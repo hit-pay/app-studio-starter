@@ -1,0 +1,77 @@
+name: Release App Studio Starter
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    name: Build and Release Starter
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get next version
+        id: version
+        shell: bash
+        run: |
+          git fetch --tags
+
+          LATEST=$(git tag -l 'v*' --sort=-version:refname | head -n 1)
+
+          if [ -z "$LATEST" ]; then
+            VERSION="v1.0.0"
+          else
+            VERSION=$(echo "$LATEST" | awk -F. '{
+              major=substr($1,2);
+              minor=$2;
+              patch=substr($3,1)+1;
+              printf "v%d.%d.%d", major, minor, patch
+            }')
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "Next version: $VERSION"
+
+      - name: Create ZIP
+        run: |
+          rm -f releases/app-studio-starter.zip
+          mkdir -p releases
+
+          cd app
+
+          zip -r \
+            "../releases/app-studio-starter.zip" \
+            .
+
+      - name: Commit ZIP
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add releases/app-studio-starter.zip
+
+          git commit \
+            -m "chore: update starter release [skip ci]" \
+            || echo "No changes to commit"
+
+          git push origin main
+
+      - name: Create version tag
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          git fetch origin main
+          git checkout main
+          git pull --ff-only origin main
+
+          git tag "$VERSION"
+          git push origin "$VERSION"
