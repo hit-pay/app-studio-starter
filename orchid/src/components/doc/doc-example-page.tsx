@@ -13,10 +13,12 @@ type DocPath =
 function DocExamplePage({
   to,
   className,
+  bodyClassName,
   children,
 }: {
   to: DocPath
   className?: string
+  bodyClassName?: string
   children: ReactNode
 }) {
   const item =
@@ -36,7 +38,14 @@ function DocExamplePage({
             <PageTitle title={item.name} description={item.description} />
           </div>
         ) : null}
-        <div className="-mx-1 flex min-h-0 flex-1 flex-col gap-8 overflow-y-auto px-1">{children}</div>
+        <div
+          className={cn(
+            '-mx-1 flex min-h-0 flex-1 flex-col gap-8 overflow-y-auto px-1',
+            bodyClassName,
+          )}
+        >
+          {children}
+        </div>
       </section>
     </main>
   )

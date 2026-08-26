@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5177",
     "lint": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "generate-routes": "bun --bun tsr generate",
     "tanstack:build": "bun run generate-routes && bun --bun vite build",
     "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r && cp registry.json public/registry.json",
@@ -28,12 +30,17 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.13",
     "@tanstack/router-cli": "^1.132.0",
+    "@testing-library/jest-dom": "^7.0.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.6",
     "@types/node": "^22.10.2",
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "jsdom": "^30.0.1",
     "tailwindcss": "^4.1.13",
     "typescript": "^6.0.2",
-    "vite": "^8.0.0"
+    "vite": "^8.0.0",
+    "vitest": "^4.1.11"
   }
 }

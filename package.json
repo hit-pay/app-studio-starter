@@ -4,6 +4,7 @@
   "scripts": {
     "dev": "bun run --cwd orchid dev",
     "generate-routes": "bun run --cwd orchid generate-routes",
+    "test": "bun run --cwd orchid test",
     "build": "bun run --cwd orchid build",
     "build:app": "bun run --cwd app build"
   }

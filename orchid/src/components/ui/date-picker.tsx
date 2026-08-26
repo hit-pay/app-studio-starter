@@ -37,14 +37,14 @@ function DatePicker({
             style="Border"
             data-empty={!date}
             className={cn(
-              'w-[280px] justify-start text-left font-normal data-[empty=true]:text-oc-muted-foreground',
+              'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />
         }
       >
         <CalendarIcon />
-        {date ? format(date, 'PPP') : <span>{placeholder}</span>}
+        <span className="min-w-0 truncate">{date ? format(date, 'PPP') : placeholder}</span>
       </PopoverTrigger>
       <PopoverContent className="w-auto overflow-hidden rounded-sm p-0" align="start">
         <Calendar
@@ -91,22 +91,20 @@ function DatePickerRange({
             style="Border"
             data-empty={!range?.from}
             className={cn(
-              'min-w-[280px] justify-start text-left font-normal data-[empty=true]:text-oc-muted-foreground',
+              'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />
         }
       >
         <CalendarIcon />
-        {range?.from ? (
-          range.to ? (
-            `${format(range.from, 'LLL dd, y')} - ${format(range.to, 'LLL dd, y')}`
-          ) : (
-            format(range.from, 'LLL dd, y')
-          )
-        ) : (
-          <span>{placeholder}</span>
-        )}
+        <span className="min-w-0 truncate">
+          {range?.from
+            ? range.to
+              ? `${format(range.from, 'LLL dd, y')} - ${format(range.to, 'LLL dd, y')}`
+              : format(range.from, 'LLL dd, y')
+            : placeholder}
+        </span>
       </PopoverTrigger>
       <PopoverContent className="w-auto overflow-hidden rounded-sm p-0" align="start">
         <Calendar

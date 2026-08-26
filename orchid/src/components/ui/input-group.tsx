@@ -7,33 +7,22 @@ import { Input } from './input'
 import { Textarea } from './textarea'
 
 const inputGroupVariants = cva(
-  'group/input-group relative flex h-9 w-full min-w-0 items-center outline-none has-disabled:opacity-50 has-[>textarea]:h-auto',
-  {
-    variants: {
-      variant: {
-        Default:
-          'rounded-lg border border-oc-border bg-oc-background shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] has-disabled:bg-oc-muted has-[[data-slot=input-group-control]:focus-visible]:border-oc-primary has-[[data-slot=input-group-control]:focus-visible]:shadow-[0_0_0_3px_var(--oc-info-border)] has-[[data-slot][aria-invalid=true]]:border-oc-destructive has-[[data-slot][aria-invalid=true]]:shadow-[0_0_0_3px_var(--oc-destructive-border)]',
-        Underline:
-          'rounded-none border-0 border-b border-oc-border bg-transparent shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-oc-primary has-[[data-slot][aria-invalid=true]]:border-oc-destructive',
-      },
-    },
-    defaultVariants: {
-      variant: 'Default',
-    },
-  },
+  [
+    'group/input-group relative flex h-9 w-full min-w-0 items-center outline-none has-disabled:opacity-50 has-[>textarea]:h-auto',
+    'rounded-lg border border-oc-border bg-oc-background shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+    'has-disabled:bg-oc-muted has-[[data-slot=input-group-control]:focus-visible]:border-oc-primary',
+    'has-[[data-slot=input-group-control]:focus-visible]:shadow-[0_0_0_3px_var(--oc-info-border)]',
+    'has-[[data-slot][aria-invalid=true]]:border-oc-destructive',
+    'has-[[data-slot][aria-invalid=true]]:shadow-[0_0_0_3px_var(--oc-destructive-border)]',
+  ].join(' '),
 )
 
-function InputGroup({
-  className,
-  variant = 'Default',
-  ...props
-}: ComponentProps<'div'> & VariantProps<typeof inputGroupVariants>) {
+function InputGroup({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="input-group"
-      data-variant={variant}
       role="group"
-      className={cn(inputGroupVariants({ variant }), className)}
+      className={cn(inputGroupVariants(), className)}
       {...props}
     />
   )

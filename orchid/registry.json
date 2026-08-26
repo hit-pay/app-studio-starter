@@ -825,16 +825,23 @@
       "name": "form-builder",
       "type": "registry:ui",
       "title": "Form Builder",
-      "description": "Schema-driven form on TanStack Form. Pass defaultValues + fields (input, textarea, select, toggle, checkbox). Renders Orchid Field. Not a generic layout grid.",
+      "description": "JSON schema form on TanStack Form. Field keys: key, title, type, value, options, validation, force_display. Types: input, select, checkbox-boolean, plus textarea, toggle, radio, combobox, slider, date, input-stepper, input-group, section.",
       "dependencies": [
         "@tanstack/react-form"
       ],
       "registryDependencies": [
         "@orchid/button",
         "@orchid/checkbox",
+        "@orchid/combobox",
+        "@orchid/date-picker",
         "@orchid/field",
         "@orchid/input",
+        "@orchid/input-group",
+        "@orchid/input-stepper",
+        "@orchid/radio-group",
+        "@orchid/section-title",
         "@orchid/select",
+        "@orchid/slider",
         "@orchid/textarea",
         "@orchid/toggle"
       ],
