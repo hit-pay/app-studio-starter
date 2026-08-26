@@ -18,7 +18,7 @@ const groupIconVariants = cva('inline-flex items-center gap-0.5', {
 })
 
 const groupIconItemVariants = cva(
-  'inline-flex size-6 shrink-0 items-center justify-center rounded p-1 text-oc-foreground outline-none hover:bg-oc-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded p-1 text-oc-foreground outline-none hover:bg-oc-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 )
 
 function GroupIcon({

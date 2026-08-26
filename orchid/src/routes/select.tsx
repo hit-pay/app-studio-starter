@@ -4,11 +4,9 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/c
 import {
   Select,
   SelectContent,
+  SelectGroup,
   SelectItem,
-  SelectMultiple,
-  SelectMultipleGroup,
-  SelectMultipleItem,
-  SelectMultipleLabel,
+  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -56,38 +54,30 @@ function SelectExamplesPage() {
 
         <FieldGroup>
           <Field>
-            <FieldLabel>Multiple</FieldLabel>
-            <SelectMultiple defaultValue={['one', 'two', 'three', 'four', 'five']}>
-              <SelectMultipleItem value="one">Text</SelectMultipleItem>
-              <SelectMultipleItem value="two">Text</SelectMultipleItem>
-              <SelectMultipleItem value="three">Text</SelectMultipleItem>
-              <SelectMultipleItem value="four">Text</SelectMultipleItem>
-              <SelectMultipleItem value="five">Text</SelectMultipleItem>
-              <SelectMultipleItem value="six">Text</SelectMultipleItem>
-            </SelectMultiple>
-            <FieldDescription>This is a hint text to help user.</FieldDescription>
-          </Field>
-
-          <Field>
             <FieldLabel>Grouped</FieldLabel>
-            <SelectMultiple>
-              <SelectMultipleGroup>
-                <SelectMultipleLabel>Group head</SelectMultipleLabel>
-                <SelectMultipleItem value="a">Option</SelectMultipleItem>
-                <SelectMultipleItem value="b">Option</SelectMultipleItem>
-                <SelectMultipleItem value="c">Option</SelectMultipleItem>
-                <SelectMultipleItem value="d">Option</SelectMultipleItem>
-                <SelectMultipleItem value="e">Option</SelectMultipleItem>
-              </SelectMultipleGroup>
-              <SelectMultipleGroup>
-                <SelectMultipleLabel>Group head</SelectMultipleLabel>
-                <SelectMultipleItem value="f">Option</SelectMultipleItem>
-                <SelectMultipleItem value="g">Option</SelectMultipleItem>
-                <SelectMultipleItem value="h">Option</SelectMultipleItem>
-                <SelectMultipleItem value="i">Option</SelectMultipleItem>
-                <SelectMultipleItem value="j">Option</SelectMultipleItem>
-              </SelectMultipleGroup>
-            </SelectMultiple>
+            <Select>
+              <SelectTrigger>
+                <SelectValue placeholder="Placeholder" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectLabel>Group head</SelectLabel>
+                  <SelectItem value="a">Option</SelectItem>
+                  <SelectItem value="b">Option</SelectItem>
+                  <SelectItem value="c">Option</SelectItem>
+                  <SelectItem value="d">Option</SelectItem>
+                  <SelectItem value="e">Option</SelectItem>
+                </SelectGroup>
+                <SelectGroup>
+                  <SelectLabel>Group head</SelectLabel>
+                  <SelectItem value="f">Option</SelectItem>
+                  <SelectItem value="g">Option</SelectItem>
+                  <SelectItem value="h">Option</SelectItem>
+                  <SelectItem value="i">Option</SelectItem>
+                  <SelectItem value="j">Option</SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
             <FieldDescription>This is a hint text to help user.</FieldDescription>
           </Field>
         </FieldGroup>

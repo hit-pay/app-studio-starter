@@ -40,7 +40,7 @@ function ChipExamplesPage() {
                 <Chip color={color} icon={<CircleIcon />}>
                   Text
                 </Chip>
-                <Chip color={color} onRemove={() => {}}>
+                <Chip color={color} closable>
                   Text
                 </Chip>
               </div>

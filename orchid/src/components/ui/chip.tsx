@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import { useState, type ComponentProps, type ReactNode } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { XCircleIcon } from 'lucide-react'
 
@@ -89,6 +89,7 @@ function Chip({
   color = 'Blue',
   type = 'Background',
   icon,
+  closable = false,
   onRemove,
   children,
   ...props
@@ -97,9 +98,14 @@ function Chip({
     color?: ChipColor
     type?: 'Background' | 'Transparent' | 'Border'
     icon?: ReactNode
+    closable?: boolean
     onRemove?: () => void
   }) {
   const resolvedColor = COLOR_ALIAS[color] ?? 'Blue'
+  const canRemove = closable || onRemove != null
+  const [open, setOpen] = useState(true)
+
+  if (!open) return null
 
   return (
     <span
@@ -111,7 +117,7 @@ function Chip({
     >
       {icon}
       {children}
-      {onRemove ? (
+      {canRemove ? (
         <button
           type="button"
           data-slot="chip-remove"
@@ -123,9 +129,10 @@ function Chip({
           onClick={(event) => {
             event.preventDefault()
             event.stopPropagation()
-            onRemove()
+            setOpen(false)
+            onRemove?.()
           }}
-          className="-mr-0.5 inline-flex size-4.5 items-center justify-center text-current outline-none"
+          className="-mr-0.5 inline-flex size-4.5 cursor-pointer items-center justify-center text-current outline-none"
         >
           <XCircleIcon className="size-4.5" />
         </button>

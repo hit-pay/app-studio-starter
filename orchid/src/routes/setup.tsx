@@ -169,13 +169,15 @@ function P({ children }: { children: ReactNode }) {
 
 function SetupGuidePage() {
   return (
-    <main className="bg-oc-background">
-      <section className="flex flex-col gap-12 px-8 py-12">
+    <main className="flex h-full min-h-0 flex-col overflow-hidden bg-oc-background">
+      <section className="flex min-h-0 flex-1 flex-col gap-8 overflow-hidden px-8 py-8">
+        <div className="shrink-0">
         <PageTitle
           title="Setup"
           description="Install Orchid tokens, point any AI harness at the registry, and add components."
         />
-
+        </div>
+        <div className="flex min-h-0 flex-1 flex-col gap-12 overflow-y-auto">
         <Section title="1. CSS variables">
           <P>
             Orchid colors use an <code className="text-oc-foreground">oc-</code> prefix so they do
@@ -365,6 +367,7 @@ function SetupGuidePage() {
             <code className="text-oc-foreground">@radix-ui/*</code>.
           </P>
         </Section>
+        </div>
       </section>
     </main>
   )

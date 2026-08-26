@@ -65,16 +65,6 @@ export const DOC_COMPONENTS = [
     description: 'Metric card with header divider, value, and percent badge.',
   },
   {
-    to: '/sub-header' as const,
-    name: 'Sub Header',
-    description: 'Back or close on the left; actions on the right.',
-  },
-  {
-    to: '/page-title' as const,
-    name: 'Page Title',
-    description: 'Heading with actions on the right and optional box below.',
-  },
-  {
     to: '/box-detail' as const,
     name: 'Box Detail',
     description: 'Detail card with grid columns, colspan, and stacked rows.',
@@ -88,11 +78,6 @@ export const DOC_COMPONENTS = [
     to: '/copy-tooltip' as const,
     name: 'Copy Tooltip',
     description: 'Copy icon that writes a value and shows Copied!.',
-  },
-  {
-    to: '/customer-card' as const,
-    name: 'Customer Card',
-    description: 'Small, Big, and Float customer or beneficiary cards.',
   },
   {
     to: '/checkbox' as const,
@@ -147,7 +132,12 @@ export const DOC_COMPONENTS = [
   {
     to: '/select' as const,
     name: 'Select',
-    description: 'Single and multiple select with chips, groups, and error.',
+    description: 'Single choice from a list, with groups and error.',
+  },
+  {
+    to: '/combobox' as const,
+    name: 'Combobox',
+    description: 'Searchable select; use multiple with chips for several values.',
   },
   {
     to: '/empty-page' as const,
@@ -165,6 +155,28 @@ export function docComponentsByName() {
   return [...DOC_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name))
 }
 
+export const DOC_BLOCKS = [
+  {
+    to: '/customer-card' as const,
+    name: 'Customer Card',
+    description: 'Small, Big, and Float customer or beneficiary cards.',
+  },
+  {
+    to: '/sub-header' as const,
+    name: 'Sub Header',
+    description: 'Back or close on the left; actions on the right.',
+  },
+  {
+    to: '/page-title' as const,
+    name: 'Page Title',
+    description: 'Heading with actions on the right and optional box below.',
+  },
+] as const
+
+export function docBlocksByName() {
+  return [...DOC_BLOCKS].sort((a, b) => a.name.localeCompare(b.name))
+}
+
 export const DOC_GUIDES = [
   { to: '/setup' as const, name: 'Setup' },
 ] as const
@@ -173,4 +185,5 @@ export const DOC_CRUMBS: Record<string, string> = {
   '/': 'Examples',
   ...Object.fromEntries(DOC_GUIDES.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
+  ...Object.fromEntries(DOC_BLOCKS.map((item) => [item.to, item.name])),
 }

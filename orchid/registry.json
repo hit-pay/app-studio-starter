@@ -39,6 +39,7 @@
         "@orchid/input",
         "@orchid/textarea",
         "@orchid/select",
+        "@orchid/combobox",
         "@orchid/input-group",
         "@orchid/popover",
         "@orchid/calendar",
@@ -599,20 +600,39 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Choose one or many from a list (status, staff, currency). Select + Trigger + Value + Item. Multi: SelectMultiple. Inline size for currency inside input-group. Not radio cards \u2014 use clickable-option.",
+      "description": "Choose one from a list (status, staff, currency). Select + Trigger + Value + Item. Inline size for currency inside input-group. For many values with search, use combobox. Not radio cards \u2014 use clickable-option.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
       ],
-      "registryDependencies": [
-        "@orchid/chip",
-        "@orchid/popover"
-      ],
+      "registryDependencies": [],
       "files": [
         {
           "path": "src/components/ui/select.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Searchable list (tags, staff, countries). Combobox + Input + Item. Multiple: ComboboxChips + Chip. Grouped: Group + Label + Collection. Not a closed single pick without search \u2014 use select.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/chip",
+        "@orchid/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/combobox.tsx"
         }
       ]
     },

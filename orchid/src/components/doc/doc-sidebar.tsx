@@ -1,7 +1,7 @@
 import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { ClickableOption, ClickableOptionGroup } from '@/components/ui/clickable-option'
 
-import { DOC_GUIDES, docComponentsByName } from './doc-components'
+import { DOC_GUIDES, docBlocksByName, docComponentsByName } from './doc-components'
 
 function DocSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname })
@@ -48,6 +48,29 @@ function DocSidebar() {
             className="gap-2"
           >
             {docComponentsByName().map((item) => (
+              <ClickableOption
+                key={item.to}
+                value={item.to}
+                title={item.name}
+                alignment="Left"
+                className="px-3 py-2"
+              />
+            ))}
+          </ClickableOptionGroup>
+        </div>
+        <div>
+          <p className="px-1 pb-2 text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Block
+          </p>
+          <ClickableOptionGroup
+            alignment="Vertical"
+            value={pathname}
+            onValueChange={(value) => {
+              if (value) void navigate({ to: value })
+            }}
+            className="gap-2"
+          >
+            {docBlocksByName().map((item) => (
               <ClickableOption
                 key={item.to}
                 value={item.to}

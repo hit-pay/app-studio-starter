@@ -40,7 +40,7 @@ function InputGroup({
 }
 
 const inputGroupAddonVariants = cva(
-  'flex h-auto cursor-text items-center justify-center gap-2 text-sm text-oc-muted-foreground select-none [&_svg:not([class*=\'size-\'])]:size-4',
+  'flex h-auto cursor-text items-center justify-center gap-2 text-sm text-oc-muted-foreground select-none has-[[data-slot=select-trigger]]:cursor-pointer [&_svg:not([class*=\'size-\'])]:size-4',
   {
     variants: {
       align: {

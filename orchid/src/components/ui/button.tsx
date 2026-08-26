@@ -7,7 +7,7 @@ import { cn } from '@/lib/utils'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
 const buttonVariants = cva(
-  'group/button inline-flex shrink-0 items-center justify-center overflow-clip border border-solid font-medium whitespace-nowrap outline-none select-none disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'group/button inline-flex shrink-0 cursor-pointer items-center justify-center overflow-clip border border-solid font-medium whitespace-nowrap outline-none select-none disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       type: {

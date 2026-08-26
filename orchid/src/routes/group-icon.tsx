@@ -1,13 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { CopyIcon, SquareArrowOutUpRightIcon } from 'lucide-react'
+import { SquareArrowOutUpRightIcon } from 'lucide-react'
+import { CopyTooltip } from '@/components/ui/copy-tooltip'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
   GroupIcon,
-  GroupIconButton,
   GroupIconDivider,
   GroupIconLink,
   GroupIconMenu,
+  groupIconItemVariants,
 } from '@/components/ui/group-icon'
 
 export const Route = createFileRoute('/group-icon')({
@@ -30,12 +31,11 @@ function ExampleGroup({ type }: { type?: 'Default' | 'Border' }) {
         <SquareArrowOutUpRightIcon />
       </GroupIconLink>
       <GroupIconDivider />
-      <GroupIconButton
+      <CopyTooltip
+        value="https://hitpayapp.com"
         aria-label="Copy"
-        onClick={() => navigator.clipboard.writeText('https://hitpayapp.com')}
-      >
-        <CopyIcon />
-      </GroupIconButton>
+        className={groupIconItemVariants()}
+      />
     </GroupIcon>
   )
 }

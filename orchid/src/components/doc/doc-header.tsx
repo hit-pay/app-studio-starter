@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { MoonIcon, SunIcon } from 'lucide-react'
 
-import { cn } from '@/lib/utils'
 import { DOC_CRUMBS } from './doc-components'
 
 const THEME_KEY = 'orchid-theme'
@@ -27,15 +26,6 @@ function DocHeader() {
       <div className="flex min-w-0 items-baseline gap-2">
         <Link to="/" className="text-sm text-white/60 hover:text-white">
           Orchid UI
-        </Link>
-        <Link
-          to="/setup"
-          className={cn(
-            'text-sm hover:text-white',
-            pathname === '/setup' ? 'font-semibold text-white' : 'text-white/60',
-          )}
-        >
-          Setup
         </Link>
         <span className="text-sm text-white/40">→</span>
         <h1 className="truncate text-sm font-semibold">{crumb}</h1>

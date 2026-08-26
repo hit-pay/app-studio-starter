@@ -1,32 +1,61 @@
 import {
-  createContext,
-  useCallback,
-  useContext,
-  useLayoutEffect,
-  useState,
+  Children,
+  isValidElement,
+  useMemo,
   type ComponentProps,
   type ReactNode,
 } from 'react'
 import { Select as SelectPrimitive } from '@base-ui/react/select'
-import { ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Chip } from './chip'
-import { Popover, PopoverContent, PopoverTrigger } from './popover'
-
-const selectTriggerOpenClass =
-  'border-oc-primary shadow-[0_0_0_3px_var(--oc-info-border)]'
 
 const selectTriggerClass =
-  'flex w-full items-center gap-2 rounded-lg border border-oc-border bg-oc-background px-2 text-left text-sm leading-[1.5] text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] aria-expanded:border-oc-primary aria-expanded:shadow-[0_0_0_3px_var(--oc-info-border)] data-popup-open:border-oc-primary data-popup-open:shadow-[0_0_0_3px_var(--oc-info-border)] data-open:border-oc-primary data-open:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] data-placeholder:text-[#9295a5]'
+  'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-oc-border bg-oc-background px-2 text-left text-sm leading-[1.5] text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] aria-expanded:border-oc-primary aria-expanded:shadow-[0_0_0_3px_var(--oc-info-border)] data-popup-open:border-oc-primary data-popup-open:shadow-[0_0_0_3px_var(--oc-info-border)] data-open:border-oc-primary data-open:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] data-placeholder:text-[#9295a5]'
 
-const Select = SelectPrimitive.Root
+function getNodeText(node: ReactNode): string {
+  if (node == null || typeof node === 'boolean') return ''
+  if (typeof node === 'string' || typeof node === 'number') return String(node)
+  if (Array.isArray(node)) return node.map(getNodeText).join('')
+  if (isValidElement(node)) {
+    return getNodeText((node.props as { children?: ReactNode }).children)
+  }
+  return ''
+}
+
+function collectSelectItems(node: ReactNode, acc: Record<string, ReactNode>) {
+  Children.forEach(node, (child) => {
+    if (!isValidElement(child)) return
+    if (child.type === SelectItem) {
+      const { value, children, label } = child.props as SelectPrimitive.Item.Props
+      if (typeof value === 'string' || typeof value === 'number') {
+        acc[String(value)] = label || getNodeText(children) || children
+      }
+    }
+    collectSelectItems((child.props as { children?: ReactNode }).children, acc)
+  })
+}
+
+function Select({ items, children, ...props }: SelectPrimitive.Root.Props<unknown>) {
+  const resolvedItems = useMemo(() => {
+    if (items) return items
+    const acc: Record<string, ReactNode> = {}
+    collectSelectItems(children, acc)
+    return acc
+  }, [children, items])
+
+  return (
+    <SelectPrimitive.Root items={resolvedItems} {...props}>
+      {children}
+    </SelectPrimitive.Root>
+  )
+}
 
 function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   return (
     <SelectPrimitive.Group
       data-slot="select-group"
-      className={cn('flex w-full flex-col', className)}
+        className={cn('flex w-full flex-col gap-1', className)}
       {...props}
     />
   )
@@ -56,7 +85,7 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         size === 'Inline'
-          ? 'inline-flex h-full w-auto shrink-0 items-center gap-1 border-0 bg-transparent px-0 text-xs font-medium leading-[1.5] text-oc-muted-foreground shadow-none outline-none select-none'
+          ? 'inline-flex h-full w-auto shrink-0 cursor-pointer items-center gap-1 border-0 bg-transparent px-0 text-xs font-medium leading-[1.5] text-oc-muted-foreground shadow-none outline-none select-none'
           : cn(selectTriggerClass, 'h-9'),
         className,
       )}
@@ -72,7 +101,7 @@ function SelectContent({
   className,
   children,
   side = 'bottom',
-  sideOffset = 4,
+  sideOffset = 0,
   align = 'start',
   alignOffset = 0,
   alignItemWithTrigger = true,
@@ -101,7 +130,7 @@ function SelectContent({
           {...props}
         >
           <SelectScrollUpButton />
-          <SelectPrimitive.List className="flex w-full flex-col">{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="flex w-full flex-col gap-1">{children}</SelectPrimitive.List>
           <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
@@ -122,12 +151,15 @@ function SelectLabel({ className, ...props }: SelectPrimitive.GroupLabel.Props) 
   )
 }
 
-function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Props) {
+function SelectItem({ className, children, label, ...props }: SelectPrimitive.Item.Props) {
+  const resolvedLabel = label || getNodeText(children) || undefined
+
   return (
     <SelectPrimitive.Item
       data-slot="select-item"
+      label={resolvedLabel}
       className={cn(
-        'relative flex w-full cursor-default items-center gap-2 rounded p-2 text-sm leading-[1.5] outline-hidden select-none hover:bg-[#f5f6f9] focus:bg-[#f5f6f9] data-disabled:pointer-events-none data-disabled:opacity-50',
+        'relative flex w-full cursor-pointer items-center gap-2 rounded p-2 pr-8 text-sm leading-[1.5] outline-hidden select-none hover:bg-[#f5f6f9] focus:bg-[#f5f6f9] data-disabled:pointer-events-none data-disabled:opacity-50',
         className,
       )}
       {...props}
@@ -135,6 +167,9 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
       <SelectPrimitive.ItemText className="flex flex-1 items-center gap-2">
         {children}
       </SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center">
+        <CheckIcon className="size-4" />
+      </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   )
 }
@@ -182,167 +217,12 @@ function SelectScrollDownButton({
   )
 }
 
-type SelectMultipleContextValue = {
-  value: string[]
-  toggle: (next: string) => void
-  register: (option: string, label: string) => void
-  labels: Record<string, string>
-}
-
-const SelectMultipleContext = createContext<SelectMultipleContextValue | null>(null)
-
-function useSelectMultiple() {
-  const context = useContext(SelectMultipleContext)
-  if (!context) {
-    throw new Error('SelectMultipleItem must be used inside SelectMultiple')
-  }
-  return context
-}
-
-function SelectMultiple({
-  className,
-  value,
-  defaultValue,
-  onValueChange,
-  placeholder = 'Placeholder',
-  children,
-}: {
-  className?: string
-  value?: string[]
-  defaultValue?: string[]
-  onValueChange?: (value: string[]) => void
-  placeholder?: string
-  children: ReactNode
-}) {
-  const [uncontrolled, setUncontrolled] = useState(defaultValue ?? [])
-  const [labels, setLabels] = useState<Record<string, string>>({})
-  const [open, setOpen] = useState(false)
-  const selected = value ?? uncontrolled
-  const filled = selected.length > 0
-
-  function commit(next: string[]) {
-    setUncontrolled(next)
-    onValueChange?.(next)
-  }
-
-  function toggle(next: string) {
-    commit(selected.includes(next) ? selected.filter((item) => item !== next) : [...selected, next])
-  }
-
-  const register = useCallback((option: string, label: string) => {
-    setLabels((current) => (current[option] === label ? current : { ...current, [option]: label }))
-  }, [])
-
-  return (
-    <SelectMultipleContext.Provider value={{ value: selected, toggle, register, labels }}>
-      <Popover open={open} onOpenChange={setOpen}>
-        <PopoverTrigger
-          render={
-            <button
-              type="button"
-              data-slot="select-multiple-trigger"
-              data-popup-open={open || undefined}
-              aria-expanded={open}
-              className={cn(
-                selectTriggerClass,
-                filled ? 'h-auto min-h-9 items-start px-2 py-1.5' : 'h-9',
-                open && selectTriggerOpenClass,
-                className,
-              )}
-            />
-          }
-        >
-          {filled ? (
-            <span className="flex min-w-0 flex-1 flex-wrap content-start items-start gap-1.5">
-              {selected.map((item) => (
-                <Chip
-                  key={item}
-                  color="Blue"
-                  type="Background"
-                  onRemove={() => commit(selected.filter((valueItem) => valueItem !== item))}
-                >
-                  {labels[item] ?? item}
-                </Chip>
-              ))}
-            </span>
-          ) : (
-            <span className="text-[#9295a5]">{placeholder}</span>
-          )}
-        </PopoverTrigger>
-        <PopoverContent
-          align="start"
-          sideOffset={4}
-          className="w-(--anchor-width) min-w-(--anchor-width) gap-0.5 overflow-x-hidden overflow-y-auto border border-oc-border p-2 shadow-[0_3px_11px_rgba(38,42,50,0.09)]"
-        >
-          {children}
-        </PopoverContent>
-      </Popover>
-    </SelectMultipleContext.Provider>
-  )
-}
-
-function SelectMultipleGroup({ className, ...props }: ComponentProps<'div'>) {
-  return <div data-slot="select-multiple-group" className={cn('flex w-full flex-col', className)} {...props} />
-}
-
-function SelectMultipleLabel({ className, ...props }: ComponentProps<'p'>) {
-  return (
-    <p
-      data-slot="select-multiple-label"
-      className={cn(
-        'px-2 pt-2 pb-1 text-[10px] leading-[18px] font-medium tracking-[0.3px] text-oc-foreground uppercase',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function SelectMultipleItem({
-  className,
-  value,
-  children,
-  ...props
-}: ComponentProps<'button'> & { value: string }) {
-  const { value: selected, toggle, register } = useSelectMultiple()
-  const label = typeof children === 'string' ? children : value
-  useLayoutEffect(() => {
-    register(value, label)
-  }, [label, register, value])
-  const isSelected = selected.includes(value)
-
-  return (
-    <button
-      type="button"
-      data-slot="select-multiple-item"
-      data-selected={isSelected || undefined}
-      className={cn(
-        'flex w-full items-center rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-[#f5f6f9] data-selected:bg-[#f5f6f9]',
-        isSelected && 'bg-[#f5f6f9]',
-        className,
-      )}
-      onClick={(event) => {
-        event.preventDefault()
-        event.stopPropagation()
-        toggle(value)
-      }}
-      {...props}
-    >
-      {children}
-    </button>
-  )
-}
-
 export {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
   SelectLabel,
-  SelectMultiple,
-  SelectMultipleGroup,
-  SelectMultipleItem,
-  SelectMultipleLabel,
   SelectScrollDownButton,
   SelectScrollUpButton,
   SelectSeparator,

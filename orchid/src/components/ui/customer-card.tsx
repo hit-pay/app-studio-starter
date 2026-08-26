@@ -264,7 +264,7 @@ function CustomerCard({
         <button
           type="button"
           aria-label="Close"
-          className="-top-1 -right-1 absolute rounded-full bg-oc-background text-oc-muted-foreground outline-none hover:text-oc-destructive-strong"
+          className="-top-1 -right-1 absolute cursor-pointer rounded-full bg-oc-background text-oc-muted-foreground outline-none hover:text-oc-destructive-strong"
           onClick={onClose}
         >
           <XCircleIcon className="size-[18px] fill-oc-background" />

@@ -15,7 +15,7 @@ function RootLayout() {
         <DocHeader />
         <div className="flex min-h-0 flex-1 overflow-hidden">
           <DocSidebar />
-          <div className="min-h-0 flex-1 overflow-auto bg-oc-background">
+          <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-oc-background">
             <Outlet />
           </div>
         </div>

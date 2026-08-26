@@ -2,9 +2,9 @@ import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 import { PageTitle } from '@/components/ui/page-title'
-import { DOC_COMPONENTS } from './doc-components'
+import { DOC_BLOCKS, DOC_COMPONENTS } from './doc-components'
 
-type DocPath = (typeof DOC_COMPONENTS)[number]['to'] | '/'
+type DocPath = (typeof DOC_COMPONENTS)[number]['to'] | (typeof DOC_BLOCKS)[number]['to'] | '/'
 
 function DocExamplePage({
   to,
@@ -18,13 +18,20 @@ function DocExamplePage({
   const item =
     to === '/'
       ? { name: 'Examples', description: 'Browse Orchid UI components.' }
-      : DOC_COMPONENTS.find((entry) => entry.to === to)
+      : DOC_COMPONENTS.find((entry) => entry.to === to) ??
+        DOC_BLOCKS.find((entry) => entry.to === to)
 
   return (
-    <main className="bg-oc-background">
-      <section className={cn('space-y-12 px-8 py-12', className)}>
-        {item ? <PageTitle title={item.name} description={item.description} /> : null}
-        {children}
+    <main className="flex h-full min-h-0 flex-col overflow-hidden bg-oc-background">
+      <section
+        className={cn('flex min-h-0 flex-1 flex-col gap-8 overflow-hidden px-8 py-8', className)}
+      >
+        {item ? (
+          <div className="shrink-0">
+            <PageTitle title={item.name} description={item.description} />
+          </div>
+        ) : null}
+        <div className="-mx-1 flex min-h-0 flex-1 flex-col gap-8 overflow-y-auto px-1">{children}</div>
       </section>
     </main>
   )

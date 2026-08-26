@@ -17,6 +17,7 @@ import { Route as ButtonRouteImport } from './routes/button'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChipRouteImport } from './routes/chip'
 import { Route as ClickableOptionRouteImport } from './routes/clickable-option'
+import { Route as ComboboxRouteImport } from './routes/combobox'
 import { Route as CopyTooltipRouteImport } from './routes/copy-tooltip'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
 import { Route as DatePickerRouteImport } from './routes/date-picker'
@@ -82,6 +83,11 @@ const ChipRoute = ChipRouteImport.update({
 const ClickableOptionRoute = ClickableOptionRouteImport.update({
   id: '/clickable-option',
   path: '/clickable-option',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComboboxRoute = ComboboxRouteImport.update({
+  id: '/combobox',
+  path: '/combobox',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CopyTooltipRoute = CopyTooltipRouteImport.update({
@@ -224,6 +230,7 @@ export interface FileRoutesByFullPath {
   '/checkbox': typeof CheckboxRoute
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
+  '/combobox': typeof ComboboxRoute
   '/copy-tooltip': typeof CopyTooltipRoute
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
@@ -260,6 +267,7 @@ export interface FileRoutesByTo {
   '/checkbox': typeof CheckboxRoute
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
+  '/combobox': typeof ComboboxRoute
   '/copy-tooltip': typeof CopyTooltipRoute
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
@@ -297,6 +305,7 @@ export interface FileRoutesById {
   '/checkbox': typeof CheckboxRoute
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
+  '/combobox': typeof ComboboxRoute
   '/copy-tooltip': typeof CopyTooltipRoute
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
@@ -335,6 +344,7 @@ export interface FileRouteTypes {
     | '/checkbox'
     | '/chip'
     | '/clickable-option'
+    | '/combobox'
     | '/copy-tooltip'
     | '/customer-card'
     | '/date-picker'
@@ -371,6 +381,7 @@ export interface FileRouteTypes {
     | '/checkbox'
     | '/chip'
     | '/clickable-option'
+    | '/combobox'
     | '/copy-tooltip'
     | '/customer-card'
     | '/date-picker'
@@ -407,6 +418,7 @@ export interface FileRouteTypes {
     | '/checkbox'
     | '/chip'
     | '/clickable-option'
+    | '/combobox'
     | '/copy-tooltip'
     | '/customer-card'
     | '/date-picker'
@@ -444,6 +456,7 @@ export interface RootRouteChildren {
   CheckboxRoute: typeof CheckboxRoute
   ChipRoute: typeof ChipRoute
   ClickableOptionRoute: typeof ClickableOptionRoute
+  ComboboxRoute: typeof ComboboxRoute
   CopyTooltipRoute: typeof CopyTooltipRoute
   CustomerCardRoute: typeof CustomerCardRoute
   DatePickerRoute: typeof DatePickerRoute
@@ -528,6 +541,13 @@ declare module '@tanstack/react-router' {
       path: '/clickable-option'
       fullPath: '/clickable-option'
       preLoaderRoute: typeof ClickableOptionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/combobox': {
+      id: '/combobox'
+      path: '/combobox'
+      fullPath: '/combobox'
+      preLoaderRoute: typeof ComboboxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/copy-tooltip': {
@@ -724,6 +744,7 @@ const rootRouteChildren: RootRouteChildren = {
   CheckboxRoute: CheckboxRoute,
   ChipRoute: ChipRoute,
   ClickableOptionRoute: ClickableOptionRoute,
+  ComboboxRoute: ComboboxRoute,
   CopyTooltipRoute: CopyTooltipRoute,
   CustomerCardRoute: CustomerCardRoute,
   DatePickerRoute: DatePickerRoute,

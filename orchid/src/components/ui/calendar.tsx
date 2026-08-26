@@ -80,13 +80,13 @@ function Calendar({
           'flex h-8 w-full items-center justify-start gap-1 text-sm font-medium',
           defaultClassNames.dropdowns,
         ),
-        dropdown_root: cn('relative rounded-lg', defaultClassNames.dropdown_root),
+        dropdown_root: cn('relative rounded-sm', defaultClassNames.dropdown_root),
         dropdown: cn('absolute inset-0 bg-oc-background opacity-0', defaultClassNames.dropdown),
         caption_label: cn(
           'text-sm font-medium text-oc-foreground select-none',
           captionLayout === 'label'
             ? ''
-            : 'flex items-center gap-1 rounded-lg [&>svg]:size-3.5 [&>svg]:text-oc-muted-foreground',
+            : 'flex items-center gap-1 rounded-sm [&>svg]:size-3.5 [&>svg]:text-oc-muted-foreground',
           defaultClassNames.caption_label,
         ),
         month_grid: cn('w-full border-collapse', defaultClassNames.month_grid),
