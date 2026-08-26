@@ -4,9 +4,9 @@ description: Orchid UI. Open when building screens.
 
 # Screens
 
-Orchid is the **global** kit. Browse it with the **shadcn MCP** ([docs](https://ui.shadcn.com/docs/mcp)). Sprite uses **Codex**: project file `.codex/config.toml` (`bunx --bun shadcn mcp`). The shadcn CLI cannot edit `~/.codex/config.toml` — that home file is only for a laptop Codex install. Registries: `components.json` (`@orchid`).
+Orchid is the **global** kit. Browse it with the **shadcn MCP** ([docs](https://ui.shadcn.com/docs/mcp)) from any harness (Cursor, Claude Code, VS Code Copilot, Codex, Windsurf, OpenCode). Command: `bunx --bun shadcn mcp`. Config files: `.cursor/mcp.json`, `.mcp.json`, `.vscode/mcp.json`, `.codex/config.toml`. Registries: `components.json` (`@orchid`).
 
-If MCP tools are missing, do **not** run `mcp init --client claude`. Rely on `.codex/config.toml` / `.mcp.json`, or fetch the catalog JSON below.
+If MCP tools are missing, do not assume a single client. Use that harness’s MCP file, or fetch the catalog JSON below.
 
 Search/list **`@orchid` only**. Do not add Button/Dialog/Card from the default shadcn registry.
 

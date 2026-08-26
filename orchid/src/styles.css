@@ -164,13 +164,3 @@
   --oc-secondary-button-disabled-start: #fcfcfc;
   --oc-secondary-button-disabled-stop: #f7f7f7;
 }
-
-@layer base {
-  body {
-    @apply bg-oc-background text-oc-foreground;
-  }
-
-  html {
-    @apply font-inter;
-  }
-}

@@ -165,7 +165,12 @@ export function docComponentsByName() {
   return [...DOC_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name))
 }
 
+export const DOC_GUIDES = [
+  { to: '/setup' as const, name: 'Setup' },
+] as const
+
 export const DOC_CRUMBS: Record<string, string> = {
   '/': 'Examples',
+  ...Object.fromEntries(DOC_GUIDES.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
 }

@@ -35,6 +35,7 @@ import { Route as PageTitleRouteImport } from './routes/page-title'
 import { Route as ProgressBarRouteImport } from './routes/progress-bar'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
 import { Route as SelectRouteImport } from './routes/select'
+import { Route as SetupRouteImport } from './routes/setup'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SnackbarRouteImport } from './routes/snackbar'
 import { Route as SubHeaderRouteImport } from './routes/sub-header'
@@ -173,6 +174,11 @@ const SelectRoute = SelectRouteImport.update({
   path: '/select',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SetupRoute = SetupRouteImport.update({
+  id: '/setup',
+  path: '/setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SliderRoute = SliderRouteImport.update({
   id: '/slider',
   path: '/slider',
@@ -236,6 +242,7 @@ export interface FileRoutesByFullPath {
   '/progress-bar': typeof ProgressBarRoute
   '/radio-group': typeof RadioGroupRoute
   '/select': typeof SelectRoute
+  '/setup': typeof SetupRoute
   '/slider': typeof SliderRoute
   '/snackbar': typeof SnackbarRoute
   '/sub-header': typeof SubHeaderRoute
@@ -271,6 +278,7 @@ export interface FileRoutesByTo {
   '/progress-bar': typeof ProgressBarRoute
   '/radio-group': typeof RadioGroupRoute
   '/select': typeof SelectRoute
+  '/setup': typeof SetupRoute
   '/slider': typeof SliderRoute
   '/snackbar': typeof SnackbarRoute
   '/sub-header': typeof SubHeaderRoute
@@ -307,6 +315,7 @@ export interface FileRoutesById {
   '/progress-bar': typeof ProgressBarRoute
   '/radio-group': typeof RadioGroupRoute
   '/select': typeof SelectRoute
+  '/setup': typeof SetupRoute
   '/slider': typeof SliderRoute
   '/snackbar': typeof SnackbarRoute
   '/sub-header': typeof SubHeaderRoute
@@ -344,6 +353,7 @@ export interface FileRouteTypes {
     | '/progress-bar'
     | '/radio-group'
     | '/select'
+    | '/setup'
     | '/slider'
     | '/snackbar'
     | '/sub-header'
@@ -379,6 +389,7 @@ export interface FileRouteTypes {
     | '/progress-bar'
     | '/radio-group'
     | '/select'
+    | '/setup'
     | '/slider'
     | '/snackbar'
     | '/sub-header'
@@ -414,6 +425,7 @@ export interface FileRouteTypes {
     | '/progress-bar'
     | '/radio-group'
     | '/select'
+    | '/setup'
     | '/slider'
     | '/snackbar'
     | '/sub-header'
@@ -450,6 +462,7 @@ export interface RootRouteChildren {
   ProgressBarRoute: typeof ProgressBarRoute
   RadioGroupRoute: typeof RadioGroupRoute
   SelectRoute: typeof SelectRoute
+  SetupRoute: typeof SetupRoute
   SliderRoute: typeof SliderRoute
   SnackbarRoute: typeof SnackbarRoute
   SubHeaderRoute: typeof SubHeaderRoute
@@ -643,6 +656,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SelectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/setup': {
+      id: '/setup'
+      path: '/setup'
+      fullPath: '/setup'
+      preLoaderRoute: typeof SetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/slider': {
       id: '/slider'
       path: '/slider'
@@ -722,6 +742,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressBarRoute: ProgressBarRoute,
   RadioGroupRoute: RadioGroupRoute,
   SelectRoute: SelectRoute,
+  SetupRoute: SetupRoute,
   SliderRoute: SliderRoute,
   SnackbarRoute: SnackbarRoute,
   SubHeaderRoute: SubHeaderRoute,
