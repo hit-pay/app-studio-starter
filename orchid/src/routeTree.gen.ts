@@ -14,6 +14,7 @@ import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BoxDetailRouteImport } from './routes/box-detail'
 import { Route as ButtonRouteImport } from './routes/button'
+import { Route as ButtonGroupRouteImport } from './routes/button-group'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChipRouteImport } from './routes/chip'
 import { Route as ClickableOptionRouteImport } from './routes/clickable-option'
@@ -25,7 +26,6 @@ import { Route as DatePickerRouteImport } from './routes/date-picker'
 import { Route as DropdownRouteImport } from './routes/dropdown'
 import { Route as EmptyPageRouteImport } from './routes/empty-page'
 import { Route as FieldRouteImport } from './routes/field'
-import { Route as GroupIconRouteImport } from './routes/group-icon'
 import { Route as InputRouteImport } from './routes/input'
 import { Route as InputGroupRouteImport } from './routes/input-group'
 import { Route as InputStepperRouteImport } from './routes/input-stepper'
@@ -36,13 +36,16 @@ import { Route as OverviewItemRouteImport } from './routes/overview-item'
 import { Route as PageTitleRouteImport } from './routes/page-title'
 import { Route as ProgressBarRouteImport } from './routes/progress-bar'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
+import { Route as SectionTitleRouteImport } from './routes/section-title'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as SetupRouteImport } from './routes/setup'
+import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SnackbarRouteImport } from './routes/snackbar'
 import { Route as SubHeaderRouteImport } from './routes/sub-header'
 import { Route as TabMenuRouteImport } from './routes/tab-menu'
 import { Route as TextareaRouteImport } from './routes/textarea'
+import { Route as ToastRouteImport } from './routes/toast'
 import { Route as ToggleRouteImport } from './routes/toggle'
 import { Route as TooltipRouteImport } from './routes/tooltip'
 
@@ -69,6 +72,11 @@ const BoxDetailRoute = BoxDetailRouteImport.update({
 const ButtonRoute = ButtonRouteImport.update({
   id: '/button',
   path: '/button',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ButtonGroupRoute = ButtonGroupRouteImport.update({
+  id: '/button-group',
+  path: '/button-group',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckboxRoute = CheckboxRouteImport.update({
@@ -126,11 +134,6 @@ const FieldRoute = FieldRouteImport.update({
   path: '/field',
   getParentRoute: () => rootRouteImport,
 } as any)
-const GroupIconRoute = GroupIconRouteImport.update({
-  id: '/group-icon',
-  path: '/group-icon',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InputRoute = InputRouteImport.update({
   id: '/input',
   path: '/input',
@@ -181,6 +184,11 @@ const RadioGroupRoute = RadioGroupRouteImport.update({
   path: '/radio-group',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SectionTitleRoute = SectionTitleRouteImport.update({
+  id: '/section-title',
+  path: '/section-title',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SelectRoute = SelectRouteImport.update({
   id: '/select',
   path: '/select',
@@ -189,6 +197,11 @@ const SelectRoute = SelectRouteImport.update({
 const SetupRoute = SetupRouteImport.update({
   id: '/setup',
   path: '/setup',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SkeletonRoute = SkeletonRouteImport.update({
+  id: '/skeleton',
+  path: '/skeleton',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SliderRoute = SliderRouteImport.update({
@@ -216,6 +229,11 @@ const TextareaRoute = TextareaRouteImport.update({
   path: '/textarea',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToastRoute = ToastRouteImport.update({
+  id: '/toast',
+  path: '/toast',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ToggleRoute = ToggleRouteImport.update({
   id: '/toggle',
   path: '/toggle',
@@ -233,6 +251,7 @@ export interface FileRoutesByFullPath {
   '/avatar': typeof AvatarRoute
   '/box-detail': typeof BoxDetailRoute
   '/button': typeof ButtonRoute
+  '/button-group': typeof ButtonGroupRoute
   '/checkbox': typeof CheckboxRoute
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
@@ -244,7 +263,6 @@ export interface FileRoutesByFullPath {
   '/dropdown': typeof DropdownRoute
   '/empty-page': typeof EmptyPageRoute
   '/field': typeof FieldRoute
-  '/group-icon': typeof GroupIconRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
   '/input-stepper': typeof InputStepperRoute
@@ -255,13 +273,16 @@ export interface FileRoutesByFullPath {
   '/page-title': typeof PageTitleRoute
   '/progress-bar': typeof ProgressBarRoute
   '/radio-group': typeof RadioGroupRoute
+  '/section-title': typeof SectionTitleRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
+  '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/snackbar': typeof SnackbarRoute
   '/sub-header': typeof SubHeaderRoute
   '/tab-menu': typeof TabMenuRoute
   '/textarea': typeof TextareaRoute
+  '/toast': typeof ToastRoute
   '/toggle': typeof ToggleRoute
   '/tooltip': typeof TooltipRoute
 }
@@ -271,6 +292,7 @@ export interface FileRoutesByTo {
   '/avatar': typeof AvatarRoute
   '/box-detail': typeof BoxDetailRoute
   '/button': typeof ButtonRoute
+  '/button-group': typeof ButtonGroupRoute
   '/checkbox': typeof CheckboxRoute
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
@@ -282,7 +304,6 @@ export interface FileRoutesByTo {
   '/dropdown': typeof DropdownRoute
   '/empty-page': typeof EmptyPageRoute
   '/field': typeof FieldRoute
-  '/group-icon': typeof GroupIconRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
   '/input-stepper': typeof InputStepperRoute
@@ -293,13 +314,16 @@ export interface FileRoutesByTo {
   '/page-title': typeof PageTitleRoute
   '/progress-bar': typeof ProgressBarRoute
   '/radio-group': typeof RadioGroupRoute
+  '/section-title': typeof SectionTitleRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
+  '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/snackbar': typeof SnackbarRoute
   '/sub-header': typeof SubHeaderRoute
   '/tab-menu': typeof TabMenuRoute
   '/textarea': typeof TextareaRoute
+  '/toast': typeof ToastRoute
   '/toggle': typeof ToggleRoute
   '/tooltip': typeof TooltipRoute
 }
@@ -310,6 +334,7 @@ export interface FileRoutesById {
   '/avatar': typeof AvatarRoute
   '/box-detail': typeof BoxDetailRoute
   '/button': typeof ButtonRoute
+  '/button-group': typeof ButtonGroupRoute
   '/checkbox': typeof CheckboxRoute
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
@@ -321,7 +346,6 @@ export interface FileRoutesById {
   '/dropdown': typeof DropdownRoute
   '/empty-page': typeof EmptyPageRoute
   '/field': typeof FieldRoute
-  '/group-icon': typeof GroupIconRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
   '/input-stepper': typeof InputStepperRoute
@@ -332,13 +356,16 @@ export interface FileRoutesById {
   '/page-title': typeof PageTitleRoute
   '/progress-bar': typeof ProgressBarRoute
   '/radio-group': typeof RadioGroupRoute
+  '/section-title': typeof SectionTitleRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
+  '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/snackbar': typeof SnackbarRoute
   '/sub-header': typeof SubHeaderRoute
   '/tab-menu': typeof TabMenuRoute
   '/textarea': typeof TextareaRoute
+  '/toast': typeof ToastRoute
   '/toggle': typeof ToggleRoute
   '/tooltip': typeof TooltipRoute
 }
@@ -350,6 +377,7 @@ export interface FileRouteTypes {
     | '/avatar'
     | '/box-detail'
     | '/button'
+    | '/button-group'
     | '/checkbox'
     | '/chip'
     | '/clickable-option'
@@ -361,7 +389,6 @@ export interface FileRouteTypes {
     | '/dropdown'
     | '/empty-page'
     | '/field'
-    | '/group-icon'
     | '/input'
     | '/input-group'
     | '/input-stepper'
@@ -372,13 +399,16 @@ export interface FileRouteTypes {
     | '/page-title'
     | '/progress-bar'
     | '/radio-group'
+    | '/section-title'
     | '/select'
     | '/setup'
+    | '/skeleton'
     | '/slider'
     | '/snackbar'
     | '/sub-header'
     | '/tab-menu'
     | '/textarea'
+    | '/toast'
     | '/toggle'
     | '/tooltip'
   fileRoutesByTo: FileRoutesByTo
@@ -388,6 +418,7 @@ export interface FileRouteTypes {
     | '/avatar'
     | '/box-detail'
     | '/button'
+    | '/button-group'
     | '/checkbox'
     | '/chip'
     | '/clickable-option'
@@ -399,7 +430,6 @@ export interface FileRouteTypes {
     | '/dropdown'
     | '/empty-page'
     | '/field'
-    | '/group-icon'
     | '/input'
     | '/input-group'
     | '/input-stepper'
@@ -410,13 +440,16 @@ export interface FileRouteTypes {
     | '/page-title'
     | '/progress-bar'
     | '/radio-group'
+    | '/section-title'
     | '/select'
     | '/setup'
+    | '/skeleton'
     | '/slider'
     | '/snackbar'
     | '/sub-header'
     | '/tab-menu'
     | '/textarea'
+    | '/toast'
     | '/toggle'
     | '/tooltip'
   id:
@@ -426,6 +459,7 @@ export interface FileRouteTypes {
     | '/avatar'
     | '/box-detail'
     | '/button'
+    | '/button-group'
     | '/checkbox'
     | '/chip'
     | '/clickable-option'
@@ -437,7 +471,6 @@ export interface FileRouteTypes {
     | '/dropdown'
     | '/empty-page'
     | '/field'
-    | '/group-icon'
     | '/input'
     | '/input-group'
     | '/input-stepper'
@@ -448,13 +481,16 @@ export interface FileRouteTypes {
     | '/page-title'
     | '/progress-bar'
     | '/radio-group'
+    | '/section-title'
     | '/select'
     | '/setup'
+    | '/skeleton'
     | '/slider'
     | '/snackbar'
     | '/sub-header'
     | '/tab-menu'
     | '/textarea'
+    | '/toast'
     | '/toggle'
     | '/tooltip'
   fileRoutesById: FileRoutesById
@@ -465,6 +501,7 @@ export interface RootRouteChildren {
   AvatarRoute: typeof AvatarRoute
   BoxDetailRoute: typeof BoxDetailRoute
   ButtonRoute: typeof ButtonRoute
+  ButtonGroupRoute: typeof ButtonGroupRoute
   CheckboxRoute: typeof CheckboxRoute
   ChipRoute: typeof ChipRoute
   ClickableOptionRoute: typeof ClickableOptionRoute
@@ -476,7 +513,6 @@ export interface RootRouteChildren {
   DropdownRoute: typeof DropdownRoute
   EmptyPageRoute: typeof EmptyPageRoute
   FieldRoute: typeof FieldRoute
-  GroupIconRoute: typeof GroupIconRoute
   InputRoute: typeof InputRoute
   InputGroupRoute: typeof InputGroupRoute
   InputStepperRoute: typeof InputStepperRoute
@@ -487,13 +523,16 @@ export interface RootRouteChildren {
   PageTitleRoute: typeof PageTitleRoute
   ProgressBarRoute: typeof ProgressBarRoute
   RadioGroupRoute: typeof RadioGroupRoute
+  SectionTitleRoute: typeof SectionTitleRoute
   SelectRoute: typeof SelectRoute
   SetupRoute: typeof SetupRoute
+  SkeletonRoute: typeof SkeletonRoute
   SliderRoute: typeof SliderRoute
   SnackbarRoute: typeof SnackbarRoute
   SubHeaderRoute: typeof SubHeaderRoute
   TabMenuRoute: typeof TabMenuRoute
   TextareaRoute: typeof TextareaRoute
+  ToastRoute: typeof ToastRoute
   ToggleRoute: typeof ToggleRoute
   TooltipRoute: typeof TooltipRoute
 }
@@ -533,6 +572,13 @@ declare module '@tanstack/react-router' {
       path: '/button'
       fullPath: '/button'
       preLoaderRoute: typeof ButtonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/button-group': {
+      id: '/button-group'
+      path: '/button-group'
+      fullPath: '/button-group'
+      preLoaderRoute: typeof ButtonGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkbox': {
@@ -612,13 +658,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FieldRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/group-icon': {
-      id: '/group-icon'
-      path: '/group-icon'
-      fullPath: '/group-icon'
-      preLoaderRoute: typeof GroupIconRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/input': {
       id: '/input'
       path: '/input'
@@ -689,6 +728,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RadioGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/section-title': {
+      id: '/section-title'
+      path: '/section-title'
+      fullPath: '/section-title'
+      preLoaderRoute: typeof SectionTitleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/select': {
       id: '/select'
       path: '/select'
@@ -701,6 +747,13 @@ declare module '@tanstack/react-router' {
       path: '/setup'
       fullPath: '/setup'
       preLoaderRoute: typeof SetupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/skeleton': {
+      id: '/skeleton'
+      path: '/skeleton'
+      fullPath: '/skeleton'
+      preLoaderRoute: typeof SkeletonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/slider': {
@@ -738,6 +791,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TextareaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/toast': {
+      id: '/toast'
+      path: '/toast'
+      fullPath: '/toast'
+      preLoaderRoute: typeof ToastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/toggle': {
       id: '/toggle'
       path: '/toggle'
@@ -761,6 +821,7 @@ const rootRouteChildren: RootRouteChildren = {
   AvatarRoute: AvatarRoute,
   BoxDetailRoute: BoxDetailRoute,
   ButtonRoute: ButtonRoute,
+  ButtonGroupRoute: ButtonGroupRoute,
   CheckboxRoute: CheckboxRoute,
   ChipRoute: ChipRoute,
   ClickableOptionRoute: ClickableOptionRoute,
@@ -772,7 +833,6 @@ const rootRouteChildren: RootRouteChildren = {
   DropdownRoute: DropdownRoute,
   EmptyPageRoute: EmptyPageRoute,
   FieldRoute: FieldRoute,
-  GroupIconRoute: GroupIconRoute,
   InputRoute: InputRoute,
   InputGroupRoute: InputGroupRoute,
   InputStepperRoute: InputStepperRoute,
@@ -783,13 +843,16 @@ const rootRouteChildren: RootRouteChildren = {
   PageTitleRoute: PageTitleRoute,
   ProgressBarRoute: ProgressBarRoute,
   RadioGroupRoute: RadioGroupRoute,
+  SectionTitleRoute: SectionTitleRoute,
   SelectRoute: SelectRoute,
   SetupRoute: SetupRoute,
+  SkeletonRoute: SkeletonRoute,
   SliderRoute: SliderRoute,
   SnackbarRoute: SnackbarRoute,
   SubHeaderRoute: SubHeaderRoute,
   TabMenuRoute: TabMenuRoute,
   TextareaRoute: TextareaRoute,
+  ToastRoute: ToastRoute,
   ToggleRoute: ToggleRoute,
   TooltipRoute: TooltipRoute,
 }

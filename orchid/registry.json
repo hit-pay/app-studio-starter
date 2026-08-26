@@ -24,8 +24,9 @@
         "@orchid/overview-item",
         "@orchid/sub-header",
         "@orchid/page-title",
+        "@orchid/section-title",
         "@orchid/box-detail",
-        "@orchid/group-icon",
+        "@orchid/button-group",
         "@orchid/copy-tooltip",
         "@orchid/customer-card",
         "@orchid/checkbox",
@@ -35,6 +36,7 @@
         "@orchid/empty-page",
         "@orchid/label",
         "@orchid/separator",
+        "@orchid/skeleton",
         "@orchid/field",
         "@orchid/input",
         "@orchid/textarea",
@@ -125,6 +127,27 @@
           "path": "src/components/ui/snackbar.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/snackbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Programmatic snackbar stack. toast.add({ title, description, type }). Mount Toaster at the app root. Visual is Snackbar, not a generic card.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/snackbar",
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toast.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/toast.tsx"
         }
       ]
     },
@@ -342,6 +365,25 @@
       ]
     },
     {
+      "name": "section-title",
+      "type": "registry:ui",
+      "title": "Section Title",
+      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via Section; settings rows use SectionItem. Not a page heading — use page-title.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/section-title.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/section-title.tsx"
+        }
+      ]
+    },
+    {
       "name": "box-detail",
       "type": "registry:ui",
       "title": "Box Detail",
@@ -362,9 +404,9 @@
       ]
     },
     {
-      "name": "group-icon",
+      "name": "button-group",
       "type": "registry:ui",
-      "title": "Group Icon",
+      "title": "Button Group",
       "description": "Tight cluster of icon actions (copy, open link, more menu). type Default|Border. Not a full toolbar of labeled Buttons.",
       "dependencies": [
         "class-variance-authority",
@@ -375,9 +417,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/group-icon.tsx",
+          "path": "src/components/ui/button-group.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/group-icon.tsx"
+          "target": "@components/orchid-ui/button-group.tsx"
         }
       ]
     },
@@ -413,7 +455,8 @@
         "@orchid/avatar",
         "@orchid/button",
         "@orchid/chip",
-        "@orchid/copy-tooltip"
+        "@orchid/copy-tooltip",
+        "@orchid/skeleton"
       ],
       "files": [
         {
@@ -542,6 +585,21 @@
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading placeholder bars. Pulse on oc-neutral-soft. Shape via className (size-8 rounded-full, h-4 w-full). Not a spinner.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/skeleton.tsx"
         }
       ]
     },

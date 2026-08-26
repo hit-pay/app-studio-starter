@@ -5,7 +5,7 @@ import { EllipsisIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
-const groupIconVariants = cva('inline-flex items-center gap-0.5', {
+const buttonGroupVariants = cva('inline-flex items-center gap-0.5', {
   variants: {
     type: {
       Default: '',
@@ -17,55 +17,55 @@ const groupIconVariants = cva('inline-flex items-center gap-0.5', {
   },
 })
 
-const groupIconItemVariants = cva(
+const buttonGroupItemVariants = cva(
   'inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded p-1 text-oc-foreground outline-none hover:bg-oc-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 )
 
-function GroupIcon({
+function ButtonGroup({
   className,
   type = 'Default',
   ...props
-}: ComponentProps<'div'> & VariantProps<typeof groupIconVariants>) {
+}: ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>) {
   return (
     <div
-      data-slot="group-icon"
+      data-slot="button-group"
       data-type={type}
-      className={cn(groupIconVariants({ type }), className)}
+      className={cn(buttonGroupVariants({ type }), className)}
       {...props}
     />
   )
 }
 
-function GroupIconButton({ className, ...props }: ComponentProps<'button'>) {
+function ButtonGroupButton({ className, ...props }: ComponentProps<'button'>) {
   return (
     <button
       type="button"
-      data-slot="group-icon-button"
-      className={cn(groupIconItemVariants(), className)}
+      data-slot="button-group-button"
+      className={cn(buttonGroupItemVariants(), className)}
       {...props}
     />
   )
 }
 
-function GroupIconLink({ className, ...props }: ComponentProps<'a'>) {
+function ButtonGroupLink({ className, ...props }: ComponentProps<'a'>) {
   return (
     <a
-      data-slot="group-icon-link"
+      data-slot="button-group-link"
       target="_blank"
       rel="noreferrer"
-      className={cn(groupIconItemVariants(), className)}
+      className={cn(buttonGroupItemVariants(), className)}
       {...props}
     />
   )
 }
 
-function GroupIconDivider() {
+function ButtonGroupDivider() {
   return (
-    <span data-slot="group-icon-divider" className="h-4 w-px shrink-0 bg-oc-dark-blue-border" />
+    <span data-slot="button-group-divider" className="h-4 w-px shrink-0 bg-oc-dark-blue-border" />
   )
 }
 
-function GroupIconMenu({
+function ButtonGroupMenu({
   className,
   menu,
 }: {
@@ -76,7 +76,7 @@ function GroupIconMenu({
     <DropdownMenu>
       <DropdownMenuTrigger
         nativeButton
-        className={cn(groupIconItemVariants(), className)}
+        className={cn(buttonGroupItemVariants(), className)}
         render={
           <button type="button" aria-label="More">
             <EllipsisIcon />
@@ -89,11 +89,11 @@ function GroupIconMenu({
 }
 
 export {
-  GroupIcon,
-  GroupIconButton,
-  GroupIconLink,
-  GroupIconDivider,
-  GroupIconMenu,
-  groupIconVariants,
-  groupIconItemVariants,
+  ButtonGroup,
+  ButtonGroupButton,
+  ButtonGroupLink,
+  ButtonGroupDivider,
+  ButtonGroupMenu,
+  buttonGroupVariants,
+  buttonGroupItemVariants,
 }

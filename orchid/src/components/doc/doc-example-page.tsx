@@ -17,7 +17,7 @@ function DocExamplePage({
 }) {
   const item =
     to === '/'
-      ? { name: 'Examples', description: 'Browse Orchid UI components.' }
+      ? { name: 'Examples', description: 'HitPay dashboard patterns: Commerce, payment channels, invoices, and more.' }
       : DOC_COMPONENTS.find((entry) => entry.to === to) ??
         DOC_BLOCKS.find((entry) => entry.to === to)
 

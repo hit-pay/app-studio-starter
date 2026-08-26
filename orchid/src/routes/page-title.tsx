@@ -18,9 +18,103 @@ function PageTitleExamplesPage() {
     <DocExamplePage to="/page-title">
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Default
+            Invoices
           </p>
-          <PageTitle title="Payments" description="Track incoming and outgoing payments." />
+          <PageTitle
+            title="Invoices"
+            description="Create, send, and track invoices across payment channels."
+            actions={
+              <Button type="Primary" size="Default">
+                Create invoice
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Payment Links
+          </p>
+          <PageTitle
+            title="Payment Links"
+            description="Share a link so customers can pay without an invoice."
+            actions={
+              <Button type="Primary" size="Default">
+                Create payment link
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Recurring
+          </p>
+          <PageTitle
+            title="Recurring"
+            description="Subscriptions billed on a weekly, monthly, or yearly cycle."
+            actions={
+              <Button type="Primary" size="Default">
+                New plan
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            POS
+          </p>
+          <PageTitle
+            title="Point of Sale"
+            description="In-store sales, terminals, and payment channels."
+            chip={<Chip color="Green">Orchard 01 online</Chip>}
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Online Store
+          </p>
+          <PageTitle
+            title="Online Store"
+            description="Products, checkout, and storefront settings."
+            actions={
+              <Button type="Secondary" style="Border" size="Default">
+                View store
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Customers
+          </p>
+          <PageTitle
+            title="Customers"
+            description="Customer Data from invoices, payment links, Recurring, POS, and Online Store."
+            actions={
+              <Button type="Primary" size="Default">
+                Add customer
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Products
+          </p>
+          <PageTitle
+            title="Products"
+            description="Product Data shared across Online Store, POS, invoices, and payment links."
+            actions={
+              <Button type="Primary" size="Default">
+                Add product
+              </Button>
+            }
+          />
         </div>
 
         <div className="space-y-4">
@@ -34,10 +128,10 @@ function PageTitleExamplesPage() {
             actions={
               <>
                 <Button type="Secondary" style="Border" size="Default">
-                  Cancel
+                  Refund
                 </Button>
                 <Button type="Primary" size="Default">
-                  Save
+                  Send receipt
                 </Button>
               </>
             }
@@ -66,13 +160,13 @@ function PageTitleExamplesPage() {
                   Alex Turner
                 </BoxDetailRow>
                 <BoxDetailRow label="Email" alignment="Vertical">
-                  alex@example.com
+                  alex@studio.co
                 </BoxDetailRow>
                 <BoxDetailRow label="Amount" alignment="Vertical">
                   SGD 128.00
                 </BoxDetailRow>
-                <BoxDetailRow label="Method" alignment="Vertical">
-                  Card
+                <BoxDetailRow label="Channel" alignment="Vertical">
+                  PayNow
                 </BoxDetailRow>
               </BoxDetailGrid>
             </BoxDetail>

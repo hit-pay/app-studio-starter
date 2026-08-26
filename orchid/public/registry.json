@@ -25,7 +25,7 @@
         "@orchid/sub-header",
         "@orchid/page-title",
         "@orchid/box-detail",
-        "@orchid/group-icon",
+        "@orchid/button-group",
         "@orchid/copy-tooltip",
         "@orchid/customer-card",
         "@orchid/checkbox",
@@ -361,9 +361,9 @@
       ]
     },
     {
-      "name": "group-icon",
+      "name": "button-group",
       "type": "registry:ui",
-      "title": "Group Icon",
+      "title": "Button Group",
       "description": "Tight cluster of icon actions (copy, open link, more menu). type Default|Border. Not a full toolbar of labeled Buttons.",
       "dependencies": [
         "class-variance-authority",
@@ -374,9 +374,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/group-icon.tsx",
+          "path": "src/components/ui/button-group.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/group-icon.tsx"
+          "target": "@components/orchid-ui/button-group.tsx"
         }
       ]
     },

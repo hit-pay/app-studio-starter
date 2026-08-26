@@ -1,5 +1,14 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { CircleIcon, PencilIcon } from 'lucide-react'
+import {
+  CircleIcon,
+  CreditCardIcon,
+  LinkIcon,
+  PencilIcon,
+  RepeatIcon,
+  SendIcon,
+  StoreIcon,
+  Trash2Icon,
+} from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
@@ -16,19 +25,6 @@ export const Route = createFileRoute('/dropdown')({
   component: DropdownExamplesPage,
 })
 
-function MenuItem({
-  variant = 'default',
-}: {
-  variant?: 'default' | 'destructive'
-}) {
-  return (
-    <DropdownMenuItem variant={variant}>
-      <PencilIcon />
-      Menu
-    </DropdownMenuItem>
-  )
-}
-
 function OpenButton({ children }: { children: React.ReactNode }) {
   return (
     <DropdownMenu>
@@ -37,7 +33,7 @@ function OpenButton({ children }: { children: React.ReactNode }) {
         className="inline-flex w-fit"
         render={
           <Button type="Secondary" size="Small">
-            Open
+            Invoice actions
           </Button>
         }
       />
@@ -49,59 +45,118 @@ function OpenButton({ children }: { children: React.ReactNode }) {
 function DropdownExamplesPage() {
   return (
     <DocExamplePage to="/dropdown">
-        <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Dropdown Menu
-          </p>
-          <OpenButton>
-            <MenuItem />
-            <MenuItem />
-            <DropdownMenuSeparator />
-            <MenuItem variant="destructive" />
-          </OpenButton>
-        </div>
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Dropdown Menu
+        </p>
+        <OpenButton>
+          <DropdownMenuItem>
+            <PencilIcon />
+            Edit invoice
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <SendIcon />
+            Send payment link
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">
+            <Trash2Icon />
+            Void invoice
+          </DropdownMenuItem>
+        </OpenButton>
+      </div>
 
-        <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Dropdown
-          </p>
-          <OpenButton>
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Group Title</DropdownMenuLabel>
-              <MenuItem />
-              <MenuItem />
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuLabel>Group Title</DropdownMenuLabel>
-              <MenuItem />
-              <MenuItem />
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <MenuItem variant="destructive" />
-          </OpenButton>
-        </div>
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Dropdown
+        </p>
+        <OpenButton>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Commerce</DropdownMenuLabel>
+            <DropdownMenuItem>
+              <LinkIcon />
+              Payment Link
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <RepeatIcon />
+              Recurring
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Sales</DropdownMenuLabel>
+            <DropdownMenuItem>
+              <StoreIcon />
+              Online Store
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <CreditCardIcon />
+              Point of Sale
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">
+            <Trash2Icon />
+            Delete invoice
+          </DropdownMenuItem>
+        </OpenButton>
+      </div>
 
-        <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Dropdown in Button
-          </p>
-          <Button
-            type="Secondary"
-            size="Small"
-            menu={
-              <>
-                <MenuItem />
-                <MenuItem />
-                <DropdownMenuSeparator />
-                <MenuItem variant="destructive" />
-              </>
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Dropdown in Button
+        </p>
+        <Button
+          type="Secondary"
+          size="Small"
+          menu={
+            <>
+              <DropdownMenuItem>
+                <PencilIcon />
+                Edit INV-2048
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <SendIcon />
+                Resend to Priya Nair
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                <Trash2Icon />
+                Refund SGD 128.00
+              </DropdownMenuItem>
+            </>
+          }
+        >
+          <CircleIcon />
+          More
+        </Button>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Payment channels
+        </p>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            nativeButton
+            className="inline-flex w-fit"
+            render={
+              <Button type="Secondary" size="Small">
+                Enable channel
+              </Button>
             }
-          >
-            <CircleIcon />
-            Button Text
-          </Button>
-        </div>
-      </DocExamplePage>
+          />
+          <DropdownMenuContent align="start">
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>Singapore</DropdownMenuLabel>
+              <DropdownMenuItem>PayNow</DropdownMenuItem>
+              <DropdownMenuItem>Cards</DropdownMenuItem>
+              <DropdownMenuItem>GrabPay</DropdownMenuItem>
+              <DropdownMenuItem>WeChat Pay</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </DocExamplePage>
   )
 }

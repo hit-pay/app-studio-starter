@@ -15,10 +15,10 @@ function ModalExamplesPage() {
             Default
           </p>
           <Modal>
-            <ModalTrigger render={<Button type="Primary" />}>Open Default</ModalTrigger>
-            <ModalPopup title="Modal Title" description="Modal Description">
+            <ModalTrigger render={<Button type="Primary" />}>Review invoice</ModalTrigger>
+            <ModalPopup title="Review invoice INV-2048" description="Confirm details before sending to the customer.">
               <p className="text-sm leading-[1.5] text-oc-foreground">
-                Review this payment before you confirm. You can still cancel or go back.
+                Alex Turner · SGD 128.00 · PayNow or card. You can still cancel or go back.
               </p>
             </ModalPopup>
           </Modal>
@@ -33,29 +33,37 @@ function ModalExamplesPage() {
               <ModalTrigger render={<Button type="Secondary" style="Border" />}>Small</ModalTrigger>
               <ModalPopup
                 size="Small"
-                title="Confirm"
+                title="Remove payment channel"
                 description="This cannot be undone."
                 confirmType="Destructive"
-                confirmLabel="Delete"
+                confirmLabel="Remove"
               >
                 <p className="text-sm leading-[1.5] text-oc-foreground">
-                  Delete this payment method from the account?
+                  Remove GrabPay from this merchant account?
                 </p>
               </ModalPopup>
             </Modal>
             <Modal>
               <ModalTrigger render={<Button type="Secondary" style="Border" />}>Medium</ModalTrigger>
-              <ModalPopup size="Medium" title="Modal Title" description="Modal Description">
+              <ModalPopup
+                size="Medium"
+                title="Create payment link"
+                description="Share a link for a one-off payment."
+              >
                 <p className="text-sm leading-[1.5] text-oc-foreground">
-                  Medium width, used for most create and edit dialogs.
+                  Medium width, used for most create and edit dialogs in the dashboard.
                 </p>
               </ModalPopup>
             </Modal>
             <Modal>
               <ModalTrigger render={<Button type="Secondary" style="Border" />}>Default</ModalTrigger>
-              <ModalPopup size="Default" title="Modal Title" description="Modal Description">
+              <ModalPopup
+                size="Default"
+                title="New Recurring plan"
+                description="Set interval, amount, and product."
+              >
                 <p className="text-sm leading-[1.5] text-oc-foreground">
-                  Default width for longer forms and detail content.
+                  Default width for longer forms such as Recurring and Online Store settings.
                 </p>
               </ModalPopup>
             </Modal>
@@ -65,12 +73,12 @@ function ModalExamplesPage() {
               </ModalTrigger>
               <ModalPopup
                 size="Confirmation"
-                title="Are you sure?"
-                confirmLabel="Save"
+                title="Send this invoice?"
+                confirmLabel="Send"
                 cancelLabel="Cancel"
               >
                 <p className="text-center text-sm leading-[1.5] text-oc-muted-foreground">
-                  Change Modal Content on Component settings
+                  The customer will get an email with a PayNow and card checkout.
                 </p>
               </ModalPopup>
             </Modal>
@@ -85,9 +93,9 @@ function ModalExamplesPage() {
             <ModalTrigger render={<Button type="Secondary" style="Border" />}>
               Open Borderless
             </ModalTrigger>
-            <ModalPopup borderless title="Are you sure?" confirmLabel="Yes" cancelLabel="No">
+            <ModalPopup borderless title="Cancel Recurring plan?" confirmLabel="Yes" cancelLabel="No">
               <p className="py-5 text-sm leading-[1.5] text-oc-foreground">
-                Header and footer have no dividers.
+                The customer will not be charged on the next billing date. Header and footer have no dividers.
               </p>
             </ModalPopup>
           </Modal>
@@ -101,9 +109,9 @@ function ModalExamplesPage() {
             <ModalTrigger render={<Button type="Secondary" style="Border" />}>
               Open Persistent
             </ModalTrigger>
-            <ModalPopup title="Complete this step" description="Clicking outside will not close.">
+            <ModalPopup title="Connect POS terminal" description="Clicking outside will not close.">
               <p className="text-sm leading-[1.5] text-oc-foreground">
-                Use Cancel or the close icon to dismiss.
+                Pair Orchard 01 before you leave this step. Use Cancel or the close icon to dismiss.
               </p>
             </ModalPopup>
           </Modal>
@@ -117,9 +125,9 @@ function ModalExamplesPage() {
             <ModalTrigger render={<Button type="Secondary" style="Border" />}>
               Open Without Footer
             </ModalTrigger>
-            <ModalPopup footer={false} title="Details" description="Read-only overlay">
+            <ModalPopup footer={false} title="Customer details" description="Read-only overlay">
               <p className="text-sm leading-[1.5] text-oc-foreground">
-                Close with the icon in the header.
+                Alex Turner · alex@studio.co · last paid via Payment Link. Close with the icon in the header.
               </p>
             </ModalPopup>
           </Modal>

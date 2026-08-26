@@ -7,6 +7,7 @@ import { Avatar } from './avatar'
 import { Button } from './button'
 import { Chip } from './chip'
 import { CopyTooltip } from './copy-tooltip'
+import { Skeleton } from './skeleton'
 
 type CustomerCardAddress = {
   street?: string
@@ -92,8 +93,33 @@ function DetailRow({ label, children }: { label: string; children: ReactNode }) 
   )
 }
 
-function Skeleton({ className }: { className?: string }) {
-  return <div className={cn('animate-pulse rounded bg-oc-neutral-soft', className)} />
+function CustomerCardSkeleton({ expanded }: { expanded: boolean }) {
+  return (
+    <div className="flex w-full flex-col gap-2" aria-hidden>
+      <div className={cn('flex items-center gap-2', expanded && 'w-full min-w-0')}>
+        <Skeleton className="size-8 shrink-0 rounded-full" />
+        <div className="flex min-w-0 flex-1 flex-col gap-1">
+          <Skeleton className="h-5 w-3/4" />
+          <Skeleton className="h-3.5 w-full" />
+        </div>
+      </div>
+      {expanded ? (
+        <div className="flex w-full min-w-0 flex-col gap-3 pt-3">
+          <div className="flex w-full items-center gap-4">
+            <Skeleton className="h-3.5 w-20 shrink-0" />
+            <Skeleton className="h-3.5 flex-1" />
+          </div>
+          <div className="flex w-full items-start gap-4">
+            <Skeleton className="h-3.5 w-20 shrink-0" />
+            <div className="flex min-w-0 flex-1 flex-col gap-1">
+              <Skeleton className="h-3.5 w-full" />
+              <Skeleton className="h-3.5 w-2/3" />
+            </div>
+          </div>
+        </div>
+      ) : null}
+    </div>
+  )
 }
 
 function CustomerCard({
@@ -131,7 +157,7 @@ function CustomerCard({
   onEdit?: () => void
   onClose?: () => void
 }) {
-  const empty = variant === 'Empty' || !customer
+  const empty = !loading && (variant === 'Empty' || !customer)
   const expanded = variant === 'Big' || variant === 'Float'
   const phone = customer ? formatPhone(customer) : '-'
 
@@ -148,16 +174,11 @@ function CustomerCard({
         }),
         className,
       )}
+      aria-busy={loading || undefined}
       {...props}
     >
-      {loading && !empty ? (
-        <div className="flex w-full items-center gap-2">
-          <Skeleton className="size-8 rounded-full" />
-          <div className="flex min-w-0 flex-1 flex-col gap-1">
-            <Skeleton className="h-5 w-3/4 rounded" />
-            <Skeleton className="h-3.5 w-full rounded" />
-          </div>
-        </div>
+      {loading ? (
+        <CustomerCardSkeleton expanded={expanded} />
       ) : empty ? (
         <>
           <div className="flex w-full flex-col items-center justify-center gap-2">

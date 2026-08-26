@@ -15,6 +15,11 @@ export const DOC_COMPONENTS = [
     description: 'Small/Default as floating toasts; Big with close and actions.',
   },
   {
+    to: '/toast' as const,
+    name: 'Toast',
+    description: 'Programmatic snackbar via toast.add. Types, action, and Toaster.',
+  },
+  {
     to: '/chip' as const,
     name: 'Chip',
     description: 'Global colors, Background/Border/Transparent, and user-type chips.',
@@ -70,8 +75,8 @@ export const DOC_COMPONENTS = [
     description: 'Detail card with grid columns, colspan, and stacked rows.',
   },
   {
-    to: '/group-icon' as const,
-    name: 'Group Icon',
+    to: '/button-group' as const,
+    name: 'Button Group',
     description: 'Icon cluster with Default and Border; dropdown, link, and copy.',
   },
   {
@@ -110,6 +115,11 @@ export const DOC_COMPONENTS = [
     description: 'Accessible label for form controls.',
   },
   {
+    to: '/skeleton' as const,
+    name: 'Skeleton',
+    description: 'Placeholder pulse while dashboard content loads.',
+  },
+  {
     to: '/field' as const,
     name: 'Field',
     description: 'Compose label, description, and error around a control.',
@@ -117,37 +127,42 @@ export const DOC_COMPONENTS = [
   {
     to: '/input' as const,
     name: 'Input',
-    description: 'Text field with default, leading icon, error, and disabled.',
+    description: 'Invoice numbers, customer email, SKUs, store handles, and POS IDs.',
   },
   {
     to: '/input-group' as const,
     name: 'Input Group',
-    description: 'Input combined with select or prefix, including currency.',
+    description: 'Invoice and Recurring amounts, store URL prefix, and channel fees.',
   },
   {
     to: '/textarea' as const,
     name: 'Textarea',
-    description: 'Multiline field with hint and error.',
+    description: 'Invoice notes, payment link copy, product descriptions, and customer notes.',
   },
   {
     to: '/select' as const,
     name: 'Select',
-    description: 'Single choice from a list, with groups and error.',
+    description: 'Inventory, sales channel, Recurring interval, POS terminal, and tax class.',
   },
   {
     to: '/combobox' as const,
     name: 'Combobox',
-    description: 'Searchable select; multiple chips, checkbox items, and select all.',
+    description: 'Search payment channels, products, customers, and POS locations.',
+  },
+  {
+    to: '/section-title' as const,
+    name: 'Section Title',
+    description: 'Headings for Online Store, Payment Channels, Invoices, Recurring, and POS.',
   },
   {
     to: '/empty-page' as const,
     name: 'Empty Page',
-    description: 'Centered empty state with icon, title, description, and actions.',
+    description: 'Empty invoices, products, customers, payment links, and POS upgrade.',
   },
   {
     to: '/modal' as const,
     name: 'Modal',
-    description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
+    description: 'Review invoices, create payment links, pair POS, and confirm Recurring.',
   },
 ] as const
 
@@ -159,22 +174,22 @@ export const DOC_BLOCKS = [
   {
     to: '/customer-card' as const,
     name: 'Customer Card',
-    description: 'Small, Big, and Float customer or beneficiary cards.',
+    description: 'Customer Data cards for invoices, Recurring, and POS walk-ins.',
   },
   {
     to: '/sub-header' as const,
     name: 'Sub Header',
-    description: 'Back or close on the left; actions on the right.',
+    description: 'Fullscreen create product or invoice; back or close with save actions.',
   },
   {
     to: '/page-title' as const,
     name: 'Page Title',
-    description: 'Heading with actions on the right and optional box below.',
+    description: 'Invoices, Payment Links, Recurring, POS, Online Store, Customers, Products.',
   },
   {
     to: '/confirmation-modal' as const,
     name: 'Confirmation Modal',
-    description: 'Prebuilt confirm dialog: Delete, Warning, Success, Question, and type-to-confirm.',
+    description: 'Delete invoices and products, warn on POS, confirm Recurring cancel.',
   },
 ] as const
 

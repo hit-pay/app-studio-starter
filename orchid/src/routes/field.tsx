@@ -20,30 +20,48 @@ export const Route = createFileRoute('/field')({
 function FieldExamplesPage() {
   return (
     <DocExamplePage to="/field">
-      <FieldSet className="max-w-sm">
-        <FieldLegend>Profile</FieldLegend>
-        <FieldDescription>This appears on invoices and emails.</FieldDescription>
-        <FieldGroup>
-          <Field>
-            <FieldLabel htmlFor="full-name">Full name</FieldLabel>
-            <Input id="full-name" placeholder="Placeholder" />
-            <FieldDescription>This is a hint text to help user.</FieldDescription>
-          </Field>
-          <Field data-invalid>
-            <FieldLabel htmlFor="username">Username</FieldLabel>
-            <Input id="username" placeholder="Placeholder" aria-invalid />
-            <FieldError>Choose another username.</FieldError>
-          </Field>
-          <Field orientation="horizontal">
-            <Toggle />
-            <FieldLabel>Subscribe to the newsletter</FieldLabel>
-          </Field>
-          <Field orientation="horizontal">
-            <Checkbox />
-            <FieldLabel>Email alerts</FieldLabel>
-          </Field>
-        </FieldGroup>
-      </FieldSet>
+      <div className="space-y-8">
+        <FieldSet className="max-w-sm">
+          <FieldLegend>Customer Data</FieldLegend>
+          <FieldDescription>Shown on invoices, receipts, and Online Store orders.</FieldDescription>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="full-name">Full name</FieldLabel>
+              <Input id="full-name" placeholder="Alex Turner" />
+              <FieldDescription>Billing name on INV-2048.</FieldDescription>
+            </Field>
+            <Field data-invalid>
+              <FieldLabel htmlFor="customer-email">Email</FieldLabel>
+              <Input id="customer-email" placeholder="alex@example.com" aria-invalid />
+              <FieldError>Enter a valid email to send the payment link.</FieldError>
+            </Field>
+            <Field orientation="horizontal">
+              <Toggle defaultChecked />
+              <FieldLabel>Email receipt after Point of Sale</FieldLabel>
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox defaultChecked />
+              <FieldLabel>Save to Customer Data</FieldLabel>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+
+        <FieldSet className="max-w-sm">
+          <FieldLegend>Product Data</FieldLegend>
+          <FieldDescription>Shared by Online Store and Point of Sale.</FieldDescription>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="product-name">Product name</FieldLabel>
+              <Input id="product-name" defaultValue="Classic White Tee" />
+              <FieldDescription>Catalog title on the storefront.</FieldDescription>
+            </Field>
+            <Field orientation="horizontal">
+              <Toggle />
+              <FieldLabel>Track inventory</FieldLabel>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+      </div>
     </DocExamplePage>
   )
 }

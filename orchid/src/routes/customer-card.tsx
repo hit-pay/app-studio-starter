@@ -12,12 +12,23 @@ export const Route = createFileRoute('/customer-card')({
 
 const CUSTOMER: CustomerCardData = {
   name: 'Alex Turner',
-  email: 'alex@arcticmonkey.io',
+  email: 'alex@studio.co',
   phone_number: '8373 3739 18',
   phone_number_country_code: '65',
   address: {
-    street: '4666 Dickens Islands',
-    state: 'Pennsylvania',
+    street: '12 Orchard Road',
+    state: 'Singapore',
+  },
+}
+
+const POS_CUSTOMER: CustomerCardData = {
+  name: 'Chloe Tan',
+  email: 'chloe@tan.co',
+  phone_number: '9123 4567',
+  phone_number_country_code: '65',
+  address: {
+    street: 'Tanjong Pagar Centre',
+    state: 'Singapore',
   },
 }
 
@@ -47,6 +58,7 @@ function CustomerCardExamplesPage() {
           <CustomerCard variant="Small" customer={CUSTOMER} hover />
           <CustomerCard variant="Small" customer={CUSTOMER} active />
           <CustomerCard variant="Small" customer={CUSTOMER} loading />
+          <CustomerCard variant="Big" customer={CUSTOMER} loading />
         </div>
       </ExampleBlock>
 
@@ -63,11 +75,27 @@ function CustomerCardExamplesPage() {
           <CustomerCard variant="Empty" />
         </ExampleBlock>
 
-        <ExampleBlock title="Label">
+        <ExampleBlock title="Invoice payer">
           <CustomerCard
             variant="Small"
             customer={CUSTOMER}
-            chip={<Chip color="Blue">Text</Chip>}
+            chip={<Chip color="Blue">Invoice</Chip>}
+          />
+        </ExampleBlock>
+
+        <ExampleBlock title="Recurring subscriber">
+          <CustomerCard
+            variant="Small"
+            customer={CUSTOMER}
+            chip={<Chip color="Purple">Recurring</Chip>}
+          />
+        </ExampleBlock>
+
+        <ExampleBlock title="POS walk-in">
+          <CustomerCard
+            variant="Small"
+            customer={POS_CUSTOMER}
+            chip={<Chip color="Green">POS</Chip>}
           />
         </ExampleBlock>
 

@@ -14,11 +14,11 @@ function CheckboxExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Vertical
           </p>
-          <CheckboxGroup label="Label" alignment="Vertical" defaultValue={['a']}>
-            <Checkbox value="a">Text</Checkbox>
-            <Checkbox value="b">Text</Checkbox>
-            <Checkbox value="c">Text</Checkbox>
-            <Checkbox value="d">Text</Checkbox>
+          <CheckboxGroup label="Payment Channels" alignment="Vertical" defaultValue={['paynow']}>
+            <Checkbox value="paynow">PayNow</Checkbox>
+            <Checkbox value="cards">Cards</Checkbox>
+            <Checkbox value="grabpay">GrabPay</Checkbox>
+            <Checkbox value="wechat">WeChat Pay</Checkbox>
           </CheckboxGroup>
         </div>
 
@@ -26,10 +26,10 @@ function CheckboxExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Horizontal
           </p>
-          <CheckboxGroup label="Label" alignment="Horizontal" defaultValue={['a']}>
-            <Checkbox value="a">Text</Checkbox>
-            <Checkbox value="b">Text</Checkbox>
-            <Checkbox value="c">Text</Checkbox>
+          <CheckboxGroup label="Commerce" alignment="Horizontal" defaultValue={['invoice']}>
+            <Checkbox value="invoice">Invoice</Checkbox>
+            <Checkbox value="link">Payment Link</Checkbox>
+            <Checkbox value="pos">Point of Sale</Checkbox>
           </CheckboxGroup>
         </div>
 
@@ -38,13 +38,13 @@ function CheckboxExamplesPage() {
             States
           </p>
           <div className="flex flex-col gap-2">
-            <Checkbox>Default</Checkbox>
-            <Checkbox defaultChecked>Active</Checkbox>
-            <Checkbox indeterminate>Partial</Checkbox>
-            <Checkbox error>Error</Checkbox>
-            <Checkbox disabled>Disabled</Checkbox>
+            <Checkbox>Send receipt by email</Checkbox>
+            <Checkbox defaultChecked>Collect Customer Data</Checkbox>
+            <Checkbox indeterminate>Partial SKU selection</Checkbox>
+            <Checkbox error>Missing billing address</Checkbox>
+            <Checkbox disabled>PayNow (not available)</Checkbox>
             <Checkbox defaultChecked disabled>
-              Active disabled
+              Cards (locked)
             </Checkbox>
           </div>
         </div>
@@ -53,7 +53,20 @@ function CheckboxExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Description
           </p>
-          <Checkbox description="Some description here...">Text</Checkbox>
+          <Checkbox description="Include SKU, quantity, and SGD amount on INV-2026-0842.">
+            Attach Product Data
+          </Checkbox>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Recurring notifications
+          </p>
+          <CheckboxGroup label="Alerts" alignment="Vertical" defaultValue={['failed']}>
+            <Checkbox value="failed">Failed Recurring charge</Checkbox>
+            <Checkbox value="upcoming">Upcoming renewal</Checkbox>
+            <Checkbox value="pos">Point of Sale daily summary</Checkbox>
+          </CheckboxGroup>
         </div>
       </div>
     </DocExamplePage>

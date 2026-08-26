@@ -29,172 +29,105 @@ export const Route = createFileRoute('/list-item')({
 function ListItemExamplesPage() {
   return (
     <DocExamplePage to="/list-item">
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            General
-          </p>
-          <ListItem>
-            <ListItemBody>
-              <div className="space-y-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <ListItemTitle>DBS Multiplier</ListItemTitle>
-                  <Chip color="DarkBlue">Default</Chip>
-                  <Chip color="Blue">HitPay</Chip>
-                  <Chip color="Purple">Stripe</Chip>
-                </div>
-                <ListItemDescription>Alex Turner</ListItemDescription>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          General
+        </p>
+        <ListItem>
+          <ListItemBody>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <ListItemTitle>DBS Multiplier</ListItemTitle>
+                <Chip color="DarkBlue">Default</Chip>
+                <Chip color="Blue">HitPay</Chip>
+                <Chip color="Purple">Stripe</Chip>
               </div>
-              <ListItemMeta>
-                <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-                <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-                <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
-              </ListItemMeta>
-            </ListItemBody>
-          </ListItem>
-          <ListItem>
-            <ListItemBody>
-              <div className="space-y-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <ListItemTitle>DBS Multiplier</ListItemTitle>
-                  <Chip color="DarkBlue">Default</Chip>
-                  <Chip color="Blue">HitPay</Chip>
-                  <Chip color="Purple">Stripe</Chip>
-                </div>
-                <ListItemDescription>Alex Turner</ListItemDescription>
+              <ListItemDescription>Alex Turner</ListItemDescription>
+            </div>
+            <ListItemMeta>
+              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+        <ListItem>
+          <ListItemBody>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <ListItemTitle>DBS Multiplier</ListItemTitle>
+                <Chip color="DarkBlue">Default</Chip>
+                <Chip color="Blue">HitPay</Chip>
+                <Chip color="Purple">Stripe</Chip>
               </div>
-              <ListItemMeta>
-                <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-                <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-                <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
-              </ListItemMeta>
-              <ListItemHoverActions>
-                <ListItemAction aria-label="Edit">
-                  <PencilIcon className="size-4" />
-                </ListItemAction>
-                <ListItemActionDivider />
-                <ListItemAction aria-label="Delete" destructive>
-                  <Trash2Icon className="size-4" />
-                </ListItemAction>
-              </ListItemHoverActions>
-            </ListItemBody>
-          </ListItem>
-          <ListItem selected>
-            <ListItemBody>
-              <div className="space-y-1">
-                <div className="flex flex-wrap items-center gap-2">
-                  <ListItemTitle>DBS Multiplier</ListItemTitle>
-                  <Chip color="DarkBlue">Default</Chip>
-                  <Chip color="Blue">HitPay</Chip>
-                  <Chip color="Purple">Stripe</Chip>
-                </div>
-                <ListItemDescription>Alex Turner</ListItemDescription>
+              <ListItemDescription>Alex Turner</ListItemDescription>
+            </div>
+            <ListItemMeta>
+              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
+            </ListItemMeta>
+            <ListItemHoverActions>
+              <ListItemAction aria-label="Edit">
+                <PencilIcon className="size-4" />
+              </ListItemAction>
+              <ListItemActionDivider />
+              <ListItemAction aria-label="Delete" destructive>
+                <Trash2Icon className="size-4" />
+              </ListItemAction>
+            </ListItemHoverActions>
+          </ListItemBody>
+        </ListItem>
+        <ListItem selected>
+          <ListItemBody>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <ListItemTitle>DBS Multiplier</ListItemTitle>
+                <Chip color="DarkBlue">Default</Chip>
+                <Chip color="Blue">HitPay</Chip>
+                <Chip color="Purple">Stripe</Chip>
               </div>
-              <ListItemMeta>
-                <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-                <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-                <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
-              </ListItemMeta>
-            </ListItemBody>
-          </ListItem>
-        </div>
+              <ListItemDescription>Alex Turner</ListItemDescription>
+            </div>
+            <ListItemMeta>
+              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+      </div>
 
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Webhook
-          </p>
-          <ListItem className="flex-col items-stretch gap-4">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex min-w-0 flex-wrap items-baseline gap-1">
-                <ListItemTitle>Zapier Flow</ListItemTitle>
-                <span className="text-xs text-oc-muted-foreground">-</span>
-                <span className="text-xs text-oc-muted-foreground">Oct, 20 2023</span>
-              </div>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Webhook
+        </p>
+        <ListItem className="flex-col items-stretch gap-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex min-w-0 flex-wrap items-baseline gap-1">
+              <ListItemTitle>Invoice paid</ListItemTitle>
+              <span className="text-xs text-oc-muted-foreground">-</span>
+              <span className="text-xs text-oc-muted-foreground">20 Aug 2026</span>
             </div>
-            <div className="space-y-2">
-              <ListItemCopyRow
-                label="URL:"
-                value="https://webhook.site/a9ad4444-e1da-46d9-9d83-4da6cb602ab9"
-              />
-              <ListItemCopyRow
-                label="Salt:"
-                value="JDJ5JDEwJHUvekxEVWpoUjV5Ty9qdFg1bENrVC40eDZJVnNNSFFKdmozTkpqWHVqZ3cybHFTOXZINjNx"
-              />
+          </div>
+          <div className="space-y-2">
+            <ListItemCopyRow
+              label="URL:"
+              value="https://hooks.hitpayapp.com/invoice/a9ad4444-e1da-46d9-9d83-4da6cb602ab9"
+            />
+            <ListItemCopyRow
+              label="Salt:"
+              value="JDJ5JDEwJHUvekxEVWpoUjV5Ty9qdFg1bENrVC40eDZJVnNNSFFKdmozTkpqWHVqZ3cybHFTOXZINjNx"
+            />
+          </div>
+        </ListItem>
+        <ListItem className="flex-col items-stretch gap-4">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex min-w-0 flex-wrap items-baseline gap-1">
+              <ListItemTitle>Payment link paid</ListItemTitle>
+              <span className="text-xs text-oc-muted-foreground">-</span>
+              <span className="text-xs text-oc-muted-foreground">20 Aug 2026</span>
             </div>
-          </ListItem>
-          <ListItem className="flex-col items-stretch gap-4">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex min-w-0 flex-wrap items-baseline gap-1">
-                <ListItemTitle>Zapier Flow</ListItemTitle>
-                <span className="text-xs text-oc-muted-foreground">-</span>
-                <span className="text-xs text-oc-muted-foreground">Oct, 20 2023</span>
-              </div>
-              <ListItemMore
-                menu={
-                  <>
-                    <DropdownMenuItem>Edit</DropdownMenuItem>
-                    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-                  </>
-                }
-              />
-            </div>
-            <div className="space-y-2">
-              <ListItemCopyRow
-                label="URL:"
-                value="https://webhook.site/a9ad4444-e1da-46d9-9d83-4da6cb602ab9"
-              />
-              <ListItemCopyRow
-                label="Salt:"
-                value="JDJ5JDEwJHUvekxEVWpoUjV5Ty9qdFg1bENrVC40eDZJVnNNSFFKdmozTkpqWHVqZ3cybHFTOXZINjNx"
-              />
-            </div>
-          </ListItem>
-        </div>
-
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Page
-          </p>
-          <ListItem className="items-center">
-            <ListItemMedia>
-              <img
-                alt=""
-                className="size-full object-cover"
-                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop"
-              />
-            </ListItemMedia>
-            <ListItemBody className="gap-1">
-              <ListItemTitle>Home</ListItemTitle>
-              <ListItemDescription className="line-clamp-2">
-                Welcome to our store. Discover new arrivals and seasonal offers.
-              </ListItemDescription>
-              <ListItemMeta>
-                <span className="text-xs leading-[1.5] text-oc-muted-foreground">
-                  Last updated : 20 Oct 2023
-                </span>
-                <Chip color="Green">Published</Chip>
-              </ListItemMeta>
-            </ListItemBody>
-          </ListItem>
-          <ListItem className="items-center">
-            <ListItemMedia>
-              <img
-                alt=""
-                className="size-full object-cover"
-                src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop"
-              />
-            </ListItemMedia>
-            <ListItemBody className="gap-1">
-              <ListItemTitle>Home</ListItemTitle>
-              <ListItemDescription className="line-clamp-2">
-                Welcome to our store. Discover new arrivals and seasonal offers.
-              </ListItemDescription>
-              <ListItemMeta>
-                <span className="text-xs leading-[1.5] text-oc-muted-foreground">
-                  Last updated : 20 Oct 2023
-                </span>
-                <Chip color="Grey">Draft</Chip>
-              </ListItemMeta>
-            </ListItemBody>
             <ListItemMore
               menu={
                 <>
@@ -203,64 +136,183 @@ function ListItemExamplesPage() {
                 </>
               }
             />
-          </ListItem>
-        </div>
+          </div>
+          <div className="space-y-2">
+            <ListItemCopyRow
+              label="URL:"
+              value="https://hooks.hitpayapp.com/payment-link/a9ad4444-e1da-46d9-9d83-4da6cb602ab9"
+            />
+            <ListItemCopyRow
+              label="Salt:"
+              value="JDJ5JDEwJHUvekxEVWpoUjV5Ty9qdFg1bENrVC40eDZJVnNNSFFKdmozTkpqWHVqZ3cybHFTOXZINjNx"
+            />
+          </div>
+        </ListItem>
+      </div>
 
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Integration
-          </p>
-          <ListItem className="p-4">
-            <ListItemBody>
-              <div className="flex items-center gap-2">
-                <ListItemLogo>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
-                    H
-                  </span>
-                </ListItemLogo>
-                <ListItemTitle>HitPay Store</ListItemTitle>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Page
+        </p>
+        <ListItem className="items-center">
+          <ListItemMedia>
+            <img
+              alt=""
+              className="size-full object-cover"
+              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop"
+            />
+          </ListItemMedia>
+          <ListItemBody className="gap-1">
+            <ListItemTitle>Home</ListItemTitle>
+            <ListItemDescription className="line-clamp-2">
+              Welcome to our store. Discover new arrivals and seasonal offers.
+            </ListItemDescription>
+            <ListItemMeta>
+              <span className="text-xs leading-[1.5] text-oc-muted-foreground">
+                Last updated : 20 Aug 2026
+              </span>
+              <Chip color="Green">Published</Chip>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+        <ListItem className="items-center">
+          <ListItemMedia>
+            <img
+              alt=""
+              className="size-full object-cover"
+              src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop"
+            />
+          </ListItemMedia>
+          <ListItemBody className="gap-1">
+            <ListItemTitle>Weekend brunch</ListItemTitle>
+            <ListItemDescription className="line-clamp-2">
+              Payment Link landing page for SGD 48.00 brunch sets. PayNow and GrabPay enabled.
+            </ListItemDescription>
+            <ListItemMeta>
+              <span className="text-xs leading-[1.5] text-oc-muted-foreground">
+                Last updated : 18 Aug 2026
+              </span>
+              <Chip color="Grey">Draft</Chip>
+            </ListItemMeta>
+          </ListItemBody>
+          <ListItemMore
+            menu={
+              <>
+                <DropdownMenuItem>Edit</DropdownMenuItem>
+                <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+              </>
+            }
+          />
+        </ListItem>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Integration
+        </p>
+        <ListItem className="p-4">
+          <ListItemBody>
+            <div className="flex items-center gap-2">
+              <ListItemLogo>
+                <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
+                  H
+                </span>
+              </ListItemLogo>
+              <ListItemTitle>HitPay Store</ListItemTitle>
+            </div>
+            <div className="flex flex-wrap items-center gap-1">
+              <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
+              {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
+                <ListItemMethod key={code}>{code}</ListItemMethod>
+              ))}
+            </div>
+          </ListItemBody>
+        </ListItem>
+        <ListItem className="p-4">
+          <ListItemBody>
+            <div className="flex min-w-0 items-center gap-2">
+              <ListItemLogo>
+                <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
+                  H
+                </span>
+              </ListItemLogo>
+              <ListItemTitle>HitPay Store</ListItemTitle>
+            </div>
+            <div className="flex flex-wrap items-center gap-1">
+              <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
+              {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
+                <ListItemMethod key={code}>{code}</ListItemMethod>
+              ))}
+            </div>
+          </ListItemBody>
+          <ListItemTrailing>
+            <ListItemHoverActions className="static flex">
+              <ListItemAction aria-label="Edit">
+                <PencilIcon className="size-4" />
+              </ListItemAction>
+              <ListItemActionDivider />
+              <ListItemAction aria-label="Delete" destructive>
+                <Trash2Icon className="size-4" />
+              </ListItemAction>
+            </ListItemHoverActions>
+            <Button type="Primary" size="Default">
+              Connect
+            </Button>
+          </ListItemTrailing>
+        </ListItem>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Customers
+        </p>
+        <ListItem>
+          <ListItemBody>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <ListItemTitle>Priya Nair</ListItemTitle>
+                <Chip color="Green">Paid</Chip>
               </div>
-              <div className="flex flex-wrap items-center gap-1">
-                <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
-                {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
-                  <ListItemMethod key={code}>{code}</ListItemMethod>
-                ))}
+              <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
+            </div>
+            <ListItemMeta>
+              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+        <ListItem>
+          <ListItemBody>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <ListItemTitle>Alex Turner</ListItemTitle>
+                <Chip color="Purple">Recurring</Chip>
               </div>
-            </ListItemBody>
-          </ListItem>
-          <ListItem className="p-4">
-            <ListItemBody>
-              <div className="flex min-w-0 items-center gap-2">
-                <ListItemLogo>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
-                    H
-                  </span>
-                </ListItemLogo>
-                <ListItemTitle>HitPay Store</ListItemTitle>
-              </div>
-              <div className="flex flex-wrap items-center gap-1">
-                <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
-                {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
-                  <ListItemMethod key={code}>{code}</ListItemMethod>
-                ))}
-              </div>
-            </ListItemBody>
-            <ListItemTrailing>
-              <ListItemHoverActions className="static flex">
-                <ListItemAction aria-label="Edit">
-                  <PencilIcon className="size-4" />
-                </ListItemAction>
-                <ListItemActionDivider />
-                <ListItemAction aria-label="Delete" destructive>
-                  <Trash2Icon className="size-4" />
-                </ListItemAction>
-              </ListItemHoverActions>
-              <Button type="Primary" size="Default">
-                Connect
-              </Button>
-            </ListItemTrailing>
-          </ListItem>
-        </div>
-      </DocExamplePage>
+              <ListItemDescription>Monthly plan · next charge 1 Sep 2026</ListItemDescription>
+            </div>
+            <ListItemMeta>
+              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD 29.00</ListItemDetail>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Products
+        </p>
+        <ListItem className="items-center">
+          <ListItemBody className="gap-1">
+            <ListItemTitle>Matcha Latte</ListItemTitle>
+            <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
+            <ListItemMeta>
+              <span className="text-xs leading-[1.5] text-oc-muted-foreground">24 in stock</span>
+              <Chip color="Green">Active</Chip>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+      </div>
+    </DocExamplePage>
   )
 }

@@ -1,0 +1,139 @@
+import { createFileRoute } from '@tanstack/react-router'
+import { ExternalLinkIcon } from 'lucide-react'
+import { DocExamplePage } from '@/components/doc/doc-example-page'
+import { Button } from '@/components/ui/button'
+import { Chip } from '@/components/ui/chip'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Section, SectionItem, SectionTitle } from '@/components/ui/section-title'
+import { Toggle } from '@/components/ui/toggle'
+import { TooltipProvider } from '@/components/ui/tooltip'
+
+export const Route = createFileRoute('/section-title')({
+  component: SectionTitleExamplesPage,
+})
+
+function SectionTitleExamplesPage() {
+  return (
+    <TooltipProvider>
+      <DocExamplePage to="/section-title">
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <SectionTitle
+            title="Online Store"
+            description="Storefront URL, theme, and password protection."
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Chip and action
+          </p>
+          <SectionTitle
+            title="Payment Channels"
+            description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
+            chip={<Chip color="Purple">Upgrade</Chip>}
+            actions={<Button type="Primary">Upgrade Now</Button>}
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Notification
+          </p>
+          <SectionTitle
+            title="Invoices"
+            description="Overdue invoices that need a reminder."
+            notification={2}
+            hint="Unread items that need a response."
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Button group
+          </p>
+          <SectionTitle
+            title="Online Store theme"
+            description="Preview changes before they go live."
+            actions={
+              <>
+                <Button type="Secondary" size="Small">
+                  Preview
+                  <ExternalLinkIcon />
+                </Button>
+                <Button type="Primary" size="Small">
+                  Save
+                </Button>
+              </>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Recurring
+          </p>
+          <SectionTitle
+            title="Recurring"
+            description="Monthly membership billed to saved payment methods."
+            chip={<Chip color="Blue">Active</Chip>}
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            POS
+          </p>
+          <SectionTitle
+            title="Point of Sale"
+            description="Terminals, receipts, and in-store payment channels."
+            actions={
+              <Button type="Secondary" size="Small">
+                Manage terminals
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            With form
+          </p>
+          <Section className="max-w-xl">
+            <SectionTitle
+              title="Online Store"
+              description="These fields share the same left edge as the section title."
+            />
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="store-name">Store name</FieldLabel>
+                <Input id="store-name" placeholder="HitPay Studio" />
+                <FieldDescription>Shown on invoices and receipts.</FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="store-url">Store URL</FieldLabel>
+                <Input id="store-url" placeholder="your-store.hitpay.shop" />
+              </Field>
+              <SectionItem
+                title="Password protection"
+                description="Visitors must enter a password before they can view the store."
+                actions={<Toggle defaultChecked />}
+              >
+                <Input placeholder="Enter password" type="password" />
+              </SectionItem>
+              <SectionItem
+                type="Background"
+                title="Guest checkout"
+                description="Let customers pay without creating an account."
+                actions={<Toggle defaultChecked />}
+              />
+            </FieldGroup>
+          </Section>
+        </div>
+      </DocExamplePage>
+    </TooltipProvider>
+  )
+}

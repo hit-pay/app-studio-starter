@@ -26,39 +26,30 @@ export const Route = createFileRoute('/combobox')({
 })
 
 const currencies = [
-  'IDR — Indonesian Rupiah',
-  'USD — US Dollar',
   'SGD — Singapore Dollar',
+  'USD — US Dollar',
+  'MYR — Malaysian Ringgit',
+  'IDR — Indonesian Rupiah',
   'EUR — Euro',
   'GBP — British Pound',
-  'JPY — Japanese Yen',
   'AUD — Australian Dollar',
-  'CAD — Canadian Dollar',
-  'CHF — Swiss Franc',
-  'CNY — Chinese Yuan',
   'HKD — Hong Kong Dollar',
-  'KRW — South Korean Won',
-  'MYR — Malaysian Ringgit',
   'THB — Thai Baht',
   'VND — Vietnamese Dong',
 ]
 
-const countries = [
+const paymentChannels = [
   {
-    value: 'Asia',
-    items: ['Indonesia', 'Singapore', 'Japan', 'Malaysia', 'Thailand', 'Vietnam', 'South Korea'],
+    value: 'Singapore',
+    items: ['PayNow', 'Card', 'GrabPay', 'PayLah!', 'WeChat Pay'],
   },
   {
-    value: 'Europe',
-    items: ['Germany', 'France', 'United Kingdom', 'Netherlands', 'Spain', 'Italy'],
+    value: 'Malaysia',
+    items: ['FPX', 'Card', 'GrabPay', 'Touch n Go'],
   },
   {
-    value: 'Americas',
-    items: ['United States', 'Canada', 'Brazil', 'Mexico'],
-  },
-  {
-    value: 'Oceania',
-    items: ['Australia', 'New Zealand'],
+    value: 'Indonesia',
+    items: ['QRIS', 'Card', 'GoPay', 'OVO', 'DANA'],
   },
 ]
 
@@ -74,42 +65,37 @@ const fulfilmentChipColor: Record<(typeof fulfilmentTypes)[number], ChipColor> =
 
 const products = [
   'Classic White Tee',
-  'Denim Jacket',
-  'Linen Shirt',
-  'Canvas Tote',
-  'Wool Scarf',
-  'Leather Belt',
-  'Running Sneakers',
+  'Studio Membership',
+  'Weekend Workshop',
+  'Gift Card SGD 50',
   'Ceramic Mug',
+  'Canvas Tote',
+  'POS Starter Kit',
 ]
 
-const users = [
-  'Aria Putri',
-  'Ben Hartono',
+const customers = [
+  'Alex Turner',
   'Chloe Tan',
   'Daniel Kim',
   'Elena Santos',
   'Farhan Malik',
   'Grace Wijaya',
   'Hiro Tanaka',
+  'Maya Lim',
 ]
 
-const cities = [
-  {
-    value: 'Indonesia',
-    items: ['Jakarta', 'Bandung', 'Surabaya', 'Yogyakarta', 'Medan'],
-  },
+const posLocations = [
   {
     value: 'Singapore',
-    items: ['Singapore'],
+    items: ['Orchard', 'Tanjong Pagar', 'Bugis', 'Tampines'],
   },
   {
-    value: 'Japan',
-    items: ['Tokyo', 'Osaka', 'Kyoto', 'Fukuoka'],
+    value: 'Malaysia',
+    items: ['KLCC', 'Bukit Bintang', 'Penang'],
   },
   {
-    value: 'United States',
-    items: ['New York', 'San Francisco', 'Austin', 'Seattle'],
+    value: 'Indonesia',
+    items: ['Jakarta Sudirman', 'Bandung', 'Surabaya'],
   },
 ]
 
@@ -150,7 +136,7 @@ function ComboboxFulfilmentExample() {
   )
 }
 
-function ComboboxUsersExample({
+function ComboboxCustomersExample({
   defaultValue,
   invalid,
   variant = 'Default',
@@ -164,7 +150,7 @@ function ComboboxUsersExample({
   const chips = useComboboxAnchor()
 
   return (
-    <Combobox items={users} multiple defaultValue={defaultValue}>
+    <Combobox items={customers} multiple defaultValue={defaultValue}>
       <ComboboxChips ref={chips}>
         <ComboboxValue>
           {(value: string[]) =>
@@ -175,7 +161,7 @@ function ComboboxUsersExample({
             ))
           }
         </ComboboxValue>
-        <ComboboxChipsInput placeholder="Search users" aria-invalid={invalid || undefined} />
+        <ComboboxChipsInput placeholder="Search customers" aria-invalid={invalid || undefined} />
       </ComboboxChips>
       <ComboboxContent anchor={chips}>
         {selectAll ? (
@@ -184,7 +170,7 @@ function ComboboxUsersExample({
             <ComboboxSeparator />
           </>
         ) : null}
-        <ComboboxEmpty>No users found.</ComboboxEmpty>
+        <ComboboxEmpty>No customers found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (
             <ComboboxItem key={item} value={item} variant={variant}>
@@ -197,14 +183,14 @@ function ComboboxUsersExample({
   )
 }
 
-function ComboboxCountriesExample() {
+function ComboboxChannelsExample() {
   return (
-    <Combobox items={countries}>
-      <ComboboxInput placeholder="Search countries" />
+    <Combobox items={paymentChannels}>
+      <ComboboxInput placeholder="Search payment channels" />
       <ComboboxContent>
-        <ComboboxEmpty>No countries found.</ComboboxEmpty>
+        <ComboboxEmpty>No payment channels found.</ComboboxEmpty>
         <ComboboxList>
-          {(group: (typeof countries)[number]) => (
+          {(group: (typeof paymentChannels)[number]) => (
             <ComboboxGroup key={group.value} items={group.items}>
               <ComboboxLabel>{group.value}</ComboboxLabel>
               <ComboboxCollection>
@@ -222,11 +208,11 @@ function ComboboxCountriesExample() {
   )
 }
 
-function ComboboxCitiesExample() {
+function ComboboxLocationsExample() {
   const chips = useComboboxAnchor()
 
   return (
-    <Combobox items={cities} multiple>
+    <Combobox items={posLocations} multiple>
       <ComboboxChips ref={chips}>
         <ComboboxValue>
           {(value: string[]) =>
@@ -237,12 +223,12 @@ function ComboboxCitiesExample() {
             ))
           }
         </ComboboxValue>
-        <ComboboxChipsInput placeholder="Search cities" />
+        <ComboboxChipsInput placeholder="Search POS locations" />
       </ComboboxChips>
       <ComboboxContent anchor={chips}>
-        <ComboboxEmpty>No cities found.</ComboboxEmpty>
+        <ComboboxEmpty>No POS locations found.</ComboboxEmpty>
         <ComboboxList>
-          {(group: (typeof cities)[number]) => (
+          {(group: (typeof posLocations)[number]) => (
             <ComboboxGroup key={group.value} items={group.items}>
               <ComboboxLabel>{group.value}</ComboboxLabel>
               <ComboboxCollection>
@@ -266,8 +252,8 @@ function ComboboxExamplesPage() {
       <div className="grid gap-8 md:grid-cols-2">
         <FieldGroup>
           <Field>
-            <FieldLabel>Currency</FieldLabel>
-            <Combobox items={currencies} defaultValue="IDR — Indonesian Rupiah">
+            <FieldLabel>Settlement currency</FieldLabel>
+            <Combobox items={currencies} defaultValue="SGD — Singapore Dollar">
               <ComboboxInput placeholder="Search currencies" />
               <ComboboxContent>
                 <ComboboxEmpty>No currencies found.</ComboboxEmpty>
@@ -280,18 +266,18 @@ function ComboboxExamplesPage() {
                 </ComboboxList>
               </ComboboxContent>
             </Combobox>
-            <FieldDescription>Type a code or name to find a currency.</FieldDescription>
+            <FieldDescription>Type a code or name to find a settlement currency.</FieldDescription>
           </Field>
 
           <Field>
-            <FieldLabel>Country</FieldLabel>
-            <ComboboxCountriesExample />
-            <FieldDescription>Search countries grouped by region.</FieldDescription>
+            <FieldLabel>Payment channel</FieldLabel>
+            <ComboboxChannelsExample />
+            <FieldDescription>Search channels grouped by market.</FieldDescription>
           </Field>
 
           <Field>
             <FieldLabel>Product</FieldLabel>
-            <Combobox items={products}>
+            <Combobox items={products} defaultValue="Studio Membership">
               <ComboboxInput placeholder="Search products" />
               <ComboboxContent>
                 <ComboboxEmpty>No products found.</ComboboxEmpty>
@@ -304,7 +290,7 @@ function ComboboxExamplesPage() {
                 </ComboboxList>
               </ComboboxContent>
             </Combobox>
-            <FieldDescription>Type to filter a large product catalog.</FieldDescription>
+            <FieldDescription>Add a product to an invoice, payment link, or POS sale.</FieldDescription>
           </Field>
 
           <Field data-invalid>
@@ -328,33 +314,33 @@ function ComboboxExamplesPage() {
 
         <FieldGroup>
           <Field>
-            <FieldLabel>Fulfilment Type</FieldLabel>
+            <FieldLabel>Online Store fulfilment</FieldLabel>
             <ComboboxFulfilmentExample />
             <FieldDescription>Chip color can be set per option.</FieldDescription>
           </Field>
 
           <Field>
-            <FieldLabel>Users</FieldLabel>
-            <ComboboxUsersExample defaultValue={['Aria Putri', 'Chloe Tan', 'Hiro Tanaka']} />
-            <FieldDescription>Assign multiple teammates by searching names.</FieldDescription>
+            <FieldLabel>Customers</FieldLabel>
+            <ComboboxCustomersExample defaultValue={['Alex Turner', 'Chloe Tan', 'Hiro Tanaka']} />
+            <FieldDescription>Assign invoices or recurring plans to multiple customers.</FieldDescription>
           </Field>
 
           <Field>
-            <FieldLabel>Users</FieldLabel>
-            <ComboboxUsersExample variant="Checkbox" defaultValue={['Ben Hartono', 'Elena Santos']} />
-            <FieldDescription>Same list, with checkbox selection.</FieldDescription>
+            <FieldLabel>Customers</FieldLabel>
+            <ComboboxCustomersExample variant="Checkbox" defaultValue={['Daniel Kim', 'Elena Santos']} />
+            <FieldDescription>Same Customer Data list, with checkbox selection.</FieldDescription>
           </Field>
 
           <Field>
-            <FieldLabel>Users</FieldLabel>
-            <ComboboxUsersExample variant="Checkbox" selectAll />
-            <FieldDescription>Select all teammates, then deselect a few.</FieldDescription>
+            <FieldLabel>Customers</FieldLabel>
+            <ComboboxCustomersExample variant="Checkbox" selectAll />
+            <FieldDescription>Select all customers, then deselect a few.</FieldDescription>
           </Field>
 
           <Field>
-            <FieldLabel>City</FieldLabel>
-            <ComboboxCitiesExample />
-            <FieldDescription>Search cities grouped by country.</FieldDescription>
+            <FieldLabel>POS locations</FieldLabel>
+            <ComboboxLocationsExample />
+            <FieldDescription>Search POS outlets grouped by country.</FieldDescription>
           </Field>
         </FieldGroup>
       </div>
