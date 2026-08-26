@@ -40,11 +40,6 @@ export const DOC_COMPONENTS = [
     description: 'General, webhook, and integration list cards.',
   },
   {
-    to: '/input-stepper' as const,
-    name: 'Input Stepper',
-    description: 'Minus/plus stepper; click the value to type.',
-  },
-  {
     to: '/avatar' as const,
     name: 'Avatar',
     description: 'Sizes 24–64, Default, Business, and Image.',
@@ -85,44 +80,36 @@ export const DOC_COMPONENTS = [
     description: 'Copy icon that writes a value and shows Copied!.',
   },
   {
-    to: '/checkbox' as const,
-    name: 'Checkbox',
-    description: 'Checkbox and group with vertical or horizontal alignment.',
-  },
-  {
-    to: '/radio-group' as const,
-    name: 'Radio Group',
-    description: 'Radio options with vertical or horizontal alignment.',
-  },
-  {
-    to: '/toggle' as const,
-    name: 'Toggle',
-    description: 'Switch control in Default and Small sizes.',
-  },
-  {
-    to: '/slider' as const,
-    name: 'Slider',
-    description: 'Single or range slider; pass an array for two or more thumbs.',
-  },
-  {
-    to: '/date-picker' as const,
-    name: 'Date Picker',
-    description: 'Popover + Calendar, same composition as shadcn Date Picker.',
-  },
-  {
-    to: '/label' as const,
-    name: 'Label',
-    description: 'Accessible label for form controls.',
-  },
-  {
     to: '/skeleton' as const,
     name: 'Skeleton',
     description: 'Placeholder pulse while content loads.',
   },
   {
+    to: '/empty-page' as const,
+    name: 'Empty Page',
+    description: 'Centered empty state with icon, title, description, and actions.',
+  },
+  {
+    to: '/modal' as const,
+    name: 'Modal',
+    description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
+  },
+] as const
+
+export function docComponentsByName() {
+  return [...DOC_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name))
+}
+
+export const DOC_FORMS = [
+  {
     to: '/field' as const,
     name: 'Field',
     description: 'Compose label, description, and error around a control.',
+  },
+  {
+    to: '/label' as const,
+    name: 'Label',
+    description: 'Accessible label for form controls.',
   },
   {
     to: '/input' as const,
@@ -150,24 +137,44 @@ export const DOC_COMPONENTS = [
     description: 'Searchable select; multiple chips, checkbox items, and select all.',
   },
   {
+    to: '/input-stepper' as const,
+    name: 'Input Stepper',
+    description: 'Minus/plus stepper; click the value to type.',
+  },
+  {
+    to: '/checkbox' as const,
+    name: 'Checkbox',
+    description: 'Checkbox and group with vertical or horizontal alignment.',
+  },
+  {
+    to: '/radio-group' as const,
+    name: 'Radio Group',
+    description: 'Radio options with vertical or horizontal alignment.',
+  },
+  {
+    to: '/toggle' as const,
+    name: 'Toggle',
+    description: 'Switch control in Default and Small sizes.',
+  },
+  {
+    to: '/slider' as const,
+    name: 'Slider',
+    description: 'Single or range slider; pass an array for two or more thumbs.',
+  },
+  {
+    to: '/date-picker' as const,
+    name: 'Date Picker',
+    description: 'Popover + Calendar, same composition as shadcn Date Picker.',
+  },
+  {
     to: '/section-title' as const,
     name: 'Section Title',
     description: 'Form section heading with optional chip, hint, count, and actions.',
   },
-  {
-    to: '/empty-page' as const,
-    name: 'Empty Page',
-    description: 'Centered empty state with icon, title, description, and actions.',
-  },
-  {
-    to: '/modal' as const,
-    name: 'Modal',
-    description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
-  },
 ] as const
 
-export function docComponentsByName() {
-  return [...DOC_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name))
+export function docFormsByName() {
+  return [...DOC_FORMS].sort((a, b) => a.name.localeCompare(b.name))
 }
 
 export const DOC_BLOCKS = [
@@ -191,6 +198,11 @@ export const DOC_BLOCKS = [
     name: 'Confirmation Modal',
     description: 'Prebuilt confirm dialog: Delete, Warning, Success, Question, and type-to-confirm.',
   },
+  {
+    to: '/form-builder' as const,
+    name: 'Form Builder',
+    description: 'TanStack Form plus Orchid fields from a field schema.',
+  },
 ] as const
 
 export function docBlocksByName() {
@@ -205,5 +217,6 @@ export const DOC_CRUMBS: Record<string, string> = {
   '/': 'Examples',
   ...Object.fromEntries(DOC_GUIDES.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
+  ...Object.fromEntries(DOC_FORMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_BLOCKS.map((item) => [item.to, item.name])),
 }

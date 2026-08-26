@@ -2,9 +2,13 @@ import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 import { PageTitle } from '@/components/ui/page-title'
-import { DOC_BLOCKS, DOC_COMPONENTS } from './doc-components'
+import { DOC_BLOCKS, DOC_COMPONENTS, DOC_FORMS } from './doc-components'
 
-type DocPath = (typeof DOC_COMPONENTS)[number]['to'] | (typeof DOC_BLOCKS)[number]['to'] | '/'
+type DocPath =
+  | (typeof DOC_COMPONENTS)[number]['to']
+  | (typeof DOC_FORMS)[number]['to']
+  | (typeof DOC_BLOCKS)[number]['to']
+  | '/'
 
 function DocExamplePage({
   to,
@@ -19,6 +23,7 @@ function DocExamplePage({
     to === '/'
       ? { name: 'Examples', description: 'Browse Orchid UI components.' }
       : DOC_COMPONENTS.find((entry) => entry.to === to) ??
+        DOC_FORMS.find((entry) => entry.to === to) ??
         DOC_BLOCKS.find((entry) => entry.to === to)
 
   return (

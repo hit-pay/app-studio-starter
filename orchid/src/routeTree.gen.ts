@@ -26,6 +26,7 @@ import { Route as DatePickerRouteImport } from './routes/date-picker'
 import { Route as DropdownRouteImport } from './routes/dropdown'
 import { Route as EmptyPageRouteImport } from './routes/empty-page'
 import { Route as FieldRouteImport } from './routes/field'
+import { Route as FormBuilderRouteImport } from './routes/form-builder'
 import { Route as InputRouteImport } from './routes/input'
 import { Route as InputGroupRouteImport } from './routes/input-group'
 import { Route as InputStepperRouteImport } from './routes/input-stepper'
@@ -132,6 +133,11 @@ const EmptyPageRoute = EmptyPageRouteImport.update({
 const FieldRoute = FieldRouteImport.update({
   id: '/field',
   path: '/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormBuilderRoute = FormBuilderRouteImport.update({
+  id: '/form-builder',
+  path: '/form-builder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const InputRoute = InputRouteImport.update({
@@ -263,6 +269,7 @@ export interface FileRoutesByFullPath {
   '/dropdown': typeof DropdownRoute
   '/empty-page': typeof EmptyPageRoute
   '/field': typeof FieldRoute
+  '/form-builder': typeof FormBuilderRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
   '/input-stepper': typeof InputStepperRoute
@@ -304,6 +311,7 @@ export interface FileRoutesByTo {
   '/dropdown': typeof DropdownRoute
   '/empty-page': typeof EmptyPageRoute
   '/field': typeof FieldRoute
+  '/form-builder': typeof FormBuilderRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
   '/input-stepper': typeof InputStepperRoute
@@ -346,6 +354,7 @@ export interface FileRoutesById {
   '/dropdown': typeof DropdownRoute
   '/empty-page': typeof EmptyPageRoute
   '/field': typeof FieldRoute
+  '/form-builder': typeof FormBuilderRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
   '/input-stepper': typeof InputStepperRoute
@@ -389,6 +398,7 @@ export interface FileRouteTypes {
     | '/dropdown'
     | '/empty-page'
     | '/field'
+    | '/form-builder'
     | '/input'
     | '/input-group'
     | '/input-stepper'
@@ -430,6 +440,7 @@ export interface FileRouteTypes {
     | '/dropdown'
     | '/empty-page'
     | '/field'
+    | '/form-builder'
     | '/input'
     | '/input-group'
     | '/input-stepper'
@@ -471,6 +482,7 @@ export interface FileRouteTypes {
     | '/dropdown'
     | '/empty-page'
     | '/field'
+    | '/form-builder'
     | '/input'
     | '/input-group'
     | '/input-stepper'
@@ -513,6 +525,7 @@ export interface RootRouteChildren {
   DropdownRoute: typeof DropdownRoute
   EmptyPageRoute: typeof EmptyPageRoute
   FieldRoute: typeof FieldRoute
+  FormBuilderRoute: typeof FormBuilderRoute
   InputRoute: typeof InputRoute
   InputGroupRoute: typeof InputGroupRoute
   InputStepperRoute: typeof InputStepperRoute
@@ -656,6 +669,13 @@ declare module '@tanstack/react-router' {
       path: '/field'
       fullPath: '/field'
       preLoaderRoute: typeof FieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/form-builder': {
+      id: '/form-builder'
+      path: '/form-builder'
+      fullPath: '/form-builder'
+      preLoaderRoute: typeof FormBuilderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/input': {
@@ -833,6 +853,7 @@ const rootRouteChildren: RootRouteChildren = {
   DropdownRoute: DropdownRoute,
   EmptyPageRoute: EmptyPageRoute,
   FieldRoute: FieldRoute,
+  FormBuilderRoute: FormBuilderRoute,
   InputRoute: InputRoute,
   InputGroupRoute: InputGroupRoute,
   InputStepperRoute: InputStepperRoute,

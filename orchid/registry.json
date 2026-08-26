@@ -47,7 +47,8 @@
         "@orchid/calendar",
         "@orchid/date-picker",
         "@orchid/modal",
-        "@orchid/confirmation-modal"
+        "@orchid/confirmation-modal",
+        "@orchid/form-builder"
       ],
       "files": [
         {
@@ -817,6 +818,31 @@
           "path": "src/components/ui/confirmation-modal.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/confirmation-modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-builder",
+      "type": "registry:ui",
+      "title": "Form Builder",
+      "description": "Schema-driven form on TanStack Form. Pass defaultValues + fields (input, textarea, select, toggle, checkbox). Renders Orchid Field. Not a generic layout grid.",
+      "dependencies": [
+        "@tanstack/react-form"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/field",
+        "@orchid/input",
+        "@orchid/select",
+        "@orchid/textarea",
+        "@orchid/toggle"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form-builder.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/form-builder.tsx"
         }
       ]
     }
