@@ -110,7 +110,71 @@ type FormBuilderRenderField = {
   onChange: (next: unknown) => void
 }
 
+function pairKeys(field: FormBuilderField) {
+  const plus = field.key.indexOf('+')
+  if (plus === -1) return null
+  return {
+    first: field.key.slice(0, plus),
+    second: field.key.slice(plus + 1),
+  }
+}
+
+function inputGroupKeys(field: FormBuilderField) {
+  if (field.type !== 'input-group') return null
+  const keys = pairKeys(field)
+  return keys ? { input: keys.first, select: keys.second } : null
+}
+
+function siblingPath(path: string, key: string) {
+  const parts = path.split('.')
+  parts[parts.length - 1] = key
+  return parts.join('.')
+}
+
+function inputGroupValue(field: FormBuilderField, value: unknown) {
+  const keys = inputGroupKeys(field)
+  const fallbackSelect = field.options?.[0]?.value ?? ''
+  if (value != null && typeof value === 'object' && !Array.isArray(value)) {
+    const record = value as FormBuilderValues
+    return {
+      input: String(record[keys?.input ?? 'input'] ?? record.input ?? ''),
+      select: String(record[keys?.select ?? 'select'] ?? record.select ?? fallbackSelect),
+    }
+  }
+  return {
+    input: value == null ? '' : String(value),
+    select: fallbackSelect,
+  }
+}
+
+function pairDefaultParts(field: FormBuilderField): [unknown, unknown] | null {
+  const keys = pairKeys(field)
+  if (!keys) return null
+  const value = field.value
+  if (field.type === 'input-group') {
+    const group = inputGroupValue(field, value)
+    return [group.input, group.select]
+  }
+  if (field.type === 'slider') {
+    if (Array.isArray(value)) return [Number(value[0]) || 0, Number(value[1]) || 0]
+    if (isPlainObject(value)) {
+      return [
+        Number(value[keys.first] ?? value.min ?? 0) || 0,
+        Number(value[keys.second] ?? value.max ?? field.max ?? 100) || 0,
+      ]
+    }
+    return [0, field.max ?? 100]
+  }
+  if (isPlainObject(value)) {
+    return [value[keys.first] ?? value.from ?? '', value[keys.second] ?? value.to ?? '']
+  }
+  return ['', '']
+}
+
 function defaultValueFor(field: FormBuilderField): unknown {
+  if (field.type === 'input-group' && !inputGroupKeys(field)) {
+    return inputGroupValue(field, field.value)
+  }
   if (field.value !== undefined) return field.value
   if (
     field.type === 'checkbox' ||
@@ -132,15 +196,21 @@ function defaultValueFor(field: FormBuilderField): unknown {
 
 function formValuesFromFields(fields: FormBuilderField[]): FormBuilderValues {
   return Object.fromEntries(
-    fields
-      .filter(
-        (field) =>
-          field.type !== 'section' && (field.type !== 'hidden' || field.value !== undefined),
-      )
-      .map((field) => [
-        field.key,
-        field.type === 'hidden' ? field.value : defaultValueFor(field),
-      ]),
+    fields.flatMap((field) => {
+      if (field.type === 'section') return []
+      if (field.type === 'hidden') {
+        return field.value === undefined ? [] : [[field.key, field.value]]
+      }
+      const parts = pairDefaultParts(field)
+      const keys = pairKeys(field)
+      if (keys && parts) {
+        return [
+          [keys.first, parts[0]],
+          [keys.second, parts[1]],
+        ]
+      }
+      return [[field.key, defaultValueFor(field)]]
+    }),
   )
 }
 
@@ -151,7 +221,10 @@ function isMultiCombobox(field: FormBuilderField) {
 function flattenFields(fields: FormBuilderField[], prefix = ''): FlatField[] {
   return fields.flatMap((field) => {
     if (field.type === 'hidden') return []
-    const path = prefix ? `${prefix}.${field.key}` : field.key
+    const keys = pairKeys(field)
+    const path = prefix
+      ? `${prefix}.${keys?.first ?? field.key}`
+      : (keys?.first ?? field.key)
     if (field.type === 'object' && field.fields?.length) {
       return flattenFields(field.fields, path)
     }
@@ -223,6 +296,16 @@ function fieldsWithValues(fields: FormBuilderField[], values: FormBuilderValues)
       const nested = isPlainObject(values[field.key]) ? values[field.key] : {}
       return { ...field, fields: fieldsWithValues(field.fields, nested), value: nested }
     }
+    const keys = pairKeys(field)
+    if (keys) {
+      return {
+        ...field,
+        value: {
+          [keys.first]: values[keys.first] ?? '',
+          [keys.second]: values[keys.second] ?? '',
+        },
+      }
+    }
     return { ...field, value: values[field.key] ?? field.value ?? null }
   })
 }
@@ -241,6 +324,9 @@ function isEmpty(value: unknown, field: FormBuilderField) {
   }
   if (type === 'checkbox-group') {
     return !Array.isArray(value) || value.length === 0
+  }
+  if (type === 'input-group') {
+    return inputGroupValue(field, value).input.trim() === ''
   }
   if (value == null) return true
   if (typeof value === 'string') return value.trim() === ''
@@ -586,14 +672,33 @@ function FormBuilder({
               }
 
               if (type === 'slider') {
+                const keys = pairKeys(item)
+                const secondPath = keys ? siblingPath(item.path, keys.second) : null
+                const first = Number(value) || 0
+                const second = secondPath
+                  ? Number(getValueByPath(values, secondPath)) || 0
+                  : 0
+                const sliderValue = keys
+                  ? [first, second]
+                  : Array.isArray(value)
+                    ? value.map(Number)
+                    : Number(value) || 0
                 return (
                   <Field data-invalid={invalid || undefined}>
                     <FieldLabel>{item.title}</FieldLabel>
                     <Slider
                       min={0}
                       max={item.max ?? 100}
-                      value={Array.isArray(value) ? value.map(Number) : Number(value) || 0}
-                      onValueChange={(next) => field.handleChange(next)}
+                      value={sliderValue}
+                      onValueChange={(next) => {
+                        if (keys && secondPath) {
+                          const thumbs = Array.isArray(next) ? next : [next]
+                          field.handleChange(Number(thumbs[0]) || 0)
+                          form.setFieldValue(secondPath, Number(thumbs[1]) || 0)
+                          return
+                        }
+                        field.handleChange(next)
+                      }}
                     />
                     {invalid ? <FieldError>{message}</FieldError> : null}
                   </Field>
@@ -618,22 +723,60 @@ function FormBuilder({
               }
 
               if (type === 'input-group') {
+                const keys = inputGroupKeys(item)
+                const group = inputGroupValue(item, value)
+                const selectPath = keys ? siblingPath(item.path, keys.select) : null
+                const selectValue = selectPath
+                  ? String(getValueByPath(values, selectPath) ?? group.select)
+                  : group.select
+                const setInput = (next: string) => {
+                  if (keys) field.handleChange(next)
+                  else field.handleChange({ ...group, input: next })
+                }
+                const setSelect = (next: string) => {
+                  if (selectPath) form.setFieldValue(selectPath, next)
+                  else field.handleChange({ ...group, select: next })
+                }
+                const addonEnd = item.props?.align === 'end'
+                const selectAddon = (item.options ?? []).length ? (
+                  <InputGroupAddon align={addonEnd ? 'inline-end' : 'inline-start'}>
+                    <Select
+                      value={selectValue || null}
+                      onValueChange={(next) => setSelect(String(next))}
+                    >
+                      <SelectTrigger size="Inline" id={`${item.path}-select`}>
+                        <SelectValue className="uppercase" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {(item.options ?? []).map((option) => (
+                          <SelectItem key={option.value} value={option.value}>
+                            {option.label}
+                          </SelectItem>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </InputGroupAddon>
+                ) : (
+                  <InputGroupAddon align={addonEnd ? 'inline-end' : 'inline-start'}>
+                    <InputGroupText>{selectValue || 'SGD'}</InputGroupText>
+                  </InputGroupAddon>
+                )
                 return (
                   <Field data-invalid={invalid || undefined}>
                     <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
                     <InputGroup>
-                      <InputGroupAddon>
-                        <InputGroupText>SGD</InputGroupText>
-                      </InputGroupAddon>
-                      <InputGroupSeparator />
+                      {addonEnd ? null : selectAddon}
+                      {addonEnd ? null : <InputGroupSeparator />}
                       <InputGroupInput
                         id={item.path}
                         placeholder={placeholder}
-                        value={String(value ?? '')}
+                        value={keys ? String(value ?? '') : group.input}
                         aria-invalid={invalid || undefined}
                         onBlur={field.handleBlur}
-                        onChange={(event) => field.handleChange(event.target.value)}
+                        onChange={(event) => setInput(event.target.value)}
                       />
+                      {addonEnd ? <InputGroupSeparator /> : null}
+                      {addonEnd ? selectAddon : null}
                     </InputGroup>
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -677,14 +820,30 @@ function FormBuilder({
                 )
               }
 
+              const pair = pairKeys(item)
+              const pairSecondPath = pair ? siblingPath(item.path, pair.second) : null
+              const customValue =
+                pair && pairSecondPath
+                  ? {
+                      [pair.first]: value,
+                      [pair.second]: getValueByPath(values, pairSecondPath),
+                    }
+                  : value
               const custom = renderField?.({
                 field: item,
-                value,
+                value: customValue,
                 invalid,
                 message,
                 placeholder,
                 onBlur: field.handleBlur,
-                onChange: field.handleChange,
+                onChange: (next) => {
+                  if (pair && pairSecondPath && isPlainObject(next)) {
+                    field.handleChange(next[pair.first] ?? next.from ?? null)
+                    form.setFieldValue(pairSecondPath, next[pair.second] ?? next.to ?? null)
+                    return
+                  }
+                  field.handleChange(next)
+                },
               })
               if (custom) {
                 return (

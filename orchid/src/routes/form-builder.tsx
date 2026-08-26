@@ -134,23 +134,37 @@ const DETAILS_FIELDS: FormBuilderField[] = [
     max: 100,
   },
   {
+    key: 'min+max',
+    title: 'Slider range',
+    type: 'slider',
+    value: { min: 20, max: 80 },
+    max: 100,
+  },
+  {
     key: 'date',
     title: 'Date',
     type: 'date',
     value: '2026-08-15',
   },
   {
-    key: 'date_range',
+    key: 'from+to',
     title: 'Date range',
     type: 'date-range',
     value: { from: '2026-01-20', to: '2026-02-09' },
   },
   {
-    key: 'amount',
+    key: 'amount+currency',
     title: 'Input group',
     type: 'input-group',
     placeholder: '0.00',
-    value: '',
+    options: [
+      { value: 'sgd', label: 'SGD' },
+      { value: 'usd', label: 'USD' },
+      { value: 'myr', label: 'MYR' },
+    ],
+    required: true,
+    props: { align: 'end' },
+    value: { amount: '', currency: 'sgd' },
   },
   {
     key: 'password_protection',
@@ -199,10 +213,11 @@ Types
 - select
 - combobox — searchable; add props.multiple for chips
 - radio | checkbox | checkbox-boolean | checkbox-group | accepted | toggle
-- slider | input-group
+- slider — single value, or key "min+max" for a range
+- input-group — key "amount+currency" writes amount + currency
 - object — nest with fields[]
 - hidden | section | section-item — row with title + toggle (Figma Section Item)
-- custom via renderField — date, date-range, file, input-stepper, slots
+- custom via renderField — date; date-range uses key "from+to"
 
 show_if
 - show_if: "password_protection"
@@ -286,18 +301,23 @@ function renderDateField({ field, value, placeholder, onChange }: FormBuilderRen
   }
 
   if (field.type === 'date-range') {
-    const range = (value ?? {}) as { from?: string | null; to?: string | null }
+    const plus = field.key.indexOf('+')
+    const fromKey = plus === -1 ? 'from' : field.key.slice(0, plus)
+    const toKey = plus === -1 ? 'to' : field.key.slice(plus + 1)
+    const range = (value ?? {}) as Record<string, string | null | undefined>
+    const from = range[fromKey] ?? range.from
+    const to = range[toKey] ?? range.to
     return (
       <DatePickerRange
         selected={{
-          from: range.from ? parseLocalYmd(range.from) : undefined,
-          to: range.to ? parseLocalYmd(range.to) : undefined,
+          from: from ? parseLocalYmd(from) : undefined,
+          to: to ? parseLocalYmd(to) : undefined,
         }}
         placeholder={placeholder ?? 'Pick a date'}
         onSelect={(next) =>
           onChange({
-            from: next?.from ? toLocalYmd(next.from) : null,
-            to: next?.to ? toLocalYmd(next.to) : null,
+            [fromKey]: next?.from ? toLocalYmd(next.from) : null,
+            [toKey]: next?.to ? toLocalYmd(next.to) : null,
           })
         }
       />
