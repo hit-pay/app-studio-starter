@@ -166,3 +166,4 @@ function UserChip({
 }
 
 export { Chip, UserChip, chipVariants }
+export type { ChipColor }

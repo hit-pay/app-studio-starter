@@ -4,9 +4,7 @@ import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/c
 import {
   Select,
   SelectContent,
-  SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
@@ -21,64 +19,63 @@ function SelectExamplesPage() {
       <div className="grid gap-8 md:grid-cols-2">
         <FieldGroup>
           <Field>
-            <FieldLabel>Default</FieldLabel>
-            <Select>
+            <FieldLabel>Inventory</FieldLabel>
+            <Select defaultValue="in-stock">
               <SelectTrigger>
-                <SelectValue placeholder="Placeholder" />
+                <SelectValue placeholder="Select inventory" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="one">Option</SelectItem>
-                <SelectItem value="two">Option</SelectItem>
-                <SelectItem value="three">Option</SelectItem>
-                <SelectItem value="four">Option</SelectItem>
-                <SelectItem value="five">Option</SelectItem>
+                <SelectItem value="in-stock">In Stock</SelectItem>
+                <SelectItem value="out-of-stock">Out of Stock</SelectItem>
               </SelectContent>
             </Select>
-            <FieldDescription>This is a hint text to help user.</FieldDescription>
+            <FieldDescription>Two fixed stock states.</FieldDescription>
           </Field>
 
           <Field data-invalid>
-            <FieldLabel>Error</FieldLabel>
+            <FieldLabel>Inventory</FieldLabel>
             <Select>
               <SelectTrigger aria-invalid>
-                <SelectValue placeholder="Placeholder" />
+                <SelectValue placeholder="Select inventory" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="one">Option</SelectItem>
-                <SelectItem value="two">Option</SelectItem>
+                <SelectItem value="in-stock">In Stock</SelectItem>
+                <SelectItem value="out-of-stock">Out of Stock</SelectItem>
               </SelectContent>
             </Select>
-            <FieldError>This is a hint text to help user.</FieldError>
+            <FieldError>Inventory status is required.</FieldError>
           </Field>
         </FieldGroup>
 
         <FieldGroup>
           <Field>
-            <FieldLabel>Grouped</FieldLabel>
-            <Select>
+            <FieldLabel>Channel</FieldLabel>
+            <Select defaultValue="online-store">
               <SelectTrigger>
-                <SelectValue placeholder="Placeholder" />
+                <SelectValue placeholder="Select channel" />
               </SelectTrigger>
               <SelectContent>
-                <SelectGroup>
-                  <SelectLabel>Group head</SelectLabel>
-                  <SelectItem value="a">Option</SelectItem>
-                  <SelectItem value="b">Option</SelectItem>
-                  <SelectItem value="c">Option</SelectItem>
-                  <SelectItem value="d">Option</SelectItem>
-                  <SelectItem value="e">Option</SelectItem>
-                </SelectGroup>
-                <SelectGroup>
-                  <SelectLabel>Group head</SelectLabel>
-                  <SelectItem value="f">Option</SelectItem>
-                  <SelectItem value="g">Option</SelectItem>
-                  <SelectItem value="h">Option</SelectItem>
-                  <SelectItem value="i">Option</SelectItem>
-                  <SelectItem value="j">Option</SelectItem>
-                </SelectGroup>
+                <SelectItem value="online-store">Online Store</SelectItem>
+                <SelectItem value="point-of-sale">Point Of Sale</SelectItem>
+                <SelectItem value="invoicing">Invoicing</SelectItem>
               </SelectContent>
             </Select>
-            <FieldDescription>This is a hint text to help user.</FieldDescription>
+            <FieldDescription>Sales channels — short list, no search needed.</FieldDescription>
+          </Field>
+
+          <Field>
+            <FieldLabel>Calculation</FieldLabel>
+            <Select defaultValue="flat-rate">
+              <SelectTrigger>
+                <SelectValue placeholder="Select calculation" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="flat-rate">Flat rate</SelectItem>
+                <SelectItem value="fee-per-unit">Fee per Unit</SelectItem>
+                <SelectItem value="weight-base">Weight Base</SelectItem>
+              </SelectContent>
+            </Select>
+            <FieldDescription>How the fee is calculated.</FieldDescription>
           </Field>
         </FieldGroup>
       </div>
