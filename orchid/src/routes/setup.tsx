@@ -27,8 +27,7 @@ const COMPONENTS_JSON = `{
     "hooks": "@/hooks"
   },
   "registries": {
-    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json",
-    "@orchid-local": "http://127.0.0.1:5177/r/{name}.json"
+    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
   }
 }`
 
@@ -67,36 +66,36 @@ const HARNESSES: { name: string; file: string; note: string }[] = [
   { name: 'Windsurf / OpenCode / others', file: 'client MCP config', note: 'Same stdio command: bunx --bun shadcn mcp.' },
 ]
 
-const COLOR_TOKENS: { token: string; utility: string; value: string }[] = [
-  { token: '--oc-background', utility: 'bg-oc-background', value: '#fff' },
-  { token: '--oc-foreground', utility: 'text-oc-foreground', value: '#03102f' },
-  { token: '--oc-card', utility: 'bg-oc-card', value: '#fff' },
-  { token: '--oc-card-foreground', utility: 'text-oc-card-foreground', value: '#03102f' },
-  { token: '--oc-primary', utility: 'bg-oc-primary', value: '#2465de' },
-  { token: '--oc-primary-foreground', utility: 'text-oc-primary-foreground', value: '#fff' },
-  { token: '--oc-primary-300', utility: 'text-oc-primary-300', value: '#80acfe' },
-  { token: '--oc-secondary', utility: 'bg-oc-secondary', value: '#f2f2f2' },
-  { token: '--oc-secondary-foreground', utility: 'text-oc-secondary-foreground', value: '#61667c' },
-  { token: '--oc-muted', utility: 'bg-oc-muted', value: '#f8f9fc' },
-  { token: '--oc-muted-foreground', utility: 'text-oc-muted-foreground', value: '#61667c' },
-  { token: '--oc-accent', utility: 'bg-oc-accent', value: '#f2f2f4' },
-  { token: '--oc-accent-foreground', utility: 'text-oc-accent-foreground', value: '#03102f' },
-  { token: '--oc-border', utility: 'border-oc-border', value: '#e5e6ea' },
-  { token: '--oc-destructive', utility: 'text-oc-destructive', value: '#dc3545' },
-  { token: '--oc-destructive-soft', utility: 'bg-oc-destructive-soft', value: '#f9e9e9' },
-  { token: '--oc-destructive-border', utility: 'border-oc-destructive-border', value: '#e7a6a6' },
-  { token: '--oc-success', utility: 'text-oc-success', value: '#2bc37d' },
-  { token: '--oc-success-soft', utility: 'bg-oc-success-soft', value: '#e6f9f0' },
-  { token: '--oc-success-border', utility: 'border-oc-success-border', value: '#b3eed2' },
-  { token: '--oc-warning', utility: 'text-oc-warning', value: '#f4b840' },
-  { token: '--oc-warning-soft', utility: 'bg-oc-warning-soft', value: '#fff9ec' },
-  { token: '--oc-warning-border', utility: 'border-oc-warning-border', value: '#f4b840' },
-  { token: '--oc-info-soft', utility: 'bg-oc-info-soft', value: '#e5eeff' },
-  { token: '--oc-info-border', utility: 'border-oc-info-border', value: '#b3cdfe' },
-  { token: '--oc-neutral', utility: 'bg-oc-neutral', value: '#fcfcfd' },
-  { token: '--oc-neutral-soft', utility: 'bg-oc-neutral-soft', value: '#f2f2f4' },
-  { token: '--oc-neutral-border', utility: 'border-oc-neutral-border', value: '#cbcdd4' },
-  { token: '--oc-neutral-strong', utility: 'text-oc-neutral-strong', value: '#484d61' },
+const COLOR_TOKENS: { token: string; utility: string; value: string; dark: string }[] = [
+  { token: '--oc-background', utility: 'bg-oc-background', value: '#fff', dark: '#0c1018' },
+  { token: '--oc-foreground', utility: 'text-oc-foreground', value: '#03102f', dark: '#eef1f6' },
+  { token: '--oc-card', utility: 'bg-oc-card', value: '#fff', dark: '#141924' },
+  { token: '--oc-card-foreground', utility: 'text-oc-card-foreground', value: '#03102f', dark: '#eef1f6' },
+  { token: '--oc-primary', utility: 'bg-oc-primary', value: '#2465de', dark: '#4d8af0' },
+  { token: '--oc-primary-foreground', utility: 'text-oc-primary-foreground', value: '#fff', dark: '#fff' },
+  { token: '--oc-primary-300', utility: 'text-oc-primary-300', value: '#80acfe', dark: '#8eb6ff' },
+  { token: '--oc-secondary', utility: 'bg-oc-secondary', value: '#f2f2f2', dark: '#1c2230' },
+  { token: '--oc-secondary-foreground', utility: 'text-oc-secondary-foreground', value: '#61667c', dark: '#a8adbd' },
+  { token: '--oc-muted', utility: 'bg-oc-muted', value: '#f8f9fc', dark: '#121722' },
+  { token: '--oc-muted-foreground', utility: 'text-oc-muted-foreground', value: '#61667c', dark: '#8b91a3' },
+  { token: '--oc-accent', utility: 'bg-oc-accent', value: '#f2f2f4', dark: '#1c2230' },
+  { token: '--oc-accent-foreground', utility: 'text-oc-accent-foreground', value: '#03102f', dark: '#eef1f6' },
+  { token: '--oc-border', utility: 'border-oc-border', value: '#e5e6ea', dark: '#2a3142' },
+  { token: '--oc-destructive', utility: 'text-oc-destructive', value: '#dc3545', dark: '#f05a68' },
+  { token: '--oc-destructive-soft', utility: 'bg-oc-destructive-soft', value: '#f9e9e9', dark: '#3a1c20' },
+  { token: '--oc-destructive-border', utility: 'border-oc-destructive-border', value: '#e7a6a6', dark: '#8a3d46' },
+  { token: '--oc-success', utility: 'text-oc-success', value: '#2bc37d', dark: '#3dd68c' },
+  { token: '--oc-success-soft', utility: 'bg-oc-success-soft', value: '#e6f9f0', dark: '#143528' },
+  { token: '--oc-success-border', utility: 'border-oc-success-border', value: '#b3eed2', dark: '#2a6b4c' },
+  { token: '--oc-warning', utility: 'text-oc-warning', value: '#f4b840', dark: '#f5c35a' },
+  { token: '--oc-warning-soft', utility: 'bg-oc-warning-soft', value: '#fff9ec', dark: '#3a2d12' },
+  { token: '--oc-warning-border', utility: 'border-oc-warning-border', value: '#f4b840', dark: '#8a6a28' },
+  { token: '--oc-info-soft', utility: 'bg-oc-info-soft', value: '#e5eeff', dark: '#172844' },
+  { token: '--oc-info-border', utility: 'border-oc-info-border', value: '#b3cdfe', dark: '#3d5f99' },
+  { token: '--oc-neutral', utility: 'bg-oc-neutral', value: '#fcfcfd', dark: '#10151f' },
+  { token: '--oc-neutral-soft', utility: 'bg-oc-neutral-soft', value: '#f2f2f4', dark: '#1c2230' },
+  { token: '--oc-neutral-border', utility: 'border-oc-neutral-border', value: '#cbcdd4', dark: '#3a4154' },
+  { token: '--oc-neutral-strong', utility: 'text-oc-neutral-strong', value: '#484d61', dark: '#c5c9d4' },
 ]
 
 function CopyAllButton({ value, label }: { value: string; label: string }) {
@@ -197,7 +196,8 @@ function SetupGuidePage() {
             <code className="text-oc-foreground">bg-oc-background</code>, and{' '}
             <code className="text-oc-foreground">text-oc-foreground</code> on{' '}
             <code className="text-oc-foreground">html</code>/<code className="text-oc-foreground">body</code>{' '}
-            yourself.
+            yourself. Add <code className="text-oc-foreground">class="dark"</code> on{' '}
+            <code className="text-oc-foreground">html</code> to use the dark tokens.
           </P>
           <CodeBlock
             code={orchidStyles}
@@ -211,7 +211,8 @@ function SetupGuidePage() {
                 <tr>
                   <th className="px-4 py-2 font-medium">CSS variable</th>
                   <th className="px-4 py-2 font-medium">Tailwind</th>
-                  <th className="px-4 py-2 font-medium">Value</th>
+                  <th className="px-4 py-2 font-medium">Light</th>
+                  <th className="px-4 py-2 font-medium">Dark</th>
                 </tr>
               </thead>
               <tbody>
@@ -228,6 +229,15 @@ function SetupGuidePage() {
                           style={{ background: row.value }}
                         />
                         {row.value}
+                      </span>
+                    </td>
+                    <td className="px-4 py-2">
+                      <span className="inline-flex items-center gap-2 font-mono text-[13px]">
+                        <span
+                          className="size-3.5 rounded-sm border border-solid border-oc-border"
+                          style={{ background: row.dark }}
+                        />
+                        {row.dark}
                       </span>
                     </td>
                   </tr>
@@ -322,19 +332,16 @@ function SetupGuidePage() {
         </Section>
 
         <Section title="4. Add a component">
-          <P>
-            From the app directory. The CLI will prompt; do not pass{' '}
-            <code className="text-oc-foreground">--yes</code>.
-          </P>
+          <P>From the app directory:</P>
           <CodeBlock code="bunx shadcn add @orchid/button" />
           <P>Several at once:</P>
           <CodeBlock code="bunx shadcn add @orchid/button @orchid/input @orchid/field" />
           <P>
-            Local registry (run Orchid docs first:{' '}
-            <code className="text-oc-foreground">cd orchid && bun run registry:build && bun run dev</code>
-            ):
+            All Orchid UI items (not the default shadcn kit). Do not run{' '}
+            <code className="text-oc-foreground">shadcn add --all</code> without{' '}
+            <code className="text-oc-foreground">@orchid</code>.
           </P>
-          <CodeBlock code="bunx shadcn add @orchid-local/button" />
+          <CodeBlock code="bunx shadcn add @orchid --all" />
           <P>
             Files land in the <code className="text-oc-foreground">ui</code> alias. Import from{' '}
             <code className="text-oc-foreground">@/ui/button</code> (or{' '}

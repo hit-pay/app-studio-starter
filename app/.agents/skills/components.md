@@ -10,7 +10,7 @@ If MCP tools are missing, do not assume a single client. Use that harness’s MC
 
 Search/list **`@orchid` only**. Do not add Button/Dialog/Card from the default shadcn registry.
 
-Fallback catalog (one JSON, do not open every kit file): **https://orchid-ui-hitpay.vercel.app/registry.json** (`items` `registry:ui`, skip `utils`). Item JSON: `https://orchid-ui-hitpay.vercel.app/r/{name}.json`. Local Orchid dev: `@orchid-local` → `http://127.0.0.1:5177/r/{name}.json`.
+Fallback catalog (one JSON, do not open every kit file): **https://orchid-ui-hitpay.vercel.app/registry.json** (`items` `registry:ui`, skip `utils`). Item JSON: `https://orchid-ui-hitpay.vercel.app/r/{name}.json`.
 
 Then import `@/ui/<name>` (`src/orchid-ui/`). Open a `.tsx` only after you chose that `name`.
 
@@ -18,10 +18,11 @@ Base UI: `render={<Button />}`, never `asChild` or `@radix-ui/*`. No `src/compon
 
 **Orchid first.** Custom → `src/components/<name>.tsx` only if no catalog item fits.
 
-`components.json` has `@orchid` (Vercel) and `@orchid-local` (`http://127.0.0.1:5177/r/{name}.json`). Missing file:
+`components.json` has `@orchid`. Missing file:
 
 ```bash
 bunx shadcn add @orchid/<name>
+bunx shadcn add @orchid --all
 ```
 
 ```tsx
