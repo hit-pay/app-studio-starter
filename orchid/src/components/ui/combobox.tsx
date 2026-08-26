@@ -405,7 +405,7 @@ function ComboboxChipsInput({ className, ...props }: ComboboxPrimitive.Input.Pro
     <ComboboxPrimitive.Input
       data-slot="combobox-chip-input"
       className={cn(
-        'min-w-12 flex-1 border-0 bg-transparent p-0 text-sm leading-[1.5] text-oc-foreground outline-none placeholder:text-oc-muted-foreground',
+        'min-w-12 flex-1 border-0 bg-transparent p-0 text-base leading-[1.5] text-oc-foreground outline-none placeholder:text-oc-muted-foreground md:text-sm',
         className,
       )}
       {...props}

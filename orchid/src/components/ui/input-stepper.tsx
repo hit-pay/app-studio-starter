@@ -109,7 +109,7 @@ function InputStepper({
               setEditing(false)
             }
           }}
-          className="min-w-0 flex-1 bg-transparent text-center text-sm leading-[1.5] text-oc-foreground outline-none"
+          className="min-w-0 flex-1 bg-transparent text-center text-base leading-[1.5] text-oc-foreground outline-none md:text-sm"
         />
       ) : (
         <button
