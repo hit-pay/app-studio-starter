@@ -10,8 +10,9 @@ Reading kit / route files while coding is fine. **Do not** run `bun run lint` or
 
 When **all** source changes for this request are done:
 
-1. If you added or renamed a file under `src/routes/`, run `bun run generate-routes` **once**.
-2. Optionally `bun run lint` **once** if you want a typecheck.
-3. Always run **`bun run preview:refresh` once**.
+1. Self-review the diff — `.agents/skills/review.md`. Fix issues.
+2. If you added or renamed a file under `src/routes/`, run `bun run generate-routes` **once**.
+3. `bun run lint` **once**.
+4. **`bun run preview:refresh` once**.
 
-Do not end the job until that single preview:refresh has run. If lint fails, fix, then preview:refresh **once more** — not after every hunk.
+Do not end the job until that single preview:refresh has run. If lint or review finds bugs, fix, then lint **once** and preview:refresh **once more**.

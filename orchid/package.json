@@ -8,7 +8,8 @@
     "generate-routes": "bun --bun tsr generate",
     "tanstack:build": "bun run generate-routes && bun --bun vite build",
     "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r",
-    "build": "bun run registry:build && bun run tanstack:build"
+    "catalog:app": "bun scripts/export-app-catalog.ts",
+    "build": "bun run registry:build && bun run catalog:app && bun run tanstack:build"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
