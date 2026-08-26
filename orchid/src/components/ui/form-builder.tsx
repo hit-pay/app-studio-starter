@@ -424,6 +424,7 @@ function FormComboboxField({
 type FormBuilderApi = {
   fields: FormBuilderField[]
   values: FormBuilderValues
+  errors: FormBuilderValues
   isSubmitting: boolean
   submit: () => Promise<void>
   form: ReturnType<typeof useForm>
@@ -445,12 +446,27 @@ function useFormBuilder({
     },
   })
   const rawValues = useStore(form.store, (state) => state.values)
+  const fieldMeta = useStore(form.store, (state) => state.fieldMeta)
+  const submissionAttempts = useStore(form.store, (state) => state.submissionAttempts)
   const isSubmitting = useStore(form.store, (state) => state.isSubmitting)
+  const values = nestValues(rawValues as FormBuilderValues, defaultValues)
+  const submitted = submissionAttempts > 0
+  const errors = Object.fromEntries(
+    flattenFields(fields)
+      .filter((item) => isDisplayed(item, values))
+      .flatMap((item) => {
+        const message = validateField(item, getValueByPath(values, item.path))
+        const touched = Boolean((fieldMeta as Record<string, { isTouched?: boolean }>)[item.path]?.isTouched)
+        if (!message || !(touched || submitted)) return []
+        return [[item.path, message]]
+      }),
+  )
 
   return {
     fields,
     form,
-    values: nestValues(rawValues as FormBuilderValues, defaultValues),
+    values,
+    errors,
     isSubmitting,
     submit: () => form.handleSubmit(),
   }

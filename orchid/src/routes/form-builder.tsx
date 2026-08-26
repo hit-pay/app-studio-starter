@@ -334,13 +334,26 @@ function FormBuilderExamplesPage() {
           >
             <TabMenuList>
               <TabMenuTab value="result">Result</TabMenuTab>
+              <TabMenuTab value="errors">Errors</TabMenuTab>
               <TabMenuTab value="schema">Schema</TabMenuTab>
               <TabMenuTab value="prompt">Prompt</TabMenuTab>
             </TabMenuList>
             <TabMenuPanel value="result" className="min-w-0">
+              <div className="flex min-w-0 flex-col gap-4">
+                <JsonPanel
+                  filename="result.json"
+                  data={{ account: account.values, details: details.values }}
+                />
+                <JsonPanel
+                  filename="errors.json"
+                  data={{ account: account.errors, details: details.errors }}
+                />
+              </div>
+            </TabMenuPanel>
+            <TabMenuPanel value="errors" className="min-w-0">
               <JsonPanel
-                filename="result.json"
-                data={{ account: account.values, details: details.values }}
+                filename="errors.json"
+                data={{ account: account.errors, details: details.errors }}
               />
             </TabMenuPanel>
             <TabMenuPanel value="schema" className="min-w-0">
