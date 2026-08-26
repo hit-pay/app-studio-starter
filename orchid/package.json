@@ -7,7 +7,7 @@
     "lint": "tsc --noEmit",
     "generate-routes": "bun --bun tsr generate",
     "tanstack:build": "bun run generate-routes && bun --bun vite build",
-    "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r",
+    "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r && cp registry.json public/registry.json",
     "build": "bun run registry:build && bun run tanstack:build"
   },
   "dependencies": {
