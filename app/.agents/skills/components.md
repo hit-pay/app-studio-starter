@@ -1,21 +1,59 @@
 ---
-description: Orchid UI kit. Open when building screens. Follow the user layout.
+description: Orchid UI. Open when building screens.
 ---
 
 # Screens
 
-Import kit from `@/ui/…` (`src/orchid-ui/`). Tokens: `src/styles.css`. `cn()` from `@/lib/utils`. Icons: `lucide-react`. Props are PascalCase (`type="Primary"`, `size="Small"`), not shadcn `variant="outline"`.
+Orchid kit only. Import `@/ui/…` → `src/orchid-ui/`. Tokens: `src/styles.css`. `cn()` from `@/lib/utils`. Icons: `lucide-react`. Base UI: `render={<Button />}`, never `asChild` or `@radix-ui/*`. No `src/components/ui`. Never `bunx shadcn add` from `@shadcn` or ui.shadcn.com.
 
-Do not `shadcn add` from ui.shadcn.com. No `@radix-ui/*`. No files in `src/components/ui`.
+**Orchid first.** Compose kit pieces. Custom → `src/components/<name>.tsx` only if no kit file can do it.
 
-**Orchid first.** Open `src/orchid-ui/<name>.tsx` for the real API. Custom UI → `src/components/<name>.tsx` (`@/components/…`) only if the kit file does not exist. Missing kit file that is in the registry (only if you need it): `bunx shadcn add @orchid/<name> --yes`. Catalog: `https://app-studio-starter.vercel.app/registry.json`.
+## CLI (kit file missing)
+
+```bash
+bunx shadcn add @orchid/<name> --yes
+```
+
+Then read `src/orchid-ui/<name>.tsx`. Catalog only if needed: `https://app-studio-starter.vercel.app/registry.json`.
+
+## APIs
 
 ```tsx
-import { Button } from '@/ui/button'
 <Button type="Primary">Save</Button>
 <Button type="Secondary" style="Border">Cancel</Button>
 ```
 
-Kit files: `button` `dropdown-menu` `snackbar` `chip` `accordion` `progress-bar` `list-item` `input-stepper` `avatar` `tooltip` `copy-tooltip` `tab-menu` `clickable-option` `overview-item` `sub-header` `page-title` `box-detail` `group-icon` `customer-card` `checkbox` `radio-group` `toggle` `slider` `empty-page` `modal` `label` `separator` `field` `input` `textarea` `select` `input-group` `popover` `calendar` `date-picker`.
+Button: `type` Primary | Secondary | Destructive (visual; submit = `htmlType`). `style` Default | Transparent | Border. `size` Small | Default | Big. No `isLoading` — `disabled` + label.
 
-Button: `type` Primary | Secondary | Destructive; `style` Default | Transparent | Border; `size` Small | Default | Big. Field wraps Label + Input + description/error. Modal: `Modal` + `ModalTrigger` + `ModalPopup`.
+Triggers: `DropdownMenuTrigger nativeButton render={<Button type="Secondary" style="Border" />}`.
+
+`TabMenu` → `TabMenuList` → `TabMenuTab`. `Modal` always has `title`. `Avatar`: `size` 24–64, initials as children, `src` for photos. Status: `Chip` / `UserChip`. Empty: `EmptyPage`. Toast: `Snackbar`. Overlay: `Modal` (or `Popover` for small click content).
+
+## Forms & layout
+
+- `FieldGroup` + `Field` + `FieldLabel` + control. Invalid: `data-invalid` on `Field`, `aria-invalid` on the control.
+- Prefix/icon in a field: `InputGroup` + `InputGroupInput` / `InputGroupTextarea` + `InputGroupAddon`. Never raw `Input` inside `InputGroup`.
+- `flex … gap-*`, not `space-y-*`. Equal box: `size-*`. Long text: `truncate`. Classes: `cn()`.
+- `className` on kit = layout only. Colors: tokens (`bg-primary`, `text-muted-foreground`, `text-destructive`), not `bg-blue-500` / `text-emerald-600`. No `dark:` color hacks. No extra `z-index` on Modal / Dropdown / Popover / Tooltip.
+- Icons inside Button / menu items: no `size-4` / `mr-2`. Pass icon components (`icon={CheckIcon}`), not string maps.
+- `Separator` not `<hr>`.
+
+## Map
+
+| Need | Use |
+|---|---|
+| Button | `Button` |
+| Text / area / select | `Input` `Textarea` `Select` / `SelectMultiple` |
+| Prefix, currency | `InputGroup` |
+| Checkbox / radio / switch | `Checkbox` `RadioGroup` `Toggle` |
+| Date | `DatePicker` `DatePickerRange` |
+| Tabs | `TabMenu` |
+| Modal | `Modal` |
+| Menu / tooltip / popover | `DropdownMenu` `Tooltip` `Popover` |
+| Status | `Chip` `UserChip` |
+| Empty | `EmptyPage` |
+| Toast | `Snackbar` |
+| List / metric / customer | `ListItem` `OverviewItem` `CustomerCard` |
+| Page chrome | `SubHeader` `PageTitle` `BoxDetail` `GroupIcon` |
+
+Kit: `button` `dropdown-menu` `snackbar` `chip` `accordion` `progress-bar` `list-item` `input-stepper` `avatar` `tooltip` `copy-tooltip` `tab-menu` `clickable-option` `overview-item` `sub-header` `page-title` `box-detail` `group-icon` `customer-card` `checkbox` `radio-group` `toggle` `slider` `empty-page` `modal` `label` `separator` `field` `input` `textarea` `select` `input-group` `popover` `calendar` `date-picker`.
