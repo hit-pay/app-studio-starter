@@ -117,7 +117,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/skeleton' as const,
     name: 'Skeleton',
-    description: 'Placeholder pulse while dashboard content loads.',
+    description: 'Placeholder pulse while content loads.',
   },
   {
     to: '/field' as const,
@@ -127,42 +127,42 @@ export const DOC_COMPONENTS = [
   {
     to: '/input' as const,
     name: 'Input',
-    description: 'Invoice numbers, customer email, SKUs, store handles, and POS IDs.',
+    description: 'Text field with default, leading icon, error, and disabled.',
   },
   {
     to: '/input-group' as const,
     name: 'Input Group',
-    description: 'Invoice and Recurring amounts, store URL prefix, and channel fees.',
+    description: 'Input combined with select or prefix, including currency.',
   },
   {
     to: '/textarea' as const,
     name: 'Textarea',
-    description: 'Invoice notes, payment link copy, product descriptions, and customer notes.',
+    description: 'Multiline field with hint and error.',
   },
   {
     to: '/select' as const,
     name: 'Select',
-    description: 'Inventory, sales channel, Recurring interval, POS terminal, and tax class.',
+    description: 'Single choice from a list, with groups and error.',
   },
   {
     to: '/combobox' as const,
     name: 'Combobox',
-    description: 'Search payment channels, products, customers, and POS locations.',
+    description: 'Searchable select; multiple chips, checkbox items, and select all.',
   },
   {
     to: '/section-title' as const,
     name: 'Section Title',
-    description: 'Headings for Online Store, Payment Channels, Invoices, Recurring, and POS.',
+    description: 'Form section heading with optional chip, hint, count, and actions.',
   },
   {
     to: '/empty-page' as const,
     name: 'Empty Page',
-    description: 'Empty invoices, products, customers, payment links, and POS upgrade.',
+    description: 'Centered empty state with icon, title, description, and actions.',
   },
   {
     to: '/modal' as const,
     name: 'Modal',
-    description: 'Review invoices, create payment links, pair POS, and confirm Recurring.',
+    description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
   },
 ] as const
 
@@ -174,22 +174,22 @@ export const DOC_BLOCKS = [
   {
     to: '/customer-card' as const,
     name: 'Customer Card',
-    description: 'Customer Data cards for invoices, Recurring, and POS walk-ins.',
+    description: 'Small, Big, and Float customer or beneficiary cards.',
   },
   {
     to: '/sub-header' as const,
     name: 'Sub Header',
-    description: 'Fullscreen create product or invoice; back or close with save actions.',
+    description: 'Back or close on the left; actions on the right.',
   },
   {
     to: '/page-title' as const,
     name: 'Page Title',
-    description: 'Invoices, Payment Links, Recurring, POS, Online Store, Customers, Products.',
+    description: 'Heading with actions on the right and optional box below.',
   },
   {
     to: '/confirmation-modal' as const,
     name: 'Confirmation Modal',
-    description: 'Delete invoices and products, warn on POS, confirm Recurring cancel.',
+    description: 'Prebuilt confirm dialog: Delete, Warning, Success, Question, and type-to-confirm.',
   },
 ] as const
 

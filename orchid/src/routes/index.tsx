@@ -16,7 +16,7 @@ function ExamplesIndexPage() {
       >
         <span>
           <span className="font-medium">Setup guide</span>
-          <span className="text-oc-muted-foreground"> — CSS tokens, any AI harness, and shadcn add. Examples below mirror the HitPay dashboard.</span>
+          <span className="text-oc-muted-foreground"> — CSS tokens, any AI harness, and shadcn add</span>
         </span>
         <span className="text-oc-muted-foreground">→</span>
       </Link>
