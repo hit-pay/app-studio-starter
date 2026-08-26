@@ -1,5 +1,5 @@
 import { useNavigate, useRouterState } from '@tanstack/react-router'
-import { ClickableOption, ClickableOptionGroup } from '@/components/ui/clickable-option'
+import { ChoiceCard, ChoiceCardGroup } from '@/components/ui/choice-card'
 
 import {
   DOC_GUIDES,
@@ -24,7 +24,7 @@ function NavGroup({
       <p className="px-1 pb-2 text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
         {label}
       </p>
-      <ClickableOptionGroup
+      <ChoiceCardGroup
         alignment="Vertical"
         value={pathname}
         onValueChange={(value) => {
@@ -33,7 +33,7 @@ function NavGroup({
         className="gap-2"
       >
         {items.map((item) => (
-          <ClickableOption
+          <ChoiceCard
             key={item.to}
             value={item.to}
             title={item.name}
@@ -41,7 +41,7 @@ function NavGroup({
             className="px-3 py-2"
           />
         ))}
-      </ClickableOptionGroup>
+      </ChoiceCardGroup>
     </div>
   )
 }

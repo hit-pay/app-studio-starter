@@ -4,7 +4,7 @@ import { CopyIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
 
-function CopyTooltip({
+function CopyButton({
   className,
   value,
   label = 'Copied!',
@@ -24,7 +24,7 @@ function CopyTooltip({
             <button
               type="button"
               aria-label="Copy"
-              data-slot="copy-tooltip"
+              data-slot="copy-button"
               className={cn(
                 'inline-flex size-4 shrink-0 cursor-pointer items-center justify-center text-oc-muted-foreground outline-none hover:text-oc-foreground [&_svg]:size-full',
                 className,
@@ -50,4 +50,4 @@ function CopyTooltip({
   )
 }
 
-export { CopyTooltip }
+export { CopyButton }

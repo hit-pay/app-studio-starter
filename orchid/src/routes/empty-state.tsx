@@ -2,21 +2,21 @@ import { createFileRoute } from '@tanstack/react-router'
 import { FileTextIcon, LinkIcon, PlusIcon, ShoppingBagIcon, StoreIcon, UserPlusIcon } from 'lucide-react'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
-import { EmptyPage } from '@/components/ui/empty-page'
+import { EmptyState } from '@/components/ui/empty-state'
 
-export const Route = createFileRoute('/empty-page')({
-  component: EmptyPageExamplesPage,
+export const Route = createFileRoute('/empty-state')({
+  component: EmptyStateExamplesPage,
 })
 
-function EmptyPageExamplesPage() {
+function EmptyStateExamplesPage() {
   return (
-    <DocExamplePage to="/empty-page">
+    <DocExamplePage to="/empty-state">
       <div className="grid gap-12 md:grid-cols-2">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             No invoices
           </p>
-          <EmptyPage
+          <EmptyState
             type="Default"
             title="No invoices yet"
             description="Create an invoice to bill a customer by email or payment link."
@@ -39,7 +39,7 @@ function EmptyPageExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             No products
           </p>
-          <EmptyPage
+          <EmptyState
             type="Default"
             title="No products yet"
             description="Add Product Data to sell in Online Store, POS, invoices, and payment links."
@@ -56,7 +56,7 @@ function EmptyPageExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             No customers
           </p>
-          <EmptyPage
+          <EmptyState
             type="Default"
             title="No customers yet"
             description="Customer Data appears here after a payment, invoice, or POS sale."
@@ -73,7 +73,7 @@ function EmptyPageExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             No payment links
           </p>
-          <EmptyPage
+          <EmptyState
             type="Default"
             title="No payment links yet"
             description="Share a link so customers can pay without an invoice."
@@ -90,7 +90,7 @@ function EmptyPageExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Upgrade POS
           </p>
-          <EmptyPage
+          <EmptyState
             type="Upgrade"
             title="Upgrade to Point of Sale"
             description="Accept in-store payments on a HitPay terminal. Upgrade your plan to enable POS."
@@ -106,7 +106,7 @@ function EmptyPageExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Search not found
           </p>
-          <EmptyPage
+          <EmptyState
             type="Search"
             title="No matching invoices"
             description="Try another invoice number, customer, or payment channel."
@@ -117,7 +117,7 @@ function EmptyPageExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Online Store
           </p>
-          <EmptyPage
+          <EmptyState
             type="Default"
             title="Your Online Store is empty"
             description="Add products so customers can check out on your storefront."

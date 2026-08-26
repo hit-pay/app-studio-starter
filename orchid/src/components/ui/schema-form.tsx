@@ -39,12 +39,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from './select'
-import { SectionItem } from './section-title'
+import { SectionItem } from './form-section'
 import { Slider } from './slider'
 import { Textarea } from './textarea'
 import { Toggle } from './toggle'
 
-type FormBuilderType =
+type SchemaFormType =
   | 'input'
   | 'password'
   | 'textarea'
@@ -64,43 +64,43 @@ type FormBuilderType =
   | 'section'
   | 'section-item'
 
-type FormBuilderOption = {
+type SchemaFormOption = {
   value: string
   label: string
 }
 
-type FormBuilderFieldProps = {
+type SchemaFormFieldProps = {
   multiple?: boolean
   [key: string]: unknown
 }
 
-type FormBuilderField = {
+type SchemaFormField = {
   key: string
   title: string
-  type: FormBuilderType | (string & {})
+  type: SchemaFormType | (string & {})
   required?: boolean
   placeholder?: string | null
   description?: string | null
-  options?: FormBuilderOption[]
+  options?: SchemaFormOption[]
   value?: unknown
   validation?: string | null
   force_display?: boolean
   max_length?: number
   min_length?: number
   max?: number
-  props?: FormBuilderFieldProps
+  props?: SchemaFormFieldProps
   show_if?: string | string[]
   show_if_value?: unknown
   format?: string
   parent?: string
-  fields?: FormBuilderField[]
+  fields?: SchemaFormField[]
 }
 
-type FormBuilderValues = Record<string, unknown>
+type SchemaFormValues = Record<string, unknown>
 
-type FlatField = FormBuilderField & { path: string }
+type FlatField = SchemaFormField & { path: string }
 
-type FormBuilderRenderField = {
+type SchemaFormRenderField = {
   field: FlatField
   value: unknown
   invalid: boolean
@@ -110,7 +110,7 @@ type FormBuilderRenderField = {
   onChange: (next: unknown) => void
 }
 
-function pairKeys(field: FormBuilderField) {
+function pairKeys(field: SchemaFormField) {
   const plus = field.key.indexOf('+')
   if (plus === -1) return null
   return {
@@ -119,7 +119,7 @@ function pairKeys(field: FormBuilderField) {
   }
 }
 
-function inputGroupKeys(field: FormBuilderField) {
+function inputGroupKeys(field: SchemaFormField) {
   if (field.type !== 'input-group') return null
   const keys = pairKeys(field)
   return keys ? { input: keys.first, select: keys.second } : null
@@ -131,11 +131,11 @@ function siblingPath(path: string, key: string) {
   return parts.join('.')
 }
 
-function inputGroupValue(field: FormBuilderField, value: unknown) {
+function inputGroupValue(field: SchemaFormField, value: unknown) {
   const keys = inputGroupKeys(field)
   const fallbackSelect = field.options?.[0]?.value ?? ''
   if (value != null && typeof value === 'object' && !Array.isArray(value)) {
-    const record = value as FormBuilderValues
+    const record = value as SchemaFormValues
     return {
       input: String(record[keys?.input ?? 'input'] ?? record.input ?? ''),
       select: String(record[keys?.select ?? 'select'] ?? record.select ?? fallbackSelect),
@@ -147,7 +147,7 @@ function inputGroupValue(field: FormBuilderField, value: unknown) {
   }
 }
 
-function pairDefaultParts(field: FormBuilderField): [unknown, unknown] | null {
+function pairDefaultParts(field: SchemaFormField): [unknown, unknown] | null {
   const keys = pairKeys(field)
   if (!keys) return null
   const value = field.value
@@ -171,7 +171,7 @@ function pairDefaultParts(field: FormBuilderField): [unknown, unknown] | null {
   return ['', '']
 }
 
-function defaultValueFor(field: FormBuilderField): unknown {
+function defaultValueFor(field: SchemaFormField): unknown {
   if (field.type === 'input-group' && !inputGroupKeys(field)) {
     return inputGroupValue(field, field.value)
   }
@@ -194,7 +194,7 @@ function defaultValueFor(field: FormBuilderField): unknown {
   return ''
 }
 
-function formValuesFromFields(fields: FormBuilderField[]): FormBuilderValues {
+function formValuesFromFields(fields: SchemaFormField[]): SchemaFormValues {
   return Object.fromEntries(
     fields.flatMap((field) => {
       if (field.type === 'section') return []
@@ -214,11 +214,11 @@ function formValuesFromFields(fields: FormBuilderField[]): FormBuilderValues {
   )
 }
 
-function isMultiCombobox(field: FormBuilderField) {
+function isMultiCombobox(field: SchemaFormField) {
   return field.type === 'combobox' && field.props?.multiple === true
 }
 
-function flattenFields(fields: FormBuilderField[], prefix = ''): FlatField[] {
+function flattenFields(fields: SchemaFormField[], prefix = ''): FlatField[] {
   return fields.flatMap((field) => {
     if (field.type === 'hidden') return []
     const keys = pairKeys(field)
@@ -232,7 +232,7 @@ function flattenFields(fields: FormBuilderField[], prefix = ''): FlatField[] {
   })
 }
 
-function getValueByPath(values: FormBuilderValues, path: string) {
+function getValueByPath(values: SchemaFormValues, path: string) {
   return path.split('.').reduce<unknown>((cursor, key) => {
     if (!isPlainObject(cursor)) return undefined
     return cursor[key]
@@ -244,7 +244,7 @@ function matchesShowIf(actual: unknown, expected: unknown) {
   return Object.is(actual, expected)
 }
 
-function isDisplayed(field: FormBuilderField, values: FormBuilderValues) {
+function isDisplayed(field: SchemaFormField, values: SchemaFormValues) {
   if (field.force_display === false) return false
   if (!field.show_if) return true
   const keys = Array.isArray(field.show_if) ? field.show_if : [field.show_if]
@@ -253,7 +253,7 @@ function isDisplayed(field: FormBuilderField, values: FormBuilderValues) {
   return keys.every((key, index) => matchesShowIf(getValueByPath(values, key), expectedList[index]))
 }
 
-function setPath(target: FormBuilderValues, path: string, value: unknown) {
+function setPath(target: SchemaFormValues, path: string, value: unknown) {
   const parts = path.split('.')
   let cursor = target
   for (let index = 0; index < parts.length - 1; index++) {
@@ -262,17 +262,17 @@ function setPath(target: FormBuilderValues, path: string, value: unknown) {
     if (next == null || typeof next !== 'object' || Array.isArray(next)) {
       cursor[key] = {}
     }
-    cursor = cursor[key] as FormBuilderValues
+    cursor = cursor[key] as SchemaFormValues
   }
   cursor[parts[parts.length - 1]!] = value
 }
 
-function isPlainObject(value: unknown): value is FormBuilderValues {
+function isPlainObject(value: unknown): value is SchemaFormValues {
   return value != null && typeof value === 'object' && !Array.isArray(value)
 }
 
-function nestValues(value: FormBuilderValues, fallback: FormBuilderValues): FormBuilderValues {
-  const result: FormBuilderValues = structuredClone(fallback)
+function nestValues(value: SchemaFormValues, fallback: SchemaFormValues): SchemaFormValues {
+  const result: SchemaFormValues = structuredClone(fallback)
   for (const [key, next] of Object.entries(value)) {
     if (key.includes('.')) {
       setPath(result, key, next)
@@ -290,7 +290,7 @@ function nestValues(value: FormBuilderValues, fallback: FormBuilderValues): Form
   return result
 }
 
-function fieldsWithValues(fields: FormBuilderField[], values: FormBuilderValues): FormBuilderField[] {
+function fieldsWithValues(fields: SchemaFormField[], values: SchemaFormValues): SchemaFormField[] {
   return fields.map((field) => {
     if (field.type === 'object' && field.fields) {
       const nested = isPlainObject(values[field.key]) ? values[field.key] : {}
@@ -310,7 +310,7 @@ function fieldsWithValues(fields: FormBuilderField[], values: FormBuilderValues)
   })
 }
 
-function isEmpty(value: unknown, field: FormBuilderField) {
+function isEmpty(value: unknown, field: SchemaFormField) {
   const type = field.type
   if (isMultiCombobox(field)) return !Array.isArray(value) || value.length === 0
   if (
@@ -339,7 +339,7 @@ function testRegex(pattern: string, source: string) {
   return regex.test(source)
 }
 
-function laravelRule(rule: string, value: unknown, field: FormBuilderField) {
+function laravelRule(rule: string, value: unknown, field: SchemaFormField) {
   const source = String(value)
   if (rule === 'email') {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(source) ? undefined : 'Enter a valid email'
@@ -368,7 +368,7 @@ function laravelRule(rule: string, value: unknown, field: FormBuilderField) {
   return undefined
 }
 
-function validateField(field: FormBuilderField, value: unknown) {
+function validateField(field: SchemaFormField, value: unknown) {
   if (isEmpty(value, field)) {
     return field.required ? `${field.title} is required` : undefined
   }
@@ -398,19 +398,19 @@ function validateField(field: FormBuilderField, value: unknown) {
   return undefined
 }
 
-function controlType(type: FormBuilderType) {
+function controlType(type: SchemaFormType) {
   if (type === 'phone') return 'input'
   if (type === 'password') return 'password'
   if (type === 'accepted' || type === 'checkbox') return 'checkbox-boolean'
   return type
 }
 
-function labelsFromValues(options: FormBuilderOption[], value: unknown) {
+function labelsFromValues(options: SchemaFormOption[], value: unknown) {
   const selected = Array.isArray(value) ? value.map(String) : []
   return selected.map((entry) => options.find((option) => option.value === entry)?.label ?? entry)
 }
 
-function valuesFromLabels(options: FormBuilderOption[], labels: unknown) {
+function valuesFromLabels(options: SchemaFormOption[], labels: unknown) {
   const next = Array.isArray(labels) ? labels.map(String) : []
   return next.map((label) => options.find((option) => option.label === label)?.value ?? label)
 }
@@ -507,27 +507,27 @@ function FormComboboxField({
   )
 }
 
-type FormBuilderApi = {
-  fields: FormBuilderField[]
-  values: FormBuilderValues
-  errors: FormBuilderValues
+type SchemaFormApi = {
+  fields: SchemaFormField[]
+  values: SchemaFormValues
+  errors: SchemaFormValues
   isSubmitting: boolean
   submit: () => Promise<void>
   form: ReturnType<typeof useForm>
 }
 
-function useFormBuilder({
+function useSchemaForm({
   fields,
   onSubmit,
 }: {
-  fields: FormBuilderField[]
-  onSubmit?: (values: FormBuilderValues, nextFields: FormBuilderField[]) => void | Promise<void>
-}): FormBuilderApi {
+  fields: SchemaFormField[]
+  onSubmit?: (values: SchemaFormValues, nextFields: SchemaFormField[]) => void | Promise<void>
+}): SchemaFormApi {
   const defaultValues = formValuesFromFields(fields)
   const form = useForm({
     defaultValues,
     onSubmit: async ({ value }) => {
-      const values = nestValues(value as FormBuilderValues, defaultValues)
+      const values = nestValues(value as SchemaFormValues, defaultValues)
       await onSubmit?.(values, fieldsWithValues(fields, values))
     },
   })
@@ -535,7 +535,7 @@ function useFormBuilder({
   const fieldMeta = useStore(form.store, (state) => state.fieldMeta)
   const submissionAttempts = useStore(form.store, (state) => state.submissionAttempts)
   const isSubmitting = useStore(form.store, (state) => state.isSubmitting)
-  const values = nestValues(rawValues as FormBuilderValues, defaultValues)
+  const values = nestValues(rawValues as SchemaFormValues, defaultValues)
   const submitted = submissionAttempts > 0
   const errors = Object.fromEntries(
     flattenFields(fields)
@@ -558,16 +558,16 @@ function useFormBuilder({
   }
 }
 
-function FormBuilder({
+function SchemaForm({
   form: builder,
   id,
   className,
   renderField,
 }: {
-  form: FormBuilderApi
+  form: SchemaFormApi
   id?: string
   className?: string
-  renderField?: (ctx: FormBuilderRenderField) => ReactNode
+  renderField?: (ctx: SchemaFormRenderField) => ReactNode
 }) {
   const { form, fields, values } = builder
   const flat = flattenFields(fields).filter((item) => isDisplayed(item, values))
@@ -917,13 +917,13 @@ function FormBuilder({
   )
 }
 
-export { fieldsWithValues, FormBuilder, formValuesFromFields, useFormBuilder }
+export { fieldsWithValues, SchemaForm, formValuesFromFields, useSchemaForm }
 export type {
-  FormBuilderApi,
-  FormBuilderField,
-  FormBuilderFieldProps,
-  FormBuilderOption,
-  FormBuilderRenderField,
-  FormBuilderType,
-  FormBuilderValues,
+  SchemaFormApi,
+  SchemaFormField,
+  SchemaFormFieldProps,
+  SchemaFormOption,
+  SchemaFormRenderField,
+  SchemaFormType,
+  SchemaFormValues,
 }

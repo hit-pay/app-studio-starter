@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  BoxDetail,
-  BoxDetailGrid,
-  BoxDetailRow,
-} from '@/components/ui/box-detail'
+  DetailList,
+  DetailListGrid,
+  DetailListRow,
+} from '@/components/ui/detail-list'
 import { Button } from '@/components/ui/button'
 import { Chip } from '@/components/ui/chip'
 import { PageTitle } from '@/components/ui/page-title'
@@ -154,22 +154,22 @@ function PageTitleExamplesPage() {
                 </Button>
               }
             />
-            <BoxDetail type="Default">
-              <BoxDetailGrid columns={2}>
-                <BoxDetailRow label="Customer" alignment="Vertical">
+            <DetailList type="Default">
+              <DetailListGrid columns={2}>
+                <DetailListRow label="Customer" alignment="Vertical">
                   Alex Turner
-                </BoxDetailRow>
-                <BoxDetailRow label="Email" alignment="Vertical">
+                </DetailListRow>
+                <DetailListRow label="Email" alignment="Vertical">
                   alex@studio.co
-                </BoxDetailRow>
-                <BoxDetailRow label="Amount" alignment="Vertical">
+                </DetailListRow>
+                <DetailListRow label="Amount" alignment="Vertical">
                   SGD 128.00
-                </BoxDetailRow>
-                <BoxDetailRow label="Channel" alignment="Vertical">
+                </DetailListRow>
+                <DetailListRow label="Channel" alignment="Vertical">
                   PayNow
-                </BoxDetailRow>
-              </BoxDetailGrid>
-            </BoxDetail>
+                </DetailListRow>
+              </DetailListGrid>
+            </DetailList>
           </div>
         </div>
       </DocExamplePage>

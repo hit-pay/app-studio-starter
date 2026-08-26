@@ -2,9 +2,9 @@ import { createContext, useContext, type ComponentProps, type ReactNode } from '
 import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
-import { CopyTooltip } from './copy-tooltip'
+import { CopyButton } from './copy-button'
 
-const BoxDetailTypeContext = createContext<'Default' | 'Border'>('Default')
+const DetailListTypeContext = createContext<'Default' | 'Border'>('Default')
 
 const boxDetailVariants = cva(
   'flex w-full flex-col rounded-lg border border-solid border-oc-border bg-oc-background',
@@ -21,7 +21,7 @@ const boxDetailVariants = cva(
   },
 )
 
-function BoxDetail({
+function DetailList({
   className,
   type = 'Default',
   ...props
@@ -29,23 +29,23 @@ function BoxDetail({
   type?: 'Default' | 'Border'
 }) {
   return (
-    <BoxDetailTypeContext.Provider value={type}>
+    <DetailListTypeContext.Provider value={type}>
       <div
-        data-slot="box-detail"
+        data-slot="detail-list"
         data-type={type}
         className={cn(boxDetailVariants({ type }), className)}
         {...props}
       />
-    </BoxDetailTypeContext.Provider>
+    </DetailListTypeContext.Provider>
   )
 }
 
-function BoxDetailHeader({ className, ...props }: ComponentProps<'div'>) {
-  const type = useContext(BoxDetailTypeContext)
+function DetailListHeader({ className, ...props }: ComponentProps<'div'>) {
+  const type = useContext(DetailListTypeContext)
 
   return (
     <div
-      data-slot="box-detail-header"
+      data-slot="detail-list-header"
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-3',
         type === 'Border' && 'bg-oc-background px-4 py-3',
@@ -56,7 +56,7 @@ function BoxDetailHeader({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-function BoxDetailGrid({
+function DetailListGrid({
   className,
   columns = 2,
   style,
@@ -64,11 +64,11 @@ function BoxDetailGrid({
 }: ComponentProps<'div'> & {
   columns?: number
 }) {
-  const type = useContext(BoxDetailTypeContext)
+  const type = useContext(DetailListTypeContext)
 
   return (
     <div
-      data-slot="box-detail-grid"
+      data-slot="detail-list-grid"
       className={cn(
         'grid w-full min-w-0',
         type === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
@@ -83,10 +83,10 @@ function BoxDetailGrid({
   )
 }
 
-function BoxDetailTitle({ className, ...props }: ComponentProps<'p'>) {
+function DetailListTitle({ className, ...props }: ComponentProps<'p'>) {
   return (
     <p
-      data-slot="box-detail-title"
+      data-slot="detail-list-title"
       className={cn('min-w-0 text-sm font-medium leading-[1.5] text-oc-foreground', className)}
       {...props}
     />
@@ -134,7 +134,7 @@ const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-oc-foreground', {
   },
 })
 
-function BoxDetailRow({
+function DetailListRow({
   className,
   label,
   children,
@@ -151,11 +151,11 @@ function BoxDetailRow({
   size?: 'Small' | 'Big'
   colSpan?: number
 }) {
-  const type = useContext(BoxDetailTypeContext)
+  const type = useContext(DetailListTypeContext)
 
   return (
     <div
-      data-slot="box-detail-row"
+      data-slot="detail-list-row"
       data-alignment={alignment}
       data-size={size}
       className={cn(
@@ -178,29 +178,29 @@ function BoxDetailRow({
         )}
       >
         <span className="min-w-0 break-words">{children}</span>
-        {copyValue ? <CopyTooltip value={copyValue} /> : null}
+        {copyValue ? <CopyButton value={copyValue} /> : null}
       </span>
     </div>
   )
 }
 
-function BoxDetailValue({
+function DetailListValue({
   className,
   children,
   ...props
 }: ComponentProps<'span'> & { children?: ReactNode }) {
   return (
-    <span data-slot="box-detail-value" className={cn('min-w-0', className)} {...props}>
+    <span data-slot="detail-list-value" className={cn('min-w-0', className)} {...props}>
       {children}
     </span>
   )
 }
 
 export {
-  BoxDetail,
-  BoxDetailHeader,
-  BoxDetailGrid,
-  BoxDetailTitle,
-  BoxDetailRow,
-  BoxDetailValue,
+  DetailList,
+  DetailListHeader,
+  DetailListGrid,
+  DetailListTitle,
+  DetailListRow,
+  DetailListValue,
 }

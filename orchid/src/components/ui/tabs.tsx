@@ -4,15 +4,15 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-type TabMenuType = 'Default' | 'Pills'
-type TabMenuSize = 'Default' | 'Big'
+type TabsType = 'Default' | 'Pills'
+type TabsSize = 'Default' | 'Big'
 
-const TabMenuContext = createContext<{ type: TabMenuType; size: TabMenuSize }>({
+const TabsContext = createContext<{ type: TabsType; size: TabsSize }>({
   type: 'Default',
   size: 'Default',
 })
 
-const tabMenuListVariants = cva('relative flex min-w-0 items-stretch', {
+const tabsListVariants = cva('relative flex min-w-0 items-stretch', {
   variants: {
     type: {
       Default: 'w-full gap-0 border-b border-solid border-oc-border',
@@ -24,7 +24,7 @@ const tabMenuListVariants = cva('relative flex min-w-0 items-stretch', {
   },
 })
 
-const tabMenuTabVariants = cva(
+const tabsTabVariants = cva(
   'inline-flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap outline-none select-none disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
@@ -46,41 +46,41 @@ const tabMenuTabVariants = cva(
   },
 )
 
-function TabMenu({
+function Tabs({
   className,
   type = 'Default',
   size = 'Default',
   ...props
 }: TabsPrimitive.Root.Props & {
-  type?: TabMenuType
-  size?: TabMenuSize
+  type?: TabsType
+  size?: TabsSize
 }) {
   return (
-    <TabMenuContext.Provider value={{ type, size }}>
+    <TabsContext.Provider value={{ type, size }}>
       <TabsPrimitive.Root
-        data-slot="tab-menu"
+        data-slot="tabs"
         data-type={type}
         data-size={size}
         className={cn('flex w-full flex-col gap-4', className)}
         {...props}
       />
-    </TabMenuContext.Provider>
+    </TabsContext.Provider>
   )
 }
 
-function TabMenuList({ className, children, ...props }: TabsPrimitive.List.Props) {
-  const { type } = useContext(TabMenuContext)
+function TabsList({ className, children, ...props }: TabsPrimitive.List.Props) {
+  const { type } = useContext(TabsContext)
 
   return (
     <TabsPrimitive.List
-      data-slot="tab-menu-list"
-      className={cn(tabMenuListVariants({ type }), className)}
+      data-slot="tabs-list"
+      className={cn(tabsListVariants({ type }), className)}
       {...props}
     >
       {children}
       {type === 'Default' ? (
         <TabsPrimitive.Indicator
-          data-slot="tab-menu-indicator"
+          data-slot="tabs-indicator"
           className="pointer-events-none absolute bottom-0 left-0 z-10 h-0.5 bg-oc-primary transition-[translate,width] duration-200"
           style={{
             width: 'var(--active-tab-width)',
@@ -92,7 +92,7 @@ function TabMenuList({ className, children, ...props }: TabsPrimitive.List.Props
   )
 }
 
-function TabMenuTab({
+function TabsTab({
   className,
   count,
   icon,
@@ -102,12 +102,12 @@ function TabMenuTab({
   count?: number
   icon?: ReactNode
 }) {
-  const { type, size } = useContext(TabMenuContext)
+  const { type, size } = useContext(TabsContext)
 
   return (
     <TabsPrimitive.Tab
-      data-slot="tab-menu-tab"
-      className={cn(tabMenuTabVariants({ type, size }), className)}
+      data-slot="tabs-tab"
+      className={cn(tabsTabVariants({ type, size }), className)}
       {...props}
     >
       {icon ? (
@@ -123,14 +123,14 @@ function TabMenuTab({
   )
 }
 
-function TabMenuPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
+function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
   return (
     <TabsPrimitive.Panel
-      data-slot="tab-menu-panel"
+      data-slot="tabs-panel"
       className={cn('w-full text-sm leading-[1.5] text-oc-foreground outline-none', className)}
       {...props}
     />
   )
 }
 
-export { TabMenu, TabMenuList, TabMenuTab, TabMenuPanel }
+export { Tabs, TabsList, TabsTab, TabsPanel }

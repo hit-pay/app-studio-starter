@@ -21,14 +21,14 @@ const buttonGroupItemVariants = cva(
   'inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded p-1 text-oc-foreground outline-none hover:bg-oc-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 )
 
-function ButtonGroup({
+function IconGroup({
   className,
   type = 'Default',
   ...props
 }: ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>) {
   return (
     <div
-      data-slot="button-group"
+      data-slot="icon-group"
       data-type={type}
       className={cn(buttonGroupVariants({ type }), className)}
       {...props}
@@ -36,21 +36,21 @@ function ButtonGroup({
   )
 }
 
-function ButtonGroupButton({ className, ...props }: ComponentProps<'button'>) {
+function IconGroupButton({ className, ...props }: ComponentProps<'button'>) {
   return (
     <button
       type="button"
-      data-slot="button-group-button"
+      data-slot="icon-group-button"
       className={cn(buttonGroupItemVariants(), className)}
       {...props}
     />
   )
 }
 
-function ButtonGroupLink({ className, ...props }: ComponentProps<'a'>) {
+function IconGroupLink({ className, ...props }: ComponentProps<'a'>) {
   return (
     <a
-      data-slot="button-group-link"
+      data-slot="icon-group-link"
       target="_blank"
       rel="noreferrer"
       className={cn(buttonGroupItemVariants(), className)}
@@ -59,13 +59,13 @@ function ButtonGroupLink({ className, ...props }: ComponentProps<'a'>) {
   )
 }
 
-function ButtonGroupDivider() {
+function IconGroupDivider() {
   return (
-    <span data-slot="button-group-divider" className="h-4 w-px shrink-0 bg-oc-dark-blue-border" />
+    <span data-slot="icon-group-divider" className="h-4 w-px shrink-0 bg-oc-dark-blue-border" />
   )
 }
 
-function ButtonGroupMenu({
+function IconGroupMenu({
   className,
   menu,
 }: {
@@ -89,11 +89,11 @@ function ButtonGroupMenu({
 }
 
 export {
-  ButtonGroup,
-  ButtonGroupButton,
-  ButtonGroupLink,
-  ButtonGroupDivider,
-  ButtonGroupMenu,
+  IconGroup,
+  IconGroupButton,
+  IconGroupLink,
+  IconGroupDivider,
+  IconGroupMenu,
   buttonGroupVariants,
   buttonGroupItemVariants,
 }

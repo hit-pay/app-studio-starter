@@ -11,7 +11,7 @@ function clamp(value: number, min?: number, max?: number) {
   return next
 }
 
-function InputStepper({
+function QuantityInput({
   className,
   value,
   defaultValue = 1,
@@ -72,7 +72,7 @@ function InputStepper({
 
   return (
     <div
-      data-slot="input-stepper"
+      data-slot="quantity-input"
       className={cn(
         'flex h-9 w-full items-center gap-2 overflow-clip rounded-lg border border-solid border-oc-border bg-oc-background px-1 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
         disabled && 'pointer-events-none opacity-50',
@@ -138,4 +138,4 @@ function InputStepper({
   )
 }
 
-export { InputStepper }
+export { QuantityInput }

@@ -1,7 +1,7 @@
 import type { ComponentProps, ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
-import { CopyTooltip } from './copy-tooltip'
+import { CopyButton } from './copy-button'
 
 function PageTitle({
   className,
@@ -40,7 +40,7 @@ function PageTitle({
         ) : description ? (
           <div className="flex min-w-0 items-center gap-2">
             <p className="min-w-0 text-[14px] leading-5 text-oc-muted-foreground">{description}</p>
-            {copyValue ? <CopyTooltip value={copyValue} /> : null}
+            {copyValue ? <CopyButton value={copyValue} /> : null}
           </div>
         ) : null}
       </div>

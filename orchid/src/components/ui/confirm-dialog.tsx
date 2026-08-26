@@ -58,7 +58,7 @@ const ACTION_PRESET: Record<
   },
 }
 
-function ConfirmationModalContent({
+function ConfirmDialogContent({
   className,
   type = 'Delete',
   size = 'Small',
@@ -78,7 +78,7 @@ function ConfirmationModalContent({
 
   return (
     <div
-      data-slot="confirmation-modal-content"
+      data-slot="confirm-dialog-content"
       data-type={type}
       data-size={size}
       className={cn(
@@ -116,7 +116,7 @@ function ConfirmationModalContent({
   )
 }
 
-function ConfirmationModal({
+function ConfirmDialog({
   type = 'Delete',
   size = 'Small',
   title = 'Are you sure?',
@@ -209,7 +209,7 @@ function ConfirmationModal({
           </div>
         }
       >
-        <ConfirmationModalContent
+        <ConfirmDialogContent
           type={type}
           size={size}
           message={message}
@@ -223,15 +223,15 @@ function ConfirmationModal({
               placeholder={inputPlaceholder}
             />
           ) : null}
-        </ConfirmationModalContent>
+        </ConfirmDialogContent>
       </ModalPopup>
     </Modal>
   )
 }
 
 export {
-  ConfirmationModal,
-  ConfirmationModalContent,
-  ModalTrigger as ConfirmationModalTrigger,
+  ConfirmDialog,
+  ConfirmDialogContent,
+  ModalTrigger as ConfirmDialogTrigger,
 }
 export type { ConfirmationSize, ConfirmationType }

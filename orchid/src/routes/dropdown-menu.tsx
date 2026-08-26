@@ -21,7 +21,7 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
-export const Route = createFileRoute('/dropdown')({
+export const Route = createFileRoute('/dropdown-menu')({
   component: DropdownExamplesPage,
 })
 
@@ -44,7 +44,7 @@ function OpenButton({ children }: { children: React.ReactNode }) {
 
 function DropdownExamplesPage() {
   return (
-    <DocExamplePage to="/dropdown">
+    <DocExamplePage to="/dropdown-menu">
       <div className="space-y-6">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Dropdown Menu

@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { EllipsisIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { CopyTooltip } from './copy-tooltip'
+import { CopyButton } from './copy-button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
 function ListItem({
@@ -192,7 +192,7 @@ function ListItemCopyRow({
       <span className="shrink-0 font-medium leading-[1.5] text-oc-muted-foreground">{label}</span>
       <span className="group/copy flex min-w-0 items-center gap-2">
         <span className="min-w-0 break-all leading-[1.5] text-oc-foreground">{value}</span>
-        <CopyTooltip
+        <CopyButton
           value={value}
           className="text-oc-foreground opacity-0 group-hover/copy:opacity-100"
         />

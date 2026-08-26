@@ -11,12 +11,42 @@ import {
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
-import {
-  Snackbar,
-  SnackbarDescription,
-  SnackbarIcon,
-  SnackbarTitle,
-} from '@/components/ui/snackbar'
+
+const TOAST_BAR_COLOR: Record<string, string> = {
+  Default:
+    'border-oc-success-border bg-oc-success-soft [&_[data-slot=toast-bar-icon]]:text-oc-success',
+  Blue: 'border-oc-info-border bg-oc-info-soft [&_[data-slot=toast-bar-icon]]:text-oc-primary',
+  Red: 'border-oc-destructive-border bg-oc-destructive-soft [&_[data-slot=toast-bar-icon]]:text-oc-destructive',
+  Orange:
+    'border-oc-warning-border bg-oc-warning-soft [&_[data-slot=toast-bar-icon]]:text-oc-warning',
+  Grey: 'border-oc-neutral-border bg-oc-neutral-soft [&_[data-slot=toast-bar-icon]]:text-oc-muted-foreground',
+}
+
+function ToastBar({
+  className,
+  color,
+  size,
+  children,
+}: {
+  className?: string
+  color: string
+  size: 'Small' | 'Default'
+  children: React.ReactNode
+}) {
+  return (
+    <div
+      data-slot="toast-bar"
+      className={cn(
+        'relative flex w-fit max-w-full flex-nowrap items-center rounded-lg border border-solid text-oc-foreground shadow-[0_8px_6px_rgba(42,50,82,0.04)]',
+        size === 'Small' ? 'gap-1 py-2 pr-3 pl-2 text-xs leading-[1.5]' : 'gap-3 py-3 pr-4 pl-3 text-sm leading-[1.5]',
+        TOAST_BAR_COLOR[color] ?? TOAST_BAR_COLOR.Default,
+        className,
+      )}
+    >
+      {children}
+    </div>
+  )
+}
 
 const toast = ToastPrimitive.createToastManager()
 
@@ -125,7 +155,7 @@ function ToastAction({
   )
 }
 
-function ToastIcon({ type }: { type: string | undefined }) {
+function ToastIcon({ type, size }: { type: string | undefined; size: 'Small' | 'Default' }) {
   let icon: React.ReactNode = <CheckIcon aria-hidden="true" />
 
   if (type === 'success') {
@@ -145,9 +175,15 @@ function ToastIcon({ type }: { type: string | undefined }) {
   }
 
   return (
-    <SnackbarIcon>
+    <span
+      data-slot="toast-bar-icon"
+      className={cn(
+        'inline-flex shrink-0 items-center justify-center [&_svg]:size-full',
+        size === 'Small' ? 'size-4' : 'size-6',
+      )}
+    >
       {icon}
-    </SnackbarIcon>
+    </span>
   )
 }
 
@@ -164,18 +200,18 @@ function ToastList() {
     return (
       <Toast key={toastItem.id} toast={toastItem}>
         <ToastContent>
-          <Snackbar color={color} size={size} className="mx-auto w-fit max-w-full flex-nowrap">
-            <ToastIcon type={toastItem.type} />
+          <ToastBar color={color} size={size} className="mx-auto">
+            <ToastIcon type={toastItem.type} size={size} />
             <div className="flex shrink-0 flex-col gap-0.5 whitespace-nowrap">
               {hasTitle ? (
-                <SnackbarTitle className="w-auto">
+                <div className="w-auto text-sm font-medium text-oc-foreground">
                   <ToastTitle />
-                </SnackbarTitle>
+                </div>
               ) : null}
               {hasDescription ? (
-                <SnackbarDescription className="w-auto">
+                <div className="w-auto text-oc-foreground">
                   <ToastDescription className={size === 'Small' ? 'text-xs' : 'text-sm'} />
-                </SnackbarDescription>
+                </div>
               ) : null}
             </div>
             {hasAction ? (
@@ -183,7 +219,7 @@ function ToastList() {
                 <ToastAction />
               </div>
             ) : null}
-          </Snackbar>
+          </ToastBar>
         </ToastContent>
       </Toast>
     )

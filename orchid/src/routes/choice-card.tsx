@@ -7,22 +7,22 @@ import {
   ShoppingBagIcon,
   StoreIcon,
 } from 'lucide-react'
-import { ClickableOption, ClickableOptionGroup } from '@/components/ui/clickable-option'
+import { ChoiceCard, ChoiceCardGroup } from '@/components/ui/choice-card'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
-export const Route = createFileRoute('/clickable-option')({
-  component: ClickableOptionExamplesPage,
+export const Route = createFileRoute('/choice-card')({
+  component: ChoiceCardExamplesPage,
 })
 
-function ClickableOptionExamplesPage() {
+function ChoiceCardExamplesPage() {
   return (
-    <DocExamplePage to="/clickable-option">
+    <DocExamplePage to="/choice-card">
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Left
         </p>
-        <ClickableOptionGroup defaultValue="paynow">
-          <ClickableOption
+        <ChoiceCardGroup defaultValue="paynow">
+          <ChoiceCard
             value="paynow"
             alignment="Left"
             iconAlign="Left"
@@ -30,7 +30,7 @@ function ClickableOptionExamplesPage() {
             title="PayNow"
             description="Instant SGD transfers via QR"
           />
-          <ClickableOption
+          <ChoiceCard
             value="cards"
             alignment="Left"
             iconAlign="Left"
@@ -38,7 +38,7 @@ function ClickableOptionExamplesPage() {
             title="Cards"
             description="Visa, Mastercard, and AMEX"
           />
-          <ClickableOption
+          <ChoiceCard
             value="link"
             alignment="Left"
             iconAlign="Left"
@@ -46,15 +46,15 @@ function ClickableOptionExamplesPage() {
             title="Payment Link"
             description="Share a checkout URL with the customer"
           />
-        </ClickableOptionGroup>
+        </ChoiceCardGroup>
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Center
         </p>
-        <ClickableOptionGroup defaultValue="invoice" alignment="Horizontal">
-          <ClickableOption
+        <ChoiceCardGroup defaultValue="invoice" alignment="Horizontal">
+          <ChoiceCard
             value="invoice"
             alignment="Center"
             iconAlign="Center"
@@ -63,7 +63,7 @@ function ClickableOptionExamplesPage() {
             description="INV-2026"
             className="flex-1"
           />
-          <ClickableOption
+          <ChoiceCard
             value="recurring"
             alignment="Center"
             iconAlign="Center"
@@ -72,7 +72,7 @@ function ClickableOptionExamplesPage() {
             description="Subscriptions"
             className="flex-1"
           />
-          <ClickableOption
+          <ChoiceCard
             value="pos"
             alignment="Center"
             iconAlign="Center"
@@ -81,15 +81,15 @@ function ClickableOptionExamplesPage() {
             description="In-store"
             className="flex-1"
           />
-        </ClickableOptionGroup>
+        </ChoiceCardGroup>
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Commerce channel
         </p>
-        <ClickableOptionGroup defaultValue="online-store">
-          <ClickableOption
+        <ChoiceCardGroup defaultValue="online-store">
+          <ChoiceCard
             value="online-store"
             alignment="Left"
             iconAlign="Left"
@@ -97,7 +97,7 @@ function ClickableOptionExamplesPage() {
             title="Online Store"
             description="Sell SKUs on your HitPay storefront"
           />
-          <ClickableOption
+          <ChoiceCard
             value="pos"
             alignment="Left"
             iconAlign="Left"
@@ -105,7 +105,7 @@ function ClickableOptionExamplesPage() {
             title="Point of Sale"
             description="Collect SGD at the counter with Cards or PayNow"
           />
-        </ClickableOptionGroup>
+        </ChoiceCardGroup>
       </div>
     </DocExamplePage>
   )

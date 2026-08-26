@@ -5,23 +5,23 @@ import { Button } from '@/components/ui/button'
 import { Chip } from '@/components/ui/chip'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { Section, SectionItem, SectionTitle } from '@/components/ui/section-title'
+import { Section, SectionItem, FormSection } from '@/components/ui/form-section'
 import { Toggle } from '@/components/ui/toggle'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
-export const Route = createFileRoute('/section-title')({
-  component: SectionTitleExamplesPage,
+export const Route = createFileRoute('/form-section')({
+  component: FormSectionExamplesPage,
 })
 
-function SectionTitleExamplesPage() {
+function FormSectionExamplesPage() {
   return (
     <TooltipProvider>
-      <DocExamplePage to="/section-title">
+      <DocExamplePage to="/form-section">
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
-          <SectionTitle
+          <FormSection
             title="Online Store"
             description="Storefront URL, theme, and password protection."
           />
@@ -31,7 +31,7 @@ function SectionTitleExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Chip and action
           </p>
-          <SectionTitle
+          <FormSection
             title="Payment Channels"
             description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
             chip={<Chip color="Purple">Upgrade</Chip>}
@@ -43,7 +43,7 @@ function SectionTitleExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Notification
           </p>
-          <SectionTitle
+          <FormSection
             title="Invoices"
             description="Overdue invoices that need a reminder."
             notification={2}
@@ -55,7 +55,7 @@ function SectionTitleExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Button group
           </p>
-          <SectionTitle
+          <FormSection
             title="Online Store theme"
             description="Preview changes before they go live."
             actions={
@@ -76,7 +76,7 @@ function SectionTitleExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Recurring
           </p>
-          <SectionTitle
+          <FormSection
             title="Recurring"
             description="Monthly membership billed to saved payment methods."
             chip={<Chip color="Blue">Active</Chip>}
@@ -87,7 +87,7 @@ function SectionTitleExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             POS
           </p>
-          <SectionTitle
+          <FormSection
             title="Point of Sale"
             description="Terminals, receipts, and in-store payment channels."
             actions={
@@ -103,7 +103,7 @@ function SectionTitleExamplesPage() {
             With form
           </p>
           <Section className="max-w-xl">
-            <SectionTitle
+            <FormSection
               title="Online Store"
               description="These fields share the same left edge as the section title."
             />

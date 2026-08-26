@@ -10,24 +10,24 @@ import {
   StoreIcon,
   UsersIcon,
 } from 'lucide-react'
-import { OverviewItem } from '@/components/ui/overview-item'
+import { StatCard } from '@/components/ui/stat-card'
 import { TooltipProvider } from '@/components/ui/tooltip'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
-export const Route = createFileRoute('/overview-item')({
-  component: OverviewItemExamplesPage,
+export const Route = createFileRoute('/stat-card')({
+  component: StatCardExamplesPage,
 })
 
-function OverviewItemExamplesPage() {
+function StatCardExamplesPage() {
   return (
     <TooltipProvider>
-      <DocExamplePage to="/overview-item">
+      <DocExamplePage to="/stat-card">
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             4 items
           </p>
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <OverviewItem
+            <StatCard
               icon={<CoinsIcon />}
               iconColor="Blue"
               title="Gross volume"
@@ -37,7 +37,7 @@ function OverviewItemExamplesPage() {
               percentValue={10}
               percentTooltip="Compared to last month"
             />
-            <OverviewItem
+            <StatCard
               icon={<CircleDollarSignIcon />}
               iconColor="Blue"
               title="This month"
@@ -45,14 +45,14 @@ function OverviewItemExamplesPage() {
               percentValue={4}
               percentTooltip="Compared to last month"
             />
-            <OverviewItem
+            <StatCard
               icon={<SquareCheckIcon />}
               iconColor="Green"
               title="Paid invoices"
               content="20"
               percentValue={12}
             />
-            <OverviewItem
+            <StatCard
               icon={<RotateCcwIcon />}
               iconColor="Red"
               title="Refunded"
@@ -66,7 +66,7 @@ function OverviewItemExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
-          <OverviewItem
+          <StatCard
             icon={<ShoppingBagIcon />}
             title="Online Store sales"
             content="SGD 12,480.00"
@@ -81,7 +81,7 @@ function OverviewItemExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Footer
           </p>
-          <OverviewItem
+          <StatCard
             icon={<UsersIcon />}
             title="Customers"
             content="86"
@@ -94,21 +94,21 @@ function OverviewItemExamplesPage() {
             Commerce mix
           </p>
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <OverviewItem
+            <StatCard
               icon={<LinkIcon />}
               iconColor="Blue"
               title="Payment Links"
               content="SGD 4,260.00"
               percentValue={8}
             />
-            <OverviewItem
+            <StatCard
               icon={<RepeatIcon />}
               iconColor="Green"
               title="Recurring"
               content="SGD 2,140.00"
               percentValue={6}
             />
-            <OverviewItem
+            <StatCard
               icon={<StoreIcon />}
               iconColor="Blue"
               title="Point of Sale"

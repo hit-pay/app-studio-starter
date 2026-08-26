@@ -5,7 +5,7 @@ import { CircleHelpIcon, TriangleIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
 
-const overviewItemIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
+const statCardIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
   variants: {
     color: {
       Blue: 'text-oc-primary',
@@ -19,7 +19,7 @@ const overviewItemIconVariants = cva('inline-flex shrink-0 items-center justify-
   },
 })
 
-function OverviewItem({
+function StatCard({
   className,
   icon,
   iconColor = 'Grey',
@@ -48,7 +48,7 @@ function OverviewItem({
 }) {
   return (
     <div
-      data-slot="overview-item"
+      data-slot="stat-card"
       className={cn(
         'flex w-full min-w-0 flex-col overflow-hidden rounded-lg bg-oc-background',
         transparent ? 'border border-transparent' : 'border border-solid border-oc-border',
@@ -76,7 +76,7 @@ function OverviewItem({
             )}
           >
             {icon ? (
-              <span className={overviewItemIconVariants({ color: iconColor })}>{icon}</span>
+              <span className={statCardIconVariants({ color: iconColor })}>{icon}</span>
             ) : null}
             {title ? (
               <p className="min-w-0 flex-1 truncate text-sm leading-[1.5] text-oc-foreground">{title}</p>
@@ -149,4 +149,4 @@ function PercentBadge({ value, tooltip }: { value: number; tooltip?: string }) {
   )
 }
 
-export { OverviewItem, overviewItemIconVariants }
+export { StatCard, statCardIconVariants }

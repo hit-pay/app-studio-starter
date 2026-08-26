@@ -18,7 +18,7 @@ function SectionHint({ hint }: { hint: string }) {
   )
 }
 
-function SectionTitle({
+function FormSection({
   className,
   title,
   description,
@@ -37,7 +37,7 @@ function SectionTitle({
 }) {
   return (
     <div
-      data-slot="section-title"
+      data-slot="form-section"
       className={cn('flex w-full min-w-0 items-center gap-8', className)}
       {...props}
     >
@@ -120,4 +120,4 @@ function Section({ className, ...props }: ComponentProps<'section'>) {
   )
 }
 
-export { Section, SectionItem, SectionTitle }
+export { Section, SectionItem, FormSection }

@@ -3,17 +3,76 @@ import { createFileRoute } from '@tanstack/react-router'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
 import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import {
+  SchemaForm,
+  useSchemaForm,
+  type SchemaFormField,
+} from '@/components/ui/schema-form'
 import { Input } from '@/components/ui/input'
 import { Modal, ModalPopup, ModalTrigger } from '@/components/ui/modal'
-import { SubHeader } from '@/components/ui/sub-header'
-import { Textarea } from '@/components/ui/textarea'
+import { PageToolbar } from '@/components/ui/page-toolbar'
+import { toast } from '@/components/ui/toast'
 
-export const Route = createFileRoute('/sub-header')({
-  component: SubHeaderExamplesPage,
+export const Route = createFileRoute('/page-toolbar')({
+  component: PageToolbarExamplesPage,
 })
+
+const PRODUCT_FIELDS: SchemaFormField[] = [
+  {
+    key: 'name',
+    title: 'Name',
+    type: 'input',
+    placeholder: 'Studio Membership',
+    required: true,
+    max_length: 32,
+    value: '',
+  },
+  {
+    key: 'sku',
+    title: 'SKU',
+    type: 'input',
+    placeholder: 'SKU-MEM-001',
+    value: '',
+  },
+  {
+    key: 'amount+currency',
+    title: 'Price',
+    type: 'input-group',
+    placeholder: '29.00',
+    required: true,
+    options: [
+      { value: 'sgd', label: 'SGD' },
+      { value: 'usd', label: 'USD' },
+      { value: 'myr', label: 'MYR' },
+    ],
+    props: { align: 'end' },
+    value: { amount: '', currency: 'sgd' },
+  },
+  {
+    key: 'description',
+    title: 'Description',
+    type: 'textarea',
+    placeholder: 'Shown in Online Store, POS, invoices, and payment links.',
+    value: '',
+  },
+]
 
 function CreateProductExample() {
   const [open, setOpen] = useState(false)
+  const product = useSchemaForm({
+    fields: PRODUCT_FIELDS,
+    onSubmit: (values) => {
+      const name = String(values.name ?? 'Product')
+      const amount = String(values.amount ?? '')
+      const currency = String(values.currency ?? 'sgd').toUpperCase()
+      toast.add({
+        title: 'Product saved',
+        description: `${name} · ${currency} ${amount}`,
+        type: 'success',
+      })
+      setOpen(false)
+    },
+  })
 
   function close() {
     setOpen(false)
@@ -23,7 +82,7 @@ function CreateProductExample() {
     <Modal open={open} onOpenChange={setOpen}>
       <ModalTrigger render={<Button type="Primary" />}>Create product</ModalTrigger>
       <ModalPopup size="Fullscreen" title="Create product">
-        <SubHeader
+        <PageToolbar
           className="shrink-0"
           left="Close"
           onBack={close}
@@ -32,43 +91,22 @@ function CreateProductExample() {
               <Button type="Secondary" className="w-[100px]" onClick={close}>
                 Cancel
               </Button>
-              <Button type="Primary" className="w-[100px]" onClick={close}>
+              <Button
+                type="Primary"
+                className="w-[100px]"
+                disabled={product.isSubmitting}
+                aria-busy={product.isSubmitting}
+                onClick={() => void product.submit()}
+              >
                 Save
               </Button>
             </>
           }
         />
         <div className="min-h-0 flex-1 overflow-y-auto">
-          <form
-            className="mx-auto flex w-full max-w-xl flex-col gap-6 px-6 py-8"
-            onSubmit={(event) => {
-              event.preventDefault()
-              close()
-            }}
-          >
-            <FieldGroup>
-              <Field>
-                <FieldLabel htmlFor="product-name">Name</FieldLabel>
-                <Input id="product-name" name="name" placeholder="Studio Membership" />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="product-sku">SKU</FieldLabel>
-                <Input id="product-sku" name="sku" placeholder="SKU-MEM-001" />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="product-price">Price</FieldLabel>
-                <Input id="product-price" name="price" type="number" placeholder="29.00" />
-              </Field>
-              <Field>
-                <FieldLabel htmlFor="product-description">Description</FieldLabel>
-                <Textarea
-                  id="product-description"
-                  name="description"
-                  placeholder="Shown in Online Store, POS, invoices, and payment links."
-                />
-              </Field>
-            </FieldGroup>
-          </form>
+          <div className="mx-auto w-full max-w-xl px-6 py-8">
+            <SchemaForm form={product} className="max-w-none" />
+          </div>
         </div>
       </ModalPopup>
     </Modal>
@@ -86,7 +124,7 @@ function CreateInvoiceExample() {
     <Modal open={open} onOpenChange={setOpen}>
       <ModalTrigger render={<Button type="Secondary" style="Border" />}>Create invoice</ModalTrigger>
       <ModalPopup size="Fullscreen" title="Create invoice">
-        <SubHeader
+        <PageToolbar
           className="shrink-0"
           left="Close"
           onBack={close}
@@ -126,9 +164,9 @@ function CreateInvoiceExample() {
   )
 }
 
-function SubHeaderExamplesPage() {
+function PageToolbarExamplesPage() {
   return (
-    <DocExamplePage to="/sub-header">
+    <DocExamplePage to="/page-toolbar">
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Fullscreen — Product Data
@@ -147,7 +185,7 @@ function SubHeaderExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Back
         </p>
-        <SubHeader
+        <PageToolbar
           left="Back"
           actions={
             <>
@@ -166,7 +204,7 @@ function SubHeaderExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Close
         </p>
-        <SubHeader
+        <PageToolbar
           left="Close"
           actions={
             <>

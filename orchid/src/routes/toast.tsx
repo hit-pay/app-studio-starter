@@ -15,7 +15,7 @@ function ToastExamplesPage() {
           Default
         </p>
         <p className="text-xs text-oc-muted-foreground">
-          Programmatic toast. The UI uses Snackbar. Mount <code className="font-mono">Toaster</code> in
+          Programmatic floating toast. Mount <code className="font-mono">Toaster</code> in
           the root layout.
         </p>
         <Button

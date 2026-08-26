@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils'
 import { Avatar } from './avatar'
 import { Button } from './button'
 import { Chip } from './chip'
-import { CopyTooltip } from './copy-tooltip'
+import { CopyButton } from './copy-button'
 import { Skeleton } from './skeleton'
 
 type CustomerCardAddress = {
@@ -239,7 +239,7 @@ function CustomerCard({
                   <DetailRow label="Phone">
                     <span className="inline-flex min-w-0 items-center gap-0.5">
                       <span>{phone}</span>
-                      {phone !== '-' ? <CopyTooltip value={phone} className="size-3.5" /> : null}
+                      {phone !== '-' ? <CopyButton value={phone} className="size-3.5" /> : null}
                     </span>
                   </DetailRow>
                   <DetailRow label="Address">{formatAddress(customer.address)}</DetailRow>

@@ -11,28 +11,28 @@
       "registryDependencies": [
         "@orchid/button",
         "@orchid/dropdown-menu",
-        "@orchid/snackbar",
+        "@orchid/banner",
         "@orchid/chip",
         "@orchid/accordion",
         "@orchid/progress-bar",
         "@orchid/list-item",
-        "@orchid/input-stepper",
+        "@orchid/quantity-input",
         "@orchid/avatar",
         "@orchid/tooltip",
-        "@orchid/tab-menu",
-        "@orchid/clickable-option",
-        "@orchid/overview-item",
-        "@orchid/sub-header",
+        "@orchid/tabs",
+        "@orchid/choice-card",
+        "@orchid/stat-card",
+        "@orchid/page-toolbar",
         "@orchid/page-title",
-        "@orchid/box-detail",
-        "@orchid/button-group",
-        "@orchid/copy-tooltip",
+        "@orchid/detail-list",
+        "@orchid/icon-group",
+        "@orchid/copy-button",
         "@orchid/customer-card",
         "@orchid/checkbox",
         "@orchid/radio-group",
         "@orchid/toggle",
         "@orchid/slider",
-        "@orchid/empty-page",
+        "@orchid/empty-state",
         "@orchid/label",
         "@orchid/separator",
         "@orchid/field",
@@ -110,10 +110,10 @@
       ]
     },
     {
-      "name": "snackbar",
+      "name": "banner",
       "type": "registry:ui",
-      "title": "Snack Bar",
-      "description": "Short feedback after save/error (toast or inline banner). color Default|Blue|Red|Orange|Grey. Not a permanent page alert \u2014 use empty-page or a Field error.",
+      "title": "Banner",
+      "description": "In-page notification above the page header: title, description, actions, close. color Default|Blue|Red|Orange|Grey. Not a floating toast.",
       "dependencies": [
         "class-variance-authority",
         "lucide-react"
@@ -121,9 +121,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/snackbar.tsx",
+          "path": "src/components/ui/banner.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/snackbar.tsx"
+          "target": "@components/orchid-ui/banner.tsx"
         }
       ]
     },
@@ -149,7 +149,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Expand/collapse sections (FAQ, extra details, progress per item). AccordionTrigger title/description/label/progress. Not tabs \u2014 use tab-menu for switching views.",
+      "description": "Expand/collapse sections (FAQ, extra details, progress per item). AccordionTrigger title/description/label/progress. Not tabs \u2014 use tabs for switching views.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -189,7 +189,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
-        "@orchid/copy-tooltip"
+        "@orchid/copy-button"
       ],
       "files": [
         {
@@ -200,9 +200,9 @@
       ]
     },
     {
-      "name": "input-stepper",
+      "name": "quantity-input",
       "type": "registry:ui",
-      "title": "Input Stepper",
+      "title": "Quantity Input",
       "description": "Integer quantity (capacity, count). Minus/plus; click the number to type. min/max/step. Not a slider and not a plain text input for money.",
       "dependencies": [
         "lucide-react"
@@ -212,9 +212,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/input-stepper.tsx",
+          "path": "src/components/ui/quantity-input.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/input-stepper.tsx"
+          "target": "@components/orchid-ui/quantity-input.tsx"
         }
       ]
     },
@@ -253,10 +253,10 @@
       ]
     },
     {
-      "name": "tab-menu",
+      "name": "tabs",
       "type": "registry:ui",
-      "title": "Tab Menu",
-      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabMenuList + TabMenuTab + TabMenuPanel. Not a dropdown of actions.",
+      "title": "Tabs",
+      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabsList + TabsTab + TabsPanel. Not a dropdown of actions.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -264,33 +264,33 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/tab-menu.tsx",
+          "path": "src/components/ui/tabs.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/tab-menu.tsx"
+          "target": "@components/orchid-ui/tabs.tsx"
         }
       ]
     },
     {
-      "name": "clickable-option",
+      "name": "choice-card",
       "type": "registry:ui",
-      "title": "Clickable Option",
-      "description": "Pick one option as a card (plan, shift slot, payment method) without a radio dot. ClickableOptionGroup. Not a checkbox list and not select.",
+      "title": "Choice Card",
+      "description": "Pick one option as a card (plan, shift slot, payment method) without a radio dot. ChoiceCardGroup. Not a checkbox list and not select.",
       "dependencies": [
         "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/clickable-option.tsx",
+          "path": "src/components/ui/choice-card.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/clickable-option.tsx"
+          "target": "@components/orchid-ui/choice-card.tsx"
         }
       ]
     },
     {
-      "name": "overview-item",
+      "name": "stat-card",
       "type": "registry:ui",
-      "title": "Overview Item",
+      "title": "Stat Card",
       "description": "Dashboard KPI: icon, title, value, percent badge. iconColor Blue|Green|Red|Grey. Grid several on a home/overview page. Not a list row \u2014 use list-item.",
       "dependencies": [
         "lucide-react"
@@ -300,16 +300,16 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/overview-item.tsx",
+          "path": "src/components/ui/stat-card.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/overview-item.tsx"
+          "target": "@components/orchid-ui/stat-card.tsx"
         }
       ]
     },
     {
-      "name": "sub-header",
+      "name": "page-toolbar",
       "type": "registry:ui",
-      "title": "Sub Header",
+      "title": "Page Toolbar",
       "description": "Top bar on a nested screen: Back or Close + right-side buttons. Put page-title below, not inside. Not the app sidebar.",
       "dependencies": [
         "lucide-react"
@@ -317,9 +317,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/sub-header.tsx",
+          "path": "src/components/ui/page-toolbar.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/sub-header.tsx"
+          "target": "@components/orchid-ui/page-toolbar.tsx"
         }
       ]
     },
@@ -327,10 +327,10 @@
       "name": "page-title",
       "type": "registry:ui",
       "title": "Page Title",
-      "description": "Page heading: title, optional chip/status, description, copy id, action buttons. Sit under sub-header; box-detail below. Not a card title inside a list.",
+      "description": "Page heading: title, optional chip/status, description, copy id, action buttons. Sit under page-toolbar; detail-list below. Not a card title inside a list.",
       "dependencies": [],
       "registryDependencies": [
-        "@orchid/copy-tooltip"
+        "@orchid/copy-button"
       ],
       "files": [
         {
@@ -341,29 +341,29 @@
       ]
     },
     {
-      "name": "box-detail",
+      "name": "detail-list",
       "type": "registry:ui",
-      "title": "Box Detail",
+      "title": "Detail List",
       "description": "Read-only key/value details (shift time, customer fields) in one card. type Default or Border table. Grid + colspan. Not an editable form \u2014 use field + input.",
       "dependencies": [
         "class-variance-authority",
         "lucide-react"
       ],
       "registryDependencies": [
-        "@orchid/copy-tooltip"
+        "@orchid/copy-button"
       ],
       "files": [
         {
-          "path": "src/components/ui/box-detail.tsx",
+          "path": "src/components/ui/detail-list.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/box-detail.tsx"
+          "target": "@components/orchid-ui/detail-list.tsx"
         }
       ]
     },
     {
-      "name": "button-group",
+      "name": "icon-group",
       "type": "registry:ui",
-      "title": "Button Group",
+      "title": "Icon Group",
       "description": "Tight cluster of icon actions (copy, open link, more menu). type Default|Border. Not a full toolbar of labeled Buttons.",
       "dependencies": [
         "class-variance-authority",
@@ -374,16 +374,16 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/button-group.tsx",
+          "path": "src/components/ui/icon-group.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/button-group.tsx"
+          "target": "@components/orchid-ui/icon-group.tsx"
         }
       ]
     },
     {
-      "name": "copy-tooltip",
+      "name": "copy-button",
       "type": "registry:ui",
-      "title": "Copy Tooltip",
+      "title": "Copy Button",
       "description": "Copy a string (id, phone, URL) with a Copied! tooltip. Pass value. Use on ids and contact fields, not as the only way to duplicate a whole record.",
       "dependencies": [
         "lucide-react"
@@ -393,9 +393,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/copy-tooltip.tsx",
+          "path": "src/components/ui/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/copy-tooltip.tsx"
+          "target": "@components/orchid-ui/copy-button.tsx"
         }
       ]
     },
@@ -412,7 +412,7 @@
         "@orchid/avatar",
         "@orchid/button",
         "@orchid/chip",
-        "@orchid/copy-tooltip"
+        "@orchid/copy-button"
       ],
       "files": [
         {
@@ -445,7 +445,7 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
-      "description": "Exactly one choice from a short list (alignment, role). Radio inside RadioGroup. For many options use select; for cards use clickable-option.",
+      "description": "Exactly one choice from a short list (alignment, role). Radio inside RadioGroup. For many options use select; for cards use choice-card.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -481,7 +481,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Pick a number or range on a track (0\u2013100, price band). Array value = two thumbs. Not for counts with exact integers \u2014 use input-stepper.",
+      "description": "Pick a number or range on a track (0\u2013100, price band). Array value = two thumbs. Not for counts with exact integers \u2014 use quantity-input.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -495,9 +495,9 @@
       ]
     },
     {
-      "name": "empty-page",
+      "name": "empty-state",
       "type": "registry:ui",
-      "title": "Empty Page",
+      "title": "Empty State",
       "description": "No data / no search hits / upgrade CTA. type Default|Search|Upgrade + actions Buttons. Use when a list or page has zero rows \u2014 not for inline field errors.",
       "dependencies": [
         "class-variance-authority",
@@ -506,9 +506,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/empty-page.tsx",
+          "path": "src/components/ui/empty-state.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/empty-page.tsx"
+          "target": "@components/orchid-ui/empty-state.tsx"
         }
       ]
     },
@@ -600,7 +600,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Choose one from a list (status, staff, currency). Select + Trigger + Value + Item. Inline size for currency inside input-group. For many values with search, use combobox. Not radio cards \u2014 use clickable-option.",
+      "description": "Choose one from a list (status, staff, currency). Select + Trigger + Value + Item. Inline size for currency inside input-group. For many values with search, use combobox. Not radio cards \u2014 use choice-card.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"

@@ -6,15 +6,15 @@ import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
 import { DatePicker, DatePickerRange } from '@/components/ui/date-picker'
 import {
-  FormBuilder,
-  useFormBuilder,
-  type FormBuilderField,
-  type FormBuilderRenderField,
-} from '@/components/ui/form-builder'
-import { TabMenu, TabMenuList, TabMenuPanel, TabMenuTab } from '@/components/ui/tab-menu'
+  SchemaForm,
+  useSchemaForm,
+  type SchemaFormField,
+  type SchemaFormRenderField,
+} from '@/components/ui/schema-form'
+import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs'
 
-export const Route = createFileRoute('/form-builder')({
-  component: FormBuilderExamplesPage,
+export const Route = createFileRoute('/schema-form')({
+  component: SchemaFormExamplesPage,
 })
 
 const OPTIONS = [
@@ -22,12 +22,12 @@ const OPTIONS = [
   { value: 'b', label: 'Option B' },
 ]
 
-const ACCOUNT_FIELDS: FormBuilderField[] = [
+const ACCOUNT_FIELDS: SchemaFormField[] = [
   {
     key: 'section',
     title: 'Account',
     type: 'section',
-    description: 'One FormBuilder instance.',
+    description: 'One SchemaForm instance.',
   },
   {
     key: 'input',
@@ -93,12 +93,12 @@ const ACCOUNT_FIELDS: FormBuilderField[] = [
   },
 ]
 
-const DETAILS_FIELDS: FormBuilderField[] = [
+const DETAILS_FIELDS: SchemaFormField[] = [
   {
     key: 'section',
     title: 'Details',
     type: 'section',
-    description: 'Second FormBuilder on the same page.',
+    description: 'Second SchemaForm on the same page.',
   },
   {
     key: 'radio',
@@ -194,7 +194,7 @@ const DETAILS_FIELDS: FormBuilderField[] = [
   },
 ]
 
-const TYPE_PROMPT = `Form Builder field prompt
+const TYPE_PROMPT = `Schema Form field prompt
 
 Each item in fields is one control.
 
@@ -230,7 +230,7 @@ Validation
 
 force_display: false hides the control; the value still submits.
 
-State lives in useFormBuilder. Render with <FormBuilder form={account} />. Call account.submit() from the host.
+State lives in useSchemaForm. Render with <SchemaForm form={account} />. Call account.submit() from the host.
 
 Example — combobox multiple
 {
@@ -244,6 +244,76 @@ Example — combobox multiple
   ],
   "value": ["paynow"]
 }`
+
+const USAGE_EXAMPLE = `import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/components/ui/schema-form'
+import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/toast'
+
+const FIELDS: SchemaFormField[] = [
+  {
+    key: 'name',
+    title: 'Name',
+    type: 'input',
+    placeholder: 'Studio Membership',
+    required: true,
+    max_length: 32,
+  },
+  {
+    key: 'sku',
+    title: 'SKU',
+    type: 'input',
+    placeholder: 'SKU-MEM-001',
+  },
+  {
+    key: 'amount+currency',
+    title: 'Price',
+    type: 'input-group',
+    placeholder: '29.00',
+    required: true,
+    options: [
+      { value: 'sgd', label: 'SGD' },
+      { value: 'usd', label: 'USD' },
+    ],
+    props: { align: 'end' },
+    value: { amount: '', currency: 'sgd' },
+  },
+  {
+    key: 'description',
+    title: 'Description',
+    type: 'textarea',
+    placeholder: 'Shown on the store and invoices.',
+  },
+]
+
+function CreateProduct() {
+  const form = useSchemaForm({
+    fields: FIELDS,
+    onSubmit: (values) => {
+      toast.add({
+        title: 'Product saved',
+        description: \`\${values.name} · \${String(values.currency).toUpperCase()} \${values.amount}\`,
+        type: 'success',
+      })
+    },
+  })
+
+  return (
+    <>
+      <Button
+        type="Primary"
+        disabled={form.isSubmitting}
+        onClick={() => void form.submit()}
+      >
+        Save
+      </Button>
+      <SchemaForm form={form} />
+    </>
+  )
+}
+
+// form.values  — live values (amount + currency are sibling keys)
+// form.errors  — visible field errors after touch or submit
+// onSubmit     — runs only when validation passes`
 
 function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
   const code = typeof data === 'string' ? data : JSON.stringify(data, null, 2)
@@ -288,7 +358,7 @@ function parseLocalYmd(value: string) {
   return Number.isNaN(date.getTime()) ? undefined : date
 }
 
-function renderDateField({ field, value, placeholder, onChange }: FormBuilderRenderField) {
+function renderDateField({ field, value, placeholder, onChange }: SchemaFormRenderField) {
   if (field.type === 'date') {
     const selected = typeof value === 'string' && value ? parseLocalYmd(value) : undefined
     return (
@@ -327,17 +397,17 @@ function renderDateField({ field, value, placeholder, onChange }: FormBuilderRen
   return null
 }
 
-function FormBuilderExamplesPage() {
-  const account = useFormBuilder({ fields: ACCOUNT_FIELDS })
-  const details = useFormBuilder({ fields: DETAILS_FIELDS })
+function SchemaFormExamplesPage() {
+  const account = useSchemaForm({ fields: ACCOUNT_FIELDS })
+  const details = useSchemaForm({ fields: DETAILS_FIELDS })
   const [tab, setTab] = useState('result')
   const validating = account.isSubmitting || details.isSubmitting
 
   return (
-    <DocExamplePage to="/form-builder">
+    <DocExamplePage to="/schema-form">
       <div className="grid min-w-0 gap-6 xl:grid-cols-3">
-        <FormBuilder form={account} className="max-w-none" renderField={renderDateField} />
-        <FormBuilder form={details} className="max-w-none" renderField={renderDateField} />
+        <SchemaForm form={account} className="max-w-none" renderField={renderDateField} />
+        <SchemaForm form={details} className="max-w-none" renderField={renderDateField} />
         <div className="flex min-w-0 flex-col gap-4">
           <Button
             htmlType="button"
@@ -347,18 +417,19 @@ function FormBuilderExamplesPage() {
           >
             {validating ? 'Validating…' : 'Validate'}
           </Button>
-          <TabMenu
+          <Tabs
             value={tab}
             onValueChange={(value) => setTab(String(value))}
             className="min-w-0 gap-3"
           >
-            <TabMenuList>
-              <TabMenuTab value="result">Result</TabMenuTab>
-              <TabMenuTab value="errors">Errors</TabMenuTab>
-              <TabMenuTab value="schema">Schema</TabMenuTab>
-              <TabMenuTab value="prompt">Prompt</TabMenuTab>
-            </TabMenuList>
-            <TabMenuPanel value="result" className="min-w-0">
+            <TabsList>
+              <TabsTab value="result">Result</TabsTab>
+              <TabsTab value="errors">Errors</TabsTab>
+              <TabsTab value="schema">Schema</TabsTab>
+              <TabsTab value="prompt">Prompt</TabsTab>
+              <TabsTab value="usage">Usage</TabsTab>
+            </TabsList>
+            <TabsPanel value="result" className="min-w-0">
               <div className="flex min-w-0 flex-col gap-4">
                 <JsonPanel
                   filename="result.json"
@@ -369,23 +440,29 @@ function FormBuilderExamplesPage() {
                   data={{ account: account.errors, details: details.errors }}
                 />
               </div>
-            </TabMenuPanel>
-            <TabMenuPanel value="errors" className="min-w-0">
+            </TabsPanel>
+            <TabsPanel value="errors" className="min-w-0">
               <JsonPanel
                 filename="errors.json"
                 data={{ account: account.errors, details: details.errors }}
               />
-            </TabMenuPanel>
-            <TabMenuPanel value="schema" className="min-w-0">
+            </TabsPanel>
+            <TabsPanel value="schema" className="min-w-0">
               <JsonPanel
                 filename="fields.json"
                 data={{ account: ACCOUNT_FIELDS, details: DETAILS_FIELDS }}
               />
-            </TabMenuPanel>
-            <TabMenuPanel value="prompt" className="min-w-0">
-              <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
-            </TabMenuPanel>
-          </TabMenu>
+            </TabsPanel>
+            <TabsPanel value="prompt" className="min-w-0">
+              <div className="flex min-w-0 flex-col gap-4">
+                <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
+                <JsonPanel filename="usage.tsx" data={USAGE_EXAMPLE} />
+              </div>
+            </TabsPanel>
+            <TabsPanel value="usage" className="min-w-0">
+              <JsonPanel filename="usage.tsx" data={USAGE_EXAMPLE} />
+            </TabsPanel>
+          </Tabs>
         </div>
       </div>
     </DocExamplePage>

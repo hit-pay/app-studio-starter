@@ -17,7 +17,7 @@ const clickableOptionGroupVariants = cva('flex w-full', {
   },
 })
 
-function ClickableOptionGroup({
+function ChoiceCardGroup({
   className,
   alignment = 'Vertical',
   ...props
@@ -26,7 +26,7 @@ function ClickableOptionGroup({
 }) {
   return (
     <RadioGroupPrimitive
-      data-slot="clickable-option-group"
+      data-slot="choice-card-group"
       data-alignment={alignment}
       className={cn(clickableOptionGroupVariants({ alignment }), className)}
       {...props}
@@ -36,7 +36,7 @@ function ClickableOptionGroup({
 
 const clickableOptionVariants = cva(
   [
-    'group/clickable-option flex min-w-0 cursor-pointer gap-3 rounded-lg border border-solid border-oc-border bg-oc-background px-5 py-3 outline-none',
+    'group/choice-card flex min-w-0 cursor-pointer gap-3 rounded-lg border border-solid border-oc-border bg-oc-background px-5 py-3 outline-none',
     'hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
     'data-checked:border-oc-primary',
     'data-disabled:pointer-events-none data-disabled:opacity-50',
@@ -59,7 +59,7 @@ const clickableOptionVariants = cva(
   },
 )
 
-function ClickableOption({
+function ChoiceCard({
   className,
   title,
   description,
@@ -77,7 +77,7 @@ function ClickableOption({
 }) {
   return (
     <RadioPrimitive.Root
-      data-slot="clickable-option"
+      data-slot="choice-card"
       data-alignment={alignment}
       data-icon-align={iconAlign}
       className={cn(clickableOptionVariants({ alignment, iconAlign }), className)}
@@ -109,4 +109,4 @@ function ClickableOption({
   )
 }
 
-export { ClickableOption, ClickableOptionGroup }
+export { ChoiceCard, ChoiceCardGroup }

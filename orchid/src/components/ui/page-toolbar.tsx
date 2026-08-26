@@ -11,7 +11,7 @@ function KeyboardHint({ children }: { children: ReactNode }) {
   )
 }
 
-function SubHeader({
+function PageToolbar({
   className,
   left = 'Back',
   onBack,
@@ -24,7 +24,7 @@ function SubHeader({
 }) {
   return (
     <div
-      data-slot="sub-header"
+      data-slot="page-toolbar"
       data-left={left}
       className={cn(
         'flex w-full items-center justify-between gap-4 border-b border-solid border-oc-border bg-oc-background px-6 py-3',
@@ -58,4 +58,4 @@ function SubHeader({
   )
 }
 
-export { SubHeader }
+export { PageToolbar }

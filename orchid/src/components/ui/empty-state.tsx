@@ -26,7 +26,7 @@ const DEFAULT_ICON: Record<'Default' | 'Search' | 'Upgrade', ReactNode> = {
   Upgrade: <TriangleAlertIcon className="size-8 text-oc-warning" />,
 }
 
-function EmptyPage({
+function EmptyState({
   className,
   type = 'Default',
   title,
@@ -47,7 +47,7 @@ function EmptyPage({
 
   return (
     <div
-      data-slot="empty-page"
+      data-slot="empty-state"
       data-type={type}
       className={cn('flex w-full flex-col items-center justify-center gap-6', className)}
       {...props}
@@ -79,4 +79,4 @@ function EmptyPage({
   )
 }
 
-export { EmptyPage }
+export { EmptyState }

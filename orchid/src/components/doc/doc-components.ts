@@ -5,19 +5,19 @@ export const DOC_COMPONENTS = [
     description: 'Type, Style, Size, Default/Disabled, icon-only, and additional action.',
   },
   {
-    to: '/dropdown' as const,
-    name: 'Dropdown',
+    to: '/dropdown-menu' as const,
+    name: 'Dropdown Menu',
     description: 'Item states and grouped or ungrouped menus.',
   },
   {
-    to: '/snackbar' as const,
-    name: 'Snack Bar',
-    description: 'Small/Default as floating toasts; Big with close and actions.',
+    to: '/banner' as const,
+    name: 'Banner',
+    description: 'In-page notification above the page header, with actions. Not a floating toast.',
   },
   {
     to: '/toast' as const,
     name: 'Toast',
-    description: 'Programmatic snackbar via toast.add. Types, action, and Toaster.',
+    description: 'Programmatic floating toast via toast.add. Types, action, and Toaster.',
   },
   {
     to: '/chip' as const,
@@ -50,33 +50,33 @@ export const DOC_COMPONENTS = [
     description: 'Hover tooltip with top, bottom, left, and right placement.',
   },
   {
-    to: '/tab-menu' as const,
-    name: 'Tab Menu',
+    to: '/tabs' as const,
+    name: 'Tabs',
     description: 'Default underline and Pills tab bars.',
   },
   {
-    to: '/clickable-option' as const,
-    name: 'Clickable Option',
+    to: '/choice-card' as const,
+    name: 'Choice Card',
     description: 'Selectable cards with left or center icon, no radio dot.',
   },
   {
-    to: '/overview-item' as const,
-    name: 'Overview Item',
+    to: '/stat-card' as const,
+    name: 'Stat Card',
     description: 'Metric card with header divider, value, and percent badge.',
   },
   {
-    to: '/box-detail' as const,
-    name: 'Box Detail',
+    to: '/detail-list' as const,
+    name: 'Detail List',
     description: 'Detail card with grid columns, colspan, and stacked rows.',
   },
   {
-    to: '/button-group' as const,
-    name: 'Button Group',
+    to: '/icon-group' as const,
+    name: 'Icon Group',
     description: 'Icon cluster with Default and Border; dropdown, link, and copy.',
   },
   {
-    to: '/copy-tooltip' as const,
-    name: 'Copy Tooltip',
+    to: '/copy-button' as const,
+    name: 'Copy Button',
     description: 'Copy icon that writes a value and shows Copied!.',
   },
   {
@@ -85,8 +85,8 @@ export const DOC_COMPONENTS = [
     description: 'Placeholder pulse while content loads.',
   },
   {
-    to: '/empty-page' as const,
-    name: 'Empty Page',
+    to: '/empty-state' as const,
+    name: 'Empty State',
     description: 'Centered empty state with icon, title, description, and actions.',
   },
   {
@@ -137,8 +137,8 @@ export const DOC_FORMS = [
     description: 'Searchable select; multiple chips, checkbox items, and select all.',
   },
   {
-    to: '/input-stepper' as const,
-    name: 'Input Stepper',
+    to: '/quantity-input' as const,
+    name: 'Quantity Input',
     description: 'Minus/plus stepper; click the value to type.',
   },
   {
@@ -167,8 +167,8 @@ export const DOC_FORMS = [
     description: 'Popover + Calendar, same composition as shadcn Date Picker.',
   },
   {
-    to: '/section-title' as const,
-    name: 'Section Title',
+    to: '/form-section' as const,
+    name: 'Form Section',
     description: 'Form section heading with optional chip, hint, count, and actions.',
   },
 ] as const
@@ -184,8 +184,8 @@ export const DOC_BLOCKS = [
     description: 'Small, Big, and Float customer or beneficiary cards.',
   },
   {
-    to: '/sub-header' as const,
-    name: 'Sub Header',
+    to: '/page-toolbar' as const,
+    name: 'Page Toolbar',
     description: 'Back or close on the left; actions on the right.',
   },
   {
@@ -194,13 +194,13 @@ export const DOC_BLOCKS = [
     description: 'Heading with actions on the right and optional box below.',
   },
   {
-    to: '/confirmation-modal' as const,
-    name: 'Confirmation Modal',
+    to: '/confirm-dialog' as const,
+    name: 'Confirm Dialog',
     description: 'Prebuilt confirm dialog: Delete, Warning, Success, Question, and type-to-confirm.',
   },
   {
-    to: '/form-builder' as const,
-    name: 'Form Builder',
+    to: '/schema-form' as const,
+    name: 'Schema Form',
     description: 'TanStack Form plus Orchid fields from a field schema.',
   },
 ] as const

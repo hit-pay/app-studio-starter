@@ -1,24 +1,24 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SquareArrowOutUpRightIcon } from 'lucide-react'
-import { CopyTooltip } from '@/components/ui/copy-tooltip'
+import { CopyButton } from '@/components/ui/copy-button'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
-  ButtonGroup,
-  ButtonGroupDivider,
-  ButtonGroupLink,
-  ButtonGroupMenu,
+  IconGroup,
+  IconGroupDivider,
+  IconGroupLink,
+  IconGroupMenu,
   buttonGroupItemVariants,
-} from '@/components/ui/button-group'
+} from '@/components/ui/icon-group'
 
-export const Route = createFileRoute('/button-group')({
-  component: ButtonGroupExamplesPage,
+export const Route = createFileRoute('/icon-group')({
+  component: IconGroupExamplesPage,
 })
 
 function ExampleGroup({ type }: { type?: 'Default' | 'Border' }) {
   return (
-    <ButtonGroup type={type}>
-      <ButtonGroupMenu
+    <IconGroup type={type}>
+      <IconGroupMenu
         menu={
           <>
             <DropdownMenuItem>Mark invoice as paid</DropdownMenuItem>
@@ -27,24 +27,24 @@ function ExampleGroup({ type }: { type?: 'Default' | 'Border' }) {
           </>
         }
       />
-      <ButtonGroupDivider />
-      <ButtonGroupLink href="https://hitpay.shop/pay/pl_8f2a91" aria-label="Open payment link">
+      <IconGroupDivider />
+      <IconGroupLink href="https://hitpay.shop/pay/pl_8f2a91" aria-label="Open payment link">
         <SquareArrowOutUpRightIcon />
-      </ButtonGroupLink>
-      <ButtonGroupDivider />
-      <CopyTooltip
+      </IconGroupLink>
+      <IconGroupDivider />
+      <CopyButton
         value="https://hitpay.shop/pay/pl_8f2a91"
         aria-label="Copy payment link"
         className={buttonGroupItemVariants()}
       />
-    </ButtonGroup>
+    </IconGroup>
   )
 }
 
 function InvoiceGroup() {
   return (
-    <ButtonGroup type="Border">
-      <ButtonGroupMenu
+    <IconGroup type="Border">
+      <IconGroupMenu
         menu={
           <>
             <DropdownMenuItem>Download PDF</DropdownMenuItem>
@@ -53,23 +53,23 @@ function InvoiceGroup() {
           </>
         }
       />
-      <ButtonGroupDivider />
-      <ButtonGroupLink href="https://hitpay.shop/invoices/INV-2026-0842" aria-label="Open invoice">
+      <IconGroupDivider />
+      <IconGroupLink href="https://hitpay.shop/invoices/INV-2026-0842" aria-label="Open invoice">
         <SquareArrowOutUpRightIcon />
-      </ButtonGroupLink>
-      <ButtonGroupDivider />
-      <CopyTooltip
+      </IconGroupLink>
+      <IconGroupDivider />
+      <CopyButton
         value="INV-2026-0842"
         aria-label="Copy invoice number"
         className={buttonGroupItemVariants()}
       />
-    </ButtonGroup>
+    </IconGroup>
   )
 }
 
-function ButtonGroupExamplesPage() {
+function IconGroupExamplesPage() {
   return (
-    <DocExamplePage to="/button-group">
+    <DocExamplePage to="/icon-group">
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
