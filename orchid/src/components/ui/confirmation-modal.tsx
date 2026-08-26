@@ -180,30 +180,32 @@ function ConfirmationModal({
         footerContent={
           <div
             className={cn(
-              'flex min-w-0 flex-1 items-center gap-3',
+              'flex min-w-0 flex-1 items-center',
               medium ? 'justify-end' : 'justify-center',
             )}
           >
-            {showCancel ? (
+            <div className="grid auto-cols-[minmax(7rem,1fr)] grid-flow-col gap-3">
+              {showCancel ? (
+                <ModalClose
+                  render={<Button type="Secondary" className="w-full" onClick={onCancel} />}
+                >
+                  {resolvedCancel}
+                </ModalClose>
+              ) : null}
               <ModalClose
-                render={<Button type="Secondary" className="min-w-[112px]" onClick={onCancel} />}
+                disabled={!matched}
+                render={
+                  <Button
+                    type={resolvedConfirmType}
+                    className="w-full"
+                    disabled={!matched}
+                    onClick={onConfirm}
+                  />
+                }
               >
-                {resolvedCancel}
+                {resolvedConfirm}
               </ModalClose>
-            ) : null}
-            <ModalClose
-              disabled={!matched}
-              render={
-                <Button
-                  type={resolvedConfirmType}
-                  className="min-w-[112px]"
-                  disabled={!matched}
-                  onClick={onConfirm}
-                />
-              }
-            >
-              {resolvedConfirm}
-            </ModalClose>
+            </div>
           </div>
         }
       >

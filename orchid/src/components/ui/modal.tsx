@@ -7,14 +7,19 @@ import { cn } from '@/lib/utils'
 import { Button } from './button'
 
 const modalPopupVariants = cva(
-  'flex w-full max-h-[80vh] flex-col overflow-hidden rounded-2xl bg-oc-background shadow-[0_3px_22px_rgba(38,42,50,0.09)] outline-none sm:max-h-[96vh]',
+  'flex w-full flex-col overflow-hidden bg-oc-background outline-none',
   {
     variants: {
       size: {
-        Small: 'max-w-[320px]',
-        Medium: 'max-w-[480px]',
-        Default: 'max-w-[640px]',
-        Confirmation: 'max-w-[320px]',
+        Small:
+          'max-h-[80vh] max-w-[320px] rounded-2xl shadow-[0_3px_22px_rgba(38,42,50,0.09)] sm:max-h-[96vh]',
+        Medium:
+          'max-h-[80vh] max-w-[480px] rounded-2xl shadow-[0_3px_22px_rgba(38,42,50,0.09)] sm:max-h-[96vh]',
+        Default:
+          'max-h-[80vh] max-w-[640px] rounded-2xl shadow-[0_3px_22px_rgba(38,42,50,0.09)] sm:max-h-[96vh]',
+        Confirmation:
+          'max-h-[80vh] max-w-[320px] rounded-2xl shadow-[0_3px_22px_rgba(38,42,50,0.09)] sm:max-h-[96vh]',
+        Fullscreen: 'h-dvh max-h-none w-full max-w-none rounded-none shadow-none',
       },
     },
     defaultVariants: {
@@ -64,7 +69,7 @@ function ModalPopup({
   children,
   ...props
 }: DialogPrimitive.Popup.Props & {
-  size?: 'Small' | 'Medium' | 'Default' | 'Confirmation'
+  size?: 'Small' | 'Medium' | 'Default' | 'Confirmation' | 'Fullscreen'
   title?: string
   description?: string
   closeIcon?: boolean
@@ -80,6 +85,7 @@ function ModalPopup({
   showCancel?: boolean
 }) {
   const confirmation = size === 'Confirmation'
+  const fullscreen = size === 'Fullscreen'
   const hideDividers = borderless || confirmation
 
   return (
@@ -88,14 +94,23 @@ function ModalPopup({
         data-slot="modal-backdrop"
         className="fixed inset-0 z-50 bg-black/45"
       />
-      <DialogPrimitive.Viewport className="fixed inset-0 z-50 flex items-center justify-center p-5">
+      <DialogPrimitive.Viewport
+        className={cn(
+          'fixed inset-0 z-50 flex',
+          fullscreen ? 'items-stretch justify-stretch p-0' : 'items-center justify-center p-5',
+        )}
+      >
         <DialogPrimitive.Popup
           data-slot="modal-popup"
           data-size={size}
           className={cn(modalPopupVariants({ size }), className)}
           {...props}
         >
-          {header ? (
+          {fullscreen && title ? (
+            <DialogPrimitive.Title className="sr-only">{title}</DialogPrimitive.Title>
+          ) : null}
+
+          {header && !fullscreen ? (
             <div
               className={cn(
                 'flex items-start justify-between gap-4 bg-oc-background p-4',
@@ -128,15 +143,16 @@ function ModalPopup({
 
           <div
             className={cn(
-              'min-h-0 flex-1 overflow-y-auto',
-              confirmation ? 'p-4' : 'p-6',
-              borderless && !confirmation && 'py-0',
+              'min-h-0 flex-1',
+              fullscreen ? 'flex flex-col overflow-hidden p-0' : 'overflow-y-auto',
+              !fullscreen && (confirmation ? 'p-4' : 'p-6'),
+              borderless && !confirmation && !fullscreen && 'py-0',
             )}
           >
             {children}
           </div>
 
-          {footer ? (
+          {footer && !fullscreen ? (
             <div
               className={cn(
                 'flex items-center gap-8 px-4 py-5',
@@ -147,25 +163,27 @@ function ModalPopup({
               {footerContent ?? (
                 <div
                   className={cn(
-                    'flex min-w-0 flex-1 items-center gap-3',
+                    'flex min-w-0 flex-1 items-center',
                     confirmation ? 'justify-center' : 'justify-end',
                   )}
                 >
-                  {showCancel ? (
-                    <DialogPrimitive.Close
-                      render={<Button type="Secondary" className="min-w-[112px]" onClick={onCancel} />}
+                  <div className="grid auto-cols-[minmax(7rem,1fr)] grid-flow-col gap-3">
+                    {showCancel ? (
+                      <DialogPrimitive.Close
+                        render={<Button type="Secondary" className="w-full" onClick={onCancel} />}
+                      >
+                        {cancelLabel}
+                      </DialogPrimitive.Close>
+                    ) : null}
+                    <Button
+                      type={confirmType}
+                      htmlType="button"
+                      className="w-full"
+                      onClick={onConfirm}
                     >
-                      {cancelLabel}
-                    </DialogPrimitive.Close>
-                  ) : null}
-                  <Button
-                    type={confirmType}
-                    htmlType="button"
-                    className="min-w-[112px]"
-                    onClick={onConfirm}
-                  >
-                    {confirmLabel}
-                  </Button>
+                      {confirmLabel}
+                    </Button>
+                  </div>
                 </div>
               )}
             </div>

@@ -34,7 +34,7 @@ function SubHeader({
     >
       <button
         type="button"
-        className="inline-flex items-center gap-1 text-sm leading-[1.5] text-oc-muted-foreground outline-none hover:text-oc-foreground"
+        className="inline-flex cursor-pointer items-center gap-1 text-sm leading-[1.5] text-oc-muted-foreground outline-none hover:text-oc-foreground"
         onClick={onBack}
       >
         {left === 'Close' ? (
