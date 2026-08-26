@@ -4,16 +4,24 @@ description: Orchid UI. Open when building screens.
 
 # Screens
 
-Pick components from **one file**: `.agents/orchid-ui.json` (generated from the Orchid registry). Do **not** open every `src/orchid-ui/*.tsx`. Open a kit `.tsx` only after you chose that `name`.
+Orchid is the **global** kit. Browse it with the **shadcn MCP** ([docs](https://ui.shadcn.com/docs/mcp)). Sprite uses **Codex**: project file `.codex/config.toml` (`bunx --bun shadcn mcp`). The shadcn CLI cannot edit `~/.codex/config.toml` — that home file is only for a laptop Codex install. Registries: `components.json` (`@orchid`).
 
-Import `@/ui/<name>`. Tokens: `src/styles.css`. `cn()` from `@/lib/utils`. Icons: `lucide-react`. Base UI: `render={<Button />}`, never `asChild` or `@radix-ui/*`. No `src/components/ui`. Never `bunx shadcn add` from `@shadcn`.
+If MCP tools are missing, do **not** run `mcp init --client claude`. Rely on `.codex/config.toml` / `.mcp.json`, or fetch the catalog JSON below.
+
+Search/list **`@orchid` only**. Do not add Button/Dialog/Card from the default shadcn registry.
+
+Fallback catalog (one JSON, do not open every kit file): **https://orchid-ui-hitpay.vercel.app/registry.json** (`items` `registry:ui`, skip `utils`). Item JSON: `https://orchid-ui-hitpay.vercel.app/r/{name}.json`. Local Orchid dev: `@orchid-local` → `http://127.0.0.1:5177/r/{name}.json`.
+
+Then import `@/ui/<name>` (`src/orchid-ui/`). Open a `.tsx` only after you chose that `name`.
+
+Base UI: `render={<Button />}`, never `asChild` or `@radix-ui/*`. No `src/components/ui`. Never add from `@shadcn` / ui.shadcn.com.
 
 **Orchid first.** Custom → `src/components/<name>.tsx` only if no catalog item fits.
 
-Missing kit file:
+`components.json` has `@orchid` (Vercel) and `@orchid-local` (`http://127.0.0.1:5177/r/{name}.json`). Missing file:
 
 ```bash
-bunx shadcn add @orchid/<name> --yes
+bunx shadcn add @orchid/<name>
 ```
 
 ```tsx

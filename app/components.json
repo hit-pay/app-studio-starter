@@ -22,6 +22,7 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@orchid": "https://app-studio-starter.vercel.app/r/{name}.json"
+    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json",
+    "@orchid-local": "http://127.0.0.1:5177/r/{name}.json"
   }
 }

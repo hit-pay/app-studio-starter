@@ -1,7 +1,7 @@
 {
   "$schema": "https://ui.shadcn.com/schema/registry.json",
   "name": "orchid",
-  "homepage": "https://ui.shadcn.com",
+  "homepage": "https://orchid-ui-hitpay.vercel.app",
   "items": [
     {
       "name": "utils",

@@ -1,0 +1,6 @@
+# Codex on Sprite (app = workspace). shadcn CLI cannot write ~/.codex/config.toml.
+# Registries come from components.json (@orchid).
+
+[mcp_servers.shadcn]
+command = "bunx"
+args = ["--bun", "shadcn", "mcp"]
