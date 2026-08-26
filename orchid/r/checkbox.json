@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "checkbox",
+  "title": "Checkbox",
+  "description": "Orchid UI checkbox and checkbox group.",
+  "dependencies": [
+    "@base-ui/react",
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/checkbox.tsx",
+      "content": "import type { ReactNode } from 'react'\nimport { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'\nimport { CheckboxGroup as CheckboxGroupPrimitive } from '@base-ui/react/checkbox-group'\nimport { cva } from 'class-variance-authority'\nimport { CheckIcon, MinusIcon } from 'lucide-react'\n\nimport { cn } from '@/lib/utils'\n\nconst checkboxGroupVariants = cva('flex', {\n  variants: {\n    alignment: {\n      Vertical: 'flex-col gap-2',\n      Horizontal: 'flex-row flex-wrap items-center gap-4',\n    },\n  },\n  defaultVariants: {\n    alignment: 'Vertical',\n  },\n})\n\nfunction CheckboxGroup({\n  className,\n  alignment = 'Vertical',\n  label,\n  ...props\n}: CheckboxGroupPrimitive.Props & {\n  alignment?: 'Vertical' | 'Horizontal'\n  label?: ReactNode\n}) {\n  return (\n    <div className=\"flex w-full flex-col items-start gap-2\">\n      {label ? (\n        <p className=\"text-xs font-medium leading-[1.5] text-muted-foreground\">{label}</p>\n      ) : null}\n      <CheckboxGroupPrimitive\n        data-slot=\"checkbox-group\"\n        data-alignment={alignment}\n        className={cn(checkboxGroupVariants({ alignment }), className)}\n        {...props}\n      />\n    </div>\n  )\n}\n\nconst checkboxControlVariants = cva(\n  [\n    'inline-flex size-4 shrink-0 items-center justify-center rounded border border-solid outline-none',\n    'shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',\n    'bg-background border-border text-primary-foreground',\n    'hover:border-primary hover:shadow-[0_0_0_3px_var(--info-border)]',\n    'data-checked:border-primary data-checked:bg-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',\n    'data-indeterminate:border-primary data-indeterminate:bg-info-soft data-indeterminate:text-primary',\n    'data-disabled:pointer-events-none data-disabled:border-border data-disabled:bg-dark-blue-soft data-disabled:text-primary-foreground data-disabled:shadow-none',\n    'data-disabled:data-checked:border-dark-blue-border data-disabled:data-checked:bg-dark-blue-border',\n    'data-[error=true]:border-destructive data-[error=true]:shadow-[0_0_0_3px_var(--destructive-border)]',\n  ].join(' '),\n)\n\nfunction Checkbox({\n  className,\n  children,\n  description,\n  error = false,\n  value,\n  ...props\n}: CheckboxPrimitive.Root.Props & {\n  description?: ReactNode\n  error?: boolean\n  value?: string\n}) {\n  return (\n    <label\n      className={cn(\n        'inline-flex items-start gap-2 text-xs leading-[1.5] text-foreground',\n        'has-data-disabled:text-[#9295a5]',\n        className,\n      )}\n    >\n      <CheckboxPrimitive.Root\n        data-slot=\"checkbox\"\n        data-error={error || undefined}\n        name={value}\n        className={checkboxControlVariants()}\n        {...props}\n      >\n        <CheckboxPrimitive.Indicator className=\"flex items-center justify-center\">\n          {props.indeterminate ? (\n            <MinusIcon className=\"size-2.5\" />\n          ) : (\n            <CheckIcon className=\"size-2.5\" />\n          )}\n        </CheckboxPrimitive.Indicator>\n      </CheckboxPrimitive.Root>\n      {children || description ? (\n        <span className=\"flex min-w-0 flex-col gap-0.5\">\n          {children ? <span>{children}</span> : null}\n          {description ? (\n            <span className=\"text-xs leading-[1.5] text-muted-foreground\">{description}</span>\n          ) : null}\n        </span>\n      ) : null}\n    </label>\n  )\n}\n\nexport { Checkbox, CheckboxGroup }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/checkbox.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

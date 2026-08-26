@@ -1,0 +1,546 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "orchid",
+  "homepage": "https://ui.shadcn.com",
+  "items": [
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "cn helper for Orchid UI components.",
+      "dependencies": ["clsx", "tailwind-merge"],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Orchid UI button with type, style, size, and split action.",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Orchid UI dropdown menu built on Base UI.",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "snackbar",
+      "type": "registry:ui",
+      "title": "Snack Bar",
+      "description": "Orchid UI snackbar for floating toasts and rich banners.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/snackbar.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/snackbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chip",
+      "type": "registry:ui",
+      "title": "Chip",
+      "description": "Orchid UI chip with color, type, icon, and removable variants.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/chip.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/chip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Orchid UI accordion with title, optional description, label, and progress.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress-bar",
+      "type": "registry:ui",
+      "title": "Progress Bar",
+      "description": "Orchid UI progress bar with Default and Small sizes.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/progress-bar.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/progress-bar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "list-item",
+      "type": "registry:ui",
+      "title": "List Item",
+      "description": "Orchid UI list item for general, webhook, and integration cards.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["copy-tooltip"],
+      "files": [
+        {
+          "path": "src/components/ui/list-item.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/list-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-stepper",
+      "type": "registry:ui",
+      "title": "Input Stepper",
+      "description": "Orchid UI input stepper; value is editable on click.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/ui/input-stepper.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/input-stepper.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Orchid UI avatar with size and Default, Business, or Image type.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Orchid UI tooltip with arrow and placement.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tab-menu",
+      "type": "registry:ui",
+      "title": "Tab Menu",
+      "description": "Orchid UI tab menu with Default underline and Pills types.",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/tab-menu.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/tab-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "clickable-option",
+      "type": "registry:ui",
+      "title": "Clickable Option",
+      "description": "Orchid UI clickable option radio cards.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/clickable-option.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/clickable-option.tsx"
+        }
+      ]
+    },
+    {
+      "name": "overview-item",
+      "type": "registry:ui",
+      "title": "Overview Item",
+      "description": "Orchid UI overview metric card.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["tooltip"],
+      "files": [
+        {
+          "path": "src/components/ui/overview-item.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/overview-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sub-header",
+      "type": "registry:ui",
+      "title": "Sub Header",
+      "description": "Orchid UI page sub header with title, back, and actions.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/sub-header.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/sub-header.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-title",
+      "type": "registry:ui",
+      "title": "Page Title",
+      "description": "Orchid UI page title with description, chip, and copy.",
+      "dependencies": [],
+      "registryDependencies": ["copy-tooltip"],
+      "files": [
+        {
+          "path": "src/components/ui/page-title.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/page-title.tsx"
+        }
+      ]
+    },
+    {
+      "name": "box-detail",
+      "type": "registry:ui",
+      "title": "Box Detail",
+      "description": "Orchid UI detail box with labeled rows, grid, and colspan.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": ["copy-tooltip"],
+      "files": [
+        {
+          "path": "src/components/ui/box-detail.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/box-detail.tsx"
+        }
+      ]
+    },
+    {
+      "name": "group-icon",
+      "type": "registry:ui",
+      "title": "Group Icon",
+      "description": "Orchid UI icon action group with Default and Border types.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": ["dropdown-menu"],
+      "files": [
+        {
+          "path": "src/components/ui/group-icon.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/group-icon.tsx"
+        }
+      ]
+    },
+    {
+      "name": "copy-tooltip",
+      "type": "registry:ui",
+      "title": "Copy Tooltip",
+      "description": "Orchid UI copy icon with Copied! tooltip.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["tooltip"],
+      "files": [
+        {
+          "path": "src/components/ui/copy-tooltip.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/copy-tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "customer-card",
+      "type": "registry:ui",
+      "title": "Customer Card",
+      "description": "Orchid UI customer and beneficiary profile card.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": ["avatar", "button", "chip", "copy-tooltip"],
+      "files": [
+        {
+          "path": "src/components/ui/customer-card.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/customer-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Orchid UI checkbox and checkbox group.",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Orchid UI radio group.",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toggle",
+      "type": "registry:ui",
+      "title": "Toggle",
+      "description": "Orchid UI toggle switch.",
+      "dependencies": ["@base-ui/react", "class-variance-authority"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/toggle.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/toggle.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Orchid UI range slider.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty-page",
+      "type": "registry:ui",
+      "title": "Empty Page",
+      "description": "Orchid UI empty state with icon, title, description, and actions.",
+      "dependencies": ["class-variance-authority", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/empty-page.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/empty-page.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Orchid UI label from shadcn Label.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Orchid UI separator from shadcn Separator.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Orchid UI field from shadcn Field.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["label", "separator"],
+      "files": [
+        {
+          "path": "src/components/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Orchid UI text input from shadcn Input.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Orchid UI textarea from shadcn Textarea.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Orchid UI select and multiple select from Figma.",
+      "dependencies": ["@base-ui/react", "lucide-react"],
+      "registryDependencies": ["chip", "popover"],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Orchid UI input group from shadcn Input Group.",
+      "dependencies": ["class-variance-authority"],
+      "registryDependencies": ["button", "input", "select", "textarea"],
+      "files": [
+        {
+          "path": "src/components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/input-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Orchid UI popover built from shadcn Popover.",
+      "dependencies": ["@base-ui/react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Orchid UI calendar built from shadcn Calendar.",
+      "dependencies": ["react-day-picker", "lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/calendar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Orchid UI date picker composed from Popover and Calendar.",
+      "dependencies": ["date-fns", "lucide-react", "react-day-picker"],
+      "registryDependencies": ["button", "calendar", "popover"],
+      "files": [
+        {
+          "path": "src/components/ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/date-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "modal",
+      "type": "registry:ui",
+      "title": "Modal",
+      "description": "Orchid UI modal dialog with header, body, and footer.",
+      "dependencies": ["@base-ui/react", "class-variance-authority", "lucide-react"],
+      "registryDependencies": ["button"],
+      "files": [
+        {
+          "path": "src/components/ui/modal.tsx",
+          "type": "registry:ui",
+          "target": "orchid-ui/modal.tsx"
+        }
+      ]
+    }
+  ]
+}

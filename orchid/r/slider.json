@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "slider",
+  "title": "Slider",
+  "description": "Orchid UI range slider.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/slider.tsx",
+      "content": "import { useState } from 'react'\nimport { Slider as SliderPrimitive } from '@base-ui/react/slider'\n\nimport { cn } from '@/lib/utils'\n\nfunction toValues(\n  value: number | readonly number[] | undefined,\n  fallback: number[],\n) {\n  if (typeof value === 'number') return [value]\n  if (Array.isArray(value) && value.length > 0) return [...value]\n  return fallback\n}\n\nfunction Slider({\n  className,\n  defaultValue = 50,\n  value,\n  min = 0,\n  max = 100,\n  showIndicator = true,\n  showRange = true,\n  onValueChange,\n  onValueCommitted,\n  ...props\n}: SliderPrimitive.Root.Props & {\n  showIndicator?: boolean\n  showRange?: boolean\n}) {\n  const initial = toValues(defaultValue, [min])\n  const [internal, setInternal] = useState(initial)\n  const [dragging, setDragging] = useState(false)\n  const current = value !== undefined ? toValues(value, internal) : internal\n\n  return (\n    <SliderPrimitive.Root\n      data-slot=\"slider\"\n      data-dragging={dragging || undefined}\n      min={min}\n      max={max}\n      thumbAlignment=\"edge\"\n      value={value}\n      defaultValue={defaultValue}\n      className={cn('flex w-full flex-col gap-1 data-horizontal:w-full', className)}\n      onValueChange={(next, details) => {\n        setInternal(toValues(next, current))\n        setDragging(details.reason === 'drag')\n        onValueChange?.(next, details)\n      }}\n      onValueCommitted={(next, details) => {\n        setDragging(false)\n        onValueCommitted?.(next, details)\n      }}\n      {...props}\n    >\n      <SliderPrimitive.Control className=\"relative flex w-full touch-none items-center py-1.5 select-none\">\n        <SliderPrimitive.Track className=\"relative h-2 w-full grow overflow-hidden rounded-2xl bg-neutral-soft\">\n          <SliderPrimitive.Indicator className=\"rounded-2xl bg-primary\" />\n        </SliderPrimitive.Track>\n        {current.map((thumbValue, index) => (\n          <SliderPrimitive.Thumb\n            key={index}\n            className=\"relative flex size-5 shrink-0 items-center justify-center rounded-full bg-background shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] outline-none\"\n          >\n            <span className=\"size-2.5 rounded-full bg-primary\" />\n            {showIndicator && dragging ? (\n              <span className=\"absolute top-full mt-1 rounded bg-foreground px-1.5 py-0.5 text-xs font-medium leading-5 whitespace-nowrap text-primary-foreground\">\n                {thumbValue}\n              </span>\n            ) : null}\n          </SliderPrimitive.Thumb>\n        ))}\n      </SliderPrimitive.Control>\n      {showRange ? (\n        <div className=\"flex w-full items-center justify-between text-sm leading-[1.5] text-foreground\">\n          <span>{min}</span>\n          <span>{max}</span>\n        </div>\n      ) : null}\n    </SliderPrimitive.Root>\n  )\n}\n\nexport { Slider }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/slider.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

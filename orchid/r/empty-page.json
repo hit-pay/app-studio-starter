@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty-page",
+  "title": "Empty Page",
+  "description": "Orchid UI empty state with icon, title, description, and actions.",
+  "dependencies": [
+    "class-variance-authority",
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/empty-page.tsx",
+      "content": "import type { ComponentProps, ReactNode } from 'react'\nimport { cva } from 'class-variance-authority'\nimport { FileTextIcon, SearchIcon, TriangleAlertIcon } from 'lucide-react'\n\nimport { cn } from '@/lib/utils'\n\nconst emptyPageIconVariants = cva(\n  'relative inline-flex items-center justify-center rounded-full border border-solid p-4',\n  {\n    variants: {\n      type: {\n        Default: 'border-neutral-soft bg-neutral',\n        Search: 'border-neutral-soft bg-neutral',\n        Upgrade: 'border-warning-chip-border bg-warning-soft',\n      },\n    },\n    defaultVariants: {\n      type: 'Default',\n    },\n  },\n)\n\nconst DEFAULT_ICON: Record<'Default' | 'Search' | 'Upgrade', ReactNode> = {\n  Default: <FileTextIcon className=\"size-8 text-muted-foreground\" />,\n  Search: <SearchIcon className=\"size-8 text-muted-foreground\" />,\n  Upgrade: <TriangleAlertIcon className=\"size-8 text-warning\" />,\n}\n\nfunction EmptyPage({\n  className,\n  type = 'Default',\n  title,\n  description,\n  icon,\n  badge,\n  actions,\n  ...props\n}: ComponentProps<'div'> & {\n  type?: 'Default' | 'Search' | 'Upgrade'\n  title?: ReactNode\n  description?: ReactNode\n  icon?: ReactNode\n  badge?: boolean\n  actions?: ReactNode\n}) {\n  const showBadge = badge ?? type !== 'Upgrade'\n\n  return (\n    <div\n      data-slot=\"empty-page\"\n      data-type={type}\n      className={cn('flex w-full flex-col items-center justify-center gap-6', className)}\n      {...props}\n    >\n      <div className={emptyPageIconVariants({ type })}>\n        {icon ?? DEFAULT_ICON[type]}\n        {showBadge ? (\n          <span className=\"absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-neutral-soft bg-[#9295a5] text-[11px] font-medium leading-none text-white\">\n            !\n          </span>\n        ) : null}\n      </div>\n\n      {title || description ? (\n        <div className=\"flex w-full flex-col items-center gap-2 text-center\">\n          {title ? (\n            <p className=\"text-base font-medium leading-[1.4] text-foreground\">{title}</p>\n          ) : null}\n          {description ? (\n            <p className=\"text-sm leading-[1.5] text-muted-foreground\">{description}</p>\n          ) : null}\n        </div>\n      ) : null}\n\n      {actions ? (\n        <div className=\"flex flex-wrap items-center justify-center gap-2\">{actions}</div>\n      ) : null}\n    </div>\n  )\n}\n\nexport { EmptyPage }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/empty-page.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

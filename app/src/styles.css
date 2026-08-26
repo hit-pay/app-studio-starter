@@ -1,0 +1,186 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@theme inline {
+  --font-heading: var(--font-sans);
+  --font-sans: 'Inter', sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
+  --color-destructive-soft: var(--destructive-soft);
+  --color-destructive-border: var(--destructive-border);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-success-border: var(--success-border);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-warning-border: var(--warning-border);
+  --color-info-soft: var(--info-soft);
+  --color-info-border: var(--info-border);
+  --color-neutral: var(--neutral);
+  --color-neutral-soft: var(--neutral-soft);
+  --color-neutral-border: var(--neutral-border);
+  --color-neutral-strong: var(--neutral-strong);
+  --color-border: var(--border);
+  --color-primary-button-text: var(--primary-button-text);
+  --color-primary-button-border: var(--primary-button-border);
+  --color-primary-button-default-start: var(--primary-button-default-start);
+  --color-primary-button-default-stop: var(--primary-button-default-stop);
+  --color-primary-button-hover-start: var(--primary-button-hover-start);
+  --color-primary-button-hover-stop: var(--primary-button-hover-stop);
+  --color-primary-button-pressed-start: var(--primary-button-pressed-start);
+  --color-primary-button-pressed-stop: var(--primary-button-pressed-stop);
+  --color-primary-button-disabled-start: var(--primary-button-disabled-start);
+  --color-primary-button-disabled-stop: var(--primary-button-disabled-stop);
+  --color-destructive-button-text: var(--destructive-button-text);
+  --color-destructive-button-border: var(--destructive-button-border);
+  --color-destructive-button-default-start: var(--destructive-button-default-start);
+  --color-destructive-button-default-stop: var(--destructive-button-default-stop);
+  --color-destructive-button-hover-start: var(--destructive-button-hover-start);
+  --color-destructive-button-hover-stop: var(--destructive-button-hover-stop);
+  --color-destructive-button-pressed-start: var(--destructive-button-pressed-start);
+  --color-destructive-button-pressed-stop: var(--destructive-button-pressed-stop);
+  --color-destructive-button-disabled-start: var(--destructive-button-disabled-start);
+  --color-destructive-button-disabled-stop: var(--destructive-button-disabled-stop);
+  --color-secondary-button-text: var(--secondary-button-text);
+  --color-secondary-button-border: var(--secondary-button-border);
+  --color-secondary-button-default-start: var(--secondary-button-default-start);
+  --color-secondary-button-default-stop: var(--secondary-button-default-stop);
+  --color-secondary-button-hover-start: var(--secondary-button-hover-start);
+  --color-secondary-button-hover-stop: var(--secondary-button-hover-stop);
+  --color-secondary-button-pressed-start: var(--secondary-button-pressed-start);
+  --color-secondary-button-pressed-stop: var(--secondary-button-pressed-stop);
+  --color-secondary-button-disabled-start: var(--secondary-button-disabled-start);
+  --color-secondary-button-disabled-stop: var(--secondary-button-disabled-stop);
+  --color-primary-300: var(--primary-300);
+  --color-purple: var(--purple);
+  --color-purple-soft: var(--purple-soft);
+  --color-purple-border: var(--purple-border);
+  --color-dark-blue: var(--dark-blue);
+  --color-dark-blue-soft: var(--dark-blue-soft);
+  --color-dark-blue-border: var(--dark-blue-border);
+  --color-tosca: var(--tosca);
+  --color-tosca-soft: var(--tosca-soft);
+  --color-tosca-border: var(--tosca-border);
+  --color-light-red: var(--light-red);
+  --color-light-red-soft: var(--light-red-soft);
+  --color-light-red-border: var(--light-red-border);
+  --color-success-strong: var(--success-strong);
+  --color-warning-strong: var(--warning-strong);
+  --color-destructive-strong: var(--destructive-strong);
+  --color-warning-chip-border: var(--warning-chip-border);
+  --color-success-chip-border: var(--success-chip-border);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+}
+
+:root {
+  --background: #fff;
+  --foreground: #03102f;
+  --card: #fff;
+  --card-foreground: #03102f;
+  --primary: #2465de;
+  --primary-foreground: #fff;
+  --secondary: #f2f2f2;
+  --secondary-foreground: #61667c;
+  --muted: #f8f9fc;
+  --muted-foreground: #61667c;
+  --accent: #f2f2f4;
+  --destructive: #dc3545;
+  --destructive-soft: #f9e9e9;
+  --destructive-border: #e7a6a6;
+  --success: #2bc37d;
+  --success-soft: #e6f9f0;
+  --success-border: #b3eed2;
+  --warning: #f4b840;
+  --warning-soft: #fff9ec;
+  --warning-border: #f4b840;
+  --info-soft: #e5eeff;
+  --info-border: #b3cdfe;
+  --neutral: #fcfcfd;
+  --neutral-soft: #f2f2f4;
+  --neutral-border: #cbcdd4;
+  --neutral-strong: #484d61;
+  --border: #e5e6ea;
+  --primary-300: #80acfe;
+  --purple: #7d1ab7;
+  --purple-soft: #f7edfd;
+  --purple-border: #d8a4f6;
+  --dark-blue: #002771;
+  --dark-blue-soft: #f5f6f9;
+  --dark-blue-border: #a6b3cd;
+  --tosca: #0495a9;
+  --tosca-soft: #edfbfd;
+  --tosca-border: #c9e9ed;
+  --light-red: #ff3334;
+  --light-red-soft: #fff0f0;
+  --light-red-border: #ffa6a7;
+  --success-strong: #238b5b;
+  --warning-strong: #bd8400;
+  --destructive-strong: #c20a1c;
+  --warning-chip-border: #ffe0a2;
+  --success-chip-border: #81e3b6;
+  --primary-button-text: #fff;
+  --primary-button-border: #2465de;
+  --primary-button-default-start: #4179e2;
+  --primary-button-default-stop: #1f5bcc;
+  --primary-button-shadow: #1d5fd9;
+  --primary-button-hover-start: #4179e2;
+  --primary-button-hover-stop: #2f6ddf;
+  --primary-button-pressed-start: #3873e1;
+  --primary-button-pressed-stop: #4179e2;
+  --primary-button-disabled-start: #567fcd;
+  --primary-button-disabled-stop: #3662b5;
+  --destructive-button-text: #fff;
+  --destructive-button-border: #dc3545;
+  --destructive-button-default-start: #e44e5c;
+  --destructive-button-default-stop: #cc2334;
+  --destructive-button-shadow: #c8303f;
+  --destructive-button-hover-start: #e44e5c;
+  --destructive-button-hover-stop: #dc3747;
+  --destructive-button-pressed-start: #dc3747;
+  --destructive-button-pressed-stop: #e44e5c;
+  --destructive-button-disabled-start: #c66c75;
+  --destructive-button-disabled-stop: #a84851;
+  --secondary-button-text: #61667c;
+  --secondary-button-border: #f2f2f4;
+  --secondary-button-default-start: #fff;
+  --secondary-button-default-stop: #f2f2f2;
+  --secondary-button-shadow: rgb(0 0 0 / 10%);
+  --secondary-button-hover-start: #fff;
+  --secondary-button-hover-stop: #fafafa;
+  --secondary-button-pressed-start: #fafafa;
+  --secondary-button-pressed-stop: #fff;
+  --secondary-button-disabled-start: #fcfcfc;
+  --secondary-button-disabled-stop: #f7f7f7;
+  --radius: 0.5rem;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  html {
+    @apply font-sans;
+  }
+
+  html,
+  body {
+    min-height: 100%;
+  }
+}
+

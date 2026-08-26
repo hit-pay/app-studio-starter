@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "radio-group",
+  "title": "Radio Group",
+  "description": "Orchid UI radio group.",
+  "dependencies": [
+    "@base-ui/react",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/radio-group.tsx",
+      "content": "import type { ReactNode } from 'react'\nimport { Radio as RadioPrimitive } from '@base-ui/react/radio'\nimport { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group'\nimport { cva } from 'class-variance-authority'\n\nimport { cn } from '@/lib/utils'\n\nconst radioGroupVariants = cva('flex', {\n  variants: {\n    alignment: {\n      Vertical: 'flex-col gap-2',\n      Horizontal: 'flex-row flex-wrap items-center gap-4',\n    },\n  },\n  defaultVariants: {\n    alignment: 'Vertical',\n  },\n})\n\nfunction RadioGroup({\n  className,\n  alignment = 'Vertical',\n  label,\n  ...props\n}: RadioGroupPrimitive.Props & {\n  alignment?: 'Vertical' | 'Horizontal'\n  label?: ReactNode\n}) {\n  return (\n    <div className=\"flex w-full flex-col items-start gap-2\">\n      {label ? (\n        <p className=\"text-xs font-medium leading-[1.5] text-muted-foreground\">{label}</p>\n      ) : null}\n      <RadioGroupPrimitive\n        data-slot=\"radio-group\"\n        data-alignment={alignment}\n        className={cn(radioGroupVariants({ alignment }), className)}\n        {...props}\n      />\n    </div>\n  )\n}\n\nconst radioControlVariants = cva(\n  [\n    'inline-flex size-4 shrink-0 items-center justify-center rounded-full border border-solid outline-none',\n    'shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',\n    'bg-background border-border',\n    'hover:border-primary hover:shadow-[0_0_0_3px_var(--info-border)]',\n    'data-checked:border-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',\n    'data-disabled:pointer-events-none data-disabled:border-border data-disabled:bg-dark-blue-soft data-disabled:shadow-none',\n    'data-disabled:data-checked:border-dark-blue-border',\n    'data-[error=true]:border-destructive data-[error=true]:shadow-[0_0_0_3px_var(--destructive-border)]',\n  ].join(' '),\n)\n\nfunction Radio({\n  className,\n  children,\n  description,\n  error = false,\n  ...props\n}: RadioPrimitive.Root.Props & {\n  description?: ReactNode\n  error?: boolean\n}) {\n  return (\n    <label\n      className={cn(\n        'inline-flex items-start gap-2 text-xs leading-[1.5] text-foreground',\n        'has-data-disabled:text-[#9295a5]',\n        className,\n      )}\n    >\n      <RadioPrimitive.Root\n        data-slot=\"radio\"\n        data-error={error || undefined}\n        className={radioControlVariants()}\n        {...props}\n      >\n        <RadioPrimitive.Indicator className=\"size-2 rounded-full bg-primary data-disabled:bg-dark-blue-border\" />\n      </RadioPrimitive.Root>\n      {children || description ? (\n        <span className=\"flex min-w-0 flex-col gap-0.5\">\n          {children ? <span>{children}</span> : null}\n          {description ? (\n            <span className=\"text-xs leading-[1.5] text-muted-foreground\">{description}</span>\n          ) : null}\n        </span>\n      ) : null}\n    </label>\n  )\n}\n\nexport { Radio, RadioGroup }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/radio-group.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

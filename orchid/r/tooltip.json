@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "tooltip",
+  "title": "Tooltip",
+  "description": "Orchid UI tooltip with arrow and placement.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/tooltip.tsx",
+      "content": "import { Tooltip as TooltipPrimitive } from '@base-ui/react/tooltip'\n\nimport { cn } from '@/lib/utils'\n\nfunction TooltipProvider({ delay = 200, ...props }: TooltipPrimitive.Provider.Props) {\n  return <TooltipPrimitive.Provider delay={delay} {...props} />\n}\n\nfunction Tooltip({ ...props }: TooltipPrimitive.Root.Props) {\n  return <TooltipPrimitive.Root data-slot=\"tooltip\" {...props} />\n}\n\nfunction TooltipTrigger({ delay = 200, ...props }: TooltipPrimitive.Trigger.Props) {\n  return <TooltipPrimitive.Trigger data-slot=\"tooltip-trigger\" delay={delay} {...props} />\n}\n\nfunction TooltipContent({\n  className,\n  side = 'top',\n  sideOffset = 5,\n  align = 'center',\n  arrowHidden = false,\n  children,\n  ...props\n}: TooltipPrimitive.Popup.Props &\n  Pick<TooltipPrimitive.Positioner.Props, 'align' | 'side' | 'sideOffset'> & {\n    arrowHidden?: boolean\n  }) {\n  return (\n    <TooltipPrimitive.Portal>\n      <TooltipPrimitive.Positioner\n        className=\"isolate z-50 outline-none\"\n        align={align}\n        side={side}\n        sideOffset={sideOffset}\n      >\n        <TooltipPrimitive.Popup\n          data-slot=\"tooltip-content\"\n          className={cn(\n            'z-50 origin-(--transform-origin) rounded-lg bg-background px-2 py-1 text-xs leading-[1.5] text-foreground shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] outline-none',\n            className,\n          )}\n          {...props}\n        >\n          {children}\n          {arrowHidden ? null : (\n            <TooltipPrimitive.Arrow\n              data-slot=\"tooltip-arrow\"\n              className=\"z-0 size-2.5 rotate-45 rounded-[1px] bg-background data-[side=bottom]:-top-1 data-[side=left]:-right-1 data-[side=right]:-left-1 data-[side=top]:-bottom-1\"\n            />\n          )}\n        </TooltipPrimitive.Popup>\n      </TooltipPrimitive.Positioner>\n    </TooltipPrimitive.Portal>\n  )\n}\n\nexport { Tooltip, TooltipTrigger, TooltipContent, TooltipProvider }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/tooltip.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

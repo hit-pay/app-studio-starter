@@ -1,0 +1,20 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "toggle",
+  "title": "Toggle",
+  "description": "Orchid UI toggle switch.",
+  "dependencies": [
+    "@base-ui/react",
+    "class-variance-authority"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/toggle.tsx",
+      "content": "import { Switch as SwitchPrimitive } from '@base-ui/react/switch'\nimport { cva } from 'class-variance-authority'\n\nimport { cn } from '@/lib/utils'\n\nconst toggleVariants = cva(\n  [\n    'group/toggle relative inline-flex shrink-0 items-center rounded-full border border-solid border-transparent outline-none',\n    'bg-neutral-border',\n    'hover:shadow-[0_0_0_3px_var(--info-border)]',\n    'data-checked:bg-primary data-checked:hover:shadow-none',\n    'data-disabled:pointer-events-none data-disabled:opacity-50 data-disabled:shadow-none',\n  ].join(' '),\n  {\n    variants: {\n      size: {\n        Default: 'h-6 w-[42px] p-0.5',\n        Small: 'h-[15px] w-[26px] p-px',\n      },\n    },\n    defaultVariants: {\n      size: 'Default',\n    },\n  },\n)\n\nconst toggleThumbVariants = cva(\n  'block rounded-full bg-background shadow-[0_1px_2px_rgba(0,0,0,0.16)] transition-transform',\n  {\n    variants: {\n      size: {\n        Default: 'size-5 group-data-checked/toggle:translate-x-[18px]',\n        Small: 'size-3 group-data-checked/toggle:translate-x-[11px]',\n      },\n    },\n    defaultVariants: {\n      size: 'Default',\n    },\n  },\n)\n\nfunction Toggle({\n  className,\n  size = 'Default',\n  ...props\n}: SwitchPrimitive.Root.Props & {\n  size?: 'Default' | 'Small'\n}) {\n  return (\n    <SwitchPrimitive.Root\n      data-slot=\"toggle\"\n      data-size={size}\n      className={cn(toggleVariants({ size }), className)}\n      {...props}\n    >\n      <SwitchPrimitive.Thumb className={toggleThumbVariants({ size })} />\n    </SwitchPrimitive.Root>\n  )\n}\n\nexport { Toggle }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/toggle.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

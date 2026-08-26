@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sub-header",
+  "title": "Sub Header",
+  "description": "Orchid UI page sub header with title, back, and actions.",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/ui/sub-header.tsx",
+      "content": "import type { ComponentProps, ReactNode } from 'react'\nimport { ChevronLeftIcon } from 'lucide-react'\n\nimport { cn } from '@/lib/utils'\n\nfunction KeyboardHint({ children }: { children: ReactNode }) {\n  return (\n    <span className=\"inline-flex items-center justify-center rounded border border-solid border-border bg-background px-2 py-0.5 text-xs font-medium leading-[1.5] text-[#9295a5]\">\n      {children}\n    </span>\n  )\n}\n\nfunction SubHeader({\n  className,\n  left = 'Back',\n  onBack,\n  actions,\n  ...props\n}: ComponentProps<'div'> & {\n  left?: 'Back' | 'Close'\n  onBack?: () => void\n  actions?: ReactNode\n}) {\n  return (\n    <div\n      data-slot=\"sub-header\"\n      data-left={left}\n      className={cn(\n        'flex w-full items-center justify-between gap-4 border-b border-solid border-border bg-background px-6 py-3',\n        className,\n      )}\n      {...props}\n    >\n      <button\n        type=\"button\"\n        className=\"inline-flex items-center gap-1 text-sm leading-[1.5] text-muted-foreground outline-none hover:text-foreground\"\n        onClick={onBack}\n      >\n        {left === 'Close' ? (\n          <>\n            Close\n            <KeyboardHint>esc</KeyboardHint>\n          </>\n        ) : (\n          <>\n            <ChevronLeftIcon className=\"size-4\" />\n            Back\n          </>\n        )}\n      </button>\n      {actions ? (\n        <div className=\"flex min-w-0 flex-1 flex-wrap items-center justify-end gap-2\">{actions}</div>\n      ) : (\n        <span className=\"min-w-0 flex-1\" />\n      )}\n    </div>\n  )\n}\n\nexport { SubHeader }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/sub-header.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

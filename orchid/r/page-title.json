@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "page-title",
+  "title": "Page Title",
+  "description": "Orchid UI page title with description, chip, and copy.",
+  "dependencies": [],
+  "registryDependencies": [
+    "copy-tooltip"
+  ],
+  "files": [
+    {
+      "path": "src/components/ui/page-title.tsx",
+      "content": "import type { ComponentProps, ReactNode } from 'react'\n\nimport { cn } from '@/lib/utils'\nimport { CopyTooltip } from './copy-tooltip'\n\nfunction PageTitle({\n  className,\n  title,\n  description,\n  chip,\n  copyValue,\n  actions,\n  loading = false,\n  ...props\n}: ComponentProps<'div'> & {\n  title: string\n  description?: string\n  chip?: ReactNode\n  copyValue?: string\n  actions?: ReactNode\n  loading?: boolean\n}) {\n  return (\n    <div\n      data-slot=\"page-title\"\n      className={cn('flex w-full min-w-0 items-start justify-between gap-4', className)}\n      {...props}\n    >\n      <div className=\"flex min-w-0 flex-1 flex-col gap-1\">\n        <div className=\"flex min-w-0 flex-wrap items-center gap-2\">\n          {loading ? (\n            <span className=\"h-6 min-w-0 flex-1 animate-pulse rounded bg-neutral-soft\" />\n          ) : (\n            <h1 className=\"min-w-0 text-[18px] font-medium leading-6 text-foreground\">{title}</h1>\n          )}\n          {chip && !loading ? chip : null}\n        </div>\n        {loading ? (\n          <span className=\"h-5 min-w-0 flex-1 animate-pulse rounded bg-neutral-soft\" />\n        ) : description ? (\n          <div className=\"flex min-w-0 items-center gap-2\">\n            <p className=\"min-w-0 text-[14px] leading-5 text-muted-foreground\">{description}</p>\n            {copyValue ? <CopyTooltip value={copyValue} /> : null}\n          </div>\n        ) : null}\n      </div>\n      {actions && !loading ? (\n        <div className=\"flex shrink-0 flex-wrap items-center justify-end gap-2\">{actions}</div>\n      ) : null}\n    </div>\n  )\n}\n\nexport { PageTitle }\n",
+      "type": "registry:ui",
+      "target": "orchid-ui/page-title.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
