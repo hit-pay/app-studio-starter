@@ -15,11 +15,13 @@
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
-    "ui": "@/ui",
+    "ui": "@/orchid-ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
   "menuColor": "default",
   "menuAccent": "subtle",
-  "registries": {}
+  "registries": {
+    "@orchid": "https://app-studio-starter.vercel.app/r/{name}.json"
+  }
 }

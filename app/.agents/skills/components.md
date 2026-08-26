@@ -4,11 +4,28 @@ description: UI components and how to add screens. Use when building or changing
 
 # Screens
 
-Compose from `@/ui/` only. Tokens live in `src/styles.css`. Merge classes with `cn()` from `@/lib/utils`. Icons: `lucide-react`. Files live in `src/orchid-ui/`; import them as `@/ui/…`.
+Compose screens from the Orchid kit (`@/ui/…` → `src/orchid-ui/`) plus app composites (`@/components/…` → `src/components/`). Tokens live in `src/styles.css`. Merge classes with `cn()` from `@/lib/utils`. Icons: `lucide-react`.
 
-Do **not** run `shadcn add` / `bunx shadcn add` from ui.shadcn.com or any other registry. Do **not** add `@radix-ui/*`. Primitives are Base UI (`@base-ui/react`). Do **not** put UI kit files in `src/components/ui`.
+Do **not** run `shadcn add` / `bunx shadcn add` from ui.shadcn.com (`@shadcn/…`) or any other third-party registry. Do **not** add `@radix-ui/*`. Primitives are Base UI (`@base-ui/react`). Do **not** put UI kit files in `src/components/ui`.
 
-If a primitive is missing: create `src/orchid-ui/<name>.tsx` following `button.tsx` / `chip.tsx` (`cva`, Figma prop names, tokens in `styles.css`, relative imports between UI kit files). Then add a short entry below.
+Default: use files already in `src/orchid-ui/` (`@/ui/…`) and the APIs below. Do **not** fetch the registry or run `shadcn add` unless a needed kit piece is missing from that folder.
+
+Only then: fetch `https://app-studio-starter.vercel.app/registry.json` (`items[].name` where `type` is `registry:ui`, skip `utils`). If the name is in the catalog:
+
+```bash
+bunx shadcn add @orchid/<name> --yes
+```
+
+That writes `src/orchid-ui/<name>.tsx`. Import `@/ui/<name>`. Item JSON: `https://app-studio-starter.vercel.app/r/{name}.json`. Namespace `@orchid` is in `components.json`.
+
+If it is **not** in the catalog, **create an app component** — never add it to `src/orchid-ui/` (kit only). Do not pull shadcn/ui. Match Orchid visually:
+
+- File: `src/components/<name>.tsx`. Import as `@/components/<name>`. Do **not** use `src/components/ui`.
+- Build it from kit pieces (`Button`, `Field`, `Chip`, … imported as `@/ui/…`). Relative kit imports are for `orchid-ui` files only.
+- Copy Orchid patterns from `src/orchid-ui/button.tsx` / `chip.tsx`: `cva` + `cn()`, PascalCase visual props (`type` `Primary` | `Secondary`, `size` `Small` | `Default` | `Big`, `style` `Default` | `Border` | `Transparent`) — not shadcn `variant="outline"` / `size="sm"`.
+- Color, radius, type, shadow: tokens in `src/styles.css` only (`primary`, `border`, `muted-foreground`, `destructive`, info/success/warning soft+border). No one-off hex unless a kit file already uses the same value.
+- Behavior: `@base-ui/react` only (no `@radix-ui/*`). Icons: `lucide-react`.
+- Do not add a kit entry below for app-only components.
 
 Add as many routes and layout regions as the request needs. Shared chrome goes in `__root.tsx`. SSR: first paint must not read `window`. HitPay user/role in the browser (`#/lib/hitpay`). Links via TanStack `Link` / `createFileRoute` — do not hardcode the app-id path.
 
@@ -70,6 +87,44 @@ import {
   AccordionPanel,
   AccordionTrigger,
 } from '@/ui/accordion'
+import { Label } from '@/ui/label'
+import { Separator } from '@/ui/separator'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from '@/ui/field'
+import { Input } from '@/ui/input'
+import { Textarea } from '@/ui/textarea'
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectMultiple,
+  SelectMultipleGroup,
+  SelectMultipleItem,
+  SelectMultipleLabel,
+  SelectTrigger,
+  SelectValue,
+} from '@/ui/select'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+  InputGroupSeparator,
+  InputGroupText,
+} from '@/ui/input-group'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/ui/popover'
+import { Calendar } from '@/ui/calendar'
+import { DatePicker, DatePickerRange } from '@/ui/date-picker'
 ```
 
 Do not use shadcn APIs (`variant="outline"`, `size="sm"`) as the primary API.
@@ -201,4 +256,80 @@ Base UI `Menu`. Typical: `DropdownMenu`, `DropdownMenuTrigger` (`nativeButton` +
 ### Modal
 
 `src/orchid-ui/modal.tsx` — import `@/ui/modal`. Base UI Dialog. Wrap `ModalTrigger` + `ModalPopup` in `Modal`. `size`: `Small` | `Medium` | `Default`. `title`, `description`, `closeIcon`, `header`, `footer`, `borderless`, `persistent` (no backdrop close). Footer: `cancelLabel`, `confirmLabel`, `confirmType`, `onCancel`, `onConfirm`, or `footerContent`.
+
+### Label
+
+`src/orchid-ui/label.tsx` — import `@/ui/label`. Form label. Pair with a control via `htmlFor`. Prefer `FieldLabel` inside `Field`.
+
+### Separator
+
+`src/orchid-ui/separator.tsx` — import `@/ui/separator`. `orientation`: `horizontal` | `vertical`.
+
+### Field
+
+`src/orchid-ui/field.tsx` — import `@/ui/field`. Compose label, control, hint, and error. `orientation`: `vertical` | `horizontal` | `responsive`. Mark invalid with `data-invalid` on `Field` and `aria-invalid` on the control. Parts: `FieldSet`, `FieldLegend`, `FieldGroup`, `Field`, `FieldLabel`, `FieldDescription`, `FieldError`, `FieldContent`, `FieldTitle`, `FieldSeparator`.
+
+```tsx
+<Field>
+  <FieldLabel htmlFor="name">Label</FieldLabel>
+  <Input id="name" placeholder="Placeholder" />
+  <FieldDescription>Hint text.</FieldDescription>
+</Field>
+```
+
+### Input
+
+`src/orchid-ui/input.tsx` — import `@/ui/input`. Standard text field. Use `placeholder`, `disabled`, `aria-invalid`. For a leading icon or prefix, use `InputGroup` + `InputGroupInput`.
+
+### Textarea
+
+`src/orchid-ui/textarea.tsx` — import `@/ui/textarea`. Multiline field. Same invalid/disabled pattern as `Input`.
+
+### Select
+
+`src/orchid-ui/select.tsx` — import `@/ui/select`. Single: `Select` + `SelectTrigger` + `SelectValue` + `SelectContent` + `SelectItem` (`SelectGroup` / `SelectLabel` optional). `SelectTrigger` `size`: `Default` | `Inline` (for currency inside `InputGroup`). Multiple: `SelectMultiple` + `SelectMultipleItem`; grouped: `SelectMultipleGroup` + `SelectMultipleLabel`.
+
+```tsx
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Placeholder" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="one">Option</SelectItem>
+  </SelectContent>
+</Select>
+```
+
+### Input Group
+
+`src/orchid-ui/input-group.tsx` — import `@/ui/input-group`. Combine input with prefix, select, or icon. `variant`: `Default` | `Underline`. Compose `InputGroup`, `InputGroupAddon` (`align` `inline-start` | `inline-end` | `block-start` | `block-end`), `InputGroupInput` / `InputGroupTextarea`, `InputGroupSeparator`, `InputGroupText`, `InputGroupButton`.
+
+```tsx
+<InputGroup>
+  <InputGroupAddon>
+    <Select defaultValue="USD">
+      <SelectTrigger size="Inline">
+        <SelectValue />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="USD">USD</SelectItem>
+      </SelectContent>
+    </Select>
+  </InputGroupAddon>
+  <InputGroupSeparator />
+  <InputGroupInput placeholder="Placeholder" />
+</InputGroup>
+```
+
+### Popover
+
+`src/orchid-ui/popover.tsx` — import `@/ui/popover`. Base UI Popover. Compose `Popover`, `PopoverTrigger` (`render={<Button … />}`), `PopoverContent` (`side`, `align`). Optional `PopoverHeader`, `PopoverTitle`, `PopoverDescription`.
+
+### Calendar
+
+`src/orchid-ui/calendar.tsx` — import `@/ui/calendar`. `react-day-picker` calendar. Prefer `DatePicker` / `DatePickerRange` unless you need a standalone month grid. `mode`: `single` | `range` | `multiple`.
+
+### Date Picker
+
+`src/orchid-ui/date-picker.tsx` — import `@/ui/date-picker`. Popover + Calendar. `DatePicker` for one day (`selected` / `defaultSelected` / `onSelect`). `DatePickerRange` for a range (`numberOfMonths` 2). Optional `disabled`, `placeholder`.
 

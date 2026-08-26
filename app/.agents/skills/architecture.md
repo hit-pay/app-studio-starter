@@ -13,7 +13,7 @@ First screen: replace `src/routes/index.tsx`. Shared chrome (nav, sidebar) in `_
 | `src/routes/` | Pages. `index.tsx` is `/`. Nested files become nested URLs. `createFileRoute`. |
 | `src/routes/__root.tsx` | Document shell, fonts, CSS, shared chrome |
 | `src/orchid-ui/` | UI kit. Import `@/ui/…` |
-| `src/components/` | App-specific composites (nav, page chrome), not the UI kit |
+| `src/components/` | App-only composites and custom UI (nav, page chrome, anything not in the Orchid catalog). Import `@/components/…`. Never `src/components/ui`. |
 | `src/lib/db.ts` | Turso — **server only** |
 | `src/lib/migrate.ts` | Runs `migrations/*.sql` — **server only** |
 | `src/lib/hitpay.ts` | Signed-in user / roles / members — **browser only** |
