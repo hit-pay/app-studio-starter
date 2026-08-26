@@ -4,21 +4,20 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1 --port 5177",
-    "generate-routes": "bun --bun tsr generate",
-    "build": "bun --bun vite build",
     "lint": "tsc --noEmit",
-    "registry:build": "bunx --bun shadcn@4.17.0 build --output ./r"
+    "generate-routes": "bun --bun tsr generate",
+    "tanstack:build": "bun run generate-routes && bun --bun vite build",
+    "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r",
+    "build": "bun run registry:build && bun run tanstack:build"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
     "@tanstack/react-router": "^1.132.0",
-    "@tanstack/react-start": "^1.132.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.4.0",
     "lucide-react": "^1.33.0",
     "react-day-picker": "^10.0.1",
-    "nitro": "3.0.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "shadcn": "^4.18.0",
