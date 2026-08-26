@@ -1,16 +1,12 @@
 ---
-description: Turso / libSQL schema, migrations, and queries. Use when the app stores data.
+description: Turso queries. Open only if the prompt stores data.
 ---
 
 # Database
 
-Use `#/lib/db` and `#/lib/migrate` on the **server** (`loader` / `createServerFn`). Do not import `db` in client components. Do not add another client or ORM.
+Server only: `#/lib/db`, `#/lib/migrate`. No `db` in client components. No extra ORM.
 
-- One statement per `db.execute()`. Several writes → `db.batch`. Migration files may have multiple statements (`ensureMigrations` uses `executeMultiple`).
-- New schema → new `migrations/00N_name.sql`. Do not edit or delete an existing migration. Prefer additive columns (nullable).
-- Parameterized SQL (`?`). SQLite types (`TEXT`, `INTEGER`), not Postgres.
-- Call `await ensureMigrations()` before the first query.
-- Do not put `TURSO_*` in source or chat. “Unable to connect” means a server function threw — fix the handler, do not skip the database.
+New schema → new `migrations/00N_name.sql` (do not edit old ones). `?` params. SQLite types. `await ensureMigrations()` before queries.
 
 ```ts
 import { createServerFn } from '@tanstack/react-start'

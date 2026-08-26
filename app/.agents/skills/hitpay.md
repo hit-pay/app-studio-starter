@@ -1,19 +1,13 @@
 ---
-description: HitPay signed-in user, roles, and staff/members. Use only when the app needs who is logged in, role gates, or a teammate roster.
+description: Logged-in user and roles. Open only if the prompt needs auth or role gates.
 ---
 
 # HitPay
 
-Import `#/lib/hitpay` in **client** components only (`useEffect` / clicks). Never from `createServerFn` or a loader (that throws “socket connection was closed”).
+Browser only (`useEffect` / clicks). Never import from `createServerFn` / loaders.
 
 ```ts
-import { fetchUserInfo, fetchAppRoles, fetchAppMembers } from '#/lib/hitpay'
+import { fetchUserInfo, fetchAppRoles, fetchAppMembers, useHitPayUser } from '#/lib/hitpay'
 ```
 
-- **Auth / current user** — `fetchUserInfo()` → `{ id, email, name, role: { id, title } }`. Gate UI with `role.title`.
-- **Roles** — `fetchAppRoles()` → `{ roles: [{ id, title }] }`
-- **Staff / members** — `fetchAppMembers()` → `{ members: [{ id, email, name, role_id }] }`. Join `role_id` to `roles` for titles.
-
-Role-based apps need **frontend and backend**. UI gates (`disabled`, hidden nav) are not sufficient. Mutating `createServerFn` handlers must receive `role.title` from the client (after `fetchUserInfo`) and reject if it is not in the allowlist for that action. Do not skip the server check.
-
-Do not invent login screens. Store app data in Turso, not in these endpoints.
+`fetchUserInfo()` → `{ id, email, name, role: { id, title } }`. Gate UI with `role.title`. If the prompt has roles, also check `role.title` in mutating server handlers (pass it from the client; HitPay cannot run on the server). No login screen. App data stays in Turso.

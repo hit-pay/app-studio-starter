@@ -1,18 +1,14 @@
 ---
-description: How to apply source changes on the Sprite. Use after editing routes or source, or if preview looks stale.
+description: Reload the live preview. Always run this after you finish editing the app.
 ---
 
 # Deployment
 
-This process is the live preview. Do not start a second server.
+This process is the live preview. Do not start a second server (`bun run dev`, extra `vite`, extra `bun run start`). Do not edit `.output/` or `.nitro/`.
 
-After source changes:
+When you finish changing source:
 
 1. If you added or renamed a file under `src/routes/`, run `bun run generate-routes`.
-2. Always run **`bun run preview:refresh`** (builds, then signals the Sprite to reload).
+2. Always run **`bun run preview:refresh`**.
 
-Do **not** run `bun run dev`, `vite`, or a second `bun run start`. Do **not** edit `.output/` or `.nitro/` by hand.
-
-`APP_STUDIO_APP_ID`, Turso env, and `start.mjs` are platform wiring. Leave them alone unless you broke them.
-
-When you finish talking to the user, say what they can do in the app. 
+Do not end the job until preview:refresh has run.
