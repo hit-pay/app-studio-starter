@@ -37,7 +37,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/list-item' as const,
     name: 'List Item',
-    description: 'General, webhook, and integration list cards.',
+    description: 'Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.',
   },
   {
     to: '/avatar' as const,

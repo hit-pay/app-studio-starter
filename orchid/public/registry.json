@@ -184,7 +184,7 @@
       "name": "list-item",
       "type": "registry:ui",
       "title": "List Item",
-      "description": "One row in a list: title, meta, thumbnail, hover edit/delete, copy id. selected = highlighted card. Use for rosters, webhooks, integrations \u2014 not a data table.",
+      "description": "Generic list row. Compose title, media, logo, meta, copy fields, tokens, hover actions. layout default|stack|media. selected highlights the card. Not a data table.",
       "dependencies": [
         "lucide-react"
       ],

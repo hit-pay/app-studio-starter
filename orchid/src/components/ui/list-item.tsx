@@ -8,14 +8,22 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdo
 function ListItem({
   className,
   selected = false,
+  layout = 'default',
   ...props
-}: ComponentProps<'div'> & { selected?: boolean }) {
+}: ComponentProps<'div'> & {
+  selected?: boolean
+  layout?: 'default' | 'stack' | 'media'
+}) {
   return (
     <div
       data-slot="list-item"
       data-selected={selected || undefined}
+      data-layout={layout}
       className={cn(
-        'group/list-item relative flex w-full items-start gap-3 rounded-lg border border-solid bg-oc-background px-4 py-3',
+        'group/list-item relative flex w-full gap-3 rounded-lg border border-solid bg-oc-background px-4 py-3',
+        layout === 'stack' && 'flex-col items-stretch gap-4',
+        layout === 'media' && 'items-center',
+        layout === 'default' && 'items-start',
         selected
           ? 'border-2 border-oc-primary'
           : 'border-oc-border hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
@@ -201,10 +209,10 @@ function ListItemCopyRow({
   )
 }
 
-function ListItemMethod({ className, children, ...props }: ComponentProps<'span'>) {
+function ListItemToken({ className, children, ...props }: ComponentProps<'span'>) {
   return (
     <span
-      data-slot="list-item-method"
+      data-slot="list-item-token"
       className={cn(
         'inline-flex h-6 min-w-[35px] items-center justify-center overflow-clip rounded border border-oc-border bg-oc-background px-1 text-[10px] font-medium text-oc-foreground',
         className,
@@ -231,5 +239,5 @@ export {
   ListItemActionDivider,
   ListItemMore,
   ListItemCopyRow,
-  ListItemMethod,
+  ListItemToken,
 }

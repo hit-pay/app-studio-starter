@@ -16,9 +16,9 @@ import {
   ListItemLogo,
   ListItemMedia,
   ListItemMeta,
-  ListItemMethod,
   ListItemMore,
   ListItemTitle,
+  ListItemToken,
   ListItemTrailing,
 } from '@/components/ui/list-item'
 
@@ -31,7 +31,10 @@ function ListItemExamplesPage() {
     <DocExamplePage to="/list-item">
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          General
+          Default
+        </p>
+        <p className="text-xs text-oc-muted-foreground">
+          Title, chips, description, and icon meta. Compose any entity.
         </p>
         <ListItem>
           <ListItemBody>
@@ -51,6 +54,37 @@ function ListItemExamplesPage() {
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
+        <ListItem>
+          <ListItemBody>
+            <div className="space-y-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <ListItemTitle>Priya Nair</ListItemTitle>
+                <Chip color="Green">Paid</Chip>
+              </div>
+              <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
+            </div>
+            <ListItemMeta>
+              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+        <ListItem layout="media">
+          <ListItemBody className="gap-1">
+            <ListItemTitle>Matcha Latte</ListItemTitle>
+            <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
+            <ListItemMeta>
+              <span className="text-xs leading-[1.5] text-oc-muted-foreground">24 in stock</span>
+              <Chip color="Green">Active</Chip>
+            </ListItemMeta>
+          </ListItemBody>
+        </ListItem>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Hover actions
+        </p>
         <ListItem>
           <ListItemBody>
             <div className="space-y-1">
@@ -100,9 +134,9 @@ function ListItemExamplesPage() {
 
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Webhook
+          Stack · copy fields
         </p>
-        <ListItem className="flex-col items-stretch gap-4">
+        <ListItem layout="stack">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-baseline gap-1">
               <ListItemTitle>Invoice paid</ListItemTitle>
@@ -121,7 +155,7 @@ function ListItemExamplesPage() {
             />
           </div>
         </ListItem>
-        <ListItem className="flex-col items-stretch gap-4">
+        <ListItem layout="stack">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-baseline gap-1">
               <ListItemTitle>Payment link paid</ListItemTitle>
@@ -152,9 +186,9 @@ function ListItemExamplesPage() {
 
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Page
+          Media
         </p>
-        <ListItem className="items-center">
+        <ListItem layout="media">
           <ListItemMedia>
             <img
               alt=""
@@ -175,7 +209,7 @@ function ListItemExamplesPage() {
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
-        <ListItem className="items-center">
+        <ListItem layout="media">
           <ListItemMedia>
             <img
               alt=""
@@ -208,9 +242,9 @@ function ListItemExamplesPage() {
 
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Integration
+          Logo · tokens · trailing
         </p>
-        <ListItem className="p-4">
+        <ListItem>
           <ListItemBody>
             <div className="flex items-center gap-2">
               <ListItemLogo>
@@ -223,12 +257,12 @@ function ListItemExamplesPage() {
             <div className="flex flex-wrap items-center gap-1">
               <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
               {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
-                <ListItemMethod key={code}>{code}</ListItemMethod>
+                <ListItemToken key={code}>{code}</ListItemToken>
               ))}
             </div>
           </ListItemBody>
         </ListItem>
-        <ListItem className="p-4">
+        <ListItem>
           <ListItemBody>
             <div className="flex min-w-0 items-center gap-2">
               <ListItemLogo>
@@ -241,7 +275,7 @@ function ListItemExamplesPage() {
             <div className="flex flex-wrap items-center gap-1">
               <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
               {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
-                <ListItemMethod key={code}>{code}</ListItemMethod>
+                <ListItemToken key={code}>{code}</ListItemToken>
               ))}
             </div>
           </ListItemBody>
@@ -259,58 +293,6 @@ function ListItemExamplesPage() {
               Connect
             </Button>
           </ListItemTrailing>
-        </ListItem>
-      </div>
-
-      <div className="space-y-3">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Customers
-        </p>
-        <ListItem>
-          <ListItemBody>
-            <div className="space-y-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <ListItemTitle>Priya Nair</ListItemTitle>
-                <Chip color="Green">Paid</Chip>
-              </div>
-              <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
-            </div>
-            <ListItemMeta>
-              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-            </ListItemMeta>
-          </ListItemBody>
-        </ListItem>
-        <ListItem>
-          <ListItemBody>
-            <div className="space-y-1">
-              <div className="flex flex-wrap items-center gap-2">
-                <ListItemTitle>Alex Turner</ListItemTitle>
-                <Chip color="Purple">Recurring</Chip>
-              </div>
-              <ListItemDescription>Monthly plan · next charge 1 Sep 2026</ListItemDescription>
-            </div>
-            <ListItemMeta>
-              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD 29.00</ListItemDetail>
-            </ListItemMeta>
-          </ListItemBody>
-        </ListItem>
-      </div>
-
-      <div className="space-y-3">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Products
-        </p>
-        <ListItem className="items-center">
-          <ListItemBody className="gap-1">
-            <ListItemTitle>Matcha Latte</ListItemTitle>
-            <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
-            <ListItemMeta>
-              <span className="text-xs leading-[1.5] text-oc-muted-foreground">24 in stock</span>
-              <Chip color="Green">Active</Chip>
-            </ListItemMeta>
-          </ListItemBody>
         </ListItem>
       </div>
     </DocExamplePage>
