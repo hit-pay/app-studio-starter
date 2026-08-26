@@ -60,7 +60,7 @@ function InputGroupExamplesPage() {
         <Field>
           <FieldLabel>Prefix + input</FieldLabel>
           <InputGroup>
-            <InputGroupAddon className="self-stretch bg-[#f8f9fc]">
+            <InputGroupAddon className="self-stretch bg-oc-muted">
               <InputGroupText>https://hitpay.shop/</InputGroupText>
             </InputGroupAddon>
             <InputGroupSeparator />

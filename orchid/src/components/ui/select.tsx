@@ -11,7 +11,7 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const selectTriggerClass =
-  'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-oc-border bg-oc-background px-2 text-left text-sm leading-[1.5] text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] aria-expanded:border-oc-primary aria-expanded:shadow-[0_0_0_3px_var(--oc-info-border)] data-popup-open:border-oc-primary data-popup-open:shadow-[0_0_0_3px_var(--oc-info-border)] data-open:border-oc-primary data-open:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] data-placeholder:text-[#9295a5]'
+  'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-oc-border bg-oc-background px-2 text-left text-sm leading-[1.5] text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] aria-expanded:border-oc-primary aria-expanded:shadow-[0_0_0_3px_var(--oc-info-border)] data-popup-open:border-oc-primary data-popup-open:shadow-[0_0_0_3px_var(--oc-info-border)] data-open:border-oc-primary data-open:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] data-placeholder:text-oc-muted-foreground'
 
 function getNodeText(node: ReactNode): string {
   if (node == null || typeof node === 'boolean') return ''
@@ -124,7 +124,7 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            'relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-[0_3px_11px_rgba(38,42,50,0.09)] outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
@@ -159,7 +159,7 @@ function SelectItem({ className, children, label, ...props }: SelectPrimitive.It
       data-slot="select-item"
       label={resolvedLabel}
       className={cn(
-        'relative flex w-full cursor-pointer items-center gap-2 rounded p-2 pr-8 text-sm leading-[1.5] outline-hidden select-none hover:bg-[#f5f6f9] focus:bg-[#f5f6f9] data-disabled:pointer-events-none data-disabled:opacity-50',
+        'relative flex w-full cursor-pointer items-center gap-2 rounded p-2 pr-8 text-sm leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft data-selected:data-highlighted:bg-oc-info-soft data-disabled:pointer-events-none data-disabled:opacity-50',
         className,
       )}
       {...props}

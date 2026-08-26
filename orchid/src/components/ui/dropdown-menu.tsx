@@ -6,13 +6,13 @@ import { CheckIcon, ChevronRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const dropdownMenuItemVariants = cva(
-  'group/dropdown-menu-item relative flex cursor-pointer items-center gap-2 rounded p-2 text-xs leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-[#f5f6f9] focus:bg-[#f5f6f9] data-inset:pl-7 data-[preview=Hover]:bg-[#f5f6f9] data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+  'group/dropdown-menu-item relative flex cursor-pointer items-center gap-2 rounded p-2 text-xs leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-inset:pl-7 data-[preview=Hover]:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
   {
     variants: {
       variant: {
         default: '',
         destructive:
-          'text-oc-destructive hover:bg-[#f5f6f9] focus:bg-[#f5f6f9] focus:text-oc-destructive *:[svg]:text-oc-destructive',
+          'text-oc-destructive hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft focus:text-oc-destructive *:[svg]:text-oc-destructive',
       },
     },
     defaultVariants: {
@@ -57,7 +57,7 @@ function DropdownMenuContent({
         <MenuPrimitive.Popup
           data-slot="dropdown-menu-content"
           className={cn(
-            'z-50 box-border flex max-h-(--available-height) w-[162px] flex-col origin-(--transform-origin) overflow-y-auto rounded-lg bg-oc-background p-1 text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95',
+            'z-50 box-border flex max-h-(--available-height) w-[162px] flex-col origin-(--transform-origin) overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-1 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
@@ -269,7 +269,7 @@ function DropdownMenuKey({
     <span
       data-slot="dropdown-menu-key"
       className={cn(
-        'flex size-5 items-center justify-center rounded bg-[#f5f6f9] pl-0.5 pr-1 font-mono text-sm leading-[1.4] text-oc-muted-foreground group-hover/dropdown-menu-item:bg-oc-background group-focus/dropdown-menu-item:bg-oc-background group-data-[preview=Hover]/dropdown-menu-item:bg-oc-background',
+        'flex size-5 items-center justify-center rounded bg-oc-dark-blue-soft pl-0.5 pr-1 font-mono text-sm leading-[1.4] text-oc-muted-foreground group-hover/dropdown-menu-item:bg-oc-background group-focus/dropdown-menu-item:bg-oc-background group-data-[preview=Hover]/dropdown-menu-item:bg-oc-background',
         className,
       )}
       {...props}

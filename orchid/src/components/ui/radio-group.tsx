@@ -68,7 +68,7 @@ function Radio({
     <label
       className={cn(
         'inline-flex items-start gap-2 text-xs leading-[1.5] text-oc-foreground',
-        'has-data-disabled:text-[#9295a5]',
+        'has-data-disabled:text-oc-muted-foreground',
         className,
       )}
     >

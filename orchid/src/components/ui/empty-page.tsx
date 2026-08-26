@@ -55,7 +55,7 @@ function EmptyPage({
       <div className={emptyPageIconVariants({ type })}>
         {icon ?? DEFAULT_ICON[type]}
         {showBadge ? (
-          <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-[#9295a5] text-[11px] font-medium leading-none text-white">
+          <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-oc-muted-foreground text-[11px] font-medium leading-none text-white">
             !
           </span>
         ) : null}

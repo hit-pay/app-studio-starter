@@ -83,6 +83,7 @@
   --color-oc-destructive-strong: var(--oc-destructive-strong);
   --color-oc-warning-chip-border: var(--oc-warning-chip-border);
   --color-oc-success-chip-border: var(--oc-success-chip-border);
+  --shadow-oc-popup: var(--oc-popup-shadow);
 }
 
 :root {
@@ -165,6 +166,7 @@
   --oc-secondary-button-pressed-stop: #fff;
   --oc-secondary-button-disabled-start: #fcfcfc;
   --oc-secondary-button-disabled-stop: #f7f7f7;
+  --oc-popup-shadow: 0 1px 3px rgb(0 0 0 / 10%), 0 3px 22px rgb(38 42 50 / 9%);
 }
 
 .dark {
@@ -173,31 +175,31 @@
   --oc-foreground: #eef1f6;
   --oc-card: #141924;
   --oc-card-foreground: #eef1f6;
-  --oc-primary: #4d8af0;
-  --oc-primary-foreground: #fff;
+  --oc-primary: #ecece4;
+  --oc-primary-foreground: #14140f;
   --oc-secondary: #1c2230;
   --oc-secondary-foreground: #a8adbd;
   --oc-muted: #121722;
   --oc-muted-foreground: #8b91a3;
   --oc-accent: #1c2230;
   --oc-accent-foreground: #eef1f6;
-  --oc-destructive: #f05a68;
-  --oc-destructive-soft: #3a1c20;
-  --oc-destructive-border: #8a3d46;
+  --oc-destructive: #c43542;
+  --oc-destructive-soft: #2a1418;
+  --oc-destructive-border: #6e3038;
   --oc-success: #3dd68c;
   --oc-success-soft: #143528;
   --oc-success-border: #2a6b4c;
   --oc-warning: #f5c35a;
   --oc-warning-soft: #3a2d12;
   --oc-warning-border: #8a6a28;
-  --oc-info-soft: #172844;
-  --oc-info-border: #3d5f99;
+  --oc-info-soft: #2a2a24;
+  --oc-info-border: #6e6e64;
   --oc-neutral: #10151f;
   --oc-neutral-soft: #1c2230;
   --oc-neutral-border: #3a4154;
   --oc-neutral-strong: #c5c9d4;
   --oc-border: #2a3142;
-  --oc-primary-300: #8eb6ff;
+  --oc-primary-300: #c8c8be;
   --oc-purple: #c084fc;
   --oc-purple-soft: #2a1840;
   --oc-purple-border: #6b3d8f;
@@ -207,36 +209,36 @@
   --oc-tosca: #2ec4d4;
   --oc-tosca-soft: #123338;
   --oc-tosca-border: #2a5c64;
-  --oc-light-red: #ff6b6c;
-  --oc-light-red-soft: #3a1a1a;
-  --oc-light-red-border: #8a4040;
+  --oc-light-red: #e05556;
+  --oc-light-red-soft: #2a1414;
+  --oc-light-red-border: #6e3232;
   --oc-success-strong: #6ee7b0;
   --oc-warning-strong: #fbbf24;
-  --oc-destructive-strong: #f87171;
+  --oc-destructive-strong: #e05660;
   --oc-warning-chip-border: #6b5420;
   --oc-success-chip-border: #2a6b4c;
-  --oc-primary-button-text: #fff;
-  --oc-primary-button-border: #4d8af0;
-  --oc-primary-button-default-start: #5b94f2;
-  --oc-primary-button-default-stop: #2f6de0;
-  --oc-primary-button-shadow: #1a4fb8;
-  --oc-primary-button-hover-start: #6aa0f5;
-  --oc-primary-button-hover-stop: #3d7ae8;
-  --oc-primary-button-pressed-start: #3d7ae8;
-  --oc-primary-button-pressed-stop: #5b94f2;
-  --oc-primary-button-disabled-start: #3a5a8f;
-  --oc-primary-button-disabled-stop: #2c4774;
+  --oc-primary-button-text: #14140f;
+  --oc-primary-button-border: #d6d6cc;
+  --oc-primary-button-default-start: #f3f3eb;
+  --oc-primary-button-default-stop: #e2e2d8;
+  --oc-primary-button-shadow: #3a3a34;
+  --oc-primary-button-hover-start: #f7f7f1;
+  --oc-primary-button-hover-stop: #ecece4;
+  --oc-primary-button-pressed-start: #e2e2d8;
+  --oc-primary-button-pressed-stop: #f3f3eb;
+  --oc-primary-button-disabled-start: #6a6a64;
+  --oc-primary-button-disabled-stop: #555550;
   --oc-destructive-button-text: #fff;
-  --oc-destructive-button-border: #f05a68;
-  --oc-destructive-button-default-start: #f46b77;
-  --oc-destructive-button-default-stop: #d63b4a;
-  --oc-destructive-button-shadow: #a82d39;
-  --oc-destructive-button-hover-start: #f67a85;
-  --oc-destructive-button-hover-stop: #e44e5c;
-  --oc-destructive-button-pressed-start: #e44e5c;
-  --oc-destructive-button-pressed-stop: #f46b77;
-  --oc-destructive-button-disabled-start: #7a4248;
-  --oc-destructive-button-disabled-stop: #5c3035;
+  --oc-destructive-button-border: #c43542;
+  --oc-destructive-button-default-start: #d44c57;
+  --oc-destructive-button-default-stop: #b02836;
+  --oc-destructive-button-shadow: #7a1f2a;
+  --oc-destructive-button-hover-start: #dc5863;
+  --oc-destructive-button-hover-stop: #c43542;
+  --oc-destructive-button-pressed-start: #b02836;
+  --oc-destructive-button-pressed-stop: #d44c57;
+  --oc-destructive-button-disabled-start: #5c3036;
+  --oc-destructive-button-disabled-stop: #452428;
   --oc-secondary-button-text: #c5c9d4;
   --oc-secondary-button-border: #2a3142;
   --oc-secondary-button-default-start: #242b3c;
@@ -248,4 +250,5 @@
   --oc-secondary-button-pressed-stop: #242b3c;
   --oc-secondary-button-disabled-start: #1a1f2a;
   --oc-secondary-button-disabled-stop: #151922;
+  --oc-popup-shadow: 0 8px 28px rgb(0 0 0 / 55%), 0 0 0 1px rgb(255 255 255 / 14%);
 }

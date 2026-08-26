@@ -72,7 +72,7 @@ function Checkbox({
     <label
       className={cn(
         'inline-flex cursor-pointer items-start gap-2 text-xs leading-[1.5] text-oc-foreground',
-        'has-data-disabled:cursor-not-allowed has-data-disabled:text-[#9295a5]',
+        'has-data-disabled:cursor-not-allowed has-data-disabled:text-oc-muted-foreground',
         className,
       )}
     >

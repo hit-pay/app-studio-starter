@@ -4,6 +4,7 @@ import {
   useState,
   useRef,
   type ComponentProps,
+  type RefObject,
 } from 'react'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react/combobox'
 import { CheckIcon, ChevronDownIcon, MinusIcon, XCircleIcon, XIcon } from 'lucide-react'
@@ -21,6 +22,7 @@ type ComboboxSelectionContextValue = {
 }
 
 const ComboboxSelectionContext = createContext<ComboboxSelectionContextValue | null>(null)
+const ComboboxFieldAnchorContext = createContext<RefObject<HTMLDivElement | null> | null>(null)
 
 function flattenComboboxItems(items: readonly unknown[] | undefined) {
   if (!items?.length) return []
@@ -47,6 +49,7 @@ function Combobox({
     () => defaultValue ?? (multiple ? [] : null),
   )
   const selected = value !== undefined ? value : uncontrolled
+  const fieldAnchor = useRef<HTMLDivElement>(null)
 
   function handleChange(...args: Parameters<NonNullable<ComboboxPrimitive.Root.Props<any, boolean | undefined>['onValueChange']>>) {
     const next = args[0]
@@ -55,6 +58,7 @@ function Combobox({
   }
 
   return (
+    <ComboboxFieldAnchorContext.Provider value={fieldAnchor}>
     <ComboboxSelectionContext.Provider
       value={{
         items,
@@ -73,6 +77,7 @@ function Combobox({
         {children}
       </ComboboxPrimitive.Root>
     </ComboboxSelectionContext.Provider>
+    </ComboboxFieldAnchorContext.Provider>
   )
 }
 
@@ -117,8 +122,10 @@ function ComboboxInput({
   showTrigger?: boolean
   showClear?: boolean
 }) {
+  const fieldAnchor = useContext(ComboboxFieldAnchorContext)
+
   return (
-    <InputGroup>
+    <InputGroup ref={fieldAnchor ?? undefined}>
       <ComboboxPrimitive.Input
         disabled={disabled}
         className={className}
@@ -164,6 +171,8 @@ function ComboboxContent({
   ...props
 }: ComboboxPrimitive.Popup.Props &
   Pick<ComboboxPrimitive.Positioner.Props, 'side' | 'align' | 'sideOffset' | 'alignOffset' | 'anchor'>) {
+  const fieldAnchor = useContext(ComboboxFieldAnchorContext)
+
   return (
     <ComboboxPrimitive.Portal>
       <ComboboxPrimitive.Positioner
@@ -171,14 +180,14 @@ function ComboboxContent({
         sideOffset={sideOffset}
         align={align}
         alignOffset={alignOffset}
-        anchor={anchor}
+        anchor={anchor ?? fieldAnchor ?? undefined}
         className="isolate z-50"
       >
         <ComboboxPrimitive.Popup
           data-slot="combobox-content"
           data-chips={anchor ? true : undefined}
           className={cn(
-            'group/combobox-content relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-[0_3px_11px_rgba(38,42,50,0.09)] outline-none duration-100 data-[chips=true]:min-w-(--anchor-width) data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'group/combobox-content relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
@@ -213,7 +222,7 @@ function ComboboxItem({
       data-slot="combobox-item"
       data-variant={variant}
       className={cn(
-        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-[1.5] outline-hidden select-none hover:bg-[#f5f6f9] data-highlighted:bg-[#f5f6f9] data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft data-selected:data-highlighted:bg-oc-info-soft aria-selected:bg-oc-info-soft aria-selected:hover:bg-oc-info-soft data-disabled:pointer-events-none data-disabled:opacity-50',
+        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft data-selected:data-highlighted:bg-oc-info-soft aria-selected:bg-oc-info-soft aria-selected:hover:bg-oc-info-soft data-disabled:pointer-events-none data-disabled:opacity-50',
         !checkbox && 'pr-8',
         className,
       )}
@@ -268,7 +277,7 @@ function ComboboxSelectAll({
       data-slot="combobox-select-all"
       data-selected={allSelected || undefined}
       className={cn(
-        'flex w-full cursor-pointer items-center gap-2 rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-[#f5f6f9] data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft',
+        'flex w-full cursor-pointer items-center gap-2 rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-oc-dark-blue-soft data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft',
         className,
       )}
       onClick={() => context.setValue(allSelected ? [] : all)}
@@ -396,7 +405,7 @@ function ComboboxChipsInput({ className, ...props }: ComboboxPrimitive.Input.Pro
     <ComboboxPrimitive.Input
       data-slot="combobox-chip-input"
       className={cn(
-        'min-w-12 flex-1 border-0 bg-transparent p-0 text-sm leading-[1.5] text-oc-foreground outline-none placeholder:text-[#9295a5]',
+        'min-w-12 flex-1 border-0 bg-transparent p-0 text-sm leading-[1.5] text-oc-foreground outline-none placeholder:text-oc-muted-foreground',
         className,
       )}
       {...props}
