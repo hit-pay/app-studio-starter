@@ -8,17 +8,17 @@ If they ask to make / add / change / fix an app or screen — **build it now**. 
 
 If they only asked a question, answer and do not edit.
 
-When you finish, say what they can do now. After any source change, **always** refresh preview: `.agents/skills/deployment.md` (`bun run preview:refresh`). Do not skip this.
+When you finish, say what they can do now. Then refresh preview **once** — see `deployment.md`. Do not `bun run lint` or `preview:refresh` after every file.
 
 ## How to work (keep it small)
 
-1. Follow the prompt. One pass: the screens they named.
+1. Follow the prompt. One pass: the screens they named. Reading Orchid kit files is fine.
 2. Open a skill **only when that topic is in the prompt**. Do not open every skill. Do not invent jobs from the skill list.
 3. `PLAN.md` only if the prompt has **several** screens or flows. One short checkbox list, then code. Do not rewrite PLAN.md after every file.
 4. UI: Orchid first — see `components.md`.
 5. Stored data in the prompt → see `database.md`. Display-only → skip DB.
 6. Roles in the prompt → see `hitpay.md`. No roles mentioned → skip.
-7. Done coding → `deployment.md` (generate-routes if you added routes, then `preview:refresh`).
+7. After **all** edits: `deployment.md` — `generate-routes` if you added/renamed routes, optional **one** `bun run lint`, then **one** `bun run preview:refresh`. Never lint/preview in a loop per file.
 
 ## Skills
 
