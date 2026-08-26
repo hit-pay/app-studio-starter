@@ -103,4 +103,4 @@ function Checkbox({
   )
 }
 
-export { Checkbox, CheckboxGroup }
+export { Checkbox, CheckboxGroup, checkboxControlVariants }

@@ -13,6 +13,8 @@ import {
   ComboboxItem,
   ComboboxLabel,
   ComboboxList,
+  ComboboxSelectAll,
+  ComboboxSeparator,
   ComboboxValue,
   useComboboxAnchor,
 } from '@/components/ui/combobox'
@@ -38,9 +40,13 @@ const groupedOptions = [
 function ComboboxMultipleExample({
   defaultValue,
   invalid,
+  variant = 'Default',
+  selectAll = false,
 }: {
   defaultValue?: string[]
   invalid?: boolean
+  variant?: 'Default' | 'Checkbox'
+  selectAll?: boolean
 }) {
   const chips = useComboboxAnchor()
 
@@ -59,10 +65,16 @@ function ComboboxMultipleExample({
         <ComboboxChipsInput placeholder="Placeholder" aria-invalid={invalid || undefined} />
       </ComboboxChips>
       <ComboboxContent anchor={chips}>
+        {selectAll ? (
+          <>
+            <ComboboxSelectAll />
+            <ComboboxSeparator />
+          </>
+        ) : null}
         <ComboboxEmpty>No items found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (
-            <ComboboxItem key={item} value={item}>
+            <ComboboxItem key={item} value={item} variant={variant}>
               {item}
             </ComboboxItem>
           )}
@@ -97,7 +109,7 @@ function ComboboxGroupedExample() {
               <ComboboxLabel>{group.value}</ComboboxLabel>
               <ComboboxCollection>
                 {(item: string) => (
-                  <ComboboxItem key={item} value={item}>
+                  <ComboboxItem key={item} value={item} variant="Checkbox">
                     {item}
                   </ComboboxItem>
                 )}
@@ -155,7 +167,19 @@ function ComboboxExamplesPage() {
         <FieldGroup>
           <Field>
             <FieldLabel>Multiple</FieldLabel>
-            <ComboboxMultipleExample defaultValue={['Option', 'Option two', 'Option three', 'Option four', 'Option five']} />
+            <ComboboxMultipleExample defaultValue={['Option', 'Option two', 'Option three']} />
+            <FieldDescription>This is a hint text to help user.</FieldDescription>
+          </Field>
+
+          <Field>
+            <FieldLabel>Checkbox</FieldLabel>
+            <ComboboxMultipleExample variant="Checkbox" defaultValue={['Option', 'Option two']} />
+            <FieldDescription>This is a hint text to help user.</FieldDescription>
+          </Field>
+
+          <Field>
+            <FieldLabel>Select all</FieldLabel>
+            <ComboboxMultipleExample variant="Checkbox" selectAll />
             <FieldDescription>This is a hint text to help user.</FieldDescription>
           </Field>
 

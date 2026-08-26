@@ -1,12 +1,80 @@
-import { useRef } from 'react'
+import {
+  createContext,
+  useContext,
+  useState,
+  useRef,
+  type ComponentProps,
+} from 'react'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react/combobox'
-import { CheckIcon, ChevronDownIcon, XCircleIcon, XIcon } from 'lucide-react'
+import { CheckIcon, ChevronDownIcon, MinusIcon, XCircleIcon, XIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { checkboxControlVariants } from './checkbox'
 import { chipVariants } from './chip'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from './input-group'
 
-const Combobox = ComboboxPrimitive.Root
+type ComboboxSelectionContextValue = {
+  items: readonly unknown[] | undefined
+  value: unknown
+  multiple: boolean
+  setValue: (value: unknown) => void
+}
+
+const ComboboxSelectionContext = createContext<ComboboxSelectionContextValue | null>(null)
+
+function flattenComboboxItems(items: readonly unknown[] | undefined) {
+  if (!items?.length) return []
+  const first = items[0]
+  if (first && typeof first === 'object' && first !== null && 'items' in first) {
+    return items.flatMap((group) => {
+      const nested = (group as { items?: unknown[] }).items
+      return Array.isArray(nested) ? nested : []
+    })
+  }
+  return [...items]
+}
+
+function Combobox({
+  items,
+  value,
+  defaultValue,
+  onValueChange,
+  multiple = false,
+  children,
+  ...props
+}: ComboboxPrimitive.Root.Props<any, boolean | undefined>) {
+  const [uncontrolled, setUncontrolled] = useState(
+    () => defaultValue ?? (multiple ? [] : null),
+  )
+  const selected = value !== undefined ? value : uncontrolled
+
+  function handleChange(...args: Parameters<NonNullable<ComboboxPrimitive.Root.Props<any, boolean | undefined>['onValueChange']>>) {
+    const next = args[0]
+    if (value === undefined) setUncontrolled(next as typeof uncontrolled)
+    onValueChange?.(...args)
+  }
+
+  return (
+    <ComboboxSelectionContext.Provider
+      value={{
+        items,
+        value: selected,
+        multiple: Boolean(multiple),
+        setValue: (next) => handleChange(next as never, undefined as never),
+      }}
+    >
+      <ComboboxPrimitive.Root
+        {...props}
+        items={items}
+        value={selected as never}
+        multiple={multiple}
+        onValueChange={handleChange}
+      >
+        {children}
+      </ComboboxPrimitive.Root>
+    </ComboboxSelectionContext.Provider>
+  )
+}
 
 function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
   return <ComboboxPrimitive.Value data-slot="combobox-value" {...props} />
@@ -130,21 +198,98 @@ function ComboboxList({ className, ...props }: ComboboxPrimitive.List.Props) {
   )
 }
 
-function ComboboxItem({ className, children, ...props }: ComboboxPrimitive.Item.Props) {
+function ComboboxItem({
+  className,
+  children,
+  variant = 'Default',
+  ...props
+}: ComboboxPrimitive.Item.Props & {
+  variant?: 'Default' | 'Checkbox'
+}) {
+  const checkbox = variant === 'Checkbox'
+
   return (
     <ComboboxPrimitive.Item
       data-slot="combobox-item"
+      data-variant={variant}
       className={cn(
-        'relative flex w-full cursor-pointer items-center gap-2 rounded p-2 pr-8 text-sm leading-[1.5] outline-hidden select-none hover:bg-[#f5f6f9] data-highlighted:bg-[#f5f6f9] data-disabled:pointer-events-none data-disabled:opacity-50',
+        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-[1.5] outline-hidden select-none hover:bg-[#f5f6f9] data-highlighted:bg-[#f5f6f9] data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft data-selected:data-highlighted:bg-oc-info-soft aria-selected:bg-oc-info-soft aria-selected:hover:bg-oc-info-soft data-disabled:pointer-events-none data-disabled:opacity-50',
+        !checkbox && 'pr-8',
         className,
       )}
       {...props}
     >
+      {checkbox ? (
+        <span
+          className={cn(
+            checkboxControlVariants(),
+            'pointer-events-none shadow-none hover:shadow-none',
+            'group-aria-selected/combobox-item:border-oc-primary group-aria-selected/combobox-item:bg-oc-primary group-aria-selected/combobox-item:text-oc-primary-foreground',
+            'group-data-selected/combobox-item:border-oc-primary group-data-selected/combobox-item:bg-oc-primary group-data-selected/combobox-item:text-oc-primary-foreground',
+          )}
+        >
+          <ComboboxPrimitive.ItemIndicator className="flex items-center justify-center text-current">
+            <CheckIcon className="size-2.5" />
+          </ComboboxPrimitive.ItemIndicator>
+        </span>
+      ) : null}
       {children}
-      <ComboboxPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center">
-        <CheckIcon className="size-4" />
-      </ComboboxPrimitive.ItemIndicator>
+      {checkbox ? null : (
+        <ComboboxPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center">
+          <CheckIcon className="size-4" />
+        </ComboboxPrimitive.ItemIndicator>
+      )}
     </ComboboxPrimitive.Item>
+  )
+}
+
+function ComboboxSelectAll({
+  className,
+  children = 'Select all',
+  items: itemsProp,
+  ...props
+}: ComponentProps<'button'> & {
+  items?: readonly unknown[]
+}) {
+  const context = useContext(ComboboxSelectionContext)
+  if (!context) {
+    throw new Error('ComboboxSelectAll must be used inside Combobox')
+  }
+
+  const all = flattenComboboxItems(itemsProp ?? context.items)
+  const selected = Array.isArray(context.value) ? context.value : []
+  const allSelected =
+    all.length > 0 && all.every((item) => selected.some((value) => Object.is(value, item)))
+  const someSelected = selected.length > 0 && !allSelected
+
+  return (
+    <button
+      type="button"
+      data-slot="combobox-select-all"
+      data-selected={allSelected || undefined}
+      className={cn(
+        'flex w-full cursor-pointer items-center gap-2 rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-[#f5f6f9] data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft',
+        className,
+      )}
+      onClick={() => context.setValue(allSelected ? [] : all)}
+      {...props}
+    >
+      <span
+        className={cn(
+          checkboxControlVariants(),
+          'pointer-events-none shadow-none hover:shadow-none',
+        )}
+        data-checked={allSelected || undefined}
+        data-indeterminate={someSelected || undefined}
+      >
+        {allSelected ? (
+          <CheckIcon className="size-2.5" />
+        ) : someSelected ? (
+          <MinusIcon className="size-2.5" />
+        ) : null}
+      </span>
+      {children}
+    </button>
   )
 }
 
@@ -270,6 +415,7 @@ export {
   ComboboxItem,
   ComboboxLabel,
   ComboboxList,
+  ComboboxSelectAll,
   ComboboxSeparator,
   ComboboxTrigger,
   ComboboxValue,

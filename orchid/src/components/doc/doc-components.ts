@@ -137,7 +137,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/combobox' as const,
     name: 'Combobox',
-    description: 'Searchable select; use multiple with chips for several values.',
+    description: 'Searchable select; multiple chips, checkbox items, and select all.',
   },
   {
     to: '/empty-page' as const,

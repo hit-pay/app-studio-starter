@@ -618,13 +618,14 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Searchable list (tags, staff, countries). Combobox + Input + Item. Multiple: ComboboxChips + Chip. Grouped: Group + Label + Collection. Not a closed single pick without search \u2014 use select.",
+      "description": "Searchable list (tags, staff, countries). Combobox + Input + Item. Multiple: ComboboxChips + Chip. Checkbox variant and ComboboxSelectAll for bulk pick. Grouped: Group + Label + Collection. Not a closed single pick without search \u2014 use select.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
       ],
       "registryDependencies": [
         "@orchid/button",
+        "@orchid/checkbox",
         "@orchid/chip",
         "@orchid/input-group"
       ],
