@@ -10,10 +10,10 @@ function CopyTooltipExamplesPage() {
   return (
     <DocExamplePage to="/copy-tooltip">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
-          <div className="flex items-center gap-2 text-sm leading-[1.5] text-foreground">
+          <div className="flex items-center gap-2 text-sm leading-[1.5] text-oc-foreground">
             <span>+65 8373 3739 18</span>
             <CopyTooltip value="+65 8373 3739 18" />
           </div>

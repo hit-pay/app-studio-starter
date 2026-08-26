@@ -22,7 +22,7 @@ function BoxDetailExamplesPage() {
   return (
     <DocExamplePage to="/box-detail">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <BoxDetail type="Default">
@@ -44,7 +44,7 @@ function BoxDetailExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Border
           </p>
           <BoxDetail type="Border">
@@ -69,7 +69,7 @@ function BoxDetailExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             3 columns, 2 rows
           </p>
           <BoxDetail type="Border">
@@ -97,7 +97,7 @@ function BoxDetailExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Colspan
           </p>
           <BoxDetail type="Border">
@@ -134,7 +134,7 @@ function BoxDetailExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Stacked rows
           </p>
           <BoxDetail type="Default">
@@ -144,7 +144,7 @@ function BoxDetailExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Stacked rows, Border
           </p>
           <BoxDetail type="Border">

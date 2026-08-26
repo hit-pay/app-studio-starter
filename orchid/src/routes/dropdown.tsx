@@ -50,7 +50,7 @@ function DropdownExamplesPage() {
   return (
     <DocExamplePage to="/dropdown">
         <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Dropdown Menu
           </p>
           <OpenButton>
@@ -62,7 +62,7 @@ function DropdownExamplesPage() {
         </div>
 
         <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Dropdown
           </p>
           <OpenButton>
@@ -83,7 +83,7 @@ function DropdownExamplesPage() {
         </div>
 
         <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Dropdown in Button
           </p>
           <Button

@@ -30,7 +30,7 @@ function ExampleBlock({
 }) {
   return (
     <div className="space-y-3">
-      <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
         {title}
       </p>
       {children}

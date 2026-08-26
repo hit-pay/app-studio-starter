@@ -1,6 +1,9 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" class="font-inter">
   <head>
+    <script>
+      if (localStorage.getItem('orchid-theme') === 'dark') document.documentElement.classList.add('dark')
+    </script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Orchid UI</title>
@@ -12,7 +15,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
     />
   </head>
-  <body>
+  <body class="bg-oc-background text-oc-foreground">
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

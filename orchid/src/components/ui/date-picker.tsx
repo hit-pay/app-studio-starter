@@ -37,7 +37,7 @@ function DatePicker({
             style="Border"
             data-empty={!date}
             className={cn(
-              'w-[280px] justify-start text-left font-normal data-[empty=true]:text-muted-foreground',
+              'w-[280px] justify-start text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />
@@ -91,7 +91,7 @@ function DatePickerRange({
             style="Border"
             data-empty={!range?.from}
             className={cn(
-              'min-w-[280px] justify-start text-left font-normal data-[empty=true]:text-muted-foreground',
+              'min-w-[280px] justify-start text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />

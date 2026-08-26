@@ -29,7 +29,7 @@ function RadioGroup({
   return (
     <div className="flex w-full flex-col items-start gap-2">
       {label ? (
-        <p className="text-xs font-medium leading-[1.5] text-muted-foreground">{label}</p>
+        <p className="text-xs font-medium leading-[1.5] text-oc-muted-foreground">{label}</p>
       ) : null}
       <RadioGroupPrimitive
         data-slot="radio-group"
@@ -45,12 +45,12 @@ const radioControlVariants = cva(
   [
     'inline-flex size-4 shrink-0 items-center justify-center rounded-full border border-solid outline-none',
     'shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
-    'bg-background border-border',
-    'hover:border-primary hover:shadow-[0_0_0_3px_var(--info-border)]',
-    'data-checked:border-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
-    'data-disabled:pointer-events-none data-disabled:border-border data-disabled:bg-dark-blue-soft data-disabled:shadow-none',
-    'data-disabled:data-checked:border-dark-blue-border',
-    'data-[error=true]:border-destructive data-[error=true]:shadow-[0_0_0_3px_var(--destructive-border)]',
+    'bg-oc-background border-oc-border',
+    'hover:border-oc-primary hover:shadow-[0_0_0_3px_var(--oc-info-border)]',
+    'data-checked:border-oc-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+    'data-disabled:pointer-events-none data-disabled:border-oc-border data-disabled:bg-oc-dark-blue-soft data-disabled:shadow-none',
+    'data-disabled:data-checked:border-oc-dark-blue-border',
+    'data-[error=true]:border-oc-destructive data-[error=true]:shadow-[0_0_0_3px_var(--oc-destructive-border)]',
   ].join(' '),
 )
 
@@ -67,7 +67,7 @@ function Radio({
   return (
     <label
       className={cn(
-        'inline-flex items-start gap-2 text-xs leading-[1.5] text-foreground',
+        'inline-flex items-start gap-2 text-xs leading-[1.5] text-oc-foreground',
         'has-data-disabled:text-[#9295a5]',
         className,
       )}
@@ -78,13 +78,13 @@ function Radio({
         className={radioControlVariants()}
         {...props}
       >
-        <RadioPrimitive.Indicator className="size-2 rounded-full bg-primary data-disabled:bg-dark-blue-border" />
+        <RadioPrimitive.Indicator className="size-2 rounded-full bg-oc-primary data-disabled:bg-oc-dark-blue-border" />
       </RadioPrimitive.Root>
       {children || description ? (
         <span className="flex min-w-0 flex-col gap-0.5">
           {children ? <span>{children}</span> : null}
           {description ? (
-            <span className="text-xs leading-[1.5] text-muted-foreground">{description}</span>
+            <span className="text-xs leading-[1.5] text-oc-muted-foreground">{description}</span>
           ) : null}
         </span>
       ) : null}

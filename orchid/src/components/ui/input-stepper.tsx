@@ -74,7 +74,7 @@ function InputStepper({
     <div
       data-slot="input-stepper"
       className={cn(
-        'flex h-9 w-full items-center gap-2 overflow-clip rounded-lg border border-solid border-border bg-background px-1 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+        'flex h-9 w-full items-center gap-2 overflow-clip rounded-lg border border-solid border-oc-border bg-oc-background px-1 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
         disabled && 'pointer-events-none opacity-50',
         className,
       )}
@@ -109,7 +109,7 @@ function InputStepper({
               setEditing(false)
             }
           }}
-          className="min-w-0 flex-1 bg-transparent text-center text-sm leading-[1.5] text-foreground outline-none"
+          className="min-w-0 flex-1 bg-transparent text-center text-sm leading-[1.5] text-oc-foreground outline-none"
         />
       ) : (
         <button
@@ -118,7 +118,7 @@ function InputStepper({
           disabled={disabled}
           aria-label="Edit number"
           onClick={() => setEditing(true)}
-          className="min-w-0 flex-1 truncate text-center text-sm leading-[1.5] text-muted-foreground outline-none"
+          className="min-w-0 flex-1 truncate text-center text-sm leading-[1.5] text-oc-muted-foreground outline-none"
         >
           {numeric}
         </button>

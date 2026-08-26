@@ -14,7 +14,7 @@ function AvatarExamplesPage() {
   return (
     <DocExamplePage to="/avatar">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Size
           </p>
           <div className="flex flex-wrap items-end gap-4">
@@ -27,7 +27,7 @@ function AvatarExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Type
           </p>
           <div className="flex flex-wrap items-center gap-4">

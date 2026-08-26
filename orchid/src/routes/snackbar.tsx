@@ -35,10 +35,10 @@ function SnackbarExamplesPage() {
   return (
     <DocExamplePage to="/snackbar">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Small
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-oc-muted-foreground">
             Floating toast untuk create / edit / delete. Tanpa close dan tanpa action.
           </p>
           <div className="flex flex-wrap items-start gap-4">
@@ -52,10 +52,10 @@ function SnackbarExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
-          <p className="text-xs text-muted-foreground">
+          <p className="text-xs text-oc-muted-foreground">
             Floating toast. Tanpa close dan tanpa action.
           </p>
           <div className="flex flex-wrap items-start gap-4">
@@ -69,7 +69,7 @@ function SnackbarExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Big · Bottom
           </p>
           <div className="space-y-4">
@@ -99,7 +99,7 @@ function SnackbarExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Big · Right
           </p>
           <div className="space-y-4">

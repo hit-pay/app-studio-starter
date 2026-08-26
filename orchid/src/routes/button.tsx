@@ -35,7 +35,7 @@ function ButtonExamplesPage() {
     <DocExamplePage to="/button">
       {TYPES.map((type) => (
         <div key={type} className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             {type}
           </p>
           <div className="flex flex-wrap items-center gap-3">
@@ -60,7 +60,7 @@ function ButtonExamplesPage() {
       ))}
 
       <div className="space-y-3">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Size
         </p>
         <div className="flex flex-wrap items-center gap-3">
@@ -73,7 +73,7 @@ function ButtonExamplesPage() {
       </div>
 
       <div className="space-y-3">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Disabled
         </p>
         <div className="flex flex-wrap items-center gap-3">

@@ -39,7 +39,7 @@ function TooltipExamplesPage() {
     <TooltipProvider>
       <DocExamplePage to="/tooltip">
           <div className="space-y-4">
-            <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
               Placement
             </p>
             <div className="flex flex-wrap items-center gap-6">

@@ -30,7 +30,7 @@ function ListItemExamplesPage() {
   return (
     <DocExamplePage to="/list-item">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             General
           </p>
           <ListItem>
@@ -99,15 +99,15 @@ function ListItemExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Webhook
           </p>
           <ListItem className="flex-col items-stretch gap-4">
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-wrap items-baseline gap-1">
                 <ListItemTitle>Zapier Flow</ListItemTitle>
-                <span className="text-xs text-muted-foreground">-</span>
-                <span className="text-xs text-muted-foreground">Oct, 20 2023</span>
+                <span className="text-xs text-oc-muted-foreground">-</span>
+                <span className="text-xs text-oc-muted-foreground">Oct, 20 2023</span>
               </div>
             </div>
             <div className="space-y-2">
@@ -125,8 +125,8 @@ function ListItemExamplesPage() {
             <div className="flex items-center justify-between gap-3">
               <div className="flex min-w-0 flex-wrap items-baseline gap-1">
                 <ListItemTitle>Zapier Flow</ListItemTitle>
-                <span className="text-xs text-muted-foreground">-</span>
-                <span className="text-xs text-muted-foreground">Oct, 20 2023</span>
+                <span className="text-xs text-oc-muted-foreground">-</span>
+                <span className="text-xs text-oc-muted-foreground">Oct, 20 2023</span>
               </div>
               <ListItemMore
                 menu={
@@ -151,7 +151,7 @@ function ListItemExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Page
           </p>
           <ListItem className="items-center">
@@ -168,7 +168,7 @@ function ListItemExamplesPage() {
                 Welcome to our store. Discover new arrivals and seasonal offers.
               </ListItemDescription>
               <ListItemMeta>
-                <span className="text-xs leading-[1.5] text-muted-foreground">
+                <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                   Last updated : 20 Oct 2023
                 </span>
                 <Chip color="Green">Published</Chip>
@@ -189,7 +189,7 @@ function ListItemExamplesPage() {
                 Welcome to our store. Discover new arrivals and seasonal offers.
               </ListItemDescription>
               <ListItemMeta>
-                <span className="text-xs leading-[1.5] text-muted-foreground">
+                <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                   Last updated : 20 Oct 2023
                 </span>
                 <Chip color="Grey">Draft</Chip>
@@ -207,21 +207,21 @@ function ListItemExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Integration
           </p>
           <ListItem className="p-4">
             <ListItemBody>
               <div className="flex items-center gap-2">
                 <ListItemLogo>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                  <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
                     H
                   </span>
                 </ListItemLogo>
                 <ListItemTitle>HitPay Store</ListItemTitle>
               </div>
               <div className="flex flex-wrap items-center gap-1">
-                <p className="mr-1 text-xs font-medium text-muted-foreground">Payment methods</p>
+                <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
                 {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
                   <ListItemMethod key={code}>{code}</ListItemMethod>
                 ))}
@@ -232,14 +232,14 @@ function ListItemExamplesPage() {
             <ListItemBody>
               <div className="flex min-w-0 items-center gap-2">
                 <ListItemLogo>
-                  <span className="flex size-8 items-center justify-center rounded-full bg-primary text-xs font-semibold text-primary-foreground">
+                  <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
                     H
                   </span>
                 </ListItemLogo>
                 <ListItemTitle>HitPay Store</ListItemTitle>
               </div>
               <div className="flex flex-wrap items-center gap-1">
-                <p className="mr-1 text-xs font-medium text-muted-foreground">Payment methods</p>
+                <p className="mr-1 text-xs font-medium text-oc-muted-foreground">Payment methods</p>
                 {['Visa', 'WC', 'MC', 'AP', 'At', 'PN', 'GP', 'IP', 'JCB', 'KP'].map((code) => (
                   <ListItemMethod key={code}>{code}</ListItemMethod>
                 ))}

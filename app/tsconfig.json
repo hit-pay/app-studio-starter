@@ -7,7 +7,7 @@
     "paths": {
       "#/*": ["./src/*"],
       "@/*": ["./src/*"],
-      "@/ui/*": ["./src/orchid-ui/*"]
+      "@/orchid-ui/*": ["./src/components/orchid-ui/*"]
     },
     "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "types": ["vite/client"],

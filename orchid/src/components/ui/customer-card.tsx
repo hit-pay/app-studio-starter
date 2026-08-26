@@ -30,7 +30,7 @@ type CustomerCardData = {
 }
 
 const customerCardVariants = cva(
-  'group/customer-card relative flex w-full rounded-lg border border-solid border-border bg-background',
+  'group/customer-card relative flex w-full rounded-lg border border-solid border-oc-border bg-oc-background',
   {
     variants: {
       variant: {
@@ -44,7 +44,7 @@ const customerCardVariants = cva(
         false: '',
       },
       active: {
-        true: 'border-2 border-primary',
+        true: 'border-2 border-oc-primary',
         false: '',
       },
     },
@@ -86,14 +86,14 @@ function formatAddress(address?: CustomerCardAddress) {
 function DetailRow({ label, children }: { label: string; children: ReactNode }) {
   return (
     <div className="flex w-full min-w-0 items-start gap-4">
-      <span className="w-20 shrink-0 text-xs leading-[1.5] text-muted-foreground">{label}</span>
-      <span className="min-w-0 flex-1 text-xs leading-[1.5] text-foreground">{children}</span>
+      <span className="w-20 shrink-0 text-xs leading-[1.5] text-oc-muted-foreground">{label}</span>
+      <span className="min-w-0 flex-1 text-xs leading-[1.5] text-oc-foreground">{children}</span>
     </div>
   )
 }
 
 function Skeleton({ className }: { className?: string }) {
-  return <div className={cn('animate-pulse rounded bg-neutral-soft', className)} />
+  return <div className={cn('animate-pulse rounded bg-oc-neutral-soft', className)} />
 }
 
 function CustomerCard({
@@ -162,13 +162,13 @@ function CustomerCard({
         <>
           <div className="flex w-full flex-col items-center justify-center gap-2">
             {avatar ? (
-              <span className="inline-flex size-8 items-center justify-center rounded-full border border-solid border-neutral-border bg-neutral-strong text-primary-foreground">
+              <span className="inline-flex size-8 items-center justify-center rounded-full border border-solid border-oc-neutral-border bg-oc-neutral-strong text-oc-primary-foreground">
                 <UserPlusIcon className="size-4" />
               </span>
             ) : null}
             <div className="flex w-full flex-col text-center font-medium">
-              <span className="text-sm leading-[1.5] text-foreground">No customer attached</span>
-              <span className="text-xs leading-[1.5] text-muted-foreground">
+              <span className="text-sm leading-[1.5] text-oc-foreground">No customer attached</span>
+              <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                 Add customer detail to this transaction
               </span>
             </div>
@@ -193,7 +193,7 @@ function CustomerCard({
             ) : null}
             <div className="flex min-w-0 flex-1 flex-col items-start">
               <div className="flex min-w-0 items-start gap-1">
-                <span className="min-w-0 truncate text-sm font-medium leading-[1.5] text-foreground">
+                <span className="min-w-0 truncate text-sm font-medium leading-[1.5] text-oc-foreground">
                   {customer.name || '-'}
                 </span>
                 {chip ? chip : null}
@@ -201,7 +201,7 @@ function CustomerCard({
                   <Chip color="Blue">{customer.currency.toUpperCase()}</Chip>
                 ) : null}
               </div>
-              <span className="min-w-0 truncate text-xs font-medium leading-[1.5] text-muted-foreground">
+              <span className="min-w-0 truncate text-xs font-medium leading-[1.5] text-oc-muted-foreground">
                 {beneficiary
                   ? [customer.bank_name, customer.bank_account_number].filter(Boolean).join(' / ')
                   : customer.email || formatPhone(customer)}
@@ -264,10 +264,10 @@ function CustomerCard({
         <button
           type="button"
           aria-label="Close"
-          className="-top-1 -right-1 absolute rounded-full bg-background text-muted-foreground outline-none hover:text-destructive-strong"
+          className="-top-1 -right-1 absolute rounded-full bg-oc-background text-oc-muted-foreground outline-none hover:text-oc-destructive-strong"
           onClick={onClose}
         >
-          <XCircleIcon className="size-[18px] fill-background" />
+          <XCircleIcon className="size-[18px] fill-oc-background" />
         </button>
       ) : null}
 

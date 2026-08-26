@@ -10,14 +10,14 @@ function ProgressBarExamplesPage() {
   return (
     <DocExamplePage to="/progress-bar">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <ProgressBar size="Default" value={70} max={100} />
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Small
           </p>
           <ProgressBar size="Small" value={70} max={100} />

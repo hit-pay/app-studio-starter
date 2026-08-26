@@ -13,7 +13,7 @@ function EmptyPageExamplesPage() {
     <DocExamplePage to="/empty-page">
       <div className="grid gap-12 md:grid-cols-2">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Add New
           </p>
           <EmptyPage
@@ -36,7 +36,7 @@ function EmptyPageExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Upgrade
           </p>
           <EmptyPage
@@ -52,7 +52,7 @@ function EmptyPageExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Search not found
           </p>
           <EmptyPage
@@ -63,7 +63,7 @@ function EmptyPageExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             2 Actions
           </p>
           <EmptyPage

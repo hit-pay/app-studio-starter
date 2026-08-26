@@ -15,7 +15,7 @@ When you finish, say what they can do now. **Review first**, then preview **once
 1. Follow the prompt. One pass: the screens they named.
 2. Open a skill **only when that topic is in the prompt**. Do not open every skill. Do not invent jobs from the skill list.
 3. `PLAN.md` only if the prompt has **several** screens or flows. One short checkbox list, then code. Do not rewrite PLAN.md after every file.
-4. UI: Orchid first — shadcn MCP on Codex (`.codex/config.toml`, `@orchid`) or catalog **https://orchid-ui-hitpay.vercel.app/registry.json**. See `components.md`. Do not scan every kit file. Never install `@shadcn` items.
+4. UI: Orchid first — shadcn MCP on any harness (`@orchid`) or catalog **https://orchid-ui-hitpay.vercel.app/registry.json**. See `components.md`. Do not scan every kit file. Never install `@shadcn` items.
 5. Stored data in the prompt → see `database.md`. Display-only → skip DB.
 6. Roles in the prompt → see `hitpay.md`. No roles mentioned → skip.
 7. After **all** edits: `review.md` (fix bugs), then `deployment.md` — `generate-routes` if you added/renamed routes, **one** `bun run lint`, then **one** `bun run preview:refresh`.

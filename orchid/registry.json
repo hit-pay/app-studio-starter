@@ -4,6 +4,50 @@
   "homepage": "https://orchid-ui-hitpay.vercel.app",
   "items": [
     {
+      "name": "all",
+      "type": "registry:ui",
+      "title": "All",
+      "description": "Installs every Orchid UI component via registryDependencies.",
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/dropdown-menu",
+        "@orchid/snackbar",
+        "@orchid/chip",
+        "@orchid/accordion",
+        "@orchid/progress-bar",
+        "@orchid/list-item",
+        "@orchid/input-stepper",
+        "@orchid/avatar",
+        "@orchid/tooltip",
+        "@orchid/tab-menu",
+        "@orchid/clickable-option",
+        "@orchid/overview-item",
+        "@orchid/sub-header",
+        "@orchid/page-title",
+        "@orchid/box-detail",
+        "@orchid/group-icon",
+        "@orchid/copy-tooltip",
+        "@orchid/customer-card",
+        "@orchid/checkbox",
+        "@orchid/radio-group",
+        "@orchid/toggle",
+        "@orchid/slider",
+        "@orchid/empty-page",
+        "@orchid/label",
+        "@orchid/separator",
+        "@orchid/field",
+        "@orchid/input",
+        "@orchid/textarea",
+        "@orchid/select",
+        "@orchid/input-group",
+        "@orchid/popover",
+        "@orchid/calendar",
+        "@orchid/date-picker",
+        "@orchid/modal"
+      ],
+      "files": []
+    },
+    {
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
@@ -28,7 +72,7 @@
         {
           "path": "src/components/ui/button.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/button.tsx"
+          "target": "@components/orchid-ui/button.tsx"
         }
       ]
     },
@@ -43,7 +87,7 @@
         {
           "path": "src/components/ui/dropdown-menu.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/dropdown-menu.tsx"
+          "target": "@components/orchid-ui/dropdown-menu.tsx"
         }
       ]
     },
@@ -58,7 +102,7 @@
         {
           "path": "src/components/ui/snackbar.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/snackbar.tsx"
+          "target": "@components/orchid-ui/snackbar.tsx"
         }
       ]
     },
@@ -73,7 +117,7 @@
         {
           "path": "src/components/ui/chip.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/chip.tsx"
+          "target": "@components/orchid-ui/chip.tsx"
         }
       ]
     },
@@ -88,7 +132,7 @@
         {
           "path": "src/components/ui/accordion.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/accordion.tsx"
+          "target": "@components/orchid-ui/accordion.tsx"
         }
       ]
     },
@@ -103,7 +147,7 @@
         {
           "path": "src/components/ui/progress-bar.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/progress-bar.tsx"
+          "target": "@components/orchid-ui/progress-bar.tsx"
         }
       ]
     },
@@ -118,7 +162,7 @@
         {
           "path": "src/components/ui/list-item.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/list-item.tsx"
+          "target": "@components/orchid-ui/list-item.tsx"
         }
       ]
     },
@@ -133,7 +177,7 @@
         {
           "path": "src/components/ui/input-stepper.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/input-stepper.tsx"
+          "target": "@components/orchid-ui/input-stepper.tsx"
         }
       ]
     },
@@ -148,7 +192,7 @@
         {
           "path": "src/components/ui/avatar.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/avatar.tsx"
+          "target": "@components/orchid-ui/avatar.tsx"
         }
       ]
     },
@@ -163,7 +207,7 @@
         {
           "path": "src/components/ui/tooltip.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/tooltip.tsx"
+          "target": "@components/orchid-ui/tooltip.tsx"
         }
       ]
     },
@@ -178,7 +222,7 @@
         {
           "path": "src/components/ui/tab-menu.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/tab-menu.tsx"
+          "target": "@components/orchid-ui/tab-menu.tsx"
         }
       ]
     },
@@ -193,7 +237,7 @@
         {
           "path": "src/components/ui/clickable-option.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/clickable-option.tsx"
+          "target": "@components/orchid-ui/clickable-option.tsx"
         }
       ]
     },
@@ -208,7 +252,7 @@
         {
           "path": "src/components/ui/overview-item.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/overview-item.tsx"
+          "target": "@components/orchid-ui/overview-item.tsx"
         }
       ]
     },
@@ -223,7 +267,7 @@
         {
           "path": "src/components/ui/sub-header.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/sub-header.tsx"
+          "target": "@components/orchid-ui/sub-header.tsx"
         }
       ]
     },
@@ -238,7 +282,7 @@
         {
           "path": "src/components/ui/page-title.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/page-title.tsx"
+          "target": "@components/orchid-ui/page-title.tsx"
         }
       ]
     },
@@ -253,7 +297,7 @@
         {
           "path": "src/components/ui/box-detail.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/box-detail.tsx"
+          "target": "@components/orchid-ui/box-detail.tsx"
         }
       ]
     },
@@ -268,7 +312,7 @@
         {
           "path": "src/components/ui/group-icon.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/group-icon.tsx"
+          "target": "@components/orchid-ui/group-icon.tsx"
         }
       ]
     },
@@ -283,7 +327,7 @@
         {
           "path": "src/components/ui/copy-tooltip.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/copy-tooltip.tsx"
+          "target": "@components/orchid-ui/copy-tooltip.tsx"
         }
       ]
     },
@@ -298,7 +342,7 @@
         {
           "path": "src/components/ui/customer-card.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/customer-card.tsx"
+          "target": "@components/orchid-ui/customer-card.tsx"
         }
       ]
     },
@@ -313,7 +357,7 @@
         {
           "path": "src/components/ui/checkbox.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/checkbox.tsx"
+          "target": "@components/orchid-ui/checkbox.tsx"
         }
       ]
     },
@@ -328,7 +372,7 @@
         {
           "path": "src/components/ui/radio-group.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/radio-group.tsx"
+          "target": "@components/orchid-ui/radio-group.tsx"
         }
       ]
     },
@@ -343,7 +387,7 @@
         {
           "path": "src/components/ui/toggle.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/toggle.tsx"
+          "target": "@components/orchid-ui/toggle.tsx"
         }
       ]
     },
@@ -358,7 +402,7 @@
         {
           "path": "src/components/ui/slider.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/slider.tsx"
+          "target": "@components/orchid-ui/slider.tsx"
         }
       ]
     },
@@ -373,7 +417,7 @@
         {
           "path": "src/components/ui/empty-page.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/empty-page.tsx"
+          "target": "@components/orchid-ui/empty-page.tsx"
         }
       ]
     },
@@ -388,7 +432,7 @@
         {
           "path": "src/components/ui/label.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/label.tsx"
+          "target": "@components/orchid-ui/label.tsx"
         }
       ]
     },
@@ -403,7 +447,7 @@
         {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/separator.tsx"
+          "target": "@components/orchid-ui/separator.tsx"
         }
       ]
     },
@@ -418,7 +462,7 @@
         {
           "path": "src/components/ui/field.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/field.tsx"
+          "target": "@components/orchid-ui/field.tsx"
         }
       ]
     },
@@ -433,7 +477,7 @@
         {
           "path": "src/components/ui/input.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/input.tsx"
+          "target": "@components/orchid-ui/input.tsx"
         }
       ]
     },
@@ -448,7 +492,7 @@
         {
           "path": "src/components/ui/textarea.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/textarea.tsx"
+          "target": "@components/orchid-ui/textarea.tsx"
         }
       ]
     },
@@ -463,7 +507,7 @@
         {
           "path": "src/components/ui/select.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/select.tsx"
+          "target": "@components/orchid-ui/select.tsx"
         }
       ]
     },
@@ -478,7 +522,7 @@
         {
           "path": "src/components/ui/input-group.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/input-group.tsx"
+          "target": "@components/orchid-ui/input-group.tsx"
         }
       ]
     },
@@ -493,7 +537,7 @@
         {
           "path": "src/components/ui/popover.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/popover.tsx"
+          "target": "@components/orchid-ui/popover.tsx"
         }
       ]
     },
@@ -508,7 +552,7 @@
         {
           "path": "src/components/ui/calendar.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/calendar.tsx"
+          "target": "@components/orchid-ui/calendar.tsx"
         }
       ]
     },
@@ -523,7 +567,7 @@
         {
           "path": "src/components/ui/date-picker.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/date-picker.tsx"
+          "target": "@components/orchid-ui/date-picker.tsx"
         }
       ]
     },
@@ -538,7 +582,7 @@
         {
           "path": "src/components/ui/modal.tsx",
           "type": "registry:ui",
-          "target": "orchid-ui/modal.tsx"
+          "target": "@components/orchid-ui/modal.tsx"
         }
       ]
     }

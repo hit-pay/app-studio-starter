@@ -11,28 +11,28 @@ function SliderExamplesPage() {
     <DocExamplePage to="/slider">
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <Slider defaultValue={78} showIndicator={false} />
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Dragged
           </p>
           <Slider defaultValue={78} />
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Range
           </p>
           <Slider defaultValue={[25, 75]} />
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Multiple thumbs
           </p>
           <Slider defaultValue={[20, 40, 70]} showIndicator={false} />

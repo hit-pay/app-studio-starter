@@ -13,7 +13,7 @@ function SubHeaderExamplesPage() {
   return (
     <DocExamplePage to="/sub-header">
       <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Back
         </p>
         <div>
@@ -41,7 +41,7 @@ function SubHeaderExamplesPage() {
       </div>
 
       <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Close
         </p>
         <SubHeader

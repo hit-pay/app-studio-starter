@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils'
 
 function KeyboardHint({ children }: { children: ReactNode }) {
   return (
-    <span className="inline-flex items-center justify-center rounded border border-solid border-border bg-background px-2 py-0.5 text-xs font-medium leading-[1.5] text-[#9295a5]">
+    <span className="inline-flex items-center justify-center rounded border border-solid border-oc-border bg-oc-background px-2 py-0.5 text-xs font-medium leading-[1.5] text-[#9295a5]">
       {children}
     </span>
   )
@@ -27,14 +27,14 @@ function SubHeader({
       data-slot="sub-header"
       data-left={left}
       className={cn(
-        'flex w-full items-center justify-between gap-4 border-b border-solid border-border bg-background px-6 py-3',
+        'flex w-full items-center justify-between gap-4 border-b border-solid border-oc-border bg-oc-background px-6 py-3',
         className,
       )}
       {...props}
     >
       <button
         type="button"
-        className="inline-flex items-center gap-1 text-sm leading-[1.5] text-muted-foreground outline-none hover:text-foreground"
+        className="inline-flex items-center gap-1 text-sm leading-[1.5] text-oc-muted-foreground outline-none hover:text-oc-foreground"
         onClick={onBack}
       >
         {left === 'Close' ? (

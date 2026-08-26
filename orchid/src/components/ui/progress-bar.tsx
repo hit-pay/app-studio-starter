@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const progressBarTrackVariants = cva('relative min-w-0 flex-1 overflow-clip rounded-full bg-neutral-soft', {
+const progressBarTrackVariants = cva('relative min-w-0 flex-1 overflow-clip rounded-full bg-oc-neutral-soft', {
   variants: {
     size: {
       Default: 'h-2',
@@ -60,14 +60,14 @@ function ProgressBar({
       >
         <div
           data-slot="progress-bar-current"
-          className="absolute inset-y-0 left-0 rounded-full bg-primary"
+          className="absolute inset-y-0 left-0 rounded-full bg-oc-primary"
           style={{ width: `${percent}%` }}
         />
       </div>
       {showLabel ? (
         <p className={progressBarLabelVariants({ size })}>
-          <span className="font-medium text-foreground">{clamped}</span>
-          <span className="text-muted-foreground">/{safeMax}</span>
+          <span className="font-medium text-oc-foreground">{clamped}</span>
+          <span className="text-oc-muted-foreground">/{safeMax}</span>
         </p>
       ) : null}
     </div>
