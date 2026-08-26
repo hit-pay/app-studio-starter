@@ -337,11 +337,26 @@ function SetupGuidePage() {
           <P>Several at once:</P>
           <CodeBlock code="bunx shadcn add @orchid/button @orchid/input @orchid/field" />
           <P>
-            All Orchid UI items (not the default shadcn kit). Do not run{' '}
-            <code className="text-oc-foreground">shadcn add --all</code> without{' '}
-            <code className="text-oc-foreground">@orchid</code>.
+            Every Orchid UI item. The CLI flag{' '}
+            <code className="text-oc-foreground">--all</code> only installs the default shadcn kit
+            — it cannot target <code className="text-oc-foreground">@orchid</code>.
           </P>
-          <CodeBlock code="bunx shadcn add @orchid --all" />
+          <CodeBlock
+            code={`bunx shadcn add \\
+  @orchid/button @orchid/dropdown-menu @orchid/snackbar @orchid/chip \\
+  @orchid/accordion @orchid/progress-bar @orchid/list-item @orchid/input-stepper \\
+  @orchid/avatar @orchid/tooltip @orchid/tab-menu @orchid/clickable-option \\
+  @orchid/overview-item @orchid/sub-header @orchid/page-title @orchid/box-detail \\
+  @orchid/group-icon @orchid/copy-tooltip @orchid/customer-card @orchid/checkbox \\
+  @orchid/radio-group @orchid/toggle @orchid/slider @orchid/empty-page \\
+  @orchid/label @orchid/separator @orchid/field @orchid/input @orchid/textarea \\
+  @orchid/select @orchid/input-group @orchid/popover @orchid/calendar \\
+  @orchid/date-picker @orchid/modal`}
+          />
+          <P>
+            After this catalog is deployed, you can also install the same set as one item:
+          </P>
+          <CodeBlock code="bunx shadcn add @orchid/all" />
           <P>
             Files land in the <code className="text-oc-foreground">ui</code> alias. Import from{' '}
             <code className="text-oc-foreground">@/ui/button</code> (or{' '}

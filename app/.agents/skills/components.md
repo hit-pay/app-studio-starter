@@ -22,8 +22,10 @@ Base UI: `render={<Button />}`, never `asChild` or `@radix-ui/*`. No `src/compon
 
 ```bash
 bunx shadcn add @orchid/<name>
-bunx shadcn add @orchid --all
+bunx shadcn add @orchid/all
 ```
+
+Do not run `shadcn add --all` or `shadcn add @orchid --all`. `--all` only installs the default shadcn kit.
 
 ```tsx
 <Button type="Primary">Save</Button>
