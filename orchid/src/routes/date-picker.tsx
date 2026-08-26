@@ -11,14 +11,14 @@ function DatePickerExamplesPage() {
     <DocExamplePage to="/date-picker">
       <div className="space-y-8">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Basic
           </p>
           <DatePicker />
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Range
           </p>
           <DatePickerRange

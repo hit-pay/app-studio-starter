@@ -26,7 +26,7 @@ function ChipExamplesPage() {
   return (
     <DocExamplePage to="/chip">
         <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Global Chip
           </p>
           <div className="space-y-4">
@@ -49,7 +49,7 @@ function ChipExamplesPage() {
         </div>
 
         <div className="space-y-6">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             User Type Chip
           </p>
           <div className="flex flex-wrap items-center gap-3">

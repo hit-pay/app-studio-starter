@@ -16,7 +16,7 @@ function ExamplesIndexPage() {
             <ListItem className="h-full">
               <ListItemBody>
                 <ListItemTitle>{item.name}</ListItemTitle>
-                <ListItemDescription className="text-muted-foreground">
+                <ListItemDescription className="text-oc-muted-foreground">
                   {item.description}
                 </ListItemDescription>
               </ListItemBody>

@@ -33,9 +33,9 @@ function PreviewCanvas({ children }: { children: ReactNode }) {
   const { preview } = useContext(PreviewContext)
 
   return (
-    <div className="min-h-0 flex-1 overflow-auto bg-background">
+    <div className="min-h-0 flex-1 overflow-auto bg-oc-background">
       <div
-        className="w-full bg-background transition-[max-width] duration-200"
+        className="w-full bg-oc-background transition-[max-width] duration-200"
         style={{ maxWidth: PREVIEW_MAX_WIDTH[preview] }}
       >
         {children}

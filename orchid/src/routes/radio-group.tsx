@@ -11,7 +11,7 @@ function RadioGroupExamplesPage() {
     <DocExamplePage to="/radio-group">
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Vertical
           </p>
           <RadioGroup label="Label" alignment="Vertical" defaultValue="a">
@@ -23,7 +23,7 @@ function RadioGroupExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Horizontal
           </p>
           <RadioGroup label="Label" alignment="Horizontal" defaultValue="a">
@@ -34,7 +34,7 @@ function RadioGroupExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             States
           </p>
           <RadioGroup defaultValue="active">
@@ -50,7 +50,7 @@ function RadioGroupExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Description
           </p>
           <RadioGroup defaultValue="a">

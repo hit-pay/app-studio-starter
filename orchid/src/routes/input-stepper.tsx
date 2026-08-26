@@ -14,7 +14,7 @@ function InputStepperExamplesPage() {
     <DocExamplePage to="/input-stepper">
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <InputStepper
@@ -27,14 +27,14 @@ function InputStepperExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Uncontrolled
           </p>
           <InputStepper className="max-w-xs" defaultValue={3} min={1} max={10} />
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Disabled
           </p>
           <InputStepper className="max-w-xs" defaultValue={5} disabled />

@@ -37,7 +37,7 @@ function TooltipContent({
         <TooltipPrimitive.Popup
           data-slot="tooltip-content"
           className={cn(
-            'z-50 origin-(--transform-origin) rounded-lg bg-background px-2 py-1 text-xs leading-[1.5] text-foreground shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] outline-none',
+            'z-50 origin-(--transform-origin) rounded-lg bg-oc-background px-2 py-1 text-xs leading-[1.5] text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] outline-none',
             className,
           )}
           {...props}
@@ -46,7 +46,7 @@ function TooltipContent({
           {arrowHidden ? null : (
             <TooltipPrimitive.Arrow
               data-slot="tooltip-arrow"
-              className="z-0 size-2.5 rotate-45 rounded-[1px] bg-background data-[side=bottom]:-top-1 data-[side=left]:-right-1 data-[side=right]:-left-1 data-[side=top]:-bottom-1"
+              className="z-0 size-2.5 rotate-45 rounded-[1px] bg-oc-background data-[side=bottom]:-top-1 data-[side=left]:-right-1 data-[side=right]:-left-1 data-[side=top]:-bottom-1"
             />
           )}
         </TooltipPrimitive.Popup>

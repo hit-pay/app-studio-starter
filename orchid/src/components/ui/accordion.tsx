@@ -24,7 +24,7 @@ function AccordionItem({ className, ...props }: AccordionPrimitive.Item.Props) {
     <AccordionPrimitive.Item
       data-slot="accordion-item"
       className={cn(
-        'group/accordion-item overflow-clip rounded-lg border border-transparent bg-dark-blue-soft hover:border-border data-open:border-border data-open:bg-background',
+        'group/accordion-item overflow-clip rounded-lg border border-transparent bg-oc-dark-blue-soft hover:border-oc-border data-open:border-oc-border data-open:bg-oc-background',
         className,
       )}
       {...props}
@@ -67,7 +67,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          'group/accordion-trigger flex w-full cursor-pointer items-center gap-2 bg-dark-blue-soft px-3 py-2 text-left outline-none',
+          'group/accordion-trigger flex w-full cursor-pointer items-center gap-2 bg-oc-dark-blue-soft px-3 py-2 text-left outline-none',
           className,
         )}
         {...props}
@@ -82,26 +82,26 @@ function AccordionTrigger({
             <span className="flex min-w-0 flex-1 flex-col items-start gap-1">
               <span className="flex min-w-0 items-center gap-2">
                 {title ? (
-                  <span className="truncate text-[14px] font-medium leading-[1.5] text-foreground">
+                  <span className="truncate text-[14px] font-medium leading-[1.5] text-oc-foreground">
                     {title}
                   </span>
                 ) : null}
                 {label}
               </span>
               {description ? (
-                <span className="w-full truncate text-[12px] leading-[1.5] text-muted-foreground">
+                <span className="w-full truncate text-[12px] leading-[1.5] text-oc-muted-foreground">
                   {description}
                 </span>
               ) : null}
             </span>
             {progress ? (
               <span className="flex min-w-0 flex-1 items-center gap-2">
-                <span className="shrink-0 text-[12px] leading-[1.5] whitespace-nowrap text-muted-foreground">
+                <span className="shrink-0 text-[12px] leading-[1.5] whitespace-nowrap text-oc-muted-foreground">
                   {progress.label}
                 </span>
-                <span className="relative h-2 min-w-0 flex-1 overflow-clip rounded-full bg-background">
+                <span className="relative h-2 min-w-0 flex-1 overflow-clip rounded-full bg-oc-background">
                   <span
-                    className="absolute inset-y-0 left-0 rounded-full bg-primary"
+                    className="absolute inset-y-0 left-0 rounded-full bg-oc-primary"
                     style={{ width: `${Math.min(100, Math.max(0, progress.value * 100))}%` }}
                   />
                 </span>
@@ -117,7 +117,7 @@ function AccordionTrigger({
               </span>
             ) : null}
             {chevron ? (
-              <ChevronDownIcon className="size-4 shrink-0 text-foreground transition-transform group-data-open/accordion-item:rotate-180" />
+              <ChevronDownIcon className="size-4 shrink-0 text-oc-foreground transition-transform group-data-open/accordion-item:rotate-180" />
             ) : null}
           </>
         )}
@@ -131,7 +131,7 @@ function AccordionPanel({ className, ...props }: AccordionPrimitive.Panel.Props)
     <AccordionPrimitive.Panel
       data-slot="accordion-panel"
       className={cn(
-        'border-t border-border p-3 text-[14px] leading-[1.5] text-foreground',
+        'border-t border-oc-border p-3 text-[14px] leading-[1.5] text-oc-foreground',
         className,
       )}
       {...props}

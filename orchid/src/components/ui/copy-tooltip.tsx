@@ -26,7 +26,7 @@ function CopyTooltip({
               aria-label="Copy"
               data-slot="copy-tooltip"
               className={cn(
-                'inline-flex size-4 shrink-0 items-center justify-center text-muted-foreground outline-none hover:text-foreground [&_svg]:size-full',
+                'inline-flex size-4 shrink-0 items-center justify-center text-oc-muted-foreground outline-none hover:text-oc-foreground [&_svg]:size-full',
                 className,
               )}
               onClick={async (event) => {
@@ -42,7 +42,7 @@ function CopyTooltip({
             </button>
           }
         />
-        <TooltipContent side="top" className="text-muted-foreground">
+        <TooltipContent side="top" className="text-oc-muted-foreground">
           {label}
         </TooltipContent>
       </Tooltip>

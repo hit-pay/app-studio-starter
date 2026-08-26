@@ -15,10 +15,10 @@ import { Chip } from './chip'
 import { Popover, PopoverContent, PopoverTrigger } from './popover'
 
 const selectTriggerOpenClass =
-  'border-primary shadow-[0_0_0_3px_var(--info-border)]'
+  'border-oc-primary shadow-[0_0_0_3px_var(--oc-info-border)]'
 
 const selectTriggerClass =
-  'flex w-full items-center gap-2 rounded-lg border border-border bg-background px-2 text-left text-sm leading-[1.5] text-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-primary focus-visible:shadow-[0_0_0_3px_var(--info-border)] aria-expanded:border-primary aria-expanded:shadow-[0_0_0_3px_var(--info-border)] data-popup-open:border-primary data-popup-open:shadow-[0_0_0_3px_var(--info-border)] data-open:border-primary data-open:shadow-[0_0_0_3px_var(--info-border)] disabled:cursor-not-allowed disabled:bg-muted disabled:opacity-50 aria-invalid:border-destructive aria-invalid:shadow-[0_0_0_3px_var(--destructive-border)] data-placeholder:text-[#9295a5]'
+  'flex w-full items-center gap-2 rounded-lg border border-oc-border bg-oc-background px-2 text-left text-sm leading-[1.5] text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] aria-expanded:border-oc-primary aria-expanded:shadow-[0_0_0_3px_var(--oc-info-border)] data-popup-open:border-oc-primary data-popup-open:shadow-[0_0_0_3px_var(--oc-info-border)] data-open:border-oc-primary data-open:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] data-placeholder:text-[#9295a5]'
 
 const Select = SelectPrimitive.Root
 
@@ -56,14 +56,14 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         size === 'Inline'
-          ? 'inline-flex h-full w-auto shrink-0 items-center gap-1 border-0 bg-transparent px-0 text-xs font-medium leading-[1.5] text-muted-foreground shadow-none outline-none select-none'
+          ? 'inline-flex h-full w-auto shrink-0 items-center gap-1 border-0 bg-transparent px-0 text-xs font-medium leading-[1.5] text-oc-muted-foreground shadow-none outline-none select-none'
           : cn(selectTriggerClass, 'h-9'),
         className,
       )}
       {...props}
     >
       {children}
-      {size === 'Inline' ? <ChevronDownIcon className="size-3.5 text-muted-foreground" /> : null}
+      {size === 'Inline' ? <ChevronDownIcon className="size-3.5 text-oc-muted-foreground" /> : null}
     </SelectPrimitive.Trigger>
   )
 }
@@ -95,7 +95,7 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            'relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-border bg-background p-2 text-foreground shadow-[0_3px_11px_rgba(38,42,50,0.09)] outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-[0_3px_11px_rgba(38,42,50,0.09)] outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
@@ -114,7 +114,7 @@ function SelectLabel({ className, ...props }: SelectPrimitive.GroupLabel.Props) 
     <SelectPrimitive.GroupLabel
       data-slot="select-label"
       className={cn(
-        'px-2 pt-2 pb-1 text-[10px] leading-[18px] font-medium tracking-[0.3px] text-foreground uppercase',
+        'px-2 pt-2 pb-1 text-[10px] leading-[18px] font-medium tracking-[0.3px] text-oc-foreground uppercase',
         className,
       )}
       {...props}
@@ -143,7 +143,7 @@ function SelectSeparator({ className, ...props }: SelectPrimitive.Separator.Prop
   return (
     <SelectPrimitive.Separator
       data-slot="select-separator"
-      className={cn('pointer-events-none my-1 h-px bg-border', className)}
+      className={cn('pointer-events-none my-1 h-px bg-oc-border', className)}
       {...props}
     />
   )
@@ -156,7 +156,7 @@ function SelectScrollUpButton({
   return (
     <SelectPrimitive.ScrollUpArrow
       data-slot="select-scroll-up-button"
-      className={cn('top-0 z-10 flex w-full items-center justify-center bg-background py-1', className)}
+      className={cn('top-0 z-10 flex w-full items-center justify-center bg-oc-background py-1', className)}
       {...props}
     >
       <ChevronUpIcon className="size-4" />
@@ -172,7 +172,7 @@ function SelectScrollDownButton({
     <SelectPrimitive.ScrollDownArrow
       data-slot="select-scroll-down-button"
       className={cn(
-        'bottom-0 z-10 flex w-full items-center justify-center bg-background py-1',
+        'bottom-0 z-10 flex w-full items-center justify-center bg-oc-background py-1',
         className,
       )}
       {...props}
@@ -272,7 +272,7 @@ function SelectMultiple({
         <PopoverContent
           align="start"
           sideOffset={4}
-          className="w-(--anchor-width) min-w-(--anchor-width) gap-0.5 overflow-x-hidden overflow-y-auto border border-border p-2 shadow-[0_3px_11px_rgba(38,42,50,0.09)]"
+          className="w-(--anchor-width) min-w-(--anchor-width) gap-0.5 overflow-x-hidden overflow-y-auto border border-oc-border p-2 shadow-[0_3px_11px_rgba(38,42,50,0.09)]"
         >
           {children}
         </PopoverContent>
@@ -290,7 +290,7 @@ function SelectMultipleLabel({ className, ...props }: ComponentProps<'p'>) {
     <p
       data-slot="select-multiple-label"
       className={cn(
-        'px-2 pt-2 pb-1 text-[10px] leading-[18px] font-medium tracking-[0.3px] text-foreground uppercase',
+        'px-2 pt-2 pb-1 text-[10px] leading-[18px] font-medium tracking-[0.3px] text-oc-foreground uppercase',
         className,
       )}
       {...props}
@@ -317,7 +317,7 @@ function SelectMultipleItem({
       data-slot="select-multiple-item"
       data-selected={isSelected || undefined}
       className={cn(
-        'flex w-full items-center rounded p-2 text-left text-sm leading-[1.5] text-foreground outline-none hover:bg-[#f5f6f9] data-selected:bg-[#f5f6f9]',
+        'flex w-full items-center rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-[#f5f6f9] data-selected:bg-[#f5f6f9]',
         isSelected && 'bg-[#f5f6f9]',
         className,
       )}

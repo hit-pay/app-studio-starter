@@ -12,9 +12,9 @@ const inputGroupVariants = cva(
     variants: {
       variant: {
         Default:
-          'rounded-lg border border-border bg-background shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] has-disabled:bg-muted has-[[data-slot=input-group-control]:focus-visible]:border-primary has-[[data-slot=input-group-control]:focus-visible]:shadow-[0_0_0_3px_var(--info-border)] has-[[data-slot][aria-invalid=true]]:border-destructive has-[[data-slot][aria-invalid=true]]:shadow-[0_0_0_3px_var(--destructive-border)]',
+          'rounded-lg border border-oc-border bg-oc-background shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] has-disabled:bg-oc-muted has-[[data-slot=input-group-control]:focus-visible]:border-oc-primary has-[[data-slot=input-group-control]:focus-visible]:shadow-[0_0_0_3px_var(--oc-info-border)] has-[[data-slot][aria-invalid=true]]:border-oc-destructive has-[[data-slot][aria-invalid=true]]:shadow-[0_0_0_3px_var(--oc-destructive-border)]',
         Underline:
-          'rounded-none border-0 border-b border-border bg-transparent shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-primary has-[[data-slot][aria-invalid=true]]:border-destructive',
+          'rounded-none border-0 border-b border-oc-border bg-transparent shadow-none has-[[data-slot=input-group-control]:focus-visible]:border-oc-primary has-[[data-slot][aria-invalid=true]]:border-oc-destructive',
       },
     },
     defaultVariants: {
@@ -40,7 +40,7 @@ function InputGroup({
 }
 
 const inputGroupAddonVariants = cva(
-  'flex h-auto cursor-text items-center justify-center gap-2 text-sm text-muted-foreground select-none [&_svg:not([class*=\'size-\'])]:size-4',
+  'flex h-auto cursor-text items-center justify-center gap-2 text-sm text-oc-muted-foreground select-none [&_svg:not([class*=\'size-\'])]:size-4',
   {
     variants: {
       align: {
@@ -102,7 +102,7 @@ function InputGroupSeparator({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="input-group-separator"
-      className={cn('w-px self-stretch bg-border', className)}
+      className={cn('w-px self-stretch bg-oc-border', className)}
       {...props}
     />
   )
@@ -112,7 +112,7 @@ function InputGroupText({ className, ...props }: ComponentProps<'span'>) {
   return (
     <span
       className={cn(
-        'flex items-center gap-2 text-sm text-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*=\'size-\'])]:size-4',
+        'flex items-center gap-2 text-sm text-oc-muted-foreground [&_svg]:pointer-events-none [&_svg:not([class*=\'size-\'])]:size-4',
         className,
       )}
       {...props}

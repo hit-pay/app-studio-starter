@@ -18,7 +18,7 @@ const buttonVariants = cva(
       style: {
         Default: '',
         Transparent: 'border-transparent bg-transparent shadow-none [text-shadow:none]',
-        Border: 'bg-background shadow-none [text-shadow:none] border-[1.5px]',
+        Border: 'bg-oc-background shadow-none [text-shadow:none] border-[1.5px]',
       },
       size: {
         Small:
@@ -44,55 +44,55 @@ const buttonVariants = cva(
         type: 'Primary',
         style: 'Default',
         class:
-          'border-primary-button-border bg-linear-to-b from-primary-button-default-start to-primary-button-default-stop text-primary-button-text shadow-[0_1.5px_0_0_var(--primary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-primary-button-hover-start hover:to-primary-button-hover-stop active:from-primary-button-pressed-start active:to-primary-button-pressed-stop active:shadow-none disabled:from-primary-button-disabled-start disabled:to-primary-button-disabled-stop disabled:shadow-none',
+          'border-oc-primary-button-border bg-linear-to-b from-oc-primary-button-default-start to-oc-primary-button-default-stop text-oc-primary-button-text shadow-[0_1.5px_0_0_var(--oc-primary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-oc-primary-button-hover-start hover:to-oc-primary-button-hover-stop active:from-oc-primary-button-pressed-start active:to-oc-primary-button-pressed-stop active:shadow-none disabled:from-oc-primary-button-disabled-start disabled:to-oc-primary-button-disabled-stop disabled:shadow-none',
       },
       {
         type: 'Primary',
         style: 'Transparent',
         class:
-          'text-primary hover:text-primary-300 active:text-primary-button-default-stop',
+          'text-oc-primary hover:text-oc-primary-300 active:text-oc-primary-button-default-stop',
       },
       {
         type: 'Primary',
         style: 'Border',
         class:
-          'border-primary text-primary hover:bg-info-soft active:bg-primary/15',
+          'border-oc-primary text-oc-primary hover:bg-oc-info-soft active:bg-oc-primary/15',
       },
       {
         type: 'Destructive',
         style: 'Default',
         class:
-          'border-destructive-button-border bg-linear-to-b from-destructive-button-default-start to-destructive-button-default-stop text-destructive-button-text shadow-[0_1.5px_0_0_var(--destructive-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-destructive-button-hover-start hover:to-destructive-button-hover-stop active:from-destructive-button-pressed-start active:to-destructive-button-pressed-stop active:shadow-none disabled:from-destructive-button-disabled-start disabled:to-destructive-button-disabled-stop disabled:shadow-none',
+          'border-oc-destructive-button-border bg-linear-to-b from-oc-destructive-button-default-start to-oc-destructive-button-default-stop text-oc-destructive-button-text shadow-[0_1.5px_0_0_var(--oc-destructive-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-oc-destructive-button-hover-start hover:to-oc-destructive-button-hover-stop active:from-oc-destructive-button-pressed-start active:to-oc-destructive-button-pressed-stop active:shadow-none disabled:from-oc-destructive-button-disabled-start disabled:to-oc-destructive-button-disabled-stop disabled:shadow-none',
       },
       {
         type: 'Destructive',
         style: 'Transparent',
         class:
-          'text-destructive hover:text-destructive/80 active:text-destructive-button-default-stop',
+          'text-oc-destructive hover:text-oc-destructive/80 active:text-oc-destructive-button-default-stop',
       },
       {
         type: 'Destructive',
         style: 'Border',
         class:
-          'border-destructive text-destructive hover:bg-destructive-soft active:bg-destructive/15',
+          'border-oc-destructive text-oc-destructive hover:bg-oc-destructive-soft active:bg-oc-destructive/15',
       },
       {
         type: 'Secondary',
         style: 'Default',
         class:
-          'border-secondary-button-border bg-linear-to-b from-secondary-button-default-start to-secondary-button-default-stop text-secondary-button-text shadow-[0_1.5px_0_0_var(--secondary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.08)] hover:from-secondary-button-hover-start hover:to-secondary-button-hover-stop active:from-secondary-button-pressed-start active:to-secondary-button-pressed-stop active:shadow-none disabled:from-secondary-button-disabled-start disabled:to-secondary-button-disabled-stop disabled:shadow-none',
+          'border-oc-secondary-button-border bg-linear-to-b from-oc-secondary-button-default-start to-oc-secondary-button-default-stop text-oc-secondary-button-text shadow-[0_1.5px_0_0_var(--oc-secondary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.08)] hover:from-oc-secondary-button-hover-start hover:to-oc-secondary-button-hover-stop active:from-oc-secondary-button-pressed-start active:to-oc-secondary-button-pressed-stop active:shadow-none disabled:from-oc-secondary-button-disabled-start disabled:to-oc-secondary-button-disabled-stop disabled:shadow-none',
       },
       {
         type: 'Secondary',
         style: 'Transparent',
         class:
-          'text-secondary-button-text hover:text-foreground active:text-foreground',
+          'text-oc-secondary-button-text hover:text-oc-foreground active:text-oc-foreground',
       },
       {
         type: 'Secondary',
         style: 'Border',
         class:
-          'border-border text-secondary-button-text hover:bg-muted active:bg-accent',
+          'border-oc-border text-oc-secondary-button-text hover:bg-oc-muted active:bg-oc-accent',
       },
     ],
     defaultVariants: {
@@ -188,10 +188,10 @@ function Button({
     resolvedStyle !== 'Default'
       ? ''
       : resolvedType === 'Destructive'
-        ? 'shadow-[0_1.5px_0_0_var(--destructive-button-shadow)]'
+        ? 'shadow-[0_1.5px_0_0_var(--oc-destructive-button-shadow)]'
         : resolvedType === 'Secondary'
-          ? 'shadow-[0_1.5px_0_0_var(--secondary-button-shadow)]'
-          : 'shadow-[0_1.5px_0_0_var(--primary-button-shadow)]'
+          ? 'shadow-[0_1.5px_0_0_var(--oc-secondary-button-shadow)]'
+          : 'shadow-[0_1.5px_0_0_var(--oc-primary-button-shadow)]'
 
   const actionIcon = additional ?? <ChevronDownIcon />
   const showSplit = additional != null || menu != null

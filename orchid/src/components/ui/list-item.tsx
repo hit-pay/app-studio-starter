@@ -15,10 +15,10 @@ function ListItem({
       data-slot="list-item"
       data-selected={selected || undefined}
       className={cn(
-        'group/list-item relative flex w-full items-start gap-3 rounded-lg border border-solid bg-background px-4 py-3',
+        'group/list-item relative flex w-full items-start gap-3 rounded-lg border border-solid bg-oc-background px-4 py-3',
         selected
-          ? 'border-2 border-primary'
-          : 'border-border hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
+          ? 'border-2 border-oc-primary'
+          : 'border-oc-border hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
         className,
       )}
       {...props}
@@ -31,7 +31,7 @@ function ListItemMedia({ className, ...props }: ComponentProps<'div'>) {
     <div
       data-slot="list-item-media"
       className={cn(
-        'size-16 shrink-0 overflow-clip rounded-lg border border-border bg-background',
+        'size-16 shrink-0 overflow-clip rounded-lg border border-oc-border bg-oc-background',
         className,
       )}
       {...props}
@@ -44,7 +44,7 @@ function ListItemLogo({ className, ...props }: ComponentProps<'div'>) {
     <div
       data-slot="list-item-logo"
       className={cn(
-        'flex size-10 shrink-0 items-center justify-center rounded bg-dark-blue-soft p-1 [&_svg]:size-8',
+        'flex size-10 shrink-0 items-center justify-center rounded bg-oc-dark-blue-soft p-1 [&_svg]:size-8',
         className,
       )}
       {...props}
@@ -66,7 +66,7 @@ function ListItemTitle({ className, ...props }: ComponentProps<'p'>) {
   return (
     <p
       data-slot="list-item-title"
-      className={cn('text-sm font-medium leading-[1.5] text-foreground', className)}
+      className={cn('text-sm font-medium leading-[1.5] text-oc-foreground', className)}
       {...props}
     />
   )
@@ -76,7 +76,7 @@ function ListItemDescription({ className, ...props }: ComponentProps<'p'>) {
   return (
     <p
       data-slot="list-item-description"
-      className={cn('text-xs leading-[1.5] text-foreground', className)}
+      className={cn('text-xs leading-[1.5] text-oc-foreground', className)}
       {...props}
     />
   )
@@ -101,7 +101,7 @@ function ListItemDetail({
   return (
     <span
       data-slot="list-item-detail"
-      className={cn('inline-flex items-center gap-1 text-xs leading-[1.5] text-foreground', className)}
+      className={cn('inline-flex items-center gap-1 text-xs leading-[1.5] text-oc-foreground', className)}
       {...props}
     >
       {icon ? <span className="inline-flex size-4 shrink-0 [&_svg]:size-4">{icon}</span> : null}
@@ -125,7 +125,7 @@ function ListItemHoverActions({ className, children, ...props }: ComponentProps<
     <div
       data-slot="list-item-hover-actions"
       className={cn(
-        'absolute top-3 right-4 z-10 hidden items-center gap-0.5 rounded border border-dark-blue-border bg-background p-0.5 group-hover/list-item:flex',
+        'absolute top-3 right-4 z-10 hidden items-center gap-0.5 rounded border border-oc-dark-blue-border bg-oc-background p-0.5 group-hover/list-item:flex',
         className,
       )}
       {...props}
@@ -146,7 +146,7 @@ function ListItemAction({
       data-slot="list-item-action"
       className={cn(
         'inline-flex size-6 items-center justify-center rounded p-1 outline-none',
-        destructive ? 'text-destructive' : 'text-foreground',
+        destructive ? 'text-oc-destructive' : 'text-oc-foreground',
         className,
       )}
       {...props}
@@ -155,7 +155,7 @@ function ListItemAction({
 }
 
 function ListItemActionDivider() {
-  return <span className="h-4 w-px bg-dark-blue-border" data-slot="list-item-action-divider" />
+  return <span className="h-4 w-px bg-oc-dark-blue-border" data-slot="list-item-action-divider" />
 }
 
 function ListItemMore({ className, menu }: { className?: string; menu?: ReactNode }) {
@@ -169,7 +169,7 @@ function ListItemMore({ className, menu }: { className?: string; menu?: ReactNod
         )}
         render={
           <button type="button" aria-label="More">
-            <EllipsisIcon className="size-[22px] text-foreground" />
+            <EllipsisIcon className="size-[22px] text-oc-foreground" />
           </button>
         }
       />
@@ -189,12 +189,12 @@ function ListItemCopyRow({
 }) {
   return (
     <div data-slot="list-item-copy-row" className={cn('flex min-w-0 items-start gap-2 text-xs', className)}>
-      <span className="shrink-0 font-medium leading-[1.5] text-muted-foreground">{label}</span>
+      <span className="shrink-0 font-medium leading-[1.5] text-oc-muted-foreground">{label}</span>
       <span className="group/copy flex min-w-0 items-center gap-2">
-        <span className="min-w-0 break-all leading-[1.5] text-foreground">{value}</span>
+        <span className="min-w-0 break-all leading-[1.5] text-oc-foreground">{value}</span>
         <CopyTooltip
           value={value}
-          className="text-foreground opacity-0 group-hover/copy:opacity-100"
+          className="text-oc-foreground opacity-0 group-hover/copy:opacity-100"
         />
       </span>
     </div>
@@ -206,7 +206,7 @@ function ListItemMethod({ className, children, ...props }: ComponentProps<'span'
     <span
       data-slot="list-item-method"
       className={cn(
-        'inline-flex h-6 min-w-[35px] items-center justify-center overflow-clip rounded border border-border bg-background px-1 text-[10px] font-medium text-foreground',
+        'inline-flex h-6 min-w-[35px] items-center justify-center overflow-clip rounded border border-oc-border bg-oc-background px-1 text-[10px] font-medium text-oc-foreground',
         className,
       )}
       {...props}

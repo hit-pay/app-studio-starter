@@ -5,17 +5,17 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 
 const snackbarVariants = cva(
-  'group/snackbar relative flex rounded-lg border border-solid text-foreground',
+  'group/snackbar relative flex rounded-lg border border-solid text-oc-foreground',
   {
     variants: {
       color: {
         Default:
-          'border-success-border bg-success-soft [&_[data-slot=snackbar-icon]]:text-success',
-        Blue: 'border-info-border bg-info-soft [&_[data-slot=snackbar-icon]]:text-primary',
-        Red: 'border-destructive-border bg-destructive-soft [&_[data-slot=snackbar-icon]]:text-destructive',
+          'border-oc-success-border bg-oc-success-soft [&_[data-slot=snackbar-icon]]:text-oc-success',
+        Blue: 'border-oc-info-border bg-oc-info-soft [&_[data-slot=snackbar-icon]]:text-oc-primary',
+        Red: 'border-oc-destructive-border bg-oc-destructive-soft [&_[data-slot=snackbar-icon]]:text-oc-destructive',
         Orange:
-          'border-warning-border bg-warning-soft [&_[data-slot=snackbar-icon]]:text-warning',
-        Grey: 'border-neutral-border bg-neutral-soft [&_[data-slot=snackbar-icon]]:text-muted-foreground',
+          'border-oc-warning-border bg-oc-warning-soft [&_[data-slot=snackbar-icon]]:text-oc-warning',
+        Grey: 'border-oc-neutral-border bg-oc-neutral-soft [&_[data-slot=snackbar-icon]]:text-oc-muted-foreground',
       },
       size: {
         Small: 'w-fit items-center gap-1 py-2 pr-3 pl-2 text-xs leading-[1.5]',
@@ -35,7 +35,7 @@ const snackbarVariants = cva(
       {
         color: 'Grey',
         size: 'Big',
-        class: 'border-border bg-neutral',
+        class: 'border-oc-border bg-oc-neutral',
       },
       {
         size: 'Small',
@@ -141,7 +141,7 @@ function Snackbar({
               : 'absolute -top-1.5 -right-1.5 opacity-25 hover:opacity-50',
           )}
         >
-          <span className="flex size-5 items-center justify-center rounded-full bg-foreground">
+          <span className="flex size-5 items-center justify-center rounded-full bg-oc-foreground">
             <XIcon className="size-2.5 text-white" strokeWidth={3} />
           </span>
         </button>
@@ -158,7 +158,7 @@ function SnackbarIcon({ className, ...props }: React.ComponentProps<'span'>) {
         'inline-flex shrink-0 items-center justify-center [&_svg]:size-full',
         'group-data-[size=Small]/snackbar:size-4',
         'group-data-[size=Default]/snackbar:size-6',
-        'group-data-[size=Big]/snackbar:size-12 group-data-[size=Big]/snackbar:rounded-lg group-data-[size=Big]/snackbar:bg-background group-data-[size=Big]/snackbar:p-3 group-data-[size=Big]/snackbar:shadow-[0_3px_22px_rgba(38,42,50,0.09)]',
+        'group-data-[size=Big]/snackbar:size-12 group-data-[size=Big]/snackbar:rounded-lg group-data-[size=Big]/snackbar:bg-oc-background group-data-[size=Big]/snackbar:p-3 group-data-[size=Big]/snackbar:shadow-[0_3px_22px_rgba(38,42,50,0.09)]',
         className,
       )}
       {...props}
@@ -187,7 +187,7 @@ function SnackbarTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="snackbar-title"
-      className={cn('w-full text-sm font-medium text-foreground', className)}
+      className={cn('w-full text-sm font-medium text-oc-foreground', className)}
       {...props}
     />
   )
@@ -198,7 +198,7 @@ function SnackbarDescription({ className, ...props }: React.ComponentProps<'div'
     <div
       data-slot="snackbar-description"
       className={cn(
-        'text-foreground [&_a]:text-primary [&_a]:underline-offset-2 hover:[&_a]:underline',
+        'text-oc-foreground [&_a]:text-oc-primary [&_a]:underline-offset-2 hover:[&_a]:underline',
         'group-data-[size=Small]/snackbar:text-xs',
         'group-data-[size=Default]/snackbar:text-sm',
         'group-data-[size=Big]/snackbar:w-full group-data-[size=Big]/snackbar:text-xs',

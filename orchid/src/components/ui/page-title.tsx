@@ -29,17 +29,17 @@ function PageTitle({
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
           {loading ? (
-            <span className="h-6 min-w-0 flex-1 animate-pulse rounded bg-neutral-soft" />
+            <span className="h-6 min-w-0 flex-1 animate-pulse rounded bg-oc-neutral-soft" />
           ) : (
-            <h1 className="min-w-0 text-[18px] font-medium leading-6 text-foreground">{title}</h1>
+            <h1 className="min-w-0 text-[18px] font-medium leading-6 text-oc-foreground">{title}</h1>
           )}
           {chip && !loading ? chip : null}
         </div>
         {loading ? (
-          <span className="h-5 min-w-0 flex-1 animate-pulse rounded bg-neutral-soft" />
+          <span className="h-5 min-w-0 flex-1 animate-pulse rounded bg-oc-neutral-soft" />
         ) : description ? (
           <div className="flex min-w-0 items-center gap-2">
-            <p className="min-w-0 text-[14px] leading-5 text-muted-foreground">{description}</p>
+            <p className="min-w-0 text-[14px] leading-5 text-oc-muted-foreground">{description}</p>
             {copyValue ? <CopyTooltip value={copyValue} /> : null}
           </div>
         ) : null}

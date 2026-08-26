@@ -10,8 +10,8 @@ function DocSidebar() {
   if (pathname === '/') return null
 
   return (
-    <aside className="hidden h-full w-56 shrink-0 flex-col overflow-y-auto border-r border-solid border-border bg-background md:flex">
-      <p className="sticky top-0 bg-background px-4 pt-4 pb-2 text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+    <aside className="hidden h-full w-56 shrink-0 flex-col overflow-y-auto border-r border-solid border-oc-border bg-oc-background md:flex">
+      <p className="sticky top-0 bg-oc-background px-4 pt-4 pb-2 text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
         Components
       </p>
       <nav className="px-3 pb-4">

@@ -30,7 +30,7 @@ function CheckboxGroup({
   return (
     <div className="flex w-full flex-col items-start gap-2">
       {label ? (
-        <p className="text-xs font-medium leading-[1.5] text-muted-foreground">{label}</p>
+        <p className="text-xs font-medium leading-[1.5] text-oc-muted-foreground">{label}</p>
       ) : null}
       <CheckboxGroupPrimitive
         data-slot="checkbox-group"
@@ -46,13 +46,13 @@ const checkboxControlVariants = cva(
   [
     'inline-flex size-4 shrink-0 items-center justify-center rounded border border-solid outline-none',
     'shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
-    'bg-background border-border text-primary-foreground',
-    'hover:border-primary hover:shadow-[0_0_0_3px_var(--info-border)]',
-    'data-checked:border-primary data-checked:bg-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
-    'data-indeterminate:border-primary data-indeterminate:bg-info-soft data-indeterminate:text-primary',
-    'data-disabled:pointer-events-none data-disabled:border-border data-disabled:bg-dark-blue-soft data-disabled:text-primary-foreground data-disabled:shadow-none',
-    'data-disabled:data-checked:border-dark-blue-border data-disabled:data-checked:bg-dark-blue-border',
-    'data-[error=true]:border-destructive data-[error=true]:shadow-[0_0_0_3px_var(--destructive-border)]',
+    'bg-oc-background border-oc-border text-oc-primary-foreground',
+    'hover:border-oc-primary hover:shadow-[0_0_0_3px_var(--oc-info-border)]',
+    'data-checked:border-oc-primary data-checked:bg-oc-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+    'data-indeterminate:border-oc-primary data-indeterminate:bg-oc-info-soft data-indeterminate:text-oc-primary',
+    'data-disabled:pointer-events-none data-disabled:border-oc-border data-disabled:bg-oc-dark-blue-soft data-disabled:text-oc-primary-foreground data-disabled:shadow-none',
+    'data-disabled:data-checked:border-oc-dark-blue-border data-disabled:data-checked:bg-oc-dark-blue-border',
+    'data-[error=true]:border-oc-destructive data-[error=true]:shadow-[0_0_0_3px_var(--oc-destructive-border)]',
   ].join(' '),
 )
 
@@ -71,7 +71,7 @@ function Checkbox({
   return (
     <label
       className={cn(
-        'inline-flex items-start gap-2 text-xs leading-[1.5] text-foreground',
+        'inline-flex items-start gap-2 text-xs leading-[1.5] text-oc-foreground',
         'has-data-disabled:text-[#9295a5]',
         className,
       )}
@@ -95,7 +95,7 @@ function Checkbox({
         <span className="flex min-w-0 flex-col gap-0.5">
           {children ? <span>{children}</span> : null}
           {description ? (
-            <span className="text-xs leading-[1.5] text-muted-foreground">{description}</span>
+            <span className="text-xs leading-[1.5] text-oc-muted-foreground">{description}</span>
           ) : null}
         </span>
       ) : null}

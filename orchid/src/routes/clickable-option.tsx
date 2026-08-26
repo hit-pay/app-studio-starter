@@ -11,7 +11,7 @@ function ClickableOptionExamplesPage() {
   return (
     <DocExamplePage to="/clickable-option">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Left
           </p>
           <ClickableOptionGroup defaultValue="email">
@@ -43,7 +43,7 @@ function ClickableOptionExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Center
           </p>
           <ClickableOptionGroup defaultValue="email" alignment="Horizontal">

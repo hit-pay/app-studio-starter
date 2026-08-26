@@ -6,9 +6,9 @@ import { cn } from '@/lib/utils'
 const toggleVariants = cva(
   [
     'group/toggle relative inline-flex shrink-0 items-center rounded-full border border-solid border-transparent outline-none',
-    'bg-neutral-border',
-    'hover:shadow-[0_0_0_3px_var(--info-border)]',
-    'data-checked:bg-primary data-checked:hover:shadow-none',
+    'bg-oc-neutral-border',
+    'hover:shadow-[0_0_0_3px_var(--oc-info-border)]',
+    'data-checked:bg-oc-primary data-checked:hover:shadow-none',
     'data-disabled:pointer-events-none data-disabled:opacity-50 data-disabled:shadow-none',
   ].join(' '),
   {
@@ -25,7 +25,7 @@ const toggleVariants = cva(
 )
 
 const toggleThumbVariants = cva(
-  'block rounded-full bg-background shadow-[0_1px_2px_rgba(0,0,0,0.16)] transition-transform',
+  'block rounded-full bg-oc-background shadow-[0_1px_2px_rgba(0,0,0,0.16)] transition-transform',
   {
     variants: {
       size: {

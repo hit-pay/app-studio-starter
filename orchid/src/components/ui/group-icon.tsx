@@ -9,7 +9,7 @@ const groupIconVariants = cva('inline-flex items-center gap-0.5', {
   variants: {
     type: {
       Default: '',
-      Border: 'rounded border border-solid border-dark-blue-border bg-background p-0.5',
+      Border: 'rounded border border-solid border-oc-dark-blue-border bg-oc-background p-0.5',
     },
   },
   defaultVariants: {
@@ -18,7 +18,7 @@ const groupIconVariants = cva('inline-flex items-center gap-0.5', {
 })
 
 const groupIconItemVariants = cva(
-  'inline-flex size-6 shrink-0 items-center justify-center rounded p-1 text-foreground outline-none hover:bg-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
+  'inline-flex size-6 shrink-0 items-center justify-center rounded p-1 text-oc-foreground outline-none hover:bg-oc-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 )
 
 function GroupIcon({
@@ -61,7 +61,7 @@ function GroupIconLink({ className, ...props }: ComponentProps<'a'>) {
 
 function GroupIconDivider() {
   return (
-    <span data-slot="group-icon-divider" className="h-4 w-px shrink-0 bg-dark-blue-border" />
+    <span data-slot="group-icon-divider" className="h-4 w-px shrink-0 bg-oc-dark-blue-border" />
   )
 }
 

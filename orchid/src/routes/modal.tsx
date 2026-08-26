@@ -11,13 +11,13 @@ function ModalExamplesPage() {
   return (
     <DocExamplePage to="/modal">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <Modal>
             <ModalTrigger render={<Button type="Primary" />}>Open Default</ModalTrigger>
             <ModalPopup title="Modal Title" description="Modal Description">
-              <p className="text-sm leading-[1.5] text-foreground">
+              <p className="text-sm leading-[1.5] text-oc-foreground">
                 Review this payment before you confirm. You can still cancel or go back.
               </p>
             </ModalPopup>
@@ -25,7 +25,7 @@ function ModalExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Size
           </p>
           <div className="flex flex-wrap gap-3">
@@ -38,7 +38,7 @@ function ModalExamplesPage() {
                 confirmType="Destructive"
                 confirmLabel="Delete"
               >
-                <p className="text-sm leading-[1.5] text-foreground">
+                <p className="text-sm leading-[1.5] text-oc-foreground">
                   Delete this payment method from the account?
                 </p>
               </ModalPopup>
@@ -46,7 +46,7 @@ function ModalExamplesPage() {
             <Modal>
               <ModalTrigger render={<Button type="Secondary" style="Border" />}>Medium</ModalTrigger>
               <ModalPopup size="Medium" title="Modal Title" description="Modal Description">
-                <p className="text-sm leading-[1.5] text-foreground">
+                <p className="text-sm leading-[1.5] text-oc-foreground">
                   Medium width, used for most create and edit dialogs.
                 </p>
               </ModalPopup>
@@ -54,7 +54,7 @@ function ModalExamplesPage() {
             <Modal>
               <ModalTrigger render={<Button type="Secondary" style="Border" />}>Default</ModalTrigger>
               <ModalPopup size="Default" title="Modal Title" description="Modal Description">
-                <p className="text-sm leading-[1.5] text-foreground">
+                <p className="text-sm leading-[1.5] text-oc-foreground">
                   Default width for longer forms and detail content.
                 </p>
               </ModalPopup>
@@ -63,7 +63,7 @@ function ModalExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Borderless
           </p>
           <Modal>
@@ -71,7 +71,7 @@ function ModalExamplesPage() {
               Open Borderless
             </ModalTrigger>
             <ModalPopup borderless title="Are you sure?" confirmLabel="Yes" cancelLabel="No">
-              <p className="py-5 text-sm leading-[1.5] text-foreground">
+              <p className="py-5 text-sm leading-[1.5] text-oc-foreground">
                 Header and footer have no dividers.
               </p>
             </ModalPopup>
@@ -79,7 +79,7 @@ function ModalExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Persistent
           </p>
           <Modal persistent>
@@ -87,7 +87,7 @@ function ModalExamplesPage() {
               Open Persistent
             </ModalTrigger>
             <ModalPopup title="Complete this step" description="Clicking outside will not close.">
-              <p className="text-sm leading-[1.5] text-foreground">
+              <p className="text-sm leading-[1.5] text-oc-foreground">
                 Use Cancel or the close icon to dismiss.
               </p>
             </ModalPopup>
@@ -95,7 +95,7 @@ function ModalExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             No footer
           </p>
           <Modal>
@@ -103,7 +103,7 @@ function ModalExamplesPage() {
               Open Without Footer
             </ModalTrigger>
             <ModalPopup footer={false} title="Details" description="Read-only overlay">
-              <p className="text-sm leading-[1.5] text-foreground">
+              <p className="text-sm leading-[1.5] text-oc-foreground">
                 Close with the icon in the header.
               </p>
             </ModalPopup>

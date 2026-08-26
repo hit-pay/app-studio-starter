@@ -21,7 +21,7 @@ function DocExamplePage({
       : DOC_COMPONENTS.find((entry) => entry.to === to)
 
   return (
-    <main className="bg-background">
+    <main className="bg-oc-background">
       <section className={cn('space-y-12 px-8 py-12', className)}>
         {item ? <PageTitle title={item.name} description={item.description} /> : null}
         {children}

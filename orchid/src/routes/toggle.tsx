@@ -11,7 +11,7 @@ function ToggleExamplesPage() {
     <DocExamplePage to="/toggle">
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <div className="flex items-center gap-4">
@@ -23,7 +23,7 @@ function ToggleExamplesPage() {
         </div>
 
         <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Small
           </p>
           <div className="flex items-center gap-4">

@@ -20,7 +20,7 @@ function OverviewItemExamplesPage() {
     <TooltipProvider>
       <DocExamplePage to="/overview-item">
           <div className="space-y-4">
-            <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
               4 items
             </p>
             <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
@@ -60,7 +60,7 @@ function OverviewItemExamplesPage() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
               Default
             </p>
             <OverviewItem
@@ -75,7 +75,7 @@ function OverviewItemExamplesPage() {
           </div>
 
           <div className="space-y-4">
-            <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+            <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
               Footer
             </p>
             <OverviewItem

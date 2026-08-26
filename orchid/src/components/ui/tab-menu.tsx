@@ -15,8 +15,8 @@ const TabMenuContext = createContext<{ type: TabMenuType; size: TabMenuSize }>({
 const tabMenuListVariants = cva('relative flex min-w-0 items-stretch', {
   variants: {
     type: {
-      Default: 'w-full gap-0 border-b border-solid border-border',
-      Pills: 'w-fit gap-1 rounded-lg bg-dark-blue-soft p-1',
+      Default: 'w-full gap-0 border-b border-solid border-oc-border',
+      Pills: 'w-fit gap-1 rounded-lg bg-oc-dark-blue-soft p-1',
     },
   },
   defaultVariants: {
@@ -30,9 +30,9 @@ const tabMenuTabVariants = cva(
     variants: {
       type: {
         Default:
-          'rounded-none text-muted-foreground hover:text-foreground data-active:text-foreground',
+          'rounded-none text-oc-muted-foreground hover:text-oc-foreground data-active:text-oc-foreground',
         Pills:
-          'rounded-md text-muted-foreground hover:text-foreground data-active:bg-background data-active:text-foreground data-active:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+          'rounded-md text-oc-muted-foreground hover:text-oc-foreground data-active:bg-oc-background data-active:text-oc-foreground data-active:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
       },
       size: {
         Default: 'px-3 py-2 text-sm leading-[1.5] font-medium',
@@ -81,7 +81,7 @@ function TabMenuList({ className, children, ...props }: TabsPrimitive.List.Props
       {type === 'Default' ? (
         <TabsPrimitive.Indicator
           data-slot="tab-menu-indicator"
-          className="pointer-events-none absolute bottom-0 left-0 z-10 h-0.5 bg-primary transition-[translate,width] duration-200"
+          className="pointer-events-none absolute bottom-0 left-0 z-10 h-0.5 bg-oc-primary transition-[translate,width] duration-200"
           style={{
             width: 'var(--active-tab-width)',
             translate: 'var(--active-tab-left) 0',
@@ -115,7 +115,7 @@ function TabMenuTab({
       ) : null}
       {children}
       {count != null ? (
-        <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-neutral-soft px-1.5 text-xs font-medium leading-[1.5] text-muted-foreground">
+        <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-oc-neutral-soft px-1.5 text-xs font-medium leading-[1.5] text-oc-muted-foreground">
           {count}
         </span>
       ) : null}
@@ -127,7 +127,7 @@ function TabMenuPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
   return (
     <TabsPrimitive.Panel
       data-slot="tab-menu-panel"
-      className={cn('w-full text-sm leading-[1.5] text-foreground outline-none', className)}
+      className={cn('w-full text-sm leading-[1.5] text-oc-foreground outline-none', className)}
       {...props}
     />
   )

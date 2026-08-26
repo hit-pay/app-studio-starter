@@ -11,7 +11,7 @@ function TabMenuExamplesPage() {
   return (
     <DocExamplePage to="/tab-menu">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <TabMenu defaultValue="a" type="Default">
@@ -29,7 +29,7 @@ function TabMenuExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Pills
           </p>
           <TabMenu defaultValue="a" type="Pills">
@@ -47,7 +47,7 @@ function TabMenuExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Big
           </p>
           <TabMenu defaultValue="a" type="Default" size="Big">

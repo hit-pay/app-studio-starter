@@ -7,12 +7,12 @@ import { CopyTooltip } from './copy-tooltip'
 const BoxDetailTypeContext = createContext<'Default' | 'Border'>('Default')
 
 const boxDetailVariants = cva(
-  'flex w-full flex-col rounded-lg border border-solid border-border bg-background',
+  'flex w-full flex-col rounded-lg border border-solid border-oc-border bg-oc-background',
   {
     variants: {
       type: {
         Default: 'gap-4 p-4',
-        Border: 'gap-px overflow-hidden bg-border',
+        Border: 'gap-px overflow-hidden bg-oc-border',
       },
     },
     defaultVariants: {
@@ -48,7 +48,7 @@ function BoxDetailHeader({ className, ...props }: ComponentProps<'div'>) {
       data-slot="box-detail-header"
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-3',
-        type === 'Border' && 'bg-background px-4 py-3',
+        type === 'Border' && 'bg-oc-background px-4 py-3',
         className,
       )}
       {...props}
@@ -71,7 +71,7 @@ function BoxDetailGrid({
       data-slot="box-detail-grid"
       className={cn(
         'grid w-full min-w-0',
-        type === 'Border' ? 'gap-px bg-border' : 'gap-x-6 gap-y-4',
+        type === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
         className,
       )}
       style={{
@@ -87,7 +87,7 @@ function BoxDetailTitle({ className, ...props }: ComponentProps<'p'>) {
   return (
     <p
       data-slot="box-detail-title"
-      className={cn('min-w-0 text-sm font-medium leading-[1.5] text-foreground', className)}
+      className={cn('min-w-0 text-sm font-medium leading-[1.5] text-oc-foreground', className)}
       {...props}
     />
   )
@@ -105,7 +105,7 @@ const boxDetailRowVariants = cva('flex w-full min-w-0 gap-3', {
   },
 })
 
-const boxDetailLabelVariants = cva('shrink-0 leading-[1.5] text-muted-foreground', {
+const boxDetailLabelVariants = cva('shrink-0 leading-[1.5] text-oc-muted-foreground', {
   variants: {
     size: {
       Small: 'text-xs',
@@ -117,7 +117,7 @@ const boxDetailLabelVariants = cva('shrink-0 leading-[1.5] text-muted-foreground
   },
 })
 
-const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-foreground', {
+const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-oc-foreground', {
   variants: {
     size: {
       Small: 'text-sm',
@@ -160,7 +160,7 @@ function BoxDetailRow({
       data-size={size}
       className={cn(
         boxDetailRowVariants({ alignment }),
-        type === 'Border' && 'bg-background p-4',
+        type === 'Border' && 'bg-oc-background p-4',
         className,
       )}
       style={{

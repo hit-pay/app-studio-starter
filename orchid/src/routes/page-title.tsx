@@ -17,14 +17,14 @@ function PageTitleExamplesPage() {
   return (
     <DocExamplePage to="/page-title">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <PageTitle title="Payments" description="Track incoming and outgoing payments." />
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Actions
           </p>
           <PageTitle
@@ -45,7 +45,7 @@ function PageTitleExamplesPage() {
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             With box
           </p>
           <div className="space-y-4">

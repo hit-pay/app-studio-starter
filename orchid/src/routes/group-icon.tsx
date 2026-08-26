@@ -44,14 +44,14 @@ function GroupIconExamplesPage() {
   return (
     <DocExamplePage to="/group-icon">
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <ExampleGroup type="Default" />
         </div>
 
         <div className="space-y-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-muted-foreground uppercase">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Border
           </p>
           <ExampleGroup type="Border" />

@@ -9,9 +9,9 @@ const emptyPageIconVariants = cva(
   {
     variants: {
       type: {
-        Default: 'border-neutral-soft bg-neutral',
-        Search: 'border-neutral-soft bg-neutral',
-        Upgrade: 'border-warning-chip-border bg-warning-soft',
+        Default: 'border-oc-neutral-soft bg-oc-neutral',
+        Search: 'border-oc-neutral-soft bg-oc-neutral',
+        Upgrade: 'border-oc-warning-chip-border bg-oc-warning-soft',
       },
     },
     defaultVariants: {
@@ -21,9 +21,9 @@ const emptyPageIconVariants = cva(
 )
 
 const DEFAULT_ICON: Record<'Default' | 'Search' | 'Upgrade', ReactNode> = {
-  Default: <FileTextIcon className="size-8 text-muted-foreground" />,
-  Search: <SearchIcon className="size-8 text-muted-foreground" />,
-  Upgrade: <TriangleAlertIcon className="size-8 text-warning" />,
+  Default: <FileTextIcon className="size-8 text-oc-muted-foreground" />,
+  Search: <SearchIcon className="size-8 text-oc-muted-foreground" />,
+  Upgrade: <TriangleAlertIcon className="size-8 text-oc-warning" />,
 }
 
 function EmptyPage({
@@ -55,7 +55,7 @@ function EmptyPage({
       <div className={emptyPageIconVariants({ type })}>
         {icon ?? DEFAULT_ICON[type]}
         {showBadge ? (
-          <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-neutral-soft bg-[#9295a5] text-[11px] font-medium leading-none text-white">
+          <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-[#9295a5] text-[11px] font-medium leading-none text-white">
             !
           </span>
         ) : null}
@@ -64,10 +64,10 @@ function EmptyPage({
       {title || description ? (
         <div className="flex w-full flex-col items-center gap-2 text-center">
           {title ? (
-            <p className="text-base font-medium leading-[1.4] text-foreground">{title}</p>
+            <p className="text-base font-medium leading-[1.4] text-oc-foreground">{title}</p>
           ) : null}
           {description ? (
-            <p className="text-sm leading-[1.5] text-muted-foreground">{description}</p>
+            <p className="text-sm leading-[1.5] text-oc-muted-foreground">{description}</p>
           ) : null}
         </div>
       ) : null}

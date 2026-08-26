@@ -36,9 +36,9 @@ function ClickableOptionGroup({
 
 const clickableOptionVariants = cva(
   [
-    'group/clickable-option flex min-w-0 cursor-pointer gap-3 rounded-lg border border-solid border-border bg-background px-5 py-3 outline-none',
+    'group/clickable-option flex min-w-0 cursor-pointer gap-3 rounded-lg border border-solid border-oc-border bg-oc-background px-5 py-3 outline-none',
     'hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
-    'data-checked:border-primary',
+    'data-checked:border-oc-primary',
     'data-disabled:pointer-events-none data-disabled:opacity-50',
   ],
   {
@@ -85,7 +85,7 @@ function ClickableOption({
     >
       <RadioPrimitive.Indicator className="sr-only" />
       {icon ? (
-        <span className="inline-flex size-5 shrink-0 items-center justify-center text-foreground [&_svg]:size-5">
+        <span className="inline-flex size-5 shrink-0 items-center justify-center text-oc-foreground [&_svg]:size-5">
           {icon}
         </span>
       ) : null}
@@ -98,10 +98,10 @@ function ClickableOption({
           )}
         >
           {title ? (
-            <span className="text-sm font-medium leading-[1.5] text-foreground">{title}</span>
+            <span className="text-sm font-medium leading-[1.5] text-oc-foreground">{title}</span>
           ) : null}
           {description ? (
-            <span className="text-xs leading-[1.5] text-muted-foreground">{description}</span>
+            <span className="text-xs leading-[1.5] text-oc-muted-foreground">{description}</span>
           ) : null}
         </span>
       )}
