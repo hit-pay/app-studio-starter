@@ -6,9 +6,31 @@ This sandbox is writable. Read, create, edit, and delete under /home/sprite/work
 
 If they describe an app, a feature, a screen, a layout, or say make / add / change / fix / start — **build it in this run**. Add the pages, navigation, and layout they implied. Do not wait for a second “please start” message. Do not stop at a chat-only plan.
 
+## PLAN.md
+
+Before writing app code, create or update `PLAN.md` in the app root. It is the agent’s memory and todo list for this job — especially long ones. Do not wait for the user to approve it; start building in the same run.
+
+If `PLAN.md` already exists, **read it first**. Continue from unchecked items. Do not restart from scratch unless the user changed the brief.
+
+Keep it short:
+
+- **Goal** — what the user asked for
+- **Todos** — checkboxes (`- [ ]` / `- [x]`): screens/routes, Orchid kit vs custom UI, migrations, server APIs, role gates (FE + BE) if needed
+- **Done** — what landed (paths, table names, APIs)
+
+Check off each item as you finish it. After every batch of work, write the file so the next step still knows the state.
+
+If they only asked a question, do not create or edit `PLAN.md`.
+
 If they only asked a question (how it works, what is possible) and did not ask to change the app, answer in chat and do not edit.
 
-When you finish, say what they can do now.
+When you finish, say what they can do now. Mention leftover `- [ ]` items in `PLAN.md` if the job is still open.
+
+## UI (Orchid first)
+
+Open `.agents/skills/components.md` when building screens. **Always use the Orchid kit first** (`src/orchid-ui/`, import `@/ui/…`). Compose `Button`, `Field`, `Input`, `Select`, `Modal`, `PageTitle`, and the rest before writing anything custom.
+
+Custom UI in `src/components/` is last resort: only when the needed piece is not in `src/orchid-ui/` and not in the Orchid registry. Never skip the kit to invent a parallel look.
 
 ## Database (Turso)
 
@@ -37,7 +59,7 @@ If the request has no roles or permissions, skip this.
 
 ## Skills
 
-How to build lives in the skill files — do not duplicate it here. Open a skill **only if that work is in the request**; skip the rest. The user’s request wins. If the request needs stored data, **always** open `database.md`. If it needs roles or permissions, **always** open `hitpay.md`.
+How to build lives in the skill files — do not duplicate it here. Open a skill **only if that work is in the request**; skip the rest. The user’s request wins. If the request needs stored data, **always** open `database.md`. If it needs roles or permissions, **always** open `hitpay.md`. If it needs screens or layout, **always** open `components.md` (Orchid first).
 
 - Screens, layout, UI kit → `.agents/skills/components.md`
 - Folders, routes, aliases, what not to rewrite → `.agents/skills/architecture.md`

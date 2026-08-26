@@ -8,7 +8,7 @@ Compose screens from the Orchid kit (`@/ui/…` → `src/orchid-ui/`) plus app c
 
 Do **not** run `shadcn add` / `bunx shadcn add` from ui.shadcn.com (`@shadcn/…`) or any other third-party registry. Do **not** add `@radix-ui/*`. Primitives are Base UI (`@base-ui/react`). Do **not** put UI kit files in `src/components/ui`.
 
-Default: use files already in `src/orchid-ui/` (`@/ui/…`) and the APIs below. Do **not** fetch the registry or run `shadcn add` unless a needed kit piece is missing from that folder.
+Default: use files already in `src/orchid-ui/` (`@/ui/…`) and the APIs below. **Orchid first** — do not create `src/components/` composites while a kit component can do the job. Do **not** fetch the registry or run `shadcn add` unless a needed kit piece is missing from that folder.
 
 Only then: fetch `https://app-studio-starter.vercel.app/registry.json` (`items[].name` where `type` is `registry:ui`, skip `utils`). If the name is in the catalog:
 
