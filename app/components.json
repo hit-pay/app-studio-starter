@@ -15,7 +15,8 @@
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
-    "ui": "@/orchid-ui",
+    "ui": "@/components/ui",
+    "orchid-ui": "@/components/orchid-ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

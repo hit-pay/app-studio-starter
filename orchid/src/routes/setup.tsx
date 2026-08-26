@@ -22,7 +22,8 @@ const COMPONENTS_JSON = `{
   "aliases": {
     "components": "@/components",
     "utils": "@/lib/utils",
-    "ui": "@/orchid-ui",
+    "ui": "@/components/ui",
+    "orchid-ui": "@/components/orchid-ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },
@@ -256,9 +257,10 @@ function SetupGuidePage() {
 
         <Section title="2. Point shadcn at Orchid">
           <P>
-            In the consuming app, set the <code className="text-oc-foreground">ui</code> alias to
-            your kit folder (for example <code className="text-oc-foreground">src/orchid-ui</code>
-            ) and register the catalog. Keep{' '}
+            Leave <code className="text-oc-foreground">ui</code> for other kits. Point{' '}
+            <code className="text-oc-foreground">orchid-ui</code> at{' '}
+            <code className="text-oc-foreground">src/components/orchid-ui</code> and register the
+            catalog. Keep{' '}
             <code className="text-oc-foreground">style: "base-nova"</code> — Orchid is Base UI, not
             Radix.
           </P>
@@ -337,36 +339,20 @@ function SetupGuidePage() {
           <P>Several at once:</P>
           <CodeBlock code="bunx shadcn add @orchid/button @orchid/input @orchid/field" />
           <P>
-            Every Orchid UI item. The CLI flag{' '}
-            <code className="text-oc-foreground">--all</code> only installs the default shadcn kit
-            — it cannot target <code className="text-oc-foreground">@orchid</code>.
-          </P>
-          <CodeBlock
-            code={`bunx shadcn add \\
-  @orchid/button @orchid/dropdown-menu @orchid/snackbar @orchid/chip \\
-  @orchid/accordion @orchid/progress-bar @orchid/list-item @orchid/input-stepper \\
-  @orchid/avatar @orchid/tooltip @orchid/tab-menu @orchid/clickable-option \\
-  @orchid/overview-item @orchid/sub-header @orchid/page-title @orchid/box-detail \\
-  @orchid/group-icon @orchid/copy-tooltip @orchid/customer-card @orchid/checkbox \\
-  @orchid/radio-group @orchid/toggle @orchid/slider @orchid/empty-page \\
-  @orchid/label @orchid/separator @orchid/field @orchid/input @orchid/textarea \\
-  @orchid/select @orchid/input-group @orchid/popover @orchid/calendar \\
-  @orchid/date-picker @orchid/modal`}
-          />
-          <P>
-            After this catalog is deployed, you can also install the same set as one item:
+            All Orchid UI components. Use the registry item, not{' '}
+            <code className="text-oc-foreground">--all</code> (that flag only works for the
+            official shadcn kit).
           </P>
           <CodeBlock code="bunx shadcn add @orchid/all" />
           <P>
-            Files land in the <code className="text-oc-foreground">ui</code> alias. Import from{' '}
-            <code className="text-oc-foreground">@/ui/button</code> (or{' '}
-            <code className="text-oc-foreground">@/orchid-ui/button</code>). Names match the
-            registry item, for example <code className="text-oc-foreground">dropdown-menu</code>,{' '}
+            Files land in <code className="text-oc-foreground">src/components/orchid-ui</code>.
+            Import from <code className="text-oc-foreground">@/orchid-ui/button</code>. Names match
+            the registry item, for example <code className="text-oc-foreground">dropdown-menu</code>,{' '}
             <code className="text-oc-foreground">date-picker</code>,{' '}
             <code className="text-oc-foreground">empty-page</code>.
           </P>
           <CodeBlock
-            code={`import { Button } from '@/ui/button'
+            code={`import { Button } from '@/orchid-ui/button'
 
 <Button type="Primary">Save</Button>
 <Button type="Secondary" style="Border">Cancel</Button>`}

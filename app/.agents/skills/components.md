@@ -12,7 +12,7 @@ Search/list **`@orchid` only**. Do not add Button/Dialog/Card from the default s
 
 Fallback catalog (one JSON, do not open every kit file): **https://orchid-ui-hitpay.vercel.app/registry.json** (`items` `registry:ui`, skip `utils`). Item JSON: `https://orchid-ui-hitpay.vercel.app/r/{name}.json`.
 
-Then import `@/ui/<name>` (`src/orchid-ui/`). Open a `.tsx` only after you chose that `name`.
+Then import `@/orchid-ui/<name>` (`src/components/orchid-ui/`). Open a `.tsx` only after you chose that `name`.
 
 Base UI: `render={<Button />}`, never `asChild` or `@radix-ui/*`. No `src/components/ui`. Never add from `@shadcn` / ui.shadcn.com.
 
@@ -25,7 +25,7 @@ bunx shadcn add @orchid/<name>
 bunx shadcn add @orchid/all
 ```
 
-Do not run `shadcn add --all` or `shadcn add @orchid --all`. `--all` only installs the default shadcn kit.
+Do not run `shadcn add --all`. That flag only installs the official shadcn kit. Use `@orchid/all`.
 
 ```tsx
 <Button type="Primary">Save</Button>
