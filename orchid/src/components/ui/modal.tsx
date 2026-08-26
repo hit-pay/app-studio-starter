@@ -7,13 +7,14 @@ import { cn } from '@/lib/utils'
 import { Button } from './button'
 
 const modalPopupVariants = cva(
-  'flex w-full max-h-[80vh] flex-col overflow-hidden rounded-xl bg-oc-background shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] outline-none sm:max-h-[96vh]',
+  'flex w-full max-h-[80vh] flex-col overflow-hidden rounded-2xl bg-oc-background shadow-[0_3px_22px_rgba(38,42,50,0.09)] outline-none sm:max-h-[96vh]',
   {
     variants: {
       size: {
-        Small: 'max-w-xs',
-        Medium: 'max-w-md',
-        Default: 'max-w-xl',
+        Small: 'max-w-[320px]',
+        Medium: 'max-w-[480px]',
+        Default: 'max-w-[640px]',
+        Confirmation: 'max-w-[320px]',
       },
     },
     defaultVariants: {
@@ -54,15 +55,16 @@ function ModalPopup({
   footer = true,
   borderless = false,
   cancelLabel = 'Cancel',
-  confirmLabel = 'OK',
+  confirmLabel = 'Save',
   confirmType = 'Primary',
   onCancel,
   onConfirm,
   footerContent,
+  showCancel = true,
   children,
   ...props
 }: DialogPrimitive.Popup.Props & {
-  size?: 'Small' | 'Medium' | 'Default'
+  size?: 'Small' | 'Medium' | 'Default' | 'Confirmation'
   title?: string
   description?: string
   closeIcon?: boolean
@@ -75,7 +77,11 @@ function ModalPopup({
   onCancel?: () => void
   onConfirm?: () => void
   footerContent?: ReactNode
+  showCancel?: boolean
 }) {
+  const confirmation = size === 'Confirmation'
+  const hideDividers = borderless || confirmation
+
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
@@ -92,18 +98,18 @@ function ModalPopup({
           {header ? (
             <div
               className={cn(
-                'flex items-start justify-between gap-9 bg-oc-background p-5',
-                !borderless && 'border-b border-solid border-oc-border',
+                'flex items-start justify-between gap-4 bg-oc-background p-4',
+                !hideDividers && 'border-b border-solid border-oc-border',
               )}
             >
-              <div className="flex min-w-0 flex-1 flex-col gap-1 overflow-hidden">
+              <div className="flex min-w-0 flex-1 flex-col gap-1 overflow-hidden pt-0.5">
                 {title ? (
-                  <DialogPrimitive.Title className="truncate text-lg font-medium leading-[1.4] text-oc-foreground">
+                  <DialogPrimitive.Title className="text-base font-medium leading-[1.4] text-oc-foreground">
                     {title}
                   </DialogPrimitive.Title>
                 ) : null}
                 {description ? (
-                  <DialogPrimitive.Description className="truncate text-sm leading-[1.5] text-oc-muted-foreground">
+                  <DialogPrimitive.Description className="text-sm font-normal leading-[1.5] text-oc-muted-foreground">
                     {description}
                   </DialogPrimitive.Description>
                 ) : null}
@@ -112,7 +118,7 @@ function ModalPopup({
                 <DialogPrimitive.Close
                   data-slot="modal-close"
                   aria-label="Close"
-                  className="inline-flex size-8 shrink-0 items-center justify-center rounded-lg text-oc-muted-foreground outline-none hover:bg-oc-dark-blue-soft hover:text-oc-foreground"
+                  className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded text-oc-muted-foreground outline-none hover:bg-oc-dark-blue-soft hover:text-oc-foreground"
                 >
                   <XIcon className="size-5" />
                 </DialogPrimitive.Close>
@@ -123,8 +129,8 @@ function ModalPopup({
           <div
             className={cn(
               'min-h-0 flex-1 overflow-y-auto',
-              size === 'Small' ? 'p-5' : 'p-7',
-              borderless && 'py-0',
+              confirmation ? 'p-4' : 'p-6',
+              borderless && !confirmation && 'py-0',
             )}
           >
             {children}
@@ -133,19 +139,34 @@ function ModalPopup({
           {footer ? (
             <div
               className={cn(
-                'flex items-center justify-end gap-4 px-5 py-6',
-                !borderless && 'border-t border-solid border-oc-border',
+                'flex items-center gap-8 px-4 py-5',
+                confirmation ? 'justify-center' : 'justify-end',
+                !hideDividers && 'border-t border-solid border-oc-border',
               )}
             >
               {footerContent ?? (
-                <>
-                  <DialogPrimitive.Close render={<Button type="Secondary" onClick={onCancel} />}>
-                    {cancelLabel}
-                  </DialogPrimitive.Close>
-                  <Button type={confirmType} htmlType="button" onClick={onConfirm}>
+                <div
+                  className={cn(
+                    'flex min-w-0 flex-1 items-center gap-3',
+                    confirmation ? 'justify-center' : 'justify-end',
+                  )}
+                >
+                  {showCancel ? (
+                    <DialogPrimitive.Close
+                      render={<Button type="Secondary" className="min-w-[112px]" onClick={onCancel} />}
+                    >
+                      {cancelLabel}
+                    </DialogPrimitive.Close>
+                  ) : null}
+                  <Button
+                    type={confirmType}
+                    htmlType="button"
+                    className="min-w-[112px]"
+                    onClick={onConfirm}
+                  >
                     {confirmLabel}
                   </Button>
-                </>
+                </div>
               )}
             </div>
           ) : null}

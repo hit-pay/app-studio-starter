@@ -147,7 +147,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/modal' as const,
     name: 'Modal',
-    description: 'Dialog overlay with Small, Medium, and Default sizes.',
+    description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
   },
 ] as const
 
@@ -170,6 +170,11 @@ export const DOC_BLOCKS = [
     to: '/page-title' as const,
     name: 'Page Title',
     description: 'Heading with actions on the right and optional box below.',
+  },
+  {
+    to: '/confirmation-modal' as const,
+    name: 'Confirmation Modal',
+    description: 'Prebuilt confirm dialog: Delete, Warning, Success, Question, and type-to-confirm.',
   },
 ] as const
 

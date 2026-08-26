@@ -44,7 +44,8 @@
         "@orchid/popover",
         "@orchid/calendar",
         "@orchid/date-picker",
-        "@orchid/modal"
+        "@orchid/modal",
+        "@orchid/confirmation-modal"
       ],
       "files": [
         {
@@ -723,7 +724,7 @@
       "name": "modal",
       "type": "registry:ui",
       "title": "Modal",
-      "description": "Focused task overlay: create/edit shift, confirm delete, handover form. Modal + Trigger + Popup. Always set title. size Small|Medium|Default. persistent = no backdrop close. Not a side sheet (none in kit).",
+      "description": "Focused task overlay: create/edit shift, confirm delete, handover form. Modal + Trigger + Popup. Always set title. size Small|Medium|Default|Confirmation (320/480/640). persistent = no backdrop close. Not a side sheet (none in kit).",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -737,6 +738,27 @@
           "path": "src/components/ui/modal.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirmation-modal",
+      "type": "registry:ui",
+      "title": "Confirmation Modal",
+      "description": "Prebuilt confirm overlay on Modal. type Delete|Warning|Success|Question. size Small|Medium. Optional confirmPhrase to type before delete. Use ConfirmationModalContent as the inner block.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/modal"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/confirmation-modal.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/confirmation-modal.tsx"
         }
       ]
     }

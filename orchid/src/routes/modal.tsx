@@ -59,6 +59,21 @@ function ModalExamplesPage() {
                 </p>
               </ModalPopup>
             </Modal>
+            <Modal>
+              <ModalTrigger render={<Button type="Secondary" style="Border" />}>
+                Confirmation
+              </ModalTrigger>
+              <ModalPopup
+                size="Confirmation"
+                title="Are you sure?"
+                confirmLabel="Save"
+                cancelLabel="Cancel"
+              >
+                <p className="text-center text-sm leading-[1.5] text-oc-muted-foreground">
+                  Change Modal Content on Component settings
+                </p>
+              </ModalPopup>
+            </Modal>
           </div>
         </div>
 

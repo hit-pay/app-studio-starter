@@ -18,6 +18,7 @@ import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChipRouteImport } from './routes/chip'
 import { Route as ClickableOptionRouteImport } from './routes/clickable-option'
 import { Route as ComboboxRouteImport } from './routes/combobox'
+import { Route as ConfirmationModalRouteImport } from './routes/confirmation-modal'
 import { Route as CopyTooltipRouteImport } from './routes/copy-tooltip'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
 import { Route as DatePickerRouteImport } from './routes/date-picker'
@@ -88,6 +89,11 @@ const ClickableOptionRoute = ClickableOptionRouteImport.update({
 const ComboboxRoute = ComboboxRouteImport.update({
   id: '/combobox',
   path: '/combobox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ConfirmationModalRoute = ConfirmationModalRouteImport.update({
+  id: '/confirmation-modal',
+  path: '/confirmation-modal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CopyTooltipRoute = CopyTooltipRouteImport.update({
@@ -231,6 +237,7 @@ export interface FileRoutesByFullPath {
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
   '/combobox': typeof ComboboxRoute
+  '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-tooltip': typeof CopyTooltipRoute
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
@@ -268,6 +275,7 @@ export interface FileRoutesByTo {
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
   '/combobox': typeof ComboboxRoute
+  '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-tooltip': typeof CopyTooltipRoute
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
@@ -306,6 +314,7 @@ export interface FileRoutesById {
   '/chip': typeof ChipRoute
   '/clickable-option': typeof ClickableOptionRoute
   '/combobox': typeof ComboboxRoute
+  '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-tooltip': typeof CopyTooltipRoute
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
@@ -345,6 +354,7 @@ export interface FileRouteTypes {
     | '/chip'
     | '/clickable-option'
     | '/combobox'
+    | '/confirmation-modal'
     | '/copy-tooltip'
     | '/customer-card'
     | '/date-picker'
@@ -382,6 +392,7 @@ export interface FileRouteTypes {
     | '/chip'
     | '/clickable-option'
     | '/combobox'
+    | '/confirmation-modal'
     | '/copy-tooltip'
     | '/customer-card'
     | '/date-picker'
@@ -419,6 +430,7 @@ export interface FileRouteTypes {
     | '/chip'
     | '/clickable-option'
     | '/combobox'
+    | '/confirmation-modal'
     | '/copy-tooltip'
     | '/customer-card'
     | '/date-picker'
@@ -457,6 +469,7 @@ export interface RootRouteChildren {
   ChipRoute: typeof ChipRoute
   ClickableOptionRoute: typeof ClickableOptionRoute
   ComboboxRoute: typeof ComboboxRoute
+  ConfirmationModalRoute: typeof ConfirmationModalRoute
   CopyTooltipRoute: typeof CopyTooltipRoute
   CustomerCardRoute: typeof CustomerCardRoute
   DatePickerRoute: typeof DatePickerRoute
@@ -548,6 +561,13 @@ declare module '@tanstack/react-router' {
       path: '/combobox'
       fullPath: '/combobox'
       preLoaderRoute: typeof ComboboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/confirmation-modal': {
+      id: '/confirmation-modal'
+      path: '/confirmation-modal'
+      fullPath: '/confirmation-modal'
+      preLoaderRoute: typeof ConfirmationModalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/copy-tooltip': {
@@ -745,6 +765,7 @@ const rootRouteChildren: RootRouteChildren = {
   ChipRoute: ChipRoute,
   ClickableOptionRoute: ClickableOptionRoute,
   ComboboxRoute: ComboboxRoute,
+  ConfirmationModalRoute: ConfirmationModalRoute,
   CopyTooltipRoute: CopyTooltipRoute,
   CustomerCardRoute: CustomerCardRoute,
   DatePickerRoute: DatePickerRoute,
