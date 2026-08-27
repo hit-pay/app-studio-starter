@@ -824,7 +824,7 @@
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form on TanStack Form. Field keys: key, title, type, value, options, validation, force_display. Types: input, select, checkbox-boolean, plus textarea, toggle, radio, combobox, slider, date, quantity-input, input-group, section.",
+      "description": "JSON schema form on TanStack Form. Field keys: key, title, type, value, options, validation, force_display. Types: input, select, accepted, plus textarea, toggle, radio, combobox, slider, date, quantity-input, input-group, object, section.",
       "dependencies": [
         "@tanstack/react-form"
       ],

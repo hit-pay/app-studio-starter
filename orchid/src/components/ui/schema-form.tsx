@@ -1,4 +1,4 @@
-import { type FormEvent, type ReactNode } from 'react'
+import { type ReactNode } from 'react'
 import { useForm, useStore } from '@tanstack/react-form'
 
 import { cn } from '@/lib/utils'
@@ -51,8 +51,6 @@ type SchemaFormType =
   | 'select'
   | 'combobox'
   | 'radio'
-  | 'checkbox'
-  | 'checkbox-boolean'
   | 'checkbox-group'
   | 'accepted'
   | 'toggle'
@@ -177,9 +175,9 @@ function defaultValueFor(field: SchemaFormField): unknown {
   }
   if (field.value !== undefined) return field.value
   if (
+    field.type === 'accepted' ||
     field.type === 'checkbox' ||
     field.type === 'checkbox-boolean' ||
-    field.type === 'accepted' ||
     field.type === 'toggle' ||
     field.type === 'section-item'
   ) {
@@ -293,7 +291,8 @@ function nestValues(value: SchemaFormValues, fallback: SchemaFormValues): Schema
 function fieldsWithValues(fields: SchemaFormField[], values: SchemaFormValues): SchemaFormField[] {
   return fields.map((field) => {
     if (field.type === 'object' && field.fields) {
-      const nested = isPlainObject(values[field.key]) ? values[field.key] : {}
+      const raw = values[field.key]
+      const nested: SchemaFormValues = isPlainObject(raw) ? raw : {}
       return { ...field, fields: fieldsWithValues(field.fields, nested), value: nested }
     }
     const keys = pairKeys(field)
@@ -314,9 +313,9 @@ function isEmpty(value: unknown, field: SchemaFormField) {
   const type = field.type
   if (isMultiCombobox(field)) return !Array.isArray(value) || value.length === 0
   if (
+    type === 'accepted' ||
     type === 'checkbox' ||
     type === 'checkbox-boolean' ||
-    type === 'accepted' ||
     type === 'toggle' ||
     type === 'section-item'
   ) {
@@ -398,10 +397,10 @@ function validateField(field: SchemaFormField, value: unknown) {
   return undefined
 }
 
-function controlType(type: SchemaFormType) {
+function controlType(type: SchemaFormType | (string & {})) {
   if (type === 'phone') return 'input'
   if (type === 'password') return 'password'
-  if (type === 'accepted' || type === 'checkbox') return 'checkbox-boolean'
+  if (type === 'accepted' || type === 'checkbox' || type === 'checkbox-boolean') return 'accepted'
   return type
 }
 
@@ -507,13 +506,32 @@ function FormComboboxField({
   )
 }
 
+type SchemaFormInstance = {
+  handleSubmit: () => Promise<void>
+  setFieldValue: (name: string, value: unknown) => void
+  Field: (props: {
+    name: string
+    validators?: {
+      onChange?: (ctx: { value: unknown }) => string | undefined
+      onBlur?: (ctx: { value: unknown }) => string | undefined
+      onSubmit?: (ctx: { value: unknown }) => string | undefined
+    }
+    children: (field: {
+      state: { value: unknown; meta: { isTouched?: boolean } }
+      handleBlur: () => void
+      handleChange: (next: unknown) => void
+    }) => ReactNode
+  }) => ReactNode
+  state: { submissionAttempts: number }
+}
+
 type SchemaFormApi = {
   fields: SchemaFormField[]
   values: SchemaFormValues
   errors: SchemaFormValues
   isSubmitting: boolean
   submit: () => Promise<void>
-  form: ReturnType<typeof useForm>
+  form: SchemaFormInstance
 }
 
 function useSchemaForm({
@@ -550,7 +568,7 @@ function useSchemaForm({
 
   return {
     fields,
-    form,
+    form: form as SchemaFormInstance,
     values,
     errors,
     isSubmitting,
@@ -576,7 +594,7 @@ function SchemaForm({
     <form
       id={id}
       className={cn('flex w-full min-w-0 max-w-xl flex-col gap-6 overflow-visible', className)}
-      onSubmit={(event: FormEvent) => {
+      onSubmit={(event) => {
         event.preventDefault()
         event.stopPropagation()
         void form.handleSubmit()
@@ -674,15 +692,20 @@ function SchemaForm({
               if (type === 'slider') {
                 const keys = pairKeys(item)
                 const secondPath = keys ? siblingPath(item.path, keys.second) : null
+                const objectRange = isPlainObject(value) && !Array.isArray(value)
                 const first = Number(value) || 0
                 const second = secondPath
                   ? Number(getValueByPath(values, secondPath)) || 0
-                  : 0
+                  : objectRange
+                    ? Number(value.min ?? value.max ?? 0) || 0
+                    : 0
                 const sliderValue = keys
                   ? [first, second]
-                  : Array.isArray(value)
-                    ? value.map(Number)
-                    : Number(value) || 0
+                  : objectRange
+                    ? [Number(value.min) || 0, Number(value.max) || 0]
+                    : Array.isArray(value)
+                      ? value.map(Number)
+                      : Number(value) || 0
                 return (
                   <Field data-invalid={invalid || undefined}>
                     <FieldLabel>{item.title}</FieldLabel>
@@ -691,13 +714,20 @@ function SchemaForm({
                       max={item.max ?? 100}
                       value={sliderValue}
                       onValueChange={(next) => {
+                        const thumbs = Array.isArray(next) ? next.map(Number) : [Number(next) || 0]
                         if (keys && secondPath) {
-                          const thumbs = Array.isArray(next) ? next : [next]
-                          field.handleChange(Number(thumbs[0]) || 0)
-                          form.setFieldValue(secondPath, Number(thumbs[1]) || 0)
+                          field.handleChange(thumbs[0] || 0)
+                          form.setFieldValue(secondPath, thumbs[1] || 0)
                           return
                         }
-                        field.handleChange(next)
+                        if (objectRange || thumbs.length >= 2) {
+                          field.handleChange({
+                            min: thumbs[0] || 0,
+                            max: thumbs[1] ?? thumbs[0] ?? 0,
+                          })
+                          return
+                        }
+                        field.handleChange(thumbs[0] || 0)
                       }}
                     />
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -784,7 +814,7 @@ function SchemaForm({
                 )
               }
 
-              if (type === 'checkbox-boolean') {
+              if (type === 'accepted') {
                 return (
                   <Field data-invalid={invalid || undefined}>
                     <Checkbox

@@ -179,7 +179,7 @@ function CustomerCard({
     >
       {loading ? (
         <CustomerCardSkeleton expanded={expanded} />
-      ) : empty ? (
+      ) : empty || !customer ? (
         <>
           <div className="flex w-full flex-col items-center justify-center gap-2">
             {avatar ? (

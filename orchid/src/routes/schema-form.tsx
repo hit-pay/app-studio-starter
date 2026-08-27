@@ -108,10 +108,47 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     value: 'a',
   },
   {
-    key: 'checkbox',
-    title: 'Checkbox',
-    type: 'checkbox-boolean',
+    key: 'accepted',
+    title: 'I accept the terms',
+    type: 'accepted',
+    required: true,
+    validation: 'accepted',
     value: false,
+  },
+  {
+    key: 'address',
+    title: 'Address',
+    type: 'object',
+    fields: [
+      {
+        key: 'heading',
+        title: 'Address',
+        type: 'section',
+        description: 'Nested object — values live under address.',
+      },
+      {
+        key: 'line1',
+        title: 'Line 1',
+        type: 'input',
+        placeholder: '1 Harbourfront Avenue',
+        required: true,
+        value: '',
+      },
+      {
+        key: 'city',
+        title: 'City',
+        type: 'input',
+        placeholder: 'Singapore',
+        value: 'Singapore',
+      },
+      {
+        key: 'postal',
+        title: 'Postal code',
+        type: 'input',
+        placeholder: '098632',
+        value: '',
+      },
+    ],
   },
   {
     key: 'checkbox_group',
@@ -141,6 +178,13 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     max: 100,
   },
   {
+    key: 'slider_range',
+    title: 'Slider range (object)',
+    type: 'slider',
+    value: { min: 10, max: 70 },
+    max: 100,
+  },
+  {
     key: 'date',
     title: 'Date',
     type: 'date',
@@ -151,6 +195,12 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     title: 'Date range',
     type: 'date-range',
     value: { from: '2026-01-20', to: '2026-02-09' },
+  },
+  {
+    key: 'date_range',
+    title: 'Date range (object)',
+    type: 'date-range',
+    value: { from: '2026-03-01', to: '2026-03-15' },
   },
   {
     key: 'amount+currency',
@@ -212,12 +262,12 @@ Types
 - input | password | textarea | phone
 - select
 - combobox — searchable; add props.multiple for chips
-- radio | checkbox | checkbox-boolean | checkbox-group | accepted | toggle
-- slider — single value, or key "min+max" for a range
+- radio | checkbox-group | accepted | toggle
+- slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
 - object — nest with fields[]
 - hidden | section | section-item — row with title + toggle (Figma Section Item)
-- custom via renderField — date; date-range uses key "from+to"
+- custom via renderField — date; date-range uses "from+to" or one key with { from, to }
 
 show_if
 - show_if: "password_protection"
