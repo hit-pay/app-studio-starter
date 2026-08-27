@@ -25,7 +25,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <DetailList type="Default">
+        <DetailList style="Default">
           <DetailListGrid columns={2}>
             <DetailListRow label="Invoice" alignment="Vertical">
               INV-2026-0842
@@ -47,7 +47,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Border
         </p>
-        <DetailList type="Border">
+        <DetailList style="Border">
           <DetailListHeader>
             <DetailListTitle>Payment details</DetailListTitle>
           </DetailListHeader>
@@ -72,7 +72,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           3 columns, 2 rows
         </p>
-        <DetailList type="Border">
+        <DetailList style="Border">
           <DetailListGrid columns={3}>
             <DetailListRow label="Created" alignment="Vertical">
               25 Aug 2026
@@ -100,7 +100,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Colspan
         </p>
-        <DetailList type="Border">
+        <DetailList style="Border">
           <DetailListHeader>
             <DetailListTitle>Customer Data</DetailListTitle>
             <Button variant="Secondary" style="Transparent" size="Small">
@@ -110,7 +110,7 @@ function DetailListExamplesPage() {
           <DetailListGrid columns={4}>
             <DetailListRow label="Customer" alignment="Vertical" colSpan={2}>
               <span className="inline-flex items-center gap-2">
-                <Avatar size={24} type="Image" src={PHOTO} alt="" />
+                <Avatar size={24} variant="Image" src={PHOTO} alt="" />
                 Alex Turner
               </span>
             </DetailListRow>
@@ -137,7 +137,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Stacked rows
         </p>
-        <DetailList type="Default">
+        <DetailList style="Default">
           <DetailListRow label="Email">alex@arcticmonkey.io</DetailListRow>
           <DetailListRow label="Phone">+65 8123 4567</DetailListRow>
         </DetailList>
@@ -147,7 +147,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Stacked rows, Border
         </p>
-        <DetailList type="Border">
+        <DetailList style="Border">
           <DetailListRow label="Email">alex@arcticmonkey.io</DetailListRow>
           <DetailListRow label="Phone">+65 8123 4567</DetailListRow>
         </DetailList>
@@ -157,7 +157,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Product Data
         </p>
-        <DetailList type="Border">
+        <DetailList style="Border">
           <DetailListHeader>
             <DetailListTitle>SKU</DetailListTitle>
           </DetailListHeader>
@@ -182,7 +182,7 @@ function DetailListExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Recurring plan
         </p>
-        <DetailList type="Border">
+        <DetailList style="Border">
           <DetailListGrid columns={2}>
             <DetailListRow label="Plan" alignment="Vertical">
               Monthly membership

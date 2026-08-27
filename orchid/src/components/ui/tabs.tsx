@@ -4,23 +4,23 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-type TabsType = 'Default' | 'Pills'
+type TabsVariant = 'Default' | 'Pills'
 type TabsSize = 'Default' | 'Big'
 
-const TabsContext = createContext<{ type: TabsType; size: TabsSize }>({
-  type: 'Default',
+const TabsContext = createContext<{ variant: TabsVariant; size: TabsSize }>({
+  variant: 'Default',
   size: 'Default',
 })
 
 const tabsListVariants = cva('relative flex min-w-0 items-stretch', {
   variants: {
-    type: {
+    variant: {
       Default: 'w-full gap-0 border-b border-solid border-oc-border',
       Pills: 'w-fit gap-1 rounded-lg bg-oc-dark-blue-soft p-1',
     },
   },
   defaultVariants: {
-    type: 'Default',
+    variant: 'Default',
   },
 })
 
@@ -28,7 +28,7 @@ const tabsTabVariants = cva(
   'inline-flex min-w-0 shrink-0 cursor-pointer items-center justify-center gap-1.5 whitespace-nowrap outline-none select-none disabled:pointer-events-none disabled:opacity-50',
   {
     variants: {
-      type: {
+      variant: {
         Default:
           'rounded-none text-oc-muted-foreground hover:text-oc-foreground data-active:text-oc-foreground',
         Pills:
@@ -40,7 +40,7 @@ const tabsTabVariants = cva(
       },
     },
     defaultVariants: {
-      type: 'Default',
+      variant: 'Default',
       size: 'Default',
     },
   },
@@ -48,18 +48,18 @@ const tabsTabVariants = cva(
 
 function Tabs({
   className,
-  type = 'Default',
+  variant = 'Default',
   size = 'Default',
   ...props
 }: TabsPrimitive.Root.Props & {
-  type?: TabsType
+  variant?: TabsVariant
   size?: TabsSize
 }) {
   return (
-    <TabsContext.Provider value={{ type, size }}>
+    <TabsContext.Provider value={{ variant, size }}>
       <TabsPrimitive.Root
         data-slot="tabs"
-        data-type={type}
+        data-variant={variant}
         data-size={size}
         className={cn('flex w-full flex-col gap-4', className)}
         {...props}
@@ -69,16 +69,16 @@ function Tabs({
 }
 
 function TabsList({ className, children, ...props }: TabsPrimitive.List.Props) {
-  const { type } = useContext(TabsContext)
+  const { variant } = useContext(TabsContext)
 
   return (
     <TabsPrimitive.List
       data-slot="tabs-list"
-      className={cn(tabsListVariants({ type }), className)}
+      className={cn(tabsListVariants({ variant }), className)}
       {...props}
     >
       {children}
-      {type === 'Default' ? (
+      {variant === 'Default' ? (
         <TabsPrimitive.Indicator
           data-slot="tabs-indicator"
           className="pointer-events-none absolute bottom-0 left-0 z-10 h-0.5 bg-oc-primary transition-[translate,width] duration-200"
@@ -102,12 +102,12 @@ function TabsTrigger({
   count?: number
   icon?: ReactNode
 }) {
-  const { type, size } = useContext(TabsContext)
+  const { variant, size } = useContext(TabsContext)
 
   return (
     <TabsPrimitive.Tab
       data-slot="tabs-trigger"
-      className={cn(tabsTabVariants({ type, size }), className)}
+      className={cn(tabsTabVariants({ variant, size }), className)}
       {...props}
     >
       {icon ? (

@@ -172,7 +172,7 @@ import { Badge } from '@/orchid-ui/badge'
                 </Button>
               }
             />
-            <DetailList type="Default">
+            <DetailList style="Default">
               <DetailListGrid columns={2}>
                 <DetailListRow label="Customer" alignment="Vertical">
                   Alex Turner

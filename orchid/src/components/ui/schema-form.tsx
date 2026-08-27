@@ -293,7 +293,7 @@ function SchemaForm({
                   <FormSectionItem
                     title={item.title}
                     description={item.description ?? undefined}
-                    type={item.props?.background === true ? 'Background' : 'Default'}
+                    variant={item.props?.background === true ? 'Background' : 'Default'}
                     actions={
                       <Switch
                         id={item.path}
@@ -351,7 +351,7 @@ function SchemaForm({
 
               if (type === 'switch') {
                 return (
-                  <Field orientation="horizontal" data-invalid={invalid || undefined}>
+                  <Field orientation="Horizontal" data-invalid={invalid || undefined}>
                     <Switch
                       id={item.path}
                       checked={Boolean(value)}

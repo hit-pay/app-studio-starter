@@ -21,7 +21,7 @@ function AvatarExamplesPage() {
         </p>
         <div className="flex flex-wrap items-end gap-4">
           {SIZES.map((size) => (
-            <Avatar key={size} size={size} type="Default">
+            <Avatar key={size} size={size} variant="Default">
               PN
             </Avatar>
           ))}
@@ -33,9 +33,9 @@ function AvatarExamplesPage() {
           Type
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <Avatar type="Default">PN</Avatar>
-          <Avatar type="Business">H</Avatar>
-          <Avatar type="Image" src={PHOTO} alt="Priya Nair" />
+          <Avatar variant="Default">PN</Avatar>
+          <Avatar variant="Business">H</Avatar>
+          <Avatar variant="Image" src={PHOTO} alt="Priya Nair" />
         </div>
       </div>
 
@@ -44,9 +44,9 @@ function AvatarExamplesPage() {
           Customers
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <Avatar type="Image" src={PHOTO} alt="Priya Nair" />
-          <Avatar type="Image" src={ALEX_PHOTO} alt="Alex Turner" />
-          <Avatar type="Default">AT</Avatar>
+          <Avatar variant="Image" src={PHOTO} alt="Priya Nair" />
+          <Avatar variant="Image" src={ALEX_PHOTO} alt="Alex Turner" />
+          <Avatar variant="Default">AT</Avatar>
         </div>
       </div>
 
@@ -55,11 +55,11 @@ function AvatarExamplesPage() {
           Business
         </p>
         <div className="flex flex-wrap items-center gap-4">
-          <Avatar type="Business">H</Avatar>
-          <Avatar type="Business" size={48}>
+          <Avatar variant="Business">H</Avatar>
+          <Avatar variant="Business" size={48}>
             HP
           </Avatar>
-          <Avatar type="Default" size={40}>
+          <Avatar variant="Default" size={40}>
             POS
           </Avatar>
         </div>

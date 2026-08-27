@@ -88,7 +88,7 @@ function AccordionExamplesPage() {
               <AccordionTrigger
                 title="Recurring"
                 label={
-                  <Badge color="Purple" type="Background">
+                  <Badge color="Purple" style="Background">
                     New
                   </Badge>
                 }

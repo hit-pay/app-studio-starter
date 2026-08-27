@@ -29,6 +29,9 @@ const alertVariants = cva(
   },
 )
 
+/**
+ * In-page notice. `color="Default"` is success green. Use `Grey` for a neutral bar. Not a toast.
+ */
 function Alert({
   className,
   color = 'Default',

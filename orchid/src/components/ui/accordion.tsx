@@ -42,6 +42,10 @@ function AccordionHeader({ className, ...props }: AccordionPrimitive.Header.Prop
   )
 }
 
+/**
+ * Prefer `title` / `description` / `label` / `progress` props. Do not treat children as the heading
+ * unless you pass a fully custom trigger body.
+ */
 function AccordionTrigger({
   className,
   title,

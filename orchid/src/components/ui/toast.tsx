@@ -48,6 +48,7 @@ function ToastBar({
   )
 }
 
+/** Use `toast.add({ title, description, type })`. `type`: success|info|warning|error|loading — not sonner. Default color is green. */
 const toast = ToastPrimitive.createToastManager()
 
 const TYPE_TO_COLOR: Record<string, 'Default' | 'Blue' | 'Red' | 'Orange' | 'Grey'> = {

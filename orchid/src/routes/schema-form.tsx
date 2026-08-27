@@ -267,7 +267,7 @@ Required
 
 Optional
 - required, placeholder, description, options, value
-- validation, forceDisplay, maxLength, minLength, min, max
+- validation, hidden, maxLength, minLength, min, max
 - props — control options (e.g. combobox multiple, section-item background)
 - fields — nested object children
 - showIf / showIfValue — show a field when another field matches
@@ -293,7 +293,7 @@ Validation
 - pipes: email | max:255 | phone | valid_url | accepted
 - or regex: /^[A-Z]{4}SG[A-Z0-9]{2}([A-Z0-9]{3})?$/
 
-forceDisplay: false hides the control; the value still submits.
+hidden: true hides the control (or type: "hidden"); the value still submits.
 
 State lives in useSchemaForm. Render with <SchemaForm form={account} />. Call account.submit() from the host.
 
@@ -468,19 +468,12 @@ function SchemaFormExamplesPage() {
               <TabsTrigger value="errors">Errors</TabsTrigger>
               <TabsTrigger value="schema">Schema</TabsTrigger>
               <TabsTrigger value="prompt">Prompt</TabsTrigger>
-              <TabsTrigger value="usage">Usage</TabsTrigger>
             </TabsList>
             <TabsContent value="result" className="min-w-0">
-              <div className="flex min-w-0 flex-col gap-4">
-                <JsonPanel
-                  filename="result.json"
-                  data={{ account: account.values, details: details.values }}
-                />
-                <JsonPanel
-                  filename="errors.json"
-                  data={{ account: account.errors, details: details.errors }}
-                />
-              </div>
+              <JsonPanel
+                filename="result.json"
+                data={{ account: account.values, details: details.values }}
+              />
             </TabsContent>
             <TabsContent value="errors" className="min-w-0">
               <JsonPanel
@@ -495,13 +488,7 @@ function SchemaFormExamplesPage() {
               />
             </TabsContent>
             <TabsContent value="prompt" className="min-w-0">
-              <div className="flex min-w-0 flex-col gap-4">
-                <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
-                <JsonPanel filename="usage.tsx" data={USAGE_EXAMPLE} />
-              </div>
-            </TabsContent>
-            <TabsContent value="usage" className="min-w-0">
-              <JsonPanel filename="usage.tsx" data={USAGE_EXAMPLE} />
+              <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
             </TabsContent>
           </Tabs>
         </div>

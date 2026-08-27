@@ -7,13 +7,13 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdo
 
 const iconGroupVariants = cva('inline-flex items-center gap-0.5', {
   variants: {
-    type: {
+    style: {
       Default: '',
       Border: 'rounded border border-solid border-oc-dark-blue-border bg-oc-background p-0.5',
     },
   },
   defaultVariants: {
-    type: 'Default',
+    style: 'Default',
   },
 })
 
@@ -23,14 +23,14 @@ const iconGroupItemVariants = cva(
 
 function IconGroup({
   className,
-  type = 'Default',
+  style = 'Default',
   ...props
-}: ComponentProps<'div'> & VariantProps<typeof iconGroupVariants>) {
+}: Omit<ComponentProps<'div'>, 'style'> & VariantProps<typeof iconGroupVariants>) {
   return (
     <div
       data-slot="icon-group"
-      data-type={type}
-      className={cn(iconGroupVariants({ type }), className)}
+      data-style={style}
+      className={cn(iconGroupVariants({ style }), className)}
       {...props}
     />
   )

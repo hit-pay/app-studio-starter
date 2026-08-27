@@ -370,19 +370,19 @@ function ComboboxChip({
   children,
   showRemove = true,
   color = 'Blue',
-  type = 'Background',
+  style = 'Background',
   ...props
 }: ComboboxPrimitive.Chip.Props & {
   showRemove?: boolean
   color?: BadgeColor
-  type?: 'Background' | 'Border' | 'Transparent'
+  style?: 'Background' | 'Border' | 'Transparent'
 }) {
   const resolvedColor = color
 
   return (
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
-      className={cn(badgeVariants({ color: resolvedColor, type }), className)}
+      className={cn(badgeVariants({ color: resolvedColor, style }), className)}
       {...props}
     >
       {children}

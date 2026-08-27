@@ -15,7 +15,7 @@ const avatarVariants = cva(
         48: 'size-12 text-xl leading-none',
         64: 'size-16 text-[30px] leading-none',
       },
-      type: {
+      variant: {
         Default: 'bg-oc-neutral-strong text-oc-primary-foreground',
         Business: 'bg-oc-primary text-oc-primary-foreground',
         Image: 'bg-oc-neutral-soft text-oc-muted-foreground',
@@ -23,7 +23,7 @@ const avatarVariants = cva(
     },
     defaultVariants: {
       size: 32,
-      type: 'Default',
+      variant: 'Default',
     },
   },
 )
@@ -33,7 +33,7 @@ type AvatarSize = 24 | 28 | 32 | 40 | 48 | 64
 function Avatar({
   className,
   size = 32,
-  type = 'Default',
+  variant = 'Default',
   src,
   alt = '',
   children = 'H',
@@ -41,19 +41,19 @@ function Avatar({
 }: Omit<ComponentProps<'div'>, 'children'> &
   VariantProps<typeof avatarVariants> & {
     size?: AvatarSize
-    type?: 'Default' | 'Business' | 'Image'
+    variant?: 'Default' | 'Business' | 'Image'
     src?: string
     alt?: string
     children?: string
   }) {
-  const showImage = Boolean(src) || type === 'Image'
+  const showImage = Boolean(src) || variant === 'Image'
 
   return (
     <div
       data-slot="avatar"
       data-size={size}
-      data-type={type}
-      className={cn(avatarVariants({ size, type: showImage && src ? 'Image' : type }), className)}
+      data-variant={variant}
+      className={cn(avatarVariants({ size, variant: showImage && src ? 'Image' : variant }), className)}
       {...props}
     >
       {src ? (

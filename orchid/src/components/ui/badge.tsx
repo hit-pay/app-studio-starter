@@ -20,37 +20,37 @@ const badgeVariants = cva(
         Tosca: 'text-oc-tosca',
         Green: 'text-oc-success-strong',
       },
-      type: {
+      style: {
         Background: 'px-2',
         Border: 'border border-solid bg-oc-background px-2',
         Transparent: 'bg-transparent px-0',
       },
     },
     compoundVariants: [
-      { color: 'Blue', type: 'Background', class: 'bg-oc-info-soft' },
-      { color: 'Blue', type: 'Border', class: 'border-oc-primary-300' },
-      { color: 'Purple', type: 'Background', class: 'bg-oc-purple-soft' },
-      { color: 'Purple', type: 'Border', class: 'border-oc-purple-border' },
-      { color: 'Orange', type: 'Background', class: 'bg-oc-warning-soft' },
-      { color: 'Orange', type: 'Border', class: 'border-oc-warning-chip-border' },
-      { color: 'Red', type: 'Background', class: 'bg-oc-destructive-soft' },
-      { color: 'Red', type: 'Border', class: 'border-oc-destructive-border' },
-      { color: 'LightRed', type: 'Background', class: 'bg-oc-light-red-soft' },
-      { color: 'LightRed', type: 'Border', class: 'border-oc-light-red-border' },
-      { color: 'White', type: 'Background', class: 'border border-solid border-oc-border bg-oc-background' },
-      { color: 'White', type: 'Border', class: 'border-oc-neutral-border' },
-      { color: 'DarkBlue', type: 'Background', class: 'bg-oc-dark-blue-soft' },
-      { color: 'DarkBlue', type: 'Border', class: 'border-oc-dark-blue-border' },
-      { color: 'Grey', type: 'Background', class: 'bg-oc-neutral-soft' },
-      { color: 'Grey', type: 'Border', class: 'border-oc-neutral-border' },
-      { color: 'Tosca', type: 'Background', class: 'bg-oc-tosca-soft' },
-      { color: 'Tosca', type: 'Border', class: 'border-oc-tosca-border' },
-      { color: 'Green', type: 'Background', class: 'bg-oc-success-soft' },
-      { color: 'Green', type: 'Border', class: 'border-oc-success-chip-border' },
+      { color: 'Blue', style: 'Background', class: 'bg-oc-info-soft' },
+      { color: 'Blue', style: 'Border', class: 'border-oc-primary-300' },
+      { color: 'Purple', style: 'Background', class: 'bg-oc-purple-soft' },
+      { color: 'Purple', style: 'Border', class: 'border-oc-purple-border' },
+      { color: 'Orange', style: 'Background', class: 'bg-oc-warning-soft' },
+      { color: 'Orange', style: 'Border', class: 'border-oc-warning-chip-border' },
+      { color: 'Red', style: 'Background', class: 'bg-oc-destructive-soft' },
+      { color: 'Red', style: 'Border', class: 'border-oc-destructive-border' },
+      { color: 'LightRed', style: 'Background', class: 'bg-oc-light-red-soft' },
+      { color: 'LightRed', style: 'Border', class: 'border-oc-light-red-border' },
+      { color: 'White', style: 'Background', class: 'border border-solid border-oc-border bg-oc-background' },
+      { color: 'White', style: 'Border', class: 'border-oc-neutral-border' },
+      { color: 'DarkBlue', style: 'Background', class: 'bg-oc-dark-blue-soft' },
+      { color: 'DarkBlue', style: 'Border', class: 'border-oc-dark-blue-border' },
+      { color: 'Grey', style: 'Background', class: 'bg-oc-neutral-soft' },
+      { color: 'Grey', style: 'Border', class: 'border-oc-neutral-border' },
+      { color: 'Tosca', style: 'Background', class: 'bg-oc-tosca-soft' },
+      { color: 'Tosca', style: 'Border', class: 'border-oc-tosca-border' },
+      { color: 'Green', style: 'Background', class: 'bg-oc-success-soft' },
+      { color: 'Green', style: 'Border', class: 'border-oc-success-chip-border' },
     ],
     defaultVariants: {
       color: 'Blue',
-      type: 'Background',
+      style: 'Background',
     },
   },
 )
@@ -70,16 +70,16 @@ type BadgeColor =
 function Badge({
   className,
   color = 'Blue',
-  type = 'Background',
+  style = 'Background',
   icon,
   closable = false,
   onRemove,
   children,
   ...props
-}: Omit<ComponentProps<'span'>, 'color'> &
+}: Omit<ComponentProps<'span'>, 'color' | 'style'> &
   VariantProps<typeof badgeVariants> & {
     color?: BadgeColor
-    type?: 'Background' | 'Transparent' | 'Border'
+    style?: 'Background' | 'Transparent' | 'Border'
     icon?: ReactNode
     closable?: boolean
     onRemove?: () => void
@@ -93,8 +93,8 @@ function Badge({
     <span
       data-slot="badge"
       data-color={color}
-      data-type={type}
-      className={cn(badgeVariants({ color, type }), className)}
+      data-style={style}
+      className={cn(badgeVariants({ color, style }), className)}
       {...props}
     >
       {icon}
@@ -123,7 +123,7 @@ function Badge({
   )
 }
 
-const USER_CHIP: Record<
+const USER_ROLE: Record<
   'Owner' | 'Admin' | 'Manager' | 'Cashier',
   NonNullable<VariantProps<typeof badgeVariants>['color']>
 > = {
@@ -134,15 +134,15 @@ const USER_CHIP: Record<
 }
 
 function UserBadge({
-  type = 'Owner',
+  role = 'Owner',
   className,
   ...props
-}: Omit<ComponentProps<typeof Badge>, 'color' | 'children' | 'type'> & {
-  type?: 'Owner' | 'Admin' | 'Manager' | 'Cashier'
+}: Omit<ComponentProps<typeof Badge>, 'color' | 'children' | 'style'> & {
+  role?: 'Owner' | 'Admin' | 'Manager' | 'Cashier'
 }) {
   return (
-    <Badge color={USER_CHIP[type]} type="Background" className={className} {...props}>
-      {type}
+    <Badge color={USER_ROLE[role]} style="Background" className={className} {...props}>
+      {role}
     </Badge>
   )
 }

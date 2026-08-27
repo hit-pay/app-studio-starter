@@ -9,7 +9,7 @@ TanStack Start + Vite + Tailwind 4. Extend this app. Do not scaffold Next.js / n
 | Path | Use |
 |---|---|
 | `src/routes/` | Pages (`index.tsx` = `/`). Shared chrome: `__root.tsx` |
-| `src/components/orchid-ui/` | Orchid kit → `@/orchid-ui/…` |
+| `src/components/orchid-ui/` | Orchid kit → `@/orchid-ui/…` (no Card in kit) |
 | `src/components/` | App-only UI → `@/components/…` |
 | `src/lib/` | `db` / `migrate` / `form` / `utils` / `hitpay` |
 | `migrations/` | SQL files |

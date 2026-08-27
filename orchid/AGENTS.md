@@ -1,51 +1,48 @@
 # Orchid UI (kit)
 
-Use this kit so humans and agents pick the same component.
+One kebab-case file → `@orchid/<name>` → import `@/orchid-ui/<name>` (apps) or `@/components/ui/<name>` (this repo).
 
-## Files and names
+## Do not use
 
-- One widget per kebab-case file: `button.tsx` → `@orchid/button` → `/button`.
-- Compound children stay prefixed: `ListItemTitle`, `ComboboxItem`, `FieldLabel`.
-- Tabs: `TabsList` + `TabsTrigger` + `TabsContent`.
-- Form layout: `FormSection` + `FormSectionGroup` + `FormSectionItem`.
-- Dialog panel: `DialogContent`.
+`asChild`, `@radix-ui/*`, shadcn `variant="outline"|"ghost"|"destructive"` (lowercase), `Card` from shadcn, Sonner `toast()`. No `DialogHeader` / `DialogFooter` / `DialogTitle` exports.
+
+Triggers: `render={<Button />}` and `nativeButton` when the trigger is a button.
+
+Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizontal`). Exceptions: HTML `type` on Button/Input; Separator `orientation` (`horizontal` | `vertical`); Avatar `size` is 24 | 28 | 32 | 40 | 48 | 64.
+
+`type` means HTML only on Button (`submit` | `button` | `reset`). ConfirmDialog `type` is intent (Delete | Warning | Success | Question). UserBadge uses `role`. Toast `toast.add({ type: 'success' })` maps to colors (Default/green, Blue, Orange, Red, Grey).
 
 ## Button
 
-```tsx
-<Button variant="Primary">Save</Button>
-<Button variant="Secondary" style="Border">Cancel</Button>
-<Button variant="Primary" type="submit">Submit</Button>
-```
-
 - `variant`: Primary | Secondary | Destructive
-- `type`: native submit | button | reset (default button)
 - `style`: Default | Border | Transparent
 - `size`: Small | Default | Big
+- `type`: native submit | button | reset
 
 ## Which control
 
 | Need | Use |
 | --- | --- |
-| One value from a short list | `Select` |
-| Searchable / many options / multi | `Combobox` |
-| Visible options as cards | `ChoiceCard` + `ChoiceCardGroup` |
-| Actions (Edit, Delete), not a value | `DropdownMenu` |
-| In-page alert | `Alert` |
-| Floating notice | `toast.add` + root `Toaster` |
-| Custom dialog | `Dialog` + `DialogContent` |
-| Delete / warn / success / yes-no | `ConfirmDialog` (`Warning` confirms with Continue) |
-| Date in a form | `DatePicker` |
-| Date building blocks | `Popover` + `Calendar` |
-
-Variants are PascalCase (`Small`, `Border`, `Pills`).
+| Short list, one value | `Select` |
+| Search / multi | `Combobox` (`ComboboxChip` stays a Base UI chip) |
+| Visible cards | `ChoiceCard` + `ChoiceCardGroup` |
+| Actions, not a value | `DropdownMenu` |
+| In-page notice | `Alert` (`color="Default"` = green; `Grey` = neutral). Place above `PageTitle`. |
+| Floating notice | `toast.add({ title, description, type })` + root `Toaster` |
+| Custom overlay | `Dialog` + `DialogContent` (`title` required; packed footer) |
+| Delete / warn / yes-no | `ConfirmDialog` (Warning confirm = Continue) |
+| Date | `DatePicker` (`Popover` + `Calendar` only if composing) |
+| Empty page/list | `Empty` (`variant` Default \| Search \| Upgrade) |
+| Empty customer slot | `CustomerCard variant="Empty"` — not `Empty` |
+| On/off | `Switch` |
+| Status token | `Badge` (`style` Background \| Border \| Transparent) + `color` |
 
 ## Forms
 
-`FieldGroup` > `Field` > `FieldLabel` + control. Invalid: `data-invalid` on Field, `aria-invalid` on the control.
+`FieldGroup` > `Field` (`orientation` Vertical \| Horizontal \| Responsive) > `FieldLabel` + control. Invalid: `data-invalid` on Field, `aria-invalid` on the control.
 
-SchemaForm keys: `showIf`, `maxLength`, `forceDisplay`. Types include `date`, `quantity`, and `switch`. See `SCHEMA_FORM_EXAMPLE_FIELDS`.
+SchemaForm: `showIf` / `showIfValue`, `hidden: true` (or `type: "hidden"`) hides UI and still submits, `maxLength`, `minLength`, `validation` (`email\|max:255\|phone\|valid_url\|accepted` or `/regex/`). Pair keys `amount+currency`. See `SCHEMA_FORM_TYPES` and `SCHEMA_FORM_EXAMPLE_FIELDS`.
 
 ## Customer card
 
-Pass `phone` and optional `phoneCountryCode`.
+`phone` and optional `phoneCountryCode`. Slot is `badge`, not `chip`.

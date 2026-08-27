@@ -8,11 +8,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdo
 function ListItem({
   className,
   selected = false,
-  layout = 'default',
+  layout = 'Default',
   ...props
 }: ComponentProps<'div'> & {
   selected?: boolean
-  layout?: 'default' | 'stack' | 'media'
+  layout?: 'Default' | 'Stack' | 'Media'
 }) {
   return (
     <div
@@ -21,9 +21,9 @@ function ListItem({
       data-layout={layout}
       className={cn(
         'group/list-item relative flex w-full gap-3 rounded-lg border border-solid bg-oc-background px-4 py-3',
-        layout === 'stack' && 'flex-col items-stretch gap-4',
-        layout === 'media' && 'items-center',
-        layout === 'default' && 'items-start',
+        layout === 'Stack' && 'flex-col items-stretch gap-4',
+        layout === 'Media' && 'items-center',
+        layout === 'Default' && 'items-start',
         selected
           ? 'border-2 border-oc-primary'
           : 'border-oc-border hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',

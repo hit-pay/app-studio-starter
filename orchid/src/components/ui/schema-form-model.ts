@@ -38,7 +38,7 @@ export type SchemaFormFieldProps = {
 /**
  * One field in a SchemaForm.
  *
- * Keys: showIf, maxLength, minLength, forceDisplay (camelCase).
+ * Keys: showIf, maxLength, minLength, hidden (camelCase).
  * Pair keys: `amount+currency` writes two values. `key+` is only for input-group / range slider.
  */
 export type SchemaFormField = {
@@ -51,7 +51,7 @@ export type SchemaFormField = {
   options?: SchemaFormOption[]
   value?: unknown
   validation?: string | null
-  forceDisplay?: boolean
+  hidden?: boolean
   maxLength?: number
   minLength?: number
   min?: number
@@ -100,8 +100,8 @@ export function fieldMinLength(field: SchemaFormField) {
   return field.minLength
 }
 
-export function fieldForceDisplay(field: SchemaFormField) {
-  return field.forceDisplay
+export function fieldHidden(field: SchemaFormField) {
+  return field.hidden === true || field.type === 'hidden'
 }
 
 export function pairKeys(field: SchemaFormField) {
@@ -244,7 +244,7 @@ function matchesShowIf(actual: unknown, expected: unknown) {
 }
 
 export function isDisplayed(field: SchemaFormField, values: SchemaFormValues) {
-  if (fieldForceDisplay(field) === false) return false
+  if (fieldHidden(field)) return false
   const showIf = fieldShowIf(field)
   if (!showIf) return true
   const keys = Array.isArray(showIf) ? showIf : [showIf]

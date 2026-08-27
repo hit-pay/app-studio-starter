@@ -8,14 +8,14 @@ const emptyIconVariants = cva(
   'relative inline-flex items-center justify-center rounded-full border border-solid p-4',
   {
     variants: {
-      type: {
+      variant: {
         Default: 'border-oc-neutral-soft bg-oc-neutral',
         Search: 'border-oc-neutral-soft bg-oc-neutral',
         Upgrade: 'border-oc-warning-chip-border bg-oc-warning-soft',
       },
     },
     defaultVariants: {
-      type: 'Default',
+      variant: 'Default',
     },
   },
 )
@@ -28,7 +28,7 @@ const DEFAULT_ICON: Record<'Default' | 'Search' | 'Upgrade', ReactNode> = {
 
 function Empty({
   className,
-  type = 'Default',
+  variant = 'Default',
   title,
   description,
   icon,
@@ -36,24 +36,24 @@ function Empty({
   actions,
   ...props
 }: ComponentProps<'div'> & {
-  type?: 'Default' | 'Search' | 'Upgrade'
+  variant?: 'Default' | 'Search' | 'Upgrade'
   title?: ReactNode
   description?: ReactNode
   icon?: ReactNode
   badge?: boolean
   actions?: ReactNode
 }) {
-  const showBadge = badge ?? type !== 'Upgrade'
+  const showBadge = badge ?? variant !== 'Upgrade'
 
   return (
     <div
       data-slot="empty"
-      data-type={type}
+      data-variant={variant}
       className={cn('flex w-full flex-col items-center justify-center gap-6', className)}
       {...props}
     >
-      <div className={emptyIconVariants({ type })}>
-        {icon ?? DEFAULT_ICON[type]}
+      <div className={emptyIconVariants({ variant })}>
+        {icon ?? DEFAULT_ICON[variant]}
         {showBadge ? (
           <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-oc-muted-foreground text-[11px] font-medium leading-none text-white">
             !

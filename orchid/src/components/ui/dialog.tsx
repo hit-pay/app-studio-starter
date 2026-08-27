@@ -54,6 +54,10 @@ function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
   return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
+/**
+ * Packed panel: pass `title` (required for a11y). Optional header/footer, cancel/confirm.
+ * There is no DialogHeader, DialogFooter, or DialogTitle export — do not invent them.
+ */
 function DialogContent({
   className,
   size = 'Default',

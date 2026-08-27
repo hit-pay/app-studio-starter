@@ -2,7 +2,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/button' as const,
     name: 'Button',
-    description: 'Type, Style, Size, Default/Disabled, icon-only, and additional action.',
+    description: 'Variant, style, size, native type, icon-only, and split menu.',
   },
   {
     to: '/dropdown-menu' as const,
@@ -201,7 +201,7 @@ export const DOC_BLOCKS = [
   {
     to: '/schema-form' as const,
     name: 'Schema Form',
-    description: 'TanStack Form plus Orchid fields. Types include date and quantity. Keys: showIf, maxLength.',
+    description: 'TanStack Form plus Orchid fields. Keys: showIf, hidden, maxLength. Types include date, quantity, switch.',
   },
 ] as const
 

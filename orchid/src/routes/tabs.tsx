@@ -14,7 +14,7 @@ function TabsExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <Tabs defaultValue="invoice" type="Default">
+        <Tabs defaultValue="invoice" variant="Default">
           <TabsList>
             <TabsTrigger value="invoice">Invoice</TabsTrigger>
             <TabsTrigger value="link">Payment Link</TabsTrigger>
@@ -32,7 +32,7 @@ function TabsExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Pills
         </p>
-        <Tabs defaultValue="pos" type="Pills">
+        <Tabs defaultValue="pos" variant="Pills">
           <TabsList>
             <TabsTrigger value="pos" icon={<SmartphoneIcon />}>
               Point of Sale
@@ -50,7 +50,7 @@ function TabsExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Big
         </p>
-        <Tabs defaultValue="commerce" type="Default" size="Big">
+        <Tabs defaultValue="commerce" variant="Default" size="Big">
           <TabsList>
             <TabsTrigger value="commerce">Commerce</TabsTrigger>
             <TabsTrigger value="channels">Payment Channels</TabsTrigger>
@@ -66,7 +66,7 @@ function TabsExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Product data
         </p>
-        <Tabs defaultValue="stock" type="Default">
+        <Tabs defaultValue="stock" variant="Default">
           <TabsList>
             <TabsTrigger value="stock">Stock</TabsTrigger>
             <TabsTrigger value="sku">SKUs</TabsTrigger>

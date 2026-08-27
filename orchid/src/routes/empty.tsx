@@ -17,7 +17,7 @@ import { Button } from '@/orchid-ui/button'
 import { PlusIcon } from 'lucide-react'
 
 <Empty
-  type="Default"
+  variant="Default"
   title="No invoices yet"
   description="Create an invoice to bill a customer by email or payment link."
   actions={
@@ -28,9 +28,9 @@ import { PlusIcon } from 'lucide-react'
   }
 />
 
-<Empty type="Search" title="No matching invoices" description="Try another invoice number." />
+<Empty variant="Search" title="No matching invoices" description="Try another invoice number." />
 
-<Empty type="Upgrade" title="Upgrade to Point of Sale" description="Accept in-store payments on a HitPay terminal." />`}
+<Empty variant="Upgrade" title="Upgrade to Point of Sale" description="Accept in-store payments on a HitPay terminal." />`}
     >
       <div className="grid gap-12 md:grid-cols-2">
         <div className="space-y-3">
@@ -38,7 +38,7 @@ import { PlusIcon } from 'lucide-react'
             No invoices
           </p>
           <Empty
-            type="Default"
+            variant="Default"
             title="No invoices yet"
             description="Create an invoice to bill a customer by email or payment link."
             actions={
@@ -61,7 +61,7 @@ import { PlusIcon } from 'lucide-react'
             No products
           </p>
           <Empty
-            type="Default"
+            variant="Default"
             title="No products yet"
             description="Add Product Data to sell in Online Store, POS, invoices, and payment links."
             actions={
@@ -78,7 +78,7 @@ import { PlusIcon } from 'lucide-react'
             No customers
           </p>
           <Empty
-            type="Default"
+            variant="Default"
             title="No customers yet"
             description="Customer Data appears here after a payment, invoice, or POS sale."
             actions={
@@ -95,7 +95,7 @@ import { PlusIcon } from 'lucide-react'
             No payment links
           </p>
           <Empty
-            type="Default"
+            variant="Default"
             title="No payment links yet"
             description="Share a link so customers can pay without an invoice."
             actions={
@@ -112,7 +112,7 @@ import { PlusIcon } from 'lucide-react'
             Upgrade POS
           </p>
           <Empty
-            type="Upgrade"
+            variant="Upgrade"
             title="Upgrade to Point of Sale"
             description="Accept in-store payments on a HitPay terminal. Upgrade your plan to enable POS."
             actions={
@@ -128,7 +128,7 @@ import { PlusIcon } from 'lucide-react'
             Search not found
           </p>
           <Empty
-            type="Search"
+            variant="Search"
             title="No matching invoices"
             description="Try another invoice number, customer, or payment channel."
           />
@@ -139,7 +139,7 @@ import { PlusIcon } from 'lucide-react'
             Online Store
           </p>
           <Empty
-            type="Default"
+            variant="Default"
             title="Your Online Store is empty"
             description="Add products so customers can check out on your storefront."
             actions={

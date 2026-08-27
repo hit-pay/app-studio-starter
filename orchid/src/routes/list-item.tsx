@@ -99,7 +99,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
-        <ListItem layout="media">
+        <ListItem layout="Media">
           <ListItemBody className="gap-1">
             <ListItemTitle>Matcha Latte</ListItemTitle>
             <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
@@ -166,7 +166,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Stack · copy fields
         </p>
-        <ListItem layout="stack">
+        <ListItem layout="Stack">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-baseline gap-1">
               <ListItemTitle>Invoice paid</ListItemTitle>
@@ -185,7 +185,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             />
           </div>
         </ListItem>
-        <ListItem layout="stack">
+        <ListItem layout="Stack">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-baseline gap-1">
               <ListItemTitle>Payment link paid</ListItemTitle>
@@ -218,7 +218,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Media
         </p>
-        <ListItem layout="media">
+        <ListItem layout="Media">
           <ListItemMedia>
             <img
               alt=""
@@ -239,7 +239,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
-        <ListItem layout="media">
+        <ListItem layout="Media">
           <ListItemMedia>
             <img
               alt=""

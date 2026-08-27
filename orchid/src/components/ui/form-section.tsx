@@ -69,7 +69,7 @@ function FormSectionItem({
   description,
   badge,
   hint,
-  type = 'Default',
+  variant = 'Default',
   actions,
   children,
   ...props
@@ -78,16 +78,16 @@ function FormSectionItem({
   description?: string
   badge?: ReactNode
   hint?: string
-  type?: 'Default' | 'Background'
+  variant?: 'Default' | 'Background'
   actions?: ReactNode
 }) {
   return (
     <div
       data-slot="form-section-item"
-      data-type={type}
+      data-variant={variant}
       className={cn(
         'flex w-full min-w-0 flex-col gap-2',
-        type === 'Background' && 'rounded-lg bg-oc-muted p-3',
+        variant === 'Background' && 'rounded-lg bg-oc-muted p-3',
         className,
       )}
       {...props}

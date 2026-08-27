@@ -4,51 +4,51 @@ import { cva } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 import { CopyButton } from './copy-button'
 
-const DetailListTypeContext = createContext<'Default' | 'Border'>('Default')
+const DetailListStyleContext = createContext<'Default' | 'Border'>('Default')
 
 const boxDetailVariants = cva(
   'flex w-full flex-col rounded-lg border border-solid border-oc-border bg-oc-background',
   {
     variants: {
-      type: {
+      style: {
         Default: 'gap-4 p-4',
         Border: 'gap-px overflow-hidden bg-oc-border',
       },
     },
     defaultVariants: {
-      type: 'Default',
+      style: 'Default',
     },
   },
 )
 
 function DetailList({
   className,
-  type = 'Default',
+  style = 'Default',
   ...props
-}: ComponentProps<'div'> & {
-  type?: 'Default' | 'Border'
+}: Omit<ComponentProps<'div'>, 'style'> & {
+  style?: 'Default' | 'Border'
 }) {
   return (
-    <DetailListTypeContext.Provider value={type}>
+    <DetailListStyleContext.Provider value={style}>
       <div
         data-slot="detail-list"
-        data-type={type}
-        className={cn(boxDetailVariants({ type }), className)}
+        data-style={style}
+        className={cn(boxDetailVariants({ style }), className)}
         {...props}
       />
-    </DetailListTypeContext.Provider>
+    </DetailListStyleContext.Provider>
   )
 }
 
 function DetailListHeader({ className, ...props }: ComponentProps<'div'>) {
-  const type = useContext(DetailListTypeContext)
+  const style = useContext(DetailListStyleContext)
 
   return (
     <div
       data-slot="detail-list-header"
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-3',
-        type === 'Border' && 'bg-oc-background px-4 py-3',
+        style === 'Border' && 'bg-oc-background px-4 py-3',
         className,
       )}
       {...props}
@@ -64,14 +64,14 @@ function DetailListGrid({
 }: ComponentProps<'div'> & {
   columns?: number
 }) {
-  const type = useContext(DetailListTypeContext)
+  const appearance = useContext(DetailListStyleContext)
 
   return (
     <div
       data-slot="detail-list-grid"
       className={cn(
         'grid w-full min-w-0',
-        type === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
+        appearance === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
         className,
       )}
       style={{
@@ -151,7 +151,7 @@ function DetailListRow({
   size?: 'Small' | 'Big'
   colSpan?: number
 }) {
-  const type = useContext(DetailListTypeContext)
+  const appearance = useContext(DetailListStyleContext)
 
   return (
     <div
@@ -160,7 +160,7 @@ function DetailListRow({
       data-size={size}
       className={cn(
         boxDetailRowVariants({ alignment }),
-        type === 'Border' && 'bg-oc-background p-4',
+        appearance === 'Border' && 'bg-oc-background p-4',
         className,
       )}
       style={{

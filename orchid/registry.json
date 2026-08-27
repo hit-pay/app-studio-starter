@@ -7,7 +7,7 @@
       "name": "all",
       "type": "registry:ui",
       "title": "All",
-      "description": "Installs every Orchid UI component via registryDependencies, including toast.",
+      "description": "Installs every Orchid UI component via registryDependencies (including toast). all.tsx only re-exports Toaster and toast for the app root.",
       "registryDependencies": [
         "@orchid/button",
         "@orchid/dropdown-menu",
@@ -136,7 +136,7 @@
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
-      "description": "Programmatic floating toast. toast.add({ title, description, type }). Mount Toaster at the app root. Not an in-page alert.",
+      "description": "Programmatic floating toast. toast.add({ title, description, type: 'success'|'info'|'warning'|'error' }). Not sonner toast(). Mount Toaster at the app root. Not an in-page alert.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -156,7 +156,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Status, tags, filters, removable tokens. Badge colors + type Background|Border|Transparent. UserBadge for Owner|Admin|Manager|Cashier. Not a button.",
+      "description": "Status, tags, filters, removable tokens. Badge colors + style Background|Border|Transparent. UserBadge role Owner|Admin|Manager|Cashier. Not a button.",
       "dependencies": [
         "class-variance-authority",
         "lucide-react"
@@ -247,7 +247,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Person or business face. size 24\u201364, type Default|Business|Image. Initials as children; src for a photo. Pair with names, not as a logo block.",
+      "description": "Person or business face. size 24\u201364, variant Default|Business|Image. Initials as children; src for a photo. Pair with names, not as a logo block.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -281,7 +281,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabsList + TabsTrigger + TabsContent. Not a dropdown of actions.",
+      "description": "Switch views on one page (Week | My shifts | Review). variant Default underline or Pills. TabsList + TabsTrigger + TabsContent. Not a dropdown of actions.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -388,7 +388,7 @@
       "name": "detail-list",
       "type": "registry:ui",
       "title": "Detail List",
-      "description": "Read-only key/value details (shift time, customer fields) in one card. type Default or Border table. Grid + colspan. Not an editable form \u2014 use field + input.",
+      "description": "Read-only key/value details (shift time, customer fields) in one card. style Default or Border table. Grid + colspan. Not an editable form \u2014 use field + input.",
       "dependencies": [
         "class-variance-authority",
         "lucide-react"
@@ -408,7 +408,7 @@
       "name": "icon-group",
       "type": "registry:ui",
       "title": "Icon Group",
-      "description": "Tight cluster of icon actions (copy, open link, more menu). type Default|Border. Not a full toolbar of labeled Buttons.",
+      "description": "Tight cluster of icon actions (copy, open link, more menu). style Default|Border. Not a full toolbar of labeled Buttons.",
       "dependencies": [
         "class-variance-authority",
         "lucide-react"
@@ -543,7 +543,7 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "No data / no search hits / upgrade CTA. type Default|Search|Upgrade + actions Buttons. Use when a list or page has zero rows \u2014 not for inline field errors.",
+      "description": "No data / no search hits / upgrade CTA. variant Default|Search|Upgrade + actions Buttons. Use when a list or page has zero rows \u2014 not for inline field errors. Not CustomerCard Empty.",
       "dependencies": [
         "class-variance-authority",
         "lucide-react"
@@ -783,7 +783,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Focused task overlay: create/edit shift, confirm delete, handover form. Dialog + DialogTrigger + DialogContent. Always set title. size Small|Medium|Default|Confirmation (320/480/640). persistent = no backdrop close. Not a side sheet (none in kit).",
+      "description": "Focused task overlay. Dialog + DialogTrigger + DialogContent (packed: title, optional footer). No DialogHeader/Footer/Title exports. size Small|Medium|Default|Confirmation|Fullscreen. persistent = no backdrop close. Not a side sheet.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -825,7 +825,7 @@
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, forceDisplay. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, quantity, object, section, section-item, hidden, phone. Pair keys with key+ for input-group. Import SCHEMA_FORM_EXAMPLE_FIELDS.",
+      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, hidden. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, quantity, object, section, section-item, hidden, phone. Pair keys with key+ for input-group. Import SCHEMA_FORM_EXAMPLE_FIELDS.",
       "dependencies": [
         "@tanstack/react-form"
       ],

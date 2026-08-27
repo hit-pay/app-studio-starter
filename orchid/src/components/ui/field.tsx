@@ -20,15 +20,15 @@ function FieldSet({ className, ...props }: ComponentProps<'fieldset'>) {
 
 function FieldLegend({
   className,
-  variant = 'legend',
+  variant = 'Legend',
   ...props
-}: ComponentProps<'legend'> & { variant?: 'legend' | 'label' }) {
+}: ComponentProps<'legend'> & { variant?: 'Legend' | 'Label' }) {
   return (
     <legend
       data-slot="field-legend"
       data-variant={variant}
       className={cn(
-        'mb-1.5 font-medium text-oc-foreground data-[variant=label]:text-sm data-[variant=legend]:text-base',
+        'mb-1.5 font-medium text-oc-foreground data-[variant=Label]:text-sm data-[variant=Legend]:text-base',
         className,
       )}
       {...props}
@@ -54,22 +54,22 @@ const fieldVariants = cva(
   {
     variants: {
       orientation: {
-        vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
-        horizontal:
+        Vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
+        Horizontal:
           'flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
-        responsive:
+        Responsive:
           'flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
       },
     },
     defaultVariants: {
-      orientation: 'vertical',
+      orientation: 'Vertical',
     },
   },
 )
 
 function Field({
   className,
-  orientation = 'vertical',
+  orientation = 'Vertical',
   ...props
 }: ComponentProps<'div'> & VariantProps<typeof fieldVariants>) {
   return (

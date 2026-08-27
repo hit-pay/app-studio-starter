@@ -35,11 +35,11 @@ function FieldExamplesPage() {
               <Input id="customer-email" placeholder="alex@example.com" aria-invalid />
               <FieldError>Enter a valid email to send the payment link.</FieldError>
             </Field>
-            <Field orientation="horizontal">
+            <Field orientation="Horizontal">
               <Switch defaultChecked />
               <FieldLabel>Email receipt after Point of Sale</FieldLabel>
             </Field>
-            <Field orientation="horizontal">
+            <Field orientation="Horizontal">
               <Checkbox defaultChecked />
               <FieldLabel>Save to Customer Data</FieldLabel>
             </Field>
@@ -55,7 +55,7 @@ function FieldExamplesPage() {
               <Input id="product-name" defaultValue="Classic White Tee" />
               <FieldDescription>Catalog title on the storefront.</FieldDescription>
             </Field>
-            <Field orientation="horizontal">
+            <Field orientation="Horizontal">
               <Switch />
               <FieldLabel>Track inventory</FieldLabel>
             </Field>

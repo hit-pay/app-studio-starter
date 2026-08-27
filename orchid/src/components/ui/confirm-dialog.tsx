@@ -116,6 +116,10 @@ function ConfirmDialogContent({
   )
 }
 
+/**
+ * Intent: Delete | Warning | Success | Question. Warning confirm label is Continue.
+ * `confirmType` is Button `variant`, not HTML type.
+ */
 function ConfirmDialog({
   type = 'Delete',
   size = 'Small',

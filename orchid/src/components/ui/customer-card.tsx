@@ -203,7 +203,7 @@ function CustomerCard({
             {avatar ? (
               <Avatar
                 size={32}
-                type={customer.src ? 'Image' : 'Default'}
+                variant={customer.src ? 'Image' : 'Default'}
                 src={customer.src}
                 alt=""
                 className="text-sm leading-5"

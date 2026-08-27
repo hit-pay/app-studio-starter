@@ -15,9 +15,9 @@ export const Route = createFileRoute('/icon-group')({
   component: IconGroupExamplesPage,
 })
 
-function ExampleGroup({ type }: { type?: 'Default' | 'Border' }) {
+function ExampleGroup({ style }: { style?: 'Default' | 'Border' }) {
   return (
-    <IconGroup type={type}>
+    <IconGroup style={style}>
       <IconGroupMenu
         menu={
           <>
@@ -43,7 +43,7 @@ function ExampleGroup({ type }: { type?: 'Default' | 'Border' }) {
 
 function InvoiceGroup() {
   return (
-    <IconGroup type="Border">
+    <IconGroup style="Border">
       <IconGroupMenu
         menu={
           <>
@@ -74,14 +74,14 @@ function IconGroupExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <ExampleGroup type="Default" />
+        <ExampleGroup style="Default" />
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Border
         </p>
-        <ExampleGroup type="Border" />
+        <ExampleGroup style="Border" />
       </div>
 
       <div className="space-y-4">

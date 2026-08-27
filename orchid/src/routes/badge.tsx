@@ -20,7 +20,7 @@ const COLORS = [
   'Green',
 ] as const
 
-const TYPES = ['Background', 'Border', 'Transparent'] as const
+const STYLES = ['Background', 'Border', 'Transparent'] as const
 
 const COLOR_LABEL: Record<(typeof COLORS)[number], string> = {
   Blue: 'PayNow',
@@ -45,8 +45,8 @@ function BadgeExamplesPage() {
         <div className="space-y-4">
           {COLORS.map((color) => (
             <div key={color} className="flex flex-wrap items-center gap-3">
-              {TYPES.map((type) => (
-                <Badge key={type} color={color} type={type}>
+              {STYLES.map((style) => (
+                <Badge key={style} color={color} style={style}>
                   {COLOR_LABEL[color]}
                 </Badge>
               ))}
@@ -66,10 +66,10 @@ function BadgeExamplesPage() {
           User Type Badge
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <UserBadge type="Owner" />
-          <UserBadge type="Admin" />
-          <UserBadge type="Manager" />
-          <UserBadge type="Cashier" />
+          <UserBadge role="Owner" />
+          <UserBadge role="Admin" />
+          <UserBadge role="Manager" />
+          <UserBadge role="Cashier" />
         </div>
       </div>
 

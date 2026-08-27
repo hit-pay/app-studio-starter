@@ -125,7 +125,7 @@ function FormSectionExamplesPage() {
                 <Input placeholder="Enter password" type="password" />
               </FormSectionItem>
               <FormSectionItem
-                type="Background"
+                variant="Background"
                 title="Guest checkout"
                 description="Let customers pay without creating an account."
                 actions={<Switch defaultChecked />}
