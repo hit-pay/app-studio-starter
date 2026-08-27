@@ -28,14 +28,14 @@ toast.add({ title: 'Saved', type: 'success' })
 
 The app is **always** an iframe inside the HitPay dashboard (host already has icon rail, Apps header, Draft/Build, and a border around the pane).
 
-`AppShell` fills that pane (`h-full` of `html`/`body`). **No** outer border, radius, or shadow on the app. Do not wrap the page in another Card/frame. Do not rebuild the host sidebar.
+`AppShell` fills that pane (`h-full min-h-full w-full` by default — do not add `min-h-0` on the shell). **No** outer border, radius, or shadow on the app. Do not wrap the page in another Card/frame. Do not rebuild the host sidebar (hamburger, Apps, Draft/Build). Those belong to HitPay, not this iframe.
 
 ```
 AppShell header             — full width above nav (PageTitle / PageToolbar)
   nav | main                — several pages; omit nav for one screen
 ```
 
-Pass `nav` when the user asks for **more than one page**, using `AppShellNav` / `AppShellNavGroup` / `AppShellNavItem` with `active` on the current route (pill like the HitPay dashboard). One screen → omit `nav`. **Never** put a login/user card in AppShell — the host already shows who is signed in. Do not rebuild the HitPay icon rail.
+Pass `nav` when the user asks for **more than one page**, using `AppShellNav` / `AppShellNavGroup` / `AppShellNavItem` with `active` on the current route (pill like the HitPay dashboard). Do **not** repeat the PageTitle in the nav. `AppShellNavGroup` `label` is an optional small subtitle (e.g. Settings), not the app name. One screen → omit `nav`. On **mobile**, AppShell shows a menu button and slides the same nav over main — do not hide pages with no way to switch. **Never** put a login/user card in AppShell — the host already shows who is signed in. Do not rebuild the HitPay icon rail.
 
 `CustomerCard` = HitPay customer/beneficiary only. Staff, vendor, member = `ListItem` + `Avatar`. Empty customer slot = `CustomerCard variant="Empty"`, not `Empty`.
 

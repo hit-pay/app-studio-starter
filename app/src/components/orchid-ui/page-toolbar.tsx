@@ -38,7 +38,7 @@ function PageToolbar({
       data-slot="page-toolbar"
       data-left={left}
       className={cn(
-        'flex w-full items-center justify-between gap-4 border-b border-solid border-oc-border bg-oc-background px-6 py-3',
+        'flex w-full min-w-0 items-center justify-between gap-3 border-b border-solid border-oc-border bg-oc-background px-4 py-3 md:gap-4 md:px-6',
         className,
       )}
       {...props}

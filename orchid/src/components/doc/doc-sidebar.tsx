@@ -2,6 +2,7 @@ import { useNavigate, useRouterState } from '@tanstack/react-router'
 import { ChoiceCard, ChoiceCardGroup } from '@/components/ui/choice-card'
 
 import {
+  DOC_APPS,
   DOC_GUIDES,
   docBlocksByName,
   docComponentsByName,
@@ -55,6 +56,7 @@ function DocSidebar() {
     <aside className="hidden h-full w-56 shrink-0 flex-col overflow-y-auto border-r border-solid border-oc-border bg-oc-background md:flex">
       <nav className="flex flex-col gap-6 px-3 pt-4 pb-4">
         <NavGroup label="Guides" items={DOC_GUIDES} pathname={pathname} />
+        <NavGroup label="Apps" items={DOC_APPS} pathname={pathname} />
         <NavGroup label="Component" items={docComponentsByName()} pathname={pathname} />
         <NavGroup label="Form" items={docFormsByName()} pathname={pathname} />
         <NavGroup label="Blok" items={docBlocksByName()} pathname={pathname} />

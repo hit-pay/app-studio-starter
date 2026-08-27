@@ -26,24 +26,27 @@ function AppShellExamplesPage() {
             With nav
           </p>
           <p className="text-sm text-oc-muted-foreground">
-            Several pages. Header is full width above the nav, like HitPay settings. Use AppShellNavItem
-            with active for the current route. Do not show a signed-in user.
+            Several pages. Header is full width above the nav, like HitPay settings. On small screens
+            the nav is a menu (hamburger), not a permanently hidden sidebar. Use AppShellNavItem with
+            active for the current route. Do not show a signed-in user.
           </p>
           <Preview>
             <AppShell
               nav={
                 <AppShellNav>
-                  <AppShellNavGroup label="Catalog">
-                    <AppShellNavItem active>Products</AppShellNavItem>
-                    <AppShellNavItem>Inventory</AppShellNavItem>
+                  <AppShellNavGroup>
+                    <AppShellNavItem active>General settings</AppShellNavItem>
+                    <AppShellNavItem>Tracking Tools</AppShellNavItem>
+                    <AppShellNavItem>SEO</AppShellNavItem>
                   </AppShellNavGroup>
-                  <AppShellNavGroup label="Account">
-                    <AppShellNavItem>Settings</AppShellNavItem>
+                  <AppShellNavGroup label="Settings">
+                    <AppShellNavItem>Tax Settings</AppShellNavItem>
+                    <AppShellNavItem>Button Labels</AppShellNavItem>
                   </AppShellNavGroup>
                 </AppShellNav>
               }
               header={
-                <div className="px-6 py-4">
+                <div className="px-4 py-3 md:px-6 md:py-4">
                   <PageTitle title="Products" />
                 </div>
               }
@@ -61,7 +64,7 @@ function AppShellExamplesPage() {
           <Preview>
             <AppShell
               header={
-                <div className="px-6 py-4">
+                <div className="px-4 py-3 md:px-6 md:py-4">
                   <PageTitle title="Products" />
                 </div>
               }

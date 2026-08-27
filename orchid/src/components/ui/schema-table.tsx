@@ -465,10 +465,10 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
             size="Small"
             aria-label="Edit column"
             aria-pressed={open}
-            className={open ? 'border-oc-primary text-oc-primary' : undefined}
+            className={cn('max-sm:size-7 max-sm:min-w-7 max-sm:px-0', open && 'border-oc-primary text-oc-primary')}
           >
             <Settings2Icon />
-            Edit Column
+            <span className="hidden sm:inline">Edit Column</span>
           </Button>
         }
       />
@@ -570,6 +570,48 @@ function SchemaTableChips({ table }: { table: SchemaTableApi }) {
   )
 }
 
+function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
+  const tabs = table.schema.tabs
+  if (!tabs?.length) return <span />
+
+  return (
+    <>
+      <div className="min-w-0 max-w-[11rem] md:hidden">
+        <Select
+          value={table.query.tab}
+          onValueChange={(value) => {
+            if (value) table.setTab(String(value))
+          }}
+        >
+          <SelectTrigger className="h-7 text-xs" aria-label="Filter">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            {tabs.map((tab) => (
+              <SelectItem key={tab.key} value={tab.key}>
+                {tab.title}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
+      </div>
+      <div className="hidden min-w-0 flex-wrap gap-1 md:flex">
+        {tabs.map((tab) => (
+          <Button
+            key={tab.key}
+            variant="Secondary"
+            style={table.query.tab === tab.key ? 'Default' : 'Transparent'}
+            size="Small"
+            onClick={() => table.setTab(tab.key)}
+          >
+            {tab.title}
+          </Button>
+        ))}
+      </div>
+    </>
+  )
+}
+
 function SchemaTable({
   table,
   onRowAction,
@@ -602,23 +644,7 @@ function SchemaTable({
           </TableSelectionBar>
         ) : (
           <TableToolbar>
-            {table.schema.tabs?.length ? (
-              <div className="flex min-w-0 flex-wrap gap-1">
-                {table.schema.tabs.map((tab) => (
-                  <Button
-                    key={tab.key}
-                    variant="Secondary"
-                    style={table.query.tab === tab.key ? 'Default' : 'Transparent'}
-                    size="Small"
-                    onClick={() => table.setTab(tab.key)}
-                  >
-                    {tab.title}
-                  </Button>
-                ))}
-              </div>
-            ) : (
-              <span />
-            )}
+            {table.schema.tabs?.length ? <SchemaTableTabs table={table} /> : <span />}
             <div className="flex min-w-0 items-center justify-end gap-2">
               <SchemaTableSearch table={table} />
               <SchemaTableFilterPopover table={table} />
