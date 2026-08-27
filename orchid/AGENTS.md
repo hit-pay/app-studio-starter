@@ -55,7 +55,7 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 
 SchemaForm: `showIf` / `showIfValue`, `hidden: true` (or `type: "hidden"`) hides UI and still submits, `maxLength`, `minLength`, `validation` (`email\|max:255\|phone\|valid_url\|accepted` or `/regex/`). Pair keys `amount+currency`. Types include `date`, `datetime`, `file`. See `SCHEMA_FORM_TYPES`.
 
-SchemaTable: JSON schema + `useSchemaTable({ schema, data })` + `<SchemaTable table={table} />`. Prefer this for app lists. `Table` alone is only a small read-only grid. Column `locked` is fixed. Do not add TanStack Table, Query, or DB to this kit. Apps: `#/lib/query` + `lists.md`. `CustomerCard` is customer/beneficiary only.
+SchemaTable: JSON schema + `useSchemaTable({ schema, data })` + `<SchemaTable table={table} />`. Prefer this for app lists. `Table` alone is only a small read-only grid. Column `locked` is fixed. Do not add TanStack Table, Query, or DB to this kit. Apps: `#/lib/query` + `ui.md`. `CustomerCard` is customer/beneficiary only.
 
 ## Customer card
 
