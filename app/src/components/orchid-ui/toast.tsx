@@ -10,19 +10,53 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 
-const toast = ToastPrimitive.createToastManager()
-
-const TYPE_TO_COLOR: Record<string, string> = {
-  success: 'border-success-border bg-success-soft text-success',
-  info: 'border-info-border bg-info-soft text-primary',
-  warning: 'border-warning-border bg-warning-soft text-warning',
-  error: 'border-destructive-border bg-destructive-soft text-destructive',
-  loading: 'border-neutral-border bg-neutral-soft text-muted-foreground',
+const TOAST_BAR_COLOR: Record<string, string> = {
+  Default:
+    'border-oc-success-border bg-oc-success-soft [&_[data-slot=toast-bar-icon]]:text-oc-success',
+  Blue: 'border-oc-info-border bg-oc-info-soft [&_[data-slot=toast-bar-icon]]:text-oc-primary',
+  Red: 'border-oc-destructive-border bg-oc-destructive-soft [&_[data-slot=toast-bar-icon]]:text-oc-destructive',
+  Orange:
+    'border-oc-warning-border bg-oc-warning-soft [&_[data-slot=toast-bar-icon]]:text-oc-warning',
+  Grey: 'border-oc-neutral-border bg-oc-neutral-soft [&_[data-slot=toast-bar-icon]]:text-oc-muted-foreground',
 }
 
-function snackbarColor(type: string | undefined) {
-  return TYPE_TO_COLOR[type ?? ''] ?? 'border-success-border bg-success-soft text-success'
+function ToastBar({
+  className,
+  color,
+  size,
+  children,
+}: {
+  className?: string
+  color: string
+  size: 'Small' | 'Default'
+  children: React.ReactNode
+}) {
+  return (
+    <div
+      data-slot="toast-bar"
+      className={cn(
+        'relative flex w-fit max-w-full flex-nowrap items-center rounded-lg border border-solid text-oc-foreground shadow-[0_8px_6px_rgba(42,50,82,0.04)]',
+        size === 'Small' ? 'gap-1 py-2 pr-3 pl-2 text-xs leading-[1.5]' : 'gap-3 py-3 pr-4 pl-3 text-sm leading-[1.5]',
+        TOAST_BAR_COLOR[color] ?? TOAST_BAR_COLOR.Default,
+        className,
+      )}
+    >
+      {children}
+    </div>
+  )
+}
+
+/** Use `toast.add({ title, description, type })`. `type`: success|info|warning|error|loading — not sonner. Default color is green. */
+const toast = ToastPrimitive.createToastManager()
+
+const TYPE_TO_COLOR: Record<string, 'Default' | 'Blue' | 'Red' | 'Orange' | 'Grey'> = {
+  success: 'Default',
+  info: 'Blue',
+  warning: 'Orange',
+  error: 'Red',
+  loading: 'Grey',
 }
 
 function ToastProvider({ ...props }: ToastPrimitive.Provider.Props) {
@@ -91,7 +125,7 @@ function ToastTitle({ className, ...props }: ToastPrimitive.Title.Props) {
   return (
     <ToastPrimitive.Title
       data-slot="toast-title"
-      className={cn('text-sm font-medium text-foreground', className)}
+      className={cn('text-sm font-medium text-oc-foreground', className)}
       {...props}
     />
   )
@@ -101,7 +135,7 @@ function ToastDescription({ className, ...props }: ToastPrimitive.Description.Pr
   return (
     <ToastPrimitive.Description
       data-slot="toast-description"
-      className={cn('text-sm text-foreground', className)}
+      className={cn('text-oc-foreground', className)}
       {...props}
     />
   )
@@ -109,12 +143,7 @@ function ToastDescription({ className, ...props }: ToastPrimitive.Description.Pr
 
 function ToastAction({
   className,
-  render = (
-    <button
-      type="button"
-      className="inline-flex h-7 shrink-0 items-center rounded-lg border border-border bg-background px-2.5 text-xs font-medium"
-    />
-  ),
+  render = <Button variant="Secondary" style="Border" size="Small" />,
   ...props
 }: ToastPrimitive.Action.Props) {
   return (
@@ -127,17 +156,33 @@ function ToastAction({
   )
 }
 
-function ToastIcon({ type }: { type: string | undefined }) {
+function ToastIcon({ type, size }: { type: string | undefined; size: 'Small' | 'Default' }) {
   let icon: React.ReactNode = <CheckIcon aria-hidden="true" />
 
-  if (type === 'success') icon = <CircleCheckIcon aria-hidden="true" />
-  if (type === 'info') icon = <InfoIcon aria-hidden="true" />
-  if (type === 'warning') icon = <TriangleAlertIcon aria-hidden="true" />
-  if (type === 'error') icon = <OctagonXIcon aria-hidden="true" />
-  if (type === 'loading') icon = <Loader2Icon className="animate-spin" aria-hidden="true" />
+  if (type === 'success') {
+    icon = <CircleCheckIcon aria-hidden="true" />
+  }
+  if (type === 'info') {
+    icon = <InfoIcon aria-hidden="true" />
+  }
+  if (type === 'warning') {
+    icon = <TriangleAlertIcon aria-hidden="true" />
+  }
+  if (type === 'error') {
+    icon = <OctagonXIcon aria-hidden="true" />
+  }
+  if (type === 'loading') {
+    icon = <Loader2Icon className="animate-spin" aria-hidden="true" />
+  }
 
   return (
-    <span className="inline-flex size-6 shrink-0 items-center justify-center [&_svg]:size-6">
+    <span
+      data-slot="toast-bar-icon"
+      className={cn(
+        'inline-flex shrink-0 items-center justify-center [&_svg]:size-full',
+        size === 'Small' ? 'size-4' : 'size-6',
+      )}
+    >
       {icon}
     </span>
   )
@@ -147,33 +192,35 @@ function ToastList() {
   const { toasts } = ToastPrimitive.useToastManager()
 
   return toasts.map((toastItem) => {
+    const color = TYPE_TO_COLOR[toastItem.type ?? ''] ?? 'Default'
     const hasTitle = Boolean(toastItem.title)
     const hasDescription = Boolean(toastItem.description)
-    const compact = !(hasTitle && hasDescription)
+    const size = hasTitle && hasDescription ? 'Default' : 'Small'
     const hasAction = Boolean(toastItem.actionProps)
 
     return (
       <Toast key={toastItem.id} toast={toastItem}>
         <ToastContent>
-          <div
-            role="status"
-            className={cn(
-              'relative mx-auto flex w-fit max-w-full flex-nowrap items-center rounded-lg border border-solid text-foreground shadow-[0_8px_6px_rgba(42,50,82,0.04)]',
-              snackbarColor(toastItem.type),
-              compact ? 'gap-1 py-2 pr-3 pl-2 text-xs' : 'gap-3 py-3 pr-4 pl-3 text-sm',
-            )}
-          >
-            <ToastIcon type={toastItem.type} />
+          <ToastBar color={color} size={size} className="mx-auto">
+            <ToastIcon type={toastItem.type} size={size} />
             <div className="flex shrink-0 flex-col gap-0.5 whitespace-nowrap">
-              {hasTitle ? <ToastTitle className={cn(compact && 'text-xs font-normal')} /> : null}
-              {hasDescription ? <ToastDescription className={cn(compact && 'text-xs')} /> : null}
+              {hasTitle ? (
+                <div className="w-auto text-sm font-medium text-oc-foreground">
+                  <ToastTitle />
+                </div>
+              ) : null}
+              {hasDescription ? (
+                <div className="w-auto text-oc-foreground">
+                  <ToastDescription className={size === 'Small' ? 'text-xs' : 'text-sm'} />
+                </div>
+              ) : null}
             </div>
             {hasAction ? (
               <div className="ml-1 shrink-0">
                 <ToastAction />
               </div>
             ) : null}
-          </div>
+          </ToastBar>
         </ToastContent>
       </Toast>
     )
