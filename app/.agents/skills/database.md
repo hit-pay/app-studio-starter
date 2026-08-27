@@ -6,7 +6,7 @@ description: Turso queries. Open only if the prompt stores data.
 
 Server only: `#/lib/db`, `#/lib/migrate`. No Turso `db` in client components. No extra ORM. Do not rewrite `src/lib/db.ts`.
 
-Client lists: `#/lib/query` (`useQuery`, `useDebouncedValue`). Collections: TanStack DB when you need optimistic rows. Persistence: `createServerFn` + Turso. SchemaTable receives rows. Follow `lists.md`.
+Client lists: `#/lib/query` (`useQuery`, `useDebouncedValue`). Query **does not** keep Turso connected — it only caches. Persistence: `createServerFn` + Turso. SchemaTable receives rows. Follow `lists.md`. Do not add TanStack DB / `DbProvider` unless the prompt needs optimistic collections.
 
 This app already talks to Turso over **HTTP** (`db.execute` / `db.batch`). Do **not** add `@tursodatabase/database`, `@tursodatabase/sync`, WASM, MCP, vector, FTS, or encryption unless the user prompt asks for those.
 

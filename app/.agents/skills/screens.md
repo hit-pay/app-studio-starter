@@ -4,9 +4,9 @@ description: Screen recipes for Orchid. Open when building any page, list, form,
 
 # Screens
 
-Read this first. Then `lists.md` if the page has SchemaTable. Then `components.md` only for catalog install names.
+Read this first. Then **`components.md`** if you need to pick a control. Then `lists.md` if the page has SchemaTable.
 
-Orchid is the **only** kit. `@orchid` registry. No shadcn Card/Button/Dialog/Sonner. No `asChild`. Triggers: `nativeButton` + `render={<Button />}`. Import `@/orchid-ui/<name>`. There is **no generic Card** — use FormSection, DetailList, StatCard.
+Orchid is the **only** kit. Files live in `src/components/orchid-ui/`. Import `@/orchid-ui/<name>`. Do not `shadcn add` unless that file is missing. No shadcn Card/Button/Dialog/Sonner. No `asChild`. Triggers: `nativeButton` + `render={<Button />}`. There is **no generic Card** — use FormSection, DetailList, StatCard.
 
 ## Wrong vs right
 
@@ -38,8 +38,6 @@ AppShell header             — full width above nav (PageTitle / PageToolbar)
 Pass `nav` when the user asks for **more than one page**, using `AppShellNav` / `AppShellNavGroup` / `AppShellNavItem` with `active` on the current route (pill like the HitPay dashboard). One screen → omit `nav`. **Never** put a login/user card in AppShell — the host already shows who is signed in. Do not rebuild the HitPay icon rail.
 
 `CustomerCard` = HitPay customer/beneficiary only. Staff, vendor, member = `ListItem` + `Avatar`. Empty customer slot = `CustomerCard variant="Empty"`, not `Empty`.
-
-Command / Kbd / Slider / Progress / Accordion are optional. Do not use them as the default form path.
 
 ## List (always SchemaTable)
 
@@ -78,7 +76,7 @@ Create/edit page: `PageToolbar` + `PageTitle` + `SchemaForm` + submit `Button ty
 | file | do not show file bytes; show text name |
 | image URL | image |
 
-Form extras: `datetime`, `file` (one `File`). Dates without time = `date`.
+Form extras: `datetime`, `file` (one `File`; storage is not in the kit). Dates without time = `date`.
 
 ## Feedback + empty
 
@@ -86,4 +84,4 @@ In-page: `Alert` above `PageTitle` (`color="Default"` is green; `Grey` is neutra
 
 ## Fetch
 
-Do not `useEffect`+`fetch` for lists. Use `#/lib/query` (`QueryProvider` is on the root). Collections/live queries: `lists.md`. Persist: `createServerFn` + `#/lib/db`.
+Do not `useEffect`+`fetch` for lists. Use `#/lib/query` (`QueryProvider` is on the root). Persist: `createServerFn` + `#/lib/db`. Collections: only if you wire them — `lists.md`.

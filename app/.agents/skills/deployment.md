@@ -6,7 +6,7 @@ description: Reload the live preview. Run once when the job is finished, not aft
 
 This process is the live preview. Do not start a second server (`bun run dev`, extra `vite`, extra `bun run start`). Do not edit `.output/` or `.nitro/`.
 
-Reading kit / route files while coding is fine. **Do not** run `bun run lint` or `bun run preview:refresh` after each save.
+Reading kit / route files while coding is fine. **Do not** run `bun run lint` or `bun run preview:refresh` after each save. **Do not** `shadcn add` as part of finishing unless a kit file was missing.
 
 When **all** source changes for this request are done:
 

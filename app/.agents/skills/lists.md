@@ -1,19 +1,23 @@
 ---
-description: SchemaTable + TanStack Query/DB. Open when building a list, table, search, or fetching rows.
+description: SchemaTable + TanStack Query. Open when building a list, table, search, or fetching rows.
 ---
 
 # Lists (SchemaTable data)
 
-Kit (`SchemaTable`) is UI only. Fetch with `#/lib/query` ([TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)). Live collections: [TanStack DB](https://tanstack.com/db/latest/docs/quick-start). No TanStack Table. `QueryProvider` is already on `__root` — never mount another `QueryClient` per page.
+Kit (`SchemaTable`) is UI only. Fetch with `#/lib/query` ([TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)). No TanStack Table. `QueryProvider` is already on `__root` — never mount another `QueryClient` per page.
+
+Do **not** treat Query/DB as a Turso connection fix. Persistence is still `createServerFn` + `#/lib/db`. Query is cache/UX only.
+
+TanStack DB collections (`queryCollectionOptions`, `useLiveQuery`) are **optional**. Do not add `DbProvider` or collections unless the prompt needs optimistic local rows / live joins. Default path: `useQuery` + pass `data` into `useSchemaTable`.
 
 ## Pick a mode (do not default to server)
 
 | Dataset | Mode | Fetch |
 | --- | --- | --- |
-| Bounded list (products, customers, settings rows) | `mode: 'client'` (default) | **One** Query/DB collection load. Kit filters, sorts, pages in memory. |
+| Bounded list (products, customers, settings rows) | `mode: 'client'` (default) | **One** `useQuery` load. Kit filters, sorts, pages in memory. |
 | Huge / must page on the server | `mode: 'server'` | Query per **committed** list query. Pass `data` + `total`. |
 
-Prefer **client + collection**. Server mode only when the prompt says large data or the API is already paginated.
+Prefer **client + one query**. Server mode only when the prompt says large data or the API is already paginated.
 
 ## Do not refetch for
 
@@ -35,12 +39,25 @@ Stable and minimal:
 - `staleTime: 30_000`. Do not set `refetchOnWindowFocus: true` on list queries.
 - Same key = one in-flight request (Query dedupes). Do not add timestamps or random ids.
 
-## Client + DB
+## Client lists
+
+```tsx
+const { data: rows = [] } = useQuery({
+  queryKey: ['products'],
+  queryFn: () => listProducts(),
+})
+const table = useSchemaTable({ schema, data: rows })
+```
+
+After a mutation, `invalidateQueries({ queryKey: ['products'] })` once (or update the cache). Do not put table chrome in `queryKey`.
+
+## Optional: client + DB collection
+
+Only if you wired a collection provider:
 
 - `queryCollectionOptions` with a **stable** `queryKey` like `['products']` — no table chrome in that key.
-- `useLiveQuery` for derived views if the prompt needs joins; otherwise pass collection rows into `useSchemaTable` and let the kit filter.
-- Mutations: `collection.insert` / `update` / `delete` (optimistic). Persist in `onInsert` / `onUpdate` / `onDelete` via `createServerFn`. Do **not** `invalidateQueries` the whole list after every optimistic update unless the server returns a different shape.
-- After a real server create that the client cannot append locally, `invalidateQueries({ queryKey: ['products'] })` once.
+- `useLiveQuery` for derived views if the prompt needs joins; otherwise pass collection rows into `useSchemaTable`.
+- Mutations: `collection.insert` / `update` / `delete` (optimistic). Persist in `onInsert` / `onUpdate` / `onDelete` via `createServerFn`.
 
 ## UX while loading
 
