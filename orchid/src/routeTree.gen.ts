@@ -39,6 +39,7 @@ import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
 import { Route as PageTitleRouteImport } from './routes/page-title'
 import { Route as PageToolbarRouteImport } from './routes/page-toolbar'
+import { Route as PaginationRouteImport } from './routes/pagination'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
@@ -52,6 +53,7 @@ import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SpinnerRouteImport } from './routes/spinner'
 import { Route as StatCardRouteImport } from './routes/stat-card'
 import { Route as SwitchRouteImport } from './routes/switch'
+import { Route as TableRouteImport } from './routes/table'
 import { Route as TabsRouteImport } from './routes/tabs'
 import { Route as TextareaRouteImport } from './routes/textarea'
 import { Route as ToastRouteImport } from './routes/toast'
@@ -207,6 +209,11 @@ const PageToolbarRoute = PageToolbarRouteImport.update({
   path: '/page-toolbar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PaginationRoute = PaginationRouteImport.update({
+  id: '/pagination',
+  path: '/pagination',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProgressRoute = ProgressRouteImport.update({
   id: '/progress',
   path: '/progress',
@@ -272,6 +279,11 @@ const SwitchRoute = SwitchRouteImport.update({
   path: '/switch',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TableRoute = TableRouteImport.update({
+  id: '/table',
+  path: '/table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TabsRoute = TabsRouteImport.update({
   id: '/tabs',
   path: '/tabs',
@@ -324,6 +336,7 @@ export interface FileRoutesByFullPath {
   '/list-item': typeof ListItemRoute
   '/page-title': typeof PageTitleRoute
   '/page-toolbar': typeof PageToolbarRoute
+  '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
@@ -337,6 +350,7 @@ export interface FileRoutesByFullPath {
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
   '/switch': typeof SwitchRoute
+  '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
   '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
@@ -373,6 +387,7 @@ export interface FileRoutesByTo {
   '/list-item': typeof ListItemRoute
   '/page-title': typeof PageTitleRoute
   '/page-toolbar': typeof PageToolbarRoute
+  '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
@@ -386,6 +401,7 @@ export interface FileRoutesByTo {
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
   '/switch': typeof SwitchRoute
+  '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
   '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
@@ -423,6 +439,7 @@ export interface FileRoutesById {
   '/list-item': typeof ListItemRoute
   '/page-title': typeof PageTitleRoute
   '/page-toolbar': typeof PageToolbarRoute
+  '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
@@ -436,6 +453,7 @@ export interface FileRoutesById {
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
   '/switch': typeof SwitchRoute
+  '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
   '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
@@ -474,6 +492,7 @@ export interface FileRouteTypes {
     | '/list-item'
     | '/page-title'
     | '/page-toolbar'
+    | '/pagination'
     | '/progress'
     | '/quantity-input'
     | '/radio-group'
@@ -487,6 +506,7 @@ export interface FileRouteTypes {
     | '/spinner'
     | '/stat-card'
     | '/switch'
+    | '/table'
     | '/tabs'
     | '/textarea'
     | '/toast'
@@ -523,6 +543,7 @@ export interface FileRouteTypes {
     | '/list-item'
     | '/page-title'
     | '/page-toolbar'
+    | '/pagination'
     | '/progress'
     | '/quantity-input'
     | '/radio-group'
@@ -536,6 +557,7 @@ export interface FileRouteTypes {
     | '/spinner'
     | '/stat-card'
     | '/switch'
+    | '/table'
     | '/tabs'
     | '/textarea'
     | '/toast'
@@ -572,6 +594,7 @@ export interface FileRouteTypes {
     | '/list-item'
     | '/page-title'
     | '/page-toolbar'
+    | '/pagination'
     | '/progress'
     | '/quantity-input'
     | '/radio-group'
@@ -585,6 +608,7 @@ export interface FileRouteTypes {
     | '/spinner'
     | '/stat-card'
     | '/switch'
+    | '/table'
     | '/tabs'
     | '/textarea'
     | '/toast'
@@ -622,6 +646,7 @@ export interface RootRouteChildren {
   ListItemRoute: typeof ListItemRoute
   PageTitleRoute: typeof PageTitleRoute
   PageToolbarRoute: typeof PageToolbarRoute
+  PaginationRoute: typeof PaginationRoute
   ProgressRoute: typeof ProgressRoute
   QuantityInputRoute: typeof QuantityInputRoute
   RadioGroupRoute: typeof RadioGroupRoute
@@ -635,6 +660,7 @@ export interface RootRouteChildren {
   SpinnerRoute: typeof SpinnerRoute
   StatCardRoute: typeof StatCardRoute
   SwitchRoute: typeof SwitchRoute
+  TableRoute: typeof TableRoute
   TabsRoute: typeof TabsRoute
   TextareaRoute: typeof TextareaRoute
   ToastRoute: typeof ToastRoute
@@ -853,6 +879,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PageToolbarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/pagination': {
+      id: '/pagination'
+      path: '/pagination'
+      fullPath: '/pagination'
+      preLoaderRoute: typeof PaginationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/progress': {
       id: '/progress'
       path: '/progress'
@@ -944,6 +977,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SwitchRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/table': {
+      id: '/table'
+      path: '/table'
+      fullPath: '/table'
+      preLoaderRoute: typeof TableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tabs': {
       id: '/tabs'
       path: '/tabs'
@@ -1006,6 +1046,7 @@ const rootRouteChildren: RootRouteChildren = {
   ListItemRoute: ListItemRoute,
   PageTitleRoute: PageTitleRoute,
   PageToolbarRoute: PageToolbarRoute,
+  PaginationRoute: PaginationRoute,
   ProgressRoute: ProgressRoute,
   QuantityInputRoute: QuantityInputRoute,
   RadioGroupRoute: RadioGroupRoute,
@@ -1019,6 +1060,7 @@ const rootRouteChildren: RootRouteChildren = {
   SpinnerRoute: SpinnerRoute,
   StatCardRoute: StatCardRoute,
   SwitchRoute: SwitchRoute,
+  TableRoute: TableRoute,
   TabsRoute: TabsRoute,
   TextareaRoute: TextareaRoute,
   ToastRoute: ToastRoute,

@@ -52,6 +52,8 @@
         "@orchid/schema-form",
         "@orchid/spinner",
         "@orchid/breadcrumb",
+        "@orchid/pagination",
+        "@orchid/table",
         "@orchid/sheet",
         "@orchid/command",
         "@orchid/kbd",
@@ -466,6 +468,40 @@
           "path": "src/components/ui/breadcrumb.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/breadcrumb.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Page through invoice and customer lists. PaginationContent + Item + Link + Previous + Next. Ellipsis for gaps. PaginationInfo for Showing 1–10 of N. Not a table.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "Table chrome for lists and future Schema Table/DataTable. Div layout (not HTML table). Sticky checkbox left, actions right. Drag borders to resize. Cell type Default|Checkbox|Image|Icon|Empty.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/table.tsx"
         }
       ]
     },

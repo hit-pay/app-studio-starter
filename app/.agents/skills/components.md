@@ -23,7 +23,7 @@ Do not run `shadcn add --all` (official kit). `@orchid/all` is `registryDependen
 
 ## Catalog (`@orchid/…`)
 
-Primitives: `button`, `dropdown-menu`, `badge`, `accordion`, `collapsible`, `progress`, `avatar`, `tooltip`, `tabs`, `choice-card`, `stat-card`, `detail-list`, `icon-group`, `copy-button`, `skeleton`, `spinner`, `dialog`, `sheet`, `breadcrumb`, `command`, `kbd`, `scroll-area`, `toast`, `separator`, `popover`, `calendar`
+Primitives: `button`, `dropdown-menu`, `badge`, `accordion`, `collapsible`, `progress`, `avatar`, `tooltip`, `tabs`, `choice-card`, `stat-card`, `detail-list`, `icon-group`, `copy-button`, `skeleton`, `spinner`, `dialog`, `sheet`, `breadcrumb`, `pagination`, `table`, `command`, `kbd`, `scroll-area`, `toast`, `separator`, `popover`, `calendar`
 
 Forms: `field`, `label`, `input`, `input-group`, `textarea`, `select`, `combobox`, `quantity-input`, `checkbox`, `radio-group`, `switch`, `slider`, `date-picker`, `form-section`
 
@@ -58,10 +58,12 @@ PascalCase visual values: `variant="Primary"`, `style="Border"`, `size="Small"`.
 
 `DialogContent` is packed (`title` required). Do not invent DialogHeader/Footer/Title. `Sheet` is the edge panel (edit/filters). App `src/components/ui/drawer.tsx` is swipe/snap Drawer — do not copy shadcn Drawer into orchid-ui.
 
-Page path: `Breadcrumb`. Loading: `Spinner` on actions, `Skeleton` for layout. Palette: `CommandDialog`. Shortcuts: `Kbd`. One panel: `Collapsible`. Long panel body: `ScrollArea`.
+Page path: `Breadcrumb`. List pages: `Pagination`. Table chrome: `Table` (div layout). Schema Table / DataTable later must render **into** `Table`, not a new primitive or HTML `<table>`. Loading: `Spinner` on actions, `Skeleton` for layout. Palette: `CommandDialog`. Shortcuts: `Kbd`. One panel: `Collapsible`. Long panel body: `ScrollArea`.
 
 Forms: `FieldGroup` + `Field` + `FieldLabel`. Invalid: `data-invalid` on Field, `aria-invalid` on the control. Prefix: `InputGroup` + `InputGroupInput`. `flex gap-*`, not `space-y-*`. `className` = layout only. Tokens, not `bg-blue-500`.
 
 Pick: `Select` (short list), `Combobox` (search/multi), `ChoiceCard` (visible cards), `DropdownMenu` (actions). In-page: `Alert` above `PageTitle`. Floating: `toast` + `Toaster`. Destructive: `ConfirmDialog`. Dates: `DatePicker`. Page chrome: `PageToolbar` then `PageTitle` (`badge` slot). Zero rows: `Empty`. No customer: `CustomerCard variant="Empty"`.
 
 SchemaForm: `showIf` / `showIfValue`, `hidden: true` (value still submits), `maxLength`, pair keys `a+b`. Types include `date`, `quantity`, `switch`. Mount `Toaster` when using toasts or `@orchid/all`.
+
+Schema Table / DataTable is not in the catalog yet. When it lands, it maps JSON schema → `Table` cells the way SchemaForm maps JSON → Field + controls.

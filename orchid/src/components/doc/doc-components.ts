@@ -95,6 +95,16 @@ export const DOC_COMPONENTS = [
     description: 'Hierarchy of links to the current page.',
   },
   {
+    to: '/pagination' as const,
+    name: 'Pagination',
+    description: 'Page numbers, previous/next, and optional range label for lists.',
+  },
+  {
+    to: '/table' as const,
+    name: 'Table',
+    description: 'Chrome for lists and Schema Table/DataTable: Table, TableHead, TableCell.',
+  },
+  {
     to: '/command' as const,
     name: 'Command',
     description: 'Searchable command palette. CommandDialog + Input + Item.',

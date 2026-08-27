@@ -74,14 +74,14 @@ const products = [
 ]
 
 const customers = [
-  'Alex Turner',
-  'Chloe Tan',
-  'Daniel Kim',
-  'Elena Santos',
-  'Farhan Malik',
-  'Grace Wijaya',
-  'Hiro Tanaka',
-  'Maya Lim',
+  { name: 'Alex Turner', email: 'alex.turner@example.com' },
+  { name: 'Chloe Tan', email: 'chloe.tan@example.com' },
+  { name: 'Daniel Kim', email: 'daniel.kim@example.com' },
+  { name: 'Elena Santos', email: 'elena.santos@example.com' },
+  { name: 'Farhan Malik', email: 'farhan.malik@example.com' },
+  { name: 'Grace Wijaya', email: 'grace.wijaya@example.com' },
+  { name: 'Hiro Tanaka', email: 'hiro.tanaka@example.com' },
+  { name: 'Maya Lim', email: 'maya.lim@example.com' },
 ]
 
 const posLocations = [
@@ -142,7 +142,7 @@ function ComboboxCustomersExample({
   variant = 'Default',
   selectAll = false,
 }: {
-  defaultValue?: string[]
+  defaultValue?: (typeof customers)[number][]
   invalid?: boolean
   variant?: 'Default' | 'Checkbox'
   selectAll?: boolean
@@ -150,13 +150,18 @@ function ComboboxCustomersExample({
   const chips = useComboboxAnchor()
 
   return (
-    <Combobox items={customers} multiple defaultValue={defaultValue}>
+    <Combobox
+      items={customers}
+      multiple
+      defaultValue={defaultValue}
+      itemToStringLabel={(item) => `${item.name} ${item.email}`}
+    >
       <ComboboxChips ref={chips}>
         <ComboboxValue>
-          {(value: string[]) =>
+          {(value: (typeof customers)[number][]) =>
             value.map((item) => (
-              <ComboboxChip key={item} aria-label={item}>
-                {item}
+              <ComboboxChip key={item.email} aria-label={item.name}>
+                {item.name}
               </ComboboxChip>
             ))
           }
@@ -172,9 +177,12 @@ function ComboboxCustomersExample({
         ) : null}
         <ComboboxEmpty>No customers found.</ComboboxEmpty>
         <ComboboxList>
-          {(item) => (
-            <ComboboxItem key={item} value={item} variant={variant}>
-              {item}
+          {(item: (typeof customers)[number]) => (
+            <ComboboxItem key={item.email} value={item} variant={variant} className="items-start">
+              <span className="flex min-w-0 flex-col">
+                <span>{item.name}</span>
+                <span className="text-xs leading-[1.5] text-oc-muted-foreground">{item.email}</span>
+              </span>
             </ComboboxItem>
           )}
         </ComboboxList>
@@ -321,13 +329,13 @@ function ComboboxExamplesPage() {
 
           <Field>
             <FieldLabel>Customers</FieldLabel>
-            <ComboboxCustomersExample defaultValue={['Alex Turner', 'Chloe Tan', 'Hiro Tanaka']} />
+            <ComboboxCustomersExample defaultValue={[customers[0], customers[1], customers[6]]} />
             <FieldDescription>Assign invoices or recurring plans to multiple customers.</FieldDescription>
           </Field>
 
           <Field>
             <FieldLabel>Customers</FieldLabel>
-            <ComboboxCustomersExample variant="Checkbox" defaultValue={['Daniel Kim', 'Elena Santos']} />
+            <ComboboxCustomersExample variant="Checkbox" defaultValue={[customers[2], customers[3]]} />
             <FieldDescription>Same Customer Data list, with checkbox selection.</FieldDescription>
           </Field>
 

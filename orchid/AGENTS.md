@@ -36,6 +36,8 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 | One expand panel | `Collapsible` (several sections: `Accordion`) |
 | Bounded custom scroll | `ScrollArea` (page: native overflow) |
 | Page path | `Breadcrumb` |
+| List pages | `Pagination` (`PaginationInfo` for the range label) |
+| Table chrome | `Table` (div layout, not HTML `<table>`). This is the surface Schema Table / DataTable will render into — do not add a second table primitive. Checkbox sticky left, Icon/actions sticky right and hover-only. Drag the vertical border to resize. |
 | Indeterminate load | `Spinner` (Skeleton = placeholder; Progress = known total) |
 | Delete / warn / yes-no | `ConfirmDialog` (Warning confirm = Continue) |
 | Date | `DatePicker` (`Popover` + `Calendar` only if composing) |
@@ -49,6 +51,8 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 `FieldGroup` > `Field` (`orientation` Vertical \| Horizontal \| Responsive) > `FieldLabel` + control. Invalid: `data-invalid` on Field, `aria-invalid` on the control.
 
 SchemaForm: `showIf` / `showIfValue`, `hidden: true` (or `type: "hidden"`) hides UI and still submits, `maxLength`, `minLength`, `validation` (`email\|max:255\|phone\|valid_url\|accepted` or `/regex/`). Pair keys `amount+currency`. See `SCHEMA_FORM_TYPES` and `SCHEMA_FORM_EXAMPLE_FIELDS`.
+
+Schema Table / DataTable (later): JSON columns + rows, same idea as SchemaForm (`schema-form-model` + renderer). Renderer must compose `Table` / `TableHead` / `TableCell` (`type` Default|Checkbox|Image|Icon|Empty), not a native HTML table. TanStack Table may own sorting/paging/selection state; Orchid `Table` stays the chrome. List pager stays `Pagination`.
 
 ## Customer card
 
