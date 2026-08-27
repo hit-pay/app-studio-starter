@@ -222,7 +222,7 @@ function ComboboxItem({
       data-slot="combobox-item"
       data-variant={variant}
       className={cn(
-        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft data-selected:data-highlighted:bg-oc-info-soft aria-selected:bg-oc-info-soft aria-selected:hover:bg-oc-info-soft data-disabled:pointer-events-none data-disabled:opacity-50',
+        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50',
         !checkbox && 'pr-8',
         className,
       )}
@@ -244,7 +244,7 @@ function ComboboxItem({
       ) : null}
       {children}
       {checkbox ? null : (
-        <ComboboxPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center">
+        <ComboboxPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center text-oc-primary">
           <CheckIcon className="size-4" />
         </ComboboxPrimitive.ItemIndicator>
       )}
@@ -277,7 +277,7 @@ function ComboboxSelectAll({
       data-slot="combobox-select-all"
       data-selected={allSelected || undefined}
       className={cn(
-        'flex w-full cursor-pointer items-center gap-2 rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-oc-dark-blue-soft data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft',
+        'flex w-full cursor-pointer items-center gap-2 rounded p-2 text-left text-sm leading-[1.5] text-oc-foreground outline-none hover:bg-oc-dark-blue-soft',
         className,
       )}
       onClick={() => context.setValue(allSelected ? [] : all)}

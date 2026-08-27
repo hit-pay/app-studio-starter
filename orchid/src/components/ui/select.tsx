@@ -55,7 +55,7 @@ function SelectGroup({ className, ...props }: SelectPrimitive.Group.Props) {
   return (
     <SelectPrimitive.Group
       data-slot="select-group"
-        className={cn('flex w-full flex-col gap-1', className)}
+        className={cn('flex w-full flex-col', className)}
       {...props}
     />
   )
@@ -85,14 +85,19 @@ function SelectTrigger({
       data-size={size}
       className={cn(
         size === 'Inline'
-          ? 'inline-flex h-full w-auto shrink-0 cursor-pointer items-center gap-1 border-0 bg-transparent px-0 text-xs font-medium leading-[1.5] text-oc-muted-foreground shadow-none outline-none select-none'
-          : cn(selectTriggerClass, 'h-9'),
+          ? 'group/select-trigger inline-flex h-full w-auto shrink-0 cursor-pointer items-center gap-1 border-0 bg-transparent px-0 text-xs font-medium leading-[1.5] text-oc-muted-foreground shadow-none outline-none select-none'
+          : cn(selectTriggerClass, 'group/select-trigger h-9'),
         className,
       )}
       {...props}
     >
       {children}
-      {size === 'Inline' ? <ChevronDownIcon className="size-3.5 text-oc-muted-foreground" /> : null}
+      <ChevronDownIcon
+        className={cn(
+          'shrink-0 text-oc-muted-foreground transition-transform group-data-open/select-trigger:rotate-180',
+          size === 'Inline' ? 'size-3.5' : 'size-4',
+        )}
+      />
     </SelectPrimitive.Trigger>
   )
 }
@@ -124,13 +129,13 @@ function SelectContent({
         <SelectPrimitive.Popup
           data-slot="select-content"
           className={cn(
-            'relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-36 origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-1 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
         >
           <SelectScrollUpButton />
-          <SelectPrimitive.List className="flex w-full flex-col gap-1">{children}</SelectPrimitive.List>
+          <SelectPrimitive.List className="flex w-full flex-col">{children}</SelectPrimitive.List>
           <SelectScrollDownButton />
         </SelectPrimitive.Popup>
       </SelectPrimitive.Positioner>
@@ -159,7 +164,7 @@ function SelectItem({ className, children, label, ...props }: SelectPrimitive.It
       data-slot="select-item"
       label={resolvedLabel}
       className={cn(
-        'relative flex w-full cursor-pointer items-center gap-2 rounded p-2 pr-8 text-sm leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-selected:bg-oc-info-soft data-selected:hover:bg-oc-info-soft data-selected:data-highlighted:bg-oc-info-soft data-disabled:pointer-events-none data-disabled:opacity-50',
+        'relative flex w-full cursor-pointer items-center gap-2 rounded-md px-2 py-1.5 pr-8 text-sm leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-selected:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50',
         className,
       )}
       {...props}
@@ -167,7 +172,7 @@ function SelectItem({ className, children, label, ...props }: SelectPrimitive.It
       <SelectPrimitive.ItemText className="flex flex-1 items-center gap-2">
         {children}
       </SelectPrimitive.ItemText>
-      <SelectPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center">
+      <SelectPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center text-oc-primary">
         <CheckIcon className="size-4" />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
