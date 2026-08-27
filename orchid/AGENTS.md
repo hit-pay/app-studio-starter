@@ -37,7 +37,8 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 | Bounded custom scroll | `ScrollArea` (page: native overflow) |
 | Page path | `Breadcrumb` |
 | List pages | `Pagination` (`PaginationInfo` for the range label) |
-| Table chrome | `Table` (div layout, not HTML `<table>`). This is the surface Schema Table / DataTable will render into — do not add a second table primitive. Checkbox sticky left, Icon/actions sticky right and hover-only. Drag the vertical border to resize. |
+| Table chrome | `Table` for a small read-only grid (no select, no row actions). Lists with search/filter/sort/select: `SchemaTable`. |
+| JSON list (search/filter/sort/page) | `SchemaTable` + `useSchemaTable`. Chrome is `Table` + `Pagination`. |
 | Indeterminate load | `Spinner` (Skeleton = placeholder; Progress = known total) |
 | Delete / warn / yes-no | `ConfirmDialog` (Warning confirm = Continue) |
 | Date | `DatePicker` (`Popover` + `Calendar` only if composing) |
@@ -52,7 +53,7 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 
 SchemaForm: `showIf` / `showIfValue`, `hidden: true` (or `type: "hidden"`) hides UI and still submits, `maxLength`, `minLength`, `validation` (`email\|max:255\|phone\|valid_url\|accepted` or `/regex/`). Pair keys `amount+currency`. See `SCHEMA_FORM_TYPES` and `SCHEMA_FORM_EXAMPLE_FIELDS`.
 
-Schema Table / DataTable (later): JSON columns + rows, same idea as SchemaForm (`schema-form-model` + renderer). Renderer must compose `Table` / `TableHead` / `TableCell` (`type` Default|Checkbox|Image|Icon|Empty), not a native HTML table. TanStack Table may own sorting/paging/selection state; Orchid `Table` stays the chrome. List pager stays `Pagination`.
+SchemaTable: JSON schema (`SCHEMA_TABLE_EXAMPLE_SCHEMA`) + `useSchemaTable({ schema, data })` + `<SchemaTable table={table} />`. Prefer this for app lists. `Table` alone is only a small read-only grid. Search, tabs, filter popover, sort menu, Edit Column (visibility + reorder), chips, pagination. Renders `Table` chrome and `Pagination`. `mode: 'client'` filters in memory; `mode: 'server'` uses `data` + `total` and `onQueryChange`. Column `locked` is fixed (no hide/reorder). Do not add a second table primitive. Do not add TanStack Table, Query, or DB to this kit — apps fetch with Query/DB and pass rows in. App agents: default one collection (`client`); debounce server search; never refetch for Edit Column or selection (see app `lists.md`).
 
 ## Customer card
 

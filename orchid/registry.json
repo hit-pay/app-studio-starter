@@ -54,6 +54,7 @@
         "@orchid/breadcrumb",
         "@orchid/pagination",
         "@orchid/table",
+        "@orchid/schema-table",
         "@orchid/sheet",
         "@orchid/command",
         "@orchid/kbd",
@@ -492,16 +493,49 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Table chrome for lists and future Schema Table/DataTable. Div layout (not HTML table). Sticky checkbox left, actions right. Drag borders to resize. Cell type Default|Checkbox|Image|Icon|Empty.",
+      "description": "Table chrome for lists and SchemaTable. Div layout (not HTML table). Sticky checkbox left, actions right. Drag borders to resize. TableSelectionBar for bulk actions. Cell type Default|Checkbox|Image|Icon|Empty.",
       "dependencies": [
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
       "files": [
         {
           "path": "src/components/ui/table.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "schema-table",
+      "type": "registry:ui",
+      "title": "Schema Table",
+      "description": "JSON schema list like SchemaForm. Search, tabs, filter, sort, pagination. Renders Table chrome. See SCHEMA_TABLE_EXAMPLE_SCHEMA.",
+      "registryDependencies": [
+        "@orchid/badge",
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/dropdown-menu",
+        "@orchid/empty",
+        "@orchid/field",
+        "@orchid/input-group",
+        "@orchid/pagination",
+        "@orchid/popover",
+        "@orchid/select",
+        "@orchid/table"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/schema-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/schema-table.tsx"
+        },
+        {
+          "path": "src/components/ui/schema-table-model.ts",
+          "type": "registry:file",
+          "target": "@components/orchid-ui/schema-table-model.ts"
         }
       ]
     },

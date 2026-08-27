@@ -27,7 +27,7 @@ Primitives: `button`, `dropdown-menu`, `badge`, `accordion`, `collapsible`, `pro
 
 Forms: `field`, `label`, `input`, `input-group`, `textarea`, `select`, `combobox`, `quantity-input`, `checkbox`, `radio-group`, `switch`, `slider`, `date-picker`, `form-section`
 
-Blocks: `alert`, `list-item`, `empty`, `customer-card`, `page-toolbar`, `page-title`, `confirm-dialog`, `schema-form`
+Blocks: `alert`, `list-item`, `empty`, `customer-card`, `page-toolbar`, `page-title`, `confirm-dialog`, `schema-form`, `schema-table`
 
 Old names are gone: not `modal`, `banner`, `chip`, `toggle`, `progress-bar`, `empty-state`.
 
@@ -58,7 +58,7 @@ PascalCase visual values: `variant="Primary"`, `style="Border"`, `size="Small"`.
 
 `DialogContent` is packed (`title` required). Do not invent DialogHeader/Footer/Title. `Sheet` is the edge panel (edit/filters). App `src/components/ui/drawer.tsx` is swipe/snap Drawer — do not copy shadcn Drawer into orchid-ui.
 
-Page path: `Breadcrumb`. List pages: `Pagination`. Table chrome: `Table` (div layout). Schema Table / DataTable later must render **into** `Table`, not a new primitive or HTML `<table>`. Loading: `Spinner` on actions, `Skeleton` for layout. Palette: `CommandDialog`. Shortcuts: `Kbd`. One panel: `Collapsible`. Long panel body: `ScrollArea`.
+Page path: `Breadcrumb`. List pages: `Pagination`. Small read-only grid: `Table`. JSON lists (search/filter/sort/select): `SchemaTable` + `useSchemaTable`. Bulk select chrome lives on `TableSelectionBar` inside SchemaTable, not JSON. Loading: `Spinner` on actions, `Skeleton` for layout. Palette: `CommandDialog`. Shortcuts: `Kbd`. One panel: `Collapsible`. Long panel body: `ScrollArea`.
 
 Forms: `FieldGroup` + `Field` + `FieldLabel`. Invalid: `data-invalid` on Field, `aria-invalid` on the control. Prefix: `InputGroup` + `InputGroupInput`. `flex gap-*`, not `space-y-*`. `className` = layout only. Tokens, not `bg-blue-500`.
 
@@ -66,4 +66,4 @@ Pick: `Select` (short list), `Combobox` (search/multi), `ChoiceCard` (visible ca
 
 SchemaForm: `showIf` / `showIfValue`, `hidden: true` (value still submits), `maxLength`, pair keys `a+b`. Types include `date`, `quantity`, `switch`. Mount `Toaster` when using toasts or `@orchid/all`.
 
-Schema Table / DataTable is not in the catalog yet. When it lands, it maps JSON schema → `Table` cells the way SchemaForm maps JSON → Field + controls.
+SchemaTable: `useSchemaTable({ schema, data })` then `<SchemaTable table={table} />`. Schema keys: `columns`, `tabs`, `filters`, `sort`, `search`, `pagination`, `rowActions`, `selection`, `editColumns`. Column `locked` is fixed. **Lists:** open `lists.md`. Default `mode: 'client'` + one Query/DB collection. `mode: 'server'` only for large/paginated APIs; debounce search 300ms; `queryKey` is search/tab/filters/sort/page only (never column layout or selection); `placeholderData: keepPreviousData`, `staleTime: 30_000`. No TanStack Table.

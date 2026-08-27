@@ -44,6 +44,7 @@ import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
 import { Route as SchemaFormRouteImport } from './routes/schema-form'
+import { Route as SchemaTableRouteImport } from './routes/schema-table'
 import { Route as ScrollAreaRouteImport } from './routes/scroll-area'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as SetupRouteImport } from './routes/setup'
@@ -234,6 +235,11 @@ const SchemaFormRoute = SchemaFormRouteImport.update({
   path: '/schema-form',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SchemaTableRoute = SchemaTableRouteImport.update({
+  id: '/schema-table',
+  path: '/schema-table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ScrollAreaRoute = ScrollAreaRouteImport.update({
   id: '/scroll-area',
   path: '/scroll-area',
@@ -341,6 +347,7 @@ export interface FileRoutesByFullPath {
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
+  '/schema-table': typeof SchemaTableRoute
   '/scroll-area': typeof ScrollAreaRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
@@ -392,6 +399,7 @@ export interface FileRoutesByTo {
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
+  '/schema-table': typeof SchemaTableRoute
   '/scroll-area': typeof ScrollAreaRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
@@ -444,6 +452,7 @@ export interface FileRoutesById {
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
+  '/schema-table': typeof SchemaTableRoute
   '/scroll-area': typeof ScrollAreaRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
@@ -497,6 +506,7 @@ export interface FileRouteTypes {
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
+    | '/schema-table'
     | '/scroll-area'
     | '/select'
     | '/setup'
@@ -548,6 +558,7 @@ export interface FileRouteTypes {
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
+    | '/schema-table'
     | '/scroll-area'
     | '/select'
     | '/setup'
@@ -599,6 +610,7 @@ export interface FileRouteTypes {
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
+    | '/schema-table'
     | '/scroll-area'
     | '/select'
     | '/setup'
@@ -651,6 +663,7 @@ export interface RootRouteChildren {
   QuantityInputRoute: typeof QuantityInputRoute
   RadioGroupRoute: typeof RadioGroupRoute
   SchemaFormRoute: typeof SchemaFormRoute
+  SchemaTableRoute: typeof SchemaTableRoute
   ScrollAreaRoute: typeof ScrollAreaRoute
   SelectRoute: typeof SelectRoute
   SetupRoute: typeof SetupRoute
@@ -914,6 +927,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchemaFormRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/schema-table': {
+      id: '/schema-table'
+      path: '/schema-table'
+      fullPath: '/schema-table'
+      preLoaderRoute: typeof SchemaTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/scroll-area': {
       id: '/scroll-area'
       path: '/scroll-area'
@@ -1051,6 +1071,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuantityInputRoute: QuantityInputRoute,
   RadioGroupRoute: RadioGroupRoute,
   SchemaFormRoute: SchemaFormRoute,
+  SchemaTableRoute: SchemaTableRoute,
   ScrollAreaRoute: ScrollAreaRoute,
   SelectRoute: SelectRoute,
   SetupRoute: SetupRoute,

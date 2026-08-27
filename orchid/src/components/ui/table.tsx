@@ -1,4 +1,4 @@
-/** Table chrome only. Schema Table / DataTable must compose these primitives. */
+/** Table chrome only. SchemaTable must compose these primitives. */
 import {
   Children,
   cloneElement,
@@ -16,6 +16,7 @@ import {
 import { ImageIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { Button } from './button'
 
 type TableCellType = 'Default' | 'Checkbox' | 'Image' | 'Icon' | 'Empty'
 
@@ -167,6 +168,53 @@ function Table({
   )
 }
 
+function TableSelectionBar({
+  className,
+  count,
+  onDeselectAll,
+  children,
+  ...props
+}: ComponentProps<'div'> & {
+  count: number
+  onDeselectAll?: () => void
+}) {
+  const label = count === 1 ? '1 item selected' : `${count} items selected`
+
+  return (
+    <div
+      data-slot="table-selection-bar"
+      className={cn(
+        'sticky left-0 z-30 flex min-h-11 w-full items-center justify-between gap-3 border-b border-solid border-oc-border bg-oc-background px-3',
+        className,
+      )}
+      {...props}
+    >
+      <div className="flex min-w-0 items-center gap-2 text-[13px] leading-[1.5]">
+        <span className="font-medium text-oc-foreground">{label}</span>
+        {onDeselectAll ? (
+          <Button variant="Secondary" style="Transparent" size="Small" onClick={onDeselectAll}>
+            Deselect All
+          </Button>
+        ) : null}
+      </div>
+      {children ? <div className="flex shrink-0 items-center gap-1">{children}</div> : null}
+    </div>
+  )
+}
+
+function TableToolbar({ className, ...props }: ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="table-toolbar"
+      className={cn(
+        'sticky left-0 z-30 flex min-h-11 w-full items-center justify-between gap-3 border-b border-solid border-oc-border bg-oc-background px-3',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
 function TableHeader({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
@@ -184,6 +232,19 @@ function TableBody({ className, ...props }: ComponentProps<'div'>) {
       data-slot="table-body"
       role="rowgroup"
       className={cn('w-full min-w-full', className)}
+      {...props}
+    />
+  )
+}
+
+function TableEmpty({ className, ...props }: ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="table-empty"
+      className={cn(
+        'flex min-h-64 w-full flex-col items-center justify-center border-t-0 px-4 py-16',
+        className,
+      )}
       {...props}
     />
   )
@@ -438,8 +499,11 @@ export {
   TableCell,
   TableCellImage,
   TableCellText,
+  TableEmpty,
   TableFooter,
   TableHead,
   TableHeader,
   TableRow,
+  TableSelectionBar,
+  TableToolbar,
 }

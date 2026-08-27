@@ -14,12 +14,14 @@ type DocPath =
 function DocExamplePage({
   to,
   usage,
+  extraUsage,
   className,
   bodyClassName,
   children,
 }: {
   to: DocPath
   usage?: string
+  extraUsage?: Array<{ title: string; filename: string; code: string }>
   className?: string
   bodyClassName?: string
   children: ReactNode
@@ -56,6 +58,14 @@ function DocExamplePage({
               <DocCodePanel filename="usage.tsx" code={usage} />
             </div>
           ) : null}
+          {extraUsage?.map((item) => (
+            <div key={item.filename} className="flex min-w-0 flex-col gap-3">
+              <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+                {item.title}
+              </p>
+              <DocCodePanel filename={item.filename} code={item.code} />
+            </div>
+          ))}
         </div>
       </section>
     </main>

@@ -102,7 +102,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/table' as const,
     name: 'Table',
-    description: 'Chrome for lists and Schema Table/DataTable: Table, TableHead, TableCell.',
+    description: 'Small read-only grid. No search, filter, or row actions — use SchemaTable for lists.',
   },
   {
     to: '/command' as const,
@@ -247,6 +247,11 @@ export const DOC_BLOCKS = [
     to: '/schema-form' as const,
     name: 'Schema Form',
     description: 'TanStack Form plus Orchid fields. Keys: showIf, hidden, maxLength. Types include date, quantity, switch.',
+  },
+  {
+    to: '/schema-table' as const,
+    name: 'Schema Table',
+    description: 'JSON schema table like SchemaForm: search, tabs, filter, sort, pagination.',
   },
 ] as const
 
