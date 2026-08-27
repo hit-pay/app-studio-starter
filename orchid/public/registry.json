@@ -7,60 +7,60 @@
       "name": "all",
       "type": "registry:ui",
       "title": "All",
-      "description": "Installs every Orchid UI component via registryDependencies (including toast). all.tsx only re-exports Toaster and toast for the app root.",
+      "description": "Installs every Orchid UI component. all.tsx re-exports Toaster + toast.",
       "registryDependencies": [
+        "@orchid/schema-form",
+        "@orchid/schema-table",
+        "@orchid/app-shell",
+        "@orchid/alert",
+        "@orchid/list-item",
+        "@orchid/empty",
+        "@orchid/customer-card",
+        "@orchid/page-toolbar",
+        "@orchid/page-title",
+        "@orchid/confirm-dialog",
         "@orchid/button",
         "@orchid/dropdown-menu",
-        "@orchid/alert",
         "@orchid/toast",
         "@orchid/badge",
         "@orchid/accordion",
         "@orchid/progress",
-        "@orchid/list-item",
-        "@orchid/quantity-input",
         "@orchid/avatar",
         "@orchid/tooltip",
         "@orchid/tabs",
         "@orchid/choice-card",
         "@orchid/stat-card",
-        "@orchid/page-toolbar",
-        "@orchid/page-title",
-        "@orchid/app-shell",
-        "@orchid/form-section",
         "@orchid/detail-list",
         "@orchid/icon-group",
         "@orchid/copy-button",
-        "@orchid/customer-card",
+        "@orchid/skeleton",
+        "@orchid/spinner",
+        "@orchid/dialog",
+        "@orchid/sheet",
+        "@orchid/breadcrumb",
+        "@orchid/pagination",
+        "@orchid/table",
+        "@orchid/command",
+        "@orchid/kbd",
+        "@orchid/collapsible",
+        "@orchid/scroll-area",
+        "@orchid/popover",
+        "@orchid/separator",
+        "@orchid/field",
+        "@orchid/label",
+        "@orchid/input",
+        "@orchid/input-group",
+        "@orchid/textarea",
+        "@orchid/select",
+        "@orchid/combobox",
+        "@orchid/quantity-input",
         "@orchid/checkbox",
         "@orchid/radio-group",
         "@orchid/switch",
         "@orchid/slider",
-        "@orchid/empty",
-        "@orchid/label",
-        "@orchid/separator",
-        "@orchid/skeleton",
-        "@orchid/field",
-        "@orchid/input",
-        "@orchid/textarea",
-        "@orchid/select",
-        "@orchid/combobox",
-        "@orchid/input-group",
-        "@orchid/popover",
         "@orchid/calendar",
         "@orchid/date-picker",
-        "@orchid/dialog",
-        "@orchid/confirm-dialog",
-        "@orchid/schema-form",
-        "@orchid/spinner",
-        "@orchid/breadcrumb",
-        "@orchid/pagination",
-        "@orchid/table",
-        "@orchid/schema-table",
-        "@orchid/sheet",
-        "@orchid/command",
-        "@orchid/kbd",
-        "@orchid/collapsible",
-        "@orchid/scroll-area"
+        "@orchid/form-section"
       ],
       "files": [
         {
@@ -74,7 +74,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
-      "description": "Class-name helper (cn). Merge Tailwind classes. Import from @/lib/utils, not as a UI widget.",
+      "description": "cn() Tailwind class merge. Import from @/lib/utils.",
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -88,965 +88,10 @@
       ]
     },
     {
-      "name": "button",
-      "type": "registry:ui",
-      "title": "Button",
-      "description": "Primary actions: save, cancel, delete, icon-only, split menus. variant Primary|Secondary|Destructive. Native HTML type is type=submit|button|reset (default button). style Default|Border|Transparent, size Small|Default|Big. Not tabs or links in a nav.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/button.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/button.tsx"
-        }
-      ]
-    },
-    {
-      "name": "dropdown-menu",
-      "type": "registry:ui",
-      "title": "Dropdown Menu",
-      "description": "Overflow or grouped actions on a trigger (Edit, Delete, filters). Use DropdownMenu + Trigger (render Button) + Content + Item. Not for choosing one value from a long list \u2014 use select.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/dropdown-menu.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/dropdown-menu.tsx"
-        }
-      ]
-    },
-    {
-      "name": "alert",
-      "type": "registry:ui",
-      "title": "Alert",
-      "description": "In-page notification above the page header: title, description, actions, close. color Default|Blue|Red|Orange|Grey. Not a floating toast.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/alert.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/alert.tsx"
-        }
-      ]
-    },
-    {
-      "name": "toast",
-      "type": "registry:ui",
-      "title": "Toast",
-      "description": "Programmatic floating toast. toast.add({ title, description, type: 'success'|'info'|'warning'|'error' }). Not sonner toast(). Mount Toaster at the app root. Not an in-page alert.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/toast.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/toast.tsx"
-        }
-      ]
-    },
-    {
-      "name": "badge",
-      "type": "registry:ui",
-      "title": "Badge",
-      "description": "Status, tags, filters, removable tokens. Badge colors + style Background|Border|Transparent. UserBadge role Owner|Admin|Manager|Cashier. Not a button.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/badge.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/badge.tsx"
-        }
-      ]
-    },
-    {
-      "name": "accordion",
-      "type": "registry:ui",
-      "title": "Accordion",
-      "description": "Expand/collapse sections (FAQ, extra details, progress per item). AccordionTrigger title/description/label/progress. Not tabs \u2014 use tabs for switching views.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/accordion.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/accordion.tsx"
-        }
-      ]
-    },
-    {
-      "name": "progress",
-      "type": "registry:ui",
-      "title": "Progress",
-      "description": "Show completion of a known total (70/100, upload, wizard). size Default|Small, value/max. Not a loading spinner for the whole page.",
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/progress.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/progress.tsx"
-        }
-      ]
-    },
-    {
-      "name": "list-item",
-      "type": "registry:ui",
-      "title": "List Item",
-      "description": "Generic list row. Compose title, media, logo, meta, copy fields, tokens, hover actions. layout default|stack|media. selected highlights the card. Not a data table.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/copy-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/list-item.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/list-item.tsx"
-        }
-      ]
-    },
-    {
-      "name": "quantity-input",
-      "type": "registry:ui",
-      "title": "Quantity Input",
-      "description": "Integer quantity (capacity, count). Minus/plus; click the number to type. min/max/step. Not a slider and not a plain text input for money.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/quantity-input.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/quantity-input.tsx"
-        }
-      ]
-    },
-    {
-      "name": "avatar",
-      "type": "registry:ui",
-      "title": "Avatar",
-      "description": "Person or business face. size 24\u201364, variant Default|Business|Image. Initials as children; src for a photo. Pair with names, not as a logo block.",
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/avatar.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/avatar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "tooltip",
-      "type": "registry:ui",
-      "title": "Tooltip",
-      "description": "Hover/focus hint on an icon or truncated label. TooltipProvider + Content side. Not a popover with buttons \u2014 use popover or dropdown-menu.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/tooltip.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/tooltip.tsx"
-        }
-      ]
-    },
-    {
-      "name": "tabs",
-      "type": "registry:ui",
-      "title": "Tabs",
-      "description": "Switch views on one page (Week | My shifts | Review). variant Default underline or Pills. TabsList + TabsTrigger + TabsContent. Not a dropdown of actions.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/tabs.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/tabs.tsx"
-        }
-      ]
-    },
-    {
-      "name": "choice-card",
-      "type": "registry:ui",
-      "title": "Choice Card",
-      "description": "Pick one option as a card (plan, shift slot, payment method) without a radio dot. ChoiceCardGroup. Not a checkbox list and not select.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/choice-card.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/choice-card.tsx"
-        }
-      ]
-    },
-    {
-      "name": "stat-card",
-      "type": "registry:ui",
-      "title": "Stat Card",
-      "description": "Dashboard KPI: icon, title, value, percent badge. iconColor Blue|Green|Red|Grey. Grid several on a home/overview page. Not a list row \u2014 use list-item.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/tooltip"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/stat-card.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/stat-card.tsx"
-        }
-      ]
-    },
-    {
-      "name": "page-toolbar",
-      "type": "registry:ui",
-      "title": "Page Toolbar",
-      "description": "Top bar on a nested screen: Back or Close + right-side buttons. Put page-title below, not inside. Not the app sidebar.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/kbd"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/page-toolbar.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/page-toolbar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "page-title",
-      "type": "registry:ui",
-      "title": "Page Title",
-      "description": "Page heading: title, optional chip/status, description, copy id, action buttons. Sit under page-toolbar; detail-list below. Not a card title inside a list.",
-      "dependencies": [],
-      "registryDependencies": [
-        "@orchid/copy-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/page-title.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/page-title.tsx"
-        }
-      ]
-    },
-    {
-      "name": "app-shell",
-      "type": "registry:ui",
-      "title": "App Shell",
-      "description": "Fills the HitPay dashboard iframe. Header then tab bar for several pages (AppShellNavItem active underline). No sidebar. No user/login card. No outer border.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/app-shell.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/app-shell.tsx"
-        }
-      ]
-    },
-    {
-      "name": "form-section",
-      "type": "registry:ui",
-      "title": "Form Section",
-      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via FormSectionGroup; settings rows use FormSectionItem. Not a page heading \u2014 use page-title.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/tooltip"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/form-section.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/form-section.tsx"
-        }
-      ]
-    },
-    {
-      "name": "detail-list",
-      "type": "registry:ui",
-      "title": "Detail List",
-      "description": "Read-only key/value details (shift time, customer fields) in one card. style Default or Border table. Grid + colspan. Not an editable form \u2014 use field + input.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/copy-button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/detail-list.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/detail-list.tsx"
-        }
-      ]
-    },
-    {
-      "name": "icon-group",
-      "type": "registry:ui",
-      "title": "Icon Group",
-      "description": "Tight cluster of icon actions (copy, open link, more menu). style Default|Border. Not a full toolbar of labeled Buttons.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/dropdown-menu"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/icon-group.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/icon-group.tsx"
-        }
-      ]
-    },
-    {
-      "name": "copy-button",
-      "type": "registry:ui",
-      "title": "Copy Button",
-      "description": "Copy a string (id, phone, URL) with a Copied! tooltip. Pass value. Use on ids and contact fields, not as the only way to duplicate a whole record.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/tooltip"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/copy-button.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/copy-button.tsx"
-        }
-      ]
-    },
-    {
-      "name": "breadcrumb",
-      "type": "registry:ui",
-      "title": "Breadcrumb",
-      "description": "Path to the current page. BreadcrumbList + Item + Link + Page + Separator. Use Link href or app router Link as the anchor. Not PageToolbar back.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/breadcrumb.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/breadcrumb.tsx"
-        }
-      ]
-    },
-    {
-      "name": "pagination",
-      "type": "registry:ui",
-      "title": "Pagination",
-      "description": "Page through invoice and customer lists. PaginationContent + Item + Link + Previous + Next. Ellipsis for gaps. PaginationInfo for Showing 1–10 of N. Not a table.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/pagination.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/pagination.tsx"
-        }
-      ]
-    },
-    {
-      "name": "table",
-      "type": "registry:ui",
-      "title": "Table",
-      "description": "Table chrome for lists and SchemaTable. Div layout (not HTML table). Sticky checkbox left, actions right. Drag borders to resize. TableSelectionBar for bulk actions. Cell type Default|Checkbox|Image|Icon|Empty.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/table.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/table.tsx"
-        }
-      ]
-    },
-    {
-      "name": "schema-table",
-      "type": "registry:ui",
-      "title": "Schema Table",
-      "description": "JSON schema list like SchemaForm. Search, tabs, filter, sort, pagination. Renders Table chrome. See SCHEMA_TABLE_EXAMPLE_SCHEMA.",
-      "registryDependencies": [
-        "@orchid/badge",
-        "@orchid/button",
-        "@orchid/checkbox",
-        "@orchid/dropdown-menu",
-        "@orchid/empty",
-        "@orchid/field",
-        "@orchid/input-group",
-        "@orchid/pagination",
-        "@orchid/popover",
-        "@orchid/select",
-        "@orchid/table"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/schema-table.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/schema-table.tsx"
-        },
-        {
-          "path": "src/components/ui/schema-table-model.ts",
-          "type": "registry:file",
-          "target": "@components/orchid-ui/schema-table-model.ts"
-        }
-      ]
-    },
-    {
-      "name": "customer-card",
-      "type": "registry:ui",
-      "title": "Customer Card",
-      "description": "Customer or beneficiary summary: name, email, phone, address, avatar. variant Small|Big|Float|Empty. Empty + onAdd when none selected. Not a generic user list row \u2014 use list-item for long lists.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/avatar",
-        "@orchid/button",
-        "@orchid/badge",
-        "@orchid/copy-button",
-        "@orchid/skeleton"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/customer-card.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/customer-card.tsx"
-        }
-      ]
-    },
-    {
-      "name": "checkbox",
-      "type": "registry:ui",
-      "title": "Checkbox",
-      "description": "Multi-select yes/no options (permissions, extras). CheckboxGroup Vertical|Horizontal. For one on/off setting use switch. For one-of-many use radio-group or select.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/checkbox.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/checkbox.tsx"
-        }
-      ]
-    },
-    {
-      "name": "radio-group",
-      "type": "registry:ui",
-      "title": "Radio Group",
-      "description": "Exactly one choice from a short list (alignment, role). Radio inside RadioGroup. For many options use select; for cards use choice-card.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/radio-group.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/radio-group.tsx"
-        }
-      ]
-    },
-    {
-      "name": "switch",
-      "type": "registry:ui",
-      "title": "Switch",
-      "description": "On/off setting (notifications, publish). size Default|Small. Not a checkbox in a form list of many items.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/switch.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/switch.tsx"
-        }
-      ]
-    },
-    {
-      "name": "slider",
-      "type": "registry:ui",
-      "title": "Slider",
-      "description": "Pick a number or range on a track (0\u2013100, price band). Array value = two thumbs. Not for counts with exact integers \u2014 use quantity-input.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/slider.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/slider.tsx"
-        }
-      ]
-    },
-    {
-      "name": "empty",
-      "type": "registry:ui",
-      "title": "Empty",
-      "description": "No data / no search hits / upgrade CTA. variant Default|Search|Upgrade + actions Buttons. Use when a list or page has zero rows \u2014 not for inline field errors. Not CustomerCard Empty.",
-      "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/empty.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/empty.tsx"
-        }
-      ]
-    },
-    {
-      "name": "label",
-      "type": "registry:ui",
-      "title": "Label",
-      "description": "Accessible label next to a control (htmlFor). Prefer FieldLabel inside Field for forms.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/label.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/label.tsx"
-        }
-      ]
-    },
-    {
-      "name": "separator",
-      "type": "registry:ui",
-      "title": "Separator",
-      "description": "Visual divider between blocks. orientation horizontal|vertical. Use instead of hr or border-t divs.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/separator.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/separator.tsx"
-        }
-      ]
-    },
-    {
-      "name": "skeleton",
-      "type": "registry:ui",
-      "title": "Skeleton",
-      "description": "Loading placeholder bars. Pulse on oc-neutral-soft. Shape via className (size-8 rounded-full, h-4 w-full). Not a spinner.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/skeleton.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/skeleton.tsx"
-        }
-      ]
-    },
-    {
-      "name": "spinner",
-      "type": "registry:ui",
-      "title": "Spinner",
-      "description": "Indeterminate loading (save, refresh). size Small|Default|Big. Not Skeleton (layout placeholder) and not Progress (known percent).",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/spinner.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/spinner.tsx"
-        }
-      ]
-    },
-    {
-      "name": "field",
-      "type": "registry:ui",
-      "title": "Field",
-      "description": "Form row: label, control, hint, error. FieldGroup + Field + FieldLabel. data-invalid on Field, aria-invalid on the input. Wrap every form control.",
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [
-        "@orchid/label",
-        "@orchid/separator"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/field.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/field.tsx"
-        }
-      ]
-    },
-    {
-      "name": "input",
-      "type": "registry:ui",
-      "title": "Input",
-      "description": "Single-line text (name, email, amount as text). Use with Field. Prefix/icon \u2192 input-group, not a positioned Button.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/input.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/input.tsx"
-        }
-      ]
-    },
-    {
-      "name": "textarea",
-      "type": "registry:ui",
-      "title": "Textarea",
-      "description": "Multi-line notes (issues, leftover work, description). Use with Field. Not for chat transcripts.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/textarea.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/textarea.tsx"
-        }
-      ]
-    },
-    {
-      "name": "select",
-      "type": "registry:ui",
-      "title": "Select",
-      "description": "Choose one from a list (status, staff, currency). Select + Trigger + Value + Item. Inline size for currency inside input-group. For many values with search, use combobox. Not radio cards \u2014 use choice-card.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/select.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/select.tsx"
-        }
-      ]
-    },
-    {
-      "name": "combobox",
-      "type": "registry:ui",
-      "title": "Combobox",
-      "description": "Searchable list (tags, staff, countries). Combobox + Input + Item. Multiple: ComboboxChips + ComboboxChip. Checkbox variant and ComboboxSelectAll for bulk pick. Grouped: Group + Label + Collection. Not a closed single pick without search \u2014 use select.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button",
-        "@orchid/checkbox",
-        "@orchid/badge",
-        "@orchid/input-group"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/combobox.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/combobox.tsx"
-        }
-      ]
-    },
-    {
-      "name": "command",
-      "type": "registry:ui",
-      "title": "Command",
-      "description": "Searchable command palette. CommandDialog + Command + CommandInput + CommandList + CommandItem. onSelect(value). Not Combobox in a form.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/dialog",
-        "@orchid/input"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/command.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/command.tsx"
-        }
-      ]
-    },
-    {
-      "name": "kbd",
-      "type": "registry:ui",
-      "title": "Kbd",
-      "description": "Keyboard shortcut keys. Kbd and KbdGroup. Use next to Close, command palettes, and shortcut hints.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/kbd.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/kbd.tsx"
-        }
-      ]
-    },
-    {
-      "name": "collapsible",
-      "type": "registry:ui",
-      "title": "Collapsible",
-      "description": "One expand/collapse panel (filters, extra fields). Collapsible + Trigger + Content. Several independent sections: Accordion.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/collapsible.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/collapsible.tsx"
-        }
-      ]
-    },
-    {
-      "name": "scroll-area",
-      "type": "registry:ui",
-      "title": "Scroll Area",
-      "description": "Custom scrollbar in a bounded panel (Sheet body, long lists). Native overflow is fine for the page. ScrollBar orientation vertical | horizontal.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/scroll-area.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/scroll-area.tsx"
-        }
-      ]
-    },
-    {
-      "name": "input-group",
-      "type": "registry:ui",
-      "title": "Input Group",
-      "description": "Input plus prefix, suffix, or inline select (currency, URL, search icon). InputGroupInput/Textarea inside \u2014 never raw Input. Addon align start/end.",
-      "dependencies": [
-        "class-variance-authority"
-      ],
-      "registryDependencies": [
-        "@orchid/button",
-        "@orchid/input",
-        "@orchid/select",
-        "@orchid/textarea"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/input-group.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/input-group.tsx"
-        }
-      ]
-    },
-    {
-      "name": "popover",
-      "type": "registry:ui",
-      "title": "Popover",
-      "description": "Small panel on click (date, extra filters) that is not a full modal. Trigger render Button. For hover hints use tooltip; for page dialogs use modal.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/popover.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/popover.tsx"
-        }
-      ]
-    },
-    {
-      "name": "calendar",
-      "type": "registry:ui",
-      "title": "Calendar",
-      "description": "Month grid only. Prefer date-picker for forms. Use calendar when you embed a month in a custom layout. mode single|range|multiple.",
-      "dependencies": [
-        "react-day-picker",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/calendar.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/calendar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "date-picker",
-      "type": "registry:ui",
-      "title": "Date Picker",
-      "description": "Pick a day, a range, or a date+time. DatePicker, DatePickerRange, DateTimePicker.",
-      "dependencies": [
-        "date-fns",
-        "lucide-react",
-        "react-day-picker"
-      ],
-      "registryDependencies": [
-        "@orchid/button",
-        "@orchid/calendar",
-        "@orchid/input",
-        "@orchid/popover"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/date-picker.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/date-picker.tsx"
-        }
-      ]
-    },
-    {
-      "name": "dialog",
-      "type": "registry:ui",
-      "title": "Dialog",
-      "description": "Centered modal. Default for create/edit (SchemaForm). Dialog + DialogTrigger + DialogContent (packed: title, optional footer). No DialogHeader/Footer/Title exports. size Small|Medium|Default|Confirmation|Fullscreen. persistent = no backdrop close. Not a side sheet.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/dialog.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/dialog.tsx"
-        }
-      ]
-    },
-    {
-      "name": "sheet",
-      "type": "registry:ui",
-      "title": "Sheet",
-      "description": "Edge panel complementary to the page (filters, peek). Sheet + Trigger + Content. side Right|Left|Top|Bottom, size Small|Medium|Default. Packed title/footer like Dialog. Create/edit defaults to centered Dialog, not Sheet. Not a swipe Drawer.",
-      "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/sheet.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/sheet.tsx"
-        }
-      ]
-    },
-    {
-      "name": "confirm-dialog",
-      "type": "registry:ui",
-      "title": "Confirm Dialog",
-      "description": "Prebuilt confirm overlay on Dialog. type Delete|Warning|Success|Question. Warning confirm is Continue (not Delete). size Small|Medium. Optional confirmPhrase to type before delete. Use ConfirmDialogContent as the inner block.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button",
-        "@orchid/input",
-        "@orchid/dialog"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/confirm-dialog.tsx",
-          "type": "registry:ui",
-          "target": "@components/orchid-ui/confirm-dialog.tsx"
-        }
-      ]
-    },
-    {
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, hidden. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, file, quantity, object, section, section-item, hidden, phone.",
+      "description": "JSON schema form. types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": [
         "@tanstack/react-form"
       ],
@@ -1076,6 +121,961 @@
           "path": "src/components/ui/schema-form-model.ts",
           "type": "registry:file",
           "target": "@components/orchid-ui/schema-form-model.ts"
+        }
+      ]
+    },
+    {
+      "name": "schema-table",
+      "type": "registry:ui",
+      "title": "Schema Table",
+      "description": "JSON-schema list: search, tabs, filter, sort, pagination. Uses Table.",
+      "registryDependencies": [
+        "@orchid/badge",
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/dropdown-menu",
+        "@orchid/empty",
+        "@orchid/field",
+        "@orchid/input-group",
+        "@orchid/pagination",
+        "@orchid/popover",
+        "@orchid/select",
+        "@orchid/table"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/schema-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/schema-table.tsx"
+        },
+        {
+          "path": "src/components/ui/schema-table-model.ts",
+          "type": "registry:file",
+          "target": "@components/orchid-ui/schema-table-model.ts"
+        }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:ui",
+      "title": "App Shell",
+      "description": "Iframe chrome: header + AppShellNavItem tabs. No sidebar, no login card.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/app-shell.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/app-shell.tsx"
+        }
+      ]
+    },
+    {
+      "name": "alert",
+      "type": "registry:ui",
+      "title": "Alert",
+      "description": "In-page banner (not toast). color Default|Blue|Red|Orange|Grey, action Bottom|Right.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/alert.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/alert.tsx"
+        }
+      ]
+    },
+    {
+      "name": "list-item",
+      "type": "registry:ui",
+      "title": "List Item",
+      "description": "List row (title, media, meta, actions). layout Default|Stack|Media, selected.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/list-item.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/list-item.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Zero-data / no results / upgrade CTA. variant Default|Search|Upgrade.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/empty.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/empty.tsx"
+        }
+      ]
+    },
+    {
+      "name": "customer-card",
+      "type": "registry:ui",
+      "title": "Customer Card",
+      "description": "Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/avatar",
+        "@orchid/button",
+        "@orchid/badge",
+        "@orchid/copy-button",
+        "@orchid/skeleton"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/customer-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/customer-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-toolbar",
+      "type": "registry:ui",
+      "title": "Page Toolbar",
+      "description": "Nested screen bar: Back or Close + right actions. Page title sits below.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/kbd"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/page-toolbar.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/page-toolbar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-title",
+      "type": "registry:ui",
+      "title": "Page Title",
+      "description": "Page heading: title, chip, description, copy id, actions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/page-title.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/page-title.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-dialog",
+      "type": "registry:ui",
+      "title": "Confirm Dialog",
+      "description": "Confirm overlay. type Delete|Warning|Success|Question, size Small|Medium, confirmPhrase.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/confirm-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/confirm-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Actions. variant Primary|Secondary|Destructive, style Default|Border|Transparent, size Small|Default|Big, shape Default|Circle, iconOnly.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Overflow/grouped actions on a trigger. Item variant default|destructive.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Floating toast. toast.add({ title, type: success|info|warning|error }). Mount Toaster in root.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toast.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/toast.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Status/tags. color Blue|Purple|Orange|Red|LightRed|White|DarkBlue|Grey|Tosca|Green, style Background|Border|Transparent. UserBadge role Owner|Admin|Manager|Cashier.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "accordion",
+      "type": "registry:ui",
+      "title": "Accordion",
+      "description": "Expand/collapse sections. AccordionTrigger: title, description, label, progress.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/accordion.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/accordion.tsx"
+        }
+      ]
+    },
+    {
+      "name": "progress",
+      "type": "registry:ui",
+      "title": "Progress",
+      "description": "Known completion (value/max). size Default|Small.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/progress.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/progress.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Face/initials. variant Default|Business|Image, size 24|28|32|40|48|64.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Hover/focus hint. TooltipProvider + Content side.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "In-page view switch. variant Default|Pills, size Default|Big.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "choice-card",
+      "type": "registry:ui",
+      "title": "Choice Card",
+      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment Vertical|Horizontal.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/choice-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/choice-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "stat-card",
+      "type": "registry:ui",
+      "title": "Stat Card",
+      "description": "KPI card (icon, title, value, %). iconColor Blue|Green|Red|Grey.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/stat-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/stat-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "detail-list",
+      "type": "registry:ui",
+      "title": "Detail List",
+      "description": "Read-only key/value card. style Default|Border.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/detail-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/detail-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "icon-group",
+      "type": "registry:ui",
+      "title": "Icon Group",
+      "description": "Tight icon actions. style Default|Border.",
+      "dependencies": [
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/icon-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/icon-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Copy a string (id, phone, URL). prop: value.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/copy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading placeholder bars. Shape via className.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Indeterminate load. size Small|Default|Big.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/spinner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Centered overlay. size Small|Medium|Default|Confirmation|Fullscreen, persistent.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Edge panel. side Right|Left|Top|Bottom, size Small|Medium|Default.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/sheet.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Path trail. List + Item + Link + Page + Separator.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/breadcrumb.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Paged lists. Previous/Next, Ellipsis, PaginationInfo.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "table",
+      "type": "registry:ui",
+      "title": "Table",
+      "description": "List chrome (div, not HTML table). Cell type Default|Checkbox|Image|Icon|Empty. TableSelectionBar.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Command palette. CommandDialog + Input + List + Item.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/dialog",
+        "@orchid/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard shortcut keys. Kbd + KbdGroup.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/kbd.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "One expand/collapse panel. Trigger + Content.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Custom scrollbar in a bounded panel. ScrollBar vertical|horizontal.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/scroll-area.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Small click panel (not a modal). Trigger render Button.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Divider. orientation horizontal|vertical.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Form row: label, control, hint, error. FieldGroup + Field + FieldLabel.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/label",
+        "@orchid/separator"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Accessible label (htmlFor). Prefer FieldLabel in forms.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Single-line text. Use with Field; prefix/suffix → input-group.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input + prefix/suffix/inline select. Addon align start|end. Use InputGroupInput, not raw Input.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/select",
+        "@orchid/textarea"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/input-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Multi-line text. Use with Field.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Closed one-of-many list. Select + Trigger + Value + Item.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/select.tsx"
+        }
+      ]
+    },
+    {
+      "name": "combobox",
+      "type": "registry:ui",
+      "title": "Combobox",
+      "description": "Searchable pick (single/multi). Checkbox + SelectAll; chips for multi.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/badge",
+        "@orchid/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/combobox.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "quantity-input",
+      "type": "registry:ui",
+      "title": "Quantity Input",
+      "description": "Integer stepper. min/max/step.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/quantity-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/quantity-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Multi-select. CheckboxGroup alignment Vertical|Horizontal.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Pick one from a short list. RadioGroup alignment Vertical|Horizontal.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "On/off setting. size Default|Small.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Number or range on a track. Array value = two thumbs.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "calendar",
+      "type": "registry:ui",
+      "title": "Calendar",
+      "description": "Month grid. mode single|range|multiple. Prefer date-picker in forms.",
+      "dependencies": [
+        "react-day-picker",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/calendar.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/calendar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Day, range, or date+time. DatePicker | DatePickerRange | DateTimePicker.",
+      "dependencies": [
+        "date-fns",
+        "lucide-react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/calendar",
+        "@orchid/input",
+        "@orchid/popover"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/date-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-section",
+      "type": "registry:ui",
+      "title": "Form Section",
+      "description": "Form block heading. FormSectionGroup + FormSectionItem for settings rows.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form-section.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/form-section.tsx"
         }
       ]
     }

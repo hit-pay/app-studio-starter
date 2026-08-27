@@ -12,7 +12,7 @@ When you finish, say what they can do now. **Always** `bun run publish` after th
 
 Think first. Match the user’s product. One pass: the screens they named.
 
-UI: read **`orchid-catalog.md`** (`name` / title / description). For props, read `src/components/orchid-ui/<name>.tsx`.
+UI: **Read the entire** `orchid-catalog.md` with the Read tool before building any screen. Do not Grep, search, or skim headings. The catalog is the full kit — pick the matching component for each UI job (toolbar, empty, confirm, field, table, toast, etc.) instead of a generic `div`/`button`. For props after you chose a name, read `src/components/orchid-ui/<name>.tsx`.
 
 `PLAN.md` only if the prompt has **several** screens or flows. One short checkbox list, then code. Do not rewrite it after every file.
 
@@ -30,7 +30,7 @@ The app sits inside the HitPay dashboard (icon rail, Apps header, Draft/Build). 
 
 | Path | Use |
 |---|---|
-| `orchid-catalog.md` | Orchid component titles + descriptions |
+| `orchid-catalog.md` | Full Orchid kit — **read the whole file**, do not grep |
 | `src/routes/` | Pages (`index.tsx` = `/`). Shared chrome: `__root.tsx` |
 | `src/components/orchid-ui/` | Kit → `@/orchid-ui/…` (customize in place) |
 | `src/components/` | App-only UI → `@/components/…` |
