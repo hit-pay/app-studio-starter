@@ -103,7 +103,7 @@ function DetailListExamplesPage() {
         <DetailList type="Border">
           <DetailListHeader>
             <DetailListTitle>Customer Data</DetailListTitle>
-            <Button type="Secondary" style="Transparent" size="Small">
+            <Button variant="Secondary" style="Transparent" size="Small">
               Edit
             </Button>
           </DetailListHeader>

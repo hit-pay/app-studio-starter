@@ -289,7 +289,7 @@ function ListItemExamplesPage() {
                 <Trash2Icon className="size-4" />
               </ListItemAction>
             </ListItemHoverActions>
-            <Button type="Primary" size="Default">
+            <Button variant="Primary" size="Default">
               Connect
             </Button>
           </ListItemTrailing>

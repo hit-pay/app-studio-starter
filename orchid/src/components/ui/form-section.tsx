@@ -63,7 +63,7 @@ function FormSection({
   )
 }
 
-function SectionItem({
+function FormSectionItem({
   className,
   title,
   description,
@@ -83,7 +83,7 @@ function SectionItem({
 }) {
   return (
     <div
-      data-slot="section-item"
+      data-slot="form-section-item"
       data-type={type}
       className={cn(
         'flex w-full min-w-0 flex-col gap-2',
@@ -110,14 +110,14 @@ function SectionItem({
   )
 }
 
-function Section({ className, ...props }: ComponentProps<'section'>) {
+function FormSectionGroup({ className, ...props }: ComponentProps<'section'>) {
   return (
     <section
-      data-slot="section"
+      data-slot="form-section-group"
       className={cn('flex w-full min-w-0 flex-col gap-4', className)}
       {...props}
     />
   )
 }
 
-export { Section, SectionItem, FormSection }
+export { FormSection, FormSectionGroup, FormSectionItem }

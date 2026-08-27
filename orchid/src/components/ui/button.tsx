@@ -10,7 +10,7 @@ const buttonVariants = cva(
   'group/button inline-flex shrink-0 cursor-pointer items-center justify-center overflow-clip border border-solid font-medium whitespace-nowrap outline-none select-none disabled:pointer-events-none disabled:cursor-not-allowed [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
-      type: {
+      variant: {
         Primary: '',
         Secondary: '',
         Destructive: '',
@@ -41,62 +41,62 @@ const buttonVariants = cva(
       { size: 'Default', iconOnly: true, class: 'size-9 min-w-9' },
       { size: 'Big', iconOnly: true, class: 'size-11 min-w-11' },
       {
-        type: 'Primary',
+        variant: 'Primary',
         style: 'Default',
         class:
           'border-oc-primary-button-border bg-linear-to-b from-oc-primary-button-default-start to-oc-primary-button-default-stop text-oc-primary-button-text shadow-[0_1.5px_0_0_var(--oc-primary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-oc-primary-button-hover-start hover:to-oc-primary-button-hover-stop active:from-oc-primary-button-pressed-start active:to-oc-primary-button-pressed-stop active:shadow-none disabled:from-oc-primary-button-disabled-start disabled:to-oc-primary-button-disabled-stop disabled:shadow-none',
       },
       {
-        type: 'Primary',
+        variant: 'Primary',
         style: 'Transparent',
         class:
           'text-oc-primary hover:text-oc-primary-300 active:text-oc-primary-button-default-stop',
       },
       {
-        type: 'Primary',
+        variant: 'Primary',
         style: 'Border',
         class:
           'border-oc-primary text-oc-primary hover:bg-oc-info-soft active:bg-oc-primary/15',
       },
       {
-        type: 'Destructive',
+        variant: 'Destructive',
         style: 'Default',
         class:
           'border-oc-destructive-button-border bg-linear-to-b from-oc-destructive-button-default-start to-oc-destructive-button-default-stop text-oc-destructive-button-text shadow-[0_1.5px_0_0_var(--oc-destructive-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-oc-destructive-button-hover-start hover:to-oc-destructive-button-hover-stop active:from-oc-destructive-button-pressed-start active:to-oc-destructive-button-pressed-stop active:shadow-none disabled:from-oc-destructive-button-disabled-start disabled:to-oc-destructive-button-disabled-stop disabled:shadow-none',
       },
       {
-        type: 'Destructive',
+        variant: 'Destructive',
         style: 'Transparent',
         class:
           'text-oc-destructive hover:text-oc-destructive/80 active:text-oc-destructive-button-default-stop',
       },
       {
-        type: 'Destructive',
+        variant: 'Destructive',
         style: 'Border',
         class:
           'border-oc-destructive text-oc-destructive hover:bg-oc-destructive-soft active:bg-oc-destructive/15',
       },
       {
-        type: 'Secondary',
+        variant: 'Secondary',
         style: 'Default',
         class:
           'border-oc-secondary-button-border bg-linear-to-b from-oc-secondary-button-default-start to-oc-secondary-button-default-stop text-oc-secondary-button-text shadow-[0_1.5px_0_0_var(--oc-secondary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.08)] hover:from-oc-secondary-button-hover-start hover:to-oc-secondary-button-hover-stop active:from-oc-secondary-button-pressed-start active:to-oc-secondary-button-pressed-stop active:shadow-none disabled:from-oc-secondary-button-disabled-start disabled:to-oc-secondary-button-disabled-stop disabled:shadow-none',
       },
       {
-        type: 'Secondary',
+        variant: 'Secondary',
         style: 'Transparent',
         class:
           'text-oc-secondary-button-text hover:text-oc-foreground active:text-oc-foreground',
       },
       {
-        type: 'Secondary',
+        variant: 'Secondary',
         style: 'Border',
         class:
           'border-oc-border text-oc-secondary-button-text hover:bg-oc-muted active:bg-oc-accent',
       },
     ],
     defaultVariants: {
-      type: 'Primary',
+      variant: 'Primary',
       style: 'Default',
       size: 'Default',
       iconOnly: false,
@@ -105,91 +105,58 @@ const buttonVariants = cva(
   },
 )
 
-type ButtonType = 'Primary' | 'Secondary' | 'Destructive'
+type ButtonVariant = 'Primary' | 'Secondary' | 'Destructive'
+type ButtonType = ButtonVariant
 type ButtonStyle = 'Default' | 'Transparent' | 'Border'
 type ButtonSize = 'Small' | 'Default' | 'Big'
+type ButtonNativeType = NonNullable<ButtonPrimitive.Props['type']>
 
-const TYPE_ALIAS: Record<string, ButtonType> = {
-  Primary: 'Primary',
-  primary: 'Primary',
-  default: 'Primary',
-  Destructive: 'Destructive',
-  destructive: 'Destructive',
-  Secondary: 'Secondary',
-  secondary: 'Secondary',
-}
-
-const STYLE_ALIAS: Record<string, ButtonStyle> = {
-  Default: 'Default',
-  default: 'Default',
-  Transparent: 'Transparent',
-  transparent: 'Transparent',
-  ghost: 'Transparent',
-  link: 'Transparent',
-  Border: 'Border',
-  border: 'Border',
-  outline: 'Border',
-}
-
-const SIZE_ALIAS: Record<string, ButtonSize> = {
-  Small: 'Small',
-  sm: 'Small',
-  xs: 'Small',
-  Default: 'Default',
-  default: 'Default',
-  Big: 'Big',
-  lg: 'Big',
-}
-
+/**
+ * Orchid action button.
+ *
+ * `variant`: Primary | Secondary | Destructive.
+ * `type`: native submit | button | reset (default button).
+ */
 function Button({
   className,
-  type: visualType = 'Primary',
+  variant = 'Primary',
+  type = 'button',
   style = 'Default',
   size = 'Default',
   iconOnly,
   shape = 'Default',
   additional,
   menu,
-  htmlType = 'button',
   children,
   ...props
 }: Omit<ButtonPrimitive.Props, 'type'> &
   VariantProps<typeof buttonVariants> & {
-    type?: ButtonType | 'primary' | 'destructive' | 'secondary' | 'default'
-    style?: ButtonStyle | 'default' | 'transparent' | 'border' | 'ghost' | 'link' | 'outline'
-    size?: ButtonSize | 'sm' | 'xs' | 'lg' | 'default'
-    iconOnly?: boolean
-    shape?: 'Default' | 'Circle'
+    type?: ButtonNativeType
     additional?: ReactNode
     menu?: ReactNode
-    htmlType?: ButtonPrimitive.Props['type']
   }) {
-  const resolvedType = TYPE_ALIAS[visualType] ?? 'Primary'
-  const resolvedStyle = STYLE_ALIAS[style] ?? 'Default'
-  const resolvedSize = SIZE_ALIAS[String(size)] ?? 'Default'
-  const resolvedIconOnly = Boolean(iconOnly)
   const classNameResolved = cn(
     buttonVariants({
-      type: resolvedType,
-      style: resolvedStyle,
-      size: resolvedSize,
-      iconOnly: resolvedIconOnly,
+      variant,
+      style,
+      size,
+      iconOnly: Boolean(iconOnly),
       shape,
     }),
     className,
   )
   const additionalWidth =
-    resolvedSize === 'Small' ? 'w-8 min-w-8' : resolvedSize === 'Big' ? 'w-12 min-w-12' : 'w-10 min-w-10'
+    size === 'Small' ? 'w-8 min-w-8' : size === 'Big' ? 'w-12 min-w-12' : 'w-10 min-w-10'
   const divider =
-    resolvedType === 'Secondary' || resolvedStyle !== 'Default'
+    variant === 'Secondary' || style !== 'Default'
       ? 'border-l-current/20'
       : 'border-l-white/25'
   const splitShadow =
-    resolvedStyle !== 'Default'
+    style !== 'Default'
       ? ''
-      : resolvedType === 'Destructive'
+      : variant === 'Destructive'
         ? 'shadow-[0_1.5px_0_0_var(--oc-destructive-button-shadow)]'
-        : resolvedType === 'Secondary'
+        : variant === 'Secondary'
           ? 'shadow-[0_1.5px_0_0_var(--oc-secondary-button-shadow)]'
           : 'shadow-[0_1.5px_0_0_var(--oc-primary-button-shadow)]'
 
@@ -202,14 +169,14 @@ function Button({
         type="button"
         disabled={props.disabled}
         data-slot="button-additional"
-        data-type={resolvedType}
-        data-style={resolvedStyle}
-        data-size={resolvedSize}
+        data-variant={variant}
+        data-style={style}
+        data-size={size}
         className={cn(
           buttonVariants({
-            type: resolvedType,
-            style: resolvedStyle,
-            size: resolvedSize,
+            variant,
+            style,
+            size,
             iconOnly: false,
             shape: 'Default',
           }),
@@ -232,11 +199,11 @@ function Button({
         )}
       >
         <ButtonPrimitive
-          type={htmlType}
+          type={type}
           data-slot="button"
-          data-type={resolvedType}
-          data-style={resolvedStyle}
-          data-size={resolvedSize}
+          data-variant={variant}
+          data-style={style}
+          data-size={size}
           className={cn(classNameResolved, 'rounded-r-none border-r-0 shadow-none')}
           {...props}
         >
@@ -260,11 +227,11 @@ function Button({
 
   return (
     <ButtonPrimitive
-      type={htmlType}
+      type={type}
       data-slot="button"
-      data-type={resolvedType}
-      data-style={resolvedStyle}
-      data-size={resolvedSize}
+      data-variant={variant}
+      data-style={style}
+      data-size={size}
       className={classNameResolved}
       {...props}
     >
@@ -274,3 +241,4 @@ function Button({
 }
 
 export { Button, buttonVariants }
+export type { ButtonNativeType, ButtonSize, ButtonStyle, ButtonType, ButtonVariant }

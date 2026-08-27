@@ -4,7 +4,7 @@ import { FileTextIcon, SearchIcon, TriangleAlertIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-const emptyPageIconVariants = cva(
+const emptyStateIconVariants = cva(
   'relative inline-flex items-center justify-center rounded-full border border-solid p-4',
   {
     variants: {
@@ -52,7 +52,7 @@ function EmptyState({
       className={cn('flex w-full flex-col items-center justify-center gap-6', className)}
       {...props}
     >
-      <div className={emptyPageIconVariants({ type })}>
+      <div className={emptyStateIconVariants({ type })}>
         {icon ?? DEFAULT_ICON[type]}
         {showBadge ? (
           <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-oc-muted-foreground text-[11px] font-medium leading-none text-white">

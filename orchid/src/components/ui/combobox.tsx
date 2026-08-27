@@ -103,7 +103,7 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
     <ComboboxPrimitive.Clear
       data-slot="combobox-clear"
       className={cn(className)}
-      render={<InputGroupButton iconOnly size="Small" type="Secondary" style="Transparent" />}
+      render={<InputGroupButton iconOnly size="Small" variant="Secondary" style="Transparent" />}
       {...props}
     >
       <XIcon className="pointer-events-none size-4" />
@@ -146,7 +146,7 @@ function ComboboxInput({
               <InputGroupButton
                 iconOnly
                 size="Small"
-                type="Secondary"
+                variant="Secondary"
                 style="Transparent"
                 className="text-oc-muted-foreground data-pressed:bg-transparent"
               />
@@ -377,8 +377,7 @@ function ComboboxChip({
   color?: ChipColor
   type?: 'Background' | 'Border' | 'Transparent'
 }) {
-  const resolvedColor =
-    color === 'Light Red' ? 'LightRed' : color === 'Dark Blue' ? 'DarkBlue' : color
+  const resolvedColor = color
 
   return (
     <ComboboxPrimitive.Chip

@@ -52,7 +52,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/tabs' as const,
     name: 'Tabs',
-    description: 'Default underline and Pills tab bars.',
+    description: 'Default underline and Pills. TabsList + TabsTrigger + TabsPanel.',
   },
   {
     to: '/choice-card' as const,
@@ -169,7 +169,7 @@ export const DOC_FORMS = [
   {
     to: '/form-section' as const,
     name: 'Form Section',
-    description: 'Form section heading with optional chip, hint, count, and actions.',
+    description: 'Heading plus FormSectionGroup and FormSectionItem.',
   },
 ] as const
 
@@ -201,7 +201,7 @@ export const DOC_BLOCKS = [
   {
     to: '/schema-form' as const,
     name: 'Schema Form',
-    description: 'TanStack Form plus Orchid fields from a field schema.',
+    description: 'TanStack Form plus Orchid fields. Types include date and quantity. Keys: showIf, maxLength.',
   },
 ] as const
 

@@ -24,7 +24,7 @@ const PRODUCT_FIELDS: SchemaFormField[] = [
     type: 'input',
     placeholder: 'Studio Membership',
     required: true,
-    max_length: 32,
+    maxLength: 32,
     value: '',
   },
   {
@@ -80,7 +80,7 @@ function CreateProductExample() {
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <ModalTrigger render={<Button type="Primary" />}>Create product</ModalTrigger>
+      <ModalTrigger render={<Button variant="Primary" />}>Create product</ModalTrigger>
       <ModalPopup size="Fullscreen" title="Create product">
         <PageToolbar
           className="shrink-0"
@@ -88,11 +88,11 @@ function CreateProductExample() {
           onBack={close}
           actions={
             <>
-              <Button type="Secondary" className="w-[100px]" onClick={close}>
+              <Button variant="Secondary" className="w-[100px]" onClick={close}>
                 Cancel
               </Button>
               <Button
-                type="Primary"
+                variant="Primary"
                 className="w-[100px]"
                 disabled={product.isSubmitting}
                 aria-busy={product.isSubmitting}
@@ -122,7 +122,7 @@ function CreateInvoiceExample() {
 
   return (
     <Modal open={open} onOpenChange={setOpen}>
-      <ModalTrigger render={<Button type="Secondary" style="Border" />}>Create invoice</ModalTrigger>
+      <ModalTrigger render={<Button variant="Secondary" style="Border" />}>Create invoice</ModalTrigger>
       <ModalPopup size="Fullscreen" title="Create invoice">
         <PageToolbar
           className="shrink-0"
@@ -130,10 +130,10 @@ function CreateInvoiceExample() {
           onBack={close}
           actions={
             <>
-              <Button type="Secondary" className="w-[100px]" onClick={close}>
+              <Button variant="Secondary" className="w-[100px]" onClick={close}>
                 Cancel
               </Button>
-              <Button type="Primary" className="w-[100px]" onClick={close}>
+              <Button variant="Primary" className="w-[100px]" onClick={close}>
                 Send
               </Button>
             </>
@@ -189,10 +189,10 @@ function PageToolbarExamplesPage() {
           left="Back"
           actions={
             <>
-              <Button type="Secondary" style="Border" size="Default" className="w-[100px]">
+              <Button variant="Secondary" style="Border" size="Default" className="w-[100px]">
                 Cancel
               </Button>
-              <Button type="Primary" size="Default" className="w-[100px]">
+              <Button variant="Primary" size="Default" className="w-[100px]">
                 Save
               </Button>
             </>
@@ -208,10 +208,10 @@ function PageToolbarExamplesPage() {
           left="Close"
           actions={
             <>
-              <Button type="Secondary" size="Default" className="w-[100px]">
+              <Button variant="Secondary" size="Default" className="w-[100px]">
                 Cancel
               </Button>
-              <Button type="Primary" size="Default" className="w-[100px]">
+              <Button variant="Primary" size="Default" className="w-[100px]">
                 Save
               </Button>
             </>

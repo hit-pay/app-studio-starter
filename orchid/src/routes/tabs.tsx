@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SmartphoneIcon, MonitorIcon } from 'lucide-react'
-import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsPanel, TabsTrigger } from '@/components/ui/tabs'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
 export const Route = createFileRoute('/tabs')({
@@ -16,11 +16,11 @@ function TabsExamplesPage() {
         </p>
         <Tabs defaultValue="invoice" type="Default">
           <TabsList>
-            <TabsTab value="invoice">Invoice</TabsTab>
-            <TabsTab value="link">Payment Link</TabsTab>
-            <TabsTab value="recurring" count={8}>
+            <TabsTrigger value="invoice">Invoice</TabsTrigger>
+            <TabsTrigger value="link">Payment Link</TabsTrigger>
+            <TabsTrigger value="recurring" count={8}>
               Recurring
-            </TabsTab>
+            </TabsTrigger>
           </TabsList>
           <TabsPanel value="invoice">INV-2048 · Priya Nair · SGD 128.00 · Cards</TabsPanel>
           <TabsPanel value="link">Weekend brunch link · SGD 48.00 · PayNow and GrabPay</TabsPanel>
@@ -34,12 +34,12 @@ function TabsExamplesPage() {
         </p>
         <Tabs defaultValue="pos" type="Pills">
           <TabsList>
-            <TabsTab value="pos" icon={<SmartphoneIcon />}>
+            <TabsTrigger value="pos" icon={<SmartphoneIcon />}>
               Point of Sale
-            </TabsTab>
-            <TabsTab value="store" icon={<MonitorIcon />}>
+            </TabsTrigger>
+            <TabsTrigger value="store" icon={<MonitorIcon />}>
               Online Store
-            </TabsTab>
+            </TabsTrigger>
           </TabsList>
           <TabsPanel value="pos">Terminal HP-POS-04 · last sale SGD 24.50 via GrabPay</TabsPanel>
           <TabsPanel value="store">Home page published · PayNow and Cards at checkout</TabsPanel>
@@ -52,9 +52,9 @@ function TabsExamplesPage() {
         </p>
         <Tabs defaultValue="commerce" type="Default" size="Big">
           <TabsList>
-            <TabsTab value="commerce">Commerce</TabsTab>
-            <TabsTab value="channels">Payment Channels</TabsTab>
-            <TabsTab value="data">Customer Data</TabsTab>
+            <TabsTrigger value="commerce">Commerce</TabsTrigger>
+            <TabsTrigger value="channels">Payment Channels</TabsTrigger>
+            <TabsTrigger value="data">Customer Data</TabsTrigger>
           </TabsList>
           <TabsPanel value="commerce">Invoice, Payment Link, Recurring, POS, and Online Store</TabsPanel>
           <TabsPanel value="channels">PayNow, Cards, GrabPay, WeChat Pay · SGD</TabsPanel>
@@ -68,11 +68,11 @@ function TabsExamplesPage() {
         </p>
         <Tabs defaultValue="stock" type="Default">
           <TabsList>
-            <TabsTab value="stock">Stock</TabsTab>
-            <TabsTab value="sku">SKUs</TabsTab>
-            <TabsTab value="sold" count={12}>
+            <TabsTrigger value="stock">Stock</TabsTrigger>
+            <TabsTrigger value="sku">SKUs</TabsTrigger>
+            <TabsTrigger value="sold" count={12}>
               Sold today
-            </TabsTab>
+            </TabsTrigger>
           </TabsList>
           <TabsPanel value="stock">Matcha Latte · SKU-TEA-12 · 24 units remaining</TabsPanel>
           <TabsPanel value="sku">SKU-TEA-12, SKU-BKR-03, SKU-POS-01</TabsPanel>

@@ -104,7 +104,7 @@ function CopyAllButton({ value, label }: { value: string; label: string }) {
 
   return (
     <Button
-      type="Secondary"
+      variant="Secondary"
       style="Border"
       size="Small"
       onClick={async () => {
@@ -356,12 +356,14 @@ function SetupGuidePage() {
           <CodeBlock
             code={`import { Button } from '@/orchid-ui/button'
 
-<Button type="Primary">Save</Button>
-<Button type="Secondary" style="Border">Cancel</Button>`}
+<Button variant="Primary">Save</Button>
+<Button variant="Secondary" style="Border">Cancel</Button>
+<Button variant="Primary" type="submit">Submit</Button>`}
           />
           <P>
-            <code className="text-oc-foreground">type</code> is visual (Primary | Secondary |
-            Destructive). Use <code className="text-oc-foreground">htmlType</code> for submit.
+            <code className="text-oc-foreground">variant</code> is visual (Primary | Secondary |
+            Destructive). Native <code className="text-oc-foreground">type</code> is submit /
+            button / reset.
             Triggers use Base UI <code className="text-oc-foreground">render</code> with the Orchid
             Button, not <code className="text-oc-foreground">asChild</code> or{' '}
             <code className="text-oc-foreground">@radix-ui/*</code>.

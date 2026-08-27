@@ -7,11 +7,12 @@
       "name": "all",
       "type": "registry:ui",
       "title": "All",
-      "description": "Installs every Orchid UI component via registryDependencies.",
+      "description": "Installs every Orchid UI component via registryDependencies, including toast.",
       "registryDependencies": [
         "@orchid/button",
         "@orchid/dropdown-menu",
         "@orchid/banner",
+        "@orchid/toast",
         "@orchid/chip",
         "@orchid/accordion",
         "@orchid/progress-bar",
@@ -79,7 +80,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Primary actions: save, cancel, delete, icon-only, split menus. Props: type Primary|Secondary|Destructive (looks only; use htmlType for submit), style Default|Border|Transparent, size Small|Default|Big. Not tabs or links in a nav.",
+      "description": "Primary actions: save, cancel, delete, icon-only, split menus. variant Primary|Secondary|Destructive. Native HTML type is type=submit|button|reset (default button). style Default|Border|Transparent, size Small|Default|Big. Not tabs or links in a nav.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -280,7 +281,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabsList + TabsTab + TabsPanel. Not a dropdown of actions.",
+      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabsList + TabsTrigger + TabsPanel. Not a dropdown of actions.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -368,7 +369,7 @@
       "name": "form-section",
       "type": "registry:ui",
       "title": "Form Section",
-      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via Section; settings rows use SectionItem. Not a page heading — use page-title.",
+      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via FormSectionGroup; settings rows use FormSectionItem. Not a page heading — use page-title.",
       "dependencies": [
         "lucide-react"
       ],
@@ -803,7 +804,7 @@
       "name": "confirm-dialog",
       "type": "registry:ui",
       "title": "Confirm Dialog",
-      "description": "Prebuilt confirm overlay on Modal. type Delete|Warning|Success|Question. size Small|Medium. Optional confirmPhrase to type before delete. Use ConfirmDialogContent as the inner block.",
+      "description": "Prebuilt confirm overlay on Modal. type Delete|Warning|Success|Question. Warning confirm is Continue (not Delete). size Small|Medium. Optional confirmPhrase to type before delete. Use ConfirmDialogContent as the inner block.",
       "dependencies": [
         "lucide-react"
       ],
@@ -824,7 +825,7 @@
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form on TanStack Form. Field keys: key, title, type, value, options, validation, force_display. Types: input, select, accepted, plus textarea, toggle, radio, combobox, slider, date, quantity-input, input-group, object, section.",
+      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, forceDisplay. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, toggle, slider, input-group, date, quantity, object, section, section-item, hidden, phone. Pair keys with key+ for input-group. Import SCHEMA_FORM_EXAMPLE_FIELDS.",
       "dependencies": [
         "@tanstack/react-form"
       ],
@@ -849,6 +850,11 @@
           "path": "src/components/ui/schema-form.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/schema-form.tsx"
+        },
+        {
+          "path": "src/components/ui/schema-form-model.ts",
+          "type": "registry:file",
+          "target": "@components/orchid-ui/schema-form-model.ts"
         }
       ]
     }

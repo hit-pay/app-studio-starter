@@ -33,7 +33,7 @@ function DatePicker({
       <PopoverTrigger
         render={
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             data-empty={!date}
             className={cn(
@@ -87,7 +87,7 @@ function DatePickerRange({
       <PopoverTrigger
         render={
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             data-empty={!range?.from}
             className={cn(

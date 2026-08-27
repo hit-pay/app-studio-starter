@@ -21,8 +21,7 @@ type CustomerCardData = {
   name?: string
   email?: string
   phone?: string
-  phone_number?: string
-  phone_number_country_code?: string
+  phoneCountryCode?: string
   src?: string
   currency?: string
   bank_name?: string
@@ -58,8 +57,8 @@ const customerCardVariants = cva(
 )
 
 function formatPhone(customer: CustomerCardData) {
-  const phone = customer.phone ?? customer.phone_number
-  const code = customer.phone_number_country_code
+  const phone = customer.phone
+  const code = customer.phoneCountryCode
   if (code && phone && !phone.includes('+')) return `+${code} ${phone}`
   if (phone) return phone
   return '-'
@@ -194,7 +193,7 @@ function CustomerCard({
               </span>
             </div>
           </div>
-          <Button type="Secondary" size="Small" htmlType="button" className="w-full" onClick={onAdd}>
+          <Button variant="Secondary" size="Small"  className="w-full" onClick={onAdd}>
             Add customer
           </Button>
         </>
@@ -269,10 +268,10 @@ function CustomerCard({
           )}
         >
           <Button
-            type="Secondary"
+            variant="Secondary"
             size="Small"
             iconOnly
-            htmlType="button"
+            
             aria-label="Edit"
             onClick={onEdit}
           >

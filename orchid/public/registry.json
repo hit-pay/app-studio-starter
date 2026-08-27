@@ -7,11 +7,12 @@
       "name": "all",
       "type": "registry:ui",
       "title": "All",
-      "description": "Installs every Orchid UI component via registryDependencies.",
+      "description": "Installs every Orchid UI component via registryDependencies, including toast.",
       "registryDependencies": [
         "@orchid/button",
         "@orchid/dropdown-menu",
         "@orchid/banner",
+        "@orchid/toast",
         "@orchid/chip",
         "@orchid/accordion",
         "@orchid/progress-bar",
@@ -24,6 +25,7 @@
         "@orchid/stat-card",
         "@orchid/page-toolbar",
         "@orchid/page-title",
+        "@orchid/form-section",
         "@orchid/detail-list",
         "@orchid/icon-group",
         "@orchid/copy-button",
@@ -35,6 +37,7 @@
         "@orchid/empty-state",
         "@orchid/label",
         "@orchid/separator",
+        "@orchid/skeleton",
         "@orchid/field",
         "@orchid/input",
         "@orchid/textarea",
@@ -44,7 +47,9 @@
         "@orchid/popover",
         "@orchid/calendar",
         "@orchid/date-picker",
-        "@orchid/modal"
+        "@orchid/modal",
+        "@orchid/confirm-dialog",
+        "@orchid/schema-form"
       ],
       "files": [
         {
@@ -75,7 +80,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Primary actions: save, cancel, delete, icon-only, split menus. Props: type Primary|Secondary|Destructive (looks only; use htmlType for submit), style Default|Border|Transparent, size Small|Default|Big. Not tabs or links in a nav.",
+      "description": "Primary actions: save, cancel, delete, icon-only, split menus. variant Primary|Secondary|Destructive. Native HTML type is type=submit|button|reset (default button). style Default|Border|Transparent, size Small|Default|Big. Not tabs or links in a nav.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -124,6 +129,26 @@
           "path": "src/components/ui/banner.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/banner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Programmatic floating toast. toast.add({ title, description, type }). Mount Toaster at the app root. Not an in-page banner.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/toast.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/toast.tsx"
         }
       ]
     },
@@ -256,7 +281,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabsList + TabsTab + TabsPanel. Not a dropdown of actions.",
+      "description": "Switch views on one page (Week | My shifts | Review). type Default underline or Pills. TabsList + TabsTrigger + TabsPanel. Not a dropdown of actions.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -341,6 +366,25 @@
       ]
     },
     {
+      "name": "form-section",
+      "type": "registry:ui",
+      "title": "Form Section",
+      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via FormSectionGroup; settings rows use FormSectionItem. Not a page heading — use page-title.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form-section.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/form-section.tsx"
+        }
+      ]
+    },
+    {
       "name": "detail-list",
       "type": "registry:ui",
       "title": "Detail List",
@@ -412,7 +456,8 @@
         "@orchid/avatar",
         "@orchid/button",
         "@orchid/chip",
-        "@orchid/copy-button"
+        "@orchid/copy-button",
+        "@orchid/skeleton"
       ],
       "files": [
         {
@@ -545,6 +590,21 @@
       ]
     },
     {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Loading placeholder bars. Pulse on oc-neutral-soft. Shape via className (size-8 rounded-full, h-4 w-full). Not a spinner.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
@@ -618,13 +678,14 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Searchable list (tags, staff, countries). Combobox + Input + Item. Multiple: ComboboxChips + Chip. Grouped: Group + Label + Collection. Not a closed single pick without search \u2014 use select.",
+      "description": "Searchable list (tags, staff, countries). Combobox + Input + Item. Multiple: ComboboxChips + Chip. Checkbox variant and ComboboxSelectAll for bulk pick. Grouped: Group + Label + Collection. Not a closed single pick without search \u2014 use select.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
       ],
       "registryDependencies": [
         "@orchid/button",
+        "@orchid/checkbox",
         "@orchid/chip",
         "@orchid/input-group"
       ],
@@ -722,7 +783,7 @@
       "name": "modal",
       "type": "registry:ui",
       "title": "Modal",
-      "description": "Focused task overlay: create/edit shift, confirm delete, handover form. Modal + Trigger + Popup. Always set title. size Small|Medium|Default. persistent = no backdrop close. Not a side sheet (none in kit).",
+      "description": "Focused task overlay: create/edit shift, confirm delete, handover form. Modal + Trigger + Popup. Always set title. size Small|Medium|Default|Confirmation (320/480/640). persistent = no backdrop close. Not a side sheet (none in kit).",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -736,6 +797,64 @@
           "path": "src/components/ui/modal.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-dialog",
+      "type": "registry:ui",
+      "title": "Confirm Dialog",
+      "description": "Prebuilt confirm overlay on Modal. type Delete|Warning|Success|Question. Warning confirm is Continue (not Delete). size Small|Medium. Optional confirmPhrase to type before delete. Use ConfirmDialogContent as the inner block.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/modal"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/confirm-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/confirm-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "schema-form",
+      "type": "registry:ui",
+      "title": "Schema Form",
+      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, forceDisplay. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, toggle, slider, input-group, date, quantity, object, section, section-item, hidden, phone. Pair keys with key+ for input-group. Import SCHEMA_FORM_EXAMPLE_FIELDS.",
+      "dependencies": [
+        "@tanstack/react-form"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/combobox",
+        "@orchid/date-picker",
+        "@orchid/field",
+        "@orchid/input",
+        "@orchid/input-group",
+        "@orchid/quantity-input",
+        "@orchid/radio-group",
+        "@orchid/form-section",
+        "@orchid/select",
+        "@orchid/slider",
+        "@orchid/textarea",
+        "@orchid/toggle"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/schema-form.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/schema-form.tsx"
+        },
+        {
+          "path": "src/components/ui/schema-form-model.ts",
+          "type": "registry:file",
+          "target": "@components/orchid-ui/schema-form-model.ts"
         }
       ]
     }

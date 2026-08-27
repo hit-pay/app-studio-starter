@@ -28,8 +28,11 @@ bunx shadcn add @orchid/all
 Do not run `shadcn add --all`. That flag only installs the official shadcn kit. Use `@orchid/all`.
 
 ```tsx
-<Button type="Primary">Save</Button>
-<Button type="Secondary" style="Border">Cancel</Button>
+<Button variant="Primary">Save</Button>
+<Button variant="Secondary" style="Border">Cancel</Button>
+<Button variant="Primary" type="submit">Submit</Button>
 ```
 
-`type` is visual (Primary | Secondary | Destructive); submit uses `htmlType`. Triggers: `nativeButton` + `render={<Button … />}`. Modal always has `title`. Forms: `FieldGroup` + `Field` + `FieldLabel`. Invalid: `data-invalid` on Field, `aria-invalid` on the control. Prefix: `InputGroup` + `InputGroupInput`, never raw Input inside. `flex gap-*`, not `space-y-*`. `className` = layout only. Tokens, not `bg-blue-500`.
+`variant` is visual (Primary | Secondary | Destructive). Native HTML type is `type="submit"` (default `button`). Triggers: `nativeButton` + `render={<Button … />}`. Modal always has `title`. Forms: `FieldGroup` + `Field` + `FieldLabel`. Invalid: `data-invalid` on Field, `aria-invalid` on the control. Prefix: `InputGroup` + `InputGroupInput`, never raw Input inside. `flex gap-*`, not `space-y-*`. `className` = layout only. Tokens, not `bg-blue-500`.
+
+Pick: `Select` (short list), `Combobox` (search/multi), `ChoiceCard` (visible cards), `DropdownMenu` (actions). Banner vs `toast` + `Toaster`. Confirm destructive flows with `ConfirmDialog`, not a raw Modal. Dates: `DatePicker`. Mount `Toaster` when using `@orchid/all`. Tabs: `TabsTrigger`. Form blocks: `FormSectionItem`.

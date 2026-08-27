@@ -28,6 +28,10 @@ const modalPopupVariants = cva(
   },
 )
 
+/**
+ * Dialog surface. Prefer `Modal` for custom dialogs; use `ConfirmDialog` for
+ * Delete / Warning / Success / Question. `ModalPopup` is the panel.
+ */
 function Modal({
   children,
   persistent = false,
@@ -170,14 +174,13 @@ function ModalPopup({
                   <div className="grid auto-cols-[minmax(7rem,1fr)] grid-flow-col gap-3">
                     {showCancel ? (
                       <DialogPrimitive.Close
-                        render={<Button type="Secondary" className="w-full" onClick={onCancel} />}
+                        render={<Button variant="Secondary" className="w-full" onClick={onCancel} />}
                       >
                         {cancelLabel}
                       </DialogPrimitive.Close>
                     ) : null}
                     <Button
-                      type={confirmType}
-                      htmlType="button"
+                      variant={confirmType}
                       className="w-full"
                       onClick={onConfirm}
                     >

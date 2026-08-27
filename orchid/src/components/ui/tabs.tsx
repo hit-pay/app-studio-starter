@@ -92,7 +92,7 @@ function TabsList({ className, children, ...props }: TabsPrimitive.List.Props) {
   )
 }
 
-function TabsTab({
+function TabsTrigger({
   className,
   count,
   icon,
@@ -133,4 +133,4 @@ function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
   )
 }
 
-export { Tabs, TabsList, TabsTab, TabsPanel }
+export { Tabs, TabsList, TabsTrigger, TabsPanel }

@@ -11,7 +11,7 @@ import {
   type SchemaFormField,
   type SchemaFormRenderField,
 } from '@/components/ui/schema-form'
-import { Tabs, TabsList, TabsPanel, TabsTab } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsPanel, TabsTrigger } from '@/components/ui/tabs'
 
 export const Route = createFileRoute('/schema-form')({
   component: SchemaFormExamplesPage,
@@ -35,7 +35,7 @@ const ACCOUNT_FIELDS: SchemaFormField[] = [
     type: 'input',
     placeholder: 'Placeholder',
     required: true,
-    max_length: 32,
+    maxLength: 32,
     value: '',
   },
   {
@@ -61,7 +61,7 @@ const ACCOUNT_FIELDS: SchemaFormField[] = [
     title: 'Textarea',
     type: 'textarea',
     placeholder: 'Placeholder',
-    min_length: 12,
+    minLength: 12,
     description: 'At least 12 characters.',
     value: '',
   },
@@ -90,6 +90,20 @@ const ACCOUNT_FIELDS: SchemaFormField[] = [
     placeholder: 'Search',
     options: OPTIONS,
     value: ['a'],
+  },
+  {
+    key: 'qty',
+    title: 'Quantity',
+    type: 'quantity',
+    value: 1,
+    min: 1,
+    max: 99,
+  },
+  {
+    key: 'when',
+    title: 'Date',
+    type: 'date',
+    value: '',
   },
 ]
 
@@ -229,8 +243,8 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     type: 'password',
     placeholder: 'Enter password',
     required: true,
-    show_if: 'password_protection',
-    show_if_value: true,
+    showIf: 'password_protection',
+    showIfValue: true,
   },
   {
     key: 'guest_checkout',
@@ -238,8 +252,8 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     type: 'section-item',
     description: 'Let customers pay without creating an account.',
     props: { background: true },
-    show_if: 'password_protection',
-    show_if_value: true,
+    showIf: 'password_protection',
+    showIfValue: true,
     value: false,
   },
 ]
@@ -253,32 +267,33 @@ Required
 
 Optional
 - required, placeholder, description, options, value
-- validation, force_display, max_length, min_length, max
+- validation, forceDisplay, maxLength, minLength, min, max
 - props — control options (e.g. combobox multiple, section-item background)
 - fields — nested object children
-- show_if / show_if_value — show a field when another field matches
+- showIf / showIfValue — show a field when another field matches
 
 Types
 - input | password | textarea | phone
 - select
 - combobox — searchable; add props.multiple for chips
-- radio | checkbox-group | accepted | toggle
+- radio | checkbox | checkbox-group | accepted | toggle
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
+- date | quantity
 - object — nest with fields[]
-- hidden | section | section-item — row with title + toggle (Figma Section Item)
-- custom via renderField — date; date-range uses "from+to" or one key with { from, to }
+- hidden | section | section-item — row with title + toggle
+- custom via renderField — date-range uses "from+to" or one key with { from, to }
 
-show_if
-- show_if: "password_protection"
-- show_if_value: true
-- or arrays (AND): show_if: ["a", "b"], show_if_value: [true, "delivery"]
+showIf
+- showIf: "password_protection"
+- showIfValue: true
+- or arrays (AND): showIf: ["a", "b"], showIfValue: [true, "delivery"]
 
 Validation
 - pipes: email | max:255 | phone | valid_url | accepted
 - or regex: /^[A-Z]{4}SG[A-Z0-9]{2}([A-Z0-9]{3})?$/
 
-force_display: false hides the control; the value still submits.
+forceDisplay: false hides the control; the value still submits.
 
 State lives in useSchemaForm. Render with <SchemaForm form={account} />. Call account.submit() from the host.
 
@@ -306,7 +321,7 @@ const FIELDS: SchemaFormField[] = [
     type: 'input',
     placeholder: 'Studio Membership',
     required: true,
-    max_length: 32,
+    maxLength: 32,
   },
   {
     key: 'sku',
@@ -350,7 +365,7 @@ function CreateProduct() {
   return (
     <>
       <Button
-        type="Primary"
+        variant="Primary"
         disabled={form.isSubmitting}
         onClick={() => void form.submit()}
       >
@@ -374,7 +389,7 @@ function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
       <div className="flex shrink-0 items-center justify-between gap-3 border-b border-solid border-oc-border px-3 py-2">
         <span className="truncate font-mono text-xs text-oc-muted-foreground">{filename}</span>
         <Button
-          type="Secondary"
+          variant="Secondary"
           style="Border"
           size="Small"
           onClick={async () => {
@@ -460,7 +475,7 @@ function SchemaFormExamplesPage() {
         <SchemaForm form={details} className="max-w-none" renderField={renderDateField} />
         <div className="flex min-w-0 flex-col gap-4">
           <Button
-            htmlType="button"
+            
             disabled={validating}
             aria-busy={validating}
             onClick={() => void Promise.all([account.submit(), details.submit()])}
@@ -473,11 +488,11 @@ function SchemaFormExamplesPage() {
             className="min-w-0 gap-3"
           >
             <TabsList>
-              <TabsTab value="result">Result</TabsTab>
-              <TabsTab value="errors">Errors</TabsTab>
-              <TabsTab value="schema">Schema</TabsTab>
-              <TabsTab value="prompt">Prompt</TabsTab>
-              <TabsTab value="usage">Usage</TabsTab>
+              <TabsTrigger value="result">Result</TabsTrigger>
+              <TabsTrigger value="errors">Errors</TabsTrigger>
+              <TabsTrigger value="schema">Schema</TabsTrigger>
+              <TabsTrigger value="prompt">Prompt</TabsTrigger>
+              <TabsTrigger value="usage">Usage</TabsTrigger>
             </TabsList>
             <TabsPanel value="result" className="min-w-0">
               <div className="flex min-w-0 flex-col gap-4">

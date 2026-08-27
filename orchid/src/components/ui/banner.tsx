@@ -29,52 +29,24 @@ const bannerVariants = cva(
   },
 )
 
-const COLOR_ALIAS: Record<string, 'Default' | 'Blue' | 'Red' | 'Orange' | 'Grey'> = {
-  Default: 'Default',
-  success: 'Default',
-  Blue: 'Blue',
-  info: 'Blue',
-  Red: 'Red',
-  error: 'Red',
-  Orange: 'Orange',
-  warning: 'Orange',
-  Grey: 'Grey',
-  neutral: 'Grey',
-}
-
 function Banner({
   className,
   color = 'Default',
-  variant,
   action = 'Bottom',
-  actionPlacement,
   onClose,
   children,
   ...props
 }: Omit<React.ComponentProps<'div'>, 'color'> &
   VariantProps<typeof bannerVariants> & {
-    color?: 'Default' | 'Blue' | 'Red' | 'Orange' | 'Grey' | 'success' | 'info' | 'error' | 'warning' | 'neutral'
-    variant?: 'success' | 'info' | 'error' | 'warning' | 'neutral'
-    action?: 'Bottom' | 'Right'
-    actionPlacement?: 'bottom' | 'right'
     onClose?: () => void
   }) {
-  const resolvedColor = COLOR_ALIAS[variant ?? color] ?? 'Default'
-  const resolvedAction = actionPlacement === 'right' ? 'Right' : action ?? 'Bottom'
-
   return (
     <div
       data-slot="banner"
-      data-color={resolvedColor}
-      data-action={resolvedAction}
+      data-color={color}
+      data-action={action}
       role="status"
-      className={cn(
-        bannerVariants({
-          color: resolvedColor,
-          action: resolvedAction,
-        }),
-        className,
-      )}
+      className={cn(bannerVariants({ color, action }), className)}
       {...props}
     >
       {children}

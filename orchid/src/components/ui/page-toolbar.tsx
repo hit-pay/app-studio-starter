@@ -1,4 +1,4 @@
-import type { ComponentProps, ReactNode } from 'react'
+import { useEffect, type ComponentProps, type ReactNode } from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
@@ -22,6 +22,24 @@ function PageToolbar({
   onBack?: () => void
   actions?: ReactNode
 }) {
+  useEffect(() => {
+    if (left !== 'Close' || !onBack) return
+    const close = onBack
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key !== 'Escape') return
+      const target = event.target
+      if (target instanceof HTMLElement) {
+        const tag = target.tagName
+        if (tag === 'INPUT' || tag === 'TEXTAREA' || tag === 'SELECT' || target.isContentEditable) {
+          return
+        }
+      }
+      close()
+    }
+    window.addEventListener('keydown', onKeyDown)
+    return () => window.removeEventListener('keydown', onKeyDown)
+  }, [left, onBack])
+
   return (
     <div
       data-slot="page-toolbar"

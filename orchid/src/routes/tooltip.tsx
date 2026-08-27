@@ -26,7 +26,7 @@ function Tip({
       <TooltipTrigger
         className="inline-flex w-fit"
         render={
-          <Button type="Secondary" size="Small">
+          <Button variant="Secondary" size="Small">
             {label}
           </Button>
         }

@@ -24,7 +24,7 @@ function PageTitleExamplesPage() {
             title="Invoices"
             description="Create, send, and track invoices across payment channels."
             actions={
-              <Button type="Primary" size="Default">
+              <Button variant="Primary" size="Default">
                 Create invoice
               </Button>
             }
@@ -39,7 +39,7 @@ function PageTitleExamplesPage() {
             title="Payment Links"
             description="Share a link so customers can pay without an invoice."
             actions={
-              <Button type="Primary" size="Default">
+              <Button variant="Primary" size="Default">
                 Create payment link
               </Button>
             }
@@ -54,7 +54,7 @@ function PageTitleExamplesPage() {
             title="Recurring"
             description="Subscriptions billed on a weekly, monthly, or yearly cycle."
             actions={
-              <Button type="Primary" size="Default">
+              <Button variant="Primary" size="Default">
                 New plan
               </Button>
             }
@@ -80,7 +80,7 @@ function PageTitleExamplesPage() {
             title="Online Store"
             description="Products, checkout, and storefront settings."
             actions={
-              <Button type="Secondary" style="Border" size="Default">
+              <Button variant="Secondary" style="Border" size="Default">
                 View store
               </Button>
             }
@@ -95,7 +95,7 @@ function PageTitleExamplesPage() {
             title="Customers"
             description="Customer Data from invoices, payment links, Recurring, POS, and Online Store."
             actions={
-              <Button type="Primary" size="Default">
+              <Button variant="Primary" size="Default">
                 Add customer
               </Button>
             }
@@ -110,7 +110,7 @@ function PageTitleExamplesPage() {
             title="Products"
             description="Product Data shared across Online Store, POS, invoices, and payment links."
             actions={
-              <Button type="Primary" size="Default">
+              <Button variant="Primary" size="Default">
                 Add product
               </Button>
             }
@@ -127,10 +127,10 @@ function PageTitleExamplesPage() {
             chip={<Chip color="Green">Paid</Chip>}
             actions={
               <>
-                <Button type="Secondary" style="Border" size="Default">
+                <Button variant="Secondary" style="Border" size="Default">
                   Refund
                 </Button>
-                <Button type="Primary" size="Default">
+                <Button variant="Primary" size="Default">
                   Send receipt
                 </Button>
               </>
@@ -149,7 +149,7 @@ function PageTitleExamplesPage() {
               chip={<Chip color="Green">Paid</Chip>}
               copyValue="https://pay.hitpayapp.com/inv-2048"
               actions={
-                <Button type="Secondary" style="Border" size="Default">
+                <Button variant="Secondary" style="Border" size="Default">
                   Edit
                 </Button>
               }

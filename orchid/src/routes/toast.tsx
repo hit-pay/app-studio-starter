@@ -19,7 +19,7 @@ function ToastExamplesPage() {
           the root layout.
         </p>
         <Button
-          type="Secondary"
+          variant="Secondary"
           style="Border"
           size="Small"
           onClick={() =>
@@ -39,7 +39,7 @@ function ToastExamplesPage() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             size="Small"
             onClick={() =>
@@ -53,7 +53,7 @@ function ToastExamplesPage() {
             Payment received
           </Button>
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             size="Small"
             onClick={() =>
@@ -67,7 +67,7 @@ function ToastExamplesPage() {
             Recurring scheduled
           </Button>
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             size="Small"
             onClick={() =>
@@ -81,7 +81,7 @@ function ToastExamplesPage() {
             Channel warning
           </Button>
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             size="Small"
             onClick={() =>
@@ -102,7 +102,7 @@ function ToastExamplesPage() {
           Action
         </p>
         <Button
-          type="Secondary"
+          variant="Secondary"
           style="Border"
           size="Small"
           onClick={() => {
@@ -128,7 +128,7 @@ function ToastExamplesPage() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             size="Small"
             onClick={() =>
@@ -142,7 +142,7 @@ function ToastExamplesPage() {
             Publish store
           </Button>
           <Button
-            type="Secondary"
+            variant="Secondary"
             style="Border"
             size="Small"
             onClick={() =>

@@ -15,7 +15,7 @@ function ModalExamplesPage() {
             Default
           </p>
           <Modal>
-            <ModalTrigger render={<Button type="Primary" />}>Review invoice</ModalTrigger>
+            <ModalTrigger render={<Button variant="Primary" />}>Review invoice</ModalTrigger>
             <ModalPopup title="Review invoice INV-2048" description="Confirm details before sending to the customer.">
               <p className="text-sm leading-[1.5] text-oc-foreground">
                 Alex Turner · SGD 128.00 · PayNow or card. You can still cancel or go back.
@@ -30,7 +30,7 @@ function ModalExamplesPage() {
           </p>
           <div className="flex flex-wrap gap-3">
             <Modal>
-              <ModalTrigger render={<Button type="Secondary" style="Border" />}>Small</ModalTrigger>
+              <ModalTrigger render={<Button variant="Secondary" style="Border" />}>Small</ModalTrigger>
               <ModalPopup
                 size="Small"
                 title="Remove payment channel"
@@ -44,7 +44,7 @@ function ModalExamplesPage() {
               </ModalPopup>
             </Modal>
             <Modal>
-              <ModalTrigger render={<Button type="Secondary" style="Border" />}>Medium</ModalTrigger>
+              <ModalTrigger render={<Button variant="Secondary" style="Border" />}>Medium</ModalTrigger>
               <ModalPopup
                 size="Medium"
                 title="Create payment link"
@@ -56,7 +56,7 @@ function ModalExamplesPage() {
               </ModalPopup>
             </Modal>
             <Modal>
-              <ModalTrigger render={<Button type="Secondary" style="Border" />}>Default</ModalTrigger>
+              <ModalTrigger render={<Button variant="Secondary" style="Border" />}>Default</ModalTrigger>
               <ModalPopup
                 size="Default"
                 title="New Recurring plan"
@@ -68,7 +68,7 @@ function ModalExamplesPage() {
               </ModalPopup>
             </Modal>
             <Modal>
-              <ModalTrigger render={<Button type="Secondary" style="Border" />}>
+              <ModalTrigger render={<Button variant="Secondary" style="Border" />}>
                 Confirmation
               </ModalTrigger>
               <ModalPopup
@@ -90,7 +90,7 @@ function ModalExamplesPage() {
             Borderless
           </p>
           <Modal>
-            <ModalTrigger render={<Button type="Secondary" style="Border" />}>
+            <ModalTrigger render={<Button variant="Secondary" style="Border" />}>
               Open Borderless
             </ModalTrigger>
             <ModalPopup borderless title="Cancel Recurring plan?" confirmLabel="Yes" cancelLabel="No">
@@ -106,7 +106,7 @@ function ModalExamplesPage() {
             Persistent
           </p>
           <Modal persistent>
-            <ModalTrigger render={<Button type="Secondary" style="Border" />}>
+            <ModalTrigger render={<Button variant="Secondary" style="Border" />}>
               Open Persistent
             </ModalTrigger>
             <ModalPopup title="Connect POS terminal" description="Clicking outside will not close.">
@@ -122,7 +122,7 @@ function ModalExamplesPage() {
             No footer
           </p>
           <Modal>
-            <ModalTrigger render={<Button type="Secondary" style="Border" />}>
+            <ModalTrigger render={<Button variant="Secondary" style="Border" />}>
               Open Without Footer
             </ModalTrigger>
             <ModalPopup footer={false} title="Customer details" description="Read-only overlay">

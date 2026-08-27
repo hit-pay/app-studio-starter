@@ -69,16 +69,14 @@ function InputGroupAddon({
 
 function InputGroupButton({
   className,
-  htmlType = 'button',
-  type = 'Secondary',
+  variant = 'Secondary',
   style = 'Transparent',
   size = 'Small',
   ...props
 }: ComponentProps<typeof Button>) {
   return (
     <Button
-      htmlType={htmlType}
-      type={type}
+      variant={variant}
       style={style}
       size={size}
       className={cn('shadow-none', className)}

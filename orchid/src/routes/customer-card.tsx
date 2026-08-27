@@ -13,8 +13,8 @@ export const Route = createFileRoute('/customer-card')({
 const CUSTOMER: CustomerCardData = {
   name: 'Alex Turner',
   email: 'alex@studio.co',
-  phone_number: '8373 3739 18',
-  phone_number_country_code: '65',
+  phone: '8373 3739 18',
+  phoneCountryCode: '65',
   address: {
     street: '12 Orchard Road',
     state: 'Singapore',
@@ -24,8 +24,8 @@ const CUSTOMER: CustomerCardData = {
 const POS_CUSTOMER: CustomerCardData = {
   name: 'Chloe Tan',
   email: 'chloe@tan.co',
-  phone_number: '9123 4567',
-  phone_number_country_code: '65',
+  phone: '9123 4567',
+  phoneCountryCode: '65',
   address: {
     street: 'Tanjong Pagar Centre',
     state: 'Singapore',
@@ -106,7 +106,7 @@ function CustomerCardExamplesPage() {
             edit
             hover
             bottom={
-              <Button type="Primary" style="Transparent" size="Small" className="w-full">
+              <Button variant="Primary" style="Transparent" size="Small" className="w-full">
                 <MessageCircleIcon />
                 Start Chat
               </Button>

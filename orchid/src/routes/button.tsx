@@ -51,27 +51,27 @@ const MENU = (
 function ButtonExamplesPage() {
   return (
     <DocExamplePage to="/button">
-      {TYPES.map((type) => (
-        <div key={type} className="space-y-3">
+      {TYPES.map((variant) => (
+        <div key={variant} className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            {type}
+            {variant}
           </p>
           <div className="flex flex-wrap items-center gap-3">
             {STYLES.map((style) => (
-              <Button key={style} type={type} style={style}>
+              <Button key={style} variant={variant} style={style}>
                 {STYLE_LABEL[style]}
               </Button>
             ))}
-            <Button type={type}>
+            <Button variant={variant}>
               <CircleIcon />
-              {TYPE_LABEL[type]}
+              {TYPE_LABEL[variant]}
             </Button>
-            <Button type={type} iconOnly>
+            <Button variant={variant} iconOnly>
               <CircleIcon />
             </Button>
-            <Button type={type} menu={MENU}>
+            <Button variant={variant} menu={MENU}>
               <CircleIcon />
-              {TYPE_LABEL[type]}
+              {TYPE_LABEL[variant]}
             </Button>
           </div>
         </div>
@@ -95,9 +95,9 @@ function ButtonExamplesPage() {
           Disabled
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          {TYPES.map((type) => (
-            <Button key={type} type={type} disabled>
-              {TYPE_LABEL[type]}
+          {TYPES.map((variant) => (
+            <Button key={variant} variant={variant} disabled>
+              {TYPE_LABEL[variant]}
             </Button>
           ))}
         </div>
@@ -108,14 +108,14 @@ function ButtonExamplesPage() {
           Invoice actions
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <Button type="Primary">Create invoice</Button>
-          <Button type="Secondary" style="Border">
+          <Button variant="Primary">Create invoice</Button>
+          <Button variant="Secondary" style="Border">
             Send payment link
           </Button>
-          <Button type="Secondary" style="Transparent">
+          <Button variant="Secondary" style="Transparent">
             Void
           </Button>
-          <Button type="Destructive">Refund</Button>
+          <Button variant="Destructive">Refund</Button>
         </div>
       </div>
 
@@ -124,13 +124,13 @@ function ButtonExamplesPage() {
           Point of sale
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <Button type="Primary" size="Big">
+          <Button variant="Primary" size="Big">
             Charge SGD 48.00
           </Button>
-          <Button type="Secondary" style="Border">
+          <Button variant="Secondary" style="Border">
             Open terminal
           </Button>
-          <Button type="Destructive" size="Small">
+          <Button variant="Destructive" size="Small">
             Void sale
           </Button>
         </div>

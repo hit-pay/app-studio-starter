@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const clickableOptionGroupVariants = cva('flex w-full', {
+const choiceCardGroupVariants = cva('flex w-full', {
   variants: {
     alignment: {
       Vertical: 'flex-col gap-3',
@@ -28,13 +28,13 @@ function ChoiceCardGroup({
     <RadioGroupPrimitive
       data-slot="choice-card-group"
       data-alignment={alignment}
-      className={cn(clickableOptionGroupVariants({ alignment }), className)}
+      className={cn(choiceCardGroupVariants({ alignment }), className)}
       {...props}
     />
   )
 }
 
-const clickableOptionVariants = cva(
+const choiceCardVariants = cva(
   [
     'group/choice-card flex min-w-0 cursor-pointer gap-3 rounded-lg border border-solid border-oc-border bg-oc-background px-5 py-3 outline-none',
     'hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
@@ -80,7 +80,7 @@ function ChoiceCard({
       data-slot="choice-card"
       data-alignment={alignment}
       data-icon-align={iconAlign}
-      className={cn(clickableOptionVariants({ alignment, iconAlign }), className)}
+      className={cn(choiceCardVariants({ alignment, iconAlign }), className)}
       {...props}
     >
       <RadioPrimitive.Indicator className="sr-only" />

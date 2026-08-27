@@ -5,7 +5,7 @@ import { Button } from '@/components/ui/button'
 import { Chip } from '@/components/ui/chip'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { Section, SectionItem, FormSection } from '@/components/ui/form-section'
+import { FormSection, FormSectionGroup, FormSectionItem } from '@/components/ui/form-section'
 import { Toggle } from '@/components/ui/toggle'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
@@ -35,7 +35,7 @@ function FormSectionExamplesPage() {
             title="Payment Channels"
             description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
             chip={<Chip color="Purple">Upgrade</Chip>}
-            actions={<Button type="Primary">Upgrade Now</Button>}
+            actions={<Button variant="Primary">Upgrade Now</Button>}
           />
         </div>
 
@@ -60,11 +60,11 @@ function FormSectionExamplesPage() {
             description="Preview changes before they go live."
             actions={
               <>
-                <Button type="Secondary" size="Small">
+                <Button variant="Secondary" size="Small">
                   Preview
                   <ExternalLinkIcon />
                 </Button>
-                <Button type="Primary" size="Small">
+                <Button variant="Primary" size="Small">
                   Save
                 </Button>
               </>
@@ -91,7 +91,7 @@ function FormSectionExamplesPage() {
             title="Point of Sale"
             description="Terminals, receipts, and in-store payment channels."
             actions={
-              <Button type="Secondary" size="Small">
+              <Button variant="Secondary" size="Small">
                 Manage terminals
               </Button>
             }
@@ -102,7 +102,7 @@ function FormSectionExamplesPage() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             With form
           </p>
-          <Section className="max-w-xl">
+          <FormSectionGroup className="max-w-xl">
             <FormSection
               title="Online Store"
               description="These fields share the same left edge as the section title."
@@ -117,21 +117,21 @@ function FormSectionExamplesPage() {
                 <FieldLabel htmlFor="store-url">Store URL</FieldLabel>
                 <Input id="store-url" placeholder="your-store.hitpay.shop" />
               </Field>
-              <SectionItem
+              <FormSectionItem
                 title="Password protection"
                 description="Visitors must enter a password before they can view the store."
                 actions={<Toggle defaultChecked />}
               >
                 <Input placeholder="Enter password" type="password" />
-              </SectionItem>
-              <SectionItem
+              </FormSectionItem>
+              <FormSectionItem
                 type="Background"
                 title="Guest checkout"
                 description="Let customers pay without creating an account."
                 actions={<Toggle defaultChecked />}
               />
             </FieldGroup>
-          </Section>
+          </FormSectionGroup>
         </div>
       </DocExamplePage>
     </TooltipProvider>

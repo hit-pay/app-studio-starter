@@ -89,7 +89,7 @@ function BannerExamplesPage() {
                 </BannerDescription>
               </div>
               <BannerAction>
-                <Button size="Small" type="Secondary">
+                <Button size="Small" variant="Secondary">
                   View status
                 </Button>
                 <Button size="Small">Switch channel</Button>
@@ -100,7 +100,7 @@ function BannerExamplesPage() {
             title="Invoices"
             description="Create, send, and track invoices across payment channels."
             actions={
-              <Button type="Primary" size="Default">
+              <Button variant="Primary" size="Default">
                 Create invoice
               </Button>
             }
@@ -125,7 +125,7 @@ function BannerExamplesPage() {
                   </BannerDescription>
                 </div>
                 <BannerAction>
-                  <Button size="Small" type="Secondary">
+                  <Button size="Small" variant="Secondary">
                     {item.secondary}
                   </Button>
                   <Button size="Small">{item.primary}</Button>
@@ -155,7 +155,7 @@ function BannerExamplesPage() {
                   </BannerDescription>
                 </div>
                 <BannerAction>
-                  <Button size="Small" type="Secondary">
+                  <Button size="Small" variant="Secondary">
                     {item.secondary}
                   </Button>
                   <Button size="Small">{item.primary}</Button>

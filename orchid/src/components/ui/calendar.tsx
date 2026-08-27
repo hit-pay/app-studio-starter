@@ -11,7 +11,7 @@ import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from './button'
 
 const navButtonClass = buttonVariants({
-  type: 'Secondary',
+  variant: 'Secondary',
   style: 'Transparent',
   size: 'Small',
   iconOnly: true,
@@ -166,8 +166,8 @@ function CalendarDayButton({
   return (
     <Button
       {...props}
-      htmlType="button"
-      type="Secondary"
+      
+      variant="Secondary"
       style="Transparent"
       size="Small"
       iconOnly

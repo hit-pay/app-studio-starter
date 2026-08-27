@@ -81,10 +81,10 @@ function QuantityInput({
       {...props}
     >
       <Button
-        type="Secondary"
+        variant="Secondary"
         size="Small"
         iconOnly
-        htmlType="button"
+        
         disabled={disabled || (min != null && numeric <= min)}
         aria-label="Decrease"
         onClick={() => bump(-1)}
@@ -124,10 +124,10 @@ function QuantityInput({
         </button>
       )}
       <Button
-        type="Secondary"
+        variant="Secondary"
         size="Small"
         iconOnly
-        htmlType="button"
+        
         disabled={disabled || (max != null && numeric >= max)}
         aria-label="Increase"
         onClick={() => bump(1)}

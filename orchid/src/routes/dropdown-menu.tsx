@@ -32,7 +32,7 @@ function OpenButton({ children }: { children: React.ReactNode }) {
         nativeButton
         className="inline-flex w-fit"
         render={
-          <Button type="Secondary" size="Small">
+          <Button variant="Secondary" size="Small">
             Invoice actions
           </Button>
         }
@@ -107,7 +107,7 @@ function DropdownExamplesPage() {
           Dropdown in Button
         </p>
         <Button
-          type="Secondary"
+          variant="Secondary"
           size="Small"
           menu={
             <>
@@ -141,7 +141,7 @@ function DropdownExamplesPage() {
             nativeButton
             className="inline-flex w-fit"
             render={
-              <Button type="Secondary" size="Small">
+              <Button variant="Secondary" size="Small">
                 Enable channel
               </Button>
             }

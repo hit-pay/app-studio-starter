@@ -40,8 +40,8 @@ const ACTION_PRESET: Record<
   },
   Warning: {
     cancelLabel: 'Cancel',
-    confirmLabel: 'Delete',
-    confirmType: 'Destructive',
+    confirmLabel: 'Continue',
+    confirmType: 'Primary',
     showCancel: true,
   },
   Success: {
@@ -187,7 +187,7 @@ function ConfirmDialog({
             <div className="grid auto-cols-[minmax(7rem,1fr)] grid-flow-col gap-3">
               {showCancel ? (
                 <ModalClose
-                  render={<Button type="Secondary" className="w-full" onClick={onCancel} />}
+                  render={<Button variant="Secondary" className="w-full" onClick={onCancel} />}
                 >
                   {resolvedCancel}
                 </ModalClose>
@@ -196,7 +196,7 @@ function ConfirmDialog({
                 disabled={!matched}
                 render={
                   <Button
-                    type={resolvedConfirmType}
+                    variant={resolvedConfirmType}
                     className="w-full"
                     disabled={!matched}
                     onClick={onConfirm}

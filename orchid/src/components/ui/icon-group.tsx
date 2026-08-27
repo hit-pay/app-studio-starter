@@ -5,7 +5,7 @@ import { EllipsisIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
-const buttonGroupVariants = cva('inline-flex items-center gap-0.5', {
+const iconGroupVariants = cva('inline-flex items-center gap-0.5', {
   variants: {
     type: {
       Default: '',
@@ -17,7 +17,7 @@ const buttonGroupVariants = cva('inline-flex items-center gap-0.5', {
   },
 })
 
-const buttonGroupItemVariants = cva(
+const iconGroupItemVariants = cva(
   'inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded p-1 text-oc-foreground outline-none hover:bg-oc-dark-blue-soft [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0',
 )
 
@@ -25,12 +25,12 @@ function IconGroup({
   className,
   type = 'Default',
   ...props
-}: ComponentProps<'div'> & VariantProps<typeof buttonGroupVariants>) {
+}: ComponentProps<'div'> & VariantProps<typeof iconGroupVariants>) {
   return (
     <div
       data-slot="icon-group"
       data-type={type}
-      className={cn(buttonGroupVariants({ type }), className)}
+      className={cn(iconGroupVariants({ type }), className)}
       {...props}
     />
   )
@@ -41,7 +41,7 @@ function IconGroupButton({ className, ...props }: ComponentProps<'button'>) {
     <button
       type="button"
       data-slot="icon-group-button"
-      className={cn(buttonGroupItemVariants(), className)}
+      className={cn(iconGroupItemVariants(), className)}
       {...props}
     />
   )
@@ -53,7 +53,7 @@ function IconGroupLink({ className, ...props }: ComponentProps<'a'>) {
       data-slot="icon-group-link"
       target="_blank"
       rel="noreferrer"
-      className={cn(buttonGroupItemVariants(), className)}
+      className={cn(iconGroupItemVariants(), className)}
       {...props}
     />
   )
@@ -76,7 +76,7 @@ function IconGroupMenu({
     <DropdownMenu>
       <DropdownMenuTrigger
         nativeButton
-        className={cn(buttonGroupItemVariants(), className)}
+        className={cn(iconGroupItemVariants(), className)}
         render={
           <button type="button" aria-label="More">
             <EllipsisIcon />
@@ -94,6 +94,6 @@ export {
   IconGroupLink,
   IconGroupDivider,
   IconGroupMenu,
-  buttonGroupVariants,
-  buttonGroupItemVariants,
+  iconGroupVariants,
+  iconGroupItemVariants,
 }

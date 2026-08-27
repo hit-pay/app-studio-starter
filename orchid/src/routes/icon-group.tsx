@@ -8,7 +8,7 @@ import {
   IconGroupDivider,
   IconGroupLink,
   IconGroupMenu,
-  buttonGroupItemVariants,
+  iconGroupItemVariants,
 } from '@/components/ui/icon-group'
 
 export const Route = createFileRoute('/icon-group')({
@@ -35,7 +35,7 @@ function ExampleGroup({ type }: { type?: 'Default' | 'Border' }) {
       <CopyButton
         value="https://hitpay.shop/pay/pl_8f2a91"
         aria-label="Copy payment link"
-        className={buttonGroupItemVariants()}
+        className={iconGroupItemVariants()}
       />
     </IconGroup>
   )
@@ -61,7 +61,7 @@ function InvoiceGroup() {
       <CopyButton
         value="INV-2026-0842"
         aria-label="Copy invoice number"
-        className={buttonGroupItemVariants()}
+        className={iconGroupItemVariants()}
       />
     </IconGroup>
   )

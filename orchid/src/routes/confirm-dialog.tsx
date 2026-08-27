@@ -24,7 +24,7 @@ function ConfirmDialogExamplesPage() {
             message="Do you want to delete invoice INV-2048?"
             description="This invoice has not been paid. The action cannot be undone."
           >
-            <ConfirmDialogTrigger render={<Button type="Destructive" />}>
+            <ConfirmDialogTrigger render={<Button variant="Destructive" />}>
               Open Delete
             </ConfirmDialogTrigger>
           </ConfirmDialog>
@@ -39,7 +39,7 @@ function ConfirmDialogExamplesPage() {
             message="Deactivate this POS terminal?"
             description="Orchard 01 will stop accepting in-store payments until you reactivate it."
           >
-            <ConfirmDialogTrigger render={<Button type="Secondary" style="Border" />}>
+            <ConfirmDialogTrigger render={<Button variant="Secondary" style="Border" />}>
               Open Warning
             </ConfirmDialogTrigger>
           </ConfirmDialog>
@@ -54,7 +54,7 @@ function ConfirmDialogExamplesPage() {
             message="Payment link created successfully."
             description="Share this link with your customer."
           >
-            <ConfirmDialogTrigger render={<Button type="Primary" />}>
+            <ConfirmDialogTrigger render={<Button variant="Primary" />}>
               Open Success
             </ConfirmDialogTrigger>
           </ConfirmDialog>
@@ -69,7 +69,7 @@ function ConfirmDialogExamplesPage() {
             message="Cancel this Recurring plan?"
             description="The customer will not be charged on the next billing date."
           >
-            <ConfirmDialogTrigger render={<Button type="Secondary" style="Border" />}>
+            <ConfirmDialogTrigger render={<Button variant="Secondary" style="Border" />}>
               Open Question
             </ConfirmDialogTrigger>
           </ConfirmDialog>
@@ -86,7 +86,7 @@ function ConfirmDialogExamplesPage() {
           confirmPhrase="weekend-workshop"
           message="Do you want to delete this payment link? The action can't be undone."
         >
-          <ConfirmDialogTrigger render={<Button type="Destructive" />}>
+          <ConfirmDialogTrigger render={<Button variant="Destructive" />}>
             Open Medium
           </ConfirmDialogTrigger>
         </ConfirmDialog>
@@ -101,7 +101,7 @@ function ConfirmDialogExamplesPage() {
           message="Delete Classic White Tee from Product Data?"
           description="It will be removed from Online Store, POS, invoices, and payment links."
         >
-          <ConfirmDialogTrigger render={<Button type="Destructive" />}>
+          <ConfirmDialogTrigger render={<Button variant="Destructive" />}>
             Delete product
           </ConfirmDialogTrigger>
         </ConfirmDialog>

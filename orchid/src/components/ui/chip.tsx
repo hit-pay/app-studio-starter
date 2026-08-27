@@ -55,31 +55,14 @@ const chipVariants = cva(
   },
 )
 
-const COLOR_ALIAS: Record<string, NonNullable<VariantProps<typeof chipVariants>['color']>> = {
-  Blue: 'Blue',
-  Purple: 'Purple',
-  Orange: 'Orange',
-  Red: 'Red',
-  'Light Red': 'LightRed',
-  LightRed: 'LightRed',
-  White: 'White',
-  'Dark Blue': 'DarkBlue',
-  DarkBlue: 'DarkBlue',
-  Grey: 'Grey',
-  Tosca: 'Tosca',
-  Green: 'Green',
-}
-
 type ChipColor =
   | 'Blue'
   | 'Purple'
   | 'Orange'
   | 'Red'
   | 'LightRed'
-  | 'Light Red'
   | 'White'
   | 'DarkBlue'
-  | 'Dark Blue'
   | 'Grey'
   | 'Tosca'
   | 'Green'
@@ -101,7 +84,6 @@ function Chip({
     closable?: boolean
     onRemove?: () => void
   }) {
-  const resolvedColor = COLOR_ALIAS[color] ?? 'Blue'
   const canRemove = closable || onRemove != null
   const [open, setOpen] = useState(true)
 
@@ -110,9 +92,9 @@ function Chip({
   return (
     <span
       data-slot="chip"
-      data-color={resolvedColor}
+      data-color={color}
       data-type={type}
-      className={cn(chipVariants({ color: resolvedColor, type }), className)}
+      className={cn(chipVariants({ color, type }), className)}
       {...props}
     >
       {icon}

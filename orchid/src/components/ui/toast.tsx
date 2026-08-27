@@ -142,7 +142,7 @@ function ToastDescription({ className, ...props }: ToastPrimitive.Description.Pr
 
 function ToastAction({
   className,
-  render = <Button type="Secondary" style="Border" size="Small" />,
+  render = <Button variant="Secondary" style="Border" size="Small" />,
   ...props
 }: ToastPrimitive.Action.Props) {
   return (
