@@ -14,10 +14,13 @@ import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
+import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
 import { Route as ButtonRouteImport } from './routes/button'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChoiceCardRouteImport } from './routes/choice-card'
+import { Route as CollapsibleRouteImport } from './routes/collapsible'
 import { Route as ComboboxRouteImport } from './routes/combobox'
+import { Route as CommandRouteImport } from './routes/command'
 import { Route as ConfirmDialogRouteImport } from './routes/confirm-dialog'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
@@ -31,6 +34,7 @@ import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
 import { Route as InputRouteImport } from './routes/input'
 import { Route as InputGroupRouteImport } from './routes/input-group'
+import { Route as KbdRouteImport } from './routes/kbd'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
 import { Route as PageTitleRouteImport } from './routes/page-title'
@@ -39,10 +43,13 @@ import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
 import { Route as SchemaFormRouteImport } from './routes/schema-form'
+import { Route as ScrollAreaRouteImport } from './routes/scroll-area'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as SetupRouteImport } from './routes/setup'
+import { Route as SheetRouteImport } from './routes/sheet'
 import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
+import { Route as SpinnerRouteImport } from './routes/spinner'
 import { Route as StatCardRouteImport } from './routes/stat-card'
 import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as TabsRouteImport } from './routes/tabs'
@@ -75,6 +82,11 @@ const BadgeRoute = BadgeRouteImport.update({
   path: '/badge',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BreadcrumbRoute = BreadcrumbRouteImport.update({
+  id: '/breadcrumb',
+  path: '/breadcrumb',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ButtonRoute = ButtonRouteImport.update({
   id: '/button',
   path: '/button',
@@ -90,9 +102,19 @@ const ChoiceCardRoute = ChoiceCardRouteImport.update({
   path: '/choice-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CollapsibleRoute = CollapsibleRouteImport.update({
+  id: '/collapsible',
+  path: '/collapsible',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComboboxRoute = ComboboxRouteImport.update({
   id: '/combobox',
   path: '/combobox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CommandRoute = CommandRouteImport.update({
+  id: '/command',
+  path: '/command',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ConfirmDialogRoute = ConfirmDialogRouteImport.update({
@@ -160,6 +182,11 @@ const InputGroupRoute = InputGroupRouteImport.update({
   path: '/input-group',
   getParentRoute: () => rootRouteImport,
 } as any)
+const KbdRoute = KbdRouteImport.update({
+  id: '/kbd',
+  path: '/kbd',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LabelRoute = LabelRouteImport.update({
   id: '/label',
   path: '/label',
@@ -200,6 +227,11 @@ const SchemaFormRoute = SchemaFormRouteImport.update({
   path: '/schema-form',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ScrollAreaRoute = ScrollAreaRouteImport.update({
+  id: '/scroll-area',
+  path: '/scroll-area',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SelectRoute = SelectRouteImport.update({
   id: '/select',
   path: '/select',
@@ -210,6 +242,11 @@ const SetupRoute = SetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SheetRoute = SheetRouteImport.update({
+  id: '/sheet',
+  path: '/sheet',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SkeletonRoute = SkeletonRouteImport.update({
   id: '/skeleton',
   path: '/skeleton',
@@ -218,6 +255,11 @@ const SkeletonRoute = SkeletonRouteImport.update({
 const SliderRoute = SliderRouteImport.update({
   id: '/slider',
   path: '/slider',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SpinnerRoute = SpinnerRouteImport.update({
+  id: '/spinner',
+  path: '/spinner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StatCardRoute = StatCardRouteImport.update({
@@ -257,10 +299,13 @@ export interface FileRoutesByFullPath {
   '/alert': typeof AlertRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
+  '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
+  '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
+  '/command': typeof CommandRoute
   '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
@@ -274,6 +319,7 @@ export interface FileRoutesByFullPath {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
+  '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
   '/page-title': typeof PageTitleRoute
@@ -282,10 +328,13 @@ export interface FileRoutesByFullPath {
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
+  '/scroll-area': typeof ScrollAreaRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
+  '/sheet': typeof SheetRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
+  '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
   '/switch': typeof SwitchRoute
   '/tabs': typeof TabsRoute
@@ -299,10 +348,13 @@ export interface FileRoutesByTo {
   '/alert': typeof AlertRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
+  '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
+  '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
+  '/command': typeof CommandRoute
   '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
@@ -316,6 +368,7 @@ export interface FileRoutesByTo {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
+  '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
   '/page-title': typeof PageTitleRoute
@@ -324,10 +377,13 @@ export interface FileRoutesByTo {
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
+  '/scroll-area': typeof ScrollAreaRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
+  '/sheet': typeof SheetRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
+  '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
   '/switch': typeof SwitchRoute
   '/tabs': typeof TabsRoute
@@ -342,10 +398,13 @@ export interface FileRoutesById {
   '/alert': typeof AlertRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
+  '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
+  '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
+  '/command': typeof CommandRoute
   '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
@@ -359,6 +418,7 @@ export interface FileRoutesById {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
+  '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
   '/page-title': typeof PageTitleRoute
@@ -367,10 +427,13 @@ export interface FileRoutesById {
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
+  '/scroll-area': typeof ScrollAreaRoute
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
+  '/sheet': typeof SheetRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
+  '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
   '/switch': typeof SwitchRoute
   '/tabs': typeof TabsRoute
@@ -386,10 +449,13 @@ export interface FileRouteTypes {
     | '/alert'
     | '/avatar'
     | '/badge'
+    | '/breadcrumb'
     | '/button'
     | '/checkbox'
     | '/choice-card'
+    | '/collapsible'
     | '/combobox'
+    | '/command'
     | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
@@ -403,6 +469,7 @@ export interface FileRouteTypes {
     | '/icon-group'
     | '/input'
     | '/input-group'
+    | '/kbd'
     | '/label'
     | '/list-item'
     | '/page-title'
@@ -411,10 +478,13 @@ export interface FileRouteTypes {
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
+    | '/scroll-area'
     | '/select'
     | '/setup'
+    | '/sheet'
     | '/skeleton'
     | '/slider'
+    | '/spinner'
     | '/stat-card'
     | '/switch'
     | '/tabs'
@@ -428,10 +498,13 @@ export interface FileRouteTypes {
     | '/alert'
     | '/avatar'
     | '/badge'
+    | '/breadcrumb'
     | '/button'
     | '/checkbox'
     | '/choice-card'
+    | '/collapsible'
     | '/combobox'
+    | '/command'
     | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
@@ -445,6 +518,7 @@ export interface FileRouteTypes {
     | '/icon-group'
     | '/input'
     | '/input-group'
+    | '/kbd'
     | '/label'
     | '/list-item'
     | '/page-title'
@@ -453,10 +527,13 @@ export interface FileRouteTypes {
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
+    | '/scroll-area'
     | '/select'
     | '/setup'
+    | '/sheet'
     | '/skeleton'
     | '/slider'
+    | '/spinner'
     | '/stat-card'
     | '/switch'
     | '/tabs'
@@ -470,10 +547,13 @@ export interface FileRouteTypes {
     | '/alert'
     | '/avatar'
     | '/badge'
+    | '/breadcrumb'
     | '/button'
     | '/checkbox'
     | '/choice-card'
+    | '/collapsible'
     | '/combobox'
+    | '/command'
     | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
@@ -487,6 +567,7 @@ export interface FileRouteTypes {
     | '/icon-group'
     | '/input'
     | '/input-group'
+    | '/kbd'
     | '/label'
     | '/list-item'
     | '/page-title'
@@ -495,10 +576,13 @@ export interface FileRouteTypes {
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
+    | '/scroll-area'
     | '/select'
     | '/setup'
+    | '/sheet'
     | '/skeleton'
     | '/slider'
+    | '/spinner'
     | '/stat-card'
     | '/switch'
     | '/tabs'
@@ -513,10 +597,13 @@ export interface RootRouteChildren {
   AlertRoute: typeof AlertRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
+  BreadcrumbRoute: typeof BreadcrumbRoute
   ButtonRoute: typeof ButtonRoute
   CheckboxRoute: typeof CheckboxRoute
   ChoiceCardRoute: typeof ChoiceCardRoute
+  CollapsibleRoute: typeof CollapsibleRoute
   ComboboxRoute: typeof ComboboxRoute
+  CommandRoute: typeof CommandRoute
   ConfirmDialogRoute: typeof ConfirmDialogRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
@@ -530,6 +617,7 @@ export interface RootRouteChildren {
   IconGroupRoute: typeof IconGroupRoute
   InputRoute: typeof InputRoute
   InputGroupRoute: typeof InputGroupRoute
+  KbdRoute: typeof KbdRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
   PageTitleRoute: typeof PageTitleRoute
@@ -538,10 +626,13 @@ export interface RootRouteChildren {
   QuantityInputRoute: typeof QuantityInputRoute
   RadioGroupRoute: typeof RadioGroupRoute
   SchemaFormRoute: typeof SchemaFormRoute
+  ScrollAreaRoute: typeof ScrollAreaRoute
   SelectRoute: typeof SelectRoute
   SetupRoute: typeof SetupRoute
+  SheetRoute: typeof SheetRoute
   SkeletonRoute: typeof SkeletonRoute
   SliderRoute: typeof SliderRoute
+  SpinnerRoute: typeof SpinnerRoute
   StatCardRoute: typeof StatCardRoute
   SwitchRoute: typeof SwitchRoute
   TabsRoute: typeof TabsRoute
@@ -587,6 +678,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BadgeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/breadcrumb': {
+      id: '/breadcrumb'
+      path: '/breadcrumb'
+      fullPath: '/breadcrumb'
+      preLoaderRoute: typeof BreadcrumbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/button': {
       id: '/button'
       path: '/button'
@@ -608,11 +706,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChoiceCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/collapsible': {
+      id: '/collapsible'
+      path: '/collapsible'
+      fullPath: '/collapsible'
+      preLoaderRoute: typeof CollapsibleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/combobox': {
       id: '/combobox'
       path: '/combobox'
       fullPath: '/combobox'
       preLoaderRoute: typeof ComboboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/command': {
+      id: '/command'
+      path: '/command'
+      fullPath: '/command'
+      preLoaderRoute: typeof CommandRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/confirm-dialog': {
@@ -706,6 +818,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InputGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/kbd': {
+      id: '/kbd'
+      path: '/kbd'
+      fullPath: '/kbd'
+      preLoaderRoute: typeof KbdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/label': {
       id: '/label'
       path: '/label'
@@ -762,6 +881,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SchemaFormRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/scroll-area': {
+      id: '/scroll-area'
+      path: '/scroll-area'
+      fullPath: '/scroll-area'
+      preLoaderRoute: typeof ScrollAreaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/select': {
       id: '/select'
       path: '/select'
@@ -776,6 +902,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SetupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sheet': {
+      id: '/sheet'
+      path: '/sheet'
+      fullPath: '/sheet'
+      preLoaderRoute: typeof SheetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/skeleton': {
       id: '/skeleton'
       path: '/skeleton'
@@ -788,6 +921,13 @@ declare module '@tanstack/react-router' {
       path: '/slider'
       fullPath: '/slider'
       preLoaderRoute: typeof SliderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/spinner': {
+      id: '/spinner'
+      path: '/spinner'
+      fullPath: '/spinner'
+      preLoaderRoute: typeof SpinnerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/stat-card': {
@@ -841,10 +981,13 @@ const rootRouteChildren: RootRouteChildren = {
   AlertRoute: AlertRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
+  BreadcrumbRoute: BreadcrumbRoute,
   ButtonRoute: ButtonRoute,
   CheckboxRoute: CheckboxRoute,
   ChoiceCardRoute: ChoiceCardRoute,
+  CollapsibleRoute: CollapsibleRoute,
   ComboboxRoute: ComboboxRoute,
+  CommandRoute: CommandRoute,
   ConfirmDialogRoute: ConfirmDialogRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
@@ -858,6 +1001,7 @@ const rootRouteChildren: RootRouteChildren = {
   IconGroupRoute: IconGroupRoute,
   InputRoute: InputRoute,
   InputGroupRoute: InputGroupRoute,
+  KbdRoute: KbdRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,
   PageTitleRoute: PageTitleRoute,
@@ -866,10 +1010,13 @@ const rootRouteChildren: RootRouteChildren = {
   QuantityInputRoute: QuantityInputRoute,
   RadioGroupRoute: RadioGroupRoute,
   SchemaFormRoute: SchemaFormRoute,
+  ScrollAreaRoute: ScrollAreaRoute,
   SelectRoute: SelectRoute,
   SetupRoute: SetupRoute,
+  SheetRoute: SheetRoute,
   SkeletonRoute: SkeletonRoute,
   SliderRoute: SliderRoute,
+  SpinnerRoute: SpinnerRoute,
   StatCardRoute: StatCardRoute,
   SwitchRoute: SwitchRoute,
   TabsRoute: TabsRoute,

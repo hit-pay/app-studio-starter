@@ -49,7 +49,14 @@
         "@orchid/date-picker",
         "@orchid/dialog",
         "@orchid/confirm-dialog",
-        "@orchid/schema-form"
+        "@orchid/schema-form",
+        "@orchid/spinner",
+        "@orchid/breadcrumb",
+        "@orchid/sheet",
+        "@orchid/command",
+        "@orchid/kbd",
+        "@orchid/collapsible",
+        "@orchid/scroll-area"
       ],
       "files": [
         {
@@ -339,7 +346,9 @@
       "dependencies": [
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "@orchid/kbd"
+      ],
       "files": [
         {
           "path": "src/components/ui/page-toolbar.tsx",
@@ -369,7 +378,7 @@
       "name": "form-section",
       "type": "registry:ui",
       "title": "Form Section",
-      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via FormSectionGroup; settings rows use FormSectionItem. Not a page heading — use page-title.",
+      "description": "Form section heading: 16px title, 12px description, optional chip, hint, count, and actions. Pair with Field/Input via FormSectionGroup; settings rows use FormSectionItem. Not a page heading \u2014 use page-title.",
       "dependencies": [
         "lucide-react"
       ],
@@ -440,6 +449,23 @@
           "path": "src/components/ui/copy-button.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/copy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "breadcrumb",
+      "type": "registry:ui",
+      "title": "Breadcrumb",
+      "description": "Path to the current page. BreadcrumbList + Item + Link + Page + Separator. Use Link href or app router Link as the anchor. Not PageToolbar back.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/breadcrumb.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/breadcrumb.tsx"
         }
       ]
     },
@@ -605,6 +631,23 @@
       ]
     },
     {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Indeterminate loading (save, refresh). size Small|Default|Big. Not Skeleton (layout placeholder) and not Progress (known percent).",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/spinner.tsx"
+        }
+      ]
+    },
+    {
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
@@ -694,6 +737,76 @@
           "path": "src/components/ui/combobox.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Searchable command palette. CommandDialog + Command + CommandInput + CommandList + CommandItem. onSelect(value). Not Combobox in a form.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/dialog",
+        "@orchid/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "kbd",
+      "type": "registry:ui",
+      "title": "Kbd",
+      "description": "Keyboard shortcut keys. Kbd and KbdGroup. Use next to Close, command palettes, and shortcut hints.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/kbd.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/kbd.tsx"
+        }
+      ]
+    },
+    {
+      "name": "collapsible",
+      "type": "registry:ui",
+      "title": "Collapsible",
+      "description": "One expand/collapse panel (filters, extra fields). Collapsible + Trigger + Content. Several independent sections: Accordion.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/collapsible.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/collapsible.tsx"
+        }
+      ]
+    },
+    {
+      "name": "scroll-area",
+      "type": "registry:ui",
+      "title": "Scroll Area",
+      "description": "Custom scrollbar in a bounded panel (Sheet body, long lists). Native overflow is fine for the page. ScrollBar orientation vertical | horizontal.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/scroll-area.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/scroll-area.tsx"
         }
       ]
     },
@@ -797,6 +910,27 @@
           "path": "src/components/ui/dialog.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sheet",
+      "type": "registry:ui",
+      "title": "Sheet",
+      "description": "Edge panel complementary to the page (edit row, filters). Sheet + Trigger + Content. side Right|Left|Top|Bottom, size Small|Medium|Default. Packed title/footer like Dialog. Not a centered Dialog. Not a swipe Drawer (keep app drawer for mobile snap/swipe).",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/sheet.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/sheet.tsx"
         }
       ]
     },

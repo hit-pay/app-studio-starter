@@ -75,9 +75,44 @@ export const DOC_COMPONENTS = [
     description: 'Placeholder pulse while content loads.',
   },
   {
+    to: '/spinner' as const,
+    name: 'Spinner',
+    description: 'Indeterminate loading. Small, Default, and Big.',
+  },
+  {
     to: '/dialog' as const,
     name: 'Dialog',
     description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
+  },
+  {
+    to: '/sheet' as const,
+    name: 'Sheet',
+    description: 'Edge panel for edit/filters. side Right|Left|Top|Bottom. Not a swipe Drawer.',
+  },
+  {
+    to: '/breadcrumb' as const,
+    name: 'Breadcrumb',
+    description: 'Hierarchy of links to the current page.',
+  },
+  {
+    to: '/command' as const,
+    name: 'Command',
+    description: 'Searchable command palette. CommandDialog + Input + Item.',
+  },
+  {
+    to: '/kbd' as const,
+    name: 'Kbd',
+    description: 'Keyboard shortcut keys. Kbd and KbdGroup.',
+  },
+  {
+    to: '/collapsible' as const,
+    name: 'Collapsible',
+    description: 'One expand/collapse panel. Use Accordion for several sections.',
+  },
+  {
+    to: '/scroll-area' as const,
+    name: 'Scroll Area',
+    description: 'Custom scrollbar inside a bounded panel.',
   },
 ] as const
 

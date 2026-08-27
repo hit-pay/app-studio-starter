@@ -2,14 +2,7 @@ import { useEffect, type ComponentProps, type ReactNode } from 'react'
 import { ChevronLeftIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-
-function KeyboardHint({ children }: { children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center justify-center rounded border border-solid border-oc-border bg-oc-background px-2 py-0.5 text-xs font-medium leading-[1.5] text-oc-muted-foreground">
-      {children}
-    </span>
-  )
-}
+import { Kbd } from './kbd'
 
 function PageToolbar({
   className,
@@ -58,7 +51,7 @@ function PageToolbar({
         {left === 'Close' ? (
           <>
             Close
-            <KeyboardHint>esc</KeyboardHint>
+            <Kbd>Esc</Kbd>
           </>
         ) : (
           <>

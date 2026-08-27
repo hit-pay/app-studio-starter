@@ -8,7 +8,7 @@ One kebab-case file → `@orchid/<name>` → import `@/orchid-ui/<name>` (apps) 
 
 Triggers: `render={<Button />}` and `nativeButton` when the trigger is a button.
 
-Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizontal`). Exceptions: HTML `type` on Button/Input; Separator `orientation` (`horizontal` | `vertical`); Avatar `size` is 24 | 28 | 32 | 40 | 48 | 64.
+Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizontal`). Exceptions: HTML `type` on Button/Input; Separator and `ScrollBar` `orientation` (`horizontal` | `vertical`); Avatar `size` is 24 | 28 | 32 | 40 | 48 | 64.
 
 `type` means HTML only on Button (`submit` | `button` | `reset`). ConfirmDialog `type` is intent (Delete | Warning | Success | Question). UserBadge uses `role`. Toast `toast.add({ type: 'success' })` maps to colors (Default/green, Blue, Orange, Red, Grey).
 
@@ -30,6 +30,13 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 | In-page notice | `Alert` (`color="Default"` = green; `Grey` = neutral). Place above `PageTitle`. |
 | Floating notice | `toast.add({ title, description, type })` + root `Toaster` |
 | Custom overlay | `Dialog` + `DialogContent` (`title` required; packed footer) |
+| Side / edge panel | `Sheet` (`side` Right\|Left\|Top\|Bottom). Not a swipe Drawer. |
+| Command palette | `CommandDialog` + `Command` + `CommandInput` + `CommandItem` |
+| Shortcut keys | `Kbd` / `KbdGroup` |
+| One expand panel | `Collapsible` (several sections: `Accordion`) |
+| Bounded custom scroll | `ScrollArea` (page: native overflow) |
+| Page path | `Breadcrumb` |
+| Indeterminate load | `Spinner` (Skeleton = placeholder; Progress = known total) |
 | Delete / warn / yes-no | `ConfirmDialog` (Warning confirm = Continue) |
 | Date | `DatePicker` (`Popover` + `Calendar` only if composing) |
 | Empty page/list | `Empty` (`variant` Default \| Search \| Upgrade) |

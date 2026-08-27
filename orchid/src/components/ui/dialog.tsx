@@ -118,6 +118,10 @@ function DialogContent({
             <DialogPrimitive.Title className="sr-only">{title}</DialogPrimitive.Title>
           ) : null}
 
+          {!header && !fullscreen && title ? (
+            <DialogPrimitive.Title className="sr-only">{title}</DialogPrimitive.Title>
+          ) : null}
+
           {header && !fullscreen ? (
             <div
               className={cn(
