@@ -10,7 +10,7 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
+import { Button } from './button'
 
 const TOAST_BAR_COLOR: Record<string, string> = {
   Default:
