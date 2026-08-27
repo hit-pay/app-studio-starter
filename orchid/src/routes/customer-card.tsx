@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { MessageCircleIcon } from 'lucide-react'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
-import { Chip } from '@/components/ui/chip'
+import { Badge } from '@/components/ui/badge'
 import { CustomerCard, type CustomerCardData } from '@/components/ui/customer-card'
 
 export const Route = createFileRoute('/customer-card')({
@@ -54,7 +54,7 @@ function CustomerCardExamplesPage() {
     <DocExamplePage
       to="/customer-card"
       usage={`import { CustomerCard } from '@/orchid-ui/customer-card'
-import { Chip } from '@/orchid-ui/chip'
+import { Badge } from '@/orchid-ui/badge'
 import { Button } from '@/orchid-ui/button'
 
 <CustomerCard
@@ -65,7 +65,7 @@ import { Button } from '@/orchid-ui/button'
     phone: '8373 3739 18',
     phoneCountryCode: '65',
   }}
-  chip={<Chip color="Blue">Invoice</Chip>}
+  badge={<Badge color="Blue">Invoice</Badge>}
 />
 
 <CustomerCard variant="Big" customer={customer} edit hover />
@@ -99,7 +99,7 @@ import { Button } from '@/orchid-ui/button'
           <CustomerCard
             variant="Small"
             customer={CUSTOMER}
-            chip={<Chip color="Blue">Invoice</Chip>}
+            badge={<Badge color="Blue">Invoice</Badge>}
           />
         </ExampleBlock>
 
@@ -107,7 +107,7 @@ import { Button } from '@/orchid-ui/button'
           <CustomerCard
             variant="Small"
             customer={CUSTOMER}
-            chip={<Chip color="Purple">Recurring</Chip>}
+            badge={<Badge color="Purple">Recurring</Badge>}
           />
         </ExampleBlock>
 
@@ -115,7 +115,7 @@ import { Button } from '@/orchid-ui/button'
           <CustomerCard
             variant="Small"
             customer={POS_CUSTOMER}
-            chip={<Chip color="Green">POS</Chip>}
+            badge={<Badge color="Green">POS</Badge>}
           />
         </ExampleBlock>
 

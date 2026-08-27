@@ -7,7 +7,7 @@ function PageTitle({
   className,
   title,
   description,
-  chip,
+  badge,
   copyValue,
   actions,
   loading = false,
@@ -15,7 +15,7 @@ function PageTitle({
 }: ComponentProps<'div'> & {
   title: string
   description?: string
-  chip?: ReactNode
+  badge?: ReactNode
   copyValue?: string
   actions?: ReactNode
   loading?: boolean
@@ -33,7 +33,7 @@ function PageTitle({
           ) : (
             <h1 className="min-w-0 text-[18px] font-medium leading-6 text-oc-foreground">{title}</h1>
           )}
-          {chip && !loading ? chip : null}
+          {badge && !loading ? badge : null}
         </div>
         {loading ? (
           <span className="h-5 min-w-0 flex-1 animate-pulse rounded bg-oc-neutral-soft" />

@@ -2,11 +2,11 @@ import { createFileRoute } from '@tanstack/react-router'
 import { ExternalLinkIcon } from 'lucide-react'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
-import { Chip } from '@/components/ui/chip'
+import { Badge } from '@/components/ui/badge'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { FormSection, FormSectionGroup, FormSectionItem } from '@/components/ui/form-section'
-import { Toggle } from '@/components/ui/toggle'
+import { Switch } from '@/components/ui/switch'
 import { TooltipProvider } from '@/components/ui/tooltip'
 
 export const Route = createFileRoute('/form-section')({
@@ -29,12 +29,12 @@ function FormSectionExamplesPage() {
 
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Chip and action
+            Badge and action
           </p>
           <FormSection
             title="Payment Channels"
             description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
-            chip={<Chip color="Purple">Upgrade</Chip>}
+            badge={<Badge color="Purple">Upgrade</Badge>}
             actions={<Button variant="Primary">Upgrade Now</Button>}
           />
         </div>
@@ -79,7 +79,7 @@ function FormSectionExamplesPage() {
           <FormSection
             title="Recurring"
             description="Monthly membership billed to saved payment methods."
-            chip={<Chip color="Blue">Active</Chip>}
+            badge={<Badge color="Blue">Active</Badge>}
           />
         </div>
 
@@ -120,7 +120,7 @@ function FormSectionExamplesPage() {
               <FormSectionItem
                 title="Password protection"
                 description="Visitors must enter a password before they can view the store."
-                actions={<Toggle defaultChecked />}
+                actions={<Switch defaultChecked />}
               >
                 <Input placeholder="Enter password" type="password" />
               </FormSectionItem>
@@ -128,7 +128,7 @@ function FormSectionExamplesPage() {
                 type="Background"
                 title="Guest checkout"
                 description="Let customers pay without creating an account."
-                actions={<Toggle defaultChecked />}
+                actions={<Switch defaultChecked />}
               />
             </FieldGroup>
           </FormSectionGroup>

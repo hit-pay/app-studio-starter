@@ -15,9 +15,9 @@ export const DOC_COMPONENTS = [
     description: 'Programmatic floating toast via toast.add. Types, action, and Toaster.',
   },
   {
-    to: '/chip' as const,
-    name: 'Chip',
-    description: 'Global colors, Background/Border/Transparent, and user-type chips.',
+    to: '/badge' as const,
+    name: 'Badge',
+    description: 'Global colors, Background/Border/Transparent, and user-type badges.',
   },
   {
     to: '/accordion' as const,
@@ -25,8 +25,8 @@ export const DOC_COMPONENTS = [
     description: 'Expandable sections with title, optional description, label, and progress.',
   },
   {
-    to: '/progress-bar' as const,
-    name: 'Progress Bar',
+    to: '/progress' as const,
+    name: 'Progress',
     description: 'Default and Small sizes with current/max label.',
   },
   {
@@ -42,7 +42,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/tabs' as const,
     name: 'Tabs',
-    description: 'Default underline and Pills. TabsList + TabsTrigger + TabsPanel.',
+    description: 'Default underline and Pills. TabsList + TabsTrigger + TabsContent.',
   },
   {
     to: '/choice-card' as const,
@@ -75,8 +75,8 @@ export const DOC_COMPONENTS = [
     description: 'Placeholder pulse while content loads.',
   },
   {
-    to: '/modal' as const,
-    name: 'Modal',
+    to: '/dialog' as const,
+    name: 'Dialog',
     description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
   },
 ] as const
@@ -137,8 +137,8 @@ export const DOC_FORMS = [
     description: 'Radio options with vertical or horizontal alignment.',
   },
   {
-    to: '/toggle' as const,
-    name: 'Toggle',
+    to: '/switch' as const,
+    name: 'Switch',
     description: 'Switch control in Default and Small sizes.',
   },
   {
@@ -164,8 +164,8 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: '/banner' as const,
-    name: 'Banner',
+    to: '/alert' as const,
+    name: 'Alert',
     description: 'In-page notification above the page header, with actions. Not a floating toast.',
   },
   {
@@ -174,8 +174,8 @@ export const DOC_BLOCKS = [
     description: 'Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.',
   },
   {
-    to: '/empty-state' as const,
-    name: 'Empty State',
+    to: '/empty' as const,
+    name: 'Empty',
     description: 'Centered empty state with icon, title, description, and actions.',
   },
   {

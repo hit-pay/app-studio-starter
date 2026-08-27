@@ -106,7 +106,7 @@ function TabsTrigger({
 
   return (
     <TabsPrimitive.Tab
-      data-slot="tabs-tab"
+      data-slot="tabs-trigger"
       className={cn(tabsTabVariants({ type, size }), className)}
       {...props}
     >
@@ -123,14 +123,14 @@ function TabsTrigger({
   )
 }
 
-function TabsPanel({ className, ...props }: TabsPrimitive.Panel.Props) {
+function TabsContent({ className, ...props }: TabsPrimitive.Panel.Props) {
   return (
     <TabsPrimitive.Panel
-      data-slot="tabs-panel"
+      data-slot="tabs-content"
       className={cn('w-full text-sm leading-[1.5] text-oc-foreground outline-none', className)}
       {...props}
     />
   )
 }
 
-export { Tabs, TabsList, TabsTrigger, TabsPanel }
+export { Tabs, TabsList, TabsTrigger, TabsContent }

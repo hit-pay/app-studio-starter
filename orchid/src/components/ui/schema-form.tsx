@@ -44,7 +44,7 @@ import { FormSectionItem } from './form-section'
 import { QuantityInput } from './quantity-input'
 import { Slider } from './slider'
 import { Textarea } from './textarea'
-import { Toggle } from './toggle'
+import { Switch } from './switch'
 import {
   controlType,
   fieldMaxLength,
@@ -295,7 +295,7 @@ function SchemaForm({
                     description={item.description ?? undefined}
                     type={item.props?.background === true ? 'Background' : 'Default'}
                     actions={
-                      <Toggle
+                      <Switch
                         id={item.path}
                         checked={Boolean(value)}
                         onCheckedChange={(checked) => field.handleChange(checked)}
@@ -349,10 +349,10 @@ function SchemaForm({
                 )
               }
 
-              if (type === 'toggle') {
+              if (type === 'switch') {
                 return (
                   <Field orientation="horizontal" data-invalid={invalid || undefined}>
-                    <Toggle
+                    <Switch
                       id={item.path}
                       checked={Boolean(value)}
                       onCheckedChange={(checked) => field.handleChange(checked)}

@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { CircleIcon } from 'lucide-react'
-import { Chip, UserChip } from '@/components/ui/chip'
+import { Badge, UserBadge } from '@/components/ui/badge'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
-export const Route = createFileRoute('/chip')({
-  component: ChipExamplesPage,
+export const Route = createFileRoute('/badge')({
+  component: BadgeExamplesPage,
 })
 
 const COLORS = [
@@ -35,27 +35,27 @@ const COLOR_LABEL: Record<(typeof COLORS)[number], string> = {
   Green: 'Paid',
 }
 
-function ChipExamplesPage() {
+function BadgeExamplesPage() {
   return (
-    <DocExamplePage to="/chip">
+    <DocExamplePage to="/badge">
       <div className="space-y-6">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Global Chip
+          Global Badge
         </p>
         <div className="space-y-4">
           {COLORS.map((color) => (
             <div key={color} className="flex flex-wrap items-center gap-3">
               {TYPES.map((type) => (
-                <Chip key={type} color={color} type={type}>
+                <Badge key={type} color={color} type={type}>
                   {COLOR_LABEL[color]}
-                </Chip>
+                </Badge>
               ))}
-              <Chip color={color} icon={<CircleIcon />}>
+              <Badge color={color} icon={<CircleIcon />}>
                 {COLOR_LABEL[color]}
-              </Chip>
-              <Chip color={color} closable>
+              </Badge>
+              <Badge color={color} closable>
                 {COLOR_LABEL[color]}
-              </Chip>
+              </Badge>
             </div>
           ))}
         </div>
@@ -63,13 +63,13 @@ function ChipExamplesPage() {
 
       <div className="space-y-6">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          User Type Chip
+          User Type Badge
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <UserChip type="Owner" />
-          <UserChip type="Admin" />
-          <UserChip type="Manager" />
-          <UserChip type="Cashier" />
+          <UserBadge type="Owner" />
+          <UserBadge type="Admin" />
+          <UserBadge type="Manager" />
+          <UserBadge type="Cashier" />
         </div>
       </div>
 
@@ -78,11 +78,11 @@ function ChipExamplesPage() {
           Invoice status
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <Chip color="Green">Paid</Chip>
-          <Chip color="Orange">Pending</Chip>
-          <Chip color="Grey">Draft</Chip>
-          <Chip color="Red">Overdue</Chip>
-          <Chip color="LightRed">Refunded</Chip>
+          <Badge color="Green">Paid</Badge>
+          <Badge color="Orange">Pending</Badge>
+          <Badge color="Grey">Draft</Badge>
+          <Badge color="Red">Overdue</Badge>
+          <Badge color="LightRed">Refunded</Badge>
         </div>
       </div>
 
@@ -91,21 +91,21 @@ function ChipExamplesPage() {
           Commerce filters
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <Chip color="Blue" closable>
+          <Badge color="Blue" closable>
             Invoice
-          </Chip>
-          <Chip color="Purple" closable>
+          </Badge>
+          <Badge color="Purple" closable>
             Payment Link
-          </Chip>
-          <Chip color="Tosca" closable>
+          </Badge>
+          <Badge color="Tosca" closable>
             Recurring
-          </Chip>
-          <Chip color="DarkBlue" closable>
+          </Badge>
+          <Badge color="DarkBlue" closable>
             Point of Sale
-          </Chip>
-          <Chip color="Green" closable>
+          </Badge>
+          <Badge color="Green" closable>
             Online Store
-          </Chip>
+          </Badge>
         </div>
       </div>
     </DocExamplePage>

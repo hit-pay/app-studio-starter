@@ -126,10 +126,10 @@ function AccordionTrigger({
   )
 }
 
-function AccordionPanel({ className, ...props }: AccordionPrimitive.Panel.Props) {
+function AccordionContent({ className, ...props }: AccordionPrimitive.Panel.Props) {
   return (
     <AccordionPrimitive.Panel
-      data-slot="accordion-panel"
+      data-slot="accordion-content"
       className={cn(
         'border-t border-oc-border p-3 text-[14px] leading-[1.5] text-oc-foreground',
         className,
@@ -139,4 +139,4 @@ function AccordionPanel({ className, ...props }: AccordionPrimitive.Panel.Props)
   )
 }
 
-export { Accordion, AccordionItem, AccordionHeader, AccordionTrigger, AccordionPanel }
+export { Accordion, AccordionItem, AccordionHeader, AccordionTrigger, AccordionContent }

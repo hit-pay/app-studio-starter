@@ -5,7 +5,7 @@ import {
   DetailListRow,
 } from '@/components/ui/detail-list'
 import { Button } from '@/components/ui/button'
-import { Chip } from '@/components/ui/chip'
+import { Badge } from '@/components/ui/badge'
 import { PageTitle } from '@/components/ui/page-title'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
@@ -19,12 +19,12 @@ function PageTitleExamplesPage() {
       to="/page-title"
       usage={`import { PageTitle } from '@/orchid-ui/page-title'
 import { Button } from '@/orchid-ui/button'
-import { Chip } from '@/orchid-ui/chip'
+import { Badge } from '@/orchid-ui/badge'
 
 <PageTitle
   title="Invoices"
   description="Create, send, and track invoices across payment channels."
-  chip={<Chip color="Green">Paid</Chip>}
+  badge={<Badge color="Green">Paid</Badge>}
   actions={<Button variant="Primary">Create invoice</Button>}
 />
 
@@ -86,7 +86,7 @@ import { Chip } from '@/orchid-ui/chip'
           <PageTitle
             title="Point of Sale"
             description="In-store sales, terminals, and payment channels."
-            chip={<Chip color="Green">Orchard 01 online</Chip>}
+            badge={<Badge color="Green">Orchard 01 online</Badge>}
           />
         </div>
 
@@ -142,7 +142,7 @@ import { Chip } from '@/orchid-ui/chip'
           <PageTitle
             title="Payment details"
             description="Review this transaction before you continue."
-            chip={<Chip color="Green">Paid</Chip>}
+            badge={<Badge color="Green">Paid</Badge>}
             actions={
               <>
                 <Button variant="Secondary" style="Border" size="Default">
@@ -164,7 +164,7 @@ import { Chip } from '@/orchid-ui/chip'
             <PageTitle
               title="INV-2048"
               description="https://pay.hitpayapp.com/inv-2048"
-              chip={<Chip color="Green">Paid</Chip>}
+              badge={<Badge color="Green">Paid</Badge>}
               copyValue="https://pay.hitpayapp.com/inv-2048"
               actions={
                 <Button variant="Secondary" style="Border" size="Default">

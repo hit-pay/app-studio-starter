@@ -11,7 +11,7 @@ import {
   type SchemaFormField,
   type SchemaFormRenderField,
 } from '@/components/ui/schema-form'
-import { Tabs, TabsList, TabsPanel, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs'
 
 export const Route = createFileRoute('/schema-form')({
   component: SchemaFormExamplesPage,
@@ -172,9 +172,9 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     value: ['a'],
   },
   {
-    key: 'toggle',
-    title: 'Toggle',
-    type: 'toggle',
+    key: 'switch',
+    title: 'Switch',
+    type: 'switch',
     value: false,
   },
   {
@@ -276,12 +276,12 @@ Types
 - input | password | textarea | phone
 - select
 - combobox — searchable; add props.multiple for chips
-- radio | checkbox | checkbox-group | accepted | toggle
+- radio | checkbox | checkbox-group | accepted | switch
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
 - date | quantity
 - object — nest with fields[]
-- hidden | section | section-item — row with title + toggle
+- hidden | section | section-item — row with title + switch
 - custom via renderField — date-range uses "from+to" or one key with { from, to }
 
 showIf
@@ -470,7 +470,7 @@ function SchemaFormExamplesPage() {
               <TabsTrigger value="prompt">Prompt</TabsTrigger>
               <TabsTrigger value="usage">Usage</TabsTrigger>
             </TabsList>
-            <TabsPanel value="result" className="min-w-0">
+            <TabsContent value="result" className="min-w-0">
               <div className="flex min-w-0 flex-col gap-4">
                 <JsonPanel
                   filename="result.json"
@@ -481,28 +481,28 @@ function SchemaFormExamplesPage() {
                   data={{ account: account.errors, details: details.errors }}
                 />
               </div>
-            </TabsPanel>
-            <TabsPanel value="errors" className="min-w-0">
+            </TabsContent>
+            <TabsContent value="errors" className="min-w-0">
               <JsonPanel
                 filename="errors.json"
                 data={{ account: account.errors, details: details.errors }}
               />
-            </TabsPanel>
-            <TabsPanel value="schema" className="min-w-0">
+            </TabsContent>
+            <TabsContent value="schema" className="min-w-0">
               <JsonPanel
                 filename="fields.json"
                 data={{ account: ACCOUNT_FIELDS, details: DETAILS_FIELDS }}
               />
-            </TabsPanel>
-            <TabsPanel value="prompt" className="min-w-0">
+            </TabsContent>
+            <TabsContent value="prompt" className="min-w-0">
               <div className="flex min-w-0 flex-col gap-4">
                 <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
                 <JsonPanel filename="usage.tsx" data={USAGE_EXAMPLE} />
               </div>
-            </TabsPanel>
-            <TabsPanel value="usage" className="min-w-0">
+            </TabsContent>
+            <TabsContent value="usage" className="min-w-0">
               <JsonPanel filename="usage.tsx" data={USAGE_EXAMPLE} />
-            </TabsPanel>
+            </TabsContent>
           </Tabs>
         </div>
       </div>

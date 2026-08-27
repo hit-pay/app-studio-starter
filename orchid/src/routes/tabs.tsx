@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { SmartphoneIcon, MonitorIcon } from 'lucide-react'
-import { Tabs, TabsList, TabsPanel, TabsTrigger } from '@/components/ui/tabs'
+import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
 export const Route = createFileRoute('/tabs')({
@@ -22,9 +22,9 @@ function TabsExamplesPage() {
               Recurring
             </TabsTrigger>
           </TabsList>
-          <TabsPanel value="invoice">INV-2048 · Priya Nair · SGD 128.00 · Cards</TabsPanel>
-          <TabsPanel value="link">Weekend brunch link · SGD 48.00 · PayNow and GrabPay</TabsPanel>
-          <TabsPanel value="recurring">8 active plans including Alex Turner · SGD 29.00 / month</TabsPanel>
+          <TabsContent value="invoice">INV-2048 · Priya Nair · SGD 128.00 · Cards</TabsContent>
+          <TabsContent value="link">Weekend brunch link · SGD 48.00 · PayNow and GrabPay</TabsContent>
+          <TabsContent value="recurring">8 active plans including Alex Turner · SGD 29.00 / month</TabsContent>
         </Tabs>
       </div>
 
@@ -41,8 +41,8 @@ function TabsExamplesPage() {
               Online Store
             </TabsTrigger>
           </TabsList>
-          <TabsPanel value="pos">Terminal HP-POS-04 · last sale SGD 24.50 via GrabPay</TabsPanel>
-          <TabsPanel value="store">Home page published · PayNow and Cards at checkout</TabsPanel>
+          <TabsContent value="pos">Terminal HP-POS-04 · last sale SGD 24.50 via GrabPay</TabsContent>
+          <TabsContent value="store">Home page published · PayNow and Cards at checkout</TabsContent>
         </Tabs>
       </div>
 
@@ -56,9 +56,9 @@ function TabsExamplesPage() {
             <TabsTrigger value="channels">Payment Channels</TabsTrigger>
             <TabsTrigger value="data">Customer Data</TabsTrigger>
           </TabsList>
-          <TabsPanel value="commerce">Invoice, Payment Link, Recurring, POS, and Online Store</TabsPanel>
-          <TabsPanel value="channels">PayNow, Cards, GrabPay, WeChat Pay · SGD</TabsPanel>
-          <TabsPanel value="data">Priya Nair, Alex Turner, and product SKUs</TabsPanel>
+          <TabsContent value="commerce">Invoice, Payment Link, Recurring, POS, and Online Store</TabsContent>
+          <TabsContent value="channels">PayNow, Cards, GrabPay, WeChat Pay · SGD</TabsContent>
+          <TabsContent value="data">Priya Nair, Alex Turner, and product SKUs</TabsContent>
         </Tabs>
       </div>
 
@@ -74,9 +74,9 @@ function TabsExamplesPage() {
               Sold today
             </TabsTrigger>
           </TabsList>
-          <TabsPanel value="stock">Matcha Latte · SKU-TEA-12 · 24 units remaining</TabsPanel>
-          <TabsPanel value="sku">SKU-TEA-12, SKU-BKR-03, SKU-POS-01</TabsPanel>
-          <TabsPanel value="sold">12 POS sales · SGD 286.00 · mixed PayNow and Cards</TabsPanel>
+          <TabsContent value="stock">Matcha Latte · SKU-TEA-12 · 24 units remaining</TabsContent>
+          <TabsContent value="sku">SKU-TEA-12, SKU-BKR-03, SKU-POS-01</TabsContent>
+          <TabsContent value="sold">12 POS sales · SGD 286.00 · mixed PayNow and Cards</TabsContent>
         </Tabs>
       </div>
     </DocExamplePage>

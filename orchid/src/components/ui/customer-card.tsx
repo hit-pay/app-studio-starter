@@ -5,7 +5,7 @@ import { PencilIcon, UserPlusIcon, XCircleIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Avatar } from './avatar'
 import { Button } from './button'
-import { Chip } from './chip'
+import { Badge } from './badge'
 import { CopyButton } from './copy-button'
 import { Skeleton } from './skeleton'
 
@@ -132,7 +132,7 @@ function CustomerCard({
   active = false,
   loading = false,
   avatar = true,
-  chip,
+  badge,
   leading,
   bottom,
   onAdd,
@@ -149,7 +149,7 @@ function CustomerCard({
   active?: boolean
   loading?: boolean
   avatar?: boolean
-  chip?: ReactNode
+  badge?: ReactNode
   leading?: ReactNode
   bottom?: ReactNode
   onAdd?: () => void
@@ -216,9 +216,9 @@ function CustomerCard({
                 <span className="min-w-0 truncate text-sm font-medium leading-[1.5] text-oc-foreground">
                   {customer.name || '-'}
                 </span>
-                {chip ? chip : null}
+                {badge ? badge : null}
                 {beneficiary && customer.currency ? (
-                  <Chip color="Blue">{customer.currency.toUpperCase()}</Chip>
+                  <Badge color="Blue">{customer.currency.toUpperCase()}</Badge>
                 ) : null}
               </div>
               <span className="min-w-0 truncate text-xs font-medium leading-[1.5] text-oc-muted-foreground">

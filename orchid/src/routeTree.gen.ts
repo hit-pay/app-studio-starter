@@ -11,11 +11,11 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
+import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AvatarRouteImport } from './routes/avatar'
-import { Route as BannerRouteImport } from './routes/banner'
+import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as ButtonRouteImport } from './routes/button'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
-import { Route as ChipRouteImport } from './routes/chip'
 import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as ComboboxRouteImport } from './routes/combobox'
 import { Route as ConfirmDialogRouteImport } from './routes/confirm-dialog'
@@ -23,8 +23,9 @@ import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
 import { Route as DatePickerRouteImport } from './routes/date-picker'
 import { Route as DetailListRouteImport } from './routes/detail-list'
+import { Route as DialogRouteImport } from './routes/dialog'
 import { Route as DropdownMenuRouteImport } from './routes/dropdown-menu'
-import { Route as EmptyStateRouteImport } from './routes/empty-state'
+import { Route as EmptyRouteImport } from './routes/empty'
 import { Route as FieldRouteImport } from './routes/field'
 import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
@@ -32,10 +33,9 @@ import { Route as InputRouteImport } from './routes/input'
 import { Route as InputGroupRouteImport } from './routes/input-group'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
-import { Route as ModalRouteImport } from './routes/modal'
 import { Route as PageTitleRouteImport } from './routes/page-title'
 import { Route as PageToolbarRouteImport } from './routes/page-toolbar'
-import { Route as ProgressBarRouteImport } from './routes/progress-bar'
+import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
 import { Route as SchemaFormRouteImport } from './routes/schema-form'
@@ -44,10 +44,10 @@ import { Route as SetupRouteImport } from './routes/setup'
 import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as StatCardRouteImport } from './routes/stat-card'
+import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as TabsRouteImport } from './routes/tabs'
 import { Route as TextareaRouteImport } from './routes/textarea'
 import { Route as ToastRouteImport } from './routes/toast'
-import { Route as ToggleRouteImport } from './routes/toggle'
 import { Route as TooltipRouteImport } from './routes/tooltip'
 
 const IndexRoute = IndexRouteImport.update({
@@ -60,14 +60,19 @@ const AccordionRoute = AccordionRouteImport.update({
   path: '/accordion',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AlertRoute = AlertRouteImport.update({
+  id: '/alert',
+  path: '/alert',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AvatarRoute = AvatarRouteImport.update({
   id: '/avatar',
   path: '/avatar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BannerRoute = BannerRouteImport.update({
-  id: '/banner',
-  path: '/banner',
+const BadgeRoute = BadgeRouteImport.update({
+  id: '/badge',
+  path: '/badge',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ButtonRoute = ButtonRouteImport.update({
@@ -78,11 +83,6 @@ const ButtonRoute = ButtonRouteImport.update({
 const CheckboxRoute = CheckboxRouteImport.update({
   id: '/checkbox',
   path: '/checkbox',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChipRoute = ChipRouteImport.update({
-  id: '/chip',
-  path: '/chip',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChoiceCardRoute = ChoiceCardRouteImport.update({
@@ -120,14 +120,19 @@ const DetailListRoute = DetailListRouteImport.update({
   path: '/detail-list',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DialogRoute = DialogRouteImport.update({
+  id: '/dialog',
+  path: '/dialog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DropdownMenuRoute = DropdownMenuRouteImport.update({
   id: '/dropdown-menu',
   path: '/dropdown-menu',
   getParentRoute: () => rootRouteImport,
 } as any)
-const EmptyStateRoute = EmptyStateRouteImport.update({
-  id: '/empty-state',
-  path: '/empty-state',
+const EmptyRoute = EmptyRouteImport.update({
+  id: '/empty',
+  path: '/empty',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FieldRoute = FieldRouteImport.update({
@@ -165,11 +170,6 @@ const ListItemRoute = ListItemRouteImport.update({
   path: '/list-item',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ModalRoute = ModalRouteImport.update({
-  id: '/modal',
-  path: '/modal',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const PageTitleRoute = PageTitleRouteImport.update({
   id: '/page-title',
   path: '/page-title',
@@ -180,9 +180,9 @@ const PageToolbarRoute = PageToolbarRouteImport.update({
   path: '/page-toolbar',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProgressBarRoute = ProgressBarRouteImport.update({
-  id: '/progress-bar',
-  path: '/progress-bar',
+const ProgressRoute = ProgressRouteImport.update({
+  id: '/progress',
+  path: '/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
 const QuantityInputRoute = QuantityInputRouteImport.update({
@@ -225,6 +225,11 @@ const StatCardRoute = StatCardRouteImport.update({
   path: '/stat-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SwitchRoute = SwitchRouteImport.update({
+  id: '/switch',
+  path: '/switch',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TabsRoute = TabsRouteImport.update({
   id: '/tabs',
   path: '/tabs',
@@ -240,11 +245,6 @@ const ToastRoute = ToastRouteImport.update({
   path: '/toast',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToggleRoute = ToggleRouteImport.update({
-  id: '/toggle',
-  path: '/toggle',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const TooltipRoute = TooltipRouteImport.update({
   id: '/tooltip',
   path: '/tooltip',
@@ -254,11 +254,11 @@ const TooltipRoute = TooltipRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
+  '/alert': typeof AlertRoute
   '/avatar': typeof AvatarRoute
-  '/banner': typeof BannerRoute
+  '/badge': typeof BadgeRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
-  '/chip': typeof ChipRoute
   '/choice-card': typeof ChoiceCardRoute
   '/combobox': typeof ComboboxRoute
   '/confirm-dialog': typeof ConfirmDialogRoute
@@ -266,8 +266,9 @@ export interface FileRoutesByFullPath {
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
+  '/dialog': typeof DialogRoute
   '/dropdown-menu': typeof DropdownMenuRoute
-  '/empty-state': typeof EmptyStateRoute
+  '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -275,10 +276,9 @@ export interface FileRoutesByFullPath {
   '/input-group': typeof InputGroupRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/modal': typeof ModalRoute
   '/page-title': typeof PageTitleRoute
   '/page-toolbar': typeof PageToolbarRoute
-  '/progress-bar': typeof ProgressBarRoute
+  '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
@@ -287,20 +287,20 @@ export interface FileRoutesByFullPath {
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/stat-card': typeof StatCardRoute
+  '/switch': typeof SwitchRoute
   '/tabs': typeof TabsRoute
   '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
-  '/toggle': typeof ToggleRoute
   '/tooltip': typeof TooltipRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
+  '/alert': typeof AlertRoute
   '/avatar': typeof AvatarRoute
-  '/banner': typeof BannerRoute
+  '/badge': typeof BadgeRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
-  '/chip': typeof ChipRoute
   '/choice-card': typeof ChoiceCardRoute
   '/combobox': typeof ComboboxRoute
   '/confirm-dialog': typeof ConfirmDialogRoute
@@ -308,8 +308,9 @@ export interface FileRoutesByTo {
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
+  '/dialog': typeof DialogRoute
   '/dropdown-menu': typeof DropdownMenuRoute
-  '/empty-state': typeof EmptyStateRoute
+  '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -317,10 +318,9 @@ export interface FileRoutesByTo {
   '/input-group': typeof InputGroupRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/modal': typeof ModalRoute
   '/page-title': typeof PageTitleRoute
   '/page-toolbar': typeof PageToolbarRoute
-  '/progress-bar': typeof ProgressBarRoute
+  '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
@@ -329,21 +329,21 @@ export interface FileRoutesByTo {
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/stat-card': typeof StatCardRoute
+  '/switch': typeof SwitchRoute
   '/tabs': typeof TabsRoute
   '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
-  '/toggle': typeof ToggleRoute
   '/tooltip': typeof TooltipRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
+  '/alert': typeof AlertRoute
   '/avatar': typeof AvatarRoute
-  '/banner': typeof BannerRoute
+  '/badge': typeof BadgeRoute
   '/button': typeof ButtonRoute
   '/checkbox': typeof CheckboxRoute
-  '/chip': typeof ChipRoute
   '/choice-card': typeof ChoiceCardRoute
   '/combobox': typeof ComboboxRoute
   '/confirm-dialog': typeof ConfirmDialogRoute
@@ -351,8 +351,9 @@ export interface FileRoutesById {
   '/customer-card': typeof CustomerCardRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
+  '/dialog': typeof DialogRoute
   '/dropdown-menu': typeof DropdownMenuRoute
-  '/empty-state': typeof EmptyStateRoute
+  '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -360,10 +361,9 @@ export interface FileRoutesById {
   '/input-group': typeof InputGroupRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/modal': typeof ModalRoute
   '/page-title': typeof PageTitleRoute
   '/page-toolbar': typeof PageToolbarRoute
-  '/progress-bar': typeof ProgressBarRoute
+  '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
   '/schema-form': typeof SchemaFormRoute
@@ -372,10 +372,10 @@ export interface FileRoutesById {
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/stat-card': typeof StatCardRoute
+  '/switch': typeof SwitchRoute
   '/tabs': typeof TabsRoute
   '/textarea': typeof TextareaRoute
   '/toast': typeof ToastRoute
-  '/toggle': typeof ToggleRoute
   '/tooltip': typeof TooltipRoute
 }
 export interface FileRouteTypes {
@@ -383,11 +383,11 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/accordion'
+    | '/alert'
     | '/avatar'
-    | '/banner'
+    | '/badge'
     | '/button'
     | '/checkbox'
-    | '/chip'
     | '/choice-card'
     | '/combobox'
     | '/confirm-dialog'
@@ -395,8 +395,9 @@ export interface FileRouteTypes {
     | '/customer-card'
     | '/date-picker'
     | '/detail-list'
+    | '/dialog'
     | '/dropdown-menu'
-    | '/empty-state'
+    | '/empty'
     | '/field'
     | '/form-section'
     | '/icon-group'
@@ -404,10 +405,9 @@ export interface FileRouteTypes {
     | '/input-group'
     | '/label'
     | '/list-item'
-    | '/modal'
     | '/page-title'
     | '/page-toolbar'
-    | '/progress-bar'
+    | '/progress'
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
@@ -416,20 +416,20 @@ export interface FileRouteTypes {
     | '/skeleton'
     | '/slider'
     | '/stat-card'
+    | '/switch'
     | '/tabs'
     | '/textarea'
     | '/toast'
-    | '/toggle'
     | '/tooltip'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/accordion'
+    | '/alert'
     | '/avatar'
-    | '/banner'
+    | '/badge'
     | '/button'
     | '/checkbox'
-    | '/chip'
     | '/choice-card'
     | '/combobox'
     | '/confirm-dialog'
@@ -437,8 +437,9 @@ export interface FileRouteTypes {
     | '/customer-card'
     | '/date-picker'
     | '/detail-list'
+    | '/dialog'
     | '/dropdown-menu'
-    | '/empty-state'
+    | '/empty'
     | '/field'
     | '/form-section'
     | '/icon-group'
@@ -446,10 +447,9 @@ export interface FileRouteTypes {
     | '/input-group'
     | '/label'
     | '/list-item'
-    | '/modal'
     | '/page-title'
     | '/page-toolbar'
-    | '/progress-bar'
+    | '/progress'
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
@@ -458,20 +458,20 @@ export interface FileRouteTypes {
     | '/skeleton'
     | '/slider'
     | '/stat-card'
+    | '/switch'
     | '/tabs'
     | '/textarea'
     | '/toast'
-    | '/toggle'
     | '/tooltip'
   id:
     | '__root__'
     | '/'
     | '/accordion'
+    | '/alert'
     | '/avatar'
-    | '/banner'
+    | '/badge'
     | '/button'
     | '/checkbox'
-    | '/chip'
     | '/choice-card'
     | '/combobox'
     | '/confirm-dialog'
@@ -479,8 +479,9 @@ export interface FileRouteTypes {
     | '/customer-card'
     | '/date-picker'
     | '/detail-list'
+    | '/dialog'
     | '/dropdown-menu'
-    | '/empty-state'
+    | '/empty'
     | '/field'
     | '/form-section'
     | '/icon-group'
@@ -488,10 +489,9 @@ export interface FileRouteTypes {
     | '/input-group'
     | '/label'
     | '/list-item'
-    | '/modal'
     | '/page-title'
     | '/page-toolbar'
-    | '/progress-bar'
+    | '/progress'
     | '/quantity-input'
     | '/radio-group'
     | '/schema-form'
@@ -500,21 +500,21 @@ export interface FileRouteTypes {
     | '/skeleton'
     | '/slider'
     | '/stat-card'
+    | '/switch'
     | '/tabs'
     | '/textarea'
     | '/toast'
-    | '/toggle'
     | '/tooltip'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccordionRoute: typeof AccordionRoute
+  AlertRoute: typeof AlertRoute
   AvatarRoute: typeof AvatarRoute
-  BannerRoute: typeof BannerRoute
+  BadgeRoute: typeof BadgeRoute
   ButtonRoute: typeof ButtonRoute
   CheckboxRoute: typeof CheckboxRoute
-  ChipRoute: typeof ChipRoute
   ChoiceCardRoute: typeof ChoiceCardRoute
   ComboboxRoute: typeof ComboboxRoute
   ConfirmDialogRoute: typeof ConfirmDialogRoute
@@ -522,8 +522,9 @@ export interface RootRouteChildren {
   CustomerCardRoute: typeof CustomerCardRoute
   DatePickerRoute: typeof DatePickerRoute
   DetailListRoute: typeof DetailListRoute
+  DialogRoute: typeof DialogRoute
   DropdownMenuRoute: typeof DropdownMenuRoute
-  EmptyStateRoute: typeof EmptyStateRoute
+  EmptyRoute: typeof EmptyRoute
   FieldRoute: typeof FieldRoute
   FormSectionRoute: typeof FormSectionRoute
   IconGroupRoute: typeof IconGroupRoute
@@ -531,10 +532,9 @@ export interface RootRouteChildren {
   InputGroupRoute: typeof InputGroupRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
-  ModalRoute: typeof ModalRoute
   PageTitleRoute: typeof PageTitleRoute
   PageToolbarRoute: typeof PageToolbarRoute
-  ProgressBarRoute: typeof ProgressBarRoute
+  ProgressRoute: typeof ProgressRoute
   QuantityInputRoute: typeof QuantityInputRoute
   RadioGroupRoute: typeof RadioGroupRoute
   SchemaFormRoute: typeof SchemaFormRoute
@@ -543,10 +543,10 @@ export interface RootRouteChildren {
   SkeletonRoute: typeof SkeletonRoute
   SliderRoute: typeof SliderRoute
   StatCardRoute: typeof StatCardRoute
+  SwitchRoute: typeof SwitchRoute
   TabsRoute: typeof TabsRoute
   TextareaRoute: typeof TextareaRoute
   ToastRoute: typeof ToastRoute
-  ToggleRoute: typeof ToggleRoute
   TooltipRoute: typeof TooltipRoute
 }
 
@@ -566,6 +566,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AccordionRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/alert': {
+      id: '/alert'
+      path: '/alert'
+      fullPath: '/alert'
+      preLoaderRoute: typeof AlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/avatar': {
       id: '/avatar'
       path: '/avatar'
@@ -573,11 +580,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AvatarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/banner': {
-      id: '/banner'
-      path: '/banner'
-      fullPath: '/banner'
-      preLoaderRoute: typeof BannerRouteImport
+    '/badge': {
+      id: '/badge'
+      path: '/badge'
+      fullPath: '/badge'
+      preLoaderRoute: typeof BadgeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/button': {
@@ -592,13 +599,6 @@ declare module '@tanstack/react-router' {
       path: '/checkbox'
       fullPath: '/checkbox'
       preLoaderRoute: typeof CheckboxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chip': {
-      id: '/chip'
-      path: '/chip'
-      fullPath: '/chip'
-      preLoaderRoute: typeof ChipRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/choice-card': {
@@ -650,6 +650,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DetailListRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/dialog': {
+      id: '/dialog'
+      path: '/dialog'
+      fullPath: '/dialog'
+      preLoaderRoute: typeof DialogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dropdown-menu': {
       id: '/dropdown-menu'
       path: '/dropdown-menu'
@@ -657,11 +664,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DropdownMenuRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/empty-state': {
-      id: '/empty-state'
-      path: '/empty-state'
-      fullPath: '/empty-state'
-      preLoaderRoute: typeof EmptyStateRouteImport
+    '/empty': {
+      id: '/empty'
+      path: '/empty'
+      fullPath: '/empty'
+      preLoaderRoute: typeof EmptyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/field': {
@@ -713,13 +720,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListItemRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/modal': {
-      id: '/modal'
-      path: '/modal'
-      fullPath: '/modal'
-      preLoaderRoute: typeof ModalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/page-title': {
       id: '/page-title'
       path: '/page-title'
@@ -734,11 +734,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PageToolbarRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/progress-bar': {
-      id: '/progress-bar'
-      path: '/progress-bar'
-      fullPath: '/progress-bar'
-      preLoaderRoute: typeof ProgressBarRouteImport
+    '/progress': {
+      id: '/progress'
+      path: '/progress'
+      fullPath: '/progress'
+      preLoaderRoute: typeof ProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/quantity-input': {
@@ -797,6 +797,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StatCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/switch': {
+      id: '/switch'
+      path: '/switch'
+      fullPath: '/switch'
+      preLoaderRoute: typeof SwitchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/tabs': {
       id: '/tabs'
       path: '/tabs'
@@ -818,13 +825,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToastRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/toggle': {
-      id: '/toggle'
-      path: '/toggle'
-      fullPath: '/toggle'
-      preLoaderRoute: typeof ToggleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/tooltip': {
       id: '/tooltip'
       path: '/tooltip'
@@ -838,11 +838,11 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccordionRoute: AccordionRoute,
+  AlertRoute: AlertRoute,
   AvatarRoute: AvatarRoute,
-  BannerRoute: BannerRoute,
+  BadgeRoute: BadgeRoute,
   ButtonRoute: ButtonRoute,
   CheckboxRoute: CheckboxRoute,
-  ChipRoute: ChipRoute,
   ChoiceCardRoute: ChoiceCardRoute,
   ComboboxRoute: ComboboxRoute,
   ConfirmDialogRoute: ConfirmDialogRoute,
@@ -850,8 +850,9 @@ const rootRouteChildren: RootRouteChildren = {
   CustomerCardRoute: CustomerCardRoute,
   DatePickerRoute: DatePickerRoute,
   DetailListRoute: DetailListRoute,
+  DialogRoute: DialogRoute,
   DropdownMenuRoute: DropdownMenuRoute,
-  EmptyStateRoute: EmptyStateRoute,
+  EmptyRoute: EmptyRoute,
   FieldRoute: FieldRoute,
   FormSectionRoute: FormSectionRoute,
   IconGroupRoute: IconGroupRoute,
@@ -859,10 +860,9 @@ const rootRouteChildren: RootRouteChildren = {
   InputGroupRoute: InputGroupRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,
-  ModalRoute: ModalRoute,
   PageTitleRoute: PageTitleRoute,
   PageToolbarRoute: PageToolbarRoute,
-  ProgressBarRoute: ProgressBarRoute,
+  ProgressRoute: ProgressRoute,
   QuantityInputRoute: QuantityInputRoute,
   RadioGroupRoute: RadioGroupRoute,
   SchemaFormRoute: SchemaFormRoute,
@@ -871,10 +871,10 @@ const rootRouteChildren: RootRouteChildren = {
   SkeletonRoute: SkeletonRoute,
   SliderRoute: SliderRoute,
   StatCardRoute: StatCardRoute,
+  SwitchRoute: SwitchRoute,
   TabsRoute: TabsRoute,
   TextareaRoute: TextareaRoute,
   ToastRoute: ToastRoute,
-  ToggleRoute: ToggleRoute,
   TooltipRoute: TooltipRoute,
 }
 export const routeTree = rootRouteImport

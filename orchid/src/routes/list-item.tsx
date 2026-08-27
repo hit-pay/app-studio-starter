@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { LandmarkIcon, MapPinIcon, CircleDollarSignIcon, PencilIcon, Trash2Icon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { Chip } from '@/components/ui/chip'
+import { Badge } from '@/components/ui/badge'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
@@ -40,7 +40,7 @@ function ListItemExamplesPage() {
   ListItemHoverActions,
   ListItemAction,
 } from '@/orchid-ui/list-item'
-import { Chip } from '@/orchid-ui/chip'
+import { Badge } from '@/orchid-ui/badge'
 import { MapPinIcon, PencilIcon } from 'lucide-react'
 
 <ListItem>
@@ -49,7 +49,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
     <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
     <ListItemMeta>
       <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-      <Chip color="Green">Paid</Chip>
+      <Badge color="Green">Paid</Badge>
     </ListItemMeta>
   </ListItemBody>
   <ListItemHoverActions>
@@ -71,9 +71,9 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>DBS Multiplier</ListItemTitle>
-                <Chip color="DarkBlue">Default</Chip>
-                <Chip color="Blue">HitPay</Chip>
-                <Chip color="Purple">Stripe</Chip>
+                <Badge color="DarkBlue">Default</Badge>
+                <Badge color="Blue">HitPay</Badge>
+                <Badge color="Purple">Stripe</Badge>
               </div>
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
@@ -89,7 +89,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>Priya Nair</ListItemTitle>
-                <Chip color="Green">Paid</Chip>
+                <Badge color="Green">Paid</Badge>
               </div>
               <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
             </div>
@@ -105,7 +105,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
             <ListItemMeta>
               <span className="text-xs leading-[1.5] text-oc-muted-foreground">24 in stock</span>
-              <Chip color="Green">Active</Chip>
+              <Badge color="Green">Active</Badge>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -120,9 +120,9 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>DBS Multiplier</ListItemTitle>
-                <Chip color="DarkBlue">Default</Chip>
-                <Chip color="Blue">HitPay</Chip>
-                <Chip color="Purple">Stripe</Chip>
+                <Badge color="DarkBlue">Default</Badge>
+                <Badge color="Blue">HitPay</Badge>
+                <Badge color="Purple">Stripe</Badge>
               </div>
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
@@ -147,9 +147,9 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>DBS Multiplier</ListItemTitle>
-                <Chip color="DarkBlue">Default</Chip>
-                <Chip color="Blue">HitPay</Chip>
-                <Chip color="Purple">Stripe</Chip>
+                <Badge color="DarkBlue">Default</Badge>
+                <Badge color="Blue">HitPay</Badge>
+                <Badge color="Purple">Stripe</Badge>
               </div>
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
@@ -235,7 +235,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
               <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                 Last updated : 20 Aug 2026
               </span>
-              <Chip color="Green">Published</Chip>
+              <Badge color="Green">Published</Badge>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -256,7 +256,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
               <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                 Last updated : 18 Aug 2026
               </span>
-              <Chip color="Grey">Draft</Chip>
+              <Badge color="Grey">Draft</Badge>
             </ListItemMeta>
           </ListItemBody>
           <ListItemMore

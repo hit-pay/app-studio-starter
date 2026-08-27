@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const progressBarTrackVariants = cva('relative min-w-0 flex-1 overflow-clip rounded-full bg-oc-neutral-soft', {
+const progressTrackVariants = cva('relative min-w-0 flex-1 overflow-clip rounded-full bg-oc-neutral-soft', {
   variants: {
     size: {
       Default: 'h-2',
@@ -15,7 +15,7 @@ const progressBarTrackVariants = cva('relative min-w-0 flex-1 overflow-clip roun
   },
 })
 
-const progressBarLabelVariants = cva('shrink-0 whitespace-nowrap leading-[1.5]', {
+const progressLabelVariants = cva('shrink-0 whitespace-nowrap leading-[1.5]', {
   variants: {
     size: {
       Default: 'text-sm',
@@ -27,7 +27,7 @@ const progressBarLabelVariants = cva('shrink-0 whitespace-nowrap leading-[1.5]',
   },
 })
 
-function ProgressBar({
+function Progress({
   className,
   size = 'Default',
   value = 0,
@@ -35,7 +35,7 @@ function ProgressBar({
   showLabel = true,
   ...props
 }: Omit<ComponentProps<'div'>, 'role'> &
-  VariantProps<typeof progressBarTrackVariants> & {
+  VariantProps<typeof progressTrackVariants> & {
     value?: number
     max?: number
     showLabel?: boolean
@@ -46,7 +46,7 @@ function ProgressBar({
 
   return (
     <div
-      data-slot="progress-bar"
+      data-slot="progress"
       data-size={size}
       className={cn('flex w-full items-center gap-1', className)}
       {...props}
@@ -56,16 +56,16 @@ function ProgressBar({
         aria-valuemin={0}
         aria-valuemax={safeMax}
         aria-valuenow={clamped}
-        className={progressBarTrackVariants({ size })}
+        className={progressTrackVariants({ size })}
       >
         <div
-          data-slot="progress-bar-current"
+          data-slot="progress-current"
           className="absolute inset-y-0 left-0 rounded-full bg-oc-primary"
           style={{ width: `${percent}%` }}
         />
       </div>
       {showLabel ? (
-        <p className={progressBarLabelVariants({ size })}>
+        <p className={progressLabelVariants({ size })}>
           <span className="font-medium text-oc-foreground">{clamped}</span>
           <span className="text-oc-muted-foreground">/{safeMax}</span>
         </p>
@@ -74,4 +74,4 @@ function ProgressBar({
   )
 }
 
-export { ProgressBar, progressBarTrackVariants }
+export { Progress, progressTrackVariants }

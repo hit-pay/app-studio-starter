@@ -3,7 +3,7 @@ import { CheckIcon, CircleHelpIcon, Trash2Icon, TriangleAlertIcon } from 'lucide
 
 import { cn } from '@/lib/utils'
 import { Input } from './input'
-import { Modal, ModalClose, ModalPopup, ModalTrigger } from './modal'
+import { Dialog, DialogClose, DialogContent, DialogTrigger } from './dialog'
 import { Button } from './button'
 
 type ConfirmationType = 'Delete' | 'Warning' | 'Success' | 'Question'
@@ -133,7 +133,7 @@ function ConfirmDialog({
   children,
   persistent,
   ...props
-}: Omit<ComponentProps<typeof Modal>, 'children'> & {
+}: Omit<ComponentProps<typeof Dialog>, 'children'> & {
   type?: ConfirmationType
   size?: ConfirmationSize
   title?: string
@@ -167,9 +167,9 @@ function ConfirmDialog({
   const showCancel = preset.showCancel
 
   return (
-    <Modal persistent={persistent} {...props}>
+    <Dialog persistent={persistent} {...props}>
       {children}
-      <ModalPopup
+      <DialogContent
         size={medium ? 'Medium' : 'Confirmation'}
         title={title}
         cancelLabel={resolvedCancel}
@@ -186,13 +186,13 @@ function ConfirmDialog({
           >
             <div className="grid auto-cols-[minmax(7rem,1fr)] grid-flow-col gap-3">
               {showCancel ? (
-                <ModalClose
+                <DialogClose
                   render={<Button variant="Secondary" className="w-full" onClick={onCancel} />}
                 >
                   {resolvedCancel}
-                </ModalClose>
+                </DialogClose>
               ) : null}
-              <ModalClose
+              <DialogClose
                 disabled={!matched}
                 render={
                   <Button
@@ -204,7 +204,7 @@ function ConfirmDialog({
                 }
               >
                 {resolvedConfirm}
-              </ModalClose>
+              </DialogClose>
             </div>
           </div>
         }
@@ -224,14 +224,14 @@ function ConfirmDialog({
             />
           ) : null}
         </ConfirmDialogContent>
-      </ModalPopup>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   )
 }
 
 export {
   ConfirmDialog,
   ConfirmDialogContent,
-  ModalTrigger as ConfirmDialogTrigger,
+  DialogTrigger as ConfirmDialogTrigger,
 }
 export type { ConfirmationSize, ConfirmationType }

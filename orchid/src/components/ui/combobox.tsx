@@ -11,7 +11,7 @@ import { CheckIcon, ChevronDownIcon, MinusIcon, XCircleIcon, XIcon } from 'lucid
 
 import { cn } from '@/lib/utils'
 import { checkboxControlVariants } from './checkbox'
-import { chipVariants, type ChipColor } from './chip'
+import { badgeVariants, type BadgeColor } from './badge'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from './input-group'
 
 type ComboboxSelectionContextValue = {
@@ -374,7 +374,7 @@ function ComboboxChip({
   ...props
 }: ComboboxPrimitive.Chip.Props & {
   showRemove?: boolean
-  color?: ChipColor
+  color?: BadgeColor
   type?: 'Background' | 'Border' | 'Transparent'
 }) {
   const resolvedColor = color
@@ -382,7 +382,7 @@ function ComboboxChip({
   return (
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
-      className={cn(chipVariants({ color: resolvedColor, type }), className)}
+      className={cn(badgeVariants({ color: resolvedColor, type }), className)}
       {...props}
     >
       {children}

@@ -11,7 +11,7 @@ import {
   FieldSet,
 } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
-import { Toggle } from '@/components/ui/toggle'
+import { Switch } from '@/components/ui/switch'
 
 export const Route = createFileRoute('/field')({
   component: FieldExamplesPage,
@@ -36,7 +36,7 @@ function FieldExamplesPage() {
               <FieldError>Enter a valid email to send the payment link.</FieldError>
             </Field>
             <Field orientation="horizontal">
-              <Toggle defaultChecked />
+              <Switch defaultChecked />
               <FieldLabel>Email receipt after Point of Sale</FieldLabel>
             </Field>
             <Field orientation="horizontal">
@@ -56,7 +56,7 @@ function FieldExamplesPage() {
               <FieldDescription>Catalog title on the storefront.</FieldDescription>
             </Field>
             <Field orientation="horizontal">
-              <Toggle />
+              <Switch />
               <FieldLabel>Track inventory</FieldLabel>
             </Field>
           </FieldGroup>

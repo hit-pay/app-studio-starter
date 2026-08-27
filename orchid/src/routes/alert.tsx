@@ -2,21 +2,21 @@ import { createFileRoute } from '@tanstack/react-router'
 import { AlertTriangleIcon, CheckIcon, InfoIcon, XCircleIcon } from 'lucide-react'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
-  Banner,
-  BannerAction,
-  BannerBody,
-  BannerDescription,
-  BannerIcon,
-  BannerTitle,
-} from '@/components/ui/banner'
+  Alert,
+  AlertAction,
+  AlertBody,
+  AlertDescription,
+  AlertIcon,
+  AlertTitle,
+} from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
 import { PageTitle } from '@/components/ui/page-title'
 
-export const Route = createFileRoute('/banner')({
-  component: BannerExamplesPage,
+export const Route = createFileRoute('/alert')({
+  component: AlertExamplesPage,
 })
 
-const BANNER_COLORS = [
+const ALERT_COLORS = [
   {
     color: 'Default' as const,
     icon: <CheckIcon />,
@@ -65,65 +65,65 @@ const BANNER_COLORS = [
   },
 ]
 
-function BannerExamplesPage() {
+function AlertExamplesPage() {
   return (
     <DocExamplePage
-      to="/banner"
+      to="/alert"
       usage={`import {
-  Banner,
-  BannerIcon,
-  BannerBody,
-  BannerTitle,
-  BannerDescription,
-  BannerAction,
-} from '@/orchid-ui/banner'
+  Alert,
+  AlertIcon,
+  AlertBody,
+  AlertTitle,
+  AlertDescription,
+  AlertAction,
+} from '@/orchid-ui/alert'
 import { Button } from '@/orchid-ui/button'
 import { CheckIcon } from 'lucide-react'
 
-<Banner color="Default" onClose={() => {}}>
-  <BannerIcon>
+<Alert color="Default" onClose={() => {}}>
+  <AlertIcon>
     <CheckIcon />
-  </BannerIcon>
-  <BannerBody>
-    <BannerTitle>Invoice created</BannerTitle>
-    <BannerDescription>
+  </AlertIcon>
+  <AlertBody>
+    <AlertTitle>Invoice created</AlertTitle>
+    <AlertDescription>
       INV-2048 for SGD 128.00 was created and sent to Priya Nair.
-    </BannerDescription>
-  </BannerBody>
-  <BannerAction>
+    </AlertDescription>
+  </AlertBody>
+  <AlertAction>
     <Button variant="Secondary" size="Small">View invoice</Button>
     <Button variant="Primary" size="Small">Send reminder</Button>
-  </BannerAction>
-</Banner>`}
+  </AlertAction>
+</Alert>`}
     >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Above page header
         </p>
         <p className="text-xs text-oc-muted-foreground">
-          In-page banner. Place it above Page Title, not as a floating toast.
+          In-page alert. Place it above Page Title, not as a floating toast.
         </p>
         <div className="flex flex-col gap-6">
-          <Banner color="Blue" action="Right" onClose={() => {}}>
-            <BannerIcon>
+          <Alert color="Blue" action="Right" onClose={() => {}}>
+            <AlertIcon>
               <InfoIcon />
-            </BannerIcon>
-            <BannerBody>
+            </AlertIcon>
+            <AlertBody>
               <div className="flex min-w-0 flex-1 flex-col gap-1">
-                <BannerTitle>PayNow delay</BannerTitle>
-                <BannerDescription>
+                <AlertTitle>PayNow delay</AlertTitle>
+                <AlertDescription>
                   Please consider using Cards or GrabPay immediately.{' '}
                   <a href="#examples">View payment channels.</a>
-                </BannerDescription>
+                </AlertDescription>
               </div>
-              <BannerAction>
+              <AlertAction>
                 <Button size="Small" variant="Secondary">
                   View status
                 </Button>
                 <Button size="Small">Switch channel</Button>
-              </BannerAction>
-            </BannerBody>
-          </Banner>
+              </AlertAction>
+            </AlertBody>
+          </Alert>
           <PageTitle
             title="Invoices"
             description="Create, send, and track invoices across payment channels."
@@ -141,25 +141,25 @@ import { CheckIcon } from 'lucide-react'
           Actions below
         </p>
         <div className="space-y-4">
-          {BANNER_COLORS.map((item) => (
-            <Banner key={item.color} color={item.color} action="Bottom" onClose={() => {}}>
-              <BannerIcon>{item.icon}</BannerIcon>
-              <BannerBody>
+          {ALERT_COLORS.map((item) => (
+            <Alert key={item.color} color={item.color} action="Bottom" onClose={() => {}}>
+              <AlertIcon>{item.icon}</AlertIcon>
+              <AlertBody>
                 <div className="flex w-full flex-col gap-1">
-                  <BannerTitle>{item.title}</BannerTitle>
-                  <BannerDescription>
+                  <AlertTitle>{item.title}</AlertTitle>
+                  <AlertDescription>
                     {item.description}
                     {'link' in item && item.link ? <a href="#examples">View payment channels.</a> : null}
-                  </BannerDescription>
+                  </AlertDescription>
                 </div>
-                <BannerAction>
+                <AlertAction>
                   <Button size="Small" variant="Secondary">
                     {item.secondary}
                   </Button>
                   <Button size="Small">{item.primary}</Button>
-                </BannerAction>
-              </BannerBody>
-            </Banner>
+                </AlertAction>
+              </AlertBody>
+            </Alert>
           ))}
         </div>
       </div>
@@ -169,27 +169,27 @@ import { CheckIcon } from 'lucide-react'
           Actions right
         </p>
         <div className="space-y-4">
-          {BANNER_COLORS.map((item) => (
-            <Banner key={item.color} color={item.color} action="Right" onClose={() => {}}>
-              <BannerIcon>{item.icon}</BannerIcon>
-              <BannerBody>
+          {ALERT_COLORS.map((item) => (
+            <Alert key={item.color} color={item.color} action="Right" onClose={() => {}}>
+              <AlertIcon>{item.icon}</AlertIcon>
+              <AlertBody>
                 <div className="flex min-w-0 flex-1 flex-col gap-1">
-                  <BannerTitle>{item.title}</BannerTitle>
-                  <BannerDescription>
+                  <AlertTitle>{item.title}</AlertTitle>
+                  <AlertDescription>
                     {item.color === 'Blue'
                       ? 'Please consider using Cards or GrabPay immediately. '
                       : item.description}
                     {item.color === 'Blue' ? <a href="#examples">View payment channels.</a> : null}
-                  </BannerDescription>
+                  </AlertDescription>
                 </div>
-                <BannerAction>
+                <AlertAction>
                   <Button size="Small" variant="Secondary">
                     {item.secondary}
                   </Button>
                   <Button size="Small">{item.primary}</Button>
-                </BannerAction>
-              </BannerBody>
-            </Banner>
+                </AlertAction>
+              </AlertBody>
+            </Alert>
           ))}
         </div>
       </div>

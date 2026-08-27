@@ -4,7 +4,7 @@ import { FileTextIcon, SearchIcon, TriangleAlertIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-const emptyStateIconVariants = cva(
+const emptyIconVariants = cva(
   'relative inline-flex items-center justify-center rounded-full border border-solid p-4',
   {
     variants: {
@@ -26,7 +26,7 @@ const DEFAULT_ICON: Record<'Default' | 'Search' | 'Upgrade', ReactNode> = {
   Upgrade: <TriangleAlertIcon className="size-8 text-oc-warning" />,
 }
 
-function EmptyState({
+function Empty({
   className,
   type = 'Default',
   title,
@@ -47,12 +47,12 @@ function EmptyState({
 
   return (
     <div
-      data-slot="empty-state"
+      data-slot="empty"
       data-type={type}
       className={cn('flex w-full flex-col items-center justify-center gap-6', className)}
       {...props}
     >
-      <div className={emptyStateIconVariants({ type })}>
+      <div className={emptyIconVariants({ type })}>
         {icon ?? DEFAULT_ICON[type]}
         {showBadge ? (
           <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-oc-muted-foreground text-[11px] font-medium leading-none text-white">
@@ -79,4 +79,4 @@ function EmptyState({
   )
 }
 
-export { EmptyState }
+export { Empty }

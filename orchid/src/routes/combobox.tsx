@@ -19,7 +19,7 @@ import {
   useComboboxAnchor,
 } from '@/components/ui/combobox'
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
-import type { ChipColor } from '@/components/ui/chip'
+import type { BadgeColor } from '@/components/ui/badge'
 
 export const Route = createFileRoute('/combobox')({
   component: ComboboxExamplesPage,
@@ -55,7 +55,7 @@ const paymentChannels = [
 
 const fulfilmentTypes = ['In Store', 'Shipping', 'Pickup', 'Online Order', 'Digital Products'] as const
 
-const fulfilmentChipColor: Record<(typeof fulfilmentTypes)[number], ChipColor> = {
+const fulfilmentBadgeColor: Record<(typeof fulfilmentTypes)[number], BadgeColor> = {
   'In Store': 'Green',
   Shipping: 'Purple',
   Pickup: 'Blue',
@@ -111,7 +111,7 @@ function ComboboxFulfilmentExample() {
               <ComboboxChip
                 key={item}
                 aria-label={item}
-                color={fulfilmentChipColor[item as (typeof fulfilmentTypes)[number]]}
+                color={fulfilmentBadgeColor[item as (typeof fulfilmentTypes)[number]]}
               >
                 {item}
               </ComboboxChip>
@@ -316,7 +316,7 @@ function ComboboxExamplesPage() {
           <Field>
             <FieldLabel>Online Store fulfilment</FieldLabel>
             <ComboboxFulfilmentExample />
-            <FieldDescription>Chip color can be set per option.</FieldDescription>
+            <FieldDescription>Badge color can be set per option.</FieldDescription>
           </Field>
 
           <Field>

@@ -9,7 +9,7 @@ import {
   type SchemaFormField,
 } from '@/components/ui/schema-form'
 import { Input } from '@/components/ui/input'
-import { Modal, ModalPopup, ModalTrigger } from '@/components/ui/modal'
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
 import { PageToolbar } from '@/components/ui/page-toolbar'
 import { toast } from '@/components/ui/toast'
 
@@ -79,9 +79,9 @@ function CreateProductExample() {
   }
 
   return (
-    <Modal open={open} onOpenChange={setOpen}>
-      <ModalTrigger render={<Button variant="Primary" />}>Create product</ModalTrigger>
-      <ModalPopup size="Fullscreen" title="Create product">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger render={<Button variant="Primary" />}>Create product</DialogTrigger>
+      <DialogContent size="Fullscreen" title="Create product">
         <PageToolbar
           className="shrink-0"
           left="Close"
@@ -108,8 +108,8 @@ function CreateProductExample() {
             <SchemaForm form={product} className="max-w-none" />
           </div>
         </div>
-      </ModalPopup>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   )
 }
 
@@ -121,9 +121,9 @@ function CreateInvoiceExample() {
   }
 
   return (
-    <Modal open={open} onOpenChange={setOpen}>
-      <ModalTrigger render={<Button variant="Secondary" style="Border" />}>Create invoice</ModalTrigger>
-      <ModalPopup size="Fullscreen" title="Create invoice">
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger render={<Button variant="Secondary" style="Border" />}>Create invoice</DialogTrigger>
+      <DialogContent size="Fullscreen" title="Create invoice">
         <PageToolbar
           className="shrink-0"
           left="Close"
@@ -159,8 +159,8 @@ function CreateInvoiceExample() {
             </FieldGroup>
           </form>
         </div>
-      </ModalPopup>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   )
 }
 

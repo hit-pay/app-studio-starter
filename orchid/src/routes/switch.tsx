@@ -1,10 +1,10 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Label } from '@/components/ui/label'
-import { Toggle } from '@/components/ui/toggle'
+import { Switch } from '@/components/ui/switch'
 
-export const Route = createFileRoute('/toggle')({
-  component: ToggleExamplesPage,
+export const Route = createFileRoute('/switch')({
+  component: SwitchExamplesPage,
 })
 
 function ToggleRow({
@@ -22,7 +22,7 @@ function ToggleRow({
 }) {
   return (
     <div className="flex items-center gap-3">
-      <Toggle
+      <Switch
         id={id}
         size={size}
         defaultChecked={defaultChecked}
@@ -33,19 +33,19 @@ function ToggleRow({
   )
 }
 
-function ToggleExamplesPage() {
+function SwitchExamplesPage() {
   return (
-    <DocExamplePage to="/toggle">
+    <DocExamplePage to="/switch">
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <div className="flex items-center gap-4">
-            <Toggle />
-            <Toggle defaultChecked />
-            <Toggle disabled />
-            <Toggle defaultChecked disabled />
+            <Switch />
+            <Switch defaultChecked />
+            <Switch disabled />
+            <Switch defaultChecked disabled />
           </div>
         </div>
 
@@ -54,10 +54,10 @@ function ToggleExamplesPage() {
             Small
           </p>
           <div className="flex items-center gap-4">
-            <Toggle size="Small" />
-            <Toggle size="Small" defaultChecked />
-            <Toggle size="Small" disabled />
-            <Toggle size="Small" defaultChecked disabled />
+            <Switch size="Small" />
+            <Switch size="Small" defaultChecked />
+            <Switch size="Small" disabled />
+            <Switch size="Small" defaultChecked disabled />
           </div>
         </div>
 

@@ -3,9 +3,9 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const toggleVariants = cva(
+const switchVariants = cva(
   [
-    'group/toggle relative inline-flex shrink-0 items-center rounded-full border border-solid border-transparent outline-none',
+    'group/switch relative inline-flex shrink-0 items-center rounded-full border border-solid border-transparent outline-none',
     'bg-oc-neutral-border',
     'hover:shadow-[0_0_0_3px_var(--oc-info-border)]',
     'data-checked:bg-oc-primary data-checked:hover:shadow-none',
@@ -24,13 +24,13 @@ const toggleVariants = cva(
   },
 )
 
-const toggleThumbVariants = cva(
+const switchThumbVariants = cva(
   'block rounded-full bg-oc-background shadow-[0_1px_2px_rgba(0,0,0,0.16)] transition-transform',
   {
     variants: {
       size: {
-        Default: 'size-5 group-data-checked/toggle:translate-x-[18px]',
-        Small: 'size-3 group-data-checked/toggle:translate-x-[11px]',
+        Default: 'size-5 group-data-checked/switch:translate-x-[18px]',
+        Small: 'size-3 group-data-checked/switch:translate-x-[11px]',
       },
     },
     defaultVariants: {
@@ -39,7 +39,7 @@ const toggleThumbVariants = cva(
   },
 )
 
-function Toggle({
+function Switch({
   className,
   size = 'Default',
   ...props
@@ -48,14 +48,14 @@ function Toggle({
 }) {
   return (
     <SwitchPrimitive.Root
-      data-slot="toggle"
+      data-slot="switch"
       data-size={size}
-      className={cn(toggleVariants({ size }), className)}
+      className={cn(switchVariants({ size }), className)}
       {...props}
     >
-      <SwitchPrimitive.Thumb className={toggleThumbVariants({ size })} />
+      <SwitchPrimitive.Thumb className={switchThumbVariants({ size })} />
     </SwitchPrimitive.Root>
   )
 }
 
-export { Toggle }
+export { Switch }

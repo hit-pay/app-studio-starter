@@ -8,7 +8,7 @@ import {
   DetailListTitle,
 } from '@/components/ui/detail-list'
 import { Button } from '@/components/ui/button'
-import { Chip } from '@/components/ui/chip'
+import { Badge } from '@/components/ui/badge'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
 export const Route = createFileRoute('/detail-list')({
@@ -34,7 +34,7 @@ function DetailListExamplesPage() {
               alex@arcticmonkey.io
             </DetailListRow>
             <DetailListRow label="Status" alignment="Vertical">
-              <Chip color="Green">Paid</Chip>
+              <Badge color="Green">Paid</Badge>
             </DetailListRow>
             <DetailListRow label="Channel" alignment="Vertical">
               PayNow
@@ -59,7 +59,7 @@ function DetailListExamplesPage() {
               +65 8123 4567
             </DetailListRow>
             <DetailListRow label="Status" alignment="Vertical">
-              <Chip color="Green">Paid</Chip>
+              <Badge color="Green">Paid</Badge>
             </DetailListRow>
             <DetailListRow label="Method" alignment="Vertical">
               Cards

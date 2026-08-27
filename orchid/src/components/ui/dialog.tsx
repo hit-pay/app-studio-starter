@@ -6,7 +6,7 @@ import { XIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { Button } from './button'
 
-const modalPopupVariants = cva(
+const dialogContentVariants = cva(
   'flex w-full flex-col overflow-hidden bg-oc-background outline-none',
   {
     variants: {
@@ -29,10 +29,10 @@ const modalPopupVariants = cva(
 )
 
 /**
- * Dialog surface. Prefer `Modal` for custom dialogs; use `ConfirmDialog` for
- * Delete / Warning / Success / Question. `ModalPopup` is the panel.
+ * Dialog surface. Prefer `Dialog` for custom dialogs; use `ConfirmDialog` for
+ * Delete / Warning / Success / Question. `DialogContent` is the panel.
  */
-function Modal({
+function Dialog({
   children,
   persistent = false,
   ...props
@@ -41,7 +41,7 @@ function Modal({
 }) {
   return (
     <DialogPrimitive.Root
-      data-slot="modal"
+      data-slot="dialog"
       disablePointerDismissal={persistent}
       {...props}
     >
@@ -50,11 +50,11 @@ function Modal({
   )
 }
 
-function ModalTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
-  return <DialogPrimitive.Trigger data-slot="modal-trigger" {...props} />
+function DialogTrigger({ ...props }: DialogPrimitive.Trigger.Props) {
+  return <DialogPrimitive.Trigger data-slot="dialog-trigger" {...props} />
 }
 
-function ModalPopup({
+function DialogContent({
   className,
   size = 'Default',
   title,
@@ -95,7 +95,7 @@ function ModalPopup({
   return (
     <DialogPrimitive.Portal>
       <DialogPrimitive.Backdrop
-        data-slot="modal-backdrop"
+        data-slot="dialog-backdrop"
         className="fixed inset-0 z-50 bg-black/45"
       />
       <DialogPrimitive.Viewport
@@ -105,9 +105,9 @@ function ModalPopup({
         )}
       >
         <DialogPrimitive.Popup
-          data-slot="modal-popup"
+          data-slot="dialog-content"
           data-size={size}
-          className={cn(modalPopupVariants({ size }), className)}
+          className={cn(dialogContentVariants({ size }), className)}
           {...props}
         >
           {fullscreen && title ? (
@@ -135,7 +135,7 @@ function ModalPopup({
               </div>
               {closeIcon ? (
                 <DialogPrimitive.Close
-                  data-slot="modal-close"
+                  data-slot="dialog-close"
                   aria-label="Close"
                   className="inline-flex size-8 shrink-0 cursor-pointer items-center justify-center rounded text-oc-muted-foreground outline-none hover:bg-oc-dark-blue-soft hover:text-oc-foreground"
                 >
@@ -197,8 +197,8 @@ function ModalPopup({
   )
 }
 
-function ModalClose({ className, ...props }: ComponentProps<typeof DialogPrimitive.Close>) {
-  return <DialogPrimitive.Close data-slot="modal-close" className={className} {...props} />
+function DialogClose({ className, ...props }: ComponentProps<typeof DialogPrimitive.Close>) {
+  return <DialogPrimitive.Close data-slot="dialog-close" className={className} {...props} />
 }
 
-export { Modal, ModalTrigger, ModalPopup, ModalClose }
+export { Dialog, DialogTrigger, DialogContent, DialogClose }

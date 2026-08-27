@@ -351,7 +351,7 @@ function SetupGuidePage() {
             Import from <code className="text-oc-foreground">@/orchid-ui/button</code>. Names match
             the registry item, for example <code className="text-oc-foreground">dropdown-menu</code>,{' '}
             <code className="text-oc-foreground">date-picker</code>,{' '}
-            <code className="text-oc-foreground">empty-state</code>.
+            <code className="text-oc-foreground">empty</code>.
           </P>
           <CodeBlock
             code={`import { Button } from '@/orchid-ui/button'

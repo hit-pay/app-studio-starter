@@ -4,18 +4,18 @@ import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const bannerVariants = cva(
-  'group/banner relative flex w-full items-start gap-4 rounded-lg border border-solid py-4 pr-8 pl-4 text-sm leading-[1.5] text-oc-foreground shadow-none',
+const alertVariants = cva(
+  'group/alert relative flex w-full items-start gap-4 rounded-lg border border-solid py-4 pr-8 pl-4 text-sm leading-[1.5] text-oc-foreground shadow-none',
   {
     variants: {
       color: {
         Default:
-          'border-oc-success-border bg-oc-success-soft [&_[data-slot=banner-icon]]:text-oc-success',
-        Blue: 'border-oc-info-border bg-oc-info-soft [&_[data-slot=banner-icon]]:text-oc-primary',
-        Red: 'border-oc-destructive-border bg-oc-destructive-soft [&_[data-slot=banner-icon]]:text-oc-destructive',
+          'border-oc-success-border bg-oc-success-soft [&_[data-slot=alert-icon]]:text-oc-success',
+        Blue: 'border-oc-info-border bg-oc-info-soft [&_[data-slot=alert-icon]]:text-oc-primary',
+        Red: 'border-oc-destructive-border bg-oc-destructive-soft [&_[data-slot=alert-icon]]:text-oc-destructive',
         Orange:
-          'border-oc-warning-border bg-oc-warning-soft [&_[data-slot=banner-icon]]:text-oc-warning',
-        Grey: 'border-oc-border bg-oc-neutral [&_[data-slot=banner-icon]]:text-oc-muted-foreground',
+          'border-oc-warning-border bg-oc-warning-soft [&_[data-slot=alert-icon]]:text-oc-warning',
+        Grey: 'border-oc-border bg-oc-neutral [&_[data-slot=alert-icon]]:text-oc-muted-foreground',
       },
       action: {
         Bottom: '',
@@ -29,7 +29,7 @@ const bannerVariants = cva(
   },
 )
 
-function Banner({
+function Alert({
   className,
   color = 'Default',
   action = 'Bottom',
@@ -37,23 +37,23 @@ function Banner({
   children,
   ...props
 }: Omit<React.ComponentProps<'div'>, 'color'> &
-  VariantProps<typeof bannerVariants> & {
+  VariantProps<typeof alertVariants> & {
     onClose?: () => void
   }) {
   return (
     <div
-      data-slot="banner"
+      data-slot="alert"
       data-color={color}
       data-action={action}
       role="status"
-      className={cn(bannerVariants({ color, action }), className)}
+      className={cn(alertVariants({ color, action }), className)}
       {...props}
     >
       {children}
       {onClose ? (
         <button
           type="button"
-          data-slot="banner-close"
+          data-slot="alert-close"
           aria-label="Close"
           onClick={onClose}
           className="absolute top-[11px] right-[11px] inline-flex size-5 items-center justify-center opacity-25 outline-none hover:opacity-50"
@@ -67,10 +67,10 @@ function Banner({
   )
 }
 
-function BannerIcon({ className, ...props }: React.ComponentProps<'span'>) {
+function AlertIcon({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
-      data-slot="banner-icon"
+      data-slot="alert-icon"
       className={cn(
         'inline-flex size-12 shrink-0 items-center justify-center rounded-lg bg-oc-background p-3 shadow-[0_3px_22px_rgba(38,42,50,0.09)] [&_svg]:size-full',
         className,
@@ -80,13 +80,13 @@ function BannerIcon({ className, ...props }: React.ComponentProps<'span'>) {
   )
 }
 
-function BannerBody({ className, ...props }: React.ComponentProps<'div'>) {
+function AlertBody({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="banner-body"
+      data-slot="alert-body"
       className={cn(
         'flex min-w-0 flex-1 flex-col gap-2',
-        'group-data-[action=Right]/banner:flex-row group-data-[action=Right]/banner:items-center',
+        'group-data-[action=Right]/alert:flex-row group-data-[action=Right]/alert:items-center',
         className,
       )}
       {...props}
@@ -94,20 +94,20 @@ function BannerBody({ className, ...props }: React.ComponentProps<'div'>) {
   )
 }
 
-function BannerTitle({ className, ...props }: React.ComponentProps<'div'>) {
+function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="banner-title"
+      data-slot="alert-title"
       className={cn('w-full text-sm font-medium text-oc-foreground', className)}
       {...props}
     />
   )
 }
 
-function BannerDescription({ className, ...props }: React.ComponentProps<'div'>) {
+function AlertDescription({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="banner-description"
+      data-slot="alert-description"
       className={cn(
         'w-full text-xs text-oc-foreground [&_a]:text-oc-primary [&_a]:underline-offset-2 hover:[&_a]:underline',
         className,
@@ -117,14 +117,14 @@ function BannerDescription({ className, ...props }: React.ComponentProps<'div'>)
   )
 }
 
-function BannerAction({ className, ...props }: React.ComponentProps<'div'>) {
+function AlertAction({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
-      data-slot="banner-action"
+      data-slot="alert-action"
       className={cn(
         'flex shrink-0 items-start gap-2',
-        'group-data-[action=Bottom]/banner:w-full',
-        'group-data-[action=Right]/banner:pr-3',
+        'group-data-[action=Bottom]/alert:w-full',
+        'group-data-[action=Right]/alert:pr-3',
         className,
       )}
       {...props}
@@ -133,11 +133,11 @@ function BannerAction({ className, ...props }: React.ComponentProps<'div'>) {
 }
 
 export {
-  Banner,
-  BannerIcon,
-  BannerBody,
-  BannerTitle,
-  BannerDescription,
-  BannerAction,
-  bannerVariants,
+  Alert,
+  AlertIcon,
+  AlertBody,
+  AlertTitle,
+  AlertDescription,
+  AlertAction,
+  alertVariants,
 }

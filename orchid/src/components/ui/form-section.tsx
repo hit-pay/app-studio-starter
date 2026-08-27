@@ -22,7 +22,7 @@ function FormSection({
   className,
   title,
   description,
-  chip,
+  badge,
   hint,
   notification,
   actions,
@@ -30,7 +30,7 @@ function FormSection({
 }: ComponentProps<'div'> & {
   title: string
   description?: string
-  chip?: ReactNode
+  badge?: ReactNode
   hint?: string
   notification?: number | string
   actions?: ReactNode
@@ -50,7 +50,7 @@ function FormSection({
             </span>
           ) : null}
           {hint ? <SectionHint hint={hint} /> : null}
-          {chip ? chip : null}
+          {badge ? badge : null}
         </div>
         {description ? (
           <p className="min-w-0 text-xs leading-[1.5] text-oc-muted-foreground">{description}</p>
@@ -67,7 +67,7 @@ function FormSectionItem({
   className,
   title,
   description,
-  chip,
+  badge,
   hint,
   type = 'Default',
   actions,
@@ -76,7 +76,7 @@ function FormSectionItem({
 }: ComponentProps<'div'> & {
   title: string
   description?: string
-  chip?: ReactNode
+  badge?: ReactNode
   hint?: string
   type?: 'Default' | 'Background'
   actions?: ReactNode
@@ -97,7 +97,7 @@ function FormSectionItem({
           <div className="flex min-w-0 flex-wrap items-center gap-2">
             <p className="text-sm font-medium leading-[1.5] text-oc-foreground">{title}</p>
             {hint ? <SectionHint hint={hint} /> : null}
-            {chip ? chip : null}
+            {badge ? badge : null}
           </div>
           {description ? (
             <p className="min-w-0 text-xs leading-[1.5] text-oc-muted-foreground">{description}</p>

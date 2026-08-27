@@ -4,7 +4,7 @@ import { XCircleIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-const chipVariants = cva(
+const badgeVariants = cva(
   'inline-flex min-h-6 min-w-8 shrink-0 items-center justify-center gap-2 rounded-full py-0.5 text-center text-xs font-medium leading-[1.5] whitespace-nowrap [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4',
   {
     variants: {
@@ -55,7 +55,7 @@ const chipVariants = cva(
   },
 )
 
-type ChipColor =
+type BadgeColor =
   | 'Blue'
   | 'Purple'
   | 'Orange'
@@ -67,7 +67,7 @@ type ChipColor =
   | 'Tosca'
   | 'Green'
 
-function Chip({
+function Badge({
   className,
   color = 'Blue',
   type = 'Background',
@@ -77,8 +77,8 @@ function Chip({
   children,
   ...props
 }: Omit<ComponentProps<'span'>, 'color'> &
-  VariantProps<typeof chipVariants> & {
-    color?: ChipColor
+  VariantProps<typeof badgeVariants> & {
+    color?: BadgeColor
     type?: 'Background' | 'Transparent' | 'Border'
     icon?: ReactNode
     closable?: boolean
@@ -91,10 +91,10 @@ function Chip({
 
   return (
     <span
-      data-slot="chip"
+      data-slot="badge"
       data-color={color}
       data-type={type}
-      className={cn(chipVariants({ color, type }), className)}
+      className={cn(badgeVariants({ color, type }), className)}
       {...props}
     >
       {icon}
@@ -102,7 +102,7 @@ function Chip({
       {canRemove ? (
         <button
           type="button"
-          data-slot="chip-remove"
+          data-slot="badge-remove"
           aria-label="Remove"
           onPointerDown={(event) => {
             event.preventDefault()
@@ -125,7 +125,7 @@ function Chip({
 
 const USER_CHIP: Record<
   'Owner' | 'Admin' | 'Manager' | 'Cashier',
-  NonNullable<VariantProps<typeof chipVariants>['color']>
+  NonNullable<VariantProps<typeof badgeVariants>['color']>
 > = {
   Owner: 'Blue',
   Admin: 'Purple',
@@ -133,19 +133,19 @@ const USER_CHIP: Record<
   Cashier: 'Green',
 }
 
-function UserChip({
+function UserBadge({
   type = 'Owner',
   className,
   ...props
-}: Omit<ComponentProps<typeof Chip>, 'color' | 'children' | 'type'> & {
+}: Omit<ComponentProps<typeof Badge>, 'color' | 'children' | 'type'> & {
   type?: 'Owner' | 'Admin' | 'Manager' | 'Cashier'
 }) {
   return (
-    <Chip color={USER_CHIP[type]} type="Background" className={className} {...props}>
+    <Badge color={USER_CHIP[type]} type="Background" className={className} {...props}>
       {type}
-    </Chip>
+    </Badge>
   )
 }
 
-export { Chip, UserChip, chipVariants }
-export type { ChipColor }
+export { Badge, UserBadge, badgeVariants }
+export type { BadgeColor }

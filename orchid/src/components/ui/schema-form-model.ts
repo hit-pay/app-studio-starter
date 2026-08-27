@@ -8,7 +8,7 @@ export const SCHEMA_FORM_TYPES = [
   'checkbox',
   'checkbox-group',
   'accepted',
-  'toggle',
+  'switch',
   'slider',
   'input-group',
   'object',
@@ -181,7 +181,7 @@ function defaultValueFor(field: SchemaFormField): unknown {
   if (
     field.type === 'accepted' ||
     field.type === 'checkbox' ||
-    field.type === 'toggle' ||
+    field.type === 'switch' ||
     field.type === 'section-item'
   ) {
     return false
@@ -313,7 +313,7 @@ function isEmpty(value: unknown, field: SchemaFormField) {
   if (
     type === 'accepted' ||
     type === 'checkbox' ||
-    type === 'toggle' ||
+    type === 'switch' ||
     type === 'section-item'
   ) {
     return value == null
