@@ -16,6 +16,7 @@ export const SCHEMA_FORM_TYPES = [
   'phone',
   'date',
   'datetime',
+  'date-range',
   'file',
   'quantity',
   'section',
@@ -85,6 +86,7 @@ export const SCHEMA_FORM_EXAMPLE_FIELDS: SchemaFormField[] = [
   { key: 'qty', title: 'Quantity', type: 'quantity', value: 1, min: 1, max: 99 },
   { key: 'when', title: 'Date', type: 'date' },
   { key: 'at', title: 'Date and time', type: 'datetime' },
+  { key: 'from+to', title: 'Date range', type: 'date-range' },
   { key: 'attachment', title: 'Attachment', type: 'file' },
 ]
 
@@ -133,6 +135,26 @@ export function isPlainObject(value: unknown): value is SchemaFormValues {
   return value != null && typeof value === 'object' && !Array.isArray(value)
 }
 
+export function dateRangeValue(field: SchemaFormField, value: unknown) {
+  const keys = pairKeys(field)
+  const fromKey = keys?.first ?? 'from'
+  const toKey = keys?.second ?? 'to'
+  if (isPlainObject(value)) {
+    return {
+      from: String(value[fromKey] ?? value.from ?? ''),
+      to: String(value[toKey] ?? value.to ?? ''),
+    }
+  }
+  return { from: '', to: '' }
+}
+
+export function toLocalYmd(date: Date) {
+  const year = date.getFullYear()
+  const month = String(date.getMonth() + 1).padStart(2, '0')
+  const day = String(date.getDate()).padStart(2, '0')
+  return `${year}-${month}-${day}`
+}
+
 export function inputGroupValue(field: SchemaFormField, value: unknown) {
   const keys = inputGroupKeys(field)
   const fallbackSelect = field.options?.[0]?.value ?? ''
@@ -167,6 +189,10 @@ function pairDefaultParts(field: SchemaFormField): [unknown, unknown] | null {
     }
     return [0, field.max ?? 100]
   }
+  if (field.type === 'date-range') {
+    const range = dateRangeValue(field, value)
+    return [range.from, range.to]
+  }
   if (isPlainObject(value)) {
     return [value[keys.first] ?? value.from ?? '', value[keys.second] ?? value.to ?? '']
   }
@@ -195,7 +221,8 @@ function defaultValueFor(field: SchemaFormField): unknown {
   }
   if (field.type === 'slider') return 0
   if (field.type === 'quantity') return 1
-  if (field.type === 'date') return ''
+  if (field.type === 'date' || field.type === 'datetime') return ''
+  if (field.type === 'date-range' && !pairKeys(field)) return { from: '', to: '' }
   if (field.type === 'object') return formValuesFromFields(field.fields ?? [])
   if (field.type === 'section') return ''
   return ''
@@ -335,6 +362,11 @@ function isEmpty(value: unknown, field: SchemaFormField) {
     if (value instanceof Date) return Number.isNaN(value.getTime())
     return value == null || value === ''
   }
+  if (type === 'date-range') {
+    if (typeof value === 'string') return value.trim() === ''
+    const range = dateRangeValue(field, value)
+    return !range.from || !range.to
+  }
   if (type === 'file') {
     return !(value instanceof File)
   }
@@ -430,6 +462,11 @@ export function valuesFromLabels(options: SchemaFormOption[], labels: unknown) {
 export function parseDateValue(value: unknown): Date | undefined {
   if (value instanceof Date && !Number.isNaN(value.getTime())) return value
   if (typeof value === 'string' && value) {
+    const ymd = value.match(/^(\d{4})-(\d{2})-(\d{2})/)
+    if (ymd) {
+      const date = new Date(Number(ymd[1]), Number(ymd[2]) - 1, Number(ymd[3]))
+      return Number.isNaN(date.getTime()) ? undefined : date
+    }
     const next = new Date(value)
     if (!Number.isNaN(next.getTime())) return next
   }

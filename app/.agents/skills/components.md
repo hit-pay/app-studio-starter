@@ -28,7 +28,7 @@ No `asChild` / `@radix-ui/*`. Triggers: `nativeButton` + `render={<Button />}`. 
 | App chrome, iframe layout, sidebar nav | `AppShell` (+ `AppShellNav*` if **more than one** page) | `app-shell` |
 | Page heading / status badge in title | `PageTitle` | `page-title` |
 | Back + title + actions row | `PageToolbar` | `page-toolbar` |
-| List CRUD, search, filter, sort, select, row actions | `SchemaTable` + `useSchemaTable` | `schema-table` |
+| List / data table (search, filter, tabs, sort, pager, select, row actions — **already in the kit**) | `SchemaTable` + `useSchemaTable` (`schema.filters`, `search`, `tabs`, …) | `schema-table` |
 | Tiny read-only grid (no toolbar) | `Table` | `table` |
 | Create / edit fields (most forms) | `SchemaForm` + `useSchemaForm` | `schema-form` |
 | Record detail key/values | `DetailList` | `detail-list` |
@@ -50,9 +50,12 @@ No `asChild` / `@radix-ui/*`. Triggers: `nativeButton` + `render={<Button />}`. 
 | On/off | `Switch` | `switch` |
 | Qty stepper | `QuantityInput` | `quantity-input` |
 | Prefix/suffix on an input (currency, unit) | `InputGroup` | `input-group` |
-| Date | `DatePicker` | `date-picker` |
-| Date + time | `DateTimePicker` | `date-picker` |
-| Date range | `DatePickerRange` | `date-picker` |
+| Date in a form | SchemaForm `type: 'date'` | `schema-form` |
+| Date + time in a form | SchemaForm `type: 'datetime'` | `schema-form` |
+| Date range in a form | SchemaForm `type: 'date-range'` (`from+to` or `{ from, to }`) | `schema-form` |
+| Date **outside** SchemaForm | `DatePicker` | `date-picker` |
+| Date + time **outside** SchemaForm | `DateTimePicker` | `date-picker` |
+| Date range **outside** SchemaForm | `DatePickerRange` | `date-picker` |
 | Menu of **actions** (not a field value) | `DropdownMenu` | `dropdown-menu` |
 | Tabbed panels | `Tabs` | `tabs` |
 | Several expand sections | `Accordion` | `accordion` |

@@ -16,7 +16,7 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from './combobox'
-import { DatePicker, DateTimePicker } from './date-picker'
+import { DatePicker, DatePickerRange, DateTimePicker } from './date-picker'
 import {
   Field,
   FieldDescription,
@@ -47,6 +47,7 @@ import { Textarea } from './textarea'
 import { Switch } from './switch'
 import {
   controlType,
+  dateRangeValue,
   fieldMaxLength,
   fieldMinLength,
   fieldsWithValues,
@@ -63,6 +64,7 @@ import {
   pairKeys,
   parseDateValue,
   siblingPath,
+  toLocalYmd,
   validateField,
   valuesFromLabels,
   SCHEMA_FORM_EXAMPLE_FIELDS,
@@ -324,7 +326,8 @@ function SchemaForm({
                     <FieldLabel>{item.title}</FieldLabel>
                     <DatePicker
                       selected={selected}
-                      onSelect={(next) => field.handleChange(next ?? '')}
+                      placeholder={placeholder ?? 'Pick a date'}
+                      onSelect={(next) => field.handleChange(next ? toLocalYmd(next) : '')}
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -339,7 +342,43 @@ function SchemaForm({
                     <FieldLabel>{item.title}</FieldLabel>
                     <DateTimePicker
                       selected={selected}
-                      onSelect={(next) => field.handleChange(next ?? '')}
+                      placeholder={placeholder ?? 'Pick a date'}
+                      onSelect={(next) => field.handleChange(next ? next.toISOString() : '')}
+                    />
+                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
+                    {invalid ? <FieldError>{message}</FieldError> : null}
+                  </Field>
+                )
+              }
+
+              if (type === 'date-range') {
+                const keys = pairKeys(item)
+                const secondPath = keys ? siblingPath(item.path, keys.second) : null
+                const range = keys
+                  ? {
+                      from: String(value ?? ''),
+                      to: String(secondPath ? (getValueByPath(values, secondPath) ?? '') : ''),
+                    }
+                  : dateRangeValue(item, value)
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel>{item.title}</FieldLabel>
+                    <DatePickerRange
+                      selected={{
+                        from: parseDateValue(range.from),
+                        to: parseDateValue(range.to),
+                      }}
+                      placeholder={placeholder ?? 'Pick a date'}
+                      onSelect={(next) => {
+                        const from = next?.from ? toLocalYmd(next.from) : ''
+                        const to = next?.to ? toLocalYmd(next.to) : ''
+                        if (keys && secondPath) {
+                          field.handleChange(from)
+                          form.setFieldValue(secondPath, to)
+                          return
+                        }
+                        field.handleChange({ from, to })
+                      }}
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}

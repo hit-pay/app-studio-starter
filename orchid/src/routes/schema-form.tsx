@@ -4,12 +4,10 @@ import { createFileRoute } from '@tanstack/react-router'
 import { DocCodePanel } from '@/components/doc/doc-code-panel'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
-import { DatePicker, DatePickerRange } from '@/components/ui/date-picker'
 import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormField,
-  type SchemaFormRenderField,
 } from '@/components/ui/schema-form'
 import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs'
 
@@ -103,6 +101,12 @@ const ACCOUNT_FIELDS: SchemaFormField[] = [
     key: 'when',
     title: 'Date',
     type: 'date',
+    value: '',
+  },
+  {
+    key: 'at',
+    title: 'Date and time',
+    type: 'datetime',
     value: '',
   },
 ]
@@ -279,10 +283,10 @@ Types
 - radio | checkbox | checkbox-group | accepted | switch
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
-- date | datetime | file | quantity
+- date | datetime | date-range | file | quantity
+- date-range — key "from+to" writes from + to, or one key with { from, to }
 - object — nest with fields[]
 - hidden | section | section-item — row with title + switch
-- custom via renderField — date-range uses "from+to" or one key with { from, to }
 
 showIf
 - showIf: "password_protection"
@@ -385,59 +389,6 @@ function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
   return <DocCodePanel filename={filename} code={code} />
 }
 
-function toLocalYmd(date: Date) {
-  const year = date.getFullYear()
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const day = String(date.getDate()).padStart(2, '0')
-  return `${year}-${month}-${day}`
-}
-
-function parseLocalYmd(value: string) {
-  const [year, month, day] = value.split('-').map(Number)
-  if (!year || !month || !day) return undefined
-  const date = new Date(year, month - 1, day)
-  return Number.isNaN(date.getTime()) ? undefined : date
-}
-
-function renderDateField({ field, value, placeholder, onChange }: SchemaFormRenderField) {
-  if (field.type === 'date') {
-    const selected = typeof value === 'string' && value ? parseLocalYmd(value) : undefined
-    return (
-      <DatePicker
-        selected={selected}
-        placeholder={placeholder ?? 'Pick a date'}
-        onSelect={(next) => onChange(next ? toLocalYmd(next) : null)}
-      />
-    )
-  }
-
-  if (field.type === 'date-range') {
-    const plus = field.key.indexOf('+')
-    const fromKey = plus === -1 ? 'from' : field.key.slice(0, plus)
-    const toKey = plus === -1 ? 'to' : field.key.slice(plus + 1)
-    const range = (value ?? {}) as Record<string, string | null | undefined>
-    const from = range[fromKey] ?? range.from
-    const to = range[toKey] ?? range.to
-    return (
-      <DatePickerRange
-        selected={{
-          from: from ? parseLocalYmd(from) : undefined,
-          to: to ? parseLocalYmd(to) : undefined,
-        }}
-        placeholder={placeholder ?? 'Pick a date'}
-        onSelect={(next) =>
-          onChange({
-            [fromKey]: next?.from ? toLocalYmd(next.from) : null,
-            [toKey]: next?.to ? toLocalYmd(next.to) : null,
-          })
-        }
-      />
-    )
-  }
-
-  return null
-}
-
 function SchemaFormExamplesPage() {
   const account = useSchemaForm({ fields: ACCOUNT_FIELDS })
   const details = useSchemaForm({ fields: DETAILS_FIELDS })
@@ -447,8 +398,8 @@ function SchemaFormExamplesPage() {
   return (
     <DocExamplePage to="/schema-form" usage={USAGE_EXAMPLE}>
       <div className="grid min-w-0 gap-6 xl:grid-cols-3">
-        <SchemaForm form={account} className="max-w-none" renderField={renderDateField} />
-        <SchemaForm form={details} className="max-w-none" renderField={renderDateField} />
+        <SchemaForm form={account} className="max-w-none" />
+        <SchemaForm form={details} className="max-w-none" />
         <div className="flex min-w-0 flex-col gap-4">
           <Button
             variant="Primary"

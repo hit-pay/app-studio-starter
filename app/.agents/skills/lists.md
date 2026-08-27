@@ -1,14 +1,78 @@
 ---
-description: SchemaTable + TanStack Query. Open when building a list, table, search, or fetching rows.
+description: SchemaTable is the data table (search, filter, sort, tabs, pager already in the kit). Open when building a list or fetching rows.
 ---
 
-# Lists (SchemaTable data)
+# Lists (SchemaTable = data table)
 
-Kit (`SchemaTable`) is UI only. Fetch with `#/lib/query` ([TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)). No TanStack Table. `QueryProvider` is already on `__root` — never mount another `QueryClient` per page.
+**`SchemaTable` already is the data table.** Search, filters, tabs, sort, pagination, column picker, row select, and row edit/delete are **in the kit**. You only pass a `schema` + `data`. Do **not** add `Input`, `Combobox`, `Select`, `Popover` filters, `Tabs` above the grid, `Pagination`, `TableToolbar`, or TanStack Table because the prompt said “filter”.
 
-Do **not** treat Query/DB as a Turso connection fix. Persistence is still `createServerFn` + `#/lib/db`. Query is cache/UX only.
+Import `@/orchid-ui/schema-table`. Types live in `schema-table-model.ts`. Read that file if a prop is unclear.
 
-TanStack DB collections (`queryCollectionOptions`, `useLiveQuery`) are **optional**. Do not add `DbProvider` or collections unless the prompt needs optimistic local rows / live joins. Default path: `useQuery` + pass `data` into `useSchemaTable`.
+Kit UI only. Fetch with `#/lib/query`. No TanStack Table. `QueryProvider` is already on `__root`. Persistence is `createServerFn` + `#/lib/db`. Default: `useQuery` + `useSchemaTable({ schema, data: rows })`.
+
+## Already in SchemaTable (wire via `schema`)
+
+| Feature | Schema | Default |
+| --- | --- | --- |
+| Search box | `search: { placeholder }` or `search: false` | On. Columns with `search: false` skipped |
+| Status / category tabs | `tabs` + `tabKey` (row field, default `status`) | Off until you set `tabs` |
+| Filter popover (option lists) | `filters: [{ key, title, options }]` | Off until you set `filters`. `key` = row field |
+| Sort popover | `sort: { fields, defaultKey, defaultDir }` or `sort: false` | Off if omitted; `sortable: false` on a column skips header sort |
+| Pagination | `pagination: { pageSize, pageSizes }` or `pagination: false` | On (`pageSize` 10) |
+| Checkbox select + bulk bar | `selection: true` | Off. Bulk UI = `selectionActions` on `<SchemaTable>` |
+| Edit columns (show/hide, reorder) | `editColumns` (default on) | Local only — not in `queryKey` |
+| Row ⋮ menu | `rowActions: ['edit', 'delete']` or `false` | Off until set. Handle `onRowAction` |
+| Empty state | built-in | Pass `emptyActions` (e.g. Add). Do not wrap in `Empty` |
+
+Column `type`: `text` \| `amount` \| `date` \| `status` \| `image` \| `empty`. `locked` pins a column. `icon` on text cells.
+
+`mode: 'client'` (default): kit applies search/tab/filters/sort/page **in memory** on `data`. `mode: 'server'`: you pass the current page `data` + `total`; kit still **shows** the same chrome.
+
+## Do not
+
+- Homemade toolbar next to SchemaTable
+- `Table` for CRUD lists (`Table` = tiny read-only grid, no chrome)
+- Extra `Pagination` under SchemaTable
+- Put `columnOrder` / `hiddenKeys` / `selected` in `queryKey`
+
+```tsx
+const table = useSchemaTable({
+  schema: {
+    key: 'products',
+    mode: 'client',
+    selection: true,
+    search: { placeholder: 'Search products' },
+    tabKey: 'status',
+    tabs: [
+      { key: 'all', title: 'All' },
+      { key: 'published', title: 'Published', value: 'Published' },
+    ],
+    filters: [
+      { key: 'category', title: 'Category', options: [{ value: 'Apparel', label: 'Apparel' }] },
+    ],
+    sort: { fields: [{ key: 'created', title: 'Created' }], defaultKey: 'created', defaultDir: 'desc' },
+    pagination: { pageSize: 10, pageSizes: [10, 20, 50] },
+    rowActions: ['edit', 'delete'],
+    columns: [
+      { key: 'name', title: 'Name', type: 'text', locked: true },
+      { key: 'amount', title: 'Amount', type: 'amount', search: false },
+      { key: 'status', title: 'Status', type: 'status', search: false },
+    ],
+  },
+  data: rows,
+})
+
+<SchemaTable
+  table={table}
+  selectionActions={selected => /* bulk */}
+  emptyActions={<Button variant="Primary">Add</Button>}
+  onRowAction={(action, row) => { /* edit | delete */ }}
+/>
+```
+
+Full example schema: `SCHEMA_TABLE_EXAMPLE_SCHEMA` in `schema-table-model.ts`.
+
+TanStack DB collections are **optional**. Do not add `DbProvider` unless the prompt needs optimistic local rows.
 
 ## Pick a mode (do not default to server)
 

@@ -9,8 +9,10 @@
     "generate-routes": "bun --bun tsr generate",
     "dev": "vite --host 127.0.0.1 --port 5176",
     "build": "bun --bun vite build",
-    "preview:refresh": "bun run build && sprite-env services signal app-studio TERM",
+    "publish": "bun run build && sprite-env services signal app-studio TERM",
+    "screenshot": "bun scripts/preview-check.mjs",
     "start": "bun start.mjs",
+    "preview": "bun start-preview.mjs",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
@@ -41,6 +43,7 @@
     "@types/react": "^19.2.0",
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
+    "playwright": "^1.62.1",
     "tailwindcss": "^4.1.13",
     "typescript": "^6.0.2",
     "vite": "^8.0.0"

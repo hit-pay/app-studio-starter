@@ -39,9 +39,9 @@ Pass `nav` when the user asks for **more than one page**, using `AppShellNav` / 
 
 `CustomerCard` = HitPay customer/beneficiary only. Staff, vendor, member = `ListItem` + `Avatar`. Empty customer slot = `CustomerCard variant="Empty"`, not `Empty`.
 
-## List (always SchemaTable)
+## List (always SchemaTable — it is the data table)
 
-CRUD / search / filter / sort / select / row actions = **`SchemaTable`**. Never `Table` + homemade toolbar. `Table` is a tiny read-only grid only.
+If the user asks for a list **with** search, filter, sort, tabs, pager, select, or row actions: that chrome **already exists** on `SchemaTable`. Set it on `schema` (`lists.md`). Never `Table` + homemade toolbar, never extra `Input`/`Pagination`/`Tabs` for the same job. `Table` is a tiny read-only grid only.
 
 ```tsx
 const table = useSchemaTable({ schema, data: rows })
@@ -71,12 +71,13 @@ Create/edit page: `PageToolbar` + `PageTitle` + `SchemaForm` + submit `Button ty
 | --- | --- |
 | input, phone, textarea, select, combobox | text |
 | date, datetime | date |
+| date-range | two date columns, or skip in the table |
 | quantity, input-group amount | amount |
 | switch / status-like select | status |
 | file | do not show file bytes; show text name |
 | image URL | image |
 
-Form extras: `datetime`, `file` (one `File`; storage is not in the kit). Dates without time = `date`.
+Form extras: `date`, `datetime`, `date-range`, `file` (one `File`; storage is not in the kit). Dates without time = `type: 'date'` on SchemaForm — do not drop in a raw `DatePicker`.
 
 ## Feedback + empty
 
