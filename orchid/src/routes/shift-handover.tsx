@@ -2,38 +2,29 @@ import { useMemo, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { DocExamplePage } from '@/components/doc/doc-example-page'
-import {
-  AppShell,
-  AppShellNav,
-  AppShellNavGroup,
-  AppShellNavItem,
-} from '@/components/ui/app-shell'
+import { AppShell } from '@/components/ui/app-shell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ui/confirm-dialog'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
+import { Empty } from '@/components/ui/empty'
 import {
-  DetailList,
-  DetailListGrid,
-  DetailListHeader,
-  DetailListRow,
-  DetailListTitle,
-} from '@/components/ui/detail-list'
+  ListItem,
+  ListItemBody,
+  ListItemDescription,
+  ListItemDetail,
+  ListItemMeta,
+  ListItemTitle,
+  ListItemTrailing,
+} from '@/components/ui/list-item'
 import { PageTitle } from '@/components/ui/page-title'
 import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/components/ui/schema-form'
-import {
-  SchemaTable,
-  useSchemaTable,
-  type SchemaTableRow,
-  type SchemaTableSchema,
-} from '@/components/ui/schema-table'
-import { Sheet, SheetContent } from '@/components/ui/sheet'
+import { type SchemaTableRow } from '@/components/ui/schema-table'
 import { toast } from '@/components/ui/toast'
 
 export const Route = createFileRoute('/shift-handover')({
   component: ShiftHandoverDocsPage,
 })
-
-type Page = 'submit' | 'log' | 'settings'
 
 const OUTLETS = [
   { value: 'orchard', label: 'Orchard flagship' },
@@ -41,33 +32,11 @@ const OUTLETS = [
   { value: 'jb', label: 'JB outlet' },
 ]
 
-const LOG_SCHEMA: SchemaTableSchema = {
-  selection: true,
-  search: { placeholder: 'Search handovers' },
-  tabKey: 'status',
-  tabs: [
-    { key: 'all', title: 'All' },
-    { key: 'open', title: 'Open', value: 'Open' },
-    { key: 'done', title: 'Done', value: 'Done' },
-  ],
-  sort: {
-    fields: [
-      { key: 'created', title: 'Logged' },
-      { key: 'outlet', title: 'Outlet' },
-    ],
-    defaultKey: 'created',
-    defaultDir: 'desc',
-  },
-  pagination: { pageSize: 8, pageSizes: [8, 20] },
-  rowActions: ['edit', 'delete'],
-  columns: [
-    { key: 'outlet', title: 'Outlet', type: 'text', locked: true },
-    { key: 'shift', title: 'Shift', type: 'text' },
-    { key: 'notes', title: 'Notes', type: 'text' },
-    { key: 'created', title: 'Logged', type: 'date' },
-    { key: 'status', title: 'Status', type: 'status' },
-  ],
-}
+const SHIFTS = [
+  { value: 'morning', label: 'Morning → Afternoon' },
+  { value: 'afternoon', label: 'Afternoon → Night' },
+  { value: 'night', label: 'Night → Morning' },
+]
 
 const SEED: SchemaTableRow[] = [
   {
@@ -96,28 +65,34 @@ const SEED: SchemaTableRow[] = [
   },
 ]
 
-function submitFields(): SchemaFormField[] {
+function submitFields(row?: SchemaTableRow | null): SchemaFormField[] {
+  const outlet =
+    OUTLETS.find((item) => item.label === row?.outlet)?.value ?? 'orchard'
+  const shift =
+    SHIFTS.find((item) => item.label === row?.shift)?.value ?? 'morning'
+
   return [
-    { key: 'section', title: 'This shift', type: 'section', description: 'What the next team needs.' },
+    {
+      key: 'section',
+      title: 'This shift',
+      type: 'section',
+      description: 'What the next team needs.',
+    },
     {
       key: 'outlet',
       title: 'Outlet',
       type: 'select',
       required: true,
       options: OUTLETS,
-      value: 'orchard',
+      value: outlet,
     },
     {
       key: 'shift',
       title: 'Handover',
       type: 'select',
       required: true,
-      options: [
-        { value: 'morning', label: 'Morning → Afternoon' },
-        { value: 'afternoon', label: 'Afternoon → Night' },
-        { value: 'night', label: 'Night → Morning' },
-      ],
-      value: 'morning',
+      options: SHIFTS,
+      value: shift,
     },
     { key: 'logged_at', title: 'Logged at', type: 'datetime', value: '' },
     {
@@ -127,7 +102,7 @@ function submitFields(): SchemaFormField[] {
       required: true,
       minLength: 12,
       placeholder: 'Incidents, VIP, hardware, cash…',
-      value: '',
+      value: row ? String(row.notes) : '',
     },
     {
       key: 'severity',
@@ -138,7 +113,7 @@ function submitFields(): SchemaFormField[] {
         { value: 'watch', label: 'Watch' },
         { value: 'block', label: 'Blocking' },
       ],
-      value: 'none',
+      value: row?.status === 'Open' ? 'watch' : 'none',
     },
   ]
 }
@@ -162,36 +137,49 @@ function settingsFields(): SchemaFormField[] {
 }
 
 function ShiftHandoverApp() {
-  const [page, setPage] = useState<Page>('submit')
   const [rows, setRows] = useState(SEED)
+  const [sheet, setSheet] = useState<null | 'create' | SchemaTableRow>(null)
   const [formKey, setFormKey] = useState(0)
-  const [edit, setEdit] = useState<SchemaTableRow | null>(null)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [remove, setRemove] = useState<SchemaTableRow | null>(null)
 
+  const editing = sheet && sheet !== 'create' ? sheet : null
+
   const submit = useSchemaForm({
-    fields: useMemo(() => submitFields(), [formKey]),
+    fields: useMemo(
+      () => submitFields(editing),
+      [editing, formKey],
+    ),
     onSubmit: (values) => {
       const outlet = OUTLETS.find((item) => item.value === values.outlet)?.label ?? String(values.outlet)
-      const shift =
-        values.shift === 'afternoon'
-          ? 'Afternoon → Night'
-          : values.shift === 'night'
-            ? 'Night → Morning'
-            : 'Morning → Afternoon'
-      setRows((current) => [
-        {
-          id: `ho-${Date.now()}`,
-          outlet,
-          shift,
-          notes: String(values.notes ?? ''),
-          created: new Date().toISOString().slice(0, 10),
-          status: values.severity === 'none' ? 'Done' : 'Open',
-        },
-        ...current,
-      ])
+      const shift = SHIFTS.find((item) => item.value === values.shift)?.label ?? String(values.shift)
+      const status = values.severity === 'none' ? 'Done' : 'Open'
+      const notes = String(values.notes ?? '')
+
+      if (editing) {
+        setRows((current) =>
+          current.map((row) =>
+            row.id === editing.id ? { ...row, outlet, shift, notes, status } : row,
+          ),
+        )
+        toast.add({ title: 'Handover updated', type: 'success' })
+      } else {
+        setRows((current) => [
+          {
+            id: `ho-${Date.now()}`,
+            outlet,
+            shift,
+            notes,
+            created: new Date().toISOString().slice(0, 10),
+            status,
+          },
+          ...current,
+        ])
+        toast.add({ title: 'Handover submitted', type: 'success' })
+      }
+
+      setSheet(null)
       setFormKey((key) => key + 1)
-      toast.add({ title: 'Handover submitted', type: 'success' })
-      setPage('log')
     },
   })
 
@@ -199,10 +187,9 @@ function ShiftHandoverApp() {
     fields: settingsFields(),
     onSubmit: () => {
       toast.add({ title: 'Settings saved', type: 'success' })
+      setSettingsOpen(false)
     },
   })
-
-  const table = useSchemaTable({ schema: LOG_SCHEMA, data: rows })
 
   return (
     <AppShell
@@ -216,107 +203,107 @@ function ShiftHandoverApp() {
                 Staff
               </Badge>
             }
+            actions={
+              <>
+                <Button variant="Secondary" style="Border" onClick={() => setSettingsOpen(true)}>
+                  Settings
+                </Button>
+                <Button
+                  variant="Primary"
+                  onClick={() => {
+                    setFormKey((key) => key + 1)
+                    setSheet('create')
+                  }}
+                >
+                  New handover
+                </Button>
+              </>
+            }
           />
         </div>
-      }
-      nav={
-        <AppShellNav>
-          <AppShellNavGroup>
-            <AppShellNavItem active={page === 'submit'} onClick={() => setPage('submit')}>
-              Submit a handover
-            </AppShellNavItem>
-            <AppShellNavItem active={page === 'log'} onClick={() => setPage('log')}>
-              Handover log
-            </AppShellNavItem>
-          </AppShellNavGroup>
-          <AppShellNavGroup label="Settings">
-            <AppShellNavItem active={page === 'settings'} onClick={() => setPage('settings')}>
-              Settings
-            </AppShellNavItem>
-          </AppShellNavGroup>
-        </AppShellNav>
       }
     >
-      {page === 'submit' ? (
-        <div className="flex max-w-xl flex-col gap-6">
-          <PageTitle
-            title="Submit a handover"
-            description="Record what the next shift needs to know for this outlet."
-          />
-          <SchemaForm key={formKey} id="handover-submit" form={submit} />
-          <Button type="submit" form="handover-submit">
-            Submit handover
-          </Button>
+      {rows.length === 0 ? (
+        <Empty
+          title="No handovers yet"
+          description="Leave a note for the next team."
+          actions={
+            <Button
+              variant="Primary"
+              onClick={() => {
+                setFormKey((key) => key + 1)
+                setSheet('create')
+              }}
+            >
+              Submit first handover
+            </Button>
+          }
+        />
+      ) : (
+        <div className="flex flex-col gap-3">
+          {rows.map((row) => (
+            <ListItem key={row.id}>
+              <ListItemBody>
+                <ListItemTitle>{String(row.outlet)}</ListItemTitle>
+                <ListItemDescription>{String(row.notes)}</ListItemDescription>
+                <ListItemMeta>
+                  <ListItemDetail>{String(row.shift)}</ListItemDetail>
+                  <ListItemDetail>{String(row.created)}</ListItemDetail>
+                  <Badge
+                    color={row.status === 'Open' ? 'Orange' : 'Green'}
+                    style="Background"
+                  >
+                    {String(row.status)}
+                  </Badge>
+                </ListItemMeta>
+              </ListItemBody>
+              <ListItemTrailing>
+                <Button
+                  variant="Secondary"
+                  style="Border"
+                  size="Small"
+                  onClick={() => {
+                    setFormKey((key) => key + 1)
+                    setSheet(row)
+                  }}
+                >
+                  Edit
+                </Button>
+                <Button
+                  variant="Secondary"
+                  style="Border"
+                  size="Small"
+                  onClick={() => setRemove(row)}
+                >
+                  Delete
+                </Button>
+              </ListItemTrailing>
+            </ListItem>
+          ))}
         </div>
-      ) : null}
+      )}
 
-      {page === 'log' ? (
-        <div className="flex flex-col gap-4">
-          <PageTitle
-            title="Handover log"
-            actions={
-              <Button variant="Primary" onClick={() => setPage('submit')}>
-                New handover
-              </Button>
-            }
-          />
-          <SchemaTable
-            table={table}
-            onRowAction={(action, row) => {
-              if (action === 'edit') setEdit(row)
-              if (action === 'delete') setRemove(row)
-            }}
-            emptyActions={
-              <Button variant="Primary" onClick={() => setPage('submit')}>
-                Submit first handover
-              </Button>
-            }
-          />
-        </div>
-      ) : null}
-
-      {page === 'settings' ? (
-        <div className="flex max-w-xl flex-col gap-6">
-          <PageTitle title="Settings" description="Defaults for this demo only. Nothing is stored." />
-          <SchemaForm form={settings} id="handover-settings" />
-          <Button type="submit" form="handover-settings">
-            Save settings
-          </Button>
-        </div>
-      ) : null}
-
-      <Sheet open={Boolean(edit)} onOpenChange={(open) => !open && setEdit(null)}>
-        <SheetContent
-          side="Right"
-          size="Small"
-          title="Handover"
-          confirmLabel="Mark done"
-          onConfirm={() => {
-            if (!edit) return
-            setRows((current) =>
-              current.map((row) => (row.id === edit.id ? { ...row, status: 'Done' } : row)),
-            )
-            toast.add({ title: 'Marked done', type: 'success' })
-            setEdit(null)
-          }}
+      <Dialog open={sheet != null} onOpenChange={(open) => !open && setSheet(null)}>
+        <DialogContent
+          title={editing ? 'Edit handover' : 'New handover'}
+          description="Record what the next shift needs to know."
+          confirmLabel={editing ? 'Save' : 'Submit'}
+          onConfirm={() => void submit.submit()}
         >
-          {edit ? (
-            <DetailList>
-              <DetailListHeader>
-                <DetailListTitle>{String(edit.outlet)}</DetailListTitle>
-              </DetailListHeader>
-              <DetailListGrid columns={1}>
-                <DetailListRow label="Shift">{String(edit.shift)}</DetailListRow>
-                <DetailListRow label="Logged">{String(edit.created)}</DetailListRow>
-                <DetailListRow label="Status">{String(edit.status)}</DetailListRow>
-                <DetailListRow label="Notes" alignment="Vertical">
-                  {String(edit.notes)}
-                </DetailListRow>
-              </DetailListGrid>
-            </DetailList>
-          ) : null}
-        </SheetContent>
-      </Sheet>
+          <SchemaForm key={formKey} form={submit} />
+        </DialogContent>
+      </Dialog>
+
+      <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
+        <DialogContent
+          title="Settings"
+          description="Defaults for this demo only."
+          confirmLabel="Save"
+          onConfirm={() => void settings.submit()}
+        >
+          <SchemaForm form={settings} />
+        </DialogContent>
+      </Dialog>
 
       <ConfirmDialog
         open={Boolean(remove)}

@@ -25,12 +25,13 @@ No `asChild` / `@radix-ui/*`. Triggers: `nativeButton` + `render={<Button />}`. 
 
 | User / spec says | Use | File |
 | --- | --- | --- |
-| App chrome, iframe layout, sidebar nav | `AppShell` (+ `AppShellNav*` if **more than one** page) | `app-shell` |
+| App chrome, iframe layout, **module** tabs (not Create/Edit) | `AppShell` (+ `AppShellNav*` if **more than one module**) | `app-shell` |
 | Page heading / status badge in title | `PageTitle` | `page-title` |
-| Back + title + actions row | `PageToolbar` | `page-toolbar` |
-| List / data table (search, filter, tabs, sort, pager, select, row actions — **already in the kit**) | `SchemaTable` + `useSchemaTable` (`schema.filters`, `search`, `tabs`, …) | `schema-table` |
+| Back + title + actions row | `PageToolbar` (rare; not the default for create/edit) | `page-toolbar` |
+| Simple list (title + meta, no table chrome) | `ListItem` (+ `Avatar` for people) | `list-item` |
+| Rich data table (search, filter, sort, pager, select) | `SchemaTable` + `useSchemaTable` | `schema-table` |
 | Tiny read-only grid (no toolbar) | `Table` | `table` |
-| Create / edit fields (most forms) | `SchemaForm` + `useSchemaForm` | `schema-form` |
+| Create / edit fields | `SchemaForm` inside centered **Dialog** (`DialogContent`) | `schema-form`, `dialog` |
 | Record detail key/values | `DetailList` | `detail-list` |
 | Group of fields / settings block | `FormSection` | `form-section` |
 | KPI / metric tile | `StatCard` | `stat-card` |
@@ -38,7 +39,7 @@ No `asChild` / `@radix-ui/*`. Triggers: `nativeButton` + `render={<Button />}`. 
 | Person who is **not** a HitPay customer (staff, vendor) | `ListItem` + `Avatar` | `list-item`, `avatar` |
 | Empty customer slot | `CustomerCard variant="Empty"` | `customer-card` |
 | Empty page / no rows (not customer slot) | `Empty` (SchemaTable has its own empty) | `empty` |
-| Side panel / drawer-like edit | `Sheet` | `sheet` |
+| Side panel (filters, rare peek — not create/edit) | `Sheet` | `sheet` |
 | Custom modal | `Dialog` + `DialogContent` (`title` required; no DialogHeader) | `dialog` |
 | Delete / warn / yes-no | `ConfirmDialog` | `confirm-dialog` |
 | In-page notice | `Alert` above `PageTitle` (`Default` = green, `Grey` = neutral) | `alert` |

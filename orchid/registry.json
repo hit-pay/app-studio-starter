@@ -382,7 +382,7 @@
       "name": "app-shell",
       "type": "registry:ui",
       "title": "App Shell",
-      "description": "Fills the HitPay dashboard iframe. Header spans full width above nav. Several pages: AppShellNav + AppShellNavItem (active pill). No user/login card. No outer border.",
+      "description": "Fills the HitPay dashboard iframe. Header then tab bar for several pages (AppShellNavItem active underline). No sidebar. No user/login card. No outer border.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [

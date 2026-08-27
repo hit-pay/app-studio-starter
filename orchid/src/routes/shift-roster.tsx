@@ -3,22 +3,11 @@ import { CalendarClockIcon, RepeatIcon, UserRoundIcon } from 'lucide-react'
 import { createFileRoute } from '@tanstack/react-router'
 
 import { DocExamplePage } from '@/components/doc/doc-example-page'
-import {
-  AppShell,
-  AppShellNav,
-  AppShellNavGroup,
-  AppShellNavItem,
-} from '@/components/ui/app-shell'
+import { AppShell } from '@/components/ui/app-shell'
 import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { ConfirmDialog } from '@/components/ui/confirm-dialog'
-import {
-  DetailList,
-  DetailListGrid,
-  DetailListHeader,
-  DetailListRow,
-  DetailListTitle,
-} from '@/components/ui/detail-list'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { PageTitle } from '@/components/ui/page-title'
 import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/components/ui/schema-form'
 import {
@@ -27,7 +16,6 @@ import {
   type SchemaTableRow,
   type SchemaTableSchema,
 } from '@/components/ui/schema-table'
-import { Sheet, SheetContent } from '@/components/ui/sheet'
 import { StatCard } from '@/components/ui/stat-card'
 import { toast } from '@/components/ui/toast'
 import { TooltipProvider } from '@/components/ui/tooltip'
@@ -35,8 +23,6 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 export const Route = createFileRoute('/shift-roster')({
   component: ShiftRosterDocsPage,
 })
-
-type Page = 'week' | 'assign' | 'settings'
 
 const WEEKDAYS = [
   { value: 'Monday', label: 'Monday' },
@@ -64,6 +50,12 @@ const SHIFTS = [
   { value: 'morning', label: 'Morning 9–15' },
   { value: 'afternoon', label: 'Afternoon 15–21' },
   { value: 'night', label: 'Night 21–9' },
+]
+
+const ROLES = [
+  { value: 'Supervisor', label: 'Supervisor' },
+  { value: 'Cashier', label: 'Cashier' },
+  { value: 'Floor', label: 'Floor' },
 ]
 
 const ROSTER_SCHEMA: SchemaTableSchema = {
@@ -165,7 +157,7 @@ const SEED: SchemaTableRow[] = [
   },
 ]
 
-function assignFields(): SchemaFormField[] {
+function assignFields(row?: SchemaTableRow | null): SchemaFormField[] {
   return [
     {
       key: 'section',
@@ -179,19 +171,15 @@ function assignFields(): SchemaFormField[] {
       type: 'combobox',
       required: true,
       options: STAFF,
-      value: 'maya',
+      value: STAFF.find((item) => item.label === row?.staff)?.value ?? 'maya',
     },
     {
       key: 'role',
       title: 'Role',
       type: 'select',
       required: true,
-      options: [
-        { value: 'Supervisor', label: 'Supervisor' },
-        { value: 'Cashier', label: 'Cashier' },
-        { value: 'Floor', label: 'Floor' },
-      ],
-      value: 'Cashier',
+      options: ROLES,
+      value: row ? String(row.role) : 'Cashier',
     },
     {
       key: 'outlet',
@@ -199,7 +187,7 @@ function assignFields(): SchemaFormField[] {
       type: 'select',
       required: true,
       options: OUTLETS,
-      value: 'orchard',
+      value: OUTLETS.find((item) => item.label === row?.outlet)?.value ?? 'orchard',
     },
     {
       key: 'weekdays',
@@ -207,7 +195,7 @@ function assignFields(): SchemaFormField[] {
       type: 'checkbox-group',
       required: true,
       options: WEEKDAYS,
-      value: ['Monday'],
+      value: row ? [String(row.weekday)] : ['Monday'],
     },
     {
       key: 'shift',
@@ -215,13 +203,13 @@ function assignFields(): SchemaFormField[] {
       type: 'select',
       required: true,
       options: SHIFTS,
-      value: 'morning',
+      value: SHIFTS.find((item) => item.label === row?.shift)?.value ?? 'morning',
     },
     {
       key: 'publish',
       title: 'Publish this template',
       type: 'switch',
-      value: true,
+      value: row ? row.status === 'Published' : true,
     },
   ]
 }
@@ -256,38 +244,55 @@ function settingsFields(): SchemaFormField[] {
 }
 
 function ShiftRosterApp() {
-  const [page, setPage] = useState<Page>('week')
   const [rows, setRows] = useState(SEED)
   const [formKey, setFormKey] = useState(0)
-  const [edit, setEdit] = useState<SchemaTableRow | null>(null)
+  const [sheet, setSheet] = useState<null | 'create' | SchemaTableRow>(null)
+  const [settingsOpen, setSettingsOpen] = useState(false)
   const [remove, setRemove] = useState<SchemaTableRow | null>(null)
 
+  const editing = sheet && sheet !== 'create' ? sheet : null
+
   const assign = useSchemaForm({
-    fields: useMemo(() => assignFields(), [formKey]),
+    fields: useMemo(() => assignFields(editing), [editing, formKey]),
     onSubmit: (values) => {
       const staff = STAFF.find((item) => item.value === values.staff)?.label ?? String(values.staff)
       const outlet = OUTLETS.find((item) => item.value === values.outlet)?.label ?? String(values.outlet)
       const shift = SHIFTS.find((item) => item.value === values.shift)?.label ?? String(values.shift)
       const days = Array.isArray(values.weekdays) ? values.weekdays.map(String) : ['Monday']
       const status = values.publish ? 'Published' : 'Draft'
-      const next = days.map((weekday, index) => ({
-        id: `r-${Date.now()}-${index}`,
-        staff,
-        role: String(values.role ?? 'Cashier'),
-        outlet,
-        weekday,
-        shift,
-        repeats: 'Weekly',
-        status,
-      }))
-      setRows((current) => [...next, ...current])
+      const role = String(values.role ?? 'Cashier')
+
+      if (editing) {
+        const weekday = days[0] ?? String(editing.weekday)
+        setRows((current) =>
+          current.map((row) =>
+            row.id === editing.id
+              ? { ...row, staff, role, outlet, weekday, shift, status }
+              : row,
+          ),
+        )
+        toast.add({ title: 'Slot updated', type: 'success' })
+      } else {
+        const next = days.map((weekday, index) => ({
+          id: `r-${Date.now()}-${index}`,
+          staff,
+          role,
+          outlet,
+          weekday,
+          shift,
+          repeats: 'Weekly',
+          status,
+        }))
+        setRows((current) => [...next, ...current])
+        toast.add({
+          title: `${staff} repeats weekly`,
+          description: days.join(', '),
+          type: 'success',
+        })
+      }
+
+      setSheet(null)
       setFormKey((key) => key + 1)
-      toast.add({
-        title: `${staff} repeats weekly`,
-        description: days.join(', '),
-        type: 'success',
-      })
-      setPage('week')
     },
   })
 
@@ -295,12 +300,18 @@ function ShiftRosterApp() {
     fields: settingsFields(),
     onSubmit: () => {
       toast.add({ title: 'Weekly rules saved', type: 'success' })
+      setSettingsOpen(false)
     },
   })
 
   const table = useSchemaTable({ schema: ROSTER_SCHEMA, data: rows })
   const people = new Set(rows.map((row) => String(row.staff))).size
   const weekdaysCovered = new Set(rows.map((row) => String(row.weekday))).size
+
+  function openCreate() {
+    setFormKey((key) => key + 1)
+    setSheet('create')
+  }
 
   return (
     <TooltipProvider>
@@ -315,118 +326,69 @@ function ShiftRosterApp() {
                   Manager
                 </Badge>
               }
+              actions={
+                <>
+                  <Button variant="Secondary" style="Border" onClick={() => setSettingsOpen(true)}>
+                    Week rules
+                  </Button>
+                  <Button variant="Primary" onClick={openCreate}>
+                    Add recurring
+                  </Button>
+                </>
+              }
             />
           </div>
-        }
-        nav={
-          <AppShellNav>
-            <AppShellNavGroup>
-              <AppShellNavItem active={page === 'week'} onClick={() => setPage('week')}>
-                Weekly template
-              </AppShellNavItem>
-              <AppShellNavItem active={page === 'assign'} onClick={() => setPage('assign')}>
-                Add recurring
-              </AppShellNavItem>
-            </AppShellNavGroup>
-            <AppShellNavGroup label="Settings">
-              <AppShellNavItem active={page === 'settings'} onClick={() => setPage('settings')}>
-                Week rules
-              </AppShellNavItem>
-            </AppShellNavGroup>
-          </AppShellNav>
         }
       >
-        {page === 'week' ? (
-          <div className="flex flex-col gap-4">
-            <PageTitle
-              title="Weekly template"
-              description="Each row repeats every week on that weekday."
-              actions={
-                <Button variant="Primary" onClick={() => setPage('assign')}>
-                  Add recurring
-                </Button>
+        <div className="flex flex-col gap-4">
+          <div className="grid gap-4 sm:grid-cols-3">
+            <StatCard icon={<RepeatIcon />} iconColor="Blue" title="Recurring slots" content={String(rows.length)} />
+            <StatCard icon={<UserRoundIcon />} iconColor="Green" title="Staff" content={String(people)} />
+            <StatCard
+              icon={<CalendarClockIcon />}
+              iconColor="Grey"
+              title="Weekdays covered"
+              content={`${weekdaysCovered}/7`}
+            />
+          </div>
+          <SchemaTable
+            table={table}
+            onRowAction={(action, row) => {
+              if (action === 'edit') {
+                setFormKey((key) => key + 1)
+                setSheet(row)
               }
-            />
-            <div className="grid gap-4 sm:grid-cols-3">
-              <StatCard icon={<RepeatIcon />} iconColor="Blue" title="Recurring slots" content={String(rows.length)} />
-              <StatCard icon={<UserRoundIcon />} iconColor="Green" title="Staff" content={String(people)} />
-              <StatCard
-                icon={<CalendarClockIcon />}
-                iconColor="Grey"
-                title="Weekdays covered"
-                content={`${weekdaysCovered}/7`}
-              />
-            </div>
-            <SchemaTable
-              table={table}
-              onRowAction={(action, row) => {
-                if (action === 'edit') setEdit(row)
-                if (action === 'delete') setRemove(row)
-              }}
-              emptyActions={
-                <Button variant="Primary" onClick={() => setPage('assign')}>
-                  Add first recurring slot
-                </Button>
-              }
-            />
-          </div>
-        ) : null}
-
-        {page === 'assign' ? (
-          <div className="flex max-w-xl flex-col gap-6">
-            <PageTitle
-              title="Add recurring"
-              description="Pick weekdays. The slot repeats every week until you delete it."
-            />
-            <SchemaForm key={formKey} id="roster-assign" form={assign} />
-            <Button type="submit" form="roster-assign">
-              Save weekly slot
-            </Button>
-          </div>
-        ) : null}
-
-        {page === 'settings' ? (
-          <div className="flex max-w-xl flex-col gap-6">
-            <PageTitle title="Week rules" description="Applies to this demo template only." />
-            <SchemaForm form={settings} id="roster-settings" />
-            <Button type="submit" form="roster-settings">
-              Save rules
-            </Button>
-          </div>
-        ) : null}
-
-        <Sheet open={Boolean(edit)} onOpenChange={(open) => !open && setEdit(null)}>
-          <SheetContent
-            side="Right"
-            size="Small"
-            title="Recurring shift"
-            confirmLabel="Publish"
-            onConfirm={() => {
-              if (!edit) return
-              setRows((current) =>
-                current.map((row) => (row.id === edit.id ? { ...row, status: 'Published' } : row)),
-              )
-              toast.add({ title: 'Slot published', type: 'success' })
-              setEdit(null)
+              if (action === 'delete') setRemove(row)
             }}
+            emptyActions={
+              <Button variant="Primary" onClick={openCreate}>
+                Add first recurring slot
+              </Button>
+            }
+          />
+        </div>
+
+        <Dialog open={sheet != null} onOpenChange={(open) => !open && setSheet(null)}>
+          <DialogContent
+            title={editing ? 'Edit recurring slot' : 'Add recurring'}
+            description="Pick weekdays. The slot repeats every week until you delete it."
+            confirmLabel="Save"
+            onConfirm={() => void assign.submit()}
           >
-            {edit ? (
-              <DetailList>
-                <DetailListHeader>
-                  <DetailListTitle>{String(edit.staff)}</DetailListTitle>
-                </DetailListHeader>
-                <DetailListGrid columns={1}>
-                  <DetailListRow label="Role">{String(edit.role)}</DetailListRow>
-                  <DetailListRow label="Outlet">{String(edit.outlet)}</DetailListRow>
-                  <DetailListRow label="Every">{String(edit.weekday)}</DetailListRow>
-                  <DetailListRow label="Shift">{String(edit.shift)}</DetailListRow>
-                  <DetailListRow label="Repeats">{String(edit.repeats)}</DetailListRow>
-                  <DetailListRow label="Status">{String(edit.status)}</DetailListRow>
-                </DetailListGrid>
-              </DetailList>
-            ) : null}
-          </SheetContent>
-        </Sheet>
+            <SchemaForm key={formKey} form={assign} />
+          </DialogContent>
+        </Dialog>
+
+        <Dialog open={settingsOpen} onOpenChange={setSettingsOpen}>
+          <DialogContent
+            title="Week rules"
+            description="Applies to this demo template only."
+            confirmLabel="Save rules"
+            onConfirm={() => void settings.submit()}
+          >
+            <SchemaForm form={settings} />
+          </DialogContent>
+        </Dialog>
 
         <ConfirmDialog
           open={Boolean(remove)}

@@ -29,15 +29,16 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 | Actions, not a value | `DropdownMenu` |
 | In-page notice | `Alert` (`color="Default"` = green; `Grey` = neutral). Place above `PageTitle`. |
 | Floating notice | `toast.add({ title, description, type })` + root `Toaster` |
+| Create / edit form | Centered `Dialog` + `DialogContent` (`title` required; packed footer) + SchemaForm. Not a right Sheet. |
 | Custom overlay | `Dialog` + `DialogContent` (`title` required; packed footer) |
-| Side / edge panel | `Sheet` (`side` Right\|Left\|Top\|Bottom). Not a swipe Drawer. |
+| Side / edge panel | `Sheet` (`side` Right\|Left\|Top\|Bottom) for filters / peek. Not default create/edit. Not a swipe Drawer. |
 | Command palette | `CommandDialog` + `Command` + `CommandInput` + `CommandItem` |
 | Shortcut keys | `Kbd` / `KbdGroup` |
 | One expand panel | `Collapsible` (several sections: `Accordion`) |
 | Bounded custom scroll | `ScrollArea` (page: native overflow) |
 | Page path | `Breadcrumb` |
 | List pages | `Pagination` (`PaginationInfo` for the range label) |
-| Page chrome | `AppShell`: header full width above nav. Several pages: `AppShellNavItem active`. No user card. |
+| Page chrome | `AppShell`: header, then tab bar for several pages (`AppShellNavItem active`). No sidebar. No user card. |
 | Table chrome | `Table` for a small read-only grid (no select, no row actions). Lists with search/filter/sort/select: `SchemaTable`. |
 | JSON list (search/filter/sort/page) | `SchemaTable` + `useSchemaTable`. Chrome is `Table` + `Pagination`. |
 | Indeterminate load | `Spinner` (Skeleton = placeholder; Progress = known total) |

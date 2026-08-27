@@ -1,21 +1,21 @@
-import { useState, type ComponentProps, type ReactNode } from 'react'
-import { MenuIcon } from 'lucide-react'
+import type { ComponentProps, ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
-import { Button } from './button'
 
 function AppShell({
   className,
   nav,
+  tabs,
   header,
   children,
   ...props
 }: ComponentProps<'div'> & {
   nav?: ReactNode
+  tabs?: ReactNode
   header?: ReactNode
   children: ReactNode
 }) {
-  const [navOpen, setNavOpen] = useState(false)
+  const tabBar = tabs ?? nav
 
   return (
     <div
@@ -26,63 +26,22 @@ function AppShell({
       )}
       {...props}
     >
-      {header || nav ? (
-        <div data-slot="app-shell-header" className="flex min-w-0 shrink-0 items-start">
-          {nav ? (
-            <div className="flex shrink-0 items-center py-3 pl-3 md:hidden">
-              <Button
-                type="button"
-                variant="Secondary"
-                style="Border"
-                size="Small"
-                iconOnly
-                aria-label="Open menu"
-                aria-expanded={navOpen}
-                onClick={() => setNavOpen(true)}
-              >
-                <MenuIcon />
-              </Button>
-            </div>
-          ) : null}
-          {header ? <div className="min-w-0 flex-1">{header}</div> : null}
+      {header ? (
+        <div data-slot="app-shell-header" className="min-w-0 shrink-0">
+          {header}
         </div>
       ) : null}
-      <div className="relative flex min-h-0 min-w-0 flex-1">
-        {nav ? (
-          <>
-            {navOpen ? (
-              <button
-                type="button"
-                aria-label="Close menu"
-                className="absolute inset-0 z-40 bg-oc-foreground/20 md:hidden"
-                onClick={() => setNavOpen(false)}
-              />
-            ) : null}
-            <aside
-              data-slot="app-shell-nav"
-              className={cn(
-                'z-50 w-60 shrink-0 flex-col bg-oc-background',
-                'max-md:absolute max-md:inset-y-0 max-md:left-0 max-md:shadow-oc-popup',
-                navOpen ? 'flex' : 'hidden',
-                'md:relative md:flex',
-              )}
-              onClick={(event) => {
-                if (!(event.target instanceof Element)) return
-                if (!event.target.closest('[data-slot=app-shell-nav-item]')) return
-                setNavOpen(false)
-              }}
-            >
-              {nav}
-            </aside>
-          </>
-        ) : null}
-        <main
-          data-slot="app-shell-main"
-          className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-6"
-        >
-          {children}
-        </main>
-      </div>
+      {tabBar ? (
+        <div data-slot="app-shell-tabs" className="min-w-0 shrink-0">
+          {tabBar}
+        </div>
+      ) : null}
+      <main
+        data-slot="app-shell-main"
+        className="min-h-0 min-w-0 flex-1 overflow-x-hidden overflow-y-auto p-4 md:p-6"
+      >
+        {children}
+      </main>
     </div>
   )
 }
@@ -91,7 +50,10 @@ function AppShellNav({ className, ...props }: ComponentProps<'nav'>) {
   return (
     <nav
       data-slot="app-shell-nav-list"
-      className={cn('flex min-h-0 flex-1 flex-col gap-4 overflow-y-auto px-4 py-3 md:px-6', className)}
+      className={cn(
+        'relative flex min-w-0 items-stretch gap-0 overflow-x-auto border-b border-solid border-oc-border px-4 md:px-6',
+        className,
+      )}
       {...props}
     />
   )
@@ -99,17 +61,16 @@ function AppShellNav({ className, ...props }: ComponentProps<'nav'>) {
 
 function AppShellNavGroup({
   className,
-  label,
+  label: _label,
   children,
   ...props
 }: ComponentProps<'div'> & { label?: string }) {
   return (
-    <div data-slot="app-shell-nav-group" className={cn('flex flex-col gap-0.5', className)} {...props}>
-      {label ? (
-        <p className="px-3 pt-0.5 pb-1 text-[10px] font-medium leading-[18px] tracking-[0.18em] text-oc-muted-foreground uppercase">
-          {label}
-        </p>
-      ) : null}
+    <div
+      data-slot="app-shell-nav-group"
+      className={cn('flex min-w-0 shrink-0 items-stretch', className)}
+      {...props}
+    >
       {children}
     </div>
   )
@@ -126,10 +87,10 @@ function AppShellNavItem({
       data-slot="app-shell-nav-item"
       data-active={active || undefined}
       className={cn(
-        'flex w-full cursor-pointer items-center rounded-md px-3 py-1.5 text-left text-sm font-normal leading-5 text-oc-foreground outline-none',
-        'hover:bg-oc-dark-blue-soft hover:text-oc-dark-blue',
+        'relative inline-flex shrink-0 cursor-pointer items-center justify-center px-3 py-2 text-sm leading-[1.5] font-medium whitespace-nowrap text-oc-muted-foreground outline-none select-none',
+        'hover:text-oc-foreground',
         active &&
-          'bg-oc-dark-blue-soft font-medium text-oc-dark-blue hover:bg-[color-mix(in_srgb,var(--oc-dark-blue)_10%,var(--oc-background))] hover:text-oc-dark-blue',
+          'text-oc-foreground after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 after:bg-oc-primary',
         className,
       )}
       {...props}

@@ -382,7 +382,7 @@
       "name": "app-shell",
       "type": "registry:ui",
       "title": "App Shell",
-      "description": "Fills the HitPay dashboard iframe. Header spans full width above nav. Several pages: AppShellNav + AppShellNavItem (active pill). No user/login card. No outer border.",
+      "description": "Fills the HitPay dashboard iframe. Header then tab bar for several pages (AppShellNavItem active underline). No sidebar. No user/login card. No outer border.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -983,7 +983,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Focused task overlay. Dialog + DialogTrigger + DialogContent (packed: title, optional footer). No DialogHeader/Footer/Title exports. size Small|Medium|Default|Confirmation|Fullscreen. persistent = no backdrop close. Not a side sheet.",
+      "description": "Centered modal. Default for create/edit (SchemaForm). Dialog + DialogTrigger + DialogContent (packed: title, optional footer). No DialogHeader/Footer/Title exports. size Small|Medium|Default|Confirmation|Fullscreen. persistent = no backdrop close. Not a side sheet.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -1004,7 +1004,7 @@
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
-      "description": "Edge panel complementary to the page (edit row, filters). Sheet + Trigger + Content. side Right|Left|Top|Bottom, size Small|Medium|Default. Packed title/footer like Dialog. Not a centered Dialog. Not a swipe Drawer (keep app drawer for mobile snap/swipe).",
+      "description": "Edge panel complementary to the page (filters, peek). Sheet + Trigger + Content. side Right|Left|Top|Bottom, size Small|Medium|Default. Packed title/footer like Dialog. Create/edit defaults to centered Dialog, not Sheet. Not a swipe Drawer.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",

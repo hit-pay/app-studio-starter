@@ -20,6 +20,7 @@ import {
   type SchemaTableRow,
   type SchemaTableSchema,
 } from '@/components/ui/schema-table'
+import { Dialog, DialogContent } from '@/components/ui/dialog'
 import { StatCard } from '@/components/ui/stat-card'
 import { toast } from '@/components/ui/toast'
 import { TooltipProvider } from '@/components/ui/tooltip'
@@ -28,7 +29,7 @@ export const Route = createFileRoute('/stock-counter')({
   component: StockCounterDocsPage,
 })
 
-type Page = 'count' | 'inventory' | 'history'
+type Page = 'inventory' | 'history'
 
 const PRODUCTS = [
   { value: 'sku-milk', label: 'Fresh milk 1L', sku: 'MILK-1L', location: 'Chiller' },
@@ -65,7 +66,7 @@ const INVENTORY_SCHEMA: SchemaTableSchema = {
     defaultDir: 'asc',
   },
   pagination: { pageSize: 8, pageSizes: [8, 20] },
-  rowActions: ['delete'],
+  rowActions: ['edit', 'delete'],
   columns: [
     { key: 'sku', title: 'SKU', type: 'text', locked: true },
     { key: 'name', title: 'Product', type: 'text' },
@@ -91,9 +92,14 @@ const HISTORY_SCHEMA: SchemaTableSchema = {
   ],
 }
 
-function countFields(): SchemaFormField[] {
+function countFields(row?: SchemaTableRow | null): SchemaFormField[] {
   return [
-    { key: 'section', title: 'Floor count', type: 'section', description: 'Tap a SKU, then the quantity on the shelf.' },
+    {
+      key: 'section',
+      title: 'Floor count',
+      type: 'section',
+      description: 'Tap a SKU, then the quantity on the shelf.',
+    },
     {
       key: 'product',
       title: 'Product',
@@ -101,16 +107,31 @@ function countFields(): SchemaFormField[] {
       required: true,
       placeholder: 'Search product',
       options: PRODUCTS.map((item) => ({ value: item.value, label: `${item.label} · ${item.sku}` })),
-      value: 'sku-milk',
+      value: row?.id ?? 'sku-milk',
     },
-    { key: 'qty', title: 'Quantity on hand', type: 'quantity', required: true, min: 0, max: 999, value: 0 },
-    { key: 'note', title: 'Note', type: 'textarea', placeholder: 'Damaged, expiry, missing…', value: '' },
+    {
+      key: 'qty',
+      title: 'Quantity on hand',
+      type: 'quantity',
+      required: true,
+      min: 0,
+      max: 999,
+      value: row ? Number(row.qty) : 0,
+    },
+    {
+      key: 'note',
+      title: 'Note',
+      type: 'textarea',
+      placeholder: 'Damaged, expiry, missing…',
+      value: '',
+    },
   ]
 }
 
 function StockCounterApp() {
-  const [page, setPage] = useState<Page>('count')
+  const [page, setPage] = useState<Page>('inventory')
   const [formKey, setFormKey] = useState(0)
+  const [countRow, setCountRow] = useState<SchemaTableRow | null | 'new'>(null)
   const [inventory, setInventory] = useState<SchemaTableRow[]>([
     { id: 'sku-milk', sku: 'MILK-1L', name: 'Fresh milk 1L', location: 'Chiller', qty: 12, status: 'In stock' },
     { id: 'sku-bread', sku: 'BRD-WHT', name: 'White loaf', location: 'Bakery', qty: 4, status: 'Low' },
@@ -123,17 +144,17 @@ function StockCounterApp() {
   ])
   const [remove, setRemove] = useState<SchemaTableRow | null>(null)
 
+  const counting = countRow && countRow !== 'new' ? countRow : null
+
   const count = useSchemaForm({
-    fields: useMemo(() => countFields(), [formKey]),
+    fields: useMemo(() => countFields(counting), [counting, formKey]),
     onSubmit: (values) => {
       const product = PRODUCTS.find((item) => item.value === values.product)
       if (!product) return
       const qty = Number(values.qty) || 0
       const status = qty <= 5 ? 'Low' : 'In stock'
       setInventory((current) =>
-        current.map((row) =>
-          row.id === product.value ? { ...row, qty, status } : row,
-        ),
+        current.map((row) => (row.id === product.value ? { ...row, qty, status } : row)),
       )
       setHistory((current) => [
         {
@@ -146,8 +167,8 @@ function StockCounterApp() {
         ...current,
       ])
       setFormKey((key) => key + 1)
+      setCountRow(null)
       toast.add({ title: `${product.label} set to ${qty}`, type: 'success' })
-      setPage('inventory')
     },
   })
 
@@ -156,6 +177,11 @@ function StockCounterApp() {
 
   const units = inventory.reduce((sum, row) => sum + Number(row.qty || 0), 0)
   const low = inventory.filter((row) => row.status === 'Low').length
+
+  function openCount(row?: SchemaTableRow) {
+    setFormKey((key) => key + 1)
+    setCountRow(row ?? 'new')
+  }
 
   return (
     <TooltipProvider>
@@ -170,45 +196,31 @@ function StockCounterApp() {
                   Staff
                 </Badge>
               }
-            />
-          </div>
-        }
-        nav={
-            <AppShellNav>
-              <AppShellNavGroup>
-                <AppShellNavItem active={page === 'count'} onClick={() => setPage('count')}>
-                  Count stock
-                </AppShellNavItem>
-                <AppShellNavItem active={page === 'inventory'} onClick={() => setPage('inventory')}>
-                  Inventory
-                </AppShellNavItem>
-                <AppShellNavItem active={page === 'history'} onClick={() => setPage('history')}>
-                  Count history
-                </AppShellNavItem>
-              </AppShellNavGroup>
-            </AppShellNav>
-        }
-      >
-        {page === 'count' ? (
-          <div className="flex max-w-xl flex-col gap-6">
-            <PageTitle title="Count stock" description="Updates on-hand quantity for this demo. No warehouse sync." />
-            <SchemaForm key={formKey} id="stock-count" form={count} />
-            <Button type="submit" form="stock-count">
-              Save count
-            </Button>
-          </div>
-        ) : null}
-
-        {page === 'inventory' ? (
-          <div className="flex flex-col gap-4">
-            <PageTitle
-              title="Inventory"
               actions={
-                <Button variant="Primary" onClick={() => setPage('count')}>
-                  Count now
-                </Button>
+                page === 'inventory' ? (
+                  <Button variant="Primary" onClick={() => openCount()}>
+                    Count now
+                  </Button>
+                ) : null
               }
             />
+          </div>
+        }
+        tabs={
+          <AppShellNav>
+            <AppShellNavGroup>
+              <AppShellNavItem active={page === 'inventory'} onClick={() => setPage('inventory')}>
+                Inventory
+              </AppShellNavItem>
+              <AppShellNavItem active={page === 'history'} onClick={() => setPage('history')}>
+                Count history
+              </AppShellNavItem>
+            </AppShellNavGroup>
+          </AppShellNav>
+        }
+      >
+        {page === 'inventory' ? (
+          <div className="flex flex-col gap-4">
             <div className="grid gap-4 sm:grid-cols-3">
               <StatCard icon={<PackageIcon />} iconColor="Blue" title="SKUs" content={String(inventory.length)} />
               <StatCard icon={<BoxesIcon />} iconColor="Green" title="Units on hand" content={String(units)} />
@@ -217,10 +229,11 @@ function StockCounterApp() {
             <SchemaTable
               table={inventoryTable}
               onRowAction={(action, row) => {
+                if (action === 'edit') openCount(row)
                 if (action === 'delete') setRemove(row)
               }}
               emptyActions={
-                <Button variant="Primary" onClick={() => setPage('count')}>
+                <Button variant="Primary" onClick={() => openCount()}>
                   Count first SKU
                 </Button>
               }
@@ -230,10 +243,21 @@ function StockCounterApp() {
 
         {page === 'history' ? (
           <div className="flex flex-col gap-4">
-            <PageTitle title="Count history" description="Every save from Count stock." />
+            <PageTitle title="Count history" description="Every save from Count now." />
             <SchemaTable table={historyTable} />
           </div>
         ) : null}
+
+        <Dialog open={countRow != null} onOpenChange={(open) => !open && setCountRow(null)}>
+          <DialogContent
+            title="Count stock"
+            description="Updates on-hand quantity for this demo."
+            confirmLabel="Save count"
+            onConfirm={() => void count.submit()}
+          >
+            <SchemaForm key={formKey} form={count} />
+          </DialogContent>
+        </Dialog>
 
         <ConfirmDialog
           open={Boolean(remove)}

@@ -17,9 +17,9 @@ function SheetExamplesPage() {
 import { Button } from '@/orchid-ui/button'
 
 <Sheet>
-  <SheetTrigger render={<Button variant="Secondary" />}>Edit invoice</SheetTrigger>
-  <SheetContent side="Right" title="Edit INV-2048" description="Changes apply to this invoice only.">
-    {/* form fields */}
+  <SheetTrigger render={<Button variant="Secondary" />}>Details</SheetTrigger>
+  <SheetContent side="Right" title="Invoice peek" description="Read-only side panel. Create/edit uses Dialog.">
+    {/* peek content */}
   </SheetContent>
 </Sheet>`}
     >
@@ -28,11 +28,11 @@ import { Button } from '@/orchid-ui/button'
           Right
         </p>
         <Sheet>
-          <SheetTrigger render={<Button variant="Secondary" />}>Edit invoice</SheetTrigger>
+          <SheetTrigger render={<Button variant="Secondary" />}>Details</SheetTrigger>
           <SheetContent
             side="Right"
-            title="Edit INV-2048"
-            description="Changes apply to this invoice only."
+            title="Invoice peek"
+            description="Read-only side panel. Create/edit uses a centered Dialog."
           >
             <Field>
               <FieldLabel htmlFor="sheet-memo">Memo</FieldLabel>

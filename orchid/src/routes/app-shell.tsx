@@ -23,23 +23,23 @@ function AppShellExamplesPage() {
       <div className="flex flex-col gap-8">
         <div className="flex flex-col gap-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            With nav
+            With tabs
           </p>
           <p className="text-sm text-oc-muted-foreground">
-            Several pages. Header is full width above the nav, like HitPay settings. On small screens
-            the nav is a menu (hamburger), not a permanently hidden sidebar. Use AppShellNavItem with
-            active for the current route. Do not show a signed-in user.
+            Several pages. Header then a tab bar (same look as Tabs Default), then main. Use
+            AppShellNavItem with active for the current route. No sidebar. Do not show a signed-in
+            user.
           </p>
           <Preview>
             <AppShell
-              nav={
+              tabs={
                 <AppShellNav>
                   <AppShellNavGroup>
                     <AppShellNavItem active>General settings</AppShellNavItem>
                     <AppShellNavItem>Tracking Tools</AppShellNavItem>
                     <AppShellNavItem>SEO</AppShellNavItem>
                   </AppShellNavGroup>
-                  <AppShellNavGroup label="Settings">
+                  <AppShellNavGroup>
                     <AppShellNavItem>Tax Settings</AppShellNavItem>
                     <AppShellNavItem>Button Labels</AppShellNavItem>
                   </AppShellNavGroup>
@@ -58,9 +58,9 @@ function AppShellExamplesPage() {
 
         <div className="flex flex-col gap-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Without nav
+            Without tabs
           </p>
-          <p className="text-sm text-oc-muted-foreground">Single screen. Omit nav.</p>
+          <p className="text-sm text-oc-muted-foreground">Single screen. Omit tabs.</p>
           <Preview>
             <AppShell
               header={
