@@ -3,6 +3,7 @@ import type { ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { PageTitle } from '@/components/ui/page-title'
 import { DOC_BLOCKS, DOC_COMPONENTS, DOC_FORMS } from './doc-components'
+import { DocCodePanel } from './doc-code-panel'
 
 type DocPath =
   | (typeof DOC_COMPONENTS)[number]['to']
@@ -12,11 +13,13 @@ type DocPath =
 
 function DocExamplePage({
   to,
+  usage,
   className,
   bodyClassName,
   children,
 }: {
   to: DocPath
+  usage?: string
   className?: string
   bodyClassName?: string
   children: ReactNode
@@ -45,6 +48,14 @@ function DocExamplePage({
           )}
         >
           {children}
+          {usage ? (
+            <div className="flex min-w-0 flex-col gap-3">
+              <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+                Usage
+              </p>
+              <DocCodePanel filename="usage.tsx" code={usage} />
+            </div>
+          ) : null}
         </div>
       </section>
     </main>

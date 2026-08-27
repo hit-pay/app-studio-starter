@@ -10,7 +10,28 @@ export const Route = createFileRoute('/empty-state')({
 
 function EmptyStateExamplesPage() {
   return (
-    <DocExamplePage to="/empty-state">
+    <DocExamplePage
+      to="/empty-state"
+      usage={`import { EmptyState } from '@/orchid-ui/empty-state'
+import { Button } from '@/orchid-ui/button'
+import { PlusIcon } from 'lucide-react'
+
+<EmptyState
+  type="Default"
+  title="No invoices yet"
+  description="Create an invoice to bill a customer by email or payment link."
+  actions={
+    <Button variant="Primary" size="Small">
+      <PlusIcon />
+      Create invoice
+    </Button>
+  }
+/>
+
+<EmptyState type="Search" title="No matching invoices" description="Try another invoice number." />
+
+<EmptyState type="Upgrade" title="Upgrade to Point of Sale" description="Accept in-store payments on a HitPay terminal." />`}
+    >
       <div className="grid gap-12 md:grid-cols-2">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">

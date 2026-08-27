@@ -15,7 +15,25 @@ export const Route = createFileRoute('/page-title')({
 
 function PageTitleExamplesPage() {
   return (
-    <DocExamplePage to="/page-title">
+    <DocExamplePage
+      to="/page-title"
+      usage={`import { PageTitle } from '@/orchid-ui/page-title'
+import { Button } from '@/orchid-ui/button'
+import { Chip } from '@/orchid-ui/chip'
+
+<PageTitle
+  title="Invoices"
+  description="Create, send, and track invoices across payment channels."
+  chip={<Chip color="Green">Paid</Chip>}
+  actions={<Button variant="Primary">Create invoice</Button>}
+/>
+
+<PageTitle
+  title="INV-2048"
+  description="https://pay.hitpayapp.com/inv-2048"
+  copyValue="https://pay.hitpayapp.com/inv-2048"
+/>`}
+    >
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Invoices

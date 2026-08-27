@@ -51,7 +51,27 @@ function ExampleBlock({
 
 function CustomerCardExamplesPage() {
   return (
-    <DocExamplePage to="/customer-card">
+    <DocExamplePage
+      to="/customer-card"
+      usage={`import { CustomerCard } from '@/orchid-ui/customer-card'
+import { Chip } from '@/orchid-ui/chip'
+import { Button } from '@/orchid-ui/button'
+
+<CustomerCard
+  variant="Small"
+  customer={{
+    name: 'Alex Turner',
+    email: 'alex@studio.co',
+    phone: '8373 3739 18',
+    phoneCountryCode: '65',
+  }}
+  chip={<Chip color="Blue">Invoice</Chip>}
+/>
+
+<CustomerCard variant="Big" customer={customer} edit hover />
+
+<CustomerCard variant="Empty" onAdd={() => {}} />`}
+    >
       <ExampleBlock title="Small">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
           <CustomerCard variant="Small" customer={CUSTOMER} />

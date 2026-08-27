@@ -10,11 +10,6 @@ export const DOC_COMPONENTS = [
     description: 'Item states and grouped or ungrouped menus.',
   },
   {
-    to: '/banner' as const,
-    name: 'Banner',
-    description: 'In-page notification above the page header, with actions. Not a floating toast.',
-  },
-  {
     to: '/toast' as const,
     name: 'Toast',
     description: 'Programmatic floating toast via toast.add. Types, action, and Toaster.',
@@ -33,11 +28,6 @@ export const DOC_COMPONENTS = [
     to: '/progress-bar' as const,
     name: 'Progress Bar',
     description: 'Default and Small sizes with current/max label.',
-  },
-  {
-    to: '/list-item' as const,
-    name: 'List Item',
-    description: 'Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.',
   },
   {
     to: '/avatar' as const,
@@ -83,11 +73,6 @@ export const DOC_COMPONENTS = [
     to: '/skeleton' as const,
     name: 'Skeleton',
     description: 'Placeholder pulse while content loads.',
-  },
-  {
-    to: '/empty-state' as const,
-    name: 'Empty State',
-    description: 'Centered empty state with icon, title, description, and actions.',
   },
   {
     to: '/modal' as const,
@@ -178,6 +163,21 @@ export function docFormsByName() {
 }
 
 export const DOC_BLOCKS = [
+  {
+    to: '/banner' as const,
+    name: 'Banner',
+    description: 'In-page notification above the page header, with actions. Not a floating toast.',
+  },
+  {
+    to: '/list-item' as const,
+    name: 'List Item',
+    description: 'Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.',
+  },
+  {
+    to: '/empty-state' as const,
+    name: 'Empty State',
+    description: 'Centered empty state with icon, title, description, and actions.',
+  },
   {
     to: '/customer-card' as const,
     name: 'Customer Card',

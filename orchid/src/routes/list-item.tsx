@@ -28,7 +28,37 @@ export const Route = createFileRoute('/list-item')({
 
 function ListItemExamplesPage() {
   return (
-    <DocExamplePage to="/list-item">
+    <DocExamplePage
+      to="/list-item"
+      usage={`import {
+  ListItem,
+  ListItemBody,
+  ListItemTitle,
+  ListItemDescription,
+  ListItemMeta,
+  ListItemDetail,
+  ListItemHoverActions,
+  ListItemAction,
+} from '@/orchid-ui/list-item'
+import { Chip } from '@/orchid-ui/chip'
+import { MapPinIcon, PencilIcon } from 'lucide-react'
+
+<ListItem>
+  <ListItemBody>
+    <ListItemTitle>Priya Nair</ListItemTitle>
+    <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
+    <ListItemMeta>
+      <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+      <Chip color="Green">Paid</Chip>
+    </ListItemMeta>
+  </ListItemBody>
+  <ListItemHoverActions>
+    <ListItemAction aria-label="Edit">
+      <PencilIcon />
+    </ListItemAction>
+  </ListItemHoverActions>
+</ListItem>`}
+    >
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default

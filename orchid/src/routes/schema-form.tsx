@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
-import { CheckIcon, CopyIcon } from 'lucide-react'
 
+import { DocCodePanel } from '@/components/doc/doc-code-panel'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
 import { DatePicker, DatePickerRange } from '@/components/ui/date-picker'
@@ -310,9 +310,9 @@ Example — combobox multiple
   "value": ["paynow"]
 }`
 
-const USAGE_EXAMPLE = `import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/components/ui/schema-form'
-import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/toast'
+const USAGE_EXAMPLE = `import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/orchid-ui/schema-form'
+import { Button } from '@/orchid-ui/button'
+import { toast } from '@/orchid-ui/toast'
 
 const FIELDS: SchemaFormField[] = [
   {
@@ -382,31 +382,7 @@ function CreateProduct() {
 
 function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
   const code = typeof data === 'string' ? data : JSON.stringify(data, null, 2)
-  const [copied, setCopied] = useState(false)
-
-  return (
-    <div className="flex max-h-[70vh] min-w-0 flex-col overflow-hidden rounded-xl border border-solid border-oc-border bg-oc-muted">
-      <div className="flex shrink-0 items-center justify-between gap-3 border-b border-solid border-oc-border px-3 py-2">
-        <span className="truncate font-mono text-xs text-oc-muted-foreground">{filename}</span>
-        <Button
-          variant="Secondary"
-          style="Border"
-          size="Small"
-          onClick={async () => {
-            await navigator.clipboard.writeText(code)
-            setCopied(true)
-            window.setTimeout(() => setCopied(false), 1600)
-          }}
-        >
-          {copied ? <CheckIcon /> : <CopyIcon />}
-          {copied ? 'Copied' : 'Copy'}
-        </Button>
-      </div>
-      <pre className="min-h-0 flex-1 overflow-auto p-4 text-[13px] leading-5 break-all whitespace-pre-wrap text-oc-foreground">
-        <code>{code}</code>
-      </pre>
-    </div>
-  )
+  return <DocCodePanel filename={filename} code={code} />
 }
 
 function toLocalYmd(date: Date) {
@@ -469,13 +445,13 @@ function SchemaFormExamplesPage() {
   const validating = account.isSubmitting || details.isSubmitting
 
   return (
-    <DocExamplePage to="/schema-form">
+    <DocExamplePage to="/schema-form" usage={USAGE_EXAMPLE}>
       <div className="grid min-w-0 gap-6 xl:grid-cols-3">
         <SchemaForm form={account} className="max-w-none" renderField={renderDateField} />
         <SchemaForm form={details} className="max-w-none" renderField={renderDateField} />
         <div className="flex min-w-0 flex-col gap-4">
           <Button
-            
+            variant="Primary"
             disabled={validating}
             aria-busy={validating}
             onClick={() => void Promise.all([account.submit(), details.submit()])}

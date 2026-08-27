@@ -67,7 +67,35 @@ const BANNER_COLORS = [
 
 function BannerExamplesPage() {
   return (
-    <DocExamplePage to="/banner">
+    <DocExamplePage
+      to="/banner"
+      usage={`import {
+  Banner,
+  BannerIcon,
+  BannerBody,
+  BannerTitle,
+  BannerDescription,
+  BannerAction,
+} from '@/orchid-ui/banner'
+import { Button } from '@/orchid-ui/button'
+import { CheckIcon } from 'lucide-react'
+
+<Banner color="Default" onClose={() => {}}>
+  <BannerIcon>
+    <CheckIcon />
+  </BannerIcon>
+  <BannerBody>
+    <BannerTitle>Invoice created</BannerTitle>
+    <BannerDescription>
+      INV-2048 for SGD 128.00 was created and sent to Priya Nair.
+    </BannerDescription>
+  </BannerBody>
+  <BannerAction>
+    <Button variant="Secondary" size="Small">View invoice</Button>
+    <Button variant="Primary" size="Small">Send reminder</Button>
+  </BannerAction>
+</Banner>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Above page header

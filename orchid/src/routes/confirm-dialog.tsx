@@ -13,7 +13,38 @@ export const Route = createFileRoute('/confirm-dialog')({
 
 function ConfirmDialogExamplesPage() {
   return (
-    <DocExamplePage to="/confirm-dialog">
+    <DocExamplePage
+      to="/confirm-dialog"
+      usage={`import { ConfirmDialog, ConfirmDialogTrigger } from '@/orchid-ui/confirm-dialog'
+import { Button } from '@/orchid-ui/button'
+
+<ConfirmDialog
+  type="Delete"
+  message="Do you want to delete invoice INV-2048?"
+  description="This invoice has not been paid. The action cannot be undone."
+  onConfirm={() => {}}
+>
+  <ConfirmDialogTrigger render={<Button variant="Destructive" />}>
+    Delete invoice
+  </ConfirmDialogTrigger>
+</ConfirmDialog>
+
+<ConfirmDialog
+  type="Warning"
+  message="Deactivate this POS terminal?"
+  onConfirm={() => {}}
+>
+  <ConfirmDialogTrigger render={<Button variant="Secondary" style="Border" />}>
+    Deactivate
+  </ConfirmDialogTrigger>
+</ConfirmDialog>
+
+<ConfirmDialog type="Delete" size="Medium" confirmPhrase="weekend-workshop">
+  <ConfirmDialogTrigger render={<Button variant="Destructive" />}>
+    Delete with phrase
+  </ConfirmDialogTrigger>
+</ConfirmDialog>`}
+    >
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">

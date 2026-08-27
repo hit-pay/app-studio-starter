@@ -166,7 +166,28 @@ function CreateInvoiceExample() {
 
 function PageToolbarExamplesPage() {
   return (
-    <DocExamplePage to="/page-toolbar">
+    <DocExamplePage
+      to="/page-toolbar"
+      usage={`import { PageToolbar } from '@/orchid-ui/page-toolbar'
+import { Button } from '@/orchid-ui/button'
+
+<PageToolbar
+  left="Back"
+  onBack={() => history.back()}
+  actions={
+    <>
+      <Button variant="Secondary" style="Border">Cancel</Button>
+      <Button variant="Primary">Save</Button>
+    </>
+  }
+/>
+
+<PageToolbar
+  left="Close"
+  onBack={close}
+  actions={<Button variant="Primary">Save</Button>}
+/>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Fullscreen — Product Data
