@@ -13,18 +13,18 @@ When you finish, say what they can do now. **Review first**, then preview **once
 ## How to work (keep it small)
 
 1. Follow the prompt. One pass: the screens they named.
-2. Open a skill **only when that topic is in the prompt**. Do not open every skill. Do not invent jobs from the skill list.
+2. Open **`screens.md` for every UI page**. Open **`lists.md` whenever the page has a table/list** (even if the prompt never says Query). Open other skills only when that topic is in the prompt. Do not invent jobs from the skill list.
 3. `PLAN.md` only if the prompt has **several** screens or flows. One short checkbox list, then code. Do not rewrite PLAN.md after every file.
-4. UI: Orchid first — shadcn MCP (`@orchid` only) or catalog **https://orchid-ui-hitpay.vercel.app/registry.json**. Open `components.md`. PascalCase kit props. Never install `@shadcn` items.
+4. UI: Orchid first — shadcn MCP (`@orchid` only) or catalog **https://orchid-ui-hitpay.vercel.app/registry.json**. PascalCase kit props. Never install `@shadcn` items. List CRUD = SchemaTable. Forms = SchemaForm. No generic Card.
 5. Stored data in the prompt → see `database.md`. Display-only → skip DB.
-5b. A list / SchemaTable / search-filter table → see `lists.md` (Query + DB; do not refetch on every keystroke).
 6. Roles in the prompt → see `hitpay.md`. No roles mentioned → skip.
 7. After **all** edits: `review.md` (fix bugs), then `deployment.md` — `generate-routes` if you added/renamed routes, **one** `bun run lint`, then **one** `bun run preview:refresh`.
 
 ## Skills
 
-- UI kit → `.agents/skills/components.md`
-- List pages (SchemaTable fetch) → `.agents/skills/lists.md`
+- Screen recipes → `.agents/skills/screens.md` (**always for UI**)
+- Catalog names → `.agents/skills/components.md`
+- List fetch (SchemaTable) → `.agents/skills/lists.md` (**always if table/list**)
 - Folders / routes → `.agents/skills/architecture.md`
 - Turso → `.agents/skills/database.md`
 - User / roles → `.agents/skills/hitpay.md`

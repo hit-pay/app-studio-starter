@@ -279,7 +279,7 @@ Types
 - radio | checkbox | checkbox-group | accepted | switch
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
-- date | quantity
+- date | datetime | file | quantity
 - object — nest with fields[]
 - hidden | section | section-item — row with title + switch
 - custom via renderField — date-range uses "from+to" or one key with { from, to }

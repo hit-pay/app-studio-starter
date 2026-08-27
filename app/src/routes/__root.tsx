@@ -1,5 +1,6 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
+import { QueryProvider } from '#/lib/query'
 import { Toaster } from '@/components/ui/toast'
 import appCss from '../styles.css?url'
 
@@ -35,12 +36,14 @@ export const Route = createRootRoute({
 
 function RootDocument({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="h-full">
       <head>
         <HeadContent />
       </head>
-      <body>
-        <Toaster>{children}</Toaster>
+      <body className="h-full overflow-hidden">
+        <QueryProvider>
+          <Toaster>{children}</Toaster>
+        </QueryProvider>
         <Scripts />
       </body>
     </html>

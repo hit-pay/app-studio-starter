@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
+import { Route as AppShellRouteImport } from './routes/app-shell'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
@@ -73,6 +74,11 @@ const AccordionRoute = AccordionRouteImport.update({
 const AlertRoute = AlertRouteImport.update({
   id: '/alert',
   path: '/alert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppShellRoute = AppShellRouteImport.update({
+  id: '/app-shell',
+  path: '/app-shell',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AvatarRoute = AvatarRouteImport.update({
@@ -315,6 +321,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -367,6 +374,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -420,6 +428,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -474,6 +483,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/app-shell'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -526,6 +536,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/app-shell'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -578,6 +589,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/app-shell'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -631,6 +643,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
+  AppShellRoute: typeof AppShellRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
@@ -701,6 +714,13 @@ declare module '@tanstack/react-router' {
       path: '/alert'
       fullPath: '/alert'
       preLoaderRoute: typeof AlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app-shell': {
+      id: '/app-shell'
+      path: '/app-shell'
+      fullPath: '/app-shell'
+      preLoaderRoute: typeof AppShellRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/avatar': {
@@ -1039,6 +1059,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
+  AppShellRoute: AppShellRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,

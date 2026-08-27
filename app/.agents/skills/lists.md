@@ -4,7 +4,7 @@ description: SchemaTable + TanStack Query/DB. Open when building a list, table, 
 
 # Lists (SchemaTable data)
 
-Kit (`SchemaTable`) is UI only. Fetch in the app with [TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview) and [TanStack DB](https://tanstack.com/db/latest/docs/quick-start). No TanStack Table. One `QueryClient` / `DbProvider` at the app root — never per page.
+Kit (`SchemaTable`) is UI only. Fetch with `#/lib/query` ([TanStack Query](https://tanstack.com/query/latest/docs/framework/react/overview)). Live collections: [TanStack DB](https://tanstack.com/db/latest/docs/quick-start). No TanStack Table. `QueryProvider` is already on `__root` — never mount another `QueryClient` per page.
 
 ## Pick a mode (do not default to server)
 
@@ -48,6 +48,21 @@ Stable and minimal:
 - Refetch / page change: keep showing `placeholderData` rows. No full-page spinner over a table that already has data.
 - Errors: stay on the table; use `toast.add` or `Alert` above `PageTitle`. Do not unmount SchemaTable.
 
-## Server fn
+## Example (server page)
+
+```tsx
+import { keepPreviousData, useQuery } from '@tanstack/react-query'
+import { useDebouncedValue } from '#/lib/query'
+
+const search = useDebouncedValue(query.search)
+const fetchQuery = { ...query, search }
+const { data } = useQuery({
+  queryKey: ['products', fetchQuery],
+  queryFn: () => listProducts({ data: fetchQuery }),
+  placeholderData: keepPreviousData,
+})
+```
+
+Root `QueryProvider` already sets `staleTime: 30_000` and `refetchOnWindowFocus: false`.
 
 List endpoints take the same fields as `SchemaTableQuery` (search, tab, filters, sort, page). Parameterized SQL. Return `{ rows, total }`. Do not return the full table when `mode: 'server'`.

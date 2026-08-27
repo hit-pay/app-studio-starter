@@ -194,7 +194,7 @@ export const DOC_FORMS = [
   {
     to: '/date-picker' as const,
     name: 'Date Picker',
-    description: 'Popover + Calendar, same composition as shadcn Date Picker.',
+    description: 'Date, date range, and date+time (DateTimePicker).',
   },
   {
     to: '/form-section' as const,
@@ -208,6 +208,11 @@ export function docFormsByName() {
 }
 
 export const DOC_BLOCKS = [
+  {
+    to: '/app-shell' as const,
+    name: 'App Shell',
+    description: 'Header full width above nav. Nav items with active pill. No user card.',
+  },
   {
     to: '/alert' as const,
     name: 'Alert',
@@ -246,12 +251,12 @@ export const DOC_BLOCKS = [
   {
     to: '/schema-form' as const,
     name: 'Schema Form',
-    description: 'TanStack Form plus Orchid fields. Keys: showIf, hidden, maxLength. Types include date, quantity, switch.',
+    description: 'TanStack Form plus Orchid fields. Types include date, datetime, file, quantity, switch.',
   },
   {
     to: '/schema-table' as const,
     name: 'Schema Table',
-    description: 'JSON schema table like SchemaForm: search, tabs, filter, sort, pagination.',
+    description: 'JSON schema table like SchemaForm: search, tabs, filter, sort, Edit Column, pagination.',
   },
 ] as const
 

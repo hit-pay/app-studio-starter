@@ -25,6 +25,7 @@
         "@orchid/stat-card",
         "@orchid/page-toolbar",
         "@orchid/page-title",
+        "@orchid/app-shell",
         "@orchid/form-section",
         "@orchid/detail-list",
         "@orchid/icon-group",
@@ -374,6 +375,21 @@
           "path": "src/components/ui/page-title.tsx",
           "type": "registry:ui",
           "target": "@components/orchid-ui/page-title.tsx"
+        }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:ui",
+      "title": "App Shell",
+      "description": "Fills the HitPay dashboard iframe. Header spans full width above nav. Several pages: AppShellNav + AppShellNavItem (active pill). No user/login card. No outer border.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/app-shell.tsx",
+          "type": "registry:ui",
+          "target": "@components/orchid-ui/app-shell.tsx"
         }
       ]
     },
@@ -943,7 +959,7 @@
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
-      "description": "Pick a day or a date range in a form (shift date, week range). DatePicker or DatePickerRange. Not a full-page calendar widget.",
+      "description": "Pick a day, a range, or a date+time. DatePicker, DatePickerRange, DateTimePicker.",
       "dependencies": [
         "date-fns",
         "lucide-react",
@@ -952,6 +968,7 @@
       "registryDependencies": [
         "@orchid/button",
         "@orchid/calendar",
+        "@orchid/input",
         "@orchid/popover"
       ],
       "files": [
@@ -1029,7 +1046,7 @@
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, hidden. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, quantity, object, section, section-item, hidden, phone. Pair keys with key+ for input-group. Import SCHEMA_FORM_EXAMPLE_FIELDS.",
+      "description": "JSON schema form on TanStack Form. Field keys: showIf, maxLength, hidden. Types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": [
         "@tanstack/react-form"
       ],

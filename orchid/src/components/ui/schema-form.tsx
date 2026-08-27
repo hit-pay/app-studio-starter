@@ -16,7 +16,7 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from './combobox'
-import { DatePicker } from './date-picker'
+import { DatePicker, DateTimePicker } from './date-picker'
 import {
   Field,
   FieldDescription,
@@ -327,6 +327,42 @@ function SchemaForm({
                       onSelect={(next) => field.handleChange(next ?? '')}
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
+                    {invalid ? <FieldError>{message}</FieldError> : null}
+                  </Field>
+                )
+              }
+
+              if (type === 'datetime') {
+                const selected = parseDateValue(value)
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel>{item.title}</FieldLabel>
+                    <DateTimePicker
+                      selected={selected}
+                      onSelect={(next) => field.handleChange(next ?? '')}
+                    />
+                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
+                    {invalid ? <FieldError>{message}</FieldError> : null}
+                  </Field>
+                )
+              }
+
+              if (type === 'file') {
+                const file = value instanceof File ? value : null
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel>{item.title}</FieldLabel>
+                    <Input
+                      type="file"
+                      name={item.path}
+                      onBlur={field.handleBlur}
+                      onChange={(event) => field.handleChange(event.target.files?.[0] ?? '')}
+                    />
+                    {file ? (
+                      <FieldDescription>{file.name}</FieldDescription>
+                    ) : item.description ? (
+                      <FieldDescription>{item.description}</FieldDescription>
+                    ) : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
                   </Field>
                 )

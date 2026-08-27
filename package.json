@@ -7,5 +7,8 @@
     "test": "bun run --cwd orchid test",
     "build": "bun run --cwd orchid build",
     "build:app": "bun run --cwd app build"
+  },
+  "dependencies": {
+    "@tanstack/react-query": "^5.102.7"
   }
 }

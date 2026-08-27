@@ -15,6 +15,8 @@ export const SCHEMA_FORM_TYPES = [
   'hidden',
   'phone',
   'date',
+  'datetime',
+  'file',
   'quantity',
   'section',
   'section-item',
@@ -82,6 +84,8 @@ export const SCHEMA_FORM_EXAMPLE_FIELDS: SchemaFormField[] = [
   { key: 'name', title: 'Name', type: 'input', required: true, maxLength: 32 },
   { key: 'qty', title: 'Quantity', type: 'quantity', value: 1, min: 1, max: 99 },
   { key: 'when', title: 'Date', type: 'date' },
+  { key: 'at', title: 'Date and time', type: 'datetime' },
+  { key: 'attachment', title: 'Attachment', type: 'file' },
 ]
 
 export function fieldShowIf(field: SchemaFormField) {
@@ -327,9 +331,12 @@ function isEmpty(value: unknown, field: SchemaFormField) {
   if (type === 'quantity') {
     return value == null || value === ''
   }
-  if (type === 'date') {
+  if (type === 'date' || type === 'datetime') {
     if (value instanceof Date) return Number.isNaN(value.getTime())
     return value == null || value === ''
+  }
+  if (type === 'file') {
+    return !(value instanceof File)
   }
   if (value == null) return true
   if (typeof value === 'string') return value.trim() === ''

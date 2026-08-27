@@ -37,11 +37,12 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 | Bounded custom scroll | `ScrollArea` (page: native overflow) |
 | Page path | `Breadcrumb` |
 | List pages | `Pagination` (`PaginationInfo` for the range label) |
+| Page chrome | `AppShell`: header full width above nav. Several pages: `AppShellNavItem active`. No user card. |
 | Table chrome | `Table` for a small read-only grid (no select, no row actions). Lists with search/filter/sort/select: `SchemaTable`. |
 | JSON list (search/filter/sort/page) | `SchemaTable` + `useSchemaTable`. Chrome is `Table` + `Pagination`. |
 | Indeterminate load | `Spinner` (Skeleton = placeholder; Progress = known total) |
 | Delete / warn / yes-no | `ConfirmDialog` (Warning confirm = Continue) |
-| Date | `DatePicker` (`Popover` + `Calendar` only if composing) |
+| Date | `DatePicker`. Date+time: `DateTimePicker`. Range: `DatePickerRange`. |
 | Empty page/list | `Empty` (`variant` Default \| Search \| Upgrade) |
 | Empty customer slot | `CustomerCard variant="Empty"` — not `Empty` |
 | On/off | `Switch` |
@@ -51,9 +52,9 @@ Visual props are **PascalCase** (`Primary`, `Small`, `Border`, `Pills`, `Horizon
 
 `FieldGroup` > `Field` (`orientation` Vertical \| Horizontal \| Responsive) > `FieldLabel` + control. Invalid: `data-invalid` on Field, `aria-invalid` on the control.
 
-SchemaForm: `showIf` / `showIfValue`, `hidden: true` (or `type: "hidden"`) hides UI and still submits, `maxLength`, `minLength`, `validation` (`email\|max:255\|phone\|valid_url\|accepted` or `/regex/`). Pair keys `amount+currency`. See `SCHEMA_FORM_TYPES` and `SCHEMA_FORM_EXAMPLE_FIELDS`.
+SchemaForm: `showIf` / `showIfValue`, `hidden: true` (or `type: "hidden"`) hides UI and still submits, `maxLength`, `minLength`, `validation` (`email\|max:255\|phone\|valid_url\|accepted` or `/regex/`). Pair keys `amount+currency`. Types include `date`, `datetime`, `file`. See `SCHEMA_FORM_TYPES`.
 
-SchemaTable: JSON schema (`SCHEMA_TABLE_EXAMPLE_SCHEMA`) + `useSchemaTable({ schema, data })` + `<SchemaTable table={table} />`. Prefer this for app lists. `Table` alone is only a small read-only grid. Search, tabs, filter popover, sort menu, Edit Column (visibility + reorder), chips, pagination. Renders `Table` chrome and `Pagination`. `mode: 'client'` filters in memory; `mode: 'server'` uses `data` + `total` and `onQueryChange`. Column `locked` is fixed (no hide/reorder). Do not add a second table primitive. Do not add TanStack Table, Query, or DB to this kit — apps fetch with Query/DB and pass rows in. App agents: default one collection (`client`); debounce server search; never refetch for Edit Column or selection (see app `lists.md`).
+SchemaTable: JSON schema + `useSchemaTable({ schema, data })` + `<SchemaTable table={table} />`. Prefer this for app lists. `Table` alone is only a small read-only grid. Column `locked` is fixed. Do not add TanStack Table, Query, or DB to this kit. Apps: `#/lib/query` + `lists.md`. `CustomerCard` is customer/beneficiary only.
 
 ## Customer card
 
