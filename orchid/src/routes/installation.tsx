@@ -14,18 +14,26 @@ const TOKENS_URL = 'https://orchid-ui-hitpay.vercel.app/orchid-tokens.css'
 
 const INSTALLATION_PROMPT = `Create a new application from scratch and use Orchid UI for its interface.
 
-Framework: [next | vite | start | react-router | astro]
 Project name: [PROJECT NAME]
 
-Work autonomously and use Bun as the package manager.
+Before creating files or running commands, ask the user:
+"Which framework would you like to use?
+1. Next.js
+2. Vite + React
+3. TanStack Start
+4. React Router
+5. Astro + React"
 
-1. Choose the shadcn project template that matches the requested framework:
+Wait for the user's answer. Do not select a default framework.
+
+After the framework is chosen, work autonomously and use Bun as the package manager.
+
+1. Use the shadcn project template that matches the selected framework:
    - next: Next.js
    - vite: Vite + React
    - start: TanStack Start
    - react-router: React Router
    - astro: Astro + React
-   If no framework is specified, use vite.
 2. Create the project with:
    bunx --bun shadcn@latest init -t [framework]
    Use the requested project name when prompted, then enter the generated project directory.
@@ -121,7 +129,7 @@ function InstallationPage() {
           description="Create a new Orchid UI app with Cursor, Claude Code, or another local coding agent."
         />
 
-        <Section title="1. Choose a framework">
+        <Section title="1. Your agent asks you to choose a framework">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-5">
             {FRAMEWORKS.map((framework) => (
               <div
@@ -155,8 +163,8 @@ function InstallationPage() {
 
         <Section title="3. Paste this prompt">
           <p className="max-w-3xl text-sm leading-6 text-oc-muted-foreground">
-            Replace the framework, project name, and app request placeholders. The agent will
-            scaffold the project, configure Orchid, install the required components, and verify the
+            Replace the project name and app request placeholders. The agent will ask which
+            framework you prefer before it creates files, then configure Orchid and verify the
             build.
           </p>
           <CodeBlock code={INSTALLATION_PROMPT} />

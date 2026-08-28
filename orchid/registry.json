@@ -386,7 +386,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "Expand/collapse sections. AccordionTrigger: title, description, label, progress.",
+      "description": "shadcn-compatible Base UI accordion with Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
