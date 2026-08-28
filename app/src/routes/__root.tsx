@@ -41,7 +41,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       <head>
         <HeadContent />
       </head>
-      <body className="h-full overflow-hidden">
+      <body className="h-full">
         <QueryProvider>
           <ConfirmDialogProvider>
             <Toaster placement="top-center">{children}</Toaster>

@@ -139,7 +139,7 @@ Never edit `.output/`, `.nitro/`, or `src/routeTree.gen.ts` by hand.
 The host dashboard owns the outer navigation, account controls, authentication gate, iframe, and app mount point. The generated app owns only the embedded pane.
 
 - Fill the pane with `AppLayout`.
-- Keep the root document's `h-full` and `overflow-hidden` behavior so the iframe does not get double scrolling.
+- Keep the root document's `h-full`, but do not set `overflow-hidden` on the root document or body.
 - Render route content inside `AppLayout`. Use `PageContent` or `FormPageContent` as the scroll owner so headers and actions remain visible.
 - Do not add a full-screen website shell or host-dashboard clone.
 - Avoid horizontal overflow and make forms, tables, actions, and tabs usable at narrow widths.
