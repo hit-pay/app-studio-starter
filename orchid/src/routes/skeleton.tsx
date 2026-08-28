@@ -8,7 +8,18 @@ export const Route = createFileRoute('/skeleton')({
 
 function SkeletonExamplesPage() {
   return (
-    <DocExamplePage to="/skeleton">
+    <DocExamplePage
+      to="/skeleton"
+      usage={`import { Skeleton } from '@/components/ui/skeleton'
+
+<div className="flex items-center gap-3">
+  <Skeleton className="size-10 rounded-full" />
+  <div className="space-y-2">
+    <Skeleton className="h-4 w-40" />
+    <Skeleton className="h-4 w-28" />
+  </div>
+</div>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default

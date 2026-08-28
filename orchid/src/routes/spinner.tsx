@@ -15,9 +15,9 @@ function SpinnerExamplesPage() {
 import { Button } from '@/components/ui/button'
 
 <Spinner />
-<Spinner size="Small" />
-<Button variant="Primary" disabled>
-  <Spinner size="Small" label="Saving" />
+<Spinner className="size-5" />
+<Button disabled>
+  <Spinner aria-label="Saving" />
   Saving
 </Button>`}
     >
@@ -26,9 +26,9 @@ import { Button } from '@/components/ui/button'
           Size
         </p>
         <div className="flex items-center gap-6">
-          <Spinner size="Small" />
-          <Spinner />
-          <Spinner size="Big" />
+          <Spinner className="size-3" />
+          <Spinner className="size-4" />
+          <Spinner className="size-8" />
         </div>
       </div>
 
@@ -36,8 +36,8 @@ import { Button } from '@/components/ui/button'
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           On a button
         </p>
-        <Button variant="Primary" disabled>
-          <Spinner size="Small" label="Saving" />
+        <Button disabled>
+          <Spinner aria-label="Saving" />
           Saving invoice
         </Button>
       </div>

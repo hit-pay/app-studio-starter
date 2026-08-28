@@ -77,12 +77,12 @@ export const DOC_COMPONENTS = [
   {
     to: '/skeleton' as const,
     name: 'Skeleton',
-    description: 'Placeholder pulse while content loads.',
+    description: 'shadcn-compatible placeholder pulse with Orchid styling.',
   },
   {
     to: '/spinner' as const,
     name: 'Spinner',
-    description: 'Indeterminate loading. Small, Default, and Big.',
+    description: 'shadcn-compatible indeterminate loading icon sized through className.',
   },
   {
     to: '/dialog' as const,
@@ -92,7 +92,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/sheet' as const,
     name: 'Sheet',
-    description: 'Edge panel for edit/filters. side Right|Left|Top|Bottom. Not a swipe Drawer.',
+    description: 'shadcn-compatible compound edge panel with four sides and Orchid styling.',
   },
   {
     to: '/breadcrumb' as const,
@@ -189,12 +189,12 @@ export const DOC_FORMS = [
   {
     to: '/switch' as const,
     name: 'Switch',
-    description: 'Switch control in Default and Small sizes.',
+    description: 'shadcn-compatible switch in default and small Orchid sizes.',
   },
   {
     to: '/slider' as const,
     name: 'Slider',
-    description: 'Single or range slider; pass an array for two or more thumbs.',
+    description: 'shadcn-compatible single, range, or vertical slider with Orchid styling.',
   },
   {
     to: '/calendar' as const,

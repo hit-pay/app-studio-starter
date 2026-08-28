@@ -8,14 +8,19 @@ export const Route = createFileRoute('/slider')({
 
 function SliderExamplesPage() {
   return (
-    <DocExamplePage to="/slider">
+    <DocExamplePage
+      to="/slider"
+      usage={`import { Slider } from '@/components/ui/slider'
+
+<Slider defaultValue={[50]} max={100} step={1} />`}
+    >
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
           <p className="text-xs text-oc-muted-foreground">Point of Sale tip (SGD)</p>
-          <Slider defaultValue={8} max={20} showIndicator={false} />
+          <Slider defaultValue={8} max={20} />
         </div>
 
         <div className="space-y-3">
@@ -39,7 +44,7 @@ function SliderExamplesPage() {
             Multiple thumbs
           </p>
           <p className="text-xs text-oc-muted-foreground">Payout bands</p>
-          <Slider defaultValue={[20, 40, 70]} showIndicator={false} />
+          <Slider defaultValue={[20, 40, 70]} />
         </div>
 
         <div className="space-y-3">
@@ -55,7 +60,7 @@ function SliderExamplesPage() {
             Recurring retry window
           </p>
           <p className="text-xs text-oc-muted-foreground">Days to retry a failed Cards charge</p>
-          <Slider defaultValue={3} max={14} showIndicator={false} />
+          <Slider defaultValue={3} max={14} />
         </div>
       </div>
     </DocExamplePage>

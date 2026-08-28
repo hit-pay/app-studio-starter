@@ -587,7 +587,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "Loading placeholder bars. Shape via className.",
+      "description": "shadcn-compatible animated loading placeholder with Orchid styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -602,7 +602,7 @@
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
-      "description": "Indeterminate load. size Small|Default|Big.",
+      "description": "shadcn-compatible indeterminate loading icon sized through className.",
       "dependencies": [
         "lucide-react"
       ],
@@ -640,10 +640,9 @@
       "name": "sheet",
       "type": "registry:ui",
       "title": "Sheet",
-      "description": "Edge panel. side Right|Left|Top|Bottom, size Small|Medium|Default.",
+      "description": "shadcn-compatible compound sheet with four sides and Orchid styling.",
       "dependencies": [
         "@base-ui/react",
-        "class-variance-authority",
         "lucide-react"
       ],
       "registryDependencies": [
@@ -1004,10 +1003,9 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "On/off setting. size Default|Small.",
+      "description": "shadcn-compatible Base UI switch with default and small Orchid sizes.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [
@@ -1022,7 +1020,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "Number or range on a track. Array value = two thumbs.",
+      "description": "shadcn-compatible horizontal or vertical slider with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
