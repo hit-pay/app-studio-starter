@@ -16,12 +16,15 @@ function ExamplesIndexPage() {
   return (
     <DocExamplePage to="/">
       <Link
-        to="/setup"
+        to="/installation"
         className="flex items-center justify-between rounded-xl border border-solid border-oc-border bg-oc-info-soft px-4 py-3 text-sm text-oc-foreground"
       >
         <span>
-          <span className="font-medium">Setup guide</span>
-          <span className="text-oc-muted-foreground"> — CSS tokens, any AI harness, and shadcn add</span>
+          <span className="font-medium">Installation</span>
+          <span className="text-oc-muted-foreground">
+            {' '}
+            — create a new app with Cursor, Claude Code, or another AI agent
+          </span>
         </span>
         <span className="text-oc-muted-foreground">→</span>
       </Link>

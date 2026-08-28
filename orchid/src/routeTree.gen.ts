@@ -35,6 +35,7 @@ import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
 import { Route as InputRouteImport } from './routes/input'
 import { Route as InputGroupRouteImport } from './routes/input-group'
+import { Route as InstallationRouteImport } from './routes/installation'
 import { Route as KbdRouteImport } from './routes/kbd'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
@@ -192,6 +193,11 @@ const InputRoute = InputRouteImport.update({
 const InputGroupRoute = InputGroupRouteImport.update({
   id: '/input-group',
   path: '/input-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InstallationRoute = InstallationRouteImport.update({
+  id: '/installation',
+  path: '/installation',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KbdRoute = KbdRouteImport.update({
@@ -362,6 +368,7 @@ export interface FileRoutesByFullPath {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
+  '/installation': typeof InstallationRoute
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
@@ -418,6 +425,7 @@ export interface FileRoutesByTo {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
+  '/installation': typeof InstallationRoute
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
@@ -475,6 +483,7 @@ export interface FileRoutesById {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
+  '/installation': typeof InstallationRoute
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
@@ -533,6 +542,7 @@ export interface FileRouteTypes {
     | '/icon-group'
     | '/input'
     | '/input-group'
+    | '/installation'
     | '/kbd'
     | '/label'
     | '/list-item'
@@ -589,6 +599,7 @@ export interface FileRouteTypes {
     | '/icon-group'
     | '/input'
     | '/input-group'
+    | '/installation'
     | '/kbd'
     | '/label'
     | '/list-item'
@@ -645,6 +656,7 @@ export interface FileRouteTypes {
     | '/icon-group'
     | '/input'
     | '/input-group'
+    | '/installation'
     | '/kbd'
     | '/label'
     | '/list-item'
@@ -702,6 +714,7 @@ export interface RootRouteChildren {
   IconGroupRoute: typeof IconGroupRoute
   InputRoute: typeof InputRoute
   InputGroupRoute: typeof InputGroupRoute
+  InstallationRoute: typeof InstallationRoute
   KbdRoute: typeof KbdRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
@@ -914,6 +927,13 @@ declare module '@tanstack/react-router' {
       path: '/input-group'
       fullPath: '/input-group'
       preLoaderRoute: typeof InputGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/installation': {
+      id: '/installation'
+      path: '/installation'
+      fullPath: '/installation'
+      preLoaderRoute: typeof InstallationRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kbd': {
@@ -1142,6 +1162,7 @@ const rootRouteChildren: RootRouteChildren = {
   IconGroupRoute: IconGroupRoute,
   InputRoute: InputRoute,
   InputGroupRoute: InputGroupRoute,
+  InstallationRoute: InstallationRoute,
   KbdRoute: KbdRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,

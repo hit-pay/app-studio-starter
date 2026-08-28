@@ -39,8 +39,8 @@ function ListItemExamplesPage() {
   ListItemDetail,
   ListItemHoverActions,
   ListItemAction,
-} from '@/orchid-ui/list-item'
-import { Badge } from '@/orchid-ui/badge'
+} from '@/components/ui/list-item'
+import { Badge } from '@/components/ui/badge'
 import { MapPinIcon, PencilIcon } from 'lucide-react'
 
 <ListItem>

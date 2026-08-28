@@ -53,9 +53,9 @@ function CustomerCardExamplesPage() {
   return (
     <DocExamplePage
       to="/customer-card"
-      usage={`import { CustomerCard } from '@/orchid-ui/customer-card'
-import { Badge } from '@/orchid-ui/badge'
-import { Button } from '@/orchid-ui/button'
+      usage={`import { CustomerCard } from '@/components/ui/customer-card'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 
 <CustomerCard
   variant="Small"

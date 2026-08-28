@@ -24,7 +24,7 @@ function BreadcrumbExamplesPage() {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from '@/orchid-ui/breadcrumb'
+} from '@/components/ui/breadcrumb'
 
 <Breadcrumb>
   <BreadcrumbList>

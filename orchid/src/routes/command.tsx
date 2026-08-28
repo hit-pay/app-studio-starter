@@ -39,7 +39,7 @@ function CommandExamplesPage() {
   CommandInput,
   CommandItem,
   CommandList,
-} from '@/orchid-ui/command'
+} from '@/components/ui/command'
 
 <CommandDialog open={open} onOpenChange={setOpen} trigger={<Button variant="Secondary">Search</Button>}>
   <Command>

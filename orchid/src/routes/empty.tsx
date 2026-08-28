@@ -12,8 +12,8 @@ function EmptyExamplesPage() {
   return (
     <DocExamplePage
       to="/empty"
-      usage={`import { Empty } from '@/orchid-ui/empty'
-import { Button } from '@/orchid-ui/button'
+      usage={`import { Empty } from '@/components/ui/empty'
+import { Button } from '@/components/ui/button'
 import { PlusIcon } from 'lucide-react'
 
 <Empty

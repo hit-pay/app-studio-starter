@@ -23,7 +23,7 @@ function ScrollAreaExamplesPage() {
   return (
     <DocExamplePage
       to="/scroll-area"
-      usage={`import { ScrollArea } from '@/orchid-ui/scroll-area'
+      usage={`import { ScrollArea } from '@/components/ui/scroll-area'
 
 <ScrollArea className="h-64 rounded-lg border border-oc-border">
   {/* long list */}

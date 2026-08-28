@@ -102,7 +102,7 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider` and Orchid `Toaster`
-- `src/components/orchid-ui/`: installed Orchid components
+- `src/components/ui/`: installed Orchid components
 - `src/components/`: app-specific components
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
@@ -117,7 +117,7 @@ Path aliases:
 
 - `#/*` -> `src/*`
 - `@/*` -> `src/*`
-- `@/orchid-ui/*` -> `src/components/orchid-ui/*`
+- `@/components/ui/*` -> `src/components/ui/*`
 
 Unless the user's request truly requires infrastructure changes, leave these files unchanged:
 
@@ -159,10 +159,10 @@ Before building a screen, read `orchid-catalog.md` in full. Then read the implem
 Import components from:
 
 ```ts
-@/orchid-ui/<kebab-name>
+@/components/ui/<kebab-name>
 ```
 
-Do not create a generic replacement when an appropriate Orchid component exists. Avoid legacy components in `src/components/ui/` for new app UI.
+Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns `src/components/ui/`; never install official shadcn components into that directory.
 
 Common choices:
 

@@ -89,7 +89,7 @@ const USAGE_EXAMPLE = `import {
   SchemaTable,
   useSchemaTable,
   type SchemaTableSchema,
-} from '@/orchid-ui/schema-table'
+} from '@/components/ui/schema-table'
 
 const SCHEMA: SchemaTableSchema = {
   selection: true,
@@ -144,7 +144,7 @@ import {
   SchemaTable,
   useSchemaTable,
   type SchemaTableQuery,
-} from '@/orchid-ui/schema-table'
+} from '@/components/ui/schema-table'
 
 // SCHEMA from usage.tsx, with mode: 'server'
 // Prefer mode: 'client' + one collection unless the API is paginated.
@@ -211,7 +211,7 @@ import {
   useLiveQuery,
 } from '@tanstack/react-db'
 import { queryCollectionOptions } from '@tanstack/query-db-collection'
-import { SchemaTable, useSchemaTable } from '@/orchid-ui/schema-table'
+import { SchemaTable, useSchemaTable } from '@/components/ui/schema-table'
 
 // SCHEMA from usage.tsx (mode: 'client', default)
 

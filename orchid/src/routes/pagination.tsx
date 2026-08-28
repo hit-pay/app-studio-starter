@@ -104,7 +104,7 @@ function PaginationExamplesPage() {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/orchid-ui/pagination'
+} from '@/components/ui/pagination'
 
 <Pagination>
   <PaginationPrevious />

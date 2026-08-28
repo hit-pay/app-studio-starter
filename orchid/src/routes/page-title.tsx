@@ -17,9 +17,9 @@ function PageTitleExamplesPage() {
   return (
     <DocExamplePage
       to="/page-title"
-      usage={`import { PageTitle } from '@/orchid-ui/page-title'
-import { Button } from '@/orchid-ui/button'
-import { Badge } from '@/orchid-ui/badge'
+      usage={`import { PageTitle } from '@/components/ui/page-title'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
 
 <PageTitle
   title="Invoices"

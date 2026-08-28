@@ -76,8 +76,8 @@ function AlertExamplesPage() {
   AlertTitle,
   AlertDescription,
   AlertAction,
-} from '@/orchid-ui/alert'
-import { Button } from '@/orchid-ui/button'
+} from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
 import { CheckIcon } from 'lucide-react'
 
 <Alert color="Default" onClose={() => {}}>

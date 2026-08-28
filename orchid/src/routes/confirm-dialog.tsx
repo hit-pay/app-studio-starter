@@ -15,8 +15,8 @@ function ConfirmDialogExamplesPage() {
   return (
     <DocExamplePage
       to="/confirm-dialog"
-      usage={`import { ConfirmDialog, ConfirmDialogTrigger } from '@/orchid-ui/confirm-dialog'
-import { Button } from '@/orchid-ui/button'
+      usage={`import { ConfirmDialog, ConfirmDialogTrigger } from '@/components/ui/confirm-dialog'
+import { Button } from '@/components/ui/button'
 
 <ConfirmDialog
   type="Delete"

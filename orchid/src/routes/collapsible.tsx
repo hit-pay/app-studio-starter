@@ -21,7 +21,7 @@ function CollapsibleExamplesPage() {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from '@/orchid-ui/collapsible'
+} from '@/components/ui/collapsible'
 
 <Collapsible>
   <CollapsibleTrigger>Advanced</CollapsibleTrigger>

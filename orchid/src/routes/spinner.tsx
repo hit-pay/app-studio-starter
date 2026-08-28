@@ -11,8 +11,8 @@ function SpinnerExamplesPage() {
   return (
     <DocExamplePage
       to="/spinner"
-      usage={`import { Spinner } from '@/orchid-ui/spinner'
-import { Button } from '@/orchid-ui/button'
+      usage={`import { Spinner } from '@/components/ui/spinner'
+import { Button } from '@/components/ui/button'
 
 <Spinner />
 <Spinner size="Small" />

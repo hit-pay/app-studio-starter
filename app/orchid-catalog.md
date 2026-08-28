@@ -1,6 +1,6 @@
 # Orchid catalog
 
-Agents: read this file **in full** (Read tool, not Grep). Import `@/orchid-ui/<name>`. For props, read `src/components/orchid-ui/<name>.tsx`.
+Agents: read this file **in full** (Read tool, not Grep). Import `@/components/ui/<name>`. For props, read `src/components/ui/<name>.tsx`.
 
 ## `utils` — Utils
 

@@ -1,7 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import { QueryProvider } from '#/lib/query'
-import { Toaster } from '@/orchid-ui/toast'
+import { Toaster } from '@/components/ui/toast'
 import appCss from '../styles.css?url'
 
 function NotFound() {

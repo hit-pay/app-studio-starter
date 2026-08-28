@@ -66,7 +66,7 @@
         {
           "path": "src/components/ui/all.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/all.tsx"
+          "target": "@ui/all.tsx"
         }
       ]
     },
@@ -115,12 +115,12 @@
         {
           "path": "src/components/ui/schema-form.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/schema-form.tsx"
+          "target": "@ui/schema-form.tsx"
         },
         {
           "path": "src/components/ui/schema-form-model.ts",
           "type": "registry:file",
-          "target": "@components/orchid-ui/schema-form-model.ts"
+          "target": "@ui/schema-form-model.ts"
         }
       ]
     },
@@ -146,12 +146,12 @@
         {
           "path": "src/components/ui/schema-table.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/schema-table.tsx"
+          "target": "@ui/schema-table.tsx"
         },
         {
           "path": "src/components/ui/schema-table-model.ts",
           "type": "registry:file",
-          "target": "@components/orchid-ui/schema-table-model.ts"
+          "target": "@ui/schema-table-model.ts"
         }
       ]
     },
@@ -166,7 +166,7 @@
         {
           "path": "src/components/ui/app-shell.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/app-shell.tsx"
+          "target": "@ui/app-shell.tsx"
         }
       ]
     },
@@ -184,7 +184,7 @@
         {
           "path": "src/components/ui/alert.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/alert.tsx"
+          "target": "@ui/alert.tsx"
         }
       ]
     },
@@ -203,7 +203,7 @@
         {
           "path": "src/components/ui/list-item.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/list-item.tsx"
+          "target": "@ui/list-item.tsx"
         }
       ]
     },
@@ -221,7 +221,7 @@
         {
           "path": "src/components/ui/empty.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/empty.tsx"
+          "target": "@ui/empty.tsx"
         }
       ]
     },
@@ -245,7 +245,7 @@
         {
           "path": "src/components/ui/customer-card.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/customer-card.tsx"
+          "target": "@ui/customer-card.tsx"
         }
       ]
     },
@@ -264,7 +264,7 @@
         {
           "path": "src/components/ui/page-toolbar.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/page-toolbar.tsx"
+          "target": "@ui/page-toolbar.tsx"
         }
       ]
     },
@@ -281,7 +281,7 @@
         {
           "path": "src/components/ui/page-title.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/page-title.tsx"
+          "target": "@ui/page-title.tsx"
         }
       ]
     },
@@ -302,7 +302,7 @@
         {
           "path": "src/components/ui/confirm-dialog.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/confirm-dialog.tsx"
+          "target": "@ui/confirm-dialog.tsx"
         }
       ]
     },
@@ -321,7 +321,7 @@
         {
           "path": "src/components/ui/button.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/button.tsx"
+          "target": "@ui/button.tsx"
         }
       ]
     },
@@ -340,7 +340,7 @@
         {
           "path": "src/components/ui/dropdown-menu.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/dropdown-menu.tsx"
+          "target": "@ui/dropdown-menu.tsx"
         }
       ]
     },
@@ -360,7 +360,7 @@
         {
           "path": "src/components/ui/toast.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/toast.tsx"
+          "target": "@ui/toast.tsx"
         }
       ]
     },
@@ -378,7 +378,7 @@
         {
           "path": "src/components/ui/badge.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/badge.tsx"
+          "target": "@ui/badge.tsx"
         }
       ]
     },
@@ -396,7 +396,7 @@
         {
           "path": "src/components/ui/accordion.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/accordion.tsx"
+          "target": "@ui/accordion.tsx"
         }
       ]
     },
@@ -413,7 +413,7 @@
         {
           "path": "src/components/ui/progress.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/progress.tsx"
+          "target": "@ui/progress.tsx"
         }
       ]
     },
@@ -430,7 +430,7 @@
         {
           "path": "src/components/ui/avatar.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/avatar.tsx"
+          "target": "@ui/avatar.tsx"
         }
       ]
     },
@@ -447,7 +447,7 @@
         {
           "path": "src/components/ui/tooltip.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/tooltip.tsx"
+          "target": "@ui/tooltip.tsx"
         }
       ]
     },
@@ -465,7 +465,7 @@
         {
           "path": "src/components/ui/tabs.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/tabs.tsx"
+          "target": "@ui/tabs.tsx"
         }
       ]
     },
@@ -482,7 +482,7 @@
         {
           "path": "src/components/ui/choice-card.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/choice-card.tsx"
+          "target": "@ui/choice-card.tsx"
         }
       ]
     },
@@ -501,7 +501,7 @@
         {
           "path": "src/components/ui/stat-card.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/stat-card.tsx"
+          "target": "@ui/stat-card.tsx"
         }
       ]
     },
@@ -521,7 +521,7 @@
         {
           "path": "src/components/ui/detail-list.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/detail-list.tsx"
+          "target": "@ui/detail-list.tsx"
         }
       ]
     },
@@ -541,7 +541,7 @@
         {
           "path": "src/components/ui/icon-group.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/icon-group.tsx"
+          "target": "@ui/icon-group.tsx"
         }
       ]
     },
@@ -560,7 +560,7 @@
         {
           "path": "src/components/ui/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/copy-button.tsx"
+          "target": "@ui/copy-button.tsx"
         }
       ]
     },
@@ -575,7 +575,7 @@
         {
           "path": "src/components/ui/skeleton.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/skeleton.tsx"
+          "target": "@ui/skeleton.tsx"
         }
       ]
     },
@@ -592,7 +592,7 @@
         {
           "path": "src/components/ui/spinner.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/spinner.tsx"
+          "target": "@ui/spinner.tsx"
         }
       ]
     },
@@ -613,7 +613,7 @@
         {
           "path": "src/components/ui/dialog.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/dialog.tsx"
+          "target": "@ui/dialog.tsx"
         }
       ]
     },
@@ -634,7 +634,7 @@
         {
           "path": "src/components/ui/sheet.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/sheet.tsx"
+          "target": "@ui/sheet.tsx"
         }
       ]
     },
@@ -651,7 +651,7 @@
         {
           "path": "src/components/ui/breadcrumb.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/breadcrumb.tsx"
+          "target": "@ui/breadcrumb.tsx"
         }
       ]
     },
@@ -668,7 +668,7 @@
         {
           "path": "src/components/ui/pagination.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/pagination.tsx"
+          "target": "@ui/pagination.tsx"
         }
       ]
     },
@@ -687,7 +687,7 @@
         {
           "path": "src/components/ui/table.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/table.tsx"
+          "target": "@ui/table.tsx"
         }
       ]
     },
@@ -707,7 +707,7 @@
         {
           "path": "src/components/ui/command.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/command.tsx"
+          "target": "@ui/command.tsx"
         }
       ]
     },
@@ -722,7 +722,7 @@
         {
           "path": "src/components/ui/kbd.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/kbd.tsx"
+          "target": "@ui/kbd.tsx"
         }
       ]
     },
@@ -740,7 +740,7 @@
         {
           "path": "src/components/ui/collapsible.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/collapsible.tsx"
+          "target": "@ui/collapsible.tsx"
         }
       ]
     },
@@ -757,7 +757,7 @@
         {
           "path": "src/components/ui/scroll-area.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/scroll-area.tsx"
+          "target": "@ui/scroll-area.tsx"
         }
       ]
     },
@@ -774,7 +774,7 @@
         {
           "path": "src/components/ui/popover.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/popover.tsx"
+          "target": "@ui/popover.tsx"
         }
       ]
     },
@@ -791,7 +791,7 @@
         {
           "path": "src/components/ui/separator.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/separator.tsx"
+          "target": "@ui/separator.tsx"
         }
       ]
     },
@@ -811,7 +811,7 @@
         {
           "path": "src/components/ui/field.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/field.tsx"
+          "target": "@ui/field.tsx"
         }
       ]
     },
@@ -826,7 +826,7 @@
         {
           "path": "src/components/ui/label.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/label.tsx"
+          "target": "@ui/label.tsx"
         }
       ]
     },
@@ -843,7 +843,7 @@
         {
           "path": "src/components/ui/input.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/input.tsx"
+          "target": "@ui/input.tsx"
         }
       ]
     },
@@ -865,7 +865,7 @@
         {
           "path": "src/components/ui/input-group.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/input-group.tsx"
+          "target": "@ui/input-group.tsx"
         }
       ]
     },
@@ -880,7 +880,7 @@
         {
           "path": "src/components/ui/textarea.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/textarea.tsx"
+          "target": "@ui/textarea.tsx"
         }
       ]
     },
@@ -898,7 +898,7 @@
         {
           "path": "src/components/ui/select.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/select.tsx"
+          "target": "@ui/select.tsx"
         }
       ]
     },
@@ -921,7 +921,7 @@
         {
           "path": "src/components/ui/combobox.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/combobox.tsx"
+          "target": "@ui/combobox.tsx"
         }
       ]
     },
@@ -940,7 +940,7 @@
         {
           "path": "src/components/ui/quantity-input.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/quantity-input.tsx"
+          "target": "@ui/quantity-input.tsx"
         }
       ]
     },
@@ -959,7 +959,7 @@
         {
           "path": "src/components/ui/checkbox.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/checkbox.tsx"
+          "target": "@ui/checkbox.tsx"
         }
       ]
     },
@@ -977,7 +977,7 @@
         {
           "path": "src/components/ui/radio-group.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/radio-group.tsx"
+          "target": "@ui/radio-group.tsx"
         }
       ]
     },
@@ -995,7 +995,7 @@
         {
           "path": "src/components/ui/switch.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/switch.tsx"
+          "target": "@ui/switch.tsx"
         }
       ]
     },
@@ -1012,7 +1012,7 @@
         {
           "path": "src/components/ui/slider.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/slider.tsx"
+          "target": "@ui/slider.tsx"
         }
       ]
     },
@@ -1032,7 +1032,7 @@
         {
           "path": "src/components/ui/calendar.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/calendar.tsx"
+          "target": "@ui/calendar.tsx"
         }
       ]
     },
@@ -1056,7 +1056,7 @@
         {
           "path": "src/components/ui/date-picker.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/date-picker.tsx"
+          "target": "@ui/date-picker.tsx"
         }
       ]
     },
@@ -1075,7 +1075,7 @@
         {
           "path": "src/components/ui/form-section.tsx",
           "type": "registry:ui",
-          "target": "@components/orchid-ui/form-section.tsx"
+          "target": "@ui/form-section.tsx"
         }
       ]
     }

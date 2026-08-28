@@ -10,7 +10,7 @@ function KbdExamplesPage() {
   return (
     <DocExamplePage
       to="/kbd"
-      usage={`import { Kbd, KbdGroup } from '@/orchid-ui/kbd'
+      usage={`import { Kbd, KbdGroup } from '@/components/ui/kbd'
 
 Close
 <Kbd>Esc</Kbd>

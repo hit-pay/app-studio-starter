@@ -168,8 +168,8 @@ function PageToolbarExamplesPage() {
   return (
     <DocExamplePage
       to="/page-toolbar"
-      usage={`import { PageToolbar } from '@/orchid-ui/page-toolbar'
-import { Button } from '@/orchid-ui/button'
+      usage={`import { PageToolbar } from '@/components/ui/page-toolbar'
+import { Button } from '@/components/ui/button'
 
 <PageToolbar
   left="Back"

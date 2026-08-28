@@ -314,9 +314,9 @@ Example — combobox multiple
   "value": ["paynow"]
 }`
 
-const USAGE_EXAMPLE = `import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/orchid-ui/schema-form'
-import { Button } from '@/orchid-ui/button'
-import { toast } from '@/orchid-ui/toast'
+const USAGE_EXAMPLE = `import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/components/ui/schema-form'
+import { Button } from '@/components/ui/button'
+import { toast } from '@/components/ui/toast'
 
 const FIELDS: SchemaFormField[] = [
   {

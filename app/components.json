@@ -16,7 +16,6 @@
     "components": "@/components",
     "utils": "@/lib/utils",
     "ui": "@/components/ui",
-    "orchid-ui": "@/components/orchid-ui",
     "lib": "@/lib",
     "hooks": "@/hooks"
   },

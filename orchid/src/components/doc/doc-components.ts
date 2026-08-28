@@ -265,7 +265,7 @@ export function docBlocksByName() {
 }
 
 export const DOC_GUIDES = [
-  { to: '/setup' as const, name: 'Setup' },
+  { to: '/installation' as const, name: 'Installation' },
 ] as const
 
 export const DOC_APPS = [

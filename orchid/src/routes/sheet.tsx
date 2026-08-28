@@ -13,8 +13,8 @@ function SheetExamplesPage() {
   return (
     <DocExamplePage
       to="/sheet"
-      usage={`import { Sheet, SheetContent, SheetTrigger } from '@/orchid-ui/sheet'
-import { Button } from '@/orchid-ui/button'
+      usage={`import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Button } from '@/components/ui/button'
 
 <Sheet>
   <SheetTrigger render={<Button variant="Secondary" />}>Details</SheetTrigger>
