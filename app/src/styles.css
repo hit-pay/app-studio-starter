@@ -36,6 +36,7 @@
   --color-oc-neutral-border: var(--oc-neutral-border);
   --color-oc-neutral-strong: var(--oc-neutral-strong);
   --color-oc-border: var(--oc-border);
+  --color-oc-child-sidebar-foreground: var(--oc-child-sidebar-foreground);
   --color-oc-primary-button-text: var(--oc-primary-button-text);
   --color-oc-primary-button-border: var(--oc-primary-button-border);
   --color-oc-primary-button-default-start: var(--oc-primary-button-default-start);
@@ -130,6 +131,7 @@
   --oc-neutral-border: #cbcdd4;
   --oc-neutral-strong: #484d61;
   --oc-border: #e5e6ea;
+  --oc-child-sidebar-foreground: #082f73;
   --oc-primary-300: #80acfe;
   --oc-purple: #7d1ab7;
   --oc-purple-soft: #f7edfd;
@@ -214,6 +216,7 @@
   --oc-neutral-border: #3a4154;
   --oc-neutral-strong: #c5c9d4;
   --oc-border: #2a3142;
+  --oc-child-sidebar-foreground: #b8ccff;
   --oc-primary-300: #c8c8be;
   --oc-purple: #c084fc;
   --oc-purple-soft: #2a1840;

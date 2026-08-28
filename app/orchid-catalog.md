@@ -16,9 +16,13 @@ JSON schema form. types: input, password, textarea, select, combobox, radio, che
 
 JSON-schema list with search, filters, sorting, pagination, and Orchid DataTable primitives.
 
-## `app-shell` — App Shell
+# Component
 
-Embedded app layout with page-title, tabs, and sub-sidebar variants.
+## `app-layout` — App Layout
+
+Embedded application layout with page header, tabs, or built-in child sidebar.
+
+# Block
 
 ## `sub-sidebar` — Sub Sidebar
 
@@ -44,15 +48,11 @@ Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.
 
 ## `form-page` — Form Page
 
-Full-page form layout used instead of a dialog, with header, scrollable content, and footer actions.
+Full-page form layout used instead of a dialog, with header and scrollable form content.
 
-# Block
+## `page` — Page
 
-## `page-title` — Page Title
-
-Page heading: title, chip, description, copy id, actions.
-
-# Component
+Standard route page with a header and scrollable content area.
 
 ## `alert-dialog` — Alert Dialog
 
