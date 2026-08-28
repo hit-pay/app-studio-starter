@@ -174,10 +174,9 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "In-page banner (not toast). color Default|Blue|Red|Orange|Grey, action Bottom|Right.",
+      "description": "shadcn-compatible alert with semantic variants and top-right or bottom action placement in Orchid styling.",
       "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
+        "class-variance-authority"
       ],
       "registryDependencies": [],
       "files": [

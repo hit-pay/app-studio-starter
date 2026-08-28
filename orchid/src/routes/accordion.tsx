@@ -16,7 +16,30 @@ export const Route = createFileRoute('/accordion')({
 
 function AccordionExamplesPage() {
   return (
-    <DocExamplePage to="/accordion">
+    <DocExamplePage
+      to="/accordion"
+      usage={`import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from '@/components/ui/accordion'
+
+<Accordion defaultValue={['invoice']}>
+  <AccordionItem value="invoice">
+    <AccordionTrigger>Invoice details</AccordionTrigger>
+    <AccordionContent>
+      Invoice INV-2048 is due on 3 Sep 2026.
+    </AccordionContent>
+  </AccordionItem>
+  <AccordionItem value="customer">
+    <AccordionTrigger>Customer data</AccordionTrigger>
+    <AccordionContent>
+      Priya Nair · priya.nair@example.com
+    </AccordionContent>
+  </AccordionItem>
+</Accordion>`}
+    >
       <div className="grid gap-8 md:grid-cols-2">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">

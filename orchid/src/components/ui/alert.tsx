@@ -1,97 +1,52 @@
 import * as React from 'react'
-import { XIcon } from 'lucide-react'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
 const alertVariants = cva(
-  'group/alert relative flex w-full items-start gap-4 rounded-lg border border-solid py-4 pr-8 pl-4 text-sm leading-[1.5] text-oc-foreground shadow-none',
+  'group/alert relative grid w-full gap-y-1 rounded-lg border border-solid px-4 py-4 text-left text-sm leading-normal text-oc-foreground shadow-none has-data-[alert-action=top-right]:pr-32 has-[>svg]:grid-cols-[3rem_1fr] has-[>svg]:gap-x-4 [&>svg]:row-span-2 [&>svg]:size-12 [&>svg]:rounded-lg [&>svg]:bg-oc-background [&>svg]:p-3 [&>svg]:shadow-[0_3px_22px_rgba(38,42,50,0.09)]',
   {
     variants: {
-      color: {
-        Default:
-          'border-oc-success-border bg-oc-success-soft [&_[data-slot=alert-icon]]:text-oc-success',
-        Blue: 'border-oc-info-border bg-oc-info-soft [&_[data-slot=alert-icon]]:text-oc-primary',
-        Red: 'border-oc-destructive-border bg-oc-destructive-soft [&_[data-slot=alert-icon]]:text-oc-destructive',
-        Orange:
-          'border-oc-warning-border bg-oc-warning-soft [&_[data-slot=alert-icon]]:text-oc-warning',
-        Grey: 'border-oc-border bg-oc-neutral [&_[data-slot=alert-icon]]:text-oc-muted-foreground',
-      },
-      action: {
-        Bottom: '',
-        Right: '',
+      variant: {
+        default:
+          'border-oc-info-border bg-oc-info-soft [&>svg]:text-oc-primary [&_[data-slot=alert-description]]:text-oc-foreground',
+        destructive:
+          'border-oc-destructive-border bg-oc-destructive-soft text-oc-destructive [&>svg]:text-oc-destructive [&_[data-slot=alert-description]]:text-oc-destructive',
+        success:
+          'border-oc-success-border bg-oc-success-soft [&>svg]:text-oc-success [&_[data-slot=alert-description]]:text-oc-foreground',
+        warning:
+          'border-oc-warning-border bg-oc-warning-soft [&>svg]:text-oc-warning [&_[data-slot=alert-description]]:text-oc-foreground',
       },
     },
     defaultVariants: {
-      color: 'Default',
-      action: 'Bottom',
+      variant: 'default',
     },
   },
 )
 
-/**
- * In-page notice. `color="Default"` is success green. Use `Grey` for a neutral bar. Not a toast.
- */
+const alertActionVariants = cva('flex items-center gap-2', {
+  variants: {
+    placement: {
+      'top-right': 'absolute top-4 right-4',
+      bottom:
+        'mt-2 w-full flex-wrap group-has-[>svg]/alert:col-start-2',
+    },
+  },
+  defaultVariants: {
+    placement: 'top-right',
+  },
+})
+
 function Alert({
   className,
-  color = 'Default',
-  action = 'Bottom',
-  onClose,
-  children,
+  variant,
   ...props
-}: Omit<React.ComponentProps<'div'>, 'color'> &
-  VariantProps<typeof alertVariants> & {
-    onClose?: () => void
-  }) {
+}: React.ComponentProps<'div'> & VariantProps<typeof alertVariants>) {
   return (
     <div
       data-slot="alert"
-      data-color={color}
-      data-action={action}
-      role="status"
-      className={cn(alertVariants({ color, action }), className)}
-      {...props}
-    >
-      {children}
-      {onClose ? (
-        <button
-          type="button"
-          data-slot="alert-close"
-          aria-label="Close"
-          onClick={onClose}
-          className="absolute top-[11px] right-[11px] inline-flex size-5 items-center justify-center opacity-25 outline-none hover:opacity-50"
-        >
-          <span className="flex size-5 items-center justify-center rounded-full bg-oc-foreground">
-            <XIcon className="size-2.5 text-white" strokeWidth={3} />
-          </span>
-        </button>
-      ) : null}
-    </div>
-  )
-}
-
-function AlertIcon({ className, ...props }: React.ComponentProps<'span'>) {
-  return (
-    <span
-      data-slot="alert-icon"
-      className={cn(
-        'inline-flex size-12 shrink-0 items-center justify-center rounded-lg bg-oc-background p-3 shadow-[0_3px_22px_rgba(38,42,50,0.09)] [&_svg]:size-full',
-        className,
-      )}
-      {...props}
-    />
-  )
-}
-
-function AlertBody({ className, ...props }: React.ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="alert-body"
-      className={cn(
-        'flex min-w-0 flex-1 flex-col gap-2',
-        'group-data-[action=Right]/alert:flex-row group-data-[action=Right]/alert:items-center',
-        className,
-      )}
+      role="alert"
+      className={cn(alertVariants({ variant }), className)}
       {...props}
     />
   )
@@ -101,7 +56,10 @@ function AlertTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="alert-title"
-      className={cn('w-full text-sm font-medium text-oc-foreground', className)}
+      className={cn(
+        'w-full font-medium text-oc-foreground group-has-[>svg]/alert:col-start-2 [&_a]:text-oc-primary [&_a]:underline-offset-2 [&_a]:hover:underline',
+        className,
+      )}
       {...props}
     />
   )
@@ -112,7 +70,7 @@ function AlertDescription({ className, ...props }: React.ComponentProps<'div'>) 
     <div
       data-slot="alert-description"
       className={cn(
-        'w-full text-xs text-oc-foreground [&_a]:text-oc-primary [&_a]:underline-offset-2 hover:[&_a]:underline',
+        'w-full text-sm text-oc-muted-foreground group-has-[>svg]/alert:col-start-2 [&_a]:text-oc-primary [&_a]:underline-offset-2 [&_a]:hover:underline [&_p:not(:last-child)]:mb-4',
         className,
       )}
       {...props}
@@ -120,27 +78,19 @@ function AlertDescription({ className, ...props }: React.ComponentProps<'div'>) 
   )
 }
 
-function AlertAction({ className, ...props }: React.ComponentProps<'div'>) {
+function AlertAction({
+  className,
+  placement = 'top-right',
+  ...props
+}: React.ComponentProps<'div'> & VariantProps<typeof alertActionVariants>) {
   return (
     <div
       data-slot="alert-action"
-      className={cn(
-        'flex shrink-0 items-start gap-2',
-        'group-data-[action=Bottom]/alert:w-full',
-        'group-data-[action=Right]/alert:pr-3',
-        className,
-      )}
+      data-alert-action={placement}
+      className={cn(alertActionVariants({ placement }), className)}
       {...props}
     />
   )
 }
 
-export {
-  Alert,
-  AlertIcon,
-  AlertBody,
-  AlertTitle,
-  AlertDescription,
-  AlertAction,
-  alertVariants,
-}
+export { Alert, AlertTitle, AlertDescription, AlertAction }

@@ -22,7 +22,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/accordion' as const,
     name: 'Accordion',
-    description: 'Expandable sections with title, optional description, label, and progress.',
+    description: 'Composable expand-and-collapse sections with shadcn-compatible primitives.',
   },
   {
     to: '/progress' as const,
@@ -216,7 +216,7 @@ export const DOC_BLOCKS = [
   {
     to: '/alert' as const,
     name: 'Alert',
-    description: 'In-page notification above the page header, with actions. Not a floating toast.',
+    description: 'In-page notification with semantic variants and an optional action.',
   },
   {
     to: '/list-item' as const,
