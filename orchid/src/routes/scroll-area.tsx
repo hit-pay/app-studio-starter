@@ -34,7 +34,7 @@ function ScrollAreaExamplesPage() {
           Invoice list
         </p>
         <ScrollArea className="h-64 rounded-lg border border-solid border-oc-border">
-          <ul className="flex flex-col gap-1 p-3 text-sm leading-[1.5] text-oc-foreground">
+          <ul className="flex flex-col gap-1 p-3 text-sm leading-normal text-oc-foreground">
             {INVOICES.map((row) => (
               <li key={row} className="rounded-md px-2 py-1.5 hover:bg-oc-dark-blue-soft">
                 {row}

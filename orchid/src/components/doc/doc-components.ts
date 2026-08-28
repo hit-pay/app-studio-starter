@@ -32,7 +32,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/progress' as const,
     name: 'Progress',
-    description: 'Default and Small sizes with current/max label.',
+    description: 'shadcn-compatible progress with composable label, value, track, and indicator.',
   },
   {
     to: '/avatar' as const,
@@ -127,7 +127,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/scroll-area' as const,
     name: 'Scroll Area',
-    description: 'Custom scrollbar inside a bounded panel.',
+    description: 'shadcn-compatible bounded scroll area with Orchid scrollbar styling.',
   },
 ] as const
 
@@ -164,7 +164,7 @@ export const DOC_FORMS = [
   {
     to: '/select' as const,
     name: 'Select',
-    description: 'Single choice from a list, with groups and error.',
+    description: 'shadcn-compatible Base UI select with groups, states, and Orchid styling.',
   },
   {
     to: '/combobox' as const,
@@ -184,7 +184,7 @@ export const DOC_FORMS = [
   {
     to: '/radio-group' as const,
     name: 'Radio Group',
-    description: 'Radio options with vertical or horizontal alignment.',
+    description: 'shadcn-compatible radio group and item primitives with Orchid styling.',
   },
   {
     to: '/switch' as const,

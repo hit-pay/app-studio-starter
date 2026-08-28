@@ -423,9 +423,9 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "Known completion (value/max). size Default|Small.",
+      "description": "shadcn-compatible compound progress with label, value, track, and indicator primitives.",
       "dependencies": [
-        "class-variance-authority"
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [
@@ -770,7 +770,7 @@
       "name": "scroll-area",
       "type": "registry:ui",
       "title": "Scroll Area",
-      "description": "Custom scrollbar in a bounded panel. ScrollBar vertical|horizontal.",
+      "description": "shadcn-compatible scroll area and scrollbar primitives with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -787,7 +787,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "Small click panel (not a modal). Trigger render Button.",
+      "description": "shadcn-compatible non-modal popover primitives with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -804,7 +804,7 @@
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
-      "description": "Divider. orientation horizontal|vertical.",
+      "description": "shadcn-compatible horizontal or vertical separator with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -909,7 +909,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Closed one-of-many list. Select + Trigger + Value + Item.",
+      "description": "shadcn-compatible Base UI select with standard sizes and Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -987,10 +987,9 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
-      "description": "Pick one from a short list. RadioGroup alignment Vertical|Horizontal.",
+      "description": "shadcn-compatible radio group and item primitives with Orchid styling.",
       "dependencies": [
-        "@base-ui/react",
-        "class-variance-authority"
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [

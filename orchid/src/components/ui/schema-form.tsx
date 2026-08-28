@@ -33,7 +33,7 @@ import {
   InputGroupSeparator,
   InputGroupText,
 } from './input-group'
-import { Radio, RadioGroup } from './radio-group'
+import { RadioGroup, RadioGroupItem } from './radio-group'
 import {
   Select,
   SelectContent,
@@ -617,16 +617,25 @@ function SchemaForm({
               if (type === 'radio') {
                 return (
                   <Field data-invalid={invalid || undefined}>
+                    <FieldLabel>{item.title}</FieldLabel>
                     <RadioGroup
-                      label={item.title}
                       value={value == null ? null : String(value)}
                       onValueChange={(next) => field.handleChange(String(next))}
                     >
-                      {(item.options ?? []).map((option) => (
-                        <Radio key={option.value} value={option.value} error={invalid}>
-                          {option.label}
-                        </Radio>
-                      ))}
+                      {(item.options ?? []).map((option) => {
+                        const optionId = `${item.path}-${option.value}`
+
+                        return (
+                          <div key={option.value} className="flex items-center gap-2">
+                            <RadioGroupItem
+                              id={optionId}
+                              value={option.value}
+                              aria-invalid={invalid || undefined}
+                            />
+                            <FieldLabel htmlFor={optionId}>{option.label}</FieldLabel>
+                          </div>
+                        )
+                      })}
                     </RadioGroup>
                     {invalid ? <FieldError>{message}</FieldError> : null}
                   </Field>

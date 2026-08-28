@@ -1,77 +1,80 @@
-import type { ComponentProps } from 'react'
-import { cva, type VariantProps } from 'class-variance-authority'
+'use client'
+
+import { Progress as ProgressPrimitive } from '@base-ui/react/progress'
 
 import { cn } from '@/lib/utils'
 
-const progressTrackVariants = cva('relative min-w-0 flex-1 overflow-clip rounded-full bg-oc-neutral-soft', {
-  variants: {
-    size: {
-      Default: 'h-2',
-      Small: 'h-[5px]',
-    },
-  },
-  defaultVariants: {
-    size: 'Default',
-  },
-})
-
-const progressLabelVariants = cva('shrink-0 whitespace-nowrap leading-[1.5]', {
-  variants: {
-    size: {
-      Default: 'text-sm',
-      Small: 'text-xs',
-    },
-  },
-  defaultVariants: {
-    size: 'Default',
-  },
-})
-
 function Progress({
   className,
-  size = 'Default',
-  value = 0,
-  max = 100,
-  showLabel = true,
+  children,
+  value,
   ...props
-}: Omit<ComponentProps<'div'>, 'role'> &
-  VariantProps<typeof progressTrackVariants> & {
-    value?: number
-    max?: number
-    showLabel?: boolean
-  }) {
-  const safeMax = max <= 0 ? 1 : max
-  const clamped = Math.min(safeMax, Math.max(0, value))
-  const percent = (clamped / safeMax) * 100
-
+}: ProgressPrimitive.Root.Props) {
   return (
-    <div
+    <ProgressPrimitive.Root
+      value={value}
       data-slot="progress"
-      data-size={size}
-      className={cn('flex w-full items-center gap-1', className)}
+      className={cn('flex flex-wrap gap-3', className)}
       {...props}
     >
-      <div
-        role="progressbar"
-        aria-valuemin={0}
-        aria-valuemax={safeMax}
-        aria-valuenow={clamped}
-        className={progressTrackVariants({ size })}
-      >
-        <div
-          data-slot="progress-current"
-          className="absolute inset-y-0 left-0 rounded-full bg-oc-primary"
-          style={{ width: `${percent}%` }}
-        />
-      </div>
-      {showLabel ? (
-        <p className={progressLabelVariants({ size })}>
-          <span className="font-medium text-oc-foreground">{clamped}</span>
-          <span className="text-oc-muted-foreground">/{safeMax}</span>
-        </p>
-      ) : null}
-    </div>
+      {children}
+      <ProgressTrack>
+        <ProgressIndicator />
+      </ProgressTrack>
+    </ProgressPrimitive.Root>
   )
 }
 
-export { Progress, progressTrackVariants }
+function ProgressTrack({ className, ...props }: ProgressPrimitive.Track.Props) {
+  return (
+    <ProgressPrimitive.Track
+      data-slot="progress-track"
+      className={cn(
+        'relative flex h-1 w-full items-center overflow-x-hidden rounded-full bg-oc-neutral-soft',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function ProgressIndicator({
+  className,
+  ...props
+}: ProgressPrimitive.Indicator.Props) {
+  return (
+    <ProgressPrimitive.Indicator
+      data-slot="progress-indicator"
+      className={cn('h-full bg-oc-primary transition-all', className)}
+      {...props}
+    />
+  )
+}
+
+function ProgressLabel({ className, ...props }: ProgressPrimitive.Label.Props) {
+  return (
+    <ProgressPrimitive.Label
+      data-slot="progress-label"
+      className={cn('text-sm font-medium text-oc-foreground', className)}
+      {...props}
+    />
+  )
+}
+
+function ProgressValue({ className, ...props }: ProgressPrimitive.Value.Props) {
+  return (
+    <ProgressPrimitive.Value
+      data-slot="progress-value"
+      className={cn('ml-auto text-sm text-oc-muted-foreground tabular-nums', className)}
+      {...props}
+    />
+  )
+}
+
+export {
+  Progress,
+  ProgressIndicator,
+  ProgressLabel,
+  ProgressTrack,
+  ProgressValue,
+}

@@ -1,95 +1,43 @@
-import type { ReactNode } from 'react'
+'use client'
+
 import { Radio as RadioPrimitive } from '@base-ui/react/radio'
 import { RadioGroup as RadioGroupPrimitive } from '@base-ui/react/radio-group'
-import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const radioGroupVariants = cva('flex', {
-  variants: {
-    alignment: {
-      Vertical: 'flex-col gap-2',
-      Horizontal: 'flex-row flex-wrap items-center gap-4',
-    },
-  },
-  defaultVariants: {
-    alignment: 'Vertical',
-  },
-})
-
-function RadioGroup({
-  className,
-  alignment = 'Vertical',
-  label,
-  ...props
-}: RadioGroupPrimitive.Props & {
-  alignment?: 'Vertical' | 'Horizontal'
-  label?: ReactNode
-}) {
+function RadioGroup({ className, ...props }: RadioGroupPrimitive.Props) {
   return (
-    <div className="flex w-full flex-col items-start gap-2">
-      {label ? (
-        <p className="text-xs font-medium leading-[1.5] text-oc-muted-foreground">{label}</p>
-      ) : null}
-      <RadioGroupPrimitive
-        data-slot="radio-group"
-        data-alignment={alignment}
-        className={cn(radioGroupVariants({ alignment }), className)}
-        {...props}
-      />
-    </div>
+    <RadioGroupPrimitive
+      data-slot="radio-group"
+      className={cn('grid w-full gap-2', className)}
+      {...props}
+    />
   )
 }
 
-const radioControlVariants = cva(
-  [
-    'inline-flex size-4 shrink-0 items-center justify-center rounded-full border border-solid outline-none',
-    'shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
-    'bg-oc-background border-oc-border',
-    'hover:border-oc-primary hover:shadow-[0_0_0_3px_var(--oc-info-border)]',
-    'data-checked:border-oc-primary data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
-    'data-disabled:pointer-events-none data-disabled:border-oc-border data-disabled:bg-oc-dark-blue-soft data-disabled:shadow-none',
-    'data-disabled:data-checked:border-oc-dark-blue-border',
-    'data-[error=true]:border-oc-destructive data-[error=true]:shadow-[0_0_0_3px_var(--oc-destructive-border)]',
-  ].join(' '),
-)
-
-function Radio({
-  className,
-  children,
-  description,
-  error = false,
-  ...props
-}: RadioPrimitive.Root.Props & {
-  description?: ReactNode
-  error?: boolean
-}) {
+function RadioGroupItem({ className, ...props }: RadioPrimitive.Root.Props) {
   return (
-    <label
+    <RadioPrimitive.Root
+      data-slot="radio-group-item"
       className={cn(
-        'inline-flex items-start gap-2 text-xs leading-[1.5] text-oc-foreground',
-        'has-data-disabled:text-oc-muted-foreground',
+        'group/radio-group-item peer relative flex aspect-square size-4 shrink-0 rounded-full border border-oc-border bg-oc-background outline-none after:absolute after:-inset-x-3 after:-inset-y-2',
+        'shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+        'hover:border-oc-primary hover:shadow-[0_0_0_3px_var(--oc-info-border)] focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50',
+        'data-checked:border-oc-primary data-checked:bg-oc-primary data-checked:text-oc-primary-foreground data-checked:hover:shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+        'disabled:pointer-events-none disabled:cursor-not-allowed disabled:border-oc-border disabled:bg-oc-dark-blue-soft disabled:opacity-50 disabled:shadow-none',
+        'aria-invalid:border-oc-destructive aria-invalid:ring-3 aria-invalid:ring-oc-destructive-border/50',
         className,
       )}
+      {...props}
     >
-      <RadioPrimitive.Root
-        data-slot="radio"
-        data-error={error || undefined}
-        className={radioControlVariants()}
-        {...props}
+      <RadioPrimitive.Indicator
+        data-slot="radio-group-indicator"
+        className="flex size-4 items-center justify-center"
       >
-        <RadioPrimitive.Indicator className="size-2 rounded-full bg-oc-primary data-disabled:bg-oc-dark-blue-border" />
-      </RadioPrimitive.Root>
-      {children || description ? (
-        <span className="flex min-w-0 flex-col gap-0.5">
-          {children ? <span>{children}</span> : null}
-          {description ? (
-            <span className="text-xs leading-[1.5] text-oc-muted-foreground">{description}</span>
-          ) : null}
-        </span>
-      ) : null}
-    </label>
+        <span className="absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-oc-primary-foreground" />
+      </RadioPrimitive.Indicator>
+    </RadioPrimitive.Root>
   )
 }
 
-export { Radio, RadioGroup }
+export { RadioGroup, RadioGroupItem }

@@ -15,7 +15,26 @@ export const Route = createFileRoute('/select')({
 
 function SelectExamplesPage() {
   return (
-    <DocExamplePage to="/select">
+    <DocExamplePage
+      to="/select"
+      usage={`import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select'
+
+<Select>
+  <SelectTrigger>
+    <SelectValue placeholder="Select a status" />
+  </SelectTrigger>
+  <SelectContent>
+    <SelectItem value="draft">Draft</SelectItem>
+    <SelectItem value="sent">Sent</SelectItem>
+  </SelectContent>
+</Select>`}
+    >
       <div className="grid gap-8 md:grid-cols-2">
         <FieldGroup>
           <Field>

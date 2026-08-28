@@ -1,5 +1,9 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Progress } from '@/components/ui/progress'
+import {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+} from '@/components/ui/progress'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 
 export const Route = createFileRoute('/progress')({
@@ -8,37 +12,57 @@ export const Route = createFileRoute('/progress')({
 
 function ProgressExamplesPage() {
   return (
-    <DocExamplePage to="/progress">
+    <DocExamplePage
+      to="/progress"
+      usage={`import {
+  Progress,
+  ProgressLabel,
+  ProgressValue,
+} from '@/components/ui/progress'
+
+<Progress value={70}>
+  <ProgressLabel>Invoice collection</ProgressLabel>
+  <ProgressValue />
+</Progress>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <p className="text-xs text-oc-muted-foreground">Invoice collection · INV-2048 · 70%</p>
-        <Progress size="Default" value={70} max={100} />
+        <Progress value={70}>
+          <ProgressLabel>Invoice collection · INV-2048</ProgressLabel>
+          <ProgressValue />
+        </Progress>
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Small
+          Custom track
         </p>
-        <p className="text-xs text-oc-muted-foreground">Payout batch processing</p>
-        <Progress size="Small" value={70} max={100} />
+        <Progress value={70} className="**:data-[slot=progress-track]:h-2">
+          <ProgressLabel className="text-xs">Payout batch processing</ProgressLabel>
+          <ProgressValue className="text-xs" />
+        </Progress>
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Recurring setup
         </p>
-        <p className="text-xs text-oc-muted-foreground">Alex Turner plan · 2 of 5 steps</p>
-        <Progress size="Default" value={2} max={5} />
+        <Progress value={2} max={5}>
+          <ProgressLabel>Alex Turner plan</ProgressLabel>
+          <ProgressValue>{(_formattedValue, value) => `${value}/5 steps`}</ProgressValue>
+        </Progress>
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Product stock
         </p>
-        <p className="text-xs text-oc-muted-foreground">SKU-TEA-12 · 8 of 24 units remaining</p>
-        <Progress size="Small" value={8} max={24} />
+        <Progress value={8} max={24}>
+          <ProgressLabel>SKU-TEA-12</ProgressLabel>
+          <ProgressValue>{(_formattedValue, value) => `${value}/24 units`}</ProgressValue>
+        </Progress>
       </div>
     </DocExamplePage>
   )
