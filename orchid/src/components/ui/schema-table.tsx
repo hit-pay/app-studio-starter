@@ -753,8 +753,13 @@ function SchemaTable({
           <span className="hidden min-w-32 sm:block" />
           <Pagination className="w-auto flex-1">
             <PaginationPrevious
-              disabled={table.page <= 1}
-              onClick={() => table.setPage(table.page - 1)}
+              href={`?page=${Math.max(1, table.page - 1)}`}
+              aria-disabled={table.page <= 1}
+              tabIndex={table.page <= 1 ? -1 : undefined}
+              onClick={(event) => {
+                event.preventDefault()
+                table.setPage(table.page - 1)
+              }}
             />
             <PaginationContent>
               {pages.map((item, index) =>
@@ -764,7 +769,14 @@ function SchemaTable({
                   </PaginationItem>
                 ) : (
                   <PaginationItem key={item}>
-                    <PaginationLink isActive={item === table.page} onClick={() => table.setPage(item)}>
+                    <PaginationLink
+                      href={`?page=${item}`}
+                      isActive={item === table.page}
+                      onClick={(event) => {
+                        event.preventDefault()
+                        table.setPage(item)
+                      }}
+                    >
                       {item}
                     </PaginationLink>
                   </PaginationItem>
@@ -772,8 +784,13 @@ function SchemaTable({
               )}
             </PaginationContent>
             <PaginationNext
-              disabled={table.page >= table.pageCount}
-              onClick={() => table.setPage(table.page + 1)}
+              href={`?page=${Math.min(table.pageCount, table.page + 1)}`}
+              aria-disabled={table.page >= table.pageCount}
+              tabIndex={table.page >= table.pageCount ? -1 : undefined}
+              onClick={(event) => {
+                event.preventDefault()
+                table.setPage(table.page + 1)
+              }}
             />
           </Pagination>
           {pageSizes.length > 0 ? (

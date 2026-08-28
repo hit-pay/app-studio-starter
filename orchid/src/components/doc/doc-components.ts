@@ -102,7 +102,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/pagination' as const,
     name: 'Pagination',
-    description: 'Page numbers, previous/next, and optional range label for lists.',
+    description: 'shadcn-compatible page links with previous, next, ellipsis, and an optional range label.',
   },
   {
     to: '/table' as const,
@@ -117,7 +117,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/kbd' as const,
     name: 'Kbd',
-    description: 'Keyboard shortcut keys. Kbd and KbdGroup.',
+    description: 'shadcn-compatible keyboard key and grouped shortcut display.',
   },
   {
     to: '/collapsible' as const,
@@ -144,7 +144,7 @@ export const DOC_FORMS = [
   {
     to: '/label' as const,
     name: 'Label',
-    description: 'Accessible label for form controls.',
+    description: 'shadcn-compatible accessible label with Orchid typography.',
   },
   {
     to: '/input' as const,

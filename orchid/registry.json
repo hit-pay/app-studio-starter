@@ -679,11 +679,13 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "Paged lists. Previous/Next, Ellipsis, PaginationInfo.",
+      "description": "shadcn-compatible link pagination with Orchid buttons and an optional range label.",
       "dependencies": [
         "lucide-react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
       "files": [
         {
           "path": "src/components/ui/pagination.tsx",

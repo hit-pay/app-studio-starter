@@ -22,25 +22,61 @@ function DefaultPagination() {
 
   return (
     <Pagination>
-      <PaginationPrevious disabled={page === 1} onClick={() => setPage((p) => Math.max(1, p - 1))} />
+      <PaginationPrevious
+        href={`?page=${Math.max(1, page - 1)}`}
+        aria-disabled={page === 1}
+        tabIndex={page === 1 ? -1 : undefined}
+        onClick={(event) => {
+          event.preventDefault()
+          setPage((p) => Math.max(1, p - 1))
+        }}
+      />
       <PaginationContent>
         <PaginationItem>
-          <PaginationLink isActive={page === 1} onClick={() => setPage(1)}>
+          <PaginationLink
+            href="?page=1"
+            isActive={page === 1}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(1)
+            }}
+          >
             1
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink isActive={page === 2} onClick={() => setPage(2)}>
+          <PaginationLink
+            href="?page=2"
+            isActive={page === 2}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(2)
+            }}
+          >
             2
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink isActive={page === 3} onClick={() => setPage(3)}>
+          <PaginationLink
+            href="?page=3"
+            isActive={page === 3}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(3)
+            }}
+          >
             3
           </PaginationLink>
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink isActive={page === 4} onClick={() => setPage(4)}>
+          <PaginationLink
+            href="?page=4"
+            isActive={page === 4}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(4)
+            }}
+          >
             4
           </PaginationLink>
         </PaginationItem>
@@ -48,14 +84,26 @@ function DefaultPagination() {
           <PaginationEllipsis />
         </PaginationItem>
         <PaginationItem>
-          <PaginationLink isActive={page === total} onClick={() => setPage(total)}>
+          <PaginationLink
+            href={`?page=${total}`}
+            isActive={page === total}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(total)
+            }}
+          >
             15
           </PaginationLink>
         </PaginationItem>
       </PaginationContent>
       <PaginationNext
-        disabled={page === total}
-        onClick={() => setPage((p) => Math.min(total, p + 1))}
+        href={`?page=${Math.min(total, page + 1)}`}
+        aria-disabled={page === total}
+        tabIndex={page === total ? -1 : undefined}
+        onClick={(event) => {
+          event.preventDefault()
+          setPage((p) => Math.min(total, p + 1))
+        }}
       />
     </Pagination>
   )
@@ -73,19 +121,39 @@ function InvoicePagination() {
         Showing {from}–{to} of {total * 10} invoices
       </PaginationInfo>
       <Pagination className="w-auto justify-end">
-        <PaginationPrevious disabled={page === 1} onClick={() => setPage((p) => Math.max(1, p - 1))} />
+        <PaginationPrevious
+          href={`?page=${Math.max(1, page - 1)}`}
+          aria-disabled={page === 1}
+          tabIndex={page === 1 ? -1 : undefined}
+          onClick={(event) => {
+            event.preventDefault()
+            setPage((p) => Math.max(1, p - 1))
+          }}
+        />
         <PaginationContent>
           {Array.from({ length: total }, (_, index) => index + 1).map((item) => (
             <PaginationItem key={item}>
-              <PaginationLink isActive={item === page} onClick={() => setPage(item)}>
+              <PaginationLink
+                href={`?page=${item}`}
+                isActive={item === page}
+                onClick={(event) => {
+                  event.preventDefault()
+                  setPage(item)
+                }}
+              >
                 {item}
               </PaginationLink>
             </PaginationItem>
           ))}
         </PaginationContent>
         <PaginationNext
-          disabled={page === total}
-          onClick={() => setPage((p) => Math.min(total, p + 1))}
+          href={`?page=${Math.min(total, page + 1)}`}
+          aria-disabled={page === total}
+          tabIndex={page === total ? -1 : undefined}
+          onClick={(event) => {
+            event.preventDefault()
+            setPage((p) => Math.min(total, p + 1))
+          }}
         />
       </Pagination>
     </div>
@@ -107,22 +175,22 @@ function PaginationExamplesPage() {
 } from '@/components/ui/pagination'
 
 <Pagination>
-  <PaginationPrevious />
+  <PaginationPrevious href="?page=1" />
   <PaginationContent>
     <PaginationItem>
-      <PaginationLink>1</PaginationLink>
+      <PaginationLink href="?page=1">1</PaginationLink>
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink isActive>2</PaginationLink>
+      <PaginationLink href="?page=2" isActive>2</PaginationLink>
     </PaginationItem>
     <PaginationItem>
       <PaginationEllipsis />
     </PaginationItem>
     <PaginationItem>
-      <PaginationLink>15</PaginationLink>
+      <PaginationLink href="?page=15">15</PaginationLink>
     </PaginationItem>
   </PaginationContent>
-  <PaginationNext />
+  <PaginationNext href="?page=3" />
 </Pagination>`}
     >
       <div className="space-y-4">
