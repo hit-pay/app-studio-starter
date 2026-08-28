@@ -420,9 +420,9 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Face/initials. variant Default|Business|Image, size 24|28|32|40|48|64.",
+      "description": "shadcn-compatible compound avatar with image, fallback, badge, group, and Orchid business styling.",
       "dependencies": [
-        "class-variance-authority"
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [

@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 import { PencilIcon, UserPlusIcon, XCircleIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Avatar } from './avatar'
+import { Avatar, AvatarFallback, AvatarImage } from './avatar'
 import { Button } from './button'
 import { Badge } from './badge'
 import { CopyButton } from './copy-button'
@@ -201,14 +201,11 @@ function CustomerCard({
         <>
           <div className={cn('flex items-center gap-2', expanded && 'w-full min-w-0')}>
             {avatar ? (
-              <Avatar
-                size={32}
-                variant={customer.src ? 'Image' : 'Default'}
-                src={customer.src}
-                alt=""
-                className="text-sm leading-5"
-              >
-                {(customer.name?.[0] ?? 'A').toUpperCase()}
+              <Avatar className="text-sm leading-5">
+                {customer.src ? <AvatarImage src={customer.src} alt="" /> : null}
+                <AvatarFallback>
+                  {(customer.name?.[0] ?? 'A').toUpperCase()}
+                </AvatarFallback>
               </Avatar>
             ) : null}
             <div className="flex min-w-0 flex-1 flex-col items-start">

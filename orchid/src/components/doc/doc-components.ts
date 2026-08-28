@@ -32,7 +32,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/avatar' as const,
     name: 'Avatar',
-    description: 'Sizes 24–64, Default, Business, and Image.',
+    description: 'Image, fallback, badge, and group primitives with Orchid styling.',
   },
   {
     to: '/tooltip' as const,

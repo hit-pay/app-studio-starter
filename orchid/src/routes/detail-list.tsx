@@ -1,5 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { Avatar } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import {
   DetailList,
   DetailListGrid,
@@ -110,7 +110,10 @@ function DetailListExamplesPage() {
           <DetailListGrid columns={4}>
             <DetailListRow label="Customer" alignment="Vertical" colSpan={2}>
               <span className="inline-flex items-center gap-2">
-                <Avatar size={24} variant="Image" src={PHOTO} alt="" />
+                <Avatar size="sm">
+                  <AvatarImage src={PHOTO} alt="" />
+                  <AvatarFallback>AT</AvatarFallback>
+                </Avatar>
                 Alex Turner
               </span>
             </DetailListRow>
