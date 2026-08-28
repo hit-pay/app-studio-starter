@@ -1,16 +1,17 @@
 import { createFileRoute } from '@tanstack/react-router'
 
 import { DocExamplePage } from '@/components/doc/doc-example-page'
-import { AppLayout, AppNav, AppNavGroup, AppNavItem } from '@/components/ui/app-layout'
+import {
+  AppLayout,
+  AppNav,
+  AppNavGroup,
+  AppNavItem,
+  AppSidebar,
+  AppSidebarContent,
+  AppSidebarItem,
+} from '@/components/ui/app-layout'
 import { Button } from '@/components/ui/button'
 import { PageHeader } from '@/components/ui/page'
-import {
-  SubSidebar,
-  SubSidebarContent,
-  SubSidebarGroup,
-  SubSidebarGroupLabel,
-  SubSidebarItem,
-} from '@/components/ui/sub-sidebar'
 
 export const Route = createFileRoute('/app-layout')({
   component: AppLayoutExamplesPage,
@@ -25,6 +26,9 @@ function AppLayoutExamplesPage() {
   AppNav,
   AppNavGroup,
   AppNavItem,
+  AppSidebar,
+  AppSidebarContent,
+  AppSidebarItem,
 } from '@/components/ui/app-layout'
 
 <AppLayout
@@ -38,6 +42,21 @@ function AppLayoutExamplesPage() {
         <AppNavItem>Notifications</AppNavItem>
       </AppNavGroup>
     </AppNav>
+  }
+>
+  Page content
+</AppLayout>
+
+<AppLayout
+  variant="sidebar"
+  sidebar={
+    <AppSidebar>
+      <AppSidebarContent>
+        <AppSidebarItem active>General settings</AppSidebarItem>
+        <AppSidebarItem>Tracking Tools</AppSidebarItem>
+        <AppSidebarItem>SEO</AppSidebarItem>
+      </AppSidebarContent>
+    </AppSidebar>
   }
 >
   Page content
@@ -86,16 +105,17 @@ function AppLayoutExamplesPage() {
             variant="sidebar"
             appName="Inventory App"
             sidebar={
-              <SubSidebar>
-                <SubSidebarContent>
-                  <SubSidebarGroup>
-                    <SubSidebarGroupLabel>Inventory</SubSidebarGroupLabel>
-                    <SubSidebarItem active>Overview</SubSidebarItem>
-                    <SubSidebarItem>Products</SubSidebarItem>
-                    <SubSidebarItem>Stock Counts</SubSidebarItem>
-                  </SubSidebarGroup>
-                </SubSidebarContent>
-              </SubSidebar>
+              <AppSidebar>
+                <AppSidebarContent>
+                  <AppSidebarItem active>General settings</AppSidebarItem>
+                  <AppSidebarItem>Tracking Tools</AppSidebarItem>
+                  <AppSidebarItem>SEO</AppSidebarItem>
+                  <AppSidebarItem>Multi-currency converter</AppSidebarItem>
+                  <AppSidebarItem>Tax Settings</AppSidebarItem>
+                  <AppSidebarItem>Button Labels</AppSidebarItem>
+                  <AppSidebarItem>Payment methods</AppSidebarItem>
+                </AppSidebarContent>
+              </AppSidebar>
             }
             header={
               <div className="px-6 pt-6">

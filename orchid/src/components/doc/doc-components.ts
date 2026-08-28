@@ -246,7 +246,7 @@ export const DOC_BLOCKS = [
   {
     to: '/app-layout' as const,
     name: 'App Layout',
-    description: 'Embedded application layout with page header, tabs, or sub-sidebar.',
+    description: 'Embedded application layout with page header, tabs, or built-in child sidebar.',
   },
   {
     to: '/sub-sidebar' as const,
