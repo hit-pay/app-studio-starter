@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { CheckIcon, CircleHelpIcon, Trash2Icon, TriangleAlertIcon, XIcon } from 'lucide-react'
 
@@ -15,10 +17,10 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
-type ConfirmDialogType = 'delete' | 'warning' | 'success' | 'question'
+type ConfirmationModalType = 'delete' | 'warning' | 'success' | 'question'
 
-type ConfirmDialogOptions = {
-  type?: ConfirmDialogType
+type ConfirmationModalOptions = {
+  type?: ConfirmationModalType
   title?: React.ReactNode
   message: React.ReactNode
   description?: React.ReactNode
@@ -28,14 +30,14 @@ type ConfirmDialogOptions = {
   inputPlaceholder?: string
 }
 
-type ConfirmDialogManager = (options: ConfirmDialogOptions) => Promise<boolean>
+type ConfirmationModalManager = (options: ConfirmationModalOptions) => Promise<boolean>
 
-type ConfirmDialogRequest = ConfirmDialogOptions & {
+type ConfirmationModalRequest = ConfirmationModalOptions & {
   resolve: (confirmed: boolean) => void
 }
 
 const PRESETS: Record<
-  ConfirmDialogType,
+  ConfirmationModalType,
   {
     icon: React.ReactNode
     iconClassName: string
@@ -79,12 +81,12 @@ const PRESETS: Record<
   },
 }
 
-const ConfirmDialogContext = React.createContext<ConfirmDialogManager | null>(null)
+const ConfirmationModalContext = React.createContext<ConfirmationModalManager | null>(null)
 
-function ConfirmDialogProvider({ children }: { children: React.ReactNode }) {
-  const [request, setRequest] = React.useState<ConfirmDialogRequest | null>(null)
+function ConfirmationModalProvider({ children }: { children: React.ReactNode }) {
+  const [request, setRequest] = React.useState<ConfirmationModalRequest | null>(null)
   const [typed, setTyped] = React.useState('')
-  const requestRef = React.useRef<ConfirmDialogRequest | null>(null)
+  const requestRef = React.useRef<ConfirmationModalRequest | null>(null)
 
   const finish = React.useCallback((confirmed: boolean) => {
     const current = requestRef.current
@@ -94,7 +96,7 @@ function ConfirmDialogProvider({ children }: { children: React.ReactNode }) {
     current?.resolve(confirmed)
   }, [])
 
-  const confirm = React.useCallback<ConfirmDialogManager>((options) => {
+  const confirm = React.useCallback<ConfirmationModalManager>((options) => {
     requestRef.current?.resolve(false)
 
     return new Promise<boolean>((resolve) => {
@@ -112,7 +114,7 @@ function ConfirmDialogProvider({ children }: { children: React.ReactNode }) {
   const matched = !request?.confirmPhrase || typed.trim() === request.confirmPhrase
 
   return (
-    <ConfirmDialogContext.Provider value={confirm}>
+    <ConfirmationModalContext.Provider value={confirm}>
       {children}
       <AlertDialog
         open={Boolean(request)}
@@ -134,7 +136,9 @@ function ConfirmDialogProvider({ children }: { children: React.ReactNode }) {
           </AlertDialogHeader>
           <div
             className={cn(
-              request?.confirmPhrase ? 'space-y-4 py-2' : 'flex flex-col items-center gap-4 py-4 text-center',
+              request?.confirmPhrase
+                ? 'space-y-4 py-2'
+                : 'flex flex-col items-center gap-4 py-4 text-center',
             )}
           >
             {!request?.confirmPhrase ? (
@@ -189,19 +193,19 @@ function ConfirmDialogProvider({ children }: { children: React.ReactNode }) {
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>
-    </ConfirmDialogContext.Provider>
+    </ConfirmationModalContext.Provider>
   )
 }
 
-function useConfirmDialog() {
-  const confirm = React.useContext(ConfirmDialogContext)
+function useConfirmationModal() {
+  const confirm = React.useContext(ConfirmationModalContext)
 
   if (!confirm) {
-    throw new Error('useConfirmDialog must be used within ConfirmDialogProvider.')
+    throw new Error('useConfirmationModal must be used within ConfirmationModalProvider.')
   }
 
   return confirm
 }
 
-export { ConfirmDialogProvider, useConfirmDialog }
-export type { ConfirmDialogManager, ConfirmDialogOptions, ConfirmDialogType }
+export { ConfirmationModalProvider, useConfirmationModal }
+export type { ConfirmationModalManager, ConfirmationModalOptions, ConfirmationModalType }

@@ -274,7 +274,7 @@
       "name": "form-modal",
       "type": "registry:ui",
       "title": "Form Modal",
-      "description": "Prebuilt modal form with prop-driven header and cancel/save actions.",
+      "description": "Prebuilt modal shell with prop-driven header and cancel/save actions; compose with SchemaForm for standard forms.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",

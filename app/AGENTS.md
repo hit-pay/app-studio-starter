@@ -101,8 +101,8 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 ### Important paths
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
-- `src/routes/__root.tsx`: root document with `QueryProvider` and Orchid `Toaster`
-- `src/components/ui/`: installed Orchid components
+- `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
+- `src/components/ui/`: complete preinstalled Orchid component catalog
 - `src/components/`: app-specific components
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
@@ -119,13 +119,12 @@ Path aliases:
 - `@/*` -> `src/*`
 - `@/components/ui/*` -> `src/components/ui/*`
 
-Unless the user's request truly requires infrastructure changes, leave these files unchanged:
+Unless the user's request truly requires infrastructure changes, leave these files unchanged. Updating `src/routes/__root.tsx` is allowed only when a required Orchid global provider is missing:
 
 - `vite.config.ts`
 - `start.mjs`
 - `start-preview.mjs`
 - `src/router.tsx`
-- `src/routes/__root.tsx`
 - `src/lib/db.ts`
 - `src/lib/migrate.ts`
 - `src/lib/hitpay.ts`
@@ -154,7 +153,7 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 ## Orchid UI
 
-Before building a screen, read `orchid-catalog.md` in full. Then read the implementation file only for each component you choose so you use its real exports and props.
+Before building a screen, read `orchid-catalog.md` in full. The complete Orchid catalog is already installed in `src/components/ui/`; do not run component installation commands. Read the implementation file for each component you choose so you use its real exports and props.
 
 Import components from:
 
@@ -166,26 +165,30 @@ Do not create a generic replacement when an appropriate Orchid component exists.
 
 Common choices:
 
-- application frame: `AppLayout`
+- application frame: `AppLayout`; configure tabs with `navigationItems` and child navigation with `sidebarItems`
+- grouped navigation inside a nested settings or detail area: compose `SubSidebar`; do not use it as the application frame
 - standard route page: compose `Page`, `PageHeader`, and `PageContent`
-- complex create/edit flows that replace the content area: `FormPage`
-- operational lists: `SchemaTable` or Orchid `Table`
-- forms: `SchemaForm` or Orchid form controls
-- simple create/edit flows: Orchid `Dialog`
-- routine confirmation: call the prebuilt `useConfirmDialog()` hook and await its boolean result
+- standard modal forms: compose `FormModal` with `SchemaForm`; configure only its built-in cancel and save actions
+- complex create/edit flows that replace the content area: compose `FormPage`, `FormPageHeader`, `FormPageContent`, and `SchemaForm`
+- use `SchemaForm` for forms with multiple fields, validation, conditional fields, or schema-driven data
+- do not bypass `SchemaForm` with direct TanStack `useForm` for complex forms
+- complex data displays with filtering, sorting, selection, pagination, or row actions: use `SchemaTable`
+- simple static data displays: use Orchid `Table`
+- custom modal layouts: compose Orchid `Dialog`
+- routine confirmation: call the prebuilt `useConfirmationModal()` hook and await its boolean result
 - custom confirmation layout: compose `AlertDialog`, `AlertDialogContent`, `AlertDialogAction`, and `AlertDialogCancel`
 - zero-data and no-results states: `Empty`
 - status: `Badge`
 - feedback: `toast.add({ title, description, type })`; use `success`, `info`, `warning`, `error`, or `loading`
 - loading: `Skeleton` or `Spinner`
 
-Mount the root toaster as `<Toaster placement="top-center">`. Do not use Sonner or create another toast provider.
+Mount `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Do not use `useConfirmationModal()` without its provider. Do not use Sonner or create another toast or confirmation provider.
 
 Prefer shadcn-compatible lowercase props such as `variant="default"`, `variant="destructive"`, and `size="sm"`. Some Orchid business components and legacy aliases still use PascalCase values; check the component source instead of guessing.
 
 Use `oc-*` design tokens from `src/styles.css`. Do not copy colors or layout from the public marketing site, and avoid hardcoded colors when a token exists.
 
-If an Orchid component file already exists, do not run an add command for that component because it can overwrite local customizations. Add from the `@orchid` registry only when a required component is genuinely missing. Never install `@shadcn` items.
+Do not run Orchid or shadcn add commands. The full Orchid catalog is preinstalled, and reinstalling components can overwrite local customizations. Never install `@shadcn` items.
 
 ## Persistent data and server code
 

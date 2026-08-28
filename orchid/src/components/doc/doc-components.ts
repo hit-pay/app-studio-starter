@@ -259,6 +259,11 @@ export const DOC_BLOCKS = [
     description: 'Embedded application layout with config-driven tabs or a built-in child sidebar.',
   },
   {
+    to: '/page' as const,
+    name: 'Page',
+    description: 'Standard route page with built-in responsive padding, header, and scrollable content.',
+  },
+  {
     to: '/form-modal' as const,
     name: 'Form Modal',
     description: 'Prebuilt modal form with prop-driven header and cancel/save actions.',
@@ -269,16 +274,6 @@ export const DOC_BLOCKS = [
     description: 'Full-page form layout with a header and scrollable form content.',
   },
   {
-    to: '/page' as const,
-    name: 'Page',
-    description: 'Standard route page with built-in responsive padding, header, and scrollable content.',
-  },
-  {
-    to: '/confirmation-modal' as const,
-    name: 'Confirmation Modal',
-    description: 'Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.',
-  },
-  {
     to: '/schema-form' as const,
     name: 'Schema Form',
     description: 'TanStack Form plus Orchid fields. Types include date, datetime, file, quantity, switch.',
@@ -287,6 +282,11 @@ export const DOC_BLOCKS = [
     to: '/schema-table' as const,
     name: 'Schema Table',
     description: 'JSON schema table like SchemaForm: search, tabs, filter, sort, Edit Column, pagination.',
+  },
+  {
+    to: '/confirmation-modal' as const,
+    name: 'Confirmation Modal',
+    description: 'Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.',
   },
 ] as const
 

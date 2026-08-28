@@ -71,14 +71,18 @@ function FormPageHeader({
       )}
       {...props}
     >
-      <button
-        type="button"
-        className="inline-flex cursor-pointer items-center gap-1 text-sm text-oc-muted-foreground outline-none hover:text-oc-foreground"
-        onClick={onClose}
-      >
-        Close
-        <Kbd>Esc</Kbd>
-      </button>
+      {onClose ? (
+        <button
+          type="button"
+          className="inline-flex cursor-pointer items-center gap-1 text-sm text-oc-muted-foreground outline-none hover:text-oc-foreground"
+          onClick={onClose}
+        >
+          Close
+          <Kbd>Esc</Kbd>
+        </button>
+      ) : (
+        <span />
+      )}
       {actions ? (
         <div className="flex min-w-0 flex-wrap items-center justify-end gap-2">
           <Button

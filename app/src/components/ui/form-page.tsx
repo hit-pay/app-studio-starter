@@ -3,7 +3,22 @@
 import { useEffect, type ComponentProps, type ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
 import { Kbd } from '@/components/ui/kbd'
+
+type FormPageAction = {
+  label: string
+  icon?: ReactNode
+  onClick?: () => void
+  disabled?: boolean
+}
+
+type FormPageActions = {
+  cancel: FormPageAction
+  save: FormPageAction & {
+    form?: string
+  }
+}
 
 function FormPage({ className, ...props }: ComponentProps<'section'>) {
   return (
@@ -25,7 +40,7 @@ function FormPageHeader({
   ...props
 }: ComponentProps<'header'> & {
   onClose?: () => void
-  actions?: ReactNode
+  actions?: FormPageActions
 }) {
   useEffect(() => {
     if (!onClose) return
@@ -56,16 +71,41 @@ function FormPageHeader({
       )}
       {...props}
     >
-      <button
-        type="button"
-        className="inline-flex cursor-pointer items-center gap-1 text-sm text-oc-muted-foreground outline-none hover:text-oc-foreground"
-        onClick={onClose}
-      >
-        Close
-        <Kbd>Esc</Kbd>
-      </button>
+      {onClose ? (
+        <button
+          type="button"
+          className="inline-flex cursor-pointer items-center gap-1 text-sm text-oc-muted-foreground outline-none hover:text-oc-foreground"
+          onClick={onClose}
+        >
+          Close
+          <Kbd>Esc</Kbd>
+        </button>
+      ) : (
+        <span />
+      )}
       {actions ? (
-        <div className="flex min-w-0 flex-wrap items-center justify-end gap-2">{actions}</div>
+        <div className="flex min-w-0 flex-wrap items-center justify-end gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            className="min-w-25"
+            disabled={actions.cancel.disabled}
+            onClick={actions.cancel.onClick}
+          >
+            {actions.cancel.icon}
+            {actions.cancel.label}
+          </Button>
+          <Button
+            type={actions.save.form ? 'submit' : 'button'}
+            form={actions.save.form}
+            className="min-w-25"
+            disabled={actions.save.disabled}
+            onClick={actions.save.onClick}
+          >
+            {actions.save.icon}
+            {actions.save.label}
+          </Button>
+        </div>
       ) : null}
     </header>
   )
@@ -81,4 +121,10 @@ function FormPageContent({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-export { FormPage, FormPageContent, FormPageHeader }
+export {
+  FormPage,
+  FormPageContent,
+  FormPageHeader,
+  type FormPageAction,
+  type FormPageActions,
+}

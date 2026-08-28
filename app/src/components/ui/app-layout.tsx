@@ -1,24 +1,36 @@
 import type { ComponentProps, ReactNode } from 'react'
-import { mergeProps } from '@base-ui/react/merge-props'
-import { useRender } from '@base-ui/react/use-render'
 
 import { cn } from '@/lib/utils'
+
+type AppNavigationItem = {
+  id: string
+  label: ReactNode
+  disabled?: boolean
+}
 
 function AppLayout({
   className,
   variant = 'default',
   appName,
   header,
-  navigation,
-  sidebar,
+  navigationItems,
+  activeNavigation,
+  onNavigationChange,
+  sidebarItems,
+  activeSidebar,
+  onSidebarChange,
   children,
   ...props
 }: ComponentProps<'div'> & {
   variant?: 'default' | 'tabs' | 'sidebar'
   appName?: ReactNode
   header?: ReactNode
-  navigation?: ReactNode
-  sidebar?: ReactNode
+  navigationItems?: AppNavigationItem[]
+  activeNavigation?: string
+  onNavigationChange?: (id: string, item: AppNavigationItem) => void
+  sidebarItems?: AppNavigationItem[]
+  activeSidebar?: string
+  onSidebarChange?: (id: string, item: AppNavigationItem) => void
 }) {
   const page = (
     <div data-slot="app-layout-content" className="flex min-w-0 flex-1 flex-col">
@@ -27,12 +39,23 @@ function AppLayout({
           {header}
         </div>
       ) : null}
-      {navigation ? (
+      {navigationItems?.length ? (
         <div data-slot="app-layout-tabs" className="min-w-0 shrink-0">
-          {navigation}
+          <AppNav>
+            {navigationItems.map((item) => (
+              <AppNavItem
+                key={item.id}
+                active={item.id === activeNavigation}
+                disabled={item.disabled}
+                onClick={() => onNavigationChange?.(item.id, item)}
+              >
+                {item.label}
+              </AppNavItem>
+            ))}
+          </AppNav>
         </div>
       ) : null}
-      <main data-slot="app-layout-main" className="min-w-0 flex-1 px-4 py-5 sm:px-6">
+      <main data-slot="app-layout-main" className="min-h-0 min-w-0 flex-1">
         {children}
       </main>
     </div>
@@ -58,7 +81,22 @@ function AppLayout({
       ) : null}
       {variant === 'sidebar' ? (
         <div data-slot="app-layout-body" className="flex min-h-0 min-w-0 flex-1">
-          {sidebar}
+          {sidebarItems?.length ? (
+            <AppSidebar>
+              <AppSidebarContent>
+                {sidebarItems.map((item) => (
+                  <AppSidebarItem
+                    key={item.id}
+                    active={item.id === activeSidebar}
+                    disabled={item.disabled}
+                    onClick={() => onSidebarChange?.(item.id, item)}
+                  >
+                    {item.label}
+                  </AppSidebarItem>
+                ))}
+              </AppSidebarContent>
+            </AppSidebar>
+          ) : null}
           {page}
         </div>
       ) : (
@@ -77,16 +115,6 @@ function AppNav({ className, ...props }: ComponentProps<'nav'>) {
         'mx-4 flex min-w-0 items-center overflow-x-auto border-b border-solid border-oc-border sm:mx-6',
         className,
       )}
-      {...props}
-    />
-  )
-}
-
-function AppNavGroup({ className, ...props }: ComponentProps<'div'>) {
-  return (
-    <div
-      data-slot="app-nav-group"
-      className={cn('flex shrink-0 items-center gap-1', className)}
       {...props}
     />
   )
@@ -141,41 +169,30 @@ function AppSidebarContent({ className, ...props }: ComponentProps<'nav'>) {
 
 function AppSidebarItem({
   className,
-  render,
   active = false,
   ...props
-}: useRender.ComponentProps<'a'> & {
+}: ComponentProps<'button'> & {
   active?: boolean
 }) {
-  return useRender({
-    defaultTagName: 'a',
-    props: mergeProps<'a'>(
-      {
-        'aria-current': active ? 'page' : undefined,
-        className: cn(
-          'flex min-h-9 w-full min-w-0 cursor-pointer items-center rounded-xl px-3 py-2 text-sm text-oc-muted-foreground outline-none transition-colors',
-          'hover:bg-oc-neutral-soft hover:text-oc-child-sidebar-foreground focus-visible:ring-2 focus-visible:ring-oc-ring',
-          active &&
-            'bg-oc-neutral-soft font-medium text-oc-child-sidebar-foreground hover:bg-oc-neutral-soft',
-          className,
-        ),
-      },
-      props,
-    ),
-    render,
-    state: {
-      active,
-      slot: 'app-sidebar-item',
-    },
-  })
+  return (
+    <button
+      type="button"
+      data-slot="app-sidebar-item"
+      aria-current={active ? 'page' : undefined}
+      className={cn(
+        'flex min-h-9 w-full min-w-0 cursor-pointer items-center rounded-xl px-3 py-2 text-left text-sm text-oc-muted-foreground outline-none transition-colors',
+        'hover:bg-oc-neutral-soft hover:text-oc-child-sidebar-foreground focus-visible:ring-2 focus-visible:ring-oc-ring',
+        'disabled:pointer-events-none disabled:opacity-50',
+        active &&
+          'bg-oc-neutral-soft font-medium text-oc-child-sidebar-foreground hover:bg-oc-neutral-soft',
+        className,
+      )}
+      {...props}
+    />
+  )
 }
 
 export {
   AppLayout,
-  AppNav,
-  AppNavGroup,
-  AppNavItem,
-  AppSidebar,
-  AppSidebarContent,
-  AppSidebarItem,
 }
+export type { AppNavigationItem }

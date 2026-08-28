@@ -1,7 +1,7 @@
 import tailwindcss from '@tailwindcss/vite'
 import { tanstackStart } from '@tanstack/react-start/plugin/vite'
 import { nitro } from 'nitro/vite'
-import { defineConfig, loadEnv } from 'vite'
+import { defineConfig, loadEnv, type PluginOption, type UserConfig } from 'vite'
 import viteReact from '@vitejs/plugin-react'
 
 function resolveBasePath(mode: string): string {
@@ -15,7 +15,7 @@ function resolveBasePath(mode: string): string {
   return '/'
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ mode }): UserConfig => {
   const base = resolveBasePath(mode)
   const basepath = base.replace(/\/$/, '') || '/'
 
@@ -42,7 +42,7 @@ export default defineConfig(({ mode }) => {
           preset: 'bun',
           baseURL: base,
         },
-      }),
+      }) as unknown as PluginOption,
       viteReact(),
     ],
   }

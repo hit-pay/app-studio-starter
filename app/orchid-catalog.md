@@ -48,7 +48,7 @@ Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.
 
 ## `form-modal` — Form Modal
 
-Prebuilt modal form with prop-driven header and cancel/save actions.
+Prebuilt modal shell with prop-driven header and cancel/save actions; compose with SchemaForm for standard forms.
 
 ## `form-page` — Form Page
 
