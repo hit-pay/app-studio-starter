@@ -17,7 +17,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/toast' as const,
     name: 'Toast',
-    description: 'Programmatic floating toast via toast.add. Types, action, and Toaster.',
+    description: 'shadcn-compatible toast manager with semantic types, actions, and close control.',
   },
   {
     to: '/badge' as const,
@@ -42,12 +42,12 @@ export const DOC_COMPONENTS = [
   {
     to: '/tooltip' as const,
     name: 'Tooltip',
-    description: 'Hover tooltip with top, bottom, left, and right placement.',
+    description: 'shadcn-compatible hover and focus tooltip with Orchid styling.',
   },
   {
     to: '/tabs' as const,
     name: 'Tabs',
-    description: 'Default underline and Pills. TabsList + TabsTrigger + TabsContent.',
+    description: 'shadcn-compatible horizontal or vertical tabs with default and line variants.',
   },
   {
     to: '/choice-card' as const,
@@ -159,7 +159,7 @@ export const DOC_FORMS = [
   {
     to: '/textarea' as const,
     name: 'Textarea',
-    description: 'Multiline field with hint and error.',
+    description: 'shadcn-compatible auto-sizing textarea with Orchid form styling.',
   },
   {
     to: '/select' as const,

@@ -414,7 +414,7 @@ function SchemaFormExamplesPage() {
             onValueChange={(value) => setTab(String(value))}
             className="min-w-0 gap-3"
           >
-            <TabsList>
+            <TabsList variant="line">
               <TabsTrigger value="result">Result</TabsTrigger>
               <TabsTrigger value="errors">Errors</TabsTrigger>
               <TabsTrigger value="schema">Schema</TabsTrigger>

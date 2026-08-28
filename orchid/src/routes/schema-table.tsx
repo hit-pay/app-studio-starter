@@ -334,7 +334,7 @@ function SchemaTableExamplesPage() {
         </div>
         <div className="flex min-w-0 flex-col gap-4">
           <Tabs value={tab} onValueChange={(value) => setTab(String(value))} className="min-w-0 gap-3">
-            <TabsList>
+            <TabsList variant="line">
               <TabsTrigger value="result">Result</TabsTrigger>
               <TabsTrigger value="schema">Schema</TabsTrigger>
               <TabsTrigger value="prompt">Prompt</TabsTrigger>

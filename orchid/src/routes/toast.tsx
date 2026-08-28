@@ -9,7 +9,16 @@ export const Route = createFileRoute('/toast')({
 
 function ToastExamplesPage() {
   return (
-    <DocExamplePage to="/toast">
+    <DocExamplePage
+      to="/toast"
+      usage={`import { toast } from '@/components/ui/toast'
+
+toast.add({
+  title: 'Payment received',
+  description: 'PayNow · INV-2048 · SGD 128.00',
+  type: 'success',
+})`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
@@ -19,9 +28,8 @@ function ToastExamplesPage() {
           the root layout.
         </p>
         <Button
-          variant="Secondary"
-          style="Border"
-          size="Small"
+          variant="outline"
+          size="sm"
           onClick={() =>
             toast.add({
               title: 'Invoice created',
@@ -39,9 +47,8 @@ function ToastExamplesPage() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="sm"
             onClick={() =>
               toast.add({
                 title: 'Payment received',
@@ -53,9 +60,8 @@ function ToastExamplesPage() {
             Payment received
           </Button>
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="sm"
             onClick={() =>
               toast.add({
                 title: 'Recurring charge scheduled',
@@ -67,9 +73,8 @@ function ToastExamplesPage() {
             Recurring scheduled
           </Button>
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="sm"
             onClick={() =>
               toast.add({
                 title: 'PayNow is slower than usual',
@@ -81,9 +86,8 @@ function ToastExamplesPage() {
             Channel warning
           </Button>
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="sm"
             onClick={() =>
               toast.add({
                 title: 'Refund failed',
@@ -102,9 +106,8 @@ function ToastExamplesPage() {
           Action
         </p>
         <Button
-          variant="Secondary"
-          style="Border"
-          size="Small"
+          variant="outline"
+          size="sm"
           onClick={() => {
             const id = toast.add({
               title: 'Payment link sent',
@@ -128,9 +131,8 @@ function ToastExamplesPage() {
         </p>
         <div className="flex flex-wrap gap-2">
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="sm"
             onClick={() =>
               toast.add({
                 title: 'Online Store published',
@@ -142,9 +144,8 @@ function ToastExamplesPage() {
             Publish store
           </Button>
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="sm"
             onClick={() =>
               toast.add({
                 title: 'POS sale charged',

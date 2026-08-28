@@ -26,7 +26,7 @@ function Tip({
       <TooltipTrigger
         className="inline-flex w-fit"
         render={
-          <Button variant="Secondary" size="Small">
+          <Button variant="outline" size="sm">
             {label}
           </Button>
         }
@@ -39,7 +39,19 @@ function Tip({
 function TooltipExamplesPage() {
   return (
     <TooltipProvider>
-      <DocExamplePage to="/tooltip">
+      <DocExamplePage
+        to="/tooltip"
+        usage={`import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from '@/components/ui/tooltip'
+
+<Tooltip>
+  <TooltipTrigger>Hover</TooltipTrigger>
+  <TooltipContent>Helpful information</TooltipContent>
+</Tooltip>`}
+      >
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Placement

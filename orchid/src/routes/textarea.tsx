@@ -9,7 +9,12 @@ export const Route = createFileRoute('/textarea')({
 
 function TextareaExamplesPage() {
   return (
-    <DocExamplePage to="/textarea">
+    <DocExamplePage
+      to="/textarea"
+      usage={`import { Textarea } from '@/components/ui/textarea'
+
+<Textarea placeholder="Type your message here." />`}
+    >
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Invoice

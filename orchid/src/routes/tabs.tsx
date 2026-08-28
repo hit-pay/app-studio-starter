@@ -9,17 +9,32 @@ export const Route = createFileRoute('/tabs')({
 
 function TabsExamplesPage() {
   return (
-    <DocExamplePage to="/tabs">
+    <DocExamplePage
+      to="/tabs"
+      usage={`import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="password">Password</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">Account settings</TabsContent>
+  <TabsContent value="password">Password settings</TabsContent>
+</Tabs>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <Tabs defaultValue="invoice" variant="Default">
-          <TabsList>
+        <Tabs defaultValue="invoice">
+          <TabsList variant="line">
             <TabsTrigger value="invoice">Invoice</TabsTrigger>
             <TabsTrigger value="link">Payment Link</TabsTrigger>
-            <TabsTrigger value="recurring" count={8}>
+            <TabsTrigger value="recurring">
               Recurring
+              <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-oc-neutral-soft px-1.5 text-xs">
+                8
+              </span>
             </TabsTrigger>
           </TabsList>
           <TabsContent value="invoice">INV-2048 · Priya Nair · SGD 128.00 · Cards</TabsContent>
@@ -32,12 +47,14 @@ function TabsExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Pills
         </p>
-        <Tabs defaultValue="pos" variant="Pills">
+        <Tabs defaultValue="pos">
           <TabsList>
-            <TabsTrigger value="pos" icon={<SmartphoneIcon />}>
+            <TabsTrigger value="pos">
+              <SmartphoneIcon data-icon="inline-start" />
               Point of Sale
             </TabsTrigger>
-            <TabsTrigger value="store" icon={<MonitorIcon />}>
+            <TabsTrigger value="store">
+              <MonitorIcon data-icon="inline-start" />
               Online Store
             </TabsTrigger>
           </TabsList>
@@ -48,10 +65,10 @@ function TabsExamplesPage() {
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Big
+          Custom size
         </p>
-        <Tabs defaultValue="commerce" variant="Default" size="Big">
-          <TabsList>
+        <Tabs defaultValue="commerce">
+          <TabsList variant="line" className="**:data-[slot=tabs-trigger]:px-4 **:data-[slot=tabs-trigger]:py-2.5 **:data-[slot=tabs-trigger]:text-base">
             <TabsTrigger value="commerce">Commerce</TabsTrigger>
             <TabsTrigger value="channels">Payment Channels</TabsTrigger>
             <TabsTrigger value="data">Customer Data</TabsTrigger>
@@ -66,12 +83,15 @@ function TabsExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Product data
         </p>
-        <Tabs defaultValue="stock" variant="Default">
-          <TabsList>
+        <Tabs defaultValue="stock">
+          <TabsList variant="line">
             <TabsTrigger value="stock">Stock</TabsTrigger>
             <TabsTrigger value="sku">SKUs</TabsTrigger>
-            <TabsTrigger value="sold" count={12}>
+            <TabsTrigger value="sold">
               Sold today
+              <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-oc-neutral-soft px-1.5 text-xs">
+                12
+              </span>
             </TabsTrigger>
           </TabsList>
           <TabsContent value="stock">Matcha Latte · SKU-TEA-12 · 24 units remaining</TabsContent>

@@ -366,7 +366,7 @@
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
-      "description": "Floating toast. toast.add({ title, type: success|info|warning|error }). Mount Toaster in root.",
+      "description": "shadcn-compatible Base UI toast with manager, actions, close control, and Orchid semantic styling.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -457,7 +457,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "Hover/focus hint. TooltipProvider + Content side.",
+      "description": "shadcn-compatible Base UI tooltip with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -474,7 +474,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "In-page view switch. variant Default|Pills, size Default|Big.",
+      "description": "shadcn-compatible horizontal or vertical tabs with default and line variants.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -893,7 +893,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "Multi-line text. Use with Field.",
+      "description": "shadcn-compatible auto-sizing textarea with Orchid form styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
