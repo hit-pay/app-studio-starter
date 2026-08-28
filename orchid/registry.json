@@ -11,7 +11,6 @@
       "registryDependencies": [
         "@orchid/schema-form",
         "@orchid/schema-table",
-        "@orchid/app-shell",
         "@orchid/alert",
         "@orchid/list-item",
         "@orchid/empty",
@@ -154,21 +153,6 @@
           "path": "src/components/ui/schema-table-model.ts",
           "type": "registry:file",
           "target": "@ui/schema-table-model.ts"
-        }
-      ]
-    },
-    {
-      "name": "app-shell",
-      "type": "registry:ui",
-      "title": "App Shell",
-      "description": "Iframe chrome: header + AppShellNavItem tabs. No sidebar, no login card.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/app-shell.tsx",
-          "type": "registry:ui",
-          "target": "@ui/app-shell.tsx"
         }
       ]
     },

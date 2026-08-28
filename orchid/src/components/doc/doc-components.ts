@@ -224,11 +224,6 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: '/app-shell' as const,
-    name: 'App Shell',
-    description: 'Header full width above nav. Nav items with active pill. No user card.',
-  },
-  {
     to: '/alert' as const,
     name: 'Alert',
     description: 'In-page notification with semantic variants and an optional action.',

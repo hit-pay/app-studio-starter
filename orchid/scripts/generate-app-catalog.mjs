@@ -19,7 +19,6 @@ const sectionFor = (name) => {
     [
       'schema-form',
       'schema-table',
-      'app-shell',
       'alert',
       'list-item',
       'empty',
