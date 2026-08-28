@@ -12,7 +12,24 @@ function QuantityInputExamplesPage() {
   const [stock, setStock] = useState(24)
 
   return (
-    <DocExamplePage to="/quantity-input">
+    <DocExamplePage
+      to="/quantity-input"
+      usage={`import { useState } from 'react'
+import { QuantityInput } from '@/components/ui/quantity-input'
+
+function QuantityExample() {
+  const [quantity, setQuantity] = useState(2)
+
+  return (
+    <QuantityInput
+      value={quantity}
+      min={1}
+      max={99}
+      onValueChange={setQuantity}
+    />
+  )
+}`}
+    >
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">

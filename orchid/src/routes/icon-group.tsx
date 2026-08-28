@@ -69,7 +69,40 @@ function InvoiceGroup() {
 
 function IconGroupExamplesPage() {
   return (
-    <DocExamplePage to="/icon-group">
+    <DocExamplePage
+      to="/icon-group"
+      usage={`import { SquareArrowOutUpRightIcon } from 'lucide-react'
+import { CopyButton } from '@/components/ui/copy-button'
+import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import {
+  IconGroup,
+  IconGroupDivider,
+  IconGroupLink,
+  IconGroupMenu,
+  iconGroupItemVariants,
+} from '@/components/ui/icon-group'
+
+<IconGroup style="Border">
+  <IconGroupMenu
+    menu={
+      <>
+        <DropdownMenuItem>Download PDF</DropdownMenuItem>
+        <DropdownMenuItem variant="destructive">Void invoice</DropdownMenuItem>
+      </>
+    }
+  />
+  <IconGroupDivider />
+  <IconGroupLink href="/invoice" aria-label="Open invoice">
+    <SquareArrowOutUpRightIcon />
+  </IconGroupLink>
+  <IconGroupDivider />
+  <CopyButton
+    value="INV-2026-0842"
+    aria-label="Copy invoice number"
+    className={iconGroupItemVariants()}
+  />
+</IconGroup>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default

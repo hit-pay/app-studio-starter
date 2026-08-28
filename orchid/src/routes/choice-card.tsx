@@ -14,9 +14,27 @@ export const Route = createFileRoute('/choice-card')({
   component: ChoiceCardExamplesPage,
 })
 
+const usage = `import { CreditCardIcon, QrCodeIcon } from 'lucide-react'
+import { ChoiceCard, ChoiceCardGroup } from '@/components/ui/choice-card'
+
+<ChoiceCardGroup defaultValue="paynow">
+  <ChoiceCard
+    value="paynow"
+    icon={<QrCodeIcon />}
+    title="PayNow"
+    description="Instant SGD transfers via QR"
+  />
+  <ChoiceCard
+    value="cards"
+    icon={<CreditCardIcon />}
+    title="Cards"
+    description="Visa, Mastercard, and AMEX"
+  />
+</ChoiceCardGroup>`
+
 function ChoiceCardExamplesPage() {
   return (
-    <DocExamplePage to="/choice-card">
+    <DocExamplePage to="/choice-card" usage={usage}>
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Left

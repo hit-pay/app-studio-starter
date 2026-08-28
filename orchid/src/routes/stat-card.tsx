@@ -21,7 +21,26 @@ export const Route = createFileRoute('/stat-card')({
 function StatCardExamplesPage() {
   return (
     <TooltipProvider>
-      <DocExamplePage to="/stat-card">
+      <DocExamplePage
+        to="/stat-card"
+        usage={`import { CoinsIcon } from 'lucide-react'
+import { StatCard } from '@/components/ui/stat-card'
+import { TooltipProvider } from '@/components/ui/tooltip'
+
+<TooltipProvider>
+  <StatCard
+    icon={<CoinsIcon />}
+    iconColor="Blue"
+    title="Gross volume"
+    content="SGD 11,170.00"
+    info
+    tooltip="Payment volume for this period"
+    percentValue={10}
+    percentTooltip="Compared to last month"
+    footer="Updated just now"
+  />
+</TooltipProvider>`}
+      >
         <div className="space-y-4">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             4 items

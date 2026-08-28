@@ -20,7 +20,33 @@ const PHOTO =
 
 function DetailListExamplesPage() {
   return (
-    <DocExamplePage to="/detail-list">
+    <DocExamplePage
+      to="/detail-list"
+      usage={`import {
+  DetailList,
+  DetailListGrid,
+  DetailListHeader,
+  DetailListRow,
+  DetailListTitle,
+} from '@/components/ui/detail-list'
+
+<DetailList style="Border">
+  <DetailListHeader>
+    <DetailListTitle>Payment details</DetailListTitle>
+  </DetailListHeader>
+  <DetailListGrid columns={2}>
+    <DetailListRow label="Invoice" alignment="Vertical" copyValue="INV-2026-0842">
+      INV-2026-0842
+    </DetailListRow>
+    <DetailListRow label="Status" alignment="Vertical">
+      Paid
+    </DetailListRow>
+    <DetailListRow label="Amount" alignment="Vertical" size="Big" colSpan={2}>
+      SGD 128.00
+    </DetailListRow>
+  </DetailListGrid>
+</DetailList>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
