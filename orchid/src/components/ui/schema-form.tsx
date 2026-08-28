@@ -19,6 +19,7 @@ import {
 import { DatePicker, DatePickerRange, DateTimePicker } from './date-picker'
 import {
   Field,
+  FieldContent,
   FieldDescription,
   FieldError,
   FieldGroup,
@@ -447,11 +448,20 @@ function SchemaForm({
                       value={Array.isArray(value) ? value.map(String) : []}
                       onValueChange={(next) => field.handleChange(next)}
                     >
-                      {(item.options ?? []).map((option) => (
-                        <Checkbox key={option.value} value={option.value}>
-                          {option.label}
-                        </Checkbox>
-                      ))}
+                      {(item.options ?? []).map((option) => {
+                        const checkboxId = `${item.path}-${option.value}`
+
+                        return (
+                          <Field key={option.value} orientation="Horizontal">
+                            <Checkbox
+                              id={checkboxId}
+                              value={option.value}
+                              aria-invalid={invalid || undefined}
+                            />
+                            <FieldLabel htmlFor={checkboxId}>{option.label}</FieldLabel>
+                          </Field>
+                        )
+                      })}
                     </CheckboxGroup>
                     {invalid ? <FieldError>{message}</FieldError> : null}
                   </Field>
@@ -585,17 +595,21 @@ function SchemaForm({
 
               if (type === 'accepted') {
                 return (
-                  <Field data-invalid={invalid || undefined}>
+                  <Field orientation="Horizontal" data-invalid={invalid || undefined}>
                     <Checkbox
+                      id={item.path}
                       checked={Boolean(value)}
-                      error={invalid}
+                      aria-invalid={invalid || undefined}
                       onCheckedChange={(checked) => field.handleChange(checked === true)}
                       onBlur={field.handleBlur}
-                    >
-                      {item.title}
-                    </Checkbox>
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    />
+                    <FieldContent>
+                      <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
+                      {item.description ? (
+                        <FieldDescription>{item.description}</FieldDescription>
+                      ) : null}
+                      {invalid ? <FieldError>{message}</FieldError> : null}
+                    </FieldContent>
                   </Field>
                 )
               }

@@ -969,7 +969,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "Multi-select. CheckboxGroup alignment Vertical|Horizontal.",
+      "description": "shadcn-compatible Base UI checkbox with Orchid states and an optional CheckboxGroup helper.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",

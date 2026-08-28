@@ -179,7 +179,7 @@ export const DOC_FORMS = [
   {
     to: '/checkbox' as const,
     name: 'Checkbox',
-    description: 'Checkbox and group with vertical or horizontal alignment.',
+    description: 'shadcn-compatible checkbox with Orchid states and an optional group helper.',
   },
   {
     to: '/radio-group' as const,

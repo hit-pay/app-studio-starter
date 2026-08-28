@@ -40,8 +40,8 @@ function FieldExamplesPage() {
               <FieldLabel>Email receipt after Point of Sale</FieldLabel>
             </Field>
             <Field orientation="Horizontal">
-              <Checkbox defaultChecked />
-              <FieldLabel>Save to Customer Data</FieldLabel>
+              <Checkbox id="save-customer-data" defaultChecked />
+              <FieldLabel htmlFor="save-customer-data">Save to Customer Data</FieldLabel>
             </Field>
           </FieldGroup>
         </FieldSet>

@@ -54,8 +54,14 @@ function CollapsibleExamplesPage() {
             <CollapsibleTrigger>Filters</CollapsibleTrigger>
             <CollapsibleContent>
               <CheckboxGroup defaultValue={['paid']}>
-                <Checkbox value="paid">Paid</Checkbox>
-                <Checkbox value="pending">Pending</Checkbox>
+                <Field orientation="Horizontal">
+                  <Checkbox id="filter-paid" value="paid" />
+                  <FieldLabel htmlFor="filter-paid">Paid</FieldLabel>
+                </Field>
+                <Field orientation="Horizontal">
+                  <Checkbox id="filter-pending" value="pending" />
+                  <FieldLabel htmlFor="filter-pending">Pending</FieldLabel>
+                </Field>
               </CheckboxGroup>
             </CollapsibleContent>
           </Collapsible>
