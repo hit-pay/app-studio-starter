@@ -87,7 +87,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/dialog' as const,
     name: 'Dialog',
-    description: 'Dialog overlay with Small, Medium, Default, and Confirmation sizes.',
+    description: 'shadcn-compatible dialog primitives with Orchid sizes and persistent mode.',
   },
   {
     to: '/sheet' as const,
@@ -112,7 +112,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/command' as const,
     name: 'Command',
-    description: 'Searchable command palette. CommandDialog + Input + Item.',
+    description: 'shadcn-compatible cmdk palette with keyboard navigation and Orchid styling.',
   },
   {
     to: '/kbd' as const,

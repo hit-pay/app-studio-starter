@@ -41,7 +41,8 @@ function CommandExamplesPage() {
   CommandList,
 } from '@/components/ui/command'
 
-<CommandDialog open={open} onOpenChange={setOpen} trigger={<Button variant="Secondary">Search</Button>}>
+<Button variant="outline" onClick={() => setOpen(true)}>Search</Button>
+<CommandDialog open={open} onOpenChange={setOpen}>
   <Command>
     <CommandInput placeholder="Search invoices, customers, pages…" />
     <CommandList>
@@ -57,22 +58,24 @@ function CommandExamplesPage() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Palette
         </p>
+        <Button variant="outline" onClick={() => setOpen(true)}>
+          Search
+        </Button>
         <CommandDialog
           open={open}
           onOpenChange={setOpen}
-          trigger={<Button variant="Secondary">Search</Button>}
         >
           <Command>
             <CommandInput placeholder="Search invoices, customers, pages…" />
             <CommandList>
               <CommandEmpty>No results</CommandEmpty>
               <CommandGroup heading="Pages">
-                <CommandItem value="invoices" keywords="billing" onSelect={go}>
+                <CommandItem value="invoices" keywords={['billing']} onSelect={go}>
                   <FileTextIcon className="size-4 text-oc-muted-foreground" />
                   Invoices
                   <CommandShortcut>I</CommandShortcut>
                 </CommandItem>
-                <CommandItem value="outlets" keywords="pos store" onSelect={go}>
+                <CommandItem value="outlets" keywords={['pos', 'store']} onSelect={go}>
                   <StoreIcon className="size-4 text-oc-muted-foreground" />
                   Outlets
                 </CommandItem>

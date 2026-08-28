@@ -3,7 +3,15 @@ import { CheckIcon, CircleHelpIcon, Trash2Icon, TriangleAlertIcon } from 'lucide
 
 import { cn } from '@/lib/utils'
 import { Input } from './input'
-import { Dialog, DialogClose, DialogContent, DialogTrigger } from './dialog'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from './dialog'
 import { Button } from './button'
 
 type ConfirmationType = 'Delete' | 'Warning' | 'Success' | 'Question'
@@ -99,12 +107,12 @@ function ConfirmDialogContent({
         </span>
       )}
       {message ? (
-        <p className="w-full text-sm font-normal leading-[1.5] text-oc-foreground">{message}</p>
+        <p className="w-full text-sm leading-normal font-normal text-oc-foreground">{message}</p>
       ) : null}
       {description ? (
         <p
           className={cn(
-            'w-full text-sm font-normal leading-[1.5]',
+            'w-full text-sm leading-normal font-normal',
             medium ? 'text-oc-foreground' : 'text-oc-muted-foreground',
           )}
         >
@@ -175,16 +183,36 @@ function ConfirmDialog({
       {children}
       <DialogContent
         size={medium ? 'Medium' : 'Confirmation'}
-        title={title}
-        cancelLabel={resolvedCancel}
-        confirmLabel={resolvedConfirm}
-        confirmType={resolvedConfirmType}
-        showCancel={showCancel}
-        onCancel={onCancel}
-        footerContent={
+        showCloseButton={false}
+        className="gap-4"
+      >
+        <DialogHeader className="sr-only">
+          <DialogTitle>{title}</DialogTitle>
+        </DialogHeader>
+        <ConfirmDialogContent
+          type={type}
+          size={size}
+          message={message}
+          description={resolvedDescription}
+          icon={icon}
+        >
+          {needsMatch ? (
+            <Input
+              value={typed}
+              onChange={(event) => setTyped(event.currentTarget.value)}
+              placeholder={inputPlaceholder}
+            />
+          ) : null}
+        </ConfirmDialogContent>
+        <DialogFooter
+          className={cn(
+            'mt-0',
+            medium ? 'sm:justify-end' : 'sm:justify-center',
+          )}
+        >
           <div
             className={cn(
-              'flex min-w-0 flex-1 items-center',
+              'flex min-w-0 flex-1',
               medium ? 'justify-end' : 'justify-center',
             )}
           >
@@ -211,23 +239,7 @@ function ConfirmDialog({
               </DialogClose>
             </div>
           </div>
-        }
-      >
-        <ConfirmDialogContent
-          type={type}
-          size={size}
-          message={message}
-          description={resolvedDescription}
-          icon={icon}
-        >
-          {needsMatch ? (
-            <Input
-              value={typed}
-              onChange={(event) => setTyped(event.currentTarget.value)}
-              placeholder={inputPlaceholder}
-            />
-          ) : null}
-        </ConfirmDialogContent>
+        </DialogFooter>
       </DialogContent>
     </Dialog>
   )

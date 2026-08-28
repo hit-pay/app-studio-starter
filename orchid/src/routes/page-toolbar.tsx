@@ -9,7 +9,7 @@ import {
   type SchemaFormField,
 } from '@/components/ui/schema-form'
 import { Input } from '@/components/ui/input'
-import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle, DialogTrigger } from '@/components/ui/dialog'
 import { PageToolbar } from '@/components/ui/page-toolbar'
 import { toast } from '@/components/ui/toast'
 
@@ -81,19 +81,20 @@ function CreateProductExample() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button variant="Primary" />}>Create product</DialogTrigger>
-      <DialogContent size="Fullscreen" title="Create product">
+      <DialogContent size="Fullscreen" showCloseButton={false}>
+        <DialogTitle className="sr-only">Create product</DialogTitle>
         <PageToolbar
           className="shrink-0"
           left="Close"
           onBack={close}
           actions={
             <>
-              <Button variant="Secondary" className="w-[100px]" onClick={close}>
+              <Button variant="Secondary" className="w-25" onClick={close}>
                 Cancel
               </Button>
               <Button
                 variant="Primary"
-                className="w-[100px]"
+                className="w-25"
                 disabled={product.isSubmitting}
                 aria-busy={product.isSubmitting}
                 onClick={() => void product.submit()}
@@ -123,17 +124,18 @@ function CreateInvoiceExample() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger render={<Button variant="Secondary" style="Border" />}>Create invoice</DialogTrigger>
-      <DialogContent size="Fullscreen" title="Create invoice">
+      <DialogContent size="Fullscreen" showCloseButton={false}>
+        <DialogTitle className="sr-only">Create invoice</DialogTitle>
         <PageToolbar
           className="shrink-0"
           left="Close"
           onBack={close}
           actions={
             <>
-              <Button variant="Secondary" className="w-[100px]" onClick={close}>
+              <Button variant="Secondary" className="w-25" onClick={close}>
                 Cancel
               </Button>
-              <Button variant="Primary" className="w-[100px]" onClick={close}>
+              <Button variant="Primary" className="w-25" onClick={close}>
                 Send
               </Button>
             </>
@@ -210,10 +212,10 @@ import { Button } from '@/components/ui/button'
           left="Back"
           actions={
             <>
-              <Button variant="Secondary" style="Border" size="Default" className="w-[100px]">
+              <Button variant="Secondary" style="Border" size="Default" className="w-25">
                 Cancel
               </Button>
-              <Button variant="Primary" size="Default" className="w-[100px]">
+              <Button variant="Primary" size="Default" className="w-25">
                 Save
               </Button>
             </>
@@ -229,10 +231,10 @@ import { Button } from '@/components/ui/button'
           left="Close"
           actions={
             <>
-              <Button variant="Secondary" size="Default" className="w-[100px]">
+              <Button variant="Secondary" size="Default" className="w-25">
                 Cancel
               </Button>
-              <Button variant="Primary" size="Default" className="w-[100px]">
+              <Button variant="Primary" size="Default" className="w-25">
                 Save
               </Button>
             </>

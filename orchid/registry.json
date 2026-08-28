@@ -620,7 +620,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "Centered overlay. size Small|Medium|Default|Confirmation|Fullscreen, persistent.",
+      "description": "shadcn-compatible dialog primitives with Orchid sizes and persistent mode.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -716,13 +716,14 @@
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
-      "description": "Command palette. CommandDialog + Input + List + Item.",
+      "description": "shadcn-compatible cmdk command palette with Orchid styling.",
       "dependencies": [
+        "cmdk",
         "lucide-react"
       ],
       "registryDependencies": [
         "@orchid/dialog",
-        "@orchid/input"
+        "@orchid/input-group"
       ],
       "files": [
         {
