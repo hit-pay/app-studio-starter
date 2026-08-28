@@ -21,7 +21,15 @@ export const Route = createFileRoute('/input')({
 
 function InputExamplesPage() {
   return (
-    <DocExamplePage to="/input">
+    <DocExamplePage
+      to="/input"
+      usage={`import { Input } from '@/components/ui/input'
+
+<Input type="email" placeholder="Email" />
+<Input type="file" />
+<Input aria-invalid placeholder="Invalid value" />
+<Input disabled placeholder="Disabled" />`}
+    >
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Invoice

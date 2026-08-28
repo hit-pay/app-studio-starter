@@ -149,12 +149,12 @@ export const DOC_FORMS = [
   {
     to: '/input' as const,
     name: 'Input',
-    description: 'Text field with default, leading icon, error, and disabled.',
+    description: 'shadcn-compatible text and file input with Orchid states.',
   },
   {
     to: '/input-group' as const,
     name: 'Input Group',
-    description: 'Input combined with select or prefix, including currency.',
+    description: 'shadcn-compatible input, textarea, addon, and button composition.',
   },
   {
     to: '/textarea' as const,

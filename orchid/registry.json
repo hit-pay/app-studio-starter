@@ -736,7 +736,7 @@
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
-      "description": "Keyboard shortcut keys. Kbd + KbdGroup.",
+      "description": "shadcn-compatible keyboard key and key group with Orchid styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -839,7 +839,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "Accessible label (htmlFor). Prefer FieldLabel in forms.",
+      "description": "shadcn-compatible accessible label with Orchid typography.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -854,7 +854,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "Single-line text. Use with Field; prefix/suffix → input-group.",
+      "description": "shadcn-compatible Base UI input with Orchid form styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -871,14 +871,13 @@
       "name": "input-group",
       "type": "registry:ui",
       "title": "Input Group",
-      "description": "Input + prefix/suffix/inline select. Addon align start|end. Use InputGroupInput, not raw Input.",
+      "description": "shadcn-compatible input, textarea, addon, and button composition with Orchid styling.",
       "dependencies": [
         "class-variance-authority"
       ],
       "registryDependencies": [
         "@orchid/button",
         "@orchid/input",
-        "@orchid/select",
         "@orchid/textarea"
       ],
       "files": [

@@ -9,7 +9,16 @@ export const Route = createFileRoute('/label')({
 
 function LabelExamplesPage() {
   return (
-    <DocExamplePage to="/label">
+    <DocExamplePage
+      to="/label"
+      usage={`import { Checkbox } from '@/components/ui/checkbox'
+import { Label } from '@/components/ui/label'
+
+<div className="flex items-center gap-2">
+  <Checkbox id="terms" />
+  <Label htmlFor="terms">Accept terms and conditions</Label>
+</div>`}
+    >
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Invoice

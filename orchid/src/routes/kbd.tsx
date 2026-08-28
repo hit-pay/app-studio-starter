@@ -24,7 +24,7 @@ Close
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <p className="flex flex-wrap items-center gap-2 text-sm leading-[1.5] text-oc-foreground">
+        <p className="flex flex-wrap items-center gap-2 text-sm leading-normal text-oc-foreground">
           Close
           <Kbd>Esc</Kbd>
         </p>

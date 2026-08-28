@@ -1,12 +1,15 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { SearchIcon } from 'lucide-react'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
+  InputGroupButton,
   InputGroupInput,
   InputGroupSeparator,
   InputGroupText,
+  InputGroupTextarea,
 } from '@/components/ui/input-group'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 
@@ -17,7 +20,7 @@ export const Route = createFileRoute('/input-group')({
 function CurrencySelect({ defaultValue = 'SGD' }: { defaultValue?: string }) {
   return (
     <Select defaultValue={defaultValue}>
-      <SelectTrigger size="Inline">
+      <SelectTrigger size="Inline" className="gap-2">
         <SelectValue className="uppercase" />
       </SelectTrigger>
       <SelectContent>
@@ -32,12 +35,30 @@ function CurrencySelect({ defaultValue = 'SGD' }: { defaultValue?: string }) {
 
 function InputGroupExamplesPage() {
   return (
-    <DocExamplePage to="/input-group">
+    <DocExamplePage
+      to="/input-group"
+      usage={`import { SearchIcon } from 'lucide-react'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group'
+
+<InputGroup>
+  <InputGroupInput placeholder="Search customers" />
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton size="icon-xs" aria-label="Search">
+      <SearchIcon />
+    </InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>`}
+    >
       <FieldGroup className="max-w-sm">
         <Field>
           <FieldLabel>Invoice amount</FieldLabel>
           <InputGroup>
-            <InputGroupAddon>
+            <InputGroupAddon className="px-2 py-0">
               <CurrencySelect />
             </InputGroupAddon>
             <InputGroupSeparator />
@@ -51,7 +72,7 @@ function InputGroupExamplesPage() {
           <InputGroup>
             <InputGroupInput placeholder="49.00" />
             <InputGroupSeparator />
-            <InputGroupAddon align="inline-end">
+            <InputGroupAddon align="inline-end" className="px-2 py-0">
               <CurrencySelect defaultValue="SGD" />
             </InputGroupAddon>
           </InputGroup>
@@ -62,12 +83,24 @@ function InputGroupExamplesPage() {
           <FieldLabel>Online Store URL</FieldLabel>
           <InputGroup>
             <InputGroupAddon className="self-stretch bg-oc-muted">
-              <InputGroupText>https://hitpay.shop/</InputGroupText>
+              <InputGroupText className='pr-2'>https://hitpay.shop/</InputGroupText>
             </InputGroupAddon>
             <InputGroupSeparator />
             <InputGroupInput placeholder="studio" />
           </InputGroup>
           <FieldDescription>Public storefront path for this merchant.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Customer search</FieldLabel>
+          <InputGroup>
+            <InputGroupInput placeholder="Search customers" />
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton size="icon-xs" aria-label="Search">
+                <SearchIcon />
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
         </Field>
       </FieldGroup>
 
@@ -75,7 +108,7 @@ function InputGroupExamplesPage() {
         <Field>
           <FieldLabel>Recurring charge</FieldLabel>
           <InputGroup>
-            <InputGroupAddon>
+            <InputGroupAddon className="px-2 py-0">
               <CurrencySelect />
             </InputGroupAddon>
             <InputGroupSeparator />
@@ -89,7 +122,7 @@ function InputGroupExamplesPage() {
           <InputGroup>
             <InputGroupInput placeholder="2.00" />
             <InputGroupSeparator />
-            <InputGroupAddon align="inline-end">
+            <InputGroupAddon align="inline-end" className="px-2 py-0">
               <CurrencySelect />
             </InputGroupAddon>
           </InputGroup>
@@ -100,12 +133,21 @@ function InputGroupExamplesPage() {
           <FieldLabel>Payment channel fee</FieldLabel>
           <InputGroup>
             <InputGroupAddon className="self-stretch bg-oc-muted">
-              <InputGroupText>%</InputGroupText>
+              <InputGroupText className="pr-2">%</InputGroupText>
             </InputGroupAddon>
             <InputGroupSeparator />
             <InputGroupInput placeholder="2.9" />
           </InputGroup>
           <FieldDescription>Percentage fee for this payment channel.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Payment note</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon align="block-start">Internal note</InputGroupAddon>
+            <InputGroupTextarea placeholder="Add context for your team…" />
+            <InputGroupAddon align="block-end">Visible only to staff</InputGroupAddon>
+          </InputGroup>
         </Field>
       </FieldGroup>
     </DocExamplePage>
