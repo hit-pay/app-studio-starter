@@ -819,7 +819,7 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "Form row: label, control, hint, error. FieldGroup + Field + FieldLabel.",
+      "description": "shadcn-compatible field composition with Orchid form styling.",
       "dependencies": [
         "class-variance-authority"
       ],

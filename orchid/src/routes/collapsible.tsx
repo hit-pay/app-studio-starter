@@ -65,11 +65,11 @@ import {
             </CollapsibleTrigger>
             <CollapsibleContent>
               <CheckboxGroup defaultValue={['paid']}>
-                <Field orientation="Horizontal">
+                <Field orientation="horizontal">
                   <Checkbox id="filter-paid" value="paid" />
                   <FieldLabel htmlFor="filter-paid">Paid</FieldLabel>
                 </Field>
-                <Field orientation="Horizontal">
+                <Field orientation="horizontal">
                   <Checkbox id="filter-pending" value="pending" />
                   <FieldLabel htmlFor="filter-pending">Pending</FieldLabel>
                 </Field>

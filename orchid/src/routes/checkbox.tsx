@@ -40,7 +40,7 @@ import { Label } from '@/components/ui/label'
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Description
           </p>
-          <Field orientation="Horizontal" className="max-w-sm">
+          <Field orientation="horizontal" className="max-w-sm">
             <Checkbox id="attach-product-data" />
             <FieldContent>
               <FieldLabel htmlFor="attach-product-data">Attach Product Data</FieldLabel>
@@ -56,27 +56,27 @@ import { Label } from '@/components/ui/label'
             States
           </p>
           <div className="flex flex-col gap-2">
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="unchecked-state" />
               <FieldLabel htmlFor="unchecked-state">Unchecked</FieldLabel>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="checked-state" defaultChecked />
               <FieldLabel htmlFor="checked-state">Checked</FieldLabel>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="indeterminate-state" indeterminate />
               <FieldLabel htmlFor="indeterminate-state">Indeterminate</FieldLabel>
             </Field>
-            <Field orientation="Horizontal" data-invalid>
+            <Field orientation="horizontal" data-invalid>
               <Checkbox id="invalid-state" aria-invalid />
               <FieldLabel htmlFor="invalid-state">Invalid</FieldLabel>
             </Field>
-            <Field orientation="Horizontal" data-disabled>
+            <Field orientation="horizontal" data-disabled>
               <Checkbox id="disabled-state" disabled />
               <FieldLabel htmlFor="disabled-state">Disabled</FieldLabel>
             </Field>
-            <Field orientation="Horizontal" data-disabled>
+            <Field orientation="horizontal" data-disabled>
               <Checkbox id="checked-disabled-state" defaultChecked disabled />
               <FieldLabel htmlFor="checked-disabled-state">Checked and disabled</FieldLabel>
             </Field>
@@ -88,15 +88,15 @@ import { Label } from '@/components/ui/label'
             Vertical group
           </p>
           <CheckboxGroup label="Payment Channels" alignment="Vertical" defaultValue={['paynow']}>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="channel-paynow" value="paynow" />
               <FieldLabel htmlFor="channel-paynow">PayNow</FieldLabel>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="channel-cards" value="cards" />
               <FieldLabel htmlFor="channel-cards">Cards</FieldLabel>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="channel-grabpay" value="grabpay" />
               <FieldLabel htmlFor="channel-grabpay">GrabPay</FieldLabel>
             </Field>
@@ -108,15 +108,15 @@ import { Label } from '@/components/ui/label'
             Horizontal group
           </p>
           <CheckboxGroup label="Commerce" alignment="Horizontal" defaultValue={['invoice']}>
-            <Field orientation="Horizontal" className="w-auto">
+            <Field orientation="horizontal" className="w-auto">
               <Checkbox id="commerce-invoice" value="invoice" />
               <FieldLabel htmlFor="commerce-invoice">Invoice</FieldLabel>
             </Field>
-            <Field orientation="Horizontal" className="w-auto">
+            <Field orientation="horizontal" className="w-auto">
               <Checkbox id="commerce-link" value="link" />
               <FieldLabel htmlFor="commerce-link">Payment Link</FieldLabel>
             </Field>
-            <Field orientation="Horizontal" className="w-auto">
+            <Field orientation="horizontal" className="w-auto">
               <Checkbox id="commerce-pos" value="pos" />
               <FieldLabel htmlFor="commerce-pos">Point of Sale</FieldLabel>
             </Field>

@@ -139,7 +139,7 @@ export const DOC_FORMS = [
   {
     to: '/field' as const,
     name: 'Field',
-    description: 'Compose label, description, and error around a control.',
+    description: 'shadcn-compatible label, description, error, and grouped field composition.',
   },
   {
     to: '/label' as const,

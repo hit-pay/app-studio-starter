@@ -19,7 +19,23 @@ export const Route = createFileRoute('/field')({
 
 function FieldExamplesPage() {
   return (
-    <DocExamplePage to="/field">
+    <DocExamplePage
+      to="/field"
+      usage={`import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+
+<Field data-invalid>
+  <FieldLabel htmlFor="email">Email</FieldLabel>
+  <Input id="email" aria-invalid />
+  <FieldDescription>Used to send payment receipts.</FieldDescription>
+  <FieldError>Enter a valid email address.</FieldError>
+</Field>`}
+    >
       <div className="space-y-8">
         <FieldSet className="max-w-sm">
           <FieldLegend>Customer Data</FieldLegend>
@@ -35,11 +51,11 @@ function FieldExamplesPage() {
               <Input id="customer-email" placeholder="alex@example.com" aria-invalid />
               <FieldError>Enter a valid email to send the payment link.</FieldError>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Switch defaultChecked />
               <FieldLabel>Email receipt after Point of Sale</FieldLabel>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Checkbox id="save-customer-data" defaultChecked />
               <FieldLabel htmlFor="save-customer-data">Save to Customer Data</FieldLabel>
             </Field>
@@ -55,7 +71,7 @@ function FieldExamplesPage() {
               <Input id="product-name" defaultValue="Classic White Tee" />
               <FieldDescription>Catalog title on the storefront.</FieldDescription>
             </Field>
-            <Field orientation="Horizontal">
+            <Field orientation="horizontal">
               <Switch />
               <FieldLabel>Track inventory</FieldLabel>
             </Field>

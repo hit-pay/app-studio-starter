@@ -427,7 +427,7 @@ function SchemaForm({
 
               if (type === 'switch') {
                 return (
-                  <Field orientation="Horizontal" data-invalid={invalid || undefined}>
+                  <Field orientation="horizontal" data-invalid={invalid || undefined}>
                     <Switch
                       id={item.path}
                       checked={Boolean(value)}
@@ -452,7 +452,7 @@ function SchemaForm({
                         const checkboxId = `${item.path}-${option.value}`
 
                         return (
-                          <Field key={option.value} orientation="Horizontal">
+                          <Field key={option.value} orientation="horizontal">
                             <Checkbox
                               id={checkboxId}
                               value={option.value}
@@ -595,7 +595,7 @@ function SchemaForm({
 
               if (type === 'accepted') {
                 return (
-                  <Field orientation="Horizontal" data-invalid={invalid || undefined}>
+                  <Field orientation="horizontal" data-invalid={invalid || undefined}>
                     <Checkbox
                       id={item.path}
                       checked={Boolean(value)}

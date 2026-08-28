@@ -1,3 +1,5 @@
+'use client'
+
 import { useMemo, type ComponentProps, type ReactNode } from 'react'
 import { cva, type VariantProps } from 'class-variance-authority'
 
@@ -20,15 +22,15 @@ function FieldSet({ className, ...props }: ComponentProps<'fieldset'>) {
 
 function FieldLegend({
   className,
-  variant = 'Legend',
+  variant = 'legend',
   ...props
-}: ComponentProps<'legend'> & { variant?: 'Legend' | 'Label' }) {
+}: ComponentProps<'legend'> & { variant?: 'legend' | 'label' }) {
   return (
     <legend
       data-slot="field-legend"
       data-variant={variant}
       className={cn(
-        'mb-1.5 font-medium text-oc-foreground data-[variant=Label]:text-sm data-[variant=Legend]:text-base',
+        'mb-1.5 font-medium text-oc-foreground data-[variant=label]:text-sm data-[variant=legend]:text-base',
         className,
       )}
       {...props}
@@ -54,22 +56,22 @@ const fieldVariants = cva(
   {
     variants: {
       orientation: {
-        Vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
-        Horizontal:
+        vertical: 'flex-col *:w-full [&>.sr-only]:w-auto',
+        horizontal:
           'flex-row items-center has-[>[data-slot=field-content]]:items-start *:data-[slot=field-label]:flex-auto has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
-        Responsive:
+        responsive:
           'flex-col *:w-full @md/field-group:flex-row @md/field-group:items-center @md/field-group:*:w-auto @md/field-group:has-[>[data-slot=field-content]]:items-start @md/field-group:*:data-[slot=field-label]:flex-auto [&>.sr-only]:w-auto @md/field-group:has-[>[data-slot=field-content]]:[&>[role=checkbox],[role=radio]]:mt-px',
       },
     },
     defaultVariants: {
-      orientation: 'Vertical',
+      orientation: 'vertical',
     },
   },
 )
 
 function Field({
   className,
-  orientation = 'Vertical',
+  orientation = 'vertical',
   ...props
 }: ComponentProps<'div'> & VariantProps<typeof fieldVariants>) {
   return (
@@ -98,7 +100,7 @@ function FieldLabel({ className, ...props }: ComponentProps<typeof Label>) {
     <Label
       data-slot="field-label"
       className={cn(
-        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-oc-primary/30 has-data-checked:bg-oc-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-oc-muted/50 has-[>[data-slot=field]]:has-[:focus-visible]:border-ring has-[>[data-slot=field]]:has-[:focus-visible]:ring-3 has-[>[data-slot=field]]:has-[:focus-visible]:ring-ring/50 *:data-[slot=field]:p-2.5',
+        'group/field-label peer/field-label flex w-fit gap-2 leading-snug group-data-[disabled=true]/field:opacity-50 has-data-checked:border-oc-primary/30 has-data-checked:bg-oc-primary/5 has-[>[data-slot=field]]:rounded-lg has-[>[data-slot=field]]:border has-[>[data-slot=field]]:not-has-[:disabled,[data-disabled]]:hover:bg-oc-muted/50 has-[>[data-slot=field]]:has-focus-visible:border-ring has-[>[data-slot=field]]:has-focus-visible:ring-3 has-[>[data-slot=field]]:has-focus-visible:ring-ring/50 *:data-[slot=field]:p-2.5',
         'has-[>[data-slot=field]]:w-full has-[>[data-slot=field]]:flex-col',
         className,
       )}
@@ -125,7 +127,7 @@ function FieldDescription({ className, ...props }: ComponentProps<'p'>) {
     <p
       data-slot="field-description"
       className={cn(
-        'text-left text-xs leading-[1.5] font-normal text-oc-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5',
+        'text-left text-sm leading-normal font-normal text-oc-muted-foreground group-has-data-horizontal/field:text-balance [[data-variant=legend]+&]:-mt-1.5',
         'last:mt-0 nth-last-2:-mt-1',
         '[&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-oc-primary',
         className,
