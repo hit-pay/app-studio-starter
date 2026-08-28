@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import {
-  CircleIcon,
+  ChevronDownIcon,
   CreditCardIcon,
   LinkIcon,
   PencilIcon,
@@ -10,6 +10,7 @@ import {
   Trash2Icon,
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ButtonGroup } from '@/components/ui/button-group'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
   DropdownMenu,
@@ -104,13 +105,22 @@ function DropdownExamplesPage() {
 
       <div className="space-y-6">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Dropdown in Button
+          Split button
         </p>
-        <Button
-          variant="Secondary"
-          size="Small"
-          menu={
-            <>
+        <ButtonGroup>
+          <Button variant="secondary" size="sm">
+            Invoice actions
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              nativeButton
+              render={
+                <Button variant="secondary" size="icon-sm" aria-label="More invoice actions">
+                  <ChevronDownIcon />
+                </Button>
+              }
+            />
+            <DropdownMenuContent align="end">
               <DropdownMenuItem>
                 <PencilIcon />
                 Edit INV-2048
@@ -124,12 +134,9 @@ function DropdownExamplesPage() {
                 <Trash2Icon />
                 Refund SGD 128.00
               </DropdownMenuItem>
-            </>
-          }
-        >
-          <CircleIcon />
-          More
-        </Button>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </ButtonGroup>
       </div>
 
       <div className="space-y-6">

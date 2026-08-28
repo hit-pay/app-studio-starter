@@ -20,6 +20,7 @@
         "@orchid/page-title",
         "@orchid/confirm-dialog",
         "@orchid/button",
+        "@orchid/button-group",
         "@orchid/dropdown-menu",
         "@orchid/toast",
         "@orchid/badge",
@@ -309,11 +310,10 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "Actions. variant Primary|Secondary|Destructive, style Default|Border|Transparent, size Small|Default|Big, shape Default|Circle, iconOnly.",
+      "description": "shadcn-compatible Base UI button with standard variants and sizes in Orchid styling.",
       "dependencies": [
         "@base-ui/react",
-        "class-variance-authority",
-        "lucide-react"
+        "class-variance-authority"
       ],
       "registryDependencies": [],
       "files": [
@@ -321,6 +321,26 @@
           "path": "src/components/ui/button.tsx",
           "type": "registry:ui",
           "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "shadcn-compatible grouped controls with horizontal or vertical orientation and Orchid styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/separator"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button-group.tsx"
         }
       ]
     },
@@ -642,8 +662,9 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "Path trail. List + Item + Link + Page + Separator.",
+      "description": "shadcn-compatible breadcrumb with composable router links, page, separator, and ellipsis.",
       "dependencies": [
+        "@base-ui/react",
         "lucide-react"
       ],
       "registryDependencies": [],

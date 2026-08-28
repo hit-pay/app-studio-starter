@@ -2,7 +2,12 @@ export const DOC_COMPONENTS = [
   {
     to: '/button' as const,
     name: 'Button',
-    description: 'Variant, style, size, native type, icon-only, and split menu.',
+    description: 'Standard variants, sizes, icon buttons, native props, and polymorphic rendering.',
+  },
+  {
+    to: '/button-group' as const,
+    name: 'Button Group',
+    description: 'Group related controls horizontally or vertically, including split dropdown buttons.',
   },
   {
     to: '/dropdown-menu' as const,
