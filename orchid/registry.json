@@ -751,10 +751,9 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "One expand/collapse panel. Trigger + Content.",
+      "description": "shadcn-compatible Root, Trigger, and Content primitives with Orchid styling.",
       "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
+        "@base-ui/react"
       ],
       "registryDependencies": [],
       "files": [

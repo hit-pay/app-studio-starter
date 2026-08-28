@@ -122,7 +122,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/collapsible' as const,
     name: 'Collapsible',
-    description: 'One expand/collapse panel. Use Accordion for several sections.',
+    description: 'shadcn-compatible expand-and-collapse primitives with Orchid styling.',
   },
   {
     to: '/scroll-area' as const,

@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/react-router'
+import { ChevronDownIcon } from 'lucide-react'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Checkbox, CheckboxGroup } from '@/components/ui/checkbox'
 import {
@@ -17,14 +18,18 @@ function CollapsibleExamplesPage() {
   return (
     <DocExamplePage
       to="/collapsible"
-      usage={`import {
+      usage={`import { ChevronDownIcon } from 'lucide-react'
+import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible'
 
 <Collapsible>
-  <CollapsibleTrigger>Advanced</CollapsibleTrigger>
+  <CollapsibleTrigger>
+    Advanced
+    <ChevronDownIcon className="size-4 transition-transform group-data-open/collapsible:rotate-180" />
+  </CollapsibleTrigger>
   <CollapsibleContent>
     {/* optional fields */}
   </CollapsibleContent>
@@ -36,7 +41,10 @@ function CollapsibleExamplesPage() {
             Default
           </p>
           <Collapsible>
-            <CollapsibleTrigger>Advanced</CollapsibleTrigger>
+            <CollapsibleTrigger>
+              Advanced
+              <ChevronDownIcon className="size-4 shrink-0 text-oc-muted-foreground transition-transform group-data-open/collapsible:rotate-180" />
+            </CollapsibleTrigger>
             <CollapsibleContent className="flex flex-col gap-3">
               <Field>
                 <FieldLabel htmlFor="collapsible-memo">Memo</FieldLabel>
@@ -51,7 +59,10 @@ function CollapsibleExamplesPage() {
             Open
           </p>
           <Collapsible defaultOpen>
-            <CollapsibleTrigger>Filters</CollapsibleTrigger>
+            <CollapsibleTrigger>
+              Filters
+              <ChevronDownIcon className="size-4 shrink-0 text-oc-muted-foreground transition-transform group-data-open/collapsible:rotate-180" />
+            </CollapsibleTrigger>
             <CollapsibleContent>
               <CheckboxGroup defaultValue={['paid']}>
                 <Field orientation="Horizontal">
