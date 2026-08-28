@@ -264,9 +264,9 @@ export const DOC_BLOCKS = [
     description: 'Heading with actions on the right and optional box below.',
   },
   {
-    to: '/confirm-dialog' as const,
-    name: 'Confirm Dialog',
-    description: 'Prebuilt confirm dialog: Delete, Warning, Success, Question, and type-to-confirm.',
+    to: '/alert-dialog' as const,
+    name: 'Alert Dialog',
+    description: 'shadcn-compatible confirmation dialog primitives with Orchid styling.',
   },
   {
     to: '/schema-form' as const,

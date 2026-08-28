@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
+import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
 import { Route as AppShellRouteImport } from './routes/app-shell'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
@@ -24,7 +25,6 @@ import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as CollapsibleRouteImport } from './routes/collapsible'
 import { Route as ComboboxRouteImport } from './routes/combobox'
 import { Route as CommandRouteImport } from './routes/command'
-import { Route as ConfirmDialogRouteImport } from './routes/confirm-dialog'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
 import { Route as DataTableRouteImport } from './routes/data-table'
@@ -79,6 +79,11 @@ const AccordionRoute = AccordionRouteImport.update({
 const AlertRoute = AlertRouteImport.update({
   id: '/alert',
   path: '/alert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AlertDialogRoute = AlertDialogRouteImport.update({
+  id: '/alert-dialog',
+  path: '/alert-dialog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppShellRoute = AppShellRouteImport.update({
@@ -139,11 +144,6 @@ const ComboboxRoute = ComboboxRouteImport.update({
 const CommandRoute = CommandRouteImport.update({
   id: '/command',
   path: '/command',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ConfirmDialogRoute = ConfirmDialogRouteImport.update({
-  id: '/confirm-dialog',
-  path: '/confirm-dialog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CopyButtonRoute = CopyButtonRouteImport.update({
@@ -351,6 +351,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/alert-dialog': typeof AlertDialogRoute
   '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
@@ -363,7 +364,6 @@ export interface FileRoutesByFullPath {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
-  '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -409,6 +409,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/alert-dialog': typeof AlertDialogRoute
   '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
@@ -421,7 +422,6 @@ export interface FileRoutesByTo {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
-  '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -468,6 +468,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/alert-dialog': typeof AlertDialogRoute
   '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
@@ -480,7 +481,6 @@ export interface FileRoutesById {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
-  '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -528,6 +528,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/alert-dialog'
     | '/app-shell'
     | '/avatar'
     | '/badge'
@@ -540,7 +541,6 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
-    | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -586,6 +586,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/alert-dialog'
     | '/app-shell'
     | '/avatar'
     | '/badge'
@@ -598,7 +599,6 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
-    | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -644,6 +644,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/alert-dialog'
     | '/app-shell'
     | '/avatar'
     | '/badge'
@@ -656,7 +657,6 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
-    | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -703,6 +703,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
+  AlertDialogRoute: typeof AlertDialogRoute
   AppShellRoute: typeof AppShellRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
@@ -715,7 +716,6 @@ export interface RootRouteChildren {
   CollapsibleRoute: typeof CollapsibleRoute
   ComboboxRoute: typeof ComboboxRoute
   CommandRoute: typeof CommandRoute
-  ConfirmDialogRoute: typeof ConfirmDialogRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
   DataTableRoute: typeof DataTableRoute
@@ -779,6 +779,13 @@ declare module '@tanstack/react-router' {
       path: '/alert'
       fullPath: '/alert'
       preLoaderRoute: typeof AlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/alert-dialog': {
+      id: '/alert-dialog'
+      path: '/alert-dialog'
+      fullPath: '/alert-dialog'
+      preLoaderRoute: typeof AlertDialogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/app-shell': {
@@ -863,13 +870,6 @@ declare module '@tanstack/react-router' {
       path: '/command'
       fullPath: '/command'
       preLoaderRoute: typeof CommandRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/confirm-dialog': {
-      id: '/confirm-dialog'
-      path: '/confirm-dialog'
-      fullPath: '/confirm-dialog'
-      preLoaderRoute: typeof ConfirmDialogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/copy-button': {
@@ -1159,6 +1159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
+  AlertDialogRoute: AlertDialogRoute,
   AppShellRoute: AppShellRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
@@ -1171,7 +1172,6 @@ const rootRouteChildren: RootRouteChildren = {
   CollapsibleRoute: CollapsibleRoute,
   ComboboxRoute: ComboboxRoute,
   CommandRoute: CommandRoute,
-  ConfirmDialogRoute: ConfirmDialogRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
   DataTableRoute: DataTableRoute,

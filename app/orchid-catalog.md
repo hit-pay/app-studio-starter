@@ -48,11 +48,11 @@ Nested screen bar: Back or Close + right actions. Page title sits below.
 
 Page heading: title, chip, description, copy id, actions.
 
-## `confirm-dialog` — Confirm Dialog
-
-Confirm overlay. type Delete|Warning|Success|Question, size Small|Medium, confirmPhrase.
-
 # Component
+
+## `alert-dialog` — Alert Dialog
+
+shadcn-compatible confirmation dialog primitives with Orchid styling.
 
 ## `button` — Button
 

@@ -162,7 +162,7 @@ Import components from:
 @/components/ui/<kebab-name>
 ```
 
-Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns `src/components/ui/`; never install official shadcn components into that directory.
+Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns `src/components/ui/`; never install official shadcn components into that directory. Orchid's shadcn-compatible components use the standard compound component names and lowercase variants where available. Read the component source for Orchid-specific extensions.
 
 Common choices:
 
@@ -172,13 +172,15 @@ Common choices:
 - operational lists: `SchemaTable` or Orchid `Table`
 - forms: `SchemaForm` or Orchid form controls
 - create/edit flows: Orchid `Dialog`
-- destructive confirmation: `ConfirmDialog`
+- destructive confirmation: compose `AlertDialog`, `AlertDialogContent`, `AlertDialogAction`, and `AlertDialogCancel`
 - zero-data and no-results states: `Empty`
 - status: `Badge`
-- feedback: `toast.add({ title, type })`
+- feedback: `toast.add({ title, description, type })`; use `success`, `info`, `warning`, `error`, or `loading`
 - loading: `Skeleton` or `Spinner`
 
-Orchid visual props commonly use PascalCase values such as `variant="Primary"` and `size="Small"`. Check the component source instead of guessing.
+Mount the root toaster as `<Toaster placement="top-center">`. Do not use Sonner or create another toast provider.
+
+Prefer shadcn-compatible lowercase props such as `variant="default"`, `variant="destructive"`, and `size="sm"`. Some Orchid business components and legacy aliases still use PascalCase values; check the component source instead of guessing.
 
 Use `oc-*` design tokens from `src/styles.css`. Do not copy colors or layout from the public marketing site, and avoid hardcoded colors when a token exists.
 

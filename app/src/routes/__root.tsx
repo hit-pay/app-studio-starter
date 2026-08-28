@@ -42,7 +42,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="h-full overflow-hidden">
         <QueryProvider>
-          <Toaster>{children}</Toaster>
+          <Toaster placement="top-center">{children}</Toaster>
         </QueryProvider>
         <Scripts />
       </body>
