@@ -107,7 +107,12 @@ export const DOC_COMPONENTS = [
   {
     to: '/table' as const,
     name: 'Table',
-    description: 'Small read-only grid. No search, filter, or row actions — use SchemaTable for lists.',
+    description: 'shadcn-compatible semantic HTML table with Orchid styling.',
+  },
+  {
+    to: '/data-table' as const,
+    name: 'Data Table',
+    description: 'Orchid resizable data grid primitives used by SchemaTable.',
   },
   {
     to: '/command' as const,

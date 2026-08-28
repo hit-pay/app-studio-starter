@@ -27,6 +27,7 @@ import { Route as CommandRouteImport } from './routes/command'
 import { Route as ConfirmDialogRouteImport } from './routes/confirm-dialog'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
+import { Route as DataTableRouteImport } from './routes/data-table'
 import { Route as DatePickerRouteImport } from './routes/date-picker'
 import { Route as DetailListRouteImport } from './routes/detail-list'
 import { Route as DialogRouteImport } from './routes/dialog'
@@ -152,6 +153,11 @@ const CopyButtonRoute = CopyButtonRouteImport.update({
 const CustomerCardRoute = CustomerCardRouteImport.update({
   id: '/customer-card',
   path: '/customer-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataTableRoute = DataTableRouteImport.update({
+  id: '/data-table',
+  path: '/data-table',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DatePickerRoute = DatePickerRouteImport.update({
@@ -354,6 +360,7 @@ export interface FileRoutesByFullPath {
   '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
+  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
@@ -410,6 +417,7 @@ export interface FileRoutesByTo {
   '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
+  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
@@ -467,6 +475,7 @@ export interface FileRoutesById {
   '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
+  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
@@ -525,6 +534,7 @@ export interface FileRouteTypes {
     | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
+    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
@@ -581,6 +591,7 @@ export interface FileRouteTypes {
     | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
+    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
@@ -637,6 +648,7 @@ export interface FileRouteTypes {
     | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
+    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
@@ -694,6 +706,7 @@ export interface RootRouteChildren {
   ConfirmDialogRoute: typeof ConfirmDialogRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
+  DataTableRoute: typeof DataTableRoute
   DatePickerRoute: typeof DatePickerRoute
   DetailListRoute: typeof DetailListRoute
   DialogRoute: typeof DialogRoute
@@ -858,6 +871,13 @@ declare module '@tanstack/react-router' {
       path: '/customer-card'
       fullPath: '/customer-card'
       preLoaderRoute: typeof CustomerCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-table': {
+      id: '/data-table'
+      path: '/data-table'
+      fullPath: '/data-table'
+      preLoaderRoute: typeof DataTableRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/date-picker': {
@@ -1134,6 +1154,7 @@ const rootRouteChildren: RootRouteChildren = {
   ConfirmDialogRoute: ConfirmDialogRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
+  DataTableRoute: DataTableRoute,
   DatePickerRoute: DatePickerRoute,
   DetailListRoute: DetailListRoute,
   DialogRoute: DialogRoute,

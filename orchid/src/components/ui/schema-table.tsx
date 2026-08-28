@@ -54,18 +54,18 @@ import {
   SelectValue,
 } from './select'
 import {
-  Table,
-  TableBody,
-  TableCell,
-  TableCellImage,
-  TableCellText,
-  TableEmpty,
-  TableHead,
-  TableHeader,
-  TableRow,
-  TableSelectionBar,
-  TableToolbar,
-} from './table'
+  DataTable,
+  DataTableBody,
+  DataTableCell,
+  DataTableCellImage,
+  DataTableCellText,
+  DataTableEmpty,
+  DataTableHead,
+  DataTableHeader,
+  DataTableRow,
+  DataTableSelectionBar,
+  DataTableToolbar,
+} from './data-table'
 import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
@@ -236,14 +236,14 @@ function cellContent(column: SchemaTableColumn, row: SchemaTableRow) {
   const value = row[column.key]
   if (column.type === 'image') {
     return (
-      <TableCellImage
+      <DataTableCellImage
         alt={String(row.name ?? '')}
         src={typeof value === 'string' ? value : undefined}
       />
     )
   }
-  if (column.type === 'amount') return <TableCellText>{formatAmount(value)}</TableCellText>
-  if (column.type === 'date') return <TableCellText>{formatDate(value)}</TableCellText>
+  if (column.type === 'amount') return <DataTableCellText>{formatAmount(value)}</DataTableCellText>
+  if (column.type === 'date') return <DataTableCellText>{formatDate(value)}</DataTableCellText>
   if (column.type === 'status') {
     const label = String(value ?? '')
     return (
@@ -253,9 +253,9 @@ function cellContent(column: SchemaTableColumn, row: SchemaTableRow) {
     )
   }
   return (
-    <TableCellText icon={column.icon ? <CircleIcon /> : undefined}>
+    <DataTableCellText icon={column.icon ? <CircleIcon /> : undefined}>
       {value == null || value === '' ? 'N/A' : String(value)}
-    </TableCellText>
+    </DataTableCellText>
   )
 }
 
@@ -638,13 +638,13 @@ function SchemaTable({
 
   return (
     <div data-slot="schema-table" className={cn('flex flex-col gap-3', className)}>
-      <Table>
+      <DataTable>
         {table.selected.length > 0 ? (
-          <TableSelectionBar count={table.selected.length} onDeselectAll={table.clearSelection}>
+          <DataTableSelectionBar count={table.selected.length} onDeselectAll={table.clearSelection}>
             {selectionActions}
-          </TableSelectionBar>
+          </DataTableSelectionBar>
         ) : (
-          <TableToolbar>
+          <DataTableToolbar>
             {table.schema.tabs?.length ? <SchemaTableTabs table={table} /> : <span />}
             <div className="flex min-w-0 items-center justify-end gap-2">
               <SchemaTableSearch table={table} />
@@ -652,32 +652,32 @@ function SchemaTable({
               <SchemaTableSortMenu table={table} />
               <SchemaTableEditColumns table={table} />
             </div>
-          </TableToolbar>
+          </DataTableToolbar>
         )}
         {table.selected.length === 0 ? <SchemaTableChips table={table} /> : null}
-        <TableHeader>
-            <TableRow>
+        <DataTableHeader>
+            <DataTableRow>
               {table.schema.selection ? (
-                <TableHead type="Checkbox">
+                <DataTableHead type="Checkbox">
                   <Checkbox
                     aria-label="Select page"
                     checked={allSelected}
                     indeterminate={someSelected}
                     onCheckedChange={() => table.togglePage()}
                   />
-                </TableHead>
+                </DataTableHead>
               ) : null}
               {columns.map((column) => (
-                <TableHead key={column.key} type={tableCellType(column) === 'Image' ? 'Image' : 'Default'}>
+                <DataTableHead key={column.key} type={tableCellType(column) === 'Image' ? 'Image' : 'Default'}>
                   {column.title}
-                </TableHead>
+                </DataTableHead>
               ))}
-              {actions.length > 0 ? <TableHead type="Icon" /> : null}
-            </TableRow>
-          </TableHeader>
-          <TableBody>
+              {actions.length > 0 ? <DataTableHead type="Icon" /> : null}
+            </DataTableRow>
+          </DataTableHeader>
+          <DataTableBody>
             {table.rows.length === 0 ? (
-              <TableEmpty>
+              <DataTableEmpty>
                 <Empty>
                   <EmptyHeader>
                     <EmptyMedia variant="search">
@@ -687,26 +687,26 @@ function SchemaTable({
                   </EmptyHeader>
                   {emptyActions ? <EmptyContent>{emptyActions}</EmptyContent> : null}
                 </Empty>
-              </TableEmpty>
+              </DataTableEmpty>
             ) : (
               table.rows.map((row) => (
-              <TableRow key={row.id}>
+              <DataTableRow key={row.id}>
                 {table.schema.selection ? (
-                  <TableCell type="Checkbox">
+                  <DataTableCell type="Checkbox">
                     <Checkbox
                       aria-label={`Select ${String(row.name ?? row.id)}`}
                       checked={table.selected.includes(row.id)}
                       onCheckedChange={() => table.toggleRow(row.id)}
                     />
-                  </TableCell>
+                  </DataTableCell>
                 ) : null}
                 {columns.map((column) => (
-                  <TableCell key={column.key} type={tableCellType(column)}>
+                  <DataTableCell key={column.key} type={tableCellType(column)}>
                     {cellContent(column, row)}
-                  </TableCell>
+                  </DataTableCell>
                 ))}
                 {actions.length > 0 ? (
-                  <TableCell type="Icon">
+                  <DataTableCell type="Icon">
                     <DropdownMenu>
                       <DropdownMenuTrigger
                         nativeButton
@@ -741,13 +741,13 @@ function SchemaTable({
                         ) : null}
                       </DropdownMenuContent>
                     </DropdownMenu>
-                  </TableCell>
+                  </DataTableCell>
                 ) : null}
-              </TableRow>
+              </DataTableRow>
             ))
             )}
-          </TableBody>
-        </Table>
+          </DataTableBody>
+        </DataTable>
       {table.schema.pagination !== false && table.filteredCount > 0 ? (
         <div className="flex flex-wrap items-center justify-between gap-3">
           <span className="hidden min-w-32 sm:block" />

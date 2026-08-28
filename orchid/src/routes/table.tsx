@@ -3,9 +3,9 @@ import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
   Table,
   TableBody,
+  TableCaption,
   TableCell,
-  TableCellImage,
-  TableCellText,
+  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
@@ -15,89 +15,73 @@ export const Route = createFileRoute('/table')({
   component: TableExamplesPage,
 })
 
-const PLAIN_ROWS = [
-  { product: 'Classic White Tee', channel: 'Online Store', amount: 'SGD 48.00' },
-  { product: 'Studio Membership', channel: 'POS', amount: 'SGD 128.00' },
-  { product: 'Weekend Workshop', channel: 'Online Store', amount: 'SGD 88.00' },
-]
-
-const DETAIL_ROWS = [
-  { name: 'Classic White Tee', status: 'Paid', amount: 'SGD 48.00', created: '3 Sep 2026' },
-  { name: 'Studio Membership', status: 'Paid', amount: 'SGD 128.00', created: '1 Sep 2026' },
-  { name: 'Gift Card SGD 50', status: 'Unpaid', amount: 'SGD 50.00', created: '28 Aug 2026' },
+const INVOICES = [
+  { invoice: 'INV-2048', customer: 'Priya Nair', status: 'Paid', amount: 'SGD 128.00' },
+  { invoice: 'INV-2047', customer: 'Alex Turner', status: 'Pending', amount: 'SGD 86.50' },
+  { invoice: 'INV-2046', customer: 'Chloe Tan', status: 'Paid', amount: 'SGD 240.00' },
 ]
 
 function TableExamplesPage() {
   return (
-    <DocExamplePage to="/table">
-      <div className="flex flex-col gap-8">
-        <div className="flex flex-col gap-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Default
-          </p>
-          <Table resizable={false}>
-            <TableHeader>
-              <TableRow>
-                <TableHead>Product</TableHead>
-                <TableHead>Channel</TableHead>
-                <TableHead>Amount</TableHead>
-              </TableRow>
-            </TableHeader>
-            <TableBody>
-              {PLAIN_ROWS.map((row) => (
-                <TableRow key={row.product}>
-                  <TableCell>
-                    <TableCellText>{row.product}</TableCellText>
-                  </TableCell>
-                  <TableCell>
-                    <TableCellText>{row.channel}</TableCellText>
-                  </TableCell>
-                  <TableCell>
-                    <TableCellText>{row.amount}</TableCellText>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+    <DocExamplePage
+      to="/table"
+      usage={`import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from '@/components/ui/table'
 
-        <div className="flex flex-col gap-4">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            With image
-          </p>
-          <Table resizable={false}>
-            <TableHeader>
-              <TableRow>
-                <TableHead type="Image">Image</TableHead>
-                <TableHead>Product</TableHead>
-                <TableHead>Status</TableHead>
-                <TableHead>Amount</TableHead>
-                <TableHead>Created</TableHead>
+<Table>
+  <TableHeader>
+    <TableRow>
+      <TableHead>Invoice</TableHead>
+      <TableHead>Customer</TableHead>
+      <TableHead className="text-right">Amount</TableHead>
+    </TableRow>
+  </TableHeader>
+  <TableBody>
+    <TableRow>
+      <TableCell>INV-2048</TableCell>
+      <TableCell>Priya Nair</TableCell>
+      <TableCell className="text-right">SGD 128.00</TableCell>
+    </TableRow>
+  </TableBody>
+</Table>`}
+    >
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Invoices
+        </p>
+        <Table>
+          <TableCaption>Recent invoices and their payment status.</TableCaption>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Invoice</TableHead>
+              <TableHead>Customer</TableHead>
+              <TableHead>Status</TableHead>
+              <TableHead className="text-right">Amount</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {INVOICES.map((invoice) => (
+              <TableRow key={invoice.invoice}>
+                <TableCell className="font-medium">{invoice.invoice}</TableCell>
+                <TableCell>{invoice.customer}</TableCell>
+                <TableCell>{invoice.status}</TableCell>
+                <TableCell className="text-right">{invoice.amount}</TableCell>
               </TableRow>
-            </TableHeader>
-            <TableBody>
-              {DETAIL_ROWS.map((row) => (
-                <TableRow key={row.name}>
-                  <TableCell type="Image">
-                    <TableCellImage alt={row.name} />
-                  </TableCell>
-                  <TableCell>
-                    <TableCellText>{row.name}</TableCellText>
-                  </TableCell>
-                  <TableCell>
-                    <TableCellText>{row.status}</TableCellText>
-                  </TableCell>
-                  <TableCell>
-                    <TableCellText>{row.amount}</TableCellText>
-                  </TableCell>
-                  <TableCell>
-                    <TableCellText>{row.created}</TableCellText>
-                  </TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
+            ))}
+          </TableBody>
+          <TableFooter>
+            <TableRow>
+              <TableCell colSpan={3}>Total</TableCell>
+              <TableCell className="text-right">SGD 454.50</TableCell>
+            </TableRow>
+          </TableFooter>
+        </Table>
       </div>
     </DocExamplePage>
   )

@@ -41,6 +41,7 @@
         "@orchid/breadcrumb",
         "@orchid/pagination",
         "@orchid/table",
+        "@orchid/data-table",
         "@orchid/command",
         "@orchid/kbd",
         "@orchid/collapsible",
@@ -129,7 +130,7 @@
       "name": "schema-table",
       "type": "registry:ui",
       "title": "Schema Table",
-      "description": "JSON-schema list: search, tabs, filter, sort, pagination. Uses Table.",
+      "description": "JSON-schema list with search, filters, sorting, pagination, and Orchid DataTable primitives.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -141,7 +142,7 @@
         "@orchid/pagination",
         "@orchid/popover",
         "@orchid/select",
-        "@orchid/table"
+        "@orchid/data-table"
       ],
       "files": [
         {
@@ -697,7 +698,22 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "List chrome (div, not HTML table). Cell type Default|Checkbox|Image|Icon|Empty. TableSelectionBar.",
+      "description": "shadcn-compatible semantic HTML table with Orchid styling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/table.tsx",
+          "type": "registry:ui",
+          "target": "@ui/table.tsx"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Orchid resizable data grid primitives with selection, toolbar, image, and typed cells.",
       "dependencies": [
         "lucide-react"
       ],
@@ -706,9 +722,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/table.tsx",
+          "path": "src/components/ui/data-table.tsx",
           "type": "registry:ui",
-          "target": "@ui/table.tsx"
+          "target": "@ui/data-table.tsx"
         }
       ]
     },
