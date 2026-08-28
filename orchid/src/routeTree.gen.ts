@@ -18,6 +18,7 @@ import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
 import { Route as ButtonRouteImport } from './routes/button'
 import { Route as ButtonGroupRouteImport } from './routes/button-group'
+import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as CollapsibleRouteImport } from './routes/collapsible'
@@ -106,6 +107,11 @@ const ButtonRoute = ButtonRouteImport.update({
 const ButtonGroupRoute = ButtonGroupRouteImport.update({
   id: '/button-group',
   path: '/button-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CalendarRoute = CalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckboxRoute = CheckboxRouteImport.update({
@@ -339,6 +345,7 @@ export interface FileRoutesByFullPath {
   '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/button-group': typeof ButtonGroupRoute
+  '/calendar': typeof CalendarRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/collapsible': typeof CollapsibleRoute
@@ -394,6 +401,7 @@ export interface FileRoutesByTo {
   '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/button-group': typeof ButtonGroupRoute
+  '/calendar': typeof CalendarRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/collapsible': typeof CollapsibleRoute
@@ -450,6 +458,7 @@ export interface FileRoutesById {
   '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/button-group': typeof ButtonGroupRoute
+  '/calendar': typeof CalendarRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/collapsible': typeof CollapsibleRoute
@@ -507,6 +516,7 @@ export interface FileRouteTypes {
     | '/breadcrumb'
     | '/button'
     | '/button-group'
+    | '/calendar'
     | '/checkbox'
     | '/choice-card'
     | '/collapsible'
@@ -562,6 +572,7 @@ export interface FileRouteTypes {
     | '/breadcrumb'
     | '/button'
     | '/button-group'
+    | '/calendar'
     | '/checkbox'
     | '/choice-card'
     | '/collapsible'
@@ -617,6 +628,7 @@ export interface FileRouteTypes {
     | '/breadcrumb'
     | '/button'
     | '/button-group'
+    | '/calendar'
     | '/checkbox'
     | '/choice-card'
     | '/collapsible'
@@ -673,6 +685,7 @@ export interface RootRouteChildren {
   BreadcrumbRoute: typeof BreadcrumbRoute
   ButtonRoute: typeof ButtonRoute
   ButtonGroupRoute: typeof ButtonGroupRoute
+  CalendarRoute: typeof CalendarRoute
   CheckboxRoute: typeof CheckboxRoute
   ChoiceCardRoute: typeof ChoiceCardRoute
   CollapsibleRoute: typeof CollapsibleRoute
@@ -782,6 +795,13 @@ declare module '@tanstack/react-router' {
       path: '/button-group'
       fullPath: '/button-group'
       preLoaderRoute: typeof ButtonGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/calendar': {
+      id: '/calendar'
+      path: '/calendar'
+      fullPath: '/calendar'
+      preLoaderRoute: typeof CalendarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkbox': {
@@ -1105,6 +1125,7 @@ const rootRouteChildren: RootRouteChildren = {
   BreadcrumbRoute: BreadcrumbRoute,
   ButtonRoute: ButtonRoute,
   ButtonGroupRoute: ButtonGroupRoute,
+  CalendarRoute: CalendarRoute,
   CheckboxRoute: CheckboxRoute,
   ChoiceCardRoute: ChoiceCardRoute,
   CollapsibleRoute: CollapsibleRoute,

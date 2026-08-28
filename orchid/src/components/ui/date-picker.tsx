@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from 'react'
 import { format } from 'date-fns'
 import { CalendarIcon } from 'lucide-react'
@@ -34,8 +36,7 @@ function DatePicker({
       <PopoverTrigger
         render={
           <Button
-            variant="Secondary"
-            style="Border"
+            variant="outline"
             data-empty={!date}
             className={cn(
               'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
@@ -44,10 +45,14 @@ function DatePicker({
           />
         }
       >
-        <CalendarIcon />
-        <span className="min-w-0 truncate">{date ? format(date, 'PPP') : placeholder}</span>
+        <CalendarIcon data-icon="inline-start" />
+        {date ? (
+          <span className="min-w-0 truncate">{format(date, 'PPP')}</span>
+        ) : (
+          <span className="min-w-0 truncate">{placeholder}</span>
+        )}
       </PopoverTrigger>
-      <PopoverContent className="w-auto overflow-hidden rounded-sm p-0" align="start">
+      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
         <Calendar
           className="p-5"
           mode="single"
@@ -105,8 +110,7 @@ function DateTimePicker({
       <PopoverTrigger
         render={
           <Button
-            variant="Secondary"
-            style="Border"
+            variant="outline"
             data-empty={!date}
             className={cn(
               'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
@@ -115,10 +119,14 @@ function DateTimePicker({
           />
         }
       >
-        <CalendarIcon />
-        <span className="min-w-0 truncate">{date ? format(date, 'PPp') : placeholder}</span>
+        <CalendarIcon data-icon="inline-start" />
+        {date ? (
+          <span className="min-w-0 truncate">{format(date, 'PPp')}</span>
+        ) : (
+          <span className="min-w-0 truncate">{placeholder}</span>
+        )}
       </PopoverTrigger>
-      <PopoverContent className="w-auto overflow-hidden rounded-sm p-0" align="start">
+      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
         <Calendar
           className="p-5"
           mode="single"
@@ -135,6 +143,7 @@ function DateTimePicker({
         <div className="border-t border-solid border-oc-border p-3">
           <Input
             type="time"
+            aria-label="Time"
             value={timeValue(date)}
             disabled={!date}
             onChange={(event) => {
@@ -173,8 +182,7 @@ function DatePickerRange({
       <PopoverTrigger
         render={
           <Button
-            variant="Secondary"
-            style="Border"
+            variant="outline"
             data-empty={!range?.from}
             className={cn(
               'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
@@ -183,7 +191,7 @@ function DatePickerRange({
           />
         }
       >
-        <CalendarIcon />
+        <CalendarIcon data-icon="inline-start" />
         <span className="min-w-0 truncate">
           {range?.from
             ? range.to
@@ -192,7 +200,7 @@ function DatePickerRange({
             : placeholder}
         </span>
       </PopoverTrigger>
-      <PopoverContent className="w-auto overflow-hidden rounded-sm p-0" align="start">
+      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
         <Calendar
           className="p-5"
           mode="range"

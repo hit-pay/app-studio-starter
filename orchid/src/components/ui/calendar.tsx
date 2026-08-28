@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import {
   DayPicker,
@@ -10,23 +12,19 @@ import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from './button'
 
-const navButtonClass = buttonVariants({
-  variant: 'Secondary',
-  style: 'Transparent',
-  size: 'Small',
-  iconOnly: true,
-})
-
 function Calendar({
   className,
   classNames,
-  showOutsideDays = false,
+  showOutsideDays = true,
   captionLayout = 'label',
+  buttonVariant = 'ghost',
   locale,
   formatters,
   components,
   ...props
-}: React.ComponentProps<typeof DayPicker>) {
+}: React.ComponentProps<typeof DayPicker> & {
+  buttonVariant?: React.ComponentProps<typeof Button>['variant']
+}) {
   const defaultClassNames = getDefaultClassNames()
   const isMultipleMonths = (props.numberOfMonths ?? 1) > 1
 
@@ -62,13 +60,13 @@ function Calendar({
           defaultClassNames.nav,
         ),
         button_previous: cn(
-          navButtonClass,
-          'size-5 p-0 text-oc-foreground select-none aria-disabled:opacity-35',
+          buttonVariants({ variant: buttonVariant, size: 'icon-xs' }),
+          'size-5 min-w-5 p-0 text-oc-foreground select-none aria-disabled:opacity-35',
           defaultClassNames.button_previous,
         ),
         button_next: cn(
-          navButtonClass,
-          'size-5 p-0 text-oc-foreground select-none aria-disabled:opacity-35',
+          buttonVariants({ variant: buttonVariant, size: 'icon-xs' }),
+          'size-5 min-w-5 p-0 text-oc-foreground select-none aria-disabled:opacity-35',
           defaultClassNames.button_next,
         ),
         month_caption: cn(
@@ -157,21 +155,20 @@ function CalendarDayButton({
   day,
   modifiers,
   locale,
-  type: _type,
-  style: _style,
   ...props
 }: React.ComponentProps<typeof DayButton> & { locale?: Partial<Locale> }) {
   const defaultClassNames = getDefaultClassNames()
+  const ref = React.useRef<HTMLButtonElement>(null)
+
+  React.useEffect(() => {
+    if (modifiers.focused) ref.current?.focus()
+  }, [modifiers.focused])
 
   return (
     <Button
-      {...props}
-      
-      variant="Secondary"
-      style="Transparent"
-      size="Small"
-      iconOnly
-      shape="Circle"
+      ref={ref}
+      variant="ghost"
+      size="icon"
       data-day={day.date.toLocaleDateString(locale?.code)}
       data-selected-single={
         modifiers.selected &&
@@ -191,6 +188,7 @@ function CalendarDayButton({
         defaultClassNames.day,
         className,
       )}
+      {...props}
     />
   )
 }

@@ -197,9 +197,14 @@ export const DOC_FORMS = [
     description: 'Single or range slider; pass an array for two or more thumbs.',
   },
   {
+    to: '/calendar' as const,
+    name: 'Calendar',
+    description: 'Single, range, and multiple date selection used by Date Picker.',
+  },
+  {
     to: '/date-picker' as const,
     name: 'Date Picker',
-    description: 'Date, date range, and date+time (DateTimePicker).',
+    description: 'Shadcn-style Popover and Calendar composition with optional Orchid helpers.',
   },
   {
     to: '/form-section' as const,

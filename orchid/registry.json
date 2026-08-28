@@ -1041,7 +1041,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "Month grid. mode single|range|multiple. Prefer date-picker in forms.",
+      "description": "shadcn-compatible DayPicker calendar for single, range, or multiple selection in Orchid styling.",
       "dependencies": [
         "react-day-picker",
         "lucide-react"
@@ -1061,7 +1061,7 @@
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
-      "description": "Day, range, or date+time. DatePicker | DatePickerRange | DateTimePicker.",
+      "description": "Orchid helper wrappers following the shadcn Popover + Calendar recipe for date, range, and date-time selection.",
       "dependencies": [
         "date-fns",
         "lucide-react",
