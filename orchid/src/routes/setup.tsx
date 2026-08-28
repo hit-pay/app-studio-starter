@@ -6,6 +6,11 @@ import orchidStyles from '@/styles.css?raw'
 import { PageTitle } from '@/components/ui/page-title'
 import { Button } from '@/components/ui/button'
 
+const ORCHID_TOKENS_MARKER = '@custom-variant dark'
+const orchidTokensStart = orchidStyles.indexOf(ORCHID_TOKENS_MARKER)
+const orchidTokens =
+  orchidTokensStart >= 0 ? orchidStyles.slice(orchidTokensStart) : orchidStyles
+
 export const Route = createFileRoute('/setup')({
   component: SetupGuidePage,
 })
@@ -58,6 +63,21 @@ const MCP_INIT = `bunx shadcn mcp init --client cursor
 bunx shadcn mcp init --client claude
 bunx shadcn mcp init --client vscode
 bunx shadcn mcp init --client codex`
+
+const INITIAL_AI_SETUP_PROMPT = `Set up and build this project using Orchid UI only.
+
+1. Keep the existing framework and project structure.
+2. Use https://orchid-ui-hitpay.vercel.app/registry.json as the component catalog.
+3. Configure components.json with the alias "orchid-ui": "@/components/orchid-ui" and registry "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json".
+4. Fetch https://orchid-ui-hitpay.vercel.app/orchid-tokens.css and merge it into the global stylesheet.
+5. Install the required @orchid components with the project's package manager and import them from @/orchid-ui/<component>.
+
+Use Orchid components for every UI element. Do not install, generate, copy, or use shadcn/ui components. The shadcn CLI may only be used to download components from the custom @orchid registry. Reuse existing Orchid components, and compose missing patterns from Orchid primitives. Use oc-* design tokens instead of shadcn tokens or hard-coded colors.
+
+Complete the setup and implement this request:
+
+App or screen request:
+[PASTE YOUR REQUEST HERE]`
 
 const HARNESSES: { name: string; file: string; note: string }[] = [
   { name: 'Cursor', file: '.cursor/mcp.json', note: 'Project MCP. Enable the server in Cursor Settings.' },
@@ -174,11 +194,24 @@ function SetupGuidePage() {
         <div className="shrink-0">
         <PageTitle
           title="Setup"
-          description="Install Orchid tokens, point any AI harness at the registry, and add components."
+          description="Use Orchid UI from Lovable, v0, or another AI builder instead of its default shadcn components."
         />
         </div>
         <div className="flex min-h-0 flex-1 flex-col gap-12 overflow-y-auto">
-        <Section title="1. CSS variables">
+        <Section title="1. Prompt for Lovable, v0, and other AI builders">
+          <P>
+            Paste this prompt into an external AI app builder, then replace the final placeholder
+            with the app or screen you want. The builder should install Orchid itself and avoid its
+            default shadcn components.
+          </P>
+          <CodeBlock
+            code={INITIAL_AI_SETUP_PROMPT}
+            copyLabel="Copy setup prompt"
+            maxHeight="32rem"
+          />
+        </Section>
+
+        <Section title="2. CSS variables">
           <P>
             Orchid colors use an <code className="text-oc-foreground">oc-</code> prefix so they do
             not collide with default shadcn tokens. Put hex values on{' '}
@@ -202,9 +235,22 @@ function SetupGuidePage() {
             yourself. Add <code className="text-oc-foreground">class="dark"</code> on{' '}
             <code className="text-oc-foreground">html</code> to use the dark tokens.
           </P>
+          <P>
+            Public CSS for AI builders:{' '}
+            <a
+              className="text-oc-primary underline-offset-2 hover:underline"
+              href="https://orchid-ui-hitpay.vercel.app/orchid-tokens.css"
+              target="_blank"
+              rel="noreferrer"
+            >
+              orchid-ui-hitpay.vercel.app/orchid-tokens.css
+            </a>
+            . This stable URL returns the same tokens shown below and allows tools such as Lovable
+            or v0 to fetch them directly.
+          </P>
           <CodeBlock
-            code={orchidStyles}
-            filename="src/styles.css"
+            code={orchidTokens}
+            filename="orchid-tokens.css"
             copyLabel="Copy all CSS"
             maxHeight="28rem"
           />
@@ -257,7 +303,7 @@ function SetupGuidePage() {
           </P>
         </Section>
 
-        <Section title="2. Point shadcn at Orchid">
+        <Section title="3. Point shadcn at Orchid">
           <P>
             Leave <code className="text-oc-foreground">ui</code> for other kits. Point{' '}
             <code className="text-oc-foreground">orchid-ui</code> at{' '}
@@ -281,7 +327,7 @@ function SetupGuidePage() {
           </P>
         </Section>
 
-        <Section title="3. AI harness (MCP)">
+        <Section title="4. AI harness (MCP)">
           <P>
             Orchid is meant for any MCP client — Cursor, Claude Code, VS Code Copilot, Codex,
             Windsurf, OpenCode, and similar harnesses. The shadcn MCP server reads registries from{' '}
@@ -335,7 +381,7 @@ function SetupGuidePage() {
           </P>
         </Section>
 
-        <Section title="4. Add a component">
+        <Section title="5. Add a component">
           <P>From the app directory:</P>
           <CodeBlock code="bunx shadcn add @orchid/button" />
           <P>Several at once:</P>
