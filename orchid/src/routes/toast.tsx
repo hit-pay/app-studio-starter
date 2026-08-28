@@ -1,31 +1,80 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/toast'
+import {
+  createToastManager,
+  toast,
+  Toaster,
+  type ToastPlacement,
+} from '@/components/ui/toast'
 
 export const Route = createFileRoute('/toast')({
   component: ToastExamplesPage,
 })
 
+const placementToast = createToastManager()
+const PLACEMENTS: ToastPlacement[] = [
+  'top-left',
+  'top-center',
+  'top-right',
+  'bottom-left',
+  'bottom-center',
+  'bottom-right',
+]
+
 function ToastExamplesPage() {
+  const [placement, setPlacement] = useState<ToastPlacement>('bottom-right')
+
   return (
-    <DocExamplePage
-      to="/toast"
-      usage={`import { toast } from '@/components/ui/toast'
+    <>
+      <Toaster toastManager={placementToast} placement={placement} />
+      <DocExamplePage
+        to="/toast"
+        usage={`import { Toaster, toast } from '@/components/ui/toast'
+
+// Mount once in the application root.
+<Toaster placement="bottom-right" />
 
 toast.add({
   title: 'Payment received',
   description: 'PayNow · INV-2048 · SGD 128.00',
   type: 'success',
 })`}
-    >
+      >
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Placement
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {PLACEMENTS.map((item) => (
+              <Button
+                key={item}
+                variant={placement === item ? 'secondary' : 'outline'}
+                size="sm"
+                onClick={() => {
+                  setPlacement(item)
+                  placementToast.add({
+                    title: item,
+                    description: `Toast positioned at ${item}.`,
+                    type: 'info',
+                  })
+                }}
+              >
+                {item}
+              </Button>
+            ))}
+          </div>
+        </div>
+
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
         <p className="text-xs text-oc-muted-foreground">
           Programmatic floating toast. Mount <code className="font-mono">Toaster</code> in
-          the root layout.
+          the root layout. Placement supports top-left, top-center, top-right, bottom-left,
+          bottom-center, and bottom-right.
         </p>
         <Button
           variant="outline"
@@ -158,6 +207,7 @@ toast.add({
           </Button>
         </div>
       </div>
-    </DocExamplePage>
+      </DocExamplePage>
+    </>
   )
 }

@@ -54,6 +54,16 @@ function ToastBar({
 /** Use `toast.add({ title, description, type })`. `type`: success|info|warning|error|loading — not sonner. Default color is green. */
 const toast = ToastPrimitive.createToastManager()
 
+type ToastPlacement =
+  | 'top-left'
+  | 'top-center'
+  | 'top-right'
+  | 'bottom-left'
+  | 'bottom-center'
+  | 'bottom-right'
+
+const ToastPlacementContext = React.createContext<ToastPlacement>('bottom-right')
+
 const TYPE_TO_COLOR: Record<string, 'Default' | 'Blue' | 'Red' | 'Orange' | 'Grey'> = {
   success: 'Default',
   info: 'Blue',
@@ -70,32 +80,48 @@ function ToastPortal({ ...props }: ToastPrimitive.Portal.Props) {
   return <ToastPrimitive.Portal data-slot="toast-portal" {...props} />
 }
 
-function ToastViewport({ className, ...props }: ToastPrimitive.Viewport.Props) {
+function ToastViewport({
+  className,
+  placement = 'bottom-right',
+  ...props
+}: ToastPrimitive.Viewport.Props & {
+  placement?: ToastPlacement
+}) {
   return (
-    <ToastPrimitive.Viewport
-      data-slot="toast-viewport"
-      className={cn(
-        'pointer-events-none fixed top-4 left-1/2 z-50 w-[min(calc(100vw-2rem),24rem)] -translate-x-1/2 outline-none',
-        className,
-      )}
-      {...props}
-    />
+    <ToastPlacementContext.Provider value={placement}>
+      <ToastPrimitive.Viewport
+        data-slot="toast-viewport"
+        data-placement={placement}
+        className={cn(
+          'pointer-events-none fixed z-50 w-[min(calc(100vw-2rem),24rem)] outline-none',
+          placement === 'top-left' && 'top-4 left-4',
+          placement === 'top-center' && 'top-4 left-1/2 -translate-x-1/2',
+          placement === 'top-right' && 'top-4 right-4',
+          placement === 'bottom-left' && 'bottom-4 left-4',
+          placement === 'bottom-center' && 'bottom-4 left-1/2 -translate-x-1/2',
+          placement === 'bottom-right' && 'right-4 bottom-4',
+          className,
+        )}
+        {...props}
+      />
+    </ToastPlacementContext.Provider>
   )
 }
 
-function Toast({ className, swipeDirection = ['up', 'left', 'right'], ...props }: ToastPrimitive.Root.Props) {
+function Toast({ className, ...props }: ToastPrimitive.Root.Props) {
+  const placement = React.useContext(ToastPlacementContext)
+  const fromTop = placement.startsWith('top-')
+
   return (
     <ToastPrimitive.Root
       data-slot="toast"
-      swipeDirection={swipeDirection}
+      data-placement={placement}
       className={cn(
-        'group/toast pointer-events-auto absolute top-0 left-0 z-[calc(1000-var(--toast-index))] w-full origin-top rounded-lg bg-transparent shadow-none will-change-transform outline-none select-none',
-        '[--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]',
-        'h-(--height) transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height))))_scale(var(--scale))] [transition:transform_500ms_cubic-bezier(0.22,1,0.36,1),opacity_500ms,height_150ms]',
-        "after:absolute after:bottom-full after:left-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-['']",
+        'group/toast pointer-events-auto absolute right-0 z-[calc(1000-var(--toast-index))] w-full rounded-lg bg-transparent shadow-none will-change-transform outline-none select-none',
+        '[--gap:0.75rem] [--height:var(--toast-frontmost-height,var(--toast-height))] [--peek:0.75rem] [--scale:calc(max(0,1-(var(--toast-index)*0.1)))] [--shrink:calc(1-var(--scale))]',
+        'h-(--height) [transition:transform_500ms_cubic-bezier(0.22,1,0.36,1),opacity_500ms,height_150ms]',
         'data-expanded:h-(--toast-height) data-expanded:transform-[translateX(var(--toast-swipe-movement-x))_translateY(var(--offset-y))]',
-        'data-limited:opacity-0 data-starting-style:transform-[translateY(-150%)]',
-        '[&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:transform-[translateY(-150%)]',
+        'data-limited:opacity-0',
         'data-ending-style:data-[swipe-direction=down]:transform-[translateY(calc(var(--toast-swipe-movement-y)+150%))]',
         'data-ending-style:data-[swipe-direction=left]:transform-[translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))]',
         'data-ending-style:data-[swipe-direction=right]:transform-[translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))]',
@@ -104,6 +130,9 @@ function Toast({ className, swipeDirection = ['up', 'left', 'right'], ...props }
         'data-expanded:data-ending-style:data-[swipe-direction=left]:transform-[translateX(calc(var(--toast-swipe-movement-x)-150%))_translateY(var(--offset-y))]',
         'data-expanded:data-ending-style:data-[swipe-direction=right]:transform-[translateX(calc(var(--toast-swipe-movement-x)+150%))_translateY(var(--offset-y))]',
         'data-expanded:data-ending-style:data-[swipe-direction=up]:transform-[translateY(calc(var(--toast-swipe-movement-y)-150%))]',
+        fromTop
+          ? "top-0 origin-top [--offset-y:calc(var(--toast-offset-y)+calc(var(--toast-index)*var(--gap))+var(--toast-swipe-movement-y))] transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)+(var(--toast-index)*var(--peek))+(var(--shrink)*var(--height))))_scale(var(--scale))] after:absolute after:bottom-full after:left-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-[''] data-starting-style:transform-[translateY(-150%)] [&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:transform-[translateY(-150%)]"
+          : "bottom-0 origin-bottom [--offset-y:calc(var(--toast-offset-y)*-1+calc(var(--toast-index)*var(--gap)*-1)+var(--toast-swipe-movement-y))] transform-[translateX(var(--toast-swipe-movement-x))_translateY(calc(var(--toast-swipe-movement-y)-(var(--toast-index)*var(--peek))-(var(--shrink)*var(--height))))_scale(var(--scale))] after:absolute after:top-full after:left-0 after:h-[calc(var(--gap)+1px)] after:w-full after:content-[''] data-starting-style:transform-[translateY(150%)] [&[data-ending-style]:not([data-limited]):not([data-swipe-direction])]:transform-[translateY(150%)]",
         className,
       )}
       {...props}
@@ -256,13 +285,16 @@ function ToastList() {
 function Toaster({
   children,
   toastManager = toast,
+  placement = 'bottom-right',
   ...props
-}: ToastPrimitive.Provider.Props) {
+}: ToastPrimitive.Provider.Props & {
+  placement?: ToastPlacement
+}) {
   return (
     <ToastProvider toastManager={toastManager} {...props}>
       {children}
       <ToastPortal>
-        <ToastViewport>
+        <ToastViewport placement={placement}>
           <ToastList />
         </ToastViewport>
       </ToastPortal>
@@ -288,3 +320,5 @@ export {
   toast,
   useToastManager,
 }
+
+export type { ToastPlacement }

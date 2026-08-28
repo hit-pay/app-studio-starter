@@ -7,6 +7,7 @@ import {
   useRef,
   type ComponentProps,
   type ComponentPropsWithRef,
+  type MouseEvent as ReactMouseEvent,
   type ReactElement,
 } from 'react'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react/combobox'
@@ -21,7 +22,7 @@ type ComboboxSelectionContextValue = {
   items: readonly unknown[] | undefined
   value: unknown
   multiple: boolean
-  setValue: (value: unknown) => void
+  setValue: (value: unknown, event: ReactMouseEvent<HTMLButtonElement>) => void
 }
 
 const ComboboxSelectionContext = createContext<ComboboxSelectionContextValue | null>(null)
@@ -67,7 +68,21 @@ function Combobox({
         items,
         value: selected,
         multiple: Boolean(multiple),
-        setValue: (next) => handleChange(next as never, undefined as never),
+        setValue: (next, event) => {
+          if (value === undefined) setUncontrolled(next as typeof uncontrolled)
+          onValueChange?.(
+            next as never,
+            {
+              reason: 'none',
+              event: event.nativeEvent,
+              cancel() {},
+              allowPropagation() {},
+              isCanceled: false,
+              isPropagationAllowed: false,
+              trigger: event.currentTarget,
+            } as never,
+          )
+        },
       }}
     >
       <ComboboxPrimitive.Root
@@ -266,7 +281,7 @@ function ComboboxSelectAll({
         'flex w-full cursor-pointer items-center gap-2 rounded p-2 text-left text-sm leading-normal text-oc-foreground outline-none hover:bg-oc-dark-blue-soft',
         className,
       )}
-      onClick={() => context.setValue(allSelected ? [] : all)}
+      onClick={(event) => context.setValue(allSelected ? [] : all, event)}
       {...props}
     >
       <span

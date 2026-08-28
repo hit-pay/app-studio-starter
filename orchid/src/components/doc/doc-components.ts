@@ -17,7 +17,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/toast' as const,
     name: 'Toast',
-    description: 'shadcn-compatible toast manager with semantic types, actions, and close control.',
+    description: 'shadcn-compatible toast manager with semantic types, actions, close, and placement.',
   },
   {
     to: '/badge' as const,

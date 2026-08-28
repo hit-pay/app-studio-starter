@@ -103,7 +103,6 @@ type ButtonVariantProps = VariantProps<typeof buttonVariants>
 function Button({
   className,
   variant = 'default',
-  type = 'button',
   style,
   size = 'default',
   iconOnly,
@@ -120,7 +119,6 @@ function Button({
 
   return (
     <ButtonPrimitive
-      type={type}
       data-slot="button"
       data-variant={variant}
       data-size={size}

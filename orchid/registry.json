@@ -367,7 +367,7 @@
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
-      "description": "shadcn-compatible Base UI toast with manager, actions, close control, and Orchid semantic styling.",
+      "description": "shadcn-compatible Base UI toast with additive placement options and Orchid semantic styling.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"

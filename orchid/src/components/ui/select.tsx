@@ -38,7 +38,11 @@ function collectSelectItems(node: ReactNode, items: Record<string, ReactNode>) {
   })
 }
 
-function Select({ items, children, ...props }: SelectPrimitive.Root.Props<unknown>) {
+function Select<Value>({
+  items,
+  children,
+  ...props
+}: SelectPrimitive.Root.Props<Value>) {
   const resolvedItems = useMemo(() => {
     if (items) return items
 
@@ -48,7 +52,10 @@ function Select({ items, children, ...props }: SelectPrimitive.Root.Props<unknow
   }, [children, items])
 
   return (
-    <SelectPrimitive.Root items={resolvedItems} {...props}>
+    <SelectPrimitive.Root
+      items={resolvedItems as SelectPrimitive.Root.Props<Value>['items']}
+      {...props}
+    >
       {children}
     </SelectPrimitive.Root>
   )
