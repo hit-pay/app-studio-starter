@@ -215,7 +215,7 @@ function CustomerCard({
                 </span>
                 {badge ? badge : null}
                 {beneficiary && customer.currency ? (
-                  <Badge color="Blue">{customer.currency.toUpperCase()}</Badge>
+                  <Badge tone="blue">{customer.currency.toUpperCase()}</Badge>
                 ) : null}
               </div>
               <span className="min-w-0 truncate text-xs font-medium leading-[1.5] text-oc-muted-foreground">

@@ -34,7 +34,7 @@ function DetailListExamplesPage() {
               alex@arcticmonkey.io
             </DetailListRow>
             <DetailListRow label="Status" alignment="Vertical">
-              <Badge color="Green">Paid</Badge>
+              <Badge tone="green">Paid</Badge>
             </DetailListRow>
             <DetailListRow label="Channel" alignment="Vertical">
               PayNow
@@ -59,7 +59,7 @@ function DetailListExamplesPage() {
               +65 8123 4567
             </DetailListRow>
             <DetailListRow label="Status" alignment="Vertical">
-              <Badge color="Green">Paid</Badge>
+              <Badge tone="green">Paid</Badge>
             </DetailListRow>
             <DetailListRow label="Method" alignment="Vertical">
               Cards

@@ -24,7 +24,7 @@ import { Badge } from '@/components/ui/badge'
 <PageTitle
   title="Invoices"
   description="Create, send, and track invoices across payment channels."
-  badge={<Badge color="Green">Paid</Badge>}
+  badge={<Badge tone="green">Paid</Badge>}
   actions={<Button variant="Primary">Create invoice</Button>}
 />
 
@@ -86,7 +86,7 @@ import { Badge } from '@/components/ui/badge'
           <PageTitle
             title="Point of Sale"
             description="In-store sales, terminals, and payment channels."
-            badge={<Badge color="Green">Orchard 01 online</Badge>}
+            badge={<Badge tone="green">Orchard 01 online</Badge>}
           />
         </div>
 
@@ -142,7 +142,7 @@ import { Badge } from '@/components/ui/badge'
           <PageTitle
             title="Payment details"
             description="Review this transaction before you continue."
-            badge={<Badge color="Green">Paid</Badge>}
+            badge={<Badge tone="green">Paid</Badge>}
             actions={
               <>
                 <Button variant="Secondary" style="Border" size="Default">
@@ -164,7 +164,7 @@ import { Badge } from '@/components/ui/badge'
             <PageTitle
               title="INV-2048"
               description="https://pay.hitpayapp.com/inv-2048"
-              badge={<Badge color="Green">Paid</Badge>}
+              badge={<Badge tone="green">Paid</Badge>}
               copyValue="https://pay.hitpayapp.com/inv-2048"
               actions={
                 <Button variant="Secondary" style="Border" size="Default">

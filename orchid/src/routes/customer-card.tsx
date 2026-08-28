@@ -65,7 +65,7 @@ import { Button } from '@/components/ui/button'
     phone: '8373 3739 18',
     phoneCountryCode: '65',
   }}
-  badge={<Badge color="Blue">Invoice</Badge>}
+  badge={<Badge tone="blue">Invoice</Badge>}
 />
 
 <CustomerCard variant="Big" customer={customer} edit hover />
@@ -99,7 +99,7 @@ import { Button } from '@/components/ui/button'
           <CustomerCard
             variant="Small"
             customer={CUSTOMER}
-            badge={<Badge color="Blue">Invoice</Badge>}
+            badge={<Badge tone="blue">Invoice</Badge>}
           />
         </ExampleBlock>
 
@@ -107,7 +107,7 @@ import { Button } from '@/components/ui/button'
           <CustomerCard
             variant="Small"
             customer={CUSTOMER}
-            badge={<Badge color="Purple">Recurring</Badge>}
+            badge={<Badge tone="purple">Recurring</Badge>}
           />
         </ExampleBlock>
 
@@ -115,7 +115,7 @@ import { Button } from '@/components/ui/button'
           <CustomerCard
             variant="Small"
             customer={POS_CUSTOMER}
-            badge={<Badge color="Green">POS</Badge>}
+            badge={<Badge tone="green">POS</Badge>}
           />
         </ExampleBlock>
 

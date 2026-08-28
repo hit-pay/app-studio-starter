@@ -17,7 +17,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/badge' as const,
     name: 'Badge',
-    description: 'Global colors, Background/Border/Transparent, and user-type badges.',
+    description: 'Standard variants with Orchid tones, appearances, removal, and user roles.',
   },
   {
     to: '/accordion' as const,
@@ -268,28 +268,9 @@ export const DOC_GUIDES = [
   { to: '/installation' as const, name: 'Installation' },
 ] as const
 
-export const DOC_APPS = [
-  {
-    to: '/shift-handover' as const,
-    name: 'Shift Handover',
-    description: 'Staff log: submit a handover, browse the log, and settings. In-memory demo.',
-  },
-  {
-    to: '/stock-counter' as const,
-    name: 'Stock Counter',
-    description: 'Count stock on the floor, see inventory, and log adjustments. In-memory demo.',
-  },
-  {
-    to: '/shift-roster' as const,
-    name: 'Shift Roster',
-    description: 'Weekly recurring roster: staff, weekday, shift. In-memory demo.',
-  },
-] as const
-
 export const DOC_CRUMBS: Record<string, string> = {
   '/': 'Examples',
   ...Object.fromEntries(DOC_GUIDES.map((item) => [item.to, item.name])),
-  ...Object.fromEntries(DOC_APPS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_FORMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_BLOCKS.map((item) => [item.to, item.name])),

@@ -14,7 +14,7 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Badge } from './badge'
+import { Badge, BadgeRemove } from './badge'
 import { Button } from './button'
 import { Checkbox } from './checkbox'
 import {
@@ -247,7 +247,7 @@ function cellContent(column: SchemaTableColumn, row: SchemaTableRow) {
   if (column.type === 'status') {
     const label = String(value ?? '')
     return (
-      <Badge color={label === 'Published' ? 'Green' : 'Grey'} style="Background">
+      <Badge tone={label === 'Published' ? 'green' : 'grey'}>
         {label || '–'}
       </Badge>
     )
@@ -559,8 +559,9 @@ function SchemaTableChips({ table }: { table: SchemaTableApi }) {
   return (
     <div className="flex flex-wrap items-center gap-2 border-b border-solid border-oc-border px-3 py-2">
       {chips.map((chip) => (
-        <Badge key={chip.key} color="Grey" style="Background" closable onRemove={chip.onRemove}>
+        <Badge key={chip.key} tone="grey">
           {chip.label}
+          <BadgeRemove onClick={chip.onRemove} />
         </Badge>
       ))}
       <Button variant="Secondary" style="Transparent" size="Small" onClick={table.clearAll}>

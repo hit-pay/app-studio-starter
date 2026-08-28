@@ -102,7 +102,7 @@ function AccordionExamplesPage() {
                 <span className="flex min-w-0 flex-1 items-center gap-2">
                   <StoreIcon className="size-5 shrink-0" />
                   <span>Online Store</span>
-                  <Badge color="Purple" style="Background">
+                  <Badge tone="purple">
                     New
                   </Badge>
                 </span>

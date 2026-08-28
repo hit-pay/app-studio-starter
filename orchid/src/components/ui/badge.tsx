@@ -1,59 +1,24 @@
-import { useState, type ComponentProps, type ReactNode } from 'react'
+import type { ComponentProps } from 'react'
+import { mergeProps } from '@base-ui/react/merge-props'
+import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
 import { XCircleIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 
-const badgeVariants = cva(
-  'inline-flex min-h-6 min-w-8 shrink-0 items-center justify-center gap-2 rounded-full py-0.5 text-center text-xs font-medium leading-[1.5] whitespace-nowrap [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*="size-"])]:size-4',
-  {
-    variants: {
-      color: {
-        Blue: 'text-oc-primary',
-        Purple: 'text-oc-purple',
-        Orange: 'text-oc-warning-strong',
-        Red: 'text-oc-destructive-strong',
-        LightRed: 'text-oc-light-red',
-        White: 'text-oc-muted-foreground',
-        DarkBlue: 'text-oc-dark-blue',
-        Grey: 'text-oc-neutral-strong',
-        Tosca: 'text-oc-tosca',
-        Green: 'text-oc-success-strong',
-      },
-      style: {
-        Background: 'px-2',
-        Border: 'border border-solid bg-oc-background px-2',
-        Transparent: 'bg-transparent px-0',
-      },
-    },
-    compoundVariants: [
-      { color: 'Blue', style: 'Background', class: 'bg-oc-info-soft' },
-      { color: 'Blue', style: 'Border', class: 'border-oc-primary-300' },
-      { color: 'Purple', style: 'Background', class: 'bg-oc-purple-soft' },
-      { color: 'Purple', style: 'Border', class: 'border-oc-purple-border' },
-      { color: 'Orange', style: 'Background', class: 'bg-oc-warning-soft' },
-      { color: 'Orange', style: 'Border', class: 'border-oc-warning-chip-border' },
-      { color: 'Red', style: 'Background', class: 'bg-oc-destructive-soft' },
-      { color: 'Red', style: 'Border', class: 'border-oc-destructive-border' },
-      { color: 'LightRed', style: 'Background', class: 'bg-oc-light-red-soft' },
-      { color: 'LightRed', style: 'Border', class: 'border-oc-light-red-border' },
-      { color: 'White', style: 'Background', class: 'border border-solid border-oc-border bg-oc-background' },
-      { color: 'White', style: 'Border', class: 'border-oc-neutral-border' },
-      { color: 'DarkBlue', style: 'Background', class: 'bg-oc-dark-blue-soft' },
-      { color: 'DarkBlue', style: 'Border', class: 'border-oc-dark-blue-border' },
-      { color: 'Grey', style: 'Background', class: 'bg-oc-neutral-soft' },
-      { color: 'Grey', style: 'Border', class: 'border-oc-neutral-border' },
-      { color: 'Tosca', style: 'Background', class: 'bg-oc-tosca-soft' },
-      { color: 'Tosca', style: 'Border', class: 'border-oc-tosca-border' },
-      { color: 'Green', style: 'Background', class: 'bg-oc-success-soft' },
-      { color: 'Green', style: 'Border', class: 'border-oc-success-chip-border' },
-    ],
-    defaultVariants: {
-      color: 'Blue',
-      style: 'Background',
-    },
-  },
-)
+type BadgeTone =
+  | 'blue'
+  | 'purple'
+  | 'orange'
+  | 'red'
+  | 'light-red'
+  | 'white'
+  | 'dark-blue'
+  | 'grey'
+  | 'tosca'
+  | 'green'
+
+type BadgeAppearance = 'soft' | 'outline' | 'ghost'
 
 type BadgeColor =
   | 'Blue'
@@ -67,85 +32,150 @@ type BadgeColor =
   | 'Tosca'
   | 'Green'
 
+const badgeVariants = cva(
+  'group/badge inline-flex min-h-6 w-fit min-w-8 shrink-0 items-center justify-center gap-1 overflow-hidden rounded-full border border-transparent px-2 py-0.5 text-center text-xs leading-normal font-medium whitespace-nowrap transition-all focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-oc-destructive aria-invalid:ring-oc-destructive-border/50 [&>svg]:pointer-events-none [&>svg]:size-3 [&>svg]:shrink-0',
+  {
+    variants: {
+      variant: {
+        default: 'bg-oc-info-soft text-oc-primary [a]:hover:bg-oc-info-border',
+        secondary:
+          'bg-oc-neutral-soft text-oc-neutral-strong [a]:hover:bg-oc-neutral',
+        destructive:
+          'bg-oc-destructive-soft text-oc-destructive-strong [a]:hover:bg-oc-destructive-border',
+        outline:
+          'border-oc-border bg-oc-background text-oc-foreground [a]:hover:bg-oc-neutral',
+        ghost:
+          'min-w-0 bg-transparent px-0 text-oc-foreground hover:text-oc-muted-foreground',
+        link: 'min-w-0 border-0 px-0 text-oc-primary underline-offset-4 hover:underline',
+      },
+      tone: {
+        blue: 'text-oc-primary',
+        purple: 'text-oc-purple',
+        orange: 'text-oc-warning-strong',
+        red: 'text-oc-destructive-strong',
+        'light-red': 'text-oc-light-red',
+        white: 'text-oc-muted-foreground',
+        'dark-blue': 'text-oc-dark-blue',
+        grey: 'text-oc-neutral-strong',
+        tosca: 'text-oc-tosca',
+        green: 'text-oc-success-strong',
+      },
+      appearance: {
+        soft: 'px-2',
+        outline: 'border-solid bg-oc-background px-2',
+        ghost: 'min-w-0 bg-transparent px-0',
+      },
+    },
+    compoundVariants: [
+      { tone: 'blue', appearance: 'soft', class: 'bg-oc-info-soft' },
+      { tone: 'blue', appearance: 'outline', class: 'border-oc-primary-300' },
+      { tone: 'purple', appearance: 'soft', class: 'bg-oc-purple-soft' },
+      { tone: 'purple', appearance: 'outline', class: 'border-oc-purple-border' },
+      { tone: 'orange', appearance: 'soft', class: 'bg-oc-warning-soft' },
+      { tone: 'orange', appearance: 'outline', class: 'border-oc-warning-chip-border' },
+      { tone: 'red', appearance: 'soft', class: 'bg-oc-destructive-soft' },
+      { tone: 'red', appearance: 'outline', class: 'border-oc-destructive-border' },
+      { tone: 'light-red', appearance: 'soft', class: 'bg-oc-light-red-soft' },
+      { tone: 'light-red', appearance: 'outline', class: 'border-oc-light-red-border' },
+      {
+        tone: 'white',
+        appearance: 'soft',
+        class: 'border-oc-border bg-oc-background',
+      },
+      { tone: 'white', appearance: 'outline', class: 'border-oc-neutral-border' },
+      { tone: 'dark-blue', appearance: 'soft', class: 'bg-oc-dark-blue-soft' },
+      { tone: 'dark-blue', appearance: 'outline', class: 'border-oc-dark-blue-border' },
+      { tone: 'grey', appearance: 'soft', class: 'bg-oc-neutral-soft' },
+      { tone: 'grey', appearance: 'outline', class: 'border-oc-neutral-border' },
+      { tone: 'tosca', appearance: 'soft', class: 'bg-oc-tosca-soft' },
+      { tone: 'tosca', appearance: 'outline', class: 'border-oc-tosca-border' },
+      { tone: 'green', appearance: 'soft', class: 'bg-oc-success-soft' },
+      { tone: 'green', appearance: 'outline', class: 'border-oc-success-chip-border' },
+    ],
+    defaultVariants: {
+      variant: 'default',
+    },
+  },
+)
+
 function Badge({
   className,
-  color = 'Blue',
-  style = 'Background',
-  icon,
-  closable = false,
-  onRemove,
+  variant = 'default',
+  tone,
+  appearance = 'soft',
+  render,
+  ...props
+}: useRender.ComponentProps<'span'> & {
+  variant?: VariantProps<typeof badgeVariants>['variant']
+  tone?: BadgeTone
+  appearance?: BadgeAppearance
+}) {
+  return useRender({
+    defaultTagName: 'span',
+    props: mergeProps<'span'>(
+      {
+        className: cn(
+          badgeVariants({
+            variant: tone ? null : variant,
+            tone,
+            appearance: tone ? appearance : null,
+          }),
+          className,
+        ),
+      },
+      props,
+    ),
+    render,
+    state: {
+      slot: 'badge',
+      variant,
+      tone,
+      appearance: tone ? appearance : undefined,
+    },
+  })
+}
+
+function BadgeRemove({
+  className,
   children,
   ...props
-}: Omit<ComponentProps<'span'>, 'color' | 'style'> &
-  VariantProps<typeof badgeVariants> & {
-    color?: BadgeColor
-    style?: 'Background' | 'Transparent' | 'Border'
-    icon?: ReactNode
-    closable?: boolean
-    onRemove?: () => void
-  }) {
-  const canRemove = closable || onRemove != null
-  const [open, setOpen] = useState(true)
-
-  if (!open) return null
-
+}: ComponentProps<'button'>) {
   return (
-    <span
-      data-slot="badge"
-      data-color={color}
-      data-style={style}
-      className={cn(badgeVariants({ color, style }), className)}
+    <button
+      type="button"
+      data-slot="badge-remove"
+      aria-label="Remove"
+      className={cn(
+        '-mr-0.5 inline-flex size-4.5 cursor-pointer items-center justify-center text-current outline-none',
+        className,
+      )}
       {...props}
     >
-      {icon}
-      {children}
-      {canRemove ? (
-        <button
-          type="button"
-          data-slot="badge-remove"
-          aria-label="Remove"
-          onPointerDown={(event) => {
-            event.preventDefault()
-            event.stopPropagation()
-          }}
-          onClick={(event) => {
-            event.preventDefault()
-            event.stopPropagation()
-            setOpen(false)
-            onRemove?.()
-          }}
-          className="-mr-0.5 inline-flex size-4.5 cursor-pointer items-center justify-center text-current outline-none"
-        >
-          <XCircleIcon className="size-4.5" />
-        </button>
-      ) : null}
-    </span>
+      {children ?? <XCircleIcon className="size-4.5" />}
+    </button>
   )
 }
 
-const USER_ROLE: Record<
-  'Owner' | 'Admin' | 'Manager' | 'Cashier',
-  NonNullable<VariantProps<typeof badgeVariants>['color']>
-> = {
-  Owner: 'Blue',
-  Admin: 'Purple',
-  Manager: 'DarkBlue',
-  Cashier: 'Green',
+const USER_ROLE: Record<'Owner' | 'Admin' | 'Manager' | 'Cashier', BadgeTone> = {
+  Owner: 'blue',
+  Admin: 'purple',
+  Manager: 'dark-blue',
+  Cashier: 'green',
 }
 
 function UserBadge({
   role = 'Owner',
   className,
   ...props
-}: Omit<ComponentProps<typeof Badge>, 'color' | 'children' | 'style'> & {
+}: Omit<ComponentProps<typeof Badge>, 'variant' | 'tone' | 'appearance' | 'children'> & {
   role?: 'Owner' | 'Admin' | 'Manager' | 'Cashier'
 }) {
   return (
-    <Badge color={USER_ROLE[role]} style="Background" className={className} {...props}>
+    <Badge tone={USER_ROLE[role]} className={className} {...props}>
       {role}
     </Badge>
   )
 }
 
-export { Badge, UserBadge, badgeVariants }
-export type { BadgeColor }
+export { Badge, BadgeRemove, UserBadge, badgeVariants }
+export type { BadgeAppearance, BadgeColor, BadgeTone }

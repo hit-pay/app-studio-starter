@@ -49,7 +49,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
     <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
     <ListItemMeta>
       <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-      <Badge color="Green">Paid</Badge>
+      <Badge tone="green">Paid</Badge>
     </ListItemMeta>
   </ListItemBody>
   <ListItemHoverActions>
@@ -71,9 +71,9 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>DBS Multiplier</ListItemTitle>
-                <Badge color="DarkBlue">Default</Badge>
-                <Badge color="Blue">HitPay</Badge>
-                <Badge color="Purple">Stripe</Badge>
+                <Badge tone="dark-blue">Default</Badge>
+                <Badge tone="blue">HitPay</Badge>
+                <Badge tone="purple">Stripe</Badge>
               </div>
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
@@ -89,7 +89,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>Priya Nair</ListItemTitle>
-                <Badge color="Green">Paid</Badge>
+                <Badge tone="green">Paid</Badge>
               </div>
               <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
             </div>
@@ -105,7 +105,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
             <ListItemMeta>
               <span className="text-xs leading-[1.5] text-oc-muted-foreground">24 in stock</span>
-              <Badge color="Green">Active</Badge>
+              <Badge tone="green">Active</Badge>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -120,9 +120,9 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>DBS Multiplier</ListItemTitle>
-                <Badge color="DarkBlue">Default</Badge>
-                <Badge color="Blue">HitPay</Badge>
-                <Badge color="Purple">Stripe</Badge>
+                <Badge tone="dark-blue">Default</Badge>
+                <Badge tone="blue">HitPay</Badge>
+                <Badge tone="purple">Stripe</Badge>
               </div>
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
@@ -147,9 +147,9 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
             <div className="space-y-1">
               <div className="flex flex-wrap items-center gap-2">
                 <ListItemTitle>DBS Multiplier</ListItemTitle>
-                <Badge color="DarkBlue">Default</Badge>
-                <Badge color="Blue">HitPay</Badge>
-                <Badge color="Purple">Stripe</Badge>
+                <Badge tone="dark-blue">Default</Badge>
+                <Badge tone="blue">HitPay</Badge>
+                <Badge tone="purple">Stripe</Badge>
               </div>
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
@@ -235,7 +235,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
               <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                 Last updated : 20 Aug 2026
               </span>
-              <Badge color="Green">Published</Badge>
+              <Badge tone="green">Published</Badge>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -256,7 +256,7 @@ import { MapPinIcon, PencilIcon } from 'lucide-react'
               <span className="text-xs leading-[1.5] text-oc-muted-foreground">
                 Last updated : 18 Aug 2026
               </span>
-              <Badge color="Grey">Draft</Badge>
+              <Badge tone="grey">Draft</Badge>
             </ListItemMeta>
           </ListItemBody>
           <ListItemMore

@@ -367,8 +367,9 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "Status/tags. color Blue|Purple|Orange|Red|LightRed|White|DarkBlue|Grey|Tosca|Green, style Background|Border|Transparent. UserBadge role Owner|Admin|Manager|Cashier.",
+      "description": "shadcn-compatible badge with render support plus Orchid tones, appearances, removable badges, and user roles.",
       "dependencies": [
+        "@base-ui/react",
         "class-variance-authority",
         "lucide-react"
       ],

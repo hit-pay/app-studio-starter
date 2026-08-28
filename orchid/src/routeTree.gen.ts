@@ -51,13 +51,10 @@ import { Route as ScrollAreaRouteImport } from './routes/scroll-area'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as SheetRouteImport } from './routes/sheet'
-import { Route as ShiftHandoverRouteImport } from './routes/shift-handover'
-import { Route as ShiftRosterRouteImport } from './routes/shift-roster'
 import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SpinnerRouteImport } from './routes/spinner'
 import { Route as StatCardRouteImport } from './routes/stat-card'
-import { Route as StockCounterRouteImport } from './routes/stock-counter'
 import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as TableRouteImport } from './routes/table'
 import { Route as TabsRouteImport } from './routes/tabs'
@@ -275,16 +272,6 @@ const SheetRoute = SheetRouteImport.update({
   path: '/sheet',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ShiftHandoverRoute = ShiftHandoverRouteImport.update({
-  id: '/shift-handover',
-  path: '/shift-handover',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ShiftRosterRoute = ShiftRosterRouteImport.update({
-  id: '/shift-roster',
-  path: '/shift-roster',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SkeletonRoute = SkeletonRouteImport.update({
   id: '/skeleton',
   path: '/skeleton',
@@ -303,11 +290,6 @@ const SpinnerRoute = SpinnerRouteImport.update({
 const StatCardRoute = StatCardRouteImport.update({
   id: '/stat-card',
   path: '/stat-card',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StockCounterRoute = StockCounterRouteImport.update({
-  id: '/stock-counter',
-  path: '/stock-counter',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SwitchRoute = SwitchRouteImport.update({
@@ -384,13 +366,10 @@ export interface FileRoutesByFullPath {
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
   '/sheet': typeof SheetRoute
-  '/shift-handover': typeof ShiftHandoverRoute
-  '/shift-roster': typeof ShiftRosterRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
-  '/stock-counter': typeof StockCounterRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
@@ -441,13 +420,10 @@ export interface FileRoutesByTo {
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
   '/sheet': typeof SheetRoute
-  '/shift-handover': typeof ShiftHandoverRoute
-  '/shift-roster': typeof ShiftRosterRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
-  '/stock-counter': typeof StockCounterRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
@@ -499,13 +475,10 @@ export interface FileRoutesById {
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
   '/sheet': typeof SheetRoute
-  '/shift-handover': typeof ShiftHandoverRoute
-  '/shift-roster': typeof ShiftRosterRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
-  '/stock-counter': typeof StockCounterRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
@@ -558,13 +531,10 @@ export interface FileRouteTypes {
     | '/select'
     | '/setup'
     | '/sheet'
-    | '/shift-handover'
-    | '/shift-roster'
     | '/skeleton'
     | '/slider'
     | '/spinner'
     | '/stat-card'
-    | '/stock-counter'
     | '/switch'
     | '/table'
     | '/tabs'
@@ -615,13 +585,10 @@ export interface FileRouteTypes {
     | '/select'
     | '/setup'
     | '/sheet'
-    | '/shift-handover'
-    | '/shift-roster'
     | '/skeleton'
     | '/slider'
     | '/spinner'
     | '/stat-card'
-    | '/stock-counter'
     | '/switch'
     | '/table'
     | '/tabs'
@@ -672,13 +639,10 @@ export interface FileRouteTypes {
     | '/select'
     | '/setup'
     | '/sheet'
-    | '/shift-handover'
-    | '/shift-roster'
     | '/skeleton'
     | '/slider'
     | '/spinner'
     | '/stat-card'
-    | '/stock-counter'
     | '/switch'
     | '/table'
     | '/tabs'
@@ -730,13 +694,10 @@ export interface RootRouteChildren {
   SelectRoute: typeof SelectRoute
   SetupRoute: typeof SetupRoute
   SheetRoute: typeof SheetRoute
-  ShiftHandoverRoute: typeof ShiftHandoverRoute
-  ShiftRosterRoute: typeof ShiftRosterRoute
   SkeletonRoute: typeof SkeletonRoute
   SliderRoute: typeof SliderRoute
   SpinnerRoute: typeof SpinnerRoute
   StatCardRoute: typeof StatCardRoute
-  StockCounterRoute: typeof StockCounterRoute
   SwitchRoute: typeof SwitchRoute
   TableRoute: typeof TableRoute
   TabsRoute: typeof TabsRoute
@@ -1041,20 +1002,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SheetRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/shift-handover': {
-      id: '/shift-handover'
-      path: '/shift-handover'
-      fullPath: '/shift-handover'
-      preLoaderRoute: typeof ShiftHandoverRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/shift-roster': {
-      id: '/shift-roster'
-      path: '/shift-roster'
-      fullPath: '/shift-roster'
-      preLoaderRoute: typeof ShiftRosterRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/skeleton': {
       id: '/skeleton'
       path: '/skeleton'
@@ -1081,13 +1028,6 @@ declare module '@tanstack/react-router' {
       path: '/stat-card'
       fullPath: '/stat-card'
       preLoaderRoute: typeof StatCardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/stock-counter': {
-      id: '/stock-counter'
-      path: '/stock-counter'
-      fullPath: '/stock-counter'
-      preLoaderRoute: typeof StockCounterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/switch': {
@@ -1178,13 +1118,10 @@ const rootRouteChildren: RootRouteChildren = {
   SelectRoute: SelectRoute,
   SetupRoute: SetupRoute,
   SheetRoute: SheetRoute,
-  ShiftHandoverRoute: ShiftHandoverRoute,
-  ShiftRosterRoute: ShiftRosterRoute,
   SkeletonRoute: SkeletonRoute,
   SliderRoute: SliderRoute,
   SpinnerRoute: SpinnerRoute,
   StatCardRoute: StatCardRoute,
-  StockCounterRoute: StockCounterRoute,
   SwitchRoute: SwitchRoute,
   TableRoute: TableRoute,
   TabsRoute: TabsRoute,

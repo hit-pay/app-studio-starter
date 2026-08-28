@@ -34,7 +34,7 @@ function FormSectionExamplesPage() {
           <FormSection
             title="Payment Channels"
             description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
-            badge={<Badge color="Purple">Upgrade</Badge>}
+            badge={<Badge tone="purple">Upgrade</Badge>}
             actions={<Button variant="Primary">Upgrade Now</Button>}
           />
         </div>
@@ -79,7 +79,7 @@ function FormSectionExamplesPage() {
           <FormSection
             title="Recurring"
             description="Monthly membership billed to saved payment methods."
-            badge={<Badge color="Blue">Active</Badge>}
+            badge={<Badge tone="blue">Active</Badge>}
           />
         </div>
 

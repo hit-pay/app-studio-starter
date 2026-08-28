@@ -11,7 +11,12 @@ import { CheckIcon, ChevronDownIcon, MinusIcon, XCircleIcon, XIcon } from 'lucid
 
 import { cn } from '@/lib/utils'
 import { checkboxControlVariants } from './checkbox'
-import { badgeVariants, type BadgeColor } from './badge'
+import {
+  badgeVariants,
+  type BadgeAppearance,
+  type BadgeColor,
+  type BadgeTone,
+} from './badge'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from './input-group'
 
 type ComboboxSelectionContextValue = {
@@ -365,6 +370,28 @@ function ComboboxChips({ className, ...props }: ComboboxPrimitive.Chips.Props) {
   )
 }
 
+const BADGE_COLOR_TONE: Record<BadgeColor, BadgeTone> = {
+  Blue: 'blue',
+  Purple: 'purple',
+  Orange: 'orange',
+  Red: 'red',
+  LightRed: 'light-red',
+  White: 'white',
+  DarkBlue: 'dark-blue',
+  Grey: 'grey',
+  Tosca: 'tosca',
+  Green: 'green',
+}
+
+const BADGE_STYLE_APPEARANCE: Record<
+  'Background' | 'Border' | 'Transparent',
+  BadgeAppearance
+> = {
+  Background: 'soft',
+  Border: 'outline',
+  Transparent: 'ghost',
+}
+
 function ComboboxChip({
   className,
   children,
@@ -372,17 +399,22 @@ function ComboboxChip({
   color = 'Blue',
   style = 'Background',
   ...props
-}: ComboboxPrimitive.Chip.Props & {
+}: Omit<ComboboxPrimitive.Chip.Props, 'style'> & {
   showRemove?: boolean
   color?: BadgeColor
   style?: 'Background' | 'Border' | 'Transparent'
 }) {
-  const resolvedColor = color
-
   return (
     <ComboboxPrimitive.Chip
       data-slot="combobox-chip"
-      className={cn(badgeVariants({ color: resolvedColor, style }), className)}
+      className={cn(
+        badgeVariants({
+          variant: null,
+          tone: BADGE_COLOR_TONE[color],
+          appearance: BADGE_STYLE_APPEARANCE[style],
+        }),
+        className,
+      )}
       {...props}
     >
       {children}
