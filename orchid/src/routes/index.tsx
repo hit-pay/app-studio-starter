@@ -62,7 +62,7 @@ function ExamplesIndexPage() {
         </div>
       </div>
       <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-oc-muted-foreground">Blok</h2>
+        <h2 className="text-sm font-medium text-oc-muted-foreground">Block</h2>
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {docBlocksByName().map((item) => (
             <Link key={item.to} to={item.to} className="block min-w-0">

@@ -8,7 +8,7 @@ function Page({ className, ...props }: ComponentProps<'section'>) {
     <section
       data-slot="page"
       className={cn(
-        'flex h-full min-h-0 w-full min-w-0 flex-1 flex-col overflow-hidden',
+        'flex h-full min-h-0 w-full min-w-0 flex-1 flex-col overflow-hidden px-4 py-5 sm:px-6',
         className,
       )}
       {...props}

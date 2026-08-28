@@ -20,7 +20,7 @@ JSON-schema list with search, filters, sorting, pagination, and Orchid DataTable
 
 ## `app-layout` — App Layout
 
-Embedded application layout with page header, tabs, or built-in child sidebar.
+Embedded application layout with config-driven tabs or a built-in child sidebar.
 
 # Block
 
@@ -46,13 +46,17 @@ Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.
 
 # Component
 
+## `form-modal` — Form Modal
+
+Prebuilt modal form with prop-driven header and cancel/save actions.
+
 ## `form-page` — Form Page
 
 Full-page form layout used instead of a dialog, with header and scrollable form content.
 
 ## `page` — Page
 
-Standard route page with a header and scrollable content area.
+Standard route page with built-in responsive padding, header, and scrollable content.
 
 ## `alert-dialog` — Alert Dialog
 
@@ -60,9 +64,9 @@ shadcn-compatible confirmation dialog primitives with Orchid styling.
 
 # Block
 
-## `confirm-dialog` — Confirm Dialog
+## `confirmation-modal` — Confirmation Modal
 
-Prebuilt Promise-based confirmation dialog invoked with useConfirmDialog.
+Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 
 # Component
 

@@ -314,75 +314,76 @@ Example — combobox multiple
   "value": ["paynow"]
 }`
 
-const USAGE_EXAMPLE = `import { SchemaForm, useSchemaForm, type SchemaFormField } from '@/components/ui/schema-form'
+const USAGE_EXAMPLE = `import { useState } from 'react'
+
+import { DocCodePanel } from '@/components/doc/doc-code-panel'
 import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/toast'
+import { SchemaForm, useSchemaForm } from '@/components/ui/schema-form'
+import { Tabs, TabsList, TabsContent, TabsTrigger } from '@/components/ui/tabs'
 
-const FIELDS: SchemaFormField[] = [
-  {
-    key: 'name',
-    title: 'Name',
-    type: 'input',
-    placeholder: 'Studio Membership',
-    required: true,
-    maxLength: 32,
-  },
-  {
-    key: 'sku',
-    title: 'SKU',
-    type: 'input',
-    placeholder: 'SKU-MEM-001',
-  },
-  {
-    key: 'amount+currency',
-    title: 'Price',
-    type: 'input-group',
-    placeholder: '29.00',
-    required: true,
-    options: [
-      { value: 'sgd', label: 'SGD' },
-      { value: 'usd', label: 'USD' },
-    ],
-    props: { align: 'end' },
-    value: { amount: '', currency: 'sgd' },
-  },
-  {
-    key: 'description',
-    title: 'Description',
-    type: 'textarea',
-    placeholder: 'Shown on the store and invoices.',
-  },
-]
-
-function CreateProduct() {
-  const form = useSchemaForm({
-    fields: FIELDS,
-    onSubmit: (values) => {
-      toast.add({
-        title: 'Product saved',
-        description: \`\${values.name} · \${String(values.currency).toUpperCase()} \${values.amount}\`,
-        type: 'success',
-      })
-    },
-  })
-
-  return (
-    <>
-      <Button
-        variant="Primary"
-        disabled={form.isSubmitting}
-        onClick={() => void form.submit()}
-      >
-        Save
-      </Button>
-      <SchemaForm form={form} />
-    </>
-  )
+// In src/routes/schema-form.tsx, ACCOUNT_FIELDS and DETAILS_FIELDS are the
+// complete schemas displayed by the Schema tab; TYPE_PROMPT feeds Prompt.
+function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
+  const code = typeof data === 'string' ? data : JSON.stringify(data, null, 2)
+  return <DocCodePanel filename={filename} code={code} />
 }
 
-// form.values  — live values (amount + currency are sibling keys)
-// form.errors  — visible field errors after touch or submit
-// onSubmit     — runs only when validation passes`
+function SchemaFormShowcase() {
+  const account = useSchemaForm({ fields: ACCOUNT_FIELDS })
+  const details = useSchemaForm({ fields: DETAILS_FIELDS })
+  const [tab, setTab] = useState('result')
+  const validating = account.isSubmitting || details.isSubmitting
+
+  return (
+    <div className="grid min-w-0 gap-6 xl:grid-cols-3">
+      <SchemaForm form={account} className="max-w-none" />
+      <SchemaForm form={details} className="max-w-none" />
+      <div className="flex min-w-0 flex-col gap-4">
+        <Button
+          variant="Primary"
+          disabled={validating}
+          aria-busy={validating}
+          onClick={() => void Promise.all([account.submit(), details.submit()])}
+        >
+          {validating ? 'Validating…' : 'Validate'}
+        </Button>
+        <Tabs
+          value={tab}
+          onValueChange={(value) => setTab(String(value))}
+          className="min-w-0 gap-3"
+        >
+          <TabsList variant="line">
+            <TabsTrigger value="result">Result</TabsTrigger>
+            <TabsTrigger value="errors">Errors</TabsTrigger>
+            <TabsTrigger value="schema">Schema</TabsTrigger>
+            <TabsTrigger value="prompt">Prompt</TabsTrigger>
+          </TabsList>
+          <TabsContent value="result" className="min-w-0">
+            <JsonPanel
+              filename="result.json"
+              data={{ account: account.values, details: details.values }}
+            />
+          </TabsContent>
+          <TabsContent value="errors" className="min-w-0">
+            <JsonPanel
+              filename="errors.json"
+              data={{ account: account.errors, details: details.errors }}
+            />
+          </TabsContent>
+          <TabsContent value="schema" className="min-w-0">
+            <JsonPanel
+              filename="fields.json"
+              data={{ account: ACCOUNT_FIELDS, details: DETAILS_FIELDS }}
+            />
+          </TabsContent>
+          <TabsContent value="prompt" className="min-w-0">
+            <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  )
+}`
 
 function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
   const code = typeof data === 'string' ? data : JSON.stringify(data, null, 2)
@@ -396,7 +397,7 @@ function SchemaFormExamplesPage() {
   const validating = account.isSubmitting || details.isSubmitting
 
   return (
-    <DocExamplePage to="/schema-form" usage={USAGE_EXAMPLE}>
+    <DocExamplePage to="/schema-form">
       <div className="grid min-w-0 gap-6 xl:grid-cols-3">
         <SchemaForm form={account} className="max-w-none" />
         <SchemaForm form={details} className="max-w-none" />
@@ -443,6 +444,12 @@ function SchemaFormExamplesPage() {
             </TabsContent>
           </Tabs>
         </div>
+      </div>
+      <div className="flex min-w-0 flex-col gap-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Usage
+        </p>
+        <DocCodePanel filename="usage.tsx" code={USAGE_EXAMPLE} />
       </div>
     </DocExamplePage>
   )

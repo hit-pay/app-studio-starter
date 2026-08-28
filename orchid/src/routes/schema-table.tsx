@@ -54,18 +54,49 @@ Bulk actions are not schema. Pass selectionActions / emptyActions as React nodes
 
 Example
 {
+  "key": "products",
+  "mode": "client",
   "selection": true,
   "search": { "placeholder": "Search products" },
   "tabKey": "status",
   "tabs": [
     { "key": "all", "title": "All" },
-    { "key": "published", "title": "Published", "value": "Published" }
+    { "key": "published", "title": "Published", "value": "Published" },
+    { "key": "draft", "title": "Draft", "value": "Draft" }
   ],
   "filters": [
     {
+      "key": "category",
+      "title": "Category",
+      "options": [
+        { "value": "Apparel", "label": "Apparel" },
+        { "value": "Membership", "label": "Membership" },
+        { "value": "Workshop", "label": "Workshop" }
+      ]
+    },
+    {
       "key": "inventory",
       "title": "Inventory",
-      "options": [{ "value": "In stock", "label": "In stock" }]
+      "options": [
+        { "value": "In stock", "label": "In stock" },
+        { "value": "Inventory not tracked", "label": "Inventory not tracked" }
+      ]
+    },
+    {
+      "key": "source",
+      "title": "Source",
+      "options": [
+        { "value": "Manual", "label": "Manual" },
+        { "value": "Import", "label": "Import" }
+      ]
+    },
+    {
+      "key": "channel",
+      "title": "Channel",
+      "options": [
+        { "value": "Online Store", "label": "Online Store" },
+        { "value": "POS", "label": "POS" }
+      ]
     }
   ],
   "sort": {
@@ -80,126 +111,114 @@ Example
   "rowActions": ["edit", "delete"],
   "columns": [
     { "key": "image", "title": "Image", "type": "image", "search": false },
-    { "key": "name", "title": "Product name", "type": "text", "locked": true },
-    { "key": "amount", "title": "Amount", "type": "amount", "search": false }
+    { "key": "name", "title": "Product name", "type": "text", "icon": true, "locked": true },
+    { "key": "inventory", "title": "Available quantity", "type": "text", "search": false },
+    { "key": "category", "title": "Category", "type": "text" },
+    { "key": "amount", "title": "Amount", "type": "amount", "search": false },
+    { "key": "status", "title": "Status", "type": "status", "search": false }
   ]
 }`
 
-const USAGE_EXAMPLE = `import {
-  SchemaTable,
-  useSchemaTable,
-  type SchemaTableSchema,
-} from '@/components/ui/schema-table'
-
-const SCHEMA: SchemaTableSchema = {
-  selection: true,
-  search: { placeholder: 'Search products' },
-  tabKey: 'status',
-  tabs: [
-    { key: 'all', title: 'All' },
-    { key: 'published', title: 'Published', value: 'Published' },
-    { key: 'draft', title: 'Draft', value: 'Draft' },
-  ],
-  filters: [
-    {
-      key: 'inventory',
-      title: 'Inventory',
-      options: [
-        { value: 'In stock', label: 'In stock' },
-        { value: 'Inventory not tracked', label: 'Inventory not tracked' },
-      ],
-    },
-  ],
-  sort: {
-    fields: [
-      { key: 'created', title: 'Created' },
-      { key: 'name', title: 'Product name' },
-      { key: 'amount', title: 'Price' },
-    ],
-    defaultKey: 'created',
-    defaultDir: 'desc',
-  },
-  pagination: { pageSize: 10, pageSizes: [10, 20, 50] },
-  rowActions: ['edit', 'delete'],
-  columns: [
-    { key: 'image', title: 'Image', type: 'image', search: false },
-    { key: 'name', title: 'Product name', type: 'text', locked: true },
-    { key: 'amount', title: 'Amount', type: 'amount', search: false },
-    { key: 'status', title: 'Status', type: 'status', search: false },
-  ],
+const USAGE_ACTIONS = `function ProductSelectionActions() {
+  return (
+    <>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeIcon />
+        Publish
+      </Button>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeOffIcon />
+        Unpublish
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button
+              variant="Secondary"
+              style="Transparent"
+              size="Small"
+              iconOnly
+              aria-label="More actions"
+            >
+              <EllipsisVerticalIcon />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Archive</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  )
 }
 
-function ProductList({ rows }) {
-  const table = useSchemaTable({
-    schema: SCHEMA,
-    data: rows,
-  })
-
-  return <SchemaTable table={table} />
+function ProductEmptyActions() {
+  return (
+    <Button variant="Primary" size="Small">
+      <PlusIcon />
+      Add new
+    </Button>
+  )
 }`
 
-const USAGE_QUERY = `import { useEffect, useState } from 'react'
-import { keepPreviousData, useQuery } from '@tanstack/react-query'
+const USAGE_IMPORTS = `import { EllipsisVerticalIcon, EyeIcon, EyeOffIcon, PlusIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
 import {
   SchemaTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
-  type SchemaTableQuery,
 } from '@/components/ui/schema-table'
 
-// SCHEMA from usage.tsx, with mode: 'server'
-// Prefer mode: 'client' + one collection unless the API is paginated.
+${USAGE_ACTIONS}`
 
-function useDebouncedValue<T>(value: T, ms = 300) {
-  const [debounced, setDebounced] = useState(value)
-  useEffect(() => {
-    const id = window.setTimeout(() => setDebounced(value), ms)
-    return () => window.clearTimeout(id)
-  }, [value, ms])
-  return debounced
-}
-
-async function fetchProducts(query: SchemaTableQuery) {
-  const params = new URLSearchParams({
-    search: query.search,
-    tab: query.tab,
-    sortKey: query.sortKey ?? '',
-    sortDir: query.sortDir,
-    page: String(query.page),
-    pageSize: String(query.pageSize),
-  })
-  for (const [key, value] of Object.entries(query.filters)) {
-    if (value) params.set(key, value)
-  }
-  const response = await fetch(\`/api/products?\${params}\`)
-  return response.json() as Promise<{ rows: Array<{ id: string }>; total: number }>
-}
+const USAGE_EXAMPLE = `${USAGE_IMPORTS}
 
 function ProductList() {
-  const [query, setQuery] = useState<SchemaTableQuery>({
-    search: '',
-    tab: 'all',
-    filters: {},
-    sortKey: 'created',
-    sortDir: 'desc',
-    page: 1,
-    pageSize: 10,
+  const table = useSchemaTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: SCHEMA_TABLE_EXAMPLE_ROWS,
   })
-  const search = useDebouncedValue(query.search)
-  const fetchQuery = { ...query, search }
-  const { data } = useQuery({
-    queryKey: ['products', fetchQuery],
-    queryFn: () => fetchProducts(fetchQuery),
-    placeholderData: keepPreviousData,
+
+  return (
+    <SchemaTable
+      table={table}
+      selectionActions={<ProductSelectionActions />}
+      emptyActions={<ProductEmptyActions />}
+    />
+  )
+}`
+
+const USAGE_QUERY = `import { useQuery } from '@tanstack/react-query'
+${USAGE_IMPORTS}
+
+function ProductList() {
+  const products = useQuery({
+    queryKey: ['products'],
+    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
+    initialData: SCHEMA_TABLE_EXAMPLE_ROWS,
     staleTime: 30_000,
   })
   const table = useSchemaTable({
-    schema: { ...SCHEMA, mode: 'server' },
-    data: data?.rows ?? [],
-    total: data?.total,
-    onQueryChange: setQuery,
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: products.data,
   })
 
-  return <SchemaTable table={table} />
+  return (
+    <SchemaTable
+      table={table}
+      selectionActions={<ProductSelectionActions />}
+      emptyActions={<ProductEmptyActions />}
+    />
+  )
 }`
 
 const USAGE_DB = `import { QueryClient } from '@tanstack/query-core'
@@ -211,9 +230,7 @@ import {
   useLiveQuery,
 } from '@tanstack/react-db'
 import { queryCollectionOptions } from '@tanstack/query-db-collection'
-import { SchemaTable, useSchemaTable } from '@/components/ui/schema-table'
-
-// SCHEMA from usage.tsx (mode: 'client', default)
+${USAGE_IMPORTS}
 
 const queryClient = new QueryClient()
 const dbClient = new DbClient({ queryClient })
@@ -224,37 +241,26 @@ const productCollection = collectionOptions('products', (client) =>
     queryKey: ['products'],
     staleTime: 30_000,
     queryClient: client.requireDependency<QueryClient>('queryClient'),
-    queryFn: async () => {
-      const response = await fetch('/api/products')
-      return response.json()
-    },
+    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
     getKey: (item) => item.id,
-    onUpdate: async ({ transaction }) => {
-      const { original, modified } = transaction.mutations[0]
-      await fetch(\`/api/products/\${original.id}\`, {
-        method: 'PUT',
-        body: JSON.stringify(modified),
-      })
-    },
   }),
 )
 
 function ProductList() {
-  const collection = useDbClient().collection(productCollection)
+  useDbClient().collection(productCollection)
   const { data: rows } = useLiveQuery({
     query: (q) => q.from({ product: productCollection }),
   })
   const table = useSchemaTable({
-    schema: SCHEMA,
-    data: rows ?? [],
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: rows ?? SCHEMA_TABLE_EXAMPLE_ROWS,
   })
 
   return (
     <SchemaTable
       table={table}
-      onRowAction={(action, row) => {
-        if (action === 'delete') collection.delete(row.id)
-      }}
+      selectionActions={<ProductSelectionActions />}
+      emptyActions={<ProductEmptyActions />}
     />
   )
 }
@@ -272,6 +278,50 @@ function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
   return <DocCodePanel filename={filename} code={code} />
 }
 
+function ProductSelectionActions() {
+  return (
+    <>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeIcon />
+        Publish
+      </Button>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeOffIcon />
+        Unpublish
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button
+              variant="Secondary"
+              style="Transparent"
+              size="Small"
+              iconOnly
+              aria-label="More actions"
+            >
+              <EllipsisVerticalIcon />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Archive</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  )
+}
+
+function ProductEmptyActions() {
+  return (
+    <Button variant="Primary" size="Small">
+      <PlusIcon />
+      Add new
+    </Button>
+  )
+}
+
 function SchemaTableExamplesPage() {
   const table = useSchemaTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
@@ -280,56 +330,13 @@ function SchemaTableExamplesPage() {
   const [tab, setTab] = useState('result')
 
   return (
-    <DocExamplePage
-      to="/schema-table"
-      usage={USAGE_EXAMPLE}
-      extraUsage={[
-        { title: 'Usage with TanStack Query', filename: 'usage-query.tsx', code: USAGE_QUERY },
-        { title: 'Usage with TanStack DB', filename: 'usage-db.tsx', code: USAGE_DB },
-      ]}
-    >
+    <DocExamplePage to="/schema-table">
       <div className="grid min-w-0 gap-6 xl:grid-cols-3">
         <div className="min-w-0 xl:col-span-2">
           <SchemaTable
             table={table}
-            selectionActions={
-              <>
-                <Button variant="Secondary" style="Transparent" size="Small">
-                  <EyeIcon />
-                  Publish
-                </Button>
-                <Button variant="Secondary" style="Transparent" size="Small">
-                  <EyeOffIcon />
-                  Unpublish
-                </Button>
-                <DropdownMenu>
-                  <DropdownMenuTrigger
-                    nativeButton
-                    render={
-                      <Button
-                        variant="Secondary"
-                        style="Transparent"
-                        size="Small"
-                        iconOnly
-                        aria-label="More actions"
-                      >
-                        <EllipsisVerticalIcon />
-                      </Button>
-                    }
-                  />
-                  <DropdownMenuContent align="end">
-                    <DropdownMenuItem>Archive</DropdownMenuItem>
-                    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </>
-            }
-            emptyActions={
-              <Button variant="Primary" size="Small">
-                <PlusIcon />
-                Add new
-              </Button>
-            }
+            selectionActions={<ProductSelectionActions />}
+            emptyActions={<ProductEmptyActions />}
           />
         </div>
         <div className="flex min-w-0 flex-col gap-4">
@@ -373,6 +380,24 @@ function SchemaTableExamplesPage() {
             </TabsContent>
           </Tabs>
         </div>
+      </div>
+      <div className="flex min-w-0 flex-col gap-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Usage
+        </p>
+        <DocCodePanel filename="usage.tsx" code={USAGE_EXAMPLE} />
+      </div>
+      <div className="flex min-w-0 flex-col gap-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Usage with TanStack Query
+        </p>
+        <DocCodePanel filename="usage-query.tsx" code={USAGE_QUERY} />
+      </div>
+      <div className="flex min-w-0 flex-col gap-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Usage with TanStack DB
+        </p>
+        <DocCodePanel filename="usage-db.tsx" code={USAGE_DB} />
       </div>
     </DocExamplePage>
   )

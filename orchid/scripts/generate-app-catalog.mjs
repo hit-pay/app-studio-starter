@@ -27,7 +27,7 @@ const sectionFor = (name) => {
       'customer-card',
       'page-toolbar',
       'page-title',
-      'confirm-dialog',
+      'confirmation-modal',
     ].includes(name)
   )
     return 'Block'

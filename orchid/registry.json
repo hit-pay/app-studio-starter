@@ -17,10 +17,11 @@
         "@orchid/list-item",
         "@orchid/empty",
         "@orchid/customer-card",
+        "@orchid/form-modal",
         "@orchid/form-page",
         "@orchid/page",
         "@orchid/alert-dialog",
-        "@orchid/confirm-dialog",
+        "@orchid/confirmation-modal",
         "@orchid/button",
         "@orchid/button-group",
         "@orchid/dropdown-menu",
@@ -163,10 +164,8 @@
       "name": "app-layout",
       "type": "registry:ui",
       "title": "App Layout",
-      "description": "Embedded application layout with page header, tabs, or built-in child sidebar.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
+      "description": "Embedded application layout with config-driven tabs or a built-in child sidebar.",
+      "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
@@ -272,6 +271,24 @@
       ]
     },
     {
+      "name": "form-modal",
+      "type": "registry:ui",
+      "title": "Form Modal",
+      "description": "Prebuilt modal form with prop-driven header and cancel/save actions.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/form-modal.tsx",
+          "type": "registry:ui",
+          "target": "@ui/form-modal.tsx"
+        }
+      ]
+    },
+    {
       "name": "form-page",
       "type": "registry:ui",
       "title": "Form Page",
@@ -280,6 +297,7 @@
         "lucide-react"
       ],
       "registryDependencies": [
+        "@orchid/button",
         "@orchid/kbd"
       ],
       "files": [
@@ -294,7 +312,7 @@
       "name": "page",
       "type": "registry:ui",
       "title": "Page",
-      "description": "Standard route page with a header and scrollable content area.",
+      "description": "Standard route page with built-in responsive padding, header, and scrollable content.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/copy-button"
@@ -326,10 +344,10 @@
       ]
     },
     {
-      "name": "confirm-dialog",
+      "name": "confirmation-modal",
       "type": "registry:ui",
-      "title": "Confirm Dialog",
-      "description": "Prebuilt Promise-based confirmation dialog invoked with useConfirmDialog.",
+      "title": "Confirmation Modal",
+      "description": "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
       "dependencies": [
         "lucide-react"
       ],
@@ -340,9 +358,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/confirm-dialog.tsx",
+          "path": "src/components/ui/confirmation-modal.tsx",
           "type": "registry:ui",
-          "target": "@ui/confirm-dialog.tsx"
+          "target": "@ui/confirmation-modal.tsx"
         }
       ]
     },

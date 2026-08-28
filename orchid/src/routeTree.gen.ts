@@ -25,7 +25,7 @@ import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as CollapsibleRouteImport } from './routes/collapsible'
 import { Route as ComboboxRouteImport } from './routes/combobox'
 import { Route as CommandRouteImport } from './routes/command'
-import { Route as ConfirmDialogRouteImport } from './routes/confirm-dialog'
+import { Route as ConfirmationModalRouteImport } from './routes/confirmation-modal'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
 import { Route as DataTableRouteImport } from './routes/data-table'
@@ -35,6 +35,7 @@ import { Route as DialogRouteImport } from './routes/dialog'
 import { Route as DropdownMenuRouteImport } from './routes/dropdown-menu'
 import { Route as EmptyRouteImport } from './routes/empty'
 import { Route as FieldRouteImport } from './routes/field'
+import { Route as FormModalRouteImport } from './routes/form-modal'
 import { Route as FormPageRouteImport } from './routes/form-page'
 import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
@@ -147,9 +148,9 @@ const CommandRoute = CommandRouteImport.update({
   path: '/command',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ConfirmDialogRoute = ConfirmDialogRouteImport.update({
-  id: '/confirm-dialog',
-  path: '/confirm-dialog',
+const ConfirmationModalRoute = ConfirmationModalRouteImport.update({
+  id: '/confirmation-modal',
+  path: '/confirmation-modal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CopyButtonRoute = CopyButtonRouteImport.update({
@@ -195,6 +196,11 @@ const EmptyRoute = EmptyRouteImport.update({
 const FieldRoute = FieldRouteImport.update({
   id: '/field',
   path: '/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormModalRoute = FormModalRouteImport.update({
+  id: '/form-modal',
+  path: '/form-modal',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FormPageRoute = FormPageRouteImport.update({
@@ -370,7 +376,7 @@ export interface FileRoutesByFullPath {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
-  '/confirm-dialog': typeof ConfirmDialogRoute
+  '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -380,6 +386,7 @@ export interface FileRoutesByFullPath {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-modal': typeof FormModalRoute
   '/form-page': typeof FormPageRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -429,7 +436,7 @@ export interface FileRoutesByTo {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
-  '/confirm-dialog': typeof ConfirmDialogRoute
+  '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -439,6 +446,7 @@ export interface FileRoutesByTo {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-modal': typeof FormModalRoute
   '/form-page': typeof FormPageRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -489,7 +497,7 @@ export interface FileRoutesById {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
-  '/confirm-dialog': typeof ConfirmDialogRoute
+  '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -499,6 +507,7 @@ export interface FileRoutesById {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-modal': typeof FormModalRoute
   '/form-page': typeof FormPageRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -550,7 +559,7 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
-    | '/confirm-dialog'
+    | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -560,6 +569,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-modal'
     | '/form-page'
     | '/form-section'
     | '/icon-group'
@@ -609,7 +619,7 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
-    | '/confirm-dialog'
+    | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -619,6 +629,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-modal'
     | '/form-page'
     | '/form-section'
     | '/icon-group'
@@ -668,7 +679,7 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
-    | '/confirm-dialog'
+    | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -678,6 +689,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-modal'
     | '/form-page'
     | '/form-section'
     | '/icon-group'
@@ -728,7 +740,7 @@ export interface RootRouteChildren {
   CollapsibleRoute: typeof CollapsibleRoute
   ComboboxRoute: typeof ComboboxRoute
   CommandRoute: typeof CommandRoute
-  ConfirmDialogRoute: typeof ConfirmDialogRoute
+  ConfirmationModalRoute: typeof ConfirmationModalRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
   DataTableRoute: typeof DataTableRoute
@@ -738,6 +750,7 @@ export interface RootRouteChildren {
   DropdownMenuRoute: typeof DropdownMenuRoute
   EmptyRoute: typeof EmptyRoute
   FieldRoute: typeof FieldRoute
+  FormModalRoute: typeof FormModalRoute
   FormPageRoute: typeof FormPageRoute
   FormSectionRoute: typeof FormSectionRoute
   IconGroupRoute: typeof IconGroupRoute
@@ -885,11 +898,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommandRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/confirm-dialog': {
-      id: '/confirm-dialog'
-      path: '/confirm-dialog'
-      fullPath: '/confirm-dialog'
-      preLoaderRoute: typeof ConfirmDialogRouteImport
+    '/confirmation-modal': {
+      id: '/confirmation-modal'
+      path: '/confirmation-modal'
+      fullPath: '/confirmation-modal'
+      preLoaderRoute: typeof ConfirmationModalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/copy-button': {
@@ -953,6 +966,13 @@ declare module '@tanstack/react-router' {
       path: '/field'
       fullPath: '/field'
       preLoaderRoute: typeof FieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/form-modal': {
+      id: '/form-modal'
+      path: '/form-modal'
+      fullPath: '/form-modal'
+      preLoaderRoute: typeof FormModalRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/form-page': {
@@ -1192,7 +1212,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollapsibleRoute: CollapsibleRoute,
   ComboboxRoute: ComboboxRoute,
   CommandRoute: CommandRoute,
-  ConfirmDialogRoute: ConfirmDialogRoute,
+  ConfirmationModalRoute: ConfirmationModalRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
   DataTableRoute: DataTableRoute,
@@ -1202,6 +1222,7 @@ const rootRouteChildren: RootRouteChildren = {
   DropdownMenuRoute: DropdownMenuRoute,
   EmptyRoute: EmptyRoute,
   FieldRoute: FieldRoute,
+  FormModalRoute: FormModalRoute,
   FormPageRoute: FormPageRoute,
   FormSectionRoute: FormSectionRoute,
   IconGroupRoute: IconGroupRoute,

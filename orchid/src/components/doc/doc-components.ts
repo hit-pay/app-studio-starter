@@ -154,6 +154,16 @@ export const DOC_COMPONENTS = [
     name: 'Scroll Area',
     description: 'shadcn-compatible bounded scroll area with Orchid scrollbar styling.',
   },
+  {
+    to: '/customer-card' as const,
+    name: 'Customer Card',
+    description: 'Small, Big, and Float customer or beneficiary cards.',
+  },
+  {
+    to: '/sub-sidebar' as const,
+    name: 'Sub Sidebar',
+    description: 'Grouped secondary navigation with a back header and active page state.',
+  },
 ] as const
 
 export function docComponentsByName() {
@@ -246,17 +256,12 @@ export const DOC_BLOCKS = [
   {
     to: '/app-layout' as const,
     name: 'App Layout',
-    description: 'Embedded application layout with page header, tabs, or built-in child sidebar.',
+    description: 'Embedded application layout with config-driven tabs or a built-in child sidebar.',
   },
   {
-    to: '/sub-sidebar' as const,
-    name: 'Sub Sidebar',
-    description: 'Grouped secondary navigation with a back header and active page state.',
-  },
-  {
-    to: '/customer-card' as const,
-    name: 'Customer Card',
-    description: 'Small, Big, and Float customer or beneficiary cards.',
+    to: '/form-modal' as const,
+    name: 'Form Modal',
+    description: 'Prebuilt modal form with prop-driven header and cancel/save actions.',
   },
   {
     to: '/form-page' as const,
@@ -266,12 +271,12 @@ export const DOC_BLOCKS = [
   {
     to: '/page' as const,
     name: 'Page',
-    description: 'Standard route page with a header and scrollable content area.',
+    description: 'Standard route page with built-in responsive padding, header, and scrollable content.',
   },
   {
-    to: '/confirm-dialog' as const,
-    name: 'Confirm Dialog',
-    description: 'Prebuilt Promise-based confirmation dialog invoked with useConfirmDialog.',
+    to: '/confirmation-modal' as const,
+    name: 'Confirmation Modal',
+    description: 'Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.',
   },
   {
     to: '/schema-form' as const,

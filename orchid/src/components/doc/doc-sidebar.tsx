@@ -1,5 +1,11 @@
 import { useNavigate, useRouterState } from '@tanstack/react-router'
-import { ChoiceCard, ChoiceCardGroup } from '@/components/ui/choice-card'
+import {
+  SubSidebar,
+  SubSidebarContent,
+  SubSidebarGroup,
+  SubSidebarGroupLabel,
+  SubSidebarItem,
+} from '@/components/ui/sub-sidebar'
 
 import {
   DOC_GUIDES,
@@ -20,29 +26,24 @@ function NavGroup({
   const navigate = useNavigate()
 
   return (
-    <div>
-      <p className="px-1 pb-2 text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-        {label}
-      </p>
-      <ChoiceCardGroup
-        alignment="Vertical"
-        value={pathname}
-        onValueChange={(value) => {
-          if (value) void navigate({ to: value })
-        }}
-        className="gap-2"
-      >
+    <SubSidebarGroup>
+      <SubSidebarGroupLabel>{label}</SubSidebarGroupLabel>
+      <div className="flex flex-col">
         {items.map((item) => (
-          <ChoiceCard
+          <SubSidebarItem
             key={item.to}
-            value={item.to}
-            title={item.name}
-            alignment="Left"
-            className="px-3 py-2"
-          />
+            href={item.to}
+            active={pathname === item.to}
+            onClick={(event) => {
+              event.preventDefault()
+              void navigate({ to: item.to })
+            }}
+          >
+            {item.name}
+          </SubSidebarItem>
         ))}
-      </ChoiceCardGroup>
-    </div>
+      </div>
+    </SubSidebarGroup>
   )
 }
 
@@ -52,14 +53,14 @@ function DocSidebar() {
   if (pathname === '/') return null
 
   return (
-    <aside className="hidden h-full w-56 shrink-0 flex-col overflow-y-auto border-r border-solid border-oc-border bg-oc-background md:flex">
-      <nav className="flex flex-col gap-6 px-3 pt-4 pb-4">
+    <SubSidebar className="hidden w-56 md:flex">
+      <SubSidebarContent>
         <NavGroup label="Guides" items={DOC_GUIDES} pathname={pathname} />
         <NavGroup label="Component" items={docComponentsByName()} pathname={pathname} />
         <NavGroup label="Form" items={docFormsByName()} pathname={pathname} />
-        <NavGroup label="Blok" items={docBlocksByName()} pathname={pathname} />
-      </nav>
-    </aside>
+        <NavGroup label="Block" items={docBlocksByName()} pathname={pathname} />
+      </SubSidebarContent>
+    </SubSidebar>
   )
 }
 
