@@ -11,6 +11,8 @@
       "registryDependencies": [
         "@orchid/schema-form",
         "@orchid/schema-table",
+        "@orchid/app-shell",
+        "@orchid/sub-sidebar",
         "@orchid/alert",
         "@orchid/list-item",
         "@orchid/empty",
@@ -153,6 +155,39 @@
           "path": "src/components/ui/schema-table-model.ts",
           "type": "registry:file",
           "target": "@ui/schema-table-model.ts"
+        }
+      ]
+    },
+    {
+      "name": "app-shell",
+      "type": "registry:ui",
+      "title": "App Shell",
+      "description": "Embedded app layout with page-title, tabs, and sub-sidebar variants.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/app-shell.tsx",
+          "type": "registry:ui",
+          "target": "@ui/app-shell.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sub-sidebar",
+      "type": "registry:ui",
+      "title": "Sub Sidebar",
+      "description": "Grouped secondary navigation with back header and active item styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/sub-sidebar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sub-sidebar.tsx"
         }
       ]
     },

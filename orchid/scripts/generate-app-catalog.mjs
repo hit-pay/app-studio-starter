@@ -19,6 +19,8 @@ const sectionFor = (name) => {
     [
       'schema-form',
       'schema-table',
+      'app-shell',
+      'sub-sidebar',
       'alert',
       'list-item',
       'empty',

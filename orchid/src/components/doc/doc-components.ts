@@ -224,6 +224,16 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
+    to: '/app-shell' as const,
+    name: 'App Shell',
+    description: 'Embedded layout with page-title, tabs, and sub-sidebar variants.',
+  },
+  {
+    to: '/sub-sidebar' as const,
+    name: 'Sub Sidebar',
+    description: 'Grouped secondary navigation with a back header and active page state.',
+  },
+  {
     to: '/alert' as const,
     name: 'Alert',
     description: 'In-page notification with semantic variants and an optional action.',

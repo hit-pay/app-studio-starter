@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
+import { Route as AppShellRouteImport } from './routes/app-shell'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
@@ -57,6 +58,7 @@ import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SpinnerRouteImport } from './routes/spinner'
 import { Route as StatCardRouteImport } from './routes/stat-card'
+import { Route as SubSidebarRouteImport } from './routes/sub-sidebar'
 import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as TableRouteImport } from './routes/table'
 import { Route as TabsRouteImport } from './routes/tabs'
@@ -77,6 +79,11 @@ const AccordionRoute = AccordionRouteImport.update({
 const AlertRoute = AlertRouteImport.update({
   id: '/alert',
   path: '/alert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppShellRoute = AppShellRouteImport.update({
+  id: '/app-shell',
+  path: '/app-shell',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AvatarRoute = AvatarRouteImport.update({
@@ -304,6 +311,11 @@ const StatCardRoute = StatCardRouteImport.update({
   path: '/stat-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubSidebarRoute = SubSidebarRouteImport.update({
+  id: '/sub-sidebar',
+  path: '/sub-sidebar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SwitchRoute = SwitchRouteImport.update({
   id: '/switch',
   path: '/switch',
@@ -339,6 +351,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -384,6 +397,7 @@ export interface FileRoutesByFullPath {
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
+  '/sub-sidebar': typeof SubSidebarRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
@@ -395,6 +409,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -440,6 +455,7 @@ export interface FileRoutesByTo {
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
+  '/sub-sidebar': typeof SubSidebarRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
@@ -452,6 +468,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
+  '/app-shell': typeof AppShellRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -497,6 +514,7 @@ export interface FileRoutesById {
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
   '/stat-card': typeof StatCardRoute
+  '/sub-sidebar': typeof SubSidebarRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
   '/tabs': typeof TabsRoute
@@ -510,6 +528,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/app-shell'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -555,6 +574,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/spinner'
     | '/stat-card'
+    | '/sub-sidebar'
     | '/switch'
     | '/table'
     | '/tabs'
@@ -566,6 +586,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/app-shell'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -611,6 +632,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/spinner'
     | '/stat-card'
+    | '/sub-sidebar'
     | '/switch'
     | '/table'
     | '/tabs'
@@ -622,6 +644,7 @@ export interface FileRouteTypes {
     | '/'
     | '/accordion'
     | '/alert'
+    | '/app-shell'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -667,6 +690,7 @@ export interface FileRouteTypes {
     | '/slider'
     | '/spinner'
     | '/stat-card'
+    | '/sub-sidebar'
     | '/switch'
     | '/table'
     | '/tabs'
@@ -679,6 +703,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
+  AppShellRoute: typeof AppShellRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
@@ -724,6 +749,7 @@ export interface RootRouteChildren {
   SliderRoute: typeof SliderRoute
   SpinnerRoute: typeof SpinnerRoute
   StatCardRoute: typeof StatCardRoute
+  SubSidebarRoute: typeof SubSidebarRoute
   SwitchRoute: typeof SwitchRoute
   TableRoute: typeof TableRoute
   TabsRoute: typeof TabsRoute
@@ -753,6 +779,13 @@ declare module '@tanstack/react-router' {
       path: '/alert'
       fullPath: '/alert'
       preLoaderRoute: typeof AlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app-shell': {
+      id: '/app-shell'
+      path: '/app-shell'
+      fullPath: '/app-shell'
+      preLoaderRoute: typeof AppShellRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/avatar': {
@@ -1070,6 +1103,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof StatCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sub-sidebar': {
+      id: '/sub-sidebar'
+      path: '/sub-sidebar'
+      fullPath: '/sub-sidebar'
+      preLoaderRoute: typeof SubSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/switch': {
       id: '/switch'
       path: '/switch'
@@ -1119,6 +1159,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
+  AppShellRoute: AppShellRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,
@@ -1164,6 +1205,7 @@ const rootRouteChildren: RootRouteChildren = {
   SliderRoute: SliderRoute,
   SpinnerRoute: SpinnerRoute,
   StatCardRoute: StatCardRoute,
+  SubSidebarRoute: SubSidebarRoute,
   SwitchRoute: SwitchRoute,
   TableRoute: TableRoute,
   TabsRoute: TabsRoute,
