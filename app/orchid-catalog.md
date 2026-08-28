@@ -40,9 +40,13 @@ shadcn-compatible compound empty state with Orchid media variants.
 
 Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.
 
-## `page-toolbar` — Page Toolbar
+# Component
 
-Nested screen bar: Back or Close + right actions. Page title sits below.
+## `form-page` — Form Page
+
+Full-page form layout used instead of a dialog, with header, scrollable content, and footer actions.
+
+# Block
 
 ## `page-title` — Page Title
 
@@ -53,6 +57,14 @@ Page heading: title, chip, description, copy id, actions.
 ## `alert-dialog` — Alert Dialog
 
 shadcn-compatible confirmation dialog primitives with Orchid styling.
+
+# Block
+
+## `confirm-dialog` — Confirm Dialog
+
+Prebuilt Promise-based confirmation dialog invoked with useConfirmDialog.
+
+# Component
 
 ## `button` — Button
 

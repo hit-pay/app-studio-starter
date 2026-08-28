@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
-import { PageTitle } from '@/components/ui/page-title'
+import { PageHeader } from '@/components/ui/page'
 import { DOC_BLOCKS, DOC_COMPONENTS, DOC_FORMS } from './doc-components'
 import { DocCodePanel } from './doc-code-panel'
 
@@ -50,7 +50,7 @@ function DocExamplePage({
       >
         {item ? (
           <div className="shrink-0">
-            <PageTitle title={item.name} description={item.description} />
+            <PageHeader title={item.name} description={item.description} />
           </div>
         ) : null}
         <div

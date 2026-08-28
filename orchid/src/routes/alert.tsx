@@ -4,7 +4,7 @@ import { CheckCircleIcon, InfoIcon, TriangleAlertIcon, XCircleIcon } from 'lucid
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Alert, AlertAction, AlertDescription, AlertTitle } from '@/components/ui/alert'
 import { Button } from '@/components/ui/button'
-import { PageTitle } from '@/components/ui/page-title'
+import { PageHeader } from '@/components/ui/page'
 
 export const Route = createFileRoute('/alert')({
   component: AlertExamplesPage,
@@ -162,7 +162,7 @@ import {
             Dashboard reporting may be delayed between 02:00 and 02:30 SGT.
           </AlertDescription>
         </Alert>
-        <PageTitle
+        <PageHeader
           title="Invoices"
           description="Create, send, and track invoices across payment channels."
           actions={<Button>Create invoice</Button>}

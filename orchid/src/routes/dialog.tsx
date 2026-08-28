@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { Button } from '@/components/ui/button'
@@ -11,6 +12,9 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
+import { Textarea } from '@/components/ui/textarea'
 
 export const Route = createFileRoute('/dialog')({
   component: DialogExamplesPage,
@@ -49,6 +53,57 @@ import {
       <Button>Send invoice</Button>
     </DialogFooter>
   </DialogContent>
+</Dialog>
+
+const [open, setOpen] = useState(false)
+
+<Dialog open={open} onOpenChange={setOpen}>
+  <DialogTrigger render={<Button />}>Add customer</DialogTrigger>
+  <DialogContent>
+    <form
+      onSubmit={(event) => {
+        event.preventDefault()
+        setOpen(false)
+      }}
+    >
+      <DialogHeader className="-mx-4 -mt-4 border-b border-oc-border px-5 py-4 pr-12">
+        <DialogTitle>Add customer</DialogTitle>
+      </DialogHeader>
+      <div className="space-y-4 py-5">
+        <DialogDescription>Enter the customer details below.</DialogDescription>
+        <FieldGroup>
+          <Field>
+            <FieldLabel htmlFor="customer-name">Name</FieldLabel>
+            <Input id="customer-name" name="name" required />
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="customer-email">Email</FieldLabel>
+            <Input id="customer-email" name="email" type="email" required />
+          </Field>
+        </FieldGroup>
+      </div>
+      <DialogFooter>
+        <DialogClose render={<Button type="button" variant="outline" />}>
+          Cancel
+        </DialogClose>
+        <Button type="submit">Save customer</Button>
+      </DialogFooter>
+    </form>
+  </DialogContent>
+</Dialog>
+
+<Dialog>
+  <DialogTrigger render={<Button variant="outline" />}>
+    Bordered dialog
+  </DialogTrigger>
+  <DialogContent className="border border-oc-border">
+    <DialogHeader>
+      <DialogTitle>Bordered dialog</DialogTitle>
+      <DialogDescription>
+        Add a border with className when stronger separation is needed.
+      </DialogDescription>
+    </DialogHeader>
+  </DialogContent>
 </Dialog>`}
     >
       <div className="grid gap-8 md:grid-cols-2">
@@ -74,6 +129,37 @@ import {
                 <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
                 <Button>Send invoice</Button>
               </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Form
+          </p>
+          <CustomerFormDialog />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Custom border
+          </p>
+          <Dialog>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Bordered dialog
+            </DialogTrigger>
+            <DialogContent className="border border-oc-border">
+              <DialogHeader>
+                <DialogTitle>Bordered dialog</DialogTitle>
+                <DialogDescription>
+                  Dialog does not have a border variant. Use the Orchid border token through
+                  className when stronger separation is needed.
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-sm text-oc-foreground">
+                The border uses <code>border-oc-border</code> and follows the active theme.
+              </p>
+              <DialogFooter showCloseButton />
             </DialogContent>
           </Dialog>
         </div>
@@ -157,5 +243,65 @@ import {
         </div>
       </div>
     </DocExamplePage>
+  )
+}
+
+function CustomerFormDialog() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger render={<Button />}>Add customer</DialogTrigger>
+      <DialogContent>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault()
+            setOpen(false)
+          }}
+        >
+          <DialogHeader className="-mx-4 -mt-4 border-b border-oc-border px-5 py-4 pr-12">
+            <DialogTitle>Add customer</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-5">
+            <DialogDescription>Enter the customer details below.</DialogDescription>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="dialog-customer-name">Name</FieldLabel>
+                <Input
+                  id="dialog-customer-name"
+                  name="name"
+                  placeholder="Alex Turner"
+                  required
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="dialog-customer-email">Email</FieldLabel>
+                <Input
+                  id="dialog-customer-email"
+                  name="email"
+                  type="email"
+                  placeholder="alex@example.com"
+                  required
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="dialog-customer-note">Note</FieldLabel>
+                <Textarea
+                  id="dialog-customer-note"
+                  name="note"
+                  placeholder="Optional customer note"
+                />
+              </Field>
+            </FieldGroup>
+          </div>
+          <DialogFooter>
+            <DialogClose render={<Button type="button" variant="outline" />}>
+              Cancel
+            </DialogClose>
+            <Button type="submit">Save customer</Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
   )
 }

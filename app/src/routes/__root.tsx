@@ -1,6 +1,7 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import { QueryProvider } from '#/lib/query'
+import { ConfirmDialogProvider } from '@/components/ui/confirm-dialog'
 import { Toaster } from '@/components/ui/toast'
 import appCss from '../styles.css?url'
 
@@ -42,7 +43,9 @@ function RootDocument({ children }: { children: React.ReactNode }) {
       </head>
       <body className="h-full overflow-hidden">
         <QueryProvider>
-          <Toaster placement="top-center">{children}</Toaster>
+          <ConfirmDialogProvider>
+            <Toaster placement="top-center">{children}</Toaster>
+          </ConfirmDialogProvider>
         </QueryProvider>
         <Scripts />
       </body>

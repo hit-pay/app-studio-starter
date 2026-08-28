@@ -11,15 +11,16 @@
       "registryDependencies": [
         "@orchid/schema-form",
         "@orchid/schema-table",
-        "@orchid/app-shell",
+        "@orchid/app-layout",
         "@orchid/sub-sidebar",
         "@orchid/alert",
         "@orchid/list-item",
         "@orchid/empty",
         "@orchid/customer-card",
-        "@orchid/page-toolbar",
-        "@orchid/page-title",
+        "@orchid/form-page",
+        "@orchid/page",
         "@orchid/alert-dialog",
+        "@orchid/confirm-dialog",
         "@orchid/button",
         "@orchid/button-group",
         "@orchid/dropdown-menu",
@@ -159,17 +160,17 @@
       ]
     },
     {
-      "name": "app-shell",
+      "name": "app-layout",
       "type": "registry:ui",
-      "title": "App Shell",
-      "description": "Embedded app layout with page-title, tabs, and sub-sidebar variants.",
+      "title": "App Layout",
+      "description": "Embedded application layout with page header, tabs, or sub-sidebar.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/app-shell.tsx",
+          "path": "src/components/ui/app-layout.tsx",
           "type": "registry:ui",
-          "target": "@ui/app-shell.tsx"
+          "target": "@ui/app-layout.tsx"
         }
       ]
     },
@@ -269,10 +270,10 @@
       ]
     },
     {
-      "name": "page-toolbar",
+      "name": "form-page",
       "type": "registry:ui",
-      "title": "Page Toolbar",
-      "description": "Nested screen bar: Back or Close + right actions. Page title sits below.",
+      "title": "Form Page",
+      "description": "Full-page form layout used instead of a dialog, with header and scrollable form content.",
       "dependencies": [
         "lucide-react"
       ],
@@ -281,26 +282,26 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/page-toolbar.tsx",
+          "path": "src/components/ui/form-page.tsx",
           "type": "registry:ui",
-          "target": "@ui/page-toolbar.tsx"
+          "target": "@ui/form-page.tsx"
         }
       ]
     },
     {
-      "name": "page-title",
+      "name": "page",
       "type": "registry:ui",
-      "title": "Page Title",
-      "description": "Page heading: title, chip, description, copy id, actions.",
+      "title": "Page",
+      "description": "Standard route page with a header and scrollable content area.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/copy-button"
       ],
       "files": [
         {
-          "path": "src/components/ui/page-title.tsx",
+          "path": "src/components/ui/page.tsx",
           "type": "registry:ui",
-          "target": "@ui/page-title.tsx"
+          "target": "@ui/page.tsx"
         }
       ]
     },
@@ -319,6 +320,27 @@
           "path": "src/components/ui/alert-dialog.tsx",
           "type": "registry:ui",
           "target": "@ui/alert-dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirm-dialog",
+      "type": "registry:ui",
+      "title": "Confirm Dialog",
+      "description": "Prebuilt Promise-based confirmation dialog invoked with useConfirmDialog.",
+      "dependencies": [
+        "lucide-react"
+      ],
+      "registryDependencies": [
+        "@orchid/alert-dialog",
+        "@orchid/button",
+        "@orchid/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/ui/confirm-dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/confirm-dialog.tsx"
         }
       ]
     },

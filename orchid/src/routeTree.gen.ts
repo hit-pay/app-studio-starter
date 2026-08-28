@@ -13,7 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
-import { Route as AppShellRouteImport } from './routes/app-shell'
+import { Route as AppLayoutRouteImport } from './routes/app-layout'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
@@ -25,6 +25,7 @@ import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as CollapsibleRouteImport } from './routes/collapsible'
 import { Route as ComboboxRouteImport } from './routes/combobox'
 import { Route as CommandRouteImport } from './routes/command'
+import { Route as ConfirmDialogRouteImport } from './routes/confirm-dialog'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
 import { Route as DataTableRouteImport } from './routes/data-table'
@@ -34,6 +35,7 @@ import { Route as DialogRouteImport } from './routes/dialog'
 import { Route as DropdownMenuRouteImport } from './routes/dropdown-menu'
 import { Route as EmptyRouteImport } from './routes/empty'
 import { Route as FieldRouteImport } from './routes/field'
+import { Route as FormPageRouteImport } from './routes/form-page'
 import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
 import { Route as InputRouteImport } from './routes/input'
@@ -42,8 +44,7 @@ import { Route as InstallationRouteImport } from './routes/installation'
 import { Route as KbdRouteImport } from './routes/kbd'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
-import { Route as PageTitleRouteImport } from './routes/page-title'
-import { Route as PageToolbarRouteImport } from './routes/page-toolbar'
+import { Route as PageRouteImport } from './routes/page'
 import { Route as PaginationRouteImport } from './routes/pagination'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
@@ -86,9 +87,9 @@ const AlertDialogRoute = AlertDialogRouteImport.update({
   path: '/alert-dialog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppShellRoute = AppShellRouteImport.update({
-  id: '/app-shell',
-  path: '/app-shell',
+const AppLayoutRoute = AppLayoutRouteImport.update({
+  id: '/app-layout',
+  path: '/app-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AvatarRoute = AvatarRouteImport.update({
@@ -146,6 +147,11 @@ const CommandRoute = CommandRouteImport.update({
   path: '/command',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ConfirmDialogRoute = ConfirmDialogRouteImport.update({
+  id: '/confirm-dialog',
+  path: '/confirm-dialog',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CopyButtonRoute = CopyButtonRouteImport.update({
   id: '/copy-button',
   path: '/copy-button',
@@ -191,6 +197,11 @@ const FieldRoute = FieldRouteImport.update({
   path: '/field',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FormPageRoute = FormPageRouteImport.update({
+  id: '/form-page',
+  path: '/form-page',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const FormSectionRoute = FormSectionRouteImport.update({
   id: '/form-section',
   path: '/form-section',
@@ -231,14 +242,9 @@ const ListItemRoute = ListItemRouteImport.update({
   path: '/list-item',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PageTitleRoute = PageTitleRouteImport.update({
-  id: '/page-title',
-  path: '/page-title',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PageToolbarRoute = PageToolbarRouteImport.update({
-  id: '/page-toolbar',
-  path: '/page-toolbar',
+const PageRoute = PageRouteImport.update({
+  id: '/page',
+  path: '/page',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaginationRoute = PaginationRouteImport.update({
@@ -352,7 +358,7 @@ export interface FileRoutesByFullPath {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-shell': typeof AppShellRoute
+  '/app-layout': typeof AppLayoutRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -364,6 +370,7 @@ export interface FileRoutesByFullPath {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
+  '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -373,6 +380,7 @@ export interface FileRoutesByFullPath {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-page': typeof FormPageRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
@@ -381,8 +389,7 @@ export interface FileRoutesByFullPath {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/page-title': typeof PageTitleRoute
-  '/page-toolbar': typeof PageToolbarRoute
+  '/page': typeof PageRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
@@ -410,7 +417,7 @@ export interface FileRoutesByTo {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-shell': typeof AppShellRoute
+  '/app-layout': typeof AppLayoutRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -422,6 +429,7 @@ export interface FileRoutesByTo {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
+  '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -431,6 +439,7 @@ export interface FileRoutesByTo {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-page': typeof FormPageRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
@@ -439,8 +448,7 @@ export interface FileRoutesByTo {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/page-title': typeof PageTitleRoute
-  '/page-toolbar': typeof PageToolbarRoute
+  '/page': typeof PageRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
@@ -469,7 +477,7 @@ export interface FileRoutesById {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-shell': typeof AppShellRoute
+  '/app-layout': typeof AppLayoutRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -481,6 +489,7 @@ export interface FileRoutesById {
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
+  '/confirm-dialog': typeof ConfirmDialogRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
   '/data-table': typeof DataTableRoute
@@ -490,6 +499,7 @@ export interface FileRoutesById {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-page': typeof FormPageRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
@@ -498,8 +508,7 @@ export interface FileRoutesById {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/page-title': typeof PageTitleRoute
-  '/page-toolbar': typeof PageToolbarRoute
+  '/page': typeof PageRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
@@ -529,7 +538,7 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-shell'
+    | '/app-layout'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -541,6 +550,7 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
+    | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -550,6 +560,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-page'
     | '/form-section'
     | '/icon-group'
     | '/input'
@@ -558,8 +569,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
-    | '/page-title'
-    | '/page-toolbar'
+    | '/page'
     | '/pagination'
     | '/progress'
     | '/quantity-input'
@@ -587,7 +597,7 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-shell'
+    | '/app-layout'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -599,6 +609,7 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
+    | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -608,6 +619,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-page'
     | '/form-section'
     | '/icon-group'
     | '/input'
@@ -616,8 +628,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
-    | '/page-title'
-    | '/page-toolbar'
+    | '/page'
     | '/pagination'
     | '/progress'
     | '/quantity-input'
@@ -645,7 +656,7 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-shell'
+    | '/app-layout'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -657,6 +668,7 @@ export interface FileRouteTypes {
     | '/collapsible'
     | '/combobox'
     | '/command'
+    | '/confirm-dialog'
     | '/copy-button'
     | '/customer-card'
     | '/data-table'
@@ -666,6 +678,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-page'
     | '/form-section'
     | '/icon-group'
     | '/input'
@@ -674,8 +687,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
-    | '/page-title'
-    | '/page-toolbar'
+    | '/page'
     | '/pagination'
     | '/progress'
     | '/quantity-input'
@@ -704,7 +716,7 @@ export interface RootRouteChildren {
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
   AlertDialogRoute: typeof AlertDialogRoute
-  AppShellRoute: typeof AppShellRoute
+  AppLayoutRoute: typeof AppLayoutRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
@@ -716,6 +728,7 @@ export interface RootRouteChildren {
   CollapsibleRoute: typeof CollapsibleRoute
   ComboboxRoute: typeof ComboboxRoute
   CommandRoute: typeof CommandRoute
+  ConfirmDialogRoute: typeof ConfirmDialogRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
   DataTableRoute: typeof DataTableRoute
@@ -725,6 +738,7 @@ export interface RootRouteChildren {
   DropdownMenuRoute: typeof DropdownMenuRoute
   EmptyRoute: typeof EmptyRoute
   FieldRoute: typeof FieldRoute
+  FormPageRoute: typeof FormPageRoute
   FormSectionRoute: typeof FormSectionRoute
   IconGroupRoute: typeof IconGroupRoute
   InputRoute: typeof InputRoute
@@ -733,8 +747,7 @@ export interface RootRouteChildren {
   KbdRoute: typeof KbdRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
-  PageTitleRoute: typeof PageTitleRoute
-  PageToolbarRoute: typeof PageToolbarRoute
+  PageRoute: typeof PageRoute
   PaginationRoute: typeof PaginationRoute
   ProgressRoute: typeof ProgressRoute
   QuantityInputRoute: typeof QuantityInputRoute
@@ -788,11 +801,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlertDialogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app-shell': {
-      id: '/app-shell'
-      path: '/app-shell'
-      fullPath: '/app-shell'
-      preLoaderRoute: typeof AppShellRouteImport
+    '/app-layout': {
+      id: '/app-layout'
+      path: '/app-layout'
+      fullPath: '/app-layout'
+      preLoaderRoute: typeof AppLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/avatar': {
@@ -872,6 +885,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CommandRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/confirm-dialog': {
+      id: '/confirm-dialog'
+      path: '/confirm-dialog'
+      fullPath: '/confirm-dialog'
+      preLoaderRoute: typeof ConfirmDialogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/copy-button': {
       id: '/copy-button'
       path: '/copy-button'
@@ -935,6 +955,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FieldRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/form-page': {
+      id: '/form-page'
+      path: '/form-page'
+      fullPath: '/form-page'
+      preLoaderRoute: typeof FormPageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/form-section': {
       id: '/form-section'
       path: '/form-section'
@@ -991,18 +1018,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListItemRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/page-title': {
-      id: '/page-title'
-      path: '/page-title'
-      fullPath: '/page-title'
-      preLoaderRoute: typeof PageTitleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/page-toolbar': {
-      id: '/page-toolbar'
-      path: '/page-toolbar'
-      fullPath: '/page-toolbar'
-      preLoaderRoute: typeof PageToolbarRouteImport
+    '/page': {
+      id: '/page'
+      path: '/page'
+      fullPath: '/page'
+      preLoaderRoute: typeof PageRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pagination': {
@@ -1160,7 +1180,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
   AlertDialogRoute: AlertDialogRoute,
-  AppShellRoute: AppShellRoute,
+  AppLayoutRoute: AppLayoutRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,
@@ -1172,6 +1192,7 @@ const rootRouteChildren: RootRouteChildren = {
   CollapsibleRoute: CollapsibleRoute,
   ComboboxRoute: ComboboxRoute,
   CommandRoute: CommandRoute,
+  ConfirmDialogRoute: ConfirmDialogRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
   DataTableRoute: DataTableRoute,
@@ -1181,6 +1202,7 @@ const rootRouteChildren: RootRouteChildren = {
   DropdownMenuRoute: DropdownMenuRoute,
   EmptyRoute: EmptyRoute,
   FieldRoute: FieldRoute,
+  FormPageRoute: FormPageRoute,
   FormSectionRoute: FormSectionRoute,
   IconGroupRoute: IconGroupRoute,
   InputRoute: InputRoute,
@@ -1189,8 +1211,7 @@ const rootRouteChildren: RootRouteChildren = {
   KbdRoute: KbdRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,
-  PageTitleRoute: PageTitleRoute,
-  PageToolbarRoute: PageToolbarRoute,
+  PageRoute: PageRoute,
   PaginationRoute: PaginationRoute,
   ProgressRoute: ProgressRoute,
   QuantityInputRoute: QuantityInputRoute,

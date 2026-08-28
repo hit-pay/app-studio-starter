@@ -3,7 +3,7 @@ import { useState, type ReactNode } from 'react'
 import { CheckIcon, CopyIcon } from 'lucide-react'
 
 import { Button } from '@/components/ui/button'
-import { PageTitle } from '@/components/ui/page-title'
+import { PageHeader } from '@/components/ui/page'
 
 export const Route = createFileRoute('/installation')({
   component: InstallationPage,
@@ -124,7 +124,7 @@ function InstallationPage() {
   return (
     <main className="flex h-full min-h-0 flex-col overflow-hidden bg-oc-background">
       <section className="flex min-h-0 flex-1 flex-col gap-8 overflow-y-auto px-8 py-8">
-        <PageTitle
+        <PageHeader
           title="Installation"
           description="Create a new Orchid UI app with Cursor, Claude Code, or another local coding agent."
         />

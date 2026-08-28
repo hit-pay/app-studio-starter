@@ -138,9 +138,9 @@ Never edit `.output/`, `.nitro/`, or `src/routeTree.gen.ts` by hand.
 
 The host dashboard owns the outer navigation, account controls, authentication gate, iframe, and app mount point. The generated app owns only the embedded pane.
 
-- Fill the pane with `AppShell`.
+- Fill the pane with `AppLayout`.
 - Keep the root document's `h-full` and `overflow-hidden` behavior so the iframe does not get double scrolling.
-- Let `AppShell` own the app content scroll area.
+- Render route content inside `AppLayout`. Use `PageContent` or `FormPageContent` as the scroll owner so headers and actions remain visible.
 - Do not add a full-screen website shell or host-dashboard clone.
 - Avoid horizontal overflow and make forms, tables, actions, and tabs usable at narrow widths.
 
@@ -166,13 +166,14 @@ Do not create a generic replacement when an appropriate Orchid component exists.
 
 Common choices:
 
-- page layout: `AppShell`
-- heading and actions: `PageTitle`
-- nested screen controls: `PageToolbar`
+- application frame: `AppLayout`
+- standard route page: compose `Page`, `PageHeader`, and `PageContent`
+- complex create/edit flows that replace the content area: `FormPage`
 - operational lists: `SchemaTable` or Orchid `Table`
 - forms: `SchemaForm` or Orchid form controls
-- create/edit flows: Orchid `Dialog`
-- destructive confirmation: compose `AlertDialog`, `AlertDialogContent`, `AlertDialogAction`, and `AlertDialogCancel`
+- simple create/edit flows: Orchid `Dialog`
+- routine confirmation: call the prebuilt `useConfirmDialog()` hook and await its boolean result
+- custom confirmation layout: compose `AlertDialog`, `AlertDialogContent`, `AlertDialogAction`, and `AlertDialogCancel`
 - zero-data and no-results states: `Empty`
 - status: `Badge`
 - feedback: `toast.add({ title, description, type })`; use `success`, `info`, `warning`, `error`, or `loading`
@@ -290,7 +291,7 @@ When requested, use the existing `preview`, `screenshot`, and HitPay preview moc
 The app is done only when:
 
 - the requested business workflow works end to end
-- the embedded UI uses `AppShell` and appropriate Orchid components
+- the embedded UI uses `AppLayout` and appropriate Orchid components
 - persistent data survives reload when the workflow stores data
 - migrations and server functions are connected
 - relevant validation and database constraints exist

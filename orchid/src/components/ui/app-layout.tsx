@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react'
 
 import { cn } from '@/lib/utils'
 
-function AppShell({
+function AppLayout({
   className,
   variant = 'default',
   appName,
@@ -19,18 +19,18 @@ function AppShell({
   sidebar?: ReactNode
 }) {
   const page = (
-    <div data-slot="app-shell-content" className="flex min-w-0 flex-1 flex-col">
+    <div data-slot="app-layout-content" className="flex min-w-0 flex-1 flex-col">
       {header ? (
-        <div data-slot="app-shell-header" className="min-w-0 shrink-0">
+        <div data-slot="app-layout-header" className="min-w-0 shrink-0">
           {header}
         </div>
       ) : null}
       {navigation ? (
-        <div data-slot="app-shell-tabs" className="min-w-0 shrink-0">
+        <div data-slot="app-layout-tabs" className="min-w-0 shrink-0">
           {navigation}
         </div>
       ) : null}
-      <main data-slot="app-shell-main" className="min-w-0 flex-1 px-4 py-5 sm:px-6">
+      <main data-slot="app-layout-main" className="min-w-0 flex-1 px-4 py-5 sm:px-6">
         {children}
       </main>
     </div>
@@ -38,7 +38,7 @@ function AppShell({
 
   return (
     <div
-      data-slot="app-shell"
+      data-slot="app-layout"
       data-variant={variant}
       className={cn(
         'flex min-h-full w-full min-w-0 flex-col bg-oc-background text-oc-foreground',
@@ -48,14 +48,14 @@ function AppShell({
     >
       {appName ? (
         <div
-          data-slot="app-shell-app-name"
+          data-slot="app-layout-app-name"
           className="flex h-12 shrink-0 items-center border-b border-solid border-oc-border px-4 text-sm font-medium text-oc-foreground sm:px-6"
         >
           <span className="min-w-0 truncate">{appName}</span>
         </div>
       ) : null}
       {variant === 'sidebar' ? (
-        <div data-slot="app-shell-layout" className="flex min-h-0 min-w-0 flex-1">
+        <div data-slot="app-layout-body" className="flex min-h-0 min-w-0 flex-1">
           {sidebar}
           {page}
         </div>
@@ -66,10 +66,10 @@ function AppShell({
   )
 }
 
-function AppShellNav({ className, ...props }: ComponentProps<'nav'>) {
+function AppNav({ className, ...props }: ComponentProps<'nav'>) {
   return (
     <nav
-      data-slot="app-shell-nav-list"
+      data-slot="app-nav"
       aria-label="Page navigation"
       className={cn(
         'flex min-w-0 items-center gap-6 overflow-x-auto border-b border-solid border-oc-border px-4 sm:px-6',
@@ -80,17 +80,17 @@ function AppShellNav({ className, ...props }: ComponentProps<'nav'>) {
   )
 }
 
-function AppShellNavGroup({ className, ...props }: ComponentProps<'div'>) {
+function AppNavGroup({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      data-slot="app-shell-nav-group"
+      data-slot="app-nav-group"
       className={cn('flex shrink-0 items-center gap-1', className)}
       {...props}
     />
   )
 }
 
-function AppShellNavItem({
+function AppNavItem({
   className,
   active = false,
   ...props
@@ -100,7 +100,7 @@ function AppShellNavItem({
   return (
     <button
       type="button"
-      data-slot="app-shell-nav-item"
+      data-slot="app-nav-item"
       data-active={active || undefined}
       className={cn(
         'relative inline-flex h-11 shrink-0 cursor-pointer items-center px-2 text-sm font-medium text-oc-muted-foreground outline-none transition-colors',
@@ -113,4 +113,4 @@ function AppShellNavItem({
   )
 }
 
-export { AppShell, AppShellNav, AppShellNavGroup, AppShellNavItem }
+export { AppLayout, AppNav, AppNavGroup, AppNavItem }

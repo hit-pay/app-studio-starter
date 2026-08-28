@@ -20,6 +20,26 @@ export const DOC_COMPONENTS = [
     description: 'shadcn-compatible toast manager with semantic types, actions, close, and placement.',
   },
   {
+    to: '/alert' as const,
+    name: 'Alert',
+    description: 'In-page notification with semantic variants and an optional action.',
+  },
+  {
+    to: '/alert-dialog' as const,
+    name: 'Alert Dialog',
+    description: 'shadcn-compatible confirmation dialog primitives with Orchid styling.',
+  },
+  {
+    to: '/empty' as const,
+    name: 'Empty',
+    description: 'shadcn-compatible compound empty state with Orchid media variants.',
+  },
+  {
+    to: '/list-item' as const,
+    name: 'List Item',
+    description: 'Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.',
+  },
+  {
     to: '/badge' as const,
     name: 'Badge',
     description: 'Standard variants with Orchid tones, appearances, removal, and user roles.',
@@ -224,9 +244,9 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: '/app-shell' as const,
-    name: 'App Shell',
-    description: 'Embedded layout with page-title, tabs, and sub-sidebar variants.',
+    to: '/app-layout' as const,
+    name: 'App Layout',
+    description: 'Embedded application layout with page header, tabs, or sub-sidebar.',
   },
   {
     to: '/sub-sidebar' as const,
@@ -234,39 +254,24 @@ export const DOC_BLOCKS = [
     description: 'Grouped secondary navigation with a back header and active page state.',
   },
   {
-    to: '/alert' as const,
-    name: 'Alert',
-    description: 'In-page notification with semantic variants and an optional action.',
-  },
-  {
-    to: '/list-item' as const,
-    name: 'List Item',
-    description: 'Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.',
-  },
-  {
-    to: '/empty' as const,
-    name: 'Empty',
-    description: 'shadcn-compatible compound empty state with Orchid media variants.',
-  },
-  {
     to: '/customer-card' as const,
     name: 'Customer Card',
     description: 'Small, Big, and Float customer or beneficiary cards.',
   },
   {
-    to: '/page-toolbar' as const,
-    name: 'Page Toolbar',
-    description: 'Back or close on the left; actions on the right.',
+    to: '/form-page' as const,
+    name: 'Form Page',
+    description: 'Full-page form layout with a header and scrollable form content.',
   },
   {
-    to: '/page-title' as const,
-    name: 'Page Title',
-    description: 'Heading with actions on the right and optional box below.',
+    to: '/page' as const,
+    name: 'Page',
+    description: 'Standard route page with a header and scrollable content area.',
   },
   {
-    to: '/alert-dialog' as const,
-    name: 'Alert Dialog',
-    description: 'shadcn-compatible confirmation dialog primitives with Orchid styling.',
+    to: '/confirm-dialog' as const,
+    name: 'Confirm Dialog',
+    description: 'Prebuilt Promise-based confirmation dialog invoked with useConfirmDialog.',
   },
   {
     to: '/schema-form' as const,
