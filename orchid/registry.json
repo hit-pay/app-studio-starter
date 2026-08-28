@@ -926,13 +926,12 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "Searchable pick (single/multi). Checkbox + SelectAll; chips for multi.",
+      "description": "shadcn-compatible searchable single or multi-select with optional Orchid checkbox items and Select All.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
       ],
       "registryDependencies": [
-        "@orchid/button",
         "@orchid/checkbox",
         "@orchid/badge",
         "@orchid/input-group"

@@ -169,7 +169,7 @@ export const DOC_FORMS = [
   {
     to: '/combobox' as const,
     name: 'Combobox',
-    description: 'Searchable select; multiple chips, checkbox items, and select all.',
+    description: 'shadcn-compatible searchable select with Orchid chips and bulk selection helpers.',
   },
   {
     to: '/quantity-input' as const,

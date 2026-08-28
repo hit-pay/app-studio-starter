@@ -19,7 +19,7 @@ import {
   useComboboxAnchor,
 } from '@/components/ui/combobox'
 import { Field, FieldDescription, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
-import type { BadgeColor } from '@/components/ui/badge'
+import type { BadgeTone } from '@/components/ui/badge'
 
 export const Route = createFileRoute('/combobox')({
   component: ComboboxExamplesPage,
@@ -55,12 +55,12 @@ const paymentChannels = [
 
 const fulfilmentTypes = ['In Store', 'Shipping', 'Pickup', 'Online Order', 'Digital Products'] as const
 
-const fulfilmentBadgeColor: Record<(typeof fulfilmentTypes)[number], BadgeColor> = {
-  'In Store': 'Green',
-  Shipping: 'Purple',
-  Pickup: 'Blue',
-  'Online Order': 'DarkBlue',
-  'Digital Products': 'Grey',
+const fulfilmentBadgeTone: Record<(typeof fulfilmentTypes)[number], BadgeTone> = {
+  'In Store': 'green',
+  Shipping: 'purple',
+  Pickup: 'blue',
+  'Online Order': 'dark-blue',
+  'Digital Products': 'grey',
 }
 
 const products = [
@@ -111,7 +111,7 @@ function ComboboxFulfilmentExample() {
               <ComboboxChip
                 key={item}
                 aria-label={item}
-                color={fulfilmentBadgeColor[item as (typeof fulfilmentTypes)[number]]}
+                tone={fulfilmentBadgeTone[item as (typeof fulfilmentTypes)[number]]}
               >
                 {item}
               </ComboboxChip>
@@ -181,7 +181,7 @@ function ComboboxCustomersExample({
             <ComboboxItem key={item.email} value={item} variant={variant} className="items-start">
               <span className="flex min-w-0 flex-col">
                 <span>{item.name}</span>
-                <span className="text-xs leading-[1.5] text-oc-muted-foreground">{item.email}</span>
+                <span className="text-xs leading-normal text-oc-muted-foreground">{item.email}</span>
               </span>
             </ComboboxItem>
           )}
@@ -256,7 +256,33 @@ function ComboboxLocationsExample() {
 
 function ComboboxExamplesPage() {
   return (
-    <DocExamplePage to="/combobox">
+    <DocExamplePage
+      to="/combobox"
+      usage={`import {
+  Combobox,
+  ComboboxContent,
+  ComboboxEmpty,
+  ComboboxInput,
+  ComboboxItem,
+  ComboboxList,
+} from '@/components/ui/combobox'
+
+const currencies = ['SGD', 'USD', 'MYR']
+
+<Combobox items={currencies}>
+  <ComboboxInput placeholder="Search currencies" />
+  <ComboboxContent>
+    <ComboboxEmpty>No currencies found.</ComboboxEmpty>
+    <ComboboxList>
+      {(currency) => (
+        <ComboboxItem key={currency} value={currency}>
+          {currency}
+        </ComboboxItem>
+      )}
+    </ComboboxList>
+  </ComboboxContent>
+</Combobox>`}
+    >
       <div className="grid gap-8 md:grid-cols-2">
         <FieldGroup>
           <Field>
