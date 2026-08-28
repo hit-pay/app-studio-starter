@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react'
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { cva, type VariantProps } from 'class-variance-authority'
@@ -6,7 +8,7 @@ import { CheckIcon, ChevronRightIcon } from 'lucide-react'
 import { cn } from '@/lib/utils'
 
 const dropdownMenuItemVariants = cva(
-  'group/dropdown-menu-item relative flex cursor-pointer items-center gap-2 rounded p-2 text-xs leading-[1.5] text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-inset:pl-7 data-[preview=Hover]:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+  'group/dropdown-menu-item relative flex cursor-pointer items-center gap-2 rounded p-2 text-xs leading-normal text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-inset:pl-7 data-[preview=Hover]:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
   {
     variants: {
       variant: {
@@ -57,7 +59,7 @@ function DropdownMenuContent({
         <MenuPrimitive.Popup
           data-slot="dropdown-menu-content"
           className={cn(
-            'z-50 box-border flex max-h-(--available-height) w-[162px] flex-col origin-(--transform-origin) overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-1 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95',
+            'z-50 box-border flex max-h-(--available-height) w-(--anchor-width) min-w-32 flex-col origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-1 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:overflow-hidden data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
@@ -83,7 +85,7 @@ function DropdownMenuLabel({
       data-slot="dropdown-menu-label"
       data-inset={inset}
       className={cn(
-        'px-2 py-1 text-[10px] font-medium leading-[18px] tracking-[0.3px] text-oc-muted-foreground uppercase data-inset:pl-7',
+        'px-2 py-1 text-[10px] leading-4.5 font-medium tracking-[0.3px] text-oc-muted-foreground uppercase data-inset:pl-7',
         className,
       )}
       {...props}
@@ -150,7 +152,7 @@ function DropdownMenuSubContent({
   return (
     <DropdownMenuContent
       data-slot="dropdown-menu-sub-content"
-      className={cn("w-auto min-w-[96px] rounded-lg bg-oc-background p-1 text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className )}
+      className={cn("w-auto min-w-24 rounded-lg bg-oc-background p-1 text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.1),0_3px_22px_rgba(38,42,50,0.09)] duration-100 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95", className )}
       align={align}
       alignOffset={alignOffset}
       side={side}
@@ -255,7 +257,10 @@ function DropdownMenuShortcut({
   return (
     <span
       data-slot="dropdown-menu-shortcut"
-      className={cn('ml-auto flex shrink-0 items-center gap-0.5', className)}
+      className={cn(
+        'ml-auto flex shrink-0 items-center gap-0.5 text-xs tracking-widest text-oc-muted-foreground group-focus/dropdown-menu-item:text-oc-foreground',
+        className,
+      )}
       {...props}
     />
   )
@@ -269,7 +274,7 @@ function DropdownMenuKey({
     <span
       data-slot="dropdown-menu-key"
       className={cn(
-        'flex size-5 items-center justify-center rounded bg-oc-dark-blue-soft pl-0.5 pr-1 font-mono text-sm leading-[1.4] text-oc-muted-foreground group-hover/dropdown-menu-item:bg-oc-background group-focus/dropdown-menu-item:bg-oc-background group-data-[preview=Hover]/dropdown-menu-item:bg-oc-background',
+        'flex size-5 items-center justify-center rounded bg-oc-dark-blue-soft pr-1 pl-0.5 font-mono text-sm leading-snug text-oc-muted-foreground group-hover/dropdown-menu-item:bg-oc-background group-focus/dropdown-menu-item:bg-oc-background group-data-[preview=Hover]/dropdown-menu-item:bg-oc-background',
         className,
       )}
       {...props}

@@ -12,7 +12,7 @@ export const DOC_COMPONENTS = [
   {
     to: '/dropdown-menu' as const,
     name: 'Dropdown Menu',
-    description: 'Item states and grouped or ungrouped menus.',
+    description: 'shadcn-compatible items, selection, submenus, and shortcuts with Orchid styling.',
   },
   {
     to: '/toast' as const,
@@ -236,7 +236,7 @@ export const DOC_BLOCKS = [
   {
     to: '/empty' as const,
     name: 'Empty',
-    description: 'Centered empty state with icon, title, description, and actions.',
+    description: 'shadcn-compatible compound empty state with Orchid media variants.',
   },
   {
     to: '/customer-card' as const,

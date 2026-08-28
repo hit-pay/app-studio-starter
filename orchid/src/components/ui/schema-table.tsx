@@ -28,7 +28,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from './dropdown-menu'
-import { Empty } from './empty'
+import { Empty, EmptyContent, EmptyHeader, EmptyMedia, EmptyTitle } from './empty'
 import { Field, FieldLabel } from './field'
 import {
   InputGroup,
@@ -344,7 +344,7 @@ function SchemaTableFilterPopover({ table }: { table: SchemaTableApi }) {
           </Button>
         }
       />
-      <PopoverContent align="end" className="w-[280px] gap-3 p-3">
+      <PopoverContent align="end" className="w-70 gap-3 p-3">
         {filters.map((filter) => (
           <Field key={filter.key}>
             <FieldLabel>{filter.title}</FieldLabel>
@@ -475,7 +475,7 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
       <PopoverContent align="end" className="max-h-80 w-72 gap-0 overflow-y-auto p-2">
         {locked.length > 0 ? (
           <div className="flex flex-col gap-0.5 pb-1">
-            <p className="px-2 py-1 text-[10px] font-medium leading-[18px] tracking-[0.3px] text-oc-muted-foreground uppercase">
+            <p className="px-2 py-1 text-[10px] leading-4.5 font-medium tracking-[0.3px] text-oc-muted-foreground uppercase">
               Fixed columns
             </p>
             {locked.map((column) => (
@@ -493,7 +493,7 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
         ) : null}
         {active.length > 0 ? (
           <div className="flex flex-col gap-0.5">
-            <p className="px-2 py-1 text-[10px] font-medium leading-[18px] tracking-[0.3px] text-oc-muted-foreground uppercase">
+            <p className="px-2 py-1 text-[10px] leading-4.5 font-medium tracking-[0.3px] text-oc-muted-foreground uppercase">
               Active columns
             </p>
             {active.map((column) => {
@@ -577,7 +577,7 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
 
   return (
     <>
-      <div className="min-w-0 max-w-[11rem] md:hidden">
+      <div className="min-w-0 max-w-44 md:hidden">
         <Select
           value={table.query.tab}
           onValueChange={(value) => {
@@ -678,11 +678,15 @@ function SchemaTable({
           <TableBody>
             {table.rows.length === 0 ? (
               <TableEmpty>
-                <Empty
-                  variant="Default"
-                  title="No data to display"
-                  actions={emptyActions}
-                />
+                <Empty>
+                  <EmptyHeader>
+                    <EmptyMedia variant="search">
+                      <SearchIcon />
+                    </EmptyMedia>
+                    <EmptyTitle>No data to display</EmptyTitle>
+                  </EmptyHeader>
+                  {emptyActions ? <EmptyContent>{emptyActions}</EmptyContent> : null}
+                </Empty>
               </TableEmpty>
             ) : (
               table.rows.map((row) => (

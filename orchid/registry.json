@@ -211,10 +211,9 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "Zero-data / no results / upgrade CTA. variant Default|Search|Upgrade.",
+      "description": "shadcn-compatible compound empty state with Orchid media variants.",
       "dependencies": [
-        "class-variance-authority",
-        "lucide-react"
+        "class-variance-authority"
       ],
       "registryDependencies": [],
       "files": [
@@ -348,7 +347,7 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
-      "description": "Overflow/grouped actions on a trigger. Item variant default|destructive.",
+      "description": "shadcn-compatible menu with items, checkbox and radio selection, submenus, and Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",

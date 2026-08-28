@@ -1,82 +1,106 @@
-import type { ComponentProps, ReactNode } from 'react'
-import { cva } from 'class-variance-authority'
-import { FileTextIcon, SearchIcon, TriangleAlertIcon } from 'lucide-react'
+import * as React from 'react'
+import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const emptyIconVariants = cva(
-  'relative inline-flex items-center justify-center rounded-full border border-solid p-4',
+function Empty({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="empty"
+      className={cn(
+        'flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-xl p-6 text-center text-balance',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function EmptyHeader({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="empty-header"
+      className={cn('flex max-w-sm flex-col items-center gap-2', className)}
+      {...props}
+    />
+  )
+}
+
+const emptyMediaVariants = cva(
+  'mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
-        Default: 'border-oc-neutral-soft bg-oc-neutral',
-        Search: 'border-oc-neutral-soft bg-oc-neutral',
-        Upgrade: 'border-oc-warning-chip-border bg-oc-warning-soft',
+        default: 'bg-transparent',
+        icon: 'size-16 rounded-full border border-oc-neutral-soft bg-oc-neutral text-oc-muted-foreground [&_svg:not([class*=size-])]:size-8',
+        search:
+          'size-16 rounded-full border border-oc-neutral-soft bg-oc-neutral text-oc-muted-foreground [&_svg:not([class*=size-])]:size-8',
+        upgrade:
+          'size-16 rounded-full border border-oc-warning-chip-border bg-oc-warning-soft text-oc-warning [&_svg:not([class*=size-])]:size-8',
       },
     },
     defaultVariants: {
-      variant: 'Default',
+      variant: 'default',
     },
   },
 )
 
-const DEFAULT_ICON: Record<'Default' | 'Search' | 'Upgrade', ReactNode> = {
-  Default: <FileTextIcon className="size-8 text-oc-muted-foreground" />,
-  Search: <SearchIcon className="size-8 text-oc-muted-foreground" />,
-  Upgrade: <TriangleAlertIcon className="size-8 text-oc-warning" />,
-}
-
-function Empty({
+function EmptyMedia({
   className,
-  variant = 'Default',
-  title,
-  description,
-  icon,
-  badge,
-  actions,
+  variant = 'default',
   ...props
-}: ComponentProps<'div'> & {
-  variant?: 'Default' | 'Search' | 'Upgrade'
-  title?: ReactNode
-  description?: ReactNode
-  icon?: ReactNode
-  badge?: boolean
-  actions?: ReactNode
-}) {
-  const showBadge = badge ?? variant !== 'Upgrade'
-
+}: React.ComponentProps<'div'> & VariantProps<typeof emptyMediaVariants>) {
   return (
     <div
-      data-slot="empty"
+      data-slot="empty-icon"
       data-variant={variant}
-      className={cn('flex w-full flex-col items-center justify-center gap-6', className)}
+      className={cn(emptyMediaVariants({ variant, className }))}
       {...props}
-    >
-      <div className={emptyIconVariants({ variant })}>
-        {icon ?? DEFAULT_ICON[variant]}
-        {showBadge ? (
-          <span className="absolute -top-px -right-px inline-flex size-5 items-center justify-center rounded-full border border-solid border-oc-neutral-soft bg-oc-muted-foreground text-[11px] font-medium leading-none text-white">
-            !
-          </span>
-        ) : null}
-      </div>
-
-      {title || description ? (
-        <div className="flex w-full flex-col items-center gap-2 text-center">
-          {title ? (
-            <p className="text-base font-medium leading-[1.4] text-oc-foreground">{title}</p>
-          ) : null}
-          {description ? (
-            <p className="text-sm leading-[1.5] text-oc-muted-foreground">{description}</p>
-          ) : null}
-        </div>
-      ) : null}
-
-      {actions ? (
-        <div className="flex flex-wrap items-center justify-center gap-2">{actions}</div>
-      ) : null}
-    </div>
+    />
   )
 }
 
-export { Empty }
+function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="empty-title"
+      className={cn('text-base leading-snug font-medium text-oc-foreground', className)}
+      {...props}
+    />
+  )
+}
+
+function EmptyDescription({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="empty-description"
+      className={cn(
+        'text-sm leading-normal text-oc-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-oc-primary',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+function EmptyContent({ className, ...props }: React.ComponentProps<'div'>) {
+  return (
+    <div
+      data-slot="empty-content"
+      className={cn(
+        'flex w-full max-w-sm min-w-0 flex-col items-center gap-2.5 text-sm text-balance',
+        className,
+      )}
+      {...props}
+    />
+  )
+}
+
+export {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+}

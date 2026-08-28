@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import {
   ChevronDownIcon,
@@ -14,11 +15,18 @@ import { ButtonGroup } from '@/components/ui/button-group'
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
   DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 
@@ -44,8 +52,30 @@ function OpenButton({ children }: { children: React.ReactNode }) {
 }
 
 function DropdownExamplesPage() {
+  const [showArchived, setShowArchived] = useState(false)
+  const [currency, setCurrency] = useState('sgd')
+
   return (
-    <DocExamplePage to="/dropdown-menu">
+    <DocExamplePage
+      to="/dropdown-menu"
+      usage={`import { Button } from '@/components/ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu'
+
+<DropdownMenu>
+  <DropdownMenuTrigger render={<Button variant="outline" />}>
+    Open menu
+  </DropdownMenuTrigger>
+  <DropdownMenuContent>
+    <DropdownMenuItem>Edit</DropdownMenuItem>
+    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+  </DropdownMenuContent>
+</DropdownMenu>`}
+    >
       <div className="space-y-6">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Dropdown Menu
@@ -54,6 +84,7 @@ function DropdownExamplesPage() {
           <DropdownMenuItem>
             <PencilIcon />
             Edit invoice
+            <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <SendIcon />
@@ -161,6 +192,39 @@ function DropdownExamplesPage() {
               <DropdownMenuItem>GrabPay</DropdownMenuItem>
               <DropdownMenuItem>WeChat Pay</DropdownMenuItem>
             </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Selection and submenu
+        </p>
+        <DropdownMenu>
+          <DropdownMenuTrigger render={<Button variant="outline" />}>
+            View options
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuCheckboxItem
+              checked={showArchived}
+              onCheckedChange={setShowArchived}
+            >
+              Show archived
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel>Currency</DropdownMenuLabel>
+            <DropdownMenuRadioGroup value={currency} onValueChange={setCurrency}>
+              <DropdownMenuRadioItem value="sgd">SGD</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="usd">USD</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>More tools</DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem>Duplicate invoice</DropdownMenuItem>
+                <DropdownMenuItem>Download PDF</DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
