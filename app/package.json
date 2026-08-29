@@ -9,7 +9,6 @@
     "generate-routes": "bun --bun tsr generate",
     "dev": "vite --host 127.0.0.1 --port 5176",
     "build": "bun --bun vite build",
-    "publish": "bun run build && sprite-env services signal app-studio TERM",
     "screenshot": "bun scripts/preview-check.mjs",
     "start": "bun start.mjs",
     "preview": "bun start-preview.mjs",

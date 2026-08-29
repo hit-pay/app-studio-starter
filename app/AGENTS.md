@@ -273,12 +273,12 @@ Prefer one focused screen with dialogs for simple create/edit flows. Add tabs or
 5. Implement the complete vertical slices, including persistence when needed.
 6. Review the changed code for broken imports, route mistakes, unsafe SQL, missing states, and disconnected actions.
 7. If routes were added or renamed, run `bun run generate-routes`.
-8. Run `bun run lint` once after all edits. This script is the TypeScript check (`tsc --noEmit`). Fix errors introduced by the work.
-9. Run `bun run publish` once after lint succeeds. Publishing builds the app and restarts the live Sprite service.
+8. Run `bun run lint` once after all edits. This script is the TypeScript check (`tsc --noEmit`). Fix every error before continuing.
+9. Run `bun run build` after lint succeeds. This is the required production-build verification. Wait for it to exit; if it fails, inspect the build output, fix the source, and rerun lint and build until both succeed. The host backend restarts the live Sprite service after generation completes.
 
-On Sprite, do not start extra `dev`, `vite`, `start`, or `preview` servers. Do not run lint or publish after every file.
+On Sprite, do not start extra `dev`, `vite`, `start`, or `preview` servers. Do not run lint or build after every file.
 
-`bun run publish` is mandatory for implementation work in Sprite. Do not say the app is finished if publishing fails.
+`bun run build` is mandatory for implementation work in Sprite, and only a zero exit code counts as success. Do not signal, restart, stop, or delete the `app-studio` service yourself. Do not say the app is finished if the final source has not passed both lint and build.
 
 ## Browser checks
 
@@ -300,11 +300,11 @@ The app is done only when:
 - relevant validation and database constraints exist
 - loading, empty, error, submitting, and success states work
 - only required routes and actions were added
-- TypeScript passes
-- publishing succeeds in Sprite
+- the final source passes `bun run lint`
+- the final source passes `bun run build` with a zero exit code
 
 Do not require a database, CRUD surface, role system, dashboard summary, or seed data when the requested app does not need it.
 
 ## Final response
 
-After completion, respond briefly in the user's language. State that the app was built and published, then list the main business actions now available. Mention a blocker instead of claiming completion when persistence, authorization, validation, or publishing is not actually working.
+After completion, respond briefly in the user's language. State that the app was built successfully, then list the main business actions now available. Mention a blocker instead of claiming completion when persistence, authorization, validation, or the production build is not actually working.
