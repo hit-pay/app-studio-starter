@@ -2,6 +2,7 @@ import { readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 import tailwindcss from '@tailwindcss/vite'
+import mdx from '@mdx-js/rollup'
 import { defineConfig } from 'vitest/config'
 import viteReact from '@vitejs/plugin-react'
 import type { Plugin } from 'vite'
@@ -51,7 +52,7 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 2000,
   },
-  plugins: [publicOrchidTokens(), tailwindcss(), viteReact()],
+  plugins: [publicOrchidTokens(), mdx(), tailwindcss(), viteReact()],
   test: {
     environment: 'jsdom',
     css: false,

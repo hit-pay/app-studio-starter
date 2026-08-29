@@ -11,8 +11,9 @@
       "registryDependencies": [
         "@orchid/schema-form",
         "@orchid/schema-table",
-        "@orchid/app-layout",
+        "@orchid/app-sidebar",
         "@orchid/sub-sidebar",
+        "@orchid/sidebar",
         "@orchid/alert",
         "@orchid/list-item",
         "@orchid/empty",
@@ -120,12 +121,12 @@
         {
           "path": "src/components/ui/schema-form.tsx",
           "type": "registry:ui",
-          "target": "@ui/schema-form.tsx"
+          "target": "@components/schema-form.tsx"
         },
         {
           "path": "src/components/ui/schema-form-model.ts",
           "type": "registry:file",
-          "target": "@ui/schema-form-model.ts"
+          "target": "@components/schema-form-model.ts"
         }
       ]
     },
@@ -151,27 +152,30 @@
         {
           "path": "src/components/ui/schema-table.tsx",
           "type": "registry:ui",
-          "target": "@ui/schema-table.tsx"
+          "target": "@components/schema-table.tsx"
         },
         {
           "path": "src/components/ui/schema-table-model.ts",
           "type": "registry:file",
-          "target": "@ui/schema-table-model.ts"
+          "target": "@components/schema-table-model.ts"
         }
       ]
     },
     {
-      "name": "app-layout",
+      "name": "app-sidebar",
       "type": "registry:ui",
-      "title": "App Layout",
-      "description": "Embedded application layout with config-driven tabs or a built-in child sidebar.",
+      "title": "App Sidebar",
+      "description": "JSON-configured navigation with inline accordion children or a back-enabled Sub Sidebar per item.",
       "dependencies": [],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "@orchid/sidebar",
+        "@orchid/sub-sidebar"
+      ],
       "files": [
         {
-          "path": "src/components/ui/app-layout.tsx",
+          "path": "src/components/ui/app-sidebar.tsx",
           "type": "registry:ui",
-          "target": "@ui/app-layout.tsx"
+          "target": "@components/app-sidebar.tsx"
         }
       ]
     },
@@ -190,6 +194,24 @@
           "path": "src/components/ui/sub-sidebar.tsx",
           "type": "registry:ui",
           "target": "@ui/sub-sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sidebar",
+      "type": "registry:ui",
+      "title": "Sidebar",
+      "description": "Grouped application navigation with icons, active items, labels, and a composable footer.",
+      "dependencies": [
+        "@base-ui/react",
+        "lucide-react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/sidebar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/sidebar.tsx"
         }
       ]
     },
@@ -284,7 +306,7 @@
         {
           "path": "src/components/ui/form-modal.tsx",
           "type": "registry:ui",
-          "target": "@ui/form-modal.tsx"
+          "target": "@components/form-modal.tsx"
         }
       ]
     },
@@ -304,7 +326,7 @@
         {
           "path": "src/components/ui/form-page.tsx",
           "type": "registry:ui",
-          "target": "@ui/form-page.tsx"
+          "target": "@components/form-page.tsx"
         }
       ]
     },
@@ -321,7 +343,7 @@
         {
           "path": "src/components/ui/page.tsx",
           "type": "registry:ui",
-          "target": "@ui/page.tsx"
+          "target": "@components/page.tsx"
         }
       ]
     },
@@ -360,7 +382,7 @@
         {
           "path": "src/components/ui/confirmation-modal.tsx",
           "type": "registry:ui",
-          "target": "@ui/confirmation-modal.tsx"
+          "target": "@components/confirmation-modal.tsx"
         }
       ]
     },

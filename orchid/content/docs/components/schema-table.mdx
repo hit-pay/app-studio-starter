@@ -1,0 +1,294 @@
+import { SchemaTableDemo } from "../../../src/components/doc/demos/schema-table-demo";
+
+<SchemaTableDemo />
+
+## Usage
+
+```tsx
+import {
+  EllipsisVerticalIcon,
+  EyeIcon,
+  EyeOffIcon,
+  PlusIcon,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  SchemaTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useSchemaTable,
+} from "@/components/schema-table";
+
+function ProductSelectionActions() {
+  return (
+    <>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeIcon />
+        Publish
+      </Button>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeOffIcon />
+        Unpublish
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button
+              variant="Secondary"
+              style="Transparent"
+              size="Small"
+              iconOnly
+              aria-label="More actions"
+            >
+              <EllipsisVerticalIcon />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Archive</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  );
+}
+
+function ProductEmptyActions() {
+  return (
+    <Button variant="Primary" size="Small">
+      <PlusIcon />
+      Add new
+    </Button>
+  );
+}
+
+function ProductList() {
+  const table = useSchemaTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: SCHEMA_TABLE_EXAMPLE_ROWS,
+  });
+
+  return (
+    <SchemaTable
+      table={table}
+      selectionActions={<ProductSelectionActions />}
+      emptyActions={<ProductEmptyActions />}
+    />
+  );
+}
+```
+
+## Usage with TanStack Query
+
+```tsx
+import { useQuery } from "@tanstack/react-query";
+import {
+  EllipsisVerticalIcon,
+  EyeIcon,
+  EyeOffIcon,
+  PlusIcon,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  SchemaTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useSchemaTable,
+} from "@/components/schema-table";
+
+function ProductSelectionActions() {
+  return (
+    <>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeIcon />
+        Publish
+      </Button>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeOffIcon />
+        Unpublish
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button
+              variant="Secondary"
+              style="Transparent"
+              size="Small"
+              iconOnly
+              aria-label="More actions"
+            >
+              <EllipsisVerticalIcon />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Archive</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  );
+}
+
+function ProductEmptyActions() {
+  return (
+    <Button variant="Primary" size="Small">
+      <PlusIcon />
+      Add new
+    </Button>
+  );
+}
+
+function ProductList() {
+  const products = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
+    initialData: SCHEMA_TABLE_EXAMPLE_ROWS,
+    staleTime: 30_000,
+  });
+  const table = useSchemaTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: products.data,
+  });
+
+  return (
+    <SchemaTable
+      table={table}
+      selectionActions={<ProductSelectionActions />}
+      emptyActions={<ProductEmptyActions />}
+    />
+  );
+}
+```
+
+## Usage with TanStack DB
+
+```tsx
+import { QueryClient } from "@tanstack/query-core";
+import {
+  DbClient,
+  DbProvider,
+  collectionOptions,
+  useDbClient,
+  useLiveQuery,
+} from "@tanstack/react-db";
+import { queryCollectionOptions } from "@tanstack/query-db-collection";
+import {
+  EllipsisVerticalIcon,
+  EyeIcon,
+  EyeOffIcon,
+  PlusIcon,
+} from "lucide-react";
+import { Button } from "@/components/ui/button";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import {
+  SchemaTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useSchemaTable,
+} from "@/components/schema-table";
+
+function ProductSelectionActions() {
+  return (
+    <>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeIcon />
+        Publish
+      </Button>
+      <Button variant="Secondary" style="Transparent" size="Small">
+        <EyeOffIcon />
+        Unpublish
+      </Button>
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button
+              variant="Secondary"
+              style="Transparent"
+              size="Small"
+              iconOnly
+              aria-label="More actions"
+            >
+              <EllipsisVerticalIcon />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Archive</DropdownMenuItem>
+          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+    </>
+  );
+}
+
+function ProductEmptyActions() {
+  return (
+    <Button variant="Primary" size="Small">
+      <PlusIcon />
+      Add new
+    </Button>
+  );
+}
+
+const queryClient = new QueryClient();
+const dbClient = new DbClient({ queryClient });
+
+const productCollection = collectionOptions("products", (client) =>
+  queryCollectionOptions({
+    id: "products",
+    queryKey: ["products"],
+    staleTime: 30_000,
+    queryClient: client.requireDependency<QueryClient>("queryClient"),
+    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
+    getKey: (item) => item.id,
+  }),
+);
+
+function ProductList() {
+  useDbClient().collection(productCollection);
+  const { data: rows } = useLiveQuery({
+    query: (q) => q.from({ product: productCollection }),
+  });
+  const table = useSchemaTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: rows ?? SCHEMA_TABLE_EXAMPLE_ROWS,
+  });
+
+  return (
+    <SchemaTable
+      table={table}
+      selectionActions={<ProductSelectionActions />}
+      emptyActions={<ProductEmptyActions />}
+    />
+  );
+}
+
+function ProductsPage() {
+  return (
+    <DbProvider client={dbClient}>
+      <ProductList />
+    </DbProvider>
+  );
+}
+```

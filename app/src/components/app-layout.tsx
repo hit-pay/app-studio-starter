@@ -147,10 +147,7 @@ function AppSidebar({ className, ...props }: ComponentProps<'aside'>) {
   return (
     <aside
       data-slot="app-sidebar"
-      className={cn(
-        'flex h-full w-64 shrink-0 flex-col bg-oc-background',
-        className,
-      )}
+      className={cn('flex h-full w-64 shrink-0 flex-col bg-oc-background', className)}
       {...props}
     />
   )
@@ -161,7 +158,10 @@ function AppSidebarContent({ className, ...props }: ComponentProps<'nav'>) {
     <nav
       data-slot="app-sidebar-content"
       aria-label="Application navigation"
-      className={cn('flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 py-4', className)}
+      className={cn(
+        'flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 py-4',
+        className,
+      )}
       {...props}
     />
   )
@@ -192,7 +192,5 @@ function AppSidebarItem({
   )
 }
 
-export {
-  AppLayout,
-}
+export { AppLayout }
 export type { AppNavigationItem }

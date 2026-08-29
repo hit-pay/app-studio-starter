@@ -1,0 +1,33 @@
+import { EmptyDemo } from '../../../src/components/doc/demos/empty-demo'
+
+<EmptyDemo />
+
+## Usage
+
+```tsx
+import { FileTextIcon } from 'lucide-react'
+import { Button } from '@/components/ui/button'
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from '@/components/ui/empty'
+
+<Empty>
+  <EmptyHeader>
+    <EmptyMedia variant="icon">
+      <FileTextIcon />
+    </EmptyMedia>
+    <EmptyTitle>No invoices yet</EmptyTitle>
+    <EmptyDescription>
+      Create an invoice to bill a customer.
+    </EmptyDescription>
+  </EmptyHeader>
+  <EmptyContent>
+    <Button>Create invoice</Button>
+  </EmptyContent>
+</Empty>
+```

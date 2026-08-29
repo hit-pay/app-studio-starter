@@ -1,0 +1,50 @@
+import { SidebarDemo } from '../../../src/components/doc/demos/sidebar-demo'
+
+<SidebarDemo />
+
+## Usage
+
+```tsx
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarItem,
+  SidebarSubmenuIndicator,
+} from '@/components/ui/sidebar'
+
+<Sidebar>
+  <SidebarHeader>Commerce</SidebarHeader>
+  <SidebarContent>
+    <SidebarGroup>
+      <SidebarItem href="/orders" icon={<ClipboardListIcon />} active>
+        Orders
+      </SidebarItem>
+      <SidebarItem href="/reports" icon={<BarChart3Icon />}>
+        Reports
+      </SidebarItem>
+    </SidebarGroup>
+
+    <SidebarGroup>
+      <SidebarGroupLabel>Others</SidebarGroupLabel>
+      <SidebarItem
+        href="/settings"
+        icon={<SettingsIcon />}
+        trailing={<SidebarSubmenuIndicator />}
+      >
+        Settings
+      </SidebarItem>
+    </SidebarGroup>
+  </SidebarContent>
+
+  <SidebarFooter>
+    {/* Render your custom account switcher here. */}
+  </SidebarFooter>
+</Sidebar>
+```
+
+`SidebarItem` supports Base UI polymorphic rendering through the `render` prop, so it can integrate with a router link without nesting anchors.
+`SidebarFooter` is only a layout slot; account and workspace switchers should be implemented by the consuming application.

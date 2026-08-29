@@ -1,0 +1,68 @@
+import { DatePickerDemo } from '../../../src/components/doc/demos/date-picker-demo'
+
+<DatePickerDemo />
+
+## Usage
+
+```tsx
+'use client'
+
+import { useState } from 'react'
+import { format } from 'date-fns'
+import { CalendarIcon } from 'lucide-react'
+
+import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Calendar } from '@/components/ui/calendar'
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover'
+
+function DatePickerDemo() {
+  const [date, setDate] = useState<Date | undefined>()
+
+  return (
+    <Popover>
+      <PopoverTrigger
+        render={
+          <Button
+            variant="outline"
+            data-empty={!date}
+            className={cn(
+              'justify-start text-left font-normal',
+              'data-[empty=true]:text-oc-muted-foreground',
+            )}
+          />
+        }
+      >
+        <CalendarIcon data-icon="inline-start" />
+        {date ? format(date, 'PPP') : <span>Pick a date</span>}
+      </PopoverTrigger>
+      <PopoverContent className="w-auto p-0" align="start">
+        <Calendar
+          className="p-5"
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+        />
+      </PopoverContent>
+    </Popover>
+  )
+}
+```
+
+## Orchid helper components
+
+```tsx
+import {
+  DatePicker,
+  DatePickerRange,
+  DateTimePicker,
+} from '@/components/ui/date-picker'
+
+<DatePicker placeholder="Invoice due date" />
+<DatePickerRange placeholder="Settlement period" />
+<DateTimePicker placeholder="Delivery date and time" />
+```

@@ -1,0 +1,25 @@
+import { StatCardDemo } from "../../../src/components/doc/demos/stat-card-demo";
+
+<StatCardDemo />
+
+## Usage
+
+```tsx
+import { CoinsIcon } from "lucide-react";
+import { StatCard } from "@/components/ui/stat-card";
+import { TooltipProvider } from "@/components/ui/tooltip";
+
+<TooltipProvider>
+  <StatCard
+    icon={<CoinsIcon />}
+    iconColor="Blue"
+    title="Gross volume"
+    content="SGD 11,170.00"
+    info
+    tooltip="Payment volume for this period"
+    percentValue={10}
+    percentTooltip="Compared to last month"
+    footer="Updated just now"
+  />
+</TooltipProvider>;
+```

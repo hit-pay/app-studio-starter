@@ -74,7 +74,7 @@ function QuantityInput({
     <div
       data-slot="quantity-input"
       className={cn(
-        'flex h-9 w-full items-center gap-2 overflow-clip rounded-lg border border-solid border-oc-border bg-oc-background px-1 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
+        'inline-flex h-9 min-w-40 items-center gap-2 overflow-clip rounded-lg border border-solid border-oc-border bg-oc-background px-1 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)]',
         disabled && 'pointer-events-none opacity-50',
         className,
       )}

@@ -1,0 +1,28 @@
+import { SheetDemo } from "../../../src/components/doc/demos/sheet-demo";
+
+<SheetDemo />
+
+## Usage
+
+```tsx
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+
+<Sheet>
+  <SheetTrigger render={<Button variant="outline" />}>Details</SheetTrigger>
+  <SheetContent side="right">
+    <SheetHeader>
+      <SheetTitle>Invoice peek</SheetTitle>
+      <SheetDescription>Read-only side panel.</SheetDescription>
+    </SheetHeader>
+    <div className="p-4">{/* peek content */}</div>
+  </SheetContent>
+</Sheet>;
+```

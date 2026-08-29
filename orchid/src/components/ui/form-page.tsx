@@ -115,7 +115,10 @@ function FormPageContent({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="form-page-content"
-      className={cn('min-h-0 flex-1 overflow-y-auto', className)}
+      className={cn(
+        'flex min-h-0 flex-1 flex-wrap content-start justify-center gap-6 overflow-y-auto px-6 py-8',
+        className,
+      )}
       {...props}
     />
   )

@@ -13,7 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
-import { Route as AppLayoutRouteImport } from './routes/app-layout'
+import { Route as AppSidebarRouteImport } from './routes/app-sidebar'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
@@ -56,6 +56,7 @@ import { Route as ScrollAreaRouteImport } from './routes/scroll-area'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as SheetRouteImport } from './routes/sheet'
+import { Route as SidebarRouteImport } from './routes/sidebar'
 import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SpinnerRouteImport } from './routes/spinner'
@@ -88,9 +89,9 @@ const AlertDialogRoute = AlertDialogRouteImport.update({
   path: '/alert-dialog',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AppLayoutRoute = AppLayoutRouteImport.update({
-  id: '/app-layout',
-  path: '/app-layout',
+const AppSidebarRoute = AppSidebarRouteImport.update({
+  id: '/app-sidebar',
+  path: '/app-sidebar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AvatarRoute = AvatarRouteImport.update({
@@ -303,6 +304,11 @@ const SheetRoute = SheetRouteImport.update({
   path: '/sheet',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SidebarRoute = SidebarRouteImport.update({
+  id: '/sidebar',
+  path: '/sidebar',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SkeletonRoute = SkeletonRouteImport.update({
   id: '/skeleton',
   path: '/skeleton',
@@ -364,7 +370,7 @@ export interface FileRoutesByFullPath {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-layout': typeof AppLayoutRoute
+  '/app-sidebar': typeof AppSidebarRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -407,6 +413,7 @@ export interface FileRoutesByFullPath {
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
   '/sheet': typeof SheetRoute
+  '/sidebar': typeof SidebarRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
@@ -424,7 +431,7 @@ export interface FileRoutesByTo {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-layout': typeof AppLayoutRoute
+  '/app-sidebar': typeof AppSidebarRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -467,6 +474,7 @@ export interface FileRoutesByTo {
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
   '/sheet': typeof SheetRoute
+  '/sidebar': typeof SidebarRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
@@ -485,7 +493,7 @@ export interface FileRoutesById {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-layout': typeof AppLayoutRoute
+  '/app-sidebar': typeof AppSidebarRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -528,6 +536,7 @@ export interface FileRoutesById {
   '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
   '/sheet': typeof SheetRoute
+  '/sidebar': typeof SidebarRoute
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
@@ -547,7 +556,7 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-layout'
+    | '/app-sidebar'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -590,6 +599,7 @@ export interface FileRouteTypes {
     | '/select'
     | '/setup'
     | '/sheet'
+    | '/sidebar'
     | '/skeleton'
     | '/slider'
     | '/spinner'
@@ -607,7 +617,7 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-layout'
+    | '/app-sidebar'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -650,6 +660,7 @@ export interface FileRouteTypes {
     | '/select'
     | '/setup'
     | '/sheet'
+    | '/sidebar'
     | '/skeleton'
     | '/slider'
     | '/spinner'
@@ -667,7 +678,7 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-layout'
+    | '/app-sidebar'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -710,6 +721,7 @@ export interface FileRouteTypes {
     | '/select'
     | '/setup'
     | '/sheet'
+    | '/sidebar'
     | '/skeleton'
     | '/slider'
     | '/spinner'
@@ -728,7 +740,7 @@ export interface RootRouteChildren {
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
   AlertDialogRoute: typeof AlertDialogRoute
-  AppLayoutRoute: typeof AppLayoutRoute
+  AppSidebarRoute: typeof AppSidebarRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
@@ -771,6 +783,7 @@ export interface RootRouteChildren {
   SelectRoute: typeof SelectRoute
   SetupRoute: typeof SetupRoute
   SheetRoute: typeof SheetRoute
+  SidebarRoute: typeof SidebarRoute
   SkeletonRoute: typeof SkeletonRoute
   SliderRoute: typeof SliderRoute
   SpinnerRoute: typeof SpinnerRoute
@@ -814,11 +827,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlertDialogRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/app-layout': {
-      id: '/app-layout'
-      path: '/app-layout'
-      fullPath: '/app-layout'
-      preLoaderRoute: typeof AppLayoutRouteImport
+    '/app-sidebar': {
+      id: '/app-sidebar'
+      path: '/app-sidebar'
+      fullPath: '/app-sidebar'
+      preLoaderRoute: typeof AppSidebarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/avatar': {
@@ -1115,6 +1128,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SheetRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sidebar': {
+      id: '/sidebar'
+      path: '/sidebar'
+      fullPath: '/sidebar'
+      preLoaderRoute: typeof SidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/skeleton': {
       id: '/skeleton'
       path: '/skeleton'
@@ -1200,7 +1220,7 @@ const rootRouteChildren: RootRouteChildren = {
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
   AlertDialogRoute: AlertDialogRoute,
-  AppLayoutRoute: AppLayoutRoute,
+  AppSidebarRoute: AppSidebarRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,
@@ -1243,6 +1263,7 @@ const rootRouteChildren: RootRouteChildren = {
   SelectRoute: SelectRoute,
   SetupRoute: SetupRoute,
   SheetRoute: SheetRoute,
+  SidebarRoute: SidebarRoute,
   SkeletonRoute: SkeletonRoute,
   SliderRoute: SliderRoute,
   SpinnerRoute: SpinnerRoute,

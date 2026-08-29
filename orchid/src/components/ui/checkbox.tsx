@@ -30,7 +30,7 @@ function CheckboxGroup({
   label?: ReactNode
 }) {
   return (
-    <div className="flex w-full flex-col items-start gap-2">
+    <div className="flex w-auto min-w-0 max-w-full flex-col items-start gap-2">
       {label ? (
         <p className="text-xs font-medium leading-normal text-oc-muted-foreground">{label}</p>
       ) : null}

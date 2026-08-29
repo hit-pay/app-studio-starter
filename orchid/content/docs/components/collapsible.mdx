@@ -1,0 +1,22 @@
+import { CollapsibleDemo } from "../../../src/components/doc/demos/collapsible-demo";
+
+<CollapsibleDemo />
+
+## Usage
+
+```tsx
+import { ChevronDownIcon } from "lucide-react";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+
+<Collapsible>
+  <CollapsibleTrigger>
+    Advanced
+    <ChevronDownIcon className="size-4 transition-transform group-data-open/collapsible:rotate-180" />
+  </CollapsibleTrigger>
+  <CollapsibleContent>{/* optional fields */}</CollapsibleContent>
+</Collapsible>;
+```

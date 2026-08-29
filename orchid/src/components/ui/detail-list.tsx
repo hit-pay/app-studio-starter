@@ -7,7 +7,7 @@ import { CopyButton } from './copy-button'
 const DetailListStyleContext = createContext<'Default' | 'Border'>('Default')
 
 const boxDetailVariants = cva(
-  'flex w-full flex-col rounded-lg border border-solid border-oc-border bg-oc-background',
+  'flex w-auto min-w-0 max-w-full flex-col rounded-lg border border-solid border-oc-border bg-oc-background',
   {
     variants: {
       style: {

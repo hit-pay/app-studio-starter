@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 
-const choiceCardGroupVariants = cva('flex w-full', {
+const choiceCardGroupVariants = cva('flex w-auto min-w-0 max-w-full', {
   variants: {
     alignment: {
       Vertical: 'flex-col gap-3',

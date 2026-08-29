@@ -1,46 +1,19 @@
-import { createFileRoute } from '@tanstack/react-router'
-import { DocExamplePage } from '@/components/doc/doc-example-page'
-import { Button } from '@/components/ui/button'
-import { Spinner } from '@/components/ui/spinner'
+import { createFileRoute } from "@tanstack/react-router";
 
-export const Route = createFileRoute('/spinner')({
+import { DocExamplePage } from "@/components/doc/doc-example-page";
+import { DocMdx } from "@/components/doc/doc-mdx";
+import SpinnerDemoDocs from "../../content/docs/components/spinner.mdx";
+
+export const Route = createFileRoute("/spinner")({
   component: SpinnerExamplesPage,
-})
+});
 
 function SpinnerExamplesPage() {
   return (
-    <DocExamplePage
-      to="/spinner"
-      usage={`import { Spinner } from '@/components/ui/spinner'
-import { Button } from '@/components/ui/button'
-
-<Spinner />
-<Spinner className="size-5" />
-<Button disabled>
-  <Spinner aria-label="Saving" />
-  Saving
-</Button>`}
-    >
-      <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Size
-        </p>
-        <div className="flex items-center gap-6">
-          <Spinner className="size-3" />
-          <Spinner className="size-4" />
-          <Spinner className="size-8" />
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          On a button
-        </p>
-        <Button disabled>
-          <Spinner aria-label="Saving" />
-          Saving invoice
-        </Button>
-      </div>
+    <DocExamplePage to="/spinner">
+      <DocMdx>
+        <SpinnerDemoDocs />
+      </DocMdx>
     </DocExamplePage>
-  )
+  );
 }

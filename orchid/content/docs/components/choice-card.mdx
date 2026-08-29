@@ -1,0 +1,25 @@
+import { ChoiceCardDemo } from "../../../src/components/doc/demos/choice-card-demo";
+
+<ChoiceCardDemo />
+
+## Usage
+
+```tsx
+import { CreditCardIcon, QrCodeIcon } from "lucide-react";
+import { ChoiceCard, ChoiceCardGroup } from "@/components/ui/choice-card";
+
+<ChoiceCardGroup defaultValue="paynow">
+  <ChoiceCard
+    value="paynow"
+    icon={<QrCodeIcon />}
+    title="PayNow"
+    description="Instant SGD transfers via QR"
+  />
+  <ChoiceCard
+    value="cards"
+    icon={<CreditCardIcon />}
+    title="Cards"
+    description="Visa, Mastercard, and AMEX"
+  />
+</ChoiceCardGroup>;
+```

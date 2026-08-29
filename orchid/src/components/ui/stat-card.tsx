@@ -50,7 +50,7 @@ function StatCard({
     <div
       data-slot="stat-card"
       className={cn(
-        'flex w-full min-w-0 flex-col overflow-hidden rounded-lg bg-oc-background',
+        'flex w-auto min-w-0 max-w-full flex-col overflow-hidden rounded-lg bg-oc-background',
         transparent ? 'border border-transparent' : 'border border-solid border-oc-border',
         className,
       )}

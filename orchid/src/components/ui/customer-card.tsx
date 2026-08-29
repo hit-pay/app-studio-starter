@@ -30,7 +30,7 @@ type CustomerCardData = {
 }
 
 const customerCardVariants = cva(
-  'group/customer-card relative flex w-full rounded-lg border border-solid border-oc-border bg-oc-background',
+  'group/customer-card relative flex w-auto min-w-0 max-w-full rounded-lg border border-solid border-oc-border bg-oc-background',
   {
     variants: {
       variant: {

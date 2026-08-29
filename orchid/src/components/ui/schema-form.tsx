@@ -2,7 +2,7 @@ import { type ReactNode } from 'react'
 import { useForm, useStore } from '@tanstack/react-form'
 
 import { cn } from '@/lib/utils'
-import { Checkbox, CheckboxGroup } from './checkbox'
+import { Checkbox, CheckboxGroup } from '@/components/ui/checkbox'
 import {
   Combobox,
   ComboboxChip,
@@ -15,8 +15,8 @@ import {
   ComboboxList,
   ComboboxValue,
   useComboboxAnchor,
-} from './combobox'
-import { DatePicker, DatePickerRange, DateTimePicker } from './date-picker'
+} from '@/components/ui/combobox'
+import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/ui/date-picker'
 import {
   Field,
   FieldContent,
@@ -24,28 +24,28 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from './field'
-import { Input } from './input'
+} from '@/components/ui/field'
+import { Input } from '@/components/ui/input'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupSeparator,
   InputGroupText,
-} from './input-group'
-import { RadioGroup, RadioGroupItem } from './radio-group'
+} from '@/components/ui/input-group'
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './select'
-import { FormSectionItem } from './form-section'
-import { QuantityInput } from './quantity-input'
-import { Slider } from './slider'
-import { Textarea } from './textarea'
-import { Switch } from './switch'
+} from '@/components/ui/select'
+import { FormSectionItem } from '@/components/ui/form-section'
+import { QuantityInput } from '@/components/ui/quantity-input'
+import { Slider } from '@/components/ui/slider'
+import { Textarea } from '@/components/ui/textarea'
+import { Switch } from '@/components/ui/switch'
 import {
   controlType,
   dateRangeValue,
@@ -71,8 +71,10 @@ import {
   SCHEMA_FORM_EXAMPLE_FIELDS,
   SCHEMA_FORM_TYPES,
   type FlatField,
+  type SchemaFormColumnSpan,
   type SchemaFormField,
   type SchemaFormFieldProps,
+  type SchemaFormLayout,
   type SchemaFormOption,
   type SchemaFormRenderField,
   type SchemaFormType,
@@ -246,14 +248,42 @@ function SchemaForm({
   id,
   className,
   renderField,
+  layout,
 }: {
   form: SchemaFormApi
   id?: string
   className?: string
   renderField?: (ctx: SchemaFormRenderField) => ReactNode
+  layout?: SchemaFormLayout
 }) {
   const { form, fields, values } = builder
   const flat = flattenFields(fields).filter((item) => isDisplayed(item, values))
+  const columns = layout?.columns ?? 1
+  const gridColumns = {
+    1: 'grid-cols-1',
+    2: 'grid-cols-1 md:grid-cols-2',
+    3: 'grid-cols-1 md:grid-cols-2 xl:grid-cols-3',
+    4: 'grid-cols-1 md:grid-cols-2 xl:grid-cols-4',
+  }[columns]
+
+  function columnSpan(item: FlatField): SchemaFormColumnSpan {
+    if (item.type === 'section' || item.type === 'section-item') return 'full'
+    return (
+      item.props?.colSpan ??
+      layout?.fields?.[item.path] ??
+      layout?.fields?.[item.key] ??
+      layout?.types?.[item.type as SchemaFormType] ??
+      1
+    )
+  }
+
+  function columnSpanClass(span: SchemaFormColumnSpan) {
+    if (span === 'full') return 'col-span-full'
+    if (span === 2) return 'md:col-span-2'
+    if (span === 3) return 'md:col-span-2 xl:col-span-3'
+    if (span === 4) return 'md:col-span-2 xl:col-span-4'
+    return undefined
+  }
 
   return (
     <form
@@ -265,9 +295,10 @@ function SchemaForm({
         void form.handleSubmit()
       }}
     >
-      <FieldGroup>
+      <FieldGroup className={cn('grid gap-6', gridColumns)}>
         {flat.map((item) => (
-          <form.Field
+          <div key={item.path} className={cn('min-w-0', columnSpanClass(columnSpan(item)))}>
+            <form.Field
             key={item.path}
             name={item.path}
             validators={{
@@ -731,7 +762,8 @@ function SchemaForm({
                 </Field>
               )
             }}
-          </form.Field>
+            </form.Field>
+          </div>
         ))}
       </FieldGroup>
 
@@ -749,9 +781,11 @@ export {
 }
 export type {
   SchemaFormApi,
+  SchemaFormColumnSpan,
   SchemaFormField,
   SchemaFormFieldProps,
   SchemaFormInstance,
+  SchemaFormLayout,
   SchemaFormOption,
   SchemaFormRenderField,
   SchemaFormType,

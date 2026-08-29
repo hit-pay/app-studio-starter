@@ -1,0 +1,50 @@
+import { DataTableDemo } from '../../../src/components/doc/demos/data-table-demo'
+
+<DataTableDemo />
+
+## Usage
+
+```tsx
+import {
+  DataTable,
+  DataTableBody,
+  DataTableCaption,
+  DataTableCell,
+  DataTableCellImage,
+  DataTableCellText,
+  DataTableFooter,
+  DataTableHead,
+  DataTableHeader,
+  DataTableRow,
+  DataTableSelectionBar,
+  DataTableToolbar,
+} from '@/components/ui/data-table'
+
+<DataTable>
+  <DataTableToolbar>Toolbar content</DataTableToolbar>
+  <DataTableSelectionBar count={1}>Selection actions</DataTableSelectionBar>
+
+  <DataTableHeader>
+    <DataTableRow>
+      <DataTableHead type="Checkbox">Select</DataTableHead>
+      <DataTableHead type="Image">Image</DataTableHead>
+      <DataTableHead>Product</DataTableHead>
+      <DataTableHead type="Empty">Note</DataTableHead>
+      <DataTableHead type="Icon">Actions</DataTableHead>
+    </DataTableRow>
+  </DataTableHeader>
+
+  <DataTableBody>
+    <DataTableRow>
+      <DataTableCell type="Checkbox"><Checkbox /></DataTableCell>
+      <DataTableCell type="Image"><DataTableCellImage /></DataTableCell>
+      <DataTableCell><DataTableCellText>Classic White Tee</DataTableCellText></DataTableCell>
+      <DataTableCell type="Empty" />
+      <DataTableCell type="Icon"><Button size="icon">...</Button></DataTableCell>
+    </DataTableRow>
+  </DataTableBody>
+
+  <DataTableFooter>Footer content</DataTableFooter>
+  <DataTableCaption>Orders for September 2026.</DataTableCaption>
+</DataTable>
+```

@@ -1,0 +1,32 @@
+import { DetailListDemo } from '../../../src/components/doc/demos/detail-list-demo'
+
+<DetailListDemo />
+
+## Usage
+
+```tsx
+import {
+  DetailList,
+  DetailListGrid,
+  DetailListHeader,
+  DetailListRow,
+  DetailListTitle,
+} from '@/components/ui/detail-list'
+
+<DetailList style="Border">
+  <DetailListHeader>
+    <DetailListTitle>Payment details</DetailListTitle>
+  </DetailListHeader>
+  <DetailListGrid columns={2}>
+    <DetailListRow label="Invoice" alignment="Vertical" copyValue="INV-2026-0842">
+      INV-2026-0842
+    </DetailListRow>
+    <DetailListRow label="Status" alignment="Vertical">
+      Paid
+    </DetailListRow>
+    <DetailListRow label="Amount" alignment="Vertical" size="Big" colSpan={2}>
+      SGD 128.00
+    </DetailListRow>
+  </DetailListGrid>
+</DetailList>
+```

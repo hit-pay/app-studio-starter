@@ -18,15 +18,23 @@ JSON-schema list with search, filters, sorting, pagination, and Orchid DataTable
 
 # Component
 
-## `app-layout` — App Layout
+## `app-sidebar` — App Sidebar
 
-Embedded application layout with config-driven tabs or a built-in child sidebar.
+JSON-configured application navigation that automatically composes Sidebar and Sub Sidebar.
 
 # Block
 
 ## `sub-sidebar` — Sub Sidebar
 
 Grouped secondary navigation with back header and active item styling.
+
+# Component
+
+## `sidebar` — Sidebar
+
+Grouped application navigation with icons, active items, labels, and a composable footer.
+
+# Block
 
 ## `alert` — Alert
 

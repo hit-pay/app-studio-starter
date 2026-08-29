@@ -1,0 +1,36 @@
+import { BadgeDemo } from '../../../src/components/doc/demos/badge-demo'
+
+<BadgeDemo />
+
+## Usage
+
+```tsx
+import {
+  Badge,
+  BadgeRemove,
+} from '@/components/ui/badge'
+import { CircleIcon } from 'lucide-react'
+
+<Badge>Default</Badge>
+<Badge variant="secondary">Secondary</Badge>
+<Badge variant="destructive">Destructive</Badge>
+<Badge variant="outline">Outline</Badge>
+
+<Badge tone="green">
+  <CircleIcon data-icon="inline-start" />
+  Paid
+</Badge>
+
+<Badge tone="orange" appearance="outline">
+  Pending
+</Badge>
+
+<Badge tone="blue">
+  Invoice
+  <BadgeRemove onClick={() => removeFilter()} />
+</Badge>
+
+<Badge render={<a href="/invoices" />}>
+  View invoices
+</Badge>
+```

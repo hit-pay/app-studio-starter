@@ -1,6 +1,6 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useHitPayUser } from '#/lib/hitpay'
-import { AppLayout } from '@/components/ui/app-layout'
+import { AppLayout } from '@/components/app-layout'
 import { Page, PageContent } from '@/components/ui/page'
 import { Spinner } from '@/components/ui/spinner'
 

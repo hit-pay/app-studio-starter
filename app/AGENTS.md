@@ -104,6 +104,7 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
 - `src/components/ui/`: complete preinstalled Orchid component catalog
 - `src/components/`: app-specific components
+- `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
 - `src/lib/hitpay.ts`: browser-only HitPay user, role, and member helpers
@@ -137,7 +138,7 @@ Never edit `.output/`, `.nitro/`, or `src/routeTree.gen.ts` by hand.
 
 The host dashboard owns the outer navigation, account controls, authentication gate, iframe, and app mount point. The generated app owns only the embedded pane.
 
-- Fill the pane with `AppLayout`.
+- Fill the pane with the App Studio-owned `AppLayout` from `@/components/app-layout`.
 - Keep the root document's `h-full`, but do not set `overflow-hidden` on the root document or body.
 - Render route content inside `AppLayout`. Use `PageContent` or `FormPageContent` as the scroll owner so headers and actions remain visible.
 - Do not add a full-screen website shell or host-dashboard clone.
@@ -161,11 +162,13 @@ Import components from:
 @/components/ui/<kebab-name>
 ```
 
+`AppLayout` is the exception: import it from `@/components/app-layout`. It belongs to the App Studio starter and must not be installed, replaced, or imported from Orchid.
+
 Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns `src/components/ui/`; never install official shadcn components into that directory. Orchid's shadcn-compatible components use the standard compound component names and lowercase variants where available. Read the component source for Orchid-specific extensions.
 
 Common choices:
 
-- application frame: `AppLayout`; configure tabs with `navigationItems` and child navigation with `sidebarItems`
+- application frame: the local `AppLayout` from `@/components/app-layout`; configure tabs with `navigationItems` and child navigation with `sidebarItems`
 - grouped navigation inside a nested settings or detail area: compose `SubSidebar`; do not use it as the application frame
 - standard route page: compose `Page`, `PageHeader`, and `PageContent`
 - standard modal forms: compose `FormModal` with `SchemaForm`; configure only its built-in cancel and save actions

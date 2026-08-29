@@ -164,6 +164,11 @@ export const DOC_COMPONENTS = [
     name: 'Sub Sidebar',
     description: 'Grouped secondary navigation with a back header and active page state.',
   },
+  {
+    to: '/sidebar' as const,
+    name: 'Sidebar',
+    description: 'Grouped application navigation with icons, active items, and a composable footer.',
+  },
 ] as const
 
 export function docComponentsByName() {
@@ -254,9 +259,9 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: '/app-layout' as const,
-    name: 'App Layout',
-    description: 'Embedded application layout with config-driven tabs or a built-in child sidebar.',
+    to: '/app-sidebar' as const,
+    name: 'App Sidebar',
+    description: 'JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.',
   },
   {
     to: '/page' as const,

@@ -1,0 +1,52 @@
+import { AlertDemo } from "../../../src/components/doc/demos/alert-demo";
+
+<AlertDemo />
+
+## Usage
+
+```tsx
+import {
+  Alert,
+  AlertAction,
+  AlertDescription,
+  AlertTitle,
+} from '@/components/ui/alert'
+import { Button } from '@/components/ui/button'
+import {
+  CheckCircleIcon,
+  InfoIcon,
+  TriangleAlertIcon,
+  XCircleIcon,
+} from 'lucide-react'
+
+<Alert>
+  <InfoIcon />
+  <AlertTitle>PayNow delay</AlertTitle>
+  <AlertDescription>
+    Payments may take longer than usual.
+  </AlertDescription>
+  <AlertAction placement="bottom">
+    <Button variant="Secondary" style="Border" size="Small">
+      View status
+    </Button>
+  </AlertAction>
+</Alert>
+
+<Alert variant="success">
+  <CheckCircleIcon />
+  <AlertTitle>Payment received</AlertTitle>
+  <AlertDescription>SGD 128.00 was paid successfully.</AlertDescription>
+</Alert>
+
+<Alert variant="warning">
+  <TriangleAlertIcon />
+  <AlertTitle>Low stock</AlertTitle>
+  <AlertDescription>SKU-TEA-12 has 3 units remaining.</AlertDescription>
+</Alert>
+
+<Alert variant="destructive">
+  <XCircleIcon />
+  <AlertTitle>Refund failed</AlertTitle>
+  <AlertDescription>Retry or contact the customer.</AlertDescription>
+</Alert>
+```

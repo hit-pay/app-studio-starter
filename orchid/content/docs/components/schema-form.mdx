@@ -1,0 +1,120 @@
+import { SchemaFormDemo } from "../../../src/components/doc/demos/schema-form-demo";
+
+<SchemaFormDemo />
+
+## Usage
+
+```tsx
+import { useState } from "react";
+
+import { DocCodePanel } from "@/components/doc/doc-code-panel";
+import { Button } from "@/components/ui/button";
+import { SchemaForm, useSchemaForm } from "@/components/schema-form";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
+
+// In src/routes/schema-form.tsx, ACCOUNT_FIELDS and DETAILS_FIELDS are the
+// complete schemas displayed by the Schema tab; TYPE_PROMPT feeds Prompt.
+function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
+  const code = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+  return <DocCodePanel filename={filename} code={code} />;
+}
+
+function SchemaFormShowcase() {
+  const account = useSchemaForm({ fields: ACCOUNT_FIELDS });
+  const details = useSchemaForm({ fields: DETAILS_FIELDS });
+  const [tab, setTab] = useState("result");
+  const validating = account.isSubmitting || details.isSubmitting;
+
+  return (
+    <div className="grid min-w-0 gap-6 xl:grid-cols-3">
+      <SchemaForm
+        form={account}
+        className="max-w-none"
+        layout={{
+          columns: 2,
+          fields: {
+            name: "full",
+            barcode: 1,
+          },
+          types: {
+            textarea: "full",
+            radio: 2,
+          },
+        }}
+      />
+      <SchemaForm form={details} className="max-w-none" />
+      <div className="flex min-w-0 flex-col gap-4">
+        <Button
+          variant="Primary"
+          disabled={validating}
+          aria-busy={validating}
+          onClick={() => void Promise.all([account.submit(), details.submit()])}
+        >
+          {validating ? "Validating…" : "Validate"}
+        </Button>
+        <Tabs
+          value={tab}
+          onValueChange={(value) => setTab(String(value))}
+          className="min-w-0 gap-3"
+        >
+          <TabsList variant="line">
+            <TabsTrigger value="result">Result</TabsTrigger>
+            <TabsTrigger value="errors">Errors</TabsTrigger>
+            <TabsTrigger value="schema">Schema</TabsTrigger>
+            <TabsTrigger value="prompt">Prompt</TabsTrigger>
+          </TabsList>
+          <TabsContent value="result" className="min-w-0">
+            <JsonPanel
+              filename="result.json"
+              data={{ account: account.values, details: details.values }}
+            />
+          </TabsContent>
+          <TabsContent value="errors" className="min-w-0">
+            <JsonPanel
+              filename="errors.json"
+              data={{ account: account.errors, details: details.errors }}
+            />
+          </TabsContent>
+          <TabsContent value="schema" className="min-w-0">
+            <JsonPanel
+              filename="fields.json"
+              data={{ account: ACCOUNT_FIELDS, details: DETAILS_FIELDS }}
+            />
+          </TabsContent>
+          <TabsContent value="prompt" className="min-w-0">
+            <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
+          </TabsContent>
+        </Tabs>
+      </div>
+    </div>
+  );
+}
+```
+
+## Column layout
+
+`columns` creates a responsive grid: one column on small screens, then the configured number of columns at the appropriate breakpoints. Rules can target fields by name or control type.
+
+```tsx
+const fields = [
+  {
+    key: "product_name",
+    title: "Product Name",
+    type: "input",
+    props: { colSpan: "full" },
+  },
+  { key: "sku", title: "SKU", type: "input" },
+  { key: "barcode", title: "Barcode", type: "input" },
+]
+
+<SchemaForm
+  form={form}
+  layout={{
+    columns: 2,
+    fields: { product_name: "full" },
+    types: { textarea: "full" },
+  }}
+/>
+```
+
+Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one column. `section` and `section-item` fields always span the full row.

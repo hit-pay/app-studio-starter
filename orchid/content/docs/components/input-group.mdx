@@ -1,0 +1,24 @@
+import { InputGroupDemo } from '../../../src/components/doc/demos/input-group-demo'
+
+<InputGroupDemo />
+
+## Usage
+
+```tsx
+import { SearchIcon } from 'lucide-react'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+} from '@/components/ui/input-group'
+
+<InputGroup>
+  <InputGroupInput placeholder="Search customers" />
+  <InputGroupAddon align="inline-end">
+    <InputGroupButton size="icon-xs" aria-label="Search">
+      <SearchIcon />
+    </InputGroupButton>
+  </InputGroupAddon>
+</InputGroup>
+```

@@ -26,7 +26,7 @@ const tabsListVariants = cva(
     variants: {
       variant: {
         default: 'gap-1 rounded-lg bg-oc-dark-blue-soft p-1',
-        line: 'gap-0 border-b border-oc-border bg-transparent group-data-horizontal/tabs:w-full group-data-vertical/tabs:border-r group-data-vertical/tabs:border-b-0',
+        line: 'max-w-full gap-0 border-b border-oc-border bg-transparent group-data-vertical/tabs:border-r group-data-vertical/tabs:border-b-0',
       },
     },
     defaultVariants: {

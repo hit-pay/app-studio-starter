@@ -20,7 +20,7 @@ function ListItem({
       data-selected={selected || undefined}
       data-layout={layout}
       className={cn(
-        'group/list-item relative flex w-full gap-3 rounded-lg border border-solid bg-oc-background px-4 py-3',
+        'group/list-item relative flex w-auto min-w-0 max-w-full gap-3 rounded-lg border border-solid bg-oc-background px-4 py-3',
         layout === 'Stack' && 'flex-col items-stretch gap-4',
         layout === 'Media' && 'items-center',
         layout === 'Default' && 'items-start',

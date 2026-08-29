@@ -1,0 +1,34 @@
+import { AvatarDemo } from "../../../src/components/doc/demos/avatar-demo";
+
+<AvatarDemo />
+
+## Usage
+
+```tsx
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from '@/components/ui/avatar'
+
+<Avatar>
+  <AvatarImage src="/avatar.jpg" alt="Priya Nair" />
+  <AvatarFallback>PN</AvatarFallback>
+  <AvatarBadge />
+</Avatar>
+
+<AvatarGroup>
+  <Avatar>
+    <AvatarImage src="/priya.jpg" alt="Priya Nair" />
+    <AvatarFallback>PN</AvatarFallback>
+  </Avatar>
+  <Avatar>
+    <AvatarImage src="/alex.jpg" alt="Alex Turner" />
+    <AvatarFallback>AT</AvatarFallback>
+  </Avatar>
+  <AvatarGroupCount>+2</AvatarGroupCount>
+</AvatarGroup>
+```

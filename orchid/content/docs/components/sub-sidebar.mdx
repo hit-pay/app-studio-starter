@@ -1,0 +1,29 @@
+import { SubSidebarDemo } from "../../../src/components/doc/demos/sub-sidebar-demo";
+
+<SubSidebarDemo />
+
+## Usage
+
+```tsx
+import {
+  SubSidebar,
+  SubSidebarContent,
+  SubSidebarGroup,
+  SubSidebarGroupLabel,
+  SubSidebarHeader,
+  SubSidebarItem,
+} from "@/components/ui/sub-sidebar";
+
+<SubSidebar>
+  <SubSidebarHeader>Settings</SubSidebarHeader>
+  <SubSidebarContent>
+    <SubSidebarGroup>
+      <SubSidebarGroupLabel>Account</SubSidebarGroupLabel>
+      <SubSidebarItem href="/business-details">Business Details</SubSidebarItem>
+      <SubSidebarItem href="/account-verification" active>
+        Account Verification
+      </SubSidebarItem>
+    </SubSidebarGroup>
+  </SubSidebarContent>
+</SubSidebar>;
+```

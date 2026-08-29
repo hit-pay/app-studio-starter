@@ -1,0 +1,36 @@
+import { ListItemDemo } from '../../../src/components/doc/demos/list-item-demo'
+
+<ListItemDemo />
+
+## Usage
+
+```tsx
+import {
+  ListItem,
+  ListItemBody,
+  ListItemTitle,
+  ListItemDescription,
+  ListItemMeta,
+  ListItemDetail,
+  ListItemHoverActions,
+  ListItemAction,
+} from '@/components/ui/list-item'
+import { Badge } from '@/components/ui/badge'
+import { MapPinIcon, PencilIcon } from 'lucide-react'
+
+<ListItem>
+  <ListItemBody>
+    <ListItemTitle>Priya Nair</ListItemTitle>
+    <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
+    <ListItemMeta>
+      <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+      <Badge tone="green">Paid</Badge>
+    </ListItemMeta>
+  </ListItemBody>
+  <ListItemHoverActions>
+    <ListItemAction aria-label="Edit">
+      <PencilIcon />
+    </ListItemAction>
+  </ListItemHoverActions>
+</ListItem>
+```

@@ -1,0 +1,25 @@
+import { ButtonDemo } from '../../../src/components/doc/demos/button-demo'
+
+<ButtonDemo />
+
+## Usage
+
+```tsx
+import { Button } from '@/components/ui/button'
+import { PlusIcon } from 'lucide-react'
+
+<Button>Create invoice</Button>
+<Button variant="outline">View details</Button>
+<Button variant="secondary">Save draft</Button>
+<Button variant="ghost">Cancel</Button>
+<Button variant="destructive">Refund</Button>
+<Button variant="link">View documentation</Button>
+
+<Button size="icon" aria-label="Create invoice">
+  <PlusIcon />
+</Button>
+
+<Button render={<a href="/invoices" />}>
+  View invoices
+</Button>
+```

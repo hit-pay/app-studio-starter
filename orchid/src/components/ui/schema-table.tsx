@@ -14,9 +14,9 @@ import {
 } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Badge, BadgeRemove } from './badge'
-import { Button } from './button'
-import { Checkbox } from './checkbox'
+import { Badge, BadgeRemove } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
+import { Checkbox } from '@/components/ui/checkbox'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -27,15 +27,15 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from './dropdown-menu'
-import { Empty, EmptyContent, EmptyHeader, EmptyMedia, EmptyTitle } from './empty'
-import { Field, FieldLabel } from './field'
+} from '@/components/ui/dropdown-menu'
+import { Empty, EmptyContent, EmptyHeader, EmptyMedia, EmptyTitle } from '@/components/ui/empty'
+import { Field, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from './input-group'
+} from '@/components/ui/input-group'
 import {
   Pagination,
   PaginationContent,
@@ -44,15 +44,15 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from './pagination'
-import { Popover, PopoverContent, PopoverTrigger } from './popover'
+} from '@/components/ui/pagination'
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './select'
+} from '@/components/ui/select'
 import {
   DataTable,
   DataTableBody,
@@ -65,7 +65,7 @@ import {
   DataTableRow,
   DataTableSelectionBar,
   DataTableToolbar,
-} from './data-table'
+} from '@/components/ui/data-table'
 import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,

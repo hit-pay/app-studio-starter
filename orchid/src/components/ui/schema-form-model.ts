@@ -35,7 +35,16 @@ export type SchemaFormFieldProps = {
   background?: boolean
   align?: 'start' | 'end'
   min?: number
+  colSpan?: SchemaFormColumnSpan
   [key: string]: unknown
+}
+
+export type SchemaFormColumnSpan = 1 | 2 | 3 | 4 | 'full'
+
+export type SchemaFormLayout = {
+  columns?: 1 | 2 | 3 | 4
+  fields?: Record<string, SchemaFormColumnSpan>
+  types?: Partial<Record<SchemaFormType, SchemaFormColumnSpan>>
 }
 
 /**
