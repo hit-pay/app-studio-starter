@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useHitPayUser } from '#/lib/hitpay'
 import { AppLayout } from '@/components/app-layout'
-import { Page, PageContent } from '@/components/ui/page'
+import { Page, PageContent } from '@/components/page'
 import { Spinner } from '@/components/ui/spinner'
 
 export const Route = createFileRoute('/')({ component: Home })
