@@ -1,119 +1,101 @@
-import { useState, type ComponentType } from 'react'
+import { useState } from 'react'
 import {
   BarChart3Icon,
-  CalendarDaysIcon,
-  CirclePercentIcon,
   ClipboardListIcon,
-  CreditCardIcon,
-  FileTextIcon,
-  GlobeIcon,
-  ImageIcon,
   LayoutGridIcon,
-  MapPinIcon,
-  MonitorIcon,
-  PaintbrushIcon,
+  PackageIcon,
   SettingsIcon,
   ShoppingBagIcon,
-  StoreIcon,
-  TicketCheckIcon,
-  TruckIcon,
   UsersIcon,
 } from 'lucide-react'
 
 import {
   Sidebar,
-  SidebarContent,
-  SidebarGroup,
-  SidebarGroupLabel,
-  SidebarHeader,
-  SidebarItem,
-  SidebarSubmenuIndicator,
+  type SidebarGroupConfig,
 } from '@/components/ui/sidebar'
 
-type NavigationItem = {
-  id: string
-  label: string
-  icon: ComponentType
-  submenu?: boolean
-}
-
-const groups: Array<{ label?: string; items: NavigationItem[] }> = [
+const groups: SidebarGroupConfig[] = [
   {
+    id: 'commerce',
     items: [
-      { id: 'web-pos', label: 'Web POS', icon: LayoutGridIcon },
-      { id: 'orders', label: 'Orders', icon: ClipboardListIcon },
-      { id: 'reports', label: 'Reports', icon: BarChart3Icon },
-      { id: 'customers', label: 'Customers', icon: UsersIcon },
-      { id: 'products', label: 'Products', icon: ShoppingBagIcon },
+      { id: 'web-pos', label: 'Web POS', icon: 'pos', href: '#web-pos' },
+      { id: 'orders', label: 'Orders', icon: 'orders', href: '#orders' },
+      { id: 'reports', label: 'Reports', icon: 'reports', href: '#reports' },
+      { id: 'customers', label: 'Customers', icon: 'customers', href: '#customers' },
+      {
+        id: 'products',
+        label: 'Products',
+        icon: 'products',
+        childrenMode: 'inline',
+        items: [
+          { id: 'all-products', label: 'All products', href: '#all-products' },
+          { id: 'collections', label: 'Collections', href: '#collections' },
+          { id: 'inventory', label: 'Inventory', href: '#inventory' },
+        ],
+      },
     ],
   },
   {
-    label: 'Marketing',
-    items: [{ id: 'discounts', label: 'Discounts', icon: CirclePercentIcon }],
-  },
-  {
-    label: 'Point of sale',
-    items: [
-      { id: 'terminals', label: 'Card Terminals', icon: CreditCardIcon },
-      { id: 'mall', label: 'Mall GTO Integrations', icon: StoreIcon },
-    ],
-  },
-  {
-    label: 'Online store',
-    items: [
-      { id: 'overview', label: 'Store Overview', icon: MonitorIcon },
-      { id: 'design', label: 'Store Design', icon: PaintbrushIcon },
-      { id: 'pages', label: 'Pages', icon: FileTextIcon },
-      { id: 'media', label: 'Media', icon: ImageIcon },
-      { id: 'coupons', label: 'Coupons', icon: TicketCheckIcon },
-      { id: 'booking', label: 'Booking', icon: CalendarDaysIcon },
-      { id: 'domain', label: 'Domain', icon: GlobeIcon },
-      { id: 'shipping', label: 'Shipping & Pickup', icon: TruckIcon },
-    ],
-  },
-  {
+    id: 'others',
     label: 'Others',
     items: [
-      { id: 'locations', label: 'Locations', icon: MapPinIcon },
-      { id: 'settings', label: 'Settings', icon: SettingsIcon, submenu: true },
+      {
+        id: 'settings',
+        label: 'Settings',
+        icon: 'settings',
+        childrenMode: 'sub-sidebar',
+        items: [
+          { id: 'general', label: 'General', href: '#general' },
+          { id: 'payments', label: 'Payments', href: '#payments' },
+          { id: 'notifications', label: 'Notifications', href: '#notifications' },
+        ],
+      },
     ],
   },
 ]
 
+const icons = {
+  pos: LayoutGridIcon,
+  orders: ClipboardListIcon,
+  reports: BarChart3Icon,
+  customers: UsersIcon,
+  products: ShoppingBagIcon,
+  settings: SettingsIcon,
+}
+
 function SidebarDemo() {
-  const [active, setActive] = useState('orders')
+  const [activeItem, setActiveItem] = useState('products')
+  const [activeSubItem, setActiveSubItem] = useState('all-products')
 
   return (
-    <div className="flex h-180 min-h-0">
-      <Sidebar>
-        <SidebarHeader>Commerce</SidebarHeader>
-        <SidebarContent>
-          {groups.map((group, index) => (
-            <SidebarGroup key={group.label ?? index}>
-              {group.label ? <SidebarGroupLabel>{group.label}</SidebarGroupLabel> : null}
-              {group.items.map((item) => {
-                const Icon = item.icon
-
-                return (
-                  <SidebarItem
-                    key={item.id}
-                    href={`#${item.id}`}
-                    icon={<Icon />}
-                    active={active === item.id}
-                    trailing={item.submenu ? <SidebarSubmenuIndicator /> : undefined}
-                    onClick={(event) => {
-                      event.preventDefault()
-                      setActive(item.id)
-                    }}
-                  >
-                    {item.label}
-                  </SidebarItem>
-                )
-              })}
-            </SidebarGroup>
-          ))}
-        </SidebarContent>
-      </Sidebar>
+    <div className="flex h-160 min-h-0 overflow-x-auto rounded-lg border border-oc-border">
+      <Sidebar
+        header="Commerce"
+        groups={groups}
+        icons={icons}
+        activeItem={activeItem}
+        activeSubItem={activeSubItem}
+        onItemChange={(id, item) => {
+          setActiveItem(id)
+          if (item.items?.length) setActiveSubItem(item.items[0]!.id)
+        }}
+        onSubItemChange={setActiveSubItem}
+        onSubSidebarClose={() => setActiveItem('')}
+        footer={
+          <div className="flex min-w-0 items-center gap-2">
+            <span className="grid size-8 shrink-0 place-items-center rounded bg-oc-primary text-oc-primary-foreground">
+              <PackageIcon className="size-4" />
+            </span>
+            <span className="min-w-0">
+              <span className="block truncate text-xs font-medium">My Store</span>
+              <span className="block truncate text-xs text-oc-muted-foreground">Custom footer</span>
+            </span>
+          </div>
+        }
+      />
+      <div className="grid min-w-80 flex-1 place-items-center bg-oc-background text-sm text-oc-muted-foreground">
+        Application content
+      </div>
     </div>
   )
 }

@@ -1,19 +1,19 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import SubSidebarDemoDocs from "../../content/docs/components/sub-sidebar.mdx";
+import { DocExamplePage } from '@/components/doc/doc-example-page'
+import { DocMdx } from '@/components/doc/doc-mdx'
+import SubSidebarDocs from '../../content/docs/components/sub-sidebar.mdx'
 
-export const Route = createFileRoute("/sub-sidebar")({
+export const Route = createFileRoute('/sub-sidebar')({
   component: SubSidebarExamplesPage,
-});
+})
 
 function SubSidebarExamplesPage() {
   return (
     <DocExamplePage to="/sub-sidebar">
       <DocMdx>
-        <SubSidebarDemoDocs />
+        <SubSidebarDocs />
       </DocMdx>
     </DocExamplePage>
-  );
+  )
 }

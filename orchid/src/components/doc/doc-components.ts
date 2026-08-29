@@ -70,31 +70,6 @@ export const DOC_COMPONENTS = [
     description: 'shadcn-compatible horizontal or vertical tabs with default and line variants.',
   },
   {
-    to: '/choice-card' as const,
-    name: 'Choice Card',
-    description: 'Selectable cards with left or center icon, no radio dot.',
-  },
-  {
-    to: '/stat-card' as const,
-    name: 'Stat Card',
-    description: 'Metric card with header divider, value, and percent badge.',
-  },
-  {
-    to: '/detail-list' as const,
-    name: 'Detail List',
-    description: 'Detail card with grid columns, colspan, and stacked rows.',
-  },
-  {
-    to: '/icon-group' as const,
-    name: 'Icon Group',
-    description: 'Icon cluster with Default and Border; dropdown, link, and copy.',
-  },
-  {
-    to: '/copy-button' as const,
-    name: 'Copy Button',
-    description: 'Copy icon that writes a value and shows Copied!.',
-  },
-  {
     to: '/skeleton' as const,
     name: 'Skeleton',
     description: 'shadcn-compatible placeholder pulse with Orchid styling.',
@@ -130,11 +105,6 @@ export const DOC_COMPONENTS = [
     description: 'shadcn-compatible semantic HTML table with Orchid styling.',
   },
   {
-    to: '/data-table' as const,
-    name: 'Data Table',
-    description: 'Orchid resizable data grid primitives used by SchemaTable.',
-  },
-  {
     to: '/command' as const,
     name: 'Command',
     description: 'shadcn-compatible cmdk palette with keyboard navigation and Orchid styling.',
@@ -153,21 +123,6 @@ export const DOC_COMPONENTS = [
     to: '/scroll-area' as const,
     name: 'Scroll Area',
     description: 'shadcn-compatible bounded scroll area with Orchid scrollbar styling.',
-  },
-  {
-    to: '/customer-card' as const,
-    name: 'Customer Card',
-    description: 'Small, Big, and Float customer or beneficiary cards.',
-  },
-  {
-    to: '/sub-sidebar' as const,
-    name: 'Sub Sidebar',
-    description: 'Grouped secondary navigation with a back header and active page state.',
-  },
-  {
-    to: '/sidebar' as const,
-    name: 'Sidebar',
-    description: 'Grouped application navigation with icons, active items, and a composable footer.',
   },
 ] as const
 
@@ -212,11 +167,6 @@ export const DOC_FORMS = [
     description: 'shadcn-compatible searchable select with Orchid chips and bulk selection helpers.',
   },
   {
-    to: '/quantity-input' as const,
-    name: 'Quantity Input',
-    description: 'Minus/plus stepper; click the value to type.',
-  },
-  {
     to: '/checkbox' as const,
     name: 'Checkbox',
     description: 'shadcn-compatible checkbox with Orchid states and an optional group helper.',
@@ -242,11 +192,6 @@ export const DOC_FORMS = [
     description: 'Single, range, and multiple date selection used by Date Picker.',
   },
   {
-    to: '/date-picker' as const,
-    name: 'Date Picker',
-    description: 'Shadcn-style Popover and Calendar composition with optional Orchid helpers.',
-  },
-  {
     to: '/form-section' as const,
     name: 'Form Section',
     description: 'Heading plus FormSectionGroup and FormSectionItem.',
@@ -259,9 +204,54 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: '/app-sidebar' as const,
-    name: 'App Sidebar',
+    to: '/sidebar' as const,
+    name: 'Sidebar',
     description: 'JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.',
+  },
+  {
+    to: '/sub-sidebar' as const,
+    name: 'Sub Sidebar',
+    description: 'JSON-configured flat child navigation with a blue active state.',
+  },
+  {
+    to: '/choice-card' as const,
+    name: 'Choice Card',
+    description: 'Selectable cards with left or center icon, no radio dot.',
+  },
+  {
+    to: '/copy-button' as const,
+    name: 'Copy Button',
+    description: 'Copy icon that writes a value and shows Copied!.',
+  },
+  {
+    to: '/customer-card' as const,
+    name: 'Customer Card',
+    description: 'Small, Big, and Float customer or beneficiary cards.',
+  },
+  {
+    to: '/date-picker' as const,
+    name: 'Date Picker',
+    description: 'Shadcn-style Popover and Calendar composition with optional Orchid helpers.',
+  },
+  {
+    to: '/detail-list' as const,
+    name: 'Detail List',
+    description: 'Detail card with grid columns, colspan, and stacked rows.',
+  },
+  {
+    to: '/icon-group' as const,
+    name: 'Icon Group',
+    description: 'Icon cluster with Default and Border; dropdown, link, and copy.',
+  },
+  {
+    to: '/quantity-input' as const,
+    name: 'Quantity Input',
+    description: 'Minus/plus stepper; click the value to type.',
+  },
+  {
+    to: '/stat-card' as const,
+    name: 'Stat Card',
+    description: 'Metric card with header divider, value, and percent badge.',
   },
   {
     to: '/page' as const,

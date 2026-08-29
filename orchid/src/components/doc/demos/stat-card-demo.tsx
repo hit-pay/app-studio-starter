@@ -9,7 +9,7 @@ import {
   StoreIcon,
   UsersIcon,
 } from "lucide-react";
-import { StatCard } from "@/components/ui/stat-card";
+import { StatCard } from "@/components/stat-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 function StatCardDemo() {

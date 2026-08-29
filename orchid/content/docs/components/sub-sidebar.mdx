@@ -1,29 +1,23 @@
-import { SubSidebarDemo } from "../../../src/components/doc/demos/sub-sidebar-demo";
+import { SubSidebarDemo } from '../../../src/components/doc/demos/sub-sidebar-demo'
 
 <SubSidebarDemo />
 
 ## Usage
 
 ```tsx
-import {
-  SubSidebar,
-  SubSidebarContent,
-  SubSidebarGroup,
-  SubSidebarGroupLabel,
-  SubSidebarHeader,
-  SubSidebarItem,
-} from "@/components/ui/sub-sidebar";
+import { SubSidebar } from '@/components/sub-sidebar'
 
-<SubSidebar>
-  <SubSidebarHeader>Settings</SubSidebarHeader>
-  <SubSidebarContent>
-    <SubSidebarGroup>
-      <SubSidebarGroupLabel>Account</SubSidebarGroupLabel>
-      <SubSidebarItem href="/business-details">Business Details</SubSidebarItem>
-      <SubSidebarItem href="/account-verification" active>
-        Account Verification
-      </SubSidebarItem>
-    </SubSidebarGroup>
-  </SubSidebarContent>
-</SubSidebar>;
+const items = [
+  { id: 'general', label: 'General settings' },
+  { id: 'tracking', label: 'Tracking tools' },
+  { id: 'seo', label: 'SEO' },
+]
+
+<SubSidebar
+  items={items}
+  activeItem={activeItem}
+  onItemChange={(id, item) => setActiveItem(id)}
+/>
 ```
+
+Sub Sidebar is configured through one JSON-compatible `items` array. It does not export item or content primitives. `AppLayout` composes it automatically when using sidebar mode.

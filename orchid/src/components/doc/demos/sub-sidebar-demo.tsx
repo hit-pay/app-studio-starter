@@ -1,70 +1,29 @@
-import { Link } from "@tanstack/react-router";
+import { useState } from 'react'
 
-import {
-  SubSidebar,
-  SubSidebarContent,
-  SubSidebarGroup,
-  SubSidebarGroupLabel,
-  SubSidebarHeader,
-  SubSidebarItem,
-} from "@/components/ui/sub-sidebar";
+import { SubSidebar } from '@/components/ui/sub-sidebar'
 
-const GROUPS = [
-  {
-    label: "Account",
-    items: ["Business Details", "Account Verification", "Bank Accounts"],
-  },
-  {
-    label: "Team",
-    items: ["Staff", "Audit Logs"],
-  },
-  {
-    label: "Online Store",
-    items: ["Store Settings"],
-  },
-  {
-    label: "Branding",
-    items: ["Checkout Customisation", "Order Form Customisation"],
-  },
-  {
-    label: "Communications",
-    items: ["Email Templates", "Notifications"],
-  },
-];
+const items = [
+  { id: 'general', label: 'General settings' },
+  { id: 'tracking', label: 'Tracking tools' },
+  { id: 'seo', label: 'SEO' },
+  { id: 'currency', label: 'Multi-currency converter' },
+  { id: 'tax', label: 'Tax settings' },
+  { id: 'labels', label: 'Button labels' },
+  { id: 'payments', label: 'Payment methods' },
+]
 
 function SubSidebarDemo() {
+  const [active, setActive] = useState('general')
+
   return (
-    <>
-      <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Settings navigation
-        </p>
-        <div className="h-160 overflow-hidden rounded-lg border border-solid border-oc-border">
-          <SubSidebar>
-            <SubSidebarHeader render={<Link to="/" />}>
-              Settings
-            </SubSidebarHeader>
-            <SubSidebarContent>
-              {GROUPS.map((group) => (
-                <SubSidebarGroup key={group.label}>
-                  <SubSidebarGroupLabel>{group.label}</SubSidebarGroupLabel>
-                  {group.items.map((item) => (
-                    <SubSidebarItem
-                      key={item}
-                      href={`#${item.toLowerCase().replaceAll(" ", "-")}`}
-                      active={item === "Checkout Customisation"}
-                    >
-                      {item}
-                    </SubSidebarItem>
-                  ))}
-                </SubSidebarGroup>
-              ))}
-            </SubSidebarContent>
-          </SubSidebar>
-        </div>
-      </div>
-    </>
-  );
+    <div className="h-120 overflow-hidden rounded-lg border border-oc-border">
+      <SubSidebar
+        items={items}
+        activeItem={active}
+        onItemChange={setActive}
+      />
+    </div>
+  )
 }
 
-export { SubSidebarDemo };
+export { SubSidebarDemo }

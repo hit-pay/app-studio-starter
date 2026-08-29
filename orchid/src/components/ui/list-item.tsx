@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { EllipsisIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { CopyButton } from './copy-button'
+import { CopyButton } from '@/components/copy-button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
 function ListItem({

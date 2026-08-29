@@ -2,7 +2,7 @@ import { createContext, useContext, type ComponentProps, type ReactNode } from '
 import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
-import { CopyButton } from './copy-button'
+import { CopyButton } from '@/components/copy-button'
 
 const DetailListStyleContext = createContext<'Default' | 'Border'>('Default')
 

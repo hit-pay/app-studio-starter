@@ -5,7 +5,7 @@ import {
   DetailListHeader,
   DetailListRow,
   DetailListTitle,
-} from '@/components/ui/detail-list'
+} from '@/components/detail-list'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 

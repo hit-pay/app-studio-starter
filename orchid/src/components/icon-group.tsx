@@ -3,7 +3,7 @@ import { cva, type VariantProps } from 'class-variance-authority'
 import { EllipsisIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
+import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from '@/components/ui/dropdown-menu'
 
 const iconGroupVariants = cva('inline-flex items-center gap-0.5', {
   variants: {

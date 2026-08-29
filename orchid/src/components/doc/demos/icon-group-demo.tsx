@@ -1,5 +1,5 @@
 import { SquareArrowOutUpRightIcon } from 'lucide-react'
-import { CopyButton } from '@/components/ui/copy-button'
+import { CopyButton } from '@/components/copy-button'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
 import {
   IconGroup,
@@ -7,7 +7,7 @@ import {
   IconGroupLink,
   IconGroupMenu,
   iconGroupItemVariants,
-} from '@/components/ui/icon-group'
+} from '@/components/icon-group'
 
 
 function ExampleGroup({ style }: { style?: 'Default' | 'Border' }) {

@@ -6,7 +6,7 @@ import {
   ShoppingBagIcon,
   StoreIcon,
 } from "lucide-react";
-import { ChoiceCard, ChoiceCardGroup } from "@/components/ui/choice-card";
+import { ChoiceCard, ChoiceCardGroup } from "@/components/choice-card";
 
 function ChoiceCardDemo() {
   return (

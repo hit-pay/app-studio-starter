@@ -3,11 +3,11 @@ import { cva } from 'class-variance-authority'
 import { PencilIcon, UserPlusIcon, XCircleIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Avatar, AvatarFallback, AvatarImage } from './avatar'
-import { Button } from './button'
-import { Badge } from './badge'
-import { CopyButton } from './copy-button'
-import { Skeleton } from './skeleton'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Button } from '@/components/ui/button'
+import { Badge } from '@/components/ui/badge'
+import { CopyButton } from '@/components/copy-button'
+import { Skeleton } from '@/components/ui/skeleton'
 
 type CustomerCardAddress = {
   street?: string

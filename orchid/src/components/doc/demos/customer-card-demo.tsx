@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { MessageCircleIcon } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { CustomerCard, type CustomerCardData } from '@/components/ui/customer-card'
+import { CustomerCard, type CustomerCardData } from '@/components/customer-card'
 
 const CUSTOMER: CustomerCardData = {
   name: 'Alex Turner',

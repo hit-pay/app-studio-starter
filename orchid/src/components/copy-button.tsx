@@ -2,7 +2,7 @@ import { useState, type ComponentProps } from 'react'
 import { CopyIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
 
 function CopyButton({
   className,

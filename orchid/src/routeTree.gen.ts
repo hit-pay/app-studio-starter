@@ -13,7 +13,6 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
-import { Route as AppSidebarRouteImport } from './routes/app-sidebar'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
@@ -28,7 +27,6 @@ import { Route as CommandRouteImport } from './routes/command'
 import { Route as ConfirmationModalRouteImport } from './routes/confirmation-modal'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
-import { Route as DataTableRouteImport } from './routes/data-table'
 import { Route as DatePickerRouteImport } from './routes/date-picker'
 import { Route as DetailListRouteImport } from './routes/detail-list'
 import { Route as DialogRouteImport } from './routes/dialog'
@@ -87,11 +85,6 @@ const AlertRoute = AlertRouteImport.update({
 const AlertDialogRoute = AlertDialogRouteImport.update({
   id: '/alert-dialog',
   path: '/alert-dialog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AppSidebarRoute = AppSidebarRouteImport.update({
-  id: '/app-sidebar',
-  path: '/app-sidebar',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AvatarRoute = AvatarRouteImport.update({
@@ -162,11 +155,6 @@ const CopyButtonRoute = CopyButtonRouteImport.update({
 const CustomerCardRoute = CustomerCardRouteImport.update({
   id: '/customer-card',
   path: '/customer-card',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DataTableRoute = DataTableRouteImport.update({
-  id: '/data-table',
-  path: '/data-table',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DatePickerRoute = DatePickerRouteImport.update({
@@ -370,7 +358,6 @@ export interface FileRoutesByFullPath {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-sidebar': typeof AppSidebarRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -385,7 +372,6 @@ export interface FileRoutesByFullPath {
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
-  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
@@ -431,7 +417,6 @@ export interface FileRoutesByTo {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-sidebar': typeof AppSidebarRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -446,7 +431,6 @@ export interface FileRoutesByTo {
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
-  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
@@ -493,7 +477,6 @@ export interface FileRoutesById {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
-  '/app-sidebar': typeof AppSidebarRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -508,7 +491,6 @@ export interface FileRoutesById {
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
-  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
@@ -556,7 +538,6 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-sidebar'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -571,7 +552,6 @@ export interface FileRouteTypes {
     | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
-    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
@@ -617,7 +597,6 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-sidebar'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -632,7 +611,6 @@ export interface FileRouteTypes {
     | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
-    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
@@ -678,7 +656,6 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
-    | '/app-sidebar'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -693,7 +670,6 @@ export interface FileRouteTypes {
     | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
-    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
@@ -740,7 +716,6 @@ export interface RootRouteChildren {
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
   AlertDialogRoute: typeof AlertDialogRoute
-  AppSidebarRoute: typeof AppSidebarRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
@@ -755,7 +730,6 @@ export interface RootRouteChildren {
   ConfirmationModalRoute: typeof ConfirmationModalRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
-  DataTableRoute: typeof DataTableRoute
   DatePickerRoute: typeof DatePickerRoute
   DetailListRoute: typeof DetailListRoute
   DialogRoute: typeof DialogRoute
@@ -825,13 +799,6 @@ declare module '@tanstack/react-router' {
       path: '/alert-dialog'
       fullPath: '/alert-dialog'
       preLoaderRoute: typeof AlertDialogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/app-sidebar': {
-      id: '/app-sidebar'
-      path: '/app-sidebar'
-      fullPath: '/app-sidebar'
-      preLoaderRoute: typeof AppSidebarRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/avatar': {
@@ -930,13 +897,6 @@ declare module '@tanstack/react-router' {
       path: '/customer-card'
       fullPath: '/customer-card'
       preLoaderRoute: typeof CustomerCardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/data-table': {
-      id: '/data-table'
-      path: '/data-table'
-      fullPath: '/data-table'
-      preLoaderRoute: typeof DataTableRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/date-picker': {
@@ -1220,7 +1180,6 @@ const rootRouteChildren: RootRouteChildren = {
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
   AlertDialogRoute: AlertDialogRoute,
-  AppSidebarRoute: AppSidebarRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,
@@ -1235,7 +1194,6 @@ const rootRouteChildren: RootRouteChildren = {
   ConfirmationModalRoute: ConfirmationModalRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
-  DataTableRoute: DataTableRoute,
   DatePickerRoute: DatePickerRoute,
   DetailListRoute: DetailListRoute,
   DialogRoute: DialogRoute,

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import {
   SchemaForm,
   useSchemaForm,
+  type SchemaFormChange,
   type SchemaFormField,
 } from "@/components/ui/schema-form";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
@@ -324,6 +325,7 @@ function SchemaFormDemo() {
   const account = useSchemaForm({ fields: ACCOUNT_FIELDS });
   const details = useSchemaForm({ fields: DETAILS_FIELDS });
   const [tab, setTab] = useState("result");
+  const [lastChange, setLastChange] = useState<SchemaFormChange | null>(null);
   const validating = account.isSubmitting || details.isSubmitting;
 
   return (
@@ -331,6 +333,7 @@ function SchemaFormDemo() {
       <div className="grid min-w-0 gap-6 xl:grid-cols-3">
         <SchemaForm
           form={account}
+          onChange={(_values, change) => setLastChange(change)}
           className="max-w-none"
           layout={{
             columns: 2,
@@ -364,7 +367,11 @@ function SchemaFormDemo() {
             <TabsContent value="result" className="min-w-0">
               <JsonPanel
                 filename="result.json"
-                data={{ account: account.values, details: details.values }}
+                data={{
+                  account: account.values,
+                  details: details.values,
+                  lastChange,
+                }}
               />
             </TabsContent>
             <TabsContent value="errors" className="min-w-0">

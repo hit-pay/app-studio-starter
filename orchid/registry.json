@@ -11,9 +11,8 @@
       "registryDependencies": [
         "@orchid/schema-form",
         "@orchid/schema-table",
-        "@orchid/app-sidebar",
-        "@orchid/sub-sidebar",
         "@orchid/sidebar",
+        "@orchid/sub-sidebar",
         "@orchid/alert",
         "@orchid/list-item",
         "@orchid/empty",
@@ -45,7 +44,6 @@
         "@orchid/breadcrumb",
         "@orchid/pagination",
         "@orchid/table",
-        "@orchid/data-table",
         "@orchid/command",
         "@orchid/kbd",
         "@orchid/collapsible",
@@ -134,7 +132,7 @@
       "name": "schema-table",
       "type": "registry:ui",
       "title": "Schema Table",
-      "description": "JSON-schema list with search, filters, sorting, pagination, and Orchid DataTable primitives.",
+      "description": "JSON-schema list with search, filters, sorting, pagination, and integrated table rendering.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -145,8 +143,7 @@
         "@orchid/input-group",
         "@orchid/pagination",
         "@orchid/popover",
-        "@orchid/select",
-        "@orchid/data-table"
+        "@orchid/select"
       ],
       "files": [
         {
@@ -162,46 +159,10 @@
       ]
     },
     {
-      "name": "app-sidebar",
-      "type": "registry:ui",
-      "title": "App Sidebar",
-      "description": "JSON-configured navigation with inline accordion children or a back-enabled Sub Sidebar per item.",
-      "dependencies": [],
-      "registryDependencies": [
-        "@orchid/sidebar",
-        "@orchid/sub-sidebar"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/app-sidebar.tsx",
-          "type": "registry:ui",
-          "target": "@components/app-sidebar.tsx"
-        }
-      ]
-    },
-    {
-      "name": "sub-sidebar",
-      "type": "registry:ui",
-      "title": "Sub Sidebar",
-      "description": "Grouped secondary navigation with back header and active item styling.",
-      "dependencies": [
-        "@base-ui/react",
-        "lucide-react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/ui/sub-sidebar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/sub-sidebar.tsx"
-        }
-      ]
-    },
-    {
       "name": "sidebar",
       "type": "registry:ui",
       "title": "Sidebar",
-      "description": "Grouped application navigation with icons, active items, labels, and a composable footer.",
+      "description": "JSON-configured navigation with inline accordion children or a back-enabled Sub Sidebar per item.",
       "dependencies": [
         "@base-ui/react",
         "lucide-react"
@@ -211,7 +172,22 @@
         {
           "path": "src/components/ui/sidebar.tsx",
           "type": "registry:ui",
-          "target": "@ui/sidebar.tsx"
+          "target": "@components/sidebar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "sub-sidebar",
+      "type": "registry:ui",
+      "title": "Sub Sidebar",
+      "description": "Simple flat child navigation for AppLayout sidebar mode with a blue active state.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/sub-sidebar.tsx",
+          "type": "registry:ui",
+          "target": "@components/sub-sidebar.tsx"
         }
       ]
     },
@@ -286,9 +262,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/customer-card.tsx",
+          "path": "src/components/customer-card.tsx",
           "type": "registry:ui",
-          "target": "@ui/customer-card.tsx"
+          "target": "@components/customer-card.tsx"
         }
       ]
     },
@@ -580,9 +556,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/choice-card.tsx",
+          "path": "src/components/choice-card.tsx",
           "type": "registry:ui",
-          "target": "@ui/choice-card.tsx"
+          "target": "@components/choice-card.tsx"
         }
       ]
     },
@@ -599,9 +575,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/stat-card.tsx",
+          "path": "src/components/stat-card.tsx",
           "type": "registry:ui",
-          "target": "@ui/stat-card.tsx"
+          "target": "@components/stat-card.tsx"
         }
       ]
     },
@@ -619,9 +595,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/detail-list.tsx",
+          "path": "src/components/detail-list.tsx",
           "type": "registry:ui",
-          "target": "@ui/detail-list.tsx"
+          "target": "@components/detail-list.tsx"
         }
       ]
     },
@@ -639,9 +615,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/icon-group.tsx",
+          "path": "src/components/icon-group.tsx",
           "type": "registry:ui",
-          "target": "@ui/icon-group.tsx"
+          "target": "@components/icon-group.tsx"
         }
       ]
     },
@@ -658,9 +634,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/copy-button.tsx",
+          "path": "src/components/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/copy-button.tsx"
+          "target": "@components/copy-button.tsx"
         }
       ]
     },
@@ -786,25 +762,6 @@
           "path": "src/components/ui/table.tsx",
           "type": "registry:ui",
           "target": "@ui/table.tsx"
-        }
-      ]
-    },
-    {
-      "name": "data-table",
-      "type": "registry:ui",
-      "title": "Data Table",
-      "description": "Orchid resizable data grid primitives with selection, toolbar, image, and typed cells.",
-      "dependencies": [
-        "lucide-react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/data-table.tsx",
-          "type": "registry:ui",
-          "target": "@ui/data-table.tsx"
         }
       ]
     },
@@ -1053,9 +1010,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/quantity-input.tsx",
+          "path": "src/components/quantity-input.tsx",
           "type": "registry:ui",
-          "target": "@ui/quantity-input.tsx"
+          "target": "@components/quantity-input.tsx"
         }
       ]
     },
@@ -1167,9 +1124,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/date-picker.tsx",
+          "path": "src/components/date-picker.tsx",
           "type": "registry:ui",
-          "target": "@ui/date-picker.tsx"
+          "target": "@components/date-picker.tsx"
         }
       ]
     },

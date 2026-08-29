@@ -20,7 +20,10 @@ function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
 }
 
 function SchemaFormShowcase() {
-  const account = useSchemaForm({ fields: ACCOUNT_FIELDS });
+  const account = useSchemaForm({
+    fields: ACCOUNT_FIELDS,
+    onSubmit: async (values) => saveAccount(values),
+  });
   const details = useSchemaForm({ fields: DETAILS_FIELDS });
   const [tab, setTab] = useState("result");
   const validating = account.isSubmitting || details.isSubmitting;
@@ -29,6 +32,10 @@ function SchemaFormShowcase() {
     <div className="grid min-w-0 gap-6 xl:grid-cols-3">
       <SchemaForm
         form={account}
+        onChange={(values, change) => {
+          console.log(change.path, change.paths, change.previousValue, change.value);
+          previewAccount(values);
+        }}
         className="max-w-none"
         layout={{
           columns: 2,
@@ -89,6 +96,31 @@ function SchemaFormShowcase() {
     </div>
   );
 }
+```
+
+## Change callback
+
+`SchemaForm` accepts `onChange?: (values: SchemaFormValues, change: SchemaFormChange) => void`.
+It runs once for each user interaction, after constructing the latest nested values snapshot. It
+does not run on the initial render or when props rerender.
+
+`change.path` is the primary changed path, `change.paths` contains every path changed by that
+interaction, and `change.value` / `change.previousValue` describe the primary value. The
+`changedValues` and `previousValues` records contain path-keyed metadata for every changed value,
+while `change.field` identifies the related flattened schema field.
+
+Paired controls such as `amount+currency`, `from+to`, and range sliders emit one callback per
+interaction. When both values change together, both paths are included in `change.paths`. Custom
+`renderField` controls use the same behavior when their `onChange` writes a paired object.
+
+Submission remains external. Configure submission through `useSchemaForm({ onSubmit })`, assign an
+`id` to the form, and point an external button at that id:
+
+```tsx
+const form = useSchemaForm({ fields, onSubmit: saveValues })
+
+<SchemaForm id="settings-form" form={form} onChange={handleChange} />
+<Button type="submit" form="settings-form">Save</Button>
 ```
 
 ## Column layout

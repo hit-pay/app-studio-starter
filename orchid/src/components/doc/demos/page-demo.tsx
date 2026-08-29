@@ -6,7 +6,7 @@ import {
   DetailList,
   DetailListGrid,
   DetailListRow,
-} from '@/components/ui/detail-list'
+} from '@/components/detail-list'
 import { Page, PageContent, PageHeader } from '@/components/ui/page'
 
 
@@ -42,7 +42,7 @@ import {
   DetailList,
   DetailListGrid,
   DetailListRow,
-} from '@/components/ui/detail-list'
+} from '@/components/detail-list'
 import {
   Page,
   PageContent,

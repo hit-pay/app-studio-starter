@@ -1,18 +1,5 @@
 import { useState } from "react";
-import {
-  EllipsisVerticalIcon,
-  EyeIcon,
-  EyeOffIcon,
-  PlusIcon,
-} from "lucide-react";
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import {
   SchemaTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
@@ -31,7 +18,7 @@ Required
 Optional
 - mode — client (filter in kit from a Query/DB collection) | server (Query fetches the page; pass data + total + onQueryChange)
 - selection — checkbox column
-- search — { placeholder } or false
+- search — { placeholder, debounceMs } or false (server search defaults to 300ms)
 - tabs[] — key, title, value (matches tabKey on the row, default tabKey is status)
 - tabKey — row field for tabs
 - filters[] — key, title, options[{ value, label }]
@@ -39,6 +26,8 @@ Optional
 - pagination — { pageSize, pageSizes[] } or false
 - editColumns — false to hide Edit Column
 - rowActions — ["edit", "delete"] or false
+- selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
+- emptyState — optional title, description, and JSON-friendly actions
 
 Column optional
 - sortable, hidden, locked (fixed, no hide/reorder), icon, search: false (exclude from search)
@@ -49,7 +38,7 @@ Query state (table.query)
 Column layout (table.columnOrder, table.hiddenKeys)
 - Edit Column popover toggles visibility and drag-reorders active columns
 
-Bulk actions are not schema. Pass selectionActions / emptyActions as React nodes.
+Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction.
 
 Example
 {
@@ -108,6 +97,24 @@ Example
   },
   "pagination": { "pageSize": 10, "pageSizes": [10, 20, 50] },
   "rowActions": ["edit", "delete"],
+  "selectionActions": [
+    { "key": "publish", "label": "Publish", "icon": "publish" },
+    {
+      "key": "more",
+      "label": "More actions",
+      "icon": "more",
+      "presentation": "dropdown",
+      "items": [
+        { "key": "duplicate", "label": "Duplicate", "icon": "duplicate" },
+        { "key": "delete", "label": "Delete", "icon": "delete", "variant": "destructive", "separator": true }
+      ]
+    }
+  ],
+  "emptyState": {
+    "title": "No products to display",
+    "description": "Add a product to start building your catalog.",
+    "actions": [{ "key": "add", "label": "Add product", "icon": "add" }]
+  },
   "columns": [
     { "key": "image", "title": "Image", "type": "image", "search": false },
     { "key": "name", "title": "Product name", "type": "text", "icon": true, "locked": true },
@@ -123,54 +130,15 @@ function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
   return <DocCodePanel filename={filename} code={code} />;
 }
 
-function ProductSelectionActions() {
-  return (
-    <>
-      <Button variant="Secondary" style="Transparent" size="Small">
-        <EyeIcon />
-        Publish
-      </Button>
-      <Button variant="Secondary" style="Transparent" size="Small">
-        <EyeOffIcon />
-        Unpublish
-      </Button>
-      <DropdownMenu>
-        <DropdownMenuTrigger
-          nativeButton
-          render={
-            <Button
-              variant="Secondary"
-              style="Transparent"
-              size="Small"
-              iconOnly
-              aria-label="More actions"
-            >
-              <EllipsisVerticalIcon />
-            </Button>
-          }
-        />
-        <DropdownMenuContent align="end">
-          <DropdownMenuItem>Archive</DropdownMenuItem>
-          <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-        </DropdownMenuContent>
-      </DropdownMenu>
-    </>
-  );
-}
-
-function ProductEmptyActions() {
-  return (
-    <Button variant="Primary" size="Small">
-      <PlusIcon />
-      Add new
-    </Button>
-  );
-}
-
 function SchemaTableDemo() {
+  const [lastChange, setLastChange] = useState<unknown>(null);
   const table = useSchemaTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: SCHEMA_TABLE_EXAMPLE_ROWS,
+    onQueryChange: (query, change) => {
+      console.log("Query change", query, change);
+      setLastChange(change);
+    },
   });
   const [tab, setTab] = useState("result");
 
@@ -180,8 +148,12 @@ function SchemaTableDemo() {
         <div className="min-w-0 xl:col-span-2">
           <SchemaTable
             table={table}
-            selectionActions={<ProductSelectionActions />}
-            emptyActions={<ProductEmptyActions />}
+            onSelectionAction={(action, selectedIds) => {
+              console.log("Selection action", action.key, selectedIds);
+            }}
+            onEmptyAction={(action) => {
+              console.log("Empty action", action.key);
+            }}
           />
         </div>
         <div className="flex min-w-0 flex-col gap-4">
@@ -200,6 +172,7 @@ function SchemaTableDemo() {
                 filename="result.json"
                 data={{
                   search: table.query.search,
+                  lastChange,
                   tab: table.query.tab,
                   filters: table.query.filters,
                   sort: {
