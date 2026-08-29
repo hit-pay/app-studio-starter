@@ -1,16 +1,11 @@
 import { Button } from '@/components/ui/button'
 import { useConfirmationModal } from '@/components/ui/confirmation-modal'
-import { toast } from '@/components/ui/toast'
 
 function ConfirmationModalDemo() {
   const confirm = useConfirmationModal()
 
   async function show(options: Parameters<typeof confirm>[0]) {
-    const confirmed = await confirm(options)
-    toast.add({
-      title: confirmed ? 'Action confirmed' : 'Action cancelled',
-      type: confirmed ? 'success' : 'info',
-    })
+    await confirm(options)
   }
 
   return (

@@ -186,9 +186,9 @@ function ProductFormPage({
     <FormPage>
       <FormPageHeader
         onClose={onClose}
+        formId={id}
         actions={{
-          cancel: { label: 'Cancel', onClick: onClose },
-          save: { label: 'Create', form: id },
+          save: { label: 'Create' },
         }}
       />
       <FormPageContent>
@@ -266,10 +266,6 @@ function TwoColumnProductFormPage({
       <FormPageHeader
         onClose={onClose}
         actions={{
-          cancel: {
-            label: 'Cancel',
-            onClick: onClose,
-          },
           save: {
             label: 'Create',
             disabled: saving,

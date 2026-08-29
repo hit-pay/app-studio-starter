@@ -55,9 +55,9 @@ function FormModalExample() {
         onOpenChange={setOpen}
         title="Add customer"
         description="Enter the customer details below."
+        formId={formId}
         actions={{
-          cancel: { label: 'Cancel' },
-          save: { label: 'Save customer', form: formId },
+          save: { label: 'Save customer' },
         }}
       >
         <SchemaForm id={formId} form={form} />
@@ -65,4 +65,20 @@ function FormModalExample() {
     </div>
   )
 }
+```
+
+`actions` is optional. The modal renders **Cancel** and **Save** by default. Provide only the action properties you want to customize:
+
+```tsx
+<FormModal
+  open={open}
+  onOpenChange={setOpen}
+  title="Add customer"
+  formId={formId}
+  actions={{
+    save: { label: 'Save customer', disabled: isSaving },
+  }}
+>
+  <SchemaForm id={formId} form={form} />
+</FormModal>
 ```

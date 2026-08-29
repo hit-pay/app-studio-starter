@@ -171,8 +171,8 @@ Common choices:
 - application frame: the local `AppLayout` from `@/components/app-layout`; configure tabs with `navigationItems` and child navigation with `sidebarItems`
 - grouped navigation inside a nested settings or detail area: compose `SubSidebar`; do not use it as the application frame
 - standard route page: compose `Page`, `PageHeader`, and `PageContent`
-- standard modal forms: compose `FormModal` with `SchemaForm`; configure only its built-in cancel and save actions
-- complex create/edit flows that replace the content area: compose `FormPage`, `FormPageHeader`, `FormPageContent`, and `SchemaForm`
+- standard modal forms: compose `FormModal` with `SchemaForm`; pass the SchemaForm id through `formId`; Cancel and Save labels are defaults, so provide `actions` only to customize labels, icons, disabled state, or click handlers
+- complex create/edit flows that replace the content area: compose `FormPage`, `FormPageHeader`, `FormPageContent`, and `SchemaForm`; pass the SchemaForm id through `FormPageHeader.formId`; Cancel and Save labels are defaults, so override only what differs
 - use `SchemaForm` for forms with multiple fields, validation, conditional fields, or schema-driven data
 - do not bypass `SchemaForm` with direct TanStack `useForm` for complex forms
 - complex data displays with filtering, sorting, selection, pagination, or row actions: use `SchemaTable`

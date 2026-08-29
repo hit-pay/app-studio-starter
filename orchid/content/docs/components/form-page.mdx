@@ -92,9 +92,9 @@ function ProductFormPage({
     <FormPage>
       <FormPageHeader
         onClose={onClose}
+        formId={id}
         actions={{
-          cancel: { label: 'Cancel', onClick: onClose },
-          save: { label: 'Create', form: id },
+          save: { label: 'Create' },
         }}
       />
       <FormPageContent>
@@ -272,10 +272,6 @@ function TwoColumnProductFormPage({
       <FormPageHeader
         onClose={onClose}
         actions={{
-          cancel: {
-            label: 'Cancel',
-            onClick: onClose,
-          },
           save: {
             label: 'Create',
             disabled: saving,
@@ -314,3 +310,5 @@ function TwoColumnProductFormPage({
   )
 }
 ```
+
+`FormPageHeader` uses **Cancel** and **Save** by default. Pass `formId` at the top level to connect Save to a form, and provide only the action properties that need customization. Cancel uses `onClose` unless `actions.cancel.onClick` is supplied.

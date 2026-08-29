@@ -11,17 +11,15 @@ import {
 } from '@/components/ui/dialog'
 
 type FormModalAction = {
-  label: string
+  label?: ReactNode
   icon?: ReactNode
   onClick?: () => void
   disabled?: boolean
 }
 
 type FormModalActions = {
-  cancel: FormModalAction
-  save: FormModalAction & {
-    form?: string
-  }
+  cancel?: FormModalAction
+  save?: FormModalAction
 }
 
 type FormModalProps = {
@@ -29,7 +27,8 @@ type FormModalProps = {
   onOpenChange: (open: boolean) => void
   title: string
   description?: string
-  actions: FormModalActions
+  formId?: string
+  actions?: FormModalActions
   children: ReactNode
   size?: 'sm' | 'default' | 'lg'
   persistent?: boolean
@@ -40,7 +39,8 @@ function FormModal({
   onOpenChange,
   title,
   description,
-  actions,
+  formId,
+  actions = {},
   children,
   size = 'default',
   persistent = false,
@@ -62,24 +62,24 @@ function FormModal({
             type="button"
             variant="outline"
             className="min-w-25"
-            disabled={actions.cancel.disabled}
+            disabled={actions.cancel?.disabled}
             onClick={() => {
-              actions.cancel.onClick?.()
+              actions.cancel?.onClick?.()
               onOpenChange(false)
             }}
           >
-            {actions.cancel.icon}
-            {actions.cancel.label}
+            {actions.cancel?.icon}
+            {actions.cancel?.label ?? 'Cancel'}
           </Button>
           <Button
-            type={actions.save.form ? 'submit' : 'button'}
-            form={actions.save.form}
+            type={formId ? 'submit' : 'button'}
+            form={formId}
             className="min-w-25"
-            disabled={actions.save.disabled}
-            onClick={actions.save.onClick}
+            disabled={actions.save?.disabled}
+            onClick={actions.save?.onClick}
           >
-            {actions.save.icon}
-            {actions.save.label}
+            {actions.save?.icon}
+            {actions.save?.label ?? 'Save'}
           </Button>
         </div>
       </DialogContent>

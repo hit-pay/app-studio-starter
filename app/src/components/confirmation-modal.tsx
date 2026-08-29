@@ -85,29 +85,49 @@ const ConfirmationModalContext = React.createContext<ConfirmationModalManager | 
 
 function ConfirmationModalProvider({ children }: { children: React.ReactNode }) {
   const [request, setRequest] = React.useState<ConfirmationModalRequest | null>(null)
+  const [open, setOpen] = React.useState(false)
   const [typed, setTyped] = React.useState('')
   const requestRef = React.useRef<ConfirmationModalRequest | null>(null)
+  const closeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
 
   const finish = React.useCallback((confirmed: boolean) => {
     const current = requestRef.current
+    if (!current) return
     requestRef.current = null
-    setRequest(null)
-    setTyped('')
+    setOpen(false)
     current?.resolve(confirmed)
+
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = setTimeout(() => {
+      setRequest((value) => (value === current ? null : value))
+      setTyped('')
+      closeTimerRef.current = null
+    }, 100)
   }, [])
 
   const confirm = React.useCallback<ConfirmationModalManager>((options) => {
     requestRef.current?.resolve(false)
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
 
     return new Promise<boolean>((resolve) => {
       const nextRequest = { ...options, resolve }
       requestRef.current = nextRequest
       setTyped('')
       setRequest(nextRequest)
+      setOpen(true)
     })
   }, [])
 
-  React.useEffect(() => () => requestRef.current?.resolve(false), [])
+  React.useEffect(
+    () => () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+      requestRef.current?.resolve(false)
+    },
+    [],
+  )
 
   const type = request?.type ?? 'question'
   const preset = PRESETS[type]
@@ -117,9 +137,9 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
     <ConfirmationModalContext.Provider value={confirm}>
       {children}
       <AlertDialog
-        open={Boolean(request)}
-        onOpenChange={(open) => {
-          if (!open) finish(false)
+        open={open}
+        onOpenChange={(nextOpen) => {
+          if (!nextOpen) finish(false)
         }}
       >
         <AlertDialogContent size={request?.confirmPhrase ? 'Medium' : 'Confirmation'}>
@@ -168,6 +188,7 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
                   Type <strong>{request.confirmPhrase}</strong> to confirm
                 </span>
                 <Input
+                  className="mt-2"
                   value={typed}
                   onChange={(event) => setTyped(event.currentTarget.value)}
                   placeholder={request.inputPlaceholder ?? 'Type here...'}

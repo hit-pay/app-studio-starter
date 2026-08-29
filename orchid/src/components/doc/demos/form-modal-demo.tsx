@@ -50,9 +50,9 @@ function FormModalDemo() {
           onOpenChange={setOpen}
           title="Add customer"
           description="Enter the customer details below."
+          formId={formId}
           actions={{
-            cancel: { label: 'Cancel' },
-            save: { label: 'Save customer', form: formId },
+            save: { label: 'Save customer' },
           }}
         >
           <SchemaForm id={formId} form={form} />

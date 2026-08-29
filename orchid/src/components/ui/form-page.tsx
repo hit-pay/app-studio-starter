@@ -7,17 +7,15 @@ import { Button } from '@/components/ui/button'
 import { Kbd } from '@/components/ui/kbd'
 
 type FormPageAction = {
-  label: string
+  label?: ReactNode
   icon?: ReactNode
   onClick?: () => void
   disabled?: boolean
 }
 
 type FormPageActions = {
-  cancel: FormPageAction
-  save: FormPageAction & {
-    form?: string
-  }
+  cancel?: FormPageAction
+  save?: FormPageAction
 }
 
 function FormPage({ className, ...props }: ComponentProps<'section'>) {
@@ -36,10 +34,12 @@ function FormPage({ className, ...props }: ComponentProps<'section'>) {
 function FormPageHeader({
   className,
   onClose,
+  formId,
   actions,
   ...props
 }: ComponentProps<'header'> & {
   onClose?: () => void
+  formId?: string
   actions?: FormPageActions
 }) {
   useEffect(() => {
@@ -83,27 +83,27 @@ function FormPageHeader({
       ) : (
         <span />
       )}
-      {actions ? (
+      {actions || formId ? (
         <div className="flex min-w-0 flex-wrap items-center justify-end gap-2">
           <Button
             type="button"
             variant="outline"
             className="min-w-25"
-            disabled={actions.cancel.disabled}
-            onClick={actions.cancel.onClick}
+            disabled={actions?.cancel?.disabled}
+            onClick={actions?.cancel?.onClick ?? onClose}
           >
-            {actions.cancel.icon}
-            {actions.cancel.label}
+            {actions?.cancel?.icon}
+            {actions?.cancel?.label ?? 'Cancel'}
           </Button>
           <Button
-            type={actions.save.form ? 'submit' : 'button'}
-            form={actions.save.form}
+            type={formId ? 'submit' : 'button'}
+            form={formId}
             className="min-w-25"
-            disabled={actions.save.disabled}
-            onClick={actions.save.onClick}
+            disabled={actions?.save?.disabled}
+            onClick={actions?.save?.onClick}
           >
-            {actions.save.icon}
-            {actions.save.label}
+            {actions?.save?.icon}
+            {actions?.save?.label ?? 'Save'}
           </Button>
         </div>
       ) : null}

@@ -296,7 +296,7 @@
       "name": "form-modal",
       "type": "registry:ui",
       "title": "Form Modal",
-      "description": "Prebuilt modal shell with prop-driven header and cancel/save actions; compose with SchemaForm for standard forms.",
+      "description": "Prebuilt modal shell with default Cancel/Save actions, optional action overrides, and a top-level formId.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",
@@ -314,7 +314,7 @@
       "name": "form-page",
       "type": "registry:ui",
       "title": "Form Page",
-      "description": "Full-page form layout used instead of a dialog, with header and scrollable form content.",
+      "description": "Full-page form layout with default Cancel/Save header actions, a top-level formId, and scrollable content.",
       "dependencies": [
         "lucide-react"
       ],

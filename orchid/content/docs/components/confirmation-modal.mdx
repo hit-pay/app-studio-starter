@@ -7,17 +7,12 @@ import { ConfirmationModalDemo } from '../../../src/components/doc/demos/confirm
 ```tsx filename="confirmation-modal.tsx"
 import { useConfirmationModal } from '@/components/confirmation-modal'
 import { Button } from '@/components/ui/button'
-import { toast } from '@/components/ui/toast'
 
 function ConfirmationModalExamples() {
   const confirm = useConfirmationModal()
 
   async function show(options: Parameters<typeof confirm>[0]) {
-    const confirmed = await confirm(options)
-    toast.add({
-      title: confirmed ? 'Action confirmed' : 'Action cancelled',
-      type: confirmed ? 'success' : 'info',
-    })
+    await confirm(options)
   }
 
   return (
