@@ -2,7 +2,7 @@ import { useEffect, useId, useRef, useState, type ComponentProps } from 'react'
 import { MinusIcon, PlusIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Button } from './button'
+import { Button } from '@/components/ui/button'
 
 function clamp(value: number, min?: number, max?: number) {
   let next = value

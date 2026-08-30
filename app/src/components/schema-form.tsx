@@ -16,7 +16,7 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from '@/components/ui/combobox'
-import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/ui/date-picker'
+import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/date-picker'
 import {
   Field,
   FieldContent,
@@ -42,7 +42,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { FormSectionItem } from '@/components/ui/form-section'
-import { QuantityInput } from '@/components/ui/quantity-input'
+import { QuantityInput } from '@/components/quantity-input'
 import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
@@ -201,6 +201,16 @@ type SchemaFormApi = {
   form: SchemaFormInstance
 }
 
+type SchemaFormChange = {
+  path: string
+  paths: string[]
+  value: unknown
+  previousValue: unknown
+  changedValues: Record<string, unknown>
+  previousValues: Record<string, unknown>
+  field: FlatField
+}
+
 function useSchemaForm({
   fields,
   onSubmit,
@@ -249,14 +259,17 @@ function SchemaForm({
   className,
   renderField,
   layout,
+  onChange,
 }: {
   form: SchemaFormApi
   id?: string
   className?: string
   renderField?: (ctx: SchemaFormRenderField) => ReactNode
   layout?: SchemaFormLayout
+  onChange?: (values: SchemaFormValues, change: SchemaFormChange) => void
 }) {
   const { form, fields, values } = builder
+  const defaultValues = formValuesFromFields(fields)
   const flat = flattenFields(fields).filter((item) => isDisplayed(item, values))
   const columns = layout?.columns ?? 1
   const gridColumns = {
@@ -283,6 +296,42 @@ function SchemaForm({
     if (span === 3) return 'md:col-span-2 xl:col-span-3'
     if (span === 4) return 'md:col-span-2 xl:col-span-4'
     return undefined
+  }
+
+  function changeField(
+    item: FlatField,
+    updates: Array<{ path: string; value: unknown }>,
+    handlePrimaryChange: (next: unknown) => void,
+  ) {
+    const previousFlat = formValuesFromFields(fields)
+    for (const flatField of flattenFields(fields)) {
+      previousFlat[flatField.path] = getValueByPath(values, flatField.path)
+    }
+    const changed = updates.filter(
+      (update) => !Object.is(previousFlat[update.path], update.value),
+    )
+
+    if (updates[0]) handlePrimaryChange(updates[0].value)
+    for (const update of updates.slice(1)) form.setFieldValue(update.path, update.value)
+    if (!changed.length || !onChange) return
+
+    const nextFlat = { ...previousFlat }
+    for (const update of updates) nextFlat[update.path] = update.value
+    const paths = changed.map((update) => update.path)
+    const changedValues = Object.fromEntries(changed.map((update) => [update.path, update.value]))
+    const previousValues = Object.fromEntries(
+      changed.map((update) => [update.path, previousFlat[update.path]]),
+    )
+    const primary = changed[0]!
+    onChange(nestValues(nextFlat, defaultValues), {
+      path: primary.path,
+      paths,
+      value: primary.value,
+      previousValue: previousFlat[primary.path],
+      changedValues,
+      previousValues,
+      field: item,
+    })
   }
 
   return (
@@ -332,7 +381,9 @@ function SchemaForm({
                       <Switch
                         id={item.path}
                         checked={Boolean(value)}
-                        onCheckedChange={(checked) => field.handleChange(checked)}
+                        onCheckedChange={(checked) =>
+                          changeField(item, [{ path: item.path, value: checked }], field.handleChange)
+                        }
                         onBlur={field.handleBlur}
                       />
                     }
@@ -359,7 +410,13 @@ function SchemaForm({
                     <DatePicker
                       selected={selected}
                       placeholder={placeholder ?? 'Pick a date'}
-                      onSelect={(next) => field.handleChange(next ? toLocalYmd(next) : '')}
+                      onSelect={(next) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: next ? toLocalYmd(next) : '' }],
+                          field.handleChange,
+                        )
+                      }
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -375,7 +432,13 @@ function SchemaForm({
                     <DateTimePicker
                       selected={selected}
                       placeholder={placeholder ?? 'Pick a date'}
-                      onSelect={(next) => field.handleChange(next ? next.toISOString() : '')}
+                      onSelect={(next) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: next ? next.toISOString() : '' }],
+                          field.handleChange,
+                        )
+                      }
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -405,11 +468,21 @@ function SchemaForm({
                         const from = next?.from ? toLocalYmd(next.from) : ''
                         const to = next?.to ? toLocalYmd(next.to) : ''
                         if (keys && secondPath) {
-                          field.handleChange(from)
-                          form.setFieldValue(secondPath, to)
+                          changeField(
+                            item,
+                            [
+                              { path: item.path, value: from },
+                              { path: secondPath, value: to },
+                            ],
+                            field.handleChange,
+                          )
                           return
                         }
-                        field.handleChange({ from, to })
+                        changeField(
+                          item,
+                          [{ path: item.path, value: { from, to } }],
+                          field.handleChange,
+                        )
                       }}
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
@@ -427,7 +500,13 @@ function SchemaForm({
                       type="file"
                       name={item.path}
                       onBlur={field.handleBlur}
-                      onChange={(event) => field.handleChange(event.target.files?.[0] ?? '')}
+                      onChange={(event) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: event.target.files?.[0] ?? '' }],
+                          field.handleChange,
+                        )
+                      }
                     />
                     {file ? (
                       <FieldDescription>{file.name}</FieldDescription>
@@ -448,7 +527,9 @@ function SchemaForm({
                       value={Number(value) || 0}
                       min={qtyMin}
                       max={item.max}
-                      onValueChange={(next) => field.handleChange(next)}
+                      onValueChange={(next) =>
+                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                      }
                     />
                     {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -462,7 +543,9 @@ function SchemaForm({
                     <Switch
                       id={item.path}
                       checked={Boolean(value)}
-                      onCheckedChange={(checked) => field.handleChange(checked)}
+                      onCheckedChange={(checked) =>
+                        changeField(item, [{ path: item.path, value: checked }], field.handleChange)
+                      }
                       onBlur={field.handleBlur}
                     />
                     <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
@@ -477,7 +560,9 @@ function SchemaForm({
                     <CheckboxGroup
                       label={item.title}
                       value={Array.isArray(value) ? value.map(String) : []}
-                      onValueChange={(next) => field.handleChange(next)}
+                      onValueChange={(next) =>
+                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                      }
                     >
                       {(item.options ?? []).map((option) => {
                         const checkboxId = `${item.path}-${option.value}`
@@ -526,18 +611,35 @@ function SchemaForm({
                       onValueChange={(next) => {
                         const thumbs = Array.isArray(next) ? next.map(Number) : [Number(next) || 0]
                         if (keys && secondPath) {
-                          field.handleChange(thumbs[0] || 0)
-                          form.setFieldValue(secondPath, thumbs[1] || 0)
+                          changeField(
+                            item,
+                            [
+                              { path: item.path, value: thumbs[0] || 0 },
+                              { path: secondPath, value: thumbs[1] || 0 },
+                            ],
+                            field.handleChange,
+                          )
                           return
                         }
                         if (objectRange || thumbs.length >= 2) {
-                          field.handleChange({
-                            min: thumbs[0] || 0,
-                            max: thumbs[1] ?? thumbs[0] ?? 0,
-                          })
+                          changeField(
+                            item,
+                            [{
+                              path: item.path,
+                              value: {
+                                min: thumbs[0] || 0,
+                                max: thumbs[1] ?? thumbs[0] ?? 0,
+                              },
+                            }],
+                            field.handleChange,
+                          )
                           return
                         }
-                        field.handleChange(thumbs[0] || 0)
+                        changeField(
+                          item,
+                          [{ path: item.path, value: thumbs[0] || 0 }],
+                          field.handleChange,
+                        )
                       }}
                     />
                     {invalid ? <FieldError>{message}</FieldError> : null}
@@ -555,7 +657,9 @@ function SchemaForm({
                       invalid={invalid}
                       placeholder={placeholder}
                       onBlur={field.handleBlur}
-                      onChange={field.handleChange}
+                      onChange={(next) =>
+                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                      }
                     />
                     {invalid ? <FieldError>{message}</FieldError> : null}
                   </Field>
@@ -570,12 +674,26 @@ function SchemaForm({
                   ? String(getValueByPath(values, selectPath) ?? group.select)
                   : group.select
                 const setInput = (next: string) => {
-                  if (keys) field.handleChange(next)
-                  else field.handleChange({ ...group, input: next })
+                  changeField(
+                    item,
+                    [{
+                      path: item.path,
+                      value: keys ? next : { ...group, input: next },
+                    }],
+                    field.handleChange,
+                  )
                 }
                 const setSelect = (next: string) => {
-                  if (selectPath) form.setFieldValue(selectPath, next)
-                  else field.handleChange({ ...group, select: next })
+                  changeField(
+                    item,
+                    [{
+                      path: selectPath ?? item.path,
+                      value: selectPath ? next : { ...group, select: next },
+                    }],
+                    selectPath
+                      ? (value) => form.setFieldValue(selectPath, value)
+                      : field.handleChange,
+                  )
                 }
                 const addonEnd = item.props?.align === 'end'
                 const selectAddon = (item.options ?? []).length ? (
@@ -631,7 +749,13 @@ function SchemaForm({
                       id={item.path}
                       checked={Boolean(value)}
                       aria-invalid={invalid || undefined}
-                      onCheckedChange={(checked) => field.handleChange(checked === true)}
+                      onCheckedChange={(checked) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: checked === true }],
+                          field.handleChange,
+                        )
+                      }
                       onBlur={field.handleBlur}
                     />
                     <FieldContent>
@@ -651,7 +775,13 @@ function SchemaForm({
                     <FieldLabel>{item.title}</FieldLabel>
                     <RadioGroup
                       value={value == null ? null : String(value)}
-                      onValueChange={(next) => field.handleChange(String(next))}
+                      onValueChange={(next) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: String(next) }],
+                          field.handleChange,
+                        )
+                      }
                     >
                       {(item.options ?? []).map((option) => {
                         const optionId = `${item.path}-${option.value}`
@@ -691,11 +821,23 @@ function SchemaForm({
                 onBlur: field.handleBlur,
                 onChange: (next) => {
                   if (pair && pairSecondPath && isPlainObject(next)) {
-                    field.handleChange(next[pair.first] ?? next.from ?? null)
-                    form.setFieldValue(pairSecondPath, next[pair.second] ?? next.to ?? null)
+                    changeField(
+                      item,
+                      [
+                        {
+                          path: item.path,
+                          value: next[pair.first] ?? next.from ?? null,
+                        },
+                        {
+                          path: pairSecondPath,
+                          value: next[pair.second] ?? next.to ?? null,
+                        },
+                      ],
+                      field.handleChange,
+                    )
                     return
                   }
-                  field.handleChange(next)
+                  changeField(item, [{ path: item.path, value: next }], field.handleChange)
                 },
               })
               if (custom) {
@@ -722,12 +864,20 @@ function SchemaForm({
                       value={String(value ?? '')}
                       aria-invalid={invalid || undefined}
                       onBlur={field.handleBlur}
-                      onChange={(event) => field.handleChange(event.target.value)}
+                      onChange={(event) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: event.target.value }],
+                          field.handleChange,
+                        )
+                      }
                     />
                   ) : type === 'select' ? (
                     <Select
                       value={value == null || value === '' ? null : String(value)}
-                      onValueChange={(next) => field.handleChange(next)}
+                      onValueChange={(next) =>
+                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                      }
                     >
                       <SelectTrigger
                         id={item.path}
@@ -754,7 +904,13 @@ function SchemaForm({
                       value={value == null ? '' : String(value)}
                       aria-invalid={invalid || undefined}
                       onBlur={field.handleBlur}
-                      onChange={(event) => field.handleChange(event.target.value)}
+                      onChange={(event) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: event.target.value }],
+                          field.handleChange,
+                        )
+                      }
                     />
                   )}
                   {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
@@ -781,6 +937,7 @@ export {
 }
 export type {
   SchemaFormApi,
+  SchemaFormChange,
   SchemaFormColumnSpan,
   SchemaFormField,
   SchemaFormFieldProps,

@@ -3,18 +3,15 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 import { QueryProvider } from '#/lib/query'
 import { AppLayout } from '@/components/app-layout'
 import { ConfirmationModalProvider } from '@/components/confirmation-modal'
-import { Page, PageContent } from '@/components/page'
 import { Toaster } from '@/components/ui/toast'
 import appCss from '../styles.css?url'
 
 function NotFound() {
   return (
     <AppLayout className="h-full">
-      <Page>
-        <PageContent className="mt-0 flex items-center justify-center">
-          <p className="text-sm text-oc-muted-foreground">That page does not exist.</p>
-        </PageContent>
-      </Page>
+      <main className="flex h-full min-h-0 w-full flex-1 items-center justify-center px-6">
+        <p className="text-sm text-oc-muted-foreground">That page does not exist.</p>
+      </main>
     </AppLayout>
   )
 }

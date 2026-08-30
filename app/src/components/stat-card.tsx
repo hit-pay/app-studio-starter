@@ -3,7 +3,7 @@ import { cva } from 'class-variance-authority'
 import { CircleHelpIcon, TriangleIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
 const statCardIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
   variants: {
