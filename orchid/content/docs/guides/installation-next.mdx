@@ -1,0 +1,37 @@
+Install Orchid in a new Next.js application using the supported `next` shadcn
+template.
+
+## Create the application
+
+```bash
+bunx --bun shadcn@latest init -t next
+```
+
+Enter the generated project directory when initialization finishes.
+
+## Configure Orchid
+
+Add the registry namespace to `components.json`:
+
+```json
+{
+  "registries": {
+    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
+  }
+}
+```
+
+Follow [Theming](/theming) to import or merge
+`https://orchid-ui-hitpay.vercel.app/orchid-tokens.css` into the global
+stylesheet configured in `components.json`.
+
+## Verify the installation
+
+```bash
+bunx --bun shadcn@latest add @orchid/button
+```
+
+Import the installed component from `@/components/ui/button`.
+
+Continue with [components.json](/components-json), [Theming](/theming), or the
+[CLI reference](/cli).

@@ -6,11 +6,24 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/((?!r/|assets/|registry\\.json|orchid-tokens\\.css).*)",
+      "source": "/((?!r/|assets/|registry\\.json|orchid-tokens\\.css|llms\\.txt).*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
+    {
+      "source": "/llms.txt",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "text/plain; charset=utf-8"
+        },
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=60, stale-while-revalidate=300"
+        }
+      ]
+    },
     {
       "source": "/registry.json",
       "headers": [

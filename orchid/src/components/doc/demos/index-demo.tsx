@@ -4,8 +4,11 @@ import {
   docComponentsByName,
   docFormsByName,
 } from '@/components/doc/doc-components'
+import { DocCodePanel } from '@/components/doc/doc-code-panel'
 import { ListItem, ListItemBody, ListItemDescription, ListItemTitle } from '@/components/ui/list-item'
 
+const AI_PROMPT =
+  'Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Use it as the source of truth for Orchid installation, MCP setup, available components and blocks, import paths, and usage guidance before building with Orchid.'
 
 function IndexDemo() {
   return (
@@ -23,6 +26,15 @@ function IndexDemo() {
         </span>
         <span className="text-oc-muted-foreground">→</span>
       </Link>
+      <div className="flex min-w-0 flex-col gap-3">
+        <div>
+          <h2 className="text-sm font-medium text-oc-foreground">Guide your AI agent</h2>
+          <p className="mt-1 text-sm text-oc-muted-foreground">
+            Copy and paste this prompt before asking an AI agent to build with Orchid.
+          </p>
+        </div>
+        <DocCodePanel filename="prompt.txt" code={AI_PROMPT} />
+      </div>
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-medium text-oc-muted-foreground">Component</h2>
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">

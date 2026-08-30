@@ -1,0 +1,49 @@
+Orchid publishes a Tailwind CSS v4 token sheet for its components. Install it
+once in the global stylesheet referenced by `components.json`.
+
+## Install the tokens
+
+Download
+[orchid-tokens.css](https://orchid-ui-hitpay.vercel.app/orchid-tokens.css) and
+either import it from your global stylesheet or merge its contents there.
+
+```css
+@import "tailwindcss";
+@import "https://orchid-ui-hitpay.vercel.app/orchid-tokens.css";
+```
+
+If your build does not allow remote CSS imports, copy the deployed token file
+into the project and import the local file instead. Do not both import and paste
+the tokens, which would duplicate the definitions.
+
+The token sheet starts with the dark custom variant, followed by Tailwind
+`@theme inline` mappings and the light and dark variable sets. Place a merged
+copy after the project's Tailwind imports.
+
+## Token model
+
+CSS variables use the `--oc-*` prefix, such as `--oc-background` and
+`--oc-primary`. Tailwind mappings expose classes such as `bg-oc-background`,
+`text-oc-foreground`, and `border-oc-border`.
+
+Customize values in `:root` for the light theme. The `.dark` selector contains
+the dark theme values:
+
+```css
+:root {
+  --oc-primary: #2465de;
+}
+
+.dark {
+  --oc-primary: #ecece4;
+}
+```
+
+Apply the `dark` class to an ancestor—normally the document element—to activate
+dark mode. Keep the variable names and `@theme` mappings intact so installed
+components continue to resolve their utility classes.
+
+## Next step
+
+Review [components.json](/components-json), then add your first component with
+the [shadcn CLI](/cli).

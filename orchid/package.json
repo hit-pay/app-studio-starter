@@ -8,8 +8,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "generate-routes": "bun --bun tsr generate",
+    "generate-llms": "bun scripts/generate-llms.mjs",
     "tanstack:build": "bun run generate-routes && bun --bun vite build",
-    "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r && cp registry.json public/registry.json && bun scripts/generate-app-catalog.mjs",
+    "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r && cp registry.json public/registry.json && bun run generate-llms && bun scripts/generate-app-catalog.mjs",
     "build": "bun run registry:build && bun run tanstack:build"
   },
   "dependencies": {

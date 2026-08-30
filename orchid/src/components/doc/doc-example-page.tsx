@@ -1,13 +1,19 @@
 import type { ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
-import { DOC_BLOCKS, DOC_COMPONENTS, DOC_FORMS } from "./doc-components";
+import {
+  DOC_BLOCKS,
+  DOC_COMPONENTS,
+  DOC_FORMS,
+  DOC_GUIDE_ITEMS,
+} from "./doc-components";
 import { DocCodePanel } from "./doc-code-panel";
 
 type DocPath =
   | (typeof DOC_COMPONENTS)[number]["to"]
   | (typeof DOC_FORMS)[number]["to"]
   | (typeof DOC_BLOCKS)[number]["to"]
+  | (typeof DOC_GUIDE_ITEMS)[number]["to"]
   | "/";
 
 function DocExamplePage({
@@ -30,7 +36,8 @@ function DocExamplePage({
   const item =
     to === "/"
       ? { name: "Examples", description: "Browse Orchid UI components." }
-      : (DOC_COMPONENTS.find((entry) => entry.to === to) ??
+      : (DOC_GUIDE_ITEMS.find((entry) => entry.to === to) ??
+        DOC_COMPONENTS.find((entry) => entry.to === to) ??
         DOC_FORMS.find((entry) => entry.to === to) ??
         DOC_BLOCKS.find((entry) => entry.to === to));
 

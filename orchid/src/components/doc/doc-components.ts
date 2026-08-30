@@ -323,12 +323,72 @@ export function docBlocksByName() {
 }
 
 export const DOC_GUIDES = [
-  { to: "/installation" as const, name: "Installation" },
+  {
+    to: "/introduction" as const,
+    name: "Introduction",
+    description:
+      "Learn what Orchid is, how it is distributed, and where to begin.",
+  },
+  {
+    to: "/installation" as const,
+    name: "Installation",
+    description: "Install Orchid with the shadcn CLI in a supported framework.",
+    children: [
+      {
+        to: "/installation/next" as const,
+        name: "Next.js",
+        description: "Install Orchid in a new Next.js application.",
+      },
+      {
+        to: "/installation/vite" as const,
+        name: "Vite",
+        description: "Install Orchid in a new Vite React application.",
+      },
+      {
+        to: "/installation/tanstack-start" as const,
+        name: "TanStack Start",
+        description: "Install Orchid in a new TanStack Start application.",
+      },
+      {
+        to: "/installation/react-router" as const,
+        name: "React Router",
+        description: "Install Orchid in a new React Router application.",
+      },
+      {
+        to: "/installation/astro" as const,
+        name: "Astro",
+        description: "Install Orchid in a new Astro React application.",
+      },
+    ],
+  },
+  {
+    to: "/cli" as const,
+    name: "CLI",
+    description:
+      "Use the shadcn CLI to initialize projects and add Orchid registry items.",
+  },
+  {
+    to: "/components-json" as const,
+    name: "components.json",
+    description:
+      "Configure aliases, Tailwind CSS, and the Orchid registry namespace.",
+  },
+  {
+    to: "/theming" as const,
+    name: "Theming",
+    description:
+      "Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.",
+  },
 ] as const;
+
+export const DOC_GUIDE_ITEMS = DOC_GUIDES.flatMap((item) => [
+  item,
+  ...("children" in item ? item.children : []),
+]);
 
 export const DOC_CRUMBS: Record<string, string> = {
   "/": "Examples",
-  ...Object.fromEntries(DOC_GUIDES.map((item) => [item.to, item.name])),
+  ...Object.fromEntries(DOC_GUIDE_ITEMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_FORMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_BLOCKS.map((item) => [item.to, item.name])),

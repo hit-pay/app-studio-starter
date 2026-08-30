@@ -1,0 +1,42 @@
+Orchid uses the standard shadcn CLI. The CLI reads `components.json`, resolves
+the `@orchid` namespace, installs dependencies, and writes registry source into
+your application.
+
+## Initialize a project
+
+Choose one of the supported shadcn templates:
+
+```bash
+bunx --bun shadcn@latest init -t vite
+```
+
+Other supported template values are `next`, `start`, `react-router`, and
+`astro`. See [Installation](/installation) for framework-specific steps.
+
+## Add a component
+
+After adding the `@orchid` registry to `components.json`, install an item by its
+namespaced name:
+
+```bash
+bunx --bun shadcn@latest add @orchid/button
+```
+
+The namespace prevents Orchid items from being confused with the default
+shadcn registry. Registry dependencies are installed automatically.
+
+## Add the complete catalog
+
+The Orchid registry publishes an `all` item:
+
+```bash
+bunx --bun shadcn@latest add @orchid/all
+```
+
+Prefer individual items when you only need part of the catalog. Use `all` for
+an application starter that intentionally keeps the full component set.
+
+## Maintainer command
+
+Orchid maintainers build the published registry with `bun run registry:build`.
+Consumer applications do not need this command.
