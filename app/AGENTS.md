@@ -102,8 +102,8 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
-- `src/components/ui/`: complete preinstalled Orchid component catalog
-- `src/components/`: app-specific components
+- `src/components/ui/`: preinstalled Orchid primitives and form controls
+- `src/components/`: App Studio components plus Orchid blocks whose registry targets install at the components root
 - `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
@@ -118,7 +118,7 @@ Path aliases:
 
 - `#/*` -> `src/*`
 - `@/*` -> `src/*`
-- `@/components/ui/*` -> `src/components/ui/*`
+- Orchid import paths are defined per item in `orchid-catalog.md`; blocks commonly use `@/components/<name>`, while primitives commonly use `@/components/ui/<name>`
 
 Unless the user's request truly requires infrastructure changes, leave these files unchanged. Updating `src/routes/__root.tsx` is allowed only when a required Orchid global provider is missing:
 
@@ -140,7 +140,7 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 - Fill the pane with the App Studio-owned `AppLayout` from `@/components/app-layout`.
 - Keep the root document's `h-full`, but do not set `overflow-hidden` on the root document or body.
-- Render route content inside `AppLayout`. Use `PageContent` or `FormPageContent` as the scroll owner so headers and actions remain visible.
+- Render route content inside `AppLayout`. Use the props-based `PageLayout` from `@/components/page-layout`, or `FormLayout` in page mode, as the scroll-owning route shell so headers and actions remain visible.
 - Do not add a full-screen website shell or host-dashboard clone.
 - Avoid horizontal overflow and make forms, tables, actions, and tabs usable at narrow widths.
 
@@ -154,29 +154,37 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 ## Orchid UI
 
-Before building a screen, read `orchid-catalog.md` in full. The complete Orchid catalog is already installed in `src/components/ui/`; do not run component installation commands. Read the implementation file for each component you choose so you use its real exports and props.
+Before building a screen, read `orchid-catalog.md` in full. The complete Orchid catalog is already installed across `src/components/` and `src/components/ui/`; do not run component installation commands. Read the listed implementation file for each component you choose so you use its real exports and props.
 
-Import components from:
+Import each component from the exact path listed in `orchid-catalog.md`. Registry blocks commonly install at:
+
+```ts
+@/components/<kebab-name>
+```
+
+Primitives and many form controls commonly install at:
 
 ```ts
 @/components/ui/<kebab-name>
 ```
 
-`AppLayout` is the exception: import it from `@/components/app-layout`. It belongs to the App Studio starter and must not be installed, replaced, or imported from Orchid.
+Do not infer the path from the component type; the catalog's generated import and source paths are authoritative. `AppLayout` is local to the App Studio starter: import it from `@/components/app-layout`; do not install, replace, or treat it as an Orchid registry item.
 
-Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns `src/components/ui/`; never install official shadcn components into that directory. Orchid's shadcn-compatible components use the standard compound component names and lowercase variants where available. Read the component source for Orchid-specific extensions.
+Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns its installed files in both component directories; never install official shadcn components over them. Orchid's shadcn-compatible components use the standard compound component names and lowercase variants where available. Read the component source for Orchid-specific extensions.
 
 Common choices:
 
 - application frame: the local `AppLayout` from `@/components/app-layout`; configure tabs with `navigationItems` and child navigation with `sidebarItems`
-- grouped navigation inside a nested settings or detail area: compose `SubSidebar`; do not use it as the application frame
-- standard route page: compose `Page`, `PageHeader`, and `PageContent`
-- standard modal forms: compose `FormModal` with `SchemaForm`; pass the SchemaForm id through `formId`; Cancel and Save labels are defaults, so provide `actions` only to customize labels, icons, disabled state, or click handlers
-- complex create/edit flows that replace the content area: compose `FormPage`, `FormPageHeader`, `FormPageContent`, and `SchemaForm`; pass the SchemaForm id through `FormPageHeader.formId`; Cancel and Save labels are defaults, so override only what differs
-- use `SchemaForm` for forms with multiple fields, validation, conditional fields, or schema-driven data
+- configurable navigation: use props-based `Sidebar` from `@/components/sidebar`; it supports grouped items and either inline children or a back-enabled nested sidebar through `childrenMode`
+- simple flat child navigation inside an `AppLayout` sidebar area: use props-based `SubSidebar` from `@/components/sub-sidebar`; do not use it as the application frame
+- standard route page: use props-based `PageLayout` from `@/components/page-layout`; pass `title`, optional `description`, `badge`, `copyValue`, and `actions`, then render page content as children
+- create/edit forms: use unified `FormLayout` from `@/components/form-layout`; choose `mode="page"` (default) or `mode="modal"`, and pass the `SchemaForm` id through `formId` for external submission; Cancel and Save labels are defaults, so override only what differs
+- use `SchemaForm` from `@/components/schema-form` for forms with multiple fields, validation, conditional fields, or schema-driven data; it remains externally submitted through its `id`, and supports component-level `onChange(values, change)` metadata
 - do not bypass `SchemaForm` with direct TanStack `useForm` for complex forms
-- complex data displays with filtering, sorting, selection, pagination, or row actions: use `SchemaTable`
+- complex data displays: use schema-driven `SchemaTable` from `@/components/schema-table` for search, filters, sorting, selection actions, pagination, row actions, and empty-state actions; `useSchemaTable.onQueryChange(query, change)` reports query-change metadata
 - simple static data displays: use Orchid `Table`
+- read-only key/value cards: use props-based `DetailList`; pass `items` rather than composing internal row primitives
+- grouped icon actions: use props-based `IconGroup`; pass `items` rather than composing internal child primitives
 - custom modal layouts: compose Orchid `Dialog`
 - routine confirmation: call the prebuilt `useConfirmationModal()` hook and await its boolean result
 - custom confirmation layout: compose `AlertDialog`, `AlertDialogContent`, `AlertDialogAction`, and `AlertDialogCancel`
