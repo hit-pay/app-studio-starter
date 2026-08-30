@@ -1,10 +1,26 @@
-import { createContext, useContext, type ComponentProps, type ReactNode } from 'react'
+import { type ComponentProps, type ReactNode } from 'react'
 import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
 import { CopyButton } from '@/components/copy-button'
 
-const DetailListStyleContext = createContext<'Default' | 'Border'>('Default')
+type DetailListItem = {
+  key: string
+  label?: ReactNode
+  value: ReactNode
+  copyValue?: string
+  alignment?: 'Horizontal' | 'Vertical'
+  size?: 'Small' | 'Big'
+  colSpan?: number
+  className?: string
+}
+
+type DetailListProps = Omit<ComponentProps<'div'>, 'children' | 'style' | 'title'> & {
+  items: DetailListItem[]
+  title?: ReactNode
+  columns?: number
+  style?: 'Default' | 'Border'
+}
 
 const boxDetailVariants = cva(
   'flex w-auto min-w-0 max-w-full flex-col rounded-lg border border-solid border-oc-border bg-oc-background',
@@ -23,73 +39,68 @@ const boxDetailVariants = cva(
 
 function DetailList({
   className,
+  items,
+  title,
+  columns = 1,
   style = 'Default',
   ...props
-}: Omit<ComponentProps<'div'>, 'style'> & {
-  style?: 'Default' | 'Border'
-}) {
+}: DetailListProps) {
   return (
-    <DetailListStyleContext.Provider value={style}>
-      <div
-        data-slot="detail-list"
-        data-style={style}
-        className={cn(boxDetailVariants({ style }), className)}
-        {...props}
-      />
-    </DetailListStyleContext.Provider>
+    <div
+      data-slot="detail-list"
+      data-style={style}
+      className={cn(boxDetailVariants({ style }), className)}
+      {...props}
+    >
+      {title !== undefined && title !== null ? (
+        <DetailListHeader title={title} style={style} />
+      ) : null}
+      <DetailListGrid items={items} columns={columns} style={style} />
+    </div>
   )
 }
 
-function DetailListHeader({ className, ...props }: ComponentProps<'div'>) {
-  const style = useContext(DetailListStyleContext)
-
+function DetailListHeader({ title, style }: { title: ReactNode; style: 'Default' | 'Border' }) {
   return (
     <div
       data-slot="detail-list-header"
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-3',
         style === 'Border' && 'bg-oc-background px-4 py-3',
-        className,
       )}
-      {...props}
-    />
+    >
+      <p
+        data-slot="detail-list-title"
+        className="min-w-0 text-sm font-medium leading-[1.5] text-oc-foreground"
+      >
+        {title}
+      </p>
+    </div>
   )
 }
 
 function DetailListGrid({
-  className,
-  columns = 2,
+  items,
+  columns,
   style,
-  ...props
-}: ComponentProps<'div'> & {
-  columns?: number
+}: {
+  items: DetailListItem[]
+  columns: number
+  style: 'Default' | 'Border'
 }) {
-  const appearance = useContext(DetailListStyleContext)
-
   return (
     <div
       data-slot="detail-list-grid"
       className={cn(
         'grid w-full min-w-0',
-        appearance === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
-        className,
+        style === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
       )}
-      style={{
-        gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))`,
-        ...style,
-      }}
-      {...props}
-    />
-  )
-}
-
-function DetailListTitle({ className, ...props }: ComponentProps<'p'>) {
-  return (
-    <p
-      data-slot="detail-list-title"
-      className={cn('min-w-0 text-sm font-medium leading-[1.5] text-oc-foreground', className)}
-      {...props}
-    />
+      style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
+    >
+      {items.map((item) => (
+        <DetailListRow key={item.key} item={item} style={style} />
+      ))}
+    </div>
   )
 }
 
@@ -134,24 +145,16 @@ const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-oc-foreground', {
   },
 })
 
-function DetailListRow({
-  className,
-  label,
-  children,
-  copyValue,
-  alignment = 'Horizontal',
-  size = 'Small',
-  colSpan,
-  style,
-  ...props
-}: ComponentProps<'div'> & {
-  label?: string
-  copyValue?: string
-  alignment?: 'Horizontal' | 'Vertical'
-  size?: 'Small' | 'Big'
-  colSpan?: number
-}) {
-  const appearance = useContext(DetailListStyleContext)
+function DetailListRow({ item, style }: { item: DetailListItem; style: 'Default' | 'Border' }) {
+  const {
+    className,
+    label,
+    value,
+    copyValue,
+    alignment = 'Horizontal',
+    size = 'Small',
+    colSpan,
+  } = item
 
   return (
     <div
@@ -160,16 +163,14 @@ function DetailListRow({
       data-size={size}
       className={cn(
         boxDetailRowVariants({ alignment }),
-        appearance === 'Border' && 'bg-oc-background p-4',
+        style === 'Border' && 'bg-oc-background p-4',
         className,
       )}
-      style={{
-        ...(colSpan ? { gridColumn: `span ${colSpan}` } : {}),
-        ...style,
-      }}
-      {...props}
+      style={colSpan ? { gridColumn: `span ${colSpan}` } : undefined}
     >
-      {label ? <span className={boxDetailLabelVariants({ size })}>{label}</span> : null}
+      {label !== undefined && label !== null ? (
+        <span className={boxDetailLabelVariants({ size })}>{label}</span>
+      ) : null}
       <span
         className={cn(
           boxDetailValueVariants({ size, alignment }),
@@ -177,30 +178,12 @@ function DetailListRow({
           alignment === 'Horizontal' ? 'justify-end' : 'justify-start',
         )}
       >
-        <span className="min-w-0 break-words">{children}</span>
-        {copyValue ? <CopyButton value={copyValue} /> : null}
+        <span className="min-w-0 break-words">{value}</span>
+        {copyValue !== undefined ? <CopyButton value={copyValue} /> : null}
       </span>
     </div>
   )
 }
 
-function DetailListValue({
-  className,
-  children,
-  ...props
-}: ComponentProps<'span'> & { children?: ReactNode }) {
-  return (
-    <span data-slot="detail-list-value" className={cn('min-w-0', className)} {...props}>
-      {children}
-    </span>
-  )
-}
-
-export {
-  DetailList,
-  DetailListHeader,
-  DetailListGrid,
-  DetailListTitle,
-  DetailListRow,
-  DetailListValue,
-}
+export { DetailList }
+export type { DetailListItem, DetailListProps }

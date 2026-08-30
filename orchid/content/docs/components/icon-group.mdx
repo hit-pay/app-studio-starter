@@ -1,39 +1,47 @@
-import { IconGroupDemo } from '../../../src/components/doc/demos/icon-group-demo'
+import { IconGroupDemo } from "../../../src/components/doc/demos/icon-group-demo";
 
 <IconGroupDemo />
 
 ## Usage
 
 ```tsx
-import { SquareArrowOutUpRightIcon } from 'lucide-react'
-import { CopyButton } from '@/components/copy-button'
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
-import {
-  IconGroup,
-  IconGroupDivider,
-  IconGroupLink,
-  IconGroupMenu,
-  iconGroupItemVariants,
-} from '@/components/icon-group'
+import { SquareArrowOutUpRightIcon } from "lucide-react";
+import { CopyIcon } from "lucide-react";
+import { IconGroup } from "@/components/icon-group";
 
-<IconGroup style="Border">
-  <IconGroupMenu
-    menu={
-      <>
-        <DropdownMenuItem>Download PDF</DropdownMenuItem>
-        <DropdownMenuItem variant="destructive">Void invoice</DropdownMenuItem>
-      </>
-    }
-  />
-  <IconGroupDivider />
-  <IconGroupLink href="/invoice" aria-label="Open invoice">
-    <SquareArrowOutUpRightIcon />
-  </IconGroupLink>
-  <IconGroupDivider />
-  <CopyButton
-    value="INV-2026-0842"
-    aria-label="Copy invoice number"
-    className={iconGroupItemVariants()}
-  />
-</IconGroup>
+<IconGroup
+  style="Border"
+  items={[
+    {
+      type: "menu",
+      key: "more",
+      items: [
+        { key: "download", label: "Download PDF" },
+        {
+          key: "void",
+          label: "Void invoice",
+          variant: "destructive",
+          separator: true,
+        },
+      ],
+      onAction: (item) => console.log(item.key),
+    },
+    {
+      type: "link",
+      key: "open",
+      href: "/invoice",
+      label: "Open invoice",
+      icon: <SquareArrowOutUpRightIcon />,
+    },
+    {
+      key: "copy",
+      label: "Copy invoice number",
+      icon: <CopyIcon />,
+      onClick: () => navigator.clipboard.writeText("INV-2026-0842"),
+    },
+  ]}
+/>;
 ```
+
+`Border` groups automatically render dividers between top-level actions. Use `separator` on a
+menu item only when its menu needs a visual grouping boundary.

@@ -5,28 +5,44 @@ import { DetailListDemo } from '../../../src/components/doc/demos/detail-list-de
 ## Usage
 
 ```tsx
-import {
-  DetailList,
-  DetailListGrid,
-  DetailListHeader,
-  DetailListRow,
-  DetailListTitle,
-} from '@/components/detail-list'
+import { Badge } from '@/components/ui/badge'
+import { DetailList } from '@/components/detail-list'
 
-<DetailList style="Border">
-  <DetailListHeader>
-    <DetailListTitle>Payment details</DetailListTitle>
-  </DetailListHeader>
-  <DetailListGrid columns={2}>
-    <DetailListRow label="Invoice" alignment="Vertical" copyValue="INV-2026-0842">
-      INV-2026-0842
-    </DetailListRow>
-    <DetailListRow label="Status" alignment="Vertical">
-      Paid
-    </DetailListRow>
-    <DetailListRow label="Amount" alignment="Vertical" size="Big" colSpan={2}>
-      SGD 128.00
-    </DetailListRow>
-  </DetailListGrid>
-</DetailList>
+;<DetailList
+  title="Payment details"
+  columns={2}
+  style="Border"
+  items={[
+    {
+      key: 'invoice',
+      label: 'Invoice',
+      value: 'INV-2026-0842',
+      copyValue: 'INV-2026-0842',
+      alignment: 'Vertical',
+    },
+    {
+      key: 'status',
+      label: 'Status',
+      value: <Badge tone="green">Paid</Badge>,
+      alignment: 'Vertical',
+    },
+    {
+      key: 'amount',
+      label: 'Amount',
+      value: 'SGD 128.00',
+      alignment: 'Vertical',
+      size: 'Big',
+      colSpan: 2,
+    },
+  ]}
+/>
 ```
+
+## API
+
+`DetailList` accepts `items`, plus optional `title`, `columns`, `style`, and `className`.
+It also supports standard `div` attributes except the native `style`, `title`, and `children` props.
+
+Each item requires a unique string `key` and a React `value`. Items can also set `label`,
+`copyValue`, `alignment`, `size`, `colSpan`, and `className`. Because `value` is a React node,
+it can render text, links, badges, or custom content.

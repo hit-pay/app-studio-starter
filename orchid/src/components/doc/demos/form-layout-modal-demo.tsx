@@ -1,42 +1,42 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-import { Button } from '@/components/ui/button'
-import { FormModal } from '@/components/ui/form-modal'
+import { Button } from "@/components/ui/button";
+import { FormLayout } from "@/components/ui/form-layout";
 import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormField,
-} from '@/components/ui/schema-form'
-import { toast } from '@/components/ui/toast'
+} from "@/components/ui/schema-form";
+import { toast } from "@/components/ui/toast";
 
 const CUSTOMER_FIELDS: SchemaFormField[] = [
   {
-    key: 'name',
-    title: 'Name',
-    type: 'input',
+    key: "name",
+    title: "Name",
+    type: "input",
     required: true,
-    value: '',
+    value: "",
   },
   {
-    key: 'email',
-    title: 'Email',
-    type: 'input',
-    validation: 'email',
+    key: "email",
+    title: "Email",
+    type: "input",
+    validation: "email",
     required: true,
-    value: '',
+    value: "",
   },
-]
+];
 
-function FormModalDemo() {
-  const [open, setOpen] = useState(false)
-  const formId = 'customer-form'
+function FormLayoutModalDemo() {
+  const [open, setOpen] = useState(false);
+  const formId = "customer-form";
   const form = useSchemaForm({
     fields: CUSTOMER_FIELDS,
     onSubmit: () => {
-      toast.add({ title: 'Customer saved', type: 'success' })
-      setOpen(false)
+      toast.add({ title: "Customer saved", type: "success" });
+      setOpen(false);
     },
-  })
+  });
 
   return (
     <>
@@ -45,21 +45,22 @@ function FormModalDemo() {
           Customer form
         </p>
         <Button onClick={() => setOpen(true)}>Add customer</Button>
-        <FormModal
+        <FormLayout
+          mode="modal"
           open={open}
           onOpenChange={setOpen}
           title="Add customer"
           description="Enter the customer details below."
           formId={formId}
           actions={{
-            save: { label: 'Save customer' },
+            save: { label: "Save customer" },
           }}
         >
           <SchemaForm id={formId} form={form} />
-        </FormModal>
+        </FormLayout>
       </div>
     </>
-  )
+  );
 }
 
-export { FormModalDemo }
+export { FormLayoutModalDemo };

@@ -33,8 +33,7 @@ import { Route as DialogRouteImport } from './routes/dialog'
 import { Route as DropdownMenuRouteImport } from './routes/dropdown-menu'
 import { Route as EmptyRouteImport } from './routes/empty'
 import { Route as FieldRouteImport } from './routes/field'
-import { Route as FormModalRouteImport } from './routes/form-modal'
-import { Route as FormPageRouteImport } from './routes/form-page'
+import { Route as FormLayoutRouteImport } from './routes/form-layout'
 import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
 import { Route as InputRouteImport } from './routes/input'
@@ -43,7 +42,7 @@ import { Route as InstallationRouteImport } from './routes/installation'
 import { Route as KbdRouteImport } from './routes/kbd'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
-import { Route as PageRouteImport } from './routes/page'
+import { Route as PageLayoutRouteImport } from './routes/page-layout'
 import { Route as PaginationRouteImport } from './routes/pagination'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
@@ -187,14 +186,9 @@ const FieldRoute = FieldRouteImport.update({
   path: '/field',
   getParentRoute: () => rootRouteImport,
 } as any)
-const FormModalRoute = FormModalRouteImport.update({
-  id: '/form-modal',
-  path: '/form-modal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FormPageRoute = FormPageRouteImport.update({
-  id: '/form-page',
-  path: '/form-page',
+const FormLayoutRoute = FormLayoutRouteImport.update({
+  id: '/form-layout',
+  path: '/form-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FormSectionRoute = FormSectionRouteImport.update({
@@ -237,9 +231,9 @@ const ListItemRoute = ListItemRouteImport.update({
   path: '/list-item',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PageRoute = PageRouteImport.update({
-  id: '/page',
-  path: '/page',
+const PageLayoutRoute = PageLayoutRouteImport.update({
+  id: '/page-layout',
+  path: '/page-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PaginationRoute = PaginationRouteImport.update({
@@ -378,8 +372,7 @@ export interface FileRoutesByFullPath {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
-  '/form-modal': typeof FormModalRoute
-  '/form-page': typeof FormPageRoute
+  '/form-layout': typeof FormLayoutRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
@@ -388,7 +381,7 @@ export interface FileRoutesByFullPath {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/page': typeof PageRoute
+  '/page-layout': typeof PageLayoutRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
@@ -437,8 +430,7 @@ export interface FileRoutesByTo {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
-  '/form-modal': typeof FormModalRoute
-  '/form-page': typeof FormPageRoute
+  '/form-layout': typeof FormLayoutRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
@@ -447,7 +439,7 @@ export interface FileRoutesByTo {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/page': typeof PageRoute
+  '/page-layout': typeof PageLayoutRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
@@ -497,8 +489,7 @@ export interface FileRoutesById {
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
-  '/form-modal': typeof FormModalRoute
-  '/form-page': typeof FormPageRoute
+  '/form-layout': typeof FormLayoutRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
@@ -507,7 +498,7 @@ export interface FileRoutesById {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
-  '/page': typeof PageRoute
+  '/page-layout': typeof PageLayoutRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
@@ -558,8 +549,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
-    | '/form-modal'
-    | '/form-page'
+    | '/form-layout'
     | '/form-section'
     | '/icon-group'
     | '/input'
@@ -568,7 +558,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
-    | '/page'
+    | '/page-layout'
     | '/pagination'
     | '/progress'
     | '/quantity-input'
@@ -617,8 +607,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
-    | '/form-modal'
-    | '/form-page'
+    | '/form-layout'
     | '/form-section'
     | '/icon-group'
     | '/input'
@@ -627,7 +616,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
-    | '/page'
+    | '/page-layout'
     | '/pagination'
     | '/progress'
     | '/quantity-input'
@@ -676,8 +665,7 @@ export interface FileRouteTypes {
     | '/dropdown-menu'
     | '/empty'
     | '/field'
-    | '/form-modal'
-    | '/form-page'
+    | '/form-layout'
     | '/form-section'
     | '/icon-group'
     | '/input'
@@ -686,7 +674,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
-    | '/page'
+    | '/page-layout'
     | '/pagination'
     | '/progress'
     | '/quantity-input'
@@ -736,8 +724,7 @@ export interface RootRouteChildren {
   DropdownMenuRoute: typeof DropdownMenuRoute
   EmptyRoute: typeof EmptyRoute
   FieldRoute: typeof FieldRoute
-  FormModalRoute: typeof FormModalRoute
-  FormPageRoute: typeof FormPageRoute
+  FormLayoutRoute: typeof FormLayoutRoute
   FormSectionRoute: typeof FormSectionRoute
   IconGroupRoute: typeof IconGroupRoute
   InputRoute: typeof InputRoute
@@ -746,7 +733,7 @@ export interface RootRouteChildren {
   KbdRoute: typeof KbdRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
-  PageRoute: typeof PageRoute
+  PageLayoutRoute: typeof PageLayoutRoute
   PaginationRoute: typeof PaginationRoute
   ProgressRoute: typeof ProgressRoute
   QuantityInputRoute: typeof QuantityInputRoute
@@ -941,18 +928,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FieldRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/form-modal': {
-      id: '/form-modal'
-      path: '/form-modal'
-      fullPath: '/form-modal'
-      preLoaderRoute: typeof FormModalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/form-page': {
-      id: '/form-page'
-      path: '/form-page'
-      fullPath: '/form-page'
-      preLoaderRoute: typeof FormPageRouteImport
+    '/form-layout': {
+      id: '/form-layout'
+      path: '/form-layout'
+      fullPath: '/form-layout'
+      preLoaderRoute: typeof FormLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/form-section': {
@@ -1011,11 +991,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListItemRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/page': {
-      id: '/page'
-      path: '/page'
-      fullPath: '/page'
-      preLoaderRoute: typeof PageRouteImport
+    '/page-layout': {
+      id: '/page-layout'
+      path: '/page-layout'
+      fullPath: '/page-layout'
+      preLoaderRoute: typeof PageLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/pagination': {
@@ -1200,8 +1180,7 @@ const rootRouteChildren: RootRouteChildren = {
   DropdownMenuRoute: DropdownMenuRoute,
   EmptyRoute: EmptyRoute,
   FieldRoute: FieldRoute,
-  FormModalRoute: FormModalRoute,
-  FormPageRoute: FormPageRoute,
+  FormLayoutRoute: FormLayoutRoute,
   FormSectionRoute: FormSectionRoute,
   IconGroupRoute: IconGroupRoute,
   InputRoute: InputRoute,
@@ -1210,7 +1189,7 @@ const rootRouteChildren: RootRouteChildren = {
   KbdRoute: KbdRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,
-  PageRoute: PageRoute,
+  PageLayoutRoute: PageLayoutRoute,
   PaginationRoute: PaginationRoute,
   ProgressRoute: ProgressRoute,
   QuantityInputRoute: QuantityInputRoute,

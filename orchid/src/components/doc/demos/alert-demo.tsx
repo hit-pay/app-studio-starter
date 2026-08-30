@@ -12,7 +12,6 @@ import {
   AlertTitle,
 } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
-import { PageHeader } from "@/components/ui/page";
 
 function AlertDemo() {
   return (
@@ -124,11 +123,19 @@ function AlertDemo() {
             Dashboard reporting may be delayed between 02:00 and 02:30 SGT.
           </AlertDescription>
         </Alert>
-        <PageHeader
-          title="Invoices"
-          description="Create, send, and track invoices across payment channels."
-          actions={<Button>Create invoice</Button>}
-        />
+        <header className="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+          <div className="min-w-0 flex-1">
+            <h2 className="wrap-break-word text-lg leading-6 font-medium text-oc-foreground">
+              Invoices
+            </h2>
+            <p className="wrap-break-word text-sm leading-5 text-oc-muted-foreground">
+              Create, send, and track invoices across payment channels.
+            </p>
+          </div>
+          <div className="flex justify-end sm:shrink-0">
+            <Button>Create invoice</Button>
+          </div>
+        </header>
       </div>
     </>
   );
