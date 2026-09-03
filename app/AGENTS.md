@@ -236,6 +236,81 @@ Do not seed fake records into a merchant's live database by default. Start with 
 
 The configured Turso database belongs to this app instance. Do not invent a multi-tenant administration layer unless the prompt asks for one.
 
+## File storage
+
+When an app needs uploads, reuse one `files` table and one `FileStorage` abstraction. Do not add BLOB columns to business tables, do not create `product_images` / `order_attachments`-style tables, and do not store files as Base64.
+
+### Schema
+
+```sql
+CREATE TABLE files (
+  id TEXT PRIMARY KEY,
+  entity_type TEXT,
+  entity_id TEXT,
+  name TEXT NOT NULL,
+  mime_type TEXT NOT NULL,
+  size INTEGER NOT NULL,
+  storage_provider TEXT NOT NULL DEFAULT 'turso',
+  storage_key TEXT NOT NULL,
+  data BLOB,
+  created_at TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE INDEX idx_files_entity
+ON files(entity_type, entity_id);
+```
+
+`entity_type` + `entity_id` optionally attach files to a record (`product`, `user`, `order`, …). Both may be `NULL` for standalone files. One entity can have many files. Look them up by `(entity_type, entity_id)`.
+
+`id` is the only reference business entities may store. It must stay stable if storage later moves from Turso to R2. Never store R2 URLs or provider paths on products, users, orders, or other business rows.
+
+### Abstraction
+
+Application code talks only to `FileStorage`, never to the `data` column or a provider URL:
+
+```ts
+interface FileStorage {
+  upload(input: {
+    file: File | Blob;
+    name: string;
+    mimeType: string;
+  }): Promise<{
+    id: string;
+    storageKey: string;
+  }>;
+
+  get(id: string): Promise<{
+    data: Blob | Buffer;
+    name: string;
+    mimeType: string;
+  }>;
+
+  delete(id: string): Promise<void>;
+}
+```
+
+Keep provider details inside the storage layer so `TursoFileStorage` and a future `R2FileStorage` can swap without changing business logic.
+
+### Turso (initial implementation)
+
+- `storage_provider = "turso"`
+- `storage_key = "files/{file_id}"`
+- Store original binary bytes in `data`. Do not encode as Base64.
+- Max **10 MB per file**. Validate in the UI and again on the server before write. Oversize files must not be stored; return a clear error that the limit is 10 MB.
+- After a later R2 move: same `id`, `storage_provider = "r2"`, `storage_key = "apps/{app_id}/files/{file_id}"`, `data = NULL`.
+
+### Access
+
+- Upload, get, and delete only through authorized server functions. Never expose Turso credentials to the browser.
+- Authorize against the associated entity before serving or deleting a file. Do not trust client-supplied `entity_type`, `entity_id`, `file_id`, or storage paths.
+- Scope access to this app instance. Changing IDs must not leak another app's files.
+- Sanitize filenames. Treat uploads as untrusted. Store the real MIME type (`image/jpeg`, `application/pdf`, …); do not authorize from the file extension.
+
+Get: load metadata by `id` → authorize → resolve `storage_provider` → return bytes with the stored MIME type and name.
+
+Delete: authorize → remove the stored object → delete the `files` row. Do not leave orphans.
+
 ## HitPay user, roles, and members
 
 Use the existing HitPay session context; never create another authentication system.
