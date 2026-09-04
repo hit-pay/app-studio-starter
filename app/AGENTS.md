@@ -107,7 +107,8 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 - `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
-- `src/lib/hitpay.ts`: browser-only HitPay user, role, and member helpers
+- `src/lib/hitpay.ts`: browser-only HitPay user, role, and member helpers for UI
+- `src/lib/hitpay-session.ts`: server-only HitPay session from `/user/info` for role-gated APIs
 - `src/lib/query.tsx`: React Query provider and debounce helper
 - `migrations/`: ordered SQL migration files
 - `src/styles.css`: Tailwind and Orchid design tokens
@@ -129,6 +130,7 @@ Unless the user's request truly requires infrastructure changes, leave these fil
 - `src/lib/db.ts`
 - `src/lib/migrate.ts`
 - `src/lib/hitpay.ts`
+- `src/lib/hitpay-session.ts`
 - `components.json`
 - `.mcp.json`
 
@@ -313,26 +315,54 @@ Delete: authorize → remove the stored object → delete the `files` row. Do no
 
 ## HitPay user, roles, and members
 
-Use the existing HitPay session context; never create another authentication system.
+Use the existing HitPay session context; never create another login, signup, or custom auth system.
 
-`src/lib/hitpay.ts` supports only:
+### Browser (UI only)
+
+`src/lib/hitpay.ts` is for the client:
 
 - `fetchUserInfo()`
 - `fetchAppRoles()`
 - `fetchAppMembers()`
 - `useHitPayUser()`
 
-These call the HitPay proxy routes:
+These call:
 
 - `/api/apps/{appId}/user/info`
 - `/api/apps/{appId}/roles`
 - `/api/apps/{appId}/members`
 
-They are browser-only. Do not call them from a loader or `createServerFn`, and do not import `#/lib/hitpay` into server code.
+Do not import `#/lib/hitpay` into server code. Use `user.role.title` to hide or show actions in the UI. Show an appropriate UI error if HitPay context cannot load. UI checks are not authorization.
 
-Use the signed-in user and `user.role.title` for identity, assignments, and role-aware UI when the workflow needs them. Show an appropriate UI error if HitPay context cannot load.
+### Server session from `/user/info`
 
-The starter does not provide server-side role verification. A role or user ID sent by the browser is not trusted authorization. Never claim hard server-side role enforcement by merely passing `role.title` to a mutation. If the requested workflow requires security-grade server authorization, use only a trusted host mechanism that actually exists; otherwise report that infrastructure limitation clearly.
+When a mutation or read must be limited to certain roles, do not report a blocker and do not trust `role`, `userId`, or `actorName` from the browser payload.
+
+Create the trusted session on the server from the same HitPay `/user/info` API:
+
+1. In `createServerFn`, read the incoming request cookies.
+2. Call `/api/apps/{appId}/user/info` with those cookies forwarded.
+3. Treat the returned user and `role.title` as the session for that request.
+4. Reject the call if the session is missing, invalid, or the role is not allowed.
+5. Persist requester/approver identity from this session, never from the client.
+
+Use the existing helper in `src/lib/hitpay-session.ts`:
+
+- `getHitPaySession()` when any signed-in HitPay user may proceed
+- `requireHitPayRoles(['Owner', 'Admin', 'Manager'])` when only those roles may mutate
+
+Example:
+
+```ts
+const decide = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
+  const actor = await requireHitPayRoles(['Owner', 'Admin', 'Manager'])
+  // use actor.id, actor.name, actor.role.title — not data.actorRole
+})
+```
+
+Tell the user that role-specific APIs are enforced this way: the server builds a request session from HitPay `/user/info`, then gates the endpoint. Do not claim that UI hiding is enough. Do not invent a second session store, JWT, or auth table unless the user asks for one.
+
+Local preview must keep using the host/preview `/user/info` mock. Do not add production mocks inside `start.mjs`.
 
 The starter exposes no HitPay payments, transactions, invoices, inventory, or customer API. Do not invent endpoints or data. If a request depends on unavailable HitPay product data, ask for the real API contract or keep the workflow app-owned in Turso when that still satisfies the request.
 
@@ -384,6 +414,7 @@ The app is done only when:
 - persistent data survives reload when the workflow stores data
 - migrations and server functions are connected
 - relevant validation and database constraints exist
+- role-limited actions are gated in the UI and again in `createServerFn` via `getHitPaySession` / `requireHitPayRoles`
 - loading, empty, error, submitting, and success states work
 - only required routes and actions were added
 - the final source passes `bun run lint`
