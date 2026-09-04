@@ -346,12 +346,9 @@ Create the trusted session on the server from the same HitPay `/user/info` API:
 4. Reject the call if the session is missing, invalid, or the role is not allowed.
 5. Persist requester/approver identity from this session, never from the client.
 
-`/user/info` is cached in two places so createServerFn does not repeat 8–12 SQL queries and an extra hop every time:
+Identity and sprite authorize are cached only on the host Bun proxy (~45s). Do not add a second cache in Laravel or in this app. `getHitPaySession()` may memoize only for the current request so one handler does not fetch `/user/info` twice.
 
-- HitPay proxy: ~45s in App Studio Redis (`CachedUserInfo`), keyed by app + user + preview-as role
-- App server: `getHitPaySession()` memoizes once per request and ~45s in memory, keyed by a hash of the HitPay cookie
-
-Do not add a second login, JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie. A role change can take up to the TTL to apply; that is acceptable. After a 401, drop the app-level cached entry.
+Do not add a second login, JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie.
 
 Use the existing helper in `src/lib/hitpay-session.ts`:
 
@@ -369,7 +366,7 @@ const decide = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
 })
 ```
 
-Tell the user that role-specific APIs are enforced this way: the server builds a session from HitPay `/user/info` (with a short memory cache), then gates the endpoint. Do not claim that UI hiding is enough. Do not invent a second session store unless the user asks for one.
+Tell the user that role-specific APIs are enforced this way: the server builds a session from HitPay `/user/info`, then gates the endpoint. Do not claim that UI hiding is enough. Do not invent a second session store unless the user asks for one.
 
 Local preview must keep using the host/preview `/user/info` mock. Do not add production mocks inside `start.mjs`.
 
