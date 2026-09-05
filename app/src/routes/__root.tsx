@@ -16,7 +16,17 @@ function NotFound() {
   )
 }
 
+function Pending() {
+  return (
+    <div className="flex h-full min-h-0 w-full flex-1 items-center justify-center">
+      <p className="text-sm text-oc-muted-foreground">Loading…</p>
+    </div>
+  )
+}
+
 export const Route = createRootRoute({
+  ssr: false,
+  pendingComponent: Pending,
   notFoundComponent: NotFound,
   head: () => ({
     meta: [

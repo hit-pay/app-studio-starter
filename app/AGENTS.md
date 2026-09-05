@@ -151,7 +151,9 @@ The host dashboard owns the outer navigation, account controls, authentication g
 - Use TanStack `Link`, router navigation, and `createFileRoute`.
 - Never hardcode an app ID or manually prepend it to route links.
 - Keep assets and app routes compatible with the configured base path.
-- Do not access `window` during the first SSR render.
+- The document is SPA (`defaultSsr: false`). Route components, loaders, and `beforeLoad` run in the browser. Do not set `ssr: true` on routes.
+- Keep `createServerFn` for trusted mutations and role checks. That is the only server API.
+- `window` is available in route components. Do not read HitPay cookies or `Authorization` there.
 - Do not replace the existing base-path or asset-prefix handling.
 
 ## Orchid UI
@@ -336,7 +338,7 @@ Do not import `#/lib/hitpay` into server code. Use `user.role.title` to hide or 
 
 ### Server session from the host proxy
 
-Do not call `/user/info` from a loader or SSR. That helper in `#/lib/hitpay` is browser-only. Sprite does not receive HitPay cookies.
+Do not call `/user/info` from `createServerFn`. That helper in `#/lib/hitpay` is browser-only. Sprite does not receive HitPay cookies. Document loaders run in the browser and may use it for UI only.
 
 When a mutation or read must be limited to certain roles, use `getHitPaySession()` / `requireHitPayRoles()` in `createServerFn`:
 
