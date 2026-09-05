@@ -34,16 +34,21 @@ function signaturesMatch(left: string, right: string): boolean {
 
 function readSignedSession(token: string): HitPaySession | null {
   const secret = process.env.HITPAY_SESSION_SECRET?.trim()
-  const [payload, signature] = token.split('.')
+  const [payload, signature] = token.trim().split('.')
 
-  if (!secret || !payload || !signature) {
-    return null
+  if (!secret) {
+    throw new Error('HITPAY_SESSION_SECRET is not set on this server.')
   }
 
+  if (!payload || !signature || token.trim().split('.').length !== 2) {
+    throw new Error('The HitPay session header is malformed.')
+  }
+
+  // Host contract: HMAC-SHA256 hex of the base64url payload (not JWT base64url sig).
   const expected = createHmac('sha256', secret).update(payload).digest('hex')
 
   if (!signaturesMatch(expected, signature)) {
-    return null
+    throw new Error('The HitPay session signature is invalid.')
   }
 
   try {
@@ -92,11 +97,18 @@ export async function getHitPaySession(): Promise<HitPaySession> {
 }
 
 async function loadHitPaySession(request: Request): Promise<HitPaySession> {
-  const signed = getRequestHeader('x-hitpay-session') ?? request.headers.get('x-hitpay-session')
-  const fromProxy = signed ? readSignedSession(signed) : null
+  const signed = (
+    getRequestHeader('x-hitpay-session') ?? request.headers.get('x-hitpay-session') ?? ''
+  ).trim()
 
-  if (fromProxy) {
-    return fromProxy
+  if (signed) {
+    const fromProxy = readSignedSession(signed)
+
+    if (fromProxy) {
+      return fromProxy
+    }
+
+    throw new Error('The HitPay session signature is invalid.')
   }
 
   const cookie = getRequestHeader('cookie') ?? request.headers.get('cookie') ?? ''

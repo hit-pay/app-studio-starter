@@ -347,6 +347,8 @@ When a mutation or read must be limited to certain roles, use `getHitPaySession(
 
 Do not add a second login, JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie.
 
+Do not rewrite `src/lib/hitpay-session.ts` or invent another verifier. The host signs `base64url(json).hex(hmac-sha256(payload))` with `HITPAY_SESSION_SECRET`. Do not treat the signature as JWT/base64url, do not HMAC the decoded JSON, and do not accept browser fields as a fallback.
+
 Use the existing helper in `src/lib/hitpay-session.ts`:
 
 - `getHitPaySession()` when any signed-in HitPay user may proceed
