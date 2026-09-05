@@ -3,13 +3,14 @@ import { pathToFileURL } from 'node:url'
 import { hitpayPreviewPayload } from './scripts/hitpay-preview-mock.mjs'
 
 // Local / agent screenshots only. Not the HitPay iframe.
-// Production stays on start.mjs (/{appId}/ behind the proxy).
+// Serves the SPA shell + createServerFn. Production stays on start.mjs.
 process.env.HOST = '127.0.0.1'
 process.env.NITRO_HOST = '127.0.0.1'
 process.env.PORT ??= '3010'
 
 const appId = process.env.APP_STUDIO_APP_ID?.trim()
 const prefix = appId ? `/${appId}` : ''
+const assetPrefix = appId ? `/${appId}/assets/` : null
 const ssrEntry = pathToFileURL(
   resolve('.nitro/vite/services/ssr/server.js'),
 ).href
@@ -39,6 +40,25 @@ function withAppPrefix(pathname) {
   return `${prefix}${pathname}`
 }
 
+function handleNitro(options, request, server) {
+  const handle = (req) => options.fetch(req, server)
+
+  if (!assetPrefix || !new URL(request.url).pathname.startsWith(assetPrefix)) {
+    return handle(request)
+  }
+
+  return Promise.resolve(handle(request)).then((response) => {
+    if (response.status !== 404) {
+      return response
+    }
+
+    const url = new URL(request.url)
+    url.pathname = url.pathname.slice(`/${appId}`.length)
+
+    return handle(new Request(url, request))
+  })
+}
+
 const serve = Bun.serve.bind(Bun)
 Bun.serve = (options) =>
   serve({
@@ -54,7 +74,7 @@ Bun.serve = (options) =>
 
       url.pathname = withAppPrefix(url.pathname)
 
-      return options.fetch(new Request(url, request), server)
+      return handleNitro(options, new Request(url, request), server)
     },
   })
 
