@@ -334,19 +334,16 @@ These call:
 
 Do not import `#/lib/hitpay` into server code. Use `user.role.title` to hide or show actions in the UI. Show an appropriate UI error if HitPay context cannot load. UI checks are not authorization.
 
-### Server session from `/user/info`
+### Server session from the host proxy
 
-When a mutation or read must be limited to certain roles, do not report a blocker and do not trust `role`, `userId`, or `actorName` from the browser payload.
+Do not call `/user/info` from a loader or SSR. That helper in `#/lib/hitpay` is browser-only. Sprite does not receive HitPay cookies.
 
-Create the trusted session on the server from the same HitPay `/user/info` API:
+When a mutation or read must be limited to certain roles, use `getHitPaySession()` / `requireHitPayRoles()` in `createServerFn`:
 
-1. In `createServerFn`, start `getHitPaySession()` / `requireHitPayRoles()` first so it can overlap later work.
-2. The helper forwards the incoming request cookies to `/api/apps/{appId}/user/info`.
-3. Treat the returned user and `role.title` as the session.
-4. Reject the call if the session is missing, invalid, or the role is not allowed.
-5. Persist requester/approver identity from this session, never from the client.
-
-Identity and sprite authorize are cached only on the host Bun proxy (~45s). Do not add a second cache in Laravel or in this app. `getHitPaySession()` may memoize only for the current request so one handler does not fetch `/user/info` twice.
+1. Production: read the signed `X-HitPay-Session` header the host proxy attaches after it authenticates the dashboard user.
+2. Local preview: if that header is missing, the helper may GET `/user/info` with the preview cookie.
+3. Never trust `role`, `userId`, or `actorName` from the browser payload.
+4. Persist requester/approver identity from this session.
 
 Do not add a second login, JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie.
 
@@ -366,7 +363,7 @@ const decide = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
 })
 ```
 
-Tell the user that role-specific APIs are enforced this way: the server builds a session from HitPay `/user/info`, then gates the endpoint. Do not claim that UI hiding is enough. Do not invent a second session store unless the user asks for one.
+Tell the user that role-specific APIs use the signed host session on `createServerFn`, not a role field from the browser. Do not claim that UI hiding is enough. Do not invent a second session store unless the user asks for one.
 
 Local preview must keep using the host/preview `/user/info` mock. Do not add production mocks inside `start.mjs`.
 

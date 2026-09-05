@@ -1,3 +1,4 @@
+import { createHmac, timingSafeEqual } from 'node:crypto'
 import { getRequest, getRequestHeader } from '@tanstack/react-start/server'
 
 export type HitPaySessionRole = {
@@ -24,11 +25,55 @@ function resolveAppId(request: Request): string {
   throw new Error('HitPay app context is missing.')
 }
 
+function signaturesMatch(left: string, right: string): boolean {
+  const a = Buffer.from(left)
+  const b = Buffer.from(right)
+
+  return a.length === b.length && timingSafeEqual(a, b)
+}
+
+function readSignedSession(token: string): HitPaySession | null {
+  const secret = process.env.HITPAY_SESSION_SECRET?.trim()
+  const [payload, signature] = token.split('.')
+
+  if (!secret || !payload || !signature) {
+    return null
+  }
+
+  const expected = createHmac('sha256', secret).update(payload).digest('hex')
+
+  if (!signaturesMatch(expected, signature)) {
+    return null
+  }
+
+  try {
+    const parsed = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as HitPaySession & {
+      exp?: number
+    }
+
+    if (typeof parsed.exp === 'number' && parsed.exp * 1000 < Date.now()) {
+      return null
+    }
+
+    if (typeof parsed.id !== 'string' || typeof parsed.email !== 'string') {
+      return null
+    }
+
+    return {
+      id: parsed.id,
+      email: parsed.email,
+      name: parsed.name ?? null,
+      role: parsed.role ?? null,
+    }
+  } catch {
+    return null
+  }
+}
+
 /**
  * Trusted HitPay identity for createServerFn.
- * Forwards request cookies to /api/apps/{appId}/user/info.
- * Memoized once per request only. Cross-request cache lives on the host proxy.
- * Never accept role, user id, or actor name from the browser payload.
+ * Production: signed X-HitPay-Session from the host proxy.
+ * Local preview: GET /user/info with the request cookie.
  */
 export async function getHitPaySession(): Promise<HitPaySession> {
   const request = getRequest()
@@ -47,6 +92,13 @@ export async function getHitPaySession(): Promise<HitPaySession> {
 }
 
 async function loadHitPaySession(request: Request): Promise<HitPaySession> {
+  const signed = getRequestHeader('x-hitpay-session') ?? request.headers.get('x-hitpay-session')
+  const fromProxy = signed ? readSignedSession(signed) : null
+
+  if (fromProxy) {
+    return fromProxy
+  }
+
   const cookie = getRequestHeader('cookie') ?? request.headers.get('cookie') ?? ''
 
   if (!cookie) {
