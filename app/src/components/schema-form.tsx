@@ -1,5 +1,14 @@
-import { type ReactNode } from 'react'
+import { useId, useRef, type ReactNode } from 'react'
 import { useForm, useStore } from '@tanstack/react-form'
+import {
+  FileCodeIcon,
+  FileIcon,
+  FileSpreadsheetIcon,
+  FileTextIcon,
+  ImageIcon,
+  UploadIcon,
+  XIcon,
+} from 'lucide-react'
 
 import { cn } from '@/lib/utils'
 import { Checkbox, CheckboxGroup } from '@/components/ui/checkbox'
@@ -43,9 +52,21 @@ import {
 } from '@/components/ui/select'
 import { FormSectionItem } from '@/components/ui/form-section'
 import { QuantityInput } from '@/components/quantity-input'
+import { ChoiceCard, ChoiceCardGroup } from '@/components/choice-card'
 import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'
+import { Button } from '@/components/ui/button'
+import {
+  Attachment,
+  AttachmentAction,
+  AttachmentActions,
+  AttachmentContent,
+  AttachmentDescription,
+  AttachmentGroup,
+  AttachmentMedia,
+  AttachmentTitle,
+} from '@/components/ui/attachment'
 import {
   controlType,
   dateRangeValue,
@@ -59,6 +80,7 @@ import {
   inputGroupValue,
   isDisplayed,
   isMultiCombobox,
+  isMultiFile,
   isPlainObject,
   labelsFromValues,
   nestValues,
@@ -80,6 +102,117 @@ import {
   type SchemaFormType,
   type SchemaFormValues,
 } from './schema-form-model'
+
+function formatFileSize(bytes: number) {
+  if (bytes < 1024) {
+    return `${bytes} B`
+  }
+  if (bytes < 1024 * 1024) {
+    return `${(bytes / 1024).toFixed(1)} KB`
+  }
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
+function FileGlyph({ file }: { file: File }) {
+  if (file.type.startsWith('image/')) {
+    return <ImageIcon />
+  }
+  if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
+    return <FileTextIcon />
+  }
+  if (file.type.includes('sheet') || /\.(csv|xlsx|xls)$/i.test(file.name)) {
+    return <FileSpreadsheetIcon />
+  }
+  if (/\.(tsx|ts|jsx|js|json)$/i.test(file.name)) {
+    return <FileCodeIcon />
+  }
+  return <FileIcon />
+}
+
+function filesFromValue(value: unknown, multiple: boolean) {
+  if (multiple) {
+    return Array.isArray(value) ? value.filter((item): item is File => item instanceof File) : []
+  }
+  return value instanceof File ? [value] : []
+}
+
+function FormFileField({
+  item,
+  value,
+  invalid,
+  message,
+  onBlur,
+  onChange,
+}: {
+  item: FlatField
+  value: unknown
+  invalid: boolean
+  message: string
+  onBlur: () => void
+  onChange: (next: unknown) => void
+}) {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const inputId = useId()
+  const multiple = isMultiFile(item)
+  const files = filesFromValue(value, multiple)
+  const accept = typeof item.props?.accept === 'string' ? item.props.accept : undefined
+
+  const setFiles = (next: File[]) => {
+    onChange(multiple ? next : (next[0] ?? ''))
+  }
+
+  return (
+    <Field data-invalid={invalid || undefined}>
+      <FieldLabel htmlFor={inputId}>{item.title}</FieldLabel>
+      <input
+        id={inputId}
+        ref={inputRef}
+        type="file"
+        name={item.path}
+        multiple={multiple}
+        accept={accept}
+        className="sr-only"
+        onBlur={onBlur}
+        onChange={(event) => {
+          const picked = event.target.files ? Array.from(event.target.files) : []
+          setFiles(multiple ? [...files, ...picked] : picked.slice(0, 1))
+          event.target.value = ''
+        }}
+      />
+      <Button type="button" variant="outline" size="sm" onClick={() => inputRef.current?.click()}>
+        <UploadIcon />
+        {multiple ? 'Choose files' : 'Choose file'}
+      </Button>
+      {files.length ? (
+        <AttachmentGroup>
+          {files.map((file, index) => (
+            <Attachment key={`${file.name}-${file.size}-${file.lastModified}-${index}`} className="w-full">
+              <AttachmentMedia>
+                <FileGlyph file={file} />
+              </AttachmentMedia>
+              <AttachmentContent>
+                <AttachmentTitle>{file.name}</AttachmentTitle>
+                <AttachmentDescription>
+                  {(file.type || 'File') + ' · ' + formatFileSize(file.size)}
+                </AttachmentDescription>
+              </AttachmentContent>
+              <AttachmentActions>
+                <AttachmentAction
+                  aria-label={`Remove ${file.name}`}
+                  onClick={() => setFiles(files.filter((_, itemIndex) => itemIndex !== index))}
+                >
+                  <XIcon />
+                </AttachmentAction>
+              </AttachmentActions>
+            </Attachment>
+          ))}
+        </AttachmentGroup>
+      ) : null}
+      {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
+      {invalid ? <FieldError>{message}</FieldError> : null}
+    </Field>
+  )
+}
 
 function FormComboboxField({
   item,
@@ -492,29 +625,17 @@ function SchemaForm({
               }
 
               if (type === 'file') {
-                const file = value instanceof File ? value : null
                 return (
-                  <Field data-invalid={invalid || undefined}>
-                    <FieldLabel>{item.title}</FieldLabel>
-                    <Input
-                      type="file"
-                      name={item.path}
-                      onBlur={field.handleBlur}
-                      onChange={(event) =>
-                        changeField(
-                          item,
-                          [{ path: item.path, value: event.target.files?.[0] ?? '' }],
-                          field.handleChange,
-                        )
-                      }
-                    />
-                    {file ? (
-                      <FieldDescription>{file.name}</FieldDescription>
-                    ) : item.description ? (
-                      <FieldDescription>{item.description}</FieldDescription>
-                    ) : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
-                  </Field>
+                  <FormFileField
+                    item={item}
+                    value={value}
+                    invalid={invalid}
+                    message={message}
+                    onBlur={field.handleBlur}
+                    onChange={(next) =>
+                      changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                    }
+                  />
                 )
               }
 
@@ -798,6 +919,46 @@ function SchemaForm({
                         )
                       })}
                     </RadioGroup>
+                    {invalid ? <FieldError>{message}</FieldError> : null}
+                  </Field>
+                )
+              }
+
+              if (type === 'choice-card') {
+                const groupAlignment =
+                  item.props?.alignment === 'Horizontal' || item.props?.alignment === 'horizontal'
+                    ? 'Horizontal'
+                    : 'Vertical'
+                const cardAlignment =
+                  item.props?.cardAlignment === 'Center' || item.props?.cardAlignment === 'center'
+                    ? 'Center'
+                    : 'Left'
+
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel>{item.title}</FieldLabel>
+                    <ChoiceCardGroup
+                      value={value == null || value === '' ? null : String(value)}
+                      alignment={groupAlignment}
+                      onValueChange={(next) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: String(next) }],
+                          field.handleChange,
+                        )
+                      }
+                    >
+                      {(item.options ?? []).map((option) => (
+                        <ChoiceCard
+                          key={option.value}
+                          value={option.value}
+                          title={option.label}
+                          description={option.description}
+                          alignment={cardAlignment}
+                        />
+                      ))}
+                    </ChoiceCardGroup>
+                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
                     {invalid ? <FieldError>{message}</FieldError> : null}
                   </Field>
                 )

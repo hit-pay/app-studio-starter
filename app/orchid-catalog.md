@@ -382,6 +382,12 @@ shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens
 Import `@/components/ui/chart`; read `src/components/ui/chart.tsx`.
 
 
+## `attachment` — Attachment
+
+shadcn-compatible file and image attachment with upload state, media, actions, and a vertical group.
+Import `@/components/ui/attachment`; read `src/components/ui/attachment.tsx`.
+
+
 # Form
 
 ## `form-section` — Form Section

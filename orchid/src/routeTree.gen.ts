@@ -14,6 +14,7 @@ import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
 import { Route as AspectRatioRouteImport } from './routes/aspect-ratio'
+import { Route as AttachmentRouteImport } from './routes/attachment'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
@@ -102,6 +103,11 @@ const AlertDialogRoute = AlertDialogRouteImport.update({
 const AspectRatioRoute = AspectRatioRouteImport.update({
   id: '/aspect-ratio',
   path: '/aspect-ratio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AttachmentRoute = AttachmentRouteImport.update({
+  id: '/attachment',
+  path: '/attachment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AvatarRoute = AvatarRouteImport.update({
@@ -432,6 +438,7 @@ export interface FileRoutesByFullPath {
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
   '/aspect-ratio': typeof AspectRatioRoute
+  '/attachment': typeof AttachmentRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -503,6 +510,7 @@ export interface FileRoutesByTo {
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
   '/aspect-ratio': typeof AspectRatioRoute
+  '/attachment': typeof AttachmentRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -575,6 +583,7 @@ export interface FileRoutesById {
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
   '/aspect-ratio': typeof AspectRatioRoute
+  '/attachment': typeof AttachmentRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
@@ -648,6 +657,7 @@ export interface FileRouteTypes {
     | '/alert'
     | '/alert-dialog'
     | '/aspect-ratio'
+    | '/attachment'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -719,6 +729,7 @@ export interface FileRouteTypes {
     | '/alert'
     | '/alert-dialog'
     | '/aspect-ratio'
+    | '/attachment'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -790,6 +801,7 @@ export interface FileRouteTypes {
     | '/alert'
     | '/alert-dialog'
     | '/aspect-ratio'
+    | '/attachment'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
@@ -862,6 +874,7 @@ export interface RootRouteChildren {
   AlertRoute: typeof AlertRoute
   AlertDialogRoute: typeof AlertDialogRoute
   AspectRatioRoute: typeof AspectRatioRoute
+  AttachmentRoute: typeof AttachmentRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
@@ -958,6 +971,13 @@ declare module '@tanstack/react-router' {
       path: '/aspect-ratio'
       fullPath: '/aspect-ratio'
       preLoaderRoute: typeof AspectRatioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/attachment': {
+      id: '/attachment'
+      path: '/attachment'
+      fullPath: '/attachment'
+      preLoaderRoute: typeof AttachmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/avatar': {
@@ -1437,6 +1457,7 @@ const rootRouteChildren: RootRouteChildren = {
   AlertRoute: AlertRoute,
   AlertDialogRoute: AlertDialogRoute,
   AspectRatioRoute: AspectRatioRoute,
+  AttachmentRoute: AttachmentRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,

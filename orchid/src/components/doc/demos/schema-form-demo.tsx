@@ -121,6 +121,17 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     value: "a",
   },
   {
+    key: "channel",
+    title: "Channel",
+    type: "choice-card",
+    required: true,
+    options: [
+      { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
+      { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
+    ],
+    value: "paynow",
+  },
+  {
     key: "accepted",
     title: "I accept the terms",
     type: "accepted",
@@ -230,6 +241,19 @@ const DETAILS_FIELDS: SchemaFormField[] = [
     value: { amount: "", currency: "sgd" },
   },
   {
+    key: "receipt",
+    title: "Receipt",
+    type: "file",
+    description: "Upload one file.",
+  },
+  {
+    key: "documents",
+    title: "Documents",
+    type: "file",
+    props: { multiple: true },
+    description: "Upload several files.",
+  },
+  {
     key: "password_protection",
     title: "Password protection",
     type: "section-item",
@@ -282,10 +306,12 @@ Types
 - input | password | textarea | phone
 - select
 - combobox — searchable; add props.multiple for chips
-- radio | checkbox | checkbox-group | accepted | switch
+- radio | choice-card | checkbox | checkbox-group | accepted | switch
+- choice-card — pick one; options may include description; props.alignment Vertical|Horizontal
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
 - date | datetime | date-range | file | quantity
+- file — one File; add props.multiple for File[]
 - date-range — key "from+to" writes from + to, or one key with { from, to }
 - object — nest with fields[]
 - hidden | section | section-item — row with title + switch
@@ -317,7 +343,17 @@ Example — combobox multiple
 }`;
 
 function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
-  const code = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+  const code =
+    typeof data === "string"
+      ? data
+      : JSON.stringify(
+          data,
+          (_key, value) =>
+            value instanceof File
+              ? { name: value.name, size: value.size, type: value.type }
+              : value,
+          2,
+        );
   return <DocCodePanel filename={filename} code={code} />;
 }
 

@@ -5,6 +5,7 @@ export const SCHEMA_FORM_TYPES = [
   'select',
   'combobox',
   'radio',
+  'choice-card',
   'checkbox',
   'checkbox-group',
   'accepted',
@@ -28,6 +29,7 @@ export type SchemaFormType = (typeof SCHEMA_FORM_TYPES)[number]
 export type SchemaFormOption = {
   value: string
   label: string
+  description?: string
 }
 
 export type SchemaFormFieldProps = {
@@ -96,7 +98,17 @@ export const SCHEMA_FORM_EXAMPLE_FIELDS: SchemaFormField[] = [
   { key: 'when', title: 'Date', type: 'date' },
   { key: 'at', title: 'Date and time', type: 'datetime' },
   { key: 'from+to', title: 'Date range', type: 'date-range' },
+  {
+    key: 'channel',
+    title: 'Channel',
+    type: 'choice-card',
+    options: [
+      { value: 'paynow', label: 'PayNow', description: 'Instant bank transfer' },
+      { value: 'card', label: 'Card', description: 'Visa, Mastercard, AMEX' },
+    ],
+  },
   { key: 'attachment', title: 'Attachment', type: 'file' },
+  { key: 'documents', title: 'Documents', type: 'file', props: { multiple: true } },
 ]
 
 export function fieldShowIf(field: SchemaFormField) {
@@ -212,6 +224,10 @@ export function isMultiCombobox(field: SchemaFormField) {
   return field.type === 'combobox' && field.props?.multiple === true
 }
 
+export function isMultiFile(field: SchemaFormField) {
+  return field.type === 'file' && field.props?.multiple === true
+}
+
 function defaultValueFor(field: SchemaFormField): unknown {
   if (field.type === 'input-group' && !inputGroupKeys(field)) {
     return inputGroupValue(field, field.value)
@@ -225,7 +241,7 @@ function defaultValueFor(field: SchemaFormField): unknown {
   ) {
     return false
   }
-  if (field.type === 'checkbox-group' || isMultiCombobox(field)) {
+  if (field.type === 'checkbox-group' || isMultiCombobox(field) || isMultiFile(field)) {
     return []
   }
   if (field.type === 'slider') return 0
@@ -377,6 +393,9 @@ function isEmpty(value: unknown, field: SchemaFormField) {
     return !range.from || !range.to
   }
   if (type === 'file') {
+    if (isMultiFile(field)) {
+      return !Array.isArray(value) || value.length === 0 || !value.every((item) => item instanceof File)
+    }
     return !(value instanceof File)
   }
   if (value == null) return true

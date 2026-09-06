@@ -169,6 +169,12 @@ export const DOC_COMPONENTS = [
     description:
       "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
   },
+  {
+    to: "/attachment" as const,
+    name: "Attachment",
+    description:
+      "shadcn-compatible file and image attachment with upload state, media, and a vertical group.",
+  },
 ] as const;
 
 export function docComponentsByName() {

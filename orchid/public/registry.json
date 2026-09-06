@@ -20,6 +20,7 @@
         "@orchid/resizable",
         "@orchid/aspect-ratio",
         "@orchid/chart",
+        "@orchid/attachment",
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
@@ -1036,6 +1037,21 @@
           "path": "src/components/ui/chart.tsx",
           "type": "registry:ui",
           "target": "@ui/chart.tsx"
+        }
+      ]
+    },
+    {
+      "name": "attachment",
+      "type": "registry:ui",
+      "title": "Attachment",
+      "description": "shadcn-compatible file and image attachment with upload state, media, actions, and a vertical group.",
+      "dependencies": ["lucide-react"],
+      "registryDependencies": ["@orchid/button"],
+      "files": [
+        {
+          "path": "src/components/ui/attachment.tsx",
+          "type": "registry:ui",
+          "target": "@ui/attachment.tsx"
         }
       ]
     },
