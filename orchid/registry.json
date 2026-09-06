@@ -16,6 +16,9 @@
         "@orchid/alert",
         "@orchid/list-item",
         "@orchid/empty",
+        "@orchid/card",
+        "@orchid/resizable",
+        "@orchid/aspect-ratio",
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
@@ -972,6 +975,51 @@
           "path": "src/components/date-picker.tsx",
           "type": "registry:ui",
           "target": "@components/date-picker.tsx"
+        }
+      ]
+    },
+    {
+      "name": "card",
+      "type": "registry:ui",
+      "title": "Card",
+      "description": "shadcn-compatible content card with header, title, description, action, content, and footer in Orchid styling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/card.tsx",
+          "type": "registry:ui",
+          "target": "@ui/card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resizable",
+      "type": "registry:ui",
+      "title": "Resizable",
+      "description": "shadcn-compatible split panes with a drag handle in Orchid styling.",
+      "dependencies": ["react-resizable-panels", "lucide-react"],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/resizable.tsx",
+          "type": "registry:ui",
+          "target": "@ui/resizable.tsx"
+        }
+      ]
+    },
+    {
+      "name": "aspect-ratio",
+      "type": "registry:ui",
+      "title": "Aspect Ratio",
+      "description": "shadcn-compatible box that keeps a width/height ratio.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/ui/aspect-ratio.tsx",
+          "type": "registry:ui",
+          "target": "@ui/aspect-ratio.tsx"
         }
       ]
     },

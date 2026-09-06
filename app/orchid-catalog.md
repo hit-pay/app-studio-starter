@@ -356,6 +356,28 @@ Orchid helper wrappers following the shadcn Popover + Calendar recipe for date, 
 Import `@/components/date-picker`; read `src/components/date-picker.tsx`.
 
 
+# Component
+
+## `card` — Card
+
+shadcn-compatible content card with header, title, description, action, content, and footer in Orchid styling.
+Import `@/components/ui/card`; read `src/components/ui/card.tsx`.
+
+
+## `resizable` — Resizable
+
+shadcn-compatible split panes with a drag handle in Orchid styling.
+Import `@/components/ui/resizable`; read `src/components/ui/resizable.tsx`.
+
+
+## `aspect-ratio` — Aspect Ratio
+
+shadcn-compatible box that keeps a width/height ratio.
+Import `@/components/ui/aspect-ratio`; read `src/components/ui/aspect-ratio.tsx`.
+
+
+# Form
+
 ## `form-section` — Form Section
 
 Form block heading. FormSectionGroup + FormSectionItem for settings rows.

@@ -200,6 +200,9 @@ That becomes `app-studio:{appId}:settings:density`. Form-draft helpers already a
 - do not bypass `SchemaForm` with direct TanStack `useForm` for complex forms
 - complex data displays: use schema-driven `SchemaTable` from `@/components/schema-table` for search, filters, sorting, selection actions, pagination, row actions, and empty-state actions; `useSchemaTable.onQueryChange(query, change)` reports query-change metadata
 - simple static data displays: use Orchid `Table`
+- generic content cards: use `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, and `CardFooter` from `@/components/ui/card`; keep `StatCard`, `ChoiceCard`, and `CustomerCard` for those specific patterns
+- split panes: use `ResizablePanelGroup`, `ResizablePanel`, and `ResizableHandle` from `@/components/ui/resizable`
+- fixed media/frame ratio: use `AspectRatio` from `@/components/ui/aspect-ratio` with `ratio={16/9}` (or similar)
 - read-only key/value cards: use props-based `DetailList`; pass `items` rather than composing internal row primitives
 - grouped icon actions: use props-based `IconGroup`; pass `items` rather than composing internal child primitives
 - custom modal layouts: compose Orchid `Dialog`

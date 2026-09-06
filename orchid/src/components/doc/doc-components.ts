@@ -145,6 +145,24 @@ export const DOC_COMPONENTS = [
     description:
       "shadcn-compatible bounded scroll area with Orchid scrollbar styling.",
   },
+  {
+    to: "/card" as const,
+    name: "Card",
+    description:
+      "shadcn-compatible content card with header, title, description, action, and footer.",
+  },
+  {
+    to: "/resizable" as const,
+    name: "Resizable",
+    description:
+      "shadcn-compatible split panes with a drag handle in Orchid styling.",
+  },
+  {
+    to: "/aspect-ratio" as const,
+    name: "Aspect Ratio",
+    description:
+      "shadcn-compatible box that keeps a width/height ratio, such as 16/9.",
+  },
 ] as const;
 
 export function docComponentsByName() {

@@ -13,12 +13,14 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AccordionRouteImport } from './routes/accordion'
 import { Route as AlertRouteImport } from './routes/alert'
 import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
+import { Route as AspectRatioRouteImport } from './routes/aspect-ratio'
 import { Route as AvatarRouteImport } from './routes/avatar'
 import { Route as BadgeRouteImport } from './routes/badge'
 import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
 import { Route as ButtonRouteImport } from './routes/button'
 import { Route as ButtonGroupRouteImport } from './routes/button-group'
 import { Route as CalendarRouteImport } from './routes/calendar'
+import { Route as CardRouteImport } from './routes/card'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as CliRouteImport } from './routes/cli'
@@ -50,6 +52,7 @@ import { Route as PaginationRouteImport } from './routes/pagination'
 import { Route as ProgressRouteImport } from './routes/progress'
 import { Route as QuantityInputRouteImport } from './routes/quantity-input'
 import { Route as RadioGroupRouteImport } from './routes/radio-group'
+import { Route as ResizableRouteImport } from './routes/resizable'
 import { Route as SchemaFormRouteImport } from './routes/schema-form'
 import { Route as SchemaTableRouteImport } from './routes/schema-table'
 import { Route as ScrollAreaRouteImport } from './routes/scroll-area'
@@ -95,6 +98,11 @@ const AlertDialogRoute = AlertDialogRouteImport.update({
   path: '/alert-dialog',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AspectRatioRoute = AspectRatioRouteImport.update({
+  id: '/aspect-ratio',
+  path: '/aspect-ratio',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AvatarRoute = AvatarRouteImport.update({
   id: '/avatar',
   path: '/avatar',
@@ -123,6 +131,11 @@ const ButtonGroupRoute = ButtonGroupRouteImport.update({
 const CalendarRoute = CalendarRouteImport.update({
   id: '/calendar',
   path: '/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CardRoute = CardRouteImport.update({
+  id: '/card',
+  path: '/card',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckboxRoute = CheckboxRouteImport.update({
@@ -280,6 +293,11 @@ const RadioGroupRoute = RadioGroupRouteImport.update({
   path: '/radio-group',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ResizableRoute = ResizableRouteImport.update({
+  id: '/resizable',
+  path: '/resizable',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SchemaFormRoute = SchemaFormRouteImport.update({
   id: '/schema-form',
   path: '/schema-form',
@@ -407,12 +425,14 @@ export interface FileRoutesByFullPath {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
+  '/aspect-ratio': typeof AspectRatioRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/button-group': typeof ButtonGroupRoute
   '/calendar': typeof CalendarRoute
+  '/card': typeof CardRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/cli': typeof CliRoute
@@ -444,6 +464,7 @@ export interface FileRoutesByFullPath {
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
+  '/resizable': typeof ResizableRoute
   '/schema-form': typeof SchemaFormRoute
   '/schema-table': typeof SchemaTableRoute
   '/scroll-area': typeof ScrollAreaRoute
@@ -474,12 +495,14 @@ export interface FileRoutesByTo {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
+  '/aspect-ratio': typeof AspectRatioRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/button-group': typeof ButtonGroupRoute
   '/calendar': typeof CalendarRoute
+  '/card': typeof CardRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/cli': typeof CliRoute
@@ -511,6 +534,7 @@ export interface FileRoutesByTo {
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
+  '/resizable': typeof ResizableRoute
   '/schema-form': typeof SchemaFormRoute
   '/schema-table': typeof SchemaTableRoute
   '/scroll-area': typeof ScrollAreaRoute
@@ -542,12 +566,14 @@ export interface FileRoutesById {
   '/accordion': typeof AccordionRoute
   '/alert': typeof AlertRoute
   '/alert-dialog': typeof AlertDialogRoute
+  '/aspect-ratio': typeof AspectRatioRoute
   '/avatar': typeof AvatarRoute
   '/badge': typeof BadgeRoute
   '/breadcrumb': typeof BreadcrumbRoute
   '/button': typeof ButtonRoute
   '/button-group': typeof ButtonGroupRoute
   '/calendar': typeof CalendarRoute
+  '/card': typeof CardRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/cli': typeof CliRoute
@@ -579,6 +605,7 @@ export interface FileRoutesById {
   '/progress': typeof ProgressRoute
   '/quantity-input': typeof QuantityInputRoute
   '/radio-group': typeof RadioGroupRoute
+  '/resizable': typeof ResizableRoute
   '/schema-form': typeof SchemaFormRoute
   '/schema-table': typeof SchemaTableRoute
   '/scroll-area': typeof ScrollAreaRoute
@@ -611,12 +638,14 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
+    | '/aspect-ratio'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
     | '/button'
     | '/button-group'
     | '/calendar'
+    | '/card'
     | '/checkbox'
     | '/choice-card'
     | '/cli'
@@ -648,6 +677,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/quantity-input'
     | '/radio-group'
+    | '/resizable'
     | '/schema-form'
     | '/schema-table'
     | '/scroll-area'
@@ -678,12 +708,14 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
+    | '/aspect-ratio'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
     | '/button'
     | '/button-group'
     | '/calendar'
+    | '/card'
     | '/checkbox'
     | '/choice-card'
     | '/cli'
@@ -715,6 +747,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/quantity-input'
     | '/radio-group'
+    | '/resizable'
     | '/schema-form'
     | '/schema-table'
     | '/scroll-area'
@@ -745,12 +778,14 @@ export interface FileRouteTypes {
     | '/accordion'
     | '/alert'
     | '/alert-dialog'
+    | '/aspect-ratio'
     | '/avatar'
     | '/badge'
     | '/breadcrumb'
     | '/button'
     | '/button-group'
     | '/calendar'
+    | '/card'
     | '/checkbox'
     | '/choice-card'
     | '/cli'
@@ -782,6 +817,7 @@ export interface FileRouteTypes {
     | '/progress'
     | '/quantity-input'
     | '/radio-group'
+    | '/resizable'
     | '/schema-form'
     | '/schema-table'
     | '/scroll-area'
@@ -813,12 +849,14 @@ export interface RootRouteChildren {
   AccordionRoute: typeof AccordionRoute
   AlertRoute: typeof AlertRoute
   AlertDialogRoute: typeof AlertDialogRoute
+  AspectRatioRoute: typeof AspectRatioRoute
   AvatarRoute: typeof AvatarRoute
   BadgeRoute: typeof BadgeRoute
   BreadcrumbRoute: typeof BreadcrumbRoute
   ButtonRoute: typeof ButtonRoute
   ButtonGroupRoute: typeof ButtonGroupRoute
   CalendarRoute: typeof CalendarRoute
+  CardRoute: typeof CardRoute
   CheckboxRoute: typeof CheckboxRoute
   ChoiceCardRoute: typeof ChoiceCardRoute
   CliRoute: typeof CliRoute
@@ -850,6 +888,7 @@ export interface RootRouteChildren {
   ProgressRoute: typeof ProgressRoute
   QuantityInputRoute: typeof QuantityInputRoute
   RadioGroupRoute: typeof RadioGroupRoute
+  ResizableRoute: typeof ResizableRoute
   SchemaFormRoute: typeof SchemaFormRoute
   SchemaTableRoute: typeof SchemaTableRoute
   ScrollAreaRoute: typeof ScrollAreaRoute
@@ -901,6 +940,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AlertDialogRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/aspect-ratio': {
+      id: '/aspect-ratio'
+      path: '/aspect-ratio'
+      fullPath: '/aspect-ratio'
+      preLoaderRoute: typeof AspectRatioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/avatar': {
       id: '/avatar'
       path: '/avatar'
@@ -941,6 +987,13 @@ declare module '@tanstack/react-router' {
       path: '/calendar'
       fullPath: '/calendar'
       preLoaderRoute: typeof CalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/card': {
+      id: '/card'
+      path: '/card'
+      fullPath: '/card'
+      preLoaderRoute: typeof CardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkbox': {
@@ -1160,6 +1213,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RadioGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/resizable': {
+      id: '/resizable'
+      path: '/resizable'
+      fullPath: '/resizable'
+      preLoaderRoute: typeof ResizableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/schema-form': {
       id: '/schema-form'
       path: '/schema-form'
@@ -1356,12 +1416,14 @@ const rootRouteChildren: RootRouteChildren = {
   AccordionRoute: AccordionRoute,
   AlertRoute: AlertRoute,
   AlertDialogRoute: AlertDialogRoute,
+  AspectRatioRoute: AspectRatioRoute,
   AvatarRoute: AvatarRoute,
   BadgeRoute: BadgeRoute,
   BreadcrumbRoute: BreadcrumbRoute,
   ButtonRoute: ButtonRoute,
   ButtonGroupRoute: ButtonGroupRoute,
   CalendarRoute: CalendarRoute,
+  CardRoute: CardRoute,
   CheckboxRoute: CheckboxRoute,
   ChoiceCardRoute: ChoiceCardRoute,
   CliRoute: CliRoute,
@@ -1393,6 +1455,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProgressRoute: ProgressRoute,
   QuantityInputRoute: QuantityInputRoute,
   RadioGroupRoute: RadioGroupRoute,
+  ResizableRoute: ResizableRoute,
   SchemaFormRoute: SchemaFormRoute,
   SchemaTableRoute: SchemaTableRoute,
   ScrollAreaRoute: ScrollAreaRoute,

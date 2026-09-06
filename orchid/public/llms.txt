@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 10 guides, 25 components, 13 form components, and 15 blocks.
-- Installable registry items: 55, excluding the helper entries `all` and `utils`.
+- Documentation pages: 10 guides, 28 components, 13 form components, and 15 blocks.
+- Installable registry items: 58, excluding the helper entries `all` and `utils`.
 
 ### Installation
 
@@ -192,6 +192,18 @@ Install: `bunx --bun shadcn@latest add @orchid/collapsible` · [Registry JSON](h
 shadcn-compatible bounded scroll area with Orchid scrollbar styling.
 Install: `bunx --bun shadcn@latest add @orchid/scroll-area` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/scroll-area.json)
 
+### [Card](https://orchid-ui-hitpay.vercel.app/card)
+shadcn-compatible content card with header, title, description, action, and footer.
+Install: `bunx --bun shadcn@latest add @orchid/card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/card.json)
+
+### [Resizable](https://orchid-ui-hitpay.vercel.app/resizable)
+shadcn-compatible split panes with a drag handle in Orchid styling.
+Install: `bunx --bun shadcn@latest add @orchid/resizable` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resizable.json)
+
+### [Aspect Ratio](https://orchid-ui-hitpay.vercel.app/aspect-ratio)
+shadcn-compatible box that keeps a width/height ratio, such as 16/9.
+Install: `bunx --bun shadcn@latest add @orchid/aspect-ratio` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/aspect-ratio.json)
+
 ## Form Components
 
 ### [Field](https://orchid-ui-hitpay.vercel.app/field)
@@ -310,7 +322,7 @@ Install: `bunx --bun shadcn@latest add @orchid/confirmation-modal` · [Registry 
 
 ## Complete Registry List (for AI reference)
 
-schema-form, schema-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, page-layout, alert-dialog, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, stat-card, detail-list, icon-group, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, form-section
+schema-form, schema-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, page-layout, alert-dialog, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, stat-card, detail-list, icon-group, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, form-section
 
 ## Usage Guidance
 
