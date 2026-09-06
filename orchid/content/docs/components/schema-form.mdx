@@ -150,3 +150,25 @@ const fields = [
 ```
 
 Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one column. `section` and `section-item` fields always span the full row.
+
+## Choice card
+
+Use `type: "choice-card"` for a single card-style choice. Each option can include a `description`. The stored value is the selected `option.value`.
+
+```tsx
+const fields = [
+  {
+    key: "channel",
+    title: "Channel",
+    type: "choice-card",
+    required: true,
+    options: [
+      { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
+      { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
+    ],
+    value: "paynow",
+  },
+]
+```
+
+`props.alignment` is `Vertical` (default) or `Horizontal`. `props.cardAlignment` is `Left` (default) or `Center`.

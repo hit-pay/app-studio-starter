@@ -160,7 +160,7 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 ## Orchid UI
 
-Before building a screen, read `orchid-catalog.md` in full. The complete Orchid catalog is already installed across `src/components/` and `src/components/ui/`; do not run component installation commands. Read the listed implementation file for each component you choose so you use its real exports and props.
+Before building a screen, read `orchid-catalog.md` in full. The complete Orchid catalog is already installed across `src/components/` and `src/components/ui/`; do not run component installation commands. Read the listed implementation file for each component you choose so you use its real exports and props. When an item lists a Docs URL, fetch that `.md` file (not the HTML example page).
 
 Import each component from the exact path listed in `orchid-catalog.md`. Registry blocks commonly install at:
 

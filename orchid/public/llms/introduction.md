@@ -1,0 +1,34 @@
+<!-- Generated from content/docs/guides/introduction.mdx. Do not edit. -->
+
+# Introduction
+
+Learn what Orchid is, how it is distributed, and where to begin.
+
+Orchid is an open-code component collection for application and business
+interfaces. You install its source into your project and retain full ownership
+of the resulting code.
+
+## Built for applications
+
+Orchid combines shadcn-compatible UI primitives with higher-level components
+for forms, data tables, page layouts, sidebars, confirmations, and common
+business workflows. It is distributed through a shadcn registry rather than as
+a closed component package.
+
+## Primitives and blocks
+
+Registry items that target `@ui` are reusable UI primitives and normally land
+in `src/components/ui`. Higher-level blocks that target `@components` normally
+land in `src/components`. The registry declares these destinations, so the
+shadcn CLI places each file automatically.
+
+Orchid uses the shadcn CLI as its installer and dependency resolver. It does not
+provide a separate Orchid CLI.
+
+## Start here
+
+- [Install Orchid](https://orchid-ui-hitpay.vercel.app/llms/installation.md) in Next.js, Vite, TanStack Start, React
+  Router, or Astro.
+- [Configure components.json](https://orchid-ui-hitpay.vercel.app/llms/components-json.md) for the `@orchid` namespace.
+- [Use the CLI](https://orchid-ui-hitpay.vercel.app/llms/cli.md) to add individual components or the full catalog.
+- [Install and customize tokens](https://orchid-ui-hitpay.vercel.app/llms/theming.md) for Tailwind CSS v4 and dark mode.

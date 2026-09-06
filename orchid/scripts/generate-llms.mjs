@@ -1,5 +1,11 @@
-import { mkdirSync, readFileSync, writeFileSync } from "node:fs";
-import { dirname, join } from "node:path";
+import {
+  existsSync,
+  mkdirSync,
+  readFileSync,
+  rmSync,
+  writeFileSync,
+} from "node:fs";
+import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
@@ -12,6 +18,7 @@ import {
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const output = join(root, "public", "llms.txt");
+const docsDir = join(root, "public", "llms");
 const homepage = registry.homepage?.replace(/\/$/, "");
 
 if (!homepage) {
@@ -22,7 +29,7 @@ const documented = [...DOC_COMPONENTS, ...DOC_FORMS, ...DOC_BLOCKS];
 const registryByName = new Map(registry.items.map((item) => [item.name, item]));
 
 function slug(item) {
-  return item.to.replace(/^\//, "");
+  return item.to.replace(/^\//, "").replaceAll("/", "-");
 }
 
 function assertUnique(items, field, label) {
@@ -49,6 +56,7 @@ for (const item of documented) {
 }
 
 const link = (path) => `${homepage}${path}`;
+const docsLink = (item) => link(`/llms/${slug(item)}.md`);
 const registryItems = registry.items.filter(
   (item) => item.name !== "all" && item.name !== "utils",
 );
@@ -57,6 +65,127 @@ const guideItems = DOC_GUIDES.flatMap((item) => [
   ...("children" in item ? item.children : []),
 ]);
 
+function findMdx(item) {
+  const name = slug(item);
+  const candidates = [
+    join(root, "content/docs/components", `${name}.mdx`),
+    join(root, "content/docs/guides", `${name}.mdx`),
+  ];
+  const found = candidates.find((path) => existsSync(path));
+  if (!found) {
+    throw new Error(`No MDX source for ${item.to} (${name})`);
+  }
+  return found;
+}
+
+function resolveDemoFile(specifier, fromFile) {
+  const base = resolve(dirname(fromFile), specifier);
+  if (existsSync(base)) return base;
+  for (const ext of [".tsx", ".ts", ".jsx", ".js"]) {
+    if (existsSync(base + ext)) return base + ext;
+  }
+  return null;
+}
+
+function parseNamedImports(source) {
+  const imports = [];
+  const re =
+    /^import\s+\{([^}]+)\}\s+from\s+['"]([^'"]+)['"]\s*;?\s*$/gm;
+  let match;
+  while ((match = re.exec(source))) {
+    imports.push({
+      names: match[1].split(",").map((part) => part.trim()).filter(Boolean),
+      from: match[2],
+    });
+  }
+  return imports;
+}
+
+function rewriteDocHref(href) {
+  if (
+    href.startsWith("http://") ||
+    href.startsWith("https://") ||
+    href.startsWith("#") ||
+    href.startsWith("mailto:")
+  ) {
+    return href;
+  }
+  if (!href.startsWith("/")) return href;
+  const [path, hash] = href.split("#");
+  if (
+    path.startsWith("/r/") ||
+    path === "/registry.json" ||
+    path === "/orchid-tokens.css" ||
+    path === "/llms.txt" ||
+    /\.\w+$/.test(path)
+  ) {
+    return `${homepage}${href}`;
+  }
+  const name = path.replace(/^\//, "").replaceAll("/", "-");
+  return `${homepage}/llms/${name}.md${hash ? `#${hash}` : ""}`;
+}
+
+function mdxToMarkdown(source, mdxFile, title, description) {
+  const imports = parseNamedImports(source);
+  const demoFiles = new Map();
+  for (const item of imports) {
+    const file = resolveDemoFile(item.from, mdxFile);
+    for (const name of item.names) {
+      demoFiles.set(name, file);
+    }
+  }
+
+  const fences = [];
+  let body = source.replace(/```[\s\S]*?```/g, (block) => {
+    const token = `@@FENCE${fences.length}@@`;
+    fences.push(block);
+    return token;
+  });
+
+  body = body.replace(/^import\s+[\s\S]*?from\s+['"][^'"]+['"]\s*;?\s*$/gm, "");
+
+  body = body.replace(/<([A-Z][A-Za-z0-9]*)\s*\/>/g, (_all, name) => {
+    const file = demoFiles.get(name);
+    if (!file) return "";
+    const code = readFileSync(file, "utf8").trim();
+    return `## Example\n\n\`\`\`tsx\n${code}\n\`\`\`\n`;
+  });
+
+  body = body.replace(/\]\(([^)]+)\)/g, (_all, href) => `](${rewriteDocHref(href)})`);
+
+  body = body.replace(/@@FENCE(\d+)@@/g, (_all, index) => fences[Number(index)]);
+  body = body.replace(/\n{3,}/g, "\n\n").trim();
+
+  return [
+    `<!-- Generated from ${mdxFile.replace(`${root}/`, "")}. Do not edit. -->`,
+    "",
+    `# ${title}`,
+    "",
+    description,
+    "",
+    body,
+    "",
+  ].join("\n");
+}
+
+function writeMarkdownDocs() {
+  rmSync(docsDir, { recursive: true, force: true });
+  mkdirSync(docsDir, { recursive: true });
+
+  const pages = [...guideItems, ...documented];
+  for (const item of pages) {
+    const mdxFile = findMdx(item);
+    const markdown = mdxToMarkdown(
+      readFileSync(mdxFile, "utf8"),
+      mdxFile,
+      item.name,
+      item.description,
+    );
+    writeFileSync(join(docsDir, `${slug(item)}.md`), markdown);
+  }
+  return pages.length;
+}
+
 function docsSection(title, items) {
   return [
     `## ${title}`,
@@ -64,7 +193,7 @@ function docsSection(title, items) {
     ...items.flatMap((item) => {
       const name = slug(item);
       return [
-        `### [${item.name}](${link(item.to)})`,
+        `### [${item.name}](${docsLink(item)})`,
         item.description,
         `Install: \`bunx --bun shadcn@latest add @orchid/${name}\` · [Registry JSON](${link(`/r/${name}.json`)})`,
         "",
@@ -73,10 +202,12 @@ function docsSection(title, items) {
   ];
 }
 
+const markdownCount = writeMarkdownDocs();
+
 const lines = [
   "# Orchid UI Documentation",
   "",
-  `AI/LLM note: use the [registry index](${link("/registry.json")}) as the machine-readable source of truth for installable items, dependencies, files, and targets. Use these docs for intent and examples, then verify exports and props in the installed source.`,
+  `AI/LLM note: use the [registry index](${link("/registry.json")}) as the machine-readable source of truth for installable items, dependencies, files, and targets. Read the generated Markdown docs under ${link("/llms/")} for intent and examples, then verify exports and props in the installed source.`,
   "",
   "## Overview",
   "",
@@ -86,6 +217,7 @@ const lines = [
   "",
   `- Documentation pages: ${guideItems.length} guides, ${DOC_COMPONENTS.length} components, ${DOC_FORMS.length} form components, and ${DOC_BLOCKS.length} blocks.`,
   `- Installable registry items: ${registryItems.length}, excluding the helper entries \`all\` and \`utils\`.`,
+  `- Markdown docs: ${link("/llms/")} — one \`.md\` file per guide and component.`,
   "",
   "### Installation",
   "",
@@ -104,10 +236,11 @@ const lines = [
   "## AI Resources",
   "",
   `- [Registry Index](${link("/registry.json")}) — machine-readable catalog and dependency graph.`,
+  `- [Markdown docs](${link("/llms/")}) — generated \`.md\` pages for agents (not the HTML site).`,
   `- [Orchid Theme Tokens](${link("/orchid-tokens.css")}) — published CSS variables and Tailwind CSS v4 theme mappings.`,
-  `- [CLI Guide](${link("/cli")}) — initialize projects and install Orchid items with the shadcn CLI.`,
-  `- [components.json Guide](${link("/components-json")}) — configure aliases, Tailwind CSS, and the Orchid namespace.`,
-  `- [Theming Guide](${link("/theming")}) — install and customize Orchid light and dark tokens.`,
+  `- [CLI Guide](${docsLink({ to: "/cli", name: "CLI" })}) — initialize projects and install Orchid items with the shadcn CLI.`,
+  `- [components.json Guide](${docsLink({ to: "/components-json", name: "components.json" })}) — configure aliases, Tailwind CSS, and the Orchid namespace.`,
+  `- [Theming Guide](${docsLink({ to: "/theming", name: "Theming" })}) — install and customize Orchid light and dark tokens.`,
   "",
   "## MCP Setup for AI Agents",
   "",
@@ -156,11 +289,11 @@ const lines = [
   "## Getting Started",
   "",
   ...DOC_GUIDES.flatMap((guide) => [
-    `- [${guide.name}](${link(guide.to)}) — ${guide.description}`,
+    `- [${guide.name}](${docsLink(guide)}) — ${guide.description}`,
     ...("children" in guide
       ? guide.children.map(
           (child) =>
-            `  - [${child.name}](${link(child.to)}) — ${child.description}`,
+            `  - [${child.name}](${docsLink(child)}) — ${child.description}`,
         )
       : []),
   ]),
@@ -174,6 +307,7 @@ const lines = [
   "",
   "## Usage Guidance",
   "",
+  "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
   "- Registry targets control whether source lands under `@/components` or `@/components/ui`; do not infer the destination from the category.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
@@ -184,5 +318,5 @@ const lines = [
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, lines.join("\n"));
 console.log(
-  `Wrote ${output} (${guideItems.length} guides, ${DOC_COMPONENTS.length} components, ${DOC_FORMS.length} forms, ${DOC_BLOCKS.length} blocks, ${registryItems.length} registry items)`,
+  `Wrote ${output} and ${markdownCount} markdown docs in ${docsDir}`,
 );

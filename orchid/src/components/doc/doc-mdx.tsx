@@ -1,21 +1,34 @@
 import { MDXProvider } from "@mdx-js/react";
-import type { ComponentProps, ReactNode } from "react";
+import {
+  Children,
+  cloneElement,
+  isValidElement,
+  type ComponentProps,
+  type ReactElement,
+  type ReactNode,
+} from "react";
 
 import { cn } from "@/lib/utils";
 import { DocCodePanel } from "./doc-code-panel";
 
-function MdxPre({ children }: ComponentProps<"pre">) {
-  const code =
-    typeof children === "object" &&
-    children !== null &&
-    "props" in children &&
-    typeof children.props === "object" &&
-    children.props !== null &&
-    "children" in children.props
-      ? String(children.props.children).replace(/\n$/, "")
-      : String(children);
+function mdxText(node: ReactNode): string {
+  if (node == null || typeof node === "boolean") return "";
+  if (typeof node === "string" || typeof node === "number") return String(node);
+  if (Array.isArray(node)) return node.map(mdxText).join("");
+  if (isValidElement<{ children?: ReactNode }>(node)) {
+    return mdxText(node.props.children);
+  }
+  return "";
+}
 
-  return <DocCodePanel filename="usage.tsx" code={code} />;
+function MdxPre({ children }: ComponentProps<"pre">) {
+  const code = mdxText(children).replace(/\n$/, "");
+
+  return (
+    <div className="w-full min-w-0 max-w-full shrink-0">
+      <DocCodePanel filename="usage.tsx" code={code} />
+    </div>
+  );
 }
 
 const components = {
@@ -67,22 +80,37 @@ const components = {
       {...props}
     />
   ),
-  code: ({ className, ...props }: ComponentProps<"code">) => (
-    <code
-      className={cn(
-        "rounded bg-oc-muted px-1 py-0.5 font-mono text-[0.9em] text-oc-foreground",
-        className,
-      )}
-      {...props}
-    />
-  ),
+  code: ({ className, ...props }: ComponentProps<"code">) => {
+    if (className?.includes("language-")) {
+      return <code className={className} {...props} />;
+    }
+
+    return (
+      <code
+        className={cn(
+          "rounded bg-oc-muted px-1 py-0.5 font-mono text-[0.9em] text-oc-foreground",
+          className,
+        )}
+        {...props}
+      />
+    );
+  },
   pre: MdxPre,
 };
 
 function DocMdx({ children }: { children: ReactNode }) {
   return (
     <MDXProvider components={components}>
-      <div className="flex min-w-0 flex-col gap-8">{children}</div>
+      <div className="grid w-full min-w-0 gap-8">
+        {Children.map(children, (child) =>
+          isValidElement(child)
+            ? cloneElement(
+                child as ReactElement<{ components?: typeof components }>,
+                { components },
+              )
+            : child,
+        )}
+      </div>
     </MDXProvider>
   );
 }

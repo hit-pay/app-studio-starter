@@ -77,13 +77,13 @@ function DocExamplePage({
         ) : null}
         <div
           className={cn(
-            "-mx-1 flex min-h-0 flex-1 flex-col gap-8 overflow-y-auto px-1",
+            "-mx-1 flex min-h-0 min-w-0 flex-1 flex-col gap-8 overflow-x-hidden overflow-y-auto px-1",
             bodyClassName,
           )}
         >
           {children}
           {usage ? (
-            <div className="flex min-w-0 flex-col gap-3">
+            <div className="flex min-w-0 shrink-0 flex-col gap-3">
               <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
                 Usage
               </p>
@@ -91,7 +91,7 @@ function DocExamplePage({
             </div>
           ) : null}
           {extraUsage?.map((item) => (
-            <div key={item.filename} className="flex min-w-0 flex-col gap-3">
+            <div key={item.filename} className="flex min-w-0 shrink-0 flex-col gap-3">
               <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
                 {item.title}
               </p>

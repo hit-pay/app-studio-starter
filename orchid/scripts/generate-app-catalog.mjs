@@ -1,15 +1,17 @@
-import { readFileSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const registry = JSON.parse(readFileSync(join(root, 'registry.json'), 'utf8'))
 const out = join(root, '..', 'app', 'orchid-catalog.md')
+const homepage = registry.homepage?.replace(/\/$/, '') ?? ''
+const docsDir = join(root, 'public', 'llms')
 
 const lines = [
   '# Orchid catalog',
   '',
-  'Agents: read this file **in full** (Read tool, not Grep). Import and inspect each item at the paths listed below; registry targets determine whether it lives in `src/components/` or `src/components/ui/`.',
+  'Agents: read this file **in full** (Read tool, not Grep). Import and inspect each item at the paths listed below; registry targets determine whether it lives in `src/components/` or `src/components/ui/`. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
   '',
 ]
 
@@ -87,12 +89,15 @@ for (const item of registry.items) {
   const companionLine = companions.length
     ? `Related source: ${companions.join(', ')}.`
     : ''
+  const docsFile = join(docsDir, `${item.name}.md`)
+  const docsLine =
+    homepage && existsSync(docsFile)
+      ? `Docs: ${homepage}/llms/${item.name}.md`
+      : ''
   lines.push(
     `## \`${item.name}\` — ${item.title}`,
     '',
-    item.description ?? '',
-    location,
-    companionLine,
+    ...[item.description ?? '', location, companionLine, docsLine].filter(Boolean),
     '',
   )
 }

@@ -8,7 +8,7 @@ import { DocCodePanel } from '@/components/doc/doc-code-panel'
 import { ListItem, ListItemBody, ListItemDescription, ListItemTitle } from '@/components/ui/list-item'
 
 const AI_PROMPT =
-  'Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Use it as the source of truth for Orchid installation, MCP setup, available components and blocks, import paths, and usage guidance before building with Orchid.'
+  'Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Follow its Markdown doc links under /llms/*.md (not the HTML example pages) for Orchid installation, MCP setup, components, and usage guidance.'
 
 function IndexDemo() {
   return (

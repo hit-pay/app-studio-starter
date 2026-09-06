@@ -58,7 +58,12 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 2000,
   },
-  plugins: [publicOrchidTokens(), mdx(), tailwindcss(), viteReact()],
+  plugins: [
+    publicOrchidTokens(),
+    mdx({ providerImportSource: '@mdx-js/react' }),
+    tailwindcss(),
+    viteReact(),
+  ],
   test: {
     environment: 'jsdom',
     css: false,

@@ -96,7 +96,7 @@
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form. types: input, password, textarea, select, combobox, radio, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, file, quantity, object, section, section-item, hidden, phone.",
+      "description": "JSON schema form. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": ["@tanstack/react-form"],
       "registryDependencies": [
         "@orchid/button",

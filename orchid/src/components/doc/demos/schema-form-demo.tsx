@@ -129,6 +129,7 @@ const DETAILS_FIELDS: SchemaFormField[] = [
       { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
       { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
     ],
+    props: { alignment: "Vertical", cardAlignment: "Left" },
     value: "paynow",
   },
   {
@@ -340,6 +341,20 @@ Example — combobox multiple
     { "value": "card", "label": "Card" }
   ],
   "value": ["paynow"]
+}
+
+Example — choice-card
+{
+  "key": "channel",
+  "title": "Channel",
+  "type": "choice-card",
+  "required": true,
+  "options": [
+    { "value": "paynow", "label": "PayNow", "description": "Instant bank transfer" },
+    { "value": "card", "label": "Card", "description": "Visa, Mastercard, AMEX" }
+  ],
+  "props": { "alignment": "Vertical", "cardAlignment": "Left" },
+  "value": "paynow"
 }`;
 
 function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
