@@ -131,6 +131,8 @@ Unless the user's request truly requires infrastructure changes, leave these fil
 - `src/lib/migrate.ts`
 - `src/lib/hitpay.ts`
 - `src/lib/hitpay-session.ts`
+- `src/lib/form-draft.ts`
+- `src/lib/studio-app-id.ts`
 - `components.json`
 - `.mcp.json`
 
@@ -184,6 +186,17 @@ Common choices:
 - standard route page: use props-based `PageLayout` from `@/components/page-layout`; pass `title`, optional `description`, `badge`, `copyValue`, and `actions`, then render page content as children
 - create/edit forms: use unified `FormLayout` from `@/components/form-layout`; choose `mode="page"` (default) or `mode="modal"`, and pass the `SchemaForm` id through `formId` for external submission; Cancel and Save labels are defaults, so override only what differs
 - use `SchemaForm` from `@/components/schema-form` for forms with multiple fields, validation, conditional fields, or schema-driven data; it remains externally submitted through its `id`, and supports component-level `onChange(values, change)` metadata
+- every create/edit form must keep an in-progress draft in `localStorage` so a failed Turso/network save does not lose typed input. Wire this in the route/page, not inside `SchemaForm`. Use `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`): restore into default values, write on change, and `clearFormDraft` only after `createServerFn` succeeds. If the save throws, keep the draft and show an error. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not modify `@/components/schema-form` to add this.
+
+## Browser storage (all apps share one origin)
+
+All App Studio apps run on `app-studio.{domain}`. `localStorage` and `sessionStorage` are therefore shared across apps. Any client-only value — form drafts, UI settings, filters, column visibility, sidebar state, last tab, dismissed banners — must use `studioStorageKey('…')` from `#/lib/studio-app-id`.
+
+```ts
+localStorage.setItem(studioStorageKey('settings:density'), 'compact')
+```
+
+That becomes `app-studio:{appId}:settings:density`. Form-draft helpers already add the prefix. Never write a bare key (`theme`, `settings`, `draft`, `filters`). Do not read or write another app's keys. Do not store secrets, tokens, or Turso credentials in browser storage.
 - do not bypass `SchemaForm` with direct TanStack `useForm` for complex forms
 - complex data displays: use schema-driven `SchemaTable` from `@/components/schema-table` for search, filters, sorting, selection actions, pagination, row actions, and empty-state actions; `useSchemaTable.onQueryChange(query, change)` reports query-change metadata
 - simple static data displays: use Orchid `Table`
@@ -234,7 +247,9 @@ Validate untrusted input in server functions even when the form also validates i
 
 Use React Query for server-backed lists and invalidate or refresh the relevant query after successful mutations. Complete the vertical slice:
 
-form -> server function -> Turso -> refreshed UI -> success feedback
+form (localStorage draft) -> server function -> Turso -> clear draft -> refreshed UI -> success feedback
+
+If the server function fails, keep the draft, show an error toast, and leave the form filled.
 
 Do not seed fake records into a merchant's live database by default. Start with a useful empty state. If the user explicitly requests examples, demo mode, or fixtures, use realistic SMB data rather than `Item 1`, `Test User`, `Lorem Ipsum`, or `foo@bar.com`.
 
@@ -419,6 +434,8 @@ The app is done only when:
 - the requested business workflow works end to end
 - the embedded UI uses `AppLayout` and appropriate Orchid components
 - persistent data survives reload when the workflow stores data
+- create/edit forms restore in-progress input from `localStorage` after a failed save, and clear that draft only after a successful save
+- every `localStorage` / `sessionStorage` key is scoped with `studioStorageKey` (includes the app id)
 - migrations and server functions are connected
 - relevant validation and database constraints exist
 - role-limited actions are gated in the UI and again in `createServerFn` via `getHitPaySession` / `requireHitPayRoles`

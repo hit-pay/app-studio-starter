@@ -21,6 +21,7 @@ export default defineConfig(({ mode }): UserConfig => {
 
   return {
     base,
+    envPrefix: ['VITE_', 'APP_STUDIO_APP_ID'],
     resolve: { tsconfigPaths: true },
     build: {
       chunkSizeWarningLimit: 2000,
