@@ -163,6 +163,12 @@ export const DOC_COMPONENTS = [
     description:
       "shadcn-compatible box that keeps a width/height ratio, such as 16/9.",
   },
+  {
+    to: "/chart" as const,
+    name: "Chart",
+    description:
+      "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
+  },
 ] as const;
 
 export function docComponentsByName() {

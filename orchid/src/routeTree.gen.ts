@@ -21,6 +21,7 @@ import { Route as ButtonRouteImport } from './routes/button'
 import { Route as ButtonGroupRouteImport } from './routes/button-group'
 import { Route as CalendarRouteImport } from './routes/calendar'
 import { Route as CardRouteImport } from './routes/card'
+import { Route as ChartRouteImport } from './routes/chart'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChoiceCardRouteImport } from './routes/choice-card'
 import { Route as CliRouteImport } from './routes/cli'
@@ -136,6 +137,11 @@ const CalendarRoute = CalendarRouteImport.update({
 const CardRoute = CardRouteImport.update({
   id: '/card',
   path: '/card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChartRoute = ChartRouteImport.update({
+  id: '/chart',
+  path: '/chart',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CheckboxRoute = CheckboxRouteImport.update({
@@ -433,6 +439,7 @@ export interface FileRoutesByFullPath {
   '/button-group': typeof ButtonGroupRoute
   '/calendar': typeof CalendarRoute
   '/card': typeof CardRoute
+  '/chart': typeof ChartRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/cli': typeof CliRoute
@@ -503,6 +510,7 @@ export interface FileRoutesByTo {
   '/button-group': typeof ButtonGroupRoute
   '/calendar': typeof CalendarRoute
   '/card': typeof CardRoute
+  '/chart': typeof ChartRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/cli': typeof CliRoute
@@ -574,6 +582,7 @@ export interface FileRoutesById {
   '/button-group': typeof ButtonGroupRoute
   '/calendar': typeof CalendarRoute
   '/card': typeof CardRoute
+  '/chart': typeof ChartRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
   '/cli': typeof CliRoute
@@ -646,6 +655,7 @@ export interface FileRouteTypes {
     | '/button-group'
     | '/calendar'
     | '/card'
+    | '/chart'
     | '/checkbox'
     | '/choice-card'
     | '/cli'
@@ -716,6 +726,7 @@ export interface FileRouteTypes {
     | '/button-group'
     | '/calendar'
     | '/card'
+    | '/chart'
     | '/checkbox'
     | '/choice-card'
     | '/cli'
@@ -786,6 +797,7 @@ export interface FileRouteTypes {
     | '/button-group'
     | '/calendar'
     | '/card'
+    | '/chart'
     | '/checkbox'
     | '/choice-card'
     | '/cli'
@@ -857,6 +869,7 @@ export interface RootRouteChildren {
   ButtonGroupRoute: typeof ButtonGroupRoute
   CalendarRoute: typeof CalendarRoute
   CardRoute: typeof CardRoute
+  ChartRoute: typeof ChartRoute
   CheckboxRoute: typeof CheckboxRoute
   ChoiceCardRoute: typeof ChoiceCardRoute
   CliRoute: typeof CliRoute
@@ -994,6 +1007,13 @@ declare module '@tanstack/react-router' {
       path: '/card'
       fullPath: '/card'
       preLoaderRoute: typeof CardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chart': {
+      id: '/chart'
+      path: '/chart'
+      fullPath: '/chart'
+      preLoaderRoute: typeof ChartRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/checkbox': {
@@ -1424,6 +1444,7 @@ const rootRouteChildren: RootRouteChildren = {
   ButtonGroupRoute: ButtonGroupRoute,
   CalendarRoute: CalendarRoute,
   CardRoute: CardRoute,
+  ChartRoute: ChartRoute,
   CheckboxRoute: CheckboxRoute,
   ChoiceCardRoute: ChoiceCardRoute,
   CliRoute: CliRoute,

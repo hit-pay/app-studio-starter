@@ -376,6 +376,12 @@ shadcn-compatible box that keeps a width/height ratio.
 Import `@/components/ui/aspect-ratio`; read `src/components/ui/aspect-ratio.tsx`.
 
 
+## `chart` — Chart
+
+shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.
+Import `@/components/ui/chart`; read `src/components/ui/chart.tsx`.
+
+
 # Form
 
 ## `form-section` — Form Section

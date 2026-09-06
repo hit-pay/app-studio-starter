@@ -19,6 +19,7 @@
         "@orchid/card",
         "@orchid/resizable",
         "@orchid/aspect-ratio",
+        "@orchid/chart",
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
@@ -1020,6 +1021,21 @@
           "path": "src/components/ui/aspect-ratio.tsx",
           "type": "registry:ui",
           "target": "@ui/aspect-ratio.tsx"
+        }
+      ]
+    },
+    {
+      "name": "chart",
+      "type": "registry:ui",
+      "title": "Chart",
+      "description": "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.",
+      "dependencies": ["recharts"],
+      "registryDependencies": ["@orchid/card"],
+      "files": [
+        {
+          "path": "src/components/ui/chart.tsx",
+          "type": "registry:ui",
+          "target": "@ui/chart.tsx"
         }
       ]
     },

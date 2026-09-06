@@ -1,0 +1,36 @@
+import { ChartDemo } from '../../../src/components/doc/demos/chart-demo'
+
+<ChartDemo />
+
+## Usage
+
+```tsx
+import { Bar, BarChart, CartesianGrid, XAxis } from 'recharts'
+
+import {
+  type ChartConfig,
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent,
+} from '@/components/ui/chart'
+
+const data = [
+  { day: 'Mon', sales: 1860 },
+  { day: 'Tue', sales: 2140 },
+]
+
+const config = {
+  sales: { label: 'Sales', color: 'var(--oc-chart-1)' },
+} satisfies ChartConfig
+
+<ChartContainer config={config} className="min-h-48 w-full">
+  <BarChart accessibilityLayer data={data}>
+    <CartesianGrid vertical={false} />
+    <XAxis dataKey="day" tickLine={false} axisLine={false} />
+    <ChartTooltip content={<ChartTooltipContent />} />
+    <Bar dataKey="sales" fill="var(--color-sales)" radius={4} />
+  </BarChart>
+</ChartContainer>
+```
+
+Use `ChartContainer` + Recharts (`BarChart`, `LineChart`, `AreaChart`, `PieChart`). Series colors come from `config` as `--color-{key}`. Prefer `--oc-chart-1` through `--oc-chart-5`. Wrap dashboard charts in `Card`. Do not call `npx shadcn add chart`.

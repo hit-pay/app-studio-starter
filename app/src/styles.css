@@ -85,6 +85,11 @@
   --color-oc-destructive-strong: var(--oc-destructive-strong);
   --color-oc-warning-chip-border: var(--oc-warning-chip-border);
   --color-oc-success-chip-border: var(--oc-success-chip-border);
+  --color-oc-chart-1: var(--oc-chart-1);
+  --color-oc-chart-2: var(--oc-chart-2);
+  --color-oc-chart-3: var(--oc-chart-3);
+  --color-oc-chart-4: var(--oc-chart-4);
+  --color-oc-chart-5: var(--oc-chart-5);
   --shadow-oc-popup: var(--oc-popup-shadow);
   --color-background: var(--oc-background);
   --color-foreground: var(--oc-foreground);
@@ -131,6 +136,11 @@
   --oc-neutral-border: #cbcdd4;
   --oc-neutral-strong: #484d61;
   --oc-border: #e5e6ea;
+  --oc-chart-1: #2465de;
+  --oc-chart-2: #0495a9;
+  --oc-chart-3: #2bc37d;
+  --oc-chart-4: #f4b840;
+  --oc-chart-5: #7d1ab7;
   --oc-child-sidebar-foreground: #082f73;
   --oc-primary-300: #80acfe;
   --oc-purple: #7d1ab7;
@@ -216,6 +226,11 @@
   --oc-neutral-border: #3a4154;
   --oc-neutral-strong: #c5c9d4;
   --oc-border: #2a3142;
+  --oc-chart-1: #8eb0ff;
+  --oc-chart-2: #2ec4d4;
+  --oc-chart-3: #3dd68c;
+  --oc-chart-4: #f5c35a;
+  --oc-chart-5: #c084fc;
   --oc-child-sidebar-foreground: #b8ccff;
   --oc-primary-300: #c8c8be;
   --oc-purple: #c084fc;

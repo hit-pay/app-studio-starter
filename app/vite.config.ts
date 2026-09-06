@@ -22,7 +22,13 @@ export default defineConfig(({ mode }): UserConfig => {
   return {
     base,
     envPrefix: ['VITE_', 'APP_STUDIO_APP_ID'],
-    resolve: { tsconfigPaths: true },
+    resolve: {
+      tsconfigPaths: true,
+      dedupe: ['react', 'react-dom'],
+    },
+    optimizeDeps: {
+      include: ['recharts', 'react', 'react-dom'],
+    },
     build: {
       chunkSizeWarningLimit: 2000,
     },

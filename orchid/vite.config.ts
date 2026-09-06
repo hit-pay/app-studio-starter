@@ -48,7 +48,13 @@ function publicOrchidTokens(): Plugin {
 }
 
 export default defineConfig({
-  resolve: { tsconfigPaths: true },
+  resolve: {
+    tsconfigPaths: true,
+    dedupe: ['react', 'react-dom'],
+  },
+  optimizeDeps: {
+    include: ['recharts', 'react', 'react-dom'],
+  },
   build: {
     chunkSizeWarningLimit: 2000,
   },

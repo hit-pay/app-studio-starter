@@ -203,6 +203,7 @@ That becomes `app-studio:{appId}:settings:density`. Form-draft helpers already a
 - generic content cards: use `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, and `CardFooter` from `@/components/ui/card`; keep `StatCard`, `ChoiceCard`, and `CustomerCard` for those specific patterns
 - split panes: use `ResizablePanelGroup`, `ResizablePanel`, and `ResizableHandle` from `@/components/ui/resizable`
 - fixed media/frame ratio: use `AspectRatio` from `@/components/ui/aspect-ratio` with `ratio={16/9}` (or similar)
+- dashboard charts: use `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, and `ChartLegendContent` from `@/components/ui/chart` with Recharts (`BarChart`, `LineChart`, `AreaChart`, `PieChart`). Put series colors in `ChartConfig` using `--oc-chart-1` through `--oc-chart-5`. Wrap KPI charts in `Card`. Do not install a separate chart library.
 - read-only key/value cards: use props-based `DetailList`; pass `items` rather than composing internal row primitives
 - grouped icon actions: use props-based `IconGroup`; pass `items` rather than composing internal child primitives
 - custom modal layouts: compose Orchid `Dialog`
