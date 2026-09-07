@@ -4,8 +4,10 @@ import * as React from 'react'
 import {
   DayPicker,
   getDefaultClassNames,
+  useDayPicker,
   type DayButton,
   type Locale,
+  type MonthCaptionProps,
 } from 'react-day-picker'
 import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 
@@ -37,7 +39,7 @@ function Calendar({
         String.raw`rtl:**:[.rdp-button\_previous>svg]:rotate-180`,
         className,
       )}
-      captionLayout={captionLayout}
+      captionLayout={captionLayout === 'dropdown' ? 'label' : captionLayout}
       locale={locale}
       formatters={{
         formatMonthDropdown: (date) =>
@@ -70,21 +72,27 @@ function Calendar({
           defaultClassNames.button_next,
         ),
         month_caption: cn(
-          'flex h-8 w-full items-center',
+          'relative flex h-8 w-full items-center',
           isMultipleMonths ? 'justify-center px-8' : 'justify-start',
           defaultClassNames.month_caption,
         ),
         dropdowns: cn(
-          'flex h-8 w-full items-center justify-start gap-1 text-sm font-medium',
+          'flex h-8 w-full items-center justify-start gap-2 text-sm font-medium',
           defaultClassNames.dropdowns,
         ),
-        dropdown_root: cn('relative rounded-sm', defaultClassNames.dropdown_root),
-        dropdown: cn('absolute inset-0 bg-oc-background opacity-0', defaultClassNames.dropdown),
+        dropdown_root: cn(
+          'relative rounded-md border border-solid border-oc-border bg-oc-background px-1.5 has-focus-visible:border-oc-ring',
+          defaultClassNames.dropdown_root,
+        ),
+        dropdown: cn(
+          'absolute inset-0 cursor-pointer opacity-0',
+          defaultClassNames.dropdown,
+        ),
         caption_label: cn(
           'text-sm font-medium text-oc-foreground select-none',
           captionLayout === 'label'
             ? ''
-            : 'flex items-center gap-1 rounded-sm [&>svg]:size-3.5 [&>svg]:text-oc-muted-foreground',
+            : 'flex items-center gap-1 [&>svg]:size-3.5 [&>svg]:text-oc-muted-foreground',
           defaultClassNames.caption_label,
         ),
         month_grid: cn('w-full border-collapse', defaultClassNames.month_grid),
@@ -136,6 +144,7 @@ function Calendar({
           return <ChevronDownIcon className={cn('size-4', className)} {...props} />
         },
         DayButton: ({ ...props }) => <CalendarDayButton locale={locale} {...props} />,
+        ...(captionLayout === 'dropdown' ? { MonthCaption: CalendarMonthCaption } : {}),
         WeekNumber: ({ children, ...props }) => {
           return (
             <td {...props}>
@@ -147,6 +156,223 @@ function Calendar({
       }}
       {...props}
     />
+  )
+}
+
+const YEAR_PAGE_SIZE = 12
+
+function startOfYearPage(year: number) {
+  return Math.floor(year / YEAR_PAGE_SIZE) * YEAR_PAGE_SIZE
+}
+
+function monthShortNames(locale?: Partial<Locale>) {
+  return Array.from({ length: 12 }, (_, month) =>
+    new Date(2026, month, 1).toLocaleString(locale?.code ?? 'en-US', { month: 'short' }),
+  )
+}
+
+function CalendarMonthCaption({
+  calendarMonth,
+  displayIndex,
+  className,
+  ...props
+}: MonthCaptionProps) {
+  const { goToMonth, dayPickerProps, formatters } = useDayPicker()
+  const locale = dayPickerProps.locale as Partial<Locale> | undefined
+  const startMonth = dayPickerProps.startMonth
+  const endMonth = dayPickerProps.endMonth
+  const [open, setOpen] = React.useState(false)
+  const [view, setView] = React.useState<'months' | 'years'>('months')
+  const [viewYear, setViewYear] = React.useState(calendarMonth.date.getFullYear())
+  const rootRef = React.useRef<HTMLDivElement>(null)
+
+  React.useEffect(() => {
+    if (!open) {
+      setView('months')
+      setViewYear(calendarMonth.date.getFullYear())
+    }
+  }, [calendarMonth.date, open])
+
+  React.useEffect(() => {
+    if (!open) return
+
+    function onPointerDown(event: PointerEvent) {
+      if (!rootRef.current?.contains(event.target as Node)) {
+        setOpen(false)
+      }
+    }
+
+    function onKeyDown(event: KeyboardEvent) {
+      if (event.key === 'Escape') setOpen(false)
+    }
+
+    document.addEventListener('pointerdown', onPointerDown)
+    document.addEventListener('keydown', onKeyDown)
+    return () => {
+      document.removeEventListener('pointerdown', onPointerDown)
+      document.removeEventListener('keydown', onKeyDown)
+    }
+  }, [open])
+
+  const displayed = calendarMonth.date
+  const yearPageStart = startOfYearPage(viewYear)
+  const yearPageEnd = yearPageStart + YEAR_PAGE_SIZE - 1
+  const minYear = startMonth?.getFullYear()
+  const maxYear = endMonth?.getFullYear()
+
+  function isMonthDisabled(month: number) {
+    const first = new Date(viewYear, month, 1)
+    const last = new Date(viewYear, month + 1, 0)
+    if (startMonth && last < new Date(startMonth.getFullYear(), startMonth.getMonth(), 1)) {
+      return true
+    }
+    if (endMonth && first > new Date(endMonth.getFullYear(), endMonth.getMonth(), 1)) {
+      return true
+    }
+    return false
+  }
+
+  function isYearDisabled(year: number) {
+    if (minYear !== undefined && year < minYear) return true
+    if (maxYear !== undefined && year > maxYear) return true
+    return false
+  }
+
+  const canPrevYear = minYear === undefined || viewYear - 1 >= minYear
+  const canNextYear = maxYear === undefined || viewYear + 1 <= maxYear
+  const canPrevYearPage = minYear === undefined || yearPageStart - 1 >= minYear
+  const canNextYearPage = maxYear === undefined || yearPageEnd + 1 <= maxYear
+
+  return (
+    <div
+      ref={rootRef}
+      className={cn(
+        'relative flex h-8 items-center [&_button]:cursor-pointer [&_button:disabled]:cursor-not-allowed',
+        className,
+      )}
+      data-display-index={displayIndex}
+      {...props}
+    >
+      <button
+        type="button"
+        className="rounded-md text-sm font-medium text-oc-foreground select-none hover:text-oc-primary"
+        aria-expanded={open}
+        aria-haspopup="dialog"
+        onClick={() => setOpen((current) => !current)}
+      >
+        {formatters.formatCaption(displayed, { locale: locale as Locale | undefined })}
+      </button>
+      {open ? (
+        <div
+          role="dialog"
+          aria-label="Select month and year"
+          className="absolute top-[calc(100%+0.375rem)] left-0 z-50 w-56 rounded-lg border border-solid border-oc-border bg-oc-background p-2.5 shadow-oc-popup"
+        >
+          <div className="relative mb-1.5 h-0 w-full">
+            <span className="absolute -top-3.5 left-6 size-2.5 rotate-45 border-t border-l border-solid border-oc-border bg-oc-background" />
+          </div>
+          <div className="mb-2 flex items-center justify-between gap-1">
+            <button
+              type="button"
+              className="inline-flex size-7 items-center justify-center rounded-md text-oc-foreground disabled:opacity-35"
+              disabled={view === 'months' ? !canPrevYear : !canPrevYearPage}
+              aria-label={view === 'months' ? 'Previous year' : 'Previous years'}
+              onClick={() =>
+                setViewYear((year) =>
+                  view === 'months' ? year - 1 : year - YEAR_PAGE_SIZE,
+                )
+              }
+            >
+              <ChevronLeftIcon className="size-4" />
+            </button>
+            {view === 'months' ? (
+              <button
+                type="button"
+                className="rounded-md px-2 py-0.5 text-sm font-semibold text-oc-foreground hover:bg-oc-muted"
+                onClick={() => setView('years')}
+              >
+                {viewYear}
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="rounded-md border border-solid border-oc-primary px-2 py-0.5 text-sm font-semibold text-oc-foreground"
+                onClick={() => setView('months')}
+              >
+                {yearPageStart} - {yearPageEnd}
+              </button>
+            )}
+            <button
+              type="button"
+              className="inline-flex size-7 items-center justify-center rounded-md text-oc-foreground disabled:opacity-35"
+              disabled={view === 'months' ? !canNextYear : !canNextYearPage}
+              aria-label={view === 'months' ? 'Next year' : 'Next years'}
+              onClick={() =>
+                setViewYear((year) =>
+                  view === 'months' ? year + 1 : year + YEAR_PAGE_SIZE,
+                )
+              }
+            >
+              <ChevronRightIcon className="size-4" />
+            </button>
+          </div>
+          {view === 'months' ? (
+            <div className="grid grid-cols-3 gap-1">
+              {monthShortNames(locale).map((label, month) => {
+                const selected =
+                  displayed.getFullYear() === viewYear && displayed.getMonth() === month
+                const disabled = isMonthDisabled(month)
+                return (
+                  <button
+                    key={label}
+                    type="button"
+                    disabled={disabled}
+                    className={cn(
+                      'h-8 rounded-md text-sm font-medium text-oc-foreground hover:bg-oc-primary/10 focus-visible:border focus-visible:border-solid focus-visible:border-oc-primary',
+                      selected && 'bg-oc-primary/10',
+                      disabled && 'text-oc-muted-foreground opacity-50',
+                    )}
+                    onClick={() => {
+                      goToMonth(new Date(viewYear, month, 1))
+                      setOpen(false)
+                    }}
+                  >
+                    {label}
+                  </button>
+                )
+              })}
+            </div>
+          ) : (
+            <div className="grid grid-cols-3 gap-1">
+              {Array.from({ length: YEAR_PAGE_SIZE }, (_, index) => yearPageStart + index).map(
+                (year) => {
+                  const selected = displayed.getFullYear() === year
+                  const disabled = isYearDisabled(year)
+                  return (
+                    <button
+                      key={year}
+                      type="button"
+                      disabled={disabled}
+                      className={cn(
+                        'h-8 rounded-md text-sm font-medium text-oc-foreground hover:bg-oc-primary/10 focus-visible:border focus-visible:border-solid focus-visible:border-oc-primary',
+                        selected && 'bg-oc-primary/10',
+                        disabled && 'text-oc-muted-foreground opacity-50',
+                      )}
+                      onClick={() => {
+                        setViewYear(year)
+                        setView('months')
+                      }}
+                    >
+                      {year}
+                    </button>
+                  )
+                },
+              )}
+            </div>
+          )}
+        </div>
+      ) : null}
+    </div>
   )
 }
 

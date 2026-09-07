@@ -119,7 +119,7 @@ Path aliases:
 
 - `#/*` -> `src/*`
 - `@/*` -> `src/*`
-- Orchid import paths are defined per item in `orchid-catalog.md`; blocks commonly use `@/components/<name>`, while primitives commonly use `@/components/ui/<name>`
+- Orchid import paths come from `orchid-catalog.md` only; do not guess `src/components` vs `src/components/ui`
 
 Unless the user's request truly requires infrastructure changes, leave these files unchanged. Updating `src/routes/__root.tsx` is allowed only when a required Orchid global provider is missing:
 
@@ -160,33 +160,22 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 ## Orchid UI
 
-Before building a screen, read `orchid-catalog.md` in full. The complete Orchid catalog is already installed across `src/components/` and `src/components/ui/`; do not run component installation commands. Read the listed implementation file for each component you choose so you use its real exports and props. When an item lists a Docs URL, fetch that `.md` file (not the HTML example page).
+`orchid-catalog.md` is the source of truth for which component to use, where to import it, and which file to read. Read that file **in full** (Read tool, not Grep) before building a screen. Then read the listed source for each item you use. If the catalog lists a Docs URL, fetch that `.md` file — not the HTML example page.
 
-Import each component from the exact path listed in `orchid-catalog.md`. Registry blocks commonly install at:
+The catalog is already installed. Do not run `shadcn add`, `bunx shadcn`, or any `@orchid` / `@shadcn` install.
 
-```ts
-@/components/<kebab-name>
-```
+Do not guess import paths. The line `Import \`@/…\`` in the catalog is authoritative (`@/components/…` vs `@/components/ui/…` is per item).
 
-Primitives and many form controls commonly install at:
+`AppLayout` is starter-only (`@/components/app-layout`). It is not in the Orchid registry. Do not install or replace it.
 
-```ts
-@/components/ui/<kebab-name>
-```
+Do not invent a parallel UI kit or overwrite files under `src/components/` or `src/components/ui/` with official shadcn copies. Compose catalog items. Field types, props, and variants live in the catalog entry and that item's source or Docs `.md` — not in this file.
 
-Do not infer the path from the component type; the catalog's generated import and source paths are authoritative. `AppLayout` is local to the App Studio starter: import it from `@/components/app-layout`; do not install, replace, or treat it as an Orchid registry item.
+Starter wiring only:
 
-Do not create a generic replacement when an appropriate Orchid component exists. Orchid owns its installed files in both component directories; never install official shadcn components over them. Orchid's shadcn-compatible components use the standard compound component names and lowercase variants where available. Read the component source for Orchid-specific extensions.
-
-Common choices:
-
-- application frame: the local `AppLayout` from `@/components/app-layout`; configure tabs with `navigationItems` and child navigation with `sidebarItems`
-- configurable navigation: use props-based `Sidebar` from `@/components/sidebar`; it supports grouped items and either inline children or a back-enabled nested sidebar through `childrenMode`
-- simple flat child navigation inside an `AppLayout` sidebar area: use props-based `SubSidebar` from `@/components/sub-sidebar`; do not use it as the application frame
-- standard route page: use props-based `PageLayout` from `@/components/page-layout`; pass `title`, optional `description`, `badge`, `copyValue`, and `actions`, then render page content as children
-- create/edit forms: use unified `FormLayout` from `@/components/form-layout`; choose `mode="page"` (default) or `mode="modal"`, and pass the `SchemaForm` id through `formId` for external submission; Cancel and Save labels are defaults, so override only what differs
-- use `SchemaForm` from `@/components/schema-form` for forms with multiple fields, validation, conditional fields, or schema-driven data; it remains externally submitted through its `id`, and supports component-level `onChange(values, change)` metadata. For a card-style single choice, use `type: "choice-card"` with `options` (`label`, optional `description`). Do not compose `ChoiceCard` beside SchemaForm for that pattern.
-- every create/edit form must keep an in-progress draft in `localStorage` so a failed Turso/network save does not lose typed input. Wire this in the route/page, not inside `SchemaForm`. Use `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`). Hydrate by merging `readFormDraft(id)` into each field's `value` **before** `useSchemaForm` (same object you pass as `fields`). Call `writeFormDraft(id, values)` from `onChange`. `clearFormDraft` only after `createServerFn` succeeds. If the save throws, keep the draft and show an error. Do not call `form.setFieldValue` or `setState` during render to load a draft — that can loop and freeze the tab. A `useEffect` hydrate is unnecessary if defaults already include the draft. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not modify `@/components/schema-form` to add this.
+- Frame the app with `AppLayout`. Use `PageLayout` for normal routes and `FormLayout` for create/edit (`mode="page"` or `mode="modal"`).
+- Drive multi-field forms with `SchemaForm` (submit through `formId`). Drive searchable lists with `SchemaTable`.
+- Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Do not add Sonner or a second toast/confirm provider.
+- Use `oc-*` tokens from `src/styles.css`. If a prop value is unclear, the component source wins over habit (some items still use PascalCase aliases).
 
 ## Browser storage (all apps share one origin)
 
@@ -197,31 +186,14 @@ localStorage.setItem(studioStorageKey('settings:density'), 'compact')
 ```
 
 That becomes `app-studio:{appId}:settings:density`. Form-draft helpers already add the prefix. Never write a bare key (`theme`, `settings`, `draft`, `filters`). Do not read or write another app's keys. Do not store secrets, tokens, or Turso credentials in browser storage.
-- do not bypass `SchemaForm` with direct TanStack `useForm` for complex forms
-- complex data displays: use schema-driven `SchemaTable` from `@/components/schema-table` for search, filters, sorting, selection actions, pagination, row actions, and empty-state actions; `useSchemaTable.onQueryChange(query, change)` reports query-change metadata
-- simple static data displays: use Orchid `Table`
-- generic content cards: use `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardAction`, `CardContent`, and `CardFooter` from `@/components/ui/card`; keep `StatCard`, `ChoiceCard`, and `CustomerCard` for those specific patterns
-- split panes: use `ResizablePanelGroup`, `ResizablePanel`, and `ResizableHandle` from `@/components/ui/resizable`
-- fixed media/frame ratio: use `AspectRatio` from `@/components/ui/aspect-ratio` with `ratio={16/9}` (or similar)
-- dashboard charts: use `ChartContainer`, `ChartTooltip`, `ChartTooltipContent`, `ChartLegend`, and `ChartLegendContent` from `@/components/ui/chart` with Recharts (`BarChart`, `LineChart`, `AreaChart`, `PieChart`). Put series colors in `ChartConfig` using `--oc-chart-1` through `--oc-chart-5`. Wrap KPI charts in `Card`. Do not install a separate chart library.
-- file and image attachments: use `Attachment`, `AttachmentMedia`, `AttachmentContent`, `AttachmentTitle`, `AttachmentDescription`, `AttachmentActions`, `AttachmentAction`, `AttachmentTrigger`, and `AttachmentGroup` from `@/components/ui/attachment`. In `SchemaForm`, use `type: "file"` (one `File`) or `type: "file"` with `props: { multiple: true }` (`File[]`). Do not drop a raw file input into a schema form. Show `Spinner` in `AttachmentMedia` only while a real upload is in flight. `AttachmentGroup` stacks items vertically. Give icon-only actions an `aria-label`.
-- read-only key/value cards: use props-based `DetailList`; pass `items` rather than composing internal row primitives
-- grouped icon actions: use props-based `IconGroup`; pass `items` rather than composing internal child primitives
-- custom modal layouts: compose Orchid `Dialog`
-- routine confirmation: call the prebuilt `useConfirmationModal()` hook and await its boolean result
-- custom confirmation layout: compose `AlertDialog`, `AlertDialogContent`, `AlertDialogAction`, and `AlertDialogCancel`
-- zero-data and no-results states: `Empty`
-- status: `Badge`
-- feedback: `toast.add({ title, description, type })`; use `success`, `info`, `warning`, `error`, or `loading`
-- loading: `Skeleton` or `Spinner`
 
-Mount `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Do not use `useConfirmationModal()` without its provider. Do not use Sonner or create another toast or confirmation provider.
+### Form drafts
 
-Prefer shadcn-compatible lowercase props such as `variant="default"`, `variant="destructive"`, and `size="sm"`. Some Orchid business components and legacy aliases still use PascalCase values; check the component source instead of guessing.
+Do not write form values to `localStorage` on every keystroke or `onChange`. Keep typed values in `useSchemaForm` only.
 
-Use `oc-*` design tokens from `src/styles.css`. Do not copy colors or layout from the public marketing site, and avoid hardcoded colors when a token exists.
+If `createServerFn` throws, call `writeFormDraft(id, values)` in the route/page `catch`. On the next open, merge `readFormDraft(id)` into each field's `value` **before** `useSchemaForm`. After a successful save, or a clean cancel, `clearFormDraft(id)`. Leave the form filled and show an error if save failed.
 
-Do not run Orchid or shadcn add commands. The full Orchid catalog is preinstalled, and reinstalling components can overwrite local customizations. Never install `@shadcn` items.
+Do not call `form.setFieldValue` or `setState` during render to hydrate a draft. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not add draft logic inside `@/components/schema-form`. Helpers: `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`).
 
 ## Persistent data and server code
 
@@ -252,9 +224,9 @@ Validate untrusted input in server functions even when the form also validates i
 
 Use React Query for server-backed lists and invalidate or refresh the relevant query after successful mutations. Complete the vertical slice:
 
-form (localStorage draft) -> server function -> Turso -> clear draft -> refreshed UI -> success feedback
+form (in-memory) -> server function -> Turso -> clear any leftover draft -> refreshed UI -> success feedback
 
-If the server function fails, keep the draft, show an error toast, and leave the form filled.
+If the server function fails, `writeFormDraft` the submitted values, show an error toast, and leave the form filled. Do not snapshot every change into `localStorage`.
 
 Do not seed fake records into a merchant's live database by default. Start with a useful empty state. If the user explicitly requests examples, demo mode, or fixtures, use realistic SMB data rather than `Item 1`, `Test User`, `Lorem Ipsum`, or `foo@bar.com`.
 
@@ -439,7 +411,7 @@ The app is done only when:
 - the requested business workflow works end to end
 - the embedded UI uses `AppLayout` and appropriate Orchid components
 - persistent data survives reload when the workflow stores data
-- create/edit forms restore in-progress input from `localStorage` after a failed save, and clear that draft only after a successful save
+- create/edit forms write a `localStorage` draft only when a save fails, restore that draft on the next open, and clear it after a successful save or a clean cancel
 - every `localStorage` / `sessionStorage` key is scoped with `studioStorageKey` (includes the app id)
 - migrations and server functions are connected
 - relevant validation and database constraints exist

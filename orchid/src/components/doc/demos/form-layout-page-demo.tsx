@@ -1,15 +1,21 @@
 import { useRef, useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { FormLayout } from "@/components/ui/form-layout";
+import { FormLayout } from "@/components/form-layout";
 import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormField,
-} from "@/components/ui/schema-form";
+} from "@/components/schema-form";
 import { toast } from "@/components/ui/toast";
 
 const PRODUCT_FIELDS: SchemaFormField[] = [
+  {
+    key: "basics",
+    title: "Basics",
+    type: "section",
+    description: "Long form to test page-body scroll under the top actions.",
+  },
   {
     key: "name",
     title: "Product name",
@@ -18,13 +24,8 @@ const PRODUCT_FIELDS: SchemaFormField[] = [
     required: true,
     value: "",
   },
-  {
-    key: "sku",
-    title: "SKU",
-    type: "input",
-    placeholder: "SKU-MEM-001",
-    value: "",
-  },
+  { key: "sku", title: "SKU", type: "input", placeholder: "SKU-MEM-001", value: "" },
+  { key: "barcode", title: "Barcode", type: "input", value: "" },
   {
     key: "price",
     title: "Price (SGD)",
@@ -33,6 +34,16 @@ const PRODUCT_FIELDS: SchemaFormField[] = [
     required: true,
     value: "",
   },
+  { key: "compare_at", title: "Compare-at price", type: "input", value: "" },
+  { key: "cost", title: "Cost price", type: "input", value: "" },
+  {
+    key: "qty",
+    title: "Quantity",
+    type: "quantity",
+    value: 1,
+    min: 0,
+    max: 999,
+  },
   {
     key: "description",
     title: "Description",
@@ -40,6 +51,17 @@ const PRODUCT_FIELDS: SchemaFormField[] = [
     placeholder: "Shown in Online Store, POS, invoices, and payment links.",
     value: "",
   },
+  { key: "inventory", title: "Inventory", type: "section" },
+  { key: "warehouse", title: "Warehouse", type: "input", value: "Harbourfront" },
+  { key: "bin", title: "Bin location", type: "input", value: "" },
+  { key: "reorder_at", title: "Reorder date", type: "date", value: "" },
+  { key: "supplier", title: "Supplier", type: "input", value: "" },
+  { key: "supplier_sku", title: "Supplier SKU", type: "input", value: "" },
+  { key: "seo", title: "SEO", type: "section" },
+  { key: "seo_title", title: "SEO title", type: "input", value: "" },
+  { key: "seo_description", title: "SEO description", type: "textarea", value: "" },
+  { key: "slug", title: "URL handle", type: "input", value: "" },
+  { key: "notes", title: "Internal notes", type: "textarea", value: "" },
 ];
 
 const PRODUCT_DETAILS_FIELDS: SchemaFormField[] = [

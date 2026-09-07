@@ -21,7 +21,7 @@ import {
 import {
   Sidebar,
   type SidebarGroupConfig,
-} from '@/components/ui/sidebar'
+} from '@/components/sidebar'
 
 const groups: SidebarGroupConfig[] = [
   {

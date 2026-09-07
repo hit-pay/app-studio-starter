@@ -208,10 +208,23 @@ function FormFileField({
           ))}
         </AttachmentGroup>
       ) : null}
-      {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-      {invalid ? <FieldError>{message}</FieldError> : null}
+      <FieldHint invalid={invalid} message={message} description={item.description} />
     </Field>
   )
+}
+
+function FieldHint({
+  invalid,
+  message,
+  description,
+}: {
+  invalid: boolean
+  message: string
+  description?: string | null
+}) {
+  if (invalid) return <FieldError>{message}</FieldError>
+  if (description) return <FieldDescription>{description}</FieldDescription>
+  return null
 }
 
 function FormComboboxField({
@@ -470,14 +483,14 @@ function SchemaForm({
   return (
     <form
       id={id}
-      className={cn('flex w-full min-w-0 max-w-xl flex-col gap-6 overflow-visible', className)}
+      className={cn('flex w-full min-w-0 max-w-xl flex-col gap-4 overflow-visible', className)}
       onSubmit={(event) => {
         event.preventDefault()
         event.stopPropagation()
         void form.handleSubmit()
       }}
     >
-      <FieldGroup className={cn('grid gap-6', gridColumns)}>
+      <FieldGroup className={cn('grid gap-4', gridColumns)}>
         {flat.map((item) => (
           <div key={item.path} className={cn('min-w-0', columnSpanClass(columnSpan(item)))}>
             <form.Field
@@ -551,8 +564,7 @@ function SchemaForm({
                         )
                       }
                     />
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -573,8 +585,7 @@ function SchemaForm({
                         )
                       }
                     />
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -618,8 +629,7 @@ function SchemaForm({
                         )
                       }}
                     />
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -652,8 +662,7 @@ function SchemaForm({
                         changeField(item, [{ path: item.path, value: next }], field.handleChange)
                       }
                     />
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -670,7 +679,7 @@ function SchemaForm({
                       onBlur={field.handleBlur}
                     />
                     <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -700,7 +709,7 @@ function SchemaForm({
                         )
                       })}
                     </CheckboxGroup>
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -763,7 +772,7 @@ function SchemaForm({
                         )
                       }}
                     />
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -782,7 +791,7 @@ function SchemaForm({
                         changeField(item, [{ path: item.path, value: next }], field.handleChange)
                       }
                     />
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -857,8 +866,7 @@ function SchemaForm({
                       {addonEnd ? <InputGroupSeparator /> : null}
                       {addonEnd ? selectAddon : null}
                     </InputGroup>
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -881,10 +889,7 @@ function SchemaForm({
                     />
                     <FieldContent>
                       <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
-                      {item.description ? (
-                        <FieldDescription>{item.description}</FieldDescription>
-                      ) : null}
-                      {invalid ? <FieldError>{message}</FieldError> : null}
+                      <FieldHint invalid={invalid} message={message} description={item.description} />
                     </FieldContent>
                   </Field>
                 )
@@ -919,7 +924,7 @@ function SchemaForm({
                         )
                       })}
                     </RadioGroup>
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -958,8 +963,7 @@ function SchemaForm({
                         />
                       ))}
                     </ChoiceCardGroup>
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -1006,8 +1010,7 @@ function SchemaForm({
                   <Field data-invalid={invalid || undefined}>
                     <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
                     {custom}
-                    {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                    {invalid ? <FieldError>{message}</FieldError> : null}
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>
                 )
               }
@@ -1074,8 +1077,7 @@ function SchemaForm({
                       }
                     />
                   )}
-                  {item.description ? <FieldDescription>{item.description}</FieldDescription> : null}
-                  {invalid ? <FieldError>{message}</FieldError> : null}
+                  <FieldHint invalid={invalid} message={message} description={item.description} />
                 </Field>
               )
             }}

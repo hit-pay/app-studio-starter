@@ -96,7 +96,7 @@
       "name": "schema-form",
       "type": "registry:ui",
       "title": "Schema Form",
-      "description": "JSON schema form. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
+      "description": "JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": ["@tanstack/react-form"],
       "registryDependencies": [
         "@orchid/button",
@@ -116,12 +116,12 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/schema-form.tsx",
+          "path": "src/components/schema-form.tsx",
           "type": "registry:ui",
           "target": "@components/schema-form.tsx"
         },
         {
-          "path": "src/components/ui/schema-form-model.ts",
+          "path": "src/components/schema-form-model.ts",
           "type": "registry:file",
           "target": "@components/schema-form-model.ts"
         }
@@ -131,7 +131,7 @@
       "name": "schema-table",
       "type": "registry:ui",
       "title": "Schema Table",
-      "description": "JSON-schema list with search, filters, sorting, pagination, and integrated table rendering.",
+      "description": "JSON-schema list with search, filters, sorting, pagination.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -146,12 +146,12 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/schema-table.tsx",
+          "path": "src/components/schema-table.tsx",
           "type": "registry:ui",
           "target": "@components/schema-table.tsx"
         },
         {
-          "path": "src/components/ui/schema-table-model.ts",
+          "path": "src/components/schema-table-model.ts",
           "type": "registry:file",
           "target": "@components/schema-table-model.ts"
         }
@@ -166,7 +166,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/sidebar.tsx",
+          "path": "src/components/sidebar.tsx",
           "type": "registry:ui",
           "target": "@components/sidebar.tsx"
         }
@@ -181,7 +181,7 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/ui/sub-sidebar.tsx",
+          "path": "src/components/sub-sidebar.tsx",
           "type": "registry:ui",
           "target": "@components/sub-sidebar.tsx"
         }
@@ -257,7 +257,7 @@
       "name": "form-layout",
       "type": "registry:ui",
       "title": "Form Layout",
-      "description": "Create and edit form shell with page and modal modes, default Cancel/Save actions, external form submission, and controlled dialog support.",
+      "description": "Create/edit shell (page or modal). Put SchemaForm inside; one form uses formId = SchemaForm id. Several forms use actions.save.onClick.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",
@@ -266,7 +266,7 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/form-layout.tsx",
+          "path": "src/components/form-layout.tsx",
           "type": "registry:ui",
           "target": "@components/form-layout.tsx"
         }
@@ -281,7 +281,7 @@
       "registryDependencies": ["@orchid/copy-button"],
       "files": [
         {
-          "path": "src/components/ui/page-layout.tsx",
+          "path": "src/components/page-layout.tsx",
           "type": "registry:ui",
           "target": "@components/page-layout.tsx"
         }
@@ -315,7 +315,7 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/confirmation-modal.tsx",
+          "path": "src/components/confirmation-modal.tsx",
           "type": "registry:ui",
           "target": "@components/confirmation-modal.tsx"
         }

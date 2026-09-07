@@ -199,9 +199,12 @@ function ModalFormLayout({
         size={size}
         data-slot="form-layout"
         data-mode="modal"
-        className={cn("gap-0 overflow-hidden p-0", className)}
+        className={cn(
+          "flex max-h-[80vh] flex-col gap-0 overflow-hidden p-0",
+          className,
+        )}
       >
-        <div className="border-b border-oc-border px-5 py-4 pr-12">
+        <div className="shrink-0 border-b border-oc-border px-5 py-4 pr-12">
           <DialogTitle>{title}</DialogTitle>
           {description ? (
             <DialogDescription className="mt-2">
@@ -210,9 +213,9 @@ function ModalFormLayout({
           ) : null}
         </div>
 
-        <div className="min-h-0 overflow-y-auto px-5 py-5">{children}</div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">{children}</div>
 
-        <div className="flex flex-col-reverse gap-2 border-t border-oc-border bg-oc-muted/50 p-4 sm:flex-row sm:justify-end">
+        <div className="sticky bottom-0 z-10 flex shrink-0 flex-col-reverse gap-2 border-t border-oc-border bg-oc-background p-4 sm:flex-row sm:justify-end">
           <FormActions
             formId={formId}
             actions={{

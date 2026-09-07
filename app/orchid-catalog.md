@@ -11,7 +11,7 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 ## `schema-form` — Schema Form
 
-JSON schema form. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
+JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
 Import `@/components/schema-form`; read `src/components/schema-form.tsx`.
 Related source: `src/components/schema-form-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-form.md
@@ -20,7 +20,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-form.md
 
 ## `schema-table` — Schema Table
 
-JSON-schema list with search, filters, sorting, pagination, and integrated table rendering.
+JSON-schema list with search, filters, sorting, pagination.
 Import `@/components/schema-table`; read `src/components/schema-table.tsx`.
 Related source: `src/components/schema-table-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-table.md
@@ -69,7 +69,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/customer-card.md
 
 ## `form-layout` — Form Layout
 
-Create and edit form shell with page and modal modes, default Cancel/Save actions, external form submission, and controlled dialog support.
+Create/edit shell (page or modal). Put SchemaForm inside; one form uses formId = SchemaForm id. Several forms use actions.save.onClick.
 Import `@/components/form-layout`; read `src/components/form-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-layout.md
 

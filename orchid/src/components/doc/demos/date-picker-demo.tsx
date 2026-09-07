@@ -28,6 +28,19 @@ function DatePickerDemo() {
 
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Date of birth
+          </p>
+          <Label>Date of birth</Label>
+          <DatePicker
+            placeholder="Select date"
+            defaultSelected={new Date(1994, 5, 15)}
+            startMonth={new Date(1900, 0)}
+            endMonth={new Date()}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Date and time
           </p>
           <Label>Delivery at</Label>

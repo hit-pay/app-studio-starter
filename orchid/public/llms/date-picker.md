@@ -37,6 +37,19 @@ function DatePickerDemo() {
 
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Date of birth
+          </p>
+          <Label>Date of birth</Label>
+          <DatePicker
+            placeholder="Select date"
+            defaultSelected={new Date(1994, 5, 15)}
+            startMonth={new Date(1900, 0)}
+            endMonth={new Date()}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Date and time
           </p>
           <Label>Delivery at</Label>
@@ -78,3 +91,5 @@ import {
 <DatePickerRange placeholder="Settlement period" />
 <DateTimePicker placeholder="Delivery date and time" />
 ```
+
+Click the month/year caption to open a month grid. Click the year in that panel to jump by 12-year pages. Default is `captionLayout="dropdown"`; use `captionLayout="label"` for chevrons only. `startMonth` / `endMonth` limit the range (default 1900 through current year + 10). Use **Clear** to reset the value and **Done** to close the picker. Range pickers include left-side shortcuts: Today, Yesterday, This week, This month, and Last month.

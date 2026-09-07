@@ -20,6 +20,7 @@ export function readFormDraft(id: string): Record<string, unknown> | null {
   }
 }
 
+/** Call only after a failed save. Do not write on every field change. */
 export function writeFormDraft(id: string, values: Record<string, unknown>): void {
   if (typeof localStorage === 'undefined' || !id) return
 

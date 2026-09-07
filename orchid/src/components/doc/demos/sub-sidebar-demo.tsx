@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-import { SubSidebar } from '@/components/ui/sub-sidebar'
+import { SubSidebar } from '@/components/sub-sidebar'
 
 const items = [
   { id: 'general', label: 'General settings' },
