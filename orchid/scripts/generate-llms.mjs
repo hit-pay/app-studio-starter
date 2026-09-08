@@ -10,6 +10,9 @@ import { fileURLToPath } from "node:url";
 
 import {
   DOC_ALL_COMPONENTS,
+  DOC_BLOCKS,
+  DOC_COMPONENTS,
+  DOC_FORMS,
   DOC_GUIDES,
 } from "../src/components/doc/doc-components.ts";
 
@@ -308,8 +311,14 @@ const lines = [
   ]),
   "",
   ...docsSection(
-    "Components",
-    [...DOC_ALL_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name)),
+    "Base Components",
+    [...DOC_COMPONENTS, ...DOC_FORMS].sort((a, b) =>
+      a.name.localeCompare(b.name),
+    ),
+  ),
+  ...docsSection(
+    "Components & Block",
+    [...DOC_BLOCKS].sort((a, b) => a.name.localeCompare(b.name)),
   ),
   "## Complete Registry List (for AI reference)",
   "",
@@ -319,7 +328,7 @@ const lines = [
   "",
   "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
-  "- All Orchid items install under `@/components/ui`. Do not look for QuantityInput, FormBuilder, DataTable, MetricCard, or PageLayout outside `src/components/ui/`.",
+  "- Base Orchid items install under `@/components/ui`. Components & Block install under `@/components` and are ready to use through props or a schema; do not assemble them from many base components.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
   "- Use FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.",
   "",

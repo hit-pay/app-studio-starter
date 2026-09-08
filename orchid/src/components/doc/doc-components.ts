@@ -363,6 +363,12 @@ export function docAllComponentsByName() {
   return [...DOC_ALL_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+export function docBaseComponentsByName() {
+  return [...DOC_COMPONENTS, ...DOC_FORMS].sort((a, b) =>
+    a.name.localeCompare(b.name),
+  );
+}
+
 export const DOC_GUIDES = [
   {
     to: "/installation" as const,

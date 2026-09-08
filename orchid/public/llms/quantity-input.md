@@ -9,7 +9,7 @@ Minus/plus stepper; click the value to type.
 ```tsx
 import { useState } from 'react'
 
-import { QuantityInput } from '@/components/ui/quantity-input'
+import { QuantityInput } from '@/components/quantity-input'
 
 function QuantityInputDemo() {
   const [quantity, setQuantity] = useState(2)

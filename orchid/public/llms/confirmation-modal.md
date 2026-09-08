@@ -8,7 +8,7 @@ Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 
 ```tsx
 import { Button } from '@/components/ui/button'
-import { useConfirmationModal } from '@/components/ui/confirmation-modal'
+import { useConfirmationModal } from '@/components/confirmation-modal'
 
 function ConfirmationModalDemo() {
   const confirm = useConfirmationModal()
@@ -85,4 +85,4 @@ function ConfirmationModalDemo() {
 export { ConfirmationModalDemo }
 ```
 
-Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` for delete/warning confirms — do not compose `AlertDialog` for those cases.
+Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` from `@/components/confirmation-modal` for delete/warning confirms — do not compose `AlertDialog` for those cases.

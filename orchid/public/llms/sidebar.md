@@ -21,7 +21,7 @@ import {
 import {
   Sidebar,
   type SidebarGroupConfig,
-} from '@/components/ui/sidebar'
+} from '@/components/sidebar'
 
 const groups: SidebarGroupConfig[] = [
   {
@@ -117,7 +117,7 @@ export { SidebarDemo }
 The navigation structure is serializable JSON. Icons are referenced by name and resolved separately through the `icons` map.
 
 ```tsx
-import { Sidebar } from '@/components/ui/sidebar'
+import { Sidebar } from '@/components/sidebar'
 
 const groups = [
   {

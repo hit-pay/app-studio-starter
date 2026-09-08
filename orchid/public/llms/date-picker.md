@@ -7,7 +7,7 @@ Shadcn-style Popover and Calendar composition with optional Orchid helpers.
 ## Example
 
 ```tsx
-import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/ui/date-picker'
+import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/date-picker'
 import { Label } from '@/components/ui/label'
 
 function DatePickerDemo() {
@@ -70,7 +70,7 @@ import {
   DatePicker,
   DatePickerRange,
   DateTimePicker,
-} from '@/components/ui/date-picker'
+} from '@/components/date-picker'
 
 <DatePicker placeholder="Invoice due date" />
 <DatePickerRange placeholder="Settlement period" />

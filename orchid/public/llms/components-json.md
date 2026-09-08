@@ -45,10 +45,9 @@ from `src/styles.css`. Ensure `@/*` resolves to your source directory.
 
 Orchid registry files declare their own target alias:
 
-- `@ui/button.tsx` and `@ui/form-builder.tsx` resolve through `aliases.ui`,
-  normally to `src/components/ui/button.tsx` and
-  `src/components/ui/form-builder.tsx`. All Orchid items install under
-  `src/components/ui`.
+- `@ui/button.tsx` resolves through `aliases.ui` to `src/components/ui/button.tsx`.
+- `@components/form-builder.tsx` resolves through `aliases.components` to
+  `src/components/form-builder.tsx`.
 
 Do not manually choose a destination when adding an item. The registry target
 and your aliases determine it consistently.

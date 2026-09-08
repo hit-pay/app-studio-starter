@@ -11,13 +11,17 @@ const docsDir = join(root, 'public', 'llms')
 const lines = [
   '# Orchid catalog',
   '',
-  'Agents: read this file **in full** (Read tool, not Grep). Every Orchid item installs under `src/components/ui/` and imports from `@/components/ui/…`. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
+  'Agents: read this file **in full** (Read tool, not Grep). **Base Components** live under `src/components/ui/` (`@/components/ui/…`). **Components & Block** live under `src/components/` (`@/components/…`) and are ready to use through props or a schema — do not assemble them from many base components. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
   '',
 ]
 
-const sectionFor = (name) => {
-  if (name === 'utils') return null
-  return 'Components'
+const sectionFor = (item) => {
+  if (item.name === 'utils') return 'Utils'
+  const files = item.files ?? []
+  const primary = files.find((file) => file.type === 'registry:ui') ?? files[0]
+  if (primary?.target?.startsWith('@components/')) return 'Components & Block'
+  if (primary?.target?.startsWith('@ui/')) return 'Base Components'
+  return 'Base Components'
 }
 
 const installedPath = (target) => {
@@ -34,36 +38,44 @@ const importPath = (target) => {
   return path.startsWith('src/') ? `@/${path.slice('src/'.length)}` : `@/${path}`
 }
 
-let section = null
+const grouped = new Map([
+  ['Utils', []],
+  ['Base Components', []],
+  ['Components & Block', []],
+])
+
 for (const item of registry.items) {
   if (item.name === 'all') continue
-  const next = sectionFor(item.name)
-  if (next && next !== section) {
-    section = next
-    lines.push(`# ${section}`, '')
-  }
-  const files = item.files ?? []
-  const primary = files.find((file) => file.type === 'registry:ui') ?? files[0]
-  const location = primary
-    ? `Import \`${importPath(primary.target)}\`; read \`${installedPath(primary.target)}\`.`
-    : ''
-  const companions = files
-    .filter((file) => file !== primary)
-    .map((file) => `\`${installedPath(file.target)}\``)
-  const companionLine = companions.length
-    ? `Related source: ${companions.join(', ')}.`
-    : ''
-  const docsFile = join(docsDir, `${item.name}.md`)
-  const docsLine =
-    homepage && existsSync(docsFile)
-      ? `Docs: ${homepage}/llms/${item.name}.md`
+  grouped.get(sectionFor(item)).push(item)
+}
+
+for (const [section, items] of grouped) {
+  if (items.length === 0) continue
+  lines.push(`# ${section}`, '')
+  for (const item of items) {
+    const files = item.files ?? []
+    const primary = files.find((file) => file.type === 'registry:ui') ?? files[0]
+    const location = primary
+      ? `Import \`${importPath(primary.target)}\`; read \`${installedPath(primary.target)}\`.`
       : ''
-  lines.push(
-    `## \`${item.name}\` — ${item.title}`,
-    '',
-    ...[item.description ?? '', location, companionLine, docsLine].filter(Boolean),
-    '',
-  )
+    const companions = files
+      .filter((file) => file !== primary)
+      .map((file) => `\`${installedPath(file.target)}\``)
+    const companionLine = companions.length
+      ? `Related source: ${companions.join(', ')}.`
+      : ''
+    const docsFile = join(docsDir, `${item.name}.md`)
+    const docsLine =
+      homepage && existsSync(docsFile)
+        ? `Docs: ${homepage}/llms/${item.name}.md`
+        : ''
+    lines.push(
+      `## \`${item.name}\` — ${item.title}`,
+      '',
+      ...[item.description ?? '', location, companionLine, docsLine].filter(Boolean),
+      '',
+    )
+  }
 }
 
 writeFileSync(out, `${lines.join('\n').trimEnd()}\n`)

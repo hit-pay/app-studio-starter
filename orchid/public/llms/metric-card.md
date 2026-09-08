@@ -17,7 +17,7 @@ import {
   StoreRegular,
   GroupRegular,
 } from '@mingcute/react/core-regular';
-import { MetricCard } from "@/components/ui/metric-card";
+import { MetricCard } from "@/components/metric-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 function MetricCardDemo() {

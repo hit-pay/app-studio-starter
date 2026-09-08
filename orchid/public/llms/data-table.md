@@ -14,7 +14,7 @@ import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
-} from "@/components/ui/data-table";
+} from "@/components/data-table";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const SCHEMA_PROMPT = `Schema Table schema prompt
@@ -247,7 +247,7 @@ import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useDataTable,
-} from "@/components/ui/data-table";
+} from "@/components/data-table";
 
 function ProductList() {
   const products = useQuery({
@@ -292,7 +292,7 @@ import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useDataTable,
-} from "@/components/ui/data-table";
+} from "@/components/data-table";
 
 const queryClient = new QueryClient();
 const dbClient = new DbClient({ queryClient });

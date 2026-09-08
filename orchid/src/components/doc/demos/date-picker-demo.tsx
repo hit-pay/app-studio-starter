@@ -1,4 +1,4 @@
-import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/ui/date-picker'
+import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/date-picker'
 import { Label } from '@/components/ui/label'
 
 function DatePickerDemo() {

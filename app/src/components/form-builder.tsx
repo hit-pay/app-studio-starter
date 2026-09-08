@@ -24,7 +24,7 @@ import {
   ComboboxValue,
   useComboboxAnchor,
 } from '@/components/ui/combobox'
-import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/ui/date-picker'
+import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/date-picker'
 import {
   Field,
   FieldContent,
@@ -50,8 +50,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { FormSectionItem } from '@/components/ui/form-section'
-import { QuantityInput } from '@/components/ui/quantity-input'
-import { ChoiceCard, ChoiceCardGroup } from '@/components/ui/choice-card'
+import { QuantityInput } from '@/components/quantity-input'
+import { ChoiceCard, ChoiceCardGroup } from '@/components/choice-card'
 import { Slider } from '@/components/ui/slider'
 import { Textarea } from '@/components/ui/textarea'
 import { Switch } from '@/components/ui/switch'

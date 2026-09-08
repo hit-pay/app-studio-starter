@@ -2,7 +2,7 @@ import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import { QueryProvider } from '#/lib/query'
 import { AppLayout } from '@/components/app-layout'
-import { ConfirmationModalProvider } from '@/components/ui/confirmation-modal'
+import { ConfirmationModalProvider } from '@/components/confirmation-modal'
 import { Toaster } from '@/components/ui/toast'
 import '../styles.css'
 
