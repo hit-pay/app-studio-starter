@@ -4,7 +4,7 @@ import { QueryProvider } from '#/lib/query'
 import { AppLayout } from '@/components/app-layout'
 import { ConfirmationModalProvider } from '@/components/confirmation-modal'
 import { Toaster } from '@/components/ui/toast'
-import appCss from '../styles.css?url'
+import '../styles.css'
 
 function NotFound() {
   return (
@@ -42,7 +42,6 @@ export const Route = createRootRoute({
         rel: 'stylesheet',
         href: 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap',
       },
-      { rel: 'stylesheet', href: appCss },
     ],
   }),
   shellComponent: RootDocument,
