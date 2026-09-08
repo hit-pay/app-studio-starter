@@ -5,6 +5,7 @@ dist.prev
 dist-ssr
 *.local
 .env
+.nitro
 .tanstack
 .wrangler
 .vinxi
