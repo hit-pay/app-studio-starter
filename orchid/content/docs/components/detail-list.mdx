@@ -11,27 +11,27 @@ import { DetailList } from '@/components/detail-list'
 ;<DetailList
   title="Payment details"
   columns={2}
-  style="Border"
+  style="border"
   items={[
     {
       key: 'invoice',
       label: 'Invoice',
       value: 'INV-2026-0842',
       copyValue: 'INV-2026-0842',
-      alignment: 'Vertical',
+      alignment: 'vertical',
     },
     {
       key: 'status',
       label: 'Status',
       value: <Badge tone="green">Paid</Badge>,
-      alignment: 'Vertical',
+      alignment: 'vertical',
     },
     {
       key: 'amount',
       label: 'Amount',
       value: 'SGD 128.00',
-      alignment: 'Vertical',
-      size: 'Big',
+      alignment: 'vertical',
+      size: 'big',
       colSpan: 2,
     },
   ]}

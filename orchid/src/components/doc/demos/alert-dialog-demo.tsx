@@ -142,7 +142,7 @@ function ConfirmPhraseAlertDialog() {
         <AlertDialogTrigger render={<Button variant="destructive" />}>
           Delete with confirmation
         </AlertDialogTrigger>
-        <AlertDialogContent size="Medium">
+        <AlertDialogContent size="medium">
           <AlertDialogCancel
             variant="ghost"
             size="icon-sm"

@@ -31,7 +31,7 @@ function StatCardDemo() {
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard
               icon={<CurrencyDollarRegular />}
-              iconColor="Blue"
+              iconColor="blue"
               title="Gross volume"
               content="SGD 11,170.00"
               info
@@ -41,7 +41,7 @@ function StatCardDemo() {
             />
             <StatCard
               icon={<CurrencyDollarRegular />}
-              iconColor="Blue"
+              iconColor="blue"
               title="This month"
               content="SGD 1,870.00"
               percentValue={4}
@@ -49,14 +49,14 @@ function StatCardDemo() {
             />
             <StatCard
               icon={<CheckboxRegular />}
-              iconColor="Green"
+              iconColor="green"
               title="Paid invoices"
               content="20"
               percentValue={12}
             />
             <StatCard
               icon={<RefreshAnticlockwise1Regular />}
-              iconColor="Red"
+              iconColor="red"
               title="Refunded"
               content="3"
               percentValue={-2}
@@ -98,21 +98,21 @@ function StatCardDemo() {
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <StatCard
               icon={<LinkRegular />}
-              iconColor="Blue"
+              iconColor="blue"
               title="Payment Links"
               content="SGD 4,260.00"
               percentValue={8}
             />
             <StatCard
               icon={<RepeatRegular />}
-              iconColor="Green"
+              iconColor="green"
               title="Recurring"
               content="SGD 2,140.00"
               percentValue={6}
             />
             <StatCard
               icon={<StoreRegular />}
-              iconColor="Blue"
+              iconColor="blue"
               title="Point of Sale"
               content="SGD 3,890.00"
               percentValue={3}
@@ -137,7 +137,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 <TooltipProvider>
   <StatCard
     icon={<CurrencyDollarRegular />}
-    iconColor="Blue"
+    iconColor="blue"
     title="Gross volume"
     content="SGD 11,170.00"
     info

@@ -148,7 +148,7 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
           if (!nextOpen) finish(false)
         }}
       >
-        <AlertDialogContent size={request?.confirmPhrase ? 'Medium' : 'Confirmation'}>
+        <AlertDialogContent size={request?.confirmPhrase ? 'medium' : 'confirmation'}>
           <AlertDialogCancel
             variant="ghost"
             size="icon-sm"

@@ -29,7 +29,7 @@ function FormSectionDemo() {
             title="Payment Channels"
             description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
             badge={<Badge tone="purple">Upgrade</Badge>}
-            actions={<Button variant="Primary">Upgrade Now</Button>}
+            actions={<Button>Upgrade Now</Button>}
           />
         </div>
 
@@ -54,11 +54,11 @@ function FormSectionDemo() {
             description="Preview changes before they go live."
             actions={
               <>
-                <Button variant="Secondary" size="Small">
+                <Button variant="secondary" size="small">
                   Preview
                   <ExternalLinkRegular />
                 </Button>
-                <Button variant="Primary" size="Small">
+                <Button size="small">
                   Save
                 </Button>
               </>
@@ -85,7 +85,7 @@ function FormSectionDemo() {
             title="Point of Sale"
             description="Terminals, receipts, and in-store payment channels."
             actions={
-              <Button variant="Secondary" size="Small">
+              <Button variant="secondary" size="small">
                 Manage terminals
               </Button>
             }
@@ -119,7 +119,7 @@ function FormSectionDemo() {
                 <Input placeholder="Enter password" type="password" />
               </FormSectionItem>
               <FormSectionItem
-                variant="Background"
+                variant="background"
                 title="Guest checkout"
                 description="Let customers pay without creating an account."
                 actions={<Switch defaultChecked />}

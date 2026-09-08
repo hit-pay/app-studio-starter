@@ -224,6 +224,8 @@ export { SchemaTableDemo };
 
 ## Usage
 
+Put `SchemaTable` directly in `PageLayout`. Do not wrap it in `Card`.
+
 ```tsx
 import {
   SchemaTable,

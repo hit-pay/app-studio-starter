@@ -15,7 +15,7 @@ import { IconGroup, type IconGroupItem } from "@/components/icon-group";
 
 const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
 
-function ExampleGroup({ style }: { style?: "Default" | "Border" }) {
+function ExampleGroup({ style }: { style?: "default" | "border" }) {
   const items: IconGroupItem[] = [
     {
       type: "menu",
@@ -83,7 +83,7 @@ function InvoiceGroup() {
     },
   ];
 
-  return <IconGroup style="Border" items={items} />;
+  return <IconGroup style="border" items={items} />;
 }
 
 function IconGroupDemo() {
@@ -93,14 +93,14 @@ function IconGroupDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <ExampleGroup style="Default" />
+        <ExampleGroup style="default" />
       </div>
 
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Border
         </p>
-        <ExampleGroup style="Border" />
+        <ExampleGroup style="border" />
       </div>
 
       <div className="space-y-4">
@@ -124,7 +124,7 @@ import { CopyRegular } from '@mingcute/react/core-regular';
 import { IconGroup } from "@/components/icon-group";
 
 <IconGroup
-  style="Border"
+  style="border"
   items={[
     {
       type: "menu",

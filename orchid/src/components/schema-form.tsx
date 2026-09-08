@@ -275,7 +275,7 @@ function FormComboboxField({
           <ComboboxEmpty>No results found.</ComboboxEmpty>
           <ComboboxList>
             {(label: string) => (
-              <ComboboxItem key={label} value={label} variant="Checkbox">
+              <ComboboxItem key={label} value={label} variant="checkbox">
                 {label}
               </ComboboxItem>
             )}
@@ -521,7 +521,7 @@ function SchemaForm({
                   <FormSectionItem
                     title={item.title}
                     description={item.description ?? undefined}
-                    variant={item.props?.background === true ? 'Background' : 'Default'}
+                    variant={item.props?.background === true ? 'background' : 'default'}
                     actions={
                       <Switch
                         id={item.path}
@@ -831,7 +831,7 @@ function SchemaForm({
                       value={selectValue || null}
                       onValueChange={(next) => setSelect(String(next))}
                     >
-                      <SelectTrigger size="Inline" id={`${item.path}-select`}>
+                      <SelectTrigger size="inline" id={`${item.path}-select`}>
                         <SelectValue className="uppercase" />
                       </SelectTrigger>
                       <SelectContent>
@@ -931,12 +931,12 @@ function SchemaForm({
               if (type === 'choice-card') {
                 const groupAlignment =
                   item.props?.alignment === 'Horizontal' || item.props?.alignment === 'horizontal'
-                    ? 'Horizontal'
-                    : 'Vertical'
+                    ? 'horizontal'
+                    : 'vertical'
                 const cardAlignment =
                   item.props?.cardAlignment === 'Center' || item.props?.cardAlignment === 'center'
-                    ? 'Center'
-                    : 'Left'
+                    ? 'center'
+                    : 'left'
 
                 return (
                   <Field data-invalid={invalid || undefined}>

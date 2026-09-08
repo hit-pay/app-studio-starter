@@ -139,7 +139,7 @@ function ComboboxFulfilmentExample() {
         <ComboboxEmpty>No fulfilment types found.</ComboboxEmpty>
         <ComboboxList>
           {(item) => (
-            <ComboboxItem key={item} value={item} variant="Checkbox">
+            <ComboboxItem key={item} value={item} variant="checkbox">
               {item}
             </ComboboxItem>
           )}
@@ -152,12 +152,12 @@ function ComboboxFulfilmentExample() {
 function ComboboxCustomersExample({
   defaultValue,
   invalid,
-  variant = "Default",
+  variant = "default",
   selectAll = false,
 }: {
   defaultValue?: (typeof customers)[number][];
   invalid?: boolean;
-  variant?: "Default" | "Checkbox";
+  variant?: "default" | "checkbox";
   selectAll?: boolean;
 }) {
   const chips = useComboboxAnchor();
@@ -264,7 +264,7 @@ function ComboboxLocationsExample() {
               <ComboboxLabel>{group.value}</ComboboxLabel>
               <ComboboxCollection>
                 {(item: string) => (
-                  <ComboboxItem key={item} value={item} variant="Checkbox">
+                  <ComboboxItem key={item} value={item} variant="checkbox">
                     {item}
                   </ComboboxItem>
                 )}
@@ -371,7 +371,7 @@ function ComboboxDemo() {
           <Field>
             <FieldLabel>Customers</FieldLabel>
             <ComboboxCustomersExample
-              variant="Checkbox"
+              variant="checkbox"
               defaultValue={[customers[2], customers[3]]}
             />
             <FieldDescription>
@@ -381,7 +381,7 @@ function ComboboxDemo() {
 
           <Field>
             <FieldLabel>Customers</FieldLabel>
-            <ComboboxCustomersExample variant="Checkbox" selectAll />
+            <ComboboxCustomersExample variant="checkbox" selectAll />
             <FieldDescription>
               Select all customers, then deselect a few.
             </FieldDescription>

@@ -89,7 +89,7 @@ function CheckboxDemo() {
           </p>
           <CheckboxGroup
             label="Payment Channels"
-            alignment="Vertical"
+            alignment="vertical"
             defaultValue={["paynow"]}
           >
             <Field orientation="horizontal">
@@ -113,7 +113,7 @@ function CheckboxDemo() {
           </p>
           <CheckboxGroup
             label="Commerce"
-            alignment="Horizontal"
+            alignment="horizontal"
             defaultValue={["invoice"]}
           >
             <Field orientation="horizontal" className="w-auto">

@@ -127,7 +127,7 @@ function SchemaTableActionIconView({ icon }: { icon?: SchemaTableActionIcon }) {
   return <Icon />;
 }
 
-type DataTableCellType = "Default" | "Checkbox" | "Image" | "Icon" | "Empty";
+type DataTableCellType = "default" | "checkbox" | "image" | "icon" | "empty";
 
 type DragSession = {
   key: string;
@@ -157,24 +157,24 @@ const DataTableResizeContext =
   createContext<DataTableResizeContextValue | null>(null);
 
 const MIN_WIDTH: Record<DataTableCellType, number> = {
-  Default: 120,
-  Checkbox: 32,
-  Image: 50,
-  Icon: 40,
-  Empty: 80,
+  default: 120,
+  checkbox: 32,
+  image: 50,
+  icon: 40,
+  empty: 80,
 };
 
 const DEFAULT_WIDTH: Record<DataTableCellType, number> = {
-  Default: 160,
-  Checkbox: 32,
-  Image: 50,
-  Icon: 40,
-  Empty: 96,
+  default: 160,
+  checkbox: 32,
+  image: 50,
+  icon: 40,
+  empty: 96,
 };
 
 function minWidthFor(type: string | undefined) {
   if (type && type in MIN_WIDTH) return MIN_WIDTH[type as DataTableCellType];
-  return MIN_WIDTH.Default;
+  return MIN_WIDTH.default;
 }
 
 function DataTable({
@@ -204,7 +204,7 @@ function DataTable({
       }
 
       const index = heads.findIndex((head) => head.dataset.column === key);
-      const fromStart = type === "Icon";
+      const fromStart = type === "icon";
       const neighbor = fromStart ? heads[index - 1] : heads[index + 1];
       const neighborKey = neighbor?.dataset.column ?? null;
 
@@ -329,9 +329,8 @@ function DataTableSelectionBar({
         <span className="font-medium text-oc-foreground">{label}</span>
         {onDeselectAll ? (
           <Button
-            variant="Secondary"
-            style="Transparent"
-            size="Small"
+            variant="ghost"
+            size="small"
             onClick={onDeselectAll}
           >
             Deselect All
@@ -420,17 +419,17 @@ function DataTableRow({
 }
 
 function columnEdgeClass(type: DataTableCellType) {
-  return type === "Icon"
+  return type === "icon"
     ? "border-l border-solid border-oc-border"
     : "border-r border-solid border-oc-border last:border-r-0";
 }
 
 function stickyColumnClass(type: DataTableCellType, surface: "head" | "cell") {
-  if (type !== "Checkbox" && type !== "Icon") return "";
+  if (type !== "checkbox" && type !== "icon") return "";
   return cn(
     "sticky z-20",
-    type === "Checkbox" && "left-0 shadow-[4px_0_8px_rgba(15,23,42,0.06)]",
-    type === "Icon" && "right-0 shadow-[-4px_0_8px_rgba(15,23,42,0.06)]",
+    type === "checkbox" && "left-0 shadow-[4px_0_8px_rgba(15,23,42,0.06)]",
+    type === "icon" && "right-0 shadow-[-4px_0_8px_rgba(15,23,42,0.06)]",
     surface === "head" && "bg-oc-neutral",
     surface === "cell" &&
       "bg-oc-background group-hover/data-table-row:bg-oc-neutral",
@@ -442,7 +441,7 @@ function useColumnSize(key: string, type: DataTableCellType): CSSProperties {
   const stored = ctx?.widths[key];
   const width = stored ?? DEFAULT_WIDTH[type];
   const minWidth = MIN_WIDTH[type];
-  const flexible = (type === "Default" || type === "Empty") && stored == null;
+  const flexible = (type === "default" || type === "empty") && stored == null;
   return flexible
     ? { minWidth, flexGrow: 1, flexShrink: 1, flexBasis: 0 }
     : {
@@ -501,7 +500,7 @@ function DataTableResizeHandle({
 
 function DataTableHead({
   className,
-  type = "Default",
+  type = "default",
   columnKey = "col-0",
   resizable,
   style,
@@ -515,7 +514,7 @@ function DataTableHead({
   const ctx = useContext(DataTableResizeContext);
   const sizeStyle = useColumnSize(columnKey, type);
   const canResize = (resizable ?? ctx?.enabled) !== false;
-  const fromStart = type === "Icon";
+  const fromStart = type === "icon";
 
   return (
     <div
@@ -527,10 +526,10 @@ function DataTableHead({
         "relative flex h-8.5 items-center bg-oc-neutral text-[10px] leading-4.5 font-medium tracking-[0.3px] text-oc-foreground uppercase",
         "border-b border-solid border-oc-border",
         columnEdgeClass(type),
-        type === "Checkbox" || type === "Image" || type === "Icon"
+        type === "checkbox" || type === "image" || type === "icon"
           ? "justify-center px-1"
           : "justify-start px-3",
-        type === "Checkbox" || type === "Image" || type === "Icon"
+        type === "checkbox" || type === "image" || type === "icon"
           ? "shrink-0"
           : "min-w-0",
         stickyColumnClass(type, "head"),
@@ -539,7 +538,7 @@ function DataTableHead({
       {...props}
       style={{ ...style, ...sizeStyle }}
     >
-      {type === "Default" || type === "Empty" ? (
+      {type === "default" || type === "empty" ? (
         <span className="min-w-0 truncate">{children}</span>
       ) : (
         children
@@ -558,7 +557,7 @@ function DataTableHead({
 
 function DataTableCell({
   className,
-  type = "Default",
+  type = "default",
   columnKey = "col-0",
   children,
   style,
@@ -579,13 +578,13 @@ function DataTableCell({
         "relative flex min-h-11 items-center bg-oc-background text-[13px] leading-normal text-oc-foreground",
         "border-b border-solid border-oc-border",
         columnEdgeClass(type),
-        type === "Checkbox" || type === "Image" || type === "Icon"
+        type === "checkbox" || type === "image" || type === "icon"
           ? "justify-center px-1"
           : "justify-start px-3",
-        type === "Checkbox" || type === "Image" || type === "Icon"
+        type === "checkbox" || type === "image" || type === "icon"
           ? "shrink-0"
           : "min-w-0",
-        type === "Icon" &&
+        type === "icon" &&
           "*:opacity-0 group-hover/data-table-row:*:opacity-100 group-focus-within/data-table-row:*:opacity-100 has-data-popup-open:*:opacity-100",
         stickyColumnClass(type, "cell"),
         className,
@@ -593,7 +592,7 @@ function DataTableCell({
       {...props}
       style={{ ...style, ...sizeStyle }}
     >
-      {type === "Empty" && children == null ? "–" : children}
+      {type === "empty" && children == null ? "–" : children}
     </div>
   );
 }
@@ -843,13 +842,12 @@ function ToolbarIcon({
   children: ReactNode;
 } & Omit<
   ComponentProps<typeof Button>,
-  "children" | "variant" | "style" | "size" | "iconOnly"
+  "children" | "variant" | "size" | "iconOnly"
 >) {
   return (
     <Button
-      variant="Secondary"
-      style="Border"
-      size="Small"
+      variant="outline"
+      size="small"
       iconOnly
       aria-label={label}
       aria-pressed={active}
@@ -891,7 +889,7 @@ function cellContent(column: SchemaTableColumn, row: SchemaTableRow) {
 }
 
 function tableCellType(column: SchemaTableColumn) {
-  return column.type === "image" ? "Image" : "Default";
+  return column.type === "image" ? "image" : "default";
 }
 
 function filterLabel(filter: SchemaTableFilter, value: string) {
@@ -965,9 +963,8 @@ function SchemaTableFilterPopover({ table }: { table: SchemaTableApi }) {
         nativeButton
         render={
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="small"
             iconOnly
             aria-label="Filter"
             aria-pressed={active || open}
@@ -1007,15 +1004,13 @@ function SchemaTableFilterPopover({ table }: { table: SchemaTableApi }) {
         ))}
         <div className="flex gap-2 pt-1">
           <Button
-            variant="Secondary"
-            style="Border"
+            variant="outline"
             className="flex-1"
             onClick={() => setOpen(false)}
           >
             Cancel
           </Button>
           <Button
-            variant="Primary"
             className="flex-1"
             onClick={() => {
               table.setFilters(draft);
@@ -1040,9 +1035,8 @@ function SchemaTableSortMenu({ table }: { table: SchemaTableApi }) {
         nativeButton
         render={
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="small"
             iconOnly
             aria-label="Sort"
           >
@@ -1108,9 +1102,8 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
         nativeButton
         render={
           <Button
-            variant="Secondary"
-            style="Border"
-            size="Small"
+            variant="outline"
+            size="small"
             aria-label="Edit column"
             aria-pressed={open}
             className={cn(
@@ -1221,9 +1214,8 @@ function SchemaTableChips({ table }: { table: SchemaTableApi }) {
         </Badge>
       ))}
       <Button
-        variant="Secondary"
-        style="Transparent"
-        size="Small"
+        variant="ghost"
+        size="small"
         onClick={table.clearAll}
       >
         Clear all
@@ -1261,9 +1253,8 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
         {tabs.map((tab) => (
           <Button
             key={tab.key}
-            variant="Secondary"
-            style={table.query.tab === tab.key ? "Default" : "Transparent"}
-            size="Small"
+            variant={table.query.tab === tab.key ? "secondary" : "ghost"}
+            size="small"
             onClick={() => table.setTab(tab.key)}
           >
             {tab.title}
@@ -1274,6 +1265,7 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
   );
 }
 
+/** Complete list surface: toolbar, grid, empty, pagination. Render directly in PageLayout. Do not wrap in Card. */
 function SchemaTable({
   table,
   onRowAction,
@@ -1327,11 +1319,10 @@ function SchemaTable({
                         <Button
                           variant={
                             action.variant === "destructive"
-                              ? "Destructive"
-                              : "Secondary"
+                              ? "destructive"
+                              : "ghost"
                           }
-                          style="Transparent"
-                          size="Small"
+                          size="small"
                           iconOnly={Boolean(action.icon)}
                           aria-label={action.label}
                         >
@@ -1365,11 +1356,10 @@ function SchemaTable({
                   key={action.key}
                   variant={
                     action.variant === "destructive"
-                      ? "Destructive"
-                      : "Secondary"
+                      ? "destructive"
+                      : "ghost"
                   }
-                  style="Transparent"
-                  size="Small"
+                  size="small"
                   disabled={action.disabled}
                   onClick={() =>
                     onSelectionAction?.(action, [...table.selected])
@@ -1402,7 +1392,7 @@ function SchemaTable({
         <DataTableHeader>
           <DataTableRow>
             {table.schema.selection ? (
-              <DataTableHead type="Checkbox">
+              <DataTableHead type="checkbox">
                 <Checkbox
                   aria-label="Select page"
                   checked={allSelected}
@@ -1414,12 +1404,12 @@ function SchemaTable({
             {columns.map((column) => (
               <DataTableHead
                 key={column.key}
-                type={tableCellType(column) === "Image" ? "Image" : "Default"}
+                type={tableCellType(column)}
               >
                 {column.title}
               </DataTableHead>
             ))}
-            {actions.length > 0 ? <DataTableHead type="Icon" /> : null}
+            {actions.length > 0 ? <DataTableHead type="icon" /> : null}
           </DataTableRow>
         </DataTableHeader>
         <DataTableBody>
@@ -1461,7 +1451,7 @@ function SchemaTable({
             table.rows.map((row) => (
               <DataTableRow key={row.id}>
                 {table.schema.selection ? (
-                  <DataTableCell type="Checkbox">
+                  <DataTableCell type="checkbox">
                     <Checkbox
                       aria-label={`Select ${String(row.name ?? row.id)}`}
                       checked={table.selected.includes(row.id)}
@@ -1475,16 +1465,15 @@ function SchemaTable({
                   </DataTableCell>
                 ))}
                 {actions.length > 0 ? (
-                  <DataTableCell type="Icon">
+                  <DataTableCell type="icon">
                     <DropdownMenu>
                       <DropdownMenuTrigger
                         nativeButton
                         className="inline-flex"
                         render={
                           <Button
-                            variant="Secondary"
-                            style="Transparent"
-                            size="Small"
+                            variant="ghost"
+                            size="small"
                             iconOnly
                             aria-label={`Actions for ${String(row.name ?? row.id)}`}
                           >
@@ -1571,7 +1560,7 @@ function SchemaTable({
                 value={String(table.pageSize)}
                 onValueChange={(value) => table.setPageSize(Number(value))}
               >
-                <SelectTrigger size="Inline">
+                <SelectTrigger size="inline">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>

@@ -84,8 +84,8 @@ function QuantityInput({
       {...props}
     >
       <Button
-        variant="Secondary"
-        size="Small"
+        variant="secondary"
+        size="small"
         iconOnly
         
         disabled={disabled || (min != null && numeric <= min)}
@@ -127,8 +127,8 @@ function QuantityInput({
         </button>
       )}
       <Button
-        variant="Secondary"
-        size="Small"
+        variant="secondary"
+        size="small"
         iconOnly
         
         disabled={disabled || (max != null && numeric >= max)}

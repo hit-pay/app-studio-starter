@@ -82,9 +82,8 @@ function CopyButton({ value }: { value: string }) {
 
   return (
     <Button
-      variant="Secondary"
-      style="Border"
-      size="Small"
+      variant="outline"
+      size="small"
       onClick={async () => {
         await navigator.clipboard.writeText(value);
         setCopied(true);

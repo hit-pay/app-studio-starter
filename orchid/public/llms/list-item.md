@@ -78,7 +78,7 @@ function ListItemDemo() {
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
-        <ListItem layout="Media">
+        <ListItem layout="media">
           <ListItemBody className="gap-1">
             <ListItemTitle>Matcha Latte</ListItemTitle>
             <ListItemDescription>SKU-TEA-12 · Online Store and POS</ListItemDescription>
@@ -145,7 +145,7 @@ function ListItemDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Stack · copy fields
         </p>
-        <ListItem layout="Stack">
+        <ListItem layout="stack">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-baseline gap-1">
               <ListItemTitle>Invoice paid</ListItemTitle>
@@ -164,7 +164,7 @@ function ListItemDemo() {
             />
           </div>
         </ListItem>
-        <ListItem layout="Stack">
+        <ListItem layout="stack">
           <div className="flex items-center justify-between gap-3">
             <div className="flex min-w-0 flex-wrap items-baseline gap-1">
               <ListItemTitle>Payment link paid</ListItemTitle>
@@ -197,7 +197,7 @@ function ListItemDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Media
         </p>
-        <ListItem layout="Media">
+        <ListItem layout="media">
           <ListItemMedia>
             <img
               alt=""
@@ -218,7 +218,7 @@ function ListItemDemo() {
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
-        <ListItem layout="Media">
+        <ListItem layout="media">
           <ListItemMedia>
             <img
               alt=""
@@ -298,7 +298,7 @@ function ListItemDemo() {
                 <Delete2Regular className="size-4" />
               </ListItemAction>
             </ListItemHoverActions>
-            <Button variant="Primary" size="Default">
+            <Button size="default">
               Connect
             </Button>
           </ListItemTrailing>

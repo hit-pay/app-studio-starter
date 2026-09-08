@@ -52,7 +52,7 @@ function SchemaFormShowcase() {
       <SchemaForm form={details} className="max-w-none" />
       <div className="flex min-w-0 flex-col gap-4">
         <Button
-          variant="Primary"
+          variant="default"
           disabled={validating}
           aria-busy={validating}
           onClick={() => void Promise.all([account.submit(), details.submit()])}

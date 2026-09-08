@@ -2,6 +2,7 @@ import type { ComponentProps } from 'react'
 
 import { cn } from '@/lib/utils'
 
+/** Bordered panel for a small summary or grouped fields. Do not wrap SchemaTable, SchemaForm, PageLayout, or Table. */
 function Card({
   className,
   size = 'default',

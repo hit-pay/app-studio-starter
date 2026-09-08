@@ -117,10 +117,10 @@ function BadgeDemo() {
           User role
         </p>
         <div className="flex flex-wrap items-center gap-3">
-          <UserBadge role="Owner" />
-          <UserBadge role="Admin" />
-          <UserBadge role="Manager" />
-          <UserBadge role="Cashier" />
+          <UserBadge role="owner" />
+          <UserBadge role="admin" />
+          <UserBadge role="manager" />
+          <UserBadge role="cashier" />
         </div>
       </div>
     </>

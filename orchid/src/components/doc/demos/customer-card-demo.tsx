@@ -48,30 +48,30 @@ function CustomerCardDemo() {
     <>
       <ExampleBlock title="Small">
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-          <CustomerCard variant="Small" customer={CUSTOMER} />
-          <CustomerCard variant="Small" customer={CUSTOMER} hover />
-          <CustomerCard variant="Small" customer={CUSTOMER} active />
-          <CustomerCard variant="Small" customer={CUSTOMER} loading />
-          <CustomerCard variant="Big" customer={CUSTOMER} loading />
+          <CustomerCard variant="small" customer={CUSTOMER} />
+          <CustomerCard variant="small" customer={CUSTOMER} hover />
+          <CustomerCard variant="small" customer={CUSTOMER} active />
+          <CustomerCard variant="small" customer={CUSTOMER} loading />
+          <CustomerCard variant="big" customer={CUSTOMER} loading />
         </div>
       </ExampleBlock>
 
       <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
         <ExampleBlock title="Big">
-          <CustomerCard variant="Big" customer={CUSTOMER} />
+          <CustomerCard variant="big" customer={CUSTOMER} />
         </ExampleBlock>
 
         <ExampleBlock title="Float">
-          <CustomerCard variant="Float" customer={CUSTOMER} />
+          <CustomerCard variant="float" customer={CUSTOMER} />
         </ExampleBlock>
 
         <ExampleBlock title="Empty">
-          <CustomerCard variant="Empty" />
+          <CustomerCard variant="empty" />
         </ExampleBlock>
 
         <ExampleBlock title="Invoice payer">
           <CustomerCard
-            variant="Small"
+            variant="small"
             customer={CUSTOMER}
             badge={<Badge tone="blue">Invoice</Badge>}
           />
@@ -79,7 +79,7 @@ function CustomerCardDemo() {
 
         <ExampleBlock title="Recurring subscriber">
           <CustomerCard
-            variant="Small"
+            variant="small"
             customer={CUSTOMER}
             badge={<Badge tone="purple">Recurring</Badge>}
           />
@@ -87,7 +87,7 @@ function CustomerCardDemo() {
 
         <ExampleBlock title="POS walk-in">
           <CustomerCard
-            variant="Small"
+            variant="small"
             customer={POS_CUSTOMER}
             badge={<Badge tone="green">POS</Badge>}
           />
@@ -95,12 +95,12 @@ function CustomerCardDemo() {
 
         <ExampleBlock title="Edit and action">
           <CustomerCard
-            variant="Big"
+            variant="big"
             customer={CUSTOMER}
             edit
             hover
             bottom={
-              <Button variant="Primary" style="Transparent" size="Small" className="w-full">
+              <Button variant="ghost" size="small" className="w-full">
                 <Chat1Regular />
                 Start Chat
               </Button>
@@ -110,7 +110,7 @@ function CustomerCardDemo() {
 
         <ExampleBlock title="Closable">
           <div className="p-2">
-            <CustomerCard variant="Small" customer={CUSTOMER} closable />
+            <CustomerCard variant="small" customer={CUSTOMER} closable />
           </div>
         </ExampleBlock>
       </div>

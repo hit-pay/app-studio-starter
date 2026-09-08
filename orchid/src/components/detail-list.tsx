@@ -9,8 +9,8 @@ type DetailListItem = {
   label?: ReactNode
   value: ReactNode
   copyValue?: string
-  alignment?: 'Horizontal' | 'Vertical'
-  size?: 'Small' | 'Big'
+  alignment?: 'horizontal' | 'vertical'
+  size?: 'small' | 'big'
   colSpan?: number
   className?: string
 }
@@ -19,7 +19,7 @@ type DetailListProps = Omit<ComponentProps<'div'>, 'children' | 'style' | 'title
   items: DetailListItem[]
   title?: ReactNode
   columns?: number
-  style?: 'Default' | 'Border'
+  style?: 'default' | 'border'
 }
 
 const boxDetailVariants = cva(
@@ -27,12 +27,12 @@ const boxDetailVariants = cva(
   {
     variants: {
       style: {
-        Default: 'gap-4 p-4',
-        Border: 'gap-px overflow-hidden bg-oc-border',
+        default: 'gap-4 p-4',
+        border: 'gap-px overflow-hidden bg-oc-border',
       },
     },
     defaultVariants: {
-      style: 'Default',
+      style: 'default',
     },
   },
 )
@@ -42,7 +42,7 @@ function DetailList({
   items,
   title,
   columns = 1,
-  style = 'Default',
+  style = 'default',
   ...props
 }: DetailListProps) {
   return (
@@ -60,13 +60,13 @@ function DetailList({
   )
 }
 
-function DetailListHeader({ title, style }: { title: ReactNode; style: 'Default' | 'Border' }) {
+function DetailListHeader({ title, style }: { title: ReactNode; style: 'default' | 'border' }) {
   return (
     <div
       data-slot="detail-list-header"
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-3',
-        style === 'Border' && 'bg-oc-background px-4 py-3',
+        style === 'border' && 'bg-oc-background px-4 py-3',
       )}
     >
       <p
@@ -86,14 +86,14 @@ function DetailListGrid({
 }: {
   items: DetailListItem[]
   columns: number
-  style: 'Default' | 'Border'
+  style: 'default' | 'border'
 }) {
   return (
     <div
       data-slot="detail-list-grid"
       className={cn(
         'grid w-full min-w-0',
-        style === 'Border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
+        style === 'border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
       )}
       style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
     >
@@ -107,52 +107,52 @@ function DetailListGrid({
 const boxDetailRowVariants = cva('flex w-full min-w-0 gap-3', {
   variants: {
     alignment: {
-      Horizontal: 'flex-row items-start justify-between',
-      Vertical: 'flex-col items-stretch gap-1',
+      horizontal: 'flex-row items-start justify-between',
+      vertical: 'flex-col items-stretch gap-1',
     },
   },
   defaultVariants: {
-    alignment: 'Horizontal',
+    alignment: 'horizontal',
   },
 })
 
 const boxDetailLabelVariants = cva('shrink-0 leading-[1.5] text-oc-muted-foreground', {
   variants: {
     size: {
-      Small: 'text-xs',
-      Big: 'text-sm',
+      small: 'text-xs',
+      big: 'text-sm',
     },
   },
   defaultVariants: {
-    size: 'Small',
+    size: 'small',
   },
 })
 
 const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-oc-foreground', {
   variants: {
     size: {
-      Small: 'text-sm',
-      Big: 'text-lg font-medium',
+      small: 'text-sm',
+      big: 'text-lg font-medium',
     },
     alignment: {
-      Horizontal: 'text-right',
-      Vertical: 'text-left',
+      horizontal: 'text-right',
+      vertical: 'text-left',
     },
   },
   defaultVariants: {
-    size: 'Small',
-    alignment: 'Horizontal',
+    size: 'small',
+    alignment: 'horizontal',
   },
 })
 
-function DetailListRow({ item, style }: { item: DetailListItem; style: 'Default' | 'Border' }) {
+function DetailListRow({ item, style }: { item: DetailListItem; style: 'default' | 'border' }) {
   const {
     className,
     label,
     value,
     copyValue,
-    alignment = 'Horizontal',
-    size = 'Small',
+    alignment = 'horizontal',
+    size = 'small',
     colSpan,
   } = item
 
@@ -163,7 +163,7 @@ function DetailListRow({ item, style }: { item: DetailListItem; style: 'Default'
       data-size={size}
       className={cn(
         boxDetailRowVariants({ alignment }),
-        style === 'Border' && 'bg-oc-background p-4',
+        style === 'border' && 'bg-oc-background p-4',
         className,
       )}
       style={colSpan ? { gridColumn: `span ${colSpan}` } : undefined}
@@ -175,7 +175,7 @@ function DetailListRow({ item, style }: { item: DetailListItem; style: 'Default'
         className={cn(
           boxDetailValueVariants({ size, alignment }),
           'flex items-start gap-2',
-          alignment === 'Horizontal' ? 'justify-end' : 'justify-start',
+          alignment === 'horizontal' ? 'justify-end' : 'justify-start',
         )}
       >
         <span className="min-w-0 break-words">{value}</span>

@@ -18,25 +18,25 @@ function DetailListDemo() {
               key: 'invoice',
               label: 'Invoice',
               value: 'INV-2026-0842',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'customer',
               label: 'Customer',
               value: 'alex@arcticmonkey.io',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'status',
               label: 'Status',
               value: <Badge tone="green">Paid</Badge>,
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'channel',
               label: 'Channel',
               value: 'PayNow',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
           ]}
         />
@@ -49,32 +49,32 @@ function DetailListDemo() {
         <DetailList
           title="Payment details"
           columns={2}
-          style="Border"
+          style="border"
           items={[
             {
               key: 'email',
               label: 'Email',
               value: 'alex@arcticmonkey.io',
               copyValue: 'alex@arcticmonkey.io',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'phone',
               label: 'Phone',
               value: '+65 8123 4567',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'status',
               label: 'Status',
               value: <Badge tone="green">Paid</Badge>,
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'method',
               label: 'Method',
               value: 'Cards',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
           ]}
         />
@@ -86,39 +86,39 @@ function DetailListDemo() {
         </p>
         <DetailList
           columns={3}
-          style="Border"
+          style="border"
           items={[
             {
               key: 'created',
               label: 'Created',
               value: '25 Aug 2026',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'channel',
               label: 'Channel',
               value: 'Online Store',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'currency',
               label: 'Currency',
               value: 'SGD',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'amount',
               label: 'Amount',
               value: '128.00',
-              alignment: 'Vertical',
-              size: 'Big',
+              alignment: 'vertical',
+              size: 'big',
             },
-            { key: 'fee', label: 'Fee', value: '3.20', alignment: 'Vertical' },
+            { key: 'fee', label: 'Fee', value: '3.20', alignment: 'vertical' },
             {
               key: 'net',
               label: 'Net',
               value: '124.80',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
           ]}
         />
@@ -131,7 +131,7 @@ function DetailListDemo() {
         <DetailList
           title="Customer data"
           columns={4}
-          style="Border"
+          style="border"
           items={[
             {
               key: 'customer',
@@ -145,40 +145,40 @@ function DetailListDemo() {
                   Alex Turner
                 </span>
               ),
-              alignment: 'Vertical',
+              alignment: 'vertical',
               colSpan: 2,
             },
             {
               key: 'email',
               label: 'Email',
               value: 'alex@arcticmonkey.io',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'phone',
               label: 'Phone',
               value: '+65 8123 4567',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'address',
               label: 'Billing address',
               value: '1 Raffles Place, Singapore 048616',
-              alignment: 'Vertical',
+              alignment: 'vertical',
               colSpan: 3,
             },
             {
               key: 'country',
               label: 'Country',
               value: 'SG',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'payment-id',
               label: 'Payment ID',
               value: 'pay_8f2a91',
               copyValue: 'pay_8f2a91',
-              alignment: 'Vertical',
+              alignment: 'vertical',
               colSpan: 4,
             },
           ]}
@@ -202,7 +202,7 @@ function DetailListDemo() {
           Stacked rows, Border
         </p>
         <DetailList
-          style="Border"
+          style="border"
           items={[
             { key: 'email', label: 'Email', value: 'alex@arcticmonkey.io' },
             { key: 'phone', label: 'Phone', value: '+65 8123 4567' },
@@ -217,31 +217,31 @@ function DetailListDemo() {
         <DetailList
           title="SKU"
           columns={2}
-          style="Border"
+          style="border"
           items={[
             {
               key: 'sku',
               label: 'SKU',
               value: 'HP-MUG-001',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'price',
               label: 'Price',
               value: 'SGD 28.00',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'inventory',
               label: 'Inventory',
               value: '42 in stock',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'sold-via',
               label: 'Sold via',
               value: 'Online Store',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
           ]}
         />
@@ -253,31 +253,31 @@ function DetailListDemo() {
         </p>
         <DetailList
           columns={2}
-          style="Border"
+          style="border"
           items={[
             {
               key: 'plan',
               label: 'Plan',
               value: 'Monthly membership',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'amount',
               label: 'Amount',
               value: 'SGD 49.00',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'next-charge',
               label: 'Next charge',
               value: '1 Sep 2026',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
             {
               key: 'method',
               label: 'Method',
               value: 'Cards',
-              alignment: 'Vertical',
+              alignment: 'vertical',
             },
           ]}
         />

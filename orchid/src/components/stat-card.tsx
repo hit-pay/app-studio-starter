@@ -11,21 +11,21 @@ import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip
 const statCardIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
   variants: {
     color: {
-      Blue: 'text-oc-primary',
-      Green: 'text-oc-success-strong',
-      Red: 'text-oc-destructive-strong',
-      Grey: 'text-oc-muted-foreground',
+      blue: 'text-oc-primary',
+      green: 'text-oc-success-strong',
+      red: 'text-oc-destructive-strong',
+      grey: 'text-oc-muted-foreground',
     },
   },
   defaultVariants: {
-    color: 'Grey',
+    color: 'grey',
   },
 })
 
 function StatCard({
   className,
   icon,
-  iconColor = 'Grey',
+  iconColor = 'grey',
   title,
   tooltip,
   content,
@@ -38,7 +38,7 @@ function StatCard({
   ...props
 }: ComponentProps<'div'> & {
   icon?: ReactNode
-  iconColor?: 'Blue' | 'Green' | 'Red' | 'Grey'
+  iconColor?: 'blue' | 'green' | 'red' | 'grey'
   title?: string
   tooltip?: string
   content?: ReactNode

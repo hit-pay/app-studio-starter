@@ -38,10 +38,10 @@ const customerCardVariants = cva(
   {
     variants: {
       variant: {
-        Small: 'flex-row items-center gap-2 px-3 py-2',
-        Big: 'flex-col items-start justify-center gap-2 p-3',
-        Float: 'flex-col items-start justify-center gap-2 p-3 shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
-        Empty: 'flex-col items-start justify-center gap-2 px-3 py-4',
+        small: 'flex-row items-center gap-2 px-3 py-2',
+        big: 'flex-col items-start justify-center gap-2 p-3',
+        float: 'flex-col items-start justify-center gap-2 p-3 shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
+        empty: 'flex-col items-start justify-center gap-2 px-3 py-4',
       },
       hover: {
         true: 'transition-shadow hover:shadow-[0_3px_11px_rgba(38,42,50,0.09)]',
@@ -53,7 +53,7 @@ const customerCardVariants = cva(
       },
     },
     defaultVariants: {
-      variant: 'Small',
+      variant: 'small',
       hover: false,
       active: false,
     },
@@ -127,7 +127,7 @@ function CustomerCardSkeleton({ expanded }: { expanded: boolean }) {
 
 function CustomerCard({
   className,
-  variant = 'Small',
+  variant = 'small',
   customer,
   hover = false,
   edit = false,
@@ -144,7 +144,7 @@ function CustomerCard({
   onClose,
   ...props
 }: ComponentProps<'div'> & {
-  variant?: 'Small' | 'Big' | 'Float' | 'Empty'
+  variant?: 'small' | 'big' | 'float' | 'empty'
   customer?: CustomerCardData | null
   hover?: boolean
   edit?: boolean
@@ -160,18 +160,18 @@ function CustomerCard({
   onEdit?: () => void
   onClose?: () => void
 }) {
-  const empty = !loading && (variant === 'Empty' || !customer)
-  const expanded = variant === 'Big' || variant === 'Float'
+  const empty = !loading && (variant === 'empty' || !customer)
+  const expanded = variant === 'big' || variant === 'float'
   const phone = customer ? formatPhone(customer) : '-'
 
   return (
     <div
       data-slot="customer-card"
-      data-variant={empty ? 'Empty' : variant}
+      data-variant={empty ? 'empty' : variant}
       data-active={active || undefined}
       className={cn(
         customerCardVariants({
-          variant: empty ? 'Empty' : variant,
+          variant: empty ? 'empty' : variant,
           hover: hover && !active && !empty,
           active: active && !empty,
         }),
@@ -197,7 +197,7 @@ function CustomerCard({
               </span>
             </div>
           </div>
-          <Button variant="Secondary" size="Small"  className="w-full" onClick={onAdd}>
+          <Button variant="secondary" size="small"  className="w-full" onClick={onAdd}>
             Add customer
           </Button>
         </>
@@ -269,8 +269,8 @@ function CustomerCard({
           )}
         >
           <Button
-            variant="Secondary"
-            size="Small"
+            variant="secondary"
+            size="small"
             iconOnly
             
             aria-label="Edit"

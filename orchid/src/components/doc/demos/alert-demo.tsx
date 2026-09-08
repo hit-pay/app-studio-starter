@@ -85,7 +85,7 @@ function AlertDemo() {
               Payments may take longer than usual.
             </AlertDescription>
             <AlertAction>
-              <Button variant="Secondary" style="Border" size="Small">
+              <Button variant="outline" size="small">
                 View status
               </Button>
             </AlertAction>
@@ -103,10 +103,10 @@ function AlertDemo() {
               INV-2048 for SGD 128.00 was created and sent to Priya Nair.
             </AlertDescription>
             <AlertAction placement="bottom">
-              <Button variant="Secondary" style="Border" size="Small">
+              <Button variant="outline" size="small">
                 View invoice
               </Button>
-              <Button size="Small">Send reminder</Button>
+              <Button size="small">Send reminder</Button>
             </AlertAction>
           </Alert>
         </div>

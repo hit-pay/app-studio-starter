@@ -14,13 +14,13 @@ import {
 const iconGroupVariants = cva("inline-flex items-center gap-0.5", {
   variants: {
     style: {
-      Default: "",
-      Border:
+      default: "",
+      border:
         "rounded border border-solid border-oc-dark-blue-border bg-oc-background p-0.5",
     },
   },
   defaultVariants: {
-    style: "Default",
+    style: "default",
   },
 });
 
@@ -75,7 +75,7 @@ type IconGroupItem =
 
 type IconGroupProps = {
   items: IconGroupItem[];
-  style?: "Default" | "Border";
+  style?: "default" | "border";
   className?: string;
 } & Omit<ComponentProps<"div">, "children" | "style">;
 
@@ -160,7 +160,7 @@ function IconGroupAction({ item }: { item: IconGroupItem }) {
 function IconGroup({
   items,
   className,
-  style = "Default",
+  style = "default",
   ...props
 }: IconGroupProps) {
   return (
@@ -172,7 +172,7 @@ function IconGroup({
     >
       {items.map((item, index) => (
         <div key={item.key} className="contents">
-          {style === "Border" && index > 0 ? (
+          {style === "border" && index > 0 ? (
             <span
               aria-hidden="true"
               data-slot="icon-group-divider"

@@ -20,9 +20,8 @@ function DocCodePanel({
       <div className="flex items-center justify-between gap-3 border-b border-solid border-oc-border px-3 py-2">
         <span className="truncate font-mono text-xs text-oc-muted-foreground">{filename}</span>
         <Button
-          variant="Secondary"
-          style="Border"
-          size="Small"
+          variant="outline"
+          size="small"
           onClick={async () => {
             await navigator.clipboard.writeText(code)
             setCopied(true)

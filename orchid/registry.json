@@ -216,7 +216,7 @@
       "name": "list-item",
       "type": "registry:ui",
       "title": "List Item",
-      "description": "List row (title, media, meta, actions). layout Default|Stack|Media, selected.",
+      "description": "List row (title, media, meta, actions). layout default|stack|media, selected.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -252,7 +252,7 @@
       "name": "customer-card",
       "type": "registry:ui",
       "title": "Customer Card",
-      "description": "Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.",
+      "description": "Customer/beneficiary summary. variant small|big|float|empty, hover, active.",
       "dependencies": [
         "class-variance-authority",
         "@mingcute/react"
@@ -534,7 +534,7 @@
       "name": "choice-card",
       "type": "registry:ui",
       "title": "Choice Card",
-      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment Vertical|Horizontal.",
+      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -570,7 +570,7 @@
       "name": "detail-list",
       "type": "registry:ui",
       "title": "Detail List",
-      "description": "Props-based read-only key/value card with React node values. style Default|Border.",
+      "description": "Props-based read-only key/value card with React node values. style default|border.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -589,7 +589,7 @@
       "name": "icon-group",
       "type": "registry:ui",
       "title": "Icon Group",
-      "description": "Props-based icon actions. Border style inserts dividers automatically.",
+      "description": "Props-based icon actions. style border inserts dividers automatically.",
       "dependencies": [
         "class-variance-authority",
         "@mingcute/react"

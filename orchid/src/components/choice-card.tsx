@@ -8,21 +8,21 @@ import { cn } from '@/lib/utils'
 const choiceCardGroupVariants = cva('flex w-auto min-w-0 max-w-full', {
   variants: {
     alignment: {
-      Vertical: 'flex-col gap-3',
-      Horizontal: 'flex-row flex-wrap items-stretch gap-3',
+      vertical: 'flex-col gap-3',
+      horizontal: 'flex-row flex-wrap items-stretch gap-3',
     },
   },
   defaultVariants: {
-    alignment: 'Vertical',
+    alignment: 'vertical',
   },
 })
 
 function ChoiceCardGroup({
   className,
-  alignment = 'Vertical',
+  alignment = 'vertical',
   ...props
 }: RadioGroupPrimitive.Props & {
-  alignment?: 'Vertical' | 'Horizontal'
+  alignment?: 'vertical' | 'horizontal'
 }) {
   return (
     <RadioGroupPrimitive
@@ -44,17 +44,17 @@ const choiceCardVariants = cva(
   {
     variants: {
       alignment: {
-        Left: 'items-center text-left',
-        Center: 'items-center text-center',
+        left: 'items-center text-left',
+        center: 'items-center text-center',
       },
       iconAlign: {
-        Left: 'flex-row',
-        Center: 'flex-col',
+        left: 'flex-row',
+        center: 'flex-col',
       },
     },
     defaultVariants: {
-      alignment: 'Left',
-      iconAlign: 'Left',
+      alignment: 'left',
+      iconAlign: 'left',
     },
   },
 )
@@ -64,16 +64,16 @@ function ChoiceCard({
   title,
   description,
   icon,
-  alignment = 'Left',
-  iconAlign = 'Left',
+  alignment = 'left',
+  iconAlign = 'left',
   children,
   ...props
 }: RadioPrimitive.Root.Props & {
   title?: string
   description?: string
   icon?: ReactNode
-  alignment?: 'Left' | 'Center'
-  iconAlign?: 'Left' | 'Center'
+  alignment?: 'left' | 'center'
+  iconAlign?: 'left' | 'center'
 }) {
   return (
     <RadioPrimitive.Root
@@ -93,8 +93,8 @@ function ChoiceCard({
         <span
           className={cn(
             'flex min-w-0 flex-col gap-0.5',
-            alignment === 'Center' ? 'items-center' : 'items-start',
-            iconAlign === 'Left' && 'flex-1',
+            alignment === 'center' ? 'items-center' : 'items-start',
+            iconAlign === 'left' && 'flex-1',
           )}
         >
           {title ? (

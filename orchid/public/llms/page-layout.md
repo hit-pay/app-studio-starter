@@ -53,10 +53,10 @@ function InvoiceDetailPageExample() {
         <DetailList
           columns={2}
           items={[
-            { key: 'customer', label: 'Customer', value: 'Alex Turner', alignment: 'Vertical' },
-            { key: 'email', label: 'Email', value: 'alex@studio.co', alignment: 'Vertical' },
-            { key: 'amount', label: 'Amount', value: 'SGD 128.00', alignment: 'Vertical' },
-            { key: 'channel', label: 'Channel', value: 'PayNow', alignment: 'Vertical' },
+            { key: 'customer', label: 'Customer', value: 'Alex Turner', alignment: 'vertical' },
+            { key: 'email', label: 'Email', value: 'alex@studio.co', alignment: 'vertical' },
+            { key: 'amount', label: 'Amount', value: 'SGD 128.00', alignment: 'vertical' },
+            { key: 'channel', label: 'Channel', value: 'PayNow', alignment: 'vertical' },
           ]}
         />
       </PageLayout>
@@ -106,25 +106,25 @@ function PageLayoutDemo() {
                   key: "customer",
                   label: "Customer",
                   value: "Alex Turner",
-                  alignment: "Vertical",
+                  alignment: "vertical",
                 },
                 {
                   key: "email",
                   label: "Email",
                   value: "alex@studio.co",
-                  alignment: "Vertical",
+                  alignment: "vertical",
                 },
                 {
                   key: "amount",
                   label: "Amount",
                   value: "SGD 128.00",
-                  alignment: "Vertical",
+                  alignment: "vertical",
                 },
                 {
                   key: "channel",
                   label: "Channel",
                   value: "PayNow",
-                  alignment: "Vertical",
+                  alignment: "vertical",
                 },
               ]}
             />

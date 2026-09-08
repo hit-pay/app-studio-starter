@@ -15,7 +15,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 function CurrencySelect({ defaultValue = 'SGD' }: { defaultValue?: string }) {
   return (
     <Select defaultValue={defaultValue}>
-      <SelectTrigger size="Inline" className="gap-2">
+      <SelectTrigger size="inline" className="gap-2">
         <SelectValue className="uppercase" />
       </SelectTrigger>
       <SelectContent>

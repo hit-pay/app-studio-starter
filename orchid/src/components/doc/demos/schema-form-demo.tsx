@@ -129,7 +129,7 @@ const DETAILS_FIELDS: SchemaFormField[] = [
       { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
       { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
     ],
-    props: { alignment: "Vertical", cardAlignment: "Left" },
+    props: { alignment: "vertical", cardAlignment: "left" },
     value: "paynow",
   },
   {
@@ -308,7 +308,7 @@ Types
 - select
 - combobox — searchable; add props.multiple for chips
 - radio | choice-card | checkbox | checkbox-group | accepted | switch
-- choice-card — pick one; options may include description; props.alignment Vertical|Horizontal
+- choice-card — pick one; options may include description; props.alignment vertical|horizontal
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency
 - date | datetime | date-range | file | quantity
@@ -353,7 +353,7 @@ Example — choice-card
     { "value": "paynow", "label": "PayNow", "description": "Instant bank transfer" },
     { "value": "card", "label": "Card", "description": "Visa, Mastercard, AMEX" }
   ],
-  "props": { "alignment": "Vertical", "cardAlignment": "Left" },
+  "props": { "alignment": "vertical", "cardAlignment": "left" },
   "value": "paynow"
 }`;
 
@@ -395,7 +395,7 @@ function SchemaFormDemo() {
         <SchemaForm form={details} className="max-w-none" />
         <div className="flex min-w-0 flex-col gap-4">
           <Button
-            variant="Primary"
+            variant="default"
             disabled={validating}
             aria-busy={validating}
             onClick={() =>
