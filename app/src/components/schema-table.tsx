@@ -296,7 +296,7 @@ function DataTable({
         data-slot="data-table-wrap"
         role="table"
         className={cn(
-          "relative w-full overflow-x-auto rounded-lg border border-solid border-oc-border",
+          "relative w-full min-w-0 overflow-x-auto",
           className,
         )}
         {...props}
