@@ -21,7 +21,7 @@ function DocCodePanel({
         <span className="truncate font-mono text-xs text-oc-muted-foreground">{filename}</span>
         <Button
           variant="outline"
-          size="small"
+          size="sm"
           onClick={async () => {
             await navigator.clipboard.writeText(code)
             setCopied(true)

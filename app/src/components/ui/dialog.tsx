@@ -65,8 +65,6 @@ const dialogContentVariants = cva(
         lg: 'top-1/2 left-1/2 max-h-[80vh] max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl sm:max-w-xl',
         fullscreen:
           'inset-0 flex h-dvh max-h-none max-w-none flex-col overflow-hidden rounded-none p-0 shadow-none',
-        small:
-          'top-1/2 left-1/2 max-h-[80vh] max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl sm:max-w-xs',
         medium:
           'top-1/2 left-1/2 max-h-[80vh] max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 rounded-2xl sm:max-w-md',
         confirmation:

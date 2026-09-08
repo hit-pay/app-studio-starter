@@ -44,7 +44,7 @@ function OpenButton({ children }: { children: React.ReactNode }) {
         nativeButton
         className="inline-flex w-fit"
         render={
-          <Button variant="secondary" size="small">
+          <Button variant="secondary" size="sm">
             Invoice actions
           </Button>
         }
@@ -163,7 +163,7 @@ function DropdownMenuDemo() {
             nativeButton
             className="inline-flex w-fit"
             render={
-              <Button variant="secondary" size="small">
+              <Button variant="secondary" size="sm">
                 Enable channel
               </Button>
             }

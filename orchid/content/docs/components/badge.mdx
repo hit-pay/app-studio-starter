@@ -11,10 +11,13 @@ import {
 } from '@/components/ui/badge'
 import { CircleDashRegular } from '@mingcute/react/core-regular'
 
-<Badge>Default</Badge>
+<Badge tone="blue">Default</Badge>
+<Badge tone="grey">Secondary</Badge>
+<Badge tone="red">Destructive</Badge>
+<Badge tone="grey" appearance="outline">Outline</Badge>
+
+{/* variant is a shortcut: default→blue, secondary→grey, destructive→red, outline→grey outline */}
 <Badge variant="secondary">Secondary</Badge>
-<Badge variant="destructive">Destructive</Badge>
-<Badge variant="outline">Outline</Badge>
 
 <Badge tone="green">
   <CircleDashRegular data-icon="inline-start" />

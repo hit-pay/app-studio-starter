@@ -58,7 +58,7 @@ export type SchemaFormLayout = {
 export type SchemaFormField = {
   key: string
   title: string
-  type: SchemaFormType | (string & {})
+  type: SchemaFormType
   required?: boolean
   placeholder?: string | null
   description?: string | null
@@ -470,11 +470,14 @@ export function validateField(field: SchemaFormField, value: unknown) {
   return undefined
 }
 
-export function controlType(type: SchemaFormType | (string & {})) {
+export function controlType(type: string) {
   if (type === 'phone') return 'input'
   if (type === 'password') return 'password'
   if (type === 'accepted' || type === 'checkbox') return 'accepted'
-  return type
+  if ((SCHEMA_FORM_TYPES as readonly string[]).includes(type)) return type as SchemaFormType
+  throw new Error(
+    `SchemaForm: unknown field type "${type}". Use one of: ${SCHEMA_FORM_TYPES.join(', ')}`,
+  )
 }
 
 export function labelsFromValues(options: SchemaFormOption[], value: unknown) {

@@ -1,7 +1,7 @@
 import type { ComponentProps } from 'react'
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
-import { cva, type VariantProps } from 'class-variance-authority'
+import { cva } from 'class-variance-authority'
 import { CloseCircleRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
@@ -32,22 +32,22 @@ type BadgeColor =
   | 'tosca'
   | 'green'
 
+const VARIANT_SHORTCUT: Record<
+  'default' | 'secondary' | 'destructive' | 'outline' | 'ghost' | 'link',
+  { tone: BadgeTone; appearance: BadgeAppearance }
+> = {
+  default: { tone: 'blue', appearance: 'soft' },
+  secondary: { tone: 'grey', appearance: 'soft' },
+  destructive: { tone: 'red', appearance: 'soft' },
+  outline: { tone: 'grey', appearance: 'outline' },
+  ghost: { tone: 'grey', appearance: 'ghost' },
+  link: { tone: 'blue', appearance: 'ghost' },
+}
+
 const badgeVariants = cva(
   'group/badge inline-flex min-h-6 w-fit min-w-8 shrink-0 items-center justify-center gap-1 overflow-hidden rounded-full border border-transparent px-2 py-0.5 text-center text-xs leading-normal font-medium whitespace-nowrap transition-all focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-oc-destructive aria-invalid:ring-oc-destructive-border/50 [&>svg]:pointer-events-none [&>svg]:size-3 [&>svg]:shrink-0',
   {
     variants: {
-      variant: {
-        default: 'bg-oc-info-soft text-oc-primary [a]:hover:bg-oc-info-border',
-        secondary:
-          'bg-oc-neutral-soft text-oc-neutral-strong [a]:hover:bg-oc-neutral',
-        destructive:
-          'bg-oc-destructive-soft text-oc-destructive-strong [a]:hover:bg-oc-destructive-border',
-        outline:
-          'border-oc-border bg-oc-background text-oc-foreground [a]:hover:bg-oc-neutral',
-        ghost:
-          'min-w-0 bg-transparent px-0 text-oc-foreground hover:text-oc-muted-foreground',
-        link: 'min-w-0 border-0 px-0 text-oc-primary underline-offset-4 hover:underline',
-      },
       tone: {
         blue: 'text-oc-primary',
         purple: 'text-oc-purple',
@@ -93,33 +93,40 @@ const badgeVariants = cva(
       { tone: 'green', appearance: 'outline', class: 'border-oc-success-chip-border' },
     ],
     defaultVariants: {
-      variant: 'default',
+      tone: 'blue',
+      appearance: 'soft',
     },
   },
 )
+
+type BadgeVariant = keyof typeof VARIANT_SHORTCUT
 
 function Badge({
   className,
   variant = 'default',
   tone,
-  appearance = 'soft',
+  appearance,
   render,
   ...props
 }: useRender.ComponentProps<'span'> & {
-  variant?: VariantProps<typeof badgeVariants>['variant']
+  variant?: BadgeVariant
   tone?: BadgeTone
   appearance?: BadgeAppearance
 }) {
+  const shortcut = VARIANT_SHORTCUT[variant]
+  const resolvedTone = tone ?? shortcut.tone
+  const resolvedAppearance = appearance ?? (tone ? 'soft' : shortcut.appearance)
+
   return useRender({
     defaultTagName: 'span',
     props: mergeProps<'span'>(
       {
         className: cn(
           badgeVariants({
-            variant: tone ? null : variant,
-            tone,
-            appearance: tone ? appearance : null,
+            tone: resolvedTone,
+            appearance: resolvedAppearance,
           }),
+          variant === 'link' && !tone && 'underline-offset-4 hover:underline',
           className,
         ),
       },
@@ -129,8 +136,8 @@ function Badge({
     state: {
       slot: 'badge',
       variant,
-      tone,
-      appearance: tone ? appearance : undefined,
+      tone: resolvedTone,
+      appearance: resolvedAppearance,
     },
   })
 }

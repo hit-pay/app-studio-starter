@@ -170,10 +170,14 @@ Do not invent a parallel UI kit or overwrite files under `src/components/` or `s
 
 Starter wiring only:
 
-- Drive multi-field forms with `SchemaForm` (submit through `formId`). Drive searchable lists with `SchemaTable`. Do not wrap `SchemaTable` in `Card` or another bordered box.
+- Drive multi-field forms with `SchemaForm` (submit through `formId`). Drive searchable lists with `SchemaTable`. Do not wrap `SchemaTable`, `SchemaForm`, `PageLayout`, or `Table` in `Card`.
+- SchemaForm `type` must be a listed type (`input`, `select`, `date`, …). Unknown types throw; do not invent field types.
 - Import icons from `@mingcute/react/core-regular` using Mingcute names (`SearchRegular`, `AddRegular`). Do not add `lucide-react` or an icon alias file.
-- Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Do not add Sonner or a second toast/confirm provider.
-- Use `oc-*` tokens from `src/styles.css`. If a prop value is unclear, the component source wins over habit (some items still use PascalCase aliases).
+- Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not compose `AlertDialog` for those, and do not add Sonner or a second toast/confirm provider.
+- Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`. Never `small` or `big`.
+- Badge: prefer `tone` + `appearance`. `variant` is only a shortcut (`default`→blue, `secondary`→grey, `destructive`→red).
+- Nested nav: import `SubSidebar` from `@/components/sub-sidebar` only.
+- Use `oc-*` tokens from `src/styles.css`. Prop values are lowercase.
 
 ## Browser storage (all apps share one origin)
 

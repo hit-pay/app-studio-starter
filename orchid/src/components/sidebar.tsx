@@ -134,10 +134,10 @@ function SidebarFooter({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-function SubSidebar({ className, ...props }: ComponentProps<'aside'>) {
+function SidebarNestedPanel({ className, ...props }: ComponentProps<'aside'>) {
   return (
     <aside
-      data-slot="sub-sidebar"
+      data-slot="sidebar-nested"
       className={cn(
         'flex h-full w-64 shrink-0 flex-col border-r border-solid border-oc-border bg-oc-background',
         className,
@@ -147,7 +147,7 @@ function SubSidebar({ className, ...props }: ComponentProps<'aside'>) {
   )
 }
 
-function SubSidebarHeader({
+function SidebarNestedHeader({
   className,
   render,
   children,
@@ -178,15 +178,15 @@ function SubSidebarHeader({
     ),
     render,
     state: {
-      slot: 'sub-sidebar-header',
+      slot: 'sidebar-nested-header',
     },
   })
 }
 
-function SubSidebarContent({ className, ...props }: ComponentProps<'nav'>) {
+function SidebarNestedContent({ className, ...props }: ComponentProps<'nav'>) {
   return (
     <nav
-      data-slot="sub-sidebar-content"
+      data-slot="sidebar-nested-content"
       aria-label="Section navigation"
       className={cn('min-h-0 flex-1 overflow-y-auto px-3 py-4', className)}
       {...props}
@@ -194,20 +194,20 @@ function SubSidebarContent({ className, ...props }: ComponentProps<'nav'>) {
   )
 }
 
-function SubSidebarGroup({ className, ...props }: ComponentProps<'div'>) {
+function SidebarNestedGroup({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      data-slot="sub-sidebar-group"
+      data-slot="sidebar-nested-group"
       className={cn('mb-5 flex min-w-0 flex-col last:mb-0', className)}
       {...props}
     />
   )
 }
 
-function SubSidebarGroupLabel({ className, ...props }: ComponentProps<'div'>) {
+function SidebarNestedGroupLabel({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
-      data-slot="sub-sidebar-group-label"
+      data-slot="sidebar-nested-group-label"
       className={cn(
         'mb-1 px-2 text-[10px] leading-5 font-medium tracking-[0.16em] text-oc-muted-foreground uppercase',
         className,
@@ -217,7 +217,7 @@ function SubSidebarGroupLabel({ className, ...props }: ComponentProps<'div'>) {
   )
 }
 
-function SubSidebarItem({
+function SidebarNestedItem({
   className,
   render,
   active = false,
@@ -242,7 +242,7 @@ function SubSidebarItem({
     render,
     state: {
       active,
-      slot: 'sub-sidebar-item',
+      slot: 'sidebar-nested-item',
     },
   })
 }
@@ -321,15 +321,15 @@ function Sidebar({
       {...props}
     >
       {showSubSidebar && selected ? (
-        <SubSidebar className={cn('w-full rounded-none', subSidebarClassName)}>
-          <SubSidebarHeader onClick={onSubSidebarClose}>
+        <SidebarNestedPanel className={cn('w-full rounded-none', subSidebarClassName)}>
+          <SidebarNestedHeader onClick={onSubSidebarClose}>
             {selected.label}
-          </SubSidebarHeader>
-          <SubSidebarContent>
-            <SubSidebarGroup>
-              <SubSidebarGroupLabel>{selected.label}</SubSidebarGroupLabel>
+          </SidebarNestedHeader>
+          <SidebarNestedContent>
+            <SidebarNestedGroup>
+              <SidebarNestedGroupLabel>{selected.label}</SidebarNestedGroupLabel>
               {subItems.map((item) => (
-                <SubSidebarItem
+                <SidebarNestedItem
                   key={item.id}
                   href={item.href ?? `#${item.id}`}
                   active={item.id === activeSubItem}
@@ -343,11 +343,11 @@ function Sidebar({
                   }}
                 >
                   {item.label}
-                </SubSidebarItem>
+                </SidebarNestedItem>
               ))}
-            </SubSidebarGroup>
-          </SubSidebarContent>
-        </SubSidebar>
+            </SidebarNestedGroup>
+          </SidebarNestedContent>
+        </SidebarNestedPanel>
       ) : (
         <SidebarRoot className={cn('w-full rounded-none', sidebarClassName)}>
           {header ? <SidebarHeader>{header}</SidebarHeader> : null}

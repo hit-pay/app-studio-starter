@@ -330,7 +330,7 @@ function DataTableSelectionBar({
         {onDeselectAll ? (
           <Button
             variant="ghost"
-            size="small"
+            size="sm"
             onClick={onDeselectAll}
           >
             Deselect All
@@ -847,7 +847,7 @@ function ToolbarIcon({
   return (
     <Button
       variant="outline"
-      size="small"
+      size="sm"
       iconOnly
       aria-label={label}
       aria-pressed={active}
@@ -964,7 +964,7 @@ function SchemaTableFilterPopover({ table }: { table: SchemaTableApi }) {
         render={
           <Button
             variant="outline"
-            size="small"
+            size="sm"
             iconOnly
             aria-label="Filter"
             aria-pressed={active || open}
@@ -1036,7 +1036,7 @@ function SchemaTableSortMenu({ table }: { table: SchemaTableApi }) {
         render={
           <Button
             variant="outline"
-            size="small"
+            size="sm"
             iconOnly
             aria-label="Sort"
           >
@@ -1103,7 +1103,7 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
         render={
           <Button
             variant="outline"
-            size="small"
+            size="sm"
             aria-label="Edit column"
             aria-pressed={open}
             className={cn(
@@ -1215,7 +1215,7 @@ function SchemaTableChips({ table }: { table: SchemaTableApi }) {
       ))}
       <Button
         variant="ghost"
-        size="small"
+        size="sm"
         onClick={table.clearAll}
       >
         Clear all
@@ -1254,7 +1254,7 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
           <Button
             key={tab.key}
             variant={table.query.tab === tab.key ? "secondary" : "ghost"}
-            size="small"
+            size="sm"
             onClick={() => table.setTab(tab.key)}
           >
             {tab.title}
@@ -1322,7 +1322,7 @@ function SchemaTable({
                               ? "destructive"
                               : "ghost"
                           }
-                          size="small"
+                          size="sm"
                           iconOnly={Boolean(action.icon)}
                           aria-label={action.label}
                         >
@@ -1359,7 +1359,7 @@ function SchemaTable({
                       ? "destructive"
                       : "ghost"
                   }
-                  size="small"
+                  size="sm"
                   disabled={action.disabled}
                   onClick={() =>
                     onSelectionAction?.(action, [...table.selected])
@@ -1473,7 +1473,7 @@ function SchemaTable({
                         render={
                           <Button
                             variant="ghost"
-                            size="small"
+                            size="sm"
                             iconOnly
                             aria-label={`Actions for ${String(row.name ?? row.id)}`}
                           >

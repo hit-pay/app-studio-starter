@@ -89,6 +89,7 @@ const PRESETS: Record<
 
 const ConfirmationModalContext = React.createContext<ConfirmationModalManager | null>(null)
 
+/** Mount once at the app root. Use `useConfirmationModal()` for confirms — do not compose AlertDialog. */
 function ConfirmationModalProvider({ children }: { children: React.ReactNode }) {
   const [request, setRequest] = React.useState<ConfirmationModalRequest | null>(null)
   const [open, setOpen] = React.useState(false)

@@ -8,6 +8,7 @@ type SubSidebarItemConfig = {
   disabled?: boolean
 }
 
+/** Public nested nav. Import this file — do not reuse Sidebar internals. */
 function SubSidebar({
   className,
   items,

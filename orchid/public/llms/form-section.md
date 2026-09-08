@@ -63,11 +63,11 @@ function FormSectionDemo() {
             description="Preview changes before they go live."
             actions={
               <>
-                <Button variant="secondary" size="small">
+                <Button variant="secondary" size="sm">
                   Preview
                   <ExternalLinkRegular />
                 </Button>
-                <Button size="small">
+                <Button size="sm">
                   Save
                 </Button>
               </>
@@ -94,7 +94,7 @@ function FormSectionDemo() {
             title="Point of Sale"
             description="Terminals, receipts, and in-store payment channels."
             actions={
-              <Button variant="secondary" size="small">
+              <Button variant="secondary" size="sm">
                 Manage terminals
               </Button>
             }

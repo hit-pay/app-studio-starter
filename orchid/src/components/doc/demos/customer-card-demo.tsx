@@ -100,7 +100,7 @@ function CustomerCardDemo() {
             edit
             hover
             bottom={
-              <Button variant="ghost" size="small" className="w-full">
+              <Button variant="ghost" size="sm" className="w-full">
                 <Chat1Regular />
                 Start Chat
               </Button>

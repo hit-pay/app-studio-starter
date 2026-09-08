@@ -44,8 +44,6 @@ const buttonVariants = cva(
         'icon-xs': 'size-6 min-w-6 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-3',
         'icon-sm': 'size-7 min-w-7 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-4',
         'icon-lg': 'size-11 min-w-11 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-5',
-        small: SIZE_SM,
-        big: SIZE_LG,
       },
       iconOnly: {
         true: 'p-0',
@@ -57,10 +55,8 @@ const buttonVariants = cva(
       },
     },
     compoundVariants: [
-      { size: 'small', iconOnly: true, class: 'size-7 min-w-7' },
       { size: 'sm', iconOnly: true, class: 'size-7 min-w-7' },
       { size: 'default', iconOnly: true, class: 'size-9 min-w-9' },
-      { size: 'big', iconOnly: true, class: 'size-11 min-w-11' },
       { size: 'lg', iconOnly: true, class: 'size-11 min-w-11' },
     ],
     defaultVariants: {

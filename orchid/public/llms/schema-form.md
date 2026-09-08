@@ -459,6 +459,8 @@ function SchemaFormDemo() {
 export { SchemaFormDemo };
 ```
 
+Unknown `type` values throw. Use only the listed SchemaForm types. Render inside `FormLayout`. Do not wrap in `Card`.
+
 ## Usage
 
 ```tsx

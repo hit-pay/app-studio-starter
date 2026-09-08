@@ -398,6 +398,7 @@ function useSchemaForm({
   }
 }
 
+/** Render a `useSchemaForm` instance. Put it in FormLayout. Do not wrap in Card. Unknown field types throw. */
 function SchemaForm({
   form: builder,
   id,

@@ -391,7 +391,6 @@ function ComboboxChip({
       data-slot="combobox-chip"
       className={cn(
         badgeVariants({
-          variant: null,
           tone,
           appearance,
         }),

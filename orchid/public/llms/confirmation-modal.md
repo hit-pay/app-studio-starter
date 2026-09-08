@@ -87,6 +87,8 @@ export { ConfirmationModalDemo }
 
 ## Usage
 
+Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` for delete/warning confirms — do not compose `AlertDialog` for those cases.
+
 ```tsx filename="confirmation-modal.tsx"
 import { useConfirmationModal } from '@/components/confirmation-modal'
 import { Button } from '@/components/ui/button'

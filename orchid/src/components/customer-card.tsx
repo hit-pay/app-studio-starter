@@ -197,7 +197,7 @@ function CustomerCard({
               </span>
             </div>
           </div>
-          <Button variant="secondary" size="small"  className="w-full" onClick={onAdd}>
+          <Button variant="secondary" size="sm"  className="w-full" onClick={onAdd}>
             Add customer
           </Button>
         </>
@@ -270,7 +270,7 @@ function CustomerCard({
         >
           <Button
             variant="secondary"
-            size="small"
+            size="sm"
             iconOnly
             
             aria-label="Edit"
