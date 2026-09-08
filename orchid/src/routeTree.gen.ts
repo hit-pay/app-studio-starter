@@ -50,6 +50,7 @@ import { Route as InstallationRouteImport } from './routes/installation'
 import { Route as KbdRouteImport } from './routes/kbd'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
+import { Route as MetricCardRouteImport } from './routes/metric-card'
 import { Route as PageLayoutRouteImport } from './routes/page-layout'
 import { Route as PaginationRouteImport } from './routes/pagination'
 import { Route as ProgressRouteImport } from './routes/progress'
@@ -66,7 +67,6 @@ import { Route as SidebarRouteImport } from './routes/sidebar'
 import { Route as SkeletonRouteImport } from './routes/skeleton'
 import { Route as SliderRouteImport } from './routes/slider'
 import { Route as SpinnerRouteImport } from './routes/spinner'
-import { Route as StatCardRouteImport } from './routes/stat-card'
 import { Route as SubSidebarRouteImport } from './routes/sub-sidebar'
 import { Route as SwitchRouteImport } from './routes/switch'
 import { Route as TableRouteImport } from './routes/table'
@@ -281,6 +281,11 @@ const ListItemRoute = ListItemRouteImport.update({
   path: '/list-item',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MetricCardRoute = MetricCardRouteImport.update({
+  id: '/metric-card',
+  path: '/metric-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PageLayoutRoute = PageLayoutRouteImport.update({
   id: '/page-layout',
   path: '/page-layout',
@@ -359,11 +364,6 @@ const SliderRoute = SliderRouteImport.update({
 const SpinnerRoute = SpinnerRouteImport.update({
   id: '/spinner',
   path: '/spinner',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const StatCardRoute = StatCardRouteImport.update({
-  id: '/stat-card',
-  path: '/stat-card',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SubSidebarRoute = SubSidebarRouteImport.update({
@@ -449,6 +449,7 @@ export interface FileRoutesByFullPath {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
+  '/metric-card': typeof MetricCardRoute
   '/page-layout': typeof PageLayoutRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
@@ -465,7 +466,6 @@ export interface FileRoutesByFullPath {
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
-  '/stat-card': typeof StatCardRoute
   '/sub-sidebar': typeof SubSidebarRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
@@ -517,6 +517,7 @@ export interface FileRoutesByTo {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
+  '/metric-card': typeof MetricCardRoute
   '/page-layout': typeof PageLayoutRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
@@ -533,7 +534,6 @@ export interface FileRoutesByTo {
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
-  '/stat-card': typeof StatCardRoute
   '/sub-sidebar': typeof SubSidebarRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
@@ -586,6 +586,7 @@ export interface FileRoutesById {
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
+  '/metric-card': typeof MetricCardRoute
   '/page-layout': typeof PageLayoutRoute
   '/pagination': typeof PaginationRoute
   '/progress': typeof ProgressRoute
@@ -602,7 +603,6 @@ export interface FileRoutesById {
   '/skeleton': typeof SkeletonRoute
   '/slider': typeof SliderRoute
   '/spinner': typeof SpinnerRoute
-  '/stat-card': typeof StatCardRoute
   '/sub-sidebar': typeof SubSidebarRoute
   '/switch': typeof SwitchRoute
   '/table': typeof TableRoute
@@ -656,6 +656,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
+    | '/metric-card'
     | '/page-layout'
     | '/pagination'
     | '/progress'
@@ -672,7 +673,6 @@ export interface FileRouteTypes {
     | '/skeleton'
     | '/slider'
     | '/spinner'
-    | '/stat-card'
     | '/sub-sidebar'
     | '/switch'
     | '/table'
@@ -724,6 +724,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
+    | '/metric-card'
     | '/page-layout'
     | '/pagination'
     | '/progress'
@@ -740,7 +741,6 @@ export interface FileRouteTypes {
     | '/skeleton'
     | '/slider'
     | '/spinner'
-    | '/stat-card'
     | '/sub-sidebar'
     | '/switch'
     | '/table'
@@ -792,6 +792,7 @@ export interface FileRouteTypes {
     | '/kbd'
     | '/label'
     | '/list-item'
+    | '/metric-card'
     | '/page-layout'
     | '/pagination'
     | '/progress'
@@ -808,7 +809,6 @@ export interface FileRouteTypes {
     | '/skeleton'
     | '/slider'
     | '/spinner'
-    | '/stat-card'
     | '/sub-sidebar'
     | '/switch'
     | '/table'
@@ -861,6 +861,7 @@ export interface RootRouteChildren {
   KbdRoute: typeof KbdRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
+  MetricCardRoute: typeof MetricCardRoute
   PageLayoutRoute: typeof PageLayoutRoute
   PaginationRoute: typeof PaginationRoute
   ProgressRoute: typeof ProgressRoute
@@ -877,7 +878,6 @@ export interface RootRouteChildren {
   SkeletonRoute: typeof SkeletonRoute
   SliderRoute: typeof SliderRoute
   SpinnerRoute: typeof SpinnerRoute
-  StatCardRoute: typeof StatCardRoute
   SubSidebarRoute: typeof SubSidebarRoute
   SwitchRoute: typeof SwitchRoute
   TableRoute: typeof TableRoute
@@ -1177,6 +1177,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ListItemRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/metric-card': {
+      id: '/metric-card'
+      path: '/metric-card'
+      fullPath: '/metric-card'
+      preLoaderRoute: typeof MetricCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/page-layout': {
       id: '/page-layout'
       path: '/page-layout'
@@ -1289,13 +1296,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SpinnerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/stat-card': {
-      id: '/stat-card'
-      path: '/stat-card'
-      fullPath: '/stat-card'
-      preLoaderRoute: typeof StatCardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/sub-sidebar': {
       id: '/sub-sidebar'
       path: '/sub-sidebar'
@@ -1397,6 +1397,7 @@ const rootRouteChildren: RootRouteChildren = {
   KbdRoute: KbdRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,
+  MetricCardRoute: MetricCardRoute,
   PageLayoutRoute: PageLayoutRoute,
   PaginationRoute: PaginationRoute,
   ProgressRoute: ProgressRoute,
@@ -1413,7 +1414,6 @@ const rootRouteChildren: RootRouteChildren = {
   SkeletonRoute: SkeletonRoute,
   SliderRoute: SliderRoute,
   SpinnerRoute: SpinnerRoute,
-  StatCardRoute: StatCardRoute,
   SubSidebarRoute: SubSidebarRoute,
   SwitchRoute: SwitchRoute,
   TableRoute: TableRoute,

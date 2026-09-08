@@ -65,4 +65,4 @@ export { CardDemo }
 
 Use `Card` for a small summary or grouped fields. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table`.
 
-Use `size="sm"` for compact cards. Prefer `StatCard`, `ChoiceCard`, or `CustomerCard` when those patterns fit.
+Use `size="sm"` for compact cards. Prefer `MetricCard`, `ChoiceCard`, or `CustomerCard` when those patterns fit.

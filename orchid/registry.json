@@ -37,7 +37,7 @@
         "@orchid/tooltip",
         "@orchid/tabs",
         "@orchid/choice-card",
-        "@orchid/stat-card",
+        "@orchid/metric-card",
         "@orchid/detail-list",
         "@orchid/icon-group",
         "@orchid/copy-button",
@@ -548,10 +548,10 @@
       ]
     },
     {
-      "name": "stat-card",
+      "name": "metric-card",
       "type": "registry:ui",
-      "title": "Stat Card",
-      "description": "KPI card (icon, title, value, %). iconColor Blue|Green|Red|Grey.",
+      "title": "Metric Card",
+      "description": "Dashboard KPI / metric card: icon, title, value, and optional percent change. Use for revenue, volume, counts.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -560,9 +560,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/stat-card.tsx",
+          "path": "src/components/ui/metric-card.tsx",
           "type": "registry:ui",
-          "target": "@ui/stat-card.tsx"
+          "target": "@ui/metric-card.tsx"
         }
       ]
     },

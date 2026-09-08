@@ -8,7 +8,7 @@ import {
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
 
-const statCardIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
+const metricCardIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
   variants: {
     color: {
       blue: 'text-oc-primary',
@@ -22,7 +22,7 @@ const statCardIconVariants = cva('inline-flex shrink-0 items-center justify-cent
   },
 })
 
-function StatCard({
+function MetricCard({
   className,
   icon,
   iconColor = 'grey',
@@ -51,7 +51,7 @@ function StatCard({
 }) {
   return (
     <div
-      data-slot="stat-card"
+      data-slot="metric-card"
       className={cn(
         'flex w-auto min-w-0 max-w-full flex-col overflow-hidden rounded-lg bg-oc-background',
         transparent ? 'border border-transparent' : 'border border-solid border-oc-border',
@@ -79,7 +79,7 @@ function StatCard({
             )}
           >
             {icon ? (
-              <span className={statCardIconVariants({ color: iconColor })}>{icon}</span>
+              <span className={metricCardIconVariants({ color: iconColor })}>{icon}</span>
             ) : null}
             {title ? (
               <p className="min-w-0 flex-1 truncate text-sm leading-[1.5] text-oc-foreground">{title}</p>
@@ -152,4 +152,4 @@ function PercentBadge({ value, tooltip }: { value: number; tooltip?: string }) {
   )
 }
 
-export { StatCard, statCardIconVariants }
+export { MetricCard, metricCardIconVariants }

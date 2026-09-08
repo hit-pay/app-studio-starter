@@ -149,11 +149,11 @@ Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal
 Import `@/components/ui/choice-card`; read `src/components/ui/choice-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/choice-card.md
 
-## `stat-card` — Stat Card
+## `metric-card` — Metric Card
 
-KPI card (icon, title, value, %). iconColor Blue|Green|Red|Grey.
-Import `@/components/ui/stat-card`; read `src/components/ui/stat-card.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/stat-card.md
+Dashboard KPI / metric card: icon, title, value, and optional percent change. Use for revenue, volume, counts.
+Import `@/components/ui/metric-card`; read `src/components/ui/metric-card.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/metric-card.md
 
 ## `detail-list` — Detail List
 

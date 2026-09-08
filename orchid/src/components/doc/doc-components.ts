@@ -313,9 +313,10 @@ export const DOC_BLOCKS = [
     description: "Minus/plus stepper; click the value to type.",
   },
   {
-    to: "/stat-card" as const,
-    name: "Stat Card",
-    description: "Metric card with header divider, value, and percent badge.",
+    to: "/metric-card" as const,
+    name: "Metric Card",
+    description:
+      "Dashboard KPI card: icon, title, value, and optional percent change.",
   },
   {
     to: "/page-layout" as const,

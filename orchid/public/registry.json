@@ -37,7 +37,7 @@
         "@orchid/tooltip",
         "@orchid/tabs",
         "@orchid/choice-card",
-        "@orchid/stat-card",
+        "@orchid/metric-card",
         "@orchid/detail-list",
         "@orchid/icon-group",
         "@orchid/copy-button",
@@ -123,12 +123,12 @@
         {
           "path": "src/components/ui/form-builder.tsx",
           "type": "registry:ui",
-          "target": "@components/schema-form.tsx"
+          "target": "@ui/form-builder.tsx"
         },
         {
           "path": "src/components/ui/form-builder-model.ts",
           "type": "registry:file",
-          "target": "@components/schema-form-model.ts"
+          "target": "@ui/form-builder-model.ts"
         }
       ]
     },
@@ -153,12 +153,12 @@
         {
           "path": "src/components/ui/data-table.tsx",
           "type": "registry:ui",
-          "target": "@components/schema-table.tsx"
+          "target": "@ui/data-table.tsx"
         },
         {
           "path": "src/components/ui/data-table-model.ts",
           "type": "registry:file",
-          "target": "@components/schema-table-model.ts"
+          "target": "@ui/data-table-model.ts"
         }
       ]
     },
@@ -176,7 +176,7 @@
         {
           "path": "src/components/ui/sidebar.tsx",
           "type": "registry:ui",
-          "target": "@components/sidebar.tsx"
+          "target": "@ui/sidebar.tsx"
         }
       ]
     },
@@ -191,7 +191,7 @@
         {
           "path": "src/components/ui/sub-sidebar.tsx",
           "type": "registry:ui",
-          "target": "@components/sub-sidebar.tsx"
+          "target": "@ui/sub-sidebar.tsx"
         }
       ]
     },
@@ -216,7 +216,7 @@
       "name": "list-item",
       "type": "registry:ui",
       "title": "List Item",
-      "description": "List row (title, media, meta, actions). layout Default|Stack|Media, selected.",
+      "description": "List row (title, media, meta, actions). layout default|stack|media, selected.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -252,7 +252,7 @@
       "name": "customer-card",
       "type": "registry:ui",
       "title": "Customer Card",
-      "description": "Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.",
+      "description": "Customer/beneficiary summary. variant small|big|float|empty, hover, active.",
       "dependencies": [
         "class-variance-authority",
         "@mingcute/react"
@@ -268,7 +268,7 @@
         {
           "path": "src/components/ui/customer-card.tsx",
           "type": "registry:ui",
-          "target": "@components/customer-card.tsx"
+          "target": "@ui/customer-card.tsx"
         }
       ]
     },
@@ -276,7 +276,7 @@
       "name": "form-layout",
       "type": "registry:ui",
       "title": "Form Layout",
-      "description": "Create/edit shell (page or modal). Put SchemaForm inside; one form uses formId = SchemaForm id. Several forms use actions.save.onClick.",
+      "description": "Create/edit shell (page or modal). Put FormBuilder inside; one form uses formId = FormBuilder id. Several forms use actions.save.onClick.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",
@@ -287,7 +287,7 @@
         {
           "path": "src/components/ui/form-layout.tsx",
           "type": "registry:ui",
-          "target": "@components/form-layout.tsx"
+          "target": "@ui/form-layout.tsx"
         }
       ]
     },
@@ -304,7 +304,7 @@
         {
           "path": "src/components/ui/page-layout.tsx",
           "type": "registry:ui",
-          "target": "@components/page-layout.tsx"
+          "target": "@ui/page-layout.tsx"
         }
       ]
     },
@@ -343,7 +343,7 @@
         {
           "path": "src/components/ui/confirmation-modal.tsx",
           "type": "registry:ui",
-          "target": "@components/confirmation-modal.tsx"
+          "target": "@ui/confirmation-modal.tsx"
         }
       ]
     },
@@ -534,7 +534,7 @@
       "name": "choice-card",
       "type": "registry:ui",
       "title": "Choice Card",
-      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment Vertical|Horizontal.",
+      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -543,15 +543,15 @@
         {
           "path": "src/components/ui/choice-card.tsx",
           "type": "registry:ui",
-          "target": "@components/choice-card.tsx"
+          "target": "@ui/choice-card.tsx"
         }
       ]
     },
     {
-      "name": "stat-card",
+      "name": "metric-card",
       "type": "registry:ui",
-      "title": "Stat Card",
-      "description": "KPI card (icon, title, value, %). iconColor Blue|Green|Red|Grey.",
+      "title": "Metric Card",
+      "description": "Dashboard KPI / metric card: icon, title, value, and optional percent change. Use for revenue, volume, counts.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -560,9 +560,9 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/stat-card.tsx",
+          "path": "src/components/ui/metric-card.tsx",
           "type": "registry:ui",
-          "target": "@components/stat-card.tsx"
+          "target": "@ui/metric-card.tsx"
         }
       ]
     },
@@ -570,7 +570,7 @@
       "name": "detail-list",
       "type": "registry:ui",
       "title": "Detail List",
-      "description": "Props-based read-only key/value card with React node values. style Default|Border.",
+      "description": "Props-based read-only key/value card with React node values. style default|border.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -581,7 +581,7 @@
         {
           "path": "src/components/ui/detail-list.tsx",
           "type": "registry:ui",
-          "target": "@components/detail-list.tsx"
+          "target": "@ui/detail-list.tsx"
         }
       ]
     },
@@ -589,7 +589,7 @@
       "name": "icon-group",
       "type": "registry:ui",
       "title": "Icon Group",
-      "description": "Props-based icon actions. Border style inserts dividers automatically.",
+      "description": "Props-based icon actions. style border inserts dividers automatically.",
       "dependencies": [
         "class-variance-authority",
         "@mingcute/react"
@@ -601,7 +601,7 @@
         {
           "path": "src/components/ui/icon-group.tsx",
           "type": "registry:ui",
-          "target": "@components/icon-group.tsx"
+          "target": "@ui/icon-group.tsx"
         }
       ]
     },
@@ -620,7 +620,7 @@
         {
           "path": "src/components/ui/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@components/copy-button.tsx"
+          "target": "@ui/copy-button.tsx"
         }
       ]
     },
@@ -996,7 +996,7 @@
         {
           "path": "src/components/ui/quantity-input.tsx",
           "type": "registry:ui",
-          "target": "@components/quantity-input.tsx"
+          "target": "@ui/quantity-input.tsx"
         }
       ]
     },
@@ -1110,7 +1110,7 @@
         {
           "path": "src/components/ui/date-picker.tsx",
           "type": "registry:ui",
-          "target": "@components/date-picker.tsx"
+          "target": "@ui/date-picker.tsx"
         }
       ]
     },

@@ -1,8 +1,8 @@
-<!-- Generated from content/docs/components/stat-card.mdx. Do not edit. -->
+<!-- Generated from content/docs/components/metric-card.mdx. Do not edit. -->
 
-# Stat Card
+# Metric Card
 
-Metric card with header divider, value, and percent badge.
+Dashboard KPI card: icon, title, value, and optional percent change.
 
 ## Example
 
@@ -17,10 +17,10 @@ import {
   StoreRegular,
   GroupRegular,
 } from '@mingcute/react/core-regular';
-import { StatCard } from "@/components/ui/stat-card";
+import { MetricCard } from "@/components/ui/metric-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-function StatCardDemo() {
+function MetricCardDemo() {
   return (
     <TooltipProvider>
       <>
@@ -29,7 +29,7 @@ function StatCardDemo() {
             4 items
           </p>
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <StatCard
+            <MetricCard
               icon={<CurrencyDollarRegular />}
               iconColor="blue"
               title="Gross volume"
@@ -39,7 +39,7 @@ function StatCardDemo() {
               percentValue={10}
               percentTooltip="Compared to last month"
             />
-            <StatCard
+            <MetricCard
               icon={<CurrencyDollarRegular />}
               iconColor="blue"
               title="This month"
@@ -47,14 +47,14 @@ function StatCardDemo() {
               percentValue={4}
               percentTooltip="Compared to last month"
             />
-            <StatCard
+            <MetricCard
               icon={<CheckboxRegular />}
               iconColor="green"
               title="Paid invoices"
               content="20"
               percentValue={12}
             />
-            <StatCard
+            <MetricCard
               icon={<RefreshAnticlockwise1Regular />}
               iconColor="red"
               title="Refunded"
@@ -68,7 +68,7 @@ function StatCardDemo() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
-          <StatCard
+          <MetricCard
             icon={<ShoppingBag1Regular />}
             title="Online Store sales"
             content="SGD 12,480.00"
@@ -83,7 +83,7 @@ function StatCardDemo() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Footer
           </p>
-          <StatCard
+          <MetricCard
             icon={<GroupRegular />}
             title="Customers"
             content="86"
@@ -96,21 +96,21 @@ function StatCardDemo() {
             Commerce mix
           </p>
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            <StatCard
+            <MetricCard
               icon={<LinkRegular />}
               iconColor="blue"
               title="Payment Links"
               content="SGD 4,260.00"
               percentValue={8}
             />
-            <StatCard
+            <MetricCard
               icon={<RepeatRegular />}
               iconColor="green"
               title="Recurring"
               content="SGD 2,140.00"
               percentValue={6}
             />
-            <StatCard
+            <MetricCard
               icon={<StoreRegular />}
               iconColor="blue"
               title="Point of Sale"
@@ -124,5 +124,5 @@ function StatCardDemo() {
   );
 }
 
-export { StatCardDemo };
+export { MetricCardDemo };
 ```

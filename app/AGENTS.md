@@ -170,7 +170,7 @@ Do not invent a parallel UI kit or overwrite files under `src/components/` or `s
 
 Starter wiring only:
 
-- Drive multi-field forms with `FormBuilder` from `@/components/ui/form-builder` (submit through `formId`). Drive searchable lists with `DataTable` from `@/components/ui/data-table`. Do not hand-build field stacks or raw `Table` for those cases. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table` in `Card`.
+- Drive multi-field forms with `FormBuilder` from `@/components/ui/form-builder` (submit through `formId`). Drive searchable lists with `DataTable` from `@/components/ui/data-table`. Drive dashboard KPI tiles (revenue, volume, counts, percent change) with `MetricCard` from `@/components/ui/metric-card`. Do not hand-build field stacks, raw `Table`, or summary `Card` grids for those cases. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table` in `Card`.
 - `FormBuilder` field `type` must be a listed type (`input`, `select`, `date`, …). Unknown types throw; do not invent field types.
 - Import icons from `@mingcute/react/core-regular` using Mingcute names (`SearchRegular`, `AddRegular`). Do not add `lucide-react` or an icon alias file.
 - Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not compose `AlertDialog` for those, and do not add Sonner or a second toast/confirm provider.
