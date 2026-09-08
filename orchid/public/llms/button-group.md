@@ -113,35 +113,3 @@ function ButtonGroupDemo() {
 
 export { ButtonGroupDemo };
 ```
-
-## Usage
-
-```tsx
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
-import { DownRegular } from '@mingcute/react/core-regular';
-
-<ButtonGroup>
-  <Button>Create invoice</Button>
-  <DropdownMenu>
-    <DropdownMenuTrigger
-      nativeButton
-      render={
-        <Button size="icon" aria-label="More invoice actions">
-          <DownRegular />
-        </Button>
-      }
-    />
-    <DropdownMenuContent align="end">
-      <DropdownMenuItem>Save as draft</DropdownMenuItem>
-      <DropdownMenuItem>Duplicate</DropdownMenuItem>
-    </DropdownMenuContent>
-  </DropdownMenu>
-</ButtonGroup>;
-```

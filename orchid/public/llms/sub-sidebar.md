@@ -38,22 +38,4 @@ function SubSidebarDemo() {
 export { SubSidebarDemo }
 ```
 
-## Usage
-
-```tsx
-import { SubSidebar } from '@/components/ui/sub-sidebar'
-
-const items = [
-  { id: 'general', label: 'General settings' },
-  { id: 'tracking', label: 'Tracking tools' },
-  { id: 'seo', label: 'SEO' },
-]
-
-<SubSidebar
-  items={items}
-  activeItem={activeItem}
-  onItemChange={(id, item) => setActiveItem(id)}
-/>
-```
-
 Sub Sidebar is configured through one JSON-compatible `items` array. It does not export item or content primitives. `AppLayout` composes it automatically when using sidebar mode.

@@ -143,37 +143,3 @@ function FormSectionDemo() {
 
 export { FormSectionDemo }
 ```
-
-## Usage
-
-```tsx
-import {
-  FormSection,
-  FormSectionGroup,
-  FormSectionItem,
-} from '@/components/ui/form-section'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Switch } from '@/components/ui/switch'
-
-<FormSectionGroup>
-  <FormSection
-    title="Online Store"
-    description="Configure storefront preferences."
-    actions={<Button size="sm">Save</Button>}
-  />
-  <FormSectionItem
-    title="Password protection"
-    description="Require a password before visitors can view the store."
-    actions={<Switch defaultChecked />}
-  >
-    <Input type="password" placeholder="Enter password" />
-  </FormSectionItem>
-  <FormSectionItem
-    variant="background"
-    title="Guest checkout"
-    description="Let customers pay without creating an account."
-    actions={<Switch defaultChecked />}
-  />
-</FormSectionGroup>
-```

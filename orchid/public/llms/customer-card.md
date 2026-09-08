@@ -129,26 +129,3 @@ function CustomerCardDemo() {
 
 export { CustomerCardDemo }
 ```
-
-## Usage
-
-```tsx
-import { CustomerCard } from '@/components/ui/customer-card'
-import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-
-<CustomerCard
-  variant="small"
-  customer={{
-    name: 'Alex Turner',
-    email: 'alex@studio.co',
-    phone: '8373 3739 18',
-    phoneCountryCode: '65',
-  }}
-  badge={<Badge tone="blue">Invoice</Badge>}
-/>
-
-<CustomerCard variant="big" customer={customer} edit hover />
-
-<CustomerCard variant="empty" onAdd={() => {}} />
-```

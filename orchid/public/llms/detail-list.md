@@ -298,42 +298,6 @@ function DetailListDemo() {
 export { DetailListDemo }
 ```
 
-## Usage
-
-```tsx
-import { Badge } from '@/components/ui/badge'
-import { DetailList } from '@/components/ui/detail-list'
-
-;<DetailList
-  title="Payment details"
-  columns={2}
-  style="border"
-  items={[
-    {
-      key: 'invoice',
-      label: 'Invoice',
-      value: 'INV-2026-0842',
-      copyValue: 'INV-2026-0842',
-      alignment: 'vertical',
-    },
-    {
-      key: 'status',
-      label: 'Status',
-      value: <Badge tone="green">Paid</Badge>,
-      alignment: 'vertical',
-    },
-    {
-      key: 'amount',
-      label: 'Amount',
-      value: 'SGD 128.00',
-      alignment: 'vertical',
-      size: 'big',
-      colSpan: 2,
-    },
-  ]}
-/>
-```
-
 ## API
 
 `DetailList` accepts `items`, plus optional `title`, `columns`, `style`, and `className`.

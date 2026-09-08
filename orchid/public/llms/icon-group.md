@@ -116,46 +116,5 @@ function IconGroupDemo() {
 export { IconGroupDemo };
 ```
 
-## Usage
-
-```tsx
-import { ArrowRightUpRegular } from '@mingcute/react/core-regular';
-import { CopyRegular } from '@mingcute/react/core-regular';
-import { IconGroup } from "@/components/ui/icon-group";
-
-<IconGroup
-  style="border"
-  items={[
-    {
-      type: "menu",
-      key: "more",
-      items: [
-        { key: "download", label: "Download PDF" },
-        {
-          key: "void",
-          label: "Void invoice",
-          variant: "destructive",
-          separator: true,
-        },
-      ],
-      onAction: (item) => console.log(item.key),
-    },
-    {
-      type: "link",
-      key: "open",
-      href: "/invoice",
-      label: "Open invoice",
-      icon: <ArrowRightUpRegular />,
-    },
-    {
-      key: "copy",
-      label: "Copy invoice number",
-      icon: <CopyRegular />,
-      onClick: () => navigator.clipboard.writeText("INV-2026-0842"),
-    },
-  ]}
-/>;
-```
-
 `Border` groups automatically render dividers between top-level actions. Use `separator` on a
 menu item only when its menu needs a visual grouping boundary.

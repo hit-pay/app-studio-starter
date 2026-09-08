@@ -63,21 +63,6 @@ function DatePickerDemo() {
 export { DatePickerDemo }
 ```
 
-## Usage
-
-```tsx
-'use client'
-
-import { useState } from 'react'
-import { DatePicker } from '@/components/ui/date-picker'
-
-function InvoiceDueDate() {
-  const [date, setDate] = useState<Date | undefined>()
-
-  return <DatePicker selected={date} onSelect={setDate} placeholder="Invoice due date" />
-}
-```
-
 ## Variants
 
 ```tsx

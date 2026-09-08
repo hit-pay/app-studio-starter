@@ -87,14 +87,3 @@ function InputDemo() {
 
 export { InputDemo }
 ```
-
-## Usage
-
-```tsx
-import { Input } from '@/components/ui/input'
-
-<Input type="email" placeholder="Email" />
-<Input type="file" />
-<Input aria-invalid placeholder="Invalid value" />
-<Input disabled placeholder="Disabled" />
-```

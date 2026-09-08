@@ -126,25 +126,3 @@ function StatCardDemo() {
 
 export { StatCardDemo };
 ```
-
-## Usage
-
-```tsx
-import { CurrencyDollarRegular } from '@mingcute/react/core-regular';
-import { StatCard } from "@/components/ui/stat-card";
-import { TooltipProvider } from "@/components/ui/tooltip";
-
-<TooltipProvider>
-  <StatCard
-    icon={<CurrencyDollarRegular />}
-    iconColor="blue"
-    title="Gross volume"
-    content="SGD 11,170.00"
-    info
-    tooltip="Payment volume for this period"
-    percentValue={10}
-    percentTooltip="Compared to last month"
-    footer="Updated just now"
-  />
-</TooltipProvider>;
-```

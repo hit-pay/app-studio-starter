@@ -121,25 +121,3 @@ function AccordionDemo() {
 
 export { AccordionDemo };
 ```
-
-## Usage
-
-```tsx
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-
-<Accordion defaultValue={["invoice"]}>
-  <AccordionItem value="invoice">
-    <AccordionTrigger>Invoice details</AccordionTrigger>
-    <AccordionContent>Invoice INV-2048 is due on 3 Sep 2026.</AccordionContent>
-  </AccordionItem>
-  <AccordionItem value="customer">
-    <AccordionTrigger>Customer data</AccordionTrigger>
-    <AccordionContent>Priya Nair · priya.nair@example.com</AccordionContent>
-  </AccordionItem>
-</Accordion>;
-```

@@ -39,17 +39,3 @@ function SpinnerDemo() {
 
 export { SpinnerDemo };
 ```
-
-## Usage
-
-```tsx
-import { Spinner } from '@/components/ui/spinner'
-import { Button } from '@/components/ui/button'
-
-<Spinner />
-<Spinner className="size-5" />
-<Button disabled>
-  <Spinner aria-label="Saving" />
-  Saving
-</Button>
-```

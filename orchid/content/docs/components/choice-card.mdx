@@ -1,28 +1,4 @@
-import { ChoiceCardDemo } from "../../../src/components/doc/demos/choice-card-demo";
+import { ChoiceCardDemo } from "../../../src/components/doc/doc-demos"
 
 <ChoiceCardDemo />
 
-## Usage
-
-```tsx
-import {
-  BankCardRegular,
-  QrcodeRegular,
-} from '@mingcute/react/core-regular';
-import { ChoiceCard, ChoiceCardGroup } from "@/components/ui/choice-card";
-
-<ChoiceCardGroup defaultValue="paynow">
-  <ChoiceCard
-    value="paynow"
-    icon={<QrcodeRegular />}
-    title="PayNow"
-    description="Instant SGD transfers via QR"
-  />
-  <ChoiceCard
-    value="cards"
-    icon={<BankCardRegular />}
-    title="Cards"
-    description="Visa, Mastercard, and AMEX"
-  />
-</ChoiceCardGroup>;
-```

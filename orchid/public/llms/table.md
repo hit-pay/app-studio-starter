@@ -80,33 +80,3 @@ function TableDemo() {
 
 export { TableDemo };
 ```
-
-## Usage
-
-```tsx
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-
-<Table>
-  <TableHeader>
-    <TableRow>
-      <TableHead>Invoice</TableHead>
-      <TableHead>Customer</TableHead>
-      <TableHead className="text-right">Amount</TableHead>
-    </TableRow>
-  </TableHeader>
-  <TableBody>
-    <TableRow>
-      <TableCell>INV-2048</TableCell>
-      <TableCell>Priya Nair</TableCell>
-      <TableCell className="text-right">SGD 128.00</TableCell>
-    </TableRow>
-  </TableBody>
-</Table>;
-```

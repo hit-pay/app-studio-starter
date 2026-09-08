@@ -71,11 +71,3 @@ function TextareaDemo() {
 
 export { TextareaDemo };
 ```
-
-## Usage
-
-```tsx
-import { Textarea } from "@/components/ui/textarea";
-
-<Textarea placeholder="Type your message here." />;
-```

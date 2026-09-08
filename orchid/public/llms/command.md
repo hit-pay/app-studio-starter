@@ -85,30 +85,3 @@ function CommandDemo() {
 
 export { CommandDemo };
 ```
-
-## Usage
-
-```tsx
-import {
-  Command,
-  CommandDialog,
-  CommandEmpty,
-  CommandGroup,
-  CommandInput,
-  CommandItem,
-  CommandList,
-} from '@/components/ui/command'
-
-<Button variant="outline" onClick={() => setOpen(true)}>Search</Button>
-<CommandDialog open={open} onOpenChange={setOpen}>
-  <Command>
-    <CommandInput placeholder="Search invoices, customers, pages…" />
-    <CommandList>
-      <CommandEmpty>No results</CommandEmpty>
-      <CommandGroup heading="Pages">
-        <CommandItem value="invoices" onSelect={go}>Invoices</CommandItem>
-      </CommandGroup>
-    </CommandList>
-  </Command>
-</CommandDialog>
-```

@@ -101,15 +101,3 @@ function SwitchDemo() {
 
 export { SwitchDemo };
 ```
-
-## Usage
-
-```tsx
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
-
-<div className="flex items-center gap-2">
-  <Switch id="notifications" />
-  <Label htmlFor="notifications">Email notifications</Label>
-</div>;
-```

@@ -47,14 +47,3 @@ function CopyButtonDemo() {
 
 export { CopyButtonDemo }
 ```
-
-## Usage
-
-```tsx
-import { CopyButton } from '@/components/ui/copy-button'
-
-<div className="flex items-center gap-2">
-  <span>INV-2026-0842</span>
-  <CopyButton value="INV-2026-0842" />
-</div>
-```

@@ -185,36 +185,3 @@ function PaginationDemo() {
 
 export { PaginationDemo }
 ```
-
-## Usage
-
-```tsx
-import {
-  Pagination,
-  PaginationContent,
-  PaginationEllipsis,
-  PaginationItem,
-  PaginationLink,
-  PaginationNext,
-  PaginationPrevious,
-} from '@/components/ui/pagination'
-
-<Pagination>
-  <PaginationPrevious href="?page=1" />
-  <PaginationContent>
-    <PaginationItem>
-      <PaginationLink href="?page=1">1</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="?page=2" isActive>2</PaginationLink>
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationEllipsis />
-    </PaginationItem>
-    <PaginationItem>
-      <PaginationLink href="?page=15">15</PaginationLink>
-    </PaginationItem>
-  </PaginationContent>
-  <PaginationNext href="?page=3" />
-</Pagination>
-```

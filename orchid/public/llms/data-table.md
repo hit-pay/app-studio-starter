@@ -222,40 +222,7 @@ function SchemaTableDemo() {
 export { SchemaTableDemo };
 ```
 
-## Usage
-
 Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
-
-```tsx
-import {
-  DataTable,
-  SCHEMA_TABLE_EXAMPLE_ROWS,
-  SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useDataTable,
-} from "@/components/ui/data-table";
-
-function ProductList() {
-  const table = useDataTable({
-    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
-    data: SCHEMA_TABLE_EXAMPLE_ROWS,
-    onQueryChange: (query, change) => {
-      console.log(query, change);
-    },
-  });
-
-  return (
-    <DataTable
-      table={table}
-      onSelectionAction={(action, selectedIds) => {
-        console.log(action.key, selectedIds);
-      }}
-      onEmptyAction={(action) => {
-        console.log(action.key);
-      }}
-    />
-  );
-}
-```
 
 Configure `selectionActions` and `emptyState.actions` in the schema. The config is JSON-friendly:
 it contains keys, labels, supported icon keys, variants, disabled state, and dropdown items—but

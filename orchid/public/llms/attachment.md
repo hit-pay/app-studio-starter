@@ -272,38 +272,4 @@ function AttachmentDemo() {
 export { AttachmentDemo }
 ```
 
-## Usage
-
-```tsx
-import {
-  FileRegular,
-  CloseRegular,
-} from '@mingcute/react/core-regular'
-
-import {
-  Attachment,
-  AttachmentAction,
-  AttachmentActions,
-  AttachmentContent,
-  AttachmentDescription,
-  AttachmentMedia,
-  AttachmentTitle,
-} from '@/components/ui/attachment'
-
-<Attachment>
-  <AttachmentMedia>
-    <FileRegular />
-  </AttachmentMedia>
-  <AttachmentContent>
-    <AttachmentTitle>sales-dashboard.pdf</AttachmentTitle>
-    <AttachmentDescription>PDF · 2.4 MB</AttachmentDescription>
-  </AttachmentContent>
-  <AttachmentActions>
-    <AttachmentAction aria-label="Remove sales-dashboard.pdf">
-      <CloseRegular />
-    </AttachmentAction>
-  </AttachmentActions>
-</Attachment>
-```
-
 Wire a real `<input type="file">` (single or `multiple`) and set `state="uploading"` while the file is in flight. Show `Spinner` in `AttachmentMedia` — do not add a title shimmer. After success, switch to `state="done"` and keep the file icon or image preview. `AttachmentGroup` stacks many files vertically. Label icon-only `AttachmentAction`s. Do not call `npx shadcn add attachment`.

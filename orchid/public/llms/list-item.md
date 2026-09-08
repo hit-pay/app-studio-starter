@@ -310,39 +310,3 @@ function ListItemDemo() {
 
 export { ListItemDemo }
 ```
-
-## Usage
-
-```tsx
-import {
-  ListItem,
-  ListItemBody,
-  ListItemTitle,
-  ListItemDescription,
-  ListItemMeta,
-  ListItemDetail,
-  ListItemHoverActions,
-  ListItemAction,
-} from '@/components/ui/list-item'
-import { Badge } from '@/components/ui/badge'
-import {
-  MapPinRegular,
-  PencilRegular,
-} from '@mingcute/react/core-regular'
-
-<ListItem>
-  <ListItemBody>
-    <ListItemTitle>Priya Nair</ListItemTitle>
-    <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
-    <ListItemMeta>
-      <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
-      <Badge tone="green">Paid</Badge>
-    </ListItemMeta>
-  </ListItemBody>
-  <ListItemHoverActions>
-    <ListItemAction aria-label="Edit">
-      <PencilRegular />
-    </ListItemAction>
-  </ListItemHoverActions>
-</ListItem>
-```

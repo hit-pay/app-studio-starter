@@ -141,24 +141,3 @@ function InputGroupDemo() {
 
 export { InputGroupDemo }
 ```
-
-## Usage
-
-```tsx
-import { SearchRegular } from '@mingcute/react/core-regular'
-import {
-  InputGroup,
-  InputGroupAddon,
-  InputGroupButton,
-  InputGroupInput,
-} from '@/components/ui/input-group'
-
-<InputGroup>
-  <InputGroupInput placeholder="Search customers" />
-  <InputGroupAddon align="inline-end">
-    <InputGroupButton size="icon-xs" aria-label="Search">
-      <SearchRegular />
-    </InputGroupButton>
-  </InputGroupAddon>
-</InputGroup>
-```

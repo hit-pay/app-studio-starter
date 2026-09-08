@@ -67,23 +67,3 @@ function QuantityInputDemo() {
 
 export { QuantityInputDemo }
 ```
-
-## Usage
-
-```tsx
-import { useState } from 'react'
-import { QuantityInput } from '@/components/ui/quantity-input'
-
-function QuantityExample() {
-  const [quantity, setQuantity] = useState(2)
-
-  return (
-    <QuantityInput
-      value={quantity}
-      min={1}
-      max={99}
-      onValueChange={setQuantity}
-    />
-  )
-}
-```

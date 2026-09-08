@@ -94,21 +94,3 @@ function RadioGroupDemo() {
 
 export { RadioGroupDemo }
 ```
-
-## Usage
-
-```tsx
-import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-
-<RadioGroup defaultValue="paynow">
-  <div className="flex items-center gap-2">
-    <RadioGroupItem value="paynow" id="paynow" />
-    <Label htmlFor="paynow">PayNow</Label>
-  </div>
-  <div className="flex items-center gap-2">
-    <RadioGroupItem value="cards" id="cards" />
-    <Label htmlFor="cards">Cards</Label>
-  </div>
-</RadioGroup>
-```

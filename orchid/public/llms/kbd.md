@@ -37,17 +37,3 @@ function KbdDemo() {
 
 export { KbdDemo }
 ```
-
-## Usage
-
-```tsx
-import { Kbd, KbdGroup } from '@/components/ui/kbd'
-
-Close
-<Kbd>Esc</Kbd>
-
-<KbdGroup>
-  <Kbd>⌘</Kbd>
-  <Kbd>K</Kbd>
-</KbdGroup>
-```

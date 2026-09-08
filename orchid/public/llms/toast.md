@@ -206,18 +206,3 @@ function ToastDemo() {
 
 export { ToastDemo };
 ```
-
-## Usage
-
-```tsx
-import { Toaster, toast } from "@/components/ui/toast";
-
-// Mount once in the application root.
-<Toaster placement="bottom-right" />;
-
-toast.add({
-  title: "Payment received",
-  description: "PayNow · INV-2048 · SGD 128.00",
-  type: "success",
-});
-```

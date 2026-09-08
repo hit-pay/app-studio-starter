@@ -39,14 +39,4 @@ function AspectRatioDemo() {
 export { AspectRatioDemo }
 ```
 
-## Usage
-
-```tsx
-import { AspectRatio } from '@/components/ui/aspect-ratio'
-
-<AspectRatio ratio={16 / 9}>
-  <img src="/menu.jpg" alt="" className="absolute inset-0 size-full object-cover" />
-</AspectRatio>
-```
-
 `ratio` is width ÷ height (`16/9`, `4/3`, `1`).

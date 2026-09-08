@@ -1,38 +1,7 @@
-import { CardDemo } from '../../../src/components/doc/demos/card-demo'
+import { CardDemo } from '../../../src/components/doc/doc-demos'
 
 <CardDemo />
 
-## Usage
-
 Use `Card` for a small summary or grouped fields. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table`.
-
-```tsx
-import { Button } from '@/components/ui/button'
-import {
-  Card,
-  CardAction,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card'
-
-<Card>
-  <CardHeader>
-    <CardTitle>Outlet hours</CardTitle>
-    <CardDescription>Shown on the customer receipt.</CardDescription>
-    <CardAction>
-      <Button variant="outline" size="sm">
-        Edit
-      </Button>
-    </CardAction>
-  </CardHeader>
-  <CardContent>Monday–Friday 10:00–21:00.</CardContent>
-  <CardFooter>
-    <Button size="sm">Save</Button>
-  </CardFooter>
-</Card>
-```
 
 Use `size="sm"` for compact cards. Prefer `StatCard`, `ChoiceCard`, or `CustomerCard` when those patterns fit.

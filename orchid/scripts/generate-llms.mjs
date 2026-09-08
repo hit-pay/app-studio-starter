@@ -76,7 +76,19 @@ function findMdx(item) {
   return found;
 }
 
-function resolveDemoFile(specifier, fromFile) {
+function pascalToKebab(name) {
+  return name.replace(/([a-z0-9])([A-Z])/g, "$1-$2").toLowerCase();
+}
+
+function resolveDemoFile(specifier, fromFile, exportName) {
+  if (exportName?.endsWith("Demo")) {
+    const byName = join(
+      root,
+      "src/components/doc/demos",
+      `${pascalToKebab(exportName)}.tsx`,
+    );
+    if (existsSync(byName)) return byName;
+  }
   const base = resolve(dirname(fromFile), specifier);
   if (existsSync(base)) return base;
   for (const ext of [".tsx", ".ts", ".jsx", ".js"]) {
@@ -127,9 +139,8 @@ function mdxToMarkdown(source, mdxFile, title, description) {
   const imports = parseNamedImports(source);
   const demoFiles = new Map();
   for (const item of imports) {
-    const file = resolveDemoFile(item.from, mdxFile);
     for (const name of item.names) {
-      demoFiles.set(name, file);
+      demoFiles.set(name, resolveDemoFile(item.from, mdxFile, name));
     }
   }
 

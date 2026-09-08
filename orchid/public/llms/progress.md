@@ -61,18 +61,3 @@ function ProgressDemo() {
 
 export { ProgressDemo }
 ```
-
-## Usage
-
-```tsx
-import {
-  Progress,
-  ProgressLabel,
-  ProgressValue,
-} from '@/components/ui/progress'
-
-<Progress value={70}>
-  <ProgressLabel>Invoice collection</ProgressLabel>
-  <ProgressValue />
-</Progress>
-```

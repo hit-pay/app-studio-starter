@@ -171,25 +171,3 @@ function SelectDemo() {
 
 export { SelectDemo };
 ```
-
-## Usage
-
-```tsx
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-
-<Select>
-  <SelectTrigger>
-    <SelectValue placeholder="Select a status" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="draft">Draft</SelectItem>
-    <SelectItem value="sent">Sent</SelectItem>
-  </SelectContent>
-</Select>;
-```

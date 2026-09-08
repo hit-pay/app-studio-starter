@@ -124,18 +124,3 @@ function TabsDemo() {
 
 export { TabsDemo };
 ```
-
-## Usage
-
-```tsx
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
-<Tabs defaultValue="account">
-  <TabsList>
-    <TabsTrigger value="account">Account</TabsTrigger>
-    <TabsTrigger value="password">Password</TabsTrigger>
-  </TabsList>
-  <TabsContent value="account">Account settings</TabsContent>
-  <TabsContent value="password">Password settings</TabsContent>
-</Tabs>;
-```

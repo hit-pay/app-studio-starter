@@ -108,33 +108,3 @@ function EmptyDemo() {
 
 export { EmptyDemo }
 ```
-
-## Usage
-
-```tsx
-import { FileRegular } from '@mingcute/react/core-regular'
-import { Button } from '@/components/ui/button'
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from '@/components/ui/empty'
-
-<Empty>
-  <EmptyHeader>
-    <EmptyMedia variant="icon">
-      <FileRegular />
-    </EmptyMedia>
-    <EmptyTitle>No invoices yet</EmptyTitle>
-    <EmptyDescription>
-      Create an invoice to bill a customer.
-    </EmptyDescription>
-  </EmptyHeader>
-  <EmptyContent>
-    <Button>Create invoice</Button>
-  </EmptyContent>
-</Empty>
-```

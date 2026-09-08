@@ -1,21 +1,6 @@
-import { DatePickerDemo } from '../../../src/components/doc/demos/date-picker-demo'
+import { DatePickerDemo } from '../../../src/components/doc/doc-demos'
 
 <DatePickerDemo />
-
-## Usage
-
-```tsx
-'use client'
-
-import { useState } from 'react'
-import { DatePicker } from '@/components/ui/date-picker'
-
-function InvoiceDueDate() {
-  const [date, setDate] = useState<Date | undefined>()
-
-  return <DatePicker selected={date} onSelect={setDate} placeholder="Invoice due date" />
-}
-```
 
 ## Variants
 

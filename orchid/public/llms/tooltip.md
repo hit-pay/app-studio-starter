@@ -116,18 +116,3 @@ function TooltipDemo() {
 
 export { TooltipDemo };
 ```
-
-## Usage
-
-```tsx
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-
-<Tooltip>
-  <TooltipTrigger>Hover</TooltipTrigger>
-  <TooltipContent>Helpful information</TooltipContent>
-</Tooltip>;
-```

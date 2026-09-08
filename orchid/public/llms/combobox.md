@@ -411,32 +411,3 @@ function ComboboxDemo() {
 
 export { ComboboxDemo };
 ```
-
-## Usage
-
-```tsx
-import {
-  Combobox,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-} from '@/components/ui/combobox'
-
-const currencies = ['SGD', 'USD', 'MYR']
-
-<Combobox items={currencies}>
-  <ComboboxInput placeholder="Search currencies" />
-  <ComboboxContent>
-    <ComboboxEmpty>No currencies found.</ComboboxEmpty>
-    <ComboboxList>
-      {(currency) => (
-        <ComboboxItem key={currency} value={currency}>
-          {currency}
-        </ComboboxItem>
-      )}
-    </ComboboxList>
-  </ComboboxContent>
-</Combobox>
-```

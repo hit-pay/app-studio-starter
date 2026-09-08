@@ -129,39 +129,3 @@ function BadgeDemo() {
 
 export { BadgeDemo }
 ```
-
-## Usage
-
-```tsx
-import {
-  Badge,
-  BadgeRemove,
-} from '@/components/ui/badge'
-import { CircleDashRegular } from '@mingcute/react/core-regular'
-
-<Badge tone="blue">Default</Badge>
-<Badge tone="grey">Secondary</Badge>
-<Badge tone="red">Destructive</Badge>
-<Badge tone="grey" appearance="outline">Outline</Badge>
-
-{/* variant is a shortcut: default→blue, secondary→grey, destructive→red, outline→grey outline */}
-<Badge variant="secondary">Secondary</Badge>
-
-<Badge tone="green">
-  <CircleDashRegular data-icon="inline-start" />
-  Paid
-</Badge>
-
-<Badge tone="orange" appearance="outline">
-  Pending
-</Badge>
-
-<Badge tone="blue">
-  Invoice
-  <BadgeRemove onClick={() => removeFilter()} />
-</Badge>
-
-<Badge render={<a href="/invoices" />}>
-  View invoices
-</Badge>
-```

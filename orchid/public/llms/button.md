@@ -94,25 +94,3 @@ function ButtonDemo() {
 
 export { ButtonDemo }
 ```
-
-## Usage
-
-```tsx
-import { Button } from '@/components/ui/button'
-import { AddRegular } from '@mingcute/react/core-regular'
-
-<Button>Create invoice</Button>
-<Button variant="outline">View details</Button>
-<Button variant="secondary">Save draft</Button>
-<Button variant="ghost">Cancel</Button>
-<Button variant="destructive">Refund</Button>
-<Button variant="link">View documentation</Button>
-
-<Button size="icon" aria-label="Create invoice">
-  <AddRegular />
-</Button>
-
-<Button render={<a href="/invoices" />}>
-  View invoices
-</Button>
-```

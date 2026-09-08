@@ -72,22 +72,3 @@ function CollapsibleDemo() {
 
 export { CollapsibleDemo };
 ```
-
-## Usage
-
-```tsx
-import { DownRegular } from '@mingcute/react/core-regular';
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-
-<Collapsible>
-  <CollapsibleTrigger>
-    Advanced
-    <DownRegular className="size-4 transition-transform group-data-open/collapsible:rotate-180" />
-  </CollapsibleTrigger>
-  <CollapsibleContent>{/* optional fields */}</CollapsibleContent>
-</Collapsible>;
-```

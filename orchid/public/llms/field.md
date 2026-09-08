@@ -71,22 +71,3 @@ function FieldDemo() {
 
 export { FieldDemo }
 ```
-
-## Usage
-
-```tsx
-import {
-  Field,
-  FieldDescription,
-  FieldError,
-  FieldLabel,
-} from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-
-<Field data-invalid>
-  <FieldLabel htmlFor="email">Email</FieldLabel>
-  <Input id="email" aria-invalid />
-  <FieldDescription>Used to send payment receipts.</FieldDescription>
-  <FieldError>Enter a valid email address.</FieldError>
-</Field>
-```

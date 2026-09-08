@@ -218,25 +218,3 @@ function DropdownMenuDemo() {
 
 export { DropdownMenuDemo }
 ```
-
-## Usage
-
-```tsx
-import { Button } from '@/components/ui/button'
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
-
-<DropdownMenu>
-  <DropdownMenuTrigger render={<Button variant="outline" />}>
-    Open menu
-  </DropdownMenuTrigger>
-  <DropdownMenuContent>
-    <DropdownMenuItem>Edit</DropdownMenuItem>
-    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-  </DropdownMenuContent>
-</DropdownMenu>
-```
