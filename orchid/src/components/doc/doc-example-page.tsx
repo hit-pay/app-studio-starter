@@ -40,7 +40,7 @@ function DocExamplePage({
       : to === "/components"
         ? {
             name: "Components",
-            description: "All Orchid primitives, form controls, and blocks.",
+            description: "All Orchid components, A–Z.",
           }
         : (DOC_GUIDE_ITEMS.find((entry) => entry.to === to) ??
           DOC_COMPONENTS.find((entry) => entry.to === to) ??

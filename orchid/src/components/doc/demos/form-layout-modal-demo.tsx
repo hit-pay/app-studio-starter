@@ -1,12 +1,12 @@
 import { useState } from "react";
 
 import { Button } from "@/components/ui/button";
-import { FormLayout } from "@/components/form-layout";
+import { FormLayout } from "@/components/ui/form-layout";
 import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormField,
-} from "@/components/schema-form";
+} from "@/components/ui/schema-form";
 import { toast } from "@/components/ui/toast";
 
 const CUSTOMER_FIELDS: SchemaFormField[] = [

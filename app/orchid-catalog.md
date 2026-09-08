@@ -1,43 +1,39 @@
 # Orchid catalog
 
-Agents: read this file **in full** (Read tool, not Grep). Import and inspect each item at the paths listed below; registry targets determine whether it lives in `src/components/` or `src/components/ui/`. When a Docs link is listed, fetch that Markdown file (not the HTML example page).
+Agents: read this file **in full** (Read tool, not Grep). Every Orchid item installs under `src/components/ui/` and imports from `@/components/ui/…`. When a Docs link is listed, fetch that Markdown file (not the HTML example page).
 
 ## `utils` — Utils
 
 cn() Tailwind class merge. Import from @/lib/utils.
 Import `@/lib/utils`; read `src/lib/utils.ts`.
 
-# Form
+# Components
 
 ## `schema-form` — Schema Form
 
 JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
-Import `@/components/schema-form`; read `src/components/schema-form.tsx`.
-Related source: `src/components/schema-form-model.ts`.
+Import `@/components/ui/schema-form`; read `src/components/ui/schema-form.tsx`.
+Related source: `src/components/ui/schema-form-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-form.md
-
-# Block
 
 ## `schema-table` — Schema Table
 
 JSON-schema list with search, filters, sorting, pagination.
-Import `@/components/schema-table`; read `src/components/schema-table.tsx`.
-Related source: `src/components/schema-table-model.ts`.
+Import `@/components/ui/schema-table`; read `src/components/ui/schema-table.tsx`.
+Related source: `src/components/ui/schema-table-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-table.md
 
 ## `sidebar` — Sidebar
 
 JSON-configured navigation with inline accordion children or a back-enabled Sub Sidebar per item.
-Import `@/components/sidebar`; read `src/components/sidebar.tsx`.
+Import `@/components/ui/sidebar`; read `src/components/ui/sidebar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/sidebar.md
 
 ## `sub-sidebar` — Sub Sidebar
 
 Simple flat child navigation for AppLayout sidebar mode with a blue active state.
-Import `@/components/sub-sidebar`; read `src/components/sub-sidebar.tsx`.
+Import `@/components/ui/sub-sidebar`; read `src/components/ui/sub-sidebar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/sub-sidebar.md
-
-# Component
 
 ## `alert` — Alert
 
@@ -47,7 +43,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/alert.md
 
 ## `list-item` — List Item
 
-List row (title, media, meta, actions). layout Default|Stack|Media, selected.
+List row (title, media, meta, actions). layout default|stack|media, selected.
 Import `@/components/ui/list-item`; read `src/components/ui/list-item.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/list-item.md
 
@@ -57,31 +53,23 @@ shadcn-compatible compound empty state with Orchid media variants.
 Import `@/components/ui/empty`; read `src/components/ui/empty.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/empty.md
 
-# Block
-
 ## `customer-card` — Customer Card
 
-Customer/beneficiary summary. variant Small|Big|Float|Empty, hover, active.
-Import `@/components/customer-card`; read `src/components/customer-card.tsx`.
+Customer/beneficiary summary. variant small|big|float|empty, hover, active.
+Import `@/components/ui/customer-card`; read `src/components/ui/customer-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/customer-card.md
-
-# Form
 
 ## `form-layout` — Form Layout
 
 Create/edit shell (page or modal). Put SchemaForm inside; one form uses formId = SchemaForm id. Several forms use actions.save.onClick.
-Import `@/components/form-layout`; read `src/components/form-layout.tsx`.
+Import `@/components/ui/form-layout`; read `src/components/ui/form-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-layout.md
-
-# Block
 
 ## `page-layout` — Page Layout
 
 Standard route page with built-in responsive padding, header, and scrollable content.
-Import `@/components/page-layout`; read `src/components/page-layout.tsx`.
+Import `@/components/ui/page-layout`; read `src/components/ui/page-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/page-layout.md
-
-# Component
 
 ## `alert-dialog` — Alert Dialog
 
@@ -89,15 +77,11 @@ shadcn-compatible confirmation dialog primitives with Orchid styling.
 Import `@/components/ui/alert-dialog`; read `src/components/ui/alert-dialog.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/alert-dialog.md
 
-# Block
-
 ## `confirmation-modal` — Confirmation Modal
 
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
-Import `@/components/confirmation-modal`; read `src/components/confirmation-modal.tsx`.
+Import `@/components/ui/confirmation-modal`; read `src/components/ui/confirmation-modal.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/confirmation-modal.md
-
-# Component
 
 ## `button` — Button
 
@@ -159,39 +143,35 @@ shadcn-compatible horizontal or vertical tabs with default and line variants.
 Import `@/components/ui/tabs`; read `src/components/ui/tabs.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/tabs.md
 
-# Block
-
 ## `choice-card` — Choice Card
 
-Pick one as a card (no radio dot). ChoiceCardGroup alignment Vertical|Horizontal.
-Import `@/components/choice-card`; read `src/components/choice-card.tsx`.
+Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal.
+Import `@/components/ui/choice-card`; read `src/components/ui/choice-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/choice-card.md
 
 ## `stat-card` — Stat Card
 
 KPI card (icon, title, value, %). iconColor Blue|Green|Red|Grey.
-Import `@/components/stat-card`; read `src/components/stat-card.tsx`.
+Import `@/components/ui/stat-card`; read `src/components/ui/stat-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/stat-card.md
 
 ## `detail-list` — Detail List
 
-Props-based read-only key/value card with React node values. style Default|Border.
-Import `@/components/detail-list`; read `src/components/detail-list.tsx`.
+Props-based read-only key/value card with React node values. style default|border.
+Import `@/components/ui/detail-list`; read `src/components/ui/detail-list.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/detail-list.md
 
 ## `icon-group` — Icon Group
 
-Props-based icon actions. Border style inserts dividers automatically.
-Import `@/components/icon-group`; read `src/components/icon-group.tsx`.
+Props-based icon actions. style border inserts dividers automatically.
+Import `@/components/ui/icon-group`; read `src/components/ui/icon-group.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/icon-group.md
 
 ## `copy-button` — Copy Button
 
 Copy a string (id, phone, URL). prop: value.
-Import `@/components/copy-button`; read `src/components/copy-button.tsx`.
+Import `@/components/ui/copy-button`; read `src/components/ui/copy-button.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/copy-button.md
-
-# Component
 
 ## `skeleton` — Skeleton
 
@@ -269,8 +249,6 @@ Import `@/components/ui/popover`; read `src/components/ui/popover.tsx`.
 shadcn-compatible horizontal or vertical separator with Orchid styling.
 Import `@/components/ui/separator`; read `src/components/ui/separator.tsx`.
 
-# Form
-
 ## `field` — Field
 
 shadcn-compatible field composition with Orchid form styling.
@@ -316,7 +294,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/combobox.md
 ## `quantity-input` — Quantity Input
 
 Integer stepper. min/max/step.
-Import `@/components/quantity-input`; read `src/components/quantity-input.tsx`.
+Import `@/components/ui/quantity-input`; read `src/components/ui/quantity-input.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/quantity-input.md
 
 ## `checkbox` — Checkbox
@@ -352,10 +330,8 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/calendar.md
 ## `date-picker` — Date Picker
 
 Orchid helper wrappers following the shadcn Popover + Calendar recipe for date, range, and date-time selection.
-Import `@/components/date-picker`; read `src/components/date-picker.tsx`.
+Import `@/components/ui/date-picker`; read `src/components/ui/date-picker.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/date-picker.md
-
-# Component
 
 ## `card` — Card
 
@@ -386,8 +362,6 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/chart.md
 shadcn-compatible file and image attachment with upload state, media, actions, and a vertical group.
 Import `@/components/ui/attachment`; read `src/components/ui/attachment.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/attachment.md
-
-# Form
 
 ## `form-section` — Form Section
 

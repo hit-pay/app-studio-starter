@@ -7,7 +7,7 @@ import {
   useSchemaForm,
   type SchemaFormChange,
   type SchemaFormField,
-} from "@/components/schema-form";
+} from "@/components/ui/schema-form";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 const OPTIONS = [

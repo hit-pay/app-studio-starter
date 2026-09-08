@@ -102,8 +102,8 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
-- `src/components/ui/`: preinstalled Orchid primitives and form controls
-- `src/components/`: App Studio components plus Orchid blocks whose registry targets install at the components root
+- `src/components/ui/`: all preinstalled Orchid components (Button, QuantityInput, SchemaForm, PageLayout, …)
+- `src/components/`: App Studio-only files such as `app-layout.tsx`
 - `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
@@ -119,7 +119,7 @@ Path aliases:
 
 - `#/*` -> `src/*`
 - `@/*` -> `src/*`
-- Orchid import paths come from `orchid-catalog.md` only; do not guess `src/components` vs `src/components/ui`
+- Orchid imports are `@/components/ui/<name>`. `AppLayout` is `@/components/app-layout` and is not in the Orchid catalog.
 
 Unless the user's request truly requires infrastructure changes, leave these files unchanged. Updating `src/routes/__root.tsx` is allowed only when a required Orchid global provider is missing:
 
@@ -164,7 +164,7 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 The catalog is already installed. Do not run `shadcn add`, `bunx shadcn`, or any `@orchid` / `@shadcn` install.
 
-Do not guess import paths. The line `Import \`@/…\`` in the catalog is authoritative (`@/components/…` vs `@/components/ui/…` is per item).
+Do not guess import paths. Every Orchid item imports from `@/components/ui/…`. The catalog line `Import \`@/…\`` is authoritative.
 
 Do not invent a parallel UI kit or overwrite files under `src/components/` or `src/components/ui/` with official shadcn copies. Compose catalog items. Field types, props, and variants live in the catalog entry and that item's source or Docs `.md` — not in this file.
 
@@ -176,7 +176,7 @@ Starter wiring only:
 - Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not compose `AlertDialog` for those, and do not add Sonner or a second toast/confirm provider.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`. Never `small` or `big`.
 - Badge: prefer `tone` + `appearance`. `variant` is only a shortcut (`default`→blue, `secondary`→grey, `destructive`→red).
-- Nested nav: import `SubSidebar` from `@/components/sub-sidebar` only.
+- Nested nav: import `SubSidebar` from `@/components/ui/sub-sidebar` only.
 - Use `oc-*` tokens from `src/styles.css`. Prop values are lowercase.
 
 ## Browser storage (all apps share one origin)
@@ -195,7 +195,7 @@ Do not write form values to `localStorage` on every keystroke or `onChange`. Kee
 
 If `createServerFn` throws, call `writeFormDraft(id, values)` in the route/page `catch`. On the next open, merge `readFormDraft(id)` into each field's `value` **before** `useSchemaForm`. After a successful save, or a clean cancel, `clearFormDraft(id)`. Leave the form filled and show an error if save failed.
 
-Do not call `form.setFieldValue` or `setState` during render to hydrate a draft. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not add draft logic inside `@/components/schema-form`. Helpers: `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`).
+Do not call `form.setFieldValue` or `setState` during render to hydrate a draft. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not add draft logic inside `@/components/ui/schema-form`. Helpers: `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`).
 
 ## Persistent data and server code
 

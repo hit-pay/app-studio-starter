@@ -7,7 +7,7 @@ Copy icon that writes a value and shows Copied!.
 ## Example
 
 ```tsx
-import { CopyButton } from '@/components/copy-button'
+import { CopyButton } from '@/components/ui/copy-button'
 
 function CopyButtonDemo() {
   return (
@@ -51,7 +51,7 @@ export { CopyButtonDemo }
 ## Usage
 
 ```tsx
-import { CopyButton } from '@/components/copy-button'
+import { CopyButton } from '@/components/ui/copy-button'
 
 <div className="flex items-center gap-2">
   <span>INV-2026-0842</span>

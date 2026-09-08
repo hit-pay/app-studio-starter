@@ -8,7 +8,7 @@ import { DatePickerDemo } from '../../../src/components/doc/demos/date-picker-de
 'use client'
 
 import { useState } from 'react'
-import { DatePicker } from '@/components/date-picker'
+import { DatePicker } from '@/components/ui/date-picker'
 
 function InvoiceDueDate() {
   const [date, setDate] = useState<Date | undefined>()
@@ -24,7 +24,7 @@ import {
   DatePicker,
   DatePickerRange,
   DateTimePicker,
-} from '@/components/date-picker'
+} from '@/components/ui/date-picker'
 
 <DatePicker placeholder="Invoice due date" />
 <DatePickerRange placeholder="Settlement period" />

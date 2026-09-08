@@ -13,11 +13,11 @@ The `actions` prop accepts any React node so pages can provide the controls they
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { DetailList } from "@/components/detail-list";
-import { PageLayout } from "@/components/page-layout";
+import { DetailList } from "@/components/ui/detail-list";
+import { PageLayout } from "@/components/ui/page-layout";
 
 const INVOICE_LIST_USAGE = `import { Button } from '@/components/ui/button'
-import { PageLayout } from '@/components/page-layout'
+import { PageLayout } from '@/components/ui/page-layout'
 
 function InvoiceListPageExample() {
   return (
@@ -37,8 +37,8 @@ function InvoiceListPageExample() {
 
 const INVOICE_DETAIL_USAGE = `import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
-import { DetailList } from '@/components/detail-list'
-import { PageLayout } from '@/components/page-layout'
+import { DetailList } from '@/components/ui/detail-list'
+import { PageLayout } from '@/components/ui/page-layout'
 
 function InvoiceDetailPageExample() {
   return (

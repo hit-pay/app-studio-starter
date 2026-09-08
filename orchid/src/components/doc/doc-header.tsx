@@ -2,16 +2,14 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { MoonRegular, SunRegular } from "@mingcute/react/core-regular";
 
-import { DOC_BLOCKS, DOC_COMPONENTS, DOC_FORMS, DOC_GUIDES } from "./doc-components";
+import { DOC_ALL_COMPONENTS, DOC_GUIDES } from "./doc-components";
 
 const THEME_KEY = "orchid-theme";
 
 const DOC_PATHS = new Set<string>(DOC_GUIDES.map((item) => item.to));
 const COMPONENT_PATHS = new Set<string>([
   "/components",
-  ...DOC_COMPONENTS.map((item) => item.to),
-  ...DOC_FORMS.map((item) => item.to),
-  ...DOC_BLOCKS.map((item) => item.to),
+  ...DOC_ALL_COMPONENTS.map((item) => item.to),
 ]);
 
 function readTheme(): "light" | "dark" {

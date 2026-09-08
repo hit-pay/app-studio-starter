@@ -1,11 +1,6 @@
 import { Link, useRouterState } from "@tanstack/react-router";
 
-import {
-  DOC_GUIDES,
-  docBlocksByName,
-  docComponentsByName,
-  docFormsByName,
-} from "./doc-components";
+import { DOC_GUIDES, docAllComponentsByName } from "./doc-components";
 
 function NavGroup({
   label,
@@ -81,12 +76,10 @@ function DocSidebar() {
       >
         <NavGroup label="Guides" items={DOC_GUIDES} pathname={pathname} />
         <NavGroup
-          label="Component"
-          items={docComponentsByName()}
+          label="Components"
+          items={docAllComponentsByName()}
           pathname={pathname}
         />
-        <NavGroup label="Form" items={docFormsByName()} pathname={pathname} />
-        <NavGroup label="Block" items={docBlocksByName()} pathname={pathname} />
       </nav>
     </aside>
   );

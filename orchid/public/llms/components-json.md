@@ -48,7 +48,7 @@ Orchid registry files declare their own target alias:
 - `@ui/button.tsx` resolves through `aliases.ui`, normally to
   `src/components/ui/button.tsx`.
 - `@components/schema-form.tsx` resolves through `aliases.components`,
-  normally to `src/components/schema-form.tsx`.
+  normally to `src/components/ui/schema-form.tsx`.
 
 Do not manually choose a destination when adding an item. The registry target
 and your aliases determine it consistently.

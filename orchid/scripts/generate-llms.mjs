@@ -9,9 +9,7 @@ import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 import {
-  DOC_BLOCKS,
-  DOC_COMPONENTS,
-  DOC_FORMS,
+  DOC_ALL_COMPONENTS,
   DOC_GUIDES,
 } from "../src/components/doc/doc-components.ts";
 
@@ -25,7 +23,7 @@ if (!homepage) {
   throw new Error("registry.json must define a homepage.");
 }
 
-const documented = [...DOC_COMPONENTS, ...DOC_FORMS, ...DOC_BLOCKS];
+const documented = [...DOC_ALL_COMPONENTS];
 const registryByName = new Map(registry.items.map((item) => [item.name, item]));
 
 function slug(item) {
@@ -215,7 +213,7 @@ const lines = [
   "",
   "### Quick Stats",
   "",
-  `- Documentation pages: ${guideItems.length} guides, ${DOC_COMPONENTS.length} components, ${DOC_FORMS.length} form components, and ${DOC_BLOCKS.length} blocks.`,
+  `- Documentation pages: ${guideItems.length} guides and ${DOC_ALL_COMPONENTS.length} components.`,
   `- Installable registry items: ${registryItems.length}, excluding the helper entries \`all\` and \`utils\`.`,
   `- Markdown docs: ${link("/llms/")} — one \`.md\` file per guide and component.`,
   "",
@@ -298,9 +296,10 @@ const lines = [
       : []),
   ]),
   "",
-  ...docsSection("Components", DOC_COMPONENTS),
-  ...docsSection("Form Components", DOC_FORMS),
-  ...docsSection("Blocks", DOC_BLOCKS),
+  ...docsSection(
+    "Components",
+    [...DOC_ALL_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name)),
+  ),
   "## Complete Registry List (for AI reference)",
   "",
   registryItems.map((item) => item.name).join(", "),
@@ -309,7 +308,7 @@ const lines = [
   "",
   "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
-  "- Registry targets control whether source lands under `@/components` or `@/components/ui`; do not infer the destination from the category.",
+  "- All Orchid items install under `@/components/ui`. Do not look for QuantityInput, SchemaForm, or PageLayout outside `src/components/ui/`.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
   "- Use SchemaForm for schema-driven form fields, SchemaTable for searchable/filterable/sortable/paginated data lists, FormLayout for page or modal form shells, and PageLayout for standard route pages.",
   "",

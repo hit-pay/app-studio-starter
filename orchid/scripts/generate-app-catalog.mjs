@@ -11,49 +11,13 @@ const docsDir = join(root, 'public', 'llms')
 const lines = [
   '# Orchid catalog',
   '',
-  'Agents: read this file **in full** (Read tool, not Grep). Import and inspect each item at the paths listed below; registry targets determine whether it lives in `src/components/` or `src/components/ui/`. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
+  'Agents: read this file **in full** (Read tool, not Grep). Every Orchid item installs under `src/components/ui/` and imports from `@/components/ui/…`. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
   '',
 ]
 
-const formItems = new Set([
-  'schema-form',
-  'form-layout',
-  'field',
-  'label',
-  'input',
-  'input-group',
-  'textarea',
-  'select',
-  'combobox',
-  'quantity-input',
-  'checkbox',
-  'radio-group',
-  'switch',
-  'slider',
-  'calendar',
-  'date-picker',
-  'form-section',
-])
-
-const blockItems = new Set([
-  'schema-table',
-  'sidebar',
-  'sub-sidebar',
-  'customer-card',
-  'page-layout',
-  'confirmation-modal',
-  'choice-card',
-  'stat-card',
-  'detail-list',
-  'icon-group',
-  'copy-button',
-])
-
 const sectionFor = (name) => {
   if (name === 'utils') return null
-  if (formItems.has(name)) return 'Form'
-  if (blockItems.has(name)) return 'Block'
-  return 'Component'
+  return 'Components'
 }
 
 const installedPath = (target) => {

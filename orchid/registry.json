@@ -121,14 +121,14 @@
       ],
       "files": [
         {
-          "path": "src/components/schema-form.tsx",
+          "path": "src/components/ui/schema-form.tsx",
           "type": "registry:ui",
-          "target": "@components/schema-form.tsx"
+          "target": "@ui/schema-form.tsx"
         },
         {
-          "path": "src/components/schema-form-model.ts",
+          "path": "src/components/ui/schema-form-model.ts",
           "type": "registry:file",
-          "target": "@components/schema-form-model.ts"
+          "target": "@ui/schema-form-model.ts"
         }
       ]
     },
@@ -151,14 +151,14 @@
       ],
       "files": [
         {
-          "path": "src/components/schema-table.tsx",
+          "path": "src/components/ui/schema-table.tsx",
           "type": "registry:ui",
-          "target": "@components/schema-table.tsx"
+          "target": "@ui/schema-table.tsx"
         },
         {
-          "path": "src/components/schema-table-model.ts",
+          "path": "src/components/ui/schema-table-model.ts",
           "type": "registry:file",
-          "target": "@components/schema-table-model.ts"
+          "target": "@ui/schema-table-model.ts"
         }
       ]
     },
@@ -174,9 +174,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/sidebar.tsx",
+          "path": "src/components/ui/sidebar.tsx",
           "type": "registry:ui",
-          "target": "@components/sidebar.tsx"
+          "target": "@ui/sidebar.tsx"
         }
       ]
     },
@@ -189,9 +189,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/sub-sidebar.tsx",
+          "path": "src/components/ui/sub-sidebar.tsx",
           "type": "registry:ui",
-          "target": "@components/sub-sidebar.tsx"
+          "target": "@ui/sub-sidebar.tsx"
         }
       ]
     },
@@ -266,9 +266,9 @@
       ],
       "files": [
         {
-          "path": "src/components/customer-card.tsx",
+          "path": "src/components/ui/customer-card.tsx",
           "type": "registry:ui",
-          "target": "@components/customer-card.tsx"
+          "target": "@ui/customer-card.tsx"
         }
       ]
     },
@@ -285,9 +285,9 @@
       ],
       "files": [
         {
-          "path": "src/components/form-layout.tsx",
+          "path": "src/components/ui/form-layout.tsx",
           "type": "registry:ui",
-          "target": "@components/form-layout.tsx"
+          "target": "@ui/form-layout.tsx"
         }
       ]
     },
@@ -302,9 +302,9 @@
       ],
       "files": [
         {
-          "path": "src/components/page-layout.tsx",
+          "path": "src/components/ui/page-layout.tsx",
           "type": "registry:ui",
-          "target": "@components/page-layout.tsx"
+          "target": "@ui/page-layout.tsx"
         }
       ]
     },
@@ -341,9 +341,9 @@
       ],
       "files": [
         {
-          "path": "src/components/confirmation-modal.tsx",
+          "path": "src/components/ui/confirmation-modal.tsx",
           "type": "registry:ui",
-          "target": "@components/confirmation-modal.tsx"
+          "target": "@ui/confirmation-modal.tsx"
         }
       ]
     },
@@ -541,9 +541,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/components/choice-card.tsx",
+          "path": "src/components/ui/choice-card.tsx",
           "type": "registry:ui",
-          "target": "@components/choice-card.tsx"
+          "target": "@ui/choice-card.tsx"
         }
       ]
     },
@@ -560,9 +560,9 @@
       ],
       "files": [
         {
-          "path": "src/components/stat-card.tsx",
+          "path": "src/components/ui/stat-card.tsx",
           "type": "registry:ui",
-          "target": "@components/stat-card.tsx"
+          "target": "@ui/stat-card.tsx"
         }
       ]
     },
@@ -579,9 +579,9 @@
       ],
       "files": [
         {
-          "path": "src/components/detail-list.tsx",
+          "path": "src/components/ui/detail-list.tsx",
           "type": "registry:ui",
-          "target": "@components/detail-list.tsx"
+          "target": "@ui/detail-list.tsx"
         }
       ]
     },
@@ -599,9 +599,9 @@
       ],
       "files": [
         {
-          "path": "src/components/icon-group.tsx",
+          "path": "src/components/ui/icon-group.tsx",
           "type": "registry:ui",
-          "target": "@components/icon-group.tsx"
+          "target": "@ui/icon-group.tsx"
         }
       ]
     },
@@ -618,9 +618,9 @@
       ],
       "files": [
         {
-          "path": "src/components/copy-button.tsx",
+          "path": "src/components/ui/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@components/copy-button.tsx"
+          "target": "@ui/copy-button.tsx"
         }
       ]
     },
@@ -994,9 +994,9 @@
       ],
       "files": [
         {
-          "path": "src/components/quantity-input.tsx",
+          "path": "src/components/ui/quantity-input.tsx",
           "type": "registry:ui",
-          "target": "@components/quantity-input.tsx"
+          "target": "@ui/quantity-input.tsx"
         }
       ]
     },
@@ -1108,9 +1108,9 @@
       ],
       "files": [
         {
-          "path": "src/components/date-picker.tsx",
+          "path": "src/components/ui/date-picker.tsx",
           "type": "registry:ui",
-          "target": "@components/date-picker.tsx"
+          "target": "@ui/date-picker.tsx"
         }
       ]
     },

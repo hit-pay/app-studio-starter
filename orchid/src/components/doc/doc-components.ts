@@ -352,6 +352,16 @@ export function docBlocksByName() {
   return [...DOC_BLOCKS].sort((a, b) => a.name.localeCompare(b.name));
 }
 
+export const DOC_ALL_COMPONENTS = [
+  ...DOC_COMPONENTS,
+  ...DOC_FORMS,
+  ...DOC_BLOCKS,
+] as const;
+
+export function docAllComponentsByName() {
+  return [...DOC_ALL_COMPONENTS].sort((a, b) => a.name.localeCompare(b.name));
+}
+
 export const DOC_GUIDES = [
   {
     to: "/installation" as const,

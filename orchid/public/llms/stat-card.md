@@ -17,7 +17,7 @@ import {
   StoreRegular,
   GroupRegular,
 } from '@mingcute/react/core-regular';
-import { StatCard } from "@/components/stat-card";
+import { StatCard } from "@/components/ui/stat-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 function StatCardDemo() {
@@ -131,7 +131,7 @@ export { StatCardDemo };
 
 ```tsx
 import { CurrencyDollarRegular } from '@mingcute/react/core-regular';
-import { StatCard } from "@/components/stat-card";
+import { StatCard } from "@/components/ui/stat-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 <TooltipProvider>

@@ -2,7 +2,7 @@ import { type ComponentProps, type ReactNode } from 'react'
 import { cva } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
-import { CopyButton } from '@/components/copy-button'
+import { CopyButton } from '@/components/ui/copy-button'
 
 type DetailListItem = {
   key: string

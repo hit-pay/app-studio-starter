@@ -8,7 +8,7 @@ Detail card with grid columns, colspan, and stacked rows.
 
 ```tsx
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { DetailList } from '@/components/detail-list'
+import { DetailList } from '@/components/ui/detail-list'
 import { Badge } from '@/components/ui/badge'
 
 const PHOTO = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop'
@@ -302,7 +302,7 @@ export { DetailListDemo }
 
 ```tsx
 import { Badge } from '@/components/ui/badge'
-import { DetailList } from '@/components/detail-list'
+import { DetailList } from '@/components/ui/detail-list'
 
 ;<DetailList
   title="Payment details"

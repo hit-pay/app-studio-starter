@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import { Chat1Regular } from '@mingcute/react/core-regular'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { CustomerCard, type CustomerCardData } from '@/components/customer-card'
+import { CustomerCard, type CustomerCardData } from '@/components/ui/customer-card'
 
 const CUSTOMER: CustomerCardData = {
   name: 'Alex Turner',

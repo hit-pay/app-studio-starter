@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { More1Regular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { CopyButton } from '@/components/copy-button'
+import { CopyButton } from '@/components/ui/copy-button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuTrigger } from './dropdown-menu'
 
 function ListItem({
