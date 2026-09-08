@@ -4,6 +4,24 @@ import { nitro } from 'nitro/vite'
 import { defineConfig, loadEnv, type PluginOption, type UserConfig } from 'vite'
 import viteReact from '@vitejs/plugin-react'
 
+function stripStartManifestFilePaths(): PluginOption {
+  return {
+    name: 'app-studio:strip-start-manifest-file-paths',
+    apply: 'build',
+    generateBundle(_options, bundle) {
+      for (const output of Object.values(bundle)) {
+        if (output.type !== 'chunk') continue
+        if (!output.fileName.includes('_tanstack-start-manifest')) continue
+
+        output.code = output.code.replace(
+          /\s*filePath:\s*(?:"(?:[^"\\]|\\.)*"|'(?:[^'\\]|\\.)*'),?/g,
+          '',
+        )
+      }
+    },
+  }
+}
+
 function resolveBasePath(mode: string): string {
   const env = loadEnv(mode, process.cwd(), '')
   const appId = env.APP_STUDIO_APP_ID?.trim()
@@ -44,6 +62,7 @@ export default defineConfig(({ mode }): UserConfig => {
           },
         },
       }),
+      stripStartManifestFilePaths(),
       nitro({
         config: {
           preset: 'bun',

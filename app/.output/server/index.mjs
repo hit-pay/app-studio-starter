@@ -974,7 +974,7 @@ function defaultHandler(error, event, opts) {
 		xForwardedProto: true
 	});
 	if (status === 404) {
-		const baseURL = "/1234567890/";
+		const baseURL = "/";
 		if (/^\/[^/]/.test(baseURL) && !url.pathname.startsWith(baseURL)) return {
 			status: 302,
 			statusText: "Found",
@@ -1681,26 +1681,26 @@ var NoHandler = () => kNotFound;
 //#endregion
 //#region \0virtual:#nitro-internal-virtual/public-assets-data
 var public_assets_data_default = {
-	"/assets/routes-COJB97LO.js": {
-		"type": "text/javascript; charset=utf-8",
-		"etag": "\"887-Xmx1zuPXHccIB6flPkCMMMvqrz8\"",
-		"mtime": "2026-09-08T10:57:20.602Z",
-		"size": 2183,
-		"path": "../public/assets/routes-COJB97LO.js"
-	},
-	"/assets/index-DC3qGzOt.js": {
-		"type": "text/javascript; charset=utf-8",
-		"etag": "\"7401c-kSyrPrE8V9qWK7BilEcoQpLylfg\"",
-		"mtime": "2026-09-08T10:57:20.602Z",
-		"size": 475164,
-		"path": "../public/assets/index-DC3qGzOt.js"
-	},
-	"/assets/styles-DHEpvK7T.css": {
+	"/assets/styles-DkDJ2TaS.css": {
 		"type": "text/css; charset=utf-8",
-		"etag": "\"21bfb-/wQhYAwUOaAHZQa2S6SS+yL0Zmw\"",
-		"mtime": "2026-09-08T10:57:20.602Z",
-		"size": 138235,
-		"path": "../public/assets/styles-DHEpvK7T.css"
+		"etag": "\"24a11-t9ZuBg23HziZyxN80b5Z7caplbw\"",
+		"mtime": "2026-09-08T11:14:34.884Z",
+		"size": 150033,
+		"path": "../public/assets/styles-DkDJ2TaS.css"
+	},
+	"/assets/index-muL1Jsqt.js": {
+		"type": "text/javascript; charset=utf-8",
+		"etag": "\"73ff1-fIxbyp/pucnSu4gA6mGj28BL59k\"",
+		"mtime": "2026-09-08T11:14:34.883Z",
+		"size": 475121,
+		"path": "../public/assets/index-muL1Jsqt.js"
+	},
+	"/assets/routes-GcxAj9EX.js": {
+		"type": "text/javascript; charset=utf-8",
+		"etag": "\"887-u72uEOtnMqukvNRpjZmkrwhyHlU\"",
+		"mtime": "2026-09-08T11:14:34.884Z",
+		"size": 2183,
+		"path": "../public/assets/routes-GcxAj9EX.js"
 	}
 };
 //#endregion
