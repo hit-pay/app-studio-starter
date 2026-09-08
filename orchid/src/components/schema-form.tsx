@@ -1,14 +1,13 @@
 import { useId, useRef, type ReactNode } from 'react'
 import { useForm, useStore } from '@tanstack/react-form'
 import {
-  FileCodeIcon,
-  FileIcon,
-  FileSpreadsheetIcon,
-  FileTextIcon,
-  ImageIcon,
-  UploadIcon,
-  XIcon,
-} from 'lucide-react'
+  FileCodeRegular,
+  FileRegular,
+  TableRegular,
+  PicRegular,
+  UploadRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Checkbox, CheckboxGroup } from '@/components/ui/checkbox'
@@ -115,18 +114,18 @@ function formatFileSize(bytes: number) {
 
 function FileGlyph({ file }: { file: File }) {
   if (file.type.startsWith('image/')) {
-    return <ImageIcon />
+    return <PicRegular />
   }
   if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
-    return <FileTextIcon />
+    return <FileRegular />
   }
   if (file.type.includes('sheet') || /\.(csv|xlsx|xls)$/i.test(file.name)) {
-    return <FileSpreadsheetIcon />
+    return <TableRegular />
   }
   if (/\.(tsx|ts|jsx|js|json)$/i.test(file.name)) {
-    return <FileCodeIcon />
+    return <FileCodeRegular />
   }
-  return <FileIcon />
+  return <FileRegular />
 }
 
 function filesFromValue(value: unknown, multiple: boolean) {
@@ -180,7 +179,7 @@ function FormFileField({
         }}
       />
       <Button type="button" variant="outline" size="sm" onClick={() => inputRef.current?.click()}>
-        <UploadIcon />
+        <UploadRegular />
         {multiple ? 'Choose files' : 'Choose file'}
       </Button>
       {files.length ? (
@@ -201,7 +200,7 @@ function FormFileField({
                   aria-label={`Remove ${file.name}`}
                   onClick={() => setFiles(files.filter((_, itemIndex) => itemIndex !== index))}
                 >
-                  <XIcon />
+                  <CloseRegular />
                 </AttachmentAction>
               </AttachmentActions>
             </Attachment>

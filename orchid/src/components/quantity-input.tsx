@@ -1,5 +1,8 @@
 import { useEffect, useId, useRef, useState, type ComponentProps } from 'react'
-import { MinusIcon, PlusIcon } from 'lucide-react'
+import {
+  LineRegular,
+  AddRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -89,7 +92,7 @@ function QuantityInput({
         aria-label="Decrease"
         onClick={() => bump(-1)}
       >
-        <MinusIcon />
+        <LineRegular />
       </Button>
       {name ? <input type="hidden" name={name} value={numeric} /> : null}
       {editing ? (
@@ -132,7 +135,7 @@ function QuantityInput({
         aria-label="Increase"
         onClick={() => bump(1)}
       >
-        <PlusIcon />
+        <AddRegular />
       </Button>
     </div>
   )

@@ -1,6 +1,9 @@
 import type { ComponentProps, ReactNode } from 'react'
 import { cva } from 'class-variance-authority'
-import { CircleHelpIcon, TriangleIcon } from 'lucide-react'
+import {
+  QuestionRegular,
+  TriangleRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipTrigger } from '@/components/ui/tooltip'
@@ -87,7 +90,7 @@ function StatCard({
                   className="inline-flex size-4 shrink-0 items-center justify-center text-oc-muted-foreground outline-none"
                   aria-label="Info"
                 >
-                  <CircleHelpIcon className="size-4" />
+                  <QuestionRegular className="size-4" />
                 </TooltipTrigger>
                 <TooltipContent>{tooltip}</TooltipContent>
               </Tooltip>
@@ -123,7 +126,7 @@ function PercentBadge({ value, tooltip }: { value: number; tooltip?: string }) {
   const badge = (
     <span className="inline-flex shrink-0 items-center gap-1 rounded-sm border border-solid border-oc-border px-3 py-2">
       {up || down ? (
-        <TriangleIcon
+        <TriangleRegular
           className={cn(
             'size-2.5 fill-current',
             up && 'text-oc-success-strong',

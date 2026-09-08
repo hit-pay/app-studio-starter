@@ -2,7 +2,7 @@
 
 import * as React from 'react'
 import { Dialog as SheetPrimitive } from '@base-ui/react/dialog'
-import { XIcon } from 'lucide-react'
+import { CloseRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from './button'
@@ -74,7 +74,7 @@ function SheetContent({
               />
             }
           >
-            <XIcon />
+            <CloseRegular />
             <span className="sr-only">Close</span>
           </SheetPrimitive.Close>
         ) : null}

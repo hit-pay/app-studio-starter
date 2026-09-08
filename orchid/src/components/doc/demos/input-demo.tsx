@@ -1,4 +1,7 @@
-import { MailIcon, SearchIcon } from 'lucide-react'
+import {
+  MailRegular,
+  SearchRegular,
+} from '@mingcute/react/core-regular'
 import {
   Field,
   FieldDescription,
@@ -31,7 +34,7 @@ function InputDemo() {
             <FieldLabel htmlFor="customer-email">Customer email</FieldLabel>
             <InputGroup>
               <InputGroupAddon>
-                <MailIcon />
+                <MailRegular />
               </InputGroupAddon>
               <InputGroupInput id="customer-email" placeholder="alex@example.com" />
             </InputGroup>
@@ -59,7 +62,7 @@ function InputDemo() {
             <FieldLabel htmlFor="product-search">Search products</FieldLabel>
             <InputGroup>
               <InputGroupAddon>
-                <SearchIcon />
+                <SearchRegular />
               </InputGroupAddon>
               <InputGroupInput id="product-search" placeholder="Classic White Tee" />
             </InputGroup>

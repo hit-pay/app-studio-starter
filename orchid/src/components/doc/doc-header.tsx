@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
-import { MoonIcon, SunIcon } from 'lucide-react'
+import {
+  MoonRegular,
+  SunRegular,
+} from '@mingcute/react/core-regular'
 
 import { DOC_CRUMBS } from './doc-components'
 
@@ -36,7 +39,7 @@ function DocHeader() {
         onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
         className="inline-flex size-8 items-center justify-center rounded-lg text-white/70 outline-none hover:bg-white/10 hover:text-white"
       >
-        {theme === 'dark' ? <SunIcon className="size-4" /> : <MoonIcon className="size-4" />}
+        {theme === 'dark' ? <SunRegular className="size-4" /> : <MoonRegular className="size-4" />}
       </button>
     </header>
   )

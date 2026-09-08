@@ -12,7 +12,7 @@ import {
   subDays,
   subMonths,
 } from 'date-fns'
-import { CalendarIcon } from 'lucide-react'
+import { CalendarRegular } from '@mingcute/react/core-regular'
 import type { DateRange, Matcher } from 'react-day-picker'
 
 import { cn } from '@/lib/utils'
@@ -94,7 +94,7 @@ function DatePicker({
           />
         }
       >
-        <CalendarIcon data-icon="inline-start" />
+        <CalendarRegular data-icon="inline-start" />
         {date ? (
           <span className="min-w-0 truncate">{format(date, 'PPP')}</span>
         ) : (
@@ -176,7 +176,7 @@ function DateTimePicker({
           />
         }
       >
-        <CalendarIcon data-icon="inline-start" />
+        <CalendarRegular data-icon="inline-start" />
         {date ? (
           <span className="min-w-0 truncate">{format(date, 'PPp')}</span>
         ) : (
@@ -311,7 +311,7 @@ function DatePickerRange({
           />
         }
       >
-        <CalendarIcon data-icon="inline-start" />
+        <CalendarRegular data-icon="inline-start" />
         <span className="min-w-0 truncate">
           {range?.from
             ? range.to

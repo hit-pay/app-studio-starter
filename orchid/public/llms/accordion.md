@@ -7,7 +7,10 @@ Composable expand-and-collapse sections with shadcn-compatible primitives.
 ## Example
 
 ```tsx
-import { CreditCardIcon, StoreIcon } from "lucide-react";
+import {
+  BankCardRegular,
+  StoreRegular,
+} from '@mingcute/react/core-regular';
 
 import {
   Accordion,
@@ -67,7 +70,7 @@ function AccordionDemo() {
             <AccordionItem value="pos">
               <AccordionTrigger>
                 <span className="flex min-w-0 flex-1 items-center gap-2">
-                  <CreditCardIcon className="size-5 shrink-0" />
+                  <BankCardRegular className="size-5 shrink-0" />
                   <span className="flex min-w-0 flex-col items-start">
                     <span>Point of Sale</span>
                     <span className="truncate text-xs font-normal text-oc-muted-foreground">
@@ -84,7 +87,7 @@ function AccordionDemo() {
             <AccordionItem value="store">
               <AccordionTrigger>
                 <span className="flex min-w-0 flex-1 items-center gap-2">
-                  <StoreIcon className="size-5 shrink-0" />
+                  <StoreRegular className="size-5 shrink-0" />
                   <span>Online Store</span>
                   <Badge tone="purple">New</Badge>
                 </span>

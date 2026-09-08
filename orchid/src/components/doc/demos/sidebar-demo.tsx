@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import {
-  BarChart3Icon,
-  ClipboardListIcon,
-  LayoutGridIcon,
-  PackageIcon,
-  SettingsIcon,
-  ShoppingBagIcon,
-  UsersIcon,
-} from 'lucide-react'
+  ChartBarRegular,
+  ClipboardRegular,
+  LayoutGridRegular,
+  PackageRegular,
+  Settings1Regular,
+  ShoppingBag1Regular,
+  GroupRegular,
+} from '@mingcute/react/core-regular'
 
 import {
   Sidebar,
@@ -55,12 +55,12 @@ const groups: SidebarGroupConfig[] = [
 ]
 
 const icons = {
-  pos: LayoutGridIcon,
-  orders: ClipboardListIcon,
-  reports: BarChart3Icon,
-  customers: UsersIcon,
-  products: ShoppingBagIcon,
-  settings: SettingsIcon,
+  pos: LayoutGridRegular,
+  orders: ClipboardRegular,
+  reports: ChartBarRegular,
+  customers: GroupRegular,
+  products: ShoppingBag1Regular,
+  settings: Settings1Regular,
 }
 
 function SidebarDemo() {
@@ -84,7 +84,7 @@ function SidebarDemo() {
         footer={
           <div className="flex min-w-0 items-center gap-2">
             <span className="grid size-8 shrink-0 place-items-center rounded bg-oc-primary text-oc-primary-foreground">
-              <PackageIcon className="size-4" />
+              <PackageRegular className="size-4" />
             </span>
             <span className="min-w-0">
               <span className="block truncate text-xs font-medium">My Store</span>

@@ -1,5 +1,8 @@
 import { useState, type ReactNode } from "react";
-import { CheckIcon, CopyIcon } from "lucide-react";
+import {
+  CheckRegular,
+  CopyRegular,
+} from '@mingcute/react/core-regular';
 
 import { Button } from "@/components/ui/button";
 
@@ -88,7 +91,7 @@ function CopyButton({ value }: { value: string }) {
         window.setTimeout(() => setCopied(false), 1600);
       }}
     >
-      {copied ? <CheckIcon /> : <CopyIcon />}
+      {copied ? <CheckRegular /> : <CopyRegular />}
       {copied ? "Copied" : "Copy prompt"}
     </Button>
   );

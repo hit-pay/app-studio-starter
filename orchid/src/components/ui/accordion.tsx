@@ -1,5 +1,5 @@
 import { Accordion as AccordionPrimitive } from '@base-ui/react/accordion'
-import { ChevronDownIcon } from 'lucide-react'
+import { DownRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -42,7 +42,7 @@ function AccordionTrigger({
         {...props}
       >
         {children}
-        <ChevronDownIcon
+        <DownRegular
           data-slot="accordion-trigger-icon"
           className="ml-auto size-4 shrink-0 text-oc-foreground transition-transform group-data-open/accordion-item:rotate-180"
         />

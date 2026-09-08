@@ -1,7 +1,10 @@
 import type { ComponentProps, ComponentType, ReactNode } from 'react'
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
-import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import {
+  LeftRegular,
+  RightRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -118,7 +121,7 @@ function SidebarNavItem({
 }
 
 function SidebarSubmenuIndicator() {
-  return <ChevronRightIcon className="size-3.5" aria-hidden />
+  return <RightRegular className="size-3.5" aria-hidden />
 }
 
 function SidebarFooter({ className, ...props }: ComponentProps<'div'>) {
@@ -165,7 +168,7 @@ function SubSidebarHeader({
         children: (
           <>
             {showBack ? (
-              <ChevronLeftIcon className="size-4 shrink-0 text-oc-muted-foreground" />
+              <LeftRegular className="size-4 shrink-0 text-oc-muted-foreground" />
             ) : null}
             <span className="min-w-0 truncate">{children}</span>
           </>

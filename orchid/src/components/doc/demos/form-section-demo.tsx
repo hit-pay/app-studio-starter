@@ -1,4 +1,4 @@
-import { ExternalLinkIcon } from 'lucide-react'
+import { ExternalLinkRegular } from '@mingcute/react/core-regular'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
@@ -56,7 +56,7 @@ function FormSectionDemo() {
               <>
                 <Button variant="Secondary" size="Small">
                   Preview
-                  <ExternalLinkIcon />
+                  <ExternalLinkRegular />
                 </Button>
                 <Button variant="Primary" size="Small">
                   Save

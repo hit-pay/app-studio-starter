@@ -1,4 +1,9 @@
-import { FileTextIcon, PlusIcon, SearchIcon, TriangleAlertIcon } from 'lucide-react'
+import {
+  FileRegular,
+  AddRegular,
+  SearchRegular,
+  AlertRegular,
+} from '@mingcute/react/core-regular'
 import { Button } from '@/components/ui/button'
 import {
   Empty,
@@ -20,7 +25,7 @@ function EmptyDemo() {
           <Empty>
             <EmptyHeader>
               <EmptyMedia variant="icon">
-                <FileTextIcon />
+                <FileRegular />
               </EmptyMedia>
               <EmptyTitle>No invoices yet</EmptyTitle>
               <EmptyDescription>
@@ -30,7 +35,7 @@ function EmptyDemo() {
             <EmptyContent className="flex-row justify-center">
               <Button variant="outline">Learn more</Button>
               <Button>
-                <PlusIcon data-icon="inline-start" />
+                <AddRegular data-icon="inline-start" />
                 Create invoice
               </Button>
             </EmptyContent>
@@ -44,7 +49,7 @@ function EmptyDemo() {
           <Empty>
             <EmptyHeader>
               <EmptyMedia variant="search">
-                <SearchIcon />
+                <SearchRegular />
               </EmptyMedia>
               <EmptyTitle>No matching invoices</EmptyTitle>
               <EmptyDescription>
@@ -61,7 +66,7 @@ function EmptyDemo() {
           <Empty>
             <EmptyHeader>
               <EmptyMedia variant="upgrade">
-                <TriangleAlertIcon />
+                <AlertRegular />
               </EmptyMedia>
               <EmptyTitle>Upgrade to Point of Sale</EmptyTitle>
               <EmptyDescription>

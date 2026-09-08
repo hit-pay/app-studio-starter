@@ -8,7 +8,7 @@ Standard variants with Orchid tones, appearances, removal, and user roles.
 
 ```tsx
 import { useState } from 'react'
-import { CircleIcon } from 'lucide-react'
+import { CircleDashRegular } from '@mingcute/react/core-regular'
 
 import {
   Badge,
@@ -91,7 +91,7 @@ function BadgeDemo() {
                 </Badge>
               ))}
               <Badge tone={tone}>
-                <CircleIcon data-icon="inline-start" />
+                <CircleDashRegular data-icon="inline-start" />
                 {TONE_LABEL[tone]}
               </Badge>
             </div>
@@ -137,7 +137,7 @@ import {
   Badge,
   BadgeRemove,
 } from '@/components/ui/badge'
-import { CircleIcon } from 'lucide-react'
+import { CircleDashRegular } from '@mingcute/react/core-regular'
 
 <Badge>Default</Badge>
 <Badge variant="secondary">Secondary</Badge>
@@ -145,7 +145,7 @@ import { CircleIcon } from 'lucide-react'
 <Badge variant="outline">Outline</Badge>
 
 <Badge tone="green">
-  <CircleIcon data-icon="inline-start" />
+  <CircleDashRegular data-icon="inline-start" />
   Paid
 </Badge>
 

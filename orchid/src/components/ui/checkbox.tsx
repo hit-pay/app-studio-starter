@@ -4,7 +4,10 @@ import type { ReactNode } from 'react'
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
 import { CheckboxGroup as CheckboxGroupPrimitive } from '@base-ui/react/checkbox-group'
 import { cva } from 'class-variance-authority'
-import { CheckIcon, MinusIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  LineRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -76,9 +79,9 @@ function Checkbox({
         className="grid place-content-center text-current transition-none"
       >
         {props.indeterminate ? (
-          <MinusIcon className="size-2.5" />
+          <LineRegular className="size-2.5" />
         ) : (
-          <CheckIcon className="size-2.5" />
+          <CheckRegular className="size-2.5" />
         )}
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>

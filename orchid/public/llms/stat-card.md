@@ -8,16 +8,15 @@ Metric card with header divider, value, and percent badge.
 
 ```tsx
 import {
-  CircleDollarSignIcon,
-  CoinsIcon,
-  LinkIcon,
-  RepeatIcon,
-  RotateCcwIcon,
-  ShoppingBagIcon,
-  SquareCheckIcon,
-  StoreIcon,
-  UsersIcon,
-} from "lucide-react";
+  CurrencyDollarRegular,
+  LinkRegular,
+  RepeatRegular,
+  RefreshAnticlockwise1Regular,
+  ShoppingBag1Regular,
+  CheckboxRegular,
+  StoreRegular,
+  GroupRegular,
+} from '@mingcute/react/core-regular';
 import { StatCard } from "@/components/stat-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -31,7 +30,7 @@ function StatCardDemo() {
           </p>
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
             <StatCard
-              icon={<CoinsIcon />}
+              icon={<CurrencyDollarRegular />}
               iconColor="Blue"
               title="Gross volume"
               content="SGD 11,170.00"
@@ -41,7 +40,7 @@ function StatCardDemo() {
               percentTooltip="Compared to last month"
             />
             <StatCard
-              icon={<CircleDollarSignIcon />}
+              icon={<CurrencyDollarRegular />}
               iconColor="Blue"
               title="This month"
               content="SGD 1,870.00"
@@ -49,14 +48,14 @@ function StatCardDemo() {
               percentTooltip="Compared to last month"
             />
             <StatCard
-              icon={<SquareCheckIcon />}
+              icon={<CheckboxRegular />}
               iconColor="Green"
               title="Paid invoices"
               content="20"
               percentValue={12}
             />
             <StatCard
-              icon={<RotateCcwIcon />}
+              icon={<RefreshAnticlockwise1Regular />}
               iconColor="Red"
               title="Refunded"
               content="3"
@@ -70,7 +69,7 @@ function StatCardDemo() {
             Default
           </p>
           <StatCard
-            icon={<ShoppingBagIcon />}
+            icon={<ShoppingBag1Regular />}
             title="Online Store sales"
             content="SGD 12,480.00"
             info
@@ -85,7 +84,7 @@ function StatCardDemo() {
             Footer
           </p>
           <StatCard
-            icon={<UsersIcon />}
+            icon={<GroupRegular />}
             title="Customers"
             content="86"
             footer="Customer Data updated just now"
@@ -98,21 +97,21 @@ function StatCardDemo() {
           </p>
           <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3">
             <StatCard
-              icon={<LinkIcon />}
+              icon={<LinkRegular />}
               iconColor="Blue"
               title="Payment Links"
               content="SGD 4,260.00"
               percentValue={8}
             />
             <StatCard
-              icon={<RepeatIcon />}
+              icon={<RepeatRegular />}
               iconColor="Green"
               title="Recurring"
               content="SGD 2,140.00"
               percentValue={6}
             />
             <StatCard
-              icon={<StoreIcon />}
+              icon={<StoreRegular />}
               iconColor="Blue"
               title="Point of Sale"
               content="SGD 3,890.00"
@@ -131,13 +130,13 @@ export { StatCardDemo };
 ## Usage
 
 ```tsx
-import { CoinsIcon } from "lucide-react";
+import { CurrencyDollarRegular } from '@mingcute/react/core-regular';
 import { StatCard } from "@/components/stat-card";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 <TooltipProvider>
   <StatCard
-    icon={<CoinsIcon />}
+    icon={<CurrencyDollarRegular />}
     iconColor="Blue"
     title="Gross volume"
     content="SGD 11,170.00"

@@ -1,13 +1,12 @@
 import { useEffect, useId, useRef, useState } from 'react'
 import {
-  FileCodeIcon,
-  FileIcon,
-  FileSpreadsheetIcon,
-  FileTextIcon,
-  ImageIcon,
-  UploadIcon,
-  XIcon,
-} from 'lucide-react'
+  FileCodeRegular,
+  FileRegular,
+  TableRegular,
+  PicRegular,
+  UploadRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
 
 import {
   Attachment,
@@ -59,15 +58,15 @@ function fileKind(file: File) {
 function FileGlyph({ file }: { file: File }) {
   switch (fileKind(file)) {
     case 'image':
-      return <ImageIcon />
+      return <PicRegular />
     case 'pdf':
-      return <FileTextIcon />
+      return <FileRegular />
     case 'sheet':
-      return <FileSpreadsheetIcon />
+      return <TableRegular />
     case 'code':
-      return <FileCodeIcon />
+      return <FileCodeRegular />
     default:
-      return <FileIcon />
+      return <FileRegular />
   }
 }
 
@@ -170,7 +169,7 @@ function UploadItemCard({
       </AttachmentContent>
       <AttachmentActions>
         <AttachmentAction aria-label={`Remove ${item.file.name}`} onClick={onRemove}>
-          <XIcon />
+          <CloseRegular />
         </AttachmentAction>
       </AttachmentActions>
     </Attachment>
@@ -203,7 +202,7 @@ function FilePicker({
         }}
       />
       <Button type="button" variant="outline" size="sm" onClick={() => inputRef.current?.click()}>
-        <UploadIcon />
+        <UploadRegular />
         {multiple ? 'Choose files' : 'Choose file'}
       </Button>
     </>

@@ -1,7 +1,10 @@
 import type { ComponentProps, ReactNode } from 'react'
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
-import { ChevronRightIcon, EllipsisIcon } from 'lucide-react'
+import {
+  RightRegular,
+  More1Regular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -88,7 +91,7 @@ function BreadcrumbSeparator({
       )}
       {...props}
     >
-      {children ?? <ChevronRightIcon />}
+      {children ?? <RightRegular />}
     </li>
   )
 }
@@ -102,7 +105,7 @@ function BreadcrumbEllipsis({ className, ...props }: ComponentProps<'span'>) {
       className={cn('inline-flex size-6 items-center justify-center text-oc-muted-foreground', className)}
       {...props}
     >
-      <EllipsisIcon className="size-4" />
+      <More1Regular className="size-4" />
       <span className="sr-only">More</span>
     </span>
   )

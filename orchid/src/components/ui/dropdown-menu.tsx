@@ -3,7 +3,10 @@
 import * as React from 'react'
 import { Menu as MenuPrimitive } from '@base-ui/react/menu'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { CheckIcon, ChevronRightIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  RightRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -136,7 +139,7 @@ function DropdownMenuSubTrigger({
       {...props}
     >
       {children}
-      <ChevronRightIcon className="ml-auto" />
+      <RightRegular className="ml-auto" />
     </MenuPrimitive.SubmenuTrigger>
   )
 }
@@ -187,7 +190,7 @@ function DropdownMenuCheckboxItem({
         data-slot="dropdown-menu-checkbox-item-indicator"
       >
         <MenuPrimitive.CheckboxItemIndicator>
-          <CheckIcon
+          <CheckRegular
           />
         </MenuPrimitive.CheckboxItemIndicator>
       </span>
@@ -228,7 +231,7 @@ function DropdownMenuRadioItem({
         data-slot="dropdown-menu-radio-item-indicator"
       >
         <MenuPrimitive.RadioItemIndicator>
-          <CheckIcon
+          <CheckRegular
           />
         </MenuPrimitive.RadioItemIndicator>
       </span>

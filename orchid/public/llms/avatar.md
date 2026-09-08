@@ -7,7 +7,7 @@ Image, fallback, badge, and group primitives with Orchid styling.
 ## Example
 
 ```tsx
-import { CheckIcon } from "lucide-react";
+import { CheckRegular } from '@mingcute/react/core-regular';
 
 import {
   Avatar,
@@ -73,13 +73,13 @@ function AvatarDemo() {
             <AvatarImage src={PHOTO} alt="Priya Nair" />
             <AvatarFallback>PN</AvatarFallback>
             <AvatarBadge>
-              <CheckIcon />
+              <CheckRegular />
             </AvatarBadge>
           </Avatar>
           <Avatar size="lg">
             <AvatarFallback>AT</AvatarFallback>
             <AvatarBadge>
-              <CheckIcon />
+              <CheckRegular />
             </AvatarBadge>
           </Avatar>
         </div>

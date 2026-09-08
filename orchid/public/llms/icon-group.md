@@ -7,7 +7,10 @@ Icon cluster with Default and Border; dropdown, link, and copy.
 ## Example
 
 ```tsx
-import { CopyIcon, SquareArrowOutUpRightIcon } from "lucide-react";
+import {
+  CopyRegular,
+  ArrowRightUpRegular,
+} from '@mingcute/react/core-regular';
 import { IconGroup, type IconGroupItem } from "@/components/icon-group";
 
 const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
@@ -34,12 +37,12 @@ function ExampleGroup({ style }: { style?: "Default" | "Border" }) {
       key: "open",
       href: paymentLink,
       label: "Open payment link",
-      icon: <SquareArrowOutUpRightIcon />,
+      icon: <ArrowRightUpRegular />,
     },
     {
       key: "copy",
       label: "Copy payment link",
-      icon: <CopyIcon />,
+      icon: <CopyRegular />,
       onClick: () => void navigator.clipboard.writeText(paymentLink),
     },
   ];
@@ -70,12 +73,12 @@ function InvoiceGroup() {
       key: "open",
       href: `https://hitpay.shop/invoices/${invoiceNumber}`,
       label: "Open invoice",
-      icon: <SquareArrowOutUpRightIcon />,
+      icon: <ArrowRightUpRegular />,
     },
     {
       key: "copy",
       label: "Copy invoice number",
-      icon: <CopyIcon />,
+      icon: <CopyRegular />,
       onClick: () => void navigator.clipboard.writeText(invoiceNumber),
     },
   ];
@@ -116,8 +119,8 @@ export { IconGroupDemo };
 ## Usage
 
 ```tsx
-import { SquareArrowOutUpRightIcon } from "lucide-react";
-import { CopyIcon } from "lucide-react";
+import { ArrowRightUpRegular } from '@mingcute/react/core-regular';
+import { CopyRegular } from '@mingcute/react/core-regular';
 import { IconGroup } from "@/components/icon-group";
 
 <IconGroup
@@ -142,12 +145,12 @@ import { IconGroup } from "@/components/icon-group";
       key: "open",
       href: "/invoice",
       label: "Open invoice",
-      icon: <SquareArrowOutUpRightIcon />,
+      icon: <ArrowRightUpRegular />,
     },
     {
       key: "copy",
       label: "Copy invoice number",
-      icon: <CopyIcon />,
+      icon: <CopyRegular />,
       onClick: () => navigator.clipboard.writeText("INV-2026-0842"),
     },
   ]}

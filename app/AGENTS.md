@@ -171,6 +171,7 @@ Do not invent a parallel UI kit or overwrite files under `src/components/` or `s
 Starter wiring only:
 
 - Drive multi-field forms with `SchemaForm` (submit through `formId`). Drive searchable lists with `SchemaTable`. Do not wrap `SchemaTable` in `Card` or another bordered box.
+- Import icons from `@mingcute/react/core-regular` using Mingcute names (`SearchRegular`, `AddRegular`). Do not add `lucide-react` or an icon alias file.
 - Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Do not add Sonner or a second toast/confirm provider.
 - Use `oc-*` tokens from `src/styles.css`. If a prop value is unclear, the component source wins over habit (some items still use PascalCase aliases).
 

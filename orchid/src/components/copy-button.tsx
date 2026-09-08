@@ -1,5 +1,5 @@
 import { useState, type ComponentProps } from 'react'
-import { CopyIcon } from 'lucide-react'
+import { CopyRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip'
@@ -38,7 +38,7 @@ function CopyButton({
               }}
               {...props}
             >
-              <CopyIcon />
+              <CopyRegular />
             </button>
           }
         />

@@ -8,13 +8,13 @@ Selectable cards with left or center icon, no radio dot.
 
 ```tsx
 import {
-  CreditCardIcon,
-  LinkIcon,
-  QrCodeIcon,
-  RepeatIcon,
-  ShoppingBagIcon,
-  StoreIcon,
-} from "lucide-react";
+  BankCardRegular,
+  LinkRegular,
+  QrcodeRegular,
+  RepeatRegular,
+  ShoppingBag1Regular,
+  StoreRegular,
+} from '@mingcute/react/core-regular';
 import { ChoiceCard, ChoiceCardGroup } from "@/components/choice-card";
 
 function ChoiceCardDemo() {
@@ -29,7 +29,7 @@ function ChoiceCardDemo() {
             value="paynow"
             alignment="Left"
             iconAlign="Left"
-            icon={<QrCodeIcon />}
+            icon={<QrcodeRegular />}
             title="PayNow"
             description="Instant SGD transfers via QR"
           />
@@ -37,7 +37,7 @@ function ChoiceCardDemo() {
             value="cards"
             alignment="Left"
             iconAlign="Left"
-            icon={<CreditCardIcon />}
+            icon={<BankCardRegular />}
             title="Cards"
             description="Visa, Mastercard, and AMEX"
           />
@@ -45,7 +45,7 @@ function ChoiceCardDemo() {
             value="link"
             alignment="Left"
             iconAlign="Left"
-            icon={<LinkIcon />}
+            icon={<LinkRegular />}
             title="Payment Link"
             description="Share a checkout URL with the customer"
           />
@@ -61,7 +61,7 @@ function ChoiceCardDemo() {
             value="invoice"
             alignment="Center"
             iconAlign="Center"
-            icon={<ShoppingBagIcon />}
+            icon={<ShoppingBag1Regular />}
             title="Invoice"
             description="INV-2026"
             className="flex-1"
@@ -70,7 +70,7 @@ function ChoiceCardDemo() {
             value="recurring"
             alignment="Center"
             iconAlign="Center"
-            icon={<RepeatIcon />}
+            icon={<RepeatRegular />}
             title="Recurring"
             description="Subscriptions"
             className="flex-1"
@@ -79,7 +79,7 @@ function ChoiceCardDemo() {
             value="pos"
             alignment="Center"
             iconAlign="Center"
-            icon={<StoreIcon />}
+            icon={<StoreRegular />}
             title="Point of Sale"
             description="In-store"
             className="flex-1"
@@ -96,7 +96,7 @@ function ChoiceCardDemo() {
             value="online-store"
             alignment="Left"
             iconAlign="Left"
-            icon={<ShoppingBagIcon />}
+            icon={<ShoppingBag1Regular />}
             title="Online Store"
             description="Sell SKUs on your HitPay storefront"
           />
@@ -104,7 +104,7 @@ function ChoiceCardDemo() {
             value="pos"
             alignment="Left"
             iconAlign="Left"
-            icon={<StoreIcon />}
+            icon={<StoreRegular />}
             title="Point of Sale"
             description="Collect SGD at the counter with Cards or PayNow"
           />
@@ -120,19 +120,22 @@ export { ChoiceCardDemo };
 ## Usage
 
 ```tsx
-import { CreditCardIcon, QrCodeIcon } from "lucide-react";
+import {
+  BankCardRegular,
+  QrcodeRegular,
+} from '@mingcute/react/core-regular';
 import { ChoiceCard, ChoiceCardGroup } from "@/components/choice-card";
 
 <ChoiceCardGroup defaultValue="paynow">
   <ChoiceCard
     value="paynow"
-    icon={<QrCodeIcon />}
+    icon={<QrcodeRegular />}
     title="PayNow"
     description="Instant SGD transfers via QR"
   />
   <ChoiceCard
     value="cards"
-    icon={<CreditCardIcon />}
+    icon={<BankCardRegular />}
     title="Cards"
     description="Visa, Mastercard, and AMEX"
   />

@@ -1,4 +1,7 @@
-import { SmartphoneIcon, MonitorIcon } from "lucide-react";
+import {
+  CellphoneRegular,
+  MonitorRegular,
+} from '@mingcute/react/core-regular';
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 function TabsDemo() {
@@ -38,11 +41,11 @@ function TabsDemo() {
         <Tabs defaultValue="pos">
           <TabsList>
             <TabsTrigger value="pos">
-              <SmartphoneIcon data-icon="inline-start" />
+              <CellphoneRegular data-icon="inline-start" />
               Point of Sale
             </TabsTrigger>
             <TabsTrigger value="store">
-              <MonitorIcon data-icon="inline-start" />
+              <MonitorRegular data-icon="inline-start" />
               Online Store
             </TabsTrigger>
           </TabsList>

@@ -8,7 +8,11 @@ shadcn-compatible cmdk palette with keyboard navigation and Orchid styling.
 
 ```tsx
 import { useState } from "react";
-import { FileTextIcon, StoreIcon, UserIcon } from "lucide-react";
+import {
+  FileRegular,
+  StoreRegular,
+  User3Regular,
+} from '@mingcute/react/core-regular';
 import { Button } from "@/components/ui/button";
 import {
   Command,
@@ -51,7 +55,7 @@ function CommandDemo() {
                   keywords={["billing"]}
                   onSelect={go}
                 >
-                  <FileTextIcon className="size-4 text-oc-muted-foreground" />
+                  <FileRegular className="size-4 text-oc-muted-foreground" />
                   Invoices
                   <CommandShortcut>I</CommandShortcut>
                 </CommandItem>
@@ -60,14 +64,14 @@ function CommandDemo() {
                   keywords={["pos", "store"]}
                   onSelect={go}
                 >
-                  <StoreIcon className="size-4 text-oc-muted-foreground" />
+                  <StoreRegular className="size-4 text-oc-muted-foreground" />
                   Outlets
                 </CommandItem>
               </CommandGroup>
               <CommandSeparator />
               <CommandGroup heading="Customers">
                 <CommandItem value="alex turner" onSelect={go}>
-                  <UserIcon className="size-4 text-oc-muted-foreground" />
+                  <User3Regular className="size-4 text-oc-muted-foreground" />
                   Alex Turner
                 </CommandItem>
               </CommandGroup>

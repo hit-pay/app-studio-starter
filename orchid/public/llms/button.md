@@ -7,7 +7,12 @@ Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 ## Example
 
 ```tsx
-import { ArrowUpRightIcon, CircleIcon, PlusIcon, Trash2Icon } from 'lucide-react'
+import {
+  ArrowRightUpRegular,
+  CircleDashRegular,
+  AddRegular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular'
 
 import { Button } from '@/components/ui/button'
 
@@ -25,7 +30,7 @@ function ButtonDemo() {
         <div className="flex flex-wrap items-center gap-3">
           {VARIANTS.map((variant) => (
             <Button key={variant} variant={variant}>
-              {variant === 'destructive' ? <Trash2Icon data-icon="inline-start" /> : null}
+              {variant === 'destructive' ? <Delete2Regular data-icon="inline-start" /> : null}
               {variant}
             </Button>
           ))}
@@ -39,7 +44,7 @@ function ButtonDemo() {
         <div className="flex flex-wrap items-center gap-3">
           {SIZES.map((size) => (
             <Button key={size} size={size}>
-              <CircleIcon data-icon="inline-start" />
+              <CircleDashRegular data-icon="inline-start" />
               {size}
             </Button>
           ))}
@@ -53,7 +58,7 @@ function ButtonDemo() {
         <div className="flex flex-wrap items-center gap-3">
           {ICON_SIZES.map((size) => (
             <Button key={size} size={size} aria-label={`Add with ${size} button`}>
-              <PlusIcon />
+              <AddRegular />
             </Button>
           ))}
         </div>
@@ -65,7 +70,7 @@ function ButtonDemo() {
         </p>
         <Button variant="outline" render={<a href="#sizes" />}>
           Review sizes
-          <ArrowUpRightIcon data-icon="inline-end" />
+          <ArrowRightUpRegular data-icon="inline-end" />
         </Button>
       </div>
 
@@ -94,7 +99,7 @@ export { ButtonDemo }
 
 ```tsx
 import { Button } from '@/components/ui/button'
-import { PlusIcon } from 'lucide-react'
+import { AddRegular } from '@mingcute/react/core-regular'
 
 <Button>Create invoice</Button>
 <Button variant="outline">View details</Button>
@@ -104,7 +109,7 @@ import { PlusIcon } from 'lucide-react'
 <Button variant="link">View documentation</Button>
 
 <Button size="icon" aria-label="Create invoice">
-  <PlusIcon />
+  <AddRegular />
 </Button>
 
 <Button render={<a href="/invoices" />}>

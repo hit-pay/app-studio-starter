@@ -9,7 +9,11 @@ import {
   type Locale,
   type MonthCaptionProps,
 } from 'react-day-picker'
-import { ChevronDownIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
+import {
+  DownRegular,
+  LeftRegular,
+  RightRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button, buttonVariants } from './button'
@@ -134,14 +138,14 @@ function Calendar({
         },
         Chevron: ({ className, orientation, ...props }) => {
           if (orientation === 'left') {
-            return <ChevronLeftIcon className={cn('size-5', className)} {...props} />
+            return <LeftRegular className={cn('size-5', className)} {...props} />
           }
 
           if (orientation === 'right') {
-            return <ChevronRightIcon className={cn('size-5', className)} {...props} />
+            return <RightRegular className={cn('size-5', className)} {...props} />
           }
 
-          return <ChevronDownIcon className={cn('size-4', className)} {...props} />
+          return <DownRegular className={cn('size-4', className)} {...props} />
         },
         DayButton: ({ ...props }) => <CalendarDayButton locale={locale} {...props} />,
         ...(captionLayout === 'dropdown' ? { MonthCaption: CalendarMonthCaption } : {}),
@@ -283,7 +287,7 @@ function CalendarMonthCaption({
                 )
               }
             >
-              <ChevronLeftIcon className="size-4" />
+              <LeftRegular className="size-4" />
             </button>
             {view === 'months' ? (
               <button
@@ -313,7 +317,7 @@ function CalendarMonthCaption({
                 )
               }
             >
-              <ChevronRightIcon className="size-4" />
+              <RightRegular className="size-4" />
             </button>
           </div>
           {view === 'months' ? (

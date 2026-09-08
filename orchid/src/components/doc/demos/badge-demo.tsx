@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { CircleIcon } from 'lucide-react'
+import { CircleDashRegular } from '@mingcute/react/core-regular'
 
 import {
   Badge,
@@ -82,7 +82,7 @@ function BadgeDemo() {
                 </Badge>
               ))}
               <Badge tone={tone}>
-                <CircleIcon data-icon="inline-start" />
+                <CircleDashRegular data-icon="inline-start" />
                 {TONE_LABEL[tone]}
               </Badge>
             </div>

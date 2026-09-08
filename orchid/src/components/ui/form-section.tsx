@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react'
-import { CircleHelpIcon } from 'lucide-react'
+import { QuestionRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Tooltip, TooltipContent, TooltipTrigger } from './tooltip'
@@ -11,7 +11,7 @@ function SectionHint({ hint }: { hint: string }) {
         className="inline-flex size-4 shrink-0 cursor-pointer items-center justify-center text-oc-muted-foreground outline-none"
         aria-label="Info"
       >
-        <CircleHelpIcon className="size-4" />
+        <QuestionRegular className="size-4" />
       </TooltipTrigger>
       <TooltipContent>{hint}</TooltipContent>
     </Tooltip>

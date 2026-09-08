@@ -1,9 +1,9 @@
 import {
-  CheckCircleIcon,
-  InfoIcon,
-  TriangleAlertIcon,
-  XCircleIcon,
-} from "lucide-react";
+  CheckCircleRegular,
+  InformationRegular,
+  AlertRegular,
+  CloseCircleRegular,
+} from '@mingcute/react/core-regular';
 
 import {
   Alert,
@@ -22,7 +22,7 @@ function AlertDemo() {
             Default
           </p>
           <Alert>
-            <InfoIcon />
+            <InformationRegular />
             <AlertTitle>PayNow delay</AlertTitle>
             <AlertDescription>
               Payments may take longer than usual. Consider using Cards or
@@ -36,7 +36,7 @@ function AlertDemo() {
             Success
           </p>
           <Alert variant="success">
-            <CheckCircleIcon />
+            <CheckCircleRegular />
             <AlertTitle>Payment received</AlertTitle>
             <AlertDescription>
               SGD 128.00 for INV-2048 was paid successfully through PayNow.
@@ -49,7 +49,7 @@ function AlertDemo() {
             Warning
           </p>
           <Alert variant="warning">
-            <TriangleAlertIcon />
+            <AlertRegular />
             <AlertTitle>Low stock</AlertTitle>
             <AlertDescription>
               SKU-TEA-12 has 3 units remaining. Restock before the weekend
@@ -63,7 +63,7 @@ function AlertDemo() {
             Destructive
           </p>
           <Alert variant="destructive">
-            <XCircleIcon />
+            <CloseCircleRegular />
             <AlertTitle>Refund failed</AlertTitle>
             <AlertDescription>
               We could not refund SGD 48.00 on INV-2048. Retry or contact the
@@ -79,7 +79,7 @@ function AlertDemo() {
             Default action
           </p>
           <Alert>
-            <InfoIcon />
+            <InformationRegular />
             <AlertTitle>PayNow delay</AlertTitle>
             <AlertDescription>
               Payments may take longer than usual.
@@ -97,7 +97,7 @@ function AlertDemo() {
             Bottom action
           </p>
           <Alert variant="success">
-            <CheckCircleIcon />
+            <CheckCircleRegular />
             <AlertTitle>Invoice created</AlertTitle>
             <AlertDescription>
               INV-2048 for SGD 128.00 was created and sent to Priya Nair.
@@ -117,7 +117,7 @@ function AlertDemo() {
           Above page header
         </p>
         <Alert>
-          <InfoIcon />
+          <InformationRegular />
           <AlertTitle>Scheduled maintenance</AlertTitle>
           <AlertDescription>
             Dashboard reporting may be delayed between 02:00 and 02:30 SGT.

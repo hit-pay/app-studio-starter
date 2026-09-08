@@ -1,6 +1,6 @@
 import type { ComponentProps, MouseEventHandler, ReactNode } from "react";
 import { cva } from "class-variance-authority";
-import { EllipsisIcon } from "lucide-react";
+import { More1Regular } from '@mingcute/react/core-regular';
 
 import { cn } from "@/lib/utils";
 import {
@@ -117,7 +117,7 @@ function IconGroupAction({ item }: { item: IconGroupItem }) {
           className={cn(iconGroupItemVariants(), item.className)}
           render={
             <button type="button" aria-label={label} title={label}>
-              {item.icon ?? <EllipsisIcon />}
+              {item.icon ?? <More1Regular />}
             </button>
           }
         />

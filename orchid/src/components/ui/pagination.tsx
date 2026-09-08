@@ -1,5 +1,9 @@
 import * as React from 'react'
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from 'lucide-react'
+import {
+  LeftRegular,
+  RightRegular,
+  More1Regular,
+} from '@mingcute/react/core-regular'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
@@ -71,7 +75,7 @@ function PaginationPrevious({
       className={cn('pl-1.5!', className)}
       {...props}
     >
-      <ChevronLeftIcon data-icon="inline-start" />
+      <LeftRegular data-icon="inline-start" />
       <span className="hidden sm:block">{text}</span>
     </PaginationLink>
   )
@@ -90,7 +94,7 @@ function PaginationNext({
       {...props}
     >
       <span className="hidden sm:block">{text}</span>
-      <ChevronRightIcon data-icon="inline-end" />
+      <RightRegular data-icon="inline-end" />
     </PaginationLink>
   )
 }
@@ -107,7 +111,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'
       )}
       {...props}
     >
-      <MoreHorizontalIcon />
+      <More1Regular />
       <span className="sr-only">More pages</span>
     </span>
   )

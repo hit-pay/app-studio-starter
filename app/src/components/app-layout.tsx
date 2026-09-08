@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, type ComponentProps, type ReactNode } from 'react'
-import { MenuIcon } from 'lucide-react'
+import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -112,7 +112,7 @@ function AppLayout({
               aria-label="Open navigation"
               onClick={() => setSidebarOpen(true)}
             >
-              <MenuIcon />
+              <MenuRegular />
             </Button>
           ) : null}
           {appName ? <span className="min-w-0 truncate">{appName}</span> : null}

@@ -2,7 +2,7 @@ import type { ComponentProps } from 'react'
 import { mergeProps } from '@base-ui/react/merge-props'
 import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { XCircleIcon } from 'lucide-react'
+import { CloseCircleRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -151,7 +151,7 @@ function BadgeRemove({
       )}
       {...props}
     >
-      {children ?? <XCircleIcon className="size-4.5" />}
+      {children ?? <CloseCircleRegular className="size-4.5" />}
     </button>
   )
 }

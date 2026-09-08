@@ -1,5 +1,8 @@
 import { useState } from 'react'
-import { CheckIcon, CopyIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  CopyRegular,
+} from '@mingcute/react/core-regular'
 
 import { Button } from '@/components/ui/button'
 
@@ -26,7 +29,7 @@ function DocCodePanel({
             window.setTimeout(() => setCopied(false), 1600)
           }}
         >
-          {copied ? <CheckIcon /> : <CopyIcon />}
+          {copied ? <CheckRegular /> : <CopyRegular />}
           {copied ? 'Copied' : 'Copy'}
         </Button>
       </div>

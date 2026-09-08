@@ -11,7 +11,12 @@ import {
   type ReactElement,
 } from 'react'
 import { Combobox as ComboboxPrimitive } from '@base-ui/react/combobox'
-import { CheckIcon, ChevronDownIcon, MinusIcon, XIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  DownRegular,
+  LineRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { checkboxControlVariants } from './checkbox'
@@ -110,7 +115,7 @@ function ComboboxTrigger({ className, children, ...props }: ComboboxPrimitive.Tr
       {...props}
     >
       {children}
-      <ChevronDownIcon className="pointer-events-none size-4 text-oc-muted-foreground" />
+      <DownRegular className="pointer-events-none size-4 text-oc-muted-foreground" />
     </ComboboxPrimitive.Trigger>
   )
 }
@@ -123,7 +128,7 @@ function ComboboxClear({ className, ...props }: ComboboxPrimitive.Clear.Props) {
       render={<InputGroupButton variant="ghost" size="icon-xs" />}
       {...props}
     >
-      <XIcon className="pointer-events-none" />
+      <CloseRegular className="pointer-events-none" />
     </ComboboxPrimitive.Clear>
   )
 }
@@ -239,14 +244,14 @@ function ComboboxItem({
           )}
         >
           <ComboboxPrimitive.ItemIndicator className="flex items-center justify-center text-current">
-            <CheckIcon className="size-2.5" />
+            <CheckRegular className="size-2.5" />
           </ComboboxPrimitive.ItemIndicator>
         </span>
       ) : null}
       {children}
       {checkbox ? null : (
         <ComboboxPrimitive.ItemIndicator className="pointer-events-none absolute right-2 flex items-center justify-center text-oc-primary">
-          <CheckIcon className="size-4" />
+          <CheckRegular className="size-4" />
         </ComboboxPrimitive.ItemIndicator>
       )}
     </ComboboxPrimitive.Item>
@@ -293,9 +298,9 @@ function ComboboxSelectAll({
         data-indeterminate={someSelected || undefined}
       >
         {allSelected ? (
-          <CheckIcon className="size-2.5" />
+          <CheckRegular className="size-2.5" />
         ) : someSelected ? (
-          <MinusIcon className="size-2.5" />
+          <LineRegular className="size-2.5" />
         ) : null}
       </span>
       {children}

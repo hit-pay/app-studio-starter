@@ -7,7 +7,7 @@ shadcn-compatible expand-and-collapse primitives with Orchid styling.
 ## Example
 
 ```tsx
-import { ChevronDownIcon } from "lucide-react";
+import { DownRegular } from '@mingcute/react/core-regular';
 import { Checkbox, CheckboxGroup } from "@/components/ui/checkbox";
 import {
   Collapsible,
@@ -28,7 +28,7 @@ function CollapsibleDemo() {
           <Collapsible>
             <CollapsibleTrigger>
               Advanced
-              <ChevronDownIcon className="size-4 shrink-0 text-oc-muted-foreground transition-transform group-data-open/collapsible:rotate-180" />
+              <DownRegular className="size-4 shrink-0 text-oc-muted-foreground transition-transform group-data-open/collapsible:rotate-180" />
             </CollapsibleTrigger>
             <CollapsibleContent className="flex flex-col gap-3">
               <Field>
@@ -49,7 +49,7 @@ function CollapsibleDemo() {
           <Collapsible defaultOpen>
             <CollapsibleTrigger>
               Filters
-              <ChevronDownIcon className="size-4 shrink-0 text-oc-muted-foreground transition-transform group-data-open/collapsible:rotate-180" />
+              <DownRegular className="size-4 shrink-0 text-oc-muted-foreground transition-transform group-data-open/collapsible:rotate-180" />
             </CollapsibleTrigger>
             <CollapsibleContent>
               <CheckboxGroup defaultValue={["paid"]}>
@@ -76,7 +76,7 @@ export { CollapsibleDemo };
 ## Usage
 
 ```tsx
-import { ChevronDownIcon } from "lucide-react";
+import { DownRegular } from '@mingcute/react/core-regular';
 import {
   Collapsible,
   CollapsibleContent,
@@ -86,7 +86,7 @@ import {
 <Collapsible>
   <CollapsibleTrigger>
     Advanced
-    <ChevronDownIcon className="size-4 transition-transform group-data-open/collapsible:rotate-180" />
+    <DownRegular className="size-4 transition-transform group-data-open/collapsible:rotate-180" />
   </CollapsibleTrigger>
   <CollapsibleContent>{/* optional fields */}</CollapsibleContent>
 </Collapsible>;

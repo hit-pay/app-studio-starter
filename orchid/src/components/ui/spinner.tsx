@@ -1,11 +1,11 @@
 import * as React from 'react'
-import { Loader2Icon } from 'lucide-react'
+import { LoadingRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
-function Spinner({ className, ...props }: React.ComponentProps<typeof Loader2Icon>) {
+function Spinner({ className, ...props }: React.ComponentProps<typeof LoadingRegular>) {
   return (
-    <Loader2Icon
+    <LoadingRegular
       data-slot="spinner"
       role="status"
       aria-label="Loading"

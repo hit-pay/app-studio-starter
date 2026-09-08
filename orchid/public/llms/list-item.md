@@ -7,7 +7,13 @@ Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.
 ## Example
 
 ```tsx
-import { LandmarkIcon, MapPinIcon, CircleDollarSignIcon, PencilIcon, Trash2Icon } from 'lucide-react'
+import {
+  BankRegular,
+  MapPinRegular,
+  CurrencyDollarRegular,
+  PencilRegular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
@@ -51,9 +57,9 @@ function ListItemDemo() {
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
             <ListItemMeta>
-              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-              <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
+              <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CurrencyDollarRegular />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<BankRegular />}>***3123</ListItemDetail>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -67,8 +73,8 @@ function ListItemDemo() {
               <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
             </div>
             <ListItemMeta>
-              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CurrencyDollarRegular />}>SGD</ListItemDetail>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -100,17 +106,17 @@ function ListItemDemo() {
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
             <ListItemMeta>
-              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-              <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
+              <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CurrencyDollarRegular />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<BankRegular />}>***3123</ListItemDetail>
             </ListItemMeta>
             <ListItemHoverActions>
               <ListItemAction aria-label="Edit">
-                <PencilIcon className="size-4" />
+                <PencilRegular className="size-4" />
               </ListItemAction>
               <ListItemActionDivider />
               <ListItemAction aria-label="Delete" destructive>
-                <Trash2Icon className="size-4" />
+                <Delete2Regular className="size-4" />
               </ListItemAction>
             </ListItemHoverActions>
           </ListItemBody>
@@ -127,9 +133,9 @@ function ListItemDemo() {
               <ListItemDescription>Alex Turner</ListItemDescription>
             </div>
             <ListItemMeta>
-              <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
-              <ListItemDetail icon={<CircleDollarSignIcon />}>SGD</ListItemDetail>
-              <ListItemDetail icon={<LandmarkIcon />}>***3123</ListItemDetail>
+              <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
+              <ListItemDetail icon={<CurrencyDollarRegular />}>SGD</ListItemDetail>
+              <ListItemDetail icon={<BankRegular />}>***3123</ListItemDetail>
             </ListItemMeta>
           </ListItemBody>
         </ListItem>
@@ -285,11 +291,11 @@ function ListItemDemo() {
           <ListItemTrailing>
             <ListItemHoverActions className="static flex">
               <ListItemAction aria-label="Edit">
-                <PencilIcon className="size-4" />
+                <PencilRegular className="size-4" />
               </ListItemAction>
               <ListItemActionDivider />
               <ListItemAction aria-label="Delete" destructive>
-                <Trash2Icon className="size-4" />
+                <Delete2Regular className="size-4" />
               </ListItemAction>
             </ListItemHoverActions>
             <Button variant="Primary" size="Default">
@@ -319,20 +325,23 @@ import {
   ListItemAction,
 } from '@/components/ui/list-item'
 import { Badge } from '@/components/ui/badge'
-import { MapPinIcon, PencilIcon } from 'lucide-react'
+import {
+  MapPinRegular,
+  PencilRegular,
+} from '@mingcute/react/core-regular'
 
 <ListItem>
   <ListItemBody>
     <ListItemTitle>Priya Nair</ListItemTitle>
     <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
     <ListItemMeta>
-      <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+      <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
       <Badge tone="green">Paid</Badge>
     </ListItemMeta>
   </ListItemBody>
   <ListItemHoverActions>
     <ListItemAction aria-label="Edit">
-      <PencilIcon />
+      <PencilRegular />
     </ListItemAction>
   </ListItemHoverActions>
 </ListItem>

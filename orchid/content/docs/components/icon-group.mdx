@@ -5,8 +5,8 @@ import { IconGroupDemo } from "../../../src/components/doc/demos/icon-group-demo
 ## Usage
 
 ```tsx
-import { SquareArrowOutUpRightIcon } from "lucide-react";
-import { CopyIcon } from "lucide-react";
+import { ArrowRightUpRegular } from '@mingcute/react/core-regular';
+import { CopyRegular } from '@mingcute/react/core-regular';
 import { IconGroup } from "@/components/icon-group";
 
 <IconGroup
@@ -31,12 +31,12 @@ import { IconGroup } from "@/components/icon-group";
       key: "open",
       href: "/invoice",
       label: "Open invoice",
-      icon: <SquareArrowOutUpRightIcon />,
+      icon: <ArrowRightUpRegular />,
     },
     {
       key: "copy",
       label: "Copy invoice number",
-      icon: <CopyIcon />,
+      icon: <CopyRegular />,
       onClick: () => navigator.clipboard.writeText("INV-2026-0842"),
     },
   ]}

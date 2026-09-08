@@ -8,7 +8,11 @@ import {
   type ReactNode,
 } from 'react'
 import { Select as SelectPrimitive } from '@base-ui/react/select'
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  DownRegular,
+  UpRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 
@@ -111,7 +115,7 @@ function SelectTrigger({
       {children}
       <SelectPrimitive.Icon
         render={
-          <ChevronDownIcon
+          <DownRegular
             className={cn(
               'pointer-events-none shrink-0 text-oc-muted-foreground transition-transform group-data-open/select-trigger:rotate-180',
               size === 'Inline' ? 'size-3.5' : 'size-4',
@@ -196,7 +200,7 @@ function SelectItem({ className, children, ...props }: SelectPrimitive.Item.Prop
           <span className="pointer-events-none absolute right-2 flex size-4 items-center justify-center text-oc-primary" />
         }
       >
-        <CheckIcon />
+        <CheckRegular />
       </SelectPrimitive.ItemIndicator>
     </SelectPrimitive.Item>
   )
@@ -225,7 +229,7 @@ function SelectScrollUpButton({
       )}
       {...props}
     >
-      <ChevronUpIcon className="size-4" />
+      <UpRegular className="size-4" />
     </SelectPrimitive.ScrollUpArrow>
   )
 }
@@ -243,7 +247,7 @@ function SelectScrollDownButton({
       )}
       {...props}
     >
-      <ChevronDownIcon className="size-4" />
+      <DownRegular className="size-4" />
     </SelectPrimitive.ScrollDownArrow>
   )
 }

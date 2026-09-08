@@ -1,4 +1,4 @@
-import { SearchIcon } from 'lucide-react'
+import { SearchRegular } from '@mingcute/react/core-regular'
 import { Field, FieldDescription, FieldGroup, FieldLabel } from '@/components/ui/field'
 import {
   InputGroup,
@@ -74,7 +74,7 @@ function InputGroupDemo() {
             <InputGroupInput placeholder="Search customers" />
             <InputGroupAddon align="inline-end">
               <InputGroupButton size="icon-xs" aria-label="Search">
-                <SearchIcon />
+                <SearchRegular />
               </InputGroupButton>
             </InputGroupAddon>
           </InputGroup>

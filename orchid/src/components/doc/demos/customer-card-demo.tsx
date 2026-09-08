@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { MessageCircleIcon } from 'lucide-react'
+import { Chat1Regular } from '@mingcute/react/core-regular'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { CustomerCard, type CustomerCardData } from '@/components/customer-card'
@@ -101,7 +101,7 @@ function CustomerCardDemo() {
             hover
             bottom={
               <Button variant="Primary" style="Transparent" size="Small" className="w-full">
-                <MessageCircleIcon />
+                <Chat1Regular />
                 Start Chat
               </Button>
             }

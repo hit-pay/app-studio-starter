@@ -16,23 +16,22 @@ import {
   type ReactNode,
 } from "react";
 import {
-  ArrowDownIcon,
-  ArrowUpDownIcon,
-  ArrowUpIcon,
-  CheckIcon,
-  CircleIcon,
-  CopyIcon,
-  DownloadIcon,
-  EllipsisVerticalIcon,
-  GripVerticalIcon,
-  ImageIcon,
-  ListFilterIcon,
-  PencilIcon,
-  PlusIcon,
-  SearchIcon,
-  Settings2Icon,
-  Trash2Icon,
-} from "lucide-react";
+  ArrowDownRegular,
+  TransferVerticalRegular,
+  ArrowUpRegular,
+  CheckRegular,
+  CircleDashRegular,
+  CopyRegular,
+  DownloadRegular,
+  DotsVerticalRegular,
+  PicRegular,
+  FilterRegular,
+  PencilRegular,
+  AddRegular,
+  SearchRegular,
+  Settings2Regular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular';
 
 import { cn } from "@/lib/utils";
 import { Badge, BadgeRemove } from "@/components/ui/badge";
@@ -114,13 +113,13 @@ import {
 } from "./schema-table-model";
 
 const schemaTableActionIcons = {
-  delete: Trash2Icon,
-  download: DownloadIcon,
-  publish: CheckIcon,
-  duplicate: CopyIcon,
-  add: PlusIcon,
-  more: EllipsisVerticalIcon,
-} satisfies Record<SchemaTableActionIcon, typeof CircleIcon>;
+  delete: Delete2Regular,
+  download: DownloadRegular,
+  publish: CheckRegular,
+  duplicate: CopyRegular,
+  add: AddRegular,
+  more: DotsVerticalRegular,
+} satisfies Record<SchemaTableActionIcon, typeof CircleDashRegular>;
 
 function SchemaTableActionIconView({ icon }: { icon?: SchemaTableActionIcon }) {
   if (!icon) return null;
@@ -617,7 +616,7 @@ function DataTableCellImage({
       {src ? (
         <img src={src} alt={alt} className="size-full object-cover" />
       ) : (
-        <ImageIcon className="size-4 text-oc-muted-foreground" />
+        <PicRegular className="size-4 text-oc-muted-foreground" />
       )}
     </span>
   );
@@ -885,7 +884,7 @@ function cellContent(column: SchemaTableColumn, row: SchemaTableRow) {
     );
   }
   return (
-    <DataTableCellText icon={column.icon ? <CircleIcon /> : undefined}>
+    <DataTableCellText icon={column.icon ? <CircleDashRegular /> : undefined}>
       {value == null || value === "" ? "N/A" : String(value)}
     </DataTableCellText>
   );
@@ -910,7 +909,7 @@ function SchemaTableSearch({ table }: { table: SchemaTableApi }) {
   if (!open) {
     return (
       <ToolbarIcon label="Search" onClick={() => setOpen(true)}>
-        <SearchIcon />
+        <SearchRegular />
       </ToolbarIcon>
     );
   }
@@ -919,7 +918,7 @@ function SchemaTableSearch({ table }: { table: SchemaTableApi }) {
     <div className="flex min-w-40 flex-1 items-center gap-2 sm:max-w-xs">
       <InputGroup>
         <InputGroupAddon>
-          <SearchIcon />
+          <SearchRegular />
         </InputGroupAddon>
         <InputGroupInput
           autoFocus
@@ -976,7 +975,7 @@ function SchemaTableFilterPopover({ table }: { table: SchemaTableApi }) {
               active || open ? "border-oc-primary text-oc-primary" : undefined
             }
           >
-            <ListFilterIcon />
+            <FilterRegular />
           </Button>
         }
       />
@@ -1047,7 +1046,7 @@ function SchemaTableSortMenu({ table }: { table: SchemaTableApi }) {
             iconOnly
             aria-label="Sort"
           >
-            <ArrowUpDownIcon />
+            <TransferVerticalRegular />
           </Button>
         }
       />
@@ -1074,11 +1073,11 @@ function SchemaTableSortMenu({ table }: { table: SchemaTableApi }) {
           }}
         >
           <DropdownMenuRadioItem value="asc">
-            <ArrowDownIcon />
+            <ArrowDownRegular />
             Ascending
           </DropdownMenuRadioItem>
           <DropdownMenuRadioItem value="desc">
-            <ArrowUpIcon />
+            <ArrowUpRegular />
             Descending
           </DropdownMenuRadioItem>
         </DropdownMenuRadioGroup>
@@ -1119,7 +1118,7 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
               open && "border-oc-primary text-oc-primary",
             )}
           >
-            <Settings2Icon />
+            <Settings2Regular />
             <span className="hidden sm:inline">Edit Column</span>
           </Button>
         }
@@ -1178,7 +1177,7 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
                     onPointerDown={(event) => event.stopPropagation()}
                   />
                   <span className="min-w-0 flex-1">{column.title}</span>
-                  <GripVerticalIcon className="size-3.5 shrink-0 text-oc-muted-foreground" />
+                  <DotsVerticalRegular className="size-3.5 shrink-0 text-oc-muted-foreground" />
                 </div>
               );
             })}
@@ -1429,7 +1428,7 @@ function SchemaTable({
               <Empty>
                 <EmptyHeader>
                   <EmptyMedia variant="search">
-                    <SearchIcon />
+                    <SearchRegular />
                   </EmptyMedia>
                   <EmptyTitle>
                     {table.schema.emptyState?.title ?? "No data to display"}
@@ -1489,7 +1488,7 @@ function SchemaTable({
                             iconOnly
                             aria-label={`Actions for ${String(row.name ?? row.id)}`}
                           >
-                            <EllipsisVerticalIcon />
+                            <DotsVerticalRegular />
                           </Button>
                         }
                       />
@@ -1498,7 +1497,7 @@ function SchemaTable({
                           <DropdownMenuItem
                             onClick={() => onRowAction?.("edit", row)}
                           >
-                            <PencilIcon />
+                            <PencilRegular />
                             Edit
                           </DropdownMenuItem>
                         ) : null}
@@ -1507,7 +1506,7 @@ function SchemaTable({
                             variant="destructive"
                             onClick={() => onRowAction?.("delete", row)}
                           >
-                            <Trash2Icon />
+                            <Delete2Regular />
                             Delete
                           </DropdownMenuItem>
                         ) : null}

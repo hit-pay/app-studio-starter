@@ -2,7 +2,10 @@
 
 import * as React from 'react'
 import { Command as CommandPrimitive } from 'cmdk'
-import { CheckIcon, SearchIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  SearchRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import {
@@ -76,7 +79,7 @@ function CommandInput({
           {...props}
         />
         <InputGroupAddon className="order-1 pl-2">
-          <SearchIcon className="size-4 shrink-0 opacity-50" />
+          <SearchRegular className="size-4 shrink-0 opacity-50" />
         </InputGroupAddon>
       </InputGroup>
     </div>
@@ -156,7 +159,7 @@ function CommandItem({
       {...props}
     >
       {children}
-      <CheckIcon className="ml-auto size-4 opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
+      <CheckRegular className="ml-auto size-4 opacity-0 group-has-data-[slot=command-shortcut]/command-item:hidden group-data-[checked=true]/command-item:opacity-100" />
     </CommandPrimitive.Item>
   )
 }

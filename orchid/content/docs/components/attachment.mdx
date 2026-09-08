@@ -5,7 +5,10 @@ import { AttachmentDemo } from '../../../src/components/doc/demos/attachment-dem
 ## Usage
 
 ```tsx
-import { FileTextIcon, XIcon } from 'lucide-react'
+import {
+  FileRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
 
 import {
   Attachment,
@@ -19,7 +22,7 @@ import {
 
 <Attachment>
   <AttachmentMedia>
-    <FileTextIcon />
+    <FileRegular />
   </AttachmentMedia>
   <AttachmentContent>
     <AttachmentTitle>sales-dashboard.pdf</AttachmentTitle>
@@ -27,7 +30,7 @@ import {
   </AttachmentContent>
   <AttachmentActions>
     <AttachmentAction aria-label="Remove sales-dashboard.pdf">
-      <XIcon />
+      <CloseRegular />
     </AttachmentAction>
   </AttachmentActions>
 </Attachment>

@@ -3,14 +3,14 @@
 import * as React from 'react'
 import { Toast as ToastPrimitive } from '@base-ui/react/toast'
 import {
-  CheckIcon,
-  CircleCheckIcon,
-  InfoIcon,
-  Loader2Icon,
-  OctagonXIcon,
-  TriangleAlertIcon,
-  XIcon,
-} from 'lucide-react'
+  CheckRegular,
+  CheckCircleRegular,
+  InformationRegular,
+  LoadingRegular,
+  AlertOctagonRegular,
+  AlertRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/components/ui/button'
@@ -205,28 +205,28 @@ function ToastClose({
       )}
       {...props}
     >
-      {children ?? <XIcon aria-hidden="true" />}
+      {children ?? <CloseRegular aria-hidden="true" />}
     </ToastPrimitive.Close>
   )
 }
 
 function ToastIcon({ type, size }: { type: string | undefined; size: 'Small' | 'Default' }) {
-  let icon: React.ReactNode = <CheckIcon aria-hidden="true" />
+  let icon: React.ReactNode = <CheckRegular aria-hidden="true" />
 
   if (type === 'success') {
-    icon = <CircleCheckIcon aria-hidden="true" />
+    icon = <CheckCircleRegular aria-hidden="true" />
   }
   if (type === 'info') {
-    icon = <InfoIcon aria-hidden="true" />
+    icon = <InformationRegular aria-hidden="true" />
   }
   if (type === 'warning') {
-    icon = <TriangleAlertIcon aria-hidden="true" />
+    icon = <AlertRegular aria-hidden="true" />
   }
   if (type === 'error') {
-    icon = <OctagonXIcon aria-hidden="true" />
+    icon = <AlertOctagonRegular aria-hidden="true" />
   }
   if (type === 'loading') {
-    icon = <Loader2Icon className="animate-spin" aria-hidden="true" />
+    icon = <LoadingRegular className="animate-spin" aria-hidden="true" />
   }
 
   return (

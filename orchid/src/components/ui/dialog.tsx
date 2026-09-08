@@ -3,7 +3,7 @@
 import * as React from 'react'
 import { Dialog as DialogPrimitive } from '@base-ui/react/dialog'
 import { cva, type VariantProps } from 'class-variance-authority'
-import { XIcon } from 'lucide-react'
+import { CloseRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from './button'
@@ -114,7 +114,7 @@ function DialogContent({
               />
             }
           >
-            <XIcon />
+            <CloseRegular />
             <span className="sr-only">Close</span>
           </DialogPrimitive.Close>
         ) : null}

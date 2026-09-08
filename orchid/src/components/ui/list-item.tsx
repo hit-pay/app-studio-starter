@@ -1,5 +1,5 @@
 import type { ComponentProps, ReactNode } from 'react'
-import { EllipsisIcon } from 'lucide-react'
+import { More1Regular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { CopyButton } from '@/components/copy-button'
@@ -177,7 +177,7 @@ function ListItemMore({ className, menu }: { className?: string; menu?: ReactNod
         )}
         render={
           <button type="button" aria-label="More">
-            <EllipsisIcon className="size-[22px] text-oc-foreground" />
+            <More1Regular className="size-[22px] text-oc-foreground" />
           </button>
         }
       />

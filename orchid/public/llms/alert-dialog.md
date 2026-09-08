@@ -9,12 +9,12 @@ shadcn-compatible confirmation dialog primitives with Orchid styling.
 ```tsx
 import { useState, type ReactNode } from "react";
 import {
-  CheckIcon,
-  CircleHelpIcon,
-  Trash2Icon,
-  TriangleAlertIcon,
-  XIcon,
-} from "lucide-react";
+  CheckRegular,
+  QuestionRegular,
+  Delete2Regular,
+  AlertRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -36,7 +36,7 @@ function AlertDialogDemo() {
         <IntentAlertDialog
           label="Delete"
           trigger="Delete payment link"
-          icon={<Trash2Icon />}
+          icon={<Delete2Regular />}
           iconClassName="bg-oc-destructive-soft text-oc-destructive"
           action="Delete"
           actionVariant="destructive"
@@ -44,7 +44,7 @@ function AlertDialogDemo() {
         <IntentAlertDialog
           label="Warning"
           trigger="Continue with warning"
-          icon={<TriangleAlertIcon />}
+          icon={<AlertRegular />}
           iconClassName="bg-oc-warning-soft text-oc-warning"
           action="Continue"
           actionVariant="destructive"
@@ -52,7 +52,7 @@ function AlertDialogDemo() {
         <IntentAlertDialog
           label="Success"
           trigger="Show success"
-          icon={<CheckIcon />}
+          icon={<CheckRegular />}
           iconClassName="bg-oc-success-soft text-oc-success"
           action="OK"
           showCancel={false}
@@ -60,7 +60,7 @@ function AlertDialogDemo() {
         <IntentAlertDialog
           label="Question"
           trigger="Ask a question"
-          icon={<CircleHelpIcon />}
+          icon={<QuestionRegular />}
           iconClassName="bg-oc-info-soft text-oc-primary"
           action="Yes"
           cancel="No"
@@ -105,7 +105,7 @@ function IntentAlertDialog({
             size="icon-sm"
             className="absolute top-2 right-2 text-oc-muted-foreground"
           >
-            <XIcon />
+            <CloseRegular />
             <span className="sr-only">Close</span>
           </AlertDialogCancel>
           <AlertDialogHeader>
@@ -157,7 +157,7 @@ function ConfirmPhraseAlertDialog() {
             size="icon-sm"
             className="absolute top-2 right-2 text-oc-muted-foreground"
           >
-            <XIcon />
+            <CloseRegular />
             <span className="sr-only">Close</span>
           </AlertDialogCancel>
           <AlertDialogHeader>

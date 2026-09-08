@@ -1,4 +1,7 @@
-import { CopyIcon, SquareArrowOutUpRightIcon } from "lucide-react";
+import {
+  CopyRegular,
+  ArrowRightUpRegular,
+} from '@mingcute/react/core-regular';
 import { IconGroup, type IconGroupItem } from "@/components/icon-group";
 
 const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
@@ -25,12 +28,12 @@ function ExampleGroup({ style }: { style?: "Default" | "Border" }) {
       key: "open",
       href: paymentLink,
       label: "Open payment link",
-      icon: <SquareArrowOutUpRightIcon />,
+      icon: <ArrowRightUpRegular />,
     },
     {
       key: "copy",
       label: "Copy payment link",
-      icon: <CopyIcon />,
+      icon: <CopyRegular />,
       onClick: () => void navigator.clipboard.writeText(paymentLink),
     },
   ];
@@ -61,12 +64,12 @@ function InvoiceGroup() {
       key: "open",
       href: `https://hitpay.shop/invoices/${invoiceNumber}`,
       label: "Open invoice",
-      icon: <SquareArrowOutUpRightIcon />,
+      icon: <ArrowRightUpRegular />,
     },
     {
       key: "copy",
       label: "Copy invoice number",
-      icon: <CopyIcon />,
+      icon: <CopyRegular />,
       onClick: () => void navigator.clipboard.writeText(invoiceNumber),
     },
   ];

@@ -1,6 +1,6 @@
 'use client'
 
-import { GripVerticalIcon } from 'lucide-react'
+import { DotsVerticalRegular } from '@mingcute/react/core-regular'
 import {
   Group as ResizablePrimitiveGroup,
   Panel as ResizablePrimitivePanel,
@@ -42,7 +42,7 @@ function ResizableHandle({
     >
       {withHandle ? (
         <div className="z-10 flex h-6 w-3 items-center justify-center rounded-sm border border-oc-border bg-oc-background">
-          <GripVerticalIcon className="size-2.5 text-oc-muted-foreground" />
+          <DotsVerticalRegular className="size-2.5 text-oc-muted-foreground" />
         </div>
       ) : null}
     </ResizablePrimitiveSeparator>

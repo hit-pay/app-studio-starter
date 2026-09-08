@@ -1,7 +1,13 @@
 'use client'
 
 import * as React from 'react'
-import { CheckIcon, CircleHelpIcon, Trash2Icon, TriangleAlertIcon, XIcon } from 'lucide-react'
+import {
+  CheckRegular,
+  QuestionRegular,
+  Delete2Regular,
+  AlertRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
 
 import {
   AlertDialog,
@@ -48,7 +54,7 @@ const PRESETS: Record<
   }
 > = {
   delete: {
-    icon: <Trash2Icon />,
+    icon: <Delete2Regular />,
     iconClassName: 'bg-oc-destructive-soft text-oc-destructive',
     confirmLabel: 'Delete',
     cancelLabel: 'Cancel',
@@ -56,7 +62,7 @@ const PRESETS: Record<
     showCancel: true,
   },
   warning: {
-    icon: <TriangleAlertIcon />,
+    icon: <AlertRegular />,
     iconClassName: 'bg-oc-warning-soft text-oc-warning',
     confirmLabel: 'Continue',
     cancelLabel: 'Cancel',
@@ -64,7 +70,7 @@ const PRESETS: Record<
     showCancel: true,
   },
   success: {
-    icon: <CheckIcon />,
+    icon: <CheckRegular />,
     iconClassName: 'bg-oc-success-soft text-oc-success',
     confirmLabel: 'OK',
     cancelLabel: 'Cancel',
@@ -72,7 +78,7 @@ const PRESETS: Record<
     showCancel: false,
   },
   question: {
-    icon: <CircleHelpIcon />,
+    icon: <QuestionRegular />,
     iconClassName: 'bg-oc-info-soft text-oc-primary',
     confirmLabel: 'Yes',
     cancelLabel: 'No',
@@ -148,7 +154,7 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
             size="icon-sm"
             className="absolute top-2 right-2 text-oc-muted-foreground"
           >
-            <XIcon />
+            <CloseRegular />
             <span className="sr-only">Close</span>
           </AlertDialogCancel>
           <AlertDialogHeader>

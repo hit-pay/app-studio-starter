@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import {
-  ChevronDownIcon,
-  CreditCardIcon,
-  LinkIcon,
-  PencilIcon,
-  RepeatIcon,
-  SendIcon,
-  StoreIcon,
-  Trash2Icon,
-} from 'lucide-react'
+  DownRegular,
+  BankCardRegular,
+  LinkRegular,
+  PencilRegular,
+  RepeatRegular,
+  SendRegular,
+  StoreRegular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular'
 import { Button } from '@/components/ui/button'
 import { ButtonGroup } from '@/components/ui/button-group'
 import {
@@ -57,17 +57,17 @@ function DropdownMenuDemo() {
         </p>
         <OpenButton>
           <DropdownMenuItem>
-            <PencilIcon />
+            <PencilRegular />
             Edit invoice
             <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
           </DropdownMenuItem>
           <DropdownMenuItem>
-            <SendIcon />
+            <SendRegular />
             Send payment link
           </DropdownMenuItem>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">
-            <Trash2Icon />
+            <Delete2Regular />
             Void invoice
           </DropdownMenuItem>
         </OpenButton>
@@ -81,11 +81,11 @@ function DropdownMenuDemo() {
           <DropdownMenuGroup>
             <DropdownMenuLabel>Commerce</DropdownMenuLabel>
             <DropdownMenuItem>
-              <LinkIcon />
+              <LinkRegular />
               Payment Link
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <RepeatIcon />
+              <RepeatRegular />
               Recurring
             </DropdownMenuItem>
           </DropdownMenuGroup>
@@ -93,17 +93,17 @@ function DropdownMenuDemo() {
           <DropdownMenuGroup>
             <DropdownMenuLabel>Sales</DropdownMenuLabel>
             <DropdownMenuItem>
-              <StoreIcon />
+              <StoreRegular />
               Online Store
             </DropdownMenuItem>
             <DropdownMenuItem>
-              <CreditCardIcon />
+              <BankCardRegular />
               Point of Sale
             </DropdownMenuItem>
           </DropdownMenuGroup>
           <DropdownMenuSeparator />
           <DropdownMenuItem variant="destructive">
-            <Trash2Icon />
+            <Delete2Regular />
             Delete invoice
           </DropdownMenuItem>
         </OpenButton>
@@ -122,22 +122,22 @@ function DropdownMenuDemo() {
               nativeButton
               render={
                 <Button variant="secondary" size="icon-sm" aria-label="More invoice actions">
-                  <ChevronDownIcon />
+                  <DownRegular />
                 </Button>
               }
             />
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
-                <PencilIcon />
+                <PencilRegular />
                 Edit INV-2048
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <SendIcon />
+                <SendRegular />
                 Resend to Priya Nair
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive">
-                <Trash2Icon />
+                <Delete2Regular />
                 Refund SGD 128.00
               </DropdownMenuItem>
             </DropdownMenuContent>

@@ -8,12 +8,12 @@ Group related controls horizontally or vertically, including split dropdown butt
 
 ```tsx
 import {
-  ChevronDownIcon,
-  CopyIcon,
-  PlusIcon,
-  SendIcon,
-  Trash2Icon,
-} from "lucide-react";
+  DownRegular,
+  CopyRegular,
+  AddRegular,
+  SendRegular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular';
 
 import { Button } from "@/components/ui/button";
 import {
@@ -38,7 +38,7 @@ function ButtonGroupDemo() {
         </p>
         <ButtonGroup>
           <Button>
-            <PlusIcon data-icon="inline-start" />
+            <AddRegular data-icon="inline-start" />
             Create invoice
           </Button>
           <DropdownMenu>
@@ -46,22 +46,22 @@ function ButtonGroupDemo() {
               nativeButton
               render={
                 <Button size="icon" aria-label="More invoice actions">
-                  <ChevronDownIcon />
+                  <DownRegular />
                 </Button>
               }
             />
             <DropdownMenuContent align="end">
               <DropdownMenuItem>
-                <CopyIcon />
+                <CopyRegular />
                 Duplicate invoice
               </DropdownMenuItem>
               <DropdownMenuItem>
-                <SendIcon />
+                <SendRegular />
                 Create and send
               </DropdownMenuItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem variant="destructive">
-                <Trash2Icon />
+                <Delete2Regular />
                 Discard draft
               </DropdownMenuItem>
             </DropdownMenuContent>
@@ -103,7 +103,7 @@ function ButtonGroupDemo() {
             size="icon"
             aria-label="Copy invoice number"
           >
-            <CopyIcon />
+            <CopyRegular />
           </Button>
         </ButtonGroup>
       </div>
@@ -125,7 +125,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { ChevronDownIcon } from "lucide-react";
+import { DownRegular } from '@mingcute/react/core-regular';
 
 <ButtonGroup>
   <Button>Create invoice</Button>
@@ -134,7 +134,7 @@ import { ChevronDownIcon } from "lucide-react";
       nativeButton
       render={
         <Button size="icon" aria-label="More invoice actions">
-          <ChevronDownIcon />
+          <DownRegular />
         </Button>
       }
     />

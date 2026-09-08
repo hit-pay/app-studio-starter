@@ -16,20 +16,23 @@ import {
   ListItemAction,
 } from '@/components/ui/list-item'
 import { Badge } from '@/components/ui/badge'
-import { MapPinIcon, PencilIcon } from 'lucide-react'
+import {
+  MapPinRegular,
+  PencilRegular,
+} from '@mingcute/react/core-regular'
 
 <ListItem>
   <ListItemBody>
     <ListItemTitle>Priya Nair</ListItemTitle>
     <ListItemDescription>INV-2048 · Cards · SGD 128.00</ListItemDescription>
     <ListItemMeta>
-      <ListItemDetail icon={<MapPinIcon />}>Singapore</ListItemDetail>
+      <ListItemDetail icon={<MapPinRegular />}>Singapore</ListItemDetail>
       <Badge tone="green">Paid</Badge>
     </ListItemMeta>
   </ListItemBody>
   <ListItemHoverActions>
     <ListItemAction aria-label="Edit">
-      <PencilIcon />
+      <PencilRegular />
     </ListItemAction>
   </ListItemHoverActions>
 </ListItem>

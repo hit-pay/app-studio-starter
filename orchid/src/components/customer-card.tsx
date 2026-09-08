@@ -1,6 +1,10 @@
 import type { ComponentProps, ReactNode } from 'react'
 import { cva } from 'class-variance-authority'
-import { PencilIcon, UserPlusIcon, XCircleIcon } from 'lucide-react'
+import {
+  PencilRegular,
+  UserAddRegular,
+  CloseCircleRegular,
+} from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
@@ -183,7 +187,7 @@ function CustomerCard({
           <div className="flex w-full flex-col items-center justify-center gap-2">
             {avatar ? (
               <span className="inline-flex size-8 items-center justify-center rounded-full border border-solid border-oc-neutral-border bg-oc-neutral-strong text-oc-primary-foreground">
-                <UserPlusIcon className="size-4" />
+                <UserAddRegular className="size-4" />
               </span>
             ) : null}
             <div className="flex w-full flex-col text-center font-medium">
@@ -272,7 +276,7 @@ function CustomerCard({
             aria-label="Edit"
             onClick={onEdit}
           >
-            <PencilIcon />
+            <PencilRegular />
           </Button>
         </div>
       ) : null}
@@ -284,7 +288,7 @@ function CustomerCard({
           className="-top-1 -right-1 absolute cursor-pointer rounded-full bg-oc-background text-oc-muted-foreground outline-none hover:text-oc-destructive-strong"
           onClick={onClose}
         >
-          <XCircleIcon className="size-[18px] fill-oc-background" />
+          <CloseCircleRegular className="size-[18px] fill-oc-background" />
         </button>
       ) : null}
 
