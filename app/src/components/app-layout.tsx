@@ -1,6 +1,11 @@
-import type { ComponentProps, ReactNode } from 'react'
+'use client'
+
+import { useState, type ComponentProps, type ReactNode } from 'react'
+import { MenuIcon } from 'lucide-react'
 
 import { cn } from '@/lib/utils'
+import { Button } from '@/components/ui/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
 
 type AppNavigationItem = {
   id: string
@@ -32,6 +37,28 @@ function AppLayout({
   activeSidebar?: string
   onSidebarChange?: (id: string, item: AppNavigationItem) => void
 }) {
+  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const hasSidebar = variant === 'sidebar' && Boolean(sidebarItems?.length)
+  const showTopBar = Boolean(appName) || hasSidebar
+
+  const sidebarNav = sidebarItems?.length ? (
+    <AppSidebarContent>
+      {sidebarItems.map((item) => (
+        <AppSidebarItem
+          key={item.id}
+          active={item.id === activeSidebar}
+          disabled={item.disabled}
+          onClick={() => {
+            onSidebarChange?.(item.id, item)
+            setSidebarOpen(false)
+          }}
+        >
+          {item.label}
+        </AppSidebarItem>
+      ))}
+    </AppSidebarContent>
+  ) : null
+
   const page = (
     <div data-slot="app-layout-content" className="flex min-w-0 flex-1 flex-col">
       {header ? (
@@ -71,31 +98,44 @@ function AppLayout({
       )}
       {...props}
     >
-      {appName ? (
+      {showTopBar ? (
         <div
           data-slot="app-layout-app-name"
-          className="flex h-12 shrink-0 items-center border-b border-solid border-oc-border px-4 text-sm font-medium text-oc-foreground sm:px-6"
+          className="flex h-12 shrink-0 items-center gap-2 border-b border-solid border-oc-border px-4 text-sm font-medium text-oc-foreground sm:px-6"
         >
-          <span className="min-w-0 truncate">{appName}</span>
+          {hasSidebar ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              className="md:hidden"
+              aria-label="Open navigation"
+              onClick={() => setSidebarOpen(true)}
+            >
+              <MenuIcon />
+            </Button>
+          ) : null}
+          {appName ? <span className="min-w-0 truncate">{appName}</span> : null}
         </div>
       ) : null}
       {variant === 'sidebar' ? (
         <div data-slot="app-layout-body" className="flex min-h-0 min-w-0 flex-1">
-          {sidebarItems?.length ? (
-            <AppSidebar>
-              <AppSidebarContent>
-                {sidebarItems.map((item) => (
-                  <AppSidebarItem
-                    key={item.id}
-                    active={item.id === activeSidebar}
-                    disabled={item.disabled}
-                    onClick={() => onSidebarChange?.(item.id, item)}
-                  >
-                    {item.label}
-                  </AppSidebarItem>
-                ))}
-              </AppSidebarContent>
-            </AppSidebar>
+          {hasSidebar ? (
+            <>
+              <AppSidebar className="hidden md:flex">{sidebarNav}</AppSidebar>
+              <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
+                <SheetContent
+                  side="left"
+                  className="w-72 gap-0 p-0 sm:max-w-72"
+                  showCloseButton
+                >
+                  <SheetHeader className="sr-only">
+                    <SheetTitle>Navigation</SheetTitle>
+                  </SheetHeader>
+                  {sidebarNav}
+                </SheetContent>
+              </Sheet>
+            </>
           ) : null}
           {page}
         </div>

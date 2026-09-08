@@ -142,9 +142,9 @@ Never edit `.output/`, `.nitro/`, or `src/routeTree.gen.ts` by hand.
 
 The host dashboard owns the outer navigation, account controls, authentication gate, iframe, and app mount point. The generated app owns only the embedded pane.
 
-- Fill the pane with the App Studio-owned `AppLayout` from `@/components/app-layout`.
+- Frame the pane with starter-only `AppLayout` (`@/components/app-layout`). It is not in the Orchid registry; do not install or replace it.
 - Keep the root document's `h-full`, but do not set `overflow-hidden` on the root document or body.
-- Render route content inside `AppLayout`. Use the props-based `PageLayout` from `@/components/page-layout`, or `FormLayout` in page mode, as the scroll-owning route shell so headers and actions remain visible.
+- Render route content inside `AppLayout`. Use `PageLayout` for normal routes and `FormLayout` for create/edit (`mode="page"` or `mode="modal"`) as the scroll-owning shell.
 - Do not add a full-screen website shell or host-dashboard clone.
 - Avoid horizontal overflow and make forms, tables, actions, and tabs usable at narrow widths.
 
@@ -166,13 +166,10 @@ The catalog is already installed. Do not run `shadcn add`, `bunx shadcn`, or any
 
 Do not guess import paths. The line `Import \`@/…\`` in the catalog is authoritative (`@/components/…` vs `@/components/ui/…` is per item).
 
-`AppLayout` is starter-only (`@/components/app-layout`). It is not in the Orchid registry. Do not install or replace it.
-
 Do not invent a parallel UI kit or overwrite files under `src/components/` or `src/components/ui/` with official shadcn copies. Compose catalog items. Field types, props, and variants live in the catalog entry and that item's source or Docs `.md` — not in this file.
 
 Starter wiring only:
 
-- Frame the app with `AppLayout`. Use `PageLayout` for normal routes and `FormLayout` for create/edit (`mode="page"` or `mode="modal"`).
 - Drive multi-field forms with `SchemaForm` (submit through `formId`). Drive searchable lists with `SchemaTable`.
 - Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Do not add Sonner or a second toast/confirm provider.
 - Use `oc-*` tokens from `src/styles.css`. If a prop value is unclear, the component source wins over habit (some items still use PascalCase aliases).
@@ -224,9 +221,7 @@ Validate untrusted input in server functions even when the form also validates i
 
 Use React Query for server-backed lists and invalidate or refresh the relevant query after successful mutations. Complete the vertical slice:
 
-form (in-memory) -> server function -> Turso -> clear any leftover draft -> refreshed UI -> success feedback
-
-If the server function fails, `writeFormDraft` the submitted values, show an error toast, and leave the form filled. Do not snapshot every change into `localStorage`.
+form (in-memory) -> server function -> Turso -> clear leftover draft on success (or write a draft on failure; see Form drafts) -> refreshed UI -> success feedback
 
 Do not seed fake records into a merchant's live database by default. Start with a useful empty state. If the user explicitly requests examples, demo mode, or fixtures, use realistic SMB data rather than `Item 1`, `Test User`, `Lorem Ipsum`, or `foo@bar.com`.
 
@@ -309,7 +304,7 @@ Delete: authorize → remove the stored object → delete the `files` row. Do no
 
 ## HitPay user, roles, and members
 
-Use the existing HitPay session context; never create another login, signup, or custom auth system.
+Use the existing HitPay session context. Auth stays with the host dashboard.
 
 ### Browser (UI only)
 
@@ -339,7 +334,7 @@ When a mutation or read must be limited to certain roles, use `getHitPaySession(
 3. Never trust `role`, `userId`, or `actorName` from the browser payload.
 4. Persist requester/approver identity from this session.
 
-Do not add a second login, JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie.
+Do not add a JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie.
 
 Do not rewrite `src/lib/hitpay-session.ts` or invent another verifier. The host signs `base64url(json).hex(hmac-sha256(payload))` with `HITPAY_SESSION_SECRET`. Do not treat the signature as JWT/base64url, do not HMAC the decoded JSON, and do not accept browser fields as a fallback.
 
@@ -388,12 +383,9 @@ Prefer one focused screen with dialogs for simple create/edit flows. Add tabs or
 5. Implement the complete vertical slices, including persistence when needed.
 6. Review the changed code for broken imports, route mistakes, unsafe SQL, missing states, and disconnected actions.
 7. If routes were added or renamed, run `bun run generate-routes`.
-8. Run `bun run lint` once after all edits. This script is the TypeScript check (`tsc --noEmit`). Fix every error before continuing.
-9. Run `bun run build` after lint succeeds. This is the required production-build verification. Wait for it to exit; if it fails, inspect the build output, fix the source, and rerun lint and build until both succeed. The host backend restarts the live Sprite service after generation completes.
+8. After all edits are done, run `bun run lint` once (`tsc --noEmit`), then `bun run build`. Never run either after each file. If either fails, fix the source and rerun that lint-then-build pair only. Wait for build to exit; only a zero exit code counts. The host backend restarts the live Sprite service after generation completes.
 
-On Sprite, do not start extra `dev`, `vite`, `start`, or `preview` servers. Do not run lint or build after every file.
-
-`bun run build` is mandatory for implementation work in Sprite, and only a zero exit code counts as success. Do not signal, restart, stop, or delete the `app-studio` service yourself. Do not say the app is finished if the final source has not passed both lint and build.
+On Sprite, do not start extra `dev`, `vite`, `start`, or `preview` servers. Do not signal, restart, stop, or delete the `app-studio` service yourself.
 
 ## Browser checks
 
@@ -402,24 +394,16 @@ Do not run screenshots or browser automation unless:
 - the user explicitly asks for a browser/UI check, or
 - the user reports a visual issue and asks you to inspect it.
 
-When requested, use the existing `preview`, `screenshot`, and HitPay preview mock scripts. Do not add production mocks; `start.mjs` must continue using real HitPay proxy behavior.
+When requested, use the existing `preview`, `screenshot`, and HitPay preview mock scripts.
 
 ## Definition of done
 
 The app is done only when:
 
 - the requested business workflow works end to end
-- the embedded UI uses `AppLayout` and appropriate Orchid components
-- persistent data survives reload when the workflow stores data
-- create/edit forms write a `localStorage` draft only when a save fails, restore that draft on the next open, and clear it after a successful save or a clean cancel
-- every `localStorage` / `sessionStorage` key is scoped with `studioStorageKey` (includes the app id)
-- migrations and server functions are connected
-- relevant validation and database constraints exist
-- role-limited actions are gated in the UI and again in `createServerFn` via `getHitPaySession` / `requireHitPayRoles`
-- loading, empty, error, submitting, and success states work
+- UI, storage, drafts, persistence, roles, and screen states follow the sections above
 - only required routes and actions were added
-- the final source passes `bun run lint`
-- the final source passes `bun run build` with a zero exit code
+- the final source passed the single lint-then-build pair in Work sequence
 
 Do not require a database, CRUD surface, role system, dashboard summary, or seed data when the requested app does not need it.
 
