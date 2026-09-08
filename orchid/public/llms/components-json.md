@@ -1,8 +1,8 @@
 <!-- Generated from content/docs/guides/components-json.mdx. Do not edit. -->
 
-# Components
+# components.json
 
-Configure aliases, Tailwind CSS, and the Orchid registry namespace in components.json.
+Configure aliases, Tailwind CSS, and the Orchid registry namespace.
 
 `components.json` tells the shadcn CLI where to write source files, which
 stylesheet contains Tailwind, and how to resolve the Orchid registry.
@@ -45,10 +45,10 @@ from `src/styles.css`. Ensure `@/*` resolves to your source directory.
 
 Orchid registry files declare their own target alias:
 
-- `@ui/button.tsx` resolves through `aliases.ui`, normally to
-  `src/components/ui/button.tsx`.
-- `@components/schema-form.tsx` resolves through `aliases.components`,
-  normally to `src/components/ui/form-builder.tsx`.
+- `@ui/button.tsx` and `@ui/form-builder.tsx` resolve through `aliases.ui`,
+  normally to `src/components/ui/button.tsx` and
+  `src/components/ui/form-builder.tsx`. All Orchid items install under
+  `src/components/ui`.
 
 Do not manually choose a destination when adding an item. The registry target
 and your aliases determine it consistently.

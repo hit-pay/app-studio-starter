@@ -33,12 +33,14 @@ import { Route as ComponentsJsonRouteImport } from './routes/components-json'
 import { Route as ConfirmationModalRouteImport } from './routes/confirmation-modal'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
 import { Route as CustomerCardRouteImport } from './routes/customer-card'
+import { Route as DataTableRouteImport } from './routes/data-table'
 import { Route as DatePickerRouteImport } from './routes/date-picker'
 import { Route as DetailListRouteImport } from './routes/detail-list'
 import { Route as DialogRouteImport } from './routes/dialog'
 import { Route as DropdownMenuRouteImport } from './routes/dropdown-menu'
 import { Route as EmptyRouteImport } from './routes/empty'
 import { Route as FieldRouteImport } from './routes/field'
+import { Route as FormBuilderRouteImport } from './routes/form-builder'
 import { Route as FormLayoutRouteImport } from './routes/form-layout'
 import { Route as FormSectionRouteImport } from './routes/form-section'
 import { Route as IconGroupRouteImport } from './routes/icon-group'
@@ -194,6 +196,11 @@ const CustomerCardRoute = CustomerCardRouteImport.update({
   path: '/customer-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DataTableRoute = DataTableRouteImport.update({
+  id: '/data-table',
+  path: '/data-table',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DatePickerRoute = DatePickerRouteImport.update({
   id: '/date-picker',
   path: '/date-picker',
@@ -222,6 +229,11 @@ const EmptyRoute = EmptyRouteImport.update({
 const FieldRoute = FieldRouteImport.update({
   id: '/field',
   path: '/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormBuilderRoute = FormBuilderRouteImport.update({
+  id: '/form-builder',
+  path: '/form-builder',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FormLayoutRoute = FormLayoutRouteImport.update({
@@ -420,12 +432,14 @@ export interface FileRoutesByFullPath {
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
+  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-builder': typeof FormBuilderRoute
   '/form-layout': typeof FormLayoutRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -486,12 +500,14 @@ export interface FileRoutesByTo {
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
+  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-builder': typeof FormBuilderRoute
   '/form-layout': typeof FormLayoutRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -553,12 +569,14 @@ export interface FileRoutesById {
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
   '/customer-card': typeof CustomerCardRoute
+  '/data-table': typeof DataTableRoute
   '/date-picker': typeof DatePickerRoute
   '/detail-list': typeof DetailListRoute
   '/dialog': typeof DialogRoute
   '/dropdown-menu': typeof DropdownMenuRoute
   '/empty': typeof EmptyRoute
   '/field': typeof FieldRoute
+  '/form-builder': typeof FormBuilderRoute
   '/form-layout': typeof FormLayoutRoute
   '/form-section': typeof FormSectionRoute
   '/icon-group': typeof IconGroupRoute
@@ -621,12 +639,14 @@ export interface FileRouteTypes {
     | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
+    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-builder'
     | '/form-layout'
     | '/form-section'
     | '/icon-group'
@@ -687,12 +707,14 @@ export interface FileRouteTypes {
     | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
+    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-builder'
     | '/form-layout'
     | '/form-section'
     | '/icon-group'
@@ -753,12 +775,14 @@ export interface FileRouteTypes {
     | '/confirmation-modal'
     | '/copy-button'
     | '/customer-card'
+    | '/data-table'
     | '/date-picker'
     | '/detail-list'
     | '/dialog'
     | '/dropdown-menu'
     | '/empty'
     | '/field'
+    | '/form-builder'
     | '/form-layout'
     | '/form-section'
     | '/icon-group'
@@ -820,12 +844,14 @@ export interface RootRouteChildren {
   ConfirmationModalRoute: typeof ConfirmationModalRoute
   CopyButtonRoute: typeof CopyButtonRoute
   CustomerCardRoute: typeof CustomerCardRoute
+  DataTableRoute: typeof DataTableRoute
   DatePickerRoute: typeof DatePickerRoute
   DetailListRoute: typeof DetailListRoute
   DialogRoute: typeof DialogRoute
   DropdownMenuRoute: typeof DropdownMenuRoute
   EmptyRoute: typeof EmptyRoute
   FieldRoute: typeof FieldRoute
+  FormBuilderRoute: typeof FormBuilderRoute
   FormLayoutRoute: typeof FormLayoutRoute
   FormSectionRoute: typeof FormSectionRoute
   IconGroupRoute: typeof IconGroupRoute
@@ -1032,6 +1058,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CustomerCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/data-table': {
+      id: '/data-table'
+      path: '/data-table'
+      fullPath: '/data-table'
+      preLoaderRoute: typeof DataTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/date-picker': {
       id: '/date-picker'
       path: '/date-picker'
@@ -1072,6 +1105,13 @@ declare module '@tanstack/react-router' {
       path: '/field'
       fullPath: '/field'
       preLoaderRoute: typeof FieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/form-builder': {
+      id: '/form-builder'
+      path: '/form-builder'
+      fullPath: '/form-builder'
+      preLoaderRoute: typeof FormBuilderRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/form-layout': {
@@ -1340,12 +1380,14 @@ const rootRouteChildren: RootRouteChildren = {
   ConfirmationModalRoute: ConfirmationModalRoute,
   CopyButtonRoute: CopyButtonRoute,
   CustomerCardRoute: CustomerCardRoute,
+  DataTableRoute: DataTableRoute,
   DatePickerRoute: DatePickerRoute,
   DetailListRoute: DetailListRoute,
   DialogRoute: DialogRoute,
   DropdownMenuRoute: DropdownMenuRoute,
   EmptyRoute: EmptyRoute,
   FieldRoute: FieldRoute,
+  FormBuilderRoute: FormBuilderRoute,
   FormLayoutRoute: FormLayoutRoute,
   FormSectionRoute: FormSectionRoute,
   IconGroupRoute: IconGroupRoute,

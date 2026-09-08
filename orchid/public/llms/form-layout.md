@@ -5,7 +5,7 @@
 Create and edit form shell with page and modal modes.
 
 `FormLayout` is the shell for create and edit forms. It provides page or modal
-presentation, headings, scrolling, close behavior, and actions. `SchemaForm`
+presentation, headings, scrolling, close behavior, and actions. `FormBuilder`
 renders the fields inside that shell.
 
 ## Example
@@ -34,11 +34,11 @@ export { FormLayoutDemo };
 ## Page mode
 
 Page mode is the default. Save submits the external form identified by
-`formId`; the submit button does not need to live inside `SchemaForm`.
+`formId`; the submit button does not need to live inside `FormBuilder`.
 
 ```tsx
 import { FormLayout } from "@/components/ui/form-layout";
-import { SchemaForm } from "@/components/ui/form-builder";
+import { FormBuilder } from "@/components/ui/form-builder";
 
 <FormLayout
   title="Create product"
@@ -47,7 +47,7 @@ import { SchemaForm } from "@/components/ui/form-builder";
   onClose={handleClose}
   actions={{ save: { label: "Create" } }}
 >
-  <SchemaForm id="product-form" form={form} />
+  <FormBuilder id="product-form" form={form} />
 </FormLayout>;
 ```
 
@@ -70,7 +70,7 @@ Modal mode preserves controlled dialog semantics through `open` and
     save: { label: "Save customer", disabled: isSaving },
   }}
 >
-  <SchemaForm id="customer-form" form={form} />
+  <FormBuilder id="customer-form" form={form} />
 </FormLayout>
 ```
 

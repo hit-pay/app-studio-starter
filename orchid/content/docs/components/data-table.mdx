@@ -11,11 +11,11 @@ import {
   DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
+  useDataTable,
 } from "@/components/ui/data-table";
 
 function ProductList() {
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: SCHEMA_TABLE_EXAMPLE_ROWS,
     onQueryChange: (query, change) => {
@@ -24,7 +24,7 @@ function ProductList() {
   });
 
   return (
-    <SchemaTable
+    <DataTable
       table={table}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
@@ -59,7 +59,7 @@ import {
   DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
+  useDataTable,
 } from "@/components/ui/data-table";
 
 function ProductList() {
@@ -69,13 +69,13 @@ function ProductList() {
     initialData: SCHEMA_TABLE_EXAMPLE_ROWS,
     staleTime: 30_000,
   });
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: products.data,
   });
 
   return (
-    <SchemaTable
+    <DataTable
       table={table}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
@@ -104,7 +104,7 @@ import {
   DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
+  useDataTable,
 } from "@/components/ui/data-table";
 
 const queryClient = new QueryClient();
@@ -126,13 +126,13 @@ function ProductList() {
   const { data: rows } = useLiveQuery({
     query: (q) => q.from({ product: productCollection }),
   });
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: rows ?? SCHEMA_TABLE_EXAMPLE_ROWS,
   });
 
   return (
-    <SchemaTable
+    <DataTable
       table={table}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);

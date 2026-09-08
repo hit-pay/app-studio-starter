@@ -13,7 +13,7 @@ Page mode is the default. Save submits the external form identified by
 
 ```tsx
 import { FormLayout } from "@/components/ui/form-layout";
-import { SchemaForm } from "@/components/ui/form-builder";
+import { FormBuilder } from "@/components/ui/form-builder";
 
 <FormLayout
   title="Create product"
@@ -22,7 +22,7 @@ import { SchemaForm } from "@/components/ui/form-builder";
   onClose={handleClose}
   actions={{ save: { label: "Create" } }}
 >
-  <SchemaForm id="product-form" form={form} />
+  <FormBuilder id="product-form" form={form} />
 </FormLayout>;
 ```
 
@@ -45,7 +45,7 @@ Modal mode preserves controlled dialog semantics through `open` and
     save: { label: "Save customer", disabled: isSaving },
   }}
 >
-  <SchemaForm id="customer-form" form={form} />
+  <FormBuilder id="customer-form" form={form} />
 </FormLayout>
 ```
 

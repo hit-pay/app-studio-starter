@@ -1,8 +1,8 @@
-<!-- Generated from content/docs/components/schema-table.mdx. Do not edit. -->
+<!-- Generated from content/docs/components/data-table.mdx. Do not edit. -->
 
-# Schema Table
+# Data Table
 
-JSON schema table like SchemaForm: search, tabs, filter, sort, Edit Column, pagination.
+Schema-driven table: search, tabs, filter, sort, Edit Column, pagination. Prefer this over Table for lists.
 
 ## Example
 
@@ -224,18 +224,18 @@ export { SchemaTableDemo };
 
 ## Usage
 
-Put `SchemaTable` directly in `PageLayout`. Do not wrap it in `Card`.
+Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
 
 ```tsx
 import {
-  SchemaTable,
+  DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
+  useDataTable,
 } from "@/components/ui/data-table";
 
 function ProductList() {
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: SCHEMA_TABLE_EXAMPLE_ROWS,
     onQueryChange: (query, change) => {
@@ -244,7 +244,7 @@ function ProductList() {
   });
 
   return (
-    <SchemaTable
+    <DataTable
       table={table}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
@@ -276,10 +276,10 @@ instant. Clearing search cancels pending work and emits immediately.
 ```tsx
 import { useQuery } from "@tanstack/react-query";
 import {
-  SchemaTable,
+  DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
+  useDataTable,
 } from "@/components/ui/data-table";
 
 function ProductList() {
@@ -289,13 +289,13 @@ function ProductList() {
     initialData: SCHEMA_TABLE_EXAMPLE_ROWS,
     staleTime: 30_000,
   });
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: products.data,
   });
 
   return (
-    <SchemaTable
+    <DataTable
       table={table}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
@@ -321,10 +321,10 @@ import {
 } from "@tanstack/react-db";
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import {
-  SchemaTable,
+  DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
+  useDataTable,
 } from "@/components/ui/data-table";
 
 const queryClient = new QueryClient();
@@ -346,13 +346,13 @@ function ProductList() {
   const { data: rows } = useLiveQuery({
     query: (q) => q.from({ product: productCollection }),
   });
-  const table = useSchemaTable({
+  const table = useDataTable({
     schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
     data: rows ?? SCHEMA_TABLE_EXAMPLE_ROWS,
   });
 
   return (
-    <SchemaTable
+    <DataTable
       table={table}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);

@@ -1,8 +1,8 @@
-<!-- Generated from content/docs/components/schema-form.mdx. Do not edit. -->
+<!-- Generated from content/docs/components/form-builder.mdx. Do not edit. -->
 
-# Schema Form
+# Form Builder
 
-TanStack Form plus Orchid fields. Types include date, datetime, file, quantity, switch.
+Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer this over assembling fields by hand.
 
 ## Example
 
@@ -459,7 +459,7 @@ function SchemaFormDemo() {
 export { SchemaFormDemo };
 ```
 
-Unknown `type` values throw. Use only the listed SchemaForm types. Render inside `FormLayout`. Do not wrap in `Card`.
+Unknown `type` values throw. Use only the listed FormBuilder types. Render inside `FormLayout`. Do not wrap in `Card`.
 
 ## Usage
 
@@ -468,7 +468,7 @@ import { useState } from "react";
 
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
 import { Button } from "@/components/ui/button";
-import { SchemaForm, useSchemaForm } from "@/components/ui/form-builder";
+import { FormBuilder, useFormBuilder } from "@/components/ui/form-builder";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 // In src/routes/schema-form.tsx, ACCOUNT_FIELDS and DETAILS_FIELDS are the

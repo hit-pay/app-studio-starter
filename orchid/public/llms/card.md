@@ -65,7 +65,7 @@ export { CardDemo }
 
 ## Usage
 
-Use `Card` for a small summary or grouped fields. Do not wrap `SchemaTable`, `SchemaForm`, `PageLayout`, or `Table`.
+Use `Card` for a small summary or grouped fields. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table`.
 
 ```tsx
 import { Button } from '@/components/ui/button'

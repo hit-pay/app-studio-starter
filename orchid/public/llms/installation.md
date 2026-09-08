@@ -13,9 +13,8 @@ forms, data tables, page layouts, sidebars, confirmations, and common business
 workflows. Orchid uses the shadcn CLI as its installer. It does not provide a
 separate Orchid CLI.
 
-Registry items that target `@ui` land in `src/components/ui`. Higher-level
-blocks that target `@components` land in `src/components`. The registry
-declares these destinations, so the CLI places each file automatically.
+Every Orchid item installs under `src/components/ui` and is imported from
+`@/components/ui/<name>`. The CLI writes the source into your application.
 
 ## Prerequisites
 

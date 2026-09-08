@@ -9,19 +9,19 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 # Components
 
-## `schema-form` — Schema Form
+## `form-builder` — Form Builder
 
 JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
 Import `@/components/ui/form-builder`; read `src/components/ui/form-builder.tsx`.
 Related source: `src/components/ui/form-builder-model.ts`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-form.md
+Docs: https://orchid-ui-hitpay.vercel.app/llms/form-builder.md
 
-## `schema-table` — Schema Table
+## `data-table` — Data Table
 
 JSON-schema list with search, filters, sorting, pagination.
 Import `@/components/ui/data-table`; read `src/components/ui/data-table.tsx`.
 Related source: `src/components/ui/data-table-model.ts`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-table.md
+Docs: https://orchid-ui-hitpay.vercel.app/llms/data-table.md
 
 ## `sidebar` — Sidebar
 
@@ -61,7 +61,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/customer-card.md
 
 ## `form-layout` — Form Layout
 
-Create/edit shell (page or modal). Put SchemaForm inside; one form uses formId = SchemaForm id. Several forms use actions.save.onClick.
+Create/edit shell (page or modal). Put FormBuilder inside; one form uses formId = FormBuilder id. Several forms use actions.save.onClick.
 Import `@/components/ui/form-layout`; read `src/components/ui/form-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-layout.md
 
