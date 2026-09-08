@@ -21,10 +21,10 @@ const SIZE_SM =
 const SIZE_DEFAULT =
   'h-9 min-w-9 gap-2 rounded-lg px-3 py-2 text-sm leading-normal has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 [&_svg:not([class*="size-"])]:size-4.5'
 const SIZE_LG =
-  'h-11 min-w-11 gap-2 rounded-lg px-4 py-2.5 text-base leading-snug has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 [&_svg:not([class*="size-"])]:size-5'
+  'h-11 min-w-11 gap-2 rounded-lg px-4 py-2.5 text-base leading-normal has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 [&_svg:not([class*="size-"])]:size-5'
 
 const buttonVariants = cva(
-  'group/button inline-flex shrink-0 cursor-pointer items-center justify-center overflow-clip border border-solid bg-clip-padding font-medium whitespace-nowrap outline-none transition-all select-none focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:ring-3 aria-invalid:ring-oc-destructive-border/50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
+  'group/button inline-flex shrink-0 cursor-pointer items-center justify-center overflow-visible border border-solid bg-clip-padding font-medium leading-normal whitespace-nowrap outline-none transition-all select-none focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:ring-3 aria-invalid:ring-oc-destructive-border/50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
   {
     variants: {
       variant: {
@@ -37,7 +37,7 @@ const buttonVariants = cva(
       },
       size: {
         default: SIZE_DEFAULT,
-        xs: 'h-6 min-w-6 gap-1 rounded-lg px-2 text-xs leading-none has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*="size-"])]:size-3',
+        xs: 'h-6 min-w-6 gap-1 rounded-lg px-2 text-xs leading-4 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*="size-"])]:size-3',
         sm: SIZE_SM,
         lg: SIZE_LG,
         icon: 'size-9 min-w-9 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-4.5',

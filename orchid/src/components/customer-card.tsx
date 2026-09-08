@@ -203,6 +203,7 @@ function CustomerCard({
         </>
       ) : (
         <>
+          {leading ? <div className="shrink-0">{leading}</div> : null}
           <div className={cn('flex items-center gap-2', expanded && 'w-full min-w-0')}>
             {avatar ? (
               <Avatar className="text-sm leading-5">
@@ -292,7 +293,6 @@ function CustomerCard({
         </button>
       ) : null}
 
-      {leading ? <div className="shrink-0">{leading}</div> : null}
     </div>
   )
 }

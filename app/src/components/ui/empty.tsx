@@ -54,7 +54,7 @@ function EmptyMedia({
     <div
       data-slot="empty-icon"
       data-variant={variant}
-      className={cn(emptyMediaVariants({ variant, className }))}
+      className={cn(emptyMediaVariants({ variant }), className)}
       {...props}
     />
   )
@@ -64,7 +64,7 @@ function EmptyTitle({ className, ...props }: React.ComponentProps<'div'>) {
   return (
     <div
       data-slot="empty-title"
-      className={cn('text-base leading-snug font-medium text-oc-foreground', className)}
+      className={cn('text-base leading-6 font-medium text-oc-foreground', className)}
       {...props}
     />
   )

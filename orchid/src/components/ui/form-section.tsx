@@ -43,7 +43,7 @@ function FormSection({
     >
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
-          <h2 className="text-base font-medium leading-[1.4] text-oc-foreground">{title}</h2>
+          <h2 className="text-base leading-6 font-medium text-oc-foreground">{title}</h2>
           {notification != null ? (
             <span className="inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-oc-destructive text-[10px] font-medium leading-[18px] tracking-[0.3px] text-white uppercase">
               {notification}
@@ -53,7 +53,7 @@ function FormSection({
           {badge ? badge : null}
         </div>
         {description ? (
-          <p className="min-w-0 text-xs leading-[1.5] text-oc-muted-foreground">{description}</p>
+          <p className="min-w-0 text-xs leading-5 text-oc-muted-foreground">{description}</p>
         ) : null}
       </div>
       {actions ? (
@@ -95,12 +95,12 @@ function FormSectionItem({
       <div className="flex w-full min-w-0 items-start gap-6">
         <div className="flex min-w-0 flex-1 flex-col gap-0.5">
           <div className="flex min-w-0 flex-wrap items-center gap-2">
-            <p className="text-sm font-medium leading-[1.5] text-oc-foreground">{title}</p>
+            <p className="text-xs font-medium leading-5 text-oc-foreground">{title}</p>
             {hint ? <SectionHint hint={hint} /> : null}
             {badge ? badge : null}
           </div>
           {description ? (
-            <p className="min-w-0 text-xs leading-[1.5] text-oc-muted-foreground">{description}</p>
+            <p className="min-w-0 text-xs leading-5 text-oc-muted-foreground">{description}</p>
           ) : null}
         </div>
         {actions ? <div className="flex shrink-0 items-center pt-0.5">{actions}</div> : null}

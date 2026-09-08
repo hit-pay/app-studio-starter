@@ -45,7 +45,7 @@ const VARIANT_SHORTCUT: Record<
 }
 
 const badgeVariants = cva(
-  'group/badge inline-flex min-h-6 w-fit min-w-8 shrink-0 items-center justify-center gap-1 overflow-hidden rounded-full border border-transparent px-2 py-0.5 text-center text-xs leading-normal font-medium whitespace-nowrap transition-all focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-oc-destructive aria-invalid:ring-oc-destructive-border/50 [&>svg]:pointer-events-none [&>svg]:size-3 [&>svg]:shrink-0',
+  'group/badge inline-flex min-h-6 w-fit min-w-8 shrink-0 items-center justify-center gap-1 overflow-visible rounded-full border border-transparent px-2 py-0.5 text-center text-xs leading-4 font-medium whitespace-nowrap transition-all focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 aria-invalid:border-oc-destructive aria-invalid:ring-oc-destructive-border/50 [&>svg]:pointer-events-none [&>svg]:size-3 [&>svg]:shrink-0',
   {
     variants: {
       tone: {

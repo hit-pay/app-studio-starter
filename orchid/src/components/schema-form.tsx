@@ -540,9 +540,9 @@ function SchemaForm({
               if (type === 'section') {
                 return (
                   <div className="flex flex-col gap-1">
-                    <p className="text-sm font-medium text-oc-foreground">{item.title}</p>
+                    <p className="text-base font-medium leading-6 text-oc-foreground">{item.title}</p>
                     {item.description ? (
-                      <p className="text-xs text-oc-muted-foreground">{item.description}</p>
+                      <p className="text-xs leading-5 text-oc-muted-foreground">{item.description}</p>
                     ) : null}
                   </div>
                 )
@@ -825,7 +825,7 @@ function SchemaForm({
                       : field.handleChange,
                   )
                 }
-                const addonEnd = item.props?.align === 'end'
+                const addonEnd = /^end$/i.test(String(item.props?.align ?? ''))
                 const selectAddon = (item.options ?? []).length ? (
                   <InputGroupAddon align={addonEnd ? 'inline-end' : 'inline-start'}>
                     <Select

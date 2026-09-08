@@ -36,7 +36,7 @@ function AccordionTrigger({
       <AccordionPrimitive.Trigger
         data-slot="accordion-trigger"
         className={cn(
-          'group/accordion-trigger flex w-full cursor-pointer items-center gap-2 bg-oc-dark-blue-soft px-3 py-2 text-left text-[14px] leading-normal font-medium text-oc-foreground outline-none focus-visible:ring-3 focus-visible:ring-oc-primary/20 aria-disabled:pointer-events-none aria-disabled:opacity-50',
+          'group/accordion-trigger flex w-full cursor-pointer items-center gap-2 bg-oc-dark-blue-soft px-3 py-2 text-left text-sm leading-normal font-medium text-oc-foreground outline-none focus-visible:ring-3 focus-visible:ring-oc-primary/20 aria-disabled:pointer-events-none aria-disabled:opacity-50',
           className,
         )}
         {...props}
@@ -64,7 +64,7 @@ function AccordionContent({
     >
       <div
         className={cn(
-          'h-(--accordion-panel-height) border-t border-oc-border p-3 text-[14px] leading-normal text-oc-foreground data-ending-style:h-0 data-starting-style:h-0',
+          'h-(--accordion-panel-height) border-t border-oc-border p-3 text-sm leading-normal text-oc-foreground data-ending-style:h-0 data-starting-style:h-0',
           className,
         )}
       >

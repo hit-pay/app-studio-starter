@@ -180,6 +180,7 @@ function minWidthFor(type: string | undefined) {
 function DataTable({
   className,
   resizable = true,
+  children,
   ...props
 }: ComponentProps<"div"> & { resizable?: boolean }) {
   const [widths, setWidths] = useState<Record<string, number>>({});
@@ -292,14 +293,20 @@ function DataTable({
       value={{ enabled: resizable, widths, beginResize }}
     >
       <div
-        data-slot="data-table-wrap"
-        role="table"
         className={cn(
-          "relative w-full min-w-0 overflow-x-auto",
+          "relative w-full min-w-0 overflow-hidden rounded-lg border border-solid border-oc-border",
           className,
         )}
-        {...props}
-      />
+      >
+        <div
+          data-slot="data-table-wrap"
+          role="table"
+          className="w-full min-w-0 overflow-x-auto"
+          {...props}
+        >
+          {children}
+        </div>
+      </div>
     </DataTableResizeContext.Provider>
   );
 }
@@ -325,7 +332,7 @@ function DataTableSelectionBar({
       )}
       {...props}
     >
-      <div className="flex min-w-0 items-center gap-2 text-[13px] leading-normal">
+      <div className="flex min-w-0 items-center gap-2 text-sm leading-normal">
         <span className="font-medium text-oc-foreground">{label}</span>
         {onDeselectAll ? (
           <Button
@@ -373,7 +380,10 @@ function DataTableBody({ className, ...props }: ComponentProps<"div">) {
     <div
       data-slot="data-table-body"
       role="rowgroup"
-      className={cn("w-full min-w-full", className)}
+      className={cn(
+        "w-full min-w-full [&_[data-slot=data-table-row]:last-child_[data-slot=data-table-cell]]:border-b-0",
+        className,
+      )}
       {...props}
     />
   );
@@ -420,7 +430,7 @@ function DataTableRow({
 
 function columnEdgeClass(type: DataTableCellType) {
   return type === "icon"
-    ? "border-l border-solid border-oc-border"
+    ? ""
     : "border-r border-solid border-oc-border last:border-r-0";
 }
 
@@ -523,7 +533,7 @@ function DataTableHead({
       data-column={columnKey}
       role="columnheader"
       className={cn(
-        "relative flex h-8.5 items-center bg-oc-neutral text-[10px] leading-4.5 font-medium tracking-[0.3px] text-oc-foreground uppercase",
+        "relative flex h-8.5 items-center bg-oc-neutral text-[10px] leading-4 font-medium tracking-[0.3px] text-oc-foreground uppercase",
         "border-b border-solid border-oc-border",
         columnEdgeClass(type),
         type === "checkbox" || type === "image" || type === "icon"
@@ -638,7 +648,7 @@ function DataTableCellText({
           {icon}
         </span>
       ) : null}
-      <span className="min-w-0 truncate">{children}</span>
+      <span className="min-w-0 truncate leading-normal">{children}</span>
     </span>
   );
 }
@@ -1513,11 +1523,12 @@ function SchemaTable({
           <span className="hidden min-w-32 sm:block" />
           <Pagination className="w-auto flex-1">
             <PaginationPrevious
-              href={`?page=${Math.max(1, table.page - 1)}`}
+              href={table.page <= 1 ? undefined : `?page=${table.page - 1}`}
               aria-disabled={table.page <= 1}
               tabIndex={table.page <= 1 ? -1 : undefined}
               onClick={(event) => {
                 event.preventDefault();
+                if (table.page <= 1) return;
                 table.setPage(table.page - 1);
               }}
             />
@@ -1544,17 +1555,22 @@ function SchemaTable({
               )}
             </PaginationContent>
             <PaginationNext
-              href={`?page=${Math.min(table.pageCount, table.page + 1)}`}
+              href={
+                table.page >= table.pageCount
+                  ? undefined
+                  : `?page=${table.page + 1}`
+              }
               aria-disabled={table.page >= table.pageCount}
               tabIndex={table.page >= table.pageCount ? -1 : undefined}
               onClick={(event) => {
                 event.preventDefault();
+                if (table.page >= table.pageCount) return;
                 table.setPage(table.page + 1);
               }}
             />
           </Pagination>
           {pageSizes.length > 0 ? (
-            <div className="flex items-center gap-2 text-[13px] text-oc-muted-foreground">
+            <div className="flex items-center gap-2 text-sm text-oc-muted-foreground">
               Item per page:
               <Select
                 value={String(table.pageSize)}

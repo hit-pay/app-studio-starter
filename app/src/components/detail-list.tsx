@@ -132,7 +132,7 @@ const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-oc-foreground', {
   variants: {
     size: {
       small: 'text-sm',
-      big: 'text-lg font-medium',
+      big: 'text-base font-medium',
     },
     alignment: {
       horizontal: 'text-right',

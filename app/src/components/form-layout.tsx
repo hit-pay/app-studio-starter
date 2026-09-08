@@ -47,7 +47,7 @@ type FormLayoutModalProps = FormLayoutCommonProps & {
   mode: "modal";
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  size?: "sm" | "default" | "lg";
+  size?: "sm" | "default" | "lg" | "medium" | "fullscreen" | "confirmation";
   persistent?: boolean;
 };
 
@@ -152,11 +152,11 @@ function PageFormLayout({
       <div className="min-h-0 flex-1 overflow-y-auto px-6 py-8">
         <div className="mx-auto w-full max-w-xl">
           <div className="mb-6">
-            <h1 className="text-xl font-semibold text-oc-foreground">
+            <h1 className="text-lg leading-6 font-medium text-oc-foreground">
               {title}
             </h1>
             {description ? (
-              <p className="mt-1 text-sm text-oc-muted-foreground">
+              <p className="mt-1 text-sm leading-5 text-oc-muted-foreground">
                 {description}
               </p>
             ) : null}

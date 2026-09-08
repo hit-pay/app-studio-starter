@@ -88,7 +88,7 @@ function DatePicker({
             variant="outline"
             data-empty={!date}
             className={cn(
-              'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
+              'w-full min-w-0 shrink justify-start overflow-visible text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />
@@ -170,7 +170,7 @@ function DateTimePicker({
             variant="outline"
             data-empty={!date}
             className={cn(
-              'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
+              'w-full min-w-0 shrink justify-start overflow-visible text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />
@@ -305,7 +305,7 @@ function DatePickerRange({
             variant="outline"
             data-empty={!range?.from}
             className={cn(
-              'w-full min-w-0 shrink justify-start overflow-hidden text-left font-normal data-[empty=true]:text-oc-muted-foreground',
+              'w-full min-w-0 shrink justify-start overflow-visible text-left font-normal data-[empty=true]:text-oc-muted-foreground',
               className,
             )}
           />

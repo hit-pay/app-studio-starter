@@ -11,7 +11,7 @@ import {
 import { cn } from '@/lib/utils'
 
 const dropdownMenuItemVariants = cva(
-  'group/dropdown-menu-item relative flex cursor-pointer items-center gap-2 rounded p-2 text-xs leading-normal text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-inset:pl-7 data-[preview=Hover]:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
+  'group/dropdown-menu-item relative flex cursor-pointer items-center gap-2 rounded p-2 text-sm leading-normal text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft focus:bg-oc-dark-blue-soft data-inset:pl-7 data-[preview=Hover]:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*=\'size-\'])]:size-4',
   {
     variants: {
       variant: {

@@ -99,7 +99,7 @@ function StatCard({
 
           <div
             className={cn(
-              'flex min-w-0 items-center gap-2 overflow-hidden text-xl font-medium leading-[1.4] text-oc-foreground',
+              'flex min-w-0 items-center gap-2 overflow-hidden text-lg font-medium leading-6 text-oc-foreground',
               transparent ? 'px-3 pt-0 pb-3' : 'px-5 py-4',
             )}
           >
