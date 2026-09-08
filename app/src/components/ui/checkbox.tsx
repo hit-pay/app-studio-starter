@@ -1,5 +1,3 @@
-'use client'
-
 import type { ReactNode } from 'react'
 import { Checkbox as CheckboxPrimitive } from '@base-ui/react/checkbox'
 import { CheckboxGroup as CheckboxGroupPrimitive } from '@base-ui/react/checkbox-group'
