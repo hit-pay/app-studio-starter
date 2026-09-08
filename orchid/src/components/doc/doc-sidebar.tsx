@@ -71,7 +71,7 @@ function NavGroup({
 function DocSidebar() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  if (pathname === "/") return null;
+  if (pathname === "/" || pathname === "/components") return null;
 
   return (
     <aside className="hidden h-full w-56 shrink-0 flex-col border-r border-solid border-oc-border bg-oc-background md:flex">

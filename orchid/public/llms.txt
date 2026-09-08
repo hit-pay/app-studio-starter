@@ -8,7 +8,7 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 10 guides, 30 components, 13 form components, and 15 blocks.
+- Documentation pages: 3 guides, 30 components, 13 form components, and 15 blocks.
 - Installable registry items: 60, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
@@ -31,8 +31,8 @@ bunx --bun shadcn@latest add @orchid/all
 - [Registry Index](https://orchid-ui-hitpay.vercel.app/registry.json) — machine-readable catalog and dependency graph.
 - [Markdown docs](https://orchid-ui-hitpay.vercel.app/llms/) — generated `.md` pages for agents (not the HTML site).
 - [Orchid Theme Tokens](https://orchid-ui-hitpay.vercel.app/orchid-tokens.css) — published CSS variables and Tailwind CSS v4 theme mappings.
-- [CLI Guide](https://orchid-ui-hitpay.vercel.app/llms/cli.md) — initialize projects and install Orchid items with the shadcn CLI.
-- [components.json Guide](https://orchid-ui-hitpay.vercel.app/llms/components-json.md) — configure aliases, Tailwind CSS, and the Orchid namespace.
+- [Installation Guide](https://orchid-ui-hitpay.vercel.app/llms/installation.md) — initialize a project and add Orchid items with the shadcn CLI.
+- [Components Guide](https://orchid-ui-hitpay.vercel.app/llms/components-json.md) — configure aliases, Tailwind CSS, and the Orchid namespace.
 - [Theming Guide](https://orchid-ui-hitpay.vercel.app/llms/theming.md) — install and customize Orchid light and dark tokens.
 
 ## MCP Setup for AI Agents
@@ -81,15 +81,8 @@ Example prompts after setup:
 
 ## Getting Started
 
-- [Introduction](https://orchid-ui-hitpay.vercel.app/llms/introduction.md) — Learn what Orchid is, how it is distributed, and where to begin.
-- [Installation](https://orchid-ui-hitpay.vercel.app/llms/installation.md) — Install Orchid with the shadcn CLI in a supported framework.
-  - [Next.js](https://orchid-ui-hitpay.vercel.app/llms/installation-next.md) — Install Orchid in a new Next.js application.
-  - [Vite](https://orchid-ui-hitpay.vercel.app/llms/installation-vite.md) — Install Orchid in a new Vite React application.
-  - [TanStack Start](https://orchid-ui-hitpay.vercel.app/llms/installation-tanstack-start.md) — Install Orchid in a new TanStack Start application.
-  - [React Router](https://orchid-ui-hitpay.vercel.app/llms/installation-react-router.md) — Install Orchid in a new React Router application.
-  - [Astro](https://orchid-ui-hitpay.vercel.app/llms/installation-astro.md) — Install Orchid in a new Astro React application.
-- [CLI](https://orchid-ui-hitpay.vercel.app/llms/cli.md) — Use the shadcn CLI to initialize projects and add Orchid registry items.
-- [components.json](https://orchid-ui-hitpay.vercel.app/llms/components-json.md) — Configure aliases, Tailwind CSS, and the Orchid registry namespace.
+- [Installation](https://orchid-ui-hitpay.vercel.app/llms/installation.md) — What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.
+- [Components](https://orchid-ui-hitpay.vercel.app/llms/components-json.md) — Configure aliases, Tailwind CSS, and the Orchid registry namespace in components.json.
 - [Theming](https://orchid-ui-hitpay.vercel.app/llms/theming.md) — Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.
 
 ## Components

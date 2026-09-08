@@ -1,8 +1,8 @@
 <!-- Generated from content/docs/guides/components-json.mdx. Do not edit. -->
 
-# components.json
+# Components
 
-Configure aliases, Tailwind CSS, and the Orchid registry namespace.
+Configure aliases, Tailwind CSS, and the Orchid registry namespace in components.json.
 
 `components.json` tells the shadcn CLI where to write source files, which
 stylesheet contains Tailwind, and how to resolve the Orchid registry.
@@ -55,8 +55,5 @@ and your aliases determine it consistently.
 
 ## Next step
 
-Install the [Orchid theme tokens](https://orchid-ui-hitpay.vercel.app/llms/theming.md), then run:
-
-```bash
-bunx --bun shadcn@latest add @orchid/button
-```
+Install the [Orchid theme tokens](https://orchid-ui-hitpay.vercel.app/llms/theming.md), then add a component from
+[Installation](https://orchid-ui-hitpay.vercel.app/llms/installation.md).

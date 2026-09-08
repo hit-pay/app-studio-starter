@@ -1,93 +1,23 @@
-import { Link } from '@tanstack/react-router'
-import {
-  docBlocksByName,
-  docComponentsByName,
-  docFormsByName,
-} from '@/components/doc/doc-components'
-import { DocCodePanel } from '@/components/doc/doc-code-panel'
-import { ListItem, ListItemBody, ListItemDescription, ListItemTitle } from '@/components/ui/list-item'
+import { DocCodePanel } from "@/components/doc/doc-code-panel";
 
 const AI_PROMPT =
-  'Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Follow its Markdown doc links under /llms/*.md (not the HTML example pages) for Orchid installation, MCP setup, components, and usage guidance.'
+  "Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Follow its Markdown doc links under /llms/*.md (not the HTML example pages) for Orchid installation, MCP setup, components, and usage guidance.";
 
 function IndexDemo() {
   return (
-    <>
-      <Link
-        to="/installation"
-        className="flex items-center justify-between rounded-xl border border-solid border-oc-border bg-oc-info-soft px-4 py-3 text-sm text-oc-foreground"
-      >
-        <span>
-          <span className="font-medium">Installation</span>
-          <span className="text-oc-muted-foreground">
-            {' '}
-            — create a new app with Cursor, Claude Code, or another AI agent
-          </span>
-        </span>
-        <span className="text-oc-muted-foreground">→</span>
-      </Link>
-      <div className="flex min-w-0 flex-col gap-3">
-        <div>
-          <h2 className="text-sm font-medium text-oc-foreground">Guide your AI agent</h2>
-          <p className="mt-1 text-sm text-oc-muted-foreground">
-            Copy and paste this prompt before asking an AI agent to build with Orchid.
-          </p>
-        </div>
-        <DocCodePanel filename="prompt.txt" code={AI_PROMPT} />
+    <div className="mx-auto flex w-full max-w-2xl flex-col gap-3">
+      <div>
+        <h2 className="text-sm font-medium text-oc-foreground">
+          Guide your AI agent
+        </h2>
+        <p className="mt-1 text-sm text-oc-muted-foreground">
+          Copy and paste this prompt before asking an AI agent to build with
+          Orchid.
+        </p>
       </div>
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-oc-muted-foreground">Component</h2>
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {docComponentsByName().map((item) => (
-            <Link key={item.to} to={item.to} className="block min-w-0">
-              <ListItem className="h-full">
-                <ListItemBody>
-                  <ListItemTitle>{item.name}</ListItemTitle>
-                  <ListItemDescription className="text-oc-muted-foreground">
-                    {item.description}
-                  </ListItemDescription>
-                </ListItemBody>
-              </ListItem>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-oc-muted-foreground">Form</h2>
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {docFormsByName().map((item) => (
-            <Link key={item.to} to={item.to} className="block min-w-0">
-              <ListItem className="h-full">
-                <ListItemBody>
-                  <ListItemTitle>{item.name}</ListItemTitle>
-                  <ListItemDescription className="text-oc-muted-foreground">
-                    {item.description}
-                  </ListItemDescription>
-                </ListItemBody>
-              </ListItem>
-            </Link>
-          ))}
-        </div>
-      </div>
-      <div className="flex flex-col gap-3">
-        <h2 className="text-sm font-medium text-oc-muted-foreground">Block</h2>
-        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {docBlocksByName().map((item) => (
-            <Link key={item.to} to={item.to} className="block min-w-0">
-              <ListItem className="h-full">
-                <ListItemBody>
-                  <ListItemTitle>{item.name}</ListItemTitle>
-                  <ListItemDescription className="text-oc-muted-foreground">
-                    {item.description}
-                  </ListItemDescription>
-                </ListItemBody>
-              </ListItem>
-            </Link>
-          ))}
-        </div>
-      </div>
-    </>
-  )
+      <DocCodePanel filename="prompt.txt" code={AI_PROMPT} />
+    </div>
+  );
 }
 
-export { IndexDemo }
+export { IndexDemo };

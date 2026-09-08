@@ -51,5 +51,6 @@ components continue to resolve their utility classes.
 
 ## Next step
 
-Review [components.json](https://orchid-ui-hitpay.vercel.app/llms/components-json.md), then add your first component with
-the [shadcn CLI](https://orchid-ui-hitpay.vercel.app/llms/cli.md).
+Review [Components](https://orchid-ui-hitpay.vercel.app/llms/components-json.md), then add your first item with
+`bunx --bun shadcn@latest add @orchid/button`. See
+[Installation](https://orchid-ui-hitpay.vercel.app/llms/installation.md) for init and add commands.

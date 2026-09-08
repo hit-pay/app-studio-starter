@@ -238,7 +238,7 @@ const lines = [
   `- [Registry Index](${link("/registry.json")}) — machine-readable catalog and dependency graph.`,
   `- [Markdown docs](${link("/llms/")}) — generated \`.md\` pages for agents (not the HTML site).`,
   `- [Orchid Theme Tokens](${link("/orchid-tokens.css")}) — published CSS variables and Tailwind CSS v4 theme mappings.`,
-  `- [CLI Guide](${docsLink({ to: "/cli", name: "CLI" })}) — initialize projects and install Orchid items with the shadcn CLI.`,
+  `- [Installation Guide](${docsLink({ to: "/installation", name: "Installation" })}) — initialize a project and add Orchid items with the shadcn CLI.`,
   `- [components.json Guide](${docsLink({ to: "/components-json", name: "components.json" })}) — configure aliases, Tailwind CSS, and the Orchid namespace.`,
   `- [Theming Guide](${docsLink({ to: "/theming", name: "Theming" })}) — install and customize Orchid light and dark tokens.`,
   "",

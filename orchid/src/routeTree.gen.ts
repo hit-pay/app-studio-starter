@@ -25,10 +25,10 @@ import { Route as CardRouteImport } from './routes/card'
 import { Route as ChartRouteImport } from './routes/chart'
 import { Route as CheckboxRouteImport } from './routes/checkbox'
 import { Route as ChoiceCardRouteImport } from './routes/choice-card'
-import { Route as CliRouteImport } from './routes/cli'
 import { Route as CollapsibleRouteImport } from './routes/collapsible'
 import { Route as ComboboxRouteImport } from './routes/combobox'
 import { Route as CommandRouteImport } from './routes/command'
+import { Route as ComponentsRouteImport } from './routes/components'
 import { Route as ComponentsJsonRouteImport } from './routes/components-json'
 import { Route as ConfirmationModalRouteImport } from './routes/confirmation-modal'
 import { Route as CopyButtonRouteImport } from './routes/copy-button'
@@ -45,7 +45,6 @@ import { Route as IconGroupRouteImport } from './routes/icon-group'
 import { Route as InputRouteImport } from './routes/input'
 import { Route as InputGroupRouteImport } from './routes/input-group'
 import { Route as InstallationRouteImport } from './routes/installation'
-import { Route as IntroductionRouteImport } from './routes/introduction'
 import { Route as KbdRouteImport } from './routes/kbd'
 import { Route as LabelRouteImport } from './routes/label'
 import { Route as ListItemRouteImport } from './routes/list-item'
@@ -74,11 +73,6 @@ import { Route as TextareaRouteImport } from './routes/textarea'
 import { Route as ThemingRouteImport } from './routes/theming'
 import { Route as ToastRouteImport } from './routes/toast'
 import { Route as TooltipRouteImport } from './routes/tooltip'
-import { Route as InstallationAstroRouteImport } from './routes/installation.astro'
-import { Route as InstallationNextRouteImport } from './routes/installation.next'
-import { Route as InstallationReactRouterRouteImport } from './routes/installation.react-router'
-import { Route as InstallationTanstackStartRouteImport } from './routes/installation.tanstack-start'
-import { Route as InstallationViteRouteImport } from './routes/installation.vite'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -160,11 +154,6 @@ const ChoiceCardRoute = ChoiceCardRouteImport.update({
   path: '/choice-card',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CliRoute = CliRouteImport.update({
-  id: '/cli',
-  path: '/cli',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const CollapsibleRoute = CollapsibleRouteImport.update({
   id: '/collapsible',
   path: '/collapsible',
@@ -178,6 +167,11 @@ const ComboboxRoute = ComboboxRouteImport.update({
 const CommandRoute = CommandRouteImport.update({
   id: '/command',
   path: '/command',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsRoute = ComponentsRouteImport.update({
+  id: '/components',
+  path: '/components',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsJsonRoute = ComponentsJsonRouteImport.update({
@@ -258,11 +252,6 @@ const InputGroupRoute = InputGroupRouteImport.update({
 const InstallationRoute = InstallationRouteImport.update({
   id: '/installation',
   path: '/installation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IntroductionRoute = IntroductionRouteImport.update({
-  id: '/introduction',
-  path: '/introduction',
   getParentRoute: () => rootRouteImport,
 } as any)
 const KbdRoute = KbdRouteImport.update({
@@ -405,32 +394,6 @@ const TooltipRoute = TooltipRouteImport.update({
   path: '/tooltip',
   getParentRoute: () => rootRouteImport,
 } as any)
-const InstallationAstroRoute = InstallationAstroRouteImport.update({
-  id: '/astro',
-  path: '/astro',
-  getParentRoute: () => InstallationRoute,
-} as any)
-const InstallationNextRoute = InstallationNextRouteImport.update({
-  id: '/next',
-  path: '/next',
-  getParentRoute: () => InstallationRoute,
-} as any)
-const InstallationReactRouterRoute = InstallationReactRouterRouteImport.update({
-  id: '/react-router',
-  path: '/react-router',
-  getParentRoute: () => InstallationRoute,
-} as any)
-const InstallationTanstackStartRoute =
-  InstallationTanstackStartRouteImport.update({
-    id: '/tanstack-start',
-    path: '/tanstack-start',
-    getParentRoute: () => InstallationRoute,
-  } as any)
-const InstallationViteRoute = InstallationViteRouteImport.update({
-  id: '/vite',
-  path: '/vite',
-  getParentRoute: () => InstallationRoute,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -449,10 +412,10 @@ export interface FileRoutesByFullPath {
   '/chart': typeof ChartRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
-  '/cli': typeof CliRoute
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
+  '/components': typeof ComponentsRoute
   '/components-json': typeof ComponentsJsonRoute
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
@@ -468,8 +431,7 @@ export interface FileRoutesByFullPath {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
-  '/installation': typeof InstallationRouteWithChildren
-  '/introduction': typeof IntroductionRoute
+  '/installation': typeof InstallationRoute
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
@@ -498,11 +460,6 @@ export interface FileRoutesByFullPath {
   '/theming': typeof ThemingRoute
   '/toast': typeof ToastRoute
   '/tooltip': typeof TooltipRoute
-  '/installation/astro': typeof InstallationAstroRoute
-  '/installation/next': typeof InstallationNextRoute
-  '/installation/react-router': typeof InstallationReactRouterRoute
-  '/installation/tanstack-start': typeof InstallationTanstackStartRoute
-  '/installation/vite': typeof InstallationViteRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -521,10 +478,10 @@ export interface FileRoutesByTo {
   '/chart': typeof ChartRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
-  '/cli': typeof CliRoute
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
+  '/components': typeof ComponentsRoute
   '/components-json': typeof ComponentsJsonRoute
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
@@ -540,8 +497,7 @@ export interface FileRoutesByTo {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
-  '/installation': typeof InstallationRouteWithChildren
-  '/introduction': typeof IntroductionRoute
+  '/installation': typeof InstallationRoute
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
@@ -570,11 +526,6 @@ export interface FileRoutesByTo {
   '/theming': typeof ThemingRoute
   '/toast': typeof ToastRoute
   '/tooltip': typeof TooltipRoute
-  '/installation/astro': typeof InstallationAstroRoute
-  '/installation/next': typeof InstallationNextRoute
-  '/installation/react-router': typeof InstallationReactRouterRoute
-  '/installation/tanstack-start': typeof InstallationTanstackStartRoute
-  '/installation/vite': typeof InstallationViteRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -594,10 +545,10 @@ export interface FileRoutesById {
   '/chart': typeof ChartRoute
   '/checkbox': typeof CheckboxRoute
   '/choice-card': typeof ChoiceCardRoute
-  '/cli': typeof CliRoute
   '/collapsible': typeof CollapsibleRoute
   '/combobox': typeof ComboboxRoute
   '/command': typeof CommandRoute
+  '/components': typeof ComponentsRoute
   '/components-json': typeof ComponentsJsonRoute
   '/confirmation-modal': typeof ConfirmationModalRoute
   '/copy-button': typeof CopyButtonRoute
@@ -613,8 +564,7 @@ export interface FileRoutesById {
   '/icon-group': typeof IconGroupRoute
   '/input': typeof InputRoute
   '/input-group': typeof InputGroupRoute
-  '/installation': typeof InstallationRouteWithChildren
-  '/introduction': typeof IntroductionRoute
+  '/installation': typeof InstallationRoute
   '/kbd': typeof KbdRoute
   '/label': typeof LabelRoute
   '/list-item': typeof ListItemRoute
@@ -643,11 +593,6 @@ export interface FileRoutesById {
   '/theming': typeof ThemingRoute
   '/toast': typeof ToastRoute
   '/tooltip': typeof TooltipRoute
-  '/installation/astro': typeof InstallationAstroRoute
-  '/installation/next': typeof InstallationNextRoute
-  '/installation/react-router': typeof InstallationReactRouterRoute
-  '/installation/tanstack-start': typeof InstallationTanstackStartRoute
-  '/installation/vite': typeof InstallationViteRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -668,10 +613,10 @@ export interface FileRouteTypes {
     | '/chart'
     | '/checkbox'
     | '/choice-card'
-    | '/cli'
     | '/collapsible'
     | '/combobox'
     | '/command'
+    | '/components'
     | '/components-json'
     | '/confirmation-modal'
     | '/copy-button'
@@ -688,7 +633,6 @@ export interface FileRouteTypes {
     | '/input'
     | '/input-group'
     | '/installation'
-    | '/introduction'
     | '/kbd'
     | '/label'
     | '/list-item'
@@ -717,11 +661,6 @@ export interface FileRouteTypes {
     | '/theming'
     | '/toast'
     | '/tooltip'
-    | '/installation/astro'
-    | '/installation/next'
-    | '/installation/react-router'
-    | '/installation/tanstack-start'
-    | '/installation/vite'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -740,10 +679,10 @@ export interface FileRouteTypes {
     | '/chart'
     | '/checkbox'
     | '/choice-card'
-    | '/cli'
     | '/collapsible'
     | '/combobox'
     | '/command'
+    | '/components'
     | '/components-json'
     | '/confirmation-modal'
     | '/copy-button'
@@ -760,7 +699,6 @@ export interface FileRouteTypes {
     | '/input'
     | '/input-group'
     | '/installation'
-    | '/introduction'
     | '/kbd'
     | '/label'
     | '/list-item'
@@ -789,11 +727,6 @@ export interface FileRouteTypes {
     | '/theming'
     | '/toast'
     | '/tooltip'
-    | '/installation/astro'
-    | '/installation/next'
-    | '/installation/react-router'
-    | '/installation/tanstack-start'
-    | '/installation/vite'
   id:
     | '__root__'
     | '/'
@@ -812,10 +745,10 @@ export interface FileRouteTypes {
     | '/chart'
     | '/checkbox'
     | '/choice-card'
-    | '/cli'
     | '/collapsible'
     | '/combobox'
     | '/command'
+    | '/components'
     | '/components-json'
     | '/confirmation-modal'
     | '/copy-button'
@@ -832,7 +765,6 @@ export interface FileRouteTypes {
     | '/input'
     | '/input-group'
     | '/installation'
-    | '/introduction'
     | '/kbd'
     | '/label'
     | '/list-item'
@@ -861,11 +793,6 @@ export interface FileRouteTypes {
     | '/theming'
     | '/toast'
     | '/tooltip'
-    | '/installation/astro'
-    | '/installation/next'
-    | '/installation/react-router'
-    | '/installation/tanstack-start'
-    | '/installation/vite'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -885,10 +812,10 @@ export interface RootRouteChildren {
   ChartRoute: typeof ChartRoute
   CheckboxRoute: typeof CheckboxRoute
   ChoiceCardRoute: typeof ChoiceCardRoute
-  CliRoute: typeof CliRoute
   CollapsibleRoute: typeof CollapsibleRoute
   ComboboxRoute: typeof ComboboxRoute
   CommandRoute: typeof CommandRoute
+  ComponentsRoute: typeof ComponentsRoute
   ComponentsJsonRoute: typeof ComponentsJsonRoute
   ConfirmationModalRoute: typeof ConfirmationModalRoute
   CopyButtonRoute: typeof CopyButtonRoute
@@ -904,8 +831,7 @@ export interface RootRouteChildren {
   IconGroupRoute: typeof IconGroupRoute
   InputRoute: typeof InputRoute
   InputGroupRoute: typeof InputGroupRoute
-  InstallationRoute: typeof InstallationRouteWithChildren
-  IntroductionRoute: typeof IntroductionRoute
+  InstallationRoute: typeof InstallationRoute
   KbdRoute: typeof KbdRoute
   LabelRoute: typeof LabelRoute
   ListItemRoute: typeof ListItemRoute
@@ -1050,13 +976,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ChoiceCardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/cli': {
-      id: '/cli'
-      path: '/cli'
-      fullPath: '/cli'
-      preLoaderRoute: typeof CliRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/collapsible': {
       id: '/collapsible'
       path: '/collapsible'
@@ -1076,6 +995,13 @@ declare module '@tanstack/react-router' {
       path: '/command'
       fullPath: '/command'
       preLoaderRoute: typeof CommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components': {
+      id: '/components'
+      path: '/components'
+      fullPath: '/components'
+      preLoaderRoute: typeof ComponentsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components-json': {
@@ -1188,13 +1114,6 @@ declare module '@tanstack/react-router' {
       path: '/installation'
       fullPath: '/installation'
       preLoaderRoute: typeof InstallationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/introduction': {
-      id: '/introduction'
-      path: '/introduction'
-      fullPath: '/introduction'
-      preLoaderRoute: typeof IntroductionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/kbd': {
@@ -1393,63 +1312,8 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TooltipRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/installation/astro': {
-      id: '/installation/astro'
-      path: '/astro'
-      fullPath: '/installation/astro'
-      preLoaderRoute: typeof InstallationAstroRouteImport
-      parentRoute: typeof InstallationRoute
-    }
-    '/installation/next': {
-      id: '/installation/next'
-      path: '/next'
-      fullPath: '/installation/next'
-      preLoaderRoute: typeof InstallationNextRouteImport
-      parentRoute: typeof InstallationRoute
-    }
-    '/installation/react-router': {
-      id: '/installation/react-router'
-      path: '/react-router'
-      fullPath: '/installation/react-router'
-      preLoaderRoute: typeof InstallationReactRouterRouteImport
-      parentRoute: typeof InstallationRoute
-    }
-    '/installation/tanstack-start': {
-      id: '/installation/tanstack-start'
-      path: '/tanstack-start'
-      fullPath: '/installation/tanstack-start'
-      preLoaderRoute: typeof InstallationTanstackStartRouteImport
-      parentRoute: typeof InstallationRoute
-    }
-    '/installation/vite': {
-      id: '/installation/vite'
-      path: '/vite'
-      fullPath: '/installation/vite'
-      preLoaderRoute: typeof InstallationViteRouteImport
-      parentRoute: typeof InstallationRoute
-    }
   }
 }
-
-interface InstallationRouteChildren {
-  InstallationAstroRoute: typeof InstallationAstroRoute
-  InstallationNextRoute: typeof InstallationNextRoute
-  InstallationReactRouterRoute: typeof InstallationReactRouterRoute
-  InstallationTanstackStartRoute: typeof InstallationTanstackStartRoute
-  InstallationViteRoute: typeof InstallationViteRoute
-}
-
-const InstallationRouteChildren: InstallationRouteChildren = {
-  InstallationAstroRoute: InstallationAstroRoute,
-  InstallationNextRoute: InstallationNextRoute,
-  InstallationReactRouterRoute: InstallationReactRouterRoute,
-  InstallationTanstackStartRoute: InstallationTanstackStartRoute,
-  InstallationViteRoute: InstallationViteRoute,
-}
-
-const InstallationRouteWithChildren = InstallationRoute._addFileChildren(
-  InstallationRouteChildren,
-)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
@@ -1468,10 +1332,10 @@ const rootRouteChildren: RootRouteChildren = {
   ChartRoute: ChartRoute,
   CheckboxRoute: CheckboxRoute,
   ChoiceCardRoute: ChoiceCardRoute,
-  CliRoute: CliRoute,
   CollapsibleRoute: CollapsibleRoute,
   ComboboxRoute: ComboboxRoute,
   CommandRoute: CommandRoute,
+  ComponentsRoute: ComponentsRoute,
   ComponentsJsonRoute: ComponentsJsonRoute,
   ConfirmationModalRoute: ConfirmationModalRoute,
   CopyButtonRoute: CopyButtonRoute,
@@ -1487,8 +1351,7 @@ const rootRouteChildren: RootRouteChildren = {
   IconGroupRoute: IconGroupRoute,
   InputRoute: InputRoute,
   InputGroupRoute: InputGroupRoute,
-  InstallationRoute: InstallationRouteWithChildren,
-  IntroductionRoute: IntroductionRoute,
+  InstallationRoute: InstallationRoute,
   KbdRoute: KbdRoute,
   LabelRoute: LabelRoute,
   ListItemRoute: ListItemRoute,
