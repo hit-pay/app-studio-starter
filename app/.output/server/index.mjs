@@ -1684,21 +1684,21 @@ var public_assets_data_default = {
 	"/assets/routes-COJB97LO.js": {
 		"type": "text/javascript; charset=utf-8",
 		"etag": "\"887-Xmx1zuPXHccIB6flPkCMMMvqrz8\"",
-		"mtime": "2026-09-08T10:44:15.158Z",
+		"mtime": "2026-09-08T10:57:20.602Z",
 		"size": 2183,
 		"path": "../public/assets/routes-COJB97LO.js"
 	},
 	"/assets/index-DC3qGzOt.js": {
 		"type": "text/javascript; charset=utf-8",
 		"etag": "\"7401c-kSyrPrE8V9qWK7BilEcoQpLylfg\"",
-		"mtime": "2026-09-08T10:44:15.158Z",
+		"mtime": "2026-09-08T10:57:20.602Z",
 		"size": 475164,
 		"path": "../public/assets/index-DC3qGzOt.js"
 	},
 	"/assets/styles-DHEpvK7T.css": {
 		"type": "text/css; charset=utf-8",
 		"etag": "\"21bfb-/wQhYAwUOaAHZQa2S6SS+yL0Zmw\"",
-		"mtime": "2026-09-08T10:44:15.159Z",
+		"mtime": "2026-09-08T10:57:20.602Z",
 		"size": 138235,
 		"path": "../public/assets/styles-DHEpvK7T.css"
 	}

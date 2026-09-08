@@ -1,5 +1,3 @@
-'use client'
-
 import { useState, type ComponentProps } from 'react'
 import {
   endOfMonth,
