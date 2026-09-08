@@ -282,7 +282,7 @@ const lines = [
   "- Show all components available in the Orchid registry.",
   "- Find an Orchid component for a schema-driven form.",
   "- Install `@orchid/button`.",
-  "- Build a searchable data page using Orchid SchemaTable and PageLayout.",
+  "- Build a searchable data page using Orchid DataTable and PageLayout.",
   "",
   "## Getting Started",
   "",
@@ -308,9 +308,9 @@ const lines = [
   "",
   "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
-  "- All Orchid items install under `@/components/ui`. Do not look for QuantityInput, SchemaForm, or PageLayout outside `src/components/ui/`.",
+  "- All Orchid items install under `@/components/ui`. Do not look for QuantityInput, FormBuilder, DataTable, or PageLayout outside `src/components/ui/`.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
-  "- Use SchemaForm for schema-driven form fields, SchemaTable for searchable/filterable/sortable/paginated data lists, FormLayout for page or modal form shells, and PageLayout for standard route pages.",
+  "- Use FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, FormLayout for page or modal form shells, and PageLayout for standard route pages.",
   "",
 ];
 

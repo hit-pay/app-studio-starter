@@ -12,15 +12,15 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 ## `schema-form` — Schema Form
 
 JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
-Import `@/components/ui/schema-form`; read `src/components/ui/schema-form.tsx`.
-Related source: `src/components/ui/schema-form-model.ts`.
+Import `@/components/ui/form-builder`; read `src/components/ui/form-builder.tsx`.
+Related source: `src/components/ui/form-builder-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-form.md
 
 ## `schema-table` — Schema Table
 
 JSON-schema list with search, filters, sorting, pagination.
-Import `@/components/ui/schema-table`; read `src/components/ui/schema-table.tsx`.
-Related source: `src/components/ui/schema-table-model.ts`.
+Import `@/components/ui/data-table`; read `src/components/ui/data-table.tsx`.
+Related source: `src/components/ui/data-table-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/schema-table.md
 
 ## `sidebar` — Sidebar

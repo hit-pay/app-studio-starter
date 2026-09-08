@@ -4,15 +4,15 @@ import { SchemaTableDemo } from "../../../src/components/doc/demos/schema-table-
 
 ## Usage
 
-Put `SchemaTable` directly in `PageLayout`. Do not wrap it in `Card`.
+Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
 
 ```tsx
 import {
-  SchemaTable,
+  DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
-} from "@/components/ui/schema-table";
+} from "@/components/ui/data-table";
 
 function ProductList() {
   const table = useSchemaTable({
@@ -56,11 +56,11 @@ instant. Clearing search cancels pending work and emits immediately.
 ```tsx
 import { useQuery } from "@tanstack/react-query";
 import {
-  SchemaTable,
+  DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
-} from "@/components/ui/schema-table";
+} from "@/components/ui/data-table";
 
 function ProductList() {
   const products = useQuery({
@@ -101,11 +101,11 @@ import {
 } from "@tanstack/react-db";
 import { queryCollectionOptions } from "@tanstack/query-db-collection";
 import {
-  SchemaTable,
+  DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
-} from "@/components/ui/schema-table";
+} from "@/components/ui/data-table";
 
 const queryClient = new QueryClient();
 const dbClient = new DbClient({ queryClient });

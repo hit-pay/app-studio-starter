@@ -6,7 +6,7 @@ import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormField,
-} from "@/components/ui/schema-form";
+} from "@/components/ui/form-builder";
 import { toast } from "@/components/ui/toast";
 
 const CUSTOMER_FIELDS: SchemaFormField[] = [

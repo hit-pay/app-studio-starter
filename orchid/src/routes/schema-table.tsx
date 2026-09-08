@@ -1,19 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import SchemaTableDemoDocs from "../../content/docs/components/schema-table.mdx";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/schema-table")({
-  component: SchemaTableExamplesPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/data-table" });
+  },
 });
-
-function SchemaTableExamplesPage() {
-  return (
-    <DocExamplePage to="/schema-table">
-      <DocMdx>
-        <SchemaTableDemoDocs />
-      </DocMdx>
-    </DocExamplePage>
-  );
-}

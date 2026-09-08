@@ -329,16 +329,16 @@ export const DOC_BLOCKS = [
     description: "Create and edit form shell with page and modal modes.",
   },
   {
-    to: "/schema-form" as const,
-    name: "Schema Form",
+    to: "/form-builder" as const,
+    name: "Form Builder",
     description:
-      "TanStack Form plus Orchid fields. Types include date, datetime, file, quantity, switch.",
+      "Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer this over assembling fields by hand.",
   },
   {
-    to: "/schema-table" as const,
-    name: "Schema Table",
+    to: "/data-table" as const,
+    name: "Data Table",
     description:
-      "JSON schema table like SchemaForm: search, tabs, filter, sort, Edit Column, pagination.",
+      "Schema-driven table: search, tabs, filter, sort, Edit Column, pagination. Prefer this over Table for lists.",
   },
   {
     to: "/confirmation-modal" as const,

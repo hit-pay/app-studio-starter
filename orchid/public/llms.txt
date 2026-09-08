@@ -313,11 +313,11 @@ Install: `bunx --bun shadcn@latest add @orchid/form-layout` · [Registry JSON](h
 
 ### [Schema Form](https://orchid-ui-hitpay.vercel.app/llms/schema-form.md)
 TanStack Form plus Orchid fields. Types include date, datetime, file, quantity, switch.
-Install: `bunx --bun shadcn@latest add @orchid/schema-form` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/schema-form.json)
+Install: `bunx --bun shadcn@latest add @orchid/form-builder` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/schema-form.json)
 
 ### [Schema Table](https://orchid-ui-hitpay.vercel.app/llms/schema-table.md)
 JSON schema table like SchemaForm: search, tabs, filter, sort, Edit Column, pagination.
-Install: `bunx --bun shadcn@latest add @orchid/schema-table` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/schema-table.json)
+Install: `bunx --bun shadcn@latest add @orchid/data-table` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/schema-table.json)
 
 ### [Confirmation Modal](https://orchid-ui-hitpay.vercel.app/llms/confirmation-modal.md)
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.

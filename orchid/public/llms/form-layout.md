@@ -38,7 +38,7 @@ Page mode is the default. Save submits the external form identified by
 
 ```tsx
 import { FormLayout } from "@/components/ui/form-layout";
-import { SchemaForm } from "@/components/ui/schema-form";
+import { SchemaForm } from "@/components/ui/form-builder";
 
 <FormLayout
   title="Create product"

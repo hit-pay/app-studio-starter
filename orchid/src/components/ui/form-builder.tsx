@@ -100,7 +100,7 @@ import {
   type SchemaFormRenderField,
   type SchemaFormType,
   type SchemaFormValues,
-} from './schema-form-model'
+} from './form-builder-model'
 
 function formatFileSize(bytes: number) {
   if (bytes < 1024) {
@@ -1094,9 +1094,11 @@ export {
   fieldsWithValues,
   formValuesFromFields,
   SchemaForm,
+  SchemaForm as FormBuilder,
   SCHEMA_FORM_EXAMPLE_FIELDS,
   SCHEMA_FORM_TYPES,
   useSchemaForm,
+  useSchemaForm as useFormBuilder,
 }
 export type {
   SchemaFormApi,

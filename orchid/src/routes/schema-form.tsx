@@ -1,19 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import SchemaFormDemoDocs from "../../content/docs/components/schema-form.mdx";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/schema-form")({
-  component: SchemaFormExamplesPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/form-builder" });
+  },
 });
-
-function SchemaFormExamplesPage() {
-  return (
-    <DocExamplePage to="/schema-form">
-      <DocMdx>
-        <SchemaFormDemoDocs />
-      </DocMdx>
-    </DocExamplePage>
-  );
-}

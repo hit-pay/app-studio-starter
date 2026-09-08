@@ -9,8 +9,8 @@
       "title": "All",
       "description": "Installs every Orchid UI component. all.tsx re-exports Toaster + toast.",
       "registryDependencies": [
-        "@orchid/schema-form",
-        "@orchid/schema-table",
+        "@orchid/form-builder",
+        "@orchid/data-table",
         "@orchid/sidebar",
         "@orchid/sub-sidebar",
         "@orchid/alert",
@@ -96,9 +96,9 @@
       ]
     },
     {
-      "name": "schema-form",
+      "name": "form-builder",
       "type": "registry:ui",
-      "title": "Schema Form",
+      "title": "Form Builder",
       "description": "JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": [
         "@tanstack/react-form"
@@ -121,21 +121,21 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/schema-form.tsx",
+          "path": "src/components/ui/form-builder.tsx",
           "type": "registry:ui",
-          "target": "@ui/schema-form.tsx"
+          "target": "@ui/form-builder.tsx"
         },
         {
-          "path": "src/components/ui/schema-form-model.ts",
+          "path": "src/components/ui/form-builder-model.ts",
           "type": "registry:file",
-          "target": "@ui/schema-form-model.ts"
+          "target": "@ui/form-builder-model.ts"
         }
       ]
     },
     {
-      "name": "schema-table",
+      "name": "data-table",
       "type": "registry:ui",
-      "title": "Schema Table",
+      "title": "Data Table",
       "description": "JSON-schema list with search, filters, sorting, pagination.",
       "registryDependencies": [
         "@orchid/badge",
@@ -151,14 +151,14 @@
       ],
       "files": [
         {
-          "path": "src/components/ui/schema-table.tsx",
+          "path": "src/components/ui/data-table.tsx",
           "type": "registry:ui",
-          "target": "@ui/schema-table.tsx"
+          "target": "@ui/data-table.tsx"
         },
         {
-          "path": "src/components/ui/schema-table-model.ts",
+          "path": "src/components/ui/data-table-model.ts",
           "type": "registry:file",
-          "target": "@ui/schema-table-model.ts"
+          "target": "@ui/data-table-model.ts"
         }
       ]
     },
@@ -276,7 +276,7 @@
       "name": "form-layout",
       "type": "registry:ui",
       "title": "Form Layout",
-      "description": "Create/edit shell (page or modal). Put SchemaForm inside; one form uses formId = SchemaForm id. Several forms use actions.save.onClick.",
+      "description": "Create/edit shell (page or modal). Put FormBuilder inside; one form uses formId = FormBuilder id. Several forms use actions.save.onClick.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",

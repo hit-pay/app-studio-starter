@@ -102,7 +102,7 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
-- `src/components/ui/`: all preinstalled Orchid components (Button, QuantityInput, SchemaForm, PageLayout, …)
+- `src/components/ui/`: all preinstalled Orchid components (Button, QuantityInput, FormBuilder, DataTable, PageLayout, …)
 - `src/components/`: App Studio-only files such as `app-layout.tsx`
 - `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
@@ -170,8 +170,8 @@ Do not invent a parallel UI kit or overwrite files under `src/components/` or `s
 
 Starter wiring only:
 
-- Drive multi-field forms with `SchemaForm` (submit through `formId`). Drive searchable lists with `SchemaTable`. Do not wrap `SchemaTable`, `SchemaForm`, `PageLayout`, or `Table` in `Card`.
-- SchemaForm `type` must be a listed type (`input`, `select`, `date`, …). Unknown types throw; do not invent field types.
+- Drive multi-field forms with `FormBuilder` from `@/components/ui/form-builder` (submit through `formId`). Drive searchable lists with `DataTable` from `@/components/ui/data-table`. Do not hand-build field stacks or raw `Table` for those cases. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table` in `Card`.
+- `FormBuilder` field `type` must be a listed type (`input`, `select`, `date`, …). Unknown types throw; do not invent field types.
 - Import icons from `@mingcute/react/core-regular` using Mingcute names (`SearchRegular`, `AddRegular`). Do not add `lucide-react` or an icon alias file.
 - Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not compose `AlertDialog` for those, and do not add Sonner or a second toast/confirm provider.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`. Never `small` or `big`.
@@ -191,11 +191,11 @@ That becomes `app-studio:{appId}:settings:density`. Form-draft helpers already a
 
 ### Form drafts
 
-Do not write form values to `localStorage` on every keystroke or `onChange`. Keep typed values in `useSchemaForm` only.
+Do not write form values to `localStorage` on every keystroke or `onChange`. Keep typed values in `useFormBuilder` only.
 
-If `createServerFn` throws, call `writeFormDraft(id, values)` in the route/page `catch`. On the next open, merge `readFormDraft(id)` into each field's `value` **before** `useSchemaForm`. After a successful save, or a clean cancel, `clearFormDraft(id)`. Leave the form filled and show an error if save failed.
+If `createServerFn` throws, call `writeFormDraft(id, values)` in the route/page `catch`. On the next open, merge `readFormDraft(id)` into each field's `value` **before** `useFormBuilder`. After a successful save, or a clean cancel, `clearFormDraft(id)`. Leave the form filled and show an error if save failed.
 
-Do not call `form.setFieldValue` or `setState` during render to hydrate a draft. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not add draft logic inside `@/components/ui/schema-form`. Helpers: `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`).
+Do not call `form.setFieldValue` or `setState` during render to hydrate a draft. Do not persist passwords, files, or secrets. Do not treat the draft as the database of record. Do not add draft logic inside `@/components/ui/form-builder`. Helpers: `readFormDraft` / `writeFormDraft` / `clearFormDraft` from `#/lib/form-draft` (or `#/lib/form`).
 
 ## Persistent data and server code
 

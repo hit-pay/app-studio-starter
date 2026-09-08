@@ -16,7 +16,7 @@ import {
   useSchemaForm,
   type SchemaFormChange,
   type SchemaFormField,
-} from "@/components/ui/schema-form";
+} from "@/components/ui/form-builder";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 const OPTIONS = [
@@ -468,7 +468,7 @@ import { useState } from "react";
 
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
 import { Button } from "@/components/ui/button";
-import { SchemaForm, useSchemaForm } from "@/components/ui/schema-form";
+import { SchemaForm, useSchemaForm } from "@/components/ui/form-builder";
 import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
 
 // In src/routes/schema-form.tsx, ACCOUNT_FIELDS and DETAILS_FIELDS are the

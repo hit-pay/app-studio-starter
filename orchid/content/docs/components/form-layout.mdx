@@ -1,7 +1,7 @@
 import { FormLayoutDemo } from "../../../src/components/doc/demos/form-layout-demo";
 
 `FormLayout` is the shell for create and edit forms. It provides page or modal
-presentation, headings, scrolling, close behavior, and actions. `SchemaForm`
+presentation, headings, scrolling, close behavior, and actions. `FormBuilder`
 renders the fields inside that shell.
 
 <FormLayoutDemo />
@@ -9,11 +9,11 @@ renders the fields inside that shell.
 ## Page mode
 
 Page mode is the default. Save submits the external form identified by
-`formId`; the submit button does not need to live inside `SchemaForm`.
+`formId`; the submit button does not need to live inside `FormBuilder`.
 
 ```tsx
 import { FormLayout } from "@/components/ui/form-layout";
-import { SchemaForm } from "@/components/ui/schema-form";
+import { SchemaForm } from "@/components/ui/form-builder";
 
 <FormLayout
   title="Create product"

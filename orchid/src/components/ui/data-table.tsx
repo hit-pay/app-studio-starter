@@ -110,7 +110,7 @@ import {
   type SchemaTableRowAction,
   type SchemaTableSchema,
   type SchemaTableSelectionAction,
-} from "./schema-table-model";
+} from "./data-table-model";
 
 const schemaTableActionIcons = {
   delete: Delete2Regular,
@@ -1597,9 +1597,11 @@ function SchemaTable({
 
 export {
   SchemaTable,
+  SchemaTable as DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
+  useSchemaTable as useDataTable,
   type SchemaTableActionIcon,
   type SchemaTableActionItem,
   type SchemaTableButtonAction,
