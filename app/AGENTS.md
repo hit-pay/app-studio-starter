@@ -104,10 +104,11 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
 - `src/components/{category}/`: Orchid blocks first (AppLayout, FormBuilder, DataTable, PageLayout, MetricCard, …)
 - `src/base-ui/{category}/`: Orchid base components (Button, Input, Table, Dialog, …) — use only when no block covers the job
-- `src/lib/db.ts`: lazy server-only Turso HTTP client
+- `src/lib/db.ts`: lazy server-only Turso HTTP client (credentials from hop env)
 - `src/lib/migrate.ts`: SQL migration runner
 - `src/lib/hitpay.ts`: browser-only HitPay user, role, and member helpers for UI
 - `src/lib/hitpay-session.ts`: server-only HitPay session from `/user/info` for role-gated APIs
+- `src/lib/hitpay-env.ts`: server-only connector + Turso env from `X-HitPay-Env` or `/api/apps/{appId}/env`
 - `src/lib/query.tsx`: React Query provider and debounce helper
 - `migrations/`: ordered SQL migration files
 - `src/styles.css`: Tailwind and Orchid design tokens
@@ -129,6 +130,7 @@ Unless the user's request truly requires infrastructure changes, leave these fil
 - `src/lib/migrate.ts`
 - `src/lib/hitpay.ts`
 - `src/lib/hitpay-session.ts`
+- `src/lib/hitpay-env.ts`
 - `src/lib/form-draft.ts`
 - `src/lib/studio-app-id.ts`
 - `components.json`
@@ -203,7 +205,8 @@ Turso is server-only:
 
 - import `db` from `#/lib/db` only in server code
 - use TanStack `createServerFn` for reads and mutations
-- never expose `TURSO_DATABASE_URL` or `TURSO_AUTH_TOKEN`
+- never expose `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, or connector env (`HITPAY_API_KEY`, …) to the browser
+- never call `/api/apps/{appId}/env` from client code or `#/lib/hitpay`
 - do not import the database client into browser components
 - keep the provided HTTP client; WebSocket/native libSQL does not work in the Sprite network environment
 
@@ -345,6 +348,15 @@ Use the existing helper in `src/lib/hitpay-session.ts`:
 
 - `getHitPaySession()` when any signed-in HitPay user may proceed
 - `requireHitPayRoles(['Owner', 'Admin', 'Manager'])` when only those roles may mutate
+
+Connector and Turso secrets are not Sprite process env. In `createServerFn` use `#/lib/hitpay-env`:
+
+1. Read signed `X-HitPay-Env` from the host proxy (same HMAC as session: `base64url(json).hex`).
+2. If that header is missing, GET `/api/apps/{appId}/env` with the request cookie (SSR only).
+3. Use `getHitPayEnv()` / `getHitPayEnvValue('HITPAY_API_KEY')`. `db` already reads `TURSO_*` from this helper.
+4. Do not read `process.env.HITPAY_*` or `process.env.TURSO_*` in generated app code (local starter `.env` is the helper fallback only).
+
+Do not rewrite `src/lib/hitpay-env.ts`. Do not put secrets in `localStorage`, cookies, or browser fetches.
 
 Example:
 
