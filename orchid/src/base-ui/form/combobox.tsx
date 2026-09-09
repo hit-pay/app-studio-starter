@@ -14,7 +14,7 @@ import { Combobox as ComboboxPrimitive } from '@base-ui/react/combobox'
 import {
   CheckRegular,
   DownRegular,
-  LineRegular,
+  MinimizeRegular,
   CloseRegular,
 } from '@mingcute/react/core-regular'
 
@@ -300,7 +300,7 @@ function ComboboxSelectAll({
         {allSelected ? (
           <CheckRegular className="size-2.5" />
         ) : someSelected ? (
-          <LineRegular className="size-2.5" />
+          <MinimizeRegular className="size-2.5" />
         ) : null}
       </span>
       {children}

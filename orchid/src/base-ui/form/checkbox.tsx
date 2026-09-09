@@ -6,7 +6,7 @@ import { CheckboxGroup as CheckboxGroupPrimitive } from '@base-ui/react/checkbox
 import { cva } from 'class-variance-authority'
 import {
   CheckRegular,
-  LineRegular,
+  MinimizeRegular,
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
@@ -79,7 +79,7 @@ function Checkbox({
         className="grid place-content-center text-current transition-none"
       >
         {props.indeterminate ? (
-          <LineRegular className="size-2.5" />
+          <MinimizeRegular className="size-2.5" />
         ) : (
           <CheckRegular className="size-2.5" />
         )}

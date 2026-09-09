@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState, type ComponentProps } from 'react'
 import {
-  LineRegular,
+  MinimizeRegular,
   AddRegular,
 } from '@mingcute/react/core-regular'
 
@@ -92,7 +92,7 @@ function QuantityInput({
         aria-label="Decrease"
         onClick={() => bump(-1)}
       >
-        <LineRegular />
+        <MinimizeRegular />
       </Button>
       {name ? <input type="hidden" name={name} value={numeric} /> : null}
       {editing ? (
