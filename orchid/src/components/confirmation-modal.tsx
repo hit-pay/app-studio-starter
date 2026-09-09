@@ -9,17 +9,16 @@ import {
   CloseRegular,
 } from '@mingcute/react/core-regular'
 
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-} from '@/components/ui/alert-dialog'
 import { Button } from '@/components/ui/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { cn } from '@/lib/utils'
 
@@ -89,7 +88,7 @@ const PRESETS: Record<
 
 const ConfirmationModalContext = React.createContext<ConfirmationModalManager | null>(null)
 
-/** Mount once at the app root. Use `useConfirmationModal()` for confirms — do not compose AlertDialog. */
+/** Mount once at the app root. Use `useConfirmationModal()` for delete/warning confirms. */
 function ConfirmationModalProvider({ children }: { children: React.ReactNode }) {
   const [request, setRequest] = React.useState<ConfirmationModalRequest | null>(null)
   const [open, setOpen] = React.useState(false)
@@ -143,24 +142,32 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
   return (
     <ConfirmationModalContext.Provider value={confirm}>
       {children}
-      <AlertDialog
+      <Dialog
+        persistent
         open={open}
         onOpenChange={(nextOpen) => {
           if (!nextOpen) finish(false)
         }}
       >
-        <AlertDialogContent size={request?.confirmPhrase ? 'medium' : 'confirmation'}>
-          <AlertDialogCancel
-            variant="ghost"
-            size="icon-sm"
-            className="absolute top-2 right-2 text-oc-muted-foreground"
+        <DialogContent
+          size={request?.confirmPhrase ? 'medium' : 'confirmation'}
+          showCloseButton={false}
+        >
+          <DialogClose
+            render={
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="absolute top-2 right-2 text-oc-muted-foreground"
+              />
+            }
           >
             <CloseRegular />
             <span className="sr-only">Close</span>
-          </AlertDialogCancel>
-          <AlertDialogHeader>
-            <AlertDialogTitle>{request?.title ?? 'Are you sure?'}</AlertDialogTitle>
-          </AlertDialogHeader>
+          </DialogClose>
+          <DialogHeader>
+            <DialogTitle>{request?.title ?? 'Are you sure?'}</DialogTitle>
+          </DialogHeader>
           <div
             className={cn(
               request?.confirmPhrase
@@ -178,7 +185,7 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
                 {preset.icon}
               </span>
             ) : null}
-            <AlertDialogDescription
+            <DialogDescription
               className={cn(!request?.confirmPhrase && 'max-w-64 text-center text-oc-foreground')}
             >
               {request?.message}
@@ -188,7 +195,7 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
                   {request.description}
                 </>
               ) : null}
-            </AlertDialogDescription>
+            </DialogDescription>
             {request?.confirmPhrase ? (
               <label className="block space-y-2 text-sm text-oc-foreground">
                 <span>
@@ -204,23 +211,23 @@ function ConfirmationModalProvider({ children }: { children: React.ReactNode }) 
               </label>
             ) : null}
           </div>
-          <AlertDialogFooter className={!request?.confirmPhrase ? 'sm:justify-center' : undefined}>
+          <DialogFooter className={!request?.confirmPhrase ? 'sm:justify-center' : undefined}>
             {preset.showCancel ? (
-              <AlertDialogCancel className="min-w-28">
+              <DialogClose render={<Button variant="outline" className="min-w-28" />}>
                 {request?.cancelLabel ?? preset.cancelLabel}
-              </AlertDialogCancel>
+              </DialogClose>
             ) : null}
-            <AlertDialogAction
+            <Button
               className="min-w-28"
               variant={preset.confirmVariant}
               disabled={!matched}
               onClick={() => finish(true)}
             >
               {request?.confirmLabel ?? preset.confirmLabel}
-            </AlertDialogAction>
-          </AlertDialogFooter>
-        </AlertDialogContent>
-      </AlertDialog>
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </ConfirmationModalContext.Provider>
   )
 }

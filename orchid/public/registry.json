@@ -24,7 +24,6 @@
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
-        "@orchid/alert-dialog",
         "@orchid/confirmation-modal",
         "@orchid/button",
         "@orchid/button-group",
@@ -309,24 +308,6 @@
       ]
     },
     {
-      "name": "alert-dialog",
-      "type": "registry:ui",
-      "title": "Alert Dialog",
-      "description": "shadcn-compatible confirmation dialog primitives with Orchid styling.",
-      "dependencies": [],
-      "registryDependencies": [
-        "@orchid/button",
-        "@orchid/dialog"
-      ],
-      "files": [
-        {
-          "path": "src/components/ui/alert-dialog.tsx",
-          "type": "registry:ui",
-          "target": "@ui/alert-dialog.tsx"
-        }
-      ]
-    },
-    {
       "name": "confirmation-modal",
       "type": "registry:ui",
       "title": "Confirmation Modal",
@@ -335,8 +316,8 @@
         "@mingcute/react"
       ],
       "registryDependencies": [
-        "@orchid/alert-dialog",
         "@orchid/button",
+        "@orchid/dialog",
         "@orchid/input"
       ],
       "files": [

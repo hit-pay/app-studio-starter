@@ -30,12 +30,6 @@ export const DOC_COMPONENTS = [
       "In-page notification with semantic variants and an optional action.",
   },
   {
-    to: "/alert-dialog" as const,
-    name: "Alert Dialog",
-    description:
-      "shadcn-compatible confirmation dialog primitives with Orchid styling.",
-  },
-  {
     to: "/empty" as const,
     name: "Empty",
     description:
@@ -368,6 +362,115 @@ export function docBaseComponentsByName() {
     a.name.localeCompare(b.name),
   );
 }
+
+const BASE_BY_TO = new Map(
+  [...DOC_COMPONENTS, ...DOC_FORMS].map((item) => [item.to, item]),
+);
+
+function baseGroup(
+  label: string,
+  tos: readonly (
+    | (typeof DOC_COMPONENTS)[number]["to"]
+    | (typeof DOC_FORMS)[number]["to"]
+  )[],
+) {
+  return {
+    label,
+    items: tos
+      .map((to) => BASE_BY_TO.get(to))
+      .filter((item): item is NonNullable<typeof item> => item != null)
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  };
+}
+
+/** AlignUI-style groups for Base Components. */
+export const DOC_BASE_GROUPS = [
+  baseGroup("Actions", ["/button", "/button-group"]),
+  baseGroup("Displaying Data", [
+    "/attachment",
+    "/avatar",
+    "/badge",
+    "/chart",
+    "/empty",
+    "/list-item",
+    "/table",
+  ]),
+  baseGroup("Feedback", [
+    "/alert",
+    "/progress",
+    "/skeleton",
+    "/spinner",
+    "/toast",
+  ]),
+  baseGroup("Form", [
+    "/calendar",
+    "/checkbox",
+    "/combobox",
+    "/field",
+    "/form-section",
+    "/input",
+    "/input-group",
+    "/label",
+    "/radio-group",
+    "/select",
+    "/slider",
+    "/switch",
+    "/textarea",
+  ]),
+  baseGroup("Layout", [
+    "/accordion",
+    "/aspect-ratio",
+    "/card",
+    "/collapsible",
+    "/resizable",
+    "/scroll-area",
+    "/tabs",
+  ]),
+  baseGroup("Navigation", ["/breadcrumb", "/pagination"]),
+  baseGroup("Overlays", [
+    "/command",
+    "/dialog",
+    "/dropdown-menu",
+    "/sheet",
+    "/tooltip",
+  ]),
+  baseGroup("Utils", ["/kbd"]),
+] as const;
+
+const BLOCK_BY_TO = new Map(DOC_BLOCKS.map((item) => [item.to, item]));
+
+function blockGroup(
+  label: string,
+  tos: readonly (typeof DOC_BLOCKS)[number]["to"][],
+) {
+  return {
+    label,
+    items: tos
+      .map((to) => BLOCK_BY_TO.get(to))
+      .filter((item): item is NonNullable<typeof item> => item != null)
+      .sort((a, b) => a.name.localeCompare(b.name)),
+  };
+}
+
+/** AlignUI-style groups for Components & Blocks. Empty groups are omitted. */
+export const DOC_BLOCK_GROUPS = [
+  blockGroup("Actions", ["/copy-button", "/icon-group"]),
+  blockGroup("Displaying Data", [
+    "/customer-card",
+    "/data-table",
+    "/detail-list",
+    "/metric-card",
+  ]),
+  blockGroup("Form", [
+    "/choice-card",
+    "/date-picker",
+    "/form-builder",
+    "/quantity-input",
+  ]),
+  blockGroup("Layout", ["/form-layout", "/page-layout"]),
+  blockGroup("Navigation", ["/sidebar", "/sub-sidebar"]),
+  blockGroup("Overlays", ["/confirmation-modal"]),
+].filter((group) => group.items.length > 0);
 
 export const DOC_GUIDES = [
   {

@@ -85,4 +85,4 @@ function ConfirmationModalDemo() {
 export { ConfirmationModalDemo }
 ```
 
-Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` from `@/components/confirmation-modal` for delete/warning confirms — do not compose `AlertDialog` for those cases.
+Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` from `@/components/confirmation-modal` for delete/warning confirms. Do not assemble a confirm dialog from `Dialog`.

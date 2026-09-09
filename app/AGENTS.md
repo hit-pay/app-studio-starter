@@ -102,8 +102,8 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
-- `src/components/ui/`: Orchid base components (Button, Input, Table, Dialog, …)
-- `src/components/`: Orchid blocks (FormBuilder, DataTable, PageLayout, MetricCard, …) plus App Studio-only `app-layout.tsx`
+- `src/components/`: Orchid blocks first (FormBuilder, DataTable, PageLayout, MetricCard, …) plus App Studio-only `app-layout.tsx`
+- `src/components/ui/`: Orchid base components (Button, Input, Table, Dialog, …) — use only when no block covers the job
 - `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
@@ -119,7 +119,7 @@ Path aliases:
 
 - `#/*` -> `src/*`
 - `@/*` -> `src/*`
-- Orchid base imports are `@/components/ui/<name>`. Orchid blocks import from `@/components/<name>`. `AppLayout` is `@/components/app-layout` and is not in the Orchid catalog.
+- Orchid blocks import from `@/components/<name>`. Base imports are `@/components/ui/<name>`. Read blocks first. `AppLayout` is `@/components/app-layout` and is not in the Orchid catalog.
 
 Unless the user's request truly requires infrastructure changes, leave these files unchanged. Updating `src/routes/__root.tsx` is allowed only when a required Orchid global provider is missing:
 
@@ -160,11 +160,11 @@ The host dashboard owns the outer navigation, account controls, authentication g
 
 ## Orchid UI
 
-`orchid-catalog.md` is the source of truth for which component to use, where to import it, and which file to read. Read that file **in full** (Read tool, not Grep) before building a screen. Then read the listed source for each item you use. If the catalog lists a Docs URL, fetch that `.md` file — not the HTML example page.
+`orchid-catalog.md` is the source of truth for which component to use, where to import it, and which file to read. Read that file **in full** (Read tool, not Grep) before building a screen. Read **Components & Blocks first**; only then use Base Components if no block covers the job. Then read the listed source for each item you use. If the catalog lists a Docs URL, fetch that `.md` file — not the HTML example page.
 
 The catalog is already installed. Do not run `shadcn add`, `bunx shadcn`, or any `@orchid` / `@shadcn` install.
 
-Do not guess import paths. Base Components import from `@/components/ui/…`. Components & Block import from `@/components/…` and are ready to use through props or a schema; do not assemble a block from many base components. The catalog line `Import \`@/…\`` is authoritative.
+Do not guess import paths. Prefer `@/components/…` blocks (props or schema). Use `@/components/ui/…` base items only when a block does not exist. Do not assemble a block from many base components. The catalog line `Import \`@/…\`` is authoritative.
 
 Do not invent a parallel UI kit or overwrite files under `src/components/` or `src/components/ui/` with official shadcn copies. Compose catalog items. Field types, props, and variants live in the catalog entry and that item's source or Docs `.md` — not in this file.
 
@@ -173,7 +173,7 @@ Starter wiring only:
 - Drive multi-field forms with `FormBuilder` from `@/components/form-builder` (submit through `formId`). Drive searchable lists with `DataTable` from `@/components/data-table`. Drive dashboard KPI tiles (revenue, volume, counts, percent change) with `MetricCard` from `@/components/metric-card`. Do not hand-build field stacks, raw `Table`, or summary `Card` grids for those cases. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table` in `Card`.
 - `FormBuilder` field `type` must be a listed type (`input`, `select`, `date`, …). Unknown types throw; do not invent field types.
 - Import icons from `@mingcute/react/core-regular` using Mingcute names (`SearchRegular`, `AddRegular`). Do not add `lucide-react` or an icon alias file.
-- Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not compose `AlertDialog` for those, and do not add Sonner or a second toast/confirm provider.
+- Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not assemble a confirm dialog from `Dialog`, and do not add Sonner or a second toast/confirm provider.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`. Never `small` or `big`.
 - Badge: prefer `tone` + `appearance`. `variant` is only a shortcut (`default`→blue, `secondary`→grey, `destructive`→red).
 - Nested nav: import `SubSidebar` from `@/components/sub-sidebar` only.
@@ -384,7 +384,7 @@ Prefer one focused screen with dialogs for simple create/edit flows. Add tabs or
 1. Read the user request and inspect the existing project.
 2. Infer the smallest complete workflow.
 3. Create `PLAN.md` only for several screens or flows; keep it to a short checkbox list.
-4. Read `orchid-catalog.md` and the source of the selected Orchid components.
+4. Read `orchid-catalog.md` (**Components & Blocks** first). Open block sources under `src/components/` before any `src/components/ui/` file. Use base only if no block covers the job.
 5. Implement the complete vertical slices, including persistence when needed.
 6. Review the changed code for broken imports, route mistakes, unsafe SQL, missing states, and disconnected actions.
 7. If routes were added or renamed, run `bun run generate-routes`.
