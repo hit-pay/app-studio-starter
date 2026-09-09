@@ -66,7 +66,19 @@ function CatalogSection({
   );
 }
 
-function ComponentCatalog() {
+function ComponentCatalog({
+  catalog,
+}: {
+  catalog: "blocks" | "base";
+}) {
+  if (catalog === "base") {
+    return (
+      <div className="grid gap-8">
+        <CatalogSection title="Base Components" groups={DOC_BASE_GROUPS} />
+      </div>
+    );
+  }
+
   return (
     <div className="grid gap-8">
       <CatalogSection
@@ -74,7 +86,6 @@ function ComponentCatalog() {
         description="Read these first. Ready-to-use blocks driven by props or a schema. Do not assemble them from many base components."
         groups={DOC_BLOCK_GROUPS}
       />
-      <CatalogSection title="Base Components" groups={DOC_BASE_GROUPS} />
     </div>
   );
 }

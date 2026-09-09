@@ -24,6 +24,7 @@
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
+        "@orchid/app-layout",
         "@orchid/confirmation-modal",
         "@orchid/button",
         "@orchid/button-group",
@@ -287,6 +288,26 @@
           "path": "src/components/layout/form-layout.tsx",
           "type": "registry:ui",
           "target": "@/components/layout/form-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "app-layout",
+      "type": "registry:ui",
+      "title": "App Layout",
+      "description": "Embedded application frame with optional app name, tabs, and sidebar.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/sheet"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-layout.tsx",
+          "type": "registry:ui",
+          "target": "@/components/layout/app-layout.tsx"
         }
       ]
     },

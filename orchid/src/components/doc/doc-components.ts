@@ -1,170 +1,170 @@
 export const DOC_COMPONENTS = [
   {
-    to: "/button" as const,
+    to: "/base-ui/button" as const,
     name: "Button",
     description:
       "Standard variants, sizes, icon buttons, native props, and polymorphic rendering.",
   },
   {
-    to: "/button-group" as const,
+    to: "/base-ui/button-group" as const,
     name: "Button Group",
     description:
       "Group related controls horizontally or vertically, including split dropdown buttons.",
   },
   {
-    to: "/dropdown-menu" as const,
+    to: "/base-ui/dropdown-menu" as const,
     name: "Dropdown Menu",
     description:
       "shadcn-compatible items, selection, submenus, and shortcuts with Orchid styling.",
   },
   {
-    to: "/toast" as const,
+    to: "/base-ui/toast" as const,
     name: "Toast",
     description:
       "shadcn-compatible toast manager with semantic types, actions, close, and placement.",
   },
   {
-    to: "/alert" as const,
+    to: "/base-ui/alert" as const,
     name: "Alert",
     description:
       "In-page notification with semantic variants and an optional action.",
   },
   {
-    to: "/empty" as const,
+    to: "/base-ui/empty" as const,
     name: "Empty",
     description:
       "shadcn-compatible compound empty state with Orchid media variants.",
   },
   {
-    to: "/list-item" as const,
+    to: "/base-ui/list-item" as const,
     name: "List Item",
     description:
       "Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.",
   },
   {
-    to: "/badge" as const,
+    to: "/base-ui/badge" as const,
     name: "Badge",
     description:
       "Standard variants with Orchid tones, appearances, removal, and user roles.",
   },
   {
-    to: "/accordion" as const,
+    to: "/base-ui/accordion" as const,
     name: "Accordion",
     description:
       "Composable expand-and-collapse sections with shadcn-compatible primitives.",
   },
   {
-    to: "/progress" as const,
+    to: "/base-ui/progress" as const,
     name: "Progress",
     description:
       "shadcn-compatible progress with composable label, value, track, and indicator.",
   },
   {
-    to: "/avatar" as const,
+    to: "/base-ui/avatar" as const,
     name: "Avatar",
     description:
       "Image, fallback, badge, and group primitives with Orchid styling.",
   },
   {
-    to: "/tooltip" as const,
+    to: "/base-ui/tooltip" as const,
     name: "Tooltip",
     description:
       "shadcn-compatible hover and focus tooltip with Orchid styling.",
   },
   {
-    to: "/tabs" as const,
+    to: "/base-ui/tabs" as const,
     name: "Tabs",
     description:
       "shadcn-compatible horizontal or vertical tabs with default and line variants.",
   },
   {
-    to: "/skeleton" as const,
+    to: "/base-ui/skeleton" as const,
     name: "Skeleton",
     description: "shadcn-compatible placeholder pulse with Orchid styling.",
   },
   {
-    to: "/spinner" as const,
+    to: "/base-ui/spinner" as const,
     name: "Spinner",
     description:
       "shadcn-compatible indeterminate loading icon sized through className.",
   },
   {
-    to: "/dialog" as const,
+    to: "/base-ui/dialog" as const,
     name: "Dialog",
     description:
       "shadcn-compatible dialog primitives with Orchid sizes and persistent mode.",
   },
   {
-    to: "/sheet" as const,
+    to: "/base-ui/sheet" as const,
     name: "Sheet",
     description:
       "shadcn-compatible compound edge panel with four sides and Orchid styling.",
   },
   {
-    to: "/breadcrumb" as const,
+    to: "/base-ui/breadcrumb" as const,
     name: "Breadcrumb",
     description: "Hierarchy of links to the current page.",
   },
   {
-    to: "/pagination" as const,
+    to: "/base-ui/pagination" as const,
     name: "Pagination",
     description:
       "shadcn-compatible page links with previous, next, ellipsis, and an optional range label.",
   },
   {
-    to: "/table" as const,
+    to: "/base-ui/table" as const,
     name: "Table",
     description: "shadcn-compatible semantic HTML table with Orchid styling.",
   },
   {
-    to: "/command" as const,
+    to: "/base-ui/command" as const,
     name: "Command",
     description:
       "shadcn-compatible cmdk palette with keyboard navigation and Orchid styling.",
   },
   {
-    to: "/kbd" as const,
+    to: "/base-ui/kbd" as const,
     name: "Kbd",
     description: "shadcn-compatible keyboard key and grouped shortcut display.",
   },
   {
-    to: "/collapsible" as const,
+    to: "/base-ui/collapsible" as const,
     name: "Collapsible",
     description:
       "shadcn-compatible expand-and-collapse primitives with Orchid styling.",
   },
   {
-    to: "/scroll-area" as const,
+    to: "/base-ui/scroll-area" as const,
     name: "Scroll Area",
     description:
       "shadcn-compatible bounded scroll area with Orchid scrollbar styling.",
   },
   {
-    to: "/card" as const,
+    to: "/base-ui/card" as const,
     name: "Card",
     description:
       "shadcn-compatible content card with header, title, description, action, and footer.",
   },
   {
-    to: "/resizable" as const,
+    to: "/base-ui/resizable" as const,
     name: "Resizable",
     description:
       "shadcn-compatible split panes with a drag handle in Orchid styling.",
   },
   {
-    to: "/aspect-ratio" as const,
+    to: "/base-ui/aspect-ratio" as const,
     name: "Aspect Ratio",
     description:
       "shadcn-compatible box that keeps a width/height ratio, such as 16/9.",
   },
   {
-    to: "/chart" as const,
+    to: "/base-ui/chart" as const,
     name: "Chart",
     description:
       "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
   },
   {
-    to: "/attachment" as const,
+    to: "/base-ui/attachment" as const,
     name: "Attachment",
     description:
       "shadcn-compatible file and image attachment with upload state, media, and a vertical group.",
@@ -177,76 +177,76 @@ export function docComponentsByName() {
 
 export const DOC_FORMS = [
   {
-    to: "/field" as const,
+    to: "/base-ui/field" as const,
     name: "Field",
     description:
       "shadcn-compatible label, description, error, and grouped field composition.",
   },
   {
-    to: "/label" as const,
+    to: "/base-ui/label" as const,
     name: "Label",
     description: "shadcn-compatible accessible label with Orchid typography.",
   },
   {
-    to: "/input" as const,
+    to: "/base-ui/input" as const,
     name: "Input",
     description: "shadcn-compatible text and file input with Orchid states.",
   },
   {
-    to: "/input-group" as const,
+    to: "/base-ui/input-group" as const,
     name: "Input Group",
     description:
       "shadcn-compatible input, textarea, addon, and button composition.",
   },
   {
-    to: "/textarea" as const,
+    to: "/base-ui/textarea" as const,
     name: "Textarea",
     description:
       "shadcn-compatible auto-sizing textarea with Orchid form styling.",
   },
   {
-    to: "/select" as const,
+    to: "/base-ui/select" as const,
     name: "Select",
     description:
       "shadcn-compatible Base UI select with groups, states, and Orchid styling.",
   },
   {
-    to: "/combobox" as const,
+    to: "/base-ui/combobox" as const,
     name: "Combobox",
     description:
       "shadcn-compatible searchable select with Orchid chips and bulk selection helpers.",
   },
   {
-    to: "/checkbox" as const,
+    to: "/base-ui/checkbox" as const,
     name: "Checkbox",
     description:
       "shadcn-compatible checkbox with Orchid states and an optional group helper.",
   },
   {
-    to: "/radio-group" as const,
+    to: "/base-ui/radio-group" as const,
     name: "Radio Group",
     description:
       "shadcn-compatible radio group and item primitives with Orchid styling.",
   },
   {
-    to: "/switch" as const,
+    to: "/base-ui/switch" as const,
     name: "Switch",
     description: "shadcn-compatible switch in default and small Orchid sizes.",
   },
   {
-    to: "/slider" as const,
+    to: "/base-ui/slider" as const,
     name: "Slider",
     description:
       "shadcn-compatible single, range, or vertical slider with Orchid styling.",
   },
   {
-    to: "/calendar" as const,
+    to: "/base-ui/calendar" as const,
     name: "Calendar",
     description:
       "Single, range, and multiple date selection used by Date Picker.",
   },
   {
-    to: "/form-section" as const,
+    to: "/base-ui/form-section" as const,
     name: "Form Section",
     description: "Heading plus FormSectionGroup and FormSectionItem.",
   },
@@ -258,85 +258,91 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: "/sidebar" as const,
+    to: "/components/sidebar" as const,
     name: "Sidebar",
     description:
       "JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.",
   },
   {
-    to: "/sub-sidebar" as const,
+    to: "/components/sub-sidebar" as const,
     name: "Sub Sidebar",
     description:
       "JSON-configured flat child navigation with a blue active state.",
   },
   {
-    to: "/choice-card" as const,
+    to: "/components/choice-card" as const,
     name: "Choice Card",
     description: "Selectable cards with left or center icon, no radio dot.",
   },
   {
-    to: "/copy-button" as const,
+    to: "/components/copy-button" as const,
     name: "Copy Button",
     description: "Copy icon that writes a value and shows Copied!.",
   },
   {
-    to: "/customer-card" as const,
+    to: "/components/customer-card" as const,
     name: "Customer Card",
     description: "Small, Big, and Float customer or beneficiary cards.",
   },
   {
-    to: "/date-picker" as const,
+    to: "/components/date-picker" as const,
     name: "Date Picker",
     description:
       "Shadcn-style Popover and Calendar composition with optional Orchid helpers.",
   },
   {
-    to: "/detail-list" as const,
+    to: "/components/detail-list" as const,
     name: "Detail List",
     description: "Detail card with grid columns, colspan, and stacked rows.",
   },
   {
-    to: "/icon-group" as const,
+    to: "/components/icon-group" as const,
     name: "Icon Group",
     description:
       "Icon cluster with Default and Border; dropdown, link, and copy.",
   },
   {
-    to: "/quantity-input" as const,
+    to: "/components/quantity-input" as const,
     name: "Quantity Input",
     description: "Minus/plus stepper; click the value to type.",
   },
   {
-    to: "/metric-card" as const,
+    to: "/components/metric-card" as const,
     name: "Metric Card",
     description:
       "Dashboard KPI card: icon, title, value, and optional percent change.",
   },
   {
-    to: "/page-layout" as const,
+    to: "/components/app-layout" as const,
+    name: "App Layout",
+    description:
+      "Embedded application frame with optional app name, tabs, and sidebar.",
+  },
+  {
+    to: "/components/page-layout" as const,
     name: "Page Layout",
     description:
       "Standard route page with built-in responsive padding, header, and scrollable content.",
   },
   {
-    to: "/form-layout" as const,
+    to: "/components/form-layout" as const,
     name: "Form Layout",
     description: "Create and edit form shell with page and modal modes.",
   },
   {
-    to: "/form-builder" as const,
+    to: "/components/form-builder" as const,
     name: "Form Builder",
     description:
       "Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer this over assembling fields by hand.",
   },
   {
-    to: "/data-table" as const,
+    to: "/components/data-table" as const,
     name: "Data Table",
     description:
       "Schema-driven table: search, tabs, filter, sort, Edit Column, pagination. Prefer this over Table for lists.",
   },
   {
-    to: "/confirmation-modal" as const,
+    to: "/components/confirmation-modal" as const,
     name: "Confirmation Modal",
     description:
       "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
@@ -385,56 +391,56 @@ function baseGroup(
 
 /** AlignUI-style groups for Base Components. */
 export const DOC_BASE_GROUPS = [
-  baseGroup("Actions", ["/button", "/button-group"]),
+  baseGroup("Actions", ["/base-ui/button", "/base-ui/button-group"]),
   baseGroup("Displaying Data", [
-    "/attachment",
-    "/avatar",
-    "/badge",
-    "/chart",
-    "/empty",
-    "/list-item",
-    "/table",
+    "/base-ui/attachment",
+    "/base-ui/avatar",
+    "/base-ui/badge",
+    "/base-ui/chart",
+    "/base-ui/empty",
+    "/base-ui/list-item",
+    "/base-ui/table",
   ]),
   baseGroup("Feedback", [
-    "/alert",
-    "/progress",
-    "/skeleton",
-    "/spinner",
-    "/toast",
+    "/base-ui/alert",
+    "/base-ui/progress",
+    "/base-ui/skeleton",
+    "/base-ui/spinner",
+    "/base-ui/toast",
   ]),
   baseGroup("Form", [
-    "/calendar",
-    "/checkbox",
-    "/combobox",
-    "/field",
-    "/form-section",
-    "/input",
-    "/input-group",
-    "/label",
-    "/radio-group",
-    "/select",
-    "/slider",
-    "/switch",
-    "/textarea",
+    "/base-ui/calendar",
+    "/base-ui/checkbox",
+    "/base-ui/combobox",
+    "/base-ui/field",
+    "/base-ui/form-section",
+    "/base-ui/input",
+    "/base-ui/input-group",
+    "/base-ui/label",
+    "/base-ui/radio-group",
+    "/base-ui/select",
+    "/base-ui/slider",
+    "/base-ui/switch",
+    "/base-ui/textarea",
   ]),
   baseGroup("Layout", [
-    "/accordion",
-    "/aspect-ratio",
-    "/card",
-    "/collapsible",
-    "/resizable",
-    "/scroll-area",
-    "/tabs",
+    "/base-ui/accordion",
+    "/base-ui/aspect-ratio",
+    "/base-ui/card",
+    "/base-ui/collapsible",
+    "/base-ui/resizable",
+    "/base-ui/scroll-area",
+    "/base-ui/tabs",
   ]),
-  baseGroup("Navigation", ["/breadcrumb", "/pagination"]),
+  baseGroup("Navigation", ["/base-ui/breadcrumb", "/base-ui/pagination"]),
   baseGroup("Overlays", [
-    "/command",
-    "/dialog",
-    "/dropdown-menu",
-    "/sheet",
-    "/tooltip",
+    "/base-ui/command",
+    "/base-ui/dialog",
+    "/base-ui/dropdown-menu",
+    "/base-ui/sheet",
+    "/base-ui/tooltip",
   ]),
-  baseGroup("Utils", ["/kbd"]),
+  baseGroup("Utils", ["/base-ui/kbd"]),
 ] as const;
 
 const BLOCK_BY_TO = new Map(DOC_BLOCKS.map((item) => [item.to, item]));
@@ -454,22 +460,22 @@ function blockGroup(
 
 /** AlignUI-style groups for Components & Blocks. Empty groups are omitted. */
 export const DOC_BLOCK_GROUPS = [
-  blockGroup("Actions", ["/copy-button", "/icon-group"]),
+  blockGroup("Actions", ["/components/copy-button", "/components/icon-group"]),
   blockGroup("Displaying Data", [
-    "/customer-card",
-    "/data-table",
-    "/detail-list",
-    "/metric-card",
+    "/components/customer-card",
+    "/components/data-table",
+    "/components/detail-list",
+    "/components/metric-card",
   ]),
   blockGroup("Form", [
-    "/choice-card",
-    "/date-picker",
-    "/form-builder",
-    "/quantity-input",
+    "/components/choice-card",
+    "/components/date-picker",
+    "/components/form-builder",
+    "/components/quantity-input",
   ]),
-  blockGroup("Layout", ["/form-layout", "/page-layout"]),
-  blockGroup("Navigation", ["/sidebar", "/sub-sidebar"]),
-  blockGroup("Overlays", ["/confirmation-modal"]),
+  blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
+  blockGroup("Navigation", ["/components/sidebar", "/components/sub-sidebar"]),
+  blockGroup("Overlays", ["/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);
 
 export const DOC_GUIDES = [
@@ -497,7 +503,8 @@ export const DOC_GUIDE_ITEMS = DOC_GUIDES;
 
 export const DOC_CRUMBS: Record<string, string> = {
   "/": "Home",
-  "/components": "Components",
+  "/components": "Components & Blocks",
+  "/base-ui": "Base Components",
   ...Object.fromEntries(DOC_GUIDE_ITEMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_FORMS.map((item) => [item.to, item.name])),

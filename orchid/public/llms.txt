@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 57 components.
-- Installable registry items: 59, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 58 components.
+- Installable registry items: 60, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -134,6 +134,10 @@ Minus/plus stepper; click the value to type.
 Install: `bunx --bun shadcn@latest add @orchid/quantity-input` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
 
 ### Layout
+
+#### [App Layout](https://orchid-ui-hitpay.vercel.app/llms/app-layout.md)
+Embedded application frame with optional app name, tabs, and sidebar.
+Install: `bunx --bun shadcn@latest add @orchid/app-layout` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/app-layout.json)
 
 #### [Form Layout](https://orchid-ui-hitpay.vercel.app/llms/form-layout.md)
 Create and edit form shell with page and modal modes.
@@ -347,7 +351,7 @@ Install: `bunx --bun shadcn@latest add @orchid/kbd` · [Registry JSON](https://o
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, detail-list, icon-group, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, attachment, form-section
+form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, detail-list, icon-group, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, attachment, form-section
 
 ## Usage Guidance
 
@@ -356,4 +360,4 @@ form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, custome
 - Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.
 - Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Blocks live under `src/components/{category}` (`@/components/{category}/…`) and are ready to use through props or a schema. Base items live under `src/base-ui/{category}` (`@/base-ui/{category}/…`). Do not assemble a block from many base components.
 - Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.
-- Use FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.
+- Use AppLayout to frame the embedded pane, FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.

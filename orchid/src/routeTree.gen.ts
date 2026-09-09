@@ -10,170 +10,74 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AccordionRouteImport } from './routes/accordion'
-import { Route as AlertRouteImport } from './routes/alert'
-import { Route as AlertDialogRouteImport } from './routes/alert-dialog'
-import { Route as AspectRatioRouteImport } from './routes/aspect-ratio'
-import { Route as AttachmentRouteImport } from './routes/attachment'
-import { Route as AvatarRouteImport } from './routes/avatar'
-import { Route as BadgeRouteImport } from './routes/badge'
-import { Route as BreadcrumbRouteImport } from './routes/breadcrumb'
-import { Route as ButtonRouteImport } from './routes/button'
-import { Route as ButtonGroupRouteImport } from './routes/button-group'
-import { Route as CalendarRouteImport } from './routes/calendar'
-import { Route as CardRouteImport } from './routes/card'
-import { Route as ChartRouteImport } from './routes/chart'
-import { Route as CheckboxRouteImport } from './routes/checkbox'
-import { Route as ChoiceCardRouteImport } from './routes/choice-card'
-import { Route as CollapsibleRouteImport } from './routes/collapsible'
-import { Route as ComboboxRouteImport } from './routes/combobox'
-import { Route as CommandRouteImport } from './routes/command'
-import { Route as ComponentsRouteImport } from './routes/components'
 import { Route as ComponentsJsonRouteImport } from './routes/components-json'
-import { Route as ConfirmationModalRouteImport } from './routes/confirmation-modal'
-import { Route as CopyButtonRouteImport } from './routes/copy-button'
-import { Route as CustomerCardRouteImport } from './routes/customer-card'
-import { Route as DataTableRouteImport } from './routes/data-table'
-import { Route as DatePickerRouteImport } from './routes/date-picker'
-import { Route as DetailListRouteImport } from './routes/detail-list'
-import { Route as DialogRouteImport } from './routes/dialog'
-import { Route as DropdownMenuRouteImport } from './routes/dropdown-menu'
-import { Route as EmptyRouteImport } from './routes/empty'
-import { Route as FieldRouteImport } from './routes/field'
-import { Route as FormBuilderRouteImport } from './routes/form-builder'
-import { Route as FormLayoutRouteImport } from './routes/form-layout'
-import { Route as FormSectionRouteImport } from './routes/form-section'
-import { Route as IconGroupRouteImport } from './routes/icon-group'
-import { Route as InputRouteImport } from './routes/input'
-import { Route as InputGroupRouteImport } from './routes/input-group'
 import { Route as InstallationRouteImport } from './routes/installation'
-import { Route as KbdRouteImport } from './routes/kbd'
-import { Route as LabelRouteImport } from './routes/label'
-import { Route as ListItemRouteImport } from './routes/list-item'
-import { Route as MetricCardRouteImport } from './routes/metric-card'
-import { Route as PageLayoutRouteImport } from './routes/page-layout'
-import { Route as PaginationRouteImport } from './routes/pagination'
-import { Route as ProgressRouteImport } from './routes/progress'
-import { Route as QuantityInputRouteImport } from './routes/quantity-input'
-import { Route as RadioGroupRouteImport } from './routes/radio-group'
-import { Route as ResizableRouteImport } from './routes/resizable'
-import { Route as SchemaFormRouteImport } from './routes/schema-form'
-import { Route as SchemaTableRouteImport } from './routes/schema-table'
-import { Route as ScrollAreaRouteImport } from './routes/scroll-area'
-import { Route as SelectRouteImport } from './routes/select'
 import { Route as SetupRouteImport } from './routes/setup'
-import { Route as SheetRouteImport } from './routes/sheet'
-import { Route as SidebarRouteImport } from './routes/sidebar'
-import { Route as SkeletonRouteImport } from './routes/skeleton'
-import { Route as SliderRouteImport } from './routes/slider'
-import { Route as SpinnerRouteImport } from './routes/spinner'
-import { Route as SubSidebarRouteImport } from './routes/sub-sidebar'
-import { Route as SwitchRouteImport } from './routes/switch'
-import { Route as TableRouteImport } from './routes/table'
-import { Route as TabsRouteImport } from './routes/tabs'
-import { Route as TextareaRouteImport } from './routes/textarea'
 import { Route as ThemingRouteImport } from './routes/theming'
-import { Route as ToastRouteImport } from './routes/toast'
-import { Route as TooltipRouteImport } from './routes/tooltip'
+import { Route as BaseUiIndexRouteImport } from './routes/base-ui/index'
+import { Route as BaseUiAccordionRouteImport } from './routes/base-ui/accordion'
+import { Route as BaseUiAlertRouteImport } from './routes/base-ui/alert'
+import { Route as BaseUiAspectRatioRouteImport } from './routes/base-ui/aspect-ratio'
+import { Route as BaseUiAttachmentRouteImport } from './routes/base-ui/attachment'
+import { Route as BaseUiAvatarRouteImport } from './routes/base-ui/avatar'
+import { Route as BaseUiBadgeRouteImport } from './routes/base-ui/badge'
+import { Route as BaseUiBreadcrumbRouteImport } from './routes/base-ui/breadcrumb'
+import { Route as BaseUiButtonRouteImport } from './routes/base-ui/button'
+import { Route as BaseUiButtonGroupRouteImport } from './routes/base-ui/button-group'
+import { Route as BaseUiCalendarRouteImport } from './routes/base-ui/calendar'
+import { Route as BaseUiCardRouteImport } from './routes/base-ui/card'
+import { Route as BaseUiChartRouteImport } from './routes/base-ui/chart'
+import { Route as BaseUiCheckboxRouteImport } from './routes/base-ui/checkbox'
+import { Route as BaseUiCollapsibleRouteImport } from './routes/base-ui/collapsible'
+import { Route as BaseUiComboboxRouteImport } from './routes/base-ui/combobox'
+import { Route as BaseUiCommandRouteImport } from './routes/base-ui/command'
+import { Route as BaseUiDialogRouteImport } from './routes/base-ui/dialog'
+import { Route as BaseUiDropdownMenuRouteImport } from './routes/base-ui/dropdown-menu'
+import { Route as BaseUiEmptyRouteImport } from './routes/base-ui/empty'
+import { Route as BaseUiFieldRouteImport } from './routes/base-ui/field'
+import { Route as BaseUiFormSectionRouteImport } from './routes/base-ui/form-section'
+import { Route as BaseUiInputRouteImport } from './routes/base-ui/input'
+import { Route as BaseUiInputGroupRouteImport } from './routes/base-ui/input-group'
+import { Route as BaseUiKbdRouteImport } from './routes/base-ui/kbd'
+import { Route as BaseUiLabelRouteImport } from './routes/base-ui/label'
+import { Route as BaseUiListItemRouteImport } from './routes/base-ui/list-item'
+import { Route as BaseUiPaginationRouteImport } from './routes/base-ui/pagination'
+import { Route as BaseUiProgressRouteImport } from './routes/base-ui/progress'
+import { Route as BaseUiRadioGroupRouteImport } from './routes/base-ui/radio-group'
+import { Route as BaseUiResizableRouteImport } from './routes/base-ui/resizable'
+import { Route as BaseUiScrollAreaRouteImport } from './routes/base-ui/scroll-area'
+import { Route as BaseUiSelectRouteImport } from './routes/base-ui/select'
+import { Route as BaseUiSheetRouteImport } from './routes/base-ui/sheet'
+import { Route as BaseUiSkeletonRouteImport } from './routes/base-ui/skeleton'
+import { Route as BaseUiSliderRouteImport } from './routes/base-ui/slider'
+import { Route as BaseUiSpinnerRouteImport } from './routes/base-ui/spinner'
+import { Route as BaseUiSwitchRouteImport } from './routes/base-ui/switch'
+import { Route as BaseUiTableRouteImport } from './routes/base-ui/table'
+import { Route as BaseUiTabsRouteImport } from './routes/base-ui/tabs'
+import { Route as BaseUiTextareaRouteImport } from './routes/base-ui/textarea'
+import { Route as BaseUiToastRouteImport } from './routes/base-ui/toast'
+import { Route as BaseUiTooltipRouteImport } from './routes/base-ui/tooltip'
+import { Route as ComponentsIndexRouteImport } from './routes/components/index'
+import { Route as ComponentsAppLayoutRouteImport } from './routes/components/app-layout'
+import { Route as ComponentsChoiceCardRouteImport } from './routes/components/choice-card'
+import { Route as ComponentsConfirmationModalRouteImport } from './routes/components/confirmation-modal'
+import { Route as ComponentsCopyButtonRouteImport } from './routes/components/copy-button'
+import { Route as ComponentsCustomerCardRouteImport } from './routes/components/customer-card'
+import { Route as ComponentsDataTableRouteImport } from './routes/components/data-table'
+import { Route as ComponentsDatePickerRouteImport } from './routes/components/date-picker'
+import { Route as ComponentsDetailListRouteImport } from './routes/components/detail-list'
+import { Route as ComponentsFormBuilderRouteImport } from './routes/components/form-builder'
+import { Route as ComponentsFormLayoutRouteImport } from './routes/components/form-layout'
+import { Route as ComponentsIconGroupRouteImport } from './routes/components/icon-group'
+import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
+import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
+import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
+import { Route as ComponentsSidebarRouteImport } from './routes/components/sidebar'
+import { Route as ComponentsSubSidebarRouteImport } from './routes/components/sub-sidebar'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccordionRoute = AccordionRouteImport.update({
-  id: '/accordion',
-  path: '/accordion',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlertRoute = AlertRouteImport.update({
-  id: '/alert',
-  path: '/alert',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AlertDialogRoute = AlertDialogRouteImport.update({
-  id: '/alert-dialog',
-  path: '/alert-dialog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AspectRatioRoute = AspectRatioRouteImport.update({
-  id: '/aspect-ratio',
-  path: '/aspect-ratio',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AttachmentRoute = AttachmentRouteImport.update({
-  id: '/attachment',
-  path: '/attachment',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AvatarRoute = AvatarRouteImport.update({
-  id: '/avatar',
-  path: '/avatar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BadgeRoute = BadgeRouteImport.update({
-  id: '/badge',
-  path: '/badge',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BreadcrumbRoute = BreadcrumbRouteImport.update({
-  id: '/breadcrumb',
-  path: '/breadcrumb',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ButtonRoute = ButtonRouteImport.update({
-  id: '/button',
-  path: '/button',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ButtonGroupRoute = ButtonGroupRouteImport.update({
-  id: '/button-group',
-  path: '/button-group',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalendarRoute = CalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CardRoute = CardRouteImport.update({
-  id: '/card',
-  path: '/card',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChartRoute = ChartRouteImport.update({
-  id: '/chart',
-  path: '/chart',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CheckboxRoute = CheckboxRouteImport.update({
-  id: '/checkbox',
-  path: '/checkbox',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ChoiceCardRoute = ChoiceCardRouteImport.update({
-  id: '/choice-card',
-  path: '/choice-card',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CollapsibleRoute = CollapsibleRouteImport.update({
-  id: '/collapsible',
-  path: '/collapsible',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComboboxRoute = ComboboxRouteImport.update({
-  id: '/combobox',
-  path: '/combobox',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CommandRoute = CommandRouteImport.update({
-  id: '/command',
-  path: '/command',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsRoute = ComponentsRouteImport.update({
-  id: '/components',
-  path: '/components',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsJsonRoute = ComponentsJsonRouteImport.update({
@@ -181,159 +85,9 @@ const ComponentsJsonRoute = ComponentsJsonRouteImport.update({
   path: '/components-json',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ConfirmationModalRoute = ConfirmationModalRouteImport.update({
-  id: '/confirmation-modal',
-  path: '/confirmation-modal',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CopyButtonRoute = CopyButtonRouteImport.update({
-  id: '/copy-button',
-  path: '/copy-button',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CustomerCardRoute = CustomerCardRouteImport.update({
-  id: '/customer-card',
-  path: '/customer-card',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DataTableRoute = DataTableRouteImport.update({
-  id: '/data-table',
-  path: '/data-table',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DatePickerRoute = DatePickerRouteImport.update({
-  id: '/date-picker',
-  path: '/date-picker',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DetailListRoute = DetailListRouteImport.update({
-  id: '/detail-list',
-  path: '/detail-list',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DialogRoute = DialogRouteImport.update({
-  id: '/dialog',
-  path: '/dialog',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DropdownMenuRoute = DropdownMenuRouteImport.update({
-  id: '/dropdown-menu',
-  path: '/dropdown-menu',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const EmptyRoute = EmptyRouteImport.update({
-  id: '/empty',
-  path: '/empty',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FieldRoute = FieldRouteImport.update({
-  id: '/field',
-  path: '/field',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FormBuilderRoute = FormBuilderRouteImport.update({
-  id: '/form-builder',
-  path: '/form-builder',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FormLayoutRoute = FormLayoutRouteImport.update({
-  id: '/form-layout',
-  path: '/form-layout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const FormSectionRoute = FormSectionRouteImport.update({
-  id: '/form-section',
-  path: '/form-section',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IconGroupRoute = IconGroupRouteImport.update({
-  id: '/icon-group',
-  path: '/icon-group',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InputRoute = InputRouteImport.update({
-  id: '/input',
-  path: '/input',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const InputGroupRoute = InputGroupRouteImport.update({
-  id: '/input-group',
-  path: '/input-group',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const InstallationRoute = InstallationRouteImport.update({
   id: '/installation',
   path: '/installation',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const KbdRoute = KbdRouteImport.update({
-  id: '/kbd',
-  path: '/kbd',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const LabelRoute = LabelRouteImport.update({
-  id: '/label',
-  path: '/label',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ListItemRoute = ListItemRouteImport.update({
-  id: '/list-item',
-  path: '/list-item',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const MetricCardRoute = MetricCardRouteImport.update({
-  id: '/metric-card',
-  path: '/metric-card',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PageLayoutRoute = PageLayoutRouteImport.update({
-  id: '/page-layout',
-  path: '/page-layout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PaginationRoute = PaginationRouteImport.update({
-  id: '/pagination',
-  path: '/pagination',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProgressRoute = ProgressRouteImport.update({
-  id: '/progress',
-  path: '/progress',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const QuantityInputRoute = QuantityInputRouteImport.update({
-  id: '/quantity-input',
-  path: '/quantity-input',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const RadioGroupRoute = RadioGroupRouteImport.update({
-  id: '/radio-group',
-  path: '/radio-group',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResizableRoute = ResizableRouteImport.update({
-  id: '/resizable',
-  path: '/resizable',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SchemaFormRoute = SchemaFormRouteImport.update({
-  id: '/schema-form',
-  path: '/schema-form',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SchemaTableRoute = SchemaTableRouteImport.update({
-  id: '/schema-table',
-  path: '/schema-table',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ScrollAreaRoute = ScrollAreaRouteImport.update({
-  id: '/scroll-area',
-  path: '/scroll-area',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SelectRoute = SelectRouteImport.update({
-  id: '/select',
-  path: '/select',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SetupRoute = SetupRouteImport.update({
@@ -341,551 +95,785 @@ const SetupRoute = SetupRouteImport.update({
   path: '/setup',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SheetRoute = SheetRouteImport.update({
-  id: '/sheet',
-  path: '/sheet',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SidebarRoute = SidebarRouteImport.update({
-  id: '/sidebar',
-  path: '/sidebar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SkeletonRoute = SkeletonRouteImport.update({
-  id: '/skeleton',
-  path: '/skeleton',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SliderRoute = SliderRouteImport.update({
-  id: '/slider',
-  path: '/slider',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SpinnerRoute = SpinnerRouteImport.update({
-  id: '/spinner',
-  path: '/spinner',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SubSidebarRoute = SubSidebarRouteImport.update({
-  id: '/sub-sidebar',
-  path: '/sub-sidebar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SwitchRoute = SwitchRouteImport.update({
-  id: '/switch',
-  path: '/switch',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TableRoute = TableRouteImport.update({
-  id: '/table',
-  path: '/table',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TabsRoute = TabsRouteImport.update({
-  id: '/tabs',
-  path: '/tabs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const TextareaRoute = TextareaRouteImport.update({
-  id: '/textarea',
-  path: '/textarea',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ThemingRoute = ThemingRouteImport.update({
   id: '/theming',
   path: '/theming',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ToastRoute = ToastRouteImport.update({
-  id: '/toast',
-  path: '/toast',
+const BaseUiIndexRoute = BaseUiIndexRouteImport.update({
+  id: '/base-ui/',
+  path: '/base-ui/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const TooltipRoute = TooltipRouteImport.update({
-  id: '/tooltip',
-  path: '/tooltip',
+const BaseUiAccordionRoute = BaseUiAccordionRouteImport.update({
+  id: '/base-ui/accordion',
+  path: '/base-ui/accordion',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiAlertRoute = BaseUiAlertRouteImport.update({
+  id: '/base-ui/alert',
+  path: '/base-ui/alert',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiAspectRatioRoute = BaseUiAspectRatioRouteImport.update({
+  id: '/base-ui/aspect-ratio',
+  path: '/base-ui/aspect-ratio',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiAttachmentRoute = BaseUiAttachmentRouteImport.update({
+  id: '/base-ui/attachment',
+  path: '/base-ui/attachment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiAvatarRoute = BaseUiAvatarRouteImport.update({
+  id: '/base-ui/avatar',
+  path: '/base-ui/avatar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiBadgeRoute = BaseUiBadgeRouteImport.update({
+  id: '/base-ui/badge',
+  path: '/base-ui/badge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiBreadcrumbRoute = BaseUiBreadcrumbRouteImport.update({
+  id: '/base-ui/breadcrumb',
+  path: '/base-ui/breadcrumb',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiButtonRoute = BaseUiButtonRouteImport.update({
+  id: '/base-ui/button',
+  path: '/base-ui/button',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiButtonGroupRoute = BaseUiButtonGroupRouteImport.update({
+  id: '/base-ui/button-group',
+  path: '/base-ui/button-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiCalendarRoute = BaseUiCalendarRouteImport.update({
+  id: '/base-ui/calendar',
+  path: '/base-ui/calendar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiCardRoute = BaseUiCardRouteImport.update({
+  id: '/base-ui/card',
+  path: '/base-ui/card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiChartRoute = BaseUiChartRouteImport.update({
+  id: '/base-ui/chart',
+  path: '/base-ui/chart',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiCheckboxRoute = BaseUiCheckboxRouteImport.update({
+  id: '/base-ui/checkbox',
+  path: '/base-ui/checkbox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiCollapsibleRoute = BaseUiCollapsibleRouteImport.update({
+  id: '/base-ui/collapsible',
+  path: '/base-ui/collapsible',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiComboboxRoute = BaseUiComboboxRouteImport.update({
+  id: '/base-ui/combobox',
+  path: '/base-ui/combobox',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiCommandRoute = BaseUiCommandRouteImport.update({
+  id: '/base-ui/command',
+  path: '/base-ui/command',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiDialogRoute = BaseUiDialogRouteImport.update({
+  id: '/base-ui/dialog',
+  path: '/base-ui/dialog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiDropdownMenuRoute = BaseUiDropdownMenuRouteImport.update({
+  id: '/base-ui/dropdown-menu',
+  path: '/base-ui/dropdown-menu',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiEmptyRoute = BaseUiEmptyRouteImport.update({
+  id: '/base-ui/empty',
+  path: '/base-ui/empty',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiFieldRoute = BaseUiFieldRouteImport.update({
+  id: '/base-ui/field',
+  path: '/base-ui/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiFormSectionRoute = BaseUiFormSectionRouteImport.update({
+  id: '/base-ui/form-section',
+  path: '/base-ui/form-section',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiInputRoute = BaseUiInputRouteImport.update({
+  id: '/base-ui/input',
+  path: '/base-ui/input',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiInputGroupRoute = BaseUiInputGroupRouteImport.update({
+  id: '/base-ui/input-group',
+  path: '/base-ui/input-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiKbdRoute = BaseUiKbdRouteImport.update({
+  id: '/base-ui/kbd',
+  path: '/base-ui/kbd',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiLabelRoute = BaseUiLabelRouteImport.update({
+  id: '/base-ui/label',
+  path: '/base-ui/label',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiListItemRoute = BaseUiListItemRouteImport.update({
+  id: '/base-ui/list-item',
+  path: '/base-ui/list-item',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiPaginationRoute = BaseUiPaginationRouteImport.update({
+  id: '/base-ui/pagination',
+  path: '/base-ui/pagination',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiProgressRoute = BaseUiProgressRouteImport.update({
+  id: '/base-ui/progress',
+  path: '/base-ui/progress',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiRadioGroupRoute = BaseUiRadioGroupRouteImport.update({
+  id: '/base-ui/radio-group',
+  path: '/base-ui/radio-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiResizableRoute = BaseUiResizableRouteImport.update({
+  id: '/base-ui/resizable',
+  path: '/base-ui/resizable',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiScrollAreaRoute = BaseUiScrollAreaRouteImport.update({
+  id: '/base-ui/scroll-area',
+  path: '/base-ui/scroll-area',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiSelectRoute = BaseUiSelectRouteImport.update({
+  id: '/base-ui/select',
+  path: '/base-ui/select',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiSheetRoute = BaseUiSheetRouteImport.update({
+  id: '/base-ui/sheet',
+  path: '/base-ui/sheet',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiSkeletonRoute = BaseUiSkeletonRouteImport.update({
+  id: '/base-ui/skeleton',
+  path: '/base-ui/skeleton',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiSliderRoute = BaseUiSliderRouteImport.update({
+  id: '/base-ui/slider',
+  path: '/base-ui/slider',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiSpinnerRoute = BaseUiSpinnerRouteImport.update({
+  id: '/base-ui/spinner',
+  path: '/base-ui/spinner',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiSwitchRoute = BaseUiSwitchRouteImport.update({
+  id: '/base-ui/switch',
+  path: '/base-ui/switch',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiTableRoute = BaseUiTableRouteImport.update({
+  id: '/base-ui/table',
+  path: '/base-ui/table',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiTabsRoute = BaseUiTabsRouteImport.update({
+  id: '/base-ui/tabs',
+  path: '/base-ui/tabs',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiTextareaRoute = BaseUiTextareaRouteImport.update({
+  id: '/base-ui/textarea',
+  path: '/base-ui/textarea',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiToastRoute = BaseUiToastRouteImport.update({
+  id: '/base-ui/toast',
+  path: '/base-ui/toast',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiTooltipRoute = BaseUiTooltipRouteImport.update({
+  id: '/base-ui/tooltip',
+  path: '/base-ui/tooltip',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsIndexRoute = ComponentsIndexRouteImport.update({
+  id: '/components/',
+  path: '/components/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsAppLayoutRoute = ComponentsAppLayoutRouteImport.update({
+  id: '/components/app-layout',
+  path: '/components/app-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsChoiceCardRoute = ComponentsChoiceCardRouteImport.update({
+  id: '/components/choice-card',
+  path: '/components/choice-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsConfirmationModalRoute =
+  ComponentsConfirmationModalRouteImport.update({
+    id: '/components/confirmation-modal',
+    path: '/components/confirmation-modal',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ComponentsCopyButtonRoute = ComponentsCopyButtonRouteImport.update({
+  id: '/components/copy-button',
+  path: '/components/copy-button',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsCustomerCardRoute = ComponentsCustomerCardRouteImport.update({
+  id: '/components/customer-card',
+  path: '/components/customer-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsDataTableRoute = ComponentsDataTableRouteImport.update({
+  id: '/components/data-table',
+  path: '/components/data-table',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsDatePickerRoute = ComponentsDatePickerRouteImport.update({
+  id: '/components/date-picker',
+  path: '/components/date-picker',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsDetailListRoute = ComponentsDetailListRouteImport.update({
+  id: '/components/detail-list',
+  path: '/components/detail-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsFormBuilderRoute = ComponentsFormBuilderRouteImport.update({
+  id: '/components/form-builder',
+  path: '/components/form-builder',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsFormLayoutRoute = ComponentsFormLayoutRouteImport.update({
+  id: '/components/form-layout',
+  path: '/components/form-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsIconGroupRoute = ComponentsIconGroupRouteImport.update({
+  id: '/components/icon-group',
+  path: '/components/icon-group',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsMetricCardRoute = ComponentsMetricCardRouteImport.update({
+  id: '/components/metric-card',
+  path: '/components/metric-card',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsPageLayoutRoute = ComponentsPageLayoutRouteImport.update({
+  id: '/components/page-layout',
+  path: '/components/page-layout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsQuantityInputRoute = ComponentsQuantityInputRouteImport.update({
+  id: '/components/quantity-input',
+  path: '/components/quantity-input',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsSidebarRoute = ComponentsSidebarRouteImport.update({
+  id: '/components/sidebar',
+  path: '/components/sidebar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsSubSidebarRoute = ComponentsSubSidebarRouteImport.update({
+  id: '/components/sub-sidebar',
+  path: '/components/sub-sidebar',
   getParentRoute: () => rootRouteImport,
 } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/accordion': typeof AccordionRoute
-  '/alert': typeof AlertRoute
-  '/alert-dialog': typeof AlertDialogRoute
-  '/aspect-ratio': typeof AspectRatioRoute
-  '/attachment': typeof AttachmentRoute
-  '/avatar': typeof AvatarRoute
-  '/badge': typeof BadgeRoute
-  '/breadcrumb': typeof BreadcrumbRoute
-  '/button': typeof ButtonRoute
-  '/button-group': typeof ButtonGroupRoute
-  '/calendar': typeof CalendarRoute
-  '/card': typeof CardRoute
-  '/chart': typeof ChartRoute
-  '/checkbox': typeof CheckboxRoute
-  '/choice-card': typeof ChoiceCardRoute
-  '/collapsible': typeof CollapsibleRoute
-  '/combobox': typeof ComboboxRoute
-  '/command': typeof CommandRoute
-  '/components': typeof ComponentsRoute
   '/components-json': typeof ComponentsJsonRoute
-  '/confirmation-modal': typeof ConfirmationModalRoute
-  '/copy-button': typeof CopyButtonRoute
-  '/customer-card': typeof CustomerCardRoute
-  '/data-table': typeof DataTableRoute
-  '/date-picker': typeof DatePickerRoute
-  '/detail-list': typeof DetailListRoute
-  '/dialog': typeof DialogRoute
-  '/dropdown-menu': typeof DropdownMenuRoute
-  '/empty': typeof EmptyRoute
-  '/field': typeof FieldRoute
-  '/form-builder': typeof FormBuilderRoute
-  '/form-layout': typeof FormLayoutRoute
-  '/form-section': typeof FormSectionRoute
-  '/icon-group': typeof IconGroupRoute
-  '/input': typeof InputRoute
-  '/input-group': typeof InputGroupRoute
   '/installation': typeof InstallationRoute
-  '/kbd': typeof KbdRoute
-  '/label': typeof LabelRoute
-  '/list-item': typeof ListItemRoute
-  '/metric-card': typeof MetricCardRoute
-  '/page-layout': typeof PageLayoutRoute
-  '/pagination': typeof PaginationRoute
-  '/progress': typeof ProgressRoute
-  '/quantity-input': typeof QuantityInputRoute
-  '/radio-group': typeof RadioGroupRoute
-  '/resizable': typeof ResizableRoute
-  '/schema-form': typeof SchemaFormRoute
-  '/schema-table': typeof SchemaTableRoute
-  '/scroll-area': typeof ScrollAreaRoute
-  '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
-  '/sheet': typeof SheetRoute
-  '/sidebar': typeof SidebarRoute
-  '/skeleton': typeof SkeletonRoute
-  '/slider': typeof SliderRoute
-  '/spinner': typeof SpinnerRoute
-  '/sub-sidebar': typeof SubSidebarRoute
-  '/switch': typeof SwitchRoute
-  '/table': typeof TableRoute
-  '/tabs': typeof TabsRoute
-  '/textarea': typeof TextareaRoute
   '/theming': typeof ThemingRoute
-  '/toast': typeof ToastRoute
-  '/tooltip': typeof TooltipRoute
+  '/base-ui/accordion': typeof BaseUiAccordionRoute
+  '/base-ui/alert': typeof BaseUiAlertRoute
+  '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
+  '/base-ui/attachment': typeof BaseUiAttachmentRoute
+  '/base-ui/avatar': typeof BaseUiAvatarRoute
+  '/base-ui/badge': typeof BaseUiBadgeRoute
+  '/base-ui/breadcrumb': typeof BaseUiBreadcrumbRoute
+  '/base-ui/button': typeof BaseUiButtonRoute
+  '/base-ui/button-group': typeof BaseUiButtonGroupRoute
+  '/base-ui/calendar': typeof BaseUiCalendarRoute
+  '/base-ui/card': typeof BaseUiCardRoute
+  '/base-ui/chart': typeof BaseUiChartRoute
+  '/base-ui/checkbox': typeof BaseUiCheckboxRoute
+  '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
+  '/base-ui/combobox': typeof BaseUiComboboxRoute
+  '/base-ui/command': typeof BaseUiCommandRoute
+  '/base-ui/dialog': typeof BaseUiDialogRoute
+  '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
+  '/base-ui/empty': typeof BaseUiEmptyRoute
+  '/base-ui/field': typeof BaseUiFieldRoute
+  '/base-ui/form-section': typeof BaseUiFormSectionRoute
+  '/base-ui/input': typeof BaseUiInputRoute
+  '/base-ui/input-group': typeof BaseUiInputGroupRoute
+  '/base-ui/kbd': typeof BaseUiKbdRoute
+  '/base-ui/label': typeof BaseUiLabelRoute
+  '/base-ui/list-item': typeof BaseUiListItemRoute
+  '/base-ui/pagination': typeof BaseUiPaginationRoute
+  '/base-ui/progress': typeof BaseUiProgressRoute
+  '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
+  '/base-ui/resizable': typeof BaseUiResizableRoute
+  '/base-ui/scroll-area': typeof BaseUiScrollAreaRoute
+  '/base-ui/select': typeof BaseUiSelectRoute
+  '/base-ui/sheet': typeof BaseUiSheetRoute
+  '/base-ui/skeleton': typeof BaseUiSkeletonRoute
+  '/base-ui/slider': typeof BaseUiSliderRoute
+  '/base-ui/spinner': typeof BaseUiSpinnerRoute
+  '/base-ui/switch': typeof BaseUiSwitchRoute
+  '/base-ui/table': typeof BaseUiTableRoute
+  '/base-ui/tabs': typeof BaseUiTabsRoute
+  '/base-ui/textarea': typeof BaseUiTextareaRoute
+  '/base-ui/toast': typeof BaseUiToastRoute
+  '/base-ui/tooltip': typeof BaseUiTooltipRoute
+  '/components/app-layout': typeof ComponentsAppLayoutRoute
+  '/components/choice-card': typeof ComponentsChoiceCardRoute
+  '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
+  '/components/copy-button': typeof ComponentsCopyButtonRoute
+  '/components/customer-card': typeof ComponentsCustomerCardRoute
+  '/components/data-table': typeof ComponentsDataTableRoute
+  '/components/date-picker': typeof ComponentsDatePickerRoute
+  '/components/detail-list': typeof ComponentsDetailListRoute
+  '/components/form-builder': typeof ComponentsFormBuilderRoute
+  '/components/form-layout': typeof ComponentsFormLayoutRoute
+  '/components/icon-group': typeof ComponentsIconGroupRoute
+  '/components/metric-card': typeof ComponentsMetricCardRoute
+  '/components/page-layout': typeof ComponentsPageLayoutRoute
+  '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/sidebar': typeof ComponentsSidebarRoute
+  '/components/sub-sidebar': typeof ComponentsSubSidebarRoute
+  '/base-ui/': typeof BaseUiIndexRoute
+  '/components/': typeof ComponentsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/accordion': typeof AccordionRoute
-  '/alert': typeof AlertRoute
-  '/alert-dialog': typeof AlertDialogRoute
-  '/aspect-ratio': typeof AspectRatioRoute
-  '/attachment': typeof AttachmentRoute
-  '/avatar': typeof AvatarRoute
-  '/badge': typeof BadgeRoute
-  '/breadcrumb': typeof BreadcrumbRoute
-  '/button': typeof ButtonRoute
-  '/button-group': typeof ButtonGroupRoute
-  '/calendar': typeof CalendarRoute
-  '/card': typeof CardRoute
-  '/chart': typeof ChartRoute
-  '/checkbox': typeof CheckboxRoute
-  '/choice-card': typeof ChoiceCardRoute
-  '/collapsible': typeof CollapsibleRoute
-  '/combobox': typeof ComboboxRoute
-  '/command': typeof CommandRoute
-  '/components': typeof ComponentsRoute
   '/components-json': typeof ComponentsJsonRoute
-  '/confirmation-modal': typeof ConfirmationModalRoute
-  '/copy-button': typeof CopyButtonRoute
-  '/customer-card': typeof CustomerCardRoute
-  '/data-table': typeof DataTableRoute
-  '/date-picker': typeof DatePickerRoute
-  '/detail-list': typeof DetailListRoute
-  '/dialog': typeof DialogRoute
-  '/dropdown-menu': typeof DropdownMenuRoute
-  '/empty': typeof EmptyRoute
-  '/field': typeof FieldRoute
-  '/form-builder': typeof FormBuilderRoute
-  '/form-layout': typeof FormLayoutRoute
-  '/form-section': typeof FormSectionRoute
-  '/icon-group': typeof IconGroupRoute
-  '/input': typeof InputRoute
-  '/input-group': typeof InputGroupRoute
   '/installation': typeof InstallationRoute
-  '/kbd': typeof KbdRoute
-  '/label': typeof LabelRoute
-  '/list-item': typeof ListItemRoute
-  '/metric-card': typeof MetricCardRoute
-  '/page-layout': typeof PageLayoutRoute
-  '/pagination': typeof PaginationRoute
-  '/progress': typeof ProgressRoute
-  '/quantity-input': typeof QuantityInputRoute
-  '/radio-group': typeof RadioGroupRoute
-  '/resizable': typeof ResizableRoute
-  '/schema-form': typeof SchemaFormRoute
-  '/schema-table': typeof SchemaTableRoute
-  '/scroll-area': typeof ScrollAreaRoute
-  '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
-  '/sheet': typeof SheetRoute
-  '/sidebar': typeof SidebarRoute
-  '/skeleton': typeof SkeletonRoute
-  '/slider': typeof SliderRoute
-  '/spinner': typeof SpinnerRoute
-  '/sub-sidebar': typeof SubSidebarRoute
-  '/switch': typeof SwitchRoute
-  '/table': typeof TableRoute
-  '/tabs': typeof TabsRoute
-  '/textarea': typeof TextareaRoute
   '/theming': typeof ThemingRoute
-  '/toast': typeof ToastRoute
-  '/tooltip': typeof TooltipRoute
+  '/base-ui/accordion': typeof BaseUiAccordionRoute
+  '/base-ui/alert': typeof BaseUiAlertRoute
+  '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
+  '/base-ui/attachment': typeof BaseUiAttachmentRoute
+  '/base-ui/avatar': typeof BaseUiAvatarRoute
+  '/base-ui/badge': typeof BaseUiBadgeRoute
+  '/base-ui/breadcrumb': typeof BaseUiBreadcrumbRoute
+  '/base-ui/button': typeof BaseUiButtonRoute
+  '/base-ui/button-group': typeof BaseUiButtonGroupRoute
+  '/base-ui/calendar': typeof BaseUiCalendarRoute
+  '/base-ui/card': typeof BaseUiCardRoute
+  '/base-ui/chart': typeof BaseUiChartRoute
+  '/base-ui/checkbox': typeof BaseUiCheckboxRoute
+  '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
+  '/base-ui/combobox': typeof BaseUiComboboxRoute
+  '/base-ui/command': typeof BaseUiCommandRoute
+  '/base-ui/dialog': typeof BaseUiDialogRoute
+  '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
+  '/base-ui/empty': typeof BaseUiEmptyRoute
+  '/base-ui/field': typeof BaseUiFieldRoute
+  '/base-ui/form-section': typeof BaseUiFormSectionRoute
+  '/base-ui/input': typeof BaseUiInputRoute
+  '/base-ui/input-group': typeof BaseUiInputGroupRoute
+  '/base-ui/kbd': typeof BaseUiKbdRoute
+  '/base-ui/label': typeof BaseUiLabelRoute
+  '/base-ui/list-item': typeof BaseUiListItemRoute
+  '/base-ui/pagination': typeof BaseUiPaginationRoute
+  '/base-ui/progress': typeof BaseUiProgressRoute
+  '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
+  '/base-ui/resizable': typeof BaseUiResizableRoute
+  '/base-ui/scroll-area': typeof BaseUiScrollAreaRoute
+  '/base-ui/select': typeof BaseUiSelectRoute
+  '/base-ui/sheet': typeof BaseUiSheetRoute
+  '/base-ui/skeleton': typeof BaseUiSkeletonRoute
+  '/base-ui/slider': typeof BaseUiSliderRoute
+  '/base-ui/spinner': typeof BaseUiSpinnerRoute
+  '/base-ui/switch': typeof BaseUiSwitchRoute
+  '/base-ui/table': typeof BaseUiTableRoute
+  '/base-ui/tabs': typeof BaseUiTabsRoute
+  '/base-ui/textarea': typeof BaseUiTextareaRoute
+  '/base-ui/toast': typeof BaseUiToastRoute
+  '/base-ui/tooltip': typeof BaseUiTooltipRoute
+  '/components/app-layout': typeof ComponentsAppLayoutRoute
+  '/components/choice-card': typeof ComponentsChoiceCardRoute
+  '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
+  '/components/copy-button': typeof ComponentsCopyButtonRoute
+  '/components/customer-card': typeof ComponentsCustomerCardRoute
+  '/components/data-table': typeof ComponentsDataTableRoute
+  '/components/date-picker': typeof ComponentsDatePickerRoute
+  '/components/detail-list': typeof ComponentsDetailListRoute
+  '/components/form-builder': typeof ComponentsFormBuilderRoute
+  '/components/form-layout': typeof ComponentsFormLayoutRoute
+  '/components/icon-group': typeof ComponentsIconGroupRoute
+  '/components/metric-card': typeof ComponentsMetricCardRoute
+  '/components/page-layout': typeof ComponentsPageLayoutRoute
+  '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/sidebar': typeof ComponentsSidebarRoute
+  '/components/sub-sidebar': typeof ComponentsSubSidebarRoute
+  '/base-ui': typeof BaseUiIndexRoute
+  '/components': typeof ComponentsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/accordion': typeof AccordionRoute
-  '/alert': typeof AlertRoute
-  '/alert-dialog': typeof AlertDialogRoute
-  '/aspect-ratio': typeof AspectRatioRoute
-  '/attachment': typeof AttachmentRoute
-  '/avatar': typeof AvatarRoute
-  '/badge': typeof BadgeRoute
-  '/breadcrumb': typeof BreadcrumbRoute
-  '/button': typeof ButtonRoute
-  '/button-group': typeof ButtonGroupRoute
-  '/calendar': typeof CalendarRoute
-  '/card': typeof CardRoute
-  '/chart': typeof ChartRoute
-  '/checkbox': typeof CheckboxRoute
-  '/choice-card': typeof ChoiceCardRoute
-  '/collapsible': typeof CollapsibleRoute
-  '/combobox': typeof ComboboxRoute
-  '/command': typeof CommandRoute
-  '/components': typeof ComponentsRoute
   '/components-json': typeof ComponentsJsonRoute
-  '/confirmation-modal': typeof ConfirmationModalRoute
-  '/copy-button': typeof CopyButtonRoute
-  '/customer-card': typeof CustomerCardRoute
-  '/data-table': typeof DataTableRoute
-  '/date-picker': typeof DatePickerRoute
-  '/detail-list': typeof DetailListRoute
-  '/dialog': typeof DialogRoute
-  '/dropdown-menu': typeof DropdownMenuRoute
-  '/empty': typeof EmptyRoute
-  '/field': typeof FieldRoute
-  '/form-builder': typeof FormBuilderRoute
-  '/form-layout': typeof FormLayoutRoute
-  '/form-section': typeof FormSectionRoute
-  '/icon-group': typeof IconGroupRoute
-  '/input': typeof InputRoute
-  '/input-group': typeof InputGroupRoute
   '/installation': typeof InstallationRoute
-  '/kbd': typeof KbdRoute
-  '/label': typeof LabelRoute
-  '/list-item': typeof ListItemRoute
-  '/metric-card': typeof MetricCardRoute
-  '/page-layout': typeof PageLayoutRoute
-  '/pagination': typeof PaginationRoute
-  '/progress': typeof ProgressRoute
-  '/quantity-input': typeof QuantityInputRoute
-  '/radio-group': typeof RadioGroupRoute
-  '/resizable': typeof ResizableRoute
-  '/schema-form': typeof SchemaFormRoute
-  '/schema-table': typeof SchemaTableRoute
-  '/scroll-area': typeof ScrollAreaRoute
-  '/select': typeof SelectRoute
   '/setup': typeof SetupRoute
-  '/sheet': typeof SheetRoute
-  '/sidebar': typeof SidebarRoute
-  '/skeleton': typeof SkeletonRoute
-  '/slider': typeof SliderRoute
-  '/spinner': typeof SpinnerRoute
-  '/sub-sidebar': typeof SubSidebarRoute
-  '/switch': typeof SwitchRoute
-  '/table': typeof TableRoute
-  '/tabs': typeof TabsRoute
-  '/textarea': typeof TextareaRoute
   '/theming': typeof ThemingRoute
-  '/toast': typeof ToastRoute
-  '/tooltip': typeof TooltipRoute
+  '/base-ui/accordion': typeof BaseUiAccordionRoute
+  '/base-ui/alert': typeof BaseUiAlertRoute
+  '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
+  '/base-ui/attachment': typeof BaseUiAttachmentRoute
+  '/base-ui/avatar': typeof BaseUiAvatarRoute
+  '/base-ui/badge': typeof BaseUiBadgeRoute
+  '/base-ui/breadcrumb': typeof BaseUiBreadcrumbRoute
+  '/base-ui/button': typeof BaseUiButtonRoute
+  '/base-ui/button-group': typeof BaseUiButtonGroupRoute
+  '/base-ui/calendar': typeof BaseUiCalendarRoute
+  '/base-ui/card': typeof BaseUiCardRoute
+  '/base-ui/chart': typeof BaseUiChartRoute
+  '/base-ui/checkbox': typeof BaseUiCheckboxRoute
+  '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
+  '/base-ui/combobox': typeof BaseUiComboboxRoute
+  '/base-ui/command': typeof BaseUiCommandRoute
+  '/base-ui/dialog': typeof BaseUiDialogRoute
+  '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
+  '/base-ui/empty': typeof BaseUiEmptyRoute
+  '/base-ui/field': typeof BaseUiFieldRoute
+  '/base-ui/form-section': typeof BaseUiFormSectionRoute
+  '/base-ui/input': typeof BaseUiInputRoute
+  '/base-ui/input-group': typeof BaseUiInputGroupRoute
+  '/base-ui/kbd': typeof BaseUiKbdRoute
+  '/base-ui/label': typeof BaseUiLabelRoute
+  '/base-ui/list-item': typeof BaseUiListItemRoute
+  '/base-ui/pagination': typeof BaseUiPaginationRoute
+  '/base-ui/progress': typeof BaseUiProgressRoute
+  '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
+  '/base-ui/resizable': typeof BaseUiResizableRoute
+  '/base-ui/scroll-area': typeof BaseUiScrollAreaRoute
+  '/base-ui/select': typeof BaseUiSelectRoute
+  '/base-ui/sheet': typeof BaseUiSheetRoute
+  '/base-ui/skeleton': typeof BaseUiSkeletonRoute
+  '/base-ui/slider': typeof BaseUiSliderRoute
+  '/base-ui/spinner': typeof BaseUiSpinnerRoute
+  '/base-ui/switch': typeof BaseUiSwitchRoute
+  '/base-ui/table': typeof BaseUiTableRoute
+  '/base-ui/tabs': typeof BaseUiTabsRoute
+  '/base-ui/textarea': typeof BaseUiTextareaRoute
+  '/base-ui/toast': typeof BaseUiToastRoute
+  '/base-ui/tooltip': typeof BaseUiTooltipRoute
+  '/components/app-layout': typeof ComponentsAppLayoutRoute
+  '/components/choice-card': typeof ComponentsChoiceCardRoute
+  '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
+  '/components/copy-button': typeof ComponentsCopyButtonRoute
+  '/components/customer-card': typeof ComponentsCustomerCardRoute
+  '/components/data-table': typeof ComponentsDataTableRoute
+  '/components/date-picker': typeof ComponentsDatePickerRoute
+  '/components/detail-list': typeof ComponentsDetailListRoute
+  '/components/form-builder': typeof ComponentsFormBuilderRoute
+  '/components/form-layout': typeof ComponentsFormLayoutRoute
+  '/components/icon-group': typeof ComponentsIconGroupRoute
+  '/components/metric-card': typeof ComponentsMetricCardRoute
+  '/components/page-layout': typeof ComponentsPageLayoutRoute
+  '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/sidebar': typeof ComponentsSidebarRoute
+  '/components/sub-sidebar': typeof ComponentsSubSidebarRoute
+  '/base-ui/': typeof BaseUiIndexRoute
+  '/components/': typeof ComponentsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/accordion'
-    | '/alert'
-    | '/alert-dialog'
-    | '/aspect-ratio'
-    | '/attachment'
-    | '/avatar'
-    | '/badge'
-    | '/breadcrumb'
-    | '/button'
-    | '/button-group'
-    | '/calendar'
-    | '/card'
-    | '/chart'
-    | '/checkbox'
-    | '/choice-card'
-    | '/collapsible'
-    | '/combobox'
-    | '/command'
-    | '/components'
     | '/components-json'
-    | '/confirmation-modal'
-    | '/copy-button'
-    | '/customer-card'
-    | '/data-table'
-    | '/date-picker'
-    | '/detail-list'
-    | '/dialog'
-    | '/dropdown-menu'
-    | '/empty'
-    | '/field'
-    | '/form-builder'
-    | '/form-layout'
-    | '/form-section'
-    | '/icon-group'
-    | '/input'
-    | '/input-group'
     | '/installation'
-    | '/kbd'
-    | '/label'
-    | '/list-item'
-    | '/metric-card'
-    | '/page-layout'
-    | '/pagination'
-    | '/progress'
-    | '/quantity-input'
-    | '/radio-group'
-    | '/resizable'
-    | '/schema-form'
-    | '/schema-table'
-    | '/scroll-area'
-    | '/select'
     | '/setup'
-    | '/sheet'
-    | '/sidebar'
-    | '/skeleton'
-    | '/slider'
-    | '/spinner'
-    | '/sub-sidebar'
-    | '/switch'
-    | '/table'
-    | '/tabs'
-    | '/textarea'
     | '/theming'
-    | '/toast'
-    | '/tooltip'
+    | '/base-ui/accordion'
+    | '/base-ui/alert'
+    | '/base-ui/aspect-ratio'
+    | '/base-ui/attachment'
+    | '/base-ui/avatar'
+    | '/base-ui/badge'
+    | '/base-ui/breadcrumb'
+    | '/base-ui/button'
+    | '/base-ui/button-group'
+    | '/base-ui/calendar'
+    | '/base-ui/card'
+    | '/base-ui/chart'
+    | '/base-ui/checkbox'
+    | '/base-ui/collapsible'
+    | '/base-ui/combobox'
+    | '/base-ui/command'
+    | '/base-ui/dialog'
+    | '/base-ui/dropdown-menu'
+    | '/base-ui/empty'
+    | '/base-ui/field'
+    | '/base-ui/form-section'
+    | '/base-ui/input'
+    | '/base-ui/input-group'
+    | '/base-ui/kbd'
+    | '/base-ui/label'
+    | '/base-ui/list-item'
+    | '/base-ui/pagination'
+    | '/base-ui/progress'
+    | '/base-ui/radio-group'
+    | '/base-ui/resizable'
+    | '/base-ui/scroll-area'
+    | '/base-ui/select'
+    | '/base-ui/sheet'
+    | '/base-ui/skeleton'
+    | '/base-ui/slider'
+    | '/base-ui/spinner'
+    | '/base-ui/switch'
+    | '/base-ui/table'
+    | '/base-ui/tabs'
+    | '/base-ui/textarea'
+    | '/base-ui/toast'
+    | '/base-ui/tooltip'
+    | '/components/app-layout'
+    | '/components/choice-card'
+    | '/components/confirmation-modal'
+    | '/components/copy-button'
+    | '/components/customer-card'
+    | '/components/data-table'
+    | '/components/date-picker'
+    | '/components/detail-list'
+    | '/components/form-builder'
+    | '/components/form-layout'
+    | '/components/icon-group'
+    | '/components/metric-card'
+    | '/components/page-layout'
+    | '/components/quantity-input'
+    | '/components/sidebar'
+    | '/components/sub-sidebar'
+    | '/base-ui/'
+    | '/components/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
-    | '/accordion'
-    | '/alert'
-    | '/alert-dialog'
-    | '/aspect-ratio'
-    | '/attachment'
-    | '/avatar'
-    | '/badge'
-    | '/breadcrumb'
-    | '/button'
-    | '/button-group'
-    | '/calendar'
-    | '/card'
-    | '/chart'
-    | '/checkbox'
-    | '/choice-card'
-    | '/collapsible'
-    | '/combobox'
-    | '/command'
-    | '/components'
     | '/components-json'
-    | '/confirmation-modal'
-    | '/copy-button'
-    | '/customer-card'
-    | '/data-table'
-    | '/date-picker'
-    | '/detail-list'
-    | '/dialog'
-    | '/dropdown-menu'
-    | '/empty'
-    | '/field'
-    | '/form-builder'
-    | '/form-layout'
-    | '/form-section'
-    | '/icon-group'
-    | '/input'
-    | '/input-group'
     | '/installation'
-    | '/kbd'
-    | '/label'
-    | '/list-item'
-    | '/metric-card'
-    | '/page-layout'
-    | '/pagination'
-    | '/progress'
-    | '/quantity-input'
-    | '/radio-group'
-    | '/resizable'
-    | '/schema-form'
-    | '/schema-table'
-    | '/scroll-area'
-    | '/select'
     | '/setup'
-    | '/sheet'
-    | '/sidebar'
-    | '/skeleton'
-    | '/slider'
-    | '/spinner'
-    | '/sub-sidebar'
-    | '/switch'
-    | '/table'
-    | '/tabs'
-    | '/textarea'
     | '/theming'
-    | '/toast'
-    | '/tooltip'
+    | '/base-ui/accordion'
+    | '/base-ui/alert'
+    | '/base-ui/aspect-ratio'
+    | '/base-ui/attachment'
+    | '/base-ui/avatar'
+    | '/base-ui/badge'
+    | '/base-ui/breadcrumb'
+    | '/base-ui/button'
+    | '/base-ui/button-group'
+    | '/base-ui/calendar'
+    | '/base-ui/card'
+    | '/base-ui/chart'
+    | '/base-ui/checkbox'
+    | '/base-ui/collapsible'
+    | '/base-ui/combobox'
+    | '/base-ui/command'
+    | '/base-ui/dialog'
+    | '/base-ui/dropdown-menu'
+    | '/base-ui/empty'
+    | '/base-ui/field'
+    | '/base-ui/form-section'
+    | '/base-ui/input'
+    | '/base-ui/input-group'
+    | '/base-ui/kbd'
+    | '/base-ui/label'
+    | '/base-ui/list-item'
+    | '/base-ui/pagination'
+    | '/base-ui/progress'
+    | '/base-ui/radio-group'
+    | '/base-ui/resizable'
+    | '/base-ui/scroll-area'
+    | '/base-ui/select'
+    | '/base-ui/sheet'
+    | '/base-ui/skeleton'
+    | '/base-ui/slider'
+    | '/base-ui/spinner'
+    | '/base-ui/switch'
+    | '/base-ui/table'
+    | '/base-ui/tabs'
+    | '/base-ui/textarea'
+    | '/base-ui/toast'
+    | '/base-ui/tooltip'
+    | '/components/app-layout'
+    | '/components/choice-card'
+    | '/components/confirmation-modal'
+    | '/components/copy-button'
+    | '/components/customer-card'
+    | '/components/data-table'
+    | '/components/date-picker'
+    | '/components/detail-list'
+    | '/components/form-builder'
+    | '/components/form-layout'
+    | '/components/icon-group'
+    | '/components/metric-card'
+    | '/components/page-layout'
+    | '/components/quantity-input'
+    | '/components/sidebar'
+    | '/components/sub-sidebar'
+    | '/base-ui'
+    | '/components'
   id:
     | '__root__'
     | '/'
-    | '/accordion'
-    | '/alert'
-    | '/alert-dialog'
-    | '/aspect-ratio'
-    | '/attachment'
-    | '/avatar'
-    | '/badge'
-    | '/breadcrumb'
-    | '/button'
-    | '/button-group'
-    | '/calendar'
-    | '/card'
-    | '/chart'
-    | '/checkbox'
-    | '/choice-card'
-    | '/collapsible'
-    | '/combobox'
-    | '/command'
-    | '/components'
     | '/components-json'
-    | '/confirmation-modal'
-    | '/copy-button'
-    | '/customer-card'
-    | '/data-table'
-    | '/date-picker'
-    | '/detail-list'
-    | '/dialog'
-    | '/dropdown-menu'
-    | '/empty'
-    | '/field'
-    | '/form-builder'
-    | '/form-layout'
-    | '/form-section'
-    | '/icon-group'
-    | '/input'
-    | '/input-group'
     | '/installation'
-    | '/kbd'
-    | '/label'
-    | '/list-item'
-    | '/metric-card'
-    | '/page-layout'
-    | '/pagination'
-    | '/progress'
-    | '/quantity-input'
-    | '/radio-group'
-    | '/resizable'
-    | '/schema-form'
-    | '/schema-table'
-    | '/scroll-area'
-    | '/select'
     | '/setup'
-    | '/sheet'
-    | '/sidebar'
-    | '/skeleton'
-    | '/slider'
-    | '/spinner'
-    | '/sub-sidebar'
-    | '/switch'
-    | '/table'
-    | '/tabs'
-    | '/textarea'
     | '/theming'
-    | '/toast'
-    | '/tooltip'
+    | '/base-ui/accordion'
+    | '/base-ui/alert'
+    | '/base-ui/aspect-ratio'
+    | '/base-ui/attachment'
+    | '/base-ui/avatar'
+    | '/base-ui/badge'
+    | '/base-ui/breadcrumb'
+    | '/base-ui/button'
+    | '/base-ui/button-group'
+    | '/base-ui/calendar'
+    | '/base-ui/card'
+    | '/base-ui/chart'
+    | '/base-ui/checkbox'
+    | '/base-ui/collapsible'
+    | '/base-ui/combobox'
+    | '/base-ui/command'
+    | '/base-ui/dialog'
+    | '/base-ui/dropdown-menu'
+    | '/base-ui/empty'
+    | '/base-ui/field'
+    | '/base-ui/form-section'
+    | '/base-ui/input'
+    | '/base-ui/input-group'
+    | '/base-ui/kbd'
+    | '/base-ui/label'
+    | '/base-ui/list-item'
+    | '/base-ui/pagination'
+    | '/base-ui/progress'
+    | '/base-ui/radio-group'
+    | '/base-ui/resizable'
+    | '/base-ui/scroll-area'
+    | '/base-ui/select'
+    | '/base-ui/sheet'
+    | '/base-ui/skeleton'
+    | '/base-ui/slider'
+    | '/base-ui/spinner'
+    | '/base-ui/switch'
+    | '/base-ui/table'
+    | '/base-ui/tabs'
+    | '/base-ui/textarea'
+    | '/base-ui/toast'
+    | '/base-ui/tooltip'
+    | '/components/app-layout'
+    | '/components/choice-card'
+    | '/components/confirmation-modal'
+    | '/components/copy-button'
+    | '/components/customer-card'
+    | '/components/data-table'
+    | '/components/date-picker'
+    | '/components/detail-list'
+    | '/components/form-builder'
+    | '/components/form-layout'
+    | '/components/icon-group'
+    | '/components/metric-card'
+    | '/components/page-layout'
+    | '/components/quantity-input'
+    | '/components/sidebar'
+    | '/components/sub-sidebar'
+    | '/base-ui/'
+    | '/components/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AccordionRoute: typeof AccordionRoute
-  AlertRoute: typeof AlertRoute
-  AlertDialogRoute: typeof AlertDialogRoute
-  AspectRatioRoute: typeof AspectRatioRoute
-  AttachmentRoute: typeof AttachmentRoute
-  AvatarRoute: typeof AvatarRoute
-  BadgeRoute: typeof BadgeRoute
-  BreadcrumbRoute: typeof BreadcrumbRoute
-  ButtonRoute: typeof ButtonRoute
-  ButtonGroupRoute: typeof ButtonGroupRoute
-  CalendarRoute: typeof CalendarRoute
-  CardRoute: typeof CardRoute
-  ChartRoute: typeof ChartRoute
-  CheckboxRoute: typeof CheckboxRoute
-  ChoiceCardRoute: typeof ChoiceCardRoute
-  CollapsibleRoute: typeof CollapsibleRoute
-  ComboboxRoute: typeof ComboboxRoute
-  CommandRoute: typeof CommandRoute
-  ComponentsRoute: typeof ComponentsRoute
   ComponentsJsonRoute: typeof ComponentsJsonRoute
-  ConfirmationModalRoute: typeof ConfirmationModalRoute
-  CopyButtonRoute: typeof CopyButtonRoute
-  CustomerCardRoute: typeof CustomerCardRoute
-  DataTableRoute: typeof DataTableRoute
-  DatePickerRoute: typeof DatePickerRoute
-  DetailListRoute: typeof DetailListRoute
-  DialogRoute: typeof DialogRoute
-  DropdownMenuRoute: typeof DropdownMenuRoute
-  EmptyRoute: typeof EmptyRoute
-  FieldRoute: typeof FieldRoute
-  FormBuilderRoute: typeof FormBuilderRoute
-  FormLayoutRoute: typeof FormLayoutRoute
-  FormSectionRoute: typeof FormSectionRoute
-  IconGroupRoute: typeof IconGroupRoute
-  InputRoute: typeof InputRoute
-  InputGroupRoute: typeof InputGroupRoute
   InstallationRoute: typeof InstallationRoute
-  KbdRoute: typeof KbdRoute
-  LabelRoute: typeof LabelRoute
-  ListItemRoute: typeof ListItemRoute
-  MetricCardRoute: typeof MetricCardRoute
-  PageLayoutRoute: typeof PageLayoutRoute
-  PaginationRoute: typeof PaginationRoute
-  ProgressRoute: typeof ProgressRoute
-  QuantityInputRoute: typeof QuantityInputRoute
-  RadioGroupRoute: typeof RadioGroupRoute
-  ResizableRoute: typeof ResizableRoute
-  SchemaFormRoute: typeof SchemaFormRoute
-  SchemaTableRoute: typeof SchemaTableRoute
-  ScrollAreaRoute: typeof ScrollAreaRoute
-  SelectRoute: typeof SelectRoute
   SetupRoute: typeof SetupRoute
-  SheetRoute: typeof SheetRoute
-  SidebarRoute: typeof SidebarRoute
-  SkeletonRoute: typeof SkeletonRoute
-  SliderRoute: typeof SliderRoute
-  SpinnerRoute: typeof SpinnerRoute
-  SubSidebarRoute: typeof SubSidebarRoute
-  SwitchRoute: typeof SwitchRoute
-  TableRoute: typeof TableRoute
-  TabsRoute: typeof TabsRoute
-  TextareaRoute: typeof TextareaRoute
   ThemingRoute: typeof ThemingRoute
-  ToastRoute: typeof ToastRoute
-  TooltipRoute: typeof TooltipRoute
+  BaseUiAccordionRoute: typeof BaseUiAccordionRoute
+  BaseUiAlertRoute: typeof BaseUiAlertRoute
+  BaseUiAspectRatioRoute: typeof BaseUiAspectRatioRoute
+  BaseUiAttachmentRoute: typeof BaseUiAttachmentRoute
+  BaseUiAvatarRoute: typeof BaseUiAvatarRoute
+  BaseUiBadgeRoute: typeof BaseUiBadgeRoute
+  BaseUiBreadcrumbRoute: typeof BaseUiBreadcrumbRoute
+  BaseUiButtonRoute: typeof BaseUiButtonRoute
+  BaseUiButtonGroupRoute: typeof BaseUiButtonGroupRoute
+  BaseUiCalendarRoute: typeof BaseUiCalendarRoute
+  BaseUiCardRoute: typeof BaseUiCardRoute
+  BaseUiChartRoute: typeof BaseUiChartRoute
+  BaseUiCheckboxRoute: typeof BaseUiCheckboxRoute
+  BaseUiCollapsibleRoute: typeof BaseUiCollapsibleRoute
+  BaseUiComboboxRoute: typeof BaseUiComboboxRoute
+  BaseUiCommandRoute: typeof BaseUiCommandRoute
+  BaseUiDialogRoute: typeof BaseUiDialogRoute
+  BaseUiDropdownMenuRoute: typeof BaseUiDropdownMenuRoute
+  BaseUiEmptyRoute: typeof BaseUiEmptyRoute
+  BaseUiFieldRoute: typeof BaseUiFieldRoute
+  BaseUiFormSectionRoute: typeof BaseUiFormSectionRoute
+  BaseUiInputRoute: typeof BaseUiInputRoute
+  BaseUiInputGroupRoute: typeof BaseUiInputGroupRoute
+  BaseUiKbdRoute: typeof BaseUiKbdRoute
+  BaseUiLabelRoute: typeof BaseUiLabelRoute
+  BaseUiListItemRoute: typeof BaseUiListItemRoute
+  BaseUiPaginationRoute: typeof BaseUiPaginationRoute
+  BaseUiProgressRoute: typeof BaseUiProgressRoute
+  BaseUiRadioGroupRoute: typeof BaseUiRadioGroupRoute
+  BaseUiResizableRoute: typeof BaseUiResizableRoute
+  BaseUiScrollAreaRoute: typeof BaseUiScrollAreaRoute
+  BaseUiSelectRoute: typeof BaseUiSelectRoute
+  BaseUiSheetRoute: typeof BaseUiSheetRoute
+  BaseUiSkeletonRoute: typeof BaseUiSkeletonRoute
+  BaseUiSliderRoute: typeof BaseUiSliderRoute
+  BaseUiSpinnerRoute: typeof BaseUiSpinnerRoute
+  BaseUiSwitchRoute: typeof BaseUiSwitchRoute
+  BaseUiTableRoute: typeof BaseUiTableRoute
+  BaseUiTabsRoute: typeof BaseUiTabsRoute
+  BaseUiTextareaRoute: typeof BaseUiTextareaRoute
+  BaseUiToastRoute: typeof BaseUiToastRoute
+  BaseUiTooltipRoute: typeof BaseUiTooltipRoute
+  ComponentsAppLayoutRoute: typeof ComponentsAppLayoutRoute
+  ComponentsChoiceCardRoute: typeof ComponentsChoiceCardRoute
+  ComponentsConfirmationModalRoute: typeof ComponentsConfirmationModalRoute
+  ComponentsCopyButtonRoute: typeof ComponentsCopyButtonRoute
+  ComponentsCustomerCardRoute: typeof ComponentsCustomerCardRoute
+  ComponentsDataTableRoute: typeof ComponentsDataTableRoute
+  ComponentsDatePickerRoute: typeof ComponentsDatePickerRoute
+  ComponentsDetailListRoute: typeof ComponentsDetailListRoute
+  ComponentsFormBuilderRoute: typeof ComponentsFormBuilderRoute
+  ComponentsFormLayoutRoute: typeof ComponentsFormLayoutRoute
+  ComponentsIconGroupRoute: typeof ComponentsIconGroupRoute
+  ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
+  ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
+  ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
+  ComponentsSidebarRoute: typeof ComponentsSidebarRoute
+  ComponentsSubSidebarRoute: typeof ComponentsSubSidebarRoute
+  BaseUiIndexRoute: typeof BaseUiIndexRoute
+  ComponentsIndexRoute: typeof ComponentsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -897,256 +885,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/accordion': {
-      id: '/accordion'
-      path: '/accordion'
-      fullPath: '/accordion'
-      preLoaderRoute: typeof AccordionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/alert': {
-      id: '/alert'
-      path: '/alert'
-      fullPath: '/alert'
-      preLoaderRoute: typeof AlertRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/alert-dialog': {
-      id: '/alert-dialog'
-      path: '/alert-dialog'
-      fullPath: '/alert-dialog'
-      preLoaderRoute: typeof AlertDialogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/aspect-ratio': {
-      id: '/aspect-ratio'
-      path: '/aspect-ratio'
-      fullPath: '/aspect-ratio'
-      preLoaderRoute: typeof AspectRatioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/attachment': {
-      id: '/attachment'
-      path: '/attachment'
-      fullPath: '/attachment'
-      preLoaderRoute: typeof AttachmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/avatar': {
-      id: '/avatar'
-      path: '/avatar'
-      fullPath: '/avatar'
-      preLoaderRoute: typeof AvatarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/badge': {
-      id: '/badge'
-      path: '/badge'
-      fullPath: '/badge'
-      preLoaderRoute: typeof BadgeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/breadcrumb': {
-      id: '/breadcrumb'
-      path: '/breadcrumb'
-      fullPath: '/breadcrumb'
-      preLoaderRoute: typeof BreadcrumbRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/button': {
-      id: '/button'
-      path: '/button'
-      fullPath: '/button'
-      preLoaderRoute: typeof ButtonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/button-group': {
-      id: '/button-group'
-      path: '/button-group'
-      fullPath: '/button-group'
-      preLoaderRoute: typeof ButtonGroupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/calendar': {
-      id: '/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof CalendarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/card': {
-      id: '/card'
-      path: '/card'
-      fullPath: '/card'
-      preLoaderRoute: typeof CardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/chart': {
-      id: '/chart'
-      path: '/chart'
-      fullPath: '/chart'
-      preLoaderRoute: typeof ChartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/checkbox': {
-      id: '/checkbox'
-      path: '/checkbox'
-      fullPath: '/checkbox'
-      preLoaderRoute: typeof CheckboxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/choice-card': {
-      id: '/choice-card'
-      path: '/choice-card'
-      fullPath: '/choice-card'
-      preLoaderRoute: typeof ChoiceCardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/collapsible': {
-      id: '/collapsible'
-      path: '/collapsible'
-      fullPath: '/collapsible'
-      preLoaderRoute: typeof CollapsibleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/combobox': {
-      id: '/combobox'
-      path: '/combobox'
-      fullPath: '/combobox'
-      preLoaderRoute: typeof ComboboxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/command': {
-      id: '/command'
-      path: '/command'
-      fullPath: '/command'
-      preLoaderRoute: typeof CommandRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components': {
-      id: '/components'
-      path: '/components'
-      fullPath: '/components'
-      preLoaderRoute: typeof ComponentsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components-json': {
       id: '/components-json'
       path: '/components-json'
       fullPath: '/components-json'
       preLoaderRoute: typeof ComponentsJsonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/confirmation-modal': {
-      id: '/confirmation-modal'
-      path: '/confirmation-modal'
-      fullPath: '/confirmation-modal'
-      preLoaderRoute: typeof ConfirmationModalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/copy-button': {
-      id: '/copy-button'
-      path: '/copy-button'
-      fullPath: '/copy-button'
-      preLoaderRoute: typeof CopyButtonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/customer-card': {
-      id: '/customer-card'
-      path: '/customer-card'
-      fullPath: '/customer-card'
-      preLoaderRoute: typeof CustomerCardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/data-table': {
-      id: '/data-table'
-      path: '/data-table'
-      fullPath: '/data-table'
-      preLoaderRoute: typeof DataTableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/date-picker': {
-      id: '/date-picker'
-      path: '/date-picker'
-      fullPath: '/date-picker'
-      preLoaderRoute: typeof DatePickerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/detail-list': {
-      id: '/detail-list'
-      path: '/detail-list'
-      fullPath: '/detail-list'
-      preLoaderRoute: typeof DetailListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dialog': {
-      id: '/dialog'
-      path: '/dialog'
-      fullPath: '/dialog'
-      preLoaderRoute: typeof DialogRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/dropdown-menu': {
-      id: '/dropdown-menu'
-      path: '/dropdown-menu'
-      fullPath: '/dropdown-menu'
-      preLoaderRoute: typeof DropdownMenuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/empty': {
-      id: '/empty'
-      path: '/empty'
-      fullPath: '/empty'
-      preLoaderRoute: typeof EmptyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/field': {
-      id: '/field'
-      path: '/field'
-      fullPath: '/field'
-      preLoaderRoute: typeof FieldRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/form-builder': {
-      id: '/form-builder'
-      path: '/form-builder'
-      fullPath: '/form-builder'
-      preLoaderRoute: typeof FormBuilderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/form-layout': {
-      id: '/form-layout'
-      path: '/form-layout'
-      fullPath: '/form-layout'
-      preLoaderRoute: typeof FormLayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/form-section': {
-      id: '/form-section'
-      path: '/form-section'
-      fullPath: '/form-section'
-      preLoaderRoute: typeof FormSectionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/icon-group': {
-      id: '/icon-group'
-      path: '/icon-group'
-      fullPath: '/icon-group'
-      preLoaderRoute: typeof IconGroupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/input': {
-      id: '/input'
-      path: '/input'
-      fullPath: '/input'
-      preLoaderRoute: typeof InputRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/input-group': {
-      id: '/input-group'
-      path: '/input-group'
-      fullPath: '/input-group'
-      preLoaderRoute: typeof InputGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/installation': {
@@ -1156,179 +899,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof InstallationRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/kbd': {
-      id: '/kbd'
-      path: '/kbd'
-      fullPath: '/kbd'
-      preLoaderRoute: typeof KbdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/label': {
-      id: '/label'
-      path: '/label'
-      fullPath: '/label'
-      preLoaderRoute: typeof LabelRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/list-item': {
-      id: '/list-item'
-      path: '/list-item'
-      fullPath: '/list-item'
-      preLoaderRoute: typeof ListItemRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/metric-card': {
-      id: '/metric-card'
-      path: '/metric-card'
-      fullPath: '/metric-card'
-      preLoaderRoute: typeof MetricCardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/page-layout': {
-      id: '/page-layout'
-      path: '/page-layout'
-      fullPath: '/page-layout'
-      preLoaderRoute: typeof PageLayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pagination': {
-      id: '/pagination'
-      path: '/pagination'
-      fullPath: '/pagination'
-      preLoaderRoute: typeof PaginationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/progress': {
-      id: '/progress'
-      path: '/progress'
-      fullPath: '/progress'
-      preLoaderRoute: typeof ProgressRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/quantity-input': {
-      id: '/quantity-input'
-      path: '/quantity-input'
-      fullPath: '/quantity-input'
-      preLoaderRoute: typeof QuantityInputRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/radio-group': {
-      id: '/radio-group'
-      path: '/radio-group'
-      fullPath: '/radio-group'
-      preLoaderRoute: typeof RadioGroupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resizable': {
-      id: '/resizable'
-      path: '/resizable'
-      fullPath: '/resizable'
-      preLoaderRoute: typeof ResizableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/schema-form': {
-      id: '/schema-form'
-      path: '/schema-form'
-      fullPath: '/schema-form'
-      preLoaderRoute: typeof SchemaFormRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/schema-table': {
-      id: '/schema-table'
-      path: '/schema-table'
-      fullPath: '/schema-table'
-      preLoaderRoute: typeof SchemaTableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/scroll-area': {
-      id: '/scroll-area'
-      path: '/scroll-area'
-      fullPath: '/scroll-area'
-      preLoaderRoute: typeof ScrollAreaRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/select': {
-      id: '/select'
-      path: '/select'
-      fullPath: '/select'
-      preLoaderRoute: typeof SelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/setup': {
       id: '/setup'
       path: '/setup'
       fullPath: '/setup'
       preLoaderRoute: typeof SetupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sheet': {
-      id: '/sheet'
-      path: '/sheet'
-      fullPath: '/sheet'
-      preLoaderRoute: typeof SheetRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sidebar': {
-      id: '/sidebar'
-      path: '/sidebar'
-      fullPath: '/sidebar'
-      preLoaderRoute: typeof SidebarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/skeleton': {
-      id: '/skeleton'
-      path: '/skeleton'
-      fullPath: '/skeleton'
-      preLoaderRoute: typeof SkeletonRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/slider': {
-      id: '/slider'
-      path: '/slider'
-      fullPath: '/slider'
-      preLoaderRoute: typeof SliderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/spinner': {
-      id: '/spinner'
-      path: '/spinner'
-      fullPath: '/spinner'
-      preLoaderRoute: typeof SpinnerRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sub-sidebar': {
-      id: '/sub-sidebar'
-      path: '/sub-sidebar'
-      fullPath: '/sub-sidebar'
-      preLoaderRoute: typeof SubSidebarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/switch': {
-      id: '/switch'
-      path: '/switch'
-      fullPath: '/switch'
-      preLoaderRoute: typeof SwitchRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/table': {
-      id: '/table'
-      path: '/table'
-      fullPath: '/table'
-      preLoaderRoute: typeof TableRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/tabs': {
-      id: '/tabs'
-      path: '/tabs'
-      fullPath: '/tabs'
-      preLoaderRoute: typeof TabsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/textarea': {
-      id: '/textarea'
-      path: '/textarea'
-      fullPath: '/textarea'
-      preLoaderRoute: typeof TextareaRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/theming': {
@@ -1338,18 +913,424 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ThemingRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/toast': {
-      id: '/toast'
-      path: '/toast'
-      fullPath: '/toast'
-      preLoaderRoute: typeof ToastRouteImport
+    '/base-ui/': {
+      id: '/base-ui/'
+      path: '/base-ui'
+      fullPath: '/base-ui/'
+      preLoaderRoute: typeof BaseUiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/tooltip': {
-      id: '/tooltip'
-      path: '/tooltip'
-      fullPath: '/tooltip'
-      preLoaderRoute: typeof TooltipRouteImport
+    '/base-ui/accordion': {
+      id: '/base-ui/accordion'
+      path: '/base-ui/accordion'
+      fullPath: '/base-ui/accordion'
+      preLoaderRoute: typeof BaseUiAccordionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/alert': {
+      id: '/base-ui/alert'
+      path: '/base-ui/alert'
+      fullPath: '/base-ui/alert'
+      preLoaderRoute: typeof BaseUiAlertRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/aspect-ratio': {
+      id: '/base-ui/aspect-ratio'
+      path: '/base-ui/aspect-ratio'
+      fullPath: '/base-ui/aspect-ratio'
+      preLoaderRoute: typeof BaseUiAspectRatioRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/attachment': {
+      id: '/base-ui/attachment'
+      path: '/base-ui/attachment'
+      fullPath: '/base-ui/attachment'
+      preLoaderRoute: typeof BaseUiAttachmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/avatar': {
+      id: '/base-ui/avatar'
+      path: '/base-ui/avatar'
+      fullPath: '/base-ui/avatar'
+      preLoaderRoute: typeof BaseUiAvatarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/badge': {
+      id: '/base-ui/badge'
+      path: '/base-ui/badge'
+      fullPath: '/base-ui/badge'
+      preLoaderRoute: typeof BaseUiBadgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/breadcrumb': {
+      id: '/base-ui/breadcrumb'
+      path: '/base-ui/breadcrumb'
+      fullPath: '/base-ui/breadcrumb'
+      preLoaderRoute: typeof BaseUiBreadcrumbRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/button': {
+      id: '/base-ui/button'
+      path: '/base-ui/button'
+      fullPath: '/base-ui/button'
+      preLoaderRoute: typeof BaseUiButtonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/button-group': {
+      id: '/base-ui/button-group'
+      path: '/base-ui/button-group'
+      fullPath: '/base-ui/button-group'
+      preLoaderRoute: typeof BaseUiButtonGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/calendar': {
+      id: '/base-ui/calendar'
+      path: '/base-ui/calendar'
+      fullPath: '/base-ui/calendar'
+      preLoaderRoute: typeof BaseUiCalendarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/card': {
+      id: '/base-ui/card'
+      path: '/base-ui/card'
+      fullPath: '/base-ui/card'
+      preLoaderRoute: typeof BaseUiCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/chart': {
+      id: '/base-ui/chart'
+      path: '/base-ui/chart'
+      fullPath: '/base-ui/chart'
+      preLoaderRoute: typeof BaseUiChartRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/checkbox': {
+      id: '/base-ui/checkbox'
+      path: '/base-ui/checkbox'
+      fullPath: '/base-ui/checkbox'
+      preLoaderRoute: typeof BaseUiCheckboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/collapsible': {
+      id: '/base-ui/collapsible'
+      path: '/base-ui/collapsible'
+      fullPath: '/base-ui/collapsible'
+      preLoaderRoute: typeof BaseUiCollapsibleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/combobox': {
+      id: '/base-ui/combobox'
+      path: '/base-ui/combobox'
+      fullPath: '/base-ui/combobox'
+      preLoaderRoute: typeof BaseUiComboboxRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/command': {
+      id: '/base-ui/command'
+      path: '/base-ui/command'
+      fullPath: '/base-ui/command'
+      preLoaderRoute: typeof BaseUiCommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/dialog': {
+      id: '/base-ui/dialog'
+      path: '/base-ui/dialog'
+      fullPath: '/base-ui/dialog'
+      preLoaderRoute: typeof BaseUiDialogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/dropdown-menu': {
+      id: '/base-ui/dropdown-menu'
+      path: '/base-ui/dropdown-menu'
+      fullPath: '/base-ui/dropdown-menu'
+      preLoaderRoute: typeof BaseUiDropdownMenuRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/empty': {
+      id: '/base-ui/empty'
+      path: '/base-ui/empty'
+      fullPath: '/base-ui/empty'
+      preLoaderRoute: typeof BaseUiEmptyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/field': {
+      id: '/base-ui/field'
+      path: '/base-ui/field'
+      fullPath: '/base-ui/field'
+      preLoaderRoute: typeof BaseUiFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/form-section': {
+      id: '/base-ui/form-section'
+      path: '/base-ui/form-section'
+      fullPath: '/base-ui/form-section'
+      preLoaderRoute: typeof BaseUiFormSectionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/input': {
+      id: '/base-ui/input'
+      path: '/base-ui/input'
+      fullPath: '/base-ui/input'
+      preLoaderRoute: typeof BaseUiInputRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/input-group': {
+      id: '/base-ui/input-group'
+      path: '/base-ui/input-group'
+      fullPath: '/base-ui/input-group'
+      preLoaderRoute: typeof BaseUiInputGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/kbd': {
+      id: '/base-ui/kbd'
+      path: '/base-ui/kbd'
+      fullPath: '/base-ui/kbd'
+      preLoaderRoute: typeof BaseUiKbdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/label': {
+      id: '/base-ui/label'
+      path: '/base-ui/label'
+      fullPath: '/base-ui/label'
+      preLoaderRoute: typeof BaseUiLabelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/list-item': {
+      id: '/base-ui/list-item'
+      path: '/base-ui/list-item'
+      fullPath: '/base-ui/list-item'
+      preLoaderRoute: typeof BaseUiListItemRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/pagination': {
+      id: '/base-ui/pagination'
+      path: '/base-ui/pagination'
+      fullPath: '/base-ui/pagination'
+      preLoaderRoute: typeof BaseUiPaginationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/progress': {
+      id: '/base-ui/progress'
+      path: '/base-ui/progress'
+      fullPath: '/base-ui/progress'
+      preLoaderRoute: typeof BaseUiProgressRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/radio-group': {
+      id: '/base-ui/radio-group'
+      path: '/base-ui/radio-group'
+      fullPath: '/base-ui/radio-group'
+      preLoaderRoute: typeof BaseUiRadioGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/resizable': {
+      id: '/base-ui/resizable'
+      path: '/base-ui/resizable'
+      fullPath: '/base-ui/resizable'
+      preLoaderRoute: typeof BaseUiResizableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/scroll-area': {
+      id: '/base-ui/scroll-area'
+      path: '/base-ui/scroll-area'
+      fullPath: '/base-ui/scroll-area'
+      preLoaderRoute: typeof BaseUiScrollAreaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/select': {
+      id: '/base-ui/select'
+      path: '/base-ui/select'
+      fullPath: '/base-ui/select'
+      preLoaderRoute: typeof BaseUiSelectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/sheet': {
+      id: '/base-ui/sheet'
+      path: '/base-ui/sheet'
+      fullPath: '/base-ui/sheet'
+      preLoaderRoute: typeof BaseUiSheetRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/skeleton': {
+      id: '/base-ui/skeleton'
+      path: '/base-ui/skeleton'
+      fullPath: '/base-ui/skeleton'
+      preLoaderRoute: typeof BaseUiSkeletonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/slider': {
+      id: '/base-ui/slider'
+      path: '/base-ui/slider'
+      fullPath: '/base-ui/slider'
+      preLoaderRoute: typeof BaseUiSliderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/spinner': {
+      id: '/base-ui/spinner'
+      path: '/base-ui/spinner'
+      fullPath: '/base-ui/spinner'
+      preLoaderRoute: typeof BaseUiSpinnerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/switch': {
+      id: '/base-ui/switch'
+      path: '/base-ui/switch'
+      fullPath: '/base-ui/switch'
+      preLoaderRoute: typeof BaseUiSwitchRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/table': {
+      id: '/base-ui/table'
+      path: '/base-ui/table'
+      fullPath: '/base-ui/table'
+      preLoaderRoute: typeof BaseUiTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/tabs': {
+      id: '/base-ui/tabs'
+      path: '/base-ui/tabs'
+      fullPath: '/base-ui/tabs'
+      preLoaderRoute: typeof BaseUiTabsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/textarea': {
+      id: '/base-ui/textarea'
+      path: '/base-ui/textarea'
+      fullPath: '/base-ui/textarea'
+      preLoaderRoute: typeof BaseUiTextareaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/toast': {
+      id: '/base-ui/toast'
+      path: '/base-ui/toast'
+      fullPath: '/base-ui/toast'
+      preLoaderRoute: typeof BaseUiToastRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/tooltip': {
+      id: '/base-ui/tooltip'
+      path: '/base-ui/tooltip'
+      fullPath: '/base-ui/tooltip'
+      preLoaderRoute: typeof BaseUiTooltipRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/': {
+      id: '/components/'
+      path: '/components'
+      fullPath: '/components/'
+      preLoaderRoute: typeof ComponentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/app-layout': {
+      id: '/components/app-layout'
+      path: '/components/app-layout'
+      fullPath: '/components/app-layout'
+      preLoaderRoute: typeof ComponentsAppLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/choice-card': {
+      id: '/components/choice-card'
+      path: '/components/choice-card'
+      fullPath: '/components/choice-card'
+      preLoaderRoute: typeof ComponentsChoiceCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/confirmation-modal': {
+      id: '/components/confirmation-modal'
+      path: '/components/confirmation-modal'
+      fullPath: '/components/confirmation-modal'
+      preLoaderRoute: typeof ComponentsConfirmationModalRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/copy-button': {
+      id: '/components/copy-button'
+      path: '/components/copy-button'
+      fullPath: '/components/copy-button'
+      preLoaderRoute: typeof ComponentsCopyButtonRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/customer-card': {
+      id: '/components/customer-card'
+      path: '/components/customer-card'
+      fullPath: '/components/customer-card'
+      preLoaderRoute: typeof ComponentsCustomerCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/data-table': {
+      id: '/components/data-table'
+      path: '/components/data-table'
+      fullPath: '/components/data-table'
+      preLoaderRoute: typeof ComponentsDataTableRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/date-picker': {
+      id: '/components/date-picker'
+      path: '/components/date-picker'
+      fullPath: '/components/date-picker'
+      preLoaderRoute: typeof ComponentsDatePickerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/detail-list': {
+      id: '/components/detail-list'
+      path: '/components/detail-list'
+      fullPath: '/components/detail-list'
+      preLoaderRoute: typeof ComponentsDetailListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/form-builder': {
+      id: '/components/form-builder'
+      path: '/components/form-builder'
+      fullPath: '/components/form-builder'
+      preLoaderRoute: typeof ComponentsFormBuilderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/form-layout': {
+      id: '/components/form-layout'
+      path: '/components/form-layout'
+      fullPath: '/components/form-layout'
+      preLoaderRoute: typeof ComponentsFormLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/icon-group': {
+      id: '/components/icon-group'
+      path: '/components/icon-group'
+      fullPath: '/components/icon-group'
+      preLoaderRoute: typeof ComponentsIconGroupRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/metric-card': {
+      id: '/components/metric-card'
+      path: '/components/metric-card'
+      fullPath: '/components/metric-card'
+      preLoaderRoute: typeof ComponentsMetricCardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/page-layout': {
+      id: '/components/page-layout'
+      path: '/components/page-layout'
+      fullPath: '/components/page-layout'
+      preLoaderRoute: typeof ComponentsPageLayoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/quantity-input': {
+      id: '/components/quantity-input'
+      path: '/components/quantity-input'
+      fullPath: '/components/quantity-input'
+      preLoaderRoute: typeof ComponentsQuantityInputRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/sidebar': {
+      id: '/components/sidebar'
+      path: '/components/sidebar'
+      fullPath: '/components/sidebar'
+      preLoaderRoute: typeof ComponentsSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/sub-sidebar': {
+      id: '/components/sub-sidebar'
+      path: '/components/sub-sidebar'
+      fullPath: '/components/sub-sidebar'
+      preLoaderRoute: typeof ComponentsSubSidebarRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -1357,71 +1338,70 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AccordionRoute: AccordionRoute,
-  AlertRoute: AlertRoute,
-  AlertDialogRoute: AlertDialogRoute,
-  AspectRatioRoute: AspectRatioRoute,
-  AttachmentRoute: AttachmentRoute,
-  AvatarRoute: AvatarRoute,
-  BadgeRoute: BadgeRoute,
-  BreadcrumbRoute: BreadcrumbRoute,
-  ButtonRoute: ButtonRoute,
-  ButtonGroupRoute: ButtonGroupRoute,
-  CalendarRoute: CalendarRoute,
-  CardRoute: CardRoute,
-  ChartRoute: ChartRoute,
-  CheckboxRoute: CheckboxRoute,
-  ChoiceCardRoute: ChoiceCardRoute,
-  CollapsibleRoute: CollapsibleRoute,
-  ComboboxRoute: ComboboxRoute,
-  CommandRoute: CommandRoute,
-  ComponentsRoute: ComponentsRoute,
   ComponentsJsonRoute: ComponentsJsonRoute,
-  ConfirmationModalRoute: ConfirmationModalRoute,
-  CopyButtonRoute: CopyButtonRoute,
-  CustomerCardRoute: CustomerCardRoute,
-  DataTableRoute: DataTableRoute,
-  DatePickerRoute: DatePickerRoute,
-  DetailListRoute: DetailListRoute,
-  DialogRoute: DialogRoute,
-  DropdownMenuRoute: DropdownMenuRoute,
-  EmptyRoute: EmptyRoute,
-  FieldRoute: FieldRoute,
-  FormBuilderRoute: FormBuilderRoute,
-  FormLayoutRoute: FormLayoutRoute,
-  FormSectionRoute: FormSectionRoute,
-  IconGroupRoute: IconGroupRoute,
-  InputRoute: InputRoute,
-  InputGroupRoute: InputGroupRoute,
   InstallationRoute: InstallationRoute,
-  KbdRoute: KbdRoute,
-  LabelRoute: LabelRoute,
-  ListItemRoute: ListItemRoute,
-  MetricCardRoute: MetricCardRoute,
-  PageLayoutRoute: PageLayoutRoute,
-  PaginationRoute: PaginationRoute,
-  ProgressRoute: ProgressRoute,
-  QuantityInputRoute: QuantityInputRoute,
-  RadioGroupRoute: RadioGroupRoute,
-  ResizableRoute: ResizableRoute,
-  SchemaFormRoute: SchemaFormRoute,
-  SchemaTableRoute: SchemaTableRoute,
-  ScrollAreaRoute: ScrollAreaRoute,
-  SelectRoute: SelectRoute,
   SetupRoute: SetupRoute,
-  SheetRoute: SheetRoute,
-  SidebarRoute: SidebarRoute,
-  SkeletonRoute: SkeletonRoute,
-  SliderRoute: SliderRoute,
-  SpinnerRoute: SpinnerRoute,
-  SubSidebarRoute: SubSidebarRoute,
-  SwitchRoute: SwitchRoute,
-  TableRoute: TableRoute,
-  TabsRoute: TabsRoute,
-  TextareaRoute: TextareaRoute,
   ThemingRoute: ThemingRoute,
-  ToastRoute: ToastRoute,
-  TooltipRoute: TooltipRoute,
+  BaseUiAccordionRoute: BaseUiAccordionRoute,
+  BaseUiAlertRoute: BaseUiAlertRoute,
+  BaseUiAspectRatioRoute: BaseUiAspectRatioRoute,
+  BaseUiAttachmentRoute: BaseUiAttachmentRoute,
+  BaseUiAvatarRoute: BaseUiAvatarRoute,
+  BaseUiBadgeRoute: BaseUiBadgeRoute,
+  BaseUiBreadcrumbRoute: BaseUiBreadcrumbRoute,
+  BaseUiButtonRoute: BaseUiButtonRoute,
+  BaseUiButtonGroupRoute: BaseUiButtonGroupRoute,
+  BaseUiCalendarRoute: BaseUiCalendarRoute,
+  BaseUiCardRoute: BaseUiCardRoute,
+  BaseUiChartRoute: BaseUiChartRoute,
+  BaseUiCheckboxRoute: BaseUiCheckboxRoute,
+  BaseUiCollapsibleRoute: BaseUiCollapsibleRoute,
+  BaseUiComboboxRoute: BaseUiComboboxRoute,
+  BaseUiCommandRoute: BaseUiCommandRoute,
+  BaseUiDialogRoute: BaseUiDialogRoute,
+  BaseUiDropdownMenuRoute: BaseUiDropdownMenuRoute,
+  BaseUiEmptyRoute: BaseUiEmptyRoute,
+  BaseUiFieldRoute: BaseUiFieldRoute,
+  BaseUiFormSectionRoute: BaseUiFormSectionRoute,
+  BaseUiInputRoute: BaseUiInputRoute,
+  BaseUiInputGroupRoute: BaseUiInputGroupRoute,
+  BaseUiKbdRoute: BaseUiKbdRoute,
+  BaseUiLabelRoute: BaseUiLabelRoute,
+  BaseUiListItemRoute: BaseUiListItemRoute,
+  BaseUiPaginationRoute: BaseUiPaginationRoute,
+  BaseUiProgressRoute: BaseUiProgressRoute,
+  BaseUiRadioGroupRoute: BaseUiRadioGroupRoute,
+  BaseUiResizableRoute: BaseUiResizableRoute,
+  BaseUiScrollAreaRoute: BaseUiScrollAreaRoute,
+  BaseUiSelectRoute: BaseUiSelectRoute,
+  BaseUiSheetRoute: BaseUiSheetRoute,
+  BaseUiSkeletonRoute: BaseUiSkeletonRoute,
+  BaseUiSliderRoute: BaseUiSliderRoute,
+  BaseUiSpinnerRoute: BaseUiSpinnerRoute,
+  BaseUiSwitchRoute: BaseUiSwitchRoute,
+  BaseUiTableRoute: BaseUiTableRoute,
+  BaseUiTabsRoute: BaseUiTabsRoute,
+  BaseUiTextareaRoute: BaseUiTextareaRoute,
+  BaseUiToastRoute: BaseUiToastRoute,
+  BaseUiTooltipRoute: BaseUiTooltipRoute,
+  ComponentsAppLayoutRoute: ComponentsAppLayoutRoute,
+  ComponentsChoiceCardRoute: ComponentsChoiceCardRoute,
+  ComponentsConfirmationModalRoute: ComponentsConfirmationModalRoute,
+  ComponentsCopyButtonRoute: ComponentsCopyButtonRoute,
+  ComponentsCustomerCardRoute: ComponentsCustomerCardRoute,
+  ComponentsDataTableRoute: ComponentsDataTableRoute,
+  ComponentsDatePickerRoute: ComponentsDatePickerRoute,
+  ComponentsDetailListRoute: ComponentsDetailListRoute,
+  ComponentsFormBuilderRoute: ComponentsFormBuilderRoute,
+  ComponentsFormLayoutRoute: ComponentsFormLayoutRoute,
+  ComponentsIconGroupRoute: ComponentsIconGroupRoute,
+  ComponentsMetricCardRoute: ComponentsMetricCardRoute,
+  ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
+  ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
+  ComponentsSidebarRoute: ComponentsSidebarRoute,
+  ComponentsSubSidebarRoute: ComponentsSubSidebarRoute,
+  BaseUiIndexRoute: BaseUiIndexRoute,
+  ComponentsIndexRoute: ComponentsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

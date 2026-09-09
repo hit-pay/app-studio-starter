@@ -1,0 +1,27 @@
+import { AppLayoutDemo } from "../../../src/components/doc/doc-demos"
+
+`AppLayout` is the embedded application frame. Use it around every route.
+Put `PageLayout` or `FormLayout` inside for page chrome.
+
+<AppLayoutDemo />
+
+## Default
+
+```tsx
+import { AppLayout } from "@/components/layout/app-layout";
+import { PageLayout } from "@/components/layout/page-layout";
+
+<AppLayout appName="Invoices" className="h-full">
+  <PageLayout title="Invoices">…</PageLayout>
+</AppLayout>
+```
+
+## Tabs
+
+Pass `navigationItems` for in-app tabs. `variant` can stay `default` or
+`tabs`.
+
+## Sidebar
+
+`variant="sidebar"` plus `sidebarItems` adds a flat child nav. On small
+screens the list opens in a sheet.

@@ -101,6 +101,7 @@ const BLOCK_SUBGROUP = {
   'date-picker': 'Form',
   'form-builder': 'Form',
   'quantity-input': 'Form',
+  'app-layout': 'Layout',
   'form-layout': 'Layout',
   'page-layout': 'Layout',
   sidebar: 'Navigation',

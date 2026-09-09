@@ -15,6 +15,7 @@ type DocPath =
   | (typeof DOC_BLOCKS)[number]["to"]
   | (typeof DOC_GUIDE_ITEMS)[number]["to"]
   | "/components"
+  | "/base-ui"
   | "/";
 
 function DocExamplePage({
@@ -39,9 +40,15 @@ function DocExamplePage({
       ? { name: "Examples", description: "Browse Orchid UI components." }
       : to === "/components"
         ? {
-            name: "Components",
-            description: "All Orchid components, A–Z.",
+            name: "Components & Blocks",
+            description:
+              "Ready-to-use blocks driven by props or a schema.",
           }
+        : to === "/base-ui"
+          ? {
+              name: "Base Components",
+              description: "Primitives under src/base-ui.",
+            }
         : (DOC_GUIDE_ITEMS.find((entry) => entry.to === to) ??
           DOC_COMPONENTS.find((entry) => entry.to === to) ??
           DOC_FORMS.find((entry) => entry.to === to) ??

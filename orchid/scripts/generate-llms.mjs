@@ -29,7 +29,7 @@ const documented = [...DOC_ALL_COMPONENTS];
 const registryByName = new Map(registry.items.map((item) => [item.name, item]));
 
 function slug(item) {
-  return item.to.replace(/^\//, "").replaceAll("/", "-");
+  return item.to.replace(/^\//, "").split("/").at(-1);
 }
 
 function assertUnique(items, field, label) {
@@ -340,7 +340,7 @@ const lines = [
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
   "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Blocks live under `src/components/{category}` (`@/components/{category}/…`) and are ready to use through props or a schema. Base items live under `src/base-ui/{category}` (`@/base-ui/{category}/…`). Do not assemble a block from many base components.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
-  "- Use FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.",
+  "- Use AppLayout to frame the embedded pane, FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.",
   "",
 ];
 

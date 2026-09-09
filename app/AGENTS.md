@@ -102,9 +102,8 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
-- `src/components/{category}/`: Orchid blocks first (FormBuilder, DataTable, PageLayout, MetricCard, …) plus App Studio-only `src/components/app-layout.tsx`
+- `src/components/{category}/`: Orchid blocks first (AppLayout, FormBuilder, DataTable, PageLayout, MetricCard, …)
 - `src/base-ui/{category}/`: Orchid base components (Button, Input, Table, Dialog, …) — use only when no block covers the job
-- `src/components/app-layout.tsx`: App Studio-owned embedded application frame; it is not an Orchid UI component
 - `src/lib/db.ts`: lazy server-only Turso HTTP client
 - `src/lib/migrate.ts`: SQL migration runner
 - `src/lib/hitpay.ts`: browser-only HitPay user, role, and member helpers for UI
@@ -119,7 +118,7 @@ Path aliases:
 
 - `#/*` -> `src/*`
 - `@/*` -> `src/*`
-- Orchid blocks import from `@/components/{category}/<name>`. Base imports are `@/base-ui/{category}/<name>`. Read blocks first. `AppLayout` is `@/components/app-layout` and is not in the Orchid catalog.
+- Orchid blocks import from `@/components/{category}/<name>`. Base imports are `@/base-ui/{category}/<name>`. Read blocks first.
 
 Unless the user's request truly requires infrastructure changes, leave these files unchanged. Updating `src/routes/__root.tsx` is allowed only when a required Orchid global provider is missing:
 
@@ -142,7 +141,7 @@ Never edit `.output/`, `.nitro/`, or `src/routeTree.gen.ts` by hand.
 
 The host dashboard owns the outer navigation, account controls, authentication gate, iframe, and app mount point. The generated app owns only the embedded pane.
 
-- Frame the pane with starter-only `AppLayout` (`@/components/app-layout`). It is not in the Orchid registry; do not install or replace it.
+- Frame the pane with `AppLayout` from `@/components/layout/app-layout`.
 - Keep the root document's `h-full`, but do not set `overflow-hidden` on the root document or body.
 - Render route content inside `AppLayout`. Use `PageLayout` for normal routes and `FormLayout` for create/edit (`mode="page"` or `mode="modal"`) as the scroll-owning shell.
 - Do not add a full-screen website shell or host-dashboard clone.

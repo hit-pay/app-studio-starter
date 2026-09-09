@@ -30,6 +30,7 @@ const wrapped = Object.fromEntries(
 
 export const AccordionDemo = wrapped.AccordionDemo;
 export const AlertDemo = wrapped.AlertDemo;
+export const AppLayoutDemo = wrapped.AppLayoutDemo;
 export const AspectRatioDemo = wrapped.AspectRatioDemo;
 export const AttachmentDemo = wrapped.AttachmentDemo;
 export const AvatarDemo = wrapped.AvatarDemo;

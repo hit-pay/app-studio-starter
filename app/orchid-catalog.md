@@ -87,6 +87,12 @@ Create/edit shell (page or modal). Put FormBuilder inside; one form uses formId 
 Import `@/components/layout/form-layout`; read `src/components/layout/form-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-layout.md
 
+## `app-layout` — App Layout
+
+Embedded application frame with optional app name, tabs, and sidebar.
+Import `@/components/layout/app-layout`; read `src/components/layout/app-layout.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/app-layout.md
+
 ## `page-layout` — Page Layout
 
 Standard route page with built-in responsive padding, header, and scrollable content.

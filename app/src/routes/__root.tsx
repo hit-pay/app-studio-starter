@@ -1,18 +1,13 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import { QueryProvider } from '#/lib/query'
-import { AppLayout } from '@/components/app-layout'
-import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
-import { Toaster } from '@/base-ui/feedback/toast'
 import '../styles.css'
 
 function NotFound() {
   return (
-    <AppLayout className="h-full">
-      <main className="flex h-full min-h-0 w-full flex-1 items-center justify-center px-6">
-        <p className="text-sm text-oc-muted-foreground">That page does not exist.</p>
-      </main>
-    </AppLayout>
+    <main className="flex h-full min-h-0 w-full flex-1 items-center justify-center px-6">
+      <p className="text-sm text-oc-muted-foreground">That page does not exist.</p>
+    </main>
   )
 }
 
@@ -54,11 +49,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="h-full">
-        <QueryProvider>
-          <ConfirmationModalProvider>
-            <Toaster placement="top-center">{children}</Toaster>
-          </ConfirmationModalProvider>
-        </QueryProvider>
+        <QueryProvider>{children}</QueryProvider>
         <Scripts />
       </body>
     </html>

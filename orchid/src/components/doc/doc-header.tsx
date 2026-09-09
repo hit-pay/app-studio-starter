@@ -2,15 +2,11 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { MoonRegular, SunRegular } from "@mingcute/react/core-regular";
 
-import { DOC_ALL_COMPONENTS, DOC_GUIDES } from "./doc-components";
+import { DOC_GUIDES } from "./doc-components";
 
 const THEME_KEY = "orchid-theme";
 
 const DOC_PATHS = new Set<string>(DOC_GUIDES.map((item) => item.to));
-const COMPONENT_PATHS = new Set<string>([
-  "/components",
-  ...DOC_ALL_COMPONENTS.map((item) => item.to),
-]);
 
 function readTheme(): "light" | "dark" {
   if (typeof document === "undefined") return "light";
@@ -30,7 +26,9 @@ function DocHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [theme, setTheme] = useState<"light" | "dark">(readTheme);
   const docsActive = DOC_PATHS.has(pathname);
-  const componentsActive = COMPONENT_PATHS.has(pathname);
+  const blocksActive =
+    pathname === "/components" || pathname.startsWith("/components/");
+  const baseActive = pathname === "/base-ui" || pathname.startsWith("/base-ui/");
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -53,10 +51,17 @@ function DocHeader() {
           </Link>
           <Link
             to="/components"
-            aria-current={componentsActive ? "page" : undefined}
-            className={navClass(componentsActive)}
+            aria-current={blocksActive ? "page" : undefined}
+            className={navClass(blocksActive)}
           >
-            Components
+            Components & Blocks
+          </Link>
+          <Link
+            to="/base-ui"
+            aria-current={baseActive ? "page" : undefined}
+            className={navClass(baseActive)}
+          >
+            Base Components
           </Link>
         </nav>
       </div>
