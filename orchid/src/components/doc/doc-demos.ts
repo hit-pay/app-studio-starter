@@ -59,7 +59,6 @@ export const FormLayoutDemo = wrapped.FormLayoutDemo;
 export const FormLayoutModalDemo = wrapped.FormLayoutModalDemo;
 export const FormLayoutPageDemo = wrapped.FormLayoutPageDemo;
 export const FormSectionDemo = wrapped.FormSectionDemo;
-export const IconGroupDemo = wrapped.IconGroupDemo;
 export const IndexDemo = wrapped.IndexDemo;
 export const InputDemo = wrapped.InputDemo;
 export const InputGroupDemo = wrapped.InputGroupDemo;

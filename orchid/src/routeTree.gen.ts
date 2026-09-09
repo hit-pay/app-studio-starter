@@ -68,7 +68,6 @@ import { Route as ComponentsDatePickerRouteImport } from './routes/components/da
 import { Route as ComponentsDetailListRouteImport } from './routes/components/detail-list'
 import { Route as ComponentsFormBuilderRouteImport } from './routes/components/form-builder'
 import { Route as ComponentsFormLayoutRouteImport } from './routes/components/form-layout'
-import { Route as ComponentsIconGroupRouteImport } from './routes/components/icon-group'
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
 import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
@@ -371,11 +370,6 @@ const ComponentsFormLayoutRoute = ComponentsFormLayoutRouteImport.update({
   path: '/components/form-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsIconGroupRoute = ComponentsIconGroupRouteImport.update({
-  id: '/components/icon-group',
-  path: '/components/icon-group',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ComponentsMetricCardRoute = ComponentsMetricCardRouteImport.update({
   id: '/components/metric-card',
   path: '/components/metric-card',
@@ -460,7 +454,6 @@ export interface FileRoutesByFullPath {
   '/components/detail-list': typeof ComponentsDetailListRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
-  '/components/icon-group': typeof ComponentsIconGroupRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
@@ -527,7 +520,6 @@ export interface FileRoutesByTo {
   '/components/detail-list': typeof ComponentsDetailListRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
-  '/components/icon-group': typeof ComponentsIconGroupRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
@@ -595,7 +587,6 @@ export interface FileRoutesById {
   '/components/detail-list': typeof ComponentsDetailListRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
-  '/components/icon-group': typeof ComponentsIconGroupRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
@@ -664,7 +655,6 @@ export interface FileRouteTypes {
     | '/components/detail-list'
     | '/components/form-builder'
     | '/components/form-layout'
-    | '/components/icon-group'
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
@@ -731,7 +721,6 @@ export interface FileRouteTypes {
     | '/components/detail-list'
     | '/components/form-builder'
     | '/components/form-layout'
-    | '/components/icon-group'
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
@@ -798,7 +787,6 @@ export interface FileRouteTypes {
     | '/components/detail-list'
     | '/components/form-builder'
     | '/components/form-layout'
-    | '/components/icon-group'
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
@@ -866,7 +854,6 @@ export interface RootRouteChildren {
   ComponentsDetailListRoute: typeof ComponentsDetailListRoute
   ComponentsFormBuilderRoute: typeof ComponentsFormBuilderRoute
   ComponentsFormLayoutRoute: typeof ComponentsFormLayoutRoute
-  ComponentsIconGroupRoute: typeof ComponentsIconGroupRoute
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
   ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
@@ -1291,13 +1278,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsFormLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/icon-group': {
-      id: '/components/icon-group'
-      path: '/components/icon-group'
-      fullPath: '/components/icon-group'
-      preLoaderRoute: typeof ComponentsIconGroupRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/metric-card': {
       id: '/components/metric-card'
       path: '/components/metric-card'
@@ -1394,7 +1374,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsDetailListRoute: ComponentsDetailListRoute,
   ComponentsFormBuilderRoute: ComponentsFormBuilderRoute,
   ComponentsFormLayoutRoute: ComponentsFormLayoutRoute,
-  ComponentsIconGroupRoute: ComponentsIconGroupRoute,
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,
   ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,

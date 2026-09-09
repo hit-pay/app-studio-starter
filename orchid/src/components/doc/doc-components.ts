@@ -9,7 +9,7 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/button-group" as const,
     name: "Button Group",
     description:
-      "Group related controls horizontally or vertically, including split dropdown buttons.",
+      "Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.",
   },
   {
     to: "/base-ui/dropdown-menu" as const,
@@ -296,12 +296,6 @@ export const DOC_BLOCKS = [
     description: "Detail card with grid columns, colspan, and stacked rows.",
   },
   {
-    to: "/components/icon-group" as const,
-    name: "Icon Group",
-    description:
-      "Icon cluster with Default and Border; dropdown, link, and copy.",
-  },
-  {
     to: "/components/quantity-input" as const,
     name: "Quantity Input",
     description: "Minus/plus stepper; click the value to type.",
@@ -460,7 +454,7 @@ function blockGroup(
 
 /** AlignUI-style groups for Components & Blocks. Empty groups are omitted. */
 export const DOC_BLOCK_GROUPS = [
-  blockGroup("Actions", ["/components/copy-button", "/components/icon-group"]),
+  blockGroup("Actions", ["/components/copy-button"]),
   blockGroup("Displaying Data", [
     "/components/customer-card",
     "/components/data-table",

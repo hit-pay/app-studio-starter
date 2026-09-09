@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 58 components.
-- Installable registry items: 60, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 57 components.
+- Installable registry items: 59, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -93,10 +93,6 @@ Example prompts after setup:
 Copy icon that writes a value and shows Copied!.
 Install: `bunx --bun shadcn@latest add @orchid/copy-button` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
 
-#### [Icon Group](https://orchid-ui-hitpay.vercel.app/llms/icon-group.md)
-Icon cluster with Default and Border; dropdown, link, and copy.
-Install: `bunx --bun shadcn@latest add @orchid/icon-group` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/icon-group.json)
-
 ### Displaying Data
 
 #### [Customer Card](https://orchid-ui-hitpay.vercel.app/llms/customer-card.md)
@@ -172,7 +168,7 @@ Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 Install: `bunx --bun shadcn@latest add @orchid/button` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button.json)
 
 #### [Button Group](https://orchid-ui-hitpay.vercel.app/llms/button-group.md)
-Group related controls horizontally or vertically, including split dropdown buttons.
+Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 Install: `bunx --bun shadcn@latest add @orchid/button-group` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button-group.json)
 
 ### Displaying Data
@@ -351,7 +347,7 @@ Install: `bunx --bun shadcn@latest add @orchid/kbd` · [Registry JSON](https://o
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, detail-list, icon-group, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, attachment, form-section
+form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, detail-list, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, attachment, form-section
 
 ## Usage Guidance
 

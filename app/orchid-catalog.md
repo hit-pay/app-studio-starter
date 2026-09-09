@@ -13,12 +13,6 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 ## Actions
 
-## `icon-group` — Icon Group
-
-Props-based icon actions. style border inserts dividers automatically.
-Import `@/components/actions/icon-group`; read `src/components/actions/icon-group.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/icon-group.md
-
 ## `copy-button` — Copy Button
 
 Copy a string (id, phone, URL). prop: value.
@@ -133,7 +127,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/button.md
 
 ## `button-group` — Button Group
 
-shadcn-compatible grouped controls with horizontal or vertical orientation and Orchid styling.
+Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.
 Import `@/base-ui/actions/button-group`; read `src/base-ui/actions/button-group.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/button-group.md
 

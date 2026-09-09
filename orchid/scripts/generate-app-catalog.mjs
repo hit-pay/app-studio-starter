@@ -92,7 +92,6 @@ const BASE_SUBGROUP = {
 
 const BLOCK_SUBGROUP = {
   'copy-button': 'Actions',
-  'icon-group': 'Actions',
   'customer-card': 'Displaying Data',
   'data-table': 'Displaying Data',
   'detail-list': 'Displaying Data',

@@ -39,7 +39,6 @@
         "@orchid/choice-card",
         "@orchid/metric-card",
         "@orchid/detail-list",
-        "@orchid/icon-group",
         "@orchid/copy-button",
         "@orchid/skeleton",
         "@orchid/spinner",
@@ -371,7 +370,7 @@
       "name": "button-group",
       "type": "registry:ui",
       "title": "Button Group",
-      "description": "shadcn-compatible grouped controls with horizontal or vertical orientation and Orchid styling.",
+      "description": "Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -584,26 +583,6 @@
           "path": "src/components/displaying-data/detail-list.tsx",
           "type": "registry:ui",
           "target": "@/components/displaying-data/detail-list.tsx"
-        }
-      ]
-    },
-    {
-      "name": "icon-group",
-      "type": "registry:ui",
-      "title": "Icon Group",
-      "description": "Props-based icon actions. style border inserts dividers automatically.",
-      "dependencies": [
-        "class-variance-authority",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [
-        "@orchid/dropdown-menu"
-      ],
-      "files": [
-        {
-          "path": "src/components/actions/icon-group.tsx",
-          "type": "registry:ui",
-          "target": "@/components/actions/icon-group.tsx"
         }
       ]
     },

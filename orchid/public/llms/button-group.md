@@ -2,7 +2,7 @@
 
 # Button Group
 
-Group related controls horizontally or vertically, including split dropdown buttons.
+Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 
 ## Example
 
@@ -13,6 +13,8 @@ import {
   AddRegular,
   SendRegular,
   Delete2Regular,
+  More1Regular,
+  ArrowRightUpRegular,
 } from '@mingcute/react/core-regular';
 
 import { Button } from "@/base-ui/actions/button";
@@ -29,9 +31,68 @@ import {
   DropdownMenuTrigger,
 } from "@/base-ui/overlays/dropdown-menu";
 
+const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
+
+function IconToolbar({
+  variant,
+}: {
+  variant: "ghost" | "border";
+}) {
+  return (
+    <ButtonGroup variant={variant} aria-label="Payment link actions">
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button variant="ghost" size="icon-xs" aria-label="More">
+              <More1Regular />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Mark invoice as paid</DropdownMenuItem>
+          <DropdownMenuItem>Send reminder</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">Void invoice</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        render={<a href={paymentLink} target="_blank" rel="noreferrer" />}
+        aria-label="Open payment link"
+      >
+        <ArrowRightUpRegular />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        aria-label="Copy payment link"
+        onClick={() => void navigator.clipboard.writeText(paymentLink)}
+      >
+        <CopyRegular />
+      </Button>
+    </ButtonGroup>
+  );
+}
+
 function ButtonGroupDemo() {
   return (
     <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <IconToolbar variant="ghost" />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Border
+        </p>
+        <IconToolbar variant="border" />
+      </div>
+
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Split dropdown
@@ -113,3 +174,8 @@ function ButtonGroupDemo() {
 
 export { ButtonGroupDemo };
 ```
+
+Use `variant="ghost"` for a loose icon toolbar (Default). Use `variant="border"`
+for the same toolbar inside a framed group; dividers render between children
+automatically. Compose overflow actions with `DropdownMenu` and links with a
+polymorphic `Button`.

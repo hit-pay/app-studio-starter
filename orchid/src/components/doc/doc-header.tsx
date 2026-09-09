@@ -50,18 +50,18 @@ function DocHeader() {
             Docs
           </Link>
           <Link
-            to="/components"
-            aria-current={blocksActive ? "page" : undefined}
-            className={navClass(blocksActive)}
-          >
-            Components & Blocks
-          </Link>
-          <Link
             to="/base-ui"
             aria-current={baseActive ? "page" : undefined}
             className={navClass(baseActive)}
           >
             Base Components
+          </Link>
+          <Link
+            to="/components"
+            aria-current={blocksActive ? "page" : undefined}
+            className={navClass(blocksActive)}
+          >
+            Components & Blocks
           </Link>
         </nav>
       </div>
