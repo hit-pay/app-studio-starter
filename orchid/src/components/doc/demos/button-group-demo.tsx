@@ -6,19 +6,19 @@ import {
   Delete2Regular,
 } from '@mingcute/react/core-regular';
 
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base-ui/actions/button";
 import {
   ButtonGroup,
   ButtonGroupSeparator,
   ButtonGroupText,
-} from "@/components/ui/button-group";
+} from "@/base-ui/actions/button-group";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/base-ui/overlays/dropdown-menu";
 
 function ButtonGroupDemo() {
   return (

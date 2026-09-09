@@ -5,9 +5,9 @@ import {
   PencilRegular,
   Delete2Regular,
 } from '@mingcute/react/core-regular'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
-import { DropdownMenuItem } from '@/components/ui/dropdown-menu'
+import { Button } from '@/base-ui/actions/button'
+import { Badge } from '@/base-ui/displaying-data/badge'
+import { DropdownMenuItem } from '@/base-ui/overlays/dropdown-menu'
 import {
   ListItem,
   ListItemAction,
@@ -24,7 +24,7 @@ import {
   ListItemTitle,
   ListItemToken,
   ListItemTrailing,
-} from '@/components/ui/list-item'
+} from '@/base-ui/displaying-data/list-item'
 
 
 function ListItemDemo() {

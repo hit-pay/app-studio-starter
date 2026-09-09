@@ -1,5 +1,5 @@
-import { Button } from '@/components/ui/button'
-import { useConfirmationModal } from '@/components/confirmation-modal'
+import { Button } from '@/base-ui/actions/button'
+import { useConfirmationModal } from '@/components/overlays/confirmation-modal'
 
 function ConfirmationModalDemo() {
   const confirm = useConfirmationModal()

@@ -338,7 +338,7 @@ const lines = [
   "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
   "- Read Components & Blocks first. Use a block when one exists. Only then read Base Components.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
-  "- Both catalogs use AlignUI groups (Actions, Displaying Data, Feedback, Form, Layout, Navigation, Overlays, Utils). Blocks install under `@/components` and are ready to use through props or a schema. Base items install under `@/components/ui`. Do not assemble a block from many base components.",
+  "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Blocks live under `src/components/{category}` (`@/components/{category}/…`) and are ready to use through props or a schema. Base items live under `src/base-ui/{category}` (`@/base-ui/{category}/…`). Do not assemble a block from many base components.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
   "- Use FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.",
   "",

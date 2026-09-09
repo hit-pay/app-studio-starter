@@ -12,7 +12,7 @@ import {
 import {
   Sidebar,
   type SidebarGroupConfig,
-} from '@/components/sidebar'
+} from '@/components/navigation/sidebar'
 
 const groups: SidebarGroupConfig[] = [
   {

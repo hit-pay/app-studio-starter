@@ -17,7 +17,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@/components/ui/pagination'
+} from '@/base-ui/navigation/pagination'
 
 function DefaultPagination() {
   const [page, setPage] = useState(2)

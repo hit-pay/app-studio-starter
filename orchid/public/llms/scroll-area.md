@@ -7,7 +7,7 @@ shadcn-compatible bounded scroll area with Orchid scrollbar styling.
 ## Example
 
 ```tsx
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { ScrollArea } from "@/base-ui/layout/scroll-area";
 
 const INVOICES = [
   "INV-2048 · Priya Nair · SGD 128.00",

@@ -18,8 +18,8 @@ import {
   StoreRegular,
   Delete2Regular,
 } from '@mingcute/react/core-regular'
-import { Button } from '@/components/ui/button'
-import { ButtonGroup } from '@/components/ui/button-group'
+import { Button } from '@/base-ui/actions/button'
+import { ButtonGroup } from '@/base-ui/actions/button-group'
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -35,7 +35,7 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu'
+} from '@/base-ui/overlays/dropdown-menu'
 
 function OpenButton({ children }: { children: React.ReactNode }) {
   return (

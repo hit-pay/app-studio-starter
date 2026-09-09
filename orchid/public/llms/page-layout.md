@@ -11,13 +11,13 @@ The `actions` prop accepts any React node so pages can provide the controls they
 
 ```tsx
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { DetailList } from "@/components/detail-list";
-import { PageLayout } from "@/components/page-layout";
+import { Badge } from "@/base-ui/displaying-data/badge";
+import { Button } from "@/base-ui/actions/button";
+import { DetailList } from "@/components/displaying-data/detail-list";
+import { PageLayout } from "@/components/layout/page-layout";
 
-const INVOICE_LIST_USAGE = `import { Button } from '@/components/ui/button'
-import { PageLayout } from '@/components/page-layout'
+const INVOICE_LIST_USAGE = `import { Button } from '@/base-ui/actions/button'
+import { PageLayout } from '@/components/layout/page-layout'
 
 function InvoiceListPageExample() {
   return (
@@ -35,10 +35,10 @@ function InvoiceListPageExample() {
   )
 }`;
 
-const INVOICE_DETAIL_USAGE = `import { Badge } from '@/components/ui/badge'
-import { Button } from '@/components/ui/button'
-import { DetailList } from '@/components/detail-list'
-import { PageLayout } from '@/components/page-layout'
+const INVOICE_DETAIL_USAGE = `import { Badge } from '@/base-ui/displaying-data/badge'
+import { Button } from '@/base-ui/actions/button'
+import { DetailList } from '@/components/displaying-data/detail-list'
+import { PageLayout } from '@/components/layout/page-layout'
 
 function InvoiceDetailPageExample() {
   return (

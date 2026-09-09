@@ -17,9 +17,9 @@ import {
   AttachmentGroup,
   AttachmentMedia,
   AttachmentTitle,
-} from '@/components/ui/attachment'
-import { Button } from '@/components/ui/button'
-import { Spinner } from '@/components/ui/spinner'
+} from '@/base-ui/displaying-data/attachment'
+import { Button } from '@/base-ui/actions/button'
+import { Spinner } from '@/base-ui/feedback/spinner'
 
 type UploadItem = {
   id: string

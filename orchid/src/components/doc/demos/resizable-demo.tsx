@@ -2,7 +2,7 @@ import {
   ResizableHandle,
   ResizablePanel,
   ResizablePanelGroup,
-} from '@/components/ui/resizable'
+} from '@/base-ui/layout/resizable'
 
 function ResizableDemo() {
   return (

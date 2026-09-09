@@ -8,8 +8,8 @@ import {
   StoreRegular,
   GroupRegular,
 } from '@mingcute/react/core-regular';
-import { MetricCard } from "@/components/metric-card";
-import { TooltipProvider } from "@/components/ui/tooltip";
+import { MetricCard } from "@/components/displaying-data/metric-card";
+import { TooltipProvider } from "@/base-ui/overlays/tooltip";
 
 function MetricCardDemo() {
   return (

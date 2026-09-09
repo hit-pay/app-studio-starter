@@ -11,7 +11,7 @@ import {
   CopyRegular,
   ArrowRightUpRegular,
 } from '@mingcute/react/core-regular';
-import { IconGroup, type IconGroupItem } from "@/components/icon-group";
+import { IconGroup, type IconGroupItem } from "@/components/actions/icon-group";
 
 const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
 

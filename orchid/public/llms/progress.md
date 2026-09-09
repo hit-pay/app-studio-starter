@@ -11,7 +11,7 @@ import {
   Progress,
   ProgressLabel,
   ProgressValue,
-} from '@/components/ui/progress'
+} from '@/base-ui/feedback/progress'
 
 function ProgressDemo() {
   return (

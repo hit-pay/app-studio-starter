@@ -13,7 +13,7 @@ import {
   StoreRegular,
   User3Regular,
 } from '@mingcute/react/core-regular';
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base-ui/actions/button";
 import {
   Command,
   CommandDialog,
@@ -24,8 +24,8 @@ import {
   CommandList,
   CommandSeparator,
   CommandShortcut,
-} from "@/components/ui/command";
-import { toast } from "@/components/ui/toast";
+} from "@/base-ui/overlays/command";
+import { toast } from "@/base-ui/feedback/toast";
 
 function CommandDemo() {
   const [open, setOpen] = useState(false);

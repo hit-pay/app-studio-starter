@@ -7,8 +7,8 @@ shadcn-compatible switch in default and small Orchid sizes.
 ## Example
 
 ```tsx
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
+import { Label } from "@/base-ui/form/label";
+import { Switch } from "@/base-ui/form/switch";
 
 function ToggleRow({
   id,

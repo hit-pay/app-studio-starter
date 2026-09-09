@@ -8,7 +8,7 @@ shadcn-compatible dialog primitives with Orchid sizes and persistent mode.
 
 ```tsx
 import { useState } from 'react'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/base-ui/actions/button'
 import {
   Dialog,
   DialogClose,
@@ -18,10 +18,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@/components/ui/dialog'
-import { Field, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
+} from '@/base-ui/overlays/dialog'
+import { Field, FieldGroup, FieldLabel } from '@/base-ui/form/field'
+import { Input } from '@/base-ui/form/input'
+import { Textarea } from '@/base-ui/form/textarea'
 
 function DialogDemo() {
   return (

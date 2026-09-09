@@ -15,7 +15,7 @@ import {
   CardDescription,
   CardHeader,
   CardTitle,
-} from '@/components/ui/card'
+} from '@/base-ui/layout/card'
 import {
   type ChartConfig,
   ChartContainer,
@@ -23,7 +23,7 @@ import {
   ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
-} from '@/components/ui/chart'
+} from '@/base-ui/displaying-data/chart'
 
 const weekly = [
   { day: 'Mon', sales: 1860, refunds: 80 },

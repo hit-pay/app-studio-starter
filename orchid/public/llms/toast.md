@@ -8,13 +8,13 @@ shadcn-compatible toast manager with semantic types, actions, close, and placeme
 
 ```tsx
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base-ui/actions/button";
 import {
   createToastManager,
   toast,
   Toaster,
   type ToastPlacement,
-} from "@/components/ui/toast";
+} from "@/base-ui/feedback/toast";
 
 const placementToast = createToastManager();
 const PLACEMENTS: ToastPlacement[] = [

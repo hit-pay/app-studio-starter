@@ -7,7 +7,7 @@ shadcn-compatible single, range, or vertical slider with Orchid styling.
 ## Example
 
 ```tsx
-import { Slider } from "@/components/ui/slider";
+import { Slider } from "@/base-ui/form/slider";
 
 function SliderDemo() {
   return (

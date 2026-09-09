@@ -13,8 +13,8 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/components/ui/field";
-import { Textarea } from "@/components/ui/textarea";
+} from "@/base-ui/form/field";
+import { Textarea } from "@/base-ui/form/textarea";
 
 function TextareaDemo() {
   return (

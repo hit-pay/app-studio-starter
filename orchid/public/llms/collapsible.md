@@ -8,14 +8,14 @@ shadcn-compatible expand-and-collapse primitives with Orchid styling.
 
 ```tsx
 import { DownRegular } from '@mingcute/react/core-regular';
-import { Checkbox, CheckboxGroup } from "@/components/ui/checkbox";
+import { Checkbox, CheckboxGroup } from "@/base-ui/form/checkbox";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/components/ui/collapsible";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+} from "@/base-ui/layout/collapsible";
+import { Field, FieldLabel } from "@/base-ui/form/field";
+import { Input } from "@/base-ui/form/input";
 
 function CollapsibleDemo() {
   return (

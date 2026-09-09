@@ -1,4 +1,4 @@
-import { Kbd, KbdGroup } from '@/components/ui/kbd'
+import { Kbd, KbdGroup } from '@/base-ui/utils/kbd'
 
 
 function KbdDemo() {

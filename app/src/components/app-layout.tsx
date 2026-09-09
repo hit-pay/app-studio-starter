@@ -4,8 +4,8 @@ import { useState, type ComponentProps, type ReactNode } from 'react'
 import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/components/ui/sheet'
+import { Button } from '@/base-ui/actions/button'
+import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/base-ui/overlays/sheet'
 
 type AppNavigationItem = {
   id: string

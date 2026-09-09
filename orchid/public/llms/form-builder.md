@@ -10,14 +10,14 @@ Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer
 import { useState } from "react";
 
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/base-ui/actions/button";
 import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormChange,
   type SchemaFormField,
-} from "@/components/form-builder";
-import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/components/ui/tabs";
+} from "@/components/form/form-builder";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@/base-ui/layout/tabs";
 
 const OPTIONS = [
   { value: "a", label: "Option A" },

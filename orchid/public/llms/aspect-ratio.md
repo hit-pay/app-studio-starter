@@ -7,7 +7,7 @@ shadcn-compatible box that keeps a width/height ratio, such as 16/9.
 ## Example
 
 ```tsx
-import { AspectRatio } from '@/components/ui/aspect-ratio'
+import { AspectRatio } from '@/base-ui/layout/aspect-ratio'
 
 function AspectRatioDemo() {
   return (

@@ -7,9 +7,9 @@ shadcn-compatible compound edge panel with four sides and Orchid styling.
 ## Example
 
 ```tsx
-import { Button } from "@/components/ui/button";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/base-ui/actions/button";
+import { Field, FieldLabel } from "@/base-ui/form/field";
+import { Input } from "@/base-ui/form/input";
 import {
   Sheet,
   SheetClose,
@@ -19,7 +19,7 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
+} from "@/base-ui/overlays/sheet";
 
 function SheetDemo() {
   return (

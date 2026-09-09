@@ -5,8 +5,8 @@ import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
   useSchemaTable,
-} from "@/components/data-table";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+} from "@/components/displaying-data/data-table";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/base-ui/layout/tabs";
 
 const SCHEMA_PROMPT = `Schema Table schema prompt
 

@@ -14,7 +14,7 @@ import {
   Delete2Regular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@/components/ui/button'
+import { Button } from '@/base-ui/actions/button'
 
 const VARIANTS = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link'] as const
 const SIZES = ['xs', 'sm', 'default', 'lg'] as const

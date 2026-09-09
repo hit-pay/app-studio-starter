@@ -7,7 +7,7 @@ shadcn-compatible placeholder pulse with Orchid styling.
 ## Example
 
 ```tsx
-import { Skeleton } from "@/components/ui/skeleton";
+import { Skeleton } from "@/base-ui/feedback/skeleton";
 
 function SkeletonDemo() {
   return (

@@ -1,5 +1,5 @@
-import { Button } from "@/components/ui/button";
-import { Spinner } from "@/components/ui/spinner";
+import { Button } from "@/base-ui/actions/button";
+import { Spinner } from "@/base-ui/feedback/spinner";
 
 function SpinnerDemo() {
   return (

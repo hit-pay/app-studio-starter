@@ -7,14 +7,14 @@ shadcn-compatible checkbox with Orchid states and an optional group helper.
 ## Example
 
 ```tsx
-import { Checkbox, CheckboxGroup } from "@/components/ui/checkbox";
+import { Checkbox, CheckboxGroup } from "@/base-ui/form/checkbox";
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldLabel,
-} from "@/components/ui/field";
-import { Label } from "@/components/ui/label";
+} from "@/base-ui/form/field";
+import { Label } from "@/base-ui/form/label";
 
 function CheckboxDemo() {
   return (

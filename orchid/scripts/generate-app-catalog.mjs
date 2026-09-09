@@ -11,7 +11,7 @@ const docsDir = join(root, 'public', 'llms')
 const lines = [
   '# Orchid catalog',
   '',
-  'Agents: read this file **in full** (Read tool, not Grep), **Components & Blocks first**. Prefer a block under `src/components/` (`@/components/…`) driven by props or a schema. Only then use **Base Components** under `src/components/ui/` (`@/components/ui/…`). Do not assemble a block from many base components. Both catalogs use the same AlignUI groups (Actions, Displaying Data, Feedback, Form, Layout, Navigation, Overlays, Utils). When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
+  'Agents: read this file **in full** (Read tool, not Grep), **Components & Blocks first**. Prefer a block under `src/components/{category}/` (`@/components/{category}/…`) driven by props or a schema. Only then use **Base Components** under `src/base-ui/{category}/` (`@/base-ui/{category}/…`). Do not assemble a block from many base components. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
   '',
 ]
 
@@ -19,13 +19,18 @@ const sectionFor = (item) => {
   if (item.name === 'utils') return 'Utils'
   const files = item.files ?? []
   const primary = files.find((file) => file.type === 'registry:ui') ?? files[0]
-  if (primary?.target?.startsWith('@components/')) return 'Components & Blocks'
-  if (primary?.target?.startsWith('@ui/')) return 'Base Components'
+  if (primary?.target?.startsWith('@/components/') || primary?.target?.startsWith('@components/')) {
+    return 'Components & Blocks'
+  }
+  if (primary?.target?.startsWith('@/base-ui/') || primary?.target?.startsWith('@base-ui/')) {
+    return 'Base Components'
+  }
   return 'Base Components'
 }
 
 const installedPath = (target) => {
-  if (target.startsWith('@ui/')) return `src/components/ui/${target.slice('@ui/'.length)}`
+  if (target.startsWith('@/')) return `src/${target.slice('@/'.length)}`
+  if (target.startsWith('@base-ui/')) return `src/base-ui/${target.slice('@base-ui/'.length)}`
   if (target.startsWith('@components/')) {
     return `src/components/${target.slice('@components/'.length)}`
   }

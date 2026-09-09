@@ -7,9 +7,9 @@ Detail card with grid columns, colspan, and stacked rows.
 ## Example
 
 ```tsx
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { DetailList } from '@/components/detail-list'
-import { Badge } from '@/components/ui/badge'
+import { Avatar, AvatarFallback, AvatarImage } from '@/base-ui/displaying-data/avatar'
+import { DetailList } from '@/components/displaying-data/detail-list'
+import { Badge } from '@/base-ui/displaying-data/badge'
 
 const PHOTO = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop'
 

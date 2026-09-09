@@ -6,7 +6,7 @@ import {
   ShoppingBag1Regular,
   StoreRegular,
 } from '@mingcute/react/core-regular';
-import { ChoiceCard, ChoiceCardGroup } from "@/components/choice-card";
+import { ChoiceCard, ChoiceCardGroup } from "@/components/form/choice-card";
 
 function ChoiceCardDemo() {
   return (

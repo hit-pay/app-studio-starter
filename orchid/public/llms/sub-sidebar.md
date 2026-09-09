@@ -9,7 +9,7 @@ JSON-configured flat child navigation with a blue active state.
 ```tsx
 import { useState } from 'react'
 
-import { SubSidebar } from '@/components/sub-sidebar'
+import { SubSidebar } from '@/components/navigation/sub-sidebar'
 
 const items = [
   { id: 'general', label: 'General settings' },

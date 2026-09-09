@@ -10,7 +10,7 @@ Single, range, and multiple date selection used by Date Picker.
 import { useState } from "react";
 import type { DateRange } from "react-day-picker";
 
-import { Calendar } from "@/components/ui/calendar";
+import { Calendar } from "@/base-ui/form/calendar";
 
 const AUGUST_2026 = new Date(2026, 7, 1);
 
