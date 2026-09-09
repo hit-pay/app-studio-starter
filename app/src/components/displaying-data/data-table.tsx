@@ -869,8 +869,22 @@ function ToolbarIcon({
   );
 }
 
-function cellContent(column: SchemaTableColumn, row: SchemaTableRow) {
+export type SchemaTableCellRender = (
+  value: unknown,
+  row: SchemaTableRow,
+  column: SchemaTableColumn,
+) => ReactNode;
+
+export type SchemaTableCells = Partial<Record<string, SchemaTableCellRender>>;
+
+function cellContent(
+  column: SchemaTableColumn,
+  row: SchemaTableRow,
+  cells?: SchemaTableCells,
+) {
   const value = row[column.key];
+  const custom = cells?.[column.key];
+  if (custom) return custom(value, row, column);
   if (column.type === "image") {
     return (
       <DataTableCellImage
@@ -1278,12 +1292,14 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
 /** Complete list surface: toolbar, grid, empty, pagination. Render directly in PageLayout. Do not wrap in Card. */
 function SchemaTable({
   table,
+  cells,
   onRowAction,
   onSelectionAction,
   onEmptyAction,
   className,
 }: {
   table: SchemaTableApi;
+  cells?: SchemaTableCells;
   onRowAction?: (action: SchemaTableRowAction, row: SchemaTableRow) => void;
   onSelectionAction?: (
     action: SchemaTableActionItem,
@@ -1471,7 +1487,7 @@ function SchemaTable({
                 ) : null}
                 {columns.map((column) => (
                   <DataTableCell key={column.key} type={tableCellType(column)}>
-                    {cellContent(column, row)}
+                    {cellContent(column, row, cells)}
                   </DataTableCell>
                 ))}
                 {actions.length > 0 ? (
@@ -1608,6 +1624,9 @@ export {
   type SchemaTableDropdownAction,
   type SchemaTableEmptyState,
   type SchemaTableApi,
+  type SchemaTableCellRender,
+  type SchemaTableCells,
+  type SchemaTableColumn,
   type SchemaTableQuery,
   type SchemaTableQueryChange,
   type SchemaTableRow,

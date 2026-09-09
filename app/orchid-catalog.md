@@ -15,7 +15,7 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 ## `data-table` — Data Table
 
-JSON-schema list with search, filters, sorting, pagination.
+JSON-schema list with search, filters, sorting, pagination. Optional cells prop for custom column render; values stay on the row.
 Import `@/components/displaying-data/data-table`; read `src/components/displaying-data/data-table.tsx`.
 Related source: `src/components/displaying-data/data-table-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/data-table.md

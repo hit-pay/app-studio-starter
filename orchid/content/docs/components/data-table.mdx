@@ -9,6 +9,82 @@ it contains keys, labels, supported icon keys, variants, disabled state, and dro
 never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
 chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
 
+Pass `cells` on `DataTable` (not in the schema) to replace a column's default render. Search,
+sort, and filters still use `row[column.key]`. Only listed keys override; other columns keep
+the built-in `type` render.
+
+```tsx
+function StatusCell({
+  value,
+  onStatusChange,
+}: {
+  value: unknown;
+  onStatusChange: (status: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger
+        nativeButton
+        className="inline-flex"
+        render={
+          <button type="button" className="inline-flex rounded-full">
+            <Badge tone={value === "Published" ? "green" : "grey"}>
+              {String(value ?? "–")}
+              <DownRegular />
+            </Badge>
+          </button>
+        }
+      />
+      <DropdownMenuContent align="start">
+        {["Published", "Draft"].map((status) => {
+          const selected = status === value;
+          return (
+            <DropdownMenuItem
+              key={status}
+              data-active={selected || undefined}
+              className={selected ? "bg-oc-dark-blue-soft font-medium" : undefined}
+              onClick={() => {
+                onStatusChange(status);
+                setOpen(false);
+              }}
+            >
+              {status}
+              {selected ? <CheckRegular className="ml-auto" /> : null}
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+const [rows, setRows] = useState(SCHEMA_TABLE_EXAMPLE_ROWS);
+const table = useDataTable({
+  schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  data: rows,
+});
+
+<DataTable
+  table={table}
+  cells={{
+    status: (value, row) => (
+      <StatusCell
+        value={value}
+        onStatusChange={(status) =>
+          setRows((current) =>
+            current.map((item) =>
+              item.id === row.id ? { ...item, status } : item,
+            ),
+          )
+        }
+      />
+    ),
+  }}
+/>
+```
+
 `onQueryChange(query, change)` receives the final query after page-reset rules and a typed
 discriminated change payload. The `change.key` is one of `search`, `tab`, `filters`, `sort`,
 `page`, or `pageSize`, with the corresponding value fields.

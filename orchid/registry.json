@@ -136,7 +136,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "JSON-schema list with search, filters, sorting, pagination.",
+      "description": "JSON-schema list with search, filters, sorting, pagination. Optional cells prop for custom column render; values stay on the row.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
