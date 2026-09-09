@@ -124,7 +124,6 @@ Unless the user's request truly requires infrastructure changes, leave these fil
 
 - `vite.config.ts`
 - `start.mjs`
-- `start-preview.mjs`
 - `src/router.tsx`
 - `src/lib/db.ts`
 - `src/lib/migrate.ts`
@@ -333,8 +332,8 @@ Do not call `/user/info` from `createServerFn`. That helper in `#/lib/hitpay` is
 
 When a mutation or read must be limited to certain roles, use `getHitPaySession()` / `requireHitPayRoles()` in `createServerFn`:
 
-1. Production: read the signed `X-HitPay-Session` header the host proxy attaches after it authenticates the dashboard user.
-2. Local preview: if that header is missing, the helper may GET `/user/info` with the preview cookie.
+1. Read the signed `X-HitPay-Session` header the host proxy attaches after it authenticates the dashboard user.
+2. If that header is missing, the helper may GET `/user/info` with the request cookie.
 3. Never trust `role`, `userId`, or `actorName` from the browser payload.
 4. Persist requester/approver identity from this session.
 
@@ -359,8 +358,6 @@ const decide = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
 ```
 
 Tell the user that role-specific APIs use the signed host session on `createServerFn`, not a role field from the browser. Do not claim that UI hiding is enough. Do not invent a second session store unless the user asks for one.
-
-Local preview must keep using the host/preview `/user/info` mock. Do not add production mocks inside `start.mjs`.
 
 The starter exposes no HitPay payments, transactions, invoices, inventory, or customer API. Do not invent endpoints or data. If a request depends on unavailable HitPay product data, ask for the real API contract or keep the workflow app-owned in Turso when that still satisfies the request.
 
@@ -389,16 +386,7 @@ Prefer one focused screen with dialogs for simple create/edit flows. Add tabs or
 7. If routes were added or renamed, run `bun run generate-routes`.
 8. After all edits are done, run `bun run lint` once (`tsc --noEmit`), then `bun run build`. Never run either after each file. If either fails, fix the source and rerun that lint-then-build pair only. Wait for build to exit; only a zero exit code counts. The host backend restarts the live Sprite service after generation completes.
 
-On Sprite, do not start extra `dev`, `vite`, `start`, or `preview` servers. Do not signal, restart, stop, or delete the `app-studio` service yourself.
-
-## Browser checks
-
-Do not run screenshots or browser automation unless:
-
-- the user explicitly asks for a browser/UI check, or
-- the user reports a visual issue and asks you to inspect it.
-
-When requested, use the existing `preview`, `screenshot`, and HitPay preview mock scripts.
+On Sprite, do not start extra `dev`, `vite`, or `start` servers. Do not signal, restart, stop, or delete the `app-studio` service yourself.
 
 ## Definition of done
 

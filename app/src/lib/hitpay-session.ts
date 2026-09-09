@@ -78,7 +78,7 @@ function readSignedSession(token: string): HitPaySession | null {
 /**
  * Trusted HitPay identity for createServerFn.
  * Production: signed X-HitPay-Session from the host proxy.
- * Local preview: GET /user/info with the request cookie.
+ * If the header is missing, GET /user/info with the request cookie.
  */
 export async function getHitPaySession(): Promise<HitPaySession> {
   const request = getRequest()
