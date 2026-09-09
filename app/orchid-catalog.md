@@ -11,14 +11,6 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 # Components & Blocks
 
-## Actions
-
-## `copy-button` — Copy Button
-
-Copy a string (id, phone, URL). prop: value.
-Import `@/components/actions/copy-button`; read `src/components/actions/copy-button.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/copy-button.md
-
 ## Displaying Data
 
 ## `data-table` — Data Table
@@ -115,6 +107,12 @@ Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 Import `@/components/overlays/confirmation-modal`; read `src/components/overlays/confirmation-modal.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/confirmation-modal.md
 
+## `command` — Command
+
+Searchable command palette driven by open, onOpenChange, and groups.
+Import `@/components/overlays/command`; read `src/components/overlays/command.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/command.md
+
 # Base Components
 
 ## Actions
@@ -130,6 +128,12 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/button.md
 Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.
 Import `@/base-ui/actions/button-group`; read `src/base-ui/actions/button-group.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/button-group.md
+
+## `copy-button` — Copy Button
+
+Copy a string (id, phone, URL). prop: value.
+Import `@/base-ui/actions/copy-button`; read `src/base-ui/actions/copy-button.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/copy-button.md
 
 ## Displaying Data
 
@@ -168,12 +172,6 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/table.md
 shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.
 Import `@/base-ui/displaying-data/chart`; read `src/base-ui/displaying-data/chart.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/chart.md
-
-## `attachment` — Attachment
-
-shadcn-compatible file and image attachment with upload state, media, actions, and a vertical group.
-Import `@/base-ui/displaying-data/attachment`; read `src/base-ui/displaying-data/attachment.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/attachment.md
 
 ## Feedback
 
@@ -281,6 +279,12 @@ shadcn-compatible DayPicker calendar for single, range, or multiple selection in
 Import `@/base-ui/form/calendar`; read `src/base-ui/form/calendar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/calendar.md
 
+## `file-upload` — File Upload
+
+File and image upload row with upload state, media, actions, and a vertical group.
+Import `@/base-ui/form/file-upload`; read `src/base-ui/form/file-upload.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/file-upload.md
+
 ## `form-section` — Form Section
 
 Form block heading. FormSectionGroup + FormSectionItem for settings rows.
@@ -365,17 +369,11 @@ shadcn-compatible dialog primitives with Orchid sizes and persistent mode.
 Import `@/base-ui/overlays/dialog`; read `src/base-ui/overlays/dialog.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/dialog.md
 
-## `sheet` — Sheet
+## `drawer` — Drawer
 
-shadcn-compatible compound sheet with four sides and Orchid styling.
-Import `@/base-ui/overlays/sheet`; read `src/base-ui/overlays/sheet.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/sheet.md
-
-## `command` — Command
-
-shadcn-compatible cmdk command palette with Orchid styling.
-Import `@/base-ui/overlays/command`; read `src/base-ui/overlays/command.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/command.md
+Swipeable edge panel. Set swipeDirection to up, right, down, or left.
+Import `@/base-ui/overlays/drawer`; read `src/base-ui/overlays/drawer.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/drawer.md
 
 ## `popover` — Popover
 

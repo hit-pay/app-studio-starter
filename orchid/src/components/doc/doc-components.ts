@@ -12,6 +12,11 @@ export const DOC_COMPONENTS = [
       "Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.",
   },
   {
+    to: "/base-ui/copy-button" as const,
+    name: "Copy Button",
+    description: "Copy icon that writes a value and shows Copied!.",
+  },
+  {
     to: "/base-ui/dropdown-menu" as const,
     name: "Dropdown Menu",
     description:
@@ -95,10 +100,10 @@ export const DOC_COMPONENTS = [
       "shadcn-compatible dialog primitives with Orchid sizes and persistent mode.",
   },
   {
-    to: "/base-ui/sheet" as const,
-    name: "Sheet",
+    to: "/base-ui/drawer" as const,
+    name: "Drawer",
     description:
-      "shadcn-compatible compound edge panel with four sides and Orchid styling.",
+      "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
   },
   {
     to: "/base-ui/breadcrumb" as const,
@@ -115,12 +120,6 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/table" as const,
     name: "Table",
     description: "shadcn-compatible semantic HTML table with Orchid styling.",
-  },
-  {
-    to: "/base-ui/command" as const,
-    name: "Command",
-    description:
-      "shadcn-compatible cmdk palette with keyboard navigation and Orchid styling.",
   },
   {
     to: "/base-ui/kbd" as const,
@@ -164,10 +163,10 @@ export const DOC_COMPONENTS = [
       "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
   },
   {
-    to: "/base-ui/attachment" as const,
-    name: "Attachment",
+    to: "/base-ui/file-upload" as const,
+    name: "File Upload",
     description:
-      "shadcn-compatible file and image attachment with upload state, media, and a vertical group.",
+      "File and image upload row with upload state, media, and a vertical group.",
   },
 ] as const;
 
@@ -275,11 +274,6 @@ export const DOC_BLOCKS = [
     description: "Selectable cards with left or center icon, no radio dot.",
   },
   {
-    to: "/components/copy-button" as const,
-    name: "Copy Button",
-    description: "Copy icon that writes a value and shows Copied!.",
-  },
-  {
     to: "/components/customer-card" as const,
     name: "Customer Card",
     description: "Small, Big, and Float customer or beneficiary cards.",
@@ -341,6 +335,12 @@ export const DOC_BLOCKS = [
     description:
       "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
   },
+  {
+    to: "/components/command" as const,
+    name: "Command",
+    description:
+      "Searchable command palette. Drive it with open, onOpenChange, and groups.",
+  },
 ] as const;
 
 export function docBlocksByName() {
@@ -385,9 +385,12 @@ function baseGroup(
 
 /** AlignUI-style groups for Base Components. */
 export const DOC_BASE_GROUPS = [
-  baseGroup("Actions", ["/base-ui/button", "/base-ui/button-group"]),
+  baseGroup("Actions", [
+    "/base-ui/button",
+    "/base-ui/button-group",
+    "/base-ui/copy-button",
+  ]),
   baseGroup("Displaying Data", [
-    "/base-ui/attachment",
     "/base-ui/avatar",
     "/base-ui/badge",
     "/base-ui/chart",
@@ -407,6 +410,7 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/checkbox",
     "/base-ui/combobox",
     "/base-ui/field",
+    "/base-ui/file-upload",
     "/base-ui/form-section",
     "/base-ui/input",
     "/base-ui/input-group",
@@ -428,10 +432,9 @@ export const DOC_BASE_GROUPS = [
   ]),
   baseGroup("Navigation", ["/base-ui/breadcrumb", "/base-ui/pagination"]),
   baseGroup("Overlays", [
-    "/base-ui/command",
     "/base-ui/dialog",
     "/base-ui/dropdown-menu",
-    "/base-ui/sheet",
+    "/base-ui/drawer",
     "/base-ui/tooltip",
   ]),
   baseGroup("Utils", ["/base-ui/kbd"]),
@@ -454,7 +457,6 @@ function blockGroup(
 
 /** AlignUI-style groups for Components & Blocks. Empty groups are omitted. */
 export const DOC_BLOCK_GROUPS = [
-  blockGroup("Actions", ["/components/copy-button"]),
   blockGroup("Displaying Data", [
     "/components/customer-card",
     "/components/data-table",
@@ -469,7 +471,7 @@ export const DOC_BLOCK_GROUPS = [
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Navigation", ["/components/sidebar", "/components/sub-sidebar"]),
-  blockGroup("Overlays", ["/components/confirmation-modal"]),
+  blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);
 
 export const DOC_GUIDES = [

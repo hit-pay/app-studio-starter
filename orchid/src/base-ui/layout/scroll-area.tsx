@@ -5,7 +5,7 @@ import { ScrollArea as ScrollAreaPrimitive } from '@base-ui/react/scroll-area'
 import { cn } from '@/lib/utils'
 
 /**
- * Custom scrollbar for a bounded panel (Sheet body, long lists). Native overflow is fine for the page.
+ * Custom scrollbar for a bounded panel (Drawer body, long lists). Native overflow is fine for the page.
  */
 function ScrollArea({
   className,

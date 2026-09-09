@@ -46,7 +46,8 @@ const importPath = (target) => {
 const BASE_SUBGROUP = {
   button: 'Actions',
   'button-group': 'Actions',
-  attachment: 'Displaying Data',
+  'copy-button': 'Actions',
+  'file-upload': 'Form',
   avatar: 'Displaying Data',
   badge: 'Displaying Data',
   chart: 'Displaying Data',
@@ -80,18 +81,16 @@ const BASE_SUBGROUP = {
   tabs: 'Layout',
   breadcrumb: 'Navigation',
   pagination: 'Navigation',
-  command: 'Overlays',
   dialog: 'Overlays',
+  drawer: 'Overlays',
   'dropdown-menu': 'Overlays',
   popover: 'Overlays',
-  sheet: 'Overlays',
   tooltip: 'Overlays',
   kbd: 'Utils',
   separator: 'Utils',
 }
 
 const BLOCK_SUBGROUP = {
-  'copy-button': 'Actions',
   'customer-card': 'Displaying Data',
   'data-table': 'Displaying Data',
   'detail-list': 'Displaying Data',
@@ -105,6 +104,7 @@ const BLOCK_SUBGROUP = {
   'page-layout': 'Layout',
   sidebar: 'Navigation',
   'sub-sidebar': 'Navigation',
+  command: 'Overlays',
   'confirmation-modal': 'Overlays',
 }
 

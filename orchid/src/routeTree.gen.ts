@@ -18,7 +18,6 @@ import { Route as BaseUiIndexRouteImport } from './routes/base-ui/index'
 import { Route as BaseUiAccordionRouteImport } from './routes/base-ui/accordion'
 import { Route as BaseUiAlertRouteImport } from './routes/base-ui/alert'
 import { Route as BaseUiAspectRatioRouteImport } from './routes/base-ui/aspect-ratio'
-import { Route as BaseUiAttachmentRouteImport } from './routes/base-ui/attachment'
 import { Route as BaseUiAvatarRouteImport } from './routes/base-ui/avatar'
 import { Route as BaseUiBadgeRouteImport } from './routes/base-ui/badge'
 import { Route as BaseUiBreadcrumbRouteImport } from './routes/base-ui/breadcrumb'
@@ -30,11 +29,13 @@ import { Route as BaseUiChartRouteImport } from './routes/base-ui/chart'
 import { Route as BaseUiCheckboxRouteImport } from './routes/base-ui/checkbox'
 import { Route as BaseUiCollapsibleRouteImport } from './routes/base-ui/collapsible'
 import { Route as BaseUiComboboxRouteImport } from './routes/base-ui/combobox'
-import { Route as BaseUiCommandRouteImport } from './routes/base-ui/command'
+import { Route as BaseUiCopyButtonRouteImport } from './routes/base-ui/copy-button'
 import { Route as BaseUiDialogRouteImport } from './routes/base-ui/dialog'
+import { Route as BaseUiDrawerRouteImport } from './routes/base-ui/drawer'
 import { Route as BaseUiDropdownMenuRouteImport } from './routes/base-ui/dropdown-menu'
 import { Route as BaseUiEmptyRouteImport } from './routes/base-ui/empty'
 import { Route as BaseUiFieldRouteImport } from './routes/base-ui/field'
+import { Route as BaseUiFileUploadRouteImport } from './routes/base-ui/file-upload'
 import { Route as BaseUiFormSectionRouteImport } from './routes/base-ui/form-section'
 import { Route as BaseUiInputRouteImport } from './routes/base-ui/input'
 import { Route as BaseUiInputGroupRouteImport } from './routes/base-ui/input-group'
@@ -47,7 +48,6 @@ import { Route as BaseUiRadioGroupRouteImport } from './routes/base-ui/radio-gro
 import { Route as BaseUiResizableRouteImport } from './routes/base-ui/resizable'
 import { Route as BaseUiScrollAreaRouteImport } from './routes/base-ui/scroll-area'
 import { Route as BaseUiSelectRouteImport } from './routes/base-ui/select'
-import { Route as BaseUiSheetRouteImport } from './routes/base-ui/sheet'
 import { Route as BaseUiSkeletonRouteImport } from './routes/base-ui/skeleton'
 import { Route as BaseUiSliderRouteImport } from './routes/base-ui/slider'
 import { Route as BaseUiSpinnerRouteImport } from './routes/base-ui/spinner'
@@ -60,8 +60,8 @@ import { Route as BaseUiTooltipRouteImport } from './routes/base-ui/tooltip'
 import { Route as ComponentsIndexRouteImport } from './routes/components/index'
 import { Route as ComponentsAppLayoutRouteImport } from './routes/components/app-layout'
 import { Route as ComponentsChoiceCardRouteImport } from './routes/components/choice-card'
+import { Route as ComponentsCommandRouteImport } from './routes/components/command'
 import { Route as ComponentsConfirmationModalRouteImport } from './routes/components/confirmation-modal'
-import { Route as ComponentsCopyButtonRouteImport } from './routes/components/copy-button'
 import { Route as ComponentsCustomerCardRouteImport } from './routes/components/customer-card'
 import { Route as ComponentsDataTableRouteImport } from './routes/components/data-table'
 import { Route as ComponentsDatePickerRouteImport } from './routes/components/date-picker'
@@ -119,11 +119,6 @@ const BaseUiAspectRatioRoute = BaseUiAspectRatioRouteImport.update({
   path: '/base-ui/aspect-ratio',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiAttachmentRoute = BaseUiAttachmentRouteImport.update({
-  id: '/base-ui/attachment',
-  path: '/base-ui/attachment',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BaseUiAvatarRoute = BaseUiAvatarRouteImport.update({
   id: '/base-ui/avatar',
   path: '/base-ui/avatar',
@@ -179,14 +174,19 @@ const BaseUiComboboxRoute = BaseUiComboboxRouteImport.update({
   path: '/base-ui/combobox',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiCommandRoute = BaseUiCommandRouteImport.update({
-  id: '/base-ui/command',
-  path: '/base-ui/command',
+const BaseUiCopyButtonRoute = BaseUiCopyButtonRouteImport.update({
+  id: '/base-ui/copy-button',
+  path: '/base-ui/copy-button',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiDialogRoute = BaseUiDialogRouteImport.update({
   id: '/base-ui/dialog',
   path: '/base-ui/dialog',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiDrawerRoute = BaseUiDrawerRouteImport.update({
+  id: '/base-ui/drawer',
+  path: '/base-ui/drawer',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiDropdownMenuRoute = BaseUiDropdownMenuRouteImport.update({
@@ -202,6 +202,11 @@ const BaseUiEmptyRoute = BaseUiEmptyRouteImport.update({
 const BaseUiFieldRoute = BaseUiFieldRouteImport.update({
   id: '/base-ui/field',
   path: '/base-ui/field',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiFileUploadRoute = BaseUiFileUploadRouteImport.update({
+  id: '/base-ui/file-upload',
+  path: '/base-ui/file-upload',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiFormSectionRoute = BaseUiFormSectionRouteImport.update({
@@ -264,11 +269,6 @@ const BaseUiSelectRoute = BaseUiSelectRouteImport.update({
   path: '/base-ui/select',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiSheetRoute = BaseUiSheetRouteImport.update({
-  id: '/base-ui/sheet',
-  path: '/base-ui/sheet',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BaseUiSkeletonRoute = BaseUiSkeletonRouteImport.update({
   id: '/base-ui/skeleton',
   path: '/base-ui/skeleton',
@@ -329,17 +329,17 @@ const ComponentsChoiceCardRoute = ComponentsChoiceCardRouteImport.update({
   path: '/components/choice-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsCommandRoute = ComponentsCommandRouteImport.update({
+  id: '/components/command',
+  path: '/components/command',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComponentsConfirmationModalRoute =
   ComponentsConfirmationModalRouteImport.update({
     id: '/components/confirmation-modal',
     path: '/components/confirmation-modal',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ComponentsCopyButtonRoute = ComponentsCopyButtonRouteImport.update({
-  id: '/components/copy-button',
-  path: '/components/copy-button',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ComponentsCustomerCardRoute = ComponentsCustomerCardRouteImport.update({
   id: '/components/customer-card',
   path: '/components/customer-card',
@@ -405,7 +405,6 @@ export interface FileRoutesByFullPath {
   '/base-ui/accordion': typeof BaseUiAccordionRoute
   '/base-ui/alert': typeof BaseUiAlertRoute
   '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
-  '/base-ui/attachment': typeof BaseUiAttachmentRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
   '/base-ui/breadcrumb': typeof BaseUiBreadcrumbRoute
@@ -417,11 +416,13 @@ export interface FileRoutesByFullPath {
   '/base-ui/checkbox': typeof BaseUiCheckboxRoute
   '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
   '/base-ui/combobox': typeof BaseUiComboboxRoute
-  '/base-ui/command': typeof BaseUiCommandRoute
+  '/base-ui/copy-button': typeof BaseUiCopyButtonRoute
   '/base-ui/dialog': typeof BaseUiDialogRoute
+  '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
   '/base-ui/empty': typeof BaseUiEmptyRoute
   '/base-ui/field': typeof BaseUiFieldRoute
+  '/base-ui/file-upload': typeof BaseUiFileUploadRoute
   '/base-ui/form-section': typeof BaseUiFormSectionRoute
   '/base-ui/input': typeof BaseUiInputRoute
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
@@ -434,7 +435,6 @@ export interface FileRoutesByFullPath {
   '/base-ui/resizable': typeof BaseUiResizableRoute
   '/base-ui/scroll-area': typeof BaseUiScrollAreaRoute
   '/base-ui/select': typeof BaseUiSelectRoute
-  '/base-ui/sheet': typeof BaseUiSheetRoute
   '/base-ui/skeleton': typeof BaseUiSkeletonRoute
   '/base-ui/slider': typeof BaseUiSliderRoute
   '/base-ui/spinner': typeof BaseUiSpinnerRoute
@@ -446,8 +446,8 @@ export interface FileRoutesByFullPath {
   '/base-ui/tooltip': typeof BaseUiTooltipRoute
   '/components/app-layout': typeof ComponentsAppLayoutRoute
   '/components/choice-card': typeof ComponentsChoiceCardRoute
+  '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
-  '/components/copy-button': typeof ComponentsCopyButtonRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
@@ -471,7 +471,6 @@ export interface FileRoutesByTo {
   '/base-ui/accordion': typeof BaseUiAccordionRoute
   '/base-ui/alert': typeof BaseUiAlertRoute
   '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
-  '/base-ui/attachment': typeof BaseUiAttachmentRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
   '/base-ui/breadcrumb': typeof BaseUiBreadcrumbRoute
@@ -483,11 +482,13 @@ export interface FileRoutesByTo {
   '/base-ui/checkbox': typeof BaseUiCheckboxRoute
   '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
   '/base-ui/combobox': typeof BaseUiComboboxRoute
-  '/base-ui/command': typeof BaseUiCommandRoute
+  '/base-ui/copy-button': typeof BaseUiCopyButtonRoute
   '/base-ui/dialog': typeof BaseUiDialogRoute
+  '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
   '/base-ui/empty': typeof BaseUiEmptyRoute
   '/base-ui/field': typeof BaseUiFieldRoute
+  '/base-ui/file-upload': typeof BaseUiFileUploadRoute
   '/base-ui/form-section': typeof BaseUiFormSectionRoute
   '/base-ui/input': typeof BaseUiInputRoute
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
@@ -500,7 +501,6 @@ export interface FileRoutesByTo {
   '/base-ui/resizable': typeof BaseUiResizableRoute
   '/base-ui/scroll-area': typeof BaseUiScrollAreaRoute
   '/base-ui/select': typeof BaseUiSelectRoute
-  '/base-ui/sheet': typeof BaseUiSheetRoute
   '/base-ui/skeleton': typeof BaseUiSkeletonRoute
   '/base-ui/slider': typeof BaseUiSliderRoute
   '/base-ui/spinner': typeof BaseUiSpinnerRoute
@@ -512,8 +512,8 @@ export interface FileRoutesByTo {
   '/base-ui/tooltip': typeof BaseUiTooltipRoute
   '/components/app-layout': typeof ComponentsAppLayoutRoute
   '/components/choice-card': typeof ComponentsChoiceCardRoute
+  '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
-  '/components/copy-button': typeof ComponentsCopyButtonRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
@@ -538,7 +538,6 @@ export interface FileRoutesById {
   '/base-ui/accordion': typeof BaseUiAccordionRoute
   '/base-ui/alert': typeof BaseUiAlertRoute
   '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
-  '/base-ui/attachment': typeof BaseUiAttachmentRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
   '/base-ui/breadcrumb': typeof BaseUiBreadcrumbRoute
@@ -550,11 +549,13 @@ export interface FileRoutesById {
   '/base-ui/checkbox': typeof BaseUiCheckboxRoute
   '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
   '/base-ui/combobox': typeof BaseUiComboboxRoute
-  '/base-ui/command': typeof BaseUiCommandRoute
+  '/base-ui/copy-button': typeof BaseUiCopyButtonRoute
   '/base-ui/dialog': typeof BaseUiDialogRoute
+  '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
   '/base-ui/empty': typeof BaseUiEmptyRoute
   '/base-ui/field': typeof BaseUiFieldRoute
+  '/base-ui/file-upload': typeof BaseUiFileUploadRoute
   '/base-ui/form-section': typeof BaseUiFormSectionRoute
   '/base-ui/input': typeof BaseUiInputRoute
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
@@ -567,7 +568,6 @@ export interface FileRoutesById {
   '/base-ui/resizable': typeof BaseUiResizableRoute
   '/base-ui/scroll-area': typeof BaseUiScrollAreaRoute
   '/base-ui/select': typeof BaseUiSelectRoute
-  '/base-ui/sheet': typeof BaseUiSheetRoute
   '/base-ui/skeleton': typeof BaseUiSkeletonRoute
   '/base-ui/slider': typeof BaseUiSliderRoute
   '/base-ui/spinner': typeof BaseUiSpinnerRoute
@@ -579,8 +579,8 @@ export interface FileRoutesById {
   '/base-ui/tooltip': typeof BaseUiTooltipRoute
   '/components/app-layout': typeof ComponentsAppLayoutRoute
   '/components/choice-card': typeof ComponentsChoiceCardRoute
+  '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
-  '/components/copy-button': typeof ComponentsCopyButtonRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
@@ -606,7 +606,6 @@ export interface FileRouteTypes {
     | '/base-ui/accordion'
     | '/base-ui/alert'
     | '/base-ui/aspect-ratio'
-    | '/base-ui/attachment'
     | '/base-ui/avatar'
     | '/base-ui/badge'
     | '/base-ui/breadcrumb'
@@ -618,11 +617,13 @@ export interface FileRouteTypes {
     | '/base-ui/checkbox'
     | '/base-ui/collapsible'
     | '/base-ui/combobox'
-    | '/base-ui/command'
+    | '/base-ui/copy-button'
     | '/base-ui/dialog'
+    | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
     | '/base-ui/empty'
     | '/base-ui/field'
+    | '/base-ui/file-upload'
     | '/base-ui/form-section'
     | '/base-ui/input'
     | '/base-ui/input-group'
@@ -635,7 +636,6 @@ export interface FileRouteTypes {
     | '/base-ui/resizable'
     | '/base-ui/scroll-area'
     | '/base-ui/select'
-    | '/base-ui/sheet'
     | '/base-ui/skeleton'
     | '/base-ui/slider'
     | '/base-ui/spinner'
@@ -647,8 +647,8 @@ export interface FileRouteTypes {
     | '/base-ui/tooltip'
     | '/components/app-layout'
     | '/components/choice-card'
+    | '/components/command'
     | '/components/confirmation-modal'
-    | '/components/copy-button'
     | '/components/customer-card'
     | '/components/data-table'
     | '/components/date-picker'
@@ -672,7 +672,6 @@ export interface FileRouteTypes {
     | '/base-ui/accordion'
     | '/base-ui/alert'
     | '/base-ui/aspect-ratio'
-    | '/base-ui/attachment'
     | '/base-ui/avatar'
     | '/base-ui/badge'
     | '/base-ui/breadcrumb'
@@ -684,11 +683,13 @@ export interface FileRouteTypes {
     | '/base-ui/checkbox'
     | '/base-ui/collapsible'
     | '/base-ui/combobox'
-    | '/base-ui/command'
+    | '/base-ui/copy-button'
     | '/base-ui/dialog'
+    | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
     | '/base-ui/empty'
     | '/base-ui/field'
+    | '/base-ui/file-upload'
     | '/base-ui/form-section'
     | '/base-ui/input'
     | '/base-ui/input-group'
@@ -701,7 +702,6 @@ export interface FileRouteTypes {
     | '/base-ui/resizable'
     | '/base-ui/scroll-area'
     | '/base-ui/select'
-    | '/base-ui/sheet'
     | '/base-ui/skeleton'
     | '/base-ui/slider'
     | '/base-ui/spinner'
@@ -713,8 +713,8 @@ export interface FileRouteTypes {
     | '/base-ui/tooltip'
     | '/components/app-layout'
     | '/components/choice-card'
+    | '/components/command'
     | '/components/confirmation-modal'
-    | '/components/copy-button'
     | '/components/customer-card'
     | '/components/data-table'
     | '/components/date-picker'
@@ -738,7 +738,6 @@ export interface FileRouteTypes {
     | '/base-ui/accordion'
     | '/base-ui/alert'
     | '/base-ui/aspect-ratio'
-    | '/base-ui/attachment'
     | '/base-ui/avatar'
     | '/base-ui/badge'
     | '/base-ui/breadcrumb'
@@ -750,11 +749,13 @@ export interface FileRouteTypes {
     | '/base-ui/checkbox'
     | '/base-ui/collapsible'
     | '/base-ui/combobox'
-    | '/base-ui/command'
+    | '/base-ui/copy-button'
     | '/base-ui/dialog'
+    | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
     | '/base-ui/empty'
     | '/base-ui/field'
+    | '/base-ui/file-upload'
     | '/base-ui/form-section'
     | '/base-ui/input'
     | '/base-ui/input-group'
@@ -767,7 +768,6 @@ export interface FileRouteTypes {
     | '/base-ui/resizable'
     | '/base-ui/scroll-area'
     | '/base-ui/select'
-    | '/base-ui/sheet'
     | '/base-ui/skeleton'
     | '/base-ui/slider'
     | '/base-ui/spinner'
@@ -779,8 +779,8 @@ export interface FileRouteTypes {
     | '/base-ui/tooltip'
     | '/components/app-layout'
     | '/components/choice-card'
+    | '/components/command'
     | '/components/confirmation-modal'
-    | '/components/copy-button'
     | '/components/customer-card'
     | '/components/data-table'
     | '/components/date-picker'
@@ -805,7 +805,6 @@ export interface RootRouteChildren {
   BaseUiAccordionRoute: typeof BaseUiAccordionRoute
   BaseUiAlertRoute: typeof BaseUiAlertRoute
   BaseUiAspectRatioRoute: typeof BaseUiAspectRatioRoute
-  BaseUiAttachmentRoute: typeof BaseUiAttachmentRoute
   BaseUiAvatarRoute: typeof BaseUiAvatarRoute
   BaseUiBadgeRoute: typeof BaseUiBadgeRoute
   BaseUiBreadcrumbRoute: typeof BaseUiBreadcrumbRoute
@@ -817,11 +816,13 @@ export interface RootRouteChildren {
   BaseUiCheckboxRoute: typeof BaseUiCheckboxRoute
   BaseUiCollapsibleRoute: typeof BaseUiCollapsibleRoute
   BaseUiComboboxRoute: typeof BaseUiComboboxRoute
-  BaseUiCommandRoute: typeof BaseUiCommandRoute
+  BaseUiCopyButtonRoute: typeof BaseUiCopyButtonRoute
   BaseUiDialogRoute: typeof BaseUiDialogRoute
+  BaseUiDrawerRoute: typeof BaseUiDrawerRoute
   BaseUiDropdownMenuRoute: typeof BaseUiDropdownMenuRoute
   BaseUiEmptyRoute: typeof BaseUiEmptyRoute
   BaseUiFieldRoute: typeof BaseUiFieldRoute
+  BaseUiFileUploadRoute: typeof BaseUiFileUploadRoute
   BaseUiFormSectionRoute: typeof BaseUiFormSectionRoute
   BaseUiInputRoute: typeof BaseUiInputRoute
   BaseUiInputGroupRoute: typeof BaseUiInputGroupRoute
@@ -834,7 +835,6 @@ export interface RootRouteChildren {
   BaseUiResizableRoute: typeof BaseUiResizableRoute
   BaseUiScrollAreaRoute: typeof BaseUiScrollAreaRoute
   BaseUiSelectRoute: typeof BaseUiSelectRoute
-  BaseUiSheetRoute: typeof BaseUiSheetRoute
   BaseUiSkeletonRoute: typeof BaseUiSkeletonRoute
   BaseUiSliderRoute: typeof BaseUiSliderRoute
   BaseUiSpinnerRoute: typeof BaseUiSpinnerRoute
@@ -846,8 +846,8 @@ export interface RootRouteChildren {
   BaseUiTooltipRoute: typeof BaseUiTooltipRoute
   ComponentsAppLayoutRoute: typeof ComponentsAppLayoutRoute
   ComponentsChoiceCardRoute: typeof ComponentsChoiceCardRoute
+  ComponentsCommandRoute: typeof ComponentsCommandRoute
   ComponentsConfirmationModalRoute: typeof ComponentsConfirmationModalRoute
-  ComponentsCopyButtonRoute: typeof ComponentsCopyButtonRoute
   ComponentsCustomerCardRoute: typeof ComponentsCustomerCardRoute
   ComponentsDataTableRoute: typeof ComponentsDataTableRoute
   ComponentsDatePickerRoute: typeof ComponentsDatePickerRoute
@@ -928,13 +928,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiAspectRatioRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/attachment': {
-      id: '/base-ui/attachment'
-      path: '/base-ui/attachment'
-      fullPath: '/base-ui/attachment'
-      preLoaderRoute: typeof BaseUiAttachmentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/base-ui/avatar': {
       id: '/base-ui/avatar'
       path: '/base-ui/avatar'
@@ -1012,11 +1005,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiComboboxRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/command': {
-      id: '/base-ui/command'
-      path: '/base-ui/command'
-      fullPath: '/base-ui/command'
-      preLoaderRoute: typeof BaseUiCommandRouteImport
+    '/base-ui/copy-button': {
+      id: '/base-ui/copy-button'
+      path: '/base-ui/copy-button'
+      fullPath: '/base-ui/copy-button'
+      preLoaderRoute: typeof BaseUiCopyButtonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/dialog': {
@@ -1024,6 +1017,13 @@ declare module '@tanstack/react-router' {
       path: '/base-ui/dialog'
       fullPath: '/base-ui/dialog'
       preLoaderRoute: typeof BaseUiDialogRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/drawer': {
+      id: '/base-ui/drawer'
+      path: '/base-ui/drawer'
+      fullPath: '/base-ui/drawer'
+      preLoaderRoute: typeof BaseUiDrawerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/dropdown-menu': {
@@ -1045,6 +1045,13 @@ declare module '@tanstack/react-router' {
       path: '/base-ui/field'
       fullPath: '/base-ui/field'
       preLoaderRoute: typeof BaseUiFieldRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/file-upload': {
+      id: '/base-ui/file-upload'
+      path: '/base-ui/file-upload'
+      fullPath: '/base-ui/file-upload'
+      preLoaderRoute: typeof BaseUiFileUploadRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/form-section': {
@@ -1131,13 +1138,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiSelectRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/sheet': {
-      id: '/base-ui/sheet'
-      path: '/base-ui/sheet'
-      fullPath: '/base-ui/sheet'
-      preLoaderRoute: typeof BaseUiSheetRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/base-ui/skeleton': {
       id: '/base-ui/skeleton'
       path: '/base-ui/skeleton'
@@ -1222,18 +1222,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsChoiceCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/command': {
+      id: '/components/command'
+      path: '/components/command'
+      fullPath: '/components/command'
+      preLoaderRoute: typeof ComponentsCommandRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/confirmation-modal': {
       id: '/components/confirmation-modal'
       path: '/components/confirmation-modal'
       fullPath: '/components/confirmation-modal'
       preLoaderRoute: typeof ComponentsConfirmationModalRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/copy-button': {
-      id: '/components/copy-button'
-      path: '/components/copy-button'
-      fullPath: '/components/copy-button'
-      preLoaderRoute: typeof ComponentsCopyButtonRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/customer-card': {
@@ -1325,7 +1325,6 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiAccordionRoute: BaseUiAccordionRoute,
   BaseUiAlertRoute: BaseUiAlertRoute,
   BaseUiAspectRatioRoute: BaseUiAspectRatioRoute,
-  BaseUiAttachmentRoute: BaseUiAttachmentRoute,
   BaseUiAvatarRoute: BaseUiAvatarRoute,
   BaseUiBadgeRoute: BaseUiBadgeRoute,
   BaseUiBreadcrumbRoute: BaseUiBreadcrumbRoute,
@@ -1337,11 +1336,13 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiCheckboxRoute: BaseUiCheckboxRoute,
   BaseUiCollapsibleRoute: BaseUiCollapsibleRoute,
   BaseUiComboboxRoute: BaseUiComboboxRoute,
-  BaseUiCommandRoute: BaseUiCommandRoute,
+  BaseUiCopyButtonRoute: BaseUiCopyButtonRoute,
   BaseUiDialogRoute: BaseUiDialogRoute,
+  BaseUiDrawerRoute: BaseUiDrawerRoute,
   BaseUiDropdownMenuRoute: BaseUiDropdownMenuRoute,
   BaseUiEmptyRoute: BaseUiEmptyRoute,
   BaseUiFieldRoute: BaseUiFieldRoute,
+  BaseUiFileUploadRoute: BaseUiFileUploadRoute,
   BaseUiFormSectionRoute: BaseUiFormSectionRoute,
   BaseUiInputRoute: BaseUiInputRoute,
   BaseUiInputGroupRoute: BaseUiInputGroupRoute,
@@ -1354,7 +1355,6 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiResizableRoute: BaseUiResizableRoute,
   BaseUiScrollAreaRoute: BaseUiScrollAreaRoute,
   BaseUiSelectRoute: BaseUiSelectRoute,
-  BaseUiSheetRoute: BaseUiSheetRoute,
   BaseUiSkeletonRoute: BaseUiSkeletonRoute,
   BaseUiSliderRoute: BaseUiSliderRoute,
   BaseUiSpinnerRoute: BaseUiSpinnerRoute,
@@ -1366,8 +1366,8 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiTooltipRoute: BaseUiTooltipRoute,
   ComponentsAppLayoutRoute: ComponentsAppLayoutRoute,
   ComponentsChoiceCardRoute: ComponentsChoiceCardRoute,
+  ComponentsCommandRoute: ComponentsCommandRoute,
   ComponentsConfirmationModalRoute: ComponentsConfirmationModalRoute,
-  ComponentsCopyButtonRoute: ComponentsCopyButtonRoute,
   ComponentsCustomerCardRoute: ComponentsCustomerCardRoute,
   ComponentsDataTableRoute: ComponentsDataTableRoute,
   ComponentsDatePickerRoute: ComponentsDatePickerRoute,

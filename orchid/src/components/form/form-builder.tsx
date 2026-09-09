@@ -57,15 +57,15 @@ import { Textarea } from '@/base-ui/form/textarea'
 import { Switch } from '@/base-ui/form/switch'
 import { Button } from '@/base-ui/actions/button'
 import {
-  Attachment,
-  AttachmentAction,
-  AttachmentActions,
-  AttachmentContent,
-  AttachmentDescription,
-  AttachmentGroup,
-  AttachmentMedia,
-  AttachmentTitle,
-} from '@/base-ui/displaying-data/attachment'
+  FileUpload,
+  FileUploadAction,
+  FileUploadActions,
+  FileUploadContent,
+  FileUploadDescription,
+  FileUploadGroup,
+  FileUploadMedia,
+  FileUploadTitle,
+} from '@/base-ui/form/file-upload'
 import {
   controlType,
   dateRangeValue,
@@ -183,29 +183,29 @@ function FormFileField({
         {multiple ? 'Choose files' : 'Choose file'}
       </Button>
       {files.length ? (
-        <AttachmentGroup>
+        <FileUploadGroup>
           {files.map((file, index) => (
-            <Attachment key={`${file.name}-${file.size}-${file.lastModified}-${index}`} className="w-full">
-              <AttachmentMedia>
+            <FileUpload key={`${file.name}-${file.size}-${file.lastModified}-${index}`} className="w-full">
+              <FileUploadMedia>
                 <FileGlyph file={file} />
-              </AttachmentMedia>
-              <AttachmentContent>
-                <AttachmentTitle>{file.name}</AttachmentTitle>
-                <AttachmentDescription>
+              </FileUploadMedia>
+              <FileUploadContent>
+                <FileUploadTitle>{file.name}</FileUploadTitle>
+                <FileUploadDescription>
                   {(file.type || 'File') + ' · ' + formatFileSize(file.size)}
-                </AttachmentDescription>
-              </AttachmentContent>
-              <AttachmentActions>
-                <AttachmentAction
+                </FileUploadDescription>
+              </FileUploadContent>
+              <FileUploadActions>
+                <FileUploadAction
                   aria-label={`Remove ${file.name}`}
                   onClick={() => setFiles(files.filter((_, itemIndex) => itemIndex !== index))}
                 >
                   <CloseRegular />
-                </AttachmentAction>
-              </AttachmentActions>
-            </Attachment>
+                </FileUploadAction>
+              </FileUploadActions>
+            </FileUpload>
           ))}
-        </AttachmentGroup>
+        </FileUploadGroup>
       ) : null}
       <FieldHint invalid={invalid} message={message} description={item.description} />
     </Field>

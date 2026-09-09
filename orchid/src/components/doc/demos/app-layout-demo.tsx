@@ -42,7 +42,7 @@ function AppLayoutDemo() {
         >
           <PageLayout title={sidebar === 'home' ? 'General' : 'Team'}>
             <p className="text-sm text-oc-muted-foreground">
-              Sidebar mode opens a sheet on small screens.
+              Sidebar mode opens a drawer on small screens.
             </p>
           </PageLayout>
         </AppLayout>

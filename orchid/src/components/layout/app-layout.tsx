@@ -5,7 +5,7 @@ import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@/base-ui/actions/button'
-import { Sheet, SheetContent, SheetHeader, SheetTitle } from '@/base-ui/overlays/sheet'
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/base-ui/overlays/drawer'
 
 type AppNavigationItem = {
   id: string
@@ -123,18 +123,14 @@ function AppLayout({
           {hasSidebar ? (
             <>
               <AppSidebar className="hidden md:flex">{sidebarNav}</AppSidebar>
-              <Sheet open={sidebarOpen} onOpenChange={setSidebarOpen}>
-                <SheetContent
-                  side="left"
-                  className="w-72 gap-0 p-0 sm:max-w-72"
-                  showCloseButton
-                >
-                  <SheetHeader className="sr-only">
-                    <SheetTitle>Navigation</SheetTitle>
-                  </SheetHeader>
+              <Drawer open={sidebarOpen} onOpenChange={setSidebarOpen} swipeDirection="left">
+                <DrawerContent className="w-72 data-[swipe-direction=left]:w-72 sm:w-72">
+                  <DrawerHeader className="sr-only">
+                    <DrawerTitle>Navigation</DrawerTitle>
+                  </DrawerHeader>
                   {sidebarNav}
-                </SheetContent>
-              </Sheet>
+                </DrawerContent>
+              </Drawer>
             </>
           ) : null}
           {page}

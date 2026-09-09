@@ -1,7 +1,7 @@
 import type { ComponentProps, ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
-import { CopyButton } from "@/components/actions/copy-button";
+import { CopyButton } from "@/base-ui/actions/copy-button";
 
 function Header({
   className,

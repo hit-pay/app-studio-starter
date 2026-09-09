@@ -107,7 +107,7 @@ export const SCHEMA_FORM_EXAMPLE_FIELDS: SchemaFormField[] = [
       { value: 'card', label: 'Card', description: 'Visa, Mastercard, AMEX' },
     ],
   },
-  { key: 'attachment', title: 'Attachment', type: 'file' },
+  { key: 'receipt', title: 'Receipt', type: 'file' },
   { key: 'documents', title: 'Documents', type: 'file', props: { multiple: true } },
 ]
 

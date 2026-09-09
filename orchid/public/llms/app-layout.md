@@ -54,7 +54,7 @@ function AppLayoutDemo() {
         >
           <PageLayout title={sidebar === 'home' ? 'General' : 'Team'}>
             <p className="text-sm text-oc-muted-foreground">
-              Sidebar mode opens a sheet on small screens.
+              Sidebar mode opens a drawer on small screens.
             </p>
           </PageLayout>
         </AppLayout>
@@ -85,4 +85,4 @@ Pass `navigationItems` for in-app tabs. `variant` can stay `default` or
 ## Sidebar
 
 `variant="sidebar"` plus `sidebarItems` adds a flat child nav. On small
-screens the list opens in a sheet.
+screens the list opens in a drawer.

@@ -87,12 +87,6 @@ Example prompts after setup:
 
 ## Components & Blocks
 
-### Actions
-
-#### [Copy Button](https://orchid-ui-hitpay.vercel.app/llms/copy-button.md)
-Copy icon that writes a value and shows Copied!.
-Install: `bunx --bun shadcn@latest add @orchid/copy-button` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
-
 ### Displaying Data
 
 #### [Customer Card](https://orchid-ui-hitpay.vercel.app/llms/customer-card.md)
@@ -155,6 +149,10 @@ Install: `bunx --bun shadcn@latest add @orchid/sub-sidebar` · [Registry JSON](h
 
 ### Overlays
 
+#### [Command](https://orchid-ui-hitpay.vercel.app/llms/command.md)
+Searchable command palette. Drive it with open, onOpenChange, and groups.
+Install: `bunx --bun shadcn@latest add @orchid/command` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/command.json)
+
 #### [Confirmation Modal](https://orchid-ui-hitpay.vercel.app/llms/confirmation-modal.md)
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 Install: `bunx --bun shadcn@latest add @orchid/confirmation-modal` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/confirmation-modal.json)
@@ -171,11 +169,11 @@ Install: `bunx --bun shadcn@latest add @orchid/button` · [Registry JSON](https:
 Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 Install: `bunx --bun shadcn@latest add @orchid/button-group` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button-group.json)
 
-### Displaying Data
+#### [Copy Button](https://orchid-ui-hitpay.vercel.app/llms/copy-button.md)
+Copy icon that writes a value and shows Copied!.
+Install: `bunx --bun shadcn@latest add @orchid/copy-button` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
 
-#### [Attachment](https://orchid-ui-hitpay.vercel.app/llms/attachment.md)
-shadcn-compatible file and image attachment with upload state, media, and a vertical group.
-Install: `bunx --bun shadcn@latest add @orchid/attachment` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/attachment.json)
+### Displaying Data
 
 #### [Avatar](https://orchid-ui-hitpay.vercel.app/llms/avatar.md)
 Image, fallback, badge, and group primitives with Orchid styling.
@@ -240,6 +238,10 @@ Install: `bunx --bun shadcn@latest add @orchid/combobox` · [Registry JSON](http
 #### [Field](https://orchid-ui-hitpay.vercel.app/llms/field.md)
 shadcn-compatible label, description, error, and grouped field composition.
 Install: `bunx --bun shadcn@latest add @orchid/field` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/field.json)
+
+#### [File Upload](https://orchid-ui-hitpay.vercel.app/llms/file-upload.md)
+File and image upload row with upload state, media, and a vertical group.
+Install: `bunx --bun shadcn@latest add @orchid/file-upload` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/file-upload.json)
 
 #### [Form Section](https://orchid-ui-hitpay.vercel.app/llms/form-section.md)
 Heading plus FormSectionGroup and FormSectionItem.
@@ -319,21 +321,17 @@ Install: `bunx --bun shadcn@latest add @orchid/pagination` · [Registry JSON](ht
 
 ### Overlays
 
-#### [Command](https://orchid-ui-hitpay.vercel.app/llms/command.md)
-shadcn-compatible cmdk palette with keyboard navigation and Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/command` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/command.json)
-
 #### [Dialog](https://orchid-ui-hitpay.vercel.app/llms/dialog.md)
 shadcn-compatible dialog primitives with Orchid sizes and persistent mode.
 Install: `bunx --bun shadcn@latest add @orchid/dialog` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dialog.json)
 
+#### [Drawer](https://orchid-ui-hitpay.vercel.app/llms/drawer.md)
+Swipeable edge panel. Set swipeDirection to up, right, down, or left.
+Install: `bunx --bun shadcn@latest add @orchid/drawer` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/drawer.json)
+
 #### [Dropdown Menu](https://orchid-ui-hitpay.vercel.app/llms/dropdown-menu.md)
 shadcn-compatible items, selection, submenus, and shortcuts with Orchid styling.
 Install: `bunx --bun shadcn@latest add @orchid/dropdown-menu` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dropdown-menu.json)
-
-#### [Sheet](https://orchid-ui-hitpay.vercel.app/llms/sheet.md)
-shadcn-compatible compound edge panel with four sides and Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/sheet` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sheet.json)
 
 #### [Tooltip](https://orchid-ui-hitpay.vercel.app/llms/tooltip.md)
 shadcn-compatible hover and focus tooltip with Orchid styling.
@@ -347,7 +345,7 @@ Install: `bunx --bun shadcn@latest add @orchid/kbd` · [Registry JSON](https://o
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, detail-list, copy-button, skeleton, spinner, dialog, sheet, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, attachment, form-section
+form-builder, data-table, sidebar, sub-sidebar, alert, list-item, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, detail-list, copy-button, skeleton, spinner, dialog, drawer, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 

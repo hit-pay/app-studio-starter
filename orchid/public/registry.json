@@ -20,10 +20,11 @@
         "@orchid/resizable",
         "@orchid/aspect-ratio",
         "@orchid/chart",
-        "@orchid/attachment",
+        "@orchid/file-upload",
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
+        "@orchid/app-layout",
         "@orchid/confirmation-modal",
         "@orchid/button",
         "@orchid/button-group",
@@ -38,12 +39,11 @@
         "@orchid/choice-card",
         "@orchid/metric-card",
         "@orchid/detail-list",
-        "@orchid/icon-group",
         "@orchid/copy-button",
         "@orchid/skeleton",
         "@orchid/spinner",
         "@orchid/dialog",
-        "@orchid/sheet",
+        "@orchid/drawer",
         "@orchid/breadcrumb",
         "@orchid/pagination",
         "@orchid/table",
@@ -116,7 +116,8 @@
         "@orchid/select",
         "@orchid/slider",
         "@orchid/textarea",
-        "@orchid/switch"
+        "@orchid/switch",
+        "@orchid/file-upload"
       ],
       "files": [
         {
@@ -291,6 +292,26 @@
       ]
     },
     {
+      "name": "app-layout",
+      "type": "registry:ui",
+      "title": "App Layout",
+      "description": "Embedded application frame with optional app name, tabs, and sidebar.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/drawer"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-layout.tsx",
+          "type": "registry:ui",
+          "target": "@/components/layout/app-layout.tsx"
+        }
+      ]
+    },
+    {
       "name": "page-layout",
       "type": "registry:ui",
       "title": "Page Layout",
@@ -350,7 +371,7 @@
       "name": "button-group",
       "type": "registry:ui",
       "title": "Button Group",
-      "description": "shadcn-compatible grouped controls with horizontal or vertical orientation and Orchid styling.",
+      "description": "Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -567,26 +588,6 @@
       ]
     },
     {
-      "name": "icon-group",
-      "type": "registry:ui",
-      "title": "Icon Group",
-      "description": "Props-based icon actions. style border inserts dividers automatically.",
-      "dependencies": [
-        "class-variance-authority",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [
-        "@orchid/dropdown-menu"
-      ],
-      "files": [
-        {
-          "path": "src/components/actions/icon-group.tsx",
-          "type": "registry:ui",
-          "target": "@/components/actions/icon-group.tsx"
-        }
-      ]
-    },
-    {
       "name": "copy-button",
       "type": "registry:ui",
       "title": "Copy Button",
@@ -599,9 +600,9 @@
       ],
       "files": [
         {
-          "path": "src/components/actions/copy-button.tsx",
+          "path": "src/base-ui/actions/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@/components/actions/copy-button.tsx"
+          "target": "@/base-ui/actions/copy-button.tsx"
         }
       ]
     },
@@ -659,22 +660,19 @@
       ]
     },
     {
-      "name": "sheet",
+      "name": "drawer",
       "type": "registry:ui",
-      "title": "Sheet",
-      "description": "shadcn-compatible compound sheet with four sides and Orchid styling.",
+      "title": "Drawer",
+      "description": "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
       "dependencies": [
-        "@base-ui/react",
-        "@mingcute/react"
+        "@base-ui/react"
       ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
+      "registryDependencies": [],
       "files": [
         {
-          "path": "src/base-ui/overlays/sheet.tsx",
+          "path": "src/base-ui/overlays/drawer.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/sheet.tsx"
+          "target": "@/base-ui/overlays/drawer.tsx"
         }
       ]
     },
@@ -734,7 +732,7 @@
       "name": "command",
       "type": "registry:ui",
       "title": "Command",
-      "description": "shadcn-compatible cmdk command palette with Orchid styling.",
+      "description": "Searchable command palette driven by open, onOpenChange, and groups.",
       "dependencies": [
         "cmdk",
         "@mingcute/react"
@@ -745,9 +743,9 @@
       ],
       "files": [
         {
-          "path": "src/base-ui/overlays/command.tsx",
+          "path": "src/components/overlays/command.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/command.tsx"
+          "target": "@/components/overlays/command.tsx"
         }
       ]
     },
@@ -1163,19 +1161,19 @@
       ]
     },
     {
-      "name": "attachment",
+      "name": "file-upload",
       "type": "registry:ui",
-      "title": "Attachment",
-      "description": "shadcn-compatible file and image attachment with upload state, media, actions, and a vertical group.",
+      "title": "File Upload",
+      "description": "File and image upload row with upload state, media, actions, and a vertical group.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button"
       ],
       "files": [
         {
-          "path": "src/base-ui/displaying-data/attachment.tsx",
+          "path": "src/base-ui/form/file-upload.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/attachment.tsx"
+          "target": "@/base-ui/form/file-upload.tsx"
         }
       ]
     },

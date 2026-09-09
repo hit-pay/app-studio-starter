@@ -1,3 +1,12 @@
+<!-- Generated from content/docs/components/file-upload.mdx. Do not edit. -->
+
+# File Upload
+
+File and image upload row with upload state, media, and a vertical group.
+
+## Example
+
+```tsx
 import { useEffect, useId, useRef, useState } from 'react'
 import {
   FileCodeRegular,
@@ -9,15 +18,15 @@ import {
 } from '@mingcute/react/core-regular'
 
 import {
-  Attachment,
-  AttachmentAction,
-  AttachmentActions,
-  AttachmentContent,
-  AttachmentDescription,
-  AttachmentGroup,
-  AttachmentMedia,
-  AttachmentTitle,
-} from '@/base-ui/displaying-data/attachment'
+  FileUpload,
+  FileUploadAction,
+  FileUploadActions,
+  FileUploadContent,
+  FileUploadDescription,
+  FileUploadGroup,
+  FileUploadMedia,
+  FileUploadTitle,
+} from '@/base-ui/form/file-upload'
 import { Button } from '@/base-ui/actions/button'
 import { Spinner } from '@/base-ui/feedback/spinner'
 
@@ -149,8 +158,8 @@ function UploadItemCard({
   const typeLabel = item.file.type || 'File'
 
   return (
-    <Attachment state={item.state} className="w-full max-w-md">
-      <AttachmentMedia variant={kind === 'image' && item.preview ? 'image' : 'icon'}>
+    <FileUpload state={item.state} className="w-full max-w-md">
+      <FileUploadMedia variant={kind === 'image' && item.preview ? 'image' : 'icon'}>
         {item.state === 'uploading' ? (
           <Spinner />
         ) : kind === 'image' && item.preview ? (
@@ -158,21 +167,21 @@ function UploadItemCard({
         ) : (
           <FileGlyph file={item.file} />
         )}
-      </AttachmentMedia>
-      <AttachmentContent>
-        <AttachmentTitle>{item.file.name}</AttachmentTitle>
-        <AttachmentDescription>
+      </FileUploadMedia>
+      <FileUploadContent>
+        <FileUploadTitle>{item.file.name}</FileUploadTitle>
+        <FileUploadDescription>
           {item.state === 'uploading'
             ? `Uploading · ${item.progress}%`
             : `${typeLabel} · ${formatSize(item.file.size)}`}
-        </AttachmentDescription>
-      </AttachmentContent>
-      <AttachmentActions>
-        <AttachmentAction aria-label={`Remove ${item.file.name}`} onClick={onRemove}>
+        </FileUploadDescription>
+      </FileUploadContent>
+      <FileUploadActions>
+        <FileUploadAction aria-label={`Remove ${item.file.name}`} onClick={onRemove}>
           <CloseRegular />
-        </AttachmentAction>
-      </AttachmentActions>
-    </Attachment>
+        </FileUploadAction>
+      </FileUploadActions>
+    </FileUpload>
   )
 }
 
@@ -241,17 +250,17 @@ function ManyUploadDemo() {
       </p>
       <FilePicker multiple onPick={addFiles} />
       {items.length ? (
-        <AttachmentGroup>
+        <FileUploadGroup>
           {items.map((item) => (
             <UploadItemCard key={item.id} item={item} onRemove={() => remove(item.id)} />
           ))}
-        </AttachmentGroup>
+        </FileUploadGroup>
       ) : null}
     </div>
   )
 }
 
-function AttachmentDemo() {
+function FileUploadDemo() {
   return (
     <div className="grid gap-8">
       <SingleUploadDemo />
@@ -260,4 +269,7 @@ function AttachmentDemo() {
   )
 }
 
-export { AttachmentDemo }
+export { FileUploadDemo }
+```
+
+Wire a real `<input type="file">` (single or `multiple`) and set `state="uploading"` while the file is in flight. Show `Spinner` in `FileUploadMedia` — do not add a title shimmer. After success, switch to `state="done"` and keep the file icon or image preview. `FileUploadGroup` stacks many files vertically. Label icon-only `FileUploadAction`s. Do not call `npx shadcn add file-upload`.
