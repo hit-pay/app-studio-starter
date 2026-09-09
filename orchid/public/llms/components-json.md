@@ -45,12 +45,13 @@ set `aliases.ui`. Orchid uses `base-ui`, `components`, `utils`, `lib`, and
 
 ## File destinations
 
-Orchid registry files declare their own target alias:
+Registry `target` uses shadcn placeholders, not import paths:
 
-- `@/base-ui/actions/button.tsx` resolves through `aliases.base-ui` to
-  `src/base-ui/actions/button.tsx`.
-- `@/components/form/form-builder.tsx` resolves through `aliases.components` to
-  `src/components/form/form-builder.tsx`.
+- `@base-ui/actions/button.tsx` → `src/base-ui/actions/button.tsx`
+- `@components/form/form-builder.tsx` → `src/components/form/form-builder.tsx`
+
+Do not use `@/base-ui/…` as a target. The CLI treats `@/` as a folder and
+writes `src/@/…`. Code imports stay `@/base-ui/…` and `@/components/…`.
 
 Do not add a TypeScript path `@base-ui/*`. That would shadow the `@base-ui/react`
 package. Use `@/base-ui/…` instead.

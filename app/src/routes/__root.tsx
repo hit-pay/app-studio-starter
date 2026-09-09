@@ -1,6 +1,8 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
 import { QueryProvider } from '#/lib/query'
+import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
+import { Toaster } from '@/base-ui/feedback/toast'
 import '../styles.css'
 
 function NotFound() {
@@ -49,7 +51,11 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="h-full">
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <ConfirmationModalProvider>
+            <Toaster placement="top-center">{children}</Toaster>
+          </ConfirmationModalProvider>
+        </QueryProvider>
         <Scripts />
       </body>
     </html>

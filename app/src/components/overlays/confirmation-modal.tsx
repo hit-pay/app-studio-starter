@@ -1,0 +1,244 @@
+import * as React from 'react'
+import {
+  CheckRegular,
+  QuestionRegular,
+  Delete2Regular,
+  AlertRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
+
+import { Button } from '@/base-ui/actions/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from '@/base-ui/overlays/dialog'
+import { Input } from '@/base-ui/form/input'
+import { cn } from '@/lib/utils'
+
+type ConfirmationModalType = 'delete' | 'warning' | 'success' | 'question'
+
+type ConfirmationModalOptions = {
+  type?: ConfirmationModalType
+  title?: React.ReactNode
+  message: React.ReactNode
+  description?: React.ReactNode
+  confirmLabel?: React.ReactNode
+  cancelLabel?: React.ReactNode
+  confirmPhrase?: string
+  inputPlaceholder?: string
+}
+
+type ConfirmationModalManager = (options: ConfirmationModalOptions) => Promise<boolean>
+
+type ConfirmationModalRequest = ConfirmationModalOptions & {
+  resolve: (confirmed: boolean) => void
+}
+
+const PRESETS: Record<
+  ConfirmationModalType,
+  {
+    icon: React.ReactNode
+    iconClassName: string
+    confirmLabel: string
+    cancelLabel: string
+    confirmVariant: React.ComponentProps<typeof Button>['variant']
+    showCancel: boolean
+  }
+> = {
+  delete: {
+    icon: <Delete2Regular />,
+    iconClassName: 'bg-oc-destructive-soft text-oc-destructive',
+    confirmLabel: 'Delete',
+    cancelLabel: 'Cancel',
+    confirmVariant: 'destructive',
+    showCancel: true,
+  },
+  warning: {
+    icon: <AlertRegular />,
+    iconClassName: 'bg-oc-warning-soft text-oc-warning',
+    confirmLabel: 'Continue',
+    cancelLabel: 'Cancel',
+    confirmVariant: 'destructive',
+    showCancel: true,
+  },
+  success: {
+    icon: <CheckRegular />,
+    iconClassName: 'bg-oc-success-soft text-oc-success',
+    confirmLabel: 'OK',
+    cancelLabel: 'Cancel',
+    confirmVariant: 'default',
+    showCancel: false,
+  },
+  question: {
+    icon: <QuestionRegular />,
+    iconClassName: 'bg-oc-info-soft text-oc-primary',
+    confirmLabel: 'Yes',
+    cancelLabel: 'No',
+    confirmVariant: 'default',
+    showCancel: true,
+  },
+}
+
+const ConfirmationModalContext = React.createContext<ConfirmationModalManager | null>(null)
+
+/** Mount once at the app root. Use `useConfirmationModal()` for delete/warning confirms. */
+function ConfirmationModalProvider({ children }: { children: React.ReactNode }) {
+  const [request, setRequest] = React.useState<ConfirmationModalRequest | null>(null)
+  const [open, setOpen] = React.useState(false)
+  const [typed, setTyped] = React.useState('')
+  const requestRef = React.useRef<ConfirmationModalRequest | null>(null)
+  const closeTimerRef = React.useRef<ReturnType<typeof setTimeout> | null>(null)
+
+  const finish = React.useCallback((confirmed: boolean) => {
+    const current = requestRef.current
+    if (!current) return
+    requestRef.current = null
+    setOpen(false)
+    current?.resolve(confirmed)
+
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = setTimeout(() => {
+      setRequest((value) => (value === current ? null : value))
+      setTyped('')
+      closeTimerRef.current = null
+    }, 100)
+  }, [])
+
+  const confirm = React.useCallback<ConfirmationModalManager>((options) => {
+    requestRef.current?.resolve(false)
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+
+    return new Promise<boolean>((resolve) => {
+      const nextRequest = { ...options, resolve }
+      requestRef.current = nextRequest
+      setTyped('')
+      setRequest(nextRequest)
+      setOpen(true)
+    })
+  }, [])
+
+  React.useEffect(
+    () => () => {
+      if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+      requestRef.current?.resolve(false)
+    },
+    [],
+  )
+
+  const type = request?.type ?? 'question'
+  const preset = PRESETS[type]
+  const matched = !request?.confirmPhrase || typed.trim() === request.confirmPhrase
+
+  return (
+    <ConfirmationModalContext.Provider value={confirm}>
+      {children}
+      <Dialog
+        persistent
+        open={open}
+        onOpenChange={(nextOpen) => {
+          if (!nextOpen) finish(false)
+        }}
+      >
+        <DialogContent
+          size={request?.confirmPhrase ? 'medium' : 'confirmation'}
+          showCloseButton={false}
+        >
+          <DialogClose
+            render={
+              <Button
+                variant="ghost"
+                size="icon-sm"
+                className="absolute top-2 right-2 text-oc-muted-foreground"
+              />
+            }
+          >
+            <CloseRegular />
+            <span className="sr-only">Close</span>
+          </DialogClose>
+          <DialogHeader>
+            <DialogTitle>{request?.title ?? 'Are you sure?'}</DialogTitle>
+          </DialogHeader>
+          <div
+            className={cn(
+              request?.confirmPhrase
+                ? 'space-y-4 py-2'
+                : 'flex flex-col items-center gap-4 py-4 text-center',
+            )}
+          >
+            {!request?.confirmPhrase ? (
+              <span
+                className={cn(
+                  'inline-flex size-12 items-center justify-center rounded-full [&_svg]:size-6',
+                  preset.iconClassName,
+                )}
+              >
+                {preset.icon}
+              </span>
+            ) : null}
+            <DialogDescription
+              className={cn(!request?.confirmPhrase && 'max-w-64 text-center text-oc-foreground')}
+            >
+              {request?.message}
+              {request?.description ? (
+                <>
+                  <br />
+                  {request.description}
+                </>
+              ) : null}
+            </DialogDescription>
+            {request?.confirmPhrase ? (
+              <label className="block space-y-2 text-sm text-oc-foreground">
+                <span>
+                  Type <strong>{request.confirmPhrase}</strong> to confirm
+                </span>
+                <Input
+                  className="mt-2"
+                  value={typed}
+                  onChange={(event) => setTyped(event.currentTarget.value)}
+                  placeholder={request.inputPlaceholder ?? 'Type here...'}
+                  autoFocus
+                />
+              </label>
+            ) : null}
+          </div>
+          <DialogFooter className={!request?.confirmPhrase ? 'sm:justify-center' : undefined}>
+            {preset.showCancel ? (
+              <DialogClose render={<Button variant="outline" className="min-w-28" />}>
+                {request?.cancelLabel ?? preset.cancelLabel}
+              </DialogClose>
+            ) : null}
+            <Button
+              className="min-w-28"
+              variant={preset.confirmVariant}
+              disabled={!matched}
+              onClick={() => finish(true)}
+            >
+              {request?.confirmLabel ?? preset.confirmLabel}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </ConfirmationModalContext.Provider>
+  )
+}
+
+function useConfirmationModal() {
+  const confirm = React.useContext(ConfirmationModalContext)
+
+  if (!confirm) {
+    throw new Error('useConfirmationModal must be used within ConfirmationModalProvider.')
+  }
+
+  return confirm
+}
+
+export { ConfirmationModalProvider, useConfirmationModal }
+export type { ConfirmationModalManager, ConfirmationModalOptions, ConfirmationModalType }

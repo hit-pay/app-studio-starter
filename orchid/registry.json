@@ -73,7 +73,7 @@
         {
           "path": "src/base-ui/all.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/all.tsx"
+          "target": "@base-ui/all.tsx"
         }
       ]
     },
@@ -123,12 +123,12 @@
         {
           "path": "src/components/form/form-builder.tsx",
           "type": "registry:ui",
-          "target": "@/components/form/form-builder.tsx"
+          "target": "@components/form/form-builder.tsx"
         },
         {
           "path": "src/components/form/form-builder-model.ts",
           "type": "registry:file",
-          "target": "@/components/form/form-builder-model.ts"
+          "target": "@components/form/form-builder-model.ts"
         }
       ]
     },
@@ -153,12 +153,12 @@
         {
           "path": "src/components/displaying-data/data-table.tsx",
           "type": "registry:ui",
-          "target": "@/components/displaying-data/data-table.tsx"
+          "target": "@components/displaying-data/data-table.tsx"
         },
         {
           "path": "src/components/displaying-data/data-table-model.ts",
           "type": "registry:file",
-          "target": "@/components/displaying-data/data-table-model.ts"
+          "target": "@components/displaying-data/data-table-model.ts"
         }
       ]
     },
@@ -176,7 +176,7 @@
         {
           "path": "src/components/navigation/sidebar.tsx",
           "type": "registry:ui",
-          "target": "@/components/navigation/sidebar.tsx"
+          "target": "@components/navigation/sidebar.tsx"
         }
       ]
     },
@@ -191,7 +191,7 @@
         {
           "path": "src/components/navigation/sub-sidebar.tsx",
           "type": "registry:ui",
-          "target": "@/components/navigation/sub-sidebar.tsx"
+          "target": "@components/navigation/sub-sidebar.tsx"
         }
       ]
     },
@@ -208,7 +208,7 @@
         {
           "path": "src/base-ui/feedback/alert.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/feedback/alert.tsx"
+          "target": "@base-ui/feedback/alert.tsx"
         }
       ]
     },
@@ -227,7 +227,7 @@
         {
           "path": "src/base-ui/displaying-data/list-item.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/list-item.tsx"
+          "target": "@base-ui/displaying-data/list-item.tsx"
         }
       ]
     },
@@ -244,7 +244,7 @@
         {
           "path": "src/base-ui/displaying-data/empty.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/empty.tsx"
+          "target": "@base-ui/displaying-data/empty.tsx"
         }
       ]
     },
@@ -268,7 +268,7 @@
         {
           "path": "src/components/displaying-data/customer-card.tsx",
           "type": "registry:ui",
-          "target": "@/components/displaying-data/customer-card.tsx"
+          "target": "@components/displaying-data/customer-card.tsx"
         }
       ]
     },
@@ -287,7 +287,7 @@
         {
           "path": "src/components/layout/form-layout.tsx",
           "type": "registry:ui",
-          "target": "@/components/layout/form-layout.tsx"
+          "target": "@components/layout/form-layout.tsx"
         }
       ]
     },
@@ -307,7 +307,7 @@
         {
           "path": "src/components/layout/app-layout.tsx",
           "type": "registry:ui",
-          "target": "@/components/layout/app-layout.tsx"
+          "target": "@components/layout/app-layout.tsx"
         }
       ]
     },
@@ -324,7 +324,7 @@
         {
           "path": "src/components/layout/page-layout.tsx",
           "type": "registry:ui",
-          "target": "@/components/layout/page-layout.tsx"
+          "target": "@components/layout/page-layout.tsx"
         }
       ]
     },
@@ -345,7 +345,7 @@
         {
           "path": "src/components/overlays/confirmation-modal.tsx",
           "type": "registry:ui",
-          "target": "@/components/overlays/confirmation-modal.tsx"
+          "target": "@components/overlays/confirmation-modal.tsx"
         }
       ]
     },
@@ -363,7 +363,7 @@
         {
           "path": "src/base-ui/actions/button.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/actions/button.tsx"
+          "target": "@base-ui/actions/button.tsx"
         }
       ]
     },
@@ -383,7 +383,7 @@
         {
           "path": "src/base-ui/actions/button-group.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/actions/button-group.tsx"
+          "target": "@base-ui/actions/button-group.tsx"
         }
       ]
     },
@@ -402,7 +402,7 @@
         {
           "path": "src/base-ui/overlays/dropdown-menu.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/dropdown-menu.tsx"
+          "target": "@base-ui/overlays/dropdown-menu.tsx"
         }
       ]
     },
@@ -422,7 +422,7 @@
         {
           "path": "src/base-ui/feedback/toast.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/feedback/toast.tsx"
+          "target": "@base-ui/feedback/toast.tsx"
         }
       ]
     },
@@ -441,7 +441,7 @@
         {
           "path": "src/base-ui/displaying-data/badge.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/badge.tsx"
+          "target": "@base-ui/displaying-data/badge.tsx"
         }
       ]
     },
@@ -459,7 +459,7 @@
         {
           "path": "src/base-ui/layout/accordion.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/accordion.tsx"
+          "target": "@base-ui/layout/accordion.tsx"
         }
       ]
     },
@@ -476,7 +476,7 @@
         {
           "path": "src/base-ui/feedback/progress.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/feedback/progress.tsx"
+          "target": "@base-ui/feedback/progress.tsx"
         }
       ]
     },
@@ -493,7 +493,7 @@
         {
           "path": "src/base-ui/displaying-data/avatar.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/avatar.tsx"
+          "target": "@base-ui/displaying-data/avatar.tsx"
         }
       ]
     },
@@ -510,7 +510,7 @@
         {
           "path": "src/base-ui/overlays/tooltip.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/tooltip.tsx"
+          "target": "@base-ui/overlays/tooltip.tsx"
         }
       ]
     },
@@ -528,7 +528,7 @@
         {
           "path": "src/base-ui/layout/tabs.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/tabs.tsx"
+          "target": "@base-ui/layout/tabs.tsx"
         }
       ]
     },
@@ -545,7 +545,7 @@
         {
           "path": "src/components/form/choice-card.tsx",
           "type": "registry:ui",
-          "target": "@/components/form/choice-card.tsx"
+          "target": "@components/form/choice-card.tsx"
         }
       ]
     },
@@ -564,7 +564,7 @@
         {
           "path": "src/components/displaying-data/metric-card.tsx",
           "type": "registry:ui",
-          "target": "@/components/displaying-data/metric-card.tsx"
+          "target": "@components/displaying-data/metric-card.tsx"
         }
       ]
     },
@@ -583,7 +583,7 @@
         {
           "path": "src/components/displaying-data/detail-list.tsx",
           "type": "registry:ui",
-          "target": "@/components/displaying-data/detail-list.tsx"
+          "target": "@components/displaying-data/detail-list.tsx"
         }
       ]
     },
@@ -602,7 +602,7 @@
         {
           "path": "src/base-ui/actions/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/actions/copy-button.tsx"
+          "target": "@base-ui/actions/copy-button.tsx"
         }
       ]
     },
@@ -617,7 +617,7 @@
         {
           "path": "src/base-ui/feedback/skeleton.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/feedback/skeleton.tsx"
+          "target": "@base-ui/feedback/skeleton.tsx"
         }
       ]
     },
@@ -634,7 +634,7 @@
         {
           "path": "src/base-ui/feedback/spinner.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/feedback/spinner.tsx"
+          "target": "@base-ui/feedback/spinner.tsx"
         }
       ]
     },
@@ -655,7 +655,7 @@
         {
           "path": "src/base-ui/overlays/dialog.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/dialog.tsx"
+          "target": "@base-ui/overlays/dialog.tsx"
         }
       ]
     },
@@ -672,7 +672,7 @@
         {
           "path": "src/base-ui/overlays/drawer.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/drawer.tsx"
+          "target": "@base-ui/overlays/drawer.tsx"
         }
       ]
     },
@@ -690,7 +690,7 @@
         {
           "path": "src/base-ui/navigation/breadcrumb.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/navigation/breadcrumb.tsx"
+          "target": "@base-ui/navigation/breadcrumb.tsx"
         }
       ]
     },
@@ -709,7 +709,7 @@
         {
           "path": "src/base-ui/navigation/pagination.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/navigation/pagination.tsx"
+          "target": "@base-ui/navigation/pagination.tsx"
         }
       ]
     },
@@ -724,7 +724,7 @@
         {
           "path": "src/base-ui/displaying-data/table.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/table.tsx"
+          "target": "@base-ui/displaying-data/table.tsx"
         }
       ]
     },
@@ -745,7 +745,7 @@
         {
           "path": "src/components/overlays/command.tsx",
           "type": "registry:ui",
-          "target": "@/components/overlays/command.tsx"
+          "target": "@components/overlays/command.tsx"
         }
       ]
     },
@@ -760,7 +760,7 @@
         {
           "path": "src/base-ui/utils/kbd.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/utils/kbd.tsx"
+          "target": "@base-ui/utils/kbd.tsx"
         }
       ]
     },
@@ -777,7 +777,7 @@
         {
           "path": "src/base-ui/layout/collapsible.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/collapsible.tsx"
+          "target": "@base-ui/layout/collapsible.tsx"
         }
       ]
     },
@@ -794,7 +794,7 @@
         {
           "path": "src/base-ui/layout/scroll-area.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/scroll-area.tsx"
+          "target": "@base-ui/layout/scroll-area.tsx"
         }
       ]
     },
@@ -811,7 +811,7 @@
         {
           "path": "src/base-ui/overlays/popover.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/overlays/popover.tsx"
+          "target": "@base-ui/overlays/popover.tsx"
         }
       ]
     },
@@ -828,7 +828,7 @@
         {
           "path": "src/base-ui/utils/separator.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/utils/separator.tsx"
+          "target": "@base-ui/utils/separator.tsx"
         }
       ]
     },
@@ -848,7 +848,7 @@
         {
           "path": "src/base-ui/form/field.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/field.tsx"
+          "target": "@base-ui/form/field.tsx"
         }
       ]
     },
@@ -863,7 +863,7 @@
         {
           "path": "src/base-ui/form/label.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/label.tsx"
+          "target": "@base-ui/form/label.tsx"
         }
       ]
     },
@@ -880,7 +880,7 @@
         {
           "path": "src/base-ui/form/input.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/input.tsx"
+          "target": "@base-ui/form/input.tsx"
         }
       ]
     },
@@ -901,7 +901,7 @@
         {
           "path": "src/base-ui/form/input-group.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/input-group.tsx"
+          "target": "@base-ui/form/input-group.tsx"
         }
       ]
     },
@@ -916,7 +916,7 @@
         {
           "path": "src/base-ui/form/textarea.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/textarea.tsx"
+          "target": "@base-ui/form/textarea.tsx"
         }
       ]
     },
@@ -934,7 +934,7 @@
         {
           "path": "src/base-ui/form/select.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/select.tsx"
+          "target": "@base-ui/form/select.tsx"
         }
       ]
     },
@@ -956,7 +956,7 @@
         {
           "path": "src/base-ui/form/combobox.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/combobox.tsx"
+          "target": "@base-ui/form/combobox.tsx"
         }
       ]
     },
@@ -975,7 +975,7 @@
         {
           "path": "src/components/form/quantity-input.tsx",
           "type": "registry:ui",
-          "target": "@/components/form/quantity-input.tsx"
+          "target": "@components/form/quantity-input.tsx"
         }
       ]
     },
@@ -994,7 +994,7 @@
         {
           "path": "src/base-ui/form/checkbox.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/checkbox.tsx"
+          "target": "@base-ui/form/checkbox.tsx"
         }
       ]
     },
@@ -1011,7 +1011,7 @@
         {
           "path": "src/base-ui/form/radio-group.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/radio-group.tsx"
+          "target": "@base-ui/form/radio-group.tsx"
         }
       ]
     },
@@ -1028,7 +1028,7 @@
         {
           "path": "src/base-ui/form/switch.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/switch.tsx"
+          "target": "@base-ui/form/switch.tsx"
         }
       ]
     },
@@ -1045,7 +1045,7 @@
         {
           "path": "src/base-ui/form/slider.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/slider.tsx"
+          "target": "@base-ui/form/slider.tsx"
         }
       ]
     },
@@ -1065,7 +1065,7 @@
         {
           "path": "src/base-ui/form/calendar.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/calendar.tsx"
+          "target": "@base-ui/form/calendar.tsx"
         }
       ]
     },
@@ -1089,7 +1089,7 @@
         {
           "path": "src/components/form/date-picker.tsx",
           "type": "registry:ui",
-          "target": "@/components/form/date-picker.tsx"
+          "target": "@components/form/date-picker.tsx"
         }
       ]
     },
@@ -1104,7 +1104,7 @@
         {
           "path": "src/base-ui/layout/card.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/card.tsx"
+          "target": "@base-ui/layout/card.tsx"
         }
       ]
     },
@@ -1122,7 +1122,7 @@
         {
           "path": "src/base-ui/layout/resizable.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/resizable.tsx"
+          "target": "@base-ui/layout/resizable.tsx"
         }
       ]
     },
@@ -1137,7 +1137,7 @@
         {
           "path": "src/base-ui/layout/aspect-ratio.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/layout/aspect-ratio.tsx"
+          "target": "@base-ui/layout/aspect-ratio.tsx"
         }
       ]
     },
@@ -1156,7 +1156,7 @@
         {
           "path": "src/base-ui/displaying-data/chart.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/displaying-data/chart.tsx"
+          "target": "@base-ui/displaying-data/chart.tsx"
         }
       ]
     },
@@ -1173,7 +1173,7 @@
         {
           "path": "src/base-ui/form/file-upload.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/file-upload.tsx"
+          "target": "@base-ui/form/file-upload.tsx"
         }
       ]
     },
@@ -1192,7 +1192,7 @@
         {
           "path": "src/base-ui/form/form-section.tsx",
           "type": "registry:ui",
-          "target": "@/base-ui/form/form-section.tsx"
+          "target": "@base-ui/form/form-section.tsx"
         }
       ]
     }
