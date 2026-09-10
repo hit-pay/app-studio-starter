@@ -2,7 +2,7 @@
 
 # Progress
 
-shadcn-compatible progress with composable label, value, track, and indicator.
+Progress with composable label, value, track, and indicator.
 
 ## Example
 

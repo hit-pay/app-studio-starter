@@ -2,7 +2,7 @@
 
 # Checkbox
 
-shadcn-compatible checkbox with Orchid states and an optional group helper.
+Checkbox with Orchid states and an optional group helper.
 
 ## Example
 

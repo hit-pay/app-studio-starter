@@ -8,7 +8,7 @@ Orchid is an open-code component collection for application and business
 interfaces. You install its source into your project and retain full ownership
 of the resulting code.
 
-It combines shadcn-compatible UI primitives with higher-level components for
+It combines UI primitives with higher-level components for
 forms, data tables, page layouts, sidebars, confirmations, and common business
 workflows. Orchid uses the shadcn CLI as its installer. It does not provide a
 separate Orchid CLI.
@@ -61,24 +61,16 @@ The complete catalog is at
 `https://orchid-ui-hitpay.vercel.app/orchid-tokens.css` into the global
 stylesheet configured in `components.json`.
 
-## Add a component
-
-```bash
-bunx --bun shadcn@latest add @orchid/button
-```
-
-The namespace keeps Orchid items separate from the default shadcn registry.
-Registry dependencies are installed automatically. Import a base item from
-`@/base-ui/actions/button` and a block from `@/components/form/form-builder`.
-
 ## Add the complete catalog
 
 ```bash
 bunx --bun shadcn@latest add @orchid/all
 ```
 
-Prefer individual items when you only need part of the catalog. Use `all` for
-an application starter that keeps the full component set.
+Use this for a new application. Do not install a subset. The namespace keeps
+Orchid items separate from the default shadcn registry. Registry dependencies
+are installed automatically. Import a base item from `@/base-ui/actions/button`
+and a block from `@/components/form/form-builder`.
 
 Orchid maintainers build the published registry with `bun run registry:build`.
 Consumer applications do not need this command.

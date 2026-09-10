@@ -101,7 +101,7 @@ const BLOCK_SUBGROUP = {
   'form-builder': 'Form',
   'quantity-input': 'Form',
   'text-editor': 'Form',
-  'app-layout': 'Layout',
+  'app-studio-layout': 'Layout',
   'form-layout': 'Layout',
   'page-layout': 'Layout',
   sidebar: 'Navigation',

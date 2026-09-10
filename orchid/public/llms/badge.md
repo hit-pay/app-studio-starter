@@ -63,7 +63,7 @@ function BadgeDemo() {
     <>
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          shadcn-compatible variants
+          Variants
         </p>
         <div className="flex flex-wrap items-center gap-3">
           {VARIANTS.map((variant) => (

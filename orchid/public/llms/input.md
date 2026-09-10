@@ -2,7 +2,7 @@
 
 # Input
 
-shadcn-compatible text and file input with Orchid states.
+Text and file input with Orchid states.
 
 ## Example
 

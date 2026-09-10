@@ -2,7 +2,7 @@
 
 # Input Group
 
-shadcn-compatible input, textarea, addon, and button composition.
+Input, textarea, addon, and button composition.
 
 ## Example
 

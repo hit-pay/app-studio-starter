@@ -2,7 +2,7 @@
 
 # Spinner
 
-shadcn-compatible indeterminate loading icon sized through className.
+Indeterminate loading icon sized through className.
 
 ## Example
 

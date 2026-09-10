@@ -2,7 +2,7 @@
 
 # Toast
 
-shadcn-compatible toast manager with semantic types, actions, close, and placement.
+Toast manager with semantic types, actions, close, and placement.
 
 ## Example
 

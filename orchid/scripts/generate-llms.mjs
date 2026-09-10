@@ -186,13 +186,15 @@ function writeMarkdownDocs() {
   const pages = [...guideItems, ...documented];
   for (const item of pages) {
     const mdxFile = findMdx(item);
-    const markdown = mdxToMarkdown(
-      readFileSync(mdxFile, "utf8"),
-      mdxFile,
-      item.name,
-      item.description,
+    writeFileSync(
+      join(docsDir, `${slug(item)}.md`),
+      mdxToMarkdown(
+        readFileSync(mdxFile, "utf8"),
+        mdxFile,
+        item.name,
+        item.description,
+      ),
     );
-    writeFileSync(join(docsDir, `${slug(item)}.md`), markdown);
   }
   return pages.length;
 }
@@ -202,7 +204,7 @@ function docsItem(item) {
   return [
     `### [${item.name}](${docsLink(item)})`,
     item.description,
-    `Install: \`bunx --bun shadcn@latest add @orchid/${name}\` · [Registry JSON](${link(`/r/${name}.json`)})`,
+    `[Registry JSON](${link(`/r/${name}.json`)})`,
     "",
   ];
 }
@@ -223,7 +225,7 @@ function docsGroupedSection(title, groups) {
         return [
           `#### [${item.name}](${docsLink(item)})`,
           item.description,
-          `Install: \`bunx --bun shadcn@latest add @orchid/${name}\` · [Registry JSON](${link(`/r/${name}.json`)})`,
+          `[Registry JSON](${link(`/r/${name}.json`)})`,
           "",
         ];
       }),
@@ -236,7 +238,7 @@ const markdownCount = writeMarkdownDocs();
 const lines = [
   "# Orchid UI Documentation",
   "",
-  `AI/LLM note: use the [registry index](${link("/registry.json")}) as the machine-readable source of truth for installable items, dependencies, files, and targets. Read the generated Markdown docs under ${link("/llms/")} for intent and examples, then verify exports and props in the installed source.`,
+  `AI/LLM note: after \`@orchid\` is in \`components.json\`, install every item with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Use the [registry index](${link("/registry.json")}) as the machine-readable catalog. Read the generated Markdown docs under ${link("/llms/")} for intent and examples, then verify exports and props in the installed source.`,
   "",
   "## Overview",
   "",
@@ -250,13 +252,7 @@ const lines = [
   "",
   "### Installation",
   "",
-  "Install one item after configuring the `@orchid` registry namespace in `components.json`:",
-  "",
-  "```bash",
-  "bunx --bun shadcn@latest add @orchid/<component-name>",
-  "```",
-  "",
-  "Install the complete catalog when that is intentional:",
+  "After `@orchid` is in `components.json`, install every Orchid component. Do not install one item, a shortlist, or any other subset:",
   "",
   "```bash",
   "bunx --bun shadcn@latest add @orchid/all",
@@ -311,9 +307,8 @@ const lines = [
   "Example prompts after setup:",
   "",
   "- Show all components available in the Orchid registry.",
-  "- Find an Orchid component for a schema-driven form.",
-  "- Install `@orchid/button`.",
-  "- Build a searchable data page using Orchid DataTable and PageLayout.",
+  "- Install the complete catalog with `@orchid/all`.",
+  "- Find the Orchid block that matches a form, a collection, or a single-record detail view.",
   "",
   "## Getting Started",
   "",
@@ -336,11 +331,12 @@ const lines = [
   "## Usage Guidance",
   "",
   "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
-  "- Read Components & Blocks first. Use a block when one exists. Only then read Base Components.",
+  "- Install `@orchid/all` after the registry is configured. Do not pick a subset.",
+  "- Read Components & Blocks first. Match the job to each item's when-to-use description. Use a block when one exists. Only then read Base Components. Do not default to a shortlist of favorites.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
   "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Blocks live under `src/components/{category}` (`@/components/{category}/…`) and are ready to use through props or a schema. Base items live under `src/base-ui/{category}` (`@/base-ui/{category}/…`). Do not assemble a block from many base components.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
-  "- Use AppLayout to frame the embedded pane, FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.",
+  "- AppStudioLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.",
   "",
 ];
 

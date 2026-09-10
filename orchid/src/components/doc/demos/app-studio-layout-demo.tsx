@@ -1,16 +1,16 @@
 import { useState } from 'react'
 
-import { AppLayout } from '@/components/layout/app-layout'
+import { AppStudioLayout } from '@/components/layout/app-studio-layout'
 import { PageLayout } from '@/components/layout/page-layout'
 
-function AppLayoutDemo() {
+function AppStudioLayoutDemo() {
   const [tab, setTab] = useState('overview')
   const [sidebar, setSidebar] = useState('home')
 
   return (
     <div className="flex min-h-0 flex-col gap-8">
       <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
-        <AppLayout
+        <AppStudioLayout
           className="h-full"
           appName="Invoices"
           variant="tabs"
@@ -23,13 +23,13 @@ function AppLayoutDemo() {
         >
           <PageLayout title={tab === 'overview' ? 'Overview' : 'Sent'}>
             <p className="text-sm text-oc-muted-foreground">
-              Frame the embedded pane with AppLayout, then put PageLayout inside.
+              Frame the embedded pane with AppStudioLayout, then put PageLayout inside.
             </p>
           </PageLayout>
-        </AppLayout>
+        </AppStudioLayout>
       </div>
       <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
-        <AppLayout
+        <AppStudioLayout
           className="h-full"
           appName="Settings"
           variant="sidebar"
@@ -45,10 +45,10 @@ function AppLayoutDemo() {
               Sidebar mode opens a drawer on small screens.
             </p>
           </PageLayout>
-        </AppLayout>
+        </AppStudioLayout>
       </div>
     </div>
   )
 }
 
-export { AppLayoutDemo }
+export { AppStudioLayoutDemo }

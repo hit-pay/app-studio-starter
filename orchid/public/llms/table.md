@@ -2,7 +2,7 @@
 
 # Table
 
-shadcn-compatible semantic HTML table with Orchid styling.
+Semantic HTML table with Orchid styling.
 
 ## Example
 

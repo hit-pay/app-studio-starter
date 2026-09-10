@@ -2,7 +2,7 @@
 
 # Field
 
-shadcn-compatible label, description, error, and grouped field composition.
+Label, description, error, and grouped field composition.
 
 ## Example
 

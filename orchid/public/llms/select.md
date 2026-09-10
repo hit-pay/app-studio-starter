@@ -2,7 +2,7 @@
 
 # Select
 
-shadcn-compatible Base UI select with groups, states, and Orchid styling.
+Base UI select with groups, states, and Orchid styling.
 
 ## Example
 

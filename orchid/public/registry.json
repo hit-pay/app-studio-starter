@@ -24,7 +24,7 @@
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
-        "@orchid/app-layout",
+        "@orchid/app-studio-layout",
         "@orchid/confirmation-modal",
         "@orchid/button",
         "@orchid/button-group",
@@ -83,7 +83,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
-      "description": "cn() Tailwind class merge. Import from @/lib/utils.",
+      "description": "Cn() Tailwind class merge. Import from @/lib/utils.",
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -138,7 +138,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Schema-driven collection when the user needs search, column filters, sorting, or pagination. Do not default every list here — use Data List for compact collections and Detail Card for one record. rowActions defaults to true (Edit + Delete). One-field edits use cells. editColumns only toggles column visibility.",
+      "description": "Schema-driven collection when the user needs search, column filters, sorting, or pagination. Do not default every list here \u2014 use Data List for compact collections and Detail Card for one record. rowActions defaults to true (Edit + Delete). One-field edits use cells. editColumns only toggles column visibility.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -186,7 +186,7 @@
       "name": "sub-sidebar",
       "type": "registry:ui",
       "title": "Sub Sidebar",
-      "description": "Simple flat child navigation for AppLayout sidebar mode with a blue active state.",
+      "description": "Simple flat child navigation for AppStudioLayout sidebar mode with a blue active state.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -201,7 +201,7 @@
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
-      "description": "shadcn-compatible alert with semantic variants and top-right or bottom action placement in Orchid styling.",
+      "description": "Alert with semantic variants and top-right or bottom action placement in Orchid styling.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -237,7 +237,7 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "shadcn-compatible compound empty state with Orchid media variants.",
+      "description": "Compound empty state with Orchid media variants.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -294,10 +294,10 @@
       ]
     },
     {
-      "name": "app-layout",
+      "name": "app-studio-layout",
       "type": "registry:ui",
-      "title": "App Layout",
-      "description": "Embedded application frame with optional app name, tabs, and sidebar.",
+      "title": "App Studio Layout",
+      "description": "HitPay App Studio embedded pane frame (not generic app chrome). Optional app name, tabs, and sidebar.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -307,9 +307,9 @@
       ],
       "files": [
         {
-          "path": "src/components/layout/app-layout.tsx",
+          "path": "src/components/layout/app-studio-layout.tsx",
           "type": "registry:ui",
-          "target": "@components/layout/app-layout.tsx"
+          "target": "@components/layout/app-studio-layout.tsx"
         }
       ]
     },
@@ -355,7 +355,7 @@
       "name": "button",
       "type": "registry:ui",
       "title": "Button",
-      "description": "shadcn-compatible Base UI button with standard variants and sizes in Orchid styling.",
+      "description": "Base UI button with standard variants and sizes in Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -393,7 +393,7 @@
       "name": "dropdown-menu",
       "type": "registry:ui",
       "title": "Dropdown Menu",
-      "description": "shadcn-compatible menu with items, checkbox and radio selection, submenus, and Orchid styling.",
+      "description": "Menu with items, checkbox and radio selection, submenus, and Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -412,7 +412,7 @@
       "name": "toast",
       "type": "registry:ui",
       "title": "Toast",
-      "description": "shadcn-compatible Base UI toast with additive placement options and Orchid semantic styling.",
+      "description": "Base UI toast with additive placement options and Orchid semantic styling.",
       "dependencies": [
         "@base-ui/react",
         "@mingcute/react"
@@ -432,7 +432,7 @@
       "name": "badge",
       "type": "registry:ui",
       "title": "Badge",
-      "description": "shadcn-compatible badge with render support plus Orchid tones, appearances, removable badges, and user roles.",
+      "description": "Badge with render support plus Orchid tones, appearances, removable badges, and user roles.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -451,7 +451,7 @@
       "name": "accordion",
       "type": "registry:ui",
       "title": "Accordion",
-      "description": "shadcn-compatible Base UI accordion with Orchid styling.",
+      "description": "Base UI accordion with Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "@mingcute/react"
@@ -469,7 +469,7 @@
       "name": "progress",
       "type": "registry:ui",
       "title": "Progress",
-      "description": "shadcn-compatible compound progress with label, value, track, and indicator primitives.",
+      "description": "Compound progress with label, value, track, and indicator primitives.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -486,7 +486,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "shadcn-compatible compound avatar with image, fallback, badge, group, and Orchid business styling.",
+      "description": "Compound avatar with image, fallback, badge, group, and Orchid business styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -503,7 +503,7 @@
       "name": "tooltip",
       "type": "registry:ui",
       "title": "Tooltip",
-      "description": "shadcn-compatible Base UI tooltip with Orchid styling.",
+      "description": "Base UI tooltip with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -520,7 +520,7 @@
       "name": "tabs",
       "type": "registry:ui",
       "title": "Tabs",
-      "description": "shadcn-compatible horizontal or vertical tabs with default and line variants.",
+      "description": "Horizontal or vertical tabs with default and line variants.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority"
@@ -555,7 +555,7 @@
       "name": "metric-card",
       "type": "registry:ui",
       "title": "Metric Card",
-      "description": "Dashboard KPI tile: icon, title, value, optional percent change. Use for revenue, volume, counts — not for a record's fields (use Detail Card).",
+      "description": "Dashboard KPI tile: icon, title, value, optional percent change. Use for revenue, volume, counts \u2014 not for a record's fields (use Detail Card).",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -574,7 +574,7 @@
       "name": "data-list",
       "type": "registry:ui",
       "title": "Data List",
-      "description": "Props-driven card/row collection (people, products, checklists, activity). Use when the list does not need search, filters, sort, or pagination. Not for one record's fields — use Detail Card. Do not assemble rows from base List.",
+      "description": "Props-driven card/row collection (people, products, checklists, activity). Use when the list does not need search, filters, sort, or pagination. Not for one record's fields \u2014 use Detail Card. Do not assemble rows from base List.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/list"
@@ -591,7 +591,7 @@
       "name": "detail-card",
       "type": "registry:ui",
       "title": "Detail Card",
-      "description": "Read-only key/value card for one record (invoice, leave request, customer). Use on show/detail pages. Not a collection — use Data List or Data Table for many items. items plus optional title, columns, style default|border. Values can be React nodes.",
+      "description": "Read-only key/value card for one record (invoice, leave request, customer). Use on show/detail pages. Not a collection \u2014 use Data List or Data Table for many items. items plus optional title, columns, style default|border. Values can be React nodes.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -629,7 +629,7 @@
       "name": "skeleton",
       "type": "registry:ui",
       "title": "Skeleton",
-      "description": "shadcn-compatible animated loading placeholder with Orchid styling.",
+      "description": "Animated loading placeholder with Orchid styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -644,7 +644,7 @@
       "name": "spinner",
       "type": "registry:ui",
       "title": "Spinner",
-      "description": "shadcn-compatible indeterminate loading icon sized through className.",
+      "description": "Indeterminate loading icon sized through className.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -661,7 +661,7 @@
       "name": "dialog",
       "type": "registry:ui",
       "title": "Dialog",
-      "description": "shadcn-compatible dialog primitives with Orchid sizes and persistent mode.",
+      "description": "Dialog primitives with Orchid sizes and persistent mode.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -699,7 +699,7 @@
       "name": "breadcrumb",
       "type": "registry:ui",
       "title": "Breadcrumb",
-      "description": "shadcn-compatible breadcrumb with composable router links, page, separator, and ellipsis.",
+      "description": "Breadcrumb with composable router links, page, separator, and ellipsis.",
       "dependencies": [
         "@base-ui/react",
         "@mingcute/react"
@@ -717,7 +717,7 @@
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
-      "description": "shadcn-compatible link pagination with Orchid buttons and an optional range label.",
+      "description": "Link pagination with Orchid buttons and an optional range label.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -736,7 +736,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "shadcn-compatible semantic HTML table with Orchid styling.",
+      "description": "Semantic HTML table with Orchid styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -772,7 +772,7 @@
       "name": "kbd",
       "type": "registry:ui",
       "title": "Kbd",
-      "description": "shadcn-compatible keyboard key and key group with Orchid styling.",
+      "description": "Keyboard key and key group with Orchid styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -787,7 +787,7 @@
       "name": "collapsible",
       "type": "registry:ui",
       "title": "Collapsible",
-      "description": "shadcn-compatible Root, Trigger, and Content primitives with Orchid styling.",
+      "description": "Root, Trigger, and Content primitives with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -804,7 +804,7 @@
       "name": "scroll-area",
       "type": "registry:ui",
       "title": "Scroll Area",
-      "description": "shadcn-compatible scroll area and scrollbar primitives with Orchid styling.",
+      "description": "Scroll area and scrollbar primitives with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -821,7 +821,7 @@
       "name": "popover",
       "type": "registry:ui",
       "title": "Popover",
-      "description": "shadcn-compatible non-modal popover primitives with Orchid styling.",
+      "description": "Non-modal popover primitives with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -838,7 +838,7 @@
       "name": "separator",
       "type": "registry:ui",
       "title": "Separator",
-      "description": "shadcn-compatible horizontal or vertical separator with Orchid styling.",
+      "description": "Horizontal or vertical separator with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -855,7 +855,7 @@
       "name": "field",
       "type": "registry:ui",
       "title": "Field",
-      "description": "shadcn-compatible field composition with Orchid form styling.",
+      "description": "Field composition with Orchid form styling.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -875,7 +875,7 @@
       "name": "label",
       "type": "registry:ui",
       "title": "Label",
-      "description": "shadcn-compatible accessible label with Orchid typography.",
+      "description": "Accessible label with Orchid typography.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -890,7 +890,7 @@
       "name": "input",
       "type": "registry:ui",
       "title": "Input",
-      "description": "shadcn-compatible Base UI input with Orchid form styling.",
+      "description": "Base UI input with Orchid form styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -907,7 +907,7 @@
       "name": "input-group",
       "type": "registry:ui",
       "title": "Input Group",
-      "description": "shadcn-compatible input, textarea, addon, and button composition with Orchid styling.",
+      "description": "Input, textarea, addon, and button composition with Orchid styling.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -928,7 +928,7 @@
       "name": "textarea",
       "type": "registry:ui",
       "title": "Textarea",
-      "description": "shadcn-compatible auto-sizing textarea with Orchid form styling.",
+      "description": "Auto-sizing textarea with Orchid form styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -943,7 +943,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "shadcn-compatible Base UI select with standard sizes and Orchid styling.",
+      "description": "Base UI select with standard sizes and Orchid styling.",
       "dependencies": [
         "@base-ui/react",
         "@mingcute/react"
@@ -961,7 +961,7 @@
       "name": "combobox",
       "type": "registry:ui",
       "title": "Combobox",
-      "description": "shadcn-compatible searchable single or multi-select with optional Orchid checkbox items and Select All.",
+      "description": "Searchable single or multi-select with optional Orchid checkbox items and Select All.",
       "dependencies": [
         "@base-ui/react",
         "@mingcute/react"
@@ -1024,7 +1024,7 @@
       "name": "checkbox",
       "type": "registry:ui",
       "title": "Checkbox",
-      "description": "shadcn-compatible Base UI checkbox with Orchid states and an optional CheckboxGroup helper.",
+      "description": "Base UI checkbox with Orchid states and an optional CheckboxGroup helper.",
       "dependencies": [
         "@base-ui/react",
         "class-variance-authority",
@@ -1043,7 +1043,7 @@
       "name": "radio-group",
       "type": "registry:ui",
       "title": "Radio Group",
-      "description": "shadcn-compatible radio group and item primitives with Orchid styling.",
+      "description": "Radio group and item primitives with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1060,7 +1060,7 @@
       "name": "switch",
       "type": "registry:ui",
       "title": "Switch",
-      "description": "shadcn-compatible Base UI switch with default and small Orchid sizes.",
+      "description": "Base UI switch with default and small Orchid sizes.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1077,7 +1077,7 @@
       "name": "slider",
       "type": "registry:ui",
       "title": "Slider",
-      "description": "shadcn-compatible horizontal or vertical slider with Orchid styling.",
+      "description": "Horizontal or vertical slider with Orchid styling.",
       "dependencies": [
         "@base-ui/react"
       ],
@@ -1094,7 +1094,7 @@
       "name": "calendar",
       "type": "registry:ui",
       "title": "Calendar",
-      "description": "shadcn-compatible DayPicker calendar for single, range, or multiple selection in Orchid styling.",
+      "description": "DayPicker calendar for single, range, or multiple selection in Orchid styling.",
       "dependencies": [
         "react-day-picker",
         "@mingcute/react"
@@ -1114,7 +1114,7 @@
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
-      "description": "Orchid helper wrappers following the shadcn Popover + Calendar recipe for date, range, and date-time selection.",
+      "description": "Date, range, and date-time selection with popover and calendar helpers.",
       "dependencies": [
         "date-fns",
         "@mingcute/react",
@@ -1138,7 +1138,7 @@
       "name": "card",
       "type": "registry:ui",
       "title": "Card",
-      "description": "shadcn-compatible content card with header, title, description, action, content, and footer in Orchid styling.",
+      "description": "Content card with header, title, description, action, content, and footer in Orchid styling.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -1153,7 +1153,7 @@
       "name": "resizable",
       "type": "registry:ui",
       "title": "Resizable",
-      "description": "shadcn-compatible split panes with a drag handle in Orchid styling.",
+      "description": "Split panes with a drag handle in Orchid styling.",
       "dependencies": [
         "react-resizable-panels",
         "@mingcute/react"
@@ -1171,7 +1171,7 @@
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
-      "description": "shadcn-compatible box that keeps a width/height ratio.",
+      "description": "Box that keeps a width/height ratio.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -1186,7 +1186,7 @@
       "name": "chart",
       "type": "registry:ui",
       "title": "Chart",
-      "description": "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.",
+      "description": "Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.",
       "dependencies": [
         "recharts"
       ],

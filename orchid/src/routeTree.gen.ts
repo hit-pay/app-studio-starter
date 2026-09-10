@@ -58,7 +58,7 @@ import { Route as BaseUiTextareaRouteImport } from './routes/base-ui/textarea'
 import { Route as BaseUiToastRouteImport } from './routes/base-ui/toast'
 import { Route as BaseUiTooltipRouteImport } from './routes/base-ui/tooltip'
 import { Route as ComponentsIndexRouteImport } from './routes/components/index'
-import { Route as ComponentsAppLayoutRouteImport } from './routes/components/app-layout'
+import { Route as ComponentsAppStudioLayoutRouteImport } from './routes/components/app-studio-layout'
 import { Route as ComponentsChoiceCardRouteImport } from './routes/components/choice-card'
 import { Route as ComponentsCommandRouteImport } from './routes/components/command'
 import { Route as ComponentsConfirmationModalRouteImport } from './routes/components/confirmation-modal'
@@ -321,11 +321,12 @@ const ComponentsIndexRoute = ComponentsIndexRouteImport.update({
   path: '/components/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsAppLayoutRoute = ComponentsAppLayoutRouteImport.update({
-  id: '/components/app-layout',
-  path: '/components/app-layout',
-  getParentRoute: () => rootRouteImport,
-} as any)
+const ComponentsAppStudioLayoutRoute =
+  ComponentsAppStudioLayoutRouteImport.update({
+    id: '/components/app-studio-layout',
+    path: '/components/app-studio-layout',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ComponentsChoiceCardRoute = ComponentsChoiceCardRouteImport.update({
   id: '/components/choice-card',
   path: '/components/choice-card',
@@ -456,7 +457,7 @@ export interface FileRoutesByFullPath {
   '/base-ui/textarea': typeof BaseUiTextareaRoute
   '/base-ui/toast': typeof BaseUiToastRoute
   '/base-ui/tooltip': typeof BaseUiTooltipRoute
-  '/components/app-layout': typeof ComponentsAppLayoutRoute
+  '/components/app-studio-layout': typeof ComponentsAppStudioLayoutRoute
   '/components/choice-card': typeof ComponentsChoiceCardRoute
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
@@ -524,7 +525,7 @@ export interface FileRoutesByTo {
   '/base-ui/textarea': typeof BaseUiTextareaRoute
   '/base-ui/toast': typeof BaseUiToastRoute
   '/base-ui/tooltip': typeof BaseUiTooltipRoute
-  '/components/app-layout': typeof ComponentsAppLayoutRoute
+  '/components/app-studio-layout': typeof ComponentsAppStudioLayoutRoute
   '/components/choice-card': typeof ComponentsChoiceCardRoute
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
@@ -593,7 +594,7 @@ export interface FileRoutesById {
   '/base-ui/textarea': typeof BaseUiTextareaRoute
   '/base-ui/toast': typeof BaseUiToastRoute
   '/base-ui/tooltip': typeof BaseUiTooltipRoute
-  '/components/app-layout': typeof ComponentsAppLayoutRoute
+  '/components/app-studio-layout': typeof ComponentsAppStudioLayoutRoute
   '/components/choice-card': typeof ComponentsChoiceCardRoute
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
@@ -663,7 +664,7 @@ export interface FileRouteTypes {
     | '/base-ui/textarea'
     | '/base-ui/toast'
     | '/base-ui/tooltip'
-    | '/components/app-layout'
+    | '/components/app-studio-layout'
     | '/components/choice-card'
     | '/components/command'
     | '/components/confirmation-modal'
@@ -731,7 +732,7 @@ export interface FileRouteTypes {
     | '/base-ui/textarea'
     | '/base-ui/toast'
     | '/base-ui/tooltip'
-    | '/components/app-layout'
+    | '/components/app-studio-layout'
     | '/components/choice-card'
     | '/components/command'
     | '/components/confirmation-modal'
@@ -799,7 +800,7 @@ export interface FileRouteTypes {
     | '/base-ui/textarea'
     | '/base-ui/toast'
     | '/base-ui/tooltip'
-    | '/components/app-layout'
+    | '/components/app-studio-layout'
     | '/components/choice-card'
     | '/components/command'
     | '/components/confirmation-modal'
@@ -868,7 +869,7 @@ export interface RootRouteChildren {
   BaseUiTextareaRoute: typeof BaseUiTextareaRoute
   BaseUiToastRoute: typeof BaseUiToastRoute
   BaseUiTooltipRoute: typeof BaseUiTooltipRoute
-  ComponentsAppLayoutRoute: typeof ComponentsAppLayoutRoute
+  ComponentsAppStudioLayoutRoute: typeof ComponentsAppStudioLayoutRoute
   ComponentsChoiceCardRoute: typeof ComponentsChoiceCardRoute
   ComponentsCommandRoute: typeof ComponentsCommandRoute
   ComponentsConfirmationModalRoute: typeof ComponentsConfirmationModalRoute
@@ -1234,11 +1235,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/app-layout': {
-      id: '/components/app-layout'
-      path: '/components/app-layout'
-      fullPath: '/components/app-layout'
-      preLoaderRoute: typeof ComponentsAppLayoutRouteImport
+    '/components/app-studio-layout': {
+      id: '/components/app-studio-layout'
+      path: '/components/app-studio-layout'
+      fullPath: '/components/app-studio-layout'
+      preLoaderRoute: typeof ComponentsAppStudioLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/choice-card': {
@@ -1404,7 +1405,7 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiTextareaRoute: BaseUiTextareaRoute,
   BaseUiToastRoute: BaseUiToastRoute,
   BaseUiTooltipRoute: BaseUiTooltipRoute,
-  ComponentsAppLayoutRoute: ComponentsAppLayoutRoute,
+  ComponentsAppStudioLayoutRoute: ComponentsAppStudioLayoutRoute,
   ComponentsChoiceCardRoute: ComponentsChoiceCardRoute,
   ComponentsCommandRoute: ComponentsCommandRoute,
   ComponentsConfirmationModalRoute: ComponentsConfirmationModalRoute,

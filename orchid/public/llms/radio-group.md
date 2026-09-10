@@ -2,7 +2,7 @@
 
 # Radio Group
 
-shadcn-compatible radio group and item primitives with Orchid styling.
+Radio group and item primitives with Orchid styling.
 
 ## Example
 

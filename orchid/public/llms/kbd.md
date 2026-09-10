@@ -2,7 +2,7 @@
 
 # Kbd
 
-shadcn-compatible keyboard key and grouped shortcut display.
+Keyboard key and grouped shortcut display.
 
 ## Example
 

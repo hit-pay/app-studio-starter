@@ -2,7 +2,7 @@
 
 # Label
 
-shadcn-compatible accessible label with Orchid typography.
+Accessible label with Orchid typography.
 
 ## Example
 

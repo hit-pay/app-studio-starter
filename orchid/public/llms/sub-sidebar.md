@@ -38,4 +38,4 @@ function SubSidebarDemo() {
 export { SubSidebarDemo }
 ```
 
-Sub Sidebar is configured through one JSON-compatible `items` array. It does not export item or content primitives. `AppLayout` composes it automatically when using sidebar mode.
+Sub Sidebar is configured through one JSON-compatible `items` array. It does not export item or content primitives. `AppStudioLayout` composes it automatically when using sidebar mode.

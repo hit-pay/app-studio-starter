@@ -2,7 +2,7 @@
 
 # Date Picker
 
-Shadcn-style Popover and Calendar composition with optional Orchid helpers.
+Date, range, and date-time selection with popover and calendar helpers.
 
 ## Example
 

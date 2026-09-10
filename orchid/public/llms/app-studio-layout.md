@@ -1,10 +1,11 @@
-<!-- Generated from content/docs/components/app-layout.mdx. Do not edit. -->
+<!-- Generated from content/docs/components/app-studio-layout.mdx. Do not edit. -->
 
-# App Layout
+# App Studio Layout
 
-Embedded application frame with optional app name, tabs, and sidebar.
+HitPay App Studio embedded pane frame. Not generic app chrome.
 
-`AppLayout` is the embedded application frame. Use it around every route.
+`AppStudioLayout` is the HitPay App Studio embedded pane frame. Use it around
+every route inside the dashboard iframe — not as generic website chrome.
 Put `PageLayout` or `FormLayout` inside for page chrome.
 
 ## Example
@@ -12,17 +13,17 @@ Put `PageLayout` or `FormLayout` inside for page chrome.
 ```tsx
 import { useState } from 'react'
 
-import { AppLayout } from '@/components/layout/app-layout'
+import { AppStudioLayout } from '@/components/layout/app-studio-layout'
 import { PageLayout } from '@/components/layout/page-layout'
 
-function AppLayoutDemo() {
+function AppStudioLayoutDemo() {
   const [tab, setTab] = useState('overview')
   const [sidebar, setSidebar] = useState('home')
 
   return (
     <div className="flex min-h-0 flex-col gap-8">
       <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
-        <AppLayout
+        <AppStudioLayout
           className="h-full"
           appName="Invoices"
           variant="tabs"
@@ -35,13 +36,13 @@ function AppLayoutDemo() {
         >
           <PageLayout title={tab === 'overview' ? 'Overview' : 'Sent'}>
             <p className="text-sm text-oc-muted-foreground">
-              Frame the embedded pane with AppLayout, then put PageLayout inside.
+              Frame the embedded pane with AppStudioLayout, then put PageLayout inside.
             </p>
           </PageLayout>
-        </AppLayout>
+        </AppStudioLayout>
       </div>
       <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
-        <AppLayout
+        <AppStudioLayout
           className="h-full"
           appName="Settings"
           variant="sidebar"
@@ -57,24 +58,24 @@ function AppLayoutDemo() {
               Sidebar mode opens a drawer on small screens.
             </p>
           </PageLayout>
-        </AppLayout>
+        </AppStudioLayout>
       </div>
     </div>
   )
 }
 
-export { AppLayoutDemo }
+export { AppStudioLayoutDemo }
 ```
 
 ## Default
 
 ```tsx
-import { AppLayout } from "@/components/layout/app-layout";
+import { AppStudioLayout } from "@/components/layout/app-studio-layout";
 import { PageLayout } from "@/components/layout/page-layout";
 
-<AppLayout appName="Invoices" className="h-full">
+<AppStudioLayout appName="Invoices" className="h-full">
   <PageLayout title="Invoices">…</PageLayout>
-</AppLayout>
+</AppStudioLayout>
 ```
 
 ## Tabs

@@ -2,7 +2,7 @@
 
 # Scroll Area
 
-shadcn-compatible bounded scroll area with Orchid scrollbar styling.
+Bounded scroll area with Orchid scrollbar styling.
 
 ## Example
 

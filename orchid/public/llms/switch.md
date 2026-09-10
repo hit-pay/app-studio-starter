@@ -2,7 +2,7 @@
 
 # Switch
 
-shadcn-compatible switch in default and small Orchid sizes.
+Switch in default and small Orchid sizes.
 
 ## Example
 

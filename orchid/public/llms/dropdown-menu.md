@@ -2,7 +2,7 @@
 
 # Dropdown Menu
 
-shadcn-compatible items, selection, submenus, and shortcuts with Orchid styling.
+Items, selection, submenus, and shortcuts with Orchid styling.
 
 ## Example
 

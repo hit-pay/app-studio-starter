@@ -2,7 +2,7 @@
 
 # Dialog
 
-shadcn-compatible dialog primitives with Orchid sizes and persistent mode.
+Dialog primitives with Orchid sizes and persistent mode.
 
 ## Example
 

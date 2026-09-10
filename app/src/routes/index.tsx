@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { useHitPayUser } from '#/lib/hitpay'
 import { Spinner } from '@/base-ui/feedback/spinner'
-import { AppLayout } from '@/components/layout/app-layout'
+import { AppStudioLayout } from '@/components/layout/app-studio-layout'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -26,7 +26,7 @@ function Home() {
   }, [])
 
   return (
-    <AppLayout appName="Your app" className="h-full min-h-0">
+    <AppStudioLayout appName="Your app" className="h-full min-h-0">
       <div className="flex min-h-[calc(100dvh-3rem)] w-full items-center justify-center px-6">
         <div className="flex w-full max-w-md flex-col items-center text-center">
           <Spinner className="size-6 text-oc-primary" aria-label="Building your app" />
@@ -55,6 +55,6 @@ function Home() {
           </p>
         </div>
       </div>
-    </AppLayout>
+    </AppStudioLayout>
   )
 }

@@ -51,6 +51,6 @@ components continue to resolve their utility classes.
 
 ## Next step
 
-Review [Components](https://orchid-ui-hitpay.vercel.app/llms/components-json.md), then add your first item with
-`bunx --bun shadcn@latest add @orchid/button`. See
+Review [Components](https://orchid-ui-hitpay.vercel.app/llms/components-json.md), then install the complete catalog with
+`bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. See
 [Installation](https://orchid-ui-hitpay.vercel.app/llms/installation.md) for init and add commands.

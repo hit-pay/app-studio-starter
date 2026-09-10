@@ -2,7 +2,7 @@
 
 # Resizable
 
-shadcn-compatible split panes with a drag handle in Orchid styling.
+Split panes with a drag handle in Orchid styling.
 
 ## Example
 

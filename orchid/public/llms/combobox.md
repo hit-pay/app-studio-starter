@@ -2,7 +2,7 @@
 
 # Combobox
 
-shadcn-compatible searchable select with Orchid chips and bulk selection helpers.
+Searchable select with Orchid chips and bulk selection helpers.
 
 ## Example
 

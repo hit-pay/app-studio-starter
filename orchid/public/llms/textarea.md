@@ -2,7 +2,7 @@
 
 # Textarea
 
-shadcn-compatible auto-sizing textarea with Orchid form styling.
+Auto-sizing textarea with Orchid form styling.
 
 ## Example
 

@@ -1,6 +1,6 @@
 # Orchid UI Documentation
 
-AI/LLM note: use the [registry index](https://orchid-ui-hitpay.vercel.app/registry.json) as the machine-readable source of truth for installable items, dependencies, files, and targets. Read the generated Markdown docs under https://orchid-ui-hitpay.vercel.app/llms/ for intent and examples, then verify exports and props in the installed source.
+AI/LLM note: after `@orchid` is in `components.json`, install every item with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Use the [registry index](https://orchid-ui-hitpay.vercel.app/registry.json) as the machine-readable catalog. Read the generated Markdown docs under https://orchid-ui-hitpay.vercel.app/llms/ for intent and examples, then verify exports and props in the installed source.
 
 ## Overview
 
@@ -14,13 +14,7 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Installation
 
-Install one item after configuring the `@orchid` registry namespace in `components.json`:
-
-```bash
-bunx --bun shadcn@latest add @orchid/<component-name>
-```
-
-Install the complete catalog when that is intentional:
+After `@orchid` is in `components.json`, install every Orchid component. Do not install one item, a shortlist, or any other subset:
 
 ```bash
 bunx --bun shadcn@latest add @orchid/all
@@ -75,9 +69,8 @@ An AI agent configuring MCP should preserve existing MCP servers and existing `c
 Example prompts after setup:
 
 - Show all components available in the Orchid registry.
-- Find an Orchid component for a schema-driven form.
-- Install `@orchid/button`.
-- Build a searchable data page using Orchid DataTable and PageLayout.
+- Install the complete catalog with `@orchid/all`.
+- Find the Orchid block that matches a form, a collection, or a single-record detail view.
 
 ## Getting Started
 
@@ -91,79 +84,79 @@ Example prompts after setup:
 
 #### [Customer Card](https://orchid-ui-hitpay.vercel.app/llms/customer-card.md)
 Small, Big, and Float customer or beneficiary cards.
-Install: `bunx --bun shadcn@latest add @orchid/customer-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/customer-card.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/customer-card.json)
 
 #### [Data List](https://orchid-ui-hitpay.vercel.app/llms/data-list.md)
 Card/row collection when search, filters, sort, or pagination are not needed.
-Install: `bunx --bun shadcn@latest add @orchid/data-list` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-list.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-list.json)
 
 #### [Data Table](https://orchid-ui-hitpay.vercel.app/llms/data-table.md)
 Schema-driven table when the list needs search, filters, sort, or pagination.
-Install: `bunx --bun shadcn@latest add @orchid/data-table` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-table.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-table.json)
 
 #### [Detail Card](https://orchid-ui-hitpay.vercel.app/llms/detail-card.md)
 Read-only key/value card for one record. Not a collection.
-Install: `bunx --bun shadcn@latest add @orchid/detail-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/detail-card.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/detail-card.json)
 
 #### [Metric Card](https://orchid-ui-hitpay.vercel.app/llms/metric-card.md)
 Dashboard KPI tile. Use for summaries, not a record's fields.
-Install: `bunx --bun shadcn@latest add @orchid/metric-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/metric-card.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/metric-card.json)
 
 ### Form
 
 #### [Choice Card](https://orchid-ui-hitpay.vercel.app/llms/choice-card.md)
 Selectable cards with left or center icon, no radio dot.
-Install: `bunx --bun shadcn@latest add @orchid/choice-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/choice-card.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/choice-card.json)
 
 #### [Date Picker](https://orchid-ui-hitpay.vercel.app/llms/date-picker.md)
-Shadcn-style Popover and Calendar composition with optional Orchid helpers.
-Install: `bunx --bun shadcn@latest add @orchid/date-picker` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/date-picker.json)
+Date, range, and date-time selection with popover and calendar helpers.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/date-picker.json)
 
 #### [Form Builder](https://orchid-ui-hitpay.vercel.app/llms/form-builder.md)
 Schema-driven create/edit form. Use Detail Card for a read-only record.
-Install: `bunx --bun shadcn@latest add @orchid/form-builder` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-builder.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-builder.json)
 
 #### [Quantity Input](https://orchid-ui-hitpay.vercel.app/llms/quantity-input.md)
 Minus/plus stepper; click the value to type.
-Install: `bunx --bun shadcn@latest add @orchid/quantity-input` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
 
 #### [Text Editor](https://orchid-ui-hitpay.vercel.app/llms/text-editor.md)
 Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
-Install: `bunx --bun shadcn@latest add @orchid/text-editor` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/text-editor.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/text-editor.json)
 
 ### Layout
 
-#### [App Layout](https://orchid-ui-hitpay.vercel.app/llms/app-layout.md)
-Embedded application frame with optional app name, tabs, and sidebar.
-Install: `bunx --bun shadcn@latest add @orchid/app-layout` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/app-layout.json)
+#### [App Studio Layout](https://orchid-ui-hitpay.vercel.app/llms/app-studio-layout.md)
+HitPay App Studio embedded pane frame. Not generic app chrome.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/app-studio-layout.json)
 
 #### [Form Layout](https://orchid-ui-hitpay.vercel.app/llms/form-layout.md)
 Create and edit form shell with page and modal modes.
-Install: `bunx --bun shadcn@latest add @orchid/form-layout` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-layout.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-layout.json)
 
 #### [Page Layout](https://orchid-ui-hitpay.vercel.app/llms/page-layout.md)
 Standard route page with built-in responsive padding, header, and scrollable content.
-Install: `bunx --bun shadcn@latest add @orchid/page-layout` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/page-layout.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/page-layout.json)
 
 ### Navigation
 
 #### [Sidebar](https://orchid-ui-hitpay.vercel.app/llms/sidebar.md)
 JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.
-Install: `bunx --bun shadcn@latest add @orchid/sidebar` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sidebar.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sidebar.json)
 
 #### [Sub Sidebar](https://orchid-ui-hitpay.vercel.app/llms/sub-sidebar.md)
 JSON-configured flat child navigation with a blue active state.
-Install: `bunx --bun shadcn@latest add @orchid/sub-sidebar` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sub-sidebar.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sub-sidebar.json)
 
 ### Overlays
 
 #### [Command](https://orchid-ui-hitpay.vercel.app/llms/command.md)
 Searchable command palette. Drive it with open, onOpenChange, and groups.
-Install: `bunx --bun shadcn@latest add @orchid/command` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/command.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/command.json)
 
 #### [Confirmation Modal](https://orchid-ui-hitpay.vercel.app/llms/confirmation-modal.md)
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
-Install: `bunx --bun shadcn@latest add @orchid/confirmation-modal` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/confirmation-modal.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/confirmation-modal.json)
 
 ## Base Components
 
@@ -171,195 +164,196 @@ Install: `bunx --bun shadcn@latest add @orchid/confirmation-modal` · [Registry 
 
 #### [Button](https://orchid-ui-hitpay.vercel.app/llms/button.md)
 Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
-Install: `bunx --bun shadcn@latest add @orchid/button` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button.json)
 
 #### [Button Group](https://orchid-ui-hitpay.vercel.app/llms/button-group.md)
 Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
-Install: `bunx --bun shadcn@latest add @orchid/button-group` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button-group.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button-group.json)
 
 #### [Copy Button](https://orchid-ui-hitpay.vercel.app/llms/copy-button.md)
 Copy icon that writes a value and shows Copied!.
-Install: `bunx --bun shadcn@latest add @orchid/copy-button` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
 
 ### Displaying Data
 
 #### [Avatar](https://orchid-ui-hitpay.vercel.app/llms/avatar.md)
 Image, fallback, badge, and group primitives with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/avatar` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/avatar.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/avatar.json)
 
 #### [Badge](https://orchid-ui-hitpay.vercel.app/llms/badge.md)
 Standard variants with Orchid tones, appearances, removal, and user roles.
-Install: `bunx --bun shadcn@latest add @orchid/badge` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/badge.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/badge.json)
 
 #### [Chart](https://orchid-ui-hitpay.vercel.app/llms/chart.md)
-shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.
-Install: `bunx --bun shadcn@latest add @orchid/chart` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/chart.json)
+Recharts wrapper with Orchid tooltip, legend, and chart tokens.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/chart.json)
 
 #### [Empty](https://orchid-ui-hitpay.vercel.app/llms/empty.md)
-shadcn-compatible compound empty state with Orchid media variants.
-Install: `bunx --bun shadcn@latest add @orchid/empty` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
+Compound empty state with Orchid media variants.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
 
 #### [List](https://orchid-ui-hitpay.vercel.app/llms/list.md)
 Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.
-Install: `bunx --bun shadcn@latest add @orchid/list` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/list.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/list.json)
 
 #### [Table](https://orchid-ui-hitpay.vercel.app/llms/table.md)
-shadcn-compatible semantic HTML table with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/table` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/table.json)
+Semantic HTML table with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/table.json)
 
 ### Feedback
 
 #### [Alert](https://orchid-ui-hitpay.vercel.app/llms/alert.md)
 In-page notification with semantic variants and an optional action.
-Install: `bunx --bun shadcn@latest add @orchid/alert` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/alert.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/alert.json)
 
 #### [Progress](https://orchid-ui-hitpay.vercel.app/llms/progress.md)
-shadcn-compatible progress with composable label, value, track, and indicator.
-Install: `bunx --bun shadcn@latest add @orchid/progress` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/progress.json)
+Progress with composable label, value, track, and indicator.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/progress.json)
 
 #### [Skeleton](https://orchid-ui-hitpay.vercel.app/llms/skeleton.md)
-shadcn-compatible placeholder pulse with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/skeleton` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/skeleton.json)
+Placeholder pulse with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/skeleton.json)
 
 #### [Spinner](https://orchid-ui-hitpay.vercel.app/llms/spinner.md)
-shadcn-compatible indeterminate loading icon sized through className.
-Install: `bunx --bun shadcn@latest add @orchid/spinner` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/spinner.json)
+Indeterminate loading icon sized through className.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/spinner.json)
 
 #### [Toast](https://orchid-ui-hitpay.vercel.app/llms/toast.md)
-shadcn-compatible toast manager with semantic types, actions, close, and placement.
-Install: `bunx --bun shadcn@latest add @orchid/toast` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/toast.json)
+Toast manager with semantic types, actions, close, and placement.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/toast.json)
 
 ### Form
 
 #### [Calendar](https://orchid-ui-hitpay.vercel.app/llms/calendar.md)
 Single, range, and multiple date selection used by Date Picker.
-Install: `bunx --bun shadcn@latest add @orchid/calendar` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/calendar.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/calendar.json)
 
 #### [Checkbox](https://orchid-ui-hitpay.vercel.app/llms/checkbox.md)
-shadcn-compatible checkbox with Orchid states and an optional group helper.
-Install: `bunx --bun shadcn@latest add @orchid/checkbox` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/checkbox.json)
+Checkbox with Orchid states and an optional group helper.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/checkbox.json)
 
 #### [Combobox](https://orchid-ui-hitpay.vercel.app/llms/combobox.md)
-shadcn-compatible searchable select with Orchid chips and bulk selection helpers.
-Install: `bunx --bun shadcn@latest add @orchid/combobox` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/combobox.json)
+Searchable select with Orchid chips and bulk selection helpers.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/combobox.json)
 
 #### [Field](https://orchid-ui-hitpay.vercel.app/llms/field.md)
-shadcn-compatible label, description, error, and grouped field composition.
-Install: `bunx --bun shadcn@latest add @orchid/field` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/field.json)
+Label, description, error, and grouped field composition.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/field.json)
 
 #### [File Upload](https://orchid-ui-hitpay.vercel.app/llms/file-upload.md)
 File and image upload row with upload state, media, and a vertical group.
-Install: `bunx --bun shadcn@latest add @orchid/file-upload` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/file-upload.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/file-upload.json)
 
 #### [Form Section](https://orchid-ui-hitpay.vercel.app/llms/form-section.md)
 Heading plus FormSectionGroup and FormSectionItem.
-Install: `bunx --bun shadcn@latest add @orchid/form-section` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-section.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-section.json)
 
 #### [Input](https://orchid-ui-hitpay.vercel.app/llms/input.md)
-shadcn-compatible text and file input with Orchid states.
-Install: `bunx --bun shadcn@latest add @orchid/input` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/input.json)
+Text and file input with Orchid states.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/input.json)
 
 #### [Input Group](https://orchid-ui-hitpay.vercel.app/llms/input-group.md)
-shadcn-compatible input, textarea, addon, and button composition.
-Install: `bunx --bun shadcn@latest add @orchid/input-group` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/input-group.json)
+Input, textarea, addon, and button composition.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/input-group.json)
 
 #### [Label](https://orchid-ui-hitpay.vercel.app/llms/label.md)
-shadcn-compatible accessible label with Orchid typography.
-Install: `bunx --bun shadcn@latest add @orchid/label` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/label.json)
+Accessible label with Orchid typography.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/label.json)
 
 #### [Radio Group](https://orchid-ui-hitpay.vercel.app/llms/radio-group.md)
-shadcn-compatible radio group and item primitives with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/radio-group` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/radio-group.json)
+Radio group and item primitives with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/radio-group.json)
 
 #### [Select](https://orchid-ui-hitpay.vercel.app/llms/select.md)
-shadcn-compatible Base UI select with groups, states, and Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/select` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
+Base UI select with groups, states, and Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
 
 #### [Slider](https://orchid-ui-hitpay.vercel.app/llms/slider.md)
-shadcn-compatible single, range, or vertical slider with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/slider` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/slider.json)
+Single, range, or vertical slider with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/slider.json)
 
 #### [Switch](https://orchid-ui-hitpay.vercel.app/llms/switch.md)
-shadcn-compatible switch in default and small Orchid sizes.
-Install: `bunx --bun shadcn@latest add @orchid/switch` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/switch.json)
+Switch in default and small Orchid sizes.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/switch.json)
 
 #### [Textarea](https://orchid-ui-hitpay.vercel.app/llms/textarea.md)
-shadcn-compatible auto-sizing textarea with Orchid form styling.
-Install: `bunx --bun shadcn@latest add @orchid/textarea` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/textarea.json)
+Auto-sizing textarea with Orchid form styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/textarea.json)
 
 ### Layout
 
 #### [Accordion](https://orchid-ui-hitpay.vercel.app/llms/accordion.md)
-Composable expand-and-collapse sections with shadcn-compatible primitives.
-Install: `bunx --bun shadcn@latest add @orchid/accordion` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/accordion.json)
+Composable expand-and-collapse sections with primitives.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/accordion.json)
 
 #### [Aspect Ratio](https://orchid-ui-hitpay.vercel.app/llms/aspect-ratio.md)
-shadcn-compatible box that keeps a width/height ratio, such as 16/9.
-Install: `bunx --bun shadcn@latest add @orchid/aspect-ratio` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/aspect-ratio.json)
+Box that keeps a width/height ratio, such as 16/9.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/aspect-ratio.json)
 
 #### [Card](https://orchid-ui-hitpay.vercel.app/llms/card.md)
-shadcn-compatible content card with header, title, description, action, and footer.
-Install: `bunx --bun shadcn@latest add @orchid/card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/card.json)
+Content card with header, title, description, action, and footer.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/card.json)
 
 #### [Collapsible](https://orchid-ui-hitpay.vercel.app/llms/collapsible.md)
-shadcn-compatible expand-and-collapse primitives with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/collapsible` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/collapsible.json)
+Expand-and-collapse primitives with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/collapsible.json)
 
 #### [Resizable](https://orchid-ui-hitpay.vercel.app/llms/resizable.md)
-shadcn-compatible split panes with a drag handle in Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/resizable` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resizable.json)
+Split panes with a drag handle in Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resizable.json)
 
 #### [Scroll Area](https://orchid-ui-hitpay.vercel.app/llms/scroll-area.md)
-shadcn-compatible bounded scroll area with Orchid scrollbar styling.
-Install: `bunx --bun shadcn@latest add @orchid/scroll-area` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/scroll-area.json)
+Bounded scroll area with Orchid scrollbar styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/scroll-area.json)
 
 #### [Tabs](https://orchid-ui-hitpay.vercel.app/llms/tabs.md)
-shadcn-compatible horizontal or vertical tabs with default and line variants.
-Install: `bunx --bun shadcn@latest add @orchid/tabs` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tabs.json)
+Horizontal or vertical tabs with default and line variants.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tabs.json)
 
 ### Navigation
 
 #### [Breadcrumb](https://orchid-ui-hitpay.vercel.app/llms/breadcrumb.md)
 Hierarchy of links to the current page.
-Install: `bunx --bun shadcn@latest add @orchid/breadcrumb` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/breadcrumb.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/breadcrumb.json)
 
 #### [Pagination](https://orchid-ui-hitpay.vercel.app/llms/pagination.md)
-shadcn-compatible page links with previous, next, ellipsis, and an optional range label.
-Install: `bunx --bun shadcn@latest add @orchid/pagination` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/pagination.json)
+Page links with previous, next, ellipsis, and an optional range label.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/pagination.json)
 
 ### Overlays
 
 #### [Dialog](https://orchid-ui-hitpay.vercel.app/llms/dialog.md)
-shadcn-compatible dialog primitives with Orchid sizes and persistent mode.
-Install: `bunx --bun shadcn@latest add @orchid/dialog` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dialog.json)
+Dialog primitives with Orchid sizes and persistent mode.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dialog.json)
 
 #### [Drawer](https://orchid-ui-hitpay.vercel.app/llms/drawer.md)
 Swipeable edge panel. Set swipeDirection to up, right, down, or left.
-Install: `bunx --bun shadcn@latest add @orchid/drawer` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/drawer.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/drawer.json)
 
 #### [Dropdown Menu](https://orchid-ui-hitpay.vercel.app/llms/dropdown-menu.md)
-shadcn-compatible items, selection, submenus, and shortcuts with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/dropdown-menu` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dropdown-menu.json)
+Items, selection, submenus, and shortcuts with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dropdown-menu.json)
 
 #### [Tooltip](https://orchid-ui-hitpay.vercel.app/llms/tooltip.md)
-shadcn-compatible hover and focus tooltip with Orchid styling.
-Install: `bunx --bun shadcn@latest add @orchid/tooltip` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tooltip.json)
+Hover and focus tooltip with Orchid styling.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tooltip.json)
 
 ### Utils
 
 #### [Kbd](https://orchid-ui-hitpay.vercel.app/llms/kbd.md)
-shadcn-compatible keyboard key and grouped shortcut display.
-Install: `bunx --bun shadcn@latest add @orchid/kbd` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/kbd.json)
+Keyboard key and grouped shortcut display.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/kbd.json)
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, sub-sidebar, alert, list, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, sidebar, sub-sidebar, alert, list, empty, customer-card, form-layout, app-studio-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 
 - Prefer the Markdown docs under `/llms/*.md` over HTML example pages.
-- Read Components & Blocks first. Use a block when one exists. Only then read Base Components.
+- Install `@orchid/all` after the registry is configured. Do not pick a subset.
+- Read Components & Blocks first. Match the job to each item's when-to-use description. Use a block when one exists. Only then read Base Components. Do not default to a shortlist of favorites.
 - Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.
 - Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Blocks live under `src/components/{category}` (`@/components/{category}/…`) and are ready to use through props or a schema. Base items live under `src/base-ui/{category}` (`@/base-ui/{category}/…`). Do not assemble a block from many base components.
 - Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.
-- Use AppLayout to frame the embedded pane, FormBuilder for schema-driven form fields, DataTable for searchable/filterable/sortable/paginated data lists, MetricCard for dashboard KPI tiles (revenue, volume, counts), FormLayout for page or modal form shells, and PageLayout for standard route pages.
+- AppStudioLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.

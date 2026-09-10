@@ -2,7 +2,7 @@
 
 # Skeleton
 
-shadcn-compatible placeholder pulse with Orchid styling.
+Placeholder pulse with Orchid styling.
 
 ## Example
 

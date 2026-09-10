@@ -2,7 +2,7 @@
 
 # Chart
 
-shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.
+Recharts wrapper with Orchid tooltip, legend, and chart tokens.
 
 ## Example
 

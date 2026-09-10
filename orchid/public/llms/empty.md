@@ -2,7 +2,7 @@
 
 # Empty
 
-shadcn-compatible compound empty state with Orchid media variants.
+Compound empty state with Orchid media variants.
 
 ## Example
 

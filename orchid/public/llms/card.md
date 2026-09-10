@@ -2,7 +2,7 @@
 
 # Card
 
-shadcn-compatible content card with header, title, description, action, and footer.
+Content card with header, title, description, action, and footer.
 
 ## Example
 

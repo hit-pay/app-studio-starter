@@ -2,7 +2,7 @@
 
 # Tabs
 
-shadcn-compatible horizontal or vertical tabs with default and line variants.
+Horizontal or vertical tabs with default and line variants.
 
 ## Example
 

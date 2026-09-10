@@ -2,7 +2,7 @@
 
 # Tooltip
 
-shadcn-compatible hover and focus tooltip with Orchid styling.
+Hover and focus tooltip with Orchid styling.
 
 ## Example
 

@@ -20,13 +20,13 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/dropdown-menu" as const,
     name: "Dropdown Menu",
     description:
-      "shadcn-compatible items, selection, submenus, and shortcuts with Orchid styling.",
+      "Items, selection, submenus, and shortcuts with Orchid styling.",
   },
   {
     to: "/base-ui/toast" as const,
     name: "Toast",
     description:
-      "shadcn-compatible toast manager with semantic types, actions, close, and placement.",
+      "Toast manager with semantic types, actions, close, and placement.",
   },
   {
     to: "/base-ui/alert" as const,
@@ -38,7 +38,7 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/empty" as const,
     name: "Empty",
     description:
-      "shadcn-compatible compound empty state with Orchid media variants.",
+      "Compound empty state with Orchid media variants.",
   },
   {
     to: "/base-ui/list" as const,
@@ -56,13 +56,13 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/accordion" as const,
     name: "Accordion",
     description:
-      "Composable expand-and-collapse sections with shadcn-compatible primitives.",
+      "Composable expand-and-collapse sections with primitives.",
   },
   {
     to: "/base-ui/progress" as const,
     name: "Progress",
     description:
-      "shadcn-compatible progress with composable label, value, track, and indicator.",
+      "Progress with composable label, value, track, and indicator.",
   },
   {
     to: "/base-ui/avatar" as const,
@@ -74,30 +74,30 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/tooltip" as const,
     name: "Tooltip",
     description:
-      "shadcn-compatible hover and focus tooltip with Orchid styling.",
+      "Hover and focus tooltip with Orchid styling.",
   },
   {
     to: "/base-ui/tabs" as const,
     name: "Tabs",
     description:
-      "shadcn-compatible horizontal or vertical tabs with default and line variants.",
+      "Horizontal or vertical tabs with default and line variants.",
   },
   {
     to: "/base-ui/skeleton" as const,
     name: "Skeleton",
-    description: "shadcn-compatible placeholder pulse with Orchid styling.",
+    description: "Placeholder pulse with Orchid styling.",
   },
   {
     to: "/base-ui/spinner" as const,
     name: "Spinner",
     description:
-      "shadcn-compatible indeterminate loading icon sized through className.",
+      "Indeterminate loading icon sized through className.",
   },
   {
     to: "/base-ui/dialog" as const,
     name: "Dialog",
     description:
-      "shadcn-compatible dialog primitives with Orchid sizes and persistent mode.",
+      "Dialog primitives with Orchid sizes and persistent mode.",
   },
   {
     to: "/base-ui/drawer" as const,
@@ -114,53 +114,53 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/pagination" as const,
     name: "Pagination",
     description:
-      "shadcn-compatible page links with previous, next, ellipsis, and an optional range label.",
+      "Page links with previous, next, ellipsis, and an optional range label.",
   },
   {
     to: "/base-ui/table" as const,
     name: "Table",
-    description: "shadcn-compatible semantic HTML table with Orchid styling.",
+    description: "Semantic HTML table with Orchid styling.",
   },
   {
     to: "/base-ui/kbd" as const,
     name: "Kbd",
-    description: "shadcn-compatible keyboard key and grouped shortcut display.",
+    description: "Keyboard key and grouped shortcut display.",
   },
   {
     to: "/base-ui/collapsible" as const,
     name: "Collapsible",
     description:
-      "shadcn-compatible expand-and-collapse primitives with Orchid styling.",
+      "Expand-and-collapse primitives with Orchid styling.",
   },
   {
     to: "/base-ui/scroll-area" as const,
     name: "Scroll Area",
     description:
-      "shadcn-compatible bounded scroll area with Orchid scrollbar styling.",
+      "Bounded scroll area with Orchid scrollbar styling.",
   },
   {
     to: "/base-ui/card" as const,
     name: "Card",
     description:
-      "shadcn-compatible content card with header, title, description, action, and footer.",
+      "Content card with header, title, description, action, and footer.",
   },
   {
     to: "/base-ui/resizable" as const,
     name: "Resizable",
     description:
-      "shadcn-compatible split panes with a drag handle in Orchid styling.",
+      "Split panes with a drag handle in Orchid styling.",
   },
   {
     to: "/base-ui/aspect-ratio" as const,
     name: "Aspect Ratio",
     description:
-      "shadcn-compatible box that keeps a width/height ratio, such as 16/9.",
+      "Box that keeps a width/height ratio, such as 16/9.",
   },
   {
     to: "/base-ui/chart" as const,
     name: "Chart",
     description:
-      "shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
+      "Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
   },
   {
     to: "/base-ui/file-upload" as const,
@@ -179,64 +179,64 @@ export const DOC_FORMS = [
     to: "/base-ui/field" as const,
     name: "Field",
     description:
-      "shadcn-compatible label, description, error, and grouped field composition.",
+      "Label, description, error, and grouped field composition.",
   },
   {
     to: "/base-ui/label" as const,
     name: "Label",
-    description: "shadcn-compatible accessible label with Orchid typography.",
+    description: "Accessible label with Orchid typography.",
   },
   {
     to: "/base-ui/input" as const,
     name: "Input",
-    description: "shadcn-compatible text and file input with Orchid states.",
+    description: "Text and file input with Orchid states.",
   },
   {
     to: "/base-ui/input-group" as const,
     name: "Input Group",
     description:
-      "shadcn-compatible input, textarea, addon, and button composition.",
+      "Input, textarea, addon, and button composition.",
   },
   {
     to: "/base-ui/textarea" as const,
     name: "Textarea",
     description:
-      "shadcn-compatible auto-sizing textarea with Orchid form styling.",
+      "Auto-sizing textarea with Orchid form styling.",
   },
   {
     to: "/base-ui/select" as const,
     name: "Select",
     description:
-      "shadcn-compatible Base UI select with groups, states, and Orchid styling.",
+      "Base UI select with groups, states, and Orchid styling.",
   },
   {
     to: "/base-ui/combobox" as const,
     name: "Combobox",
     description:
-      "shadcn-compatible searchable select with Orchid chips and bulk selection helpers.",
+      "Searchable select with Orchid chips and bulk selection helpers.",
   },
   {
     to: "/base-ui/checkbox" as const,
     name: "Checkbox",
     description:
-      "shadcn-compatible checkbox with Orchid states and an optional group helper.",
+      "Checkbox with Orchid states and an optional group helper.",
   },
   {
     to: "/base-ui/radio-group" as const,
     name: "Radio Group",
     description:
-      "shadcn-compatible radio group and item primitives with Orchid styling.",
+      "Radio group and item primitives with Orchid styling.",
   },
   {
     to: "/base-ui/switch" as const,
     name: "Switch",
-    description: "shadcn-compatible switch in default and small Orchid sizes.",
+    description: "Switch in default and small Orchid sizes.",
   },
   {
     to: "/base-ui/slider" as const,
     name: "Slider",
     description:
-      "shadcn-compatible single, range, or vertical slider with Orchid styling.",
+      "Single, range, or vertical slider with Orchid styling.",
   },
   {
     to: "/base-ui/calendar" as const,
@@ -282,7 +282,7 @@ export const DOC_BLOCKS = [
     to: "/components/date-picker" as const,
     name: "Date Picker",
     description:
-      "Shadcn-style Popover and Calendar composition with optional Orchid helpers.",
+      "Date, range, and date-time selection with popover and calendar helpers.",
   },
   {
     to: "/components/detail-card" as const,
@@ -313,10 +313,10 @@ export const DOC_BLOCKS = [
       "Dashboard KPI tile. Use for summaries, not a record's fields.",
   },
   {
-    to: "/components/app-layout" as const,
-    name: "App Layout",
+    to: "/components/app-studio-layout" as const,
+    name: "App Studio Layout",
     description:
-      "Embedded application frame with optional app name, tabs, and sidebar.",
+      "HitPay App Studio embedded pane frame. Not generic app chrome.",
   },
   {
     to: "/components/page-layout" as const,
@@ -483,7 +483,7 @@ export const DOC_BLOCK_GROUPS = [
     "/components/quantity-input",
     "/components/text-editor",
   ]),
-  blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
+  blockGroup("Layout", ["/components/app-studio-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Navigation", ["/components/sidebar", "/components/sub-sidebar"]),
   blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);

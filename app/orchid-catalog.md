@@ -6,7 +6,7 @@ Read this file **in full** (Read tool, not Grep). Match the job to each **Compon
 
 ## `utils` — Utils
 
-cn() Tailwind class merge. Import from @/lib/utils.
+Cn() Tailwind class merge. Import from @/lib/utils.
 Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 # Components & Blocks
@@ -73,7 +73,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/text-editor.md
 
 ## `date-picker` — Date Picker
 
-Orchid helper wrappers following the shadcn Popover + Calendar recipe for date, range, and date-time selection.
+Date, range, and date-time selection with popover and calendar helpers.
 Import `@/components/form/date-picker`; read `src/components/form/date-picker.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/date-picker.md
 
@@ -85,11 +85,11 @@ Create/edit scroll shell (page or modal). When the form is FormBuilder, one form
 Import `@/components/layout/form-layout`; read `src/components/layout/form-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-layout.md
 
-## `app-layout` — App Layout
+## `app-studio-layout` — App Studio Layout
 
-Embedded application frame with optional app name, tabs, and sidebar.
-Import `@/components/layout/app-layout`; read `src/components/layout/app-layout.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/app-layout.md
+HitPay App Studio embedded pane frame (not generic app chrome). Optional app name, tabs, and sidebar.
+Import `@/components/layout/app-studio-layout`; read `src/components/layout/app-studio-layout.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/app-studio-layout.md
 
 ## `page-layout` — Page Layout
 
@@ -107,7 +107,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/sidebar.md
 
 ## `sub-sidebar` — Sub Sidebar
 
-Simple flat child navigation for AppLayout sidebar mode with a blue active state.
+Simple flat child navigation for AppStudioLayout sidebar mode with a blue active state.
 Import `@/components/navigation/sub-sidebar`; read `src/components/navigation/sub-sidebar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/sub-sidebar.md
 
@@ -131,7 +131,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/command.md
 
 ## `button` — Button
 
-shadcn-compatible Base UI button with standard variants and sizes in Orchid styling.
+Base UI button with standard variants and sizes in Orchid styling.
 Import `@/base-ui/actions/button`; read `src/base-ui/actions/button.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/button.md
 
@@ -157,31 +157,31 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/list.md
 
 ## `empty` — Empty
 
-shadcn-compatible compound empty state with Orchid media variants.
+Compound empty state with Orchid media variants.
 Import `@/base-ui/displaying-data/empty`; read `src/base-ui/displaying-data/empty.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/empty.md
 
 ## `badge` — Badge
 
-shadcn-compatible badge with render support plus Orchid tones, appearances, removable badges, and user roles.
+Badge with render support plus Orchid tones, appearances, removable badges, and user roles.
 Import `@/base-ui/displaying-data/badge`; read `src/base-ui/displaying-data/badge.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/badge.md
 
 ## `avatar` — Avatar
 
-shadcn-compatible compound avatar with image, fallback, badge, group, and Orchid business styling.
+Compound avatar with image, fallback, badge, group, and Orchid business styling.
 Import `@/base-ui/displaying-data/avatar`; read `src/base-ui/displaying-data/avatar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/avatar.md
 
 ## `table` — Table
 
-shadcn-compatible semantic HTML table with Orchid styling.
+Semantic HTML table with Orchid styling.
 Import `@/base-ui/displaying-data/table`; read `src/base-ui/displaying-data/table.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/table.md
 
 ## `chart` — Chart
 
-shadcn-compatible Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.
+Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.
 Import `@/base-ui/displaying-data/chart`; read `src/base-ui/displaying-data/chart.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/chart.md
 
@@ -189,31 +189,31 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/chart.md
 
 ## `alert` — Alert
 
-shadcn-compatible alert with semantic variants and top-right or bottom action placement in Orchid styling.
+Alert with semantic variants and top-right or bottom action placement in Orchid styling.
 Import `@/base-ui/feedback/alert`; read `src/base-ui/feedback/alert.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/alert.md
 
 ## `toast` — Toast
 
-shadcn-compatible Base UI toast with additive placement options and Orchid semantic styling.
+Base UI toast with additive placement options and Orchid semantic styling.
 Import `@/base-ui/feedback/toast`; read `src/base-ui/feedback/toast.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/toast.md
 
 ## `progress` — Progress
 
-shadcn-compatible compound progress with label, value, track, and indicator primitives.
+Compound progress with label, value, track, and indicator primitives.
 Import `@/base-ui/feedback/progress`; read `src/base-ui/feedback/progress.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/progress.md
 
 ## `skeleton` — Skeleton
 
-shadcn-compatible animated loading placeholder with Orchid styling.
+Animated loading placeholder with Orchid styling.
 Import `@/base-ui/feedback/skeleton`; read `src/base-ui/feedback/skeleton.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/skeleton.md
 
 ## `spinner` — Spinner
 
-shadcn-compatible indeterminate loading icon sized through className.
+Indeterminate loading icon sized through className.
 Import `@/base-ui/feedback/spinner`; read `src/base-ui/feedback/spinner.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/spinner.md
 
@@ -221,73 +221,73 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/spinner.md
 
 ## `field` — Field
 
-shadcn-compatible field composition with Orchid form styling.
+Field composition with Orchid form styling.
 Import `@/base-ui/form/field`; read `src/base-ui/form/field.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/field.md
 
 ## `label` — Label
 
-shadcn-compatible accessible label with Orchid typography.
+Accessible label with Orchid typography.
 Import `@/base-ui/form/label`; read `src/base-ui/form/label.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/label.md
 
 ## `input` — Input
 
-shadcn-compatible Base UI input with Orchid form styling.
+Base UI input with Orchid form styling.
 Import `@/base-ui/form/input`; read `src/base-ui/form/input.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/input.md
 
 ## `input-group` — Input Group
 
-shadcn-compatible input, textarea, addon, and button composition with Orchid styling.
+Input, textarea, addon, and button composition with Orchid styling.
 Import `@/base-ui/form/input-group`; read `src/base-ui/form/input-group.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/input-group.md
 
 ## `textarea` — Textarea
 
-shadcn-compatible auto-sizing textarea with Orchid form styling.
+Auto-sizing textarea with Orchid form styling.
 Import `@/base-ui/form/textarea`; read `src/base-ui/form/textarea.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/textarea.md
 
 ## `select` — Select
 
-shadcn-compatible Base UI select with standard sizes and Orchid styling.
+Base UI select with standard sizes and Orchid styling.
 Import `@/base-ui/form/select`; read `src/base-ui/form/select.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/select.md
 
 ## `combobox` — Combobox
 
-shadcn-compatible searchable single or multi-select with optional Orchid checkbox items and Select All.
+Searchable single or multi-select with optional Orchid checkbox items and Select All.
 Import `@/base-ui/form/combobox`; read `src/base-ui/form/combobox.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/combobox.md
 
 ## `checkbox` — Checkbox
 
-shadcn-compatible Base UI checkbox with Orchid states and an optional CheckboxGroup helper.
+Base UI checkbox with Orchid states and an optional CheckboxGroup helper.
 Import `@/base-ui/form/checkbox`; read `src/base-ui/form/checkbox.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/checkbox.md
 
 ## `radio-group` — Radio Group
 
-shadcn-compatible radio group and item primitives with Orchid styling.
+Radio group and item primitives with Orchid styling.
 Import `@/base-ui/form/radio-group`; read `src/base-ui/form/radio-group.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/radio-group.md
 
 ## `switch` — Switch
 
-shadcn-compatible Base UI switch with default and small Orchid sizes.
+Base UI switch with default and small Orchid sizes.
 Import `@/base-ui/form/switch`; read `src/base-ui/form/switch.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/switch.md
 
 ## `slider` — Slider
 
-shadcn-compatible horizontal or vertical slider with Orchid styling.
+Horizontal or vertical slider with Orchid styling.
 Import `@/base-ui/form/slider`; read `src/base-ui/form/slider.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/slider.md
 
 ## `calendar` — Calendar
 
-shadcn-compatible DayPicker calendar for single, range, or multiple selection in Orchid styling.
+DayPicker calendar for single, range, or multiple selection in Orchid styling.
 Import `@/base-ui/form/calendar`; read `src/base-ui/form/calendar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/calendar.md
 
@@ -307,43 +307,43 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/form-section.md
 
 ## `accordion` — Accordion
 
-shadcn-compatible Base UI accordion with Orchid styling.
+Base UI accordion with Orchid styling.
 Import `@/base-ui/layout/accordion`; read `src/base-ui/layout/accordion.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/accordion.md
 
 ## `tabs` — Tabs
 
-shadcn-compatible horizontal or vertical tabs with default and line variants.
+Horizontal or vertical tabs with default and line variants.
 Import `@/base-ui/layout/tabs`; read `src/base-ui/layout/tabs.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/tabs.md
 
 ## `collapsible` — Collapsible
 
-shadcn-compatible Root, Trigger, and Content primitives with Orchid styling.
+Root, Trigger, and Content primitives with Orchid styling.
 Import `@/base-ui/layout/collapsible`; read `src/base-ui/layout/collapsible.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/collapsible.md
 
 ## `scroll-area` — Scroll Area
 
-shadcn-compatible scroll area and scrollbar primitives with Orchid styling.
+Scroll area and scrollbar primitives with Orchid styling.
 Import `@/base-ui/layout/scroll-area`; read `src/base-ui/layout/scroll-area.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/scroll-area.md
 
 ## `card` — Card
 
-shadcn-compatible content card with header, title, description, action, content, and footer in Orchid styling.
+Content card with header, title, description, action, content, and footer in Orchid styling.
 Import `@/base-ui/layout/card`; read `src/base-ui/layout/card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/card.md
 
 ## `resizable` — Resizable
 
-shadcn-compatible split panes with a drag handle in Orchid styling.
+Split panes with a drag handle in Orchid styling.
 Import `@/base-ui/layout/resizable`; read `src/base-ui/layout/resizable.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/resizable.md
 
 ## `aspect-ratio` — Aspect Ratio
 
-shadcn-compatible box that keeps a width/height ratio.
+Box that keeps a width/height ratio.
 Import `@/base-ui/layout/aspect-ratio`; read `src/base-ui/layout/aspect-ratio.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/aspect-ratio.md
 
@@ -351,13 +351,13 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/aspect-ratio.md
 
 ## `breadcrumb` — Breadcrumb
 
-shadcn-compatible breadcrumb with composable router links, page, separator, and ellipsis.
+Breadcrumb with composable router links, page, separator, and ellipsis.
 Import `@/base-ui/navigation/breadcrumb`; read `src/base-ui/navigation/breadcrumb.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/breadcrumb.md
 
 ## `pagination` — Pagination
 
-shadcn-compatible link pagination with Orchid buttons and an optional range label.
+Link pagination with Orchid buttons and an optional range label.
 Import `@/base-ui/navigation/pagination`; read `src/base-ui/navigation/pagination.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/pagination.md
 
@@ -365,19 +365,19 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/pagination.md
 
 ## `dropdown-menu` — Dropdown Menu
 
-shadcn-compatible menu with items, checkbox and radio selection, submenus, and Orchid styling.
+Menu with items, checkbox and radio selection, submenus, and Orchid styling.
 Import `@/base-ui/overlays/dropdown-menu`; read `src/base-ui/overlays/dropdown-menu.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/dropdown-menu.md
 
 ## `tooltip` — Tooltip
 
-shadcn-compatible Base UI tooltip with Orchid styling.
+Base UI tooltip with Orchid styling.
 Import `@/base-ui/overlays/tooltip`; read `src/base-ui/overlays/tooltip.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/tooltip.md
 
 ## `dialog` — Dialog
 
-shadcn-compatible dialog primitives with Orchid sizes and persistent mode.
+Dialog primitives with Orchid sizes and persistent mode.
 Import `@/base-ui/overlays/dialog`; read `src/base-ui/overlays/dialog.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/dialog.md
 
@@ -389,18 +389,18 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/drawer.md
 
 ## `popover` — Popover
 
-shadcn-compatible non-modal popover primitives with Orchid styling.
+Non-modal popover primitives with Orchid styling.
 Import `@/base-ui/overlays/popover`; read `src/base-ui/overlays/popover.tsx`.
 
 ## Utils
 
 ## `kbd` — Kbd
 
-shadcn-compatible keyboard key and key group with Orchid styling.
+Keyboard key and key group with Orchid styling.
 Import `@/base-ui/utils/kbd`; read `src/base-ui/utils/kbd.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/kbd.md
 
 ## `separator` — Separator
 
-shadcn-compatible horizontal or vertical separator with Orchid styling.
+Horizontal or vertical separator with Orchid styling.
 Import `@/base-ui/utils/separator`; read `src/base-ui/utils/separator.tsx`.

@@ -2,7 +2,7 @@
 
 # Collapsible
 
-shadcn-compatible expand-and-collapse primitives with Orchid styling.
+Expand-and-collapse primitives with Orchid styling.
 
 ## Example
 

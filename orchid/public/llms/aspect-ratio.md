@@ -2,7 +2,7 @@
 
 # Aspect Ratio
 
-shadcn-compatible box that keeps a width/height ratio, such as 16/9.
+Box that keeps a width/height ratio, such as 16/9.
 
 ## Example
 

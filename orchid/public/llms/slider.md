@@ -2,7 +2,7 @@
 
 # Slider
 
-shadcn-compatible single, range, or vertical slider with Orchid styling.
+Single, range, or vertical slider with Orchid styling.
 
 ## Example
 

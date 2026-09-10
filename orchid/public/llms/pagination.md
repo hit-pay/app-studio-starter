@@ -2,7 +2,7 @@
 
 # Pagination
 
-shadcn-compatible page links with previous, next, ellipsis, and an optional range label.
+Page links with previous, next, ellipsis, and an optional range label.
 
 ## Example
 

@@ -140,9 +140,9 @@ Never edit `.output/` or `.nitro/` by hand.
 
 The host dashboard owns the outer navigation, account controls, authentication gate, iframe, and app mount point. The generated app owns only the embedded pane.
 
-- Frame the pane with `AppLayout` from `@/components/layout/app-layout`.
+- Frame the pane with `AppStudioLayout` from `@/components/layout/app-studio-layout`.
 - Keep the root document's `h-full`, but do not set `overflow-hidden` on the root document or body.
-- Render route content inside `AppLayout`. Use `PageLayout` as the scroll-owning shell for browse/show routes. Use `FormLayout` (`mode="page"` or `mode="modal"`) when the screen is create/edit.
+- Render route content inside `AppStudioLayout`. Use `PageLayout` as the scroll-owning shell for browse/show routes. Use `FormLayout` (`mode="page"` or `mode="modal"`) when the screen is create/edit.
 - Do not add a full-screen website shell or host-dashboard clone.
 - Avoid horizontal overflow and make forms, tables, actions, and tabs usable at narrow widths.
 
