@@ -40,8 +40,10 @@ function ToastBar({
     <div
       data-slot="toast-bar"
       className={cn(
-        'relative flex w-fit max-w-full flex-nowrap items-center rounded-lg border border-solid text-oc-foreground shadow-[0_8px_6px_rgba(42,50,82,0.04)]',
-        size === 'small' ? 'gap-1 py-2 pr-3 pl-2 text-xs leading-normal' : 'gap-3 py-3 pr-4 pl-3 text-sm leading-normal',
+        'relative flex max-w-full min-w-0 flex-nowrap rounded-lg border border-solid text-oc-foreground shadow-[0_8px_6px_rgba(42,50,82,0.04)]',
+        size === 'small'
+          ? 'w-fit items-center gap-1 py-2 pr-3 pl-2 text-xs leading-normal'
+          : 'w-full items-start gap-3 py-3 pr-4 pl-3 text-sm leading-normal',
         TOAST_BAR_COLOR[color] ?? TOAST_BAR_COLOR.default,
         className,
       )}
@@ -157,7 +159,7 @@ function ToastTitle({ className, ...props }: ToastPrimitive.Title.Props) {
   return (
     <ToastPrimitive.Title
       data-slot="toast-title"
-      className={cn('text-sm font-medium text-oc-foreground', className)}
+      className={cn('block text-sm font-medium text-oc-foreground', className)}
       {...props}
     />
   )
@@ -167,7 +169,7 @@ function ToastDescription({ className, ...props }: ToastPrimitive.Description.Pr
   return (
     <ToastPrimitive.Description
       data-slot="toast-description"
-      className={cn('text-oc-foreground', className)}
+      className={cn('block text-oc-foreground', className)}
       {...props}
     />
   )
@@ -234,7 +236,7 @@ function ToastIcon({ type, size }: { type: string | undefined; size: 'small' | '
       data-slot="toast-bar-icon"
       className={cn(
         'inline-flex shrink-0 items-center justify-center [&_svg]:size-full',
-        size === 'small' ? 'size-4' : 'size-6',
+        size === 'small' ? 'size-4' : 'mt-0.5 size-6',
       )}
     >
       {icon}
@@ -257,15 +259,20 @@ function ToastList() {
         <ToastContent>
           <ToastBar color={color} size={size} className="mx-auto">
             <ToastIcon type={toastItem.type} size={size} />
-            <div className="flex shrink-0 flex-col gap-0.5 whitespace-nowrap">
+            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
               {hasTitle ? (
-                <div className="w-auto text-sm font-medium text-oc-foreground">
-                  <ToastTitle />
+                <div className="min-w-0 text-sm font-medium text-oc-foreground">
+                  <ToastTitle className="wrap-break-word" />
                 </div>
               ) : null}
               {hasDescription ? (
-                <div className="w-auto text-oc-foreground">
-                  <ToastDescription className={size === 'small' ? 'text-xs' : 'text-sm'} />
+                <div className="min-w-0 text-oc-foreground">
+                  <ToastDescription
+                    className={cn(
+                      'wrap-break-word',
+                      size === 'small' ? 'text-xs' : 'text-sm',
+                    )}
+                  />
                 </div>
               ) : null}
             </div>

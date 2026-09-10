@@ -118,6 +118,20 @@ function ToastDemo() {
               size="sm"
               onClick={() =>
                 toast.add({
+                  title: "Inventory refreshed",
+                  description:
+                    "HitPay products are checked if a connector is available.",
+                  type: "info",
+                })
+              }
+            >
+              Long description
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
                   title: "PayNow is slower than usual",
                   description: "Consider Cards or GrabPay for new links",
                   type: "warning",
