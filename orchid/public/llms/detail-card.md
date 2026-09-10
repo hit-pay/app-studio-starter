@@ -2,7 +2,7 @@
 
 # Detail Card
 
-Detail card with grid columns, colspan, and stacked rows.
+Read-only key/value card for one record. Not a collection.
 
 ## Example
 
@@ -297,6 +297,10 @@ function DetailCardDemo() {
 
 export { DetailCardDemo }
 ```
+
+Use `DetailCard` for a read-only key/value view of **one** record (invoice, leave request,
+customer). Use `DataList` or `DataTable` for collections. Do not assemble label/value stacks
+from `Card`.
 
 ## API
 

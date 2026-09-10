@@ -100,7 +100,7 @@
       "name": "form-builder",
       "type": "registry:ui",
       "title": "Form Builder",
-      "description": "JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
+      "description": "Multi-field create/edit from a JSON schema. Wrap in FormLayout; submit through formId. Use when the screen is a form, not a detail view. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone. Unknown types throw.",
       "dependencies": [
         "@tanstack/react-form"
       ],
@@ -138,7 +138,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "JSON-schema list with search, filters, sorting, pagination. rowActions defaults to true (Edit + Delete). Set false to hide. One-field edits use cells. editColumns only toggles column visibility.",
+      "description": "Schema-driven collection when the user needs search, column filters, sorting, or pagination. Do not default every list here — use Data List for compact collections and Detail Card for one record. rowActions defaults to true (Edit + Delete). One-field edits use cells. editColumns only toggles column visibility.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -278,7 +278,7 @@
       "name": "form-layout",
       "type": "registry:ui",
       "title": "Form Layout",
-      "description": "Create/edit shell (page or modal). Put FormBuilder inside; one form uses formId = FormBuilder id. Several forms use actions.save.onClick.",
+      "description": "Create/edit scroll shell (page or modal). When the form is FormBuilder, one form uses formId = FormBuilder id. Several forms use actions.save.onClick. Use PageLayout for browse/show.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",
@@ -555,7 +555,7 @@
       "name": "metric-card",
       "type": "registry:ui",
       "title": "Metric Card",
-      "description": "Dashboard KPI / metric card: icon, title, value, and optional percent change. Use for revenue, volume, counts.",
+      "description": "Dashboard KPI tile: icon, title, value, optional percent change. Use for revenue, volume, counts — not for a record's fields (use Detail Card).",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -574,7 +574,7 @@
       "name": "data-list",
       "type": "registry:ui",
       "title": "Data List",
-      "description": "Props-based card/row list from List. Use instead of DataTable when search, filters, sort, or pagination are not needed.",
+      "description": "Props-driven card/row collection (people, products, checklists, activity). Use when the list does not need search, filters, sort, or pagination. Not for one record's fields — use Detail Card. Do not assemble rows from base List.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/list"
@@ -591,7 +591,7 @@
       "name": "detail-card",
       "type": "registry:ui",
       "title": "Detail Card",
-      "description": "Props-based read-only key/value card with React node values. style default|border.",
+      "description": "Read-only key/value card for one record (invoice, leave request, customer). Use on show/detail pages. Not a collection — use Data List or Data Table for many items. items plus optional title, columns, style default|border. Values can be React nodes.",
       "dependencies": [
         "class-variance-authority"
       ],

@@ -1,6 +1,6 @@
 # Orchid catalog
 
-Agents: read this file **in full** (Read tool, not Grep), **Components & Blocks first**. Prefer a block under `src/components/{category}/` (`@/components/{category}/…`) driven by props or a schema. Only then use **Base Components** under `src/base-ui/{category}/` (`@/base-ui/{category}/…`). Do not assemble a block from many base components. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. When a Docs link is listed, fetch that Markdown file (not the HTML example page).
+Read this file **in full** (Read tool, not Grep). Match the job to each **Components & Blocks** description, then open the listed source and Docs `.md`. Use **Base Components** only when no block covers the job. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils.
 
 # Utils
 
@@ -15,7 +15,7 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 ## `data-table` — Data Table
 
-JSON-schema list with search, filters, sorting, pagination. rowActions defaults to true (Edit + Delete). Set false to hide. One-field edits use cells. editColumns only toggles column visibility.
+Schema-driven collection when the user needs search, column filters, sorting, or pagination. Do not default every list here — use Data List for compact collections and Detail Card for one record. rowActions defaults to true (Edit + Delete). One-field edits use cells. editColumns only toggles column visibility.
 Import `@/components/displaying-data/data-table`; read `src/components/displaying-data/data-table.tsx`.
 Related source: `src/components/displaying-data/data-table-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/data-table.md
@@ -28,19 +28,19 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/customer-card.md
 
 ## `metric-card` — Metric Card
 
-Dashboard KPI / metric card: icon, title, value, and optional percent change. Use for revenue, volume, counts.
+Dashboard KPI tile: icon, title, value, optional percent change. Use for revenue, volume, counts — not for a record's fields (use Detail Card).
 Import `@/components/displaying-data/metric-card`; read `src/components/displaying-data/metric-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/metric-card.md
 
 ## `data-list` — Data List
 
-Props-based card/row list from List. Use instead of DataTable when search, filters, sort, or pagination are not needed.
+Props-driven card/row collection (people, products, checklists, activity). Use when the list does not need search, filters, sort, or pagination. Not for one record's fields — use Detail Card. Do not assemble rows from base List.
 Import `@/components/displaying-data/data-list`; read `src/components/displaying-data/data-list.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/data-list.md
 
 ## `detail-card` — Detail Card
 
-Props-based read-only key/value card with React node values. style default|border.
+Read-only key/value card for one record (invoice, leave request, customer). Use on show/detail pages. Not a collection — use Data List or Data Table for many items. items plus optional title, columns, style default|border. Values can be React nodes.
 Import `@/components/displaying-data/detail-card`; read `src/components/displaying-data/detail-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/detail-card.md
 
@@ -48,7 +48,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/detail-card.md
 
 ## `form-builder` — Form Builder
 
-JSON schema fields. Wrap in FormLayout. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
+Multi-field create/edit from a JSON schema. Wrap in FormLayout; submit through formId. Use when the screen is a form, not a detail view. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone. Unknown types throw.
 Import `@/components/form/form-builder`; read `src/components/form/form-builder.tsx`.
 Related source: `src/components/form/form-builder-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-builder.md
@@ -81,7 +81,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/date-picker.md
 
 ## `form-layout` — Form Layout
 
-Create/edit shell (page or modal). Put FormBuilder inside; one form uses formId = FormBuilder id. Several forms use actions.save.onClick.
+Create/edit scroll shell (page or modal). When the form is FormBuilder, one form uses formId = FormBuilder id. Several forms use actions.save.onClick. Use PageLayout for browse/show.
 Import `@/components/layout/form-layout`; read `src/components/layout/form-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/form-layout.md
 

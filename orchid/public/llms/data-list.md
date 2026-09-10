@@ -2,7 +2,7 @@
 
 # Data List
 
-Props-driven card/row list built on List. Prefer this over DataTable for compact collections.
+Card/row collection when search, filters, sort, or pagination are not needed.
 
 ## Example
 

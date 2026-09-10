@@ -2,7 +2,7 @@
 
 # Metric Card
 
-Dashboard KPI card: icon, title, value, and optional percent change.
+Dashboard KPI tile. Use for summaries, not a record's fields.
 
 ## Example
 
@@ -126,3 +126,6 @@ function MetricCardDemo() {
 
 export { MetricCardDemo };
 ```
+
+Use `MetricCard` for dashboard KPIs (revenue, volume, counts). Use `DetailCard` for a
+record's fields.

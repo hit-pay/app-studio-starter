@@ -11,7 +11,7 @@ const docsDir = join(root, 'public', 'llms')
 const lines = [
   '# Orchid catalog',
   '',
-  'Agents: read this file **in full** (Read tool, not Grep), **Components & Blocks first**. Prefer a block under `src/components/{category}/` (`@/components/{category}/…`) driven by props or a schema. Only then use **Base Components** under `src/base-ui/{category}/` (`@/base-ui/{category}/…`). Do not assemble a block from many base components. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. When a Docs link is listed, fetch that Markdown file (not the HTML example page).',
+  'Read this file **in full** (Read tool, not Grep). Match the job to each **Components & Blocks** description, then open the listed source and Docs `.md`. Use **Base Components** only when no block covers the job. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils.',
   '',
 ]
 

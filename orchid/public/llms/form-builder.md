@@ -2,7 +2,7 @@
 
 # Form Builder
 
-Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer this over assembling fields by hand.
+Schema-driven create/edit form. Use Detail Card for a read-only record.
 
 ## Example
 
@@ -459,6 +459,7 @@ function SchemaFormDemo() {
 export { SchemaFormDemo };
 ```
 
+Use `FormBuilder` for multi-field create/edit. Use `DetailCard` for a read-only record.
 Unknown `type` values throw. Use only the listed FormBuilder types. Render inside `FormLayout`. Do not wrap in `Card`.
 
 ## Change callback

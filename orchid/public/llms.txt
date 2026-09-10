@@ -94,19 +94,19 @@ Small, Big, and Float customer or beneficiary cards.
 Install: `bunx --bun shadcn@latest add @orchid/customer-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/customer-card.json)
 
 #### [Data List](https://orchid-ui-hitpay.vercel.app/llms/data-list.md)
-Props-driven card/row list built on List. Prefer this over DataTable for compact collections.
+Card/row collection when search, filters, sort, or pagination are not needed.
 Install: `bunx --bun shadcn@latest add @orchid/data-list` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-list.json)
 
 #### [Data Table](https://orchid-ui-hitpay.vercel.app/llms/data-table.md)
-Schema-driven table: search, tabs, filter, sort, Edit Column, pagination. Prefer this over Table for lists.
+Schema-driven table when the list needs search, filters, sort, or pagination.
 Install: `bunx --bun shadcn@latest add @orchid/data-table` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-table.json)
 
 #### [Detail Card](https://orchid-ui-hitpay.vercel.app/llms/detail-card.md)
-Detail card with grid columns, colspan, and stacked rows.
+Read-only key/value card for one record. Not a collection.
 Install: `bunx --bun shadcn@latest add @orchid/detail-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/detail-card.json)
 
 #### [Metric Card](https://orchid-ui-hitpay.vercel.app/llms/metric-card.md)
-Dashboard KPI card: icon, title, value, and optional percent change.
+Dashboard KPI tile. Use for summaries, not a record's fields.
 Install: `bunx --bun shadcn@latest add @orchid/metric-card` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/metric-card.json)
 
 ### Form
@@ -120,7 +120,7 @@ Shadcn-style Popover and Calendar composition with optional Orchid helpers.
 Install: `bunx --bun shadcn@latest add @orchid/date-picker` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/date-picker.json)
 
 #### [Form Builder](https://orchid-ui-hitpay.vercel.app/llms/form-builder.md)
-Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer this over assembling fields by hand.
+Schema-driven create/edit form. Use Detail Card for a read-only record.
 Install: `bunx --bun shadcn@latest add @orchid/form-builder` · [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-builder.json)
 
 #### [Quantity Input](https://orchid-ui-hitpay.vercel.app/llms/quantity-input.md)

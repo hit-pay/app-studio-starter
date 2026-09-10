@@ -63,6 +63,6 @@ function CardDemo() {
 export { CardDemo }
 ```
 
-Use `Card` for a small summary or grouped fields. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table`.
+Use `Card` for a small summary or grouped fields. Do not wrap `DataTable`, `DataList`, `DetailCard`, `FormBuilder`, `PageLayout`, or `Table`.
 
-Use `size="sm"` for compact cards. Prefer `MetricCard`, `ChoiceCard`, or `CustomerCard` when those patterns fit.
+Use `size="sm"` for compact cards. Prefer `MetricCard`, `ChoiceCard`, `CustomerCard`, or `DetailCard` when those patterns fit.

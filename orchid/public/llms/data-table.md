@@ -2,7 +2,7 @@
 
 # Data Table
 
-Schema-driven table: search, tabs, filter, sort, Edit Column, pagination. Prefer this over Table for lists.
+Schema-driven table when the list needs search, filters, sort, or pagination.
 
 ## Example
 
@@ -302,6 +302,8 @@ function SchemaTableDemo() {
 export { SchemaTableDemo };
 ```
 
+Use `DataTable` when the list needs search, column filters, sorting, or pagination.
+Use `DataList` for compact collections without those tools, and `DetailCard` for one record.
 Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
 
 Configure `selectionActions` and `emptyState.actions` in the schema. The config is JSON-friendly:

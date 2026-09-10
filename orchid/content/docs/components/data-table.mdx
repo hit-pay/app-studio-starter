@@ -2,6 +2,8 @@ import { SchemaTableDemo } from "../../../src/components/doc/doc-demos"
 
 <SchemaTableDemo />
 
+Use `DataTable` when the list needs search, column filters, sorting, or pagination.
+Use `DataList` for compact collections without those tools, and `DetailCard` for one record.
 Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
 
 Configure `selectionActions` and `emptyState.actions` in the schema. The config is JSON-friendly:

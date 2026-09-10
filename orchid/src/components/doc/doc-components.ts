@@ -287,13 +287,14 @@ export const DOC_BLOCKS = [
   {
     to: "/components/detail-card" as const,
     name: "Detail Card",
-    description: "Detail card with grid columns, colspan, and stacked rows.",
+    description:
+      "Read-only key/value card for one record. Not a collection.",
   },
   {
     to: "/components/data-list" as const,
     name: "Data List",
     description:
-      "Props-driven card/row list built on List. Prefer this over DataTable for compact collections.",
+      "Card/row collection when search, filters, sort, or pagination are not needed.",
   },
   {
     to: "/components/quantity-input" as const,
@@ -309,7 +310,7 @@ export const DOC_BLOCKS = [
     to: "/components/metric-card" as const,
     name: "Metric Card",
     description:
-      "Dashboard KPI card: icon, title, value, and optional percent change.",
+      "Dashboard KPI tile. Use for summaries, not a record's fields.",
   },
   {
     to: "/components/app-layout" as const,
@@ -332,13 +333,13 @@ export const DOC_BLOCKS = [
     to: "/components/form-builder" as const,
     name: "Form Builder",
     description:
-      "Schema-driven form. Types include date, datetime, file, quantity, switch. Prefer this over assembling fields by hand.",
+      "Schema-driven create/edit form. Use Detail Card for a read-only record.",
   },
   {
     to: "/components/data-table" as const,
     name: "Data Table",
     description:
-      "Schema-driven table: search, tabs, filter, sort, Edit Column, pagination. Prefer this over Table for lists.",
+      "Schema-driven table when the list needs search, filters, sort, or pagination.",
   },
   {
     to: "/components/confirmation-modal" as const,
