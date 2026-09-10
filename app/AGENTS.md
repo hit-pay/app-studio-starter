@@ -22,6 +22,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | `src/routes/__root.tsx` | `QueryProvider`, `ConfirmationModalProvider`, `Toaster` |
 | `src/components/`, `src/base-ui/` | Orchid blocks / base (`@/…`) |
 | `src/lib/hitpay.ts` | Browser user / roles / members |
+| `src/lib/hitpay-roles.ts` | HitPay role titles (only place they are listed) |
 | `src/lib/server/` | Server helpers used only from `createServerFn` |
 | `src/lib/server/hitpay.ts` | Hopped session + connector env |
 | `src/lib/server/hitpay-api.ts` | `hitpayRequest('/v1/…')` |
@@ -84,8 +85,10 @@ CREATE INDEX idx_files_entity ON files(entity_type, entity_id);
 
 Auth is the host dashboard.
 
-- Browser UI: `useHitPayUser`, `fetchUserInfo`, `fetchAppRoles`, `fetchAppMembers` from `#/lib/hitpay`. Gate on `user.role.title`.
-- Server: `getHitPaySession` / `requireHitPayRoles(['Owner', 'Admin', 'Manager'])` from `#/lib/server/hitpay`. Persist actor from that session, not from a client-supplied role.
+- Role titles live in `#/lib/hitpay-roles`: `HITPAY_ALL_ROLES` (floor work) and `HITPAY_MANAGER_ROLES` (approvals, settings, refunds). Import those arrays; keep titles out of routes.
+- `fetchAppRoles` / `fetchAppMembers` from `#/lib/hitpay` load live ids and members from the host.
+- Browser: `useHitPayUser`, `fetchUserInfo`. Gate on `user.role.title`.
+- Server: `getHitPaySession` / `requireHitPayRoles(HITPAY_ALL_ROLES)` from `#/lib/server/hitpay`. Persist the actor from that session.
 
 Connector keys arrive on `X-HitPay-Env`. Names are in the footer `Connected server env keys`. Read them only in `createServerFn` via `getHitPayEnvValue`, `getConnector`, or `getHitPayEnv`. Missing key → tell the merchant to connect that provider. Never `process.env` for those keys.
 
@@ -95,8 +98,10 @@ Connector keys arrive on `X-HitPay-Env`. Names are in the footer `Connected serv
 - **HitPay merchant API** (`HITPAY_ACCESS_TOKEN`, `HITPAY_API_URL`): only if the request needs merchant HTTP. Grep workspace `hitpay-apis.json`. If that file is missing, `curl` the generate-footer OpenAPI URL into it once. Do not curl again. Do not read the whole spec. Call matching `/v1/…` paths with `hitpayRequest` from `#/lib/server/hitpay-api`. The running app does not download the spec.
 
 ```ts
+import { HITPAY_ALL_ROLES } from '#/lib/hitpay-roles'
+
 const products = createServerFn({ method: 'GET' }).handler(async () => {
-  await requireHitPayRoles(['Owner', 'Admin', 'Manager'])
+  await requireHitPayRoles(HITPAY_ALL_ROLES)
   const response = await hitpayRequest('/v1/products')
   if (!response.ok) throw new Error('Could not load products.')
   return response.json()

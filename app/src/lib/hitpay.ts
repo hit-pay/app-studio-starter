@@ -1,5 +1,12 @@
 import { useEffect, useState } from 'react'
 
+export {
+  HITPAY_ALL_ROLES,
+  HITPAY_MANAGER_ROLES,
+  HITPAY_ROLE,
+} from '#/lib/hitpay-roles'
+export type { HitPayRoleTitle } from '#/lib/hitpay-roles'
+
 export type HitPayRole = {
   id: string
   title: string

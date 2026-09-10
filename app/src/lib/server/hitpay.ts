@@ -1,7 +1,7 @@
 /**
  * createServerFn only. Hopped session + connector env.
  * getHitPayEnvValue('KEY') / getHitPayEnv() / getConnector('slug')
- * getHitPaySession() / requireHitPayRoles(['Owner', 'Admin'])
+ * getHitPaySession() / requireHitPayRoles(HITPAY_ALL_ROLES | HITPAY_MANAGER_ROLES)
  */
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { getRequest, getRequestHeader } from '@tanstack/react-start/server'
