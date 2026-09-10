@@ -11,7 +11,7 @@ const docsDir = join(root, 'public', 'llms')
 const lines = [
   '# Orchid catalog',
   '',
-  'Read this file **in full** (Read tool, not Grep). Match the job to each **Components & Blocks** description, then open the listed source and Docs `.md`. Use **Base Components** only when no block covers the job. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils.',
+  'Grep this file for the blocks this request needs. Do not read it in full or open every listed source/docs. Use **Base Components** only when no block covers the job. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils.',
   '',
 ]
 
