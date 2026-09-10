@@ -193,7 +193,7 @@ Compound empty state with Orchid media variants.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
 
 #### [List](https://orchid-ui-hitpay.vercel.app/llms/list.md)
-Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.
+Row primitives: ListItem, ListItemTitle, ListItemMedia, meta, copy fields, tokens, and actions.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/list.json)
 
 #### [Table](https://orchid-ui-hitpay.vercel.app/llms/table.md)

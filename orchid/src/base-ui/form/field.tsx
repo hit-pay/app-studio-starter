@@ -89,7 +89,10 @@ function FieldContent({ className, ...props }: ComponentProps<'div'>) {
   return (
     <div
       data-slot="field-content"
-      className={cn('group/field-content flex flex-1 flex-col gap-0.5 leading-normal', className)}
+      className={cn(
+        'group/field-content flex min-w-0 flex-1 flex-col gap-0.5 overflow-visible leading-normal',
+        className,
+      )}
       {...props}
     />
   )

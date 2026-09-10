@@ -2,7 +2,7 @@
 
 # List
 
-Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.
+Row primitives: ListItem, ListItemTitle, ListItemMedia, meta, copy fields, tokens, and actions.
 
 ## Example
 

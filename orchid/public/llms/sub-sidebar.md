@@ -38,4 +38,7 @@ function SubSidebarDemo() {
 export { SubSidebarDemo }
 ```
 
-Sub Sidebar is configured through one JSON-compatible `items` array. It does not export item or content primitives. `AppStudioLayout` composes it automatically when using sidebar mode.
+Sub Sidebar is a standalone flat child nav. Configure it through one JSON-compatible
+`items` array. It does not export item or content primitives. Import it yourself
+when you need nested nav; `AppStudioLayout` sidebar mode uses its own built-in list,
+not this component.

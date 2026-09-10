@@ -107,7 +107,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/sidebar.md
 
 ## `sub-sidebar` — Sub Sidebar
 
-Simple flat child navigation for AppStudioLayout sidebar mode with a blue active state.
+Standalone flat child navigation with a blue active state. Not used by AppStudioLayout sidebar mode.
 Import `@/components/navigation/sub-sidebar`; read `src/components/navigation/sub-sidebar.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/sub-sidebar.md
 
@@ -151,7 +151,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/copy-button.md
 
 ## `list` — List
 
-List row (title, media, meta, actions). layout default|stack|media, selected.
+Row primitives (ListItem, title, media, meta, actions). layout default|stack|media, selected.
 Import `@/base-ui/displaying-data/list`; read `src/base-ui/displaying-data/list.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/list.md
 

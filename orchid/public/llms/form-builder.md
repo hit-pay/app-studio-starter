@@ -316,7 +316,8 @@ Types
 - input | password | textarea | phone
 - select
 - combobox — searchable; add props.multiple for chips
-- radio | choice-card | checkbox | checkbox-group | accepted | switch
+- radio | choice-card | checkbox-group | accepted | switch
+- checkbox — alias of accepted (same single checkbox control)
 - choice-card — pick one; options may include description; props.alignment vertical|horizontal
 - slider — single value; range via key "min+max" or one key with value { min, max }
 - input-group — key "amount+currency" writes amount + currency

@@ -61,7 +61,10 @@ function Content({ className, ...props }: ComponentProps<"div">) {
   return (
     <div
       data-slot="page-content"
-      className={cn("mt-5 min-h-0 flex-1 overflow-y-auto", className)}
+      className={cn(
+        "mt-5 min-h-0 flex-1 overflow-y-auto px-1 py-0.5 -mx-1",
+        className,
+      )}
       {...props}
     />
   );

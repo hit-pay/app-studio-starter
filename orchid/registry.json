@@ -186,7 +186,7 @@
       "name": "sub-sidebar",
       "type": "registry:ui",
       "title": "Sub Sidebar",
-      "description": "Simple flat child navigation for AppStudioLayout sidebar mode with a blue active state.",
+      "description": "Standalone flat child navigation with a blue active state. Not used by AppStudioLayout sidebar mode.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -218,7 +218,7 @@
       "name": "list",
       "type": "registry:ui",
       "title": "List",
-      "description": "List row (title, media, meta, actions). layout default|stack|media, selected.",
+      "description": "Row primitives (ListItem, title, media, meta, actions). layout default|stack|media, selected.",
       "dependencies": [
         "@mingcute/react"
       ],

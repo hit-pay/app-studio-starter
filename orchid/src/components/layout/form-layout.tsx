@@ -150,7 +150,7 @@ function PageFormLayout({
       </header>
 
       <div className="min-h-0 flex-1 overflow-y-auto px-6 py-8">
-        <div className="mx-auto w-full max-w-xl">
+        <div className="mx-auto w-full max-w-xl p-1">
           <div className="mb-6">
             <h1 className="text-lg leading-6 font-medium text-oc-foreground">
               {title}
@@ -213,7 +213,9 @@ function ModalFormLayout({
           ) : null}
         </div>
 
-        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">{children}</div>
+        <div className="min-h-0 flex-1 overflow-y-auto px-5 py-5">
+          <div className="p-1">{children}</div>
+        </div>
 
         <div className="sticky bottom-0 z-10 flex shrink-0 flex-col-reverse gap-2 border-t border-oc-border bg-oc-background p-4 sm:flex-row sm:justify-end">
           <FormActions

@@ -44,7 +44,7 @@ After the framework is chosen, work autonomously and use Bun as the package mana
    - "registries.@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
    Keep compatible generated settings and ensure @/* resolves to the source directory.
 4. Fetch https://orchid-ui-hitpay.vercel.app/orchid-tokens.css and merge it once into the generated global stylesheet. Preserve the --oc-* variables and Tailwind @theme mappings without duplicating tokens.
-5. Read https://orchid-ui-hitpay.vercel.app/registry.json, then install the complete catalog with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Do not skip items.
+5. Read https://orchid-ui-hitpay.vercel.app/registry.json, then install the complete catalog with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Do not skip items.
 6. Read Components & Blocks first (@/components/<category>/<name>). Use base items from @/base-ui/<category>/<name> only when no block covers the job. Reuse Orchid components and compose missing patterns from Orchid primitives.
 7. Use Orchid UI for all interface elements. Do not install or use official @shadcn components. The shadcn CLI is only the transport for the custom @orchid registry.
 8. Use oc-* design tokens instead of shadcn tokens or hard-coded colors.

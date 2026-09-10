@@ -44,7 +44,7 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/list" as const,
     name: "List",
     description:
-      "Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.",
+      "Row primitives: ListItem, ListItemTitle, ListItemMedia, meta, copy fields, tokens, and actions.",
   },
   {
     to: "/base-ui/badge" as const,

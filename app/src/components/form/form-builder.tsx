@@ -492,7 +492,7 @@ function SchemaForm({
     >
       <FieldGroup className={cn('grid gap-4', gridColumns)}>
         {flat.map((item) => (
-          <div key={item.path} className={cn('min-w-0', columnSpanClass(columnSpan(item)))}>
+          <div key={item.path} className={cn('min-w-0 overflow-visible', columnSpanClass(columnSpan(item)))}>
             <form.Field
             key={item.path}
             name={item.path}
