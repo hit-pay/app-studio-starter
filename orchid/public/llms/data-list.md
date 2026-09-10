@@ -17,15 +17,12 @@ import {
 
 import { Button } from '@/base-ui/actions/button'
 import { Badge } from '@/base-ui/displaying-data/badge'
-import { DropdownMenuItem } from '@/base-ui/overlays/dropdown-menu'
 import { DataList } from '@/components/displaying-data/data-list'
 
-const moreMenu = (
-  <>
-    <DropdownMenuItem>Edit</DropdownMenuItem>
-    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-  </>
-)
+const moreMenu = [
+  { key: 'edit', label: 'Edit' },
+  { key: 'delete', label: 'Delete', destructive: true },
+]
 
 function DataListDemo() {
   return (
@@ -147,7 +144,7 @@ function DataListDemo() {
             {
               key: 'link',
               title: 'Payment link paid',
-              moreMenu,
+              menu: moreMenu,
               meta: (
                 <>
                   <span className="text-xs text-oc-muted-foreground">-</span>
@@ -175,7 +172,9 @@ function DataListDemo() {
               key: 'home',
               title: 'Home',
               description: 'Welcome to our store. Discover new arrivals and seasonal offers.',
-              mediaSrc: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              media: {
+                src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              },
               meta: 'Last updated : 20 Aug 2026',
               badges: <Badge tone="green">Published</Badge>,
             },
@@ -183,10 +182,12 @@ function DataListDemo() {
               key: 'brunch',
               title: 'Weekend brunch',
               description: 'Payment Link landing page for SGD 48.00 brunch sets.',
-              mediaSrc: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              media: {
+                src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              },
               meta: 'Last updated : 18 Aug 2026',
               badges: <Badge tone="grey">Draft</Badge>,
-              moreMenu,
+              menu: moreMenu,
             },
           ]}
         />
@@ -220,9 +221,9 @@ function DataListDemo() {
 export { DataListDemo }
 ```
 
-Use `DataList` for card or row collections (people, products, checklists, activity).
-Use `DataTable` only when the list needs search, column filters, sorting, or pagination.
-Do not assemble these rows from base `List` parts.
+Pass **`items` only**. Do not assemble rows from base `List` / `ListItem`. Do not
+use `DataTable` unless the list needs search, filters, sort, or pagination.
+Do not wrap `DataList` in `Card`.
 
 ```tsx
 import { DataList } from '@/components/displaying-data/data-list'
@@ -234,29 +235,48 @@ import { DataList } from '@/components/displaying-data/data-list'
       title: 'Priya Nair',
       description: 'INV-2048 · Cards · SGD 128.00',
       details: [{ key: 'city', text: 'Singapore' }],
+      actions: {
+        onClick: () => {},
+        menu: [
+          { key: 'edit', label: 'Edit', onClick: () => {} },
+          { key: 'delete', label: 'Delete', destructive: true, onClick: () => {} },
+        ],
+      },
     },
   ]}
 />
 ```
 
-## API
+## Item shape
 
-`DataList` accepts `items`, plus optional `layout` (`default` | `stack` | `media`),
-`empty`, and `className`.
+Each item is one object. Required: `key`, `title`.
 
-Each item needs a unique string `key` and a `title`. Optional fields:
+Content
 
-- `description` — secondary line
-- `badges` — React nodes next to the title (`Badge`, etc.)
+- `description` — second line
+- `badges` — nodes beside the title (`Badge`)
 - `details` — `{ key, text, icon? }[]`
-- `tokens` / `tokensLabel` — compact chips
-- `copyRows` — `{ label, value }[]` (best with `layout="stack"`)
-- `media` or `mediaSrc` / `mediaAlt` — thumbnail (`layout` becomes `media`)
+- `tokens` / `tokensLabel` — chips
+- `copyRows` — `{ label, value }[]` with `layout="stack"`
+- `media` — `{ src, alt? }` or a React node
 - `logo` — mark beside the title
-- `trailing` — right-side actions
-- `moreMenu` — dropdown content for the ⋮ control
-- `hoverActions` — `{ key, label, icon?, destructive?, onClick? }[]`
 - `meta` — muted supporting text
-- `layout` — override the list default
-- `selected` — selected border
-- `onClick` — row click
+- `layout` — `default` | `stack` | `media` (media is automatic when `media` is set)
+- `selected`
+
+Actions — prefer `actions` (do not import `DropdownMenu` for the ⋮ menu)
+
+```ts
+actions: {
+  onClick?: () => void
+  trailing?: ReactNode
+  menu?: { key?: string; label: string; destructive?: boolean; onClick?: () => void }[]
+  hover?: { key: string; label: string; icon?: ReactNode; destructive?: boolean; onClick?: () => void }[]
+}
+```
+
+Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of `actions`.
+
+## List props
+
+`items`, optional `layout`, `empty`, `className`. No `children`.

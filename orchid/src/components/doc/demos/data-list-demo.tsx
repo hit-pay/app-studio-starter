@@ -8,15 +8,12 @@ import {
 
 import { Button } from '@/base-ui/actions/button'
 import { Badge } from '@/base-ui/displaying-data/badge'
-import { DropdownMenuItem } from '@/base-ui/overlays/dropdown-menu'
 import { DataList } from '@/components/displaying-data/data-list'
 
-const moreMenu = (
-  <>
-    <DropdownMenuItem>Edit</DropdownMenuItem>
-    <DropdownMenuItem variant="destructive">Delete</DropdownMenuItem>
-  </>
-)
+const moreMenu = [
+  { key: 'edit', label: 'Edit' },
+  { key: 'delete', label: 'Delete', destructive: true },
+]
 
 function DataListDemo() {
   return (
@@ -138,7 +135,7 @@ function DataListDemo() {
             {
               key: 'link',
               title: 'Payment link paid',
-              moreMenu,
+              menu: moreMenu,
               meta: (
                 <>
                   <span className="text-xs text-oc-muted-foreground">-</span>
@@ -166,7 +163,9 @@ function DataListDemo() {
               key: 'home',
               title: 'Home',
               description: 'Welcome to our store. Discover new arrivals and seasonal offers.',
-              mediaSrc: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              media: {
+                src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              },
               meta: 'Last updated : 20 Aug 2026',
               badges: <Badge tone="green">Published</Badge>,
             },
@@ -174,10 +173,12 @@ function DataListDemo() {
               key: 'brunch',
               title: 'Weekend brunch',
               description: 'Payment Link landing page for SGD 48.00 brunch sets.',
-              mediaSrc: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              media: {
+                src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              },
               meta: 'Last updated : 18 Aug 2026',
               badges: <Badge tone="grey">Draft</Badge>,
-              moreMenu,
+              menu: moreMenu,
             },
           ]}
         />

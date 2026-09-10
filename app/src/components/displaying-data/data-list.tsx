@@ -18,6 +18,7 @@ import {
   ListItemToken,
   ListItemTrailing,
 } from '@/base-ui/displaying-data/list'
+import { DropdownMenuItem } from '@/base-ui/overlays/dropdown-menu'
 
 type DataListLayout = 'default' | 'stack' | 'media'
 
@@ -41,7 +42,26 @@ type DataListHoverAction = {
   onClick?: () => void
 }
 
-type DataListRow = {
+type DataListMenuItem = {
+  key?: string
+  label: string
+  destructive?: boolean
+  onClick?: () => void
+}
+
+type DataListMedia = {
+  src: string
+  alt?: string
+}
+
+type DataListActions = {
+  onClick?: () => void
+  trailing?: ReactNode
+  menu?: DataListMenuItem[]
+  hover?: DataListHoverAction[]
+}
+
+type DataListItem = {
   key: string
   title: ReactNode
   description?: ReactNode
@@ -50,22 +70,21 @@ type DataListRow = {
   tokens?: ReactNode[]
   tokensLabel?: ReactNode
   copyRows?: DataListCopyRow[]
-  media?: ReactNode
-  mediaSrc?: string
-  mediaAlt?: string
+  media?: ReactNode | DataListMedia
   logo?: ReactNode
-  trailing?: ReactNode
-  moreMenu?: ReactNode
-  hoverActions?: DataListHoverAction[]
   meta?: ReactNode
   layout?: DataListLayout
   selected?: boolean
   className?: string
   onClick?: () => void
+  trailing?: ReactNode
+  menu?: DataListMenuItem[]
+  hoverActions?: DataListHoverAction[]
+  actions?: DataListActions
 }
 
 type DataListProps = Omit<ComponentProps<'div'>, 'children'> & {
-  items: DataListRow[]
+  items: DataListItem[]
   layout?: DataListLayout
   empty?: ReactNode
 }
@@ -82,21 +101,39 @@ function DataList({ className, items, layout = 'default', empty, ...props }: Dat
   return (
     <div data-slot="data-list" className={cn('flex w-full min-w-0 flex-col gap-3', className)} {...props}>
       {items.map((item) => (
-        <DataListCard key={item.key} item={item} fallbackLayout={layout} />
+        <DataListCard key={item.key} item={normalizeItem(item)} fallbackLayout={layout} />
       ))}
     </div>
   )
+}
+
+type NormalizedItem = DataListItem & {
+  onClick?: () => void
+  trailing?: ReactNode
+  menu?: DataListMenuItem[]
+  hoverActions?: DataListHoverAction[]
+}
+
+function normalizeItem(item: DataListItem): NormalizedItem {
+  return {
+    ...item,
+    onClick: item.actions?.onClick ?? item.onClick,
+    trailing: item.actions?.trailing ?? item.trailing,
+    menu: item.actions?.menu ?? item.menu,
+    hoverActions: item.actions?.hover ?? item.hoverActions,
+  }
 }
 
 function DataListCard({
   item,
   fallbackLayout,
 }: {
-  item: DataListRow
+  item: NormalizedItem
   fallbackLayout: DataListLayout
 }) {
   const itemLayout = item.layout ?? (hasMedia(item) ? 'media' : fallbackLayout)
   const hoverActions = renderHoverActions(item.hoverActions)
+  const moreMenu = renderMenu(item.menu)
 
   return (
     <ListItem
@@ -106,16 +143,10 @@ function DataListCard({
       onClick={item.onClick}
     >
       {itemLayout === 'stack' ? (
-        <DataListStackBody item={item} hoverActions={hoverActions} />
+        <DataListStackBody item={item} hoverActions={hoverActions} moreMenu={moreMenu} />
       ) : (
         <>
-          {hasMedia(item) ? (
-            <ListItemMedia>
-              {item.media ?? (
-                <img alt={item.mediaAlt ?? ''} className="size-full object-cover" src={item.mediaSrc} />
-              )}
-            </ListItemMedia>
-          ) : null}
+          {hasMedia(item) ? <DataListMediaSlot item={item} /> : null}
           <ListItemBody className={itemLayout === 'media' ? 'gap-1' : undefined}>
             <div className={item.description != null ? 'space-y-1' : undefined}>
               <DataListTitleBlock item={item} />
@@ -128,9 +159,9 @@ function DataListCard({
             <DataListMeta item={item} />
             {itemLayout !== 'media' ? hoverActions : null}
           </ListItemBody>
-          {item.trailing != null || item.moreMenu != null ? (
+          {item.trailing != null || moreMenu != null ? (
             <ListItemTrailing>
-              {item.moreMenu != null ? <ListItemMore menu={item.moreMenu} /> : null}
+              {moreMenu != null ? <ListItemMore menu={moreMenu} /> : null}
               {item.trailing}
             </ListItemTrailing>
           ) : null}
@@ -143,9 +174,11 @@ function DataListCard({
 function DataListStackBody({
   item,
   hoverActions,
+  moreMenu,
 }: {
-  item: DataListRow
+  item: NormalizedItem
   hoverActions: ReactNode
+  moreMenu: ReactNode
 }) {
   return (
     <>
@@ -154,7 +187,7 @@ function DataListStackBody({
           <ListItemTitle>{item.title}</ListItemTitle>
           {item.meta}
         </div>
-        {item.moreMenu != null ? <ListItemMore menu={item.moreMenu} /> : null}
+        {moreMenu != null ? <ListItemMore menu={moreMenu} /> : null}
       </div>
       {item.copyRows?.length ? (
         <div className="space-y-2">
@@ -168,7 +201,22 @@ function DataListStackBody({
   )
 }
 
-function DataListTitleBlock({ item }: { item: DataListRow }) {
+function DataListMediaSlot({ item }: { item: NormalizedItem }) {
+  const media = item.media
+  const fromObject = isMediaObject(media)
+
+  return (
+    <ListItemMedia>
+      {fromObject ? (
+        <img alt={media.alt ?? ''} className="size-full object-cover" src={media.src} />
+      ) : (
+        media
+      )}
+    </ListItemMedia>
+  )
+}
+
+function DataListTitleBlock({ item }: { item: NormalizedItem }) {
   return (
     <div className="flex min-w-0 flex-wrap items-center gap-2">
       {item.logo != null ? <ListItemLogo>{item.logo}</ListItemLogo> : null}
@@ -178,7 +226,7 @@ function DataListTitleBlock({ item }: { item: DataListRow }) {
   )
 }
 
-function DataListMeta({ item }: { item: DataListRow }) {
+function DataListMeta({ item }: { item: NormalizedItem }) {
   const hasDetails = Boolean(item.details?.length)
   const hasTokens = Boolean(item.tokens?.length)
   const hasMeta = item.meta != null
@@ -207,6 +255,27 @@ function DataListMeta({ item }: { item: DataListRow }) {
   )
 }
 
+function renderMenu(menu?: DataListMenuItem[]) {
+  if (!menu?.length) return null
+
+  return (
+    <>
+      {menu.map((entry, index) => (
+        <DropdownMenuItem
+          key={entry.key ?? `${entry.label}-${index}`}
+          variant={entry.destructive ? 'destructive' : 'default'}
+          onClick={(event) => {
+            event.stopPropagation()
+            entry.onClick?.()
+          }}
+        >
+          {entry.label}
+        </DropdownMenuItem>
+      ))}
+    </>
+  )
+}
+
 function renderHoverActions(actions?: DataListHoverAction[]) {
   if (!actions?.length) return null
 
@@ -231,16 +300,23 @@ function renderHoverActions(actions?: DataListHoverAction[]) {
   )
 }
 
-function hasMedia(item: DataListRow) {
-  return item.media != null || Boolean(item.mediaSrc)
+function isMediaObject(media: DataListItem['media']): media is DataListMedia {
+  return Boolean(media && typeof media === 'object' && 'src' in media && typeof media.src === 'string')
+}
+
+function hasMedia(item: DataListItem) {
+  return item.media != null
 }
 
 export { DataList }
 export type {
+  DataListActions,
   DataListCopyRow,
   DataListDetail,
   DataListHoverAction,
+  DataListItem,
   DataListLayout,
+  DataListMedia,
+  DataListMenuItem,
   DataListProps,
-  DataListRow,
 }

@@ -34,7 +34,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/metric-card.md
 
 ## `data-list` — Data List
 
-Props-driven card/row collection (people, products, checklists, activity). Use when the list does not need search, filters, sort, or pagination. Not for one record's fields — use Detail Card. Do not assemble rows from base List.
+Pass items[] only: key, title, optional description, details, media, actions.menu / actions.hover. Use when the list does not need search, filters, sort, or pagination. Do not assemble ListItem parts. Not for one record — use Detail Card.
 Import `@/components/displaying-data/data-list`; read `src/components/displaying-data/data-list.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/data-list.md
 
