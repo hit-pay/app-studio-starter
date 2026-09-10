@@ -4,7 +4,7 @@ import { cva } from 'class-variance-authority'
 import { cn } from '@/lib/utils'
 import { CopyButton } from '@/base-ui/actions/copy-button'
 
-type DetailListItem = {
+type DetailCardItem = {
   key: string
   label?: ReactNode
   value: ReactNode
@@ -15,8 +15,8 @@ type DetailListItem = {
   className?: string
 }
 
-type DetailListProps = Omit<ComponentProps<'div'>, 'children' | 'style' | 'title'> & {
-  items: DetailListItem[]
+type DetailCardProps = Omit<ComponentProps<'div'>, 'children' | 'style' | 'title'> & {
+  items: DetailCardItem[]
   title?: ReactNode
   columns?: number
   style?: 'default' | 'border'
@@ -37,40 +37,40 @@ const boxDetailVariants = cva(
   },
 )
 
-function DetailList({
+function DetailCard({
   className,
   items,
   title,
   columns = 1,
   style = 'default',
   ...props
-}: DetailListProps) {
+}: DetailCardProps) {
   return (
     <div
-      data-slot="detail-list"
+      data-slot="detail-card"
       data-style={style}
       className={cn(boxDetailVariants({ style }), className)}
       {...props}
     >
       {title !== undefined && title !== null ? (
-        <DetailListHeader title={title} style={style} />
+        <DetailCardHeader title={title} style={style} />
       ) : null}
-      <DetailListGrid items={items} columns={columns} style={style} />
+      <DetailCardGrid items={items} columns={columns} style={style} />
     </div>
   )
 }
 
-function DetailListHeader({ title, style }: { title: ReactNode; style: 'default' | 'border' }) {
+function DetailCardHeader({ title, style }: { title: ReactNode; style: 'default' | 'border' }) {
   return (
     <div
-      data-slot="detail-list-header"
+      data-slot="detail-card-header"
       className={cn(
         'flex w-full min-w-0 items-center justify-between gap-3',
         style === 'border' && 'bg-oc-background px-4 py-3',
       )}
     >
       <p
-        data-slot="detail-list-title"
+        data-slot="detail-card-title"
         className="min-w-0 text-sm font-medium leading-[1.5] text-oc-foreground"
       >
         {title}
@@ -79,18 +79,18 @@ function DetailListHeader({ title, style }: { title: ReactNode; style: 'default'
   )
 }
 
-function DetailListGrid({
+function DetailCardGrid({
   items,
   columns,
   style,
 }: {
-  items: DetailListItem[]
+  items: DetailCardItem[]
   columns: number
   style: 'default' | 'border'
 }) {
   return (
     <div
-      data-slot="detail-list-grid"
+      data-slot="detail-card-grid"
       className={cn(
         'grid w-full min-w-0',
         style === 'border' ? 'gap-px bg-oc-border' : 'gap-x-6 gap-y-4',
@@ -98,7 +98,7 @@ function DetailListGrid({
       style={{ gridTemplateColumns: `repeat(${columns}, minmax(0, 1fr))` }}
     >
       {items.map((item) => (
-        <DetailListRow key={item.key} item={item} style={style} />
+        <DetailCardRow key={item.key} item={item} style={style} />
       ))}
     </div>
   )
@@ -145,7 +145,7 @@ const boxDetailValueVariants = cva('min-w-0 leading-[1.5] text-oc-foreground', {
   },
 })
 
-function DetailListRow({ item, style }: { item: DetailListItem; style: 'default' | 'border' }) {
+function DetailCardRow({ item, style }: { item: DetailCardItem; style: 'default' | 'border' }) {
   const {
     className,
     label,
@@ -158,7 +158,7 @@ function DetailListRow({ item, style }: { item: DetailListItem; style: 'default'
 
   return (
     <div
-      data-slot="detail-list-row"
+      data-slot="detail-card-row"
       data-alignment={alignment}
       data-size={size}
       className={cn(
@@ -185,5 +185,5 @@ function DetailListRow({ item, style }: { item: DetailListItem; style: 'default'
   )
 }
 
-export { DetailList }
-export type { DetailListItem, DetailListProps }
+export { DetailCard }
+export type { DetailCardItem, DetailCardProps }

@@ -41,7 +41,7 @@ import { Route as BaseUiInputRouteImport } from './routes/base-ui/input'
 import { Route as BaseUiInputGroupRouteImport } from './routes/base-ui/input-group'
 import { Route as BaseUiKbdRouteImport } from './routes/base-ui/kbd'
 import { Route as BaseUiLabelRouteImport } from './routes/base-ui/label'
-import { Route as BaseUiListItemRouteImport } from './routes/base-ui/list-item'
+import { Route as BaseUiListRouteImport } from './routes/base-ui/list'
 import { Route as BaseUiPaginationRouteImport } from './routes/base-ui/pagination'
 import { Route as BaseUiProgressRouteImport } from './routes/base-ui/progress'
 import { Route as BaseUiRadioGroupRouteImport } from './routes/base-ui/radio-group'
@@ -63,9 +63,10 @@ import { Route as ComponentsChoiceCardRouteImport } from './routes/components/ch
 import { Route as ComponentsCommandRouteImport } from './routes/components/command'
 import { Route as ComponentsConfirmationModalRouteImport } from './routes/components/confirmation-modal'
 import { Route as ComponentsCustomerCardRouteImport } from './routes/components/customer-card'
+import { Route as ComponentsDataListRouteImport } from './routes/components/data-list'
 import { Route as ComponentsDataTableRouteImport } from './routes/components/data-table'
 import { Route as ComponentsDatePickerRouteImport } from './routes/components/date-picker'
-import { Route as ComponentsDetailListRouteImport } from './routes/components/detail-list'
+import { Route as ComponentsDetailCardRouteImport } from './routes/components/detail-card'
 import { Route as ComponentsFormBuilderRouteImport } from './routes/components/form-builder'
 import { Route as ComponentsFormLayoutRouteImport } from './routes/components/form-layout'
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
@@ -73,6 +74,7 @@ import { Route as ComponentsPageLayoutRouteImport } from './routes/components/pa
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
 import { Route as ComponentsSidebarRouteImport } from './routes/components/sidebar'
 import { Route as ComponentsSubSidebarRouteImport } from './routes/components/sub-sidebar'
+import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -234,9 +236,9 @@ const BaseUiLabelRoute = BaseUiLabelRouteImport.update({
   path: '/base-ui/label',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiListItemRoute = BaseUiListItemRouteImport.update({
-  id: '/base-ui/list-item',
-  path: '/base-ui/list-item',
+const BaseUiListRoute = BaseUiListRouteImport.update({
+  id: '/base-ui/list',
+  path: '/base-ui/list',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiPaginationRoute = BaseUiPaginationRouteImport.update({
@@ -345,6 +347,11 @@ const ComponentsCustomerCardRoute = ComponentsCustomerCardRouteImport.update({
   path: '/components/customer-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsDataListRoute = ComponentsDataListRouteImport.update({
+  id: '/components/data-list',
+  path: '/components/data-list',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComponentsDataTableRoute = ComponentsDataTableRouteImport.update({
   id: '/components/data-table',
   path: '/components/data-table',
@@ -355,9 +362,9 @@ const ComponentsDatePickerRoute = ComponentsDatePickerRouteImport.update({
   path: '/components/date-picker',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsDetailListRoute = ComponentsDetailListRouteImport.update({
-  id: '/components/detail-list',
-  path: '/components/detail-list',
+const ComponentsDetailCardRoute = ComponentsDetailCardRouteImport.update({
+  id: '/components/detail-card',
+  path: '/components/detail-card',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsFormBuilderRoute = ComponentsFormBuilderRouteImport.update({
@@ -395,6 +402,11 @@ const ComponentsSubSidebarRoute = ComponentsSubSidebarRouteImport.update({
   path: '/components/sub-sidebar',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsTextEditorRoute = ComponentsTextEditorRouteImport.update({
+  id: '/components/text-editor',
+  path: '/components/text-editor',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -428,7 +440,7 @@ export interface FileRoutesByFullPath {
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
-  '/base-ui/list-item': typeof BaseUiListItemRoute
+  '/base-ui/list': typeof BaseUiListRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
   '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
@@ -449,9 +461,10 @@ export interface FileRoutesByFullPath {
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
+  '/components/data-list': typeof ComponentsDataListRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
-  '/components/detail-list': typeof ComponentsDetailListRoute
+  '/components/detail-card': typeof ComponentsDetailCardRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
@@ -459,6 +472,7 @@ export interface FileRoutesByFullPath {
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/sub-sidebar': typeof ComponentsSubSidebarRoute
+  '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
   '/components/': typeof ComponentsIndexRoute
 }
@@ -494,7 +508,7 @@ export interface FileRoutesByTo {
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
-  '/base-ui/list-item': typeof BaseUiListItemRoute
+  '/base-ui/list': typeof BaseUiListRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
   '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
@@ -515,9 +529,10 @@ export interface FileRoutesByTo {
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
+  '/components/data-list': typeof ComponentsDataListRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
-  '/components/detail-list': typeof ComponentsDetailListRoute
+  '/components/detail-card': typeof ComponentsDetailCardRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
@@ -525,6 +540,7 @@ export interface FileRoutesByTo {
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/sub-sidebar': typeof ComponentsSubSidebarRoute
+  '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui': typeof BaseUiIndexRoute
   '/components': typeof ComponentsIndexRoute
 }
@@ -561,7 +577,7 @@ export interface FileRoutesById {
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
-  '/base-ui/list-item': typeof BaseUiListItemRoute
+  '/base-ui/list': typeof BaseUiListRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
   '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
@@ -582,9 +598,10 @@ export interface FileRoutesById {
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
+  '/components/data-list': typeof ComponentsDataListRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
-  '/components/detail-list': typeof ComponentsDetailListRoute
+  '/components/detail-card': typeof ComponentsDetailCardRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
@@ -592,6 +609,7 @@ export interface FileRoutesById {
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/sub-sidebar': typeof ComponentsSubSidebarRoute
+  '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
   '/components/': typeof ComponentsIndexRoute
 }
@@ -629,7 +647,7 @@ export interface FileRouteTypes {
     | '/base-ui/input-group'
     | '/base-ui/kbd'
     | '/base-ui/label'
-    | '/base-ui/list-item'
+    | '/base-ui/list'
     | '/base-ui/pagination'
     | '/base-ui/progress'
     | '/base-ui/radio-group'
@@ -650,9 +668,10 @@ export interface FileRouteTypes {
     | '/components/command'
     | '/components/confirmation-modal'
     | '/components/customer-card'
+    | '/components/data-list'
     | '/components/data-table'
     | '/components/date-picker'
-    | '/components/detail-list'
+    | '/components/detail-card'
     | '/components/form-builder'
     | '/components/form-layout'
     | '/components/metric-card'
@@ -660,6 +679,7 @@ export interface FileRouteTypes {
     | '/components/quantity-input'
     | '/components/sidebar'
     | '/components/sub-sidebar'
+    | '/components/text-editor'
     | '/base-ui/'
     | '/components/'
   fileRoutesByTo: FileRoutesByTo
@@ -695,7 +715,7 @@ export interface FileRouteTypes {
     | '/base-ui/input-group'
     | '/base-ui/kbd'
     | '/base-ui/label'
-    | '/base-ui/list-item'
+    | '/base-ui/list'
     | '/base-ui/pagination'
     | '/base-ui/progress'
     | '/base-ui/radio-group'
@@ -716,9 +736,10 @@ export interface FileRouteTypes {
     | '/components/command'
     | '/components/confirmation-modal'
     | '/components/customer-card'
+    | '/components/data-list'
     | '/components/data-table'
     | '/components/date-picker'
-    | '/components/detail-list'
+    | '/components/detail-card'
     | '/components/form-builder'
     | '/components/form-layout'
     | '/components/metric-card'
@@ -726,6 +747,7 @@ export interface FileRouteTypes {
     | '/components/quantity-input'
     | '/components/sidebar'
     | '/components/sub-sidebar'
+    | '/components/text-editor'
     | '/base-ui'
     | '/components'
   id:
@@ -761,7 +783,7 @@ export interface FileRouteTypes {
     | '/base-ui/input-group'
     | '/base-ui/kbd'
     | '/base-ui/label'
-    | '/base-ui/list-item'
+    | '/base-ui/list'
     | '/base-ui/pagination'
     | '/base-ui/progress'
     | '/base-ui/radio-group'
@@ -782,9 +804,10 @@ export interface FileRouteTypes {
     | '/components/command'
     | '/components/confirmation-modal'
     | '/components/customer-card'
+    | '/components/data-list'
     | '/components/data-table'
     | '/components/date-picker'
-    | '/components/detail-list'
+    | '/components/detail-card'
     | '/components/form-builder'
     | '/components/form-layout'
     | '/components/metric-card'
@@ -792,6 +815,7 @@ export interface FileRouteTypes {
     | '/components/quantity-input'
     | '/components/sidebar'
     | '/components/sub-sidebar'
+    | '/components/text-editor'
     | '/base-ui/'
     | '/components/'
   fileRoutesById: FileRoutesById
@@ -828,7 +852,7 @@ export interface RootRouteChildren {
   BaseUiInputGroupRoute: typeof BaseUiInputGroupRoute
   BaseUiKbdRoute: typeof BaseUiKbdRoute
   BaseUiLabelRoute: typeof BaseUiLabelRoute
-  BaseUiListItemRoute: typeof BaseUiListItemRoute
+  BaseUiListRoute: typeof BaseUiListRoute
   BaseUiPaginationRoute: typeof BaseUiPaginationRoute
   BaseUiProgressRoute: typeof BaseUiProgressRoute
   BaseUiRadioGroupRoute: typeof BaseUiRadioGroupRoute
@@ -849,9 +873,10 @@ export interface RootRouteChildren {
   ComponentsCommandRoute: typeof ComponentsCommandRoute
   ComponentsConfirmationModalRoute: typeof ComponentsConfirmationModalRoute
   ComponentsCustomerCardRoute: typeof ComponentsCustomerCardRoute
+  ComponentsDataListRoute: typeof ComponentsDataListRoute
   ComponentsDataTableRoute: typeof ComponentsDataTableRoute
   ComponentsDatePickerRoute: typeof ComponentsDatePickerRoute
-  ComponentsDetailListRoute: typeof ComponentsDetailListRoute
+  ComponentsDetailCardRoute: typeof ComponentsDetailCardRoute
   ComponentsFormBuilderRoute: typeof ComponentsFormBuilderRoute
   ComponentsFormLayoutRoute: typeof ComponentsFormLayoutRoute
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
@@ -859,6 +884,7 @@ export interface RootRouteChildren {
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
   ComponentsSidebarRoute: typeof ComponentsSidebarRoute
   ComponentsSubSidebarRoute: typeof ComponentsSubSidebarRoute
+  ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
   BaseUiIndexRoute: typeof BaseUiIndexRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
 }
@@ -1089,11 +1115,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiLabelRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/list-item': {
-      id: '/base-ui/list-item'
-      path: '/base-ui/list-item'
-      fullPath: '/base-ui/list-item'
-      preLoaderRoute: typeof BaseUiListItemRouteImport
+    '/base-ui/list': {
+      id: '/base-ui/list'
+      path: '/base-ui/list'
+      fullPath: '/base-ui/list'
+      preLoaderRoute: typeof BaseUiListRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/pagination': {
@@ -1243,6 +1269,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsCustomerCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/data-list': {
+      id: '/components/data-list'
+      path: '/components/data-list'
+      fullPath: '/components/data-list'
+      preLoaderRoute: typeof ComponentsDataListRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/data-table': {
       id: '/components/data-table'
       path: '/components/data-table'
@@ -1257,11 +1290,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDatePickerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/detail-list': {
-      id: '/components/detail-list'
-      path: '/components/detail-list'
-      fullPath: '/components/detail-list'
-      preLoaderRoute: typeof ComponentsDetailListRouteImport
+    '/components/detail-card': {
+      id: '/components/detail-card'
+      path: '/components/detail-card'
+      fullPath: '/components/detail-card'
+      preLoaderRoute: typeof ComponentsDetailCardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/form-builder': {
@@ -1313,6 +1346,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsSubSidebarRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/text-editor': {
+      id: '/components/text-editor'
+      path: '/components/text-editor'
+      fullPath: '/components/text-editor'
+      preLoaderRoute: typeof ComponentsTextEditorRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -1348,7 +1388,7 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiInputGroupRoute: BaseUiInputGroupRoute,
   BaseUiKbdRoute: BaseUiKbdRoute,
   BaseUiLabelRoute: BaseUiLabelRoute,
-  BaseUiListItemRoute: BaseUiListItemRoute,
+  BaseUiListRoute: BaseUiListRoute,
   BaseUiPaginationRoute: BaseUiPaginationRoute,
   BaseUiProgressRoute: BaseUiProgressRoute,
   BaseUiRadioGroupRoute: BaseUiRadioGroupRoute,
@@ -1369,9 +1409,10 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsCommandRoute: ComponentsCommandRoute,
   ComponentsConfirmationModalRoute: ComponentsConfirmationModalRoute,
   ComponentsCustomerCardRoute: ComponentsCustomerCardRoute,
+  ComponentsDataListRoute: ComponentsDataListRoute,
   ComponentsDataTableRoute: ComponentsDataTableRoute,
   ComponentsDatePickerRoute: ComponentsDatePickerRoute,
-  ComponentsDetailListRoute: ComponentsDetailListRoute,
+  ComponentsDetailCardRoute: ComponentsDetailCardRoute,
   ComponentsFormBuilderRoute: ComponentsFormBuilderRoute,
   ComponentsFormLayoutRoute: ComponentsFormLayoutRoute,
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,
@@ -1379,6 +1420,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
   ComponentsSidebarRoute: ComponentsSidebarRoute,
   ComponentsSubSidebarRoute: ComponentsSubSidebarRoute,
+  ComponentsTextEditorRoute: ComponentsTextEditorRoute,
   BaseUiIndexRoute: BaseUiIndexRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,
 }

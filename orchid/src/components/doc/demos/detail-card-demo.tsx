@@ -1,26 +1,17 @@
-<!-- Generated from content/docs/components/detail-list.mdx. Do not edit. -->
-
-# Detail List
-
-Detail card with grid columns, colspan, and stacked rows.
-
-## Example
-
-```tsx
 import { Avatar, AvatarFallback, AvatarImage } from '@/base-ui/displaying-data/avatar'
-import { DetailList } from '@/components/displaying-data/detail-list'
+import { DetailCard } from '@/components/displaying-data/detail-card'
 import { Badge } from '@/base-ui/displaying-data/badge'
 
 const PHOTO = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop'
 
-function DetailListDemo() {
+function DetailCardDemo() {
   return (
     <>
       <div className="space-y-4">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Default
         </p>
-        <DetailList
+        <DetailCard
           columns={2}
           items={[
             {
@@ -55,7 +46,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Border
         </p>
-        <DetailList
+        <DetailCard
           title="Payment details"
           columns={2}
           style="border"
@@ -93,7 +84,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           3 columns, 2 rows
         </p>
-        <DetailList
+        <DetailCard
           columns={3}
           style="border"
           items={[
@@ -137,7 +128,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Colspan
         </p>
-        <DetailList
+        <DetailCard
           title="Customer data"
           columns={4}
           style="border"
@@ -198,7 +189,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Stacked rows
         </p>
-        <DetailList
+        <DetailCard
           items={[
             { key: 'email', label: 'Email', value: 'alex@arcticmonkey.io' },
             { key: 'phone', label: 'Phone', value: '+65 8123 4567' },
@@ -210,7 +201,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Stacked rows, Border
         </p>
-        <DetailList
+        <DetailCard
           style="border"
           items={[
             { key: 'email', label: 'Email', value: 'alex@arcticmonkey.io' },
@@ -223,7 +214,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Product Data
         </p>
-        <DetailList
+        <DetailCard
           title="SKU"
           columns={2}
           style="border"
@@ -260,7 +251,7 @@ function DetailListDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Recurring plan
         </p>
-        <DetailList
+        <DetailCard
           columns={2}
           style="border"
           items={[
@@ -295,14 +286,4 @@ function DetailListDemo() {
   )
 }
 
-export { DetailListDemo }
-```
-
-## API
-
-`DetailList` accepts `items`, plus optional `title`, `columns`, `style`, and `className`.
-It also supports standard `div` attributes except the native `style`, `title`, and `children` props.
-
-Each item requires a unique string `key` and a React `value`. Items can also set `label`,
-`copyValue`, `alignment`, `size`, `colSpan`, and `className`. Because `value` is a React node,
-it can render text, links, badges, or custom content.
+export { DetailCardDemo }

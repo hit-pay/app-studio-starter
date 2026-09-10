@@ -44,6 +44,16 @@ export type SchemaTableSortField = {
 
 export type SchemaTableRowAction = "edit" | "delete";
 
+export const DEFAULT_ROW_ACTIONS: SchemaTableRowAction[] = ["edit", "delete"];
+
+export function resolveRowActions(
+  rowActions?: SchemaTableRowAction[] | boolean,
+): SchemaTableRowAction[] {
+  if (rowActions === false) return [];
+  if (rowActions === true || rowActions == null) return DEFAULT_ROW_ACTIONS;
+  return rowActions;
+}
+
 export const SCHEMA_TABLE_ACTION_ICONS = [
   "delete",
   "download",
@@ -102,7 +112,8 @@ export type SchemaTableSchema = {
     | false;
   pagination?: { pageSize?: number; pageSizes?: number[] } | false;
   editColumns?: boolean;
-  rowActions?: SchemaTableRowAction[] | false;
+  /** Default `true`: Edit + Delete ⋮ menu. `false` hides it. */
+  rowActions?: SchemaTableRowAction[] | boolean;
   selectionActions?: SchemaTableSelectionAction[];
   emptyState?: SchemaTableEmptyState;
   columns: SchemaTableColumn[];
@@ -402,7 +413,7 @@ export const SCHEMA_TABLE_EXAMPLE_SCHEMA: SchemaTableSchema = {
     defaultDir: "desc",
   },
   pagination: { pageSize: 10, pageSizes: [10, 20, 50] },
-  rowActions: ["edit", "delete"],
+  rowActions: true,
   selectionActions: [
     { key: "publish", label: "Publish", icon: "publish" },
     {

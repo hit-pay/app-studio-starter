@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
+    "@lexical/react": "^0.50.0",
     "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",
     "@mingcute/react": "^3.0.2",
@@ -24,6 +25,7 @@
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
     "date-fns": "^4.4.0",
+    "lexical": "^0.50.0",
     "react": "^19.2.0",
     "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.0",

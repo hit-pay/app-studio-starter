@@ -1,0 +1,17 @@
+import { TextEditorDemo } from "../../../src/components/doc/doc-demos"
+
+Rich text for notes and handover, built with [Lexical](https://lexical.dev/) (Meta). Toolbar: bold, italic, underline, heading, lists. Use `Textarea` for a single plain field.
+
+<TextEditorDemo />
+
+```tsx
+import { TextEditor } from "@/components/form/text-editor";
+
+<TextEditor
+  onValueChange={(document) => {
+    // persist Lexical JSON (SerializedEditorState)
+  }}
+/>
+```
+
+`onValueChange` receives Lexical editor state. Store it as JSON text. Do not persist HTML.

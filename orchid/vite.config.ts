@@ -53,7 +53,15 @@ export default defineConfig({
     dedupe: ['react', 'react-dom'],
   },
   optimizeDeps: {
-    include: ['recharts', 'react', 'react-dom'],
+    include: [
+      'recharts',
+      'react',
+      'react-dom',
+      'lexical',
+      '@lexical/list',
+      '@lexical/rich-text',
+      '@lexical/selection',
+    ],
   },
   build: {
     chunkSizeWarningLimit: 2000,

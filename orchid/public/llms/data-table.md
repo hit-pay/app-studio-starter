@@ -44,13 +44,14 @@ Optional
 - filters[] — key, title, options[{ value, label }]
 - sort — { fields[{ key, title }], defaultKey, defaultDir } or false
 - pagination — { pageSize, pageSizes[] } or false
-- editColumns — false to hide Edit Column
-- rowActions — ["edit", "delete"] or false
+- editColumns — false to hide the column-visibility popover (not inline edit)
+- rowActions — default true (Edit + Delete ⋮). true or omit shows it. false hides. ["edit"] / ["delete"] to keep one. Wire onRowAction.
 - selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
 - emptyState — optional title, description, and JSON-friendly actions
 
 Column optional
 - sortable, hidden, locked (fixed, no hide/reorder), icon, search: false (exclude from search)
+- type status is a read-only badge. Inline edit is not a schema field.
 
 Query state (table.query)
 - search, tab, filters, sortKey, sortDir, page, pageSize
@@ -58,8 +59,9 @@ Query state (table.query)
 Column layout (table.columnOrder, table.hiddenKeys)
 - Edit Column popover toggles visibility and drag-reorders active columns
 
-Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction.
-Custom cells: pass cells={{ columnKey: (value, row) => <Node /> }} on DataTable. Schema stays JSON. Search/sort still use row[column.key]. Example: status cell is a dropdown that writes the new status back onto the row.
+Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction.
+One-field row edit: pass cells={{ status: (value, row) => <StatusCell /> }} on <DataTable>, then persist. Schema stays JSON. Search/sort still use row[column.key].
+Multi-field edit: rowActions edit → FormBuilder. Do not treat editColumns or type status as editable.
 
 Example
 {
@@ -117,7 +119,7 @@ Example
     "defaultDir": "desc"
   },
   "pagination": { "pageSize": 10, "pageSizes": [10, 20, 50] },
-  "rowActions": ["edit", "delete"],
+  "rowActions": true,
   "selectionActions": [
     { "key": "publish", "label": "Publish", "icon": "publish" },
     {
@@ -307,9 +309,14 @@ it contains keys, labels, supported icon keys, variants, disabled state, and dro
 never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
 chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
 
-Pass `cells` on `DataTable` (not in the schema) to replace a column's default render. Search,
-sort, and filters still use `row[column.key]`. Only listed keys override; other columns keep
-the built-in `type` render.
+`editColumns` is the column-visibility popover. `rowActions` defaults to `true`: the row ⋮
+menu shows Edit + Delete. Set `rowActions: false` to hide it. Pass `onRowAction`.
+`rowActions: ["edit"]` is enough when delete is not needed. That menu opens `FormLayout`
+for multi-field edits. Neither `editColumns` nor `type: "status"` makes a cell editable.
+
+One-field updates (status, assignee, stage) use `cells` on `DataTable`, not the schema.
+Search, sort, and filters still use `row[column.key]`. Only listed keys override; other
+columns keep the built-in `type` render (`status` is a read-only badge until overridden).
 
 ```tsx
 function StatusCell({

@@ -15,7 +15,7 @@ Import `@/lib/utils`; read `src/lib/utils.ts`.
 
 ## `data-table` — Data Table
 
-JSON-schema list with search, filters, sorting, pagination. Optional cells prop for custom column render; values stay on the row.
+JSON-schema list with search, filters, sorting, pagination. rowActions defaults to true (Edit + Delete). Set false to hide. One-field edits use cells. editColumns only toggles column visibility.
 Import `@/components/displaying-data/data-table`; read `src/components/displaying-data/data-table.tsx`.
 Related source: `src/components/displaying-data/data-table-model.ts`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/data-table.md
@@ -32,11 +32,17 @@ Dashboard KPI / metric card: icon, title, value, and optional percent change. Us
 Import `@/components/displaying-data/metric-card`; read `src/components/displaying-data/metric-card.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/metric-card.md
 
-## `detail-list` — Detail List
+## `data-list` — Data List
+
+Props-based card/row list from List. Use instead of DataTable when search, filters, sort, or pagination are not needed.
+Import `@/components/displaying-data/data-list`; read `src/components/displaying-data/data-list.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/data-list.md
+
+## `detail-card` — Detail Card
 
 Props-based read-only key/value card with React node values. style default|border.
-Import `@/components/displaying-data/detail-list`; read `src/components/displaying-data/detail-list.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/detail-list.md
+Import `@/components/displaying-data/detail-card`; read `src/components/displaying-data/detail-card.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/detail-card.md
 
 ## Form
 
@@ -58,6 +64,12 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/choice-card.md
 Integer stepper. min/max/step.
 Import `@/components/form/quantity-input`; read `src/components/form/quantity-input.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/quantity-input.md
+
+## `text-editor` — Text Editor
+
+Lexical rich text for notes. Bold, italic, heading, lists. Persist editor JSON.
+Import `@/components/form/text-editor`; read `src/components/form/text-editor.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/text-editor.md
 
 ## `date-picker` — Date Picker
 
@@ -137,11 +149,11 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/copy-button.md
 
 ## Displaying Data
 
-## `list-item` — List Item
+## `list` — List
 
 List row (title, media, meta, actions). layout default|stack|media, selected.
-Import `@/base-ui/displaying-data/list-item`; read `src/base-ui/displaying-data/list-item.tsx`.
-Docs: https://orchid-ui-hitpay.vercel.app/llms/list-item.md
+Import `@/base-ui/displaying-data/list`; read `src/base-ui/displaying-data/list.tsx`.
+Docs: https://orchid-ui-hitpay.vercel.app/llms/list.md
 
 ## `empty` — Empty
 

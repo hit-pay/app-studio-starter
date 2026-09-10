@@ -14,7 +14,7 @@
         "@orchid/sidebar",
         "@orchid/sub-sidebar",
         "@orchid/alert",
-        "@orchid/list-item",
+        "@orchid/list",
         "@orchid/empty",
         "@orchid/card",
         "@orchid/resizable",
@@ -38,7 +38,8 @@
         "@orchid/tabs",
         "@orchid/choice-card",
         "@orchid/metric-card",
-        "@orchid/detail-list",
+        "@orchid/detail-card",
+        "@orchid/data-list",
         "@orchid/copy-button",
         "@orchid/skeleton",
         "@orchid/spinner",
@@ -61,6 +62,7 @@
         "@orchid/select",
         "@orchid/combobox",
         "@orchid/quantity-input",
+        "@orchid/text-editor",
         "@orchid/checkbox",
         "@orchid/radio-group",
         "@orchid/switch",
@@ -136,7 +138,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "JSON-schema list with search, filters, sorting, pagination. Optional cells prop for custom column render; values stay on the row.",
+      "description": "JSON-schema list with search, filters, sorting, pagination. rowActions defaults to true (Edit + Delete). Set false to hide. One-field edits use cells. editColumns only toggles column visibility.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -213,9 +215,9 @@
       ]
     },
     {
-      "name": "list-item",
+      "name": "list",
       "type": "registry:ui",
-      "title": "List Item",
+      "title": "List",
       "description": "List row (title, media, meta, actions). layout default|stack|media, selected.",
       "dependencies": [
         "@mingcute/react"
@@ -225,9 +227,9 @@
       ],
       "files": [
         {
-          "path": "src/base-ui/displaying-data/list-item.tsx",
+          "path": "src/base-ui/displaying-data/list.tsx",
           "type": "registry:ui",
-          "target": "@base-ui/displaying-data/list-item.tsx"
+          "target": "@base-ui/displaying-data/list.tsx"
         }
       ]
     },
@@ -569,9 +571,26 @@
       ]
     },
     {
-      "name": "detail-list",
+      "name": "data-list",
       "type": "registry:ui",
-      "title": "Detail List",
+      "title": "Data List",
+      "description": "Props-based card/row list from List. Use instead of DataTable when search, filters, sort, or pagination are not needed.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/list"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/data-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/data-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "detail-card",
+      "type": "registry:ui",
+      "title": "Detail Card",
       "description": "Props-based read-only key/value card with React node values. style default|border.",
       "dependencies": [
         "class-variance-authority"
@@ -581,9 +600,9 @@
       ],
       "files": [
         {
-          "path": "src/components/displaying-data/detail-list.tsx",
+          "path": "src/components/displaying-data/detail-card.tsx",
           "type": "registry:ui",
-          "target": "@components/displaying-data/detail-list.tsx"
+          "target": "@components/displaying-data/detail-card.tsx"
         }
       ]
     },
@@ -976,6 +995,28 @@
           "path": "src/components/form/quantity-input.tsx",
           "type": "registry:ui",
           "target": "@components/form/quantity-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-editor",
+      "type": "registry:ui",
+      "title": "Text Editor",
+      "description": "Lexical rich text for notes. Bold, italic, heading, lists. Persist editor JSON.",
+      "dependencies": [
+        "lexical",
+        "@lexical/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/text-editor.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/text-editor.tsx"
         }
       ]
     },

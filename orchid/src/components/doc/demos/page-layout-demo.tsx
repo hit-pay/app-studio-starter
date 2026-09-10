@@ -1,7 +1,7 @@
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
 import { Badge } from "@/base-ui/displaying-data/badge";
 import { Button } from "@/base-ui/actions/button";
-import { DetailList } from "@/components/displaying-data/detail-list";
+import { DetailCard } from "@/components/displaying-data/detail-card";
 import { PageLayout } from "@/components/layout/page-layout";
 
 const INVOICE_LIST_USAGE = `import { Button } from '@/base-ui/actions/button'
@@ -25,7 +25,7 @@ function InvoiceListPageExample() {
 
 const INVOICE_DETAIL_USAGE = `import { Badge } from '@/base-ui/displaying-data/badge'
 import { Button } from '@/base-ui/actions/button'
-import { DetailList } from '@/components/displaying-data/detail-list'
+import { DetailCard } from '@/components/displaying-data/detail-card'
 import { PageLayout } from '@/components/layout/page-layout'
 
 function InvoiceDetailPageExample() {
@@ -38,7 +38,7 @@ function InvoiceDetailPageExample() {
         badge={<Badge tone="green">Paid</Badge>}
         actions={<Button variant="outline">Edit</Button>}
       >
-        <DetailList
+        <DetailCard
           columns={2}
           items={[
             { key: 'customer', label: 'Customer', value: 'Alex Turner', alignment: 'vertical' },
@@ -87,7 +87,7 @@ function PageLayoutDemo() {
             badge={<Badge tone="green">Paid</Badge>}
             actions={<Button variant="outline">Edit</Button>}
           >
-            <DetailList
+            <DetailCard
               columns={2}
               items={[
                 {

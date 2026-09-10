@@ -1,12 +1,3 @@
-<!-- Generated from content/docs/components/list-item.mdx. Do not edit. -->
-
-# List Item
-
-Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.
-
-## Example
-
-```tsx
 import {
   BankRegular,
   MapPinRegular,
@@ -33,9 +24,9 @@ import {
   ListItemTitle,
   ListItemToken,
   ListItemTrailing,
-} from '@/base-ui/displaying-data/list-item'
+} from '@/base-ui/displaying-data/list'
 
-function ListItemDemo() {
+function ListDemo() {
   return (
     <>
       <div className="space-y-3">
@@ -308,5 +299,4 @@ function ListItemDemo() {
   )
 }
 
-export { ListItemDemo }
-```
+export { ListDemo }

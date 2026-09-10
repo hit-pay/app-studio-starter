@@ -9,7 +9,7 @@ import {
   ListItemBody,
   ListItemDescription,
   ListItemTitle,
-} from "@/base-ui/displaying-data/list-item";
+} from "@/base-ui/displaying-data/list";
 
 function CatalogGrid({
   items,

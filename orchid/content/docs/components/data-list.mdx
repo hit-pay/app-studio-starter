@@ -1,0 +1,44 @@
+import { DataListDemo } from '../../../src/components/doc/doc-demos'
+
+<DataListDemo />
+
+Use `DataList` for card or row collections (people, products, checklists, activity).
+Use `DataTable` only when the list needs search, column filters, sorting, or pagination.
+Do not assemble these rows from base `List` parts.
+
+```tsx
+import { DataList } from '@/components/displaying-data/data-list'
+
+<DataList
+  items={[
+    {
+      key: '1',
+      title: 'Priya Nair',
+      description: 'INV-2048 · Cards · SGD 128.00',
+      details: [{ key: 'city', text: 'Singapore' }],
+    },
+  ]}
+/>
+```
+
+## API
+
+`DataList` accepts `items`, plus optional `layout` (`default` | `stack` | `media`),
+`empty`, and `className`.
+
+Each item needs a unique string `key` and a `title`. Optional fields:
+
+- `description` — secondary line
+- `badges` — React nodes next to the title (`Badge`, etc.)
+- `details` — `{ key, text, icon? }[]`
+- `tokens` / `tokensLabel` — compact chips
+- `copyRows` — `{ label, value }[]` (best with `layout="stack"`)
+- `media` or `mediaSrc` / `mediaAlt` — thumbnail (`layout` becomes `media`)
+- `logo` — mark beside the title
+- `trailing` — right-side actions
+- `moreMenu` — dropdown content for the ⋮ control
+- `hoverActions` — `{ key, label, icon?, destructive?, onClick? }[]`
+- `meta` — muted supporting text
+- `layout` — override the list default
+- `selected` — selected border
+- `onClick` — row click

@@ -102,7 +102,7 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 
 - `src/routes/`: TanStack file routes; `index.tsx` is `/`
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
-- `src/components/{category}/`: Orchid blocks first (AppLayout, FormBuilder, DataTable, PageLayout, MetricCard, …)
+- `src/components/{category}/`: Orchid blocks first — pick from `orchid-catalog.md`
 - `src/base-ui/{category}/`: Orchid base components (Button, Input, Table, Dialog, …) — use only when no block covers the job
 - `src/lib/hitpay.ts`: browser-only HitPay user/role/member helpers
 - `src/lib/server/`: createServerFn only — never import this folder from routes or components
@@ -169,8 +169,8 @@ Do not invent a parallel UI kit or overwrite files under `src/components/` or `s
 
 Starter wiring only:
 
-- Drive multi-field forms with `FormBuilder` from `@/components/form/form-builder` (submit through `formId`). Drive searchable lists with `DataTable` from `@/components/displaying-data/data-table`. Drive dashboard KPI tiles (revenue, volume, counts, percent change) with `MetricCard` from `@/components/displaying-data/metric-card`. Do not hand-build field stacks, raw `Table`, or summary `Card` grids for those cases. Do not wrap `DataTable`, `FormBuilder`, `PageLayout`, or `Table` in `Card`.
-- `FormBuilder` field `type` must be a listed type (`input`, `select`, `date`, …). Unknown types throw; do not invent field types.
+- Choose the block from `orchid-catalog.md` that matches the job. Do not default to a shortlist of favorites, and do not assemble a block from base components.
+- When a catalog item's docs or source mention API rules (field `type` lists, `cells`, `formId`, persistence format), follow those. Do not invent types, props, or variants here.
 - Import icons from `@mingcute/react/core-regular` using Mingcute names (`SearchRegular`, `AddRegular`). Do not add `lucide-react` or an icon alias file.
 - Keep `ConfirmationModalProvider` and `<Toaster placement="top-center">` in `src/routes/__root.tsx`. Use `useConfirmationModal()` for delete/warning confirms. Do not assemble a confirm dialog from `Dialog`, and do not add Sonner or a second toast/confirm provider.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`. Never `small` or `big`.

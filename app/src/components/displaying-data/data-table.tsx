@@ -96,6 +96,7 @@ import {
   orderedVisibleColumns,
   paginationItems,
   queryTable,
+  resolveRowActions,
   syncColumnOrder,
   type SchemaTableActionIcon,
   type SchemaTableActionItem,
@@ -1309,8 +1310,7 @@ function SchemaTable({
   className?: string;
 }) {
   const columns = table.visibleColumns;
-  const actions =
-    table.schema.rowActions === false ? [] : (table.schema.rowActions ?? []);
+  const actions = resolveRowActions(table.schema.rowActions);
   const pageIds = table.rows.map((row) => row.id);
   const selectedOnPage = pageIds.filter((id) => table.selected.includes(id));
   const allSelected =
@@ -1624,8 +1624,6 @@ export {
   type SchemaTableDropdownAction,
   type SchemaTableEmptyState,
   type SchemaTableApi,
-  type SchemaTableCellRender,
-  type SchemaTableCells,
   type SchemaTableColumn,
   type SchemaTableQuery,
   type SchemaTableQueryChange,

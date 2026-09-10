@@ -41,8 +41,8 @@ export const DOC_COMPONENTS = [
       "shadcn-compatible compound empty state with Orchid media variants.",
   },
   {
-    to: "/base-ui/list-item" as const,
-    name: "List Item",
+    to: "/base-ui/list" as const,
+    name: "List",
     description:
       "Generic row: compose title, media, logo, meta, copy fields, tokens, and actions.",
   },
@@ -285,14 +285,25 @@ export const DOC_BLOCKS = [
       "Shadcn-style Popover and Calendar composition with optional Orchid helpers.",
   },
   {
-    to: "/components/detail-list" as const,
-    name: "Detail List",
+    to: "/components/detail-card" as const,
+    name: "Detail Card",
     description: "Detail card with grid columns, colspan, and stacked rows.",
+  },
+  {
+    to: "/components/data-list" as const,
+    name: "Data List",
+    description:
+      "Props-driven card/row list built on List. Prefer this over DataTable for compact collections.",
   },
   {
     to: "/components/quantity-input" as const,
     name: "Quantity Input",
     description: "Minus/plus stepper; click the value to type.",
+  },
+  {
+    to: "/components/text-editor" as const,
+    name: "Text Editor",
+    description: "Lexical rich text: bold, italic, heading, lists. Persist editor JSON.",
   },
   {
     to: "/components/metric-card" as const,
@@ -395,7 +406,7 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/badge",
     "/base-ui/chart",
     "/base-ui/empty",
-    "/base-ui/list-item",
+    "/base-ui/list",
     "/base-ui/table",
   ]),
   baseGroup("Feedback", [
@@ -460,7 +471,8 @@ export const DOC_BLOCK_GROUPS = [
   blockGroup("Displaying Data", [
     "/components/customer-card",
     "/components/data-table",
-    "/components/detail-list",
+    "/components/detail-card",
+    "/components/data-list",
     "/components/metric-card",
   ]),
   blockGroup("Form", [
@@ -468,6 +480,7 @@ export const DOC_BLOCK_GROUPS = [
     "/components/date-picker",
     "/components/form-builder",
     "/components/quantity-input",
+    "/components/text-editor",
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Navigation", ["/components/sidebar", "/components/sub-sidebar"]),
