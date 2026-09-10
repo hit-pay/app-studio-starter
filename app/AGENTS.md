@@ -104,11 +104,11 @@ Do not scaffold another application. Do not use npm, Next.js, another ORM, anoth
 - `src/routes/__root.tsx`: root document with `QueryProvider`, Orchid `ConfirmationModalProvider`, and `Toaster`
 - `src/components/{category}/`: Orchid blocks first (AppLayout, FormBuilder, DataTable, PageLayout, MetricCard, …)
 - `src/base-ui/{category}/`: Orchid base components (Button, Input, Table, Dialog, …) — use only when no block covers the job
-- `src/lib/db.ts`: lazy server-only Turso HTTP client (credentials from hop env)
-- `src/lib/migrate.ts`: SQL migration runner
-- `src/lib/hitpay.ts`: browser-only HitPay user, role, and member helpers for UI
-- `src/lib/hitpay-session.ts`: server-only HitPay session from `/user/info` for role-gated APIs
-- `src/lib/hitpay-env.ts`: server-only connector + Turso env from `X-HitPay-Env` or `/api/apps/{appId}/env`
+- `src/lib/hitpay.ts`: browser-only HitPay user/role/member helpers
+- `src/lib/server/`: createServerFn only — never import this folder from routes or components
+- `src/lib/server/hitpay.ts`: session + connector env from Bun hop headers
+- `src/lib/server/db.ts`: Turso HTTP client
+- `src/lib/server/migrate.ts`: SQL migration runner
 - `src/lib/query.tsx`: React Query provider and debounce helper
 - `migrations/`: ordered SQL migration files
 - `src/styles.css`: Tailwind and Orchid design tokens
@@ -126,11 +126,10 @@ Unless the user's request truly requires infrastructure changes, leave these fil
 - `vite.config.ts`
 - `start.mjs`
 - `src/router.tsx`
-- `src/lib/db.ts`
-- `src/lib/migrate.ts`
 - `src/lib/hitpay.ts`
-- `src/lib/hitpay-session.ts`
-- `src/lib/hitpay-env.ts`
+- `src/lib/server/hitpay.ts`
+- `src/lib/server/db.ts`
+- `src/lib/server/migrate.ts`
 - `src/lib/form-draft.ts`
 - `src/lib/studio-app-id.ts`
 - `components.json`
@@ -203,10 +202,10 @@ If the workflow creates or changes business data, make it persistent in Turso. R
 
 Turso is server-only:
 
-- import `db` from `#/lib/db` only in server code
+- import `db` from `#/lib/server/db` only inside `createServerFn`
 - use TanStack `createServerFn` for reads and mutations
-- never expose `TURSO_DATABASE_URL`, `TURSO_AUTH_TOKEN`, or connector env (`HITPAY_API_KEY`, …) to the browser
-- never call `/api/apps/{appId}/env` from client code or `#/lib/hitpay`
+- never expose Turso or connector env values to the browser
+- never call `/api/apps/{appId}/env` from the app (the Bun hop already injects `X-HitPay-Env`)
 - do not import the database client into browser components
 - keep the provided HTTP client; WebSocket/native libSQL does not work in the Sprite network environment
 
@@ -214,7 +213,7 @@ For new schema:
 
 - create a new ordered file such as `migrations/001_create_items.sql`
 - never rewrite an already-applied migration
-- call `await ensureMigrations()` before the first query in each server workflow
+- call `await ensureMigrations()` from `#/lib/server/migrate` before the first query in each server workflow
 - use SQLite-compatible `TEXT`, `INTEGER`, and `REAL` types
 - add useful `NOT NULL`, uniqueness, foreign-key, and status constraints
 - use parameterized `?` values for all user input
@@ -314,49 +313,51 @@ Use the existing HitPay session context. Auth stays with the host dashboard.
 
 ### Browser (UI only)
 
-`src/lib/hitpay.ts` is for the client:
+Never import `#/lib/server/*` from a route, component, or `#/lib/hitpay`. Never import `#/lib/hitpay` from `createServerFn`.
 
-- `fetchUserInfo()`
-- `fetchAppRoles()`
-- `fetchAppMembers()`
-- `useHitPayUser()`
+**Browser — `#/lib/hitpay`**
 
-These call:
+- `useHitPayUser()`, `fetchUserInfo()`, `fetchAppRoles()`, `fetchAppMembers()`
+- These call `/api/apps/{appId}/user/info`, `/roles`, `/members`
+- Use `user.role.title` to hide or show actions. UI checks are not authorization.
 
-- `/api/apps/{appId}/user/info`
-- `/api/apps/{appId}/roles`
-- `/api/apps/{appId}/members`
+**createServerFn — `#/lib/server/hitpay`, `#/lib/server/db`, `#/lib/server/migrate`**
 
-Do not import `#/lib/hitpay` into server code. Use `user.role.title` to hide or show actions in the UI. Show an appropriate UI error if HitPay context cannot load. UI checks are not authorization.
+- `getHitPaySession()` / `requireHitPayRoles(['Owner', 'Admin', 'Manager'])` — signed `X-HitPay-Session`
+- `getHitPayEnvValue('KEY')` / `getHitPayEnv()` / `getConnector('slug')` — signed `X-HitPay-Env`
+- `db` / `ensureMigrations()` for Turso
+- Do not call `fetchUserInfo` or `/user/info` / `/env` from the server.
+- Never trust `role` or `userId` from the browser payload.
 
-### Server session from the host proxy
+Do not rewrite files under `src/lib/server/` or invent another verifier. Do not add a JWT/Redis/Turso session table. Do not put secrets in `localStorage`, cookies, or browser fetches. Do not read `process.env` for connector keys in generated app code.
 
-Do not call `/user/info` from `createServerFn`. That helper in `#/lib/hitpay` is browser-only. Sprite does not receive HitPay cookies. Document loaders run in the browser and may use it for UI only.
+## Connectors
 
-When a mutation or read must be limited to certain roles, use `getHitPaySession()` / `requireHitPayRoles()` in `createServerFn`:
+The merchant connects providers in **Settings → Connectors**. The hop injects only those keys into `createServerFn`. Do not collect secrets, invent env names, or hardcode provider hosts.
 
-1. Read the signed `X-HitPay-Session` header the host proxy attaches after it authenticates the dashboard user.
-2. If that header is missing, the helper may GET `/user/info` with the request cookie.
-3. Never trust `role`, `userId`, or `actorName` from the browser payload.
-4. Persist requester/approver identity from this session.
+1. Use only keys listed at the end of this prompt (“Connected server env keys”) or present on `await getHitPayEnv()`.
+2. If a key is missing, tell the merchant to connect that provider. Do not ask them to paste a token.
+3. Call providers from `createServerFn` only.
+4. `*_WEBHOOK_URL` / `*_CONNECTION_URL`: use that URL as the connection (e.g. `POST` JSON). Do not resolve channel/guild IDs or invent URLs.
+5. `*_ACCESS_TOKEN` / `*_API_KEY` / `*_AUTH_TOKEN`: send as the provider expects. Do not invent product APIs; ask for the contract or keep data in Turso.
+6. Turso keys: only through `#/lib/server/db`.
 
-Do not add a JWT, Redis, or Turso session table. Do not write `/user/info` into a browser-readable cookie.
+```ts
+import { getHitPayEnv, getHitPayEnvValue } from '#/lib/server/hitpay'
 
-Do not rewrite `src/lib/hitpay-session.ts` or invent another verifier. The host signs `base64url(json).hex(hmac-sha256(payload))` with `HITPAY_SESSION_SECRET`. Do not treat the signature as JWT/base64url, do not HMAC the decoded JSON, and do not accept browser fields as a fallback.
-
-Use the existing helper in `src/lib/hitpay-session.ts`:
-
-- `getHitPaySession()` when any signed-in HitPay user may proceed
-- `requireHitPayRoles(['Owner', 'Admin', 'Manager'])` when only those roles may mutate
-
-Connector and Turso secrets are not Sprite process env. In `createServerFn` use `#/lib/hitpay-env`:
-
-1. Read signed `X-HitPay-Env` from the host proxy (same HMAC as session: `base64url(json).hex`).
-2. If that header is missing, GET `/api/apps/{appId}/env` with the request cookie (SSR only).
-3. Use `getHitPayEnv()` / `getHitPayEnvValue('HITPAY_API_KEY')`. `db` already reads `TURSO_*` from this helper.
-4. Do not read `process.env.HITPAY_*` or `process.env.TURSO_*` in generated app code (local starter `.env` is the helper fallback only).
-
-Do not rewrite `src/lib/hitpay-env.ts`. Do not put secrets in `localStorage`, cookies, or browser fetches.
+const notify = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
+  const env = await getHitPayEnv()
+  const webhookKey = Object.keys(env).find((key) => key.endsWith('_WEBHOOK_URL'))
+  if (!webhookKey) throw new Error('Connect a messaging provider in Settings → Connectors.')
+  const webhook = await getHitPayEnvValue(webhookKey)
+  const response = await fetch(webhook, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ content: String(data.message ?? '') }),
+  })
+  if (!response.ok) throw new Error('Could not send the message.')
+})
+```
 
 Example:
 

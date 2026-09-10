@@ -1,6 +1,6 @@
 import { createClient, type Client } from '@libsql/client/http'
 
-import { getHitPayEnv } from '#/lib/hitpay-env'
+import { getHitPayEnv } from '#/lib/server/hitpay'
 
 const clients = new Map<string, Client>()
 
@@ -8,13 +8,21 @@ function tursoHttpUrl(url: string): string {
   return url.replace(/^libsql:/i, 'https:')
 }
 
+function envEnding(env: Record<string, string>, suffix: string): string {
+  const match = Object.entries(env).find(([key]) => key === suffix || key.endsWith(`_${suffix}`))
+
+  return match?.[1] ?? ''
+}
+
 async function requireDb(): Promise<Client> {
   const env = await getHitPayEnv()
-  const url = env.TURSO_DATABASE_URL
-  const authToken = env.TURSO_AUTH_TOKEN
+  const urlKey = Object.keys(env).find((key) => key.endsWith('_DATABASE_URL') || key === 'DATABASE_URL')
+  const prefix = urlKey?.replace(/_DATABASE_URL$/, '') ?? ''
+  const url = urlKey === undefined ? '' : env[urlKey] ?? ''
+  const authToken = prefix === '' ? envEnding(env, 'AUTH_TOKEN') : (env[`${prefix}_AUTH_TOKEN`] ?? '')
 
   if (!url || !authToken) {
-    throw new Error('Turso is not configured for this app.')
+    throw new Error('Database is not configured for this app.')
   }
 
   const key = `${url}\0${authToken}`
@@ -34,7 +42,7 @@ async function requireDb(): Promise<Client> {
 
 type Db = Pick<Client, 'execute' | 'batch' | 'executeMultiple'>
 
-/** Lazy Turso client — credentials from X-HitPay-Env / proxy, not Sprite service env. */
+/** Lazy Turso client — credentials from X-HitPay-Env, not Sprite service env. */
 export const db: Db = {
   execute(...args) {
     return requireDb().then((client) => client.execute(...args))

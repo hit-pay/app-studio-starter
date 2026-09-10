@@ -22,7 +22,7 @@ export type HitPayMember = {
 function assertBrowser(): void {
   if (typeof window === 'undefined') {
     throw new Error(
-      'HitPay /api/apps/{appId}/user/info, /roles, and /members must be fetched in the browser, not from createServerFn or a loader.',
+      'useHitPayUser and fetch* are browser-only. In createServerFn import getHitPaySession from #/lib/server/hitpay.',
     )
   }
 }
@@ -62,10 +62,7 @@ export const fetchAppRoles = () => hitpayGet<{ roles: HitPayRole[] }>('/roles')
 
 export const fetchAppMembers = () => hitpayGet<{ members: HitPayMember[] }>('/members')
 
-/**
- * Who is signed in. Browser only. Opening the app is gated by the proxy
- * (user/info must succeed). Gate in-app actions with `user.role.title`.
- */
+/** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useHitPayUser(): {
   user: HitPayUser | null
   error: string | null
