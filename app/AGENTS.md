@@ -311,36 +311,27 @@ Delete: authorize → remove the stored object → delete the `files` row. Do no
 
 Use the existing HitPay session context. Auth stays with the host dashboard.
 
-### Browser (UI only)
-
-Never import `#/lib/server/*` from a route, component, or `#/lib/hitpay`. Never import `#/lib/hitpay` from `createServerFn`.
-
 **Browser — `#/lib/hitpay`**
 
-- `useHitPayUser()`, `fetchUserInfo()`, `fetchAppRoles()`, `fetchAppMembers()`
-- These call `/api/apps/{appId}/user/info`, `/roles`, `/members`
-- Use `user.role.title` to hide or show actions. UI checks are not authorization.
+- `useHitPayUser()`, `fetchUserInfo()`, `fetchAppRoles()`, `fetchAppMembers()` for UI only
+- Hide or show actions with `user.role.title`
 
-**createServerFn — `#/lib/server/hitpay`, `#/lib/server/db`, `#/lib/server/migrate`**
+**createServerFn — `#/lib/server/*`**
 
-- `getHitPaySession()` / `requireHitPayRoles(['Owner', 'Admin', 'Manager'])` — signed `X-HitPay-Session`
-- `getHitPayEnvValue('KEY')` / `getHitPayEnv()` / `getConnector('slug')` — signed `X-HitPay-Env`
-- `db` / `ensureMigrations()` for Turso
-- Do not call `fetchUserInfo` or `/user/info` / `/env` from the server.
-- Never trust `role` or `userId` from the browser payload.
-
-Do not rewrite files under `src/lib/server/` or invent another verifier. Do not add a JWT/Redis/Turso session table. Do not put secrets in `localStorage`, cookies, or browser fetches. Do not read `process.env` for connector keys in generated app code.
+- Session: `getHitPaySession()` / `requireHitPayRoles(['Owner', 'Admin', 'Manager'])`
+- Persist actor identity from that session
+- Database: `db` and `ensureMigrations()`
 
 ## Connectors
 
-The merchant connects providers in **Settings → Connectors**. The hop injects only those keys into `createServerFn`. Do not collect secrets, invent env names, or hardcode provider hosts.
+Merchant connects providers in Settings → Connectors. Keys arrive on `X-HitPay-Env`.
 
-1. Use only keys listed at the end of this prompt (“Connected server env keys”) or present on `await getHitPayEnv()`.
-2. If a key is missing, tell the merchant to connect that provider. Do not ask them to paste a token.
-3. Call providers from `createServerFn` only.
-4. `*_WEBHOOK_URL` / `*_CONNECTION_URL`: use that URL as the connection (e.g. `POST` JSON). Do not resolve channel/guild IDs or invent URLs.
-5. `*_ACCESS_TOKEN` / `*_API_KEY` / `*_AUTH_TOKEN`: send as the provider expects. Do not invent product APIs; ask for the contract or keep data in Turso.
-6. Turso keys: only through `#/lib/server/db`.
+1. Use the names in the prompt footer `Connected server env keys`. Missing footer means keep data in `#/lib/server/db`, or tell the merchant to connect a provider.
+2. Read keys only inside `createServerFn` from `#/lib/server/hitpay`: `getHitPayEnvValue('EXACT_KEY')`, `getConnector('slug')`, or `getHitPayEnv()`.
+3. Missing key → empty/error UI: connect that provider in Settings → Connectors.
+4. `*_WEBHOOK_URL` / `*_CONNECTION_URL` → `POST` JSON to that URL.
+5. `*_ACCESS_TOKEN` / `*_API_KEY` / `*_AUTH_TOKEN` → send as the provider expects, or keep the workflow in `#/lib/server/db`.
+6. Database URL → `#/lib/server/db` only.
 
 ```ts
 import { getHitPayEnv, getHitPayEnvValue } from '#/lib/server/hitpay'
@@ -348,7 +339,9 @@ import { getHitPayEnv, getHitPayEnvValue } from '#/lib/server/hitpay'
 const notify = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
   const env = await getHitPayEnv()
   const webhookKey = Object.keys(env).find((key) => key.endsWith('_WEBHOOK_URL'))
-  if (!webhookKey) throw new Error('Connect a messaging provider in Settings → Connectors.')
+  if (!webhookKey) {
+    throw new Error('Connect a messaging provider in Settings → Connectors.')
+  }
   const webhook = await getHitPayEnvValue(webhookKey)
   const response = await fetch(webhook, {
     method: 'POST',
@@ -370,9 +363,7 @@ const decide = createServerFn({ method: 'POST' }).handler(async ({ data }) => {
 })
 ```
 
-Tell the user that role-specific APIs use the signed host session on `createServerFn`, not a role field from the browser. Do not claim that UI hiding is enough. Do not invent a second session store unless the user asks for one.
-
-The starter exposes no HitPay payments, transactions, invoices, inventory, or customer API. Do not invent endpoints or data. If a request depends on unavailable HitPay product data, ask for the real API contract or keep the workflow app-owned in Turso when that still satisfies the request.
+Authorize mutations with `requireHitPayRoles` on `createServerFn`. For HitPay product APIs that this starter does not expose, ask for the contract or keep the data in `#/lib/server/db`.
 
 ## UI and interaction quality
 
@@ -392,12 +383,13 @@ Prefer one focused screen with dialogs for simple create/edit flows. Add tabs or
 
 1. Read the user request and inspect the existing project.
 2. Infer the smallest complete workflow.
-3. Create `PLAN.md` only for several screens or flows; keep it to a short checkbox list.
-4. Read `orchid-catalog.md` (**Components & Blocks** first). Open block sources under `src/components/{category}/` before any `src/base-ui/` file. Use base only if no block covers the job.
-5. Implement the complete vertical slices, including persistence when needed.
-6. Review the changed code for broken imports, route mistakes, unsafe SQL, missing states, and disconnected actions.
-7. If routes were added or renamed, run `bun run generate-routes`.
-8. After all edits are done, run `bun run lint` once (`tsc --noEmit`), then `bun run build`. Never run either after each file. If either fails, fix the source and rerun that lint-then-build pair only. Wait for build to exit; only a zero exit code counts. The host backend restarts the live Sprite service after generation completes.
+3. Read `Connected server env keys` and use those names via `#/lib/server/hitpay` when the workflow needs an external provider.
+4. Create `PLAN.md` only for several screens or flows; keep it to a short checkbox list.
+5. Read `orchid-catalog.md` (**Components & Blocks** first). Open block sources under `src/components/{category}/` before any `src/base-ui/` file. Use base only if no block covers the job.
+6. Implement the complete vertical slices, including persistence when needed.
+7. Review imports, routes, SQL, screen states, and that connector keys come from `#/lib/server/hitpay`.
+8. If routes were added or renamed, run `bun run generate-routes`.
+9. After all edits are done, run `bun run lint` once (`tsc --noEmit`), then `bun run build`. Never run either after each file. If either fails, fix the source and rerun that lint-then-build pair only. Wait for build to exit; only a zero exit code counts. The host backend restarts the live Sprite service after generation completes.
 
 On Sprite, do not start extra `dev`, `vite`, or `start` servers. Do not signal, restart, stop, or delete the `app-studio` service yourself.
 
@@ -406,7 +398,8 @@ On Sprite, do not start extra `dev`, `vite`, or `start` servers. Do not signal, 
 The app is done only when:
 
 - the requested business workflow works end to end
-- UI, storage, drafts, persistence, roles, and screen states follow the sections above
+- UI, storage, drafts, persistence, roles, connectors, and screen states follow the sections above
+- external providers use only hopped keys from `#/lib/server/hitpay` (or the app asks the merchant to connect)
 - only required routes and actions were added
 - the final source passed the single lint-then-build pair in Work sequence
 
