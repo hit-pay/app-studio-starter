@@ -2,10 +2,11 @@
 
 # Page Layout
 
-Standard route page with built-in responsive padding, header, and scrollable content.
+Standard route page with header, optional onBack, and scrollable content.
 
 `PageLayout` renders its required header and wraps its children in a scrollable content area.
 The `actions` prop accepts any React node so pages can provide the controls they need.
+Pass `onBack` on nested screens (show/edit) to put a back control beside the title. Omit it on the root list.
 
 ## Example
 
@@ -49,6 +50,7 @@ function InvoiceDetailPageExample() {
         copyValue="https://pay.hitpayapp.com/inv-2048"
         badge={<Badge tone="green">Paid</Badge>}
         actions={<Button variant="outline">Edit</Button>}
+        onBack={() => {}}
       >
         <DetailCard
           columns={2}
@@ -98,6 +100,7 @@ function PageLayoutDemo() {
             copyValue="https://pay.hitpayapp.com/inv-2048"
             badge={<Badge tone="green">Paid</Badge>}
             actions={<Button variant="outline">Edit</Button>}
+            onBack={() => {}}
           >
             <DetailCard
               columns={2}

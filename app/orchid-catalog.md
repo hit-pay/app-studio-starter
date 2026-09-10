@@ -93,7 +93,7 @@ Docs: https://orchid-ui-hitpay.vercel.app/llms/app-studio-layout.md
 
 ## `page-layout` — Page Layout
 
-Standard route page with built-in responsive padding, header, and scrollable content.
+Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.
 Import `@/components/layout/page-layout`; read `src/components/layout/page-layout.tsx`.
 Docs: https://orchid-ui-hitpay.vercel.app/llms/page-layout.md
 

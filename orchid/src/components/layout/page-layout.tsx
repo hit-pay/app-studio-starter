@@ -1,6 +1,8 @@
 import type { ComponentProps, ReactNode } from "react";
+import { LeftRegular } from "@mingcute/react/core-regular";
 
 import { cn } from "@/lib/utils";
+import { Button } from "@/base-ui/actions/button";
 import { CopyButton } from "@/base-ui/actions/copy-button";
 
 function Header({
@@ -10,12 +12,19 @@ function Header({
   badge,
   copyValue,
   actions,
+  onBack,
   loading = false,
   ...props
 }: Omit<ComponentProps<"header">, "title"> &
   Pick<
     PageLayoutProps,
-    "actions" | "badge" | "copyValue" | "description" | "loading" | "title"
+    | "actions"
+    | "badge"
+    | "copyValue"
+    | "description"
+    | "loading"
+    | "onBack"
+    | "title"
   >) {
   return (
     <header
@@ -28,6 +37,18 @@ function Header({
     >
       <div className="flex min-w-0 flex-1 flex-col gap-1">
         <div className="flex min-w-0 flex-wrap items-center gap-2">
+          {onBack && !loading ? (
+            <Button
+              type="button"
+              variant="ghost"
+              size="icon-sm"
+              aria-label="Back"
+              className="-ml-1.5"
+              onClick={onBack}
+            >
+              <LeftRegular />
+            </Button>
+          ) : null}
           {loading ? (
             <span className="h-6 min-w-0 flex-1 animate-pulse rounded bg-oc-neutral-soft" />
           ) : (
@@ -40,7 +61,12 @@ function Header({
         {loading ? (
           <span className="h-5 min-w-0 flex-1 animate-pulse rounded bg-oc-neutral-soft" />
         ) : description ? (
-          <div className="flex min-w-0 items-center gap-2">
+          <div
+            className={cn(
+              "flex min-w-0 items-center gap-2",
+              onBack ? "pl-8" : undefined,
+            )}
+          >
             <div className="min-w-0 wrap-break-word text-sm leading-5 text-oc-muted-foreground">
               {description}
             </div>
@@ -76,6 +102,7 @@ type PageLayoutProps = Omit<ComponentProps<"section">, "title"> & {
   badge?: ReactNode;
   copyValue?: string;
   actions?: ReactNode;
+  onBack?: () => void;
   loading?: boolean;
   headerClassName?: string;
   contentClassName?: string;
@@ -87,6 +114,7 @@ function PageLayout({
   badge,
   copyValue,
   actions,
+  onBack,
   loading = false,
   children,
   className,
@@ -109,6 +137,7 @@ function PageLayout({
         badge={badge}
         copyValue={copyValue}
         actions={actions}
+        onBack={onBack}
         loading={loading}
         className={headerClassName}
       />

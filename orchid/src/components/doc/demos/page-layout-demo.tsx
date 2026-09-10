@@ -37,6 +37,7 @@ function InvoiceDetailPageExample() {
         copyValue="https://pay.hitpayapp.com/inv-2048"
         badge={<Badge tone="green">Paid</Badge>}
         actions={<Button variant="outline">Edit</Button>}
+        onBack={() => {}}
       >
         <DetailCard
           columns={2}
@@ -86,6 +87,7 @@ function PageLayoutDemo() {
             copyValue="https://pay.hitpayapp.com/inv-2048"
             badge={<Badge tone="green">Paid</Badge>}
             actions={<Button variant="outline">Edit</Button>}
+            onBack={() => {}}
           >
             <DetailCard
               columns={2}

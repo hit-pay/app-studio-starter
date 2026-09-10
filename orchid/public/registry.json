@@ -317,9 +317,12 @@
       "name": "page-layout",
       "type": "registry:ui",
       "title": "Page Layout",
-      "description": "Standard route page with built-in responsive padding, header, and scrollable content.",
-      "dependencies": [],
+      "description": "Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
       "registryDependencies": [
+        "@orchid/button",
         "@orchid/copy-button"
       ],
       "files": [

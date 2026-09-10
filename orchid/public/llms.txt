@@ -135,7 +135,7 @@ Create and edit form shell with page and modal modes.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-layout.json)
 
 #### [Page Layout](https://orchid-ui-hitpay.vercel.app/llms/page-layout.md)
-Standard route page with built-in responsive padding, header, and scrollable content.
+Standard route page with header, optional onBack, and scrollable content.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/page-layout.json)
 
 ### Navigation

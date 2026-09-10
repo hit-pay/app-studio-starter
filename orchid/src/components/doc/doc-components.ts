@@ -322,7 +322,7 @@ export const DOC_BLOCKS = [
     to: "/components/page-layout" as const,
     name: "Page Layout",
     description:
-      "Standard route page with built-in responsive padding, header, and scrollable content.",
+      "Standard route page with header, optional onBack, and scrollable content.",
   },
   {
     to: "/components/form-layout" as const,
