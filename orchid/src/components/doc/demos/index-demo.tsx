@@ -1,7 +1,7 @@
 import { DocCodePanel } from "@/components/doc/doc-code-panel";
 
 const AI_PROMPT =
-  "Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Follow its Markdown doc links under /llms/*.md (not the HTML example pages) for Orchid installation, MCP setup, components, and usage guidance.";
+  "Read https://orchid-ui-hitpay.vercel.app/llms.txt in full. Follow its Markdown doc links under /llms/*.md (not the HTML example pages) for Orchid installation, MCP setup, components, and usage guidance. After `@orchid` is in components.json, install the complete catalog with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Do not skip items. Prefer installed Orchid blocks over hand-built replacements.";
 
 function IndexDemo() {
   return (
