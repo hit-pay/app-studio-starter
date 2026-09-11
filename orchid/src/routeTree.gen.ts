@@ -16,10 +16,10 @@ import { Route as SetupRouteImport } from './routes/setup'
 import { Route as ThemingRouteImport } from './routes/theming'
 import { Route as BaseUiIndexRouteImport } from './routes/base-ui/index'
 import { Route as BaseUiAccordionRouteImport } from './routes/base-ui/accordion'
-import { Route as BaseUiAlertRouteImport } from './routes/base-ui/alert'
 import { Route as BaseUiAspectRatioRouteImport } from './routes/base-ui/aspect-ratio'
 import { Route as BaseUiAvatarRouteImport } from './routes/base-ui/avatar'
 import { Route as BaseUiBadgeRouteImport } from './routes/base-ui/badge'
+import { Route as BaseUiBannerRouteImport } from './routes/base-ui/banner'
 import { Route as BaseUiButtonRouteImport } from './routes/base-ui/button'
 import { Route as BaseUiButtonGroupRouteImport } from './routes/base-ui/button-group'
 import { Route as BaseUiCalendarRouteImport } from './routes/base-ui/calendar'
@@ -66,6 +66,7 @@ import { Route as ComponentsFormLayoutRouteImport } from './routes/components/fo
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
 import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
+import { Route as ComponentsResourcePickerRouteImport } from './routes/components/resource-picker'
 import { Route as ComponentsSidebarRouteImport } from './routes/components/sidebar'
 import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
 
@@ -104,11 +105,6 @@ const BaseUiAccordionRoute = BaseUiAccordionRouteImport.update({
   path: '/base-ui/accordion',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiAlertRoute = BaseUiAlertRouteImport.update({
-  id: '/base-ui/alert',
-  path: '/base-ui/alert',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BaseUiAspectRatioRoute = BaseUiAspectRatioRouteImport.update({
   id: '/base-ui/aspect-ratio',
   path: '/base-ui/aspect-ratio',
@@ -122,6 +118,11 @@ const BaseUiAvatarRoute = BaseUiAvatarRouteImport.update({
 const BaseUiBadgeRoute = BaseUiBadgeRouteImport.update({
   id: '/base-ui/badge',
   path: '/base-ui/badge',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BaseUiBannerRoute = BaseUiBannerRouteImport.update({
+  id: '/base-ui/banner',
+  path: '/base-ui/banner',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiButtonRoute = BaseUiButtonRouteImport.update({
@@ -355,6 +356,12 @@ const ComponentsQuantityInputRoute = ComponentsQuantityInputRouteImport.update({
   path: '/components/quantity-input',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsResourcePickerRoute =
+  ComponentsResourcePickerRouteImport.update({
+    id: '/components/resource-picker',
+    path: '/components/resource-picker',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ComponentsSidebarRoute = ComponentsSidebarRouteImport.update({
   id: '/components/sidebar',
   path: '/components/sidebar',
@@ -373,10 +380,10 @@ export interface FileRoutesByFullPath {
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
   '/base-ui/accordion': typeof BaseUiAccordionRoute
-  '/base-ui/alert': typeof BaseUiAlertRoute
   '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
+  '/base-ui/banner': typeof BaseUiBannerRoute
   '/base-ui/button': typeof BaseUiButtonRoute
   '/base-ui/button-group': typeof BaseUiButtonGroupRoute
   '/base-ui/calendar': typeof BaseUiCalendarRoute
@@ -422,6 +429,7 @@ export interface FileRoutesByFullPath {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
@@ -434,10 +442,10 @@ export interface FileRoutesByTo {
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
   '/base-ui/accordion': typeof BaseUiAccordionRoute
-  '/base-ui/alert': typeof BaseUiAlertRoute
   '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
+  '/base-ui/banner': typeof BaseUiBannerRoute
   '/base-ui/button': typeof BaseUiButtonRoute
   '/base-ui/button-group': typeof BaseUiButtonGroupRoute
   '/base-ui/calendar': typeof BaseUiCalendarRoute
@@ -483,6 +491,7 @@ export interface FileRoutesByTo {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui': typeof BaseUiIndexRoute
@@ -496,10 +505,10 @@ export interface FileRoutesById {
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
   '/base-ui/accordion': typeof BaseUiAccordionRoute
-  '/base-ui/alert': typeof BaseUiAlertRoute
   '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
+  '/base-ui/banner': typeof BaseUiBannerRoute
   '/base-ui/button': typeof BaseUiButtonRoute
   '/base-ui/button-group': typeof BaseUiButtonGroupRoute
   '/base-ui/calendar': typeof BaseUiCalendarRoute
@@ -545,6 +554,7 @@ export interface FileRoutesById {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
@@ -559,10 +569,10 @@ export interface FileRouteTypes {
     | '/setup'
     | '/theming'
     | '/base-ui/accordion'
-    | '/base-ui/alert'
     | '/base-ui/aspect-ratio'
     | '/base-ui/avatar'
     | '/base-ui/badge'
+    | '/base-ui/banner'
     | '/base-ui/button'
     | '/base-ui/button-group'
     | '/base-ui/calendar'
@@ -608,6 +618,7 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
+    | '/components/resource-picker'
     | '/components/sidebar'
     | '/components/text-editor'
     | '/base-ui/'
@@ -620,10 +631,10 @@ export interface FileRouteTypes {
     | '/setup'
     | '/theming'
     | '/base-ui/accordion'
-    | '/base-ui/alert'
     | '/base-ui/aspect-ratio'
     | '/base-ui/avatar'
     | '/base-ui/badge'
+    | '/base-ui/banner'
     | '/base-ui/button'
     | '/base-ui/button-group'
     | '/base-ui/calendar'
@@ -669,6 +680,7 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
+    | '/components/resource-picker'
     | '/components/sidebar'
     | '/components/text-editor'
     | '/base-ui'
@@ -681,10 +693,10 @@ export interface FileRouteTypes {
     | '/setup'
     | '/theming'
     | '/base-ui/accordion'
-    | '/base-ui/alert'
     | '/base-ui/aspect-ratio'
     | '/base-ui/avatar'
     | '/base-ui/badge'
+    | '/base-ui/banner'
     | '/base-ui/button'
     | '/base-ui/button-group'
     | '/base-ui/calendar'
@@ -730,6 +742,7 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
+    | '/components/resource-picker'
     | '/components/sidebar'
     | '/components/text-editor'
     | '/base-ui/'
@@ -743,10 +756,10 @@ export interface RootRouteChildren {
   SetupRoute: typeof SetupRoute
   ThemingRoute: typeof ThemingRoute
   BaseUiAccordionRoute: typeof BaseUiAccordionRoute
-  BaseUiAlertRoute: typeof BaseUiAlertRoute
   BaseUiAspectRatioRoute: typeof BaseUiAspectRatioRoute
   BaseUiAvatarRoute: typeof BaseUiAvatarRoute
   BaseUiBadgeRoute: typeof BaseUiBadgeRoute
+  BaseUiBannerRoute: typeof BaseUiBannerRoute
   BaseUiButtonRoute: typeof BaseUiButtonRoute
   BaseUiButtonGroupRoute: typeof BaseUiButtonGroupRoute
   BaseUiCalendarRoute: typeof BaseUiCalendarRoute
@@ -792,6 +805,7 @@ export interface RootRouteChildren {
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
   ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
+  ComponentsResourcePickerRoute: typeof ComponentsResourcePickerRoute
   ComponentsSidebarRoute: typeof ComponentsSidebarRoute
   ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
   BaseUiIndexRoute: typeof BaseUiIndexRoute
@@ -849,13 +863,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiAccordionRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/alert': {
-      id: '/base-ui/alert'
-      path: '/base-ui/alert'
-      fullPath: '/base-ui/alert'
-      preLoaderRoute: typeof BaseUiAlertRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/base-ui/aspect-ratio': {
       id: '/base-ui/aspect-ratio'
       path: '/base-ui/aspect-ratio'
@@ -875,6 +882,13 @@ declare module '@tanstack/react-router' {
       path: '/base-ui/badge'
       fullPath: '/base-ui/badge'
       preLoaderRoute: typeof BaseUiBadgeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/base-ui/banner': {
+      id: '/base-ui/banner'
+      path: '/base-ui/banner'
+      fullPath: '/base-ui/banner'
+      preLoaderRoute: typeof BaseUiBannerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/button': {
@@ -1199,6 +1213,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsQuantityInputRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/resource-picker': {
+      id: '/components/resource-picker'
+      path: '/components/resource-picker'
+      fullPath: '/components/resource-picker'
+      preLoaderRoute: typeof ComponentsResourcePickerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/sidebar': {
       id: '/components/sidebar'
       path: '/components/sidebar'
@@ -1223,10 +1244,10 @@ const rootRouteChildren: RootRouteChildren = {
   SetupRoute: SetupRoute,
   ThemingRoute: ThemingRoute,
   BaseUiAccordionRoute: BaseUiAccordionRoute,
-  BaseUiAlertRoute: BaseUiAlertRoute,
   BaseUiAspectRatioRoute: BaseUiAspectRatioRoute,
   BaseUiAvatarRoute: BaseUiAvatarRoute,
   BaseUiBadgeRoute: BaseUiBadgeRoute,
+  BaseUiBannerRoute: BaseUiBannerRoute,
   BaseUiButtonRoute: BaseUiButtonRoute,
   BaseUiButtonGroupRoute: BaseUiButtonGroupRoute,
   BaseUiCalendarRoute: BaseUiCalendarRoute,
@@ -1272,6 +1293,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,
   ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
+  ComponentsResourcePickerRoute: ComponentsResourcePickerRoute,
   ComponentsSidebarRoute: ComponentsSidebarRoute,
   ComponentsTextEditorRoute: ComponentsTextEditorRoute,
   BaseUiIndexRoute: BaseUiIndexRoute,

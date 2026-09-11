@@ -11,7 +11,7 @@
       "registryDependencies": [
         "@orchid/form-builder",
         "@orchid/data-table",
-        "@orchid/alert",
+        "@orchid/banner",
         "@orchid/empty",
         "@orchid/aspect-ratio",
         "@orchid/chart",
@@ -21,6 +21,7 @@
         "@orchid/page-layout",
         "@orchid/app-layout",
         "@orchid/confirmation-modal",
+        "@orchid/resource-picker",
         "@orchid/button",
         "@orchid/button-group",
         "@orchid/dropdown-menu",
@@ -175,19 +176,19 @@
       ]
     },
     {
-      "name": "alert",
+      "name": "banner",
       "type": "registry:ui",
-      "title": "Alert",
-      "description": "Alert with semantic variants and top-right or bottom action placement in Orchid styling.",
+      "title": "Banner",
+      "description": "Banner with semantic variants and top-right or bottom action placement in Orchid styling.",
       "dependencies": [
         "class-variance-authority"
       ],
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/feedback/alert.tsx",
+          "path": "src/ui/feedback/banner.tsx",
           "type": "registry:ui",
-          "target": "@ui/feedback/alert.tsx"
+          "target": "@ui/feedback/banner.tsx"
         }
       ]
     },
@@ -309,6 +310,32 @@
           "path": "src/components/overlays/confirmation-modal.tsx",
           "type": "registry:ui",
           "target": "@components/overlays/confirmation-modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resource-picker",
+      "type": "registry:ui",
+      "title": "Resource Picker",
+      "description": "Promise picker for HitPay list records (products, categories, customers, orders, locations). useResourcePicker({ type }).",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/badge",
+        "@orchid/spinner",
+        "@orchid/checkbox",
+        "@orchid/input",
+        "@orchid/radio-group",
+        "@orchid/select",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/overlays/resource-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/overlays/resource-picker.tsx"
         }
       ]
     },

@@ -101,12 +101,13 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 | Option cards / choose one | `@/components/form/choice-card` | radio + styled boxes |
 | Rich notes | `@/components/form/text-editor` | raw `Textarea` for rich text |
 | Confirm delete / destructive | `@/components/overlays/confirmation-modal` | custom `Dialog` |
+| Pick HitPay products / customers / orders / locations / categories | `@/components/overlays/resource-picker` | custom search `Dialog`, Data Table as a picker |
 | Command palette | `@/components/overlays/command` | custom `Dialog` + input |
 
 Layout imports: `@/components/layout/app-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
 
 - Icons: `@mingcute/react/core-regular`. No `lucide-react`.
-- Confirms: `useConfirmationModal()`. Toasts: existing `<Toaster placement="top-center">`. No extra providers.
+- Confirms: `useConfirmationModal()`. HitPay pickers: `useResourcePicker()`. Toasts: existing `<Toaster placement="top-center">`. No extra providers.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`.
 - Tokens: `oc-*` from `src/styles.css`. Nested app nav: `AppLayout` sidebar only. Do not add `SubSidebar`.
 

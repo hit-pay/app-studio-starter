@@ -18,9 +18,10 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - rich text, notes, wysiwyg, lexical → `text-editor`
 - date picker, date range picker, datetime picker, calendar popover → `date-picker`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
+- pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker → `resource-picker`
 - command palette, search commands, cmdk → `command`
 - toast, snackbar, notify, success message → `toast`
-- alert, banner, inline notice → `alert`
+- banner, alert, inline notice → `banner`
 - empty state, no records, first-use state → `empty`
 - loading placeholder, skeleton rows → `skeleton`
 - loading spinner, indeterminate loading → `spinner`
@@ -148,6 +149,13 @@ Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 Import `@/components/overlays/confirmation-modal` — `src/components/overlays/confirmation-modal.tsx`.
 Docs: `orchid-llms/confirmation-modal.md`
 
+## `resource-picker` — Resource Picker
+
+Need: pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker
+Promise picker for HitPay list records (products, categories, customers, orders, locations). useResourcePicker({ type }).
+Import `@/components/overlays/resource-picker` — `src/components/overlays/resource-picker.tsx`.
+Docs: `orchid-llms/resource-picker.md`
+
 ## `command` — Command
 
 Need: command palette, search commands, cmdk
@@ -208,12 +216,11 @@ Docs: `orchid-llms/chart.md`
 
 ## Feedback
 
-## `alert` — Alert
+## `banner` — Banner
 
-Need: alert, banner, inline notice
-Alert with semantic variants and top-right or bottom action placement in Orchid styling.
-Import `@ui/feedback/alert` — `src/ui/feedback/alert.tsx`.
-Docs: `orchid-llms/alert.md`
+Need: banner, alert, inline notice
+Banner with semantic variants and top-right or bottom action placement in Orchid styling.
+Import `@ui/feedback/banner` — `src/ui/feedback/banner.tsx`.
 
 ## `toast` — Toast
 

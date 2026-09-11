@@ -29,11 +29,11 @@ const wrapped = Object.fromEntries(
 ) as Record<string, ComponentType>;
 
 export const AccordionDemo = wrapped.AccordionDemo;
-export const AlertDemo = wrapped.AlertDemo;
 export const AppLayoutDemo = wrapped.AppLayoutDemo;
 export const AspectRatioDemo = wrapped.AspectRatioDemo;
 export const AvatarDemo = wrapped.AvatarDemo;
 export const BadgeDemo = wrapped.BadgeDemo;
+export const BannerDemo = wrapped.BannerDemo;
 export const ButtonDemo = wrapped.ButtonDemo;
 export const ButtonGroupDemo = wrapped.ButtonGroupDemo;
 export const CalendarDemo = wrapped.CalendarDemo;
@@ -71,6 +71,7 @@ export const PaginationDemo = wrapped.PaginationDemo;
 export const ProgressDemo = wrapped.ProgressDemo;
 export const QuantityInputDemo = wrapped.QuantityInputDemo;
 export const RadioGroupDemo = wrapped.RadioGroupDemo;
+export const ResourcePickerDemo = wrapped.ResourcePickerDemo;
 export const SchemaFormDemo = wrapped.SchemaFormDemo;
 export const SchemaTableDemo = wrapped.SchemaTableDemo;
 export const SelectDemo = wrapped.SelectDemo;

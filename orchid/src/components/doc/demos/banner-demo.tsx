@@ -6,14 +6,14 @@ import {
 } from '@mingcute/react/core-regular';
 
 import {
-  Alert,
-  AlertAction,
-  AlertDescription,
-  AlertTitle,
-} from "@ui/feedback/alert";
+  Banner,
+  BannerAction,
+  BannerDescription,
+  BannerTitle,
+} from "@ui/feedback/banner";
 import { Button } from "@ui/actions/button";
 
-function AlertDemo() {
+function BannerDemo() {
   return (
     <>
       <div className="grid gap-6 md:grid-cols-2">
@@ -21,55 +21,55 @@ function AlertDemo() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default
           </p>
-          <Alert>
+          <Banner>
             <InformationRegular />
-            <AlertTitle>PayNow delay</AlertTitle>
-            <AlertDescription>
+            <BannerTitle>PayNow delay</BannerTitle>
+            <BannerDescription>
               Payments may take longer than usual. Consider using Cards or
               GrabPay while the channel recovers.
-            </AlertDescription>
-          </Alert>
+            </BannerDescription>
+          </Banner>
         </div>
 
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Success
           </p>
-          <Alert variant="success">
+          <Banner variant="success">
             <CheckCircleRegular />
-            <AlertTitle>Payment received</AlertTitle>
-            <AlertDescription>
+            <BannerTitle>Payment received</BannerTitle>
+            <BannerDescription>
               SGD 128.00 for INV-2048 was paid successfully through PayNow.
-            </AlertDescription>
-          </Alert>
+            </BannerDescription>
+          </Banner>
         </div>
 
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Warning
           </p>
-          <Alert variant="warning">
+          <Banner variant="warning">
             <AlertRegular />
-            <AlertTitle>Low stock</AlertTitle>
-            <AlertDescription>
+            <BannerTitle>Low stock</BannerTitle>
+            <BannerDescription>
               SKU-TEA-12 has 3 units remaining. Restock before the weekend
               promotion.
-            </AlertDescription>
-          </Alert>
+            </BannerDescription>
+          </Banner>
         </div>
 
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Destructive
           </p>
-          <Alert variant="destructive">
+          <Banner variant="destructive">
             <CloseCircleRegular />
-            <AlertTitle>Refund failed</AlertTitle>
-            <AlertDescription>
+            <BannerTitle>Refund failed</BannerTitle>
+            <BannerDescription>
               We could not refund SGD 48.00 on INV-2048. Retry or contact the
               customer.
-            </AlertDescription>
-          </Alert>
+            </BannerDescription>
+          </Banner>
         </div>
       </div>
 
@@ -78,37 +78,37 @@ function AlertDemo() {
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Default action
           </p>
-          <Alert>
+          <Banner>
             <InformationRegular />
-            <AlertTitle>PayNow delay</AlertTitle>
-            <AlertDescription>
+            <BannerTitle>PayNow delay</BannerTitle>
+            <BannerDescription>
               Payments may take longer than usual.
-            </AlertDescription>
-            <AlertAction>
+            </BannerDescription>
+            <BannerAction>
               <Button variant="outline" size="sm">
                 View status
               </Button>
-            </AlertAction>
-          </Alert>
+            </BannerAction>
+          </Banner>
         </div>
 
         <div className="space-y-3">
           <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
             Bottom action
           </p>
-          <Alert variant="success">
+          <Banner variant="success">
             <CheckCircleRegular />
-            <AlertTitle>Invoice created</AlertTitle>
-            <AlertDescription>
+            <BannerTitle>Invoice created</BannerTitle>
+            <BannerDescription>
               INV-2048 for SGD 128.00 was created and sent to Priya Nair.
-            </AlertDescription>
-            <AlertAction placement="bottom">
+            </BannerDescription>
+            <BannerAction placement="bottom">
               <Button variant="outline" size="sm">
                 View invoice
               </Button>
               <Button size="sm">Send reminder</Button>
-            </AlertAction>
-          </Alert>
+            </BannerAction>
+          </Banner>
         </div>
       </div>
 
@@ -116,13 +116,13 @@ function AlertDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Above page header
         </p>
-        <Alert>
+        <Banner>
           <InformationRegular />
-          <AlertTitle>Scheduled maintenance</AlertTitle>
-          <AlertDescription>
+          <BannerTitle>Scheduled maintenance</BannerTitle>
+          <BannerDescription>
             Dashboard reporting may be delayed between 02:00 and 02:30 SGT.
-          </AlertDescription>
-        </Alert>
+          </BannerDescription>
+        </Banner>
         <header className="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div className="min-w-0 flex-1">
             <h2 className="wrap-break-word text-lg leading-6 font-medium text-oc-foreground">
@@ -141,4 +141,4 @@ function AlertDemo() {
   );
 }
 
-export { AlertDemo };
+export { BannerDemo };

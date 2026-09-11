@@ -26,9 +26,11 @@ const NEED = {
   'text-editor': 'rich text, notes, wysiwyg, lexical',
   'date-picker': 'date picker, date range picker, datetime picker, calendar popover',
   'confirmation-modal': 'confirm, delete, destructive, are you sure',
+  'resource-picker':
+    'pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker',
   command: 'command palette, search commands, cmdk',
   toast: 'toast, snackbar, notify, success message',
-  alert: 'alert, banner, inline notice',
+  banner: 'banner, alert, inline notice',
   empty: 'empty state, no records, first-use state',
   skeleton: 'loading placeholder, skeleton rows',
   spinner: 'loading spinner, indeterminate loading',
@@ -87,7 +89,7 @@ const BASE_SUBGROUP = {
   badge: 'Displaying Data',
   chart: 'Displaying Data',
   empty: 'Displaying Data',
-  alert: 'Feedback',
+  banner: 'Feedback',
   progress: 'Feedback',
   skeleton: 'Feedback',
   spinner: 'Feedback',
@@ -135,6 +137,7 @@ const BLOCK_SUBGROUP = {
   'page-layout': 'Layout',
   command: 'Overlays',
   'confirmation-modal': 'Overlays',
+  'resource-picker': 'Overlays',
 }
 
 const ALIGNUI_ORDER = [

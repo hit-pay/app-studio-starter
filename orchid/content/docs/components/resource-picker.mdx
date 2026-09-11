@@ -1,0 +1,23 @@
+import { ResourcePickerDemo } from '../../../src/components/doc/doc-demos'
+
+<ResourcePickerDemo />
+
+Promise picker for HitPay list records. Mount `ResourcePickerProvider` once (app root already does this). Call `useResourcePicker()` — do not rebuild a search dialog.
+
+```tsx
+const resourcePicker = useResourcePicker()
+const selected = await resourcePicker({ type: 'product', multiple: 1 })
+if (!selected) return
+```
+
+`type`: `product` | `product-category` | `customer` | `order` | `location`.
+
+- `action`: `add` (default) or `select` — title and confirm label
+- `multiple`: `false` (one), `true` (unlimited), or a number
+- `query`: initial search
+- `selectionIds`: preselected `{ id, children?: { id }[] }`
+- `filter.variants`: `false` hides product variations
+- `filter.status`: initial filter (`published`, `draft`, order status, …)
+- Cancel returns `undefined`
+
+Products return selected variations in `children`. Other types return `{ id, resource }`.

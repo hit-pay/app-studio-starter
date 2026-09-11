@@ -29,8 +29,8 @@ export const DOC_COMPONENTS = [
       "Toast manager with semantic types, actions, close, and placement.",
   },
   {
-    to: "/base-ui/alert" as const,
-    name: "Alert",
+    to: "/base-ui/banner" as const,
+    name: "Banner",
     description:
       "In-page notification with semantic variants and an optional action.",
   },
@@ -308,6 +308,12 @@ export const DOC_BLOCKS = [
       "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
   },
   {
+    to: "/components/resource-picker" as const,
+    name: "Resource Picker",
+    description:
+      "Search and select HitPay products, categories, customers, orders, or locations.",
+  },
+  {
     to: "/components/command" as const,
     name: "Command",
     description:
@@ -369,7 +375,7 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/empty",
   ]),
   baseGroup("Feedback", [
-    "/base-ui/alert",
+    "/base-ui/banner",
     "/base-ui/progress",
     "/base-ui/skeleton",
     "/base-ui/spinner",
@@ -440,7 +446,7 @@ export const DOC_BLOCK_GROUPS = [
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Navigation", ["/components/sidebar"]),
-  blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
+  blockGroup("Overlays", ["/components/command", "/components/confirmation-modal", "/components/resource-picker"]),
 ].filter((group) => group.items.length > 0);
 
 export const DOC_GUIDES = [
