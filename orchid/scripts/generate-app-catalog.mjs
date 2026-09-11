@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const registry = JSON.parse(readFileSync(join(root, 'registry.json'), 'utf8'))
-const out = join(root, '..', 'app', 'orchid-catalog.md')
+const out = join(root, '..', 'app', 'orchid-ui-guideline.md')
 const docsDir = join(root, 'public', 'llms')
 
 const NEED = {
