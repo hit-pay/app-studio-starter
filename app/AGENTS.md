@@ -83,7 +83,7 @@ createServerFn({ method: 'POST' })
 
 1. `grep` `orchid-ui-guideline.md` **Needs** and **Components & Blocks** only. Ignore **Base Components** until a block is chosen or none matches.
 2. Import the block (`@/components/…`). Pass props or a schema. If props are unclear, `Read` `orchid-llms/{name}.md`. Do not fetch orchid-ui-hitpay.vercel.app. Open installed source only if the local doc is still unclear.
-3. `@ui/…` is allowed only for: a toolbar `Button`, a `Badge`, `Spinner`, `Skeleton`, `Empty`, or a primitive the chosen block does not expose. Never start a screen from `@ui`.
+3. `@ui/…` is allowed only for: a toolbar `Button`, a `Badge`, `Spinner`, `Skeleton`, or a primitive the chosen block does not expose. Never start a screen from `@ui`.
 4. Never `shadcn add`, invent a kit, overwrite installed components, or rebuild a block from `@ui`.
 
 Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + `DataTable`, `FormLayout` + `FormBuilder`, `PageLayout` + `DetailCard`, …). If you cannot name a `@/components` block, you are not ready to code.
@@ -105,6 +105,7 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 | Pick HitPay products / customers / orders / locations / categories | `@/components/overlays/resource-picker` | custom search `Dialog`, Data Table as a picker |
 | Command palette | `@/components/overlays/command` | custom `Dialog` + input |
 | Copy id / phone / URL | `@/components/actions/copy-button` | custom clipboard `Button` |
+| No records / first-use / search miss | `@/components/displaying-data/empty` | custom centered copy + `Button`s |
 
 Layout imports: `@/components/layout/app-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
 
@@ -224,7 +225,7 @@ Every data screen must handle all of:
 | State | Use |
 |---|---|
 | Loading | `Spinner` or `Skeleton` from `@ui` (no block) |
-| Empty | `@ui/displaying-data/empty` when there are no records yet |
+| Empty | `@/components/displaying-data/empty` when there are no records yet |
 | Error | Inline message + retry; never a blank screen |
 | Success | Toast after save/delete; refreshed list/detail |
 

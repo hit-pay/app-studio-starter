@@ -2,3 +2,23 @@ import { EmptyDemo } from '../../../src/components/doc/doc-demos'
 
 <EmptyDemo />
 
+One props-driven empty state. Do not import `@ui/displaying-data/empty` children.
+
+```tsx
+import { Empty } from '@/components/displaying-data/empty'
+
+<Empty
+  media="icon"
+  title="No invoices yet"
+  description="Create an invoice to bill a customer."
+  actions={[{ key: 'create', label: 'Create invoice' }]}
+  onAction={(action) => {
+    if (action.key === 'create') createInvoice()
+  }}
+/>
+```
+
+- `title` is required.
+- `media`: `icon` | `search` | `upgrade`. Omit for text only.
+- `icon` overrides the default media glyph.
+- `actions` is `{ key, label, variant?, disabled?, icon? }[]`.

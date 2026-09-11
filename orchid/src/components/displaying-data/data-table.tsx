@@ -48,14 +48,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@ui/overlays/dropdown-menu";
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@ui/displaying-data/empty";
+import { Empty } from "@/components/displaying-data/empty";
 import { Select } from "@/components/form/select";
 import { Field, FieldLabel } from "@ui/form/field";
 import {
@@ -1417,37 +1410,24 @@ function SchemaTable({
         <DataTableBody>
           {table.rows.length === 0 ? (
             <DataTableEmpty>
-              <Empty>
-                <EmptyHeader>
-                  <EmptyMedia variant="search">
-                    <SearchRegular />
-                  </EmptyMedia>
-                  <EmptyTitle>
-                    {table.schema.emptyState?.title ?? "No data to display"}
-                  </EmptyTitle>
-                  {table.schema.emptyState?.description ? (
-                    <EmptyDescription>
-                      {table.schema.emptyState.description}
-                    </EmptyDescription>
-                  ) : null}
-                </EmptyHeader>
-                {table.schema.emptyState?.actions?.length ? (
-                  <EmptyContent>
-                    {table.schema.emptyState.actions.map((action) => (
-                      <Button
-                        key={action.key}
-                        variant={action.variant ?? "default"}
-                        size="sm"
-                        disabled={action.disabled}
-                        onClick={() => onEmptyAction?.(action)}
-                      >
-                        <SchemaTableActionIconView icon={action.icon} />
-                        {action.label}
-                      </Button>
-                    ))}
-                  </EmptyContent>
-                ) : null}
-              </Empty>
+              <Empty
+                media="search"
+                title={table.schema.emptyState?.title ?? "No data to display"}
+                description={table.schema.emptyState?.description}
+                actions={table.schema.emptyState?.actions?.map((action) => ({
+                  key: action.key,
+                  label: action.label,
+                  variant: action.variant,
+                  disabled: action.disabled,
+                  icon: <SchemaTableActionIconView icon={action.icon} />,
+                }))}
+                onAction={(action) => {
+                  const match = table.schema.emptyState?.actions?.find(
+                    (item) => item.key === action.key,
+                  );
+                  if (match) onEmptyAction?.(match);
+                }}
+              />
             </DataTableEmpty>
           ) : (
             table.rows.map((row) => (

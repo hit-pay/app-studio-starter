@@ -1,6 +1,6 @@
 # Orchid catalog
 
-Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Do not rebuild a block from primitives — that writes too much code. Open `orchid-llms/{name}.md` only when the props remain unclear. Do not fetch orchid-ui-hitpay.vercel.app. Use **Base Components** (`@ui/…`) only after no block covers the job (a single Button, Badge, Spinner, or Empty).
+Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Do not rebuild a block from primitives — that writes too much code. Open `orchid-llms/{name}.md` only when the props remain unclear. Do not fetch orchid-ui-hitpay.vercel.app. Use **Base Components** (`@ui/…`) only after no block covers the job (a single Button, Badge, or Spinner).
 
 # Needs
 
@@ -61,6 +61,13 @@ Rows-and-columns table with search, column filters, sort, and pagination. Pass c
 Import `@/components/displaying-data/data-table` — `src/components/displaying-data/data-table.tsx`.
 Docs: `orchid-llms/data-table.md`
 Related: `src/components/displaying-data/data-table-model.ts`.
+
+## `empty` — Empty
+
+Need: empty state, no records, first-use state
+Props empty state. title, optional media and actions.
+Import `@/components/displaying-data/empty` — `src/components/displaying-data/empty.tsx`.
+Docs: `orchid-llms/empty.md`
 
 ## `customer-card` — Customer Card
 
@@ -200,13 +207,6 @@ Import `@ui/actions/button-group` — `src/ui/actions/button-group.tsx`.
 Docs: `orchid-llms/button-group.md`
 
 ## Displaying Data
-
-## `empty` — Empty
-
-Need: empty state, no records, first-use state
-Compound empty state with Orchid media variants.
-Import `@ui/displaying-data/empty` — `src/ui/displaying-data/empty.tsx`.
-Docs: `orchid-llms/empty.md`
 
 ## `badge` — Badge
 

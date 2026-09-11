@@ -30,12 +30,6 @@ export const DOC_COMPONENTS = [
       "In-page notification with semantic variants and an optional action.",
   },
   {
-    to: "/base-ui/empty" as const,
-    name: "Empty",
-    description:
-      "Compound empty state with Orchid media variants.",
-  },
-  {
     to: "/base-ui/badge" as const,
     name: "Badge",
     description:
@@ -234,6 +228,11 @@ export const DOC_BLOCKS = [
       "Read-only key/value card for one record. Not a collection.",
   },
   {
+    to: "/components/empty" as const,
+    name: "Empty",
+    description: "Props empty state with optional media and actions.",
+  },
+  {
     to: "/components/data-list" as const,
     name: "Data List",
     description:
@@ -359,7 +358,6 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/avatar",
     "/base-ui/badge",
     "/base-ui/chart",
-    "/base-ui/empty",
   ]),
   baseGroup("Feedback", [
     "/base-ui/banner",
@@ -420,6 +418,7 @@ export const DOC_BLOCK_GROUPS = [
     "/components/data-table",
     "/components/detail-card",
     "/components/data-list",
+    "/components/empty",
     "/components/metric-card",
   ]),
   blockGroup("Form", [

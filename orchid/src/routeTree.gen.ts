@@ -28,7 +28,6 @@ import { Route as BaseUiCollapsibleRouteImport } from './routes/base-ui/collapsi
 import { Route as BaseUiDialogRouteImport } from './routes/base-ui/dialog'
 import { Route as BaseUiDrawerRouteImport } from './routes/base-ui/drawer'
 import { Route as BaseUiDropdownMenuRouteImport } from './routes/base-ui/dropdown-menu'
-import { Route as BaseUiEmptyRouteImport } from './routes/base-ui/empty'
 import { Route as BaseUiFieldRouteImport } from './routes/base-ui/field'
 import { Route as BaseUiFileUploadRouteImport } from './routes/base-ui/file-upload'
 import { Route as BaseUiFormSectionRouteImport } from './routes/base-ui/form-section'
@@ -58,6 +57,7 @@ import { Route as ComponentsDataListRouteImport } from './routes/components/data
 import { Route as ComponentsDataTableRouteImport } from './routes/components/data-table'
 import { Route as ComponentsDatePickerRouteImport } from './routes/components/date-picker'
 import { Route as ComponentsDetailCardRouteImport } from './routes/components/detail-card'
+import { Route as ComponentsEmptyRouteImport } from './routes/components/empty'
 import { Route as ComponentsFormBuilderRouteImport } from './routes/components/form-builder'
 import { Route as ComponentsFormLayoutRouteImport } from './routes/components/form-layout'
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
@@ -161,11 +161,6 @@ const BaseUiDrawerRoute = BaseUiDrawerRouteImport.update({
 const BaseUiDropdownMenuRoute = BaseUiDropdownMenuRouteImport.update({
   id: '/base-ui/dropdown-menu',
   path: '/base-ui/dropdown-menu',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseUiEmptyRoute = BaseUiEmptyRouteImport.update({
-  id: '/base-ui/empty',
-  path: '/base-ui/empty',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiFieldRoute = BaseUiFieldRouteImport.update({
@@ -314,6 +309,11 @@ const ComponentsDetailCardRoute = ComponentsDetailCardRouteImport.update({
   path: '/components/detail-card',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ComponentsEmptyRoute = ComponentsEmptyRouteImport.update({
+  id: '/components/empty',
+  path: '/components/empty',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComponentsFormBuilderRoute = ComponentsFormBuilderRouteImport.update({
   id: '/components/form-builder',
   path: '/components/form-builder',
@@ -380,7 +380,6 @@ export interface FileRoutesByFullPath {
   '/base-ui/dialog': typeof BaseUiDialogRoute
   '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
-  '/base-ui/empty': typeof BaseUiEmptyRoute
   '/base-ui/field': typeof BaseUiFieldRoute
   '/base-ui/file-upload': typeof BaseUiFileUploadRoute
   '/base-ui/form-section': typeof BaseUiFormSectionRoute
@@ -409,6 +408,7 @@ export interface FileRoutesByFullPath {
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
   '/components/detail-card': typeof ComponentsDetailCardRoute
+  '/components/empty': typeof ComponentsEmptyRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
@@ -440,7 +440,6 @@ export interface FileRoutesByTo {
   '/base-ui/dialog': typeof BaseUiDialogRoute
   '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
-  '/base-ui/empty': typeof BaseUiEmptyRoute
   '/base-ui/field': typeof BaseUiFieldRoute
   '/base-ui/file-upload': typeof BaseUiFileUploadRoute
   '/base-ui/form-section': typeof BaseUiFormSectionRoute
@@ -469,6 +468,7 @@ export interface FileRoutesByTo {
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
   '/components/detail-card': typeof ComponentsDetailCardRoute
+  '/components/empty': typeof ComponentsEmptyRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
@@ -501,7 +501,6 @@ export interface FileRoutesById {
   '/base-ui/dialog': typeof BaseUiDialogRoute
   '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
-  '/base-ui/empty': typeof BaseUiEmptyRoute
   '/base-ui/field': typeof BaseUiFieldRoute
   '/base-ui/file-upload': typeof BaseUiFileUploadRoute
   '/base-ui/form-section': typeof BaseUiFormSectionRoute
@@ -530,6 +529,7 @@ export interface FileRoutesById {
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
   '/components/detail-card': typeof ComponentsDetailCardRoute
+  '/components/empty': typeof ComponentsEmptyRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
@@ -563,7 +563,6 @@ export interface FileRouteTypes {
     | '/base-ui/dialog'
     | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
-    | '/base-ui/empty'
     | '/base-ui/field'
     | '/base-ui/file-upload'
     | '/base-ui/form-section'
@@ -592,6 +591,7 @@ export interface FileRouteTypes {
     | '/components/data-table'
     | '/components/date-picker'
     | '/components/detail-card'
+    | '/components/empty'
     | '/components/form-builder'
     | '/components/form-layout'
     | '/components/metric-card'
@@ -623,7 +623,6 @@ export interface FileRouteTypes {
     | '/base-ui/dialog'
     | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
-    | '/base-ui/empty'
     | '/base-ui/field'
     | '/base-ui/file-upload'
     | '/base-ui/form-section'
@@ -652,6 +651,7 @@ export interface FileRouteTypes {
     | '/components/data-table'
     | '/components/date-picker'
     | '/components/detail-card'
+    | '/components/empty'
     | '/components/form-builder'
     | '/components/form-layout'
     | '/components/metric-card'
@@ -683,7 +683,6 @@ export interface FileRouteTypes {
     | '/base-ui/dialog'
     | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
-    | '/base-ui/empty'
     | '/base-ui/field'
     | '/base-ui/file-upload'
     | '/base-ui/form-section'
@@ -712,6 +711,7 @@ export interface FileRouteTypes {
     | '/components/data-table'
     | '/components/date-picker'
     | '/components/detail-card'
+    | '/components/empty'
     | '/components/form-builder'
     | '/components/form-layout'
     | '/components/metric-card'
@@ -744,7 +744,6 @@ export interface RootRouteChildren {
   BaseUiDialogRoute: typeof BaseUiDialogRoute
   BaseUiDrawerRoute: typeof BaseUiDrawerRoute
   BaseUiDropdownMenuRoute: typeof BaseUiDropdownMenuRoute
-  BaseUiEmptyRoute: typeof BaseUiEmptyRoute
   BaseUiFieldRoute: typeof BaseUiFieldRoute
   BaseUiFileUploadRoute: typeof BaseUiFileUploadRoute
   BaseUiFormSectionRoute: typeof BaseUiFormSectionRoute
@@ -773,6 +772,7 @@ export interface RootRouteChildren {
   ComponentsDataTableRoute: typeof ComponentsDataTableRoute
   ComponentsDatePickerRoute: typeof ComponentsDatePickerRoute
   ComponentsDetailCardRoute: typeof ComponentsDetailCardRoute
+  ComponentsEmptyRoute: typeof ComponentsEmptyRoute
   ComponentsFormBuilderRoute: typeof ComponentsFormBuilderRoute
   ComponentsFormLayoutRoute: typeof ComponentsFormLayoutRoute
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
@@ -919,13 +919,6 @@ declare module '@tanstack/react-router' {
       path: '/base-ui/dropdown-menu'
       fullPath: '/base-ui/dropdown-menu'
       preLoaderRoute: typeof BaseUiDropdownMenuRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/base-ui/empty': {
-      id: '/base-ui/empty'
-      path: '/base-ui/empty'
-      fullPath: '/base-ui/empty'
-      preLoaderRoute: typeof BaseUiEmptyRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/field': {
@@ -1131,6 +1124,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDetailCardRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/empty': {
+      id: '/components/empty'
+      path: '/components/empty'
+      fullPath: '/components/empty'
+      preLoaderRoute: typeof ComponentsEmptyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/form-builder': {
       id: '/components/form-builder'
       path: '/components/form-builder'
@@ -1216,7 +1216,6 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiDialogRoute: BaseUiDialogRoute,
   BaseUiDrawerRoute: BaseUiDrawerRoute,
   BaseUiDropdownMenuRoute: BaseUiDropdownMenuRoute,
-  BaseUiEmptyRoute: BaseUiEmptyRoute,
   BaseUiFieldRoute: BaseUiFieldRoute,
   BaseUiFileUploadRoute: BaseUiFileUploadRoute,
   BaseUiFormSectionRoute: BaseUiFormSectionRoute,
@@ -1245,6 +1244,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsDataTableRoute: ComponentsDataTableRoute,
   ComponentsDatePickerRoute: ComponentsDatePickerRoute,
   ComponentsDetailCardRoute: ComponentsDetailCardRoute,
+  ComponentsEmptyRoute: ComponentsEmptyRoute,
   ComponentsFormBuilderRoute: ComponentsFormBuilderRoute,
   ComponentsFormLayoutRoute: ComponentsFormLayoutRoute,
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,

@@ -193,16 +193,19 @@
       "name": "empty",
       "type": "registry:ui",
       "title": "Empty",
-      "description": "Compound empty state with Orchid media variants.",
+      "description": "Props empty state. title, optional media and actions.",
       "dependencies": [
-        "class-variance-authority"
+        "class-variance-authority",
+        "@mingcute/react"
       ],
-      "registryDependencies": [],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
       "files": [
         {
-          "path": "src/ui/displaying-data/empty.tsx",
+          "path": "src/components/displaying-data/empty.tsx",
           "type": "registry:ui",
-          "target": "@ui/displaying-data/empty.tsx"
+          "target": "@components/displaying-data/empty.tsx"
         }
       ]
     },

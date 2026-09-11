@@ -104,6 +104,10 @@ Rows-and-columns table with search, filters, sort, and pagination.
 Read-only key/value card for one record. Not a collection.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/detail-card.json)
 
+#### [Empty](https://orchid-ui-hitpay.vercel.app/llms/empty.md)
+Props empty state with optional media and actions.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
+
 #### [Metric Card](https://orchid-ui-hitpay.vercel.app/llms/metric-card.md)
 Dashboard KPI tile. Use for summaries, not a record's fields.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/metric-card.json)
@@ -193,10 +197,6 @@ Standard variants with Orchid tones, appearances, removal, and user roles.
 #### [Chart](https://orchid-ui-hitpay.vercel.app/llms/chart.md)
 Recharts wrapper with Orchid tooltip, legend, and chart tokens.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/chart.json)
-
-#### [Empty](https://orchid-ui-hitpay.vercel.app/llms/empty.md)
-Compound empty state with Orchid media variants.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
 
 ### Feedback
 

@@ -136,6 +136,7 @@ function Select({
       value={value !== undefined ? selectedLabel : undefined}
       defaultValue={defaultLabel}
       disabled={disabled}
+      filter={searchable ? undefined : null}
       onValueChange={(next) => {
         const match = options.find((option) => option.label === next)
         onValueChange?.(match?.value ?? (next == null ? null : String(next)))
