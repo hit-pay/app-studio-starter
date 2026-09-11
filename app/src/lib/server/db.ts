@@ -1,6 +1,6 @@
 import { createClient, type Client } from '@libsql/client/http'
 
-import { getHitPayEnv } from '#/lib/server/hitpay'
+import { getConnectors } from '#/lib/server/hitpay'
 
 const clients = new Map<string, Client>()
 
@@ -15,11 +15,27 @@ function envEnding(env: Record<string, string>, suffix: string): string {
 }
 
 async function requireDb(): Promise<Client> {
-  const env = await getHitPayEnv()
-  const urlKey = Object.keys(env).find((key) => key.endsWith('_DATABASE_URL') || key === 'DATABASE_URL')
-  const prefix = urlKey?.replace(/_DATABASE_URL$/, '') ?? ''
-  const url = urlKey === undefined ? '' : env[urlKey] ?? ''
-  const authToken = prefix === '' ? envEnding(env, 'AUTH_TOKEN') : (env[`${prefix}_AUTH_TOKEN`] ?? '')
+  const connectors = await getConnectors()
+  const databaseKeys = Object.keys(connectors).filter(
+    (key) => key.endsWith('_DATABASE_URL') || key === 'DATABASE_URL',
+  )
+  const urlKey =
+    ['TURSO_DATABASE_URL', 'DATABASE_URL'].find((key) => databaseKeys.includes(key)) ??
+    (databaseKeys.length === 1 ? databaseKeys[0] : undefined)
+
+  if (databaseKeys.length > 1 && urlKey === undefined) {
+    throw new Error(
+      'Multiple database connectors are configured. Set TURSO_DATABASE_URL or DATABASE_URL explicitly.',
+    )
+  }
+
+  const prefix =
+    urlKey === undefined || urlKey === 'DATABASE_URL'
+      ? ''
+      : urlKey.replace(/_DATABASE_URL$/, '')
+  const url = urlKey === undefined ? '' : connectors[urlKey] ?? ''
+  const authToken =
+    prefix === '' ? envEnding(connectors, 'AUTH_TOKEN') : (connectors[`${prefix}_AUTH_TOKEN`] ?? '')
 
   if (!url || !authToken) {
     throw new Error('Database is not configured for this app.')
@@ -42,7 +58,7 @@ async function requireDb(): Promise<Client> {
 
 type Db = Pick<Client, 'execute' | 'batch' | 'executeMultiple'>
 
-/** Lazy Turso client — credentials from X-HitPay-Env, not Sprite service env. */
+/** Lazy Turso client — credentials from X-App-Studio-Connectors, not Sprite service env. */
 export const db: Db = {
   execute(...args) {
     return requireDb().then((client) => client.execute(...args))

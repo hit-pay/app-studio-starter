@@ -40,7 +40,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | `src/lib/hitpay.ts` | Browser user / roles / members |
 | `src/lib/hitpay-roles.ts` | HitPay role titles (only place they are listed) |
 | `src/lib/server/` | Server helpers used only from `createServerFn` |
-| `src/lib/server/hitpay.ts` | Hopped session + connector env |
+| `src/lib/server/hitpay.ts` | Hopped session + server-side connector values |
 | `src/lib/server/hitpay-api.ts` | `hitpayRequest('/v1/…')` |
 | `src/lib/server/db.ts`, `migrate.ts` | Turso HTTP + migrations |
 | `migrations/` | Ordered SQL |
@@ -85,11 +85,15 @@ createServerFn({ method: 'POST' })
 
 **Form drafts:** keep typing in `useFormBuilder`. On `createServerFn` failure, `writeFormDraft`; on reopen, merge `readFormDraft` before `useFormBuilder`; on success or cancel, `clearFormDraft`. Helpers: `#/lib/form-draft`. No passwords/files in drafts.
 
-**Turso** is the system of record for business data. Import `db` only inside `createServerFn`. Keep the HTTP client (no native/WebSocket libSQL). Never expose Turso or connector env to the browser. Never call `/api/apps/{appId}/env`.
+**Data source policy:** HitPay is the system of record for HitPay-owned data; use the available HitPay merchant API for products, customers, payments, orders, and other supported commerce records. Do not copy or replace HitPay records in Turso. Use Turso only for app-owned operational data that HitPay does not provide, such as count sessions, approvals, assignments, checklists, notes, workflow status, and audit/history rows. Store external HitPay IDs and small immutable snapshots only when needed for history or reliable display.
 
-New schema: `migrations/00x_….sql` (never rewrite applied files). `await ensureMigrations()` before the first query. SQLite `TEXT` / `INTEGER` / `REAL`, parameterized `?`, one statement per `execute()`, `batch()` for related writes. Validate again on the server. React Query for lists; invalidate after mutations.
+Before implementing a workflow, inspect `hitpay-openapi.json` for the required HitPay resource. If the API does not expose the required resource or write operation, keep only the app-specific workflow state in Turso and state the actual integration limitation; never invent a HitPay endpoint.
 
-Slice: form → server fn → Turso → draft clear/write → refresh → toast. Empty state by default; seed only if asked, with realistic SMB data. No multi-tenant admin layer unless asked.
+Import `db` only inside `createServerFn`. Keep the HTTP client (no native/WebSocket libSQL). Never expose Turso, connector values, or HitPay access tokens to the browser. Never call `/api/apps/{appId}/env`.
+
+New schema: `migrations/00x_….sql` (never rewrite applied files). `await ensureMigrations()` before the first query. The migration runner serializes application with a database transaction; keep migration files compatible with transactional execution. SQLite `TEXT` / `INTEGER` / `REAL`, parameterized `?`, one statement per `execute()`, `batch()` for related writes. Validate again on the server. React Query for lists; invalidate after mutations.
+
+Slice: form → authorized `createServerFn` → HitPay API or Turso according to the data source policy → draft clear/write → refresh/invalidate → toast. Empty state by default; seed only if asked, with realistic SMB data. No multi-tenant admin layer unless asked.
 
 **Uploads:** one `files` table + `FileStorage` (`upload` / `get` / `delete`). Business rows store `files.id` only. Max 10 MB. Authorize before get/delete. No Base64, no extra BLOB columns on business tables.
 
@@ -112,19 +116,21 @@ CREATE INDEX idx_files_entity ON files(entity_type, entity_id);
 
 ## Auth and connectors
 
-Auth is the host dashboard. Never build login, signup, password fields, or a hardcoded staff list.
+Auth is the host dashboard. Owner/Admin app creation, configuration, publishing, and Connector / Integration management happen in App Studio outside the generated app. The generated app only implements the embedded business workflow. Never build login, signup, password fields, or a hardcoded staff list.
 
 - Role titles live in `#/lib/hitpay-roles`: `HITPAY_ALL_ROLES` (floor work) and `HITPAY_MANAGER_ROLES` (approvals, settings, refunds). Import those arrays; keep titles out of routes.
 - **Browser — `#/lib/hitpay`:** `useHitPayUser()` on app screens. Hide or disable actions with `user.role.title`. Use `fetchAppMembers()` / `fetchAppRoles()` for staff pickers, assignee dropdowns, and reviewer lists — never invent members in SQL or React state.
 - **Server — `#/lib/server/hitpay`:** Every `createServerFn` that reads or writes business data must call `requireHitPayRoles(HITPAY_ALL_ROLES)` or `requireHitPayRoles(HITPAY_MANAGER_ROLES)` before touching Turso or external APIs. Use `getHitPaySession()` for the trusted actor. Persist `session.id` (and name/email when useful) on audit columns such as `created_by`, `counted_by`, `approved_by`. Never trust `data.userId`, `data.staffName`, or similar client fields for identity.
 - Manager-only actions (approve, delete others' records, change settings) must use `HITPAY_MANAGER_ROLES`.
 
-Connector keys arrive on `X-HitPay-Env`. Names are in the footer `Connected server env keys`. Read them only in `createServerFn` via `getHitPayEnvValue`, `getConnector`, or `getHitPayEnv`. Missing key → tell the merchant to connect that provider. Never `process.env` for those keys.
+The product concept is **Connectors / Integrations**: providers connected by the Owner/Admin in App Studio settings. Use that language in app copy and agent responses. Connector values are available only inside Sprite server/SSR code. Never import `#/lib/server/*` into browser code, return connector values from a `createServerFn`, include them in loader data/props/JSON responses, put them in browser storage, or bundle them into client JavaScript.
+
+The proxy transports the connected integration values to Sprite through the internal signed `X-App-Studio-Connectors` hop header. This header is an implementation detail, not a browser API and not a credential source for UI code. Signed session/connector headers must include a short-lived `iat` and `exp`; reject malformed, expired, or future-dated claims. Names are listed in the footer `Connected server env keys`. Read them only inside `createServerFn` through `getConnectorValue`, `getConnector`, or `getConnectors`, use them for the upstream request, and return only safe business data. A missing key means the merchant must connect that provider in Settings → Connectors / Integrations. Never read `process.env` for provider credentials in application code.
 
 - `*_DATABASE_URL` → `#/lib/server/db` only
 - `*_WEBHOOK_URL` / `*_CONNECTION_URL` → `POST` JSON
 - Other `*_ACCESS_TOKEN` / `*_API_KEY` → as that provider expects
-- **HitPay merchant API** (`HITPAY_ACCESS_TOKEN`, `HITPAY_API_URL`): only if the request needs merchant HTTP. The OpenAPI spec is `hitpay-openapi.json` in the app workspace, next to `package.json`. It may be minified JSON; never read, print, or load the whole file into context. Discover paths with `jq -r '.paths | keys[]' hitpay-openapi.json` and inspect only the required endpoint, for example `jq '.paths["/v1/products"]' hitpay-openapi.json`. If the file is missing, use the OpenAPI URL supplied in the current App Studio footer; never invent or guess a URL, and save the downloaded file as `hitpay-openapi.json` in the app workspace. Do not download it again when the file already exists. Never copy credentials from the spec or expose connector values to the browser. Call matching `/v1/…` paths with `hitpayRequest` from `#/lib/server/hitpay`. The running app does not download the spec.
+- **HitPay merchant API** (`HITPAY_ACCESS_TOKEN`, `HITPAY_API_URL`): only if the request needs HitPay merchant HTTP. These are server-side values supplied by the connected HitPay integration; they are not browser credentials. The OpenAPI spec is `hitpay-openapi.json` in the app workspace, next to `package.json`. It may be minified JSON; never read, print, or load the whole file into context. Discover paths with `jq -r '.paths | keys[]' hitpay-openapi.json` and inspect only the required endpoint, for example `jq '.paths["/v1/products"]' hitpay-openapi.json`. If the file is missing, use the OpenAPI URL supplied in the current App Studio footer; never invent or guess a URL, and save the downloaded file as `hitpay-openapi.json` in the app workspace. Do not download it again when the file already exists. Never copy credentials from the spec or expose connector values to the browser. Call matching `/v1/…` paths with `hitpayRequest` from `#/lib/server/hitpay`. The running app does not download the spec.
 
 ```ts
 import { createServerFn } from '@tanstack/react-start'

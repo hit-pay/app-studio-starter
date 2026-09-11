@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { studioAppId } from '#/lib/studio-app-id'
 
 export {
   HITPAY_ALL_ROLES,
@@ -35,9 +36,7 @@ function assertBrowser(): void {
 }
 
 function appStudioApi(path: '/user/info' | '/roles' | '/members'): string {
-  const appId = window.location.pathname.split('/').filter(Boolean)[0]
-
-  return `/api/apps/${appId}${path}`
+  return `/api/apps/${encodeURIComponent(studioAppId())}${path}`
 }
 
 async function hitpayGet<T>(path: '/user/info' | '/roles' | '/members'): Promise<T> {
@@ -73,12 +72,19 @@ export const fetchAppMembers = () => hitpayGet<{ members: HitPayMember[] }>('/me
 export function useHitPayUser(): {
   user: HitPayUser | null
   error: string | null
+  loading: boolean
+  retry: () => void
 } {
   const [user, setUser] = useState<HitPayUser | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [attempt, setAttempt] = useState(0)
 
   useEffect(() => {
     let cancelled = false
+
+    setLoading(true)
+    setError(null)
 
     fetchUserInfo()
       .then((next) => {
@@ -88,14 +94,20 @@ export function useHitPayUser(): {
       })
       .catch((caught) => {
         if (!cancelled) {
+          setUser(null)
           setError(caught instanceof Error ? caught.message : 'Failed to load user.')
+        }
+      })
+      .finally(() => {
+        if (!cancelled) {
+          setLoading(false)
         }
       })
 
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [attempt])
 
-  return { user, error }
+  return { user, error, loading, retry: () => setAttempt((value) => value + 1) }
 }

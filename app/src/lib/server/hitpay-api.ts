@@ -2,11 +2,11 @@
  * createServerFn only. Merchant HitPay API via hopped env.
  * Do not fetch OpenAPI / llms from the running app.
  */
-import { getHitPayEnvValue } from '#/lib/server/hitpay'
+import { getConnectorValue } from '#/lib/server/hitpay'
 
 export async function hitpayRequest(path: string, init: RequestInit = {}): Promise<Response> {
-  const base = (await getHitPayEnvValue('HITPAY_API_URL')).replace(/\/$/, '')
-  const token = await getHitPayEnvValue('HITPAY_ACCESS_TOKEN')
+  const base = (await getConnectorValue('HITPAY_API_URL')).replace(/\/$/, '')
+  const token = await getConnectorValue('HITPAY_ACCESS_TOKEN')
   const suffix = path.startsWith('/') ? path : `/${path}`
 
   if (path.startsWith('http://') || path.startsWith('https://')) {

@@ -1,12 +1,12 @@
 /**
  * createServerFn only. Hopped session + connector env.
- * getHitPayEnvValue('KEY') / getHitPayEnv() / getConnector('slug')
+ * getConnectorValue('KEY') / getConnectors() / getConnector('slug')
  * getHitPaySession() / requireHitPayRoles(HITPAY_ALL_ROLES | HITPAY_MANAGER_ROLES)
  */
 import { createHmac, timingSafeEqual } from 'node:crypto'
 import { getRequest, getRequestHeader } from '@tanstack/react-start/server'
 
-export type HitPayEnv = Record<string, string>
+export type ConnectorValues = Record<string, string>
 
 export type HitPaySessionRole = {
   id: string
@@ -20,7 +20,7 @@ export type HitPaySession = {
   role: HitPaySessionRole | null
 }
 
-const envByRequest = new WeakMap<Request, Promise<HitPayEnv>>()
+const connectorsByRequest = new WeakMap<Request, Promise<ConnectorValues>>()
 const sessionByRequest = new WeakMap<Request, Promise<HitPaySession>>()
 
 function signaturesMatch(left: string, right: string): boolean {
@@ -38,6 +38,10 @@ function readSignedHeader(token: string): Record<string, unknown> {
   }
 
   const trimmed = token.trim()
+  if (trimmed.length > 65_536) {
+    throw new Error('The App Studio header is too large.')
+  }
+
   const dot = trimmed.lastIndexOf('.')
   const payload = dot > 0 ? trimmed.slice(0, dot) : ''
   const signature = dot > 0 ? trimmed.slice(dot + 1) : ''
@@ -52,54 +56,75 @@ function readSignedHeader(token: string): Record<string, unknown> {
     throw new Error('The HitPay header signature is invalid.')
   }
 
-  const parsed = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as unknown
+  let parsed: unknown
+
+  try {
+    parsed = JSON.parse(Buffer.from(payload, 'base64url').toString('utf8')) as unknown
+  } catch {
+    throw new Error('The App Studio header is malformed.')
+  }
 
   if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
     throw new Error('The HitPay header is malformed.')
   }
 
-  const exp = (parsed as { exp?: unknown }).exp
+  const claims = parsed as { exp?: unknown; iat?: unknown }
+  const exp = claims.exp
+  const iat = claims.iat
+  const now = Math.floor(Date.now() / 1000)
 
-  if (typeof exp === 'number' && exp * 1000 < Date.now()) {
+  if (
+    typeof iat !== 'number'
+    || !Number.isInteger(iat)
+    || iat > now + 60
+    || iat < now - 300
+  ) {
+    throw new Error('The App Studio header timestamp is invalid.')
+  }
+
+  if (typeof exp !== 'number' || !Number.isInteger(exp) || exp <= now) {
     throw new Error('The HitPay header has expired.')
   }
 
   return parsed as Record<string, unknown>
 }
 
-function stringMap(value: unknown): HitPayEnv {
+function stringMap(value: unknown): ConnectorValues {
   if (value === null || typeof value !== 'object' || Array.isArray(value)) {
     return {}
   }
 
-  const env: HitPayEnv = {}
+  const connectors: ConnectorValues = {}
 
   for (const [key, item] of Object.entries(value)) {
-    if (key !== '' && typeof item === 'string' && item !== '') {
-      env[key] = item
+    if (
+      Object.keys(connectors).length < 100
+      && /^[A-Z][A-Z0-9_]*$/.test(key)
+      && typeof item === 'string'
+      && item !== ''
+      && item.length <= 16_384
+    ) {
+      connectors[key] = item
     }
   }
 
-  return env
+  return connectors
 }
 
-function localDevEnv(): HitPayEnv {
-  const env: HitPayEnv = {}
+function localDevConnectors(): ConnectorValues {
+  const connectors: ConnectorValues = {}
 
   for (const [key, value] of Object.entries(process.env)) {
     if (
       typeof value === 'string'
       && value !== ''
-      && key !== 'HITPAY_SESSION_SECRET'
-      && key !== 'APP_STUDIO_APP_ID'
-      && /^[A-Z][A-Z0-9]*_[A-Z0-9_]+$/.test(key)
-      && !/^(NODE|BUN|npm|VITE|NITRO)_/.test(key)
+      && /^(?:DATABASE_URL|TURSO_[A-Z0-9_]+|[A-Z][A-Z0-9]*_(?:DATABASE_URL|AUTH_TOKEN|ACCESS_TOKEN|API_KEY|WEBHOOK_URL|CONNECTION_URL|API_URL))$/.test(key)
     ) {
-      env[key] = value
+      connectors[key] = value
     }
   }
 
-  return env
+  return connectors
 }
 
 function sessionFromPayload(parsed: Record<string, unknown>): HitPaySession | null {
@@ -125,39 +150,40 @@ function sessionFromPayload(parsed: Record<string, unknown>): HitPaySession | nu
 }
 
 /**
- * Connector + Turso env. createServerFn only. Signed X-HitPay-Env from the Bun hop.
+ * Connector + Turso values. Sprite server/SSR only. Signed X-App-Studio-Connectors from the Bun hop.
+ * Never import this module from browser code or return connector values to the client.
  * Local `bun dev`: process.env.
  */
-export async function getHitPayEnv(): Promise<HitPayEnv> {
+export async function getConnectors(): Promise<ConnectorValues> {
   const request = getRequest()
-  const cached = envByRequest.get(request)
+  const cached = connectorsByRequest.get(request)
 
   if (cached) {
     return cached
   }
 
   const pending = (async () => {
-    const signed = (getRequestHeader('x-hitpay-env') ?? '').trim()
+    const signed = (getRequestHeader('x-app-studio-connectors') ?? '').trim()
 
     if (!signed) {
-      return localDevEnv()
+      return localDevConnectors()
     }
 
     return stringMap(readSignedHeader(signed).env)
   })()
 
-  envByRequest.set(request, pending)
+  connectorsByRequest.set(request, pending)
 
   try {
     return await pending
   } catch (error) {
-    envByRequest.delete(request)
+    connectorsByRequest.delete(request)
     throw error
   }
 }
 
-export async function getHitPayEnvValue(key: string): Promise<string> {
-  const value = (await getHitPayEnv())[key] ?? ''
+export async function getConnectorValue(key: string): Promise<string> {
+  const value = (await getConnectors())[key] ?? ''
 
   if (value === '') {
     throw new Error(
@@ -168,12 +194,12 @@ export async function getHitPayEnvValue(key: string): Promise<string> {
   return value
 }
 
-export async function getConnector(provider: string): Promise<HitPayEnv> {
+export async function getConnector(provider: string): Promise<ConnectorValues> {
   const prefix = `${provider.trim().toUpperCase().replace(/[^A-Z0-9]+/g, '_')}_`
-  const env = await getHitPayEnv()
-  const next: HitPayEnv = {}
+  const connectors = await getConnectors()
+  const next: ConnectorValues = {}
 
-  for (const [key, value] of Object.entries(env)) {
+  for (const [key, value] of Object.entries(connectors)) {
     if (key.startsWith(prefix)) {
       next[key] = value
     }
@@ -182,7 +208,7 @@ export async function getConnector(provider: string): Promise<HitPayEnv> {
   return next
 }
 
-/** Trusted identity. createServerFn only. Signed X-HitPay-Session from the Bun hop. */
+/** Trusted identity. createServerFn only. Signed X-App-Studio-Session from the Bun hop. */
 export async function getHitPaySession(): Promise<HitPaySession> {
   const request = getRequest()
   const cached = sessionByRequest.get(request)
@@ -192,7 +218,7 @@ export async function getHitPaySession(): Promise<HitPaySession> {
   }
 
   const pending = (async () => {
-    const signed = (getRequestHeader('x-hitpay-session') ?? '').trim()
+    const signed = (getRequestHeader('x-app-studio-session') ?? '').trim()
 
     if (!signed) {
       throw new Error('Sign in to HitPay to use this app.')

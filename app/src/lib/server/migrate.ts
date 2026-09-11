@@ -29,8 +29,11 @@ async function runMigrations(): Promise<void> {
     files = (await readdir(migrationsDir))
       .filter((file) => file.endsWith('.sql'))
       .sort()
-  } catch {
-    return
+  } catch (error) {
+    throw new Error(
+      `Could not read migrations directory at ${migrationsDir}.`,
+      { cause: error },
+    )
   }
 
   const applied = await appliedMigrations()
@@ -46,18 +49,25 @@ async function runMigrations(): Promise<void> {
       continue
     }
 
-    // libSQL allows one statement per execute(); migration files may contain several.
-    await db.executeMultiple(sql)
-
-    await db.execute({
-      sql: 'INSERT INTO _migrations (name) VALUES (?)',
-      args: [file],
-    })
+    // Keep the migration marker with the migration statements so a partially
+    // recorded migration cannot be retried as if it had never run.
+    const migrationName = file.replaceAll("'", "''")
+    await db.executeMultiple(
+      `BEGIN IMMEDIATE;\n${sql}\nINSERT INTO _migrations (name) VALUES ('${migrationName}');\nCOMMIT;`,
+    )
   }
 }
 
 /** Apply pending files in migrations/ once per process. Safe to call on every request. */
 export async function ensureMigrations(): Promise<void> {
-  migrationPromise ??= runMigrations()
-  await migrationPromise
+  const pending = (migrationPromise ??= runMigrations())
+
+  try {
+    await pending
+  } catch (error) {
+    if (migrationPromise === pending) {
+      migrationPromise = undefined
+    }
+    throw error
+  }
 }
