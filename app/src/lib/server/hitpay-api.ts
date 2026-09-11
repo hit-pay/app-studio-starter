@@ -1,7 +1,3 @@
-/**
- * createServerFn only. Merchant HitPay API via hopped env.
- * Do not fetch OpenAPI / llms from the running app.
- */
 import { getConnectorValue } from '#/lib/server/hitpay'
 
 export async function hitpayRequest(path: string, init: RequestInit = {}): Promise<Response> {
