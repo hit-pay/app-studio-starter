@@ -16,11 +16,12 @@ All OAuth lists the merchant **adds as catalog rows** go through ResourcePicker 
 - pick / show orders → ResourcePicker `order` / `get-order-details`
 - pick / show customers → ResourcePicker `customer` / `get-customer-details`
 - pick locations → `LocationSelect`
-- till / cash-up **totals** (do not render charge rows) → `list-charges` / `get-charge-details`
+- till / cash-up **totals** (do not render charge rows) → `list-charges` / `get-charge-details`. No wake / webhook.
 - pick / show invoices → ResourcePicker `invoice` / `get-invoice-details`
 - coupons / discounts / taxes → `CouponSelect` / `DiscountSelect` / `TaxSelect`
 - shipping / pickups → `ShippingSelect` / `PickupSelect`
 - add-ons → ResourcePicker `add-on` / `get-add-on`
+- scheduled wake snapshots → `listWakeEvents` / `listLatestWakeRows` (`#/lib/hitpay-wake`, Turso — not a HitPay HTTP list)
 
 # Endpoints
 

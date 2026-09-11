@@ -99,5 +99,5 @@ Cursor envelope: `{ data, links, meta }` with `meta.next_cursor`, `meta.prev_cur
 
 ## App rules
 
-- ResourcePicker `charge` for picking. Totals-only cash-up may call this list with date/location/method filters — do not render charge rows from a generated screen.
+- ResourcePicker `charge` for picking. Totals-only cash-up may call this list with date/location/method filters — do not render charge rows. Do not use scheduled wake or invent a charges webhook.
 - Never invent another charges list path.

@@ -50,6 +50,10 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | `src/lib/server/hitpay.ts` | Hopped session + server-side connector values |
 | `src/lib/server/hitpay-api.ts` | `hitpayRequest('/v1/…')` |
 | `src/lib/server/db.ts`, `migrate.ts` | Turso HTTP + migrations |
+| `src/lib/hitpay-wake.ts` | Read persisted wake snapshots |
+| `src/lib/server/hitpay-wake.ts` | Persist + query wake tables |
+| `src/lib/server/hitpay-wake-hook.ts` | `onScheduledWake` — extend only |
+| `src/routes/webhooks/hitpay/schedule.ts` | Prebuilt wake webhook |
 | `migrations/` | Ordered SQL |
 | `orchid-ui-guideline.md` | Which Orchid block to use |
 | `orchid-llms/` | Local Orchid docs — read these, never the public site |
@@ -59,7 +63,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
-Leave unchanged unless the request needs it: `vite.config.ts`, `start.mjs`, `src/router.tsx`, `src/lib/hitpay.ts`, `src/lib/server/hitpay.ts`, `src/lib/server/db.ts`, `src/lib/server/migrate.ts`, `src/lib/form-draft.ts`, `src/lib/studio-app-id.ts`, `components.json`, `.mcp.json`. You may add a missing Orchid provider in `__root.tsx`. Never hand-edit `.output/` or `.nitro/`.
+Leave unchanged unless the request needs it: `vite.config.ts`, `start.mjs`, `src/router.tsx`, `src/lib/hitpay.ts`, `src/lib/server/hitpay.ts`, `src/lib/server/db.ts`, `src/lib/server/migrate.ts`, `src/lib/form-draft.ts`, `src/lib/studio-app-id.ts`, `src/routes/webhooks/hitpay/schedule.ts`, `src/lib/server/hitpay-wake.ts`, `components.json`, `.mcp.json`. You may add a missing Orchid provider in `__root.tsx`. Never hand-edit `.output/` or `.nitro/`.
 
 ## Runtime
 
@@ -160,7 +164,19 @@ Slice: form → authorized `createServerFn` → Turso (synced HitPay cache + app
 
 ### Scheduled wakes
 
-HitPay may POST `POST /webhooks/hitpay/schedule` (`triggered_at`, `reason=scheduled_wake`, `key`, `frequency`, `timezone`, `config`, optional `source` + `data`). Verify `X-HitPay-Signature: sha256=<hmac>` of the raw body with `HITPAY_SESSION_SECRET`. Implement that route. Persist `data`, then process from Turso (reminders, Discord / Twilio / Resend). Do not list-sync or GET resources by id. HitPay Notification settings already email daily collection / new order — do not rebuild those.
+The **only** HitPay → app webhook is the prebuilt `POST /webhooks/hitpay/schedule`. Do not add, rename, or rewrite that route. Do not invent other webhooks (charges, orders, till, payouts, invoices, cron).
+
+Shipped `source` values only — never invent another:
+
+| `source` | When the merchant asked for | `data` |
+|---|---|---|
+| `none` | A clock tick only | none |
+| `low_stock` | Stock below alert | product + qty |
+| `top_products` | Best sellers + stock (e.g. stock reminder for most sold) | product + sold + qty |
+
+Do **not** use wake for cash-up / till / daily sales / collection — those are `list-charges` **totals** (no charge rows). Do not invent `sales_summary`, `open_orders`, charge webhooks, or in-app cron.
+
+Wire wake UI/send **only** if the user asked for a scheduled reminder **and** it maps to a row above. Otherwise leave the prebuilt route unused. Read `#/lib/hitpay-wake`. Persist is already `received` / `pending`. Destinations: `upsertWakeDestination`. After send: `updateWakeRowDelivery`. Do not rebuild HitPay Notification emails.
 
 **Uploads:** one `files` table + `FileStorage` (`upload` / `get` / `delete`). Business rows store `files.id` only. Max 10 MB. Authorize before get/delete. No Base64, no extra BLOB columns on business tables.
 

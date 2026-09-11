@@ -10,33 +10,43 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as WebhooksHitpayScheduleRouteImport } from './routes/webhooks/hitpay/schedule'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const WebhooksHitpayScheduleRoute = WebhooksHitpayScheduleRouteImport.update({
+  id: '/webhooks/hitpay/schedule',
+  path: '/webhooks/hitpay/schedule',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/webhooks/hitpay/schedule': typeof WebhooksHitpayScheduleRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/webhooks/hitpay/schedule': typeof WebhooksHitpayScheduleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/webhooks/hitpay/schedule': typeof WebhooksHitpayScheduleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/webhooks/hitpay/schedule'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/webhooks/hitpay/schedule'
+  id: '__root__' | '/' | '/webhooks/hitpay/schedule'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  WebhooksHitpayScheduleRoute: typeof WebhooksHitpayScheduleRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,22 +58,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/webhooks/hitpay/schedule': {
+      id: '/webhooks/hitpay/schedule'
+      path: '/webhooks/hitpay/schedule'
+      fullPath: '/webhooks/hitpay/schedule'
+      preLoaderRoute: typeof WebhooksHitpayScheduleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  WebhooksHitpayScheduleRoute: WebhooksHitpayScheduleRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
