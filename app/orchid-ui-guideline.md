@@ -12,7 +12,7 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - multi-field form, create form, edit form, schema fields, validation → `form-builder`
 - create/edit page shell, form modal shell, save and cancel → `form-layout`
 - browse page shell, detail page shell, page title, back button, page actions → `page-layout`
-- iframe app shell, app name, app-level tabs, app sidebar → `app-studio-layout`
+- iframe app shell, app name, app-level tabs, app sidebar → `app-layout`
 - choose one, option cards, plan, method → `choice-card`
 - stepper, quantity, plus minus, stock count → `quantity-input`
 - rich text, notes, wysiwyg, lexical → `text-editor`
@@ -30,7 +30,6 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - overflow menu, action menu, context actions → `dropdown-menu`
 - in-page tabs, tab panel → `tabs`
 - status badge, label, role badge → `badge`
-- html table markup → `table`
 - listitem primitives → `list`
 
 # Utils
@@ -127,12 +126,12 @@ Page or modal shell for create/edit. One FormBuilder: formId matches the builder
 Import `@/components/layout/form-layout` — `src/components/layout/form-layout.tsx`.
 Docs: `orchid-llms/form-layout.md`
 
-## `app-studio-layout` — App Studio Layout
+## `app-layout` — App Layout
 
 Need: iframe app shell, app name, app-level tabs, app sidebar
 HitPay App Studio embedded pane frame (not generic app chrome). Optional app name, tabs, and sidebar.
-Import `@/components/layout/app-studio-layout` — `src/components/layout/app-studio-layout.tsx`.
-Docs: `orchid-llms/app-studio-layout.md`
+Import `@/components/layout/app-layout` — `src/components/layout/app-layout.tsx`.
+Docs: `orchid-llms/app-layout.md`
 
 ## `page-layout` — Page Layout
 
@@ -207,13 +206,6 @@ Docs: `orchid-llms/badge.md`
 Compound avatar with image, fallback, badge, group, and Orchid business styling.
 Import `@ui/displaying-data/avatar` — `src/ui/displaying-data/avatar.tsx`.
 Docs: `orchid-llms/avatar.md`
-
-## `table` — Table
-
-Need: html table markup
-Low-level HTML table markup. App collections with search or pagination use Data Table.
-Import `@ui/displaying-data/table` — `src/ui/displaying-data/table.tsx`.
-Docs: `orchid-llms/table.md`
 
 ## `chart` — Chart
 
@@ -365,24 +357,6 @@ Root, Trigger, and Content primitives with Orchid styling.
 Import `@ui/layout/collapsible` — `src/ui/layout/collapsible.tsx`.
 Docs: `orchid-llms/collapsible.md`
 
-## `scroll-area` — Scroll Area
-
-Scroll area and scrollbar primitives with Orchid styling.
-Import `@ui/layout/scroll-area` — `src/ui/layout/scroll-area.tsx`.
-Docs: `orchid-llms/scroll-area.md`
-
-## `card` — Card
-
-Content card with header, title, description, action, content, and footer in Orchid styling.
-Import `@ui/layout/card` — `src/ui/layout/card.tsx`.
-Docs: `orchid-llms/card.md`
-
-## `resizable` — Resizable
-
-Split panes with a drag handle in Orchid styling.
-Import `@ui/layout/resizable` — `src/ui/layout/resizable.tsx`.
-Docs: `orchid-llms/resizable.md`
-
 ## `aspect-ratio` — Aspect Ratio
 
 Box that keeps a width/height ratio.
@@ -390,12 +364,6 @@ Import `@ui/layout/aspect-ratio` — `src/ui/layout/aspect-ratio.tsx`.
 Docs: `orchid-llms/aspect-ratio.md`
 
 ## Navigation
-
-## `breadcrumb` — Breadcrumb
-
-Breadcrumb with composable router links, page, separator, and ellipsis.
-Import `@ui/navigation/breadcrumb` — `src/ui/navigation/breadcrumb.tsx`.
-Docs: `orchid-llms/breadcrumb.md`
 
 ## `pagination` — Pagination
 

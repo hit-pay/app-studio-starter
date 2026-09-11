@@ -1,13 +1,6 @@
 import { Bar, BarChart, CartesianGrid, Line, LineChart, XAxis } from 'recharts'
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@ui/layout/card'
-import {
   type ChartConfig,
   ChartContainer,
   ChartLegend,
@@ -44,12 +37,10 @@ function ChartDemo() {
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Bar
         </p>
-        <Card>
-          <CardHeader>
-            <CardTitle>Weekly sales</CardTitle>
-            <CardDescription>Last 7 days · SGD</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div className="rounded-xl border border-solid border-oc-border bg-oc-background p-5">
+          <p className="text-sm font-medium text-oc-foreground">Weekly sales</p>
+          <p className="mt-1 text-sm text-oc-muted-foreground">Last 7 days · SGD</p>
+          <div className="mt-4">
             <ChartContainer config={chartConfig} className="min-h-48 w-full">
               <BarChart accessibilityLayer data={weekly}>
                 <CartesianGrid vertical={false} />
@@ -60,20 +51,18 @@ function ChartDemo() {
                 <Bar dataKey="refunds" fill="var(--color-refunds)" radius={4} />
               </BarChart>
             </ChartContainer>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
       <div className="space-y-3">
         <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
           Line
         </p>
-        <Card>
-          <CardHeader>
-            <CardTitle>Sales trend</CardTitle>
-            <CardDescription>Same week, line series.</CardDescription>
-          </CardHeader>
-          <CardContent>
+        <div className="rounded-xl border border-solid border-oc-border bg-oc-background p-5">
+          <p className="text-sm font-medium text-oc-foreground">Sales trend</p>
+          <p className="mt-1 text-sm text-oc-muted-foreground">Same week, line series.</p>
+          <div className="mt-4">
             <ChartContainer config={chartConfig} className="min-h-48 w-full">
               <LineChart accessibilityLayer data={weekly}>
                 <CartesianGrid vertical={false} />
@@ -95,8 +84,8 @@ function ChartDemo() {
                 />
               </LineChart>
             </ChartContainer>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
     </div>
   )

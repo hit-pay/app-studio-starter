@@ -20,7 +20,7 @@ const NEED = {
     'multi-field form, create form, edit form, schema fields, validation',
   'form-layout': 'create/edit page shell, form modal shell, save and cancel',
   'page-layout': 'browse page shell, detail page shell, page title, back button, page actions',
-  'app-studio-layout': 'iframe app shell, app name, app-level tabs, app sidebar',
+  'app-layout': 'iframe app shell, app name, app-level tabs, app sidebar',
   'choice-card': 'choose one, option cards, plan, method',
   'quantity-input': 'stepper, quantity, plus minus, stock count',
   'text-editor': 'rich text, notes, wysiwyg, lexical',
@@ -38,7 +38,6 @@ const NEED = {
   'dropdown-menu': 'overflow menu, action menu, context actions',
   tabs: 'in-page tabs, tab panel',
   badge: 'status badge, label, role badge',
-  table: 'html table markup',
   list: 'listitem primitives',
 }
 
@@ -90,7 +89,6 @@ const BASE_SUBGROUP = {
   chart: 'Displaying Data',
   empty: 'Displaying Data',
   list: 'Displaying Data',
-  table: 'Displaying Data',
   alert: 'Feedback',
   progress: 'Feedback',
   skeleton: 'Feedback',
@@ -111,12 +109,8 @@ const BASE_SUBGROUP = {
   textarea: 'Form',
   accordion: 'Layout',
   'aspect-ratio': 'Layout',
-  card: 'Layout',
   collapsible: 'Layout',
-  resizable: 'Layout',
-  'scroll-area': 'Layout',
   tabs: 'Layout',
-  breadcrumb: 'Navigation',
   pagination: 'Navigation',
   dialog: 'Overlays',
   drawer: 'Overlays',
@@ -138,7 +132,7 @@ const BLOCK_SUBGROUP = {
   'form-builder': 'Form',
   'quantity-input': 'Form',
   'text-editor': 'Form',
-  'app-studio-layout': 'Layout',
+  'app-layout': 'Layout',
   'form-layout': 'Layout',
   'page-layout': 'Layout',
   command: 'Overlays',
@@ -163,7 +157,7 @@ const grouped = new Map([
 ])
 
 for (const item of registry.items) {
-  if (['all', 'sidebar', 'sub-sidebar'].includes(item.name)) continue
+  if (['all', 'sidebar'].includes(item.name)) continue
   grouped.get(sectionFor(item)).push(item)
 }
 

@@ -20,12 +20,22 @@ export type HitPayUser = {
   role: HitPayRole | null
 }
 
-export type HitPayMember = {
+export type HitPayStaffLocation = {
   id: string
-  email: string
+  name: string | null
+}
+
+export type HitPayStaffAppMember = {
+  id: string
+  email: string | null
   name: string | null
   role_id: string | null
+  role: HitPayRole | null
+  locations: HitPayStaffLocation[]
 }
+
+/** @deprecated Use HitPayStaffAppMember */
+export type HitPayMember = HitPayStaffAppMember
 
 function assertBrowser(): void {
   if (typeof window === 'undefined') {
@@ -35,11 +45,11 @@ function assertBrowser(): void {
   }
 }
 
-function appStudioApi(path: '/user/info' | '/roles' | '/members'): string {
+function appStudioApi(path: '/user/info' | '/roles' | '/staff-app-members'): string {
   return `/api/apps/${encodeURIComponent(studioAppId())}${path}`
 }
 
-async function hitpayGet<T>(path: '/user/info' | '/roles' | '/members'): Promise<T> {
+async function hitpayGet<T>(path: '/user/info' | '/roles' | '/staff-app-members'): Promise<T> {
   assertBrowser()
 
   const response = await fetch(appStudioApi(path), {
@@ -66,7 +76,11 @@ export const fetchUserInfo = () => hitpayGet<HitPayUser>('/user/info')
 
 export const fetchAppRoles = () => hitpayGet<{ roles: HitPayRole[] }>('/roles')
 
-export const fetchAppMembers = () => hitpayGet<{ members: HitPayMember[] }>('/members')
+export const fetchStaffAppMembers = () =>
+  hitpayGet<{ members: HitPayStaffAppMember[] }>('/staff-app-members')
+
+/** @deprecated Use fetchStaffAppMembers */
+export const fetchAppMembers = fetchStaffAppMembers
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useHitPayUser(): {

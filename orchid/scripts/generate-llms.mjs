@@ -337,7 +337,7 @@ const lines = [
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
   "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Always start with Components & Blocks under `src/components/{category}` (`@/components/{category}/…`) via props or a schema. Use Base items under `src/ui/{category}` (`@ui/{category}/…`) only when no block covers the job. Do not assemble a block from many base components.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
-  "- AppStudioLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.",
+  "- AppLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.",
   "",
 ];
 

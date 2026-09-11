@@ -106,20 +106,10 @@ export const DOC_COMPONENTS = [
       "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
   },
   {
-    to: "/base-ui/breadcrumb" as const,
-    name: "Breadcrumb",
-    description: "Hierarchy of links to the current page.",
-  },
-  {
     to: "/base-ui/pagination" as const,
     name: "Pagination",
     description:
       "Page links with previous, next, ellipsis, and an optional range label.",
-  },
-  {
-    to: "/base-ui/table" as const,
-    name: "Table",
-    description: "Semantic HTML table with Orchid styling.",
   },
   {
     to: "/base-ui/kbd" as const,
@@ -131,24 +121,6 @@ export const DOC_COMPONENTS = [
     name: "Collapsible",
     description:
       "Expand-and-collapse primitives with Orchid styling.",
-  },
-  {
-    to: "/base-ui/scroll-area" as const,
-    name: "Scroll Area",
-    description:
-      "Bounded scroll area with Orchid scrollbar styling.",
-  },
-  {
-    to: "/base-ui/card" as const,
-    name: "Card",
-    description:
-      "Content card with header, title, description, action, and footer.",
-  },
-  {
-    to: "/base-ui/resizable" as const,
-    name: "Resizable",
-    description:
-      "Split panes with a drag handle in Orchid styling.",
   },
   {
     to: "/base-ui/aspect-ratio" as const,
@@ -260,13 +232,7 @@ export const DOC_BLOCKS = [
     to: "/components/sidebar" as const,
     name: "Sidebar",
     description:
-      "JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.",
-  },
-  {
-    to: "/components/sub-sidebar" as const,
-    name: "Sub Sidebar",
-    description:
-      "JSON-configured flat child navigation with a blue active state.",
+      "JSON-configured navigation that opens nested items in a back-enabled panel.",
   },
   {
     to: "/components/choice-card" as const,
@@ -313,8 +279,8 @@ export const DOC_BLOCKS = [
       "Dashboard KPI tile. Use for summaries, not a record's fields.",
   },
   {
-    to: "/components/app-studio-layout" as const,
-    name: "App Studio Layout",
+    to: "/components/app-layout" as const,
+    name: "App Layout",
     description:
       "HitPay App Studio embedded pane frame. Not generic app chrome.",
   },
@@ -408,7 +374,6 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/chart",
     "/base-ui/empty",
     "/base-ui/list",
-    "/base-ui/table",
   ]),
   baseGroup("Feedback", [
     "/base-ui/alert",
@@ -436,13 +401,10 @@ export const DOC_BASE_GROUPS = [
   baseGroup("Layout", [
     "/base-ui/accordion",
     "/base-ui/aspect-ratio",
-    "/base-ui/card",
     "/base-ui/collapsible",
-    "/base-ui/resizable",
-    "/base-ui/scroll-area",
     "/base-ui/tabs",
   ]),
-  baseGroup("Navigation", ["/base-ui/breadcrumb", "/base-ui/pagination"]),
+  baseGroup("Navigation", ["/base-ui/pagination"]),
   baseGroup("Overlays", [
     "/base-ui/dialog",
     "/base-ui/dropdown-menu",
@@ -483,8 +445,8 @@ export const DOC_BLOCK_GROUPS = [
     "/components/quantity-input",
     "/components/text-editor",
   ]),
-  blockGroup("Layout", ["/components/app-studio-layout", "/components/form-layout", "/components/page-layout"]),
-  blockGroup("Navigation", ["/components/sidebar", "/components/sub-sidebar"]),
+  blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
+  blockGroup("Navigation", ["/components/sidebar"]),
   blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);
 

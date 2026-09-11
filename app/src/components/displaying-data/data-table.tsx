@@ -1290,7 +1290,7 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
   );
 }
 
-/** Complete list surface: toolbar, grid, empty, pagination. Render directly in PageLayout. Do not wrap in Card. */
+/** Complete list surface: toolbar, grid, empty, pagination. Render directly in PageLayout. Do not wrap it. */
 function SchemaTable({
   table,
   cells,

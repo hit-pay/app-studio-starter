@@ -1,20 +1,20 @@
-import { AppStudioLayoutDemo } from "../../../src/components/doc/doc-demos"
+import { AppLayoutDemo } from "../../../src/components/doc/doc-demos"
 
-`AppStudioLayout` is the HitPay App Studio embedded pane frame. Use it around
+`AppLayout` is the HitPay App Studio embedded pane frame. Use it around
 every route inside the dashboard iframe — not as generic website chrome.
 Put `PageLayout` or `FormLayout` inside for page chrome.
 
-<AppStudioLayoutDemo />
+<AppLayoutDemo />
 
 ## Default
 
 ```tsx
-import { AppStudioLayout } from "@/components/layout/app-studio-layout";
+import { AppLayout } from "@/components/layout/app-layout";
 import { PageLayout } from "@/components/layout/page-layout";
 
-<AppStudioLayout appName="Invoices" className="h-full">
+<AppLayout appName="Invoices" className="h-full">
   <PageLayout title="Invoices">…</PageLayout>
-</AppStudioLayout>
+</AppLayout>
 ```
 
 ## Tabs

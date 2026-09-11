@@ -2,7 +2,7 @@
 
 # Sidebar
 
-JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.
+JSON-configured navigation that opens nested items in a back-enabled panel.
 
 ## Example
 

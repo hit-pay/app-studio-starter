@@ -14,15 +14,13 @@
         "@orchid/alert",
         "@orchid/list",
         "@orchid/empty",
-        "@orchid/card",
-        "@orchid/resizable",
         "@orchid/aspect-ratio",
         "@orchid/chart",
         "@orchid/file-upload",
         "@orchid/customer-card",
         "@orchid/form-layout",
         "@orchid/page-layout",
-        "@orchid/app-studio-layout",
+        "@orchid/app-layout",
         "@orchid/confirmation-modal",
         "@orchid/button",
         "@orchid/button-group",
@@ -43,13 +41,10 @@
         "@orchid/spinner",
         "@orchid/dialog",
         "@orchid/drawer",
-        "@orchid/breadcrumb",
         "@orchid/pagination",
-        "@orchid/table",
         "@orchid/command",
         "@orchid/kbd",
         "@orchid/collapsible",
-        "@orchid/scroll-area",
         "@orchid/popover",
         "@orchid/separator",
         "@orchid/field",
@@ -181,21 +176,6 @@
       ]
     },
     {
-      "name": "sub-sidebar",
-      "type": "registry:ui",
-      "title": "Sub Sidebar",
-      "description": "Flat child navigation with a blue active state. AppStudioLayout sidebar mode uses its own built-in list.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/navigation/sub-sidebar.tsx",
-          "type": "registry:ui",
-          "target": "@components/navigation/sub-sidebar.tsx"
-        }
-      ]
-    },
-    {
       "name": "alert",
       "type": "registry:ui",
       "title": "Alert",
@@ -292,9 +272,9 @@
       ]
     },
     {
-      "name": "app-studio-layout",
+      "name": "app-layout",
       "type": "registry:ui",
-      "title": "App Studio Layout",
+      "title": "App Layout",
       "description": "HitPay App Studio embedded pane frame (not generic app chrome). Optional app name, tabs, and sidebar.",
       "dependencies": [
         "@mingcute/react"
@@ -305,9 +285,9 @@
       ],
       "files": [
         {
-          "path": "src/components/layout/app-studio-layout.tsx",
+          "path": "src/components/layout/app-layout.tsx",
           "type": "registry:ui",
-          "target": "@components/layout/app-studio-layout.tsx"
+          "target": "@components/layout/app-layout.tsx"
         }
       ]
     },
@@ -698,24 +678,6 @@
       ]
     },
     {
-      "name": "breadcrumb",
-      "type": "registry:ui",
-      "title": "Breadcrumb",
-      "description": "Breadcrumb with composable router links, page, separator, and ellipsis.",
-      "dependencies": [
-        "@base-ui/react",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/navigation/breadcrumb.tsx",
-          "type": "registry:ui",
-          "target": "@ui/navigation/breadcrumb.tsx"
-        }
-      ]
-    },
-    {
       "name": "pagination",
       "type": "registry:ui",
       "title": "Pagination",
@@ -731,21 +693,6 @@
           "path": "src/ui/navigation/pagination.tsx",
           "type": "registry:ui",
           "target": "@ui/navigation/pagination.tsx"
-        }
-      ]
-    },
-    {
-      "name": "table",
-      "type": "registry:ui",
-      "title": "Table",
-      "description": "Low-level HTML table markup. App collections with search or pagination use Data Table.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/displaying-data/table.tsx",
-          "type": "registry:ui",
-          "target": "@ui/displaying-data/table.tsx"
         }
       ]
     },
@@ -799,23 +746,6 @@
           "path": "src/ui/layout/collapsible.tsx",
           "type": "registry:ui",
           "target": "@ui/layout/collapsible.tsx"
-        }
-      ]
-    },
-    {
-      "name": "scroll-area",
-      "type": "registry:ui",
-      "title": "Scroll Area",
-      "description": "Scroll area and scrollbar primitives with Orchid styling.",
-      "dependencies": [
-        "@base-ui/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/layout/scroll-area.tsx",
-          "type": "registry:ui",
-          "target": "@ui/layout/scroll-area.tsx"
         }
       ]
     },
@@ -1137,39 +1067,6 @@
       ]
     },
     {
-      "name": "card",
-      "type": "registry:ui",
-      "title": "Card",
-      "description": "Content card with header, title, description, action, content, and footer in Orchid styling.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/layout/card.tsx",
-          "type": "registry:ui",
-          "target": "@ui/layout/card.tsx"
-        }
-      ]
-    },
-    {
-      "name": "resizable",
-      "type": "registry:ui",
-      "title": "Resizable",
-      "description": "Split panes with a drag handle in Orchid styling.",
-      "dependencies": [
-        "react-resizable-panels",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/layout/resizable.tsx",
-          "type": "registry:ui",
-          "target": "@ui/layout/resizable.tsx"
-        }
-      ]
-    },
-    {
       "name": "aspect-ratio",
       "type": "registry:ui",
       "title": "Aspect Ratio",
@@ -1192,9 +1089,7 @@
       "dependencies": [
         "recharts"
       ],
-      "registryDependencies": [
-        "@orchid/card"
-      ],
+      "registryDependencies": [],
       "files": [
         {
           "path": "src/ui/displaying-data/chart.tsx",

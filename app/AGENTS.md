@@ -41,7 +41,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | `src/routes/__root.tsx` | `QueryProvider`, `ConfirmationModalProvider`, `Toaster` |
 | `src/components/` | Orchid blocks — **use these first** (`@/components/…`) |
 | `src/ui/` | Orchid primitives — last resort (`@ui/…`) |
-| `src/lib/hitpay.ts` | Browser user / roles / members |
+| `src/lib/hitpay.ts` | Browser user / roles / staff-app-members |
 | `src/lib/hitpay-roles.ts` | HitPay role titles (only place they are listed) |
 | `src/lib/server/` | Server helpers used only from `createServerFn` |
 | `src/lib/server/hitpay.ts` | Hopped session + server-side connector values |
@@ -90,25 +90,25 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 
 | Job | Use this block | Do not use |
 |---|---|---|
-| Browse rows, search, filter, sort | `@/components/displaying-data/data-table` | `@ui/displaying-data/table`, custom filters |
-| Compact list, cards, activity, people | `@/components/displaying-data/data-list` | `@ui/displaying-data/list`, stacked `Card`s |
-| One record / show page fields | `@/components/displaying-data/detail-card` | hand-rolled `dl` / `Card` rows |
+| Browse rows, search, filter, sort | `@/components/displaying-data/data-table` | hand-rolled HTML table, custom filters |
+| Compact list, cards, activity, people | `@/components/displaying-data/data-list` | `@ui/displaying-data/list`, stacked boxes |
+| One record / show page fields | `@/components/displaying-data/detail-card` | hand-rolled `dl` rows |
 | KPI / dashboard number | `@/components/displaying-data/metric-card` | custom stat tiles |
 | Customer / contact / payee | `@/components/displaying-data/customer-card` | `Avatar` + `Badge` collage |
 | Create/edit fields | `@/components/form/form-builder` | `@ui/form/field` + `Input`/`Select` per field |
 | Date / range / datetime | `@/components/form/date-picker` | `@ui/form/calendar` + `Popover` |
 | Quantity stepper | `@/components/form/quantity-input` | custom plus/minus `Button`s |
-| Option cards / choose one | `@/components/form/choice-card` | radio + styled `Card`s |
+| Option cards / choose one | `@/components/form/choice-card` | radio + styled boxes |
 | Rich notes | `@/components/form/text-editor` | raw `Textarea` for rich text |
 | Confirm delete / destructive | `@/components/overlays/confirmation-modal` | custom `Dialog` |
 | Command palette | `@/components/overlays/command` | custom `Dialog` + input |
 
-Layout imports: `@/components/layout/app-studio-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
+Layout imports: `@/components/layout/app-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
 
 - Icons: `@mingcute/react/core-regular`. No `lucide-react`.
 - Confirms: `useConfirmationModal()`. Toasts: existing `<Toaster placement="top-center">`. No extra providers.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`.
-- Tokens: `oc-*` from `src/styles.css`. Nested nav: `SubSidebar` only.
+- Tokens: `oc-*` from `src/styles.css`. Nested app nav: `AppLayout` sidebar only. Do not add `SubSidebar`.
 
 ## Data
 
@@ -150,7 +150,7 @@ CREATE INDEX idx_files_entity ON files(entity_type, entity_id);
 Auth is the host dashboard. Owner/Admin app creation, configuration, publishing, and Connector / Integration management happen in App Studio outside the generated app. The generated app only implements the embedded business workflow. Never build login, signup, password fields, or a hardcoded staff list.
 
 - Role titles live in `#/lib/hitpay-roles`: `HITPAY_ALL_ROLES` (floor work) and `HITPAY_MANAGER_ROLES` (approvals, settings, refunds). Import those arrays; keep titles out of routes.
-- **Browser — `#/lib/hitpay`:** `useHitPayUser()` on app screens. Hide or disable actions with `user.role.title`. Use `fetchAppMembers()` / `fetchAppRoles()` for staff pickers, assignee dropdowns, and reviewer lists — never invent members in SQL or React state.
+- **Browser — `#/lib/hitpay`:** `useHitPayUser()` on app screens. Hide or disable actions with `user.role.title`. Use `fetchStaffAppMembers()` (`GET /api/apps/{appId}/staff-app-members`) / `fetchAppRoles()` for staff pickers, assignee dropdowns, and reviewer lists — never invent staff in SQL or React state. Each staff row has `id`, `name`, `email`, `role` (`id` + `title`), and `locations` (`id` + `name`). Never call `/members`.
 - **Server — `#/lib/server/hitpay`:** Every `createServerFn` that reads or writes business data must call `requireHitPayRoles(HITPAY_ALL_ROLES)` or `requireHitPayRoles(HITPAY_MANAGER_ROLES)` before touching Turso or external APIs. Use `getHitPaySession()` for the trusted actor. Persist `session.id` (and name/email when useful) on audit columns such as `created_by`, `counted_by`, `approved_by`. Never trust `data.userId`, `data.staffName`, or similar client fields for identity.
 - Manager-only actions (approve, delete others' records, change settings) must use `HITPAY_MANAGER_ROLES`.
 
@@ -204,13 +204,13 @@ const products = createServerFn({ method: 'GET' }).handler(async () => {
 One layout tree per route — outer → inner:
 
 ```
-AppStudioLayout          ← once per app pane; tabs/sidebar via catalog props
+AppLayout          ← once per app pane; tabs/sidebar via catalog props
   └─ PageLayout          ← browse lists, detail/show pages
   └─ FormLayout          ← create/edit (mode="page" | "modal")
        └─ FormBuilder     ← fields only; no extra Card wrapper
 ```
 
-Imports: `@/components/layout/app-studio-layout`, `page-layout`, `form-layout`. Do not rebuild host chrome (sidebar, account menu, login).
+Imports: `@/components/layout/app-layout`, `page-layout`, `form-layout`. Do not rebuild host chrome (sidebar, account menu, login).
 
 Prefer one focused screen; add routes or tabs only when they clarify the job. Confirm destructive actions only when the workflow needs them.
 

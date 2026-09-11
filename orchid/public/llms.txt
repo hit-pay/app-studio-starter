@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 59 components.
-- Installable registry items: 61, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 53 components.
+- Installable registry items: 55, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -126,9 +126,9 @@ Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
 
 ### Layout
 
-#### [App Studio Layout](https://orchid-ui-hitpay.vercel.app/llms/app-studio-layout.md)
+#### [App Layout](https://orchid-ui-hitpay.vercel.app/llms/app-layout.md)
 HitPay App Studio embedded pane frame. Not generic app chrome.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/app-studio-layout.json)
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/app-layout.json)
 
 #### [Form Layout](https://orchid-ui-hitpay.vercel.app/llms/form-layout.md)
 Create and edit form shell with page and modal modes.
@@ -141,12 +141,8 @@ Standard route page with header, optional onBack, and scrollable content.
 ### Navigation
 
 #### [Sidebar](https://orchid-ui-hitpay.vercel.app/llms/sidebar.md)
-JSON-configured navigation that opens nested items in a back-enabled Sub Sidebar.
+JSON-configured navigation that opens nested items in a back-enabled panel.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sidebar.json)
-
-#### [Sub Sidebar](https://orchid-ui-hitpay.vercel.app/llms/sub-sidebar.md)
-JSON-configured flat child navigation with a blue active state.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/sub-sidebar.json)
 
 ### Overlays
 
@@ -195,10 +191,6 @@ Compound empty state with Orchid media variants.
 #### [List](https://orchid-ui-hitpay.vercel.app/llms/list.md)
 Row primitives: ListItem, ListItemTitle, ListItemMedia, meta, copy fields, tokens, and actions.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/list.json)
-
-#### [Table](https://orchid-ui-hitpay.vercel.app/llms/table.md)
-Semantic HTML table with Orchid styling.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/table.json)
 
 ### Feedback
 
@@ -290,31 +282,15 @@ Composable expand-and-collapse sections with primitives.
 Box that keeps a width/height ratio, such as 16/9.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/aspect-ratio.json)
 
-#### [Card](https://orchid-ui-hitpay.vercel.app/llms/card.md)
-Content card with header, title, description, action, and footer.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/card.json)
-
 #### [Collapsible](https://orchid-ui-hitpay.vercel.app/llms/collapsible.md)
 Expand-and-collapse primitives with Orchid styling.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/collapsible.json)
-
-#### [Resizable](https://orchid-ui-hitpay.vercel.app/llms/resizable.md)
-Split panes with a drag handle in Orchid styling.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resizable.json)
-
-#### [Scroll Area](https://orchid-ui-hitpay.vercel.app/llms/scroll-area.md)
-Bounded scroll area with Orchid scrollbar styling.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/scroll-area.json)
 
 #### [Tabs](https://orchid-ui-hitpay.vercel.app/llms/tabs.md)
 Horizontal or vertical tabs with default and line variants.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tabs.json)
 
 ### Navigation
-
-#### [Breadcrumb](https://orchid-ui-hitpay.vercel.app/llms/breadcrumb.md)
-Hierarchy of links to the current page.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/breadcrumb.json)
 
 #### [Pagination](https://orchid-ui-hitpay.vercel.app/llms/pagination.md)
 Page links with previous, next, ellipsis, and an optional range label.
@@ -346,7 +322,7 @@ Keyboard key and grouped shortcut display.
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, sub-sidebar, alert, list, empty, customer-card, form-layout, app-studio-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, breadcrumb, pagination, table, command, kbd, collapsible, scroll-area, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, card, resizable, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, sidebar, alert, list, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 
@@ -356,4 +332,4 @@ form-builder, data-table, sidebar, sub-sidebar, alert, list, empty, customer-car
 - Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.
 - Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Always start with Components & Blocks under `src/components/{category}` (`@/components/{category}/…`) via props or a schema. Use Base items under `src/ui/{category}` (`@ui/{category}/…`) only when no block covers the job. Do not assemble a block from many base components.
 - Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.
-- AppStudioLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.
+- AppLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.

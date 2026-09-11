@@ -3,7 +3,7 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useHitPayUser } from '#/lib/hitpay'
 import { Spinner } from '@ui/feedback/spinner'
 import { Button } from '@ui/actions/button'
-import { AppStudioLayout } from '@/components/layout/app-studio-layout'
+import { AppLayout } from '@/components/layout/app-layout'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -27,7 +27,7 @@ function Home() {
   }, [])
 
   return (
-    <AppStudioLayout appName="Your app" className="h-full min-h-0">
+    <AppLayout appName="Your app" className="h-full min-h-0">
       <div className="flex min-h-[calc(100dvh-3rem)] w-full items-center justify-center px-6">
         <div className="flex w-full max-w-md flex-col items-center text-center">
           {loading ? (
@@ -65,6 +65,6 @@ function Home() {
           </p>
         </div>
       </div>
-    </AppStudioLayout>
+    </AppLayout>
   )
 }

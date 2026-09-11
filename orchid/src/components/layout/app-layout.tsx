@@ -1,3 +1,5 @@
+'use client'
+
 import { useState, type ComponentProps, type ReactNode } from 'react'
 import { MenuRegular } from '@mingcute/react/core-regular'
 
@@ -5,13 +7,13 @@ import { cn } from '@/lib/utils'
 import { Button } from '@ui/actions/button'
 import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@ui/overlays/drawer'
 
-type AppStudioNavigationItem = {
+type AppLayoutNavigationItem = {
   id: string
   label: ReactNode
   disabled?: boolean
 }
 
-function AppStudioLayout({
+function AppLayout({
   className,
   variant = 'default',
   appName,
@@ -28,12 +30,12 @@ function AppStudioLayout({
   variant?: 'default' | 'tabs' | 'sidebar'
   appName?: ReactNode
   header?: ReactNode
-  navigationItems?: AppStudioNavigationItem[]
+  navigationItems?: AppLayoutNavigationItem[]
   activeNavigation?: string
-  onNavigationChange?: (id: string, item: AppStudioNavigationItem) => void
-  sidebarItems?: AppStudioNavigationItem[]
+  onNavigationChange?: (id: string, item: AppLayoutNavigationItem) => void
+  sidebarItems?: AppLayoutNavigationItem[]
   activeSidebar?: string
-  onSidebarChange?: (id: string, item: AppStudioNavigationItem) => void
+  onSidebarChange?: (id: string, item: AppLayoutNavigationItem) => void
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const hasSidebar = variant === 'sidebar' && Boolean(sidebarItems?.length)
@@ -58,14 +60,14 @@ function AppStudioLayout({
   ) : null
 
   const page = (
-    <div data-slot="app-studio-layout-content" className="flex min-w-0 flex-1 flex-col">
+    <div data-slot="app-layout-content" className="flex min-w-0 flex-1 flex-col">
       {header ? (
-        <div data-slot="app-studio-layout-header" className="min-w-0 shrink-0">
+        <div data-slot="app-layout-header" className="min-w-0 shrink-0">
           {header}
         </div>
       ) : null}
       {navigationItems?.length ? (
-        <div data-slot="app-studio-layout-tabs" className="min-w-0 shrink-0">
+        <div data-slot="app-layout-tabs" className="min-w-0 shrink-0">
           <AppNav>
             {navigationItems.map((item) => (
               <AppNavItem
@@ -80,7 +82,7 @@ function AppStudioLayout({
           </AppNav>
         </div>
       ) : null}
-      <main data-slot="app-studio-layout-main" className="min-h-0 min-w-0 flex-1">
+      <main data-slot="app-layout-main" className="min-h-0 min-w-0 flex-1">
         {children}
       </main>
     </div>
@@ -88,7 +90,7 @@ function AppStudioLayout({
 
   return (
     <div
-      data-slot="app-studio-layout"
+      data-slot="app-layout"
       data-variant={variant}
       className={cn(
         'flex min-h-full w-full min-w-0 flex-col bg-oc-background text-oc-foreground',
@@ -98,7 +100,7 @@ function AppStudioLayout({
     >
       {showTopBar ? (
         <div
-          data-slot="app-studio-layout-app-name"
+          data-slot="app-layout-app-name"
           className="flex h-12 shrink-0 items-center gap-2 border-b border-solid border-oc-border px-4 text-sm font-medium text-oc-foreground sm:px-6"
         >
           {hasSidebar ? (
@@ -117,7 +119,7 @@ function AppStudioLayout({
         </div>
       ) : null}
       {variant === 'sidebar' ? (
-        <div data-slot="app-studio-layout-body" className="flex min-h-0 min-w-0 flex-1">
+        <div data-slot="app-layout-body" className="flex min-h-0 min-w-0 flex-1">
           {hasSidebar ? (
             <>
               <AppSidebar className="hidden md:flex">{sidebarNav}</AppSidebar>
@@ -226,5 +228,5 @@ function AppSidebarItem({
   )
 }
 
-export { AppStudioLayout }
-export type { AppStudioNavigationItem }
+export { AppLayout }
+export type { AppLayoutNavigationItem }
