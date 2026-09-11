@@ -22,7 +22,9 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - pick role, notify role, role dropdown → `role-select`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
 - copy to clipboard, copy id, copy phone, copy url → `copy-button`
-- pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker → `resource-picker`
+- pick product, pick customer, pick order, resource picker, catalog picker → `resource-picker`
+- pick category, product category dropdown → `product-category-select`
+- pick location, location dropdown → `location-select`
 - command palette, search commands, cmdk → `command`
 - toast, snackbar, notify, success message → `toast`
 - banner, alert, inline notice → `banner`
@@ -104,15 +106,15 @@ Docs: `orchid-llms/detail-card.md`
 ## `form-builder` — Form Builder
 
 Need: multi-field form, create form, edit form, schema fields, validation
-JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
+JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, coupon, discount, tax, shipping, pickup, product-category, location, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
 Import `@/components/form/form-builder` — `src/components/form/form-builder.tsx`.
 Docs: `orchid-llms/form-builder.md`
 Related: `src/components/form/form-builder-model.ts`.
 
 ## `resource-picker` — Resource Picker
 
-Need: pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker
-Promise picker for HitPay list records (products, categories, customers, orders, locations). const pick = useResourcePicker(); await pick({ type }).
+Need: pick product, pick customer, pick order, resource picker, catalog picker
+Promise picker for HitPay list records (products, customers, orders, charges, invoices, add-ons). const pick = useResourcePicker(); await pick({ type }).
 Import `@/components/form/resource-picker` — `src/components/form/resource-picker.tsx`.
 Docs: `orchid-llms/resource-picker.md`
 
@@ -144,6 +146,55 @@ Need: pick role, notify role, role dropdown
 Business role dropdown. Loads /roles. Do not fetch on the screen.
 Import `@/components/form/role-select` — `src/components/form/role-select.tsx`.
 Docs: `orchid-llms/role-select.md`
+
+## `coupon-select` — Coupon Select
+
+Need: pick coupon, coupon dropdown
+Loads GET /v1/coupons. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/coupon-select` — `src/components/form/coupon-select.tsx`.
+Docs: `orchid-llms/coupon-select.md`
+
+## `discount-select` — Discount Select
+
+Need: pick discount, discount dropdown
+Loads GET /v1/discounts. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/discount-select` — `src/components/form/discount-select.tsx`.
+Docs: `orchid-llms/discount-select.md`
+
+## `tax-select` — Tax Select
+
+Need: pick tax, tax dropdown
+Loads GET /v1/taxes. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/tax-select` — `src/components/form/tax-select.tsx`.
+Docs: `orchid-llms/tax-select.md`
+
+## `shipping-select` — Shipping Select
+
+Need: pick shipping method
+Loads GET /v1/shipping. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/shipping-select` — `src/components/form/shipping-select.tsx`.
+Docs: `orchid-llms/shipping-select.md`
+
+## `pickup-select` — Pickup Select
+
+Need: pick pickup
+Loads GET /v1/pickups. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/pickup-select` — `src/components/form/pickup-select.tsx`.
+Docs: `orchid-llms/pickup-select.md`
+
+## `product-category-select` — Product Category Select
+
+Need: pick category, product category dropdown
+Loads GET /v1/product-category. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/product-category-select` — `src/components/form/product-category-select.tsx`.
+Docs: `orchid-llms/product-category-select.md`
+
+## `location-select` — Location Select
+
+Need: pick location, location dropdown
+Loads GET /v1/locations. Do not fetch on the screen. Do not use ResourcePicker.
+Import `@/components/form/location-select` — `src/components/form/location-select.tsx`.
+Docs: `orchid-llms/location-select.md`
 
 ## `quantity-input` — Quantity Input
 

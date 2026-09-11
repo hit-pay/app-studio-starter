@@ -27,15 +27,8 @@ const TYPE_BUTTONS: { type: ResourcePickerOptions['type']; label: string; option
     { type: 'product', label: 'Add products', options: { multiple: true } },
     { type: 'customer', label: 'Select customers', options: { action: 'select', multiple: true } },
     { type: 'order', label: 'Add orders', options: { multiple: 5 } },
-    { type: 'location', label: 'Select location', options: { action: 'select' } },
-    { type: 'product-category', label: 'Add categories', options: { multiple: true } },
     { type: 'charge', label: 'Select charge' },
     { type: 'invoice', label: 'Select invoices', options: { multiple: true } },
-    { type: 'coupon', label: 'Select coupon' },
-    { type: 'discount', label: 'Select discount' },
-    { type: 'tax', label: 'Select tax' },
-    { type: 'shipping', label: 'Select shipping' },
-    { type: 'pickup', label: 'Select pickup' },
     { type: 'add-on', label: 'Select add-on' },
   ]
 

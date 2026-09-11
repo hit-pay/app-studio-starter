@@ -5,6 +5,13 @@ export const SCHEMA_FORM_TYPES = [
   'select',
   'staff',
   'role',
+  'coupon',
+  'discount',
+  'tax',
+  'shipping',
+  'pickup',
+  'product-category',
+  'location',
   'combobox',
   'radio',
   'choice-card',
@@ -111,6 +118,13 @@ export const SCHEMA_FORM_EXAMPLE_FIELDS: SchemaFormField[] = [
   },
   { key: 'assignee', title: 'Assignee', type: 'staff' },
   { key: 'notify_role', title: 'Notify role', type: 'role' },
+  { key: 'coupon', title: 'Coupon', type: 'coupon' },
+  { key: 'discount', title: 'Discount', type: 'discount' },
+  { key: 'tax', title: 'Tax', type: 'tax' },
+  { key: 'shipping', title: 'Shipping', type: 'shipping' },
+  { key: 'pickup', title: 'Pickup', type: 'pickup' },
+  { key: 'category', title: 'Category', type: 'product-category' },
+  { key: 'location', title: 'Location', type: 'location' },
   { key: 'receipt', title: 'Receipt', type: 'file' },
   { key: 'documents', title: 'Documents', type: 'file', props: { multiple: true } },
 ]
@@ -232,8 +246,22 @@ export function isMultiFile(field: SchemaFormField) {
   return field.type === 'file' && field.props?.multiple === true
 }
 
+export function isSnapshotSelect(field: SchemaFormField) {
+  return (
+    field.type === 'staff' ||
+    field.type === 'role' ||
+    field.type === 'coupon' ||
+    field.type === 'discount' ||
+    field.type === 'tax' ||
+    field.type === 'shipping' ||
+    field.type === 'pickup' ||
+    field.type === 'product-category' ||
+    field.type === 'location'
+  )
+}
+
 export function isMultiStaffOrRole(field: SchemaFormField) {
-  return (field.type === 'staff' || field.type === 'role') && field.props?.multiple === true
+  return isSnapshotSelect(field) && field.props?.multiple === true
 }
 
 function defaultValueFor(field: SchemaFormField): unknown {
@@ -257,7 +285,7 @@ function defaultValueFor(field: SchemaFormField): unknown {
   ) {
     return []
   }
-  if (field.type === 'staff' || field.type === 'role') {
+  if (isSnapshotSelect(field)) {
     return null
   }
   if (field.type === 'slider') return 0
@@ -384,7 +412,7 @@ function isEmpty(value: unknown, field: SchemaFormField) {
   if (isMultiCombobox(field) || isMultiStaffOrRole(field)) {
     return !Array.isArray(value) || value.length === 0
   }
-  if (field.type === 'staff' || field.type === 'role') {
+  if (isSnapshotSelect(field)) {
     if (value && typeof value === 'object' && !Array.isArray(value) && 'id' in value) {
       return String((value as { id?: unknown }).id ?? '').trim() === ''
     }

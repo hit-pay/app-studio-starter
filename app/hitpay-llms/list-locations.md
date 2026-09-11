@@ -76,5 +76,5 @@ type ListLocationsResponse = {
 
 ## App rules
 
-- ResourcePicker `location` is the only generated-screen list.
+- `LocationSelect` is the only generated-screen list.
 - Snapshot from the picker. Never invent another locations path.

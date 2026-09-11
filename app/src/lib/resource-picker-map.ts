@@ -46,19 +46,38 @@ function imageUrl(images: unknown): string | null {
 }
 
 function variationTitle(variation: Record<string, unknown>) {
-  const parts = [1, 2, 3]
-    .map((index) => variation[`variation_value_${index}`])
-    .filter((value): value is string => typeof value === 'string' && value.length > 0)
-  if (parts.length) return parts.join(' / ')
+  const values = variation.values
+  if (Array.isArray(values)) {
+    const parts = values
+      .map((entry) => {
+        if (!entry || typeof entry !== 'object' || Array.isArray(entry)) return ''
+        const value = (entry as { value?: unknown }).value
+        return typeof value === 'string' ? value : ''
+      })
+      .filter(Boolean)
+    if (parts.length) return parts.join(' / ')
+  }
   if (typeof variation.description === 'string' && variation.description) return variation.description
   return 'Variant'
 }
 
-function rowsOf(type: ResourcePickerType, payload: unknown): Record<string, unknown>[] {
-  if (type === 'shipping' && payload && typeof payload === 'object') {
-    const shippings = (payload as { shippings?: unknown }).shippings
-    if (Array.isArray(shippings)) return shippings as Record<string, unknown>[]
+function productImage(product: Record<string, unknown>): string | null {
+  const fromImages = imageUrl(product.images)
+  if (fromImages) return fromImages
+  const shopify = product.shopify
+  if (shopify && typeof shopify === 'object' && !Array.isArray(shopify)) {
+    const url = (shopify as { image_url?: unknown }).image_url
+    if (typeof url === 'string' && url) return url
   }
+  return typeof product.image === 'string' ? product.image : null
+}
+
+function cursorPage(items: ResourcePickerItem[], payload: unknown): ResourcePickerPage {
+  const cursor = nextCursor(payload)
+  return { items, hasMore: Boolean(cursor), cursor }
+}
+
+function rowsOf(_type: ResourcePickerType, payload: unknown): Record<string, unknown>[] {
   return asList<Record<string, unknown>>(payload)
 }
 
@@ -67,7 +86,7 @@ function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
   return {
     id: String(product.id),
     title: String(product.name ?? product.id),
-    image: imageUrl(product.images),
+    image: productImage(product),
     badge: product.status === 'draft' ? 'Draft' : undefined,
     resource: asRecord(product),
     children: variations.map((variation) => {
@@ -109,27 +128,13 @@ function mapResourcePickerPayload(
   const page = data.page || 1
   const type = data.type
   const rows = rowsOf(type, payload)
-  const needle = data.query.trim().toLowerCase()
 
   if (type === 'product') {
     return { items: rows.map(mapProduct), hasMore: hasMore(payload, page) }
   }
 
-  if (type === 'product-category') {
-    return {
-      items: rows.map((category) => ({
-        id: String(category.id),
-        title: String(category.name ?? category.id),
-        image: imageUrl(category.image ? [category.image] : []),
-        badge: category.is_active === false ? 'Inactive' : undefined,
-        resource: asRecord(category),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
   if (type === 'customer') {
-    return { items: rows.map(mapCustomer), hasMore: hasMore(payload, page) }
+    return cursorPage(rows.map(mapCustomer), payload)
   }
 
   if (type === 'order') {
@@ -143,121 +148,32 @@ function mapResourcePickerPayload(
         badge: typeof order.status === 'string' ? order.status : undefined,
         resource: asRecord(order),
       })),
-      hasMore: false,
-    }
-  }
-
-  if (type === 'location') {
-    return {
-      items: rows
-        .filter((location) => {
-          if (data.filter === 'active') return location.active !== false
-          if (data.filter === 'inactive') return location.active === false
-          return true
-        })
-        .map((location) => ({
-          id: String(location.id),
-          title: String(location.name ?? location.id),
-          badge: location.active === false ? 'Inactive' : undefined,
-          resource: asRecord(location),
-        })),
-      hasMore: false,
+      hasMore: hasMore(payload, page),
     }
   }
 
   if (type === 'charge') {
-    const cursor = nextCursor(payload)
-    return {
-      items: rows.map((charge) => ({
+    return cursorPage(
+      rows.map((charge) => ({
         id: String(charge.id),
         title: [charge.remark, charge.amount, charge.currency].filter(Boolean).join(' · ') || String(charge.id),
         badge: typeof charge.status === 'string' ? charge.status : undefined,
         resource: asRecord(charge),
       })),
-      hasMore: Boolean(cursor),
-      cursor,
-    }
+      payload,
+    )
   }
 
   if (type === 'invoice') {
-    return {
-      items: rows.map((invoice) => ({
+    return cursorPage(
+      rows.map((invoice) => ({
         id: String(invoice.id),
         title: String(invoice.invoice_number || invoice.reference || invoice.email || invoice.id),
         badge: typeof invoice.status === 'string' ? invoice.status : undefined,
         resource: asRecord(invoice),
       })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'coupon') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.name || row.code || row.id),
-        badge: typeof row.code === 'string' ? row.code : undefined,
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'discount') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.name || row.id),
-        badge: typeof row.discount_type === 'string' ? row.discount_type : undefined,
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'tax') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.name || row.id),
-        badge: row.tax_inclusive ? 'Inclusive' : undefined,
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'shipping') {
-    return {
-      items: rows
-        .filter((row) => {
-          if (needle && !String(row.name ?? '').toLowerCase().includes(needle)) return false
-          if (data.filter === 'active') return row.is_active !== false
-          if (data.filter === 'inactive') return row.is_active === false
-          return true
-        })
-        .map((row) => ({
-          id: String(row.id),
-          title: String(row.name ?? row.id),
-          badge: row.is_active === false ? 'Inactive' : undefined,
-          resource: asRecord(row),
-        })),
-      hasMore: false,
-    }
-  }
-
-  if (type === 'pickup') {
-    return {
-      items: rows
-        .filter((row) => !needle || String(row.name ?? row.address ?? '').toLowerCase().includes(needle))
-        .map((row) => ({
-          id: String(row.id),
-          title: String(row.name ?? row.address ?? row.id),
-          badge: typeof row.status === 'string' ? row.status : undefined,
-          resource: asRecord(row),
-        })),
-      hasMore: hasMore(payload, page),
-    }
+      payload,
+    )
   }
 
   if (type === 'add-on') {

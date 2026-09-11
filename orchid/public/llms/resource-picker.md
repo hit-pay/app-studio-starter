@@ -2,7 +2,7 @@
 
 # Resource Picker
 
-Search and select HitPay products, categories, customers, orders, or locations.
+Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
 
 ## Example
 
@@ -36,15 +36,8 @@ const TYPE_BUTTONS: { type: ResourcePickerOptions['type']; label: string; option
     { type: 'product', label: 'Add products', options: { multiple: true } },
     { type: 'customer', label: 'Select customers', options: { action: 'select', multiple: true } },
     { type: 'order', label: 'Add orders', options: { multiple: 5 } },
-    { type: 'location', label: 'Select location', options: { action: 'select' } },
-    { type: 'product-category', label: 'Add categories', options: { multiple: true } },
     { type: 'charge', label: 'Select charge' },
     { type: 'invoice', label: 'Select invoices', options: { multiple: true } },
-    { type: 'coupon', label: 'Select coupon' },
-    { type: 'discount', label: 'Select discount' },
-    { type: 'tax', label: 'Select tax' },
-    { type: 'shipping', label: 'Select shipping' },
-    { type: 'pickup', label: 'Select pickup' },
     { type: 'add-on', label: 'Select add-on' },
   ]
 
@@ -150,13 +143,12 @@ function AddProducts() {
 
 Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm, send `selected` into a `createServerFn` and upsert Turso from `id` + `resource`.
 
-`type`: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on`.
+`type`: `product` | `customer` | `order` | `charge` | `invoice` | `add-on`. Category / location / coupon / discount / tax / shipping / pickup use their Select components, not this picker.
 
 ```tsx
 await pick({ type: 'charge' })
 await pick({ type: 'invoice', multiple: true })
 await pick({ type: 'customer', action: 'select', multiple: true })
-await pick({ type: 'location', action: 'select' })
 await pick({
   type: 'product',
   query: 'lamp',
@@ -204,13 +196,13 @@ function fakeHitPayList(type: ResourcePickerType) {
 }
 ```
 
-`shadcn add @orchid/resource-picker` only replaces the dialog UI. It does not ship the starter loader (`#/lib/resource-picker.ts`). Map `data[]` (shipping: `shippings[]`) with `mapResourcePickerPayload`. Result after select: `{ id, resource, children? }` — `resource` is the original HitPay row.
+`shadcn add @orchid/resource-picker` only replaces the dialog UI. It does not ship the starter loader (`#/lib/resource-picker.ts`). Map `data[]` with `mapResourcePickerPayload`. Result after select: `{ id, resource, children? }` — `resource` is the original HitPay row.
 
 - `action`: `add` (default) or `select`
 - `multiple`: omit/`false` = one, `true` = unlimited, number = cap
 - `query`: initial search
 - `selectionIds`: preselected `{ id, children?: { id }[] }`
-- `filter.status`: initial status (product, order, invoice, charge, location, shipping, discount POS/online, …)
+- `filter.status`: initial status (product, order, invoice, charge)
 - `filter.variants`: `false` hides product variations
 - Dialog also shows type-specific extras: product **Stock** + **Channel**, charge **Method**
 - `load` receives `{ type, query, filter, extras, page, cursor }` and should return `{ items, hasMore, cursor? }`

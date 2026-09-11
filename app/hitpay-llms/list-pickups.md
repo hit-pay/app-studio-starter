@@ -57,4 +57,4 @@ Location object (when present) is the same location shape as `list-locations` (n
 
 ## App rules
 
-- ResourcePicker `pickup` is the only generated-screen list.
+- `PickupSelect` is the only generated-screen list.

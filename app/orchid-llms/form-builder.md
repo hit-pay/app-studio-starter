@@ -551,7 +551,7 @@ const fields = [
 
 ## Staff and role
 
-Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. They render `StaffSelect` / `RoleSelect` (same fetch as App Studio). The stored value is `{ id, name }` (or an array when `props.multiple` is true).
+Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. Use `type: "coupon"` / `"discount"` / `"tax"` / `"shipping"` / `"pickup"` / `"product-category"` / `"location"` for those HitPay dropdowns. They render the matching Select. The stored value is `{ id, name }` (or an array when `props.multiple` is true).
 
 ```tsx
 const fields = [

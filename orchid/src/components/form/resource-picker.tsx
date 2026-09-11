@@ -3,10 +3,14 @@
 import * as React from 'react'
 import { AddRegular, CloseRegular, MinimizeRegular, SearchRegular } from '@mingcute/react/core-regular'
 
+import { format, startOfDay } from 'date-fns'
+import type { DateRange } from 'react-day-picker'
+
 import { Button } from '@ui/actions/button'
 import { Badge } from '@ui/displaying-data/badge'
 import { Spinner } from '@ui/feedback/spinner'
 import { Checkbox } from '@ui/form/checkbox'
+import { DatePickerRange } from '@/components/form/date-picker'
 import { Select } from '@/components/form/select'
 import { Input } from '@ui/form/input'
 import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
@@ -22,17 +26,10 @@ import {
 
 const RESOURCE_PICKER_TYPES = [
   'product',
-  'product-category',
   'customer',
   'order',
-  'location',
   'charge',
   'invoice',
-  'coupon',
-  'discount',
-  'tax',
-  'shipping',
-  'pickup',
   'add-on',
 ] as const
 
@@ -113,17 +110,10 @@ const ALL_FILTER: FilterOption[] = [{ value: 'all', label: 'All' }]
 
 const LABELS: Record<ResourcePickerType, { singular: string; plural: string }> = {
   product: { singular: 'product', plural: 'products' },
-  'product-category': { singular: 'category', plural: 'categories' },
   customer: { singular: 'customer', plural: 'customers' },
   order: { singular: 'order', plural: 'orders' },
-  location: { singular: 'location', plural: 'locations' },
   charge: { singular: 'charge', plural: 'charges' },
   invoice: { singular: 'invoice', plural: 'invoices' },
-  coupon: { singular: 'coupon', plural: 'coupons' },
-  discount: { singular: 'discount', plural: 'discounts' },
-  tax: { singular: 'tax', plural: 'taxes' },
-  shipping: { singular: 'shipping method', plural: 'shipping methods' },
-  pickup: { singular: 'pickup', plural: 'pickups' },
   'add-on': { singular: 'add-on', plural: 'add-ons' },
 }
 
@@ -133,24 +123,15 @@ const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
     { value: 'published', label: 'Published' },
     { value: 'draft', label: 'Draft' },
   ],
-  'product-category': [
-    { value: 'all', label: 'All categories' },
-    { value: 'active', label: 'Active' },
-    { value: 'inactive', label: 'Inactive' },
-  ],
   customer: ALL_FILTER,
   order: [
     { value: 'all', label: 'All statuses' },
     { value: 'completed', label: 'Completed' },
+    { value: 'pending', label: 'Pending' },
     { value: 'sent', label: 'Sent' },
     { value: 'draft', label: 'Draft' },
     { value: 'expired', label: 'Expired' },
     { value: 'canceled', label: 'Canceled' },
-  ],
-  location: [
-    { value: 'all', label: 'All locations' },
-    { value: 'active', label: 'Active' },
-    { value: 'inactive', label: 'Inactive' },
   ],
   charge: [
     { value: 'all', label: 'All statuses' },
@@ -166,19 +147,6 @@ const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
     { value: 'overdue', label: 'Overdue' },
     { value: 'paid', label: 'Paid' },
   ],
-  coupon: ALL_FILTER,
-  discount: [
-    { value: 'all', label: 'All discounts' },
-    { value: 'pos', label: 'POS' },
-    { value: 'online', label: 'Online' },
-  ],
-  tax: ALL_FILTER,
-  shipping: [
-    { value: 'all', label: 'All methods' },
-    { value: 'active', label: 'Active' },
-    { value: 'inactive', label: 'Inactive' },
-  ],
-  pickup: ALL_FILTER,
   'add-on': ALL_FILTER,
 }
 
@@ -215,6 +183,22 @@ const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
       ],
     },
   ],
+}
+
+const DATE_FILTER_TYPES = new Set<ResourcePickerType>(['order', 'charge'])
+
+function parseYmd(value?: string): Date | undefined {
+  if (!value) return undefined
+  const [year, month, day] = value.split('-').map(Number)
+  if (!year || !month || !day) return undefined
+  return new Date(year, month - 1, day)
+}
+
+function extrasDateRange(extras: Record<string, string>): DateRange | undefined {
+  const from = parseYmd(extras.date_from)
+  const to = parseYmd(extras.date_to)
+  if (!from && !to) return undefined
+  return { from: from ?? to, to }
 }
 
 const ResourcePickerContext = React.createContext<ResourcePickerFn | null>(null)
@@ -529,6 +513,31 @@ function ResourcePickerDialog({
               }}
             />
           ))}
+          {DATE_FILTER_TYPES.has(type) ? (
+            <DatePickerRange
+              className="w-[16.5rem] shrink-0"
+              placeholder="Date range"
+              selected={extrasDateRange(extras)}
+              disabled={{ after: startOfDay(new Date()) }}
+              endMonth={new Date()}
+              onSelect={(range) => {
+                setPage(1)
+                setCursor(undefined)
+                setExtras((current) => {
+                  const next = { ...current }
+                  if (!range?.from) {
+                    delete next.date_from
+                    delete next.date_to
+                    return next
+                  }
+                  next.date_from = format(range.from, 'yyyy-MM-dd')
+                  if (range.to) next.date_to = format(range.to, 'yyyy-MM-dd')
+                  else delete next.date_to
+                  return next
+                })
+              }}
+            />
+          ) : null}
         </div>
         <div className="max-h-[min(28rem,50vh)] min-h-48 overflow-y-auto border-y border-oc-border">
           {loading && items.length === 0 ? (

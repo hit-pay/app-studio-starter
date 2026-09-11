@@ -70,4 +70,4 @@ Length-aware `{ data, links, meta }`.
 
 ## App rules
 
-- ResourcePicker `discount` is the only generated-screen list.
+- `DiscountSelect` is the only generated-screen list.

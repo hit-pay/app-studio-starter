@@ -62,4 +62,4 @@ List rows do **not** include `applies_to_ids`.
 
 ## App rules
 
-- ResourcePicker `coupon` is the only generated-screen list.
+- `CouponSelect` is the only generated-screen list.

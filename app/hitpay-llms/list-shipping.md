@@ -67,4 +67,4 @@ Not a `{ data, meta }` list. Use `shippings`.
 
 ## App rules
 
-- ResourcePicker `shipping` is the only generated-screen list.
+- `ShippingSelect` is the only generated-screen list.

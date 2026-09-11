@@ -6,20 +6,21 @@ Document **OAuth public API only** (`oauth.any-scope` on `/v1/…`). Do not docu
 
 **Never implement HTTP DELETE** (products, customers, orders, invoices, settings). Do not invent create / update / POST write paths — those docs are not in this folder.
 
-All OAuth lists the merchant **picks** go through ResourcePicker (`charge`, `invoice`, `coupon`, `discount`, `tax`, `shipping`, `pickup`, `add-on`, plus product/customer/order/location/category). Generated screens must not `list-*` to build a picker **or to display a catalog/table/feed**. `list-*` docs are for the picker loader or totals-only computed sheets. Staff / role fields: `StaffSelect` / `RoleSelect` (or FormBuilder `staff` / `role`).
+All OAuth lists the merchant **adds as catalog rows** go through ResourcePicker (`charge`, `invoice`, `add-on`, plus product/customer/order). Generated screens must not `list-*` to build a picker **or to display a catalog/table/feed**. `list-*` docs are for the picker/select loader or totals-only computed sheets. Staff / role: `StaffSelect` / `RoleSelect`. Coupon / discount / tax / shipping / pickup / category / location: the matching `*Select` (or FormBuilder types).
 
 # Needs
 
 - pick products / add SKUs to the app → ResourcePicker `product` (never `list-products` on a screen)
 - show product → `get-product-details`
-- pick product categories → ResourcePicker `product-category`
+- pick product categories → `ProductCategorySelect`
 - pick / show orders → ResourcePicker `order` / `get-order-details`
 - pick / show customers → ResourcePicker `customer` / `get-customer-details`
-- pick locations → ResourcePicker `location`
+- pick locations → `LocationSelect`
 - till / cash-up **totals** (do not render charge rows) → `list-charges` / `get-charge-details`
 - pick / show invoices → ResourcePicker `invoice` / `get-invoice-details`
-- coupons / discounts / taxes → ResourcePicker `coupon` / `discount` / `tax`
-- shipping / pickups / add-ons → ResourcePicker `shipping` / `pickup` / `add-on` / `get-add-on`
+- coupons / discounts / taxes → `CouponSelect` / `DiscountSelect` / `TaxSelect`
+- shipping / pickups → `ShippingSelect` / `PickupSelect`
+- add-ons → ResourcePicker `add-on` / `get-add-on`
 
 # Endpoints
 

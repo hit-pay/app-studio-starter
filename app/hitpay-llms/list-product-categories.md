@@ -108,5 +108,5 @@ Same image object as products: `id`, `caption`, `alt_text`, `group`, `order`, `e
 
 ## App rules
 
-- ResourcePicker `product-category` is the only generated-screen list. This file is for the picker loader.
+- `ProductCategorySelect` is the only generated-screen list.
 - Snapshot from the picker (`id` + `resource`). Never invent another category path.

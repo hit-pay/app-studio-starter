@@ -16,16 +16,14 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       variations: [
         {
           id: '9c1e0001-0000-4000-8000-000000000011',
-          description: 'Oak',
-          variation_value_1: 'Oak',
+          values: [{ key: 'Finish', value: 'Oak' }],
           quantity: 3,
           price: 5800,
           price_display: 'S$5,800.00',
         },
         {
           id: '9c1e0001-0000-4000-8000-000000000012',
-          description: 'Pine',
-          variation_value_1: 'Pine',
+          values: [{ key: 'Finish', value: 'Pine' }],
           quantity: 12,
           price: 5100,
           price_display: 'S$5,100.00',
@@ -43,8 +41,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       variations: [
         {
           id: '9c1e0001-0000-4000-8000-000000000021',
-          description: 'Warm white',
-          variation_value_1: 'Warm white',
+          values: [{ key: 'Light', value: 'Warm white' }],
           quantity: 8,
           price: 89,
           price_display: 'S$89.00',
@@ -98,35 +95,14 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       variations: [],
     },
   ],
-  'product-category': [
-    { id: '9c1e0002-0000-4000-8000-000000000001', name: 'Furniture', is_active: true, handle: 'furniture' },
-    { id: '9c1e0002-0000-4000-8000-000000000002', name: 'Lighting', is_active: false, handle: 'lighting' },
-  ],
   customer: [
     { id: '9c1e0003-0000-4000-8000-000000000001', name: 'Priya Nair', email: 'priya@example.com', phone_number: '91234567' },
     { id: '9c1e0003-0000-4000-8000-000000000002', name: 'Wei Chen', email: 'wei@example.com', phone_number: '98887766' },
   ],
   order: [
-    { id: '9c1e0004-0000-4000-8000-000000000001', order_display_number: 2048, status: 'draft', amount: 120, currency: 'sgd' },
-    { id: '9c1e0004-0000-4000-8000-000000000002', order_display_number: 2049, status: 'completed', amount: 89, currency: 'sgd' },
-  ],
-  location: [
-    {
-      id: '9c1e0005-0000-4000-8000-000000000001',
-      name: 'Main Store',
-      street: '1 Harbourfront',
-      city: 'Singapore',
-      country: 'SG',
-      active: true,
-    },
-    {
-      id: '9c1e0005-0000-4000-8000-000000000002',
-      name: 'Warehouse',
-      street: '8 Tuas',
-      city: 'Singapore',
-      country: 'SG',
-      active: false,
-    },
+    { id: '9c1e0004-0000-4000-8000-000000000001', order_display_number: 2048, status: 'draft', amount: 120, currency: 'sgd', created_at: '2026-08-01T10:00:00+00:00' },
+    { id: '9c1e0004-0000-4000-8000-000000000002', order_display_number: 2049, status: 'completed', amount: 89, currency: 'sgd', created_at: '2026-09-02T10:00:00+00:00' },
+    { id: '9c1e0004-0000-4000-8000-000000000003', order_display_number: 2050, status: 'requires_business_action', amount: 46, currency: 'sgd', created_at: '2026-09-10T10:00:00+00:00' },
   ],
   charge: [
     {
@@ -136,6 +112,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       status: 'succeeded',
       remark: 'Order #1007',
       payment_method: { name: 'card' },
+      created_at: '2026-09-02T10:00:00+00:00',
     },
     {
       id: '9c1e0006-0000-4000-8000-000000000002',
@@ -144,6 +121,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       status: 'refunded',
       remark: 'Till cash',
       payment_method: { name: 'cash' },
+      created_at: '2026-08-15T10:00:00+00:00',
     },
     {
       id: '9c1e0006-0000-4000-8000-000000000003',
@@ -152,6 +130,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       status: 'failed',
       remark: 'Card decline',
       payment_method: { name: 'card' },
+      created_at: '2026-09-10T10:00:00+00:00',
     },
   ],
   invoice: [
@@ -172,27 +151,23 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       email: 'wei@example.com',
     },
   ],
-  coupon: [{ id: '9c1e000b-0000-4000-8000-000000000001', name: 'Welcome', code: 'WELCOME10', percentage: 10 }],
-  discount: [
-    {
-      id: '9c1e000c-0000-4000-8000-000000000001',
-      name: 'Staff 10%',
-      discount_type: 'percentage',
-      percentage: 10,
-      pos_discount: true,
-    },
-  ],
-  tax: [{ id: '9c1e000d-0000-4000-8000-000000000001', name: 'GST 9%', rate: 0.09, tax_inclusive: false }],
-  shipping: [{ id: '9c1e000e-0000-4000-8000-000000000001', name: 'Standard', is_active: true, calculation: 'flat' }],
-  pickup: [
-    { id: '9c1e000f-0000-4000-8000-000000000001', name: 'Main Store pickup', address: '1 Harbourfront', status: 'active' },
-  ],
   'add-on': [{ id: '9c1e0010-0000-4000-8000-000000000001', name: 'Gift wrap' }],
 }
 
 function includesNeedle(row: FakeRecord, keys: string[], needle: string) {
   if (!needle) return true
   return keys.some((key) => String(row[key] ?? '').toLowerCase().includes(needle))
+}
+
+function inDateRange(row: FakeRecord, extras?: Record<string, string>) {
+  const from = extras?.date_from
+  const to = extras?.date_to
+  if (!from && !to) return true
+  const raw = typeof row.created_at === 'string' ? row.created_at.slice(0, 10) : ''
+  if (!raw) return true
+  if (from && raw < from) return false
+  if (to && raw > to) return false
+  return true
 }
 
 function productQuantity(product: FakeRecord) {
@@ -223,32 +198,28 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
     })
   }
 
-  if (data.type === 'product-category') {
-    rows = rows.filter((row) => {
-      if (needle && !includesNeedle(row, ['name'], needle)) return false
-      if (data.filter === 'active') return row.is_active !== false
-      if (data.filter === 'inactive') return row.is_active === false
-      return true
-    })
-  }
-
   if (data.type === 'customer' && needle) {
     rows = rows.filter((row) => customerMatches(row, needle))
   }
 
   if (data.type === 'order') {
     rows = rows.filter((row) => {
+      if (!inDateRange(row, data.extras)) return false
       if (needle && !includesNeedle(row, ['order_display_number', 'id'], needle)) return false
-      return data.filter === 'all' || row.status === data.filter
+      if (data.filter === 'all') return true
+      if (data.filter === 'pending') {
+        return row.status === 'pending' || row.status === 'requires_business_action'
+      }
+      if (data.filter === 'sent') {
+        return row.status === 'sent' || row.status === 'requires_customer_action'
+      }
+      return row.status === data.filter
     })
-  }
-
-  if (data.type === 'location' && needle) {
-    rows = rows.filter((row) => includesNeedle(row, ['name'], needle))
   }
 
   if (data.type === 'charge') {
     rows = rows.filter((row) => {
+      if (!inDateRange(row, data.extras)) return false
       if (needle && !includesNeedle(row, ['remark', 'id'], needle)) return false
       if (data.filter !== 'all' && row.status !== data.filter) return false
       if (data.extras?.payment_method && data.extras.payment_method !== 'all') {
@@ -270,28 +241,8 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
     })
   }
 
-  if (data.type === 'coupon' && needle) {
-    rows = rows.filter((row) => includesNeedle(row, ['name', 'code', 'id'], needle))
-  }
-
-  if (data.type === 'discount') {
-    rows = rows.filter((row) => {
-      if (data.filter === 'pos') return row.pos_discount === true
-      if (data.filter === 'online') return row.pos_discount !== true
-      return includesNeedle(row, ['name', 'id'], needle)
-    })
-  }
-
-  if (data.type === 'tax' && needle) {
-    rows = rows.filter((row) => includesNeedle(row, ['name', 'id'], needle))
-  }
-
   if (data.type === 'add-on' && needle) {
     rows = rows.filter((row) => includesNeedle(row, ['name', 'id'], needle))
-  }
-
-  if (data.type === 'shipping') {
-    return { shippings: rows }
   }
 
   return { data: rows }

@@ -51,4 +51,4 @@ Length-aware `{ data, links, meta }`.
 
 ## App rules
 
-- ResourcePicker `tax` is the only generated-screen list.
+- `TaxSelect` is the only generated-screen list.

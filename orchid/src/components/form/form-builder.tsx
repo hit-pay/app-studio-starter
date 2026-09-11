@@ -11,9 +11,16 @@ import {
 
 import { cn } from '@/lib/utils'
 import { Checkbox, CheckboxGroup } from '@ui/form/checkbox'
+import { CouponSelect } from '@/components/form/coupon-select'
+import { DiscountSelect } from '@/components/form/discount-select'
+import { LocationSelect } from '@/components/form/location-select'
+import { PickupSelect } from '@/components/form/pickup-select'
+import { ProductCategorySelect } from '@/components/form/product-category-select'
 import { RoleSelect } from '@/components/form/role-select'
 import { Select } from '@/components/form/select'
+import { ShippingSelect } from '@/components/form/shipping-select'
 import { StaffSelect } from '@/components/form/staff-select'
+import { TaxSelect } from '@/components/form/tax-select'
 import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
 import {
   Field,
@@ -228,14 +235,21 @@ function idsFromSnapshot(value: unknown, multiple: boolean): string | string[] |
 
 function snapshotFromPick(
   selected:
-    | { id: string; name?: string | null; email?: string | null; title?: string }
-    | { id: string; name?: string | null; email?: string | null; title?: string }[]
+    | { id: string; name?: string | null; email?: string | null; title?: string; code?: string | null; address?: string | null }
+    | { id: string; name?: string | null; email?: string | null; title?: string; code?: string | null; address?: string | null }[]
     | null,
 ): StaffRoleSnapshot | StaffRoleSnapshot[] | null {
   if (selected == null) return null
-  const toSnap = (row: { id: string; name?: string | null; email?: string | null; title?: string }) => ({
+  const toSnap = (row: {
+    id: string
+    name?: string | null
+    email?: string | null
+    title?: string
+    code?: string | null
+    address?: string | null
+  }) => ({
     id: row.id,
-    name: row.name?.trim() || row.email?.trim() || row.title?.trim() || row.id,
+    name: row.name?.trim() || row.code?.trim() || row.address?.trim() || row.email?.trim() || row.title?.trim() || row.id,
   })
   return Array.isArray(selected) ? selected.map(toSnap) : toSnap(selected)
 }
@@ -784,6 +798,68 @@ function SchemaForm({
                       value={idsFromSnapshot(value, multiple)}
                       invalid={invalid}
                       placeholder={placeholder ?? 'Select role'}
+                      onValueChange={(_next, selected) =>
+                        changeField(
+                          item,
+                          [{ path: item.path, value: snapshotFromPick(selected) }],
+                          field.handleChange,
+                        )
+                      }
+                    />
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
+                  </Field>
+                )
+              }
+
+              if (
+                type === 'coupon' ||
+                type === 'discount' ||
+                type === 'tax' ||
+                type === 'shipping' ||
+                type === 'pickup' ||
+                type === 'product-category' ||
+                type === 'location'
+              ) {
+                const multiple = isMultiStaffOrRole(item)
+                const CommerceSelect =
+                  type === 'coupon'
+                    ? CouponSelect
+                    : type === 'discount'
+                      ? DiscountSelect
+                      : type === 'tax'
+                        ? TaxSelect
+                        : type === 'shipping'
+                          ? ShippingSelect
+                          : type === 'pickup'
+                            ? PickupSelect
+                            : type === 'product-category'
+                              ? ProductCategorySelect
+                              : LocationSelect
+                const selectPlaceholder =
+                  placeholder ??
+                  (type === 'coupon'
+                    ? 'Select coupon'
+                    : type === 'discount'
+                      ? 'Select discount'
+                      : type === 'tax'
+                        ? 'Select tax'
+                        : type === 'shipping'
+                          ? 'Select shipping'
+                          : type === 'pickup'
+                            ? 'Select pickup'
+                            : type === 'product-category'
+                              ? 'Select category'
+                              : 'Select location')
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
+                    <CommerceSelect
+                      name={item.path}
+                      label={false}
+                      multiple={multiple}
+                      value={idsFromSnapshot(value, multiple)}
+                      invalid={invalid}
+                      placeholder={selectPlaceholder}
                       onValueChange={(_next, selected) =>
                         changeField(
                           item,

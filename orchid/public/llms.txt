@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 52 components.
-- Installable registry items: 54, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 59 components.
+- Installable registry items: 61, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -118,20 +118,40 @@ Dashboard KPI tile. Use for summaries, not a record's fields.
 Selectable cards with left or center icon, no radio dot.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/choice-card.json)
 
+#### [Coupon Select](https://orchid-ui-hitpay.vercel.app/llms/coupon-select.md)
+Coupon dropdown. Loads GET /v1/coupons.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/coupon-select.json)
+
 #### [Date Picker](https://orchid-ui-hitpay.vercel.app/llms/date-picker.md)
 Date, range, and date-time selection with popover and calendar helpers.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/date-picker.json)
 
+#### [Discount Select](https://orchid-ui-hitpay.vercel.app/llms/discount-select.md)
+Discount dropdown. Loads GET /v1/discounts.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/discount-select.json)
+
 #### [Form Builder](https://orchid-ui-hitpay.vercel.app/llms/form-builder.md)
 Schema-driven create/edit form. Use Detail Card for a read-only record.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-builder.json)
+
+#### [Location Select](https://orchid-ui-hitpay.vercel.app/llms/location-select.md)
+Location dropdown. Loads GET /v1/locations.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/location-select.json)
+
+#### [Pickup Select](https://orchid-ui-hitpay.vercel.app/llms/pickup-select.md)
+Pickup dropdown. Loads GET /v1/pickups.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/pickup-select.json)
+
+#### [Product Category Select](https://orchid-ui-hitpay.vercel.app/llms/product-category-select.md)
+Category dropdown. Loads GET /v1/product-category.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/product-category-select.json)
 
 #### [Quantity Input](https://orchid-ui-hitpay.vercel.app/llms/quantity-input.md)
 Minus/plus stepper; click the value to type.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
 
 #### [Resource Picker](https://orchid-ui-hitpay.vercel.app/llms/resource-picker.md)
-Search and select HitPay products, categories, customers, orders, or locations.
+Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resource-picker.json)
 
 #### [Role Select](https://orchid-ui-hitpay.vercel.app/llms/role-select.md)
@@ -142,9 +162,17 @@ Business role dropdown. Docs use a fake roles API.
 Props picker for a closed list or a searchable / multi select.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
 
+#### [Shipping Select](https://orchid-ui-hitpay.vercel.app/llms/shipping-select.md)
+Shipping method dropdown. Loads GET /v1/shipping.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/shipping-select.json)
+
 #### [Staff Select](https://orchid-ui-hitpay.vercel.app/llms/staff-select.md)
 App-member dropdown. Docs use a fake staff-app-members API.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/staff-select.json)
+
+#### [Tax Select](https://orchid-ui-hitpay.vercel.app/llms/tax-select.md)
+Tax dropdown. Loads GET /v1/taxes.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tax-select.json)
 
 #### [Text Editor](https://orchid-ui-hitpay.vercel.app/llms/text-editor.md)
 Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
@@ -318,7 +346,7 @@ Keyboard key and grouped shortcut display.
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, staff-select, role-select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, staff-select, role-select, coupon-select, discount-select, tax-select, shipping-select, pickup-select, product-category-select, location-select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 
