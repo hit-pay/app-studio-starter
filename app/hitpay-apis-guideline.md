@@ -12,15 +12,14 @@ All OAuth lists the merchant **picks** go through ResourcePicker (`charge`, `inv
 
 - pick products / add SKUs to the app → ResourcePicker `product` (never `list-products` on a screen)
 - show product → `get-product-details`
-- pick / show product categories → ResourcePicker `product-category` / `get-product-category`
+- pick product categories → ResourcePicker `product-category`
 - pick / show orders → ResourcePicker `order` / `get-order-details`
 - pick / show customers → ResourcePicker `customer` / `get-customer-details`
 - pick locations → ResourcePicker `location`
 - till / cash-up **totals** (do not render charge rows) → `list-charges` / `get-charge-details`
 - pick / show invoices → ResourcePicker `invoice` / `get-invoice-details`
-- invoice settings → `get-invoice-settings`
-- coupons / discounts / taxes → ResourcePicker `coupon` / `discount` / `tax` / `get-coupon`
-- shipping / pickups / add-ons → ResourcePicker `shipping` / `pickup` / `add-on` / `get-shipping` / `get-add-on`
+- coupons / discounts / taxes → ResourcePicker `coupon` / `discount` / `tax`
+- shipping / pickups / add-ons → ResourcePicker `shipping` / `pickup` / `add-on` / `get-add-on`
 
 # Endpoints
 
@@ -29,7 +28,6 @@ All OAuth lists the merchant **picks** go through ResourcePicker (`charge`, `inv
 - `list-products` — `GET /v1/products` — `hitpay-llms/list-products.md`
 - `get-product-details` — `GET /v1/products/{product_id}` — `hitpay-llms/get-product-details.md`
 - `list-product-categories` — `GET /v1/product-category` — `hitpay-llms/list-product-categories.md`
-- `get-product-category` — `GET /v1/product-category/{id}` — `hitpay-llms/get-product-category.md`
 
 ## Orders
 
@@ -51,13 +49,12 @@ All OAuth lists the merchant **picks** go through ResourcePicker (`charge`, `inv
 - `get-charge-details` — `GET /v1/charges/{charge_id}` — `hitpay-llms/get-charge-details.md`
 - `list-invoices` — `GET /v1/invoices` — `hitpay-llms/list-invoices.md`
 - `get-invoice-details` — `GET /v1/invoices/{invoice_id}` — `hitpay-llms/get-invoice-details.md`
-- `get-invoice-settings` — `GET /v1/invoice-settings` — `hitpay-llms/get-invoice-settings.md`
 
 ## Commerce extras
 
-- `list-coupons` / `get-coupon` — `/v1/coupons`
+- `list-coupons` — `/v1/coupons`
 - `list-discounts` — `/v1/discounts`
 - `list-taxes` — `/v1/taxes`
-- `list-shipping` / `get-shipping` — `/v1/shipping`
+- `list-shipping` — `/v1/shipping`
 - `list-pickups` — `/v1/pickups`
 - `list-add-ons` / `get-add-on` — `/v1/add-ons`
