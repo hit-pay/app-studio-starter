@@ -63,6 +63,8 @@ function DatePickerDemo() {
 export { DatePickerDemo }
 ```
 
+Use `DatePicker`, `DatePickerRange`, or `DateTimePicker`. Do not import `@ui/form/calendar`.
+
 ## Variants
 
 ```tsx

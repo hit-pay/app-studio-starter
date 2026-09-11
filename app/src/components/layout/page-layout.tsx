@@ -3,7 +3,7 @@ import { LeftRegular } from "@mingcute/react/core-regular";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@ui/actions/button";
-import { CopyButton } from "@ui/actions/copy-button";
+import { CopyButton } from "@/components/actions/copy-button";
 
 function Header({
   className,

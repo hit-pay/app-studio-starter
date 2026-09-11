@@ -7,15 +7,9 @@ import { Button } from '@ui/actions/button'
 import { Badge } from '@ui/displaying-data/badge'
 import { Spinner } from '@ui/feedback/spinner'
 import { Checkbox } from '@ui/form/checkbox'
+import { Select } from '@/components/form/select'
 import { Input } from '@ui/form/input'
 import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ui/form/select'
 import {
   Dialog,
   DialogClose,
@@ -394,24 +388,16 @@ function ResourcePickerDialog({
           </div>
           {showFilter ? (
             <Select
+              className="w-44 shrink-0"
+              options={filters}
               value={filter}
+              placeholder="Search by All"
               onValueChange={(value) => {
                 if (value == null) return
                 setPage(1)
                 setFilter(String(value))
               }}
-            >
-              <SelectTrigger className="w-44 shrink-0">
-                <SelectValue placeholder="Search by All" />
-              </SelectTrigger>
-              <SelectContent>
-                {filters.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            />
           ) : null}
         </div>
         <div className="max-h-[min(28rem,50vh)] min-h-48 overflow-y-auto border-y border-oc-border">

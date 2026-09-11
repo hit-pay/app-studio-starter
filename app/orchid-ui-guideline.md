@@ -17,7 +17,9 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - stepper, quantity, plus minus, stock count → `quantity-input`
 - rich text, notes, wysiwyg, lexical → `text-editor`
 - date picker, date range picker, datetime picker, calendar popover → `date-picker`
+- dropdown, select, searchable select, multi select, pick one option → `select`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
+- copy to clipboard, copy id, copy phone, copy url → `copy-button`
 - pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker → `resource-picker`
 - command palette, search commands, cmdk → `command`
 - toast, snackbar, notify, success message → `toast`
@@ -40,6 +42,15 @@ Cn() Tailwind class merge. Import from @/lib/utils.
 Import `@/lib/utils` — `src/lib/utils.ts`.
 
 # Components & Blocks
+
+## Actions
+
+## `copy-button` — Copy Button
+
+Need: copy to clipboard, copy id, copy phone, copy url
+Copy a string (id, phone, URL). prop: value.
+Import `@/components/actions/copy-button` — `src/components/actions/copy-button.tsx`.
+Docs: `orchid-llms/copy-button.md`
 
 ## Displaying Data
 
@@ -96,6 +107,14 @@ Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal
 Import `@/components/form/choice-card` — `src/components/form/choice-card.tsx`.
 Docs: `orchid-llms/choice-card.md`
 
+## `select` — Select
+
+Need: dropdown, select, searchable select, multi select, pick one option
+Props picker for a closed list or a searchable / multi select.
+Import `@/components/form/select` — `src/components/form/select.tsx`.
+Docs: `orchid-llms/select.md`
+Related: `src/ui/form/combobox.tsx`.
+
 ## `quantity-input` — Quantity Input
 
 Need: stepper, quantity, plus minus, stock count
@@ -113,9 +132,10 @@ Docs: `orchid-llms/text-editor.md`
 ## `date-picker` — Date Picker
 
 Need: date picker, date range picker, datetime picker, calendar popover
-Date, range, and date-time selection with popover and calendar helpers.
+Date, range, and date-time picker. Do not import Calendar.
 Import `@/components/form/date-picker` — `src/components/form/date-picker.tsx`.
 Docs: `orchid-llms/date-picker.md`
+Related: `src/ui/form/calendar.tsx`.
 
 ## Layout
 
@@ -179,12 +199,6 @@ Attached controls plus ghost and border icon toolbars. Overflow actions compose 
 Import `@ui/actions/button-group` — `src/ui/actions/button-group.tsx`.
 Docs: `orchid-llms/button-group.md`
 
-## `copy-button` — Copy Button
-
-Copy a string (id, phone, URL). prop: value.
-Import `@ui/actions/copy-button` — `src/ui/actions/copy-button.tsx`.
-Docs: `orchid-llms/copy-button.md`
-
 ## Displaying Data
 
 ## `empty` — Empty
@@ -221,6 +235,7 @@ Docs: `orchid-llms/chart.md`
 Need: banner, alert, inline notice
 Banner with semantic variants and top-right or bottom action placement in Orchid styling.
 Import `@ui/feedback/banner` — `src/ui/feedback/banner.tsx`.
+Docs: `orchid-llms/banner.md`
 
 ## `toast` — Toast
 
@@ -281,18 +296,6 @@ Auto-sizing textarea with Orchid form styling.
 Import `@ui/form/textarea` — `src/ui/form/textarea.tsx`.
 Docs: `orchid-llms/textarea.md`
 
-## `select` — Select
-
-Base UI select with standard sizes and Orchid styling.
-Import `@ui/form/select` — `src/ui/form/select.tsx`.
-Docs: `orchid-llms/select.md`
-
-## `combobox` — Combobox
-
-Searchable single or multi-select with optional Orchid checkbox items and Select All.
-Import `@ui/form/combobox` — `src/ui/form/combobox.tsx`.
-Docs: `orchid-llms/combobox.md`
-
 ## `checkbox` — Checkbox
 
 Base UI checkbox with Orchid states and an optional CheckboxGroup helper.
@@ -316,12 +319,6 @@ Docs: `orchid-llms/switch.md`
 Horizontal or vertical slider with Orchid styling.
 Import `@ui/form/slider` — `src/ui/form/slider.tsx`.
 Docs: `orchid-llms/slider.md`
-
-## `calendar` — Calendar
-
-DayPicker calendar for single, range, or multiple selection in Orchid styling.
-Import `@ui/form/calendar` — `src/ui/form/calendar.tsx`.
-Docs: `orchid-llms/calendar.md`
 
 ## `file-upload` — File Upload
 

@@ -11,19 +11,7 @@ import {
 
 import { cn } from '@/lib/utils'
 import { Checkbox, CheckboxGroup } from '@ui/form/checkbox'
-import {
-  Combobox,
-  ComboboxChip,
-  ComboboxChips,
-  ComboboxChipsInput,
-  ComboboxContent,
-  ComboboxEmpty,
-  ComboboxInput,
-  ComboboxItem,
-  ComboboxList,
-  ComboboxValue,
-  useComboboxAnchor,
-} from '@ui/form/combobox'
+import { Select } from '@/components/form/select'
 import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
 import {
   Field,
@@ -42,13 +30,6 @@ import {
   InputGroupText,
 } from '@ui/form/input-group'
 import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@ui/form/select'
 import { FormSectionItem } from '@ui/form/form-section'
 import { QuantityInput } from '@/components/form/quantity-input'
 import { ChoiceCard, ChoiceCardGroup } from '@/components/form/choice-card'
@@ -81,14 +62,12 @@ import {
   isMultiCombobox,
   isMultiFile,
   isPlainObject,
-  labelsFromValues,
   nestValues,
   pairKeys,
   parseDateValue,
   siblingPath,
   toLocalYmd,
   validateField,
-  valuesFromLabels,
   SCHEMA_FORM_EXAMPLE_FIELDS,
   SCHEMA_FORM_TYPES,
   type FlatField,
@@ -241,80 +220,29 @@ function FormComboboxField({
   onBlur: () => void
   onChange: (next: unknown) => void
 }) {
-  const chips = useComboboxAnchor()
   const options = item.options ?? []
-  const labels = options.map((option) => option.label)
   const multiple = isMultiCombobox(item)
 
-  if (multiple) {
-    return (
-      <Combobox
-        items={labels}
-        multiple
-        value={labelsFromValues(options, value)}
-        onValueChange={(next) => onChange(valuesFromLabels(options, next))}
-      >
-        <ComboboxChips ref={chips}>
-          <ComboboxValue>
-            {(selected: string[]) =>
-              selected.map((label) => (
-                <ComboboxChip key={label} aria-label={label}>
-                  {label}
-                </ComboboxChip>
-              ))
-            }
-          </ComboboxValue>
-          <ComboboxChipsInput
-            id={item.path}
-            placeholder={placeholder ?? 'Search'}
-            aria-invalid={invalid || undefined}
-            onBlur={onBlur}
-          />
-        </ComboboxChips>
-        <ComboboxContent anchor={chips}>
-          <ComboboxEmpty>No results found.</ComboboxEmpty>
-          <ComboboxList>
-            {(label: string) => (
-              <ComboboxItem key={label} value={label} variant="checkbox">
-                {label}
-              </ComboboxItem>
-            )}
-          </ComboboxList>
-        </ComboboxContent>
-      </Combobox>
-    )
-  }
-
-  const selected =
-    options.find((option) => option.value === value)?.label ??
-    (value == null || value === '' ? null : String(value))
-
   return (
-    <Combobox
-      items={labels}
-      value={selected}
-      onValueChange={(next) => {
-        const match = options.find((option) => option.label === next)
-        onChange(match?.value ?? next ?? '')
-      }}
-    >
-      <ComboboxInput
-        id={item.path}
-        placeholder={placeholder ?? 'Search'}
-        aria-invalid={invalid || undefined}
-        onBlur={onBlur}
-      />
-      <ComboboxContent>
-        <ComboboxEmpty>No results found.</ComboboxEmpty>
-        <ComboboxList>
-          {(label: string) => (
-            <ComboboxItem key={label} value={label}>
-              {label}
-            </ComboboxItem>
-          )}
-        </ComboboxList>
-      </ComboboxContent>
-    </Combobox>
+    <Select
+      id={item.path}
+      options={options}
+      multiple={multiple}
+      searchable={item.type === 'combobox' || multiple}
+      value={
+        multiple
+          ? Array.isArray(value)
+            ? value.map(String)
+            : []
+          : value == null || value === ''
+            ? null
+            : String(value)
+      }
+      invalid={invalid}
+      placeholder={placeholder}
+      onBlur={onBlur}
+      onValueChange={(next) => onChange(next ?? (multiple ? [] : ''))}
+    />
   )
 }
 
@@ -777,7 +705,7 @@ function SchemaForm({
                 )
               }
 
-              if (type === 'combobox') {
+              if (type === 'combobox' || type === 'select') {
                 return (
                   <Field data-invalid={invalid || undefined}>
                     <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
@@ -829,20 +757,13 @@ function SchemaForm({
                 const selectAddon = (item.options ?? []).length ? (
                   <InputGroupAddon align={addonEnd ? 'inline-end' : 'inline-start'}>
                     <Select
+                      id={`${item.path}-select`}
+                      size="inline"
+                      className="uppercase"
+                      options={item.options ?? []}
                       value={selectValue || null}
-                      onValueChange={(next) => setSelect(String(next))}
-                    >
-                      <SelectTrigger size="inline" id={`${item.path}-select`}>
-                        <SelectValue className="uppercase" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {(item.options ?? []).map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
+                      onValueChange={(next) => setSelect(String(next ?? ''))}
+                    />
                   </InputGroupAddon>
                 ) : (
                   <InputGroupAddon align={addonEnd ? 'inline-end' : 'inline-start'}>
@@ -1036,28 +957,6 @@ function SchemaForm({
                         )
                       }
                     />
-                  ) : type === 'select' ? (
-                    <Select
-                      value={value == null || value === '' ? null : String(value)}
-                      onValueChange={(next) =>
-                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
-                      }
-                    >
-                      <SelectTrigger
-                        id={item.path}
-                        aria-invalid={invalid || undefined}
-                        onBlur={field.handleBlur}
-                      >
-                        <SelectValue placeholder={placeholder ?? 'Select'} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {(item.options ?? []).map((option) => (
-                          <SelectItem key={option.value} value={option.value}>
-                            {option.label}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
                   ) : (
                     <Input
                       id={item.path}

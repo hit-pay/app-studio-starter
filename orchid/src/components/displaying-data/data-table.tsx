@@ -56,6 +56,7 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@ui/displaying-data/empty";
+import { Select } from "@/components/form/select";
 import { Field, FieldLabel } from "@ui/form/field";
 import {
   InputGroup,
@@ -77,13 +78,6 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@ui/overlays/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@ui/form/select";
 import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,
@@ -1006,25 +1000,16 @@ function SchemaTableFilterPopover({ table }: { table: SchemaTableApi }) {
           <Field key={filter.key}>
             <FieldLabel>{filter.title}</FieldLabel>
             <Select
+              options={filter.options}
               value={draft[filter.key] || null}
+              placeholder={filter.title}
               onValueChange={(value) =>
                 setDraft((current) => ({
                   ...current,
                   [filter.key]: String(value ?? ""),
                 }))
               }
-            >
-              <SelectTrigger>
-                <SelectValue placeholder={filter.title} />
-              </SelectTrigger>
-              <SelectContent>
-                {filter.options.map((option) => (
-                  <SelectItem key={option.value} value={option.value}>
-                    {option.label}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            />
           </Field>
         ))}
         <div className="flex gap-2 pt-1">
@@ -1257,22 +1242,13 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
     <>
       <div className="min-w-0 max-w-44 md:hidden">
         <Select
+          size="sm"
+          options={tabs.map((tab) => ({ value: tab.key, label: tab.title }))}
           value={table.query.tab}
           onValueChange={(value) => {
             if (value) table.setTab(String(value));
           }}
-        >
-          <SelectTrigger className="h-7 text-xs" aria-label="Filter">
-            <SelectValue />
-          </SelectTrigger>
-          <SelectContent>
-            {tabs.map((tab) => (
-              <SelectItem key={tab.key} value={tab.key}>
-                {tab.title}
-              </SelectItem>
-            ))}
-          </SelectContent>
-        </Select>
+        />
       </div>
       <div className="hidden min-w-0 flex-wrap gap-1 md:flex">
         {tabs.map((tab) => (
@@ -1589,20 +1565,14 @@ function SchemaTable({
             <div className="flex items-center gap-2 text-sm text-oc-muted-foreground">
               Item per page:
               <Select
+                size="inline"
+                options={pageSizes.map((size) => ({
+                  value: String(size),
+                  label: String(size),
+                }))}
                 value={String(table.pageSize)}
                 onValueChange={(value) => table.setPageSize(Number(value))}
-              >
-                <SelectTrigger size="inline">
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  {pageSizes.map((size) => (
-                    <SelectItem key={size} value={String(size)}>
-                      {size}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              />
             </div>
           ) : null}
         </div>

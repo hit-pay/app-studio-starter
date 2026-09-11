@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 53 components.
-- Installable registry items: 55, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 51 components.
+- Installable registry items: 53, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -80,6 +80,12 @@ Example prompts after setup:
 
 ## Components & Blocks
 
+### Actions
+
+#### [Copy Button](https://orchid-ui-hitpay.vercel.app/llms/copy-button.md)
+Copy icon that writes a value and shows Copied!.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
+
 ### Displaying Data
 
 #### [Customer Card](https://orchid-ui-hitpay.vercel.app/llms/customer-card.md)
@@ -119,6 +125,10 @@ Schema-driven create/edit form. Use Detail Card for a read-only record.
 #### [Quantity Input](https://orchid-ui-hitpay.vercel.app/llms/quantity-input.md)
 Minus/plus stepper; click the value to type.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
+
+#### [Select](https://orchid-ui-hitpay.vercel.app/llms/select.md)
+Props picker for a closed list or a searchable / multi select.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
 
 #### [Text Editor](https://orchid-ui-hitpay.vercel.app/llms/text-editor.md)
 Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
@@ -170,10 +180,6 @@ Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button-group.json)
 
-#### [Copy Button](https://orchid-ui-hitpay.vercel.app/llms/copy-button.md)
-Copy icon that writes a value and shows Copied!.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
-
 ### Displaying Data
 
 #### [Avatar](https://orchid-ui-hitpay.vercel.app/llms/avatar.md)
@@ -216,17 +222,9 @@ Toast manager with semantic types, actions, close, and placement.
 
 ### Form
 
-#### [Calendar](https://orchid-ui-hitpay.vercel.app/llms/calendar.md)
-Single, range, and multiple date selection used by Date Picker.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/calendar.json)
-
 #### [Checkbox](https://orchid-ui-hitpay.vercel.app/llms/checkbox.md)
 Checkbox with Orchid states and an optional group helper.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/checkbox.json)
-
-#### [Combobox](https://orchid-ui-hitpay.vercel.app/llms/combobox.md)
-Searchable select with Orchid chips and bulk selection helpers.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/combobox.json)
 
 #### [Field](https://orchid-ui-hitpay.vercel.app/llms/field.md)
 Label, description, error, and grouped field composition.
@@ -255,10 +253,6 @@ Accessible label with Orchid typography.
 #### [Radio Group](https://orchid-ui-hitpay.vercel.app/llms/radio-group.md)
 Radio group and item primitives with Orchid styling.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/radio-group.json)
-
-#### [Select](https://orchid-ui-hitpay.vercel.app/llms/select.md)
-Base UI select with groups, states, and Orchid styling.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
 
 #### [Slider](https://orchid-ui-hitpay.vercel.app/llms/slider.md)
 Single, range, or vertical slider with Orchid styling.
@@ -322,7 +316,7 @@ Keyboard key and grouped shortcut display.
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, sidebar, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 

@@ -12,11 +12,6 @@ export const DOC_COMPONENTS = [
       "Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.",
   },
   {
-    to: "/base-ui/copy-button" as const,
-    name: "Copy Button",
-    description: "Copy icon that writes a value and shows Copied!.",
-  },
-  {
     to: "/base-ui/dropdown-menu" as const,
     name: "Dropdown Menu",
     description:
@@ -170,18 +165,6 @@ export const DOC_FORMS = [
       "Auto-sizing textarea with Orchid form styling.",
   },
   {
-    to: "/base-ui/select" as const,
-    name: "Select",
-    description:
-      "Base UI select with groups, states, and Orchid styling.",
-  },
-  {
-    to: "/base-ui/combobox" as const,
-    name: "Combobox",
-    description:
-      "Searchable select with Orchid chips and bulk selection helpers.",
-  },
-  {
     to: "/base-ui/checkbox" as const,
     name: "Checkbox",
     description:
@@ -203,12 +186,6 @@ export const DOC_FORMS = [
     name: "Slider",
     description:
       "Single, range, or vertical slider with Orchid styling.",
-  },
-  {
-    to: "/base-ui/calendar" as const,
-    name: "Calendar",
-    description:
-      "Single, range, and multiple date selection used by Date Picker.",
   },
   {
     to: "/base-ui/form-section" as const,
@@ -243,6 +220,12 @@ export const DOC_BLOCKS = [
     name: "Date Picker",
     description:
       "Date, range, and date-time selection with popover and calendar helpers.",
+  },
+  {
+    to: "/components/select" as const,
+    name: "Select",
+    description:
+      "Props picker for a closed list or a searchable / multi select.",
   },
   {
     to: "/components/detail-card" as const,
@@ -319,6 +302,11 @@ export const DOC_BLOCKS = [
     description:
       "Searchable command palette. Drive it with open, onOpenChange, and groups.",
   },
+  {
+    to: "/components/copy-button" as const,
+    name: "Copy Button",
+    description: "Copy icon that writes a value and shows Copied!.",
+  },
 ] as const;
 
 export function docBlocksByName() {
@@ -366,7 +354,6 @@ export const DOC_BASE_GROUPS = [
   baseGroup("Actions", [
     "/base-ui/button",
     "/base-ui/button-group",
-    "/base-ui/copy-button",
   ]),
   baseGroup("Displaying Data", [
     "/base-ui/avatar",
@@ -382,9 +369,7 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/toast",
   ]),
   baseGroup("Form", [
-    "/base-ui/calendar",
     "/base-ui/checkbox",
-    "/base-ui/combobox",
     "/base-ui/field",
     "/base-ui/file-upload",
     "/base-ui/form-section",
@@ -392,7 +377,6 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/input-group",
     "/base-ui/label",
     "/base-ui/radio-group",
-    "/base-ui/select",
     "/base-ui/slider",
     "/base-ui/switch",
     "/base-ui/textarea",
@@ -430,6 +414,7 @@ function blockGroup(
 
 /** AlignUI-style groups for Components & Blocks. Empty groups are omitted. */
 export const DOC_BLOCK_GROUPS = [
+  blockGroup("Actions", ["/components/copy-button"]),
   blockGroup("Displaying Data", [
     "/components/customer-card",
     "/components/data-table",
@@ -439,6 +424,7 @@ export const DOC_BLOCK_GROUPS = [
   ]),
   blockGroup("Form", [
     "/components/choice-card",
+    "/components/select",
     "/components/date-picker",
     "/components/form-builder",
     "/components/quantity-input",

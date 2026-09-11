@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils'
 import { Avatar, AvatarFallback, AvatarImage } from '@ui/displaying-data/avatar'
 import { Button } from '@ui/actions/button'
 import { Badge } from '@ui/displaying-data/badge'
-import { CopyButton } from '@ui/actions/copy-button'
+import { CopyButton } from '@/components/actions/copy-button'
 import { Skeleton } from '@ui/feedback/skeleton'
 
 type CustomerCardAddress = {

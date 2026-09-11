@@ -1,4 +1,25 @@
-import { SelectDemo } from "../../../src/components/doc/doc-demos"
+import { SelectDemo } from '../../../src/components/doc/doc-demos'
 
 <SelectDemo />
 
+One props-driven picker. Do not import `@ui/form/combobox` children.
+
+```tsx
+import { Select } from '@/components/form/select'
+
+<Select
+  options={[
+    { value: 'sgd', label: 'SGD' },
+    { value: 'usd', label: 'USD' },
+  ]}
+  value={currency}
+  onValueChange={setCurrency}
+/>
+```
+
+- Default is a closed list.
+- `searchable` — type to filter.
+- `multiple` — chips. Value is `string[]`.
+- `size`: `default` | `sm` | `inline` (input-group addon).
+
+In Form Builder, `type: "select"` is this block without search. `type: "combobox"` is the same block with `searchable`.

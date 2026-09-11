@@ -2,172 +2,96 @@
 
 # Select
 
-Base UI select with groups, states, and Orchid styling.
+Props picker for a closed list or a searchable / multi select.
 
 ## Example
 
 ```tsx
+import { useState } from 'react'
+
+import { Select } from '@/components/form/select'
 import {
   Field,
   FieldDescription,
-  FieldError,
   FieldGroup,
   FieldLabel,
-} from "@ui/form/field";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@ui/form/select";
+} from '@ui/form/field'
+
+const currencies = [
+  { value: 'SGD', label: 'SGD — Singapore Dollar' },
+  { value: 'USD', label: 'USD — US Dollar' },
+  { value: 'MYR', label: 'MYR — Malaysian Ringgit' },
+  { value: 'IDR', label: 'IDR — Indonesian Rupiah' },
+]
+
+const channels = [
+  { value: 'pos', label: 'POS' },
+  { value: 'invoice', label: 'Invoice' },
+  { value: 'online_store', label: 'Online Store' },
+]
 
 function SelectDemo() {
+  const [currency, setCurrency] = useState<string | null>('SGD')
+  const [channel, setChannel] = useState<string | null>(null)
+  const [methods, setMethods] = useState<string[]>(['pos'])
+
   return (
-    <>
-      <div className="grid gap-8 md:grid-cols-2">
-        <FieldGroup>
-          <Field>
-            <FieldLabel>Inventory</FieldLabel>
-            <Select defaultValue="in-stock">
-              <SelectTrigger>
-                <SelectValue placeholder="Select inventory" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="in-stock">In Stock</SelectItem>
-                <SelectItem value="out-of-stock">Out of Stock</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>
-              Two fixed stock states for Product Data.
-            </FieldDescription>
-          </Field>
-
-          <Field data-invalid>
-            <FieldLabel>Inventory</FieldLabel>
-            <Select>
-              <SelectTrigger aria-invalid>
-                <SelectValue placeholder="Select inventory" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="in-stock">In Stock</SelectItem>
-                <SelectItem value="out-of-stock">Out of Stock</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldError>Inventory status is required.</FieldError>
-          </Field>
-
-          <Field>
-            <FieldLabel>Recurring interval</FieldLabel>
-            <Select defaultValue="monthly">
-              <SelectTrigger>
-                <SelectValue placeholder="Select interval" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="weekly">Weekly</SelectItem>
-                <SelectItem value="monthly">Monthly</SelectItem>
-                <SelectItem value="quarterly">Quarterly</SelectItem>
-                <SelectItem value="yearly">Yearly</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>
-              How often the Recurring plan charges the customer.
-            </FieldDescription>
-          </Field>
-
-          <Field>
-            <FieldLabel>POS terminal</FieldLabel>
-            <Select defaultValue="orchard-01">
-              <SelectTrigger>
-                <SelectValue placeholder="Select terminal" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="orchard-01">Orchard 01</SelectItem>
-                <SelectItem value="orchard-02">Orchard 02</SelectItem>
-                <SelectItem value="tanjong-pagar">Tanjong Pagar</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>
-              Register this sale against a POS device.
-            </FieldDescription>
-          </Field>
-        </FieldGroup>
-
-        <FieldGroup>
-          <Field>
-            <FieldLabel>Channel</FieldLabel>
-            <Select defaultValue="online-store">
-              <SelectTrigger>
-                <SelectValue placeholder="Select channel" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="online-store">Online Store</SelectItem>
-                <SelectItem value="point-of-sale">Point Of Sale</SelectItem>
-                <SelectItem value="invoicing">Invoicing</SelectItem>
-                <SelectItem value="payment-link">Payment Link</SelectItem>
-                <SelectItem value="recurring">Recurring</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>
-              Sales channels — short list, no search needed.
-            </FieldDescription>
-          </Field>
-
-          <Field>
-            <FieldLabel>Calculation</FieldLabel>
-            <Select defaultValue="flat-rate">
-              <SelectTrigger>
-                <SelectValue placeholder="Select calculation" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="flat-rate">Flat rate</SelectItem>
-                <SelectItem value="fee-per-unit">Fee per Unit</SelectItem>
-                <SelectItem value="weight-base">Weight Base</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>How the fee is calculated.</FieldDescription>
-          </Field>
-
-          <Field>
-            <FieldLabel>Product tax class</FieldLabel>
-            <Select defaultValue="standard">
-              <SelectTrigger>
-                <SelectValue placeholder="Select tax class" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="standard">Standard GST</SelectItem>
-                <SelectItem value="zero">Zero-rated</SelectItem>
-                <SelectItem value="exempt">Exempt</SelectItem>
-                <SelectItem value="digital">Digital services</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>
-              Applied to invoices, Online Store, and POS.
-            </FieldDescription>
-          </Field>
-
-          <Field>
-            <FieldLabel>Payment channel</FieldLabel>
-            <Select defaultValue="paynow">
-              <SelectTrigger>
-                <SelectValue placeholder="Select payment channel" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="paynow">PayNow</SelectItem>
-                <SelectItem value="card">Card</SelectItem>
-                <SelectItem value="grabpay">GrabPay</SelectItem>
-                <SelectItem value="paylah">PayLah!</SelectItem>
-              </SelectContent>
-            </Select>
-            <FieldDescription>
-              Default method for this invoice or payment link.
-            </FieldDescription>
-          </Field>
-        </FieldGroup>
-      </div>
-    </>
-  );
+    <FieldGroup className="max-w-sm">
+      <Field>
+        <FieldLabel>Currency</FieldLabel>
+        <Select
+          options={currencies}
+          value={currency}
+          onValueChange={(value) => setCurrency(typeof value === 'string' ? value : null)}
+        />
+        <FieldDescription>Closed list — no search box.</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel>Sales channel</FieldLabel>
+        <Select
+          searchable
+          options={channels}
+          value={channel}
+          placeholder="Search channels"
+          onValueChange={(value) => setChannel(typeof value === 'string' ? value : null)}
+        />
+        <FieldDescription>Set searchable when the list is long.</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel>Methods</FieldLabel>
+        <Select
+          multiple
+          options={channels}
+          value={methods}
+          onValueChange={(value) => setMethods(Array.isArray(value) ? value : [])}
+        />
+        <FieldDescription>multiple adds chips.</FieldDescription>
+      </Field>
+    </FieldGroup>
+  )
 }
 
-export { SelectDemo };
+export { SelectDemo }
 ```
+
+One props-driven picker. Do not import `@ui/form/combobox` children.
+
+```tsx
+import { Select } from '@/components/form/select'
+
+<Select
+  options={[
+    { value: 'sgd', label: 'SGD' },
+    { value: 'usd', label: 'USD' },
+  ]}
+  value={currency}
+  onValueChange={setCurrency}
+/>
+```
+
+- Default is a closed list.
+- `searchable` — type to filter.
+- `multiple` — chips. Value is `string[]`.
+- `size`: `default` | `sm` | `inline` (input-group addon).
+
+In Form Builder, `type: "select"` is this block without search. `type: "combobox"` is the same block with `searchable`.

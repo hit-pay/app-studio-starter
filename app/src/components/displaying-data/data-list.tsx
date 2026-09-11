@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { More1Regular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { CopyButton } from '@ui/actions/copy-button'
+import { CopyButton } from '@/components/actions/copy-button'
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@ui/overlays/dropdown-menu'
 
 type DataListLayout = 'default' | 'stack' | 'media'

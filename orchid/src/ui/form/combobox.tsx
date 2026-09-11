@@ -107,15 +107,46 @@ function ComboboxValue({ ...props }: ComboboxPrimitive.Value.Props) {
   return <ComboboxPrimitive.Value data-slot="combobox-value" {...props} />
 }
 
-function ComboboxTrigger({ className, children, ...props }: ComboboxPrimitive.Trigger.Props) {
+const comboboxFieldTriggerClass =
+  'flex w-full cursor-pointer items-center gap-2 rounded-lg border border-oc-border bg-oc-background px-2 text-left text-sm leading-normal text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none select-none focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] aria-expanded:border-oc-primary aria-expanded:shadow-[0_0_0_3px_var(--oc-info-border)] data-popup-open:border-oc-primary data-popup-open:shadow-[0_0_0_3px_var(--oc-info-border)] data-open:border-oc-primary data-open:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] data-placeholder:text-oc-muted-foreground'
+
+function ComboboxTrigger({
+  className,
+  children,
+  variant = 'ghost',
+  size = 'default',
+  ...props
+}: ComboboxPrimitive.Trigger.Props & {
+  variant?: 'ghost' | 'field'
+  size?: 'sm' | 'default' | 'inline'
+}) {
   return (
     <ComboboxPrimitive.Trigger
       data-slot="combobox-trigger"
-      className={cn("cursor-pointer [&_svg:not([class*='size-'])]:size-4", className)}
+      data-variant={variant}
+      data-size={size}
+      className={cn(
+        variant === 'field'
+          ? size === 'inline'
+            ? 'group/combobox-trigger inline-flex h-full w-auto shrink-0 cursor-pointer items-center gap-1 border-0 bg-transparent px-0 text-xs leading-normal font-medium text-oc-muted-foreground shadow-none outline-none select-none'
+            : cn(
+                comboboxFieldTriggerClass,
+                'group/combobox-trigger justify-between whitespace-nowrap',
+                size === 'sm' ? 'h-7' : 'h-9',
+              )
+          : "cursor-pointer [&_svg:not([class*='size-'])]:size-4",
+        className,
+      )}
       {...props}
     >
       {children}
-      <DownRegular className="pointer-events-none size-4 text-oc-muted-foreground" />
+      <DownRegular
+        className={cn(
+          'pointer-events-none shrink-0 text-oc-muted-foreground',
+          variant === 'field' && size === 'inline' ? 'size-3.5' : 'size-4',
+          variant === 'field' && 'transition-transform group-data-open/combobox-trigger:rotate-180',
+        )}
+      />
     </ComboboxPrimitive.Trigger>
   )
 }

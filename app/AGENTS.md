@@ -95,7 +95,8 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 | One record / show page fields | `@/components/displaying-data/detail-card` | hand-rolled `dl` rows |
 | KPI / dashboard number | `@/components/displaying-data/metric-card` | custom stat tiles |
 | Customer / contact / payee | `@/components/displaying-data/customer-card` | `Avatar` + `Badge` collage |
-| Create/edit fields | `@/components/form/form-builder` | `@ui/form/field` + `Input`/`Select` per field |
+| Create/edit fields | `@/components/form/form-builder` | `@ui/form/field` + `Input` per field |
+| Pick from a list | `@/components/form/select` | `@ui/form/combobox` children, custom dropdown |
 | Date / range / datetime | `@/components/form/date-picker` | `@ui/form/calendar` + `Popover` |
 | Quantity stepper | `@/components/form/quantity-input` | custom plus/minus `Button`s |
 | Option cards / choose one | `@/components/form/choice-card` | radio + styled boxes |
@@ -103,6 +104,7 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 | Confirm delete / destructive | `@/components/overlays/confirmation-modal` | custom `Dialog` |
 | Pick HitPay products / customers / orders / locations / categories | `@/components/overlays/resource-picker` | custom search `Dialog`, Data Table as a picker |
 | Command palette | `@/components/overlays/command` | custom `Dialog` + input |
+| Copy id / phone / URL | `@/components/actions/copy-button` | custom clipboard `Button` |
 
 Layout imports: `@/components/layout/app-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
 

@@ -18,21 +18,21 @@ import {
   InputGroupText,
   InputGroupTextarea,
 } from '@ui/form/input-group'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@ui/form/select'
+import { Select } from '@/components/form/select'
 
 function CurrencySelect({ defaultValue = 'SGD' }: { defaultValue?: string }) {
   return (
-    <Select defaultValue={defaultValue}>
-      <SelectTrigger size="inline" className="gap-2">
-        <SelectValue className="uppercase" />
-      </SelectTrigger>
-      <SelectContent>
-        <SelectItem value="SGD">SGD</SelectItem>
-        <SelectItem value="USD">USD</SelectItem>
-        <SelectItem value="MYR">MYR</SelectItem>
-        <SelectItem value="IDR">IDR</SelectItem>
-      </SelectContent>
-    </Select>
+    <Select
+      size="inline"
+      className="uppercase"
+      defaultValue={defaultValue}
+      options={[
+        { value: 'SGD', label: 'SGD' },
+        { value: 'USD', label: 'USD' },
+        { value: 'MYR', label: 'MYR' },
+        { value: 'IDR', label: 'IDR' },
+      ]}
+    />
   )
 }
 

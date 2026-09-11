@@ -53,14 +53,12 @@
         "@orchid/input-group",
         "@orchid/textarea",
         "@orchid/select",
-        "@orchid/combobox",
         "@orchid/quantity-input",
         "@orchid/text-editor",
         "@orchid/checkbox",
         "@orchid/radio-group",
         "@orchid/switch",
         "@orchid/slider",
-        "@orchid/calendar",
         "@orchid/date-picker",
         "@orchid/form-section"
       ],
@@ -100,7 +98,7 @@
       "registryDependencies": [
         "@orchid/button",
         "@orchid/checkbox",
-        "@orchid/combobox",
+        "@orchid/select",
         "@orchid/date-picker",
         "@orchid/field",
         "@orchid/input",
@@ -108,7 +106,6 @@
         "@orchid/quantity-input",
         "@orchid/radio-group",
         "@orchid/form-section",
-        "@orchid/select",
         "@orchid/slider",
         "@orchid/textarea",
         "@orchid/switch",
@@ -610,9 +607,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/actions/copy-button.tsx",
+          "path": "src/components/actions/copy-button.tsx",
           "type": "registry:ui",
-          "target": "@ui/actions/copy-button.tsx"
+          "target": "@components/actions/copy-button.tsx"
         }
       ]
     },
@@ -884,25 +881,7 @@
       "name": "select",
       "type": "registry:ui",
       "title": "Select",
-      "description": "Base UI select with standard sizes and Orchid styling.",
-      "dependencies": [
-        "@base-ui/react",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/form/select.tsx",
-          "type": "registry:ui",
-          "target": "@ui/form/select.tsx"
-        }
-      ]
-    },
-    {
-      "name": "combobox",
-      "type": "registry:ui",
-      "title": "Combobox",
-      "description": "Searchable single or multi-select with optional Orchid checkbox items and Select All.",
+      "description": "Props picker for a closed list or a searchable / multi select.",
       "dependencies": [
         "@base-ui/react",
         "@mingcute/react"
@@ -914,8 +893,13 @@
       ],
       "files": [
         {
-          "path": "src/ui/form/combobox.tsx",
+          "path": "src/components/form/select.tsx",
           "type": "registry:ui",
+          "target": "@components/form/select.tsx"
+        },
+        {
+          "path": "src/ui/form/combobox.tsx",
+          "type": "registry:file",
           "target": "@ui/form/combobox.tsx"
         }
       ]
@@ -1032,30 +1016,10 @@
       ]
     },
     {
-      "name": "calendar",
-      "type": "registry:ui",
-      "title": "Calendar",
-      "description": "DayPicker calendar for single, range, or multiple selection in Orchid styling.",
-      "dependencies": [
-        "react-day-picker",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [
-        "@orchid/button"
-      ],
-      "files": [
-        {
-          "path": "src/ui/form/calendar.tsx",
-          "type": "registry:ui",
-          "target": "@ui/form/calendar.tsx"
-        }
-      ]
-    },
-    {
       "name": "date-picker",
       "type": "registry:ui",
       "title": "Date Picker",
-      "description": "Date, range, and date-time selection with popover and calendar helpers.",
+      "description": "Date, range, and date-time picker. Do not import Calendar.",
       "dependencies": [
         "date-fns",
         "@mingcute/react",
@@ -1063,7 +1027,6 @@
       ],
       "registryDependencies": [
         "@orchid/button",
-        "@orchid/calendar",
         "@orchid/input",
         "@orchid/popover"
       ],
@@ -1072,6 +1035,11 @@
           "path": "src/components/form/date-picker.tsx",
           "type": "registry:ui",
           "target": "@components/form/date-picker.tsx"
+        },
+        {
+          "path": "src/ui/form/calendar.tsx",
+          "type": "registry:file",
+          "target": "@ui/form/calendar.tsx"
         }
       ]
     },
