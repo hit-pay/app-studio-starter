@@ -221,9 +221,9 @@ function DataListDemo() {
 export { DataListDemo }
 ```
 
-Pass **`items` only**. Do not assemble rows from base `List` / `ListItem`. Do not
+Pass **`items` only**. Do not import row primitives. Do not
 use `DataTable` unless the list needs search, filters, sort, or pagination.
-Do not wrap `DataList` in `Card`.
+Do not wrap `DataList`.
 
 ```tsx
 import { DataList } from '@/components/displaying-data/data-list'

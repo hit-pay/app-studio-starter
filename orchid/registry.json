@@ -12,7 +12,6 @@
         "@orchid/form-builder",
         "@orchid/data-table",
         "@orchid/alert",
-        "@orchid/list",
         "@orchid/empty",
         "@orchid/aspect-ratio",
         "@orchid/chart",
@@ -189,25 +188,6 @@
           "path": "src/ui/feedback/alert.tsx",
           "type": "registry:ui",
           "target": "@ui/feedback/alert.tsx"
-        }
-      ]
-    },
-    {
-      "name": "list",
-      "type": "registry:ui",
-      "title": "List",
-      "description": "Low-level ListItem parts (title, media, meta, actions). layout default|stack|media. App lists use Data List.",
-      "dependencies": [
-        "@mingcute/react"
-      ],
-      "registryDependencies": [
-        "@orchid/copy-button"
-      ],
-      "files": [
-        {
-          "path": "src/ui/displaying-data/list.tsx",
-          "type": "registry:ui",
-          "target": "@ui/displaying-data/list.tsx"
         }
       ]
     },
@@ -556,9 +536,11 @@
       "type": "registry:ui",
       "title": "Data List",
       "description": "Stacked card or row list from items[]. Each item: key, title, optional description, details, media, actions.menu / actions.hover. For people, products, or activity without table search, filters, sort, or pagination.",
-      "dependencies": [],
+      "dependencies": [
+        "@mingcute/react"
+      ],
       "registryDependencies": [
-        "@orchid/list",
+        "@orchid/copy-button",
         "@orchid/dropdown-menu"
       ],
       "files": [

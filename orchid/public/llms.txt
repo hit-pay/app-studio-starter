@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 53 components.
-- Installable registry items: 55, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 52 components.
+- Installable registry items: 54, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -188,10 +188,6 @@ Recharts wrapper with Orchid tooltip, legend, and chart tokens.
 Compound empty state with Orchid media variants.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
 
-#### [List](https://orchid-ui-hitpay.vercel.app/llms/list.md)
-Row primitives: ListItem, ListItemTitle, ListItemMedia, meta, copy fields, tokens, and actions.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/list.json)
-
 ### Feedback
 
 #### [Alert](https://orchid-ui-hitpay.vercel.app/llms/alert.md)
@@ -322,7 +318,7 @@ Keyboard key and grouped shortcut display.
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, alert, list, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, sidebar, alert, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, combobox, quantity-input, text-editor, checkbox, radio-group, switch, slider, calendar, date-picker, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 

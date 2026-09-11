@@ -41,12 +41,6 @@ export const DOC_COMPONENTS = [
       "Compound empty state with Orchid media variants.",
   },
   {
-    to: "/base-ui/list" as const,
-    name: "List",
-    description:
-      "Row primitives: ListItem, ListItemTitle, ListItemMedia, meta, copy fields, tokens, and actions.",
-  },
-  {
     to: "/base-ui/badge" as const,
     name: "Badge",
     description:
@@ -373,7 +367,6 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/badge",
     "/base-ui/chart",
     "/base-ui/empty",
-    "/base-ui/list",
   ]),
   baseGroup("Feedback", [
     "/base-ui/alert",

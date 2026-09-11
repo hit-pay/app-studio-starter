@@ -65,8 +65,6 @@ export const InputGroupDemo = wrapped.InputGroupDemo;
 export const InstallationDemo = wrapped.InstallationDemo;
 export const KbdDemo = wrapped.KbdDemo;
 export const LabelDemo = wrapped.LabelDemo;
-export const ListDemo = wrapped.ListDemo;
-
 export const MetricCardDemo = wrapped.MetricCardDemo;
 export const PageLayoutDemo = wrapped.PageLayoutDemo;
 export const PaginationDemo = wrapped.PaginationDemo;

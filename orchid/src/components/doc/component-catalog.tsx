@@ -4,12 +4,7 @@ import {
   DOC_BASE_GROUPS,
   DOC_BLOCK_GROUPS,
 } from "@/components/doc/doc-components";
-import {
-  ListItem,
-  ListItemBody,
-  ListItemDescription,
-  ListItemTitle,
-} from "@ui/displaying-data/list";
+import { DataList } from "@/components/displaying-data/data-list";
 
 function CatalogGrid({
   items,
@@ -20,14 +15,17 @@ function CatalogGrid({
     <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
       {items.map((item) => (
         <Link key={item.to} to={item.to} className="block min-w-0">
-          <ListItem className="h-full">
-            <ListItemBody>
-              <ListItemTitle>{item.name}</ListItemTitle>
-              <ListItemDescription className="text-oc-muted-foreground">
-                {item.description}
-              </ListItemDescription>
-            </ListItemBody>
-          </ListItem>
+          <DataList
+            className="gap-0"
+            items={[
+              {
+                key: item.to,
+                title: item.name,
+                description: item.description,
+                className: "h-full",
+              },
+            ]}
+          />
         </Link>
       ))}
     </div>

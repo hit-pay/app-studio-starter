@@ -91,7 +91,7 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 | Job | Use this block | Do not use |
 |---|---|---|
 | Browse rows, search, filter, sort | `@/components/displaying-data/data-table` | hand-rolled HTML table, custom filters |
-| Compact list, cards, activity, people | `@/components/displaying-data/data-list` | `@ui/displaying-data/list`, stacked boxes |
+| Compact list, cards, activity, people | `@/components/displaying-data/data-list` | stacked boxes, custom row markup |
 | One record / show page fields | `@/components/displaying-data/detail-card` | hand-rolled `dl` rows |
 | KPI / dashboard number | `@/components/displaying-data/metric-card` | custom stat tiles |
 | Customer / contact / payee | `@/components/displaying-data/customer-card` | `Avatar` + `Badge` collage |

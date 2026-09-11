@@ -30,7 +30,6 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - overflow menu, action menu, context actions → `dropdown-menu`
 - in-page tabs, tab panel → `tabs`
 - status badge, label, role badge → `badge`
-- listitem primitives → `list`
 
 # Utils
 
@@ -179,13 +178,6 @@ Import `@ui/actions/copy-button` — `src/ui/actions/copy-button.tsx`.
 Docs: `orchid-llms/copy-button.md`
 
 ## Displaying Data
-
-## `list` — List
-
-Need: listitem primitives
-Low-level ListItem parts (title, media, meta, actions). layout default|stack|media. App lists use Data List.
-Import `@ui/displaying-data/list` — `src/ui/displaying-data/list.tsx`.
-Docs: `orchid-llms/list.md`
 
 ## `empty` — Empty
 

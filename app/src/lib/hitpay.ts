@@ -34,9 +34,6 @@ export type HitPayStaffAppMember = {
   locations: HitPayStaffLocation[]
 }
 
-/** @deprecated Use HitPayStaffAppMember */
-export type HitPayMember = HitPayStaffAppMember
-
 function assertBrowser(): void {
   if (typeof window === 'undefined') {
     throw new Error(
@@ -78,9 +75,6 @@ export const fetchAppRoles = () => hitpayGet<{ roles: HitPayRole[] }>('/roles')
 
 export const fetchStaffAppMembers = () =>
   hitpayGet<{ members: HitPayStaffAppMember[] }>('/staff-app-members')
-
-/** @deprecated Use fetchStaffAppMembers */
-export const fetchAppMembers = fetchStaffAppMembers
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useHitPayUser(): {

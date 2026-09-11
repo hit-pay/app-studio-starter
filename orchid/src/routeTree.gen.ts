@@ -39,7 +39,6 @@ import { Route as BaseUiInputRouteImport } from './routes/base-ui/input'
 import { Route as BaseUiInputGroupRouteImport } from './routes/base-ui/input-group'
 import { Route as BaseUiKbdRouteImport } from './routes/base-ui/kbd'
 import { Route as BaseUiLabelRouteImport } from './routes/base-ui/label'
-import { Route as BaseUiListRouteImport } from './routes/base-ui/list'
 import { Route as BaseUiPaginationRouteImport } from './routes/base-ui/pagination'
 import { Route as BaseUiProgressRouteImport } from './routes/base-ui/progress'
 import { Route as BaseUiRadioGroupRouteImport } from './routes/base-ui/radio-group'
@@ -220,11 +219,6 @@ const BaseUiLabelRoute = BaseUiLabelRouteImport.update({
   path: '/base-ui/label',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiListRoute = BaseUiListRouteImport.update({
-  id: '/base-ui/list',
-  path: '/base-ui/list',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BaseUiPaginationRoute = BaseUiPaginationRouteImport.update({
   id: '/base-ui/pagination',
   path: '/base-ui/pagination',
@@ -402,7 +396,6 @@ export interface FileRoutesByFullPath {
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
-  '/base-ui/list': typeof BaseUiListRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
   '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
@@ -464,7 +457,6 @@ export interface FileRoutesByTo {
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
-  '/base-ui/list': typeof BaseUiListRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
   '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
@@ -527,7 +519,6 @@ export interface FileRoutesById {
   '/base-ui/input-group': typeof BaseUiInputGroupRoute
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
-  '/base-ui/list': typeof BaseUiListRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
   '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
@@ -591,7 +582,6 @@ export interface FileRouteTypes {
     | '/base-ui/input-group'
     | '/base-ui/kbd'
     | '/base-ui/label'
-    | '/base-ui/list'
     | '/base-ui/pagination'
     | '/base-ui/progress'
     | '/base-ui/radio-group'
@@ -653,7 +643,6 @@ export interface FileRouteTypes {
     | '/base-ui/input-group'
     | '/base-ui/kbd'
     | '/base-ui/label'
-    | '/base-ui/list'
     | '/base-ui/pagination'
     | '/base-ui/progress'
     | '/base-ui/radio-group'
@@ -715,7 +704,6 @@ export interface FileRouteTypes {
     | '/base-ui/input-group'
     | '/base-ui/kbd'
     | '/base-ui/label'
-    | '/base-ui/list'
     | '/base-ui/pagination'
     | '/base-ui/progress'
     | '/base-ui/radio-group'
@@ -778,7 +766,6 @@ export interface RootRouteChildren {
   BaseUiInputGroupRoute: typeof BaseUiInputGroupRoute
   BaseUiKbdRoute: typeof BaseUiKbdRoute
   BaseUiLabelRoute: typeof BaseUiLabelRoute
-  BaseUiListRoute: typeof BaseUiListRoute
   BaseUiPaginationRoute: typeof BaseUiPaginationRoute
   BaseUiProgressRoute: typeof BaseUiProgressRoute
   BaseUiRadioGroupRoute: typeof BaseUiRadioGroupRoute
@@ -1023,13 +1010,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiLabelRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/list': {
-      id: '/base-ui/list'
-      path: '/base-ui/list'
-      fullPath: '/base-ui/list'
-      preLoaderRoute: typeof BaseUiListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/base-ui/pagination': {
       id: '/base-ui/pagination'
       path: '/base-ui/pagination'
@@ -1266,7 +1246,6 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiInputGroupRoute: BaseUiInputGroupRoute,
   BaseUiKbdRoute: BaseUiKbdRoute,
   BaseUiLabelRoute: BaseUiLabelRoute,
-  BaseUiListRoute: BaseUiListRoute,
   BaseUiPaginationRoute: BaseUiPaginationRoute,
   BaseUiProgressRoute: BaseUiProgressRoute,
   BaseUiRadioGroupRoute: BaseUiRadioGroupRoute,

@@ -38,7 +38,6 @@ const NEED = {
   'dropdown-menu': 'overflow menu, action menu, context actions',
   tabs: 'in-page tabs, tab panel',
   badge: 'status badge, label, role badge',
-  list: 'listitem primitives',
 }
 
 const lines = [
@@ -88,7 +87,6 @@ const BASE_SUBGROUP = {
   badge: 'Displaying Data',
   chart: 'Displaying Data',
   empty: 'Displaying Data',
-  list: 'Displaying Data',
   alert: 'Feedback',
   progress: 'Feedback',
   skeleton: 'Feedback',
