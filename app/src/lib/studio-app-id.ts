@@ -1,4 +1,3 @@
-/** Shared app-studio origin. Prefix every localStorage/sessionStorage key with this app id. */
 export function studioAppId(): string {
   if (typeof window !== 'undefined') {
     const fromPath = window.location.pathname.split('/').filter(Boolean)[0]

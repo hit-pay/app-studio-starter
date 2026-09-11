@@ -1,12 +1,10 @@
-'use client'
-
 import { useEffect, useMemo, useState } from 'react'
 
 import { Select } from '@/components/form/select'
 import {
   fetchStaffAppMembers,
   type HitPayStaffAppMember,
-} from '#/lib/hitpay'
+} from '@/lib/hitpay'
 import { Field, FieldDescription, FieldLabel } from '@ui/form/field'
 
 type StaffSelectLoad = () => Promise<{ members: HitPayStaffAppMember[] }>
