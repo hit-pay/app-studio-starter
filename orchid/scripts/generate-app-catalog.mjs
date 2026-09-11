@@ -26,8 +26,6 @@ const NEED = {
   'quantity-input': 'stepper, quantity, plus minus, stock count',
   'text-editor': 'rich text, notes, wysiwyg, lexical',
   'date-picker': 'date picker, date range picker, datetime picker, calendar popover',
-  sidebar: 'primary navigation, nested app navigation, accordion navigation',
-  'sub-sidebar': 'child navigation panel, section links',
   'confirmation-modal': 'confirm, delete, destructive, are you sure',
   command: 'command palette, search commands, cmdk',
   toast: 'toast, snackbar, notify, success message',
@@ -143,8 +141,6 @@ const BLOCK_SUBGROUP = {
   'app-studio-layout': 'Layout',
   'form-layout': 'Layout',
   'page-layout': 'Layout',
-  sidebar: 'Navigation',
-  'sub-sidebar': 'Navigation',
   command: 'Overlays',
   'confirmation-modal': 'Overlays',
 }
@@ -167,7 +163,7 @@ const grouped = new Map([
 ])
 
 for (const item of registry.items) {
-  if (item.name === 'all') continue
+  if (['all', 'sidebar', 'sub-sidebar'].includes(item.name)) continue
   grouped.get(sectionFor(item)).push(item)
 }
 

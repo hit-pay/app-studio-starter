@@ -11,8 +11,6 @@
       "registryDependencies": [
         "@orchid/form-builder",
         "@orchid/data-table",
-        "@orchid/sidebar",
-        "@orchid/sub-sidebar",
         "@orchid/alert",
         "@orchid/list",
         "@orchid/empty",

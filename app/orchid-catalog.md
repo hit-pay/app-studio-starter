@@ -17,8 +17,6 @@ Find the block that matches the job. Use its summary and import first. Open the 
 - stepper, quantity, plus minus, stock count → `quantity-input`
 - rich text, notes, wysiwyg, lexical → `text-editor`
 - date picker, date range picker, datetime picker, calendar popover → `date-picker`
-- primary navigation, nested app navigation, accordion navigation → `sidebar`
-- child navigation panel, section links → `sub-sidebar`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
 - command palette, search commands, cmdk → `command`
 - toast, snackbar, notify, success message → `toast`
@@ -142,22 +140,6 @@ Need: browse page shell, detail page shell, page title, back button, page action
 Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.
 Import `@/components/layout/page-layout` — `src/components/layout/page-layout.tsx`.
 Reference: `src/components/layout/page-layout.tsx`; https://orchid-ui-hitpay.vercel.app/llms/page-layout.md
-
-## Navigation
-
-## `sidebar` — Sidebar
-
-Need: primary navigation, nested app navigation, accordion navigation
-JSON-configured navigation with inline accordion children or a back-enabled Sub Sidebar per item.
-Import `@/components/navigation/sidebar` — `src/components/navigation/sidebar.tsx`.
-Reference: `src/components/navigation/sidebar.tsx`; https://orchid-ui-hitpay.vercel.app/llms/sidebar.md
-
-## `sub-sidebar` — Sub Sidebar
-
-Need: child navigation panel, section links
-Flat child navigation with a blue active state. AppStudioLayout sidebar mode uses its own built-in list.
-Import `@/components/navigation/sub-sidebar` — `src/components/navigation/sub-sidebar.tsx`.
-Reference: `src/components/navigation/sub-sidebar.tsx`; https://orchid-ui-hitpay.vercel.app/llms/sub-sidebar.md
 
 ## Overlays
 
