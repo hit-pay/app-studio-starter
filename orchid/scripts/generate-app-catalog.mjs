@@ -162,7 +162,7 @@ const grouped = new Map([
 ])
 
 for (const item of registry.items) {
-  if (['all', 'sidebar'].includes(item.name)) continue
+  if (item.name === 'all') continue
   grouped.get(sectionFor(item)).push(item)
 }
 

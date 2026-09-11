@@ -194,12 +194,6 @@ export function docFormsByName() {
 
 export const DOC_BLOCKS = [
   {
-    to: "/components/sidebar" as const,
-    name: "Sidebar",
-    description:
-      "JSON-configured navigation that opens nested items in a back-enabled panel.",
-  },
-  {
     to: "/components/choice-card" as const,
     name: "Choice Card",
     description: "Selectable cards with left or center icon, no radio dot.",
@@ -444,7 +438,6 @@ export const DOC_BLOCK_GROUPS = [
     "/components/resource-picker",
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
-  blockGroup("Navigation", ["/components/sidebar"]),
   blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);
 

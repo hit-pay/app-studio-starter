@@ -388,7 +388,10 @@ function Sidebar({
                             event.preventDefault()
                             return
                           }
-                          onItemChange?.(item.id, item)
+                          if (onItemChange) {
+                            event.preventDefault()
+                            onItemChange(item.id, item)
+                          }
                         }}
                       >
                         {item.label}

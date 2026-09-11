@@ -66,7 +66,6 @@ import { Route as ComponentsQuantityInputRouteImport } from './routes/components
 import { Route as ComponentsResourcePickerRouteImport } from './routes/components/resource-picker'
 import { Route as ComponentsRoleSelectRouteImport } from './routes/components/role-select'
 import { Route as ComponentsSelectRouteImport } from './routes/components/select'
-import { Route as ComponentsSidebarRouteImport } from './routes/components/sidebar'
 import { Route as ComponentsStaffSelectRouteImport } from './routes/components/staff-select'
 import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
 
@@ -357,11 +356,6 @@ const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
   path: '/components/select',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsSidebarRoute = ComponentsSidebarRouteImport.update({
-  id: '/components/sidebar',
-  path: '/components/sidebar',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ComponentsStaffSelectRoute = ComponentsStaffSelectRouteImport.update({
   id: '/components/staff-select',
   path: '/components/staff-select',
@@ -429,7 +423,6 @@ export interface FileRoutesByFullPath {
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
-  '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/staff-select': typeof ComponentsStaffSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
@@ -491,7 +484,6 @@ export interface FileRoutesByTo {
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
-  '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/staff-select': typeof ComponentsStaffSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui': typeof BaseUiIndexRoute
@@ -554,7 +546,6 @@ export interface FileRoutesById {
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
-  '/components/sidebar': typeof ComponentsSidebarRoute
   '/components/staff-select': typeof ComponentsStaffSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
@@ -618,7 +609,6 @@ export interface FileRouteTypes {
     | '/components/resource-picker'
     | '/components/role-select'
     | '/components/select'
-    | '/components/sidebar'
     | '/components/staff-select'
     | '/components/text-editor'
     | '/base-ui/'
@@ -680,7 +670,6 @@ export interface FileRouteTypes {
     | '/components/resource-picker'
     | '/components/role-select'
     | '/components/select'
-    | '/components/sidebar'
     | '/components/staff-select'
     | '/components/text-editor'
     | '/base-ui'
@@ -742,7 +731,6 @@ export interface FileRouteTypes {
     | '/components/resource-picker'
     | '/components/role-select'
     | '/components/select'
-    | '/components/sidebar'
     | '/components/staff-select'
     | '/components/text-editor'
     | '/base-ui/'
@@ -805,7 +793,6 @@ export interface RootRouteChildren {
   ComponentsResourcePickerRoute: typeof ComponentsResourcePickerRoute
   ComponentsRoleSelectRoute: typeof ComponentsRoleSelectRoute
   ComponentsSelectRoute: typeof ComponentsSelectRoute
-  ComponentsSidebarRoute: typeof ComponentsSidebarRoute
   ComponentsStaffSelectRoute: typeof ComponentsStaffSelectRoute
   ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
   BaseUiIndexRoute: typeof BaseUiIndexRoute
@@ -1213,13 +1200,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsSelectRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/sidebar': {
-      id: '/components/sidebar'
-      path: '/components/sidebar'
-      fullPath: '/components/sidebar'
-      preLoaderRoute: typeof ComponentsSidebarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/staff-select': {
       id: '/components/staff-select'
       path: '/components/staff-select'
@@ -1293,7 +1273,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsResourcePickerRoute: ComponentsResourcePickerRoute,
   ComponentsRoleSelectRoute: ComponentsRoleSelectRoute,
   ComponentsSelectRoute: ComponentsSelectRoute,
-  ComponentsSidebarRoute: ComponentsSidebarRoute,
   ComponentsStaffSelectRoute: ComponentsStaffSelectRoute,
   ComponentsTextEditorRoute: ComponentsTextEditorRoute,
   BaseUiIndexRoute: BaseUiIndexRoute,

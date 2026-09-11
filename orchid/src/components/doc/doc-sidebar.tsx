@@ -1,81 +1,34 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { useNavigate, useRouterState } from "@tanstack/react-router";
 
+import {
+  Sidebar,
+  type SidebarGroupConfig,
+} from "@/components/navigation/sidebar";
 import {
   DOC_BASE_GROUPS,
   DOC_BLOCK_GROUPS,
   DOC_GUIDES,
 } from "./doc-components";
 
-function NavLinks({
-  items,
-  pathname,
-}: {
-  items: readonly { to: string; name: string }[];
-  pathname: string;
-}) {
-  return (
-    <div className="flex flex-col">
-      {items.map((item) => (
-        <Link
-          key={item.to}
-          to={item.to}
-          aria-current={pathname === item.to ? "page" : undefined}
-          className={[
-            "flex min-h-8 w-full min-w-0 items-center gap-2 rounded px-2 py-1.5 text-sm text-oc-foreground outline-none transition-colors",
-            "hover:bg-oc-neutral focus-visible:ring-2 focus-visible:ring-oc-ring",
-            pathname === item.to
-              ? "bg-oc-neutral font-medium text-oc-primary hover:bg-oc-neutral"
-              : "",
-          ].join(" ")}
-        >
-          {item.name}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
-function NavGroup({
-  label,
-  items,
-  pathname,
-}: {
-  label: string;
-  items: readonly { to: string; name: string }[];
-  pathname: string;
-}) {
-  return (
-    <div className="mb-5 flex min-w-0 flex-col last:mb-0">
-      <div className="mb-1 px-2 text-[10px] leading-5 font-medium tracking-[0.16em] text-oc-muted-foreground uppercase">
-        {label}
-      </div>
-      <NavLinks items={items} pathname={pathname} />
-    </div>
-  );
-}
-
-function GroupedNav({
-  groups,
-  pathname,
-}: {
-  groups: readonly { label: string; items: readonly { to: string; name: string }[] }[];
-  pathname: string;
-}) {
-  return (
-    <div className="mb-5 flex min-w-0 flex-col last:mb-0">
-      {groups.map((group) => (
-        <div key={group.label} className="mb-3 last:mb-0">
-          <div className="mb-0.5 px-2 text-xs font-medium text-oc-muted-foreground">
-            {group.label}
-          </div>
-          <NavLinks items={group.items} pathname={pathname} />
-        </div>
-      ))}
-    </div>
-  );
+function asGroups(
+  groups: readonly {
+    label: string;
+    items: readonly { to: string; name: string }[];
+  }[],
+): SidebarGroupConfig[] {
+  return groups.map((group) => ({
+    id: group.label,
+    label: group.label,
+    items: group.items.map((item) => ({
+      id: item.to,
+      label: item.name,
+      href: item.to,
+    })),
+  }));
 }
 
 function DocSidebar() {
+  const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
   if (pathname === "/" || pathname === "/components" || pathname === "/base-ui") {
@@ -90,22 +43,23 @@ function DocSidebar() {
     return null;
   }
 
+  const groups = showGuides
+    ? asGroups([{ label: "Guides", items: DOC_GUIDES }])
+    : showBlocks
+      ? asGroups(DOC_BLOCK_GROUPS)
+      : asGroups(DOC_BASE_GROUPS);
+
   return (
     <aside className="hidden h-full w-56 shrink-0 flex-col border-r border-solid border-oc-border bg-oc-background md:flex">
-      <nav
-        aria-label="Documentation navigation"
-        className="min-h-0 flex-1 overflow-y-auto px-3 py-4"
-      >
-        {showGuides ? (
-          <NavGroup label="Guides" items={DOC_GUIDES} pathname={pathname} />
-        ) : null}
-        {showBlocks ? (
-          <GroupedNav groups={DOC_BLOCK_GROUPS} pathname={pathname} />
-        ) : null}
-        {showBase ? (
-          <GroupedNav groups={DOC_BASE_GROUPS} pathname={pathname} />
-        ) : null}
-      </nav>
+      <Sidebar
+        className="h-full min-h-0 w-full"
+        sidebarClassName="rounded-none border-0 bg-transparent"
+        groups={groups}
+        activeItem={pathname}
+        onItemChange={(id) => {
+          void navigate({ to: id });
+        }}
+      />
     </aside>
   );
 }

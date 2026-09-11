@@ -75,7 +75,6 @@ export const RoleSelectDemo = wrapped.RoleSelectDemo;
 export const StaffSelectDemo = wrapped.StaffSelectDemo;
 export const SchemaFormDemo = wrapped.SchemaFormDemo;
 export const SchemaTableDemo = wrapped.SchemaTableDemo;
-export const SidebarDemo = wrapped.SidebarDemo;
 export const SkeletonDemo = wrapped.SkeletonDemo;
 export const SliderDemo = wrapped.SliderDemo;
 export const SpinnerDemo = wrapped.SpinnerDemo;

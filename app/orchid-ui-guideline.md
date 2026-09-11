@@ -104,7 +104,7 @@ Docs: `orchid-llms/detail-card.md`
 ## `form-builder` — Form Builder
 
 Need: multi-field form, create form, edit form, schema fields, validation
-JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
+JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
 Import `@/components/form/form-builder` — `src/components/form/form-builder.tsx`.
 Docs: `orchid-llms/form-builder.md`
 Related: `src/components/form/form-builder-model.ts`.

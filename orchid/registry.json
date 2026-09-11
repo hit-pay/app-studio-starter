@@ -159,24 +159,6 @@
       ]
     },
     {
-      "name": "sidebar",
-      "type": "registry:ui",
-      "title": "Sidebar",
-      "description": "JSON-configured navigation with inline accordion children or a back-enabled Sub Sidebar per item.",
-      "dependencies": [
-        "@base-ui/react",
-        "@mingcute/react"
-      ],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/components/navigation/sidebar.tsx",
-          "type": "registry:ui",
-          "target": "@components/navigation/sidebar.tsx"
-        }
-      ]
-    },
-    {
       "name": "banner",
       "type": "registry:ui",
       "title": "Banner",

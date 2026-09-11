@@ -79,3 +79,22 @@ const fields = [
 ```
 
 `props.alignment` is `Vertical` (default) or `Horizontal`. `props.cardAlignment` is `Left` (default) or `Center`.
+
+## Staff and role
+
+Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. They render `StaffSelect` / `RoleSelect` (same fetch as App Studio). The stored value is `{ id, name }` (or an array when `props.multiple` is true).
+
+```tsx
+const fields = [
+  { key: "assignee", title: "Assignee", type: "staff", required: true },
+  {
+    key: "reviewers",
+    title: "Reviewers",
+    type: "staff",
+    props: { multiple: true, roleTitles: ["Manager", "Admin"] },
+  },
+  { key: "notify_role", title: "Notify role", type: "role" },
+]
+```
+
+Do not fetch staff or roles on the screen. Optional staff `props`: `multiple`, `roleTitles`, `locationId`.
