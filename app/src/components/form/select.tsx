@@ -42,14 +42,14 @@ type SelectProps = Omit<ComponentProps<'div'>, 'onChange'> & {
   onBlur?: () => void
 }
 
-function labelsFromValues(options: SelectOption[], value: unknown) {
-  const values = Array.isArray(value) ? value.map(String) : []
-  return options.filter((option) => values.includes(option.value)).map((option) => option.label)
+function optionLabel(options: SelectOption[], value: string) {
+  return options.find((option) => option.value === value)?.label ?? value
 }
 
-function valuesFromLabels(options: SelectOption[], labels: unknown) {
-  const selected = Array.isArray(labels) ? labels.map(String) : []
-  return options.filter((option) => selected.includes(option.label)).map((option) => option.value)
+function knownValues(options: SelectOption[], value: unknown) {
+  const values = Array.isArray(value) ? value.map(String) : []
+  const allowed = new Set(options.map((option) => option.value))
+  return values.filter((item) => allowed.has(item))
 }
 
 function Select({
@@ -70,28 +70,32 @@ function Select({
   onBlur,
 }: SelectProps) {
   const chips = useComboboxAnchor()
-  const labels = options.map((option) => option.label)
+  const values = options.map((option) => option.value)
+  const labelOf = (item: unknown) => optionLabel(options, String(item ?? ''))
 
   if (multiple) {
-    const selected = value !== undefined ? labelsFromValues(options, value) : undefined
+    const selected = value !== undefined ? knownValues(options, value) : undefined
     const defaultSelected =
-      defaultValue !== undefined ? labelsFromValues(options, defaultValue) : undefined
+      defaultValue !== undefined ? knownValues(options, defaultValue) : undefined
 
     return (
       <ComboboxPrimitive
-        items={labels}
+        items={values}
         multiple
         value={selected}
         defaultValue={defaultSelected}
         disabled={disabled}
-        onValueChange={(next) => onValueChange?.(valuesFromLabels(options, next))}
+        itemToStringLabel={labelOf}
+        onValueChange={(next) =>
+          onValueChange?.(Array.isArray(next) ? next.map(String) : [])
+        }
       >
         <ComboboxChips ref={chips} className={className} aria-invalid={invalid || undefined}>
           <ComboboxValue>
             {(picked: string[]) =>
-              picked.map((label) => (
-                <ComboboxChip key={label} aria-label={label}>
-                  {label}
+              picked.map((item) => (
+                <ComboboxChip key={item} aria-label={labelOf(item)}>
+                  {labelOf(item)}
                 </ComboboxChip>
               ))
             }
@@ -109,11 +113,11 @@ function Select({
           <ComboboxSeparator />
           <ComboboxEmpty>{empty}</ComboboxEmpty>
           <ComboboxList>
-            {(label: string) => {
-              const option = options.find((item) => item.label === label)
+            {(item: string) => {
+              const option = options.find((entry) => entry.value === item)
               return (
-                <ComboboxItem key={label} value={label} variant="checkbox" disabled={option?.disabled}>
-                  {label}
+                <ComboboxItem key={item} value={item} variant="checkbox" disabled={option?.disabled}>
+                  {option?.label ?? item}
                 </ComboboxItem>
               )
             }}
@@ -123,24 +127,27 @@ function Select({
     )
   }
 
-  const selectedLabel =
-    options.find((option) => option.value === value)?.label ??
-    (value == null || value === '' ? null : String(value))
-  const defaultLabel =
-    options.find((option) => option.value === defaultValue)?.label ??
-    (defaultValue == null || defaultValue === '' ? undefined : String(defaultValue))
+  const selectedValue =
+    value === undefined
+      ? undefined
+      : typeof value !== 'string' || !options.some((option) => option.value === value)
+        ? null
+        : value
+  const defaultSelected =
+    typeof defaultValue !== 'string' ||
+    !options.some((option) => option.value === defaultValue)
+      ? undefined
+      : defaultValue
 
   return (
     <ComboboxPrimitive
-      items={labels}
-      value={value !== undefined ? selectedLabel : undefined}
-      defaultValue={defaultLabel}
+      items={values}
+      value={selectedValue}
+      defaultValue={defaultSelected}
       disabled={disabled}
       filter={searchable ? undefined : null}
-      onValueChange={(next) => {
-        const match = options.find((option) => option.label === next)
-        onValueChange?.(match?.value ?? (next == null ? null : String(next)))
-      }}
+      itemToStringLabel={labelOf}
+      onValueChange={(next) => onValueChange?.(next == null ? null : String(next))}
     >
       {searchable ? (
         <ComboboxInput
@@ -164,7 +171,7 @@ function Select({
           <ComboboxValue>
             {(picked: string | null) =>
               picked ? (
-                <span className="min-w-0 flex-1 truncate text-left">{picked}</span>
+                <span className="min-w-0 flex-1 truncate text-left">{labelOf(picked)}</span>
               ) : (
                 <span className="min-w-0 flex-1 truncate text-left text-oc-muted-foreground">
                   {placeholder ?? 'Select'}
@@ -177,11 +184,11 @@ function Select({
       <ComboboxContent>
         <ComboboxEmpty>{empty}</ComboboxEmpty>
         <ComboboxList>
-          {(label: string) => {
-            const option = options.find((item) => item.label === label)
+          {(item: string) => {
+            const option = options.find((entry) => entry.value === item)
             return (
-              <ComboboxItem key={label} value={label} disabled={option?.disabled}>
-                {label}
+              <ComboboxItem key={item} value={item} disabled={option?.disabled}>
+                {option?.label ?? item}
               </ComboboxItem>
             )
           }}

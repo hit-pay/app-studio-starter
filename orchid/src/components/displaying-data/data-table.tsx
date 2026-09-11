@@ -1411,7 +1411,13 @@ function SchemaTable({
           {table.rows.length === 0 ? (
             <DataTableEmpty>
               <Empty
-                media="search"
+                media={
+                  table.schema.emptyState?.media ??
+                  (table.query.search.trim() ||
+                  Object.values(table.query.filters).some(Boolean)
+                    ? "search"
+                    : "icon")
+                }
                 title={table.schema.emptyState?.title ?? "No data to display"}
                 description={table.schema.emptyState?.description}
                 actions={table.schema.emptyState?.actions?.map((action) => ({

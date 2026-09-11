@@ -317,7 +317,7 @@
       "name": "resource-picker",
       "type": "registry:ui",
       "title": "Resource Picker",
-      "description": "Promise picker for HitPay list records (products, categories, customers, orders, locations). useResourcePicker({ type }).",
+      "description": "Promise picker for HitPay list records (products, categories, customers, orders, locations). const pick = useResourcePicker(); await pick({ type }).",
       "dependencies": [
         "@mingcute/react"
       ],

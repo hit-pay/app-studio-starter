@@ -85,7 +85,7 @@ import { Select } from '@/components/form/select'
     { value: 'usd', label: 'USD' },
   ]}
   value={currency}
-  onValueChange={setCurrency}
+  onValueChange={(value) => setCurrency(typeof value === 'string' ? value : null)}
 />
 ```
 

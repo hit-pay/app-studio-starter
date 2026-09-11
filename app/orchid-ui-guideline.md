@@ -179,7 +179,7 @@ Docs: `orchid-llms/confirmation-modal.md`
 ## `resource-picker` — Resource Picker
 
 Need: pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker
-Promise picker for HitPay list records (products, categories, customers, orders, locations). useResourcePicker({ type }).
+Promise picker for HitPay list records (products, categories, customers, orders, locations). const pick = useResourcePicker(); await pick({ type }).
 Import `@/components/overlays/resource-picker` — `src/components/overlays/resource-picker.tsx`.
 Docs: `orchid-llms/resource-picker.md`
 

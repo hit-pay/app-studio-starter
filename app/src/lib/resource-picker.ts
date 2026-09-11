@@ -110,27 +110,52 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
     }
 
     if (data.type === 'customer') {
-      query.set('page', String(page))
-      query.set('per_page', '25')
-      const response = await hitpayRequest(`/v1/customers?${query}`)
-      if (!response.ok) throw new Error('Could not load customers.')
-      const payload = await response.json()
       const needle = data.query.trim().toLowerCase()
-      const items: ResourcePickerItem[] = asList<Record<string, unknown>>(payload)
-        .filter((customer) => {
-          if (!needle) return true
-          const hay = [customer.name, customer.email, customer.phone_number]
-            .filter((value) => typeof value === 'string')
-            .join(' ')
-            .toLowerCase()
-          return hay.includes(needle)
-        })
-        .map((customer) => ({
-          id: String(customer.id),
-          title: String(customer.name || customer.email || customer.id),
-          resource: asRecord(customer),
-        }))
-      return { items, hasMore: hasMore(payload, page) }
+      const toItem = (customer: Record<string, unknown>): ResourcePickerItem => ({
+        id: String(customer.id),
+        title: String(customer.name || customer.email || customer.id),
+        resource: asRecord(customer),
+      })
+      const matches = (customer: Record<string, unknown>) => {
+        if (!needle) return true
+        const hay = [customer.name, customer.email, customer.phone_number]
+          .filter((value) => typeof value === 'string')
+          .join(' ')
+          .toLowerCase()
+        return hay.includes(needle)
+      }
+
+      if (!needle) {
+        query.set('page', String(page))
+        query.set('per_page', '25')
+        const response = await hitpayRequest(`/v1/customers?${query}`)
+        if (!response.ok) throw new Error('Could not load customers.')
+        const payload = await response.json()
+        return {
+          items: asList<Record<string, unknown>>(payload).map(toItem),
+          hasMore: hasMore(payload, page),
+        }
+      }
+
+      const found: ResourcePickerItem[] = []
+      let cursor = 1
+      let more = true
+      while (more && found.length < 25 && cursor <= 8) {
+        const pageQuery = new URLSearchParams()
+        pageQuery.set('page', String(cursor))
+        pageQuery.set('per_page', '25')
+        const response = await hitpayRequest(`/v1/customers?${pageQuery}`)
+        if (!response.ok) throw new Error('Could not load customers.')
+        const payload = await response.json()
+        const rows = asList<Record<string, unknown>>(payload)
+        for (const customer of rows) {
+          if (matches(customer)) found.push(toItem(customer))
+          if (found.length >= 25) break
+        }
+        more = hasMore(payload, cursor)
+        cursor += 1
+      }
+      return { items: found, hasMore: more }
     }
 
     if (data.type === 'order') {

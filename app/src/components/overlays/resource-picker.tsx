@@ -231,12 +231,14 @@ function ResourcePickerDialog({
   const [error, setError] = React.useState<string | null>(null)
   const [expanded, setExpanded] = React.useState<Set<string>>(new Set())
   const [selected, setSelected] = React.useState<Map<string, Set<string>>>(new Map())
+  const [cache, setCache] = React.useState<Map<string, ResourcePickerItem>>(new Map())
 
   React.useEffect(() => {
     if (!open || !request) return
     setSearch(request.query ?? '')
     setFilter(request.filter?.status ?? 'all')
     setItems([])
+    setCache(new Map())
     setPage(1)
     setHasMore(false)
     setError(null)
@@ -264,6 +266,11 @@ function ResourcePickerDialog({
         .then((result) => {
           if (cancelled) return
           setItems((current) => (page === 1 ? result.items : [...current, ...result.items]))
+          setCache((current) => {
+            const next = new Map(current)
+            for (const item of result.items) next.set(item.id, item)
+            return next
+          })
           setHasMore(Boolean(result.hasMore))
           setError(null)
         })
@@ -338,15 +345,18 @@ function ResourcePickerDialog({
   }
 
   function confirm() {
-    const byId = new Map(items.map((item) => [item.id, item]))
     const value: ResourcePickerResult[] = []
     for (const [id, childIds] of selected) {
-      const item = byId.get(id)
+      const item = cache.get(id)
       const children = item?.children?.filter((child) => childIds.has(child.id)) ?? []
       value.push({
         id,
         resource: item?.resource,
-        children: children.map((child) => ({ id: child.id, resource: child.resource })),
+        children: children.length
+          ? children.map((child) => ({ id: child.id, resource: child.resource }))
+          : childIds.size
+            ? [...childIds].map((childId) => ({ id: childId }))
+            : undefined,
       })
     }
     onConfirm(value)

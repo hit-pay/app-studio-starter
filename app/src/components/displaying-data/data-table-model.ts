@@ -92,6 +92,7 @@ export type SchemaTableSelectionAction =
 export type SchemaTableEmptyState = {
   title?: string;
   description?: string;
+  media?: "icon" | "search" | "upgrade";
   actions?: SchemaTableButtonAction[];
 };
 

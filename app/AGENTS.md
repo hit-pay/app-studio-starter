@@ -38,7 +38,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | Path | Role |
 |---|---|
 | `src/routes/` | File routes; `index.tsx` is `/` |
-| `src/routes/__root.tsx` | `QueryProvider`, `ConfirmationModalProvider`, `Toaster` |
+| `src/routes/__root.tsx` | `QueryProvider`, `ConfirmationModalProvider`, `ResourcePickerProvider`, `Toaster` |
 | `src/components/` | Orchid blocks — **use these first** (`@/components/…`) |
 | `src/ui/` | Orchid primitives — last resort (`@ui/…`) |
 | `src/lib/hitpay.ts` | Browser user / roles / staff-app-members |
@@ -110,7 +110,7 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 Layout imports: `@/components/layout/app-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
 
 - Icons: `@mingcute/react/core-regular`. No `lucide-react`.
-- Confirms: `useConfirmationModal()`. HitPay pickers: `useResourcePicker()`. Toasts: existing `<Toaster placement="top-center">`. No extra providers.
+- Confirms: `useConfirmationModal()`. HitPay pickers: `useResourcePicker()` then `await pick({ type })`. Toasts: existing `<Toaster placement="top-center">`. Do not remount those providers on a route.
 - Button `size`: `xs` | `sm` | `default` | `lg` | `icon` | `icon-xs` | `icon-sm` | `icon-lg`.
 - Tokens: `oc-*` from `src/styles.css`. Nested app nav: `AppLayout` sidebar only. Do not add `SubSidebar`.
 
