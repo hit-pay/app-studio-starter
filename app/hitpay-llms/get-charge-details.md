@@ -1,8 +1,8 @@
 # Get Charge Details
 
-`GET /v1/charges/{charge_id}` — one charge including customer, location, refunds, and fees.
+`GET /v1/charges/{charge_id}` — one charge.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Scope: `payments:read`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -23,48 +23,42 @@ const getCharge = createServerFn({ method: 'GET' })
   })
 ```
 
-Do not call `GET /v1/charges` for a single record.
+Do not list `/v1/charges` to load one id.
 
 ## Path
 
-| Name | Type | Notes |
-|---|---|---|
-| `charge_id` | UUID | HitPay charge id |
+| Name | Type |
+|---|---|
+| `charge_id` | UUID |
 
 ## Response
 
-**200** — one charge object (not a `{ data }` list).
+**200** — one charge object (not wrapped in `{ data }`). Show loads customer, payment request, webhook logs, target, executor, location, fees, and refunds.
+
+List fields plus:
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | UUID | |
-| `currency` / `home_currency` | string | |
-| `amount` / `home_currency_amount` | number | Display amounts |
-| `exchange_rate` | string \| null | |
-| `fixed_fee` / `discount_fee` / `discount_fee_rate` | number | |
-| `refunded_amount` | number | |
-| `amount_without_fees` | number | |
-| `remark` | string | |
-| `status` | string | e.g. `succeeded`, `refunded`, `partially_refunded` |
+| `request` | object \| omitted | Request details when present |
+| `amount_without_fees` | number | Home currency |
+| `refunded_amount` | number | Charge currency |
 | `supports_partial_refund` / `can_refund` / `refund_available` | boolean | |
 | `refund_blocked_message` | string \| null | |
-| `payment_method` | object | `code`, `name`, `type`, `display_logo`, `method_logo`, `data`, `provider_reference`, `reference_number` |
-| `customer_id` / `customer` | string / object \| null | |
-| `payment_request_id` / `payment_request` | UUID / object \| null | |
-| `location` | `{ id, name, address }` \| null | |
-| `executor` | object \| null | |
-| `channel` | string | |
-| `admin_fee` | boolean | |
-| `refunds` / `auto_refunds` | array | |
+| `payment_request` | object \| omitted | |
+| `target_id` / `target_type` | string \| null | |
+| `refunds` | array | |
+| `auto_refunds` | array | Only if that relation is loaded |
 | `webhook_logs` | array | |
-| `webhook_status` | boolean | |
-| `order_reference_number` / `payment_reference_number` | string | |
+| `terminal_id` | string \| null | |
+| `refunded_at` | datetime \| null | Atom |
+| `was_delayed` | boolean | |
+| `is_captured` | boolean | |
+| `payout` | object \| null | |
 | `fees` | object | Grouped by fee type |
-| `closed_at` / `created_at` / `updated_at` / `refunded_at` | datetime \| null | |
-| `is_captured` / `was_delayed` / `xborder` | boolean | |
 
+**403 / 404** — not allowed or missing.
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
+- Use after the merchant already has the id (picker or Turso).
+- Never invent another charge-detail path.

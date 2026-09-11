@@ -1,6 +1,8 @@
 # List Add-ons
 
-`GET /v1/add-ons` — Scope: `commerce:read`.
+`GET /v1/add-ons` — paginated add-ons.
+
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -25,22 +27,39 @@ const listAddOns = createServerFn({ method: 'GET' })
   })
 ```
 
+The list returns a **model paginator** (not the show resource wrapper).
+
 ## Query
 
 | Name | Type | Notes |
 |---|---|---|
-| `product_id` | UUID | Add-ons for one product |
-| `per_page` | integer | 1–100, default 20 |
-| `page` | integer | |
-| `keywords` | string | |
-| `exclude_product_ids[]` | UUID[] | |
-| `with_products` | boolean | Include `products[]` |
+| `product_id` | UUID | Add-ons linked to that product. 404 if the product is not on this business |
+| `per_page` / `perPage` | integer | Default `20`, max `100` |
+| `page` | integer | Min `1` |
+| `keywords` | string | Max 255. Space-split `name` LIKE |
+| `exclude_product_ids` | UUID[] | Exclude add-ons linked to these products |
+| `with_products` | boolean | Adds `products_count` only — does **not** embed `products[]` |
 
-Paginated add-on rows; optional `products` / `pivot` when `with_products`.
+Sorted by `created_at` desc.
 
+## Response
+
+Length-aware `{ data, links, meta }`.
+
+### Add-on (list)
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID | |
+| `business_id` | UUID | |
+| `name` | string | |
+| `option_type` | string | |
+| `option_values` | array \| null | JSON options |
+| `min_selection` / `max_selection` | integer \| null | |
+| `is_required` | boolean | |
+| `created_at` / `updated_at` | datetime | |
+| `products_count` | integer \| omitted | Only when `with_products` |
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
-- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet/wake — not a generated catalog UI.
+- ResourcePicker `add-on` is the only generated-screen list.

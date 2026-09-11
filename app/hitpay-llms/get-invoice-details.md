@@ -1,8 +1,8 @@
 # Get Invoice Details
 
-`GET /v1/invoices/{invoice_id}` — one invoice including customer, products, and payment requests.
+`GET /v1/invoices/{invoice_id}` — one invoice.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Scope: `commerce:read`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -23,45 +23,21 @@ const getInvoice = createServerFn({ method: 'GET' })
   })
 ```
 
+Do not list `/v1/invoices` to load one id.
+
 ## Path
 
-| Name | Type | Notes |
-|---|---|---|
-| `invoice_id` | UUID | HitPay invoice id |
+| Name | Type |
+|---|---|
+| `invoice_id` | UUID |
 
 ## Response
 
-**200** — one invoice object.
+**200** — one invoice object (not wrapped in `{ data }`). Same fields as each `list-invoices` `data[]` item. Show loads customer, payment requests + charges, and fills `custom_fields_config`.
 
-| Field | Type | Notes |
-|---|---|---|
-| `id` | UUID | |
-| `business_id` | UUID | |
-| `type` / `invoice_type` | string | `invoice` or `repeating_invoice` |
-| `invoice_number` / `reference` | string | |
-| `status` | string | `draft`, `sent`, `pending`, `overdue`, `paid`, … |
-| `currency` | string | |
-| `amount` / `subtotal` / `amount_paid` / `balance_amount` / `amount_no_tax` | number | |
-| `email` | string | |
-| `business_customer_id` / `customer` | UUID / object \| null | |
-| `location_id` / `location` | UUID / object \| null | |
-| `invoice_date` / `due_date` | `YYYY-MM-DD` | |
-| `products` | array | Line SKUs |
-| `stackable_discounts` | array | |
-| `tax_settings_id` / `tax_setting` | UUID / object \| null | |
-| `payment_methods` | string[] | |
-| `payment_requests` / `charges` | array | |
-| `allow_partial_payments` / `partial_payments` | boolean / array | |
-| `invoice_link` | string | |
-| `memo` / `footer` / `description` | string | |
-| `custom_fields` / `custom_fields_config` | array / object | |
-| `recipients` | array | |
-| `send_email` / `webhook` / `channel` | | |
-| `created_at` / `updated_at` | datetime | |
-| void / late-fee / repeating cycle fields | | When applicable |
-
+**403 / 404** — not owned or missing.
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
+- Use after the merchant already has the id (picker or Turso).
+- Never invent another invoice-detail path.

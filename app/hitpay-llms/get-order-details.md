@@ -1,8 +1,8 @@
 # Get Order Details
 
-`GET /v1/orders/{order_id}` — one order including line items and payments.
+`GET /v1/orders/{order_id}` — one order.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -23,27 +23,27 @@ const getOrder = createServerFn({ method: 'GET' })
   })
 ```
 
-`order_id` is required (UUID). Do not call `GET /v1/orders` for a single record.
+Do not list `/v1/orders` to load one id.
 
 ## Path
 
+| Name | Type |
+|---|---|
+| `order_id` | UUID |
+
+## Query
+
 | Name | Type | Notes |
 |---|---|---|
-| `order_id` | UUID | HitPay order id |
+| `with_request_details` | boolean | Adds `request` (ip, method, url, device) |
 
-## Responses
+## Response
 
-**200** — one order object (not a `{ data }` list). Same fields as `list-orders`: `id`, `order_display_number`, `channel`, `status`, `currency`, `amount`, `subtotal`, `line_items`, `products`, `charges`, `customer`, `payment_status`, `fulfilment_status`, totals, `order_form`, dates.
+**200** — one order object (not wrapped in `{ data }`). Same fields as each `list-orders` `data[]` item. Show always loads customer, products (with images), charges (with entity metadata), line items + children, location, and coupon.
 
-**404** — missing order:
-
-```json
-{ "message": "No query results for model [App\\Business\\Order] 99daaa99-0ccb-4e46-82bd-7a4347957e0a" }
-```
+**404** — order not found.
 
 ## App rules
 
-- Use this for show/edit loaders. Use `list-orders` for browse.
-- You may snapshot the order into Turso for a local working set. Keep the HitPay `id`.
-- Prefer the Turso snapshot on later reads when the workflow does not need a fresh pull.
-- Never invent another order-detail path. Never return connector tokens to the browser.
+- Use after the merchant already has the id (picker or Turso).
+- Never invent another order-detail path.

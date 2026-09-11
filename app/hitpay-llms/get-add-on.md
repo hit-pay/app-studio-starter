@@ -1,6 +1,8 @@
 # Get Add-on
 
-`GET /v1/add-ons/{add_on}` — Scope: `commerce:read`.
+`GET /v1/add-ons/{add_on}` — one add-on.
+
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -11,19 +13,39 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const getAddOn = createServerFn({ method: 'GET' })
-  .inputValidator((data: { addOnId: string }) => data)
+  .inputValidator((data: { addOnId: string; withProducts?: boolean }) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
-    const response = await hitpayRequest(`/v1/add-ons/${data.addOnId}`)
+    const query = new URLSearchParams()
+    if (data.withProducts) query.set('with_products', '1')
+    const suffix = query.size ? `?${query}` : ''
+    const response = await hitpayRequest(`/v1/add-ons/${data.addOnId}${suffix}`)
     if (response.status === 404) throw new Error('Add-on not found.')
     if (!response.ok) throw new Error('Could not load add-on.')
     return response.json()
   })
 ```
 
+## Path
+
+| Name | Type |
+|---|---|
+| `add_on` | UUID |
+
+## Query
+
+| Name | Type | Notes |
+|---|---|---|
+| `with_products` | boolean | `1` / `true` loads `products[]` |
+
+## Response
+
+**200** — one add-on object (not wrapped in `{ data }`).
+
+Same columns as a list row (`id`, `business_id`, `name`, `option_type`, `option_values`, `min_selection`, `max_selection`, `is_required`, timestamps). Empty `option_values` become `null`. `products` is present only when `with_products` is true (`id`, `name`, pivot `order_weight`).
+
+**403** — add-on belongs to another business. **404** — missing.
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
-- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet/wake — not a generated catalog UI.
+- Use after the merchant already has the id (picker or Turso).

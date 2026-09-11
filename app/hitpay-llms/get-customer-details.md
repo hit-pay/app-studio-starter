@@ -1,8 +1,8 @@
 # Get Customer Details
 
-`GET /v1/customers/{customer_id}` — one customer's full details.
+`GET /v1/customers/{customer_id}` — one customer.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -23,27 +23,21 @@ const getCustomer = createServerFn({ method: 'GET' })
   })
 ```
 
-`customer_id` is required. Do not call `GET /v1/customers` for a single record.
+Do not list `/v1/customers` to load one id.
 
 ## Path
 
-| Name | Type | Notes |
-|---|---|---|
-| `customer_id` | string | HitPay customer id |
+| Name | Type |
+|---|---|
+| `customer_id` | UUID |
 
-## Responses
+## Response
 
-**201** (documented success) — one customer object (same fields as `list-customers`). Treat any 2xx as success. Not wrapped in `{ data }`.
+**200** — one customer object (not wrapped in `{ data }`). Same fields as each `list-customers` `data[]` item.
 
-**404** — missing customer:
-
-```json
-{ "message": "No query results for model [App\\Business\\Customer] 973ee456-d28f-4418-93c5-d37e4b311685" }
-```
+**404** — customer not found or not owned by the business.
 
 ## App rules
 
-- Use this for show/edit loaders. Use `list-customers` for browse.
-- You may snapshot the customer into Turso. Keep the HitPay `id`.
-- Prefer the Turso snapshot on later reads when the workflow does not need a fresh pull.
-- Never invent another customer-detail path. Never return connector tokens to the browser.
+- Use after the merchant already has the id (picker or Turso).
+- Never invent another customer-detail path.

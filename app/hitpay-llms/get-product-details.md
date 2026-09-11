@@ -1,8 +1,8 @@
 # Get Product Details
 
-`GET /v1/products/{product_id}` — one product including variants and images.
+`GET /v1/products/{product_id}` — one product.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -13,37 +13,41 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const getProduct = createServerFn({ method: 'GET' })
-  .inputValidator((data: { productId: string }) => data)
+  .inputValidator((data: { productId: string; currency?: string }) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
-    const response = await hitpayRequest(`/v1/products/${data.productId}`)
+    const query = new URLSearchParams()
+    if (data.currency) query.set('currency', data.currency.toLowerCase())
+    const suffix = query.size ? `?${query}` : ''
+    const response = await hitpayRequest(`/v1/products/${data.productId}${suffix}`)
     if (response.status === 404) throw new Error('Product not found.')
     if (!response.ok) throw new Error('Could not load product.')
     return response.json()
   })
 ```
 
-`product_id` is required. Do not call `GET /v1/products` for a single record.
+Do not call `GET /v1/products` to load one id.
 
 ## Path
 
+| Name | Type |
+|---|---|
+| `product_id` | UUID |
+
+## Query
+
 | Name | Type | Notes |
 |---|---|---|
-| `product_id` | string | HitPay product id |
+| `currency` | string | Optional 3-letter display currency |
+| `location_ids` | UUID[] | Optional. Exactly one UUID scopes top-level `quantity` |
 
-## Responses
+## Response
 
-**200** — one product object (not wrapped in `{ data }`). Same fields as a `list-products` item: `id`, `name`, `headline`, `description`, `currency`, `price`, `price_display`, `price_stored`, `category_id`, `status`, `has_variations`, `variations`, `variation_key_1`…`3`, `images`, `is_published`, `created_at`, `updated_at`, `starts_at`, `ends_at`. `product_weight` and `delivery_method_required` may be null.
+**200** — one product object (not wrapped in `{ data }`). Same fields as each `list-products` `data[]` item, including `category_id` (category objects), `variations[].values[]`, `locations[].inventory`, images, and `product_add_ons`.
 
-**404** — missing product:
-
-```json
-{ "message": "No query results for model [App\\Business\\Product]." }
-```
+**404** — product not found.
 
 ## App rules
 
-- Use this for show/edit loaders. Use `list-products` for browse.
-- You may snapshot the product into Turso for a local working set. Keep the HitPay `id`.
-- Prefer the Turso snapshot on later reads when the workflow does not need a fresh catalog pull.
+- Use after the merchant already has the id (picker or Turso snapshot).
 - Never invent another product-detail path. Never return connector tokens to the browser.

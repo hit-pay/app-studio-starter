@@ -1,8 +1,8 @@
 # List Products
 
-`GET /v1/products` — list products. Same public OAuth handler as the dashboard (`ProductsController@index`, scope `commerce:read`). Response is `App\Http\Resources\Business\Product`, not the older `OldProduct` shape.
+`GET /v1/products` — paginated products.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -22,39 +22,38 @@ const listProducts = createServerFn({ method: 'GET' })
     if (data.keywords) query.set('keywords', data.keywords)
     const response = await hitpayRequest(`/v1/products?${query}`)
     if (!response.ok) throw new Error('Could not load products.')
-    return response.json() as Promise<ListProductsResponse>
+    return response.json()
   })
 ```
 
-`per_page` and `perPage` both work (1–100). Default page size is `10`. Array query params (`statuses`, `categories`, `location_ids`, `channels`, `sources`) are repeated keys, for example `statuses=published&statuses=draft`.
+Repeat array filters as the same key (`statuses=published&statuses=draft`). `per_page` and `perPage` both set page size (1–100). Default page size is `10`.
 
 ## Query
 
 | Name | Type | Notes |
 |---|---|---|
+| `page` | integer | Default `1` |
+| `per_page` / `perPage` | integer | Default `10`, max `100` |
+| `keywords` | string | Space-split; matches `name`, `emoji`, `stock_keeping_unit` |
 | `statuses` | `draft` \| `published` | Repeat for multiple |
-| `categories` | UUID[] | Product category ids |
-| `sources` | `shopify` \| `wooCommerce` | Repeat for multiple. Key is `sources`, not `source` |
-| `inventory` | `in_stock` \| `out_of_stock` | Single value, not repeated |
-| `location_ids` | UUID[] | Filter outlets. One id also scopes top-level `quantity` when inventories are loaded |
-| `channels` | `pos` \| `invoice` \| `online_store` \| `self_serve` | Repeat for multiple |
-| `keywords` | string | Space-split search on name |
-| `ids` | UUID[] | Filter to these product ids |
-| `stock_keeping_unit` | string | |
-| `barcode` | string | Resolves to product ids via variations |
-| `price_from` / `price_to` | number | Major units |
+| `categories` | UUID[] | Category ids |
+| `ids` | UUID[] | Limit to these product ids |
+| `stock_keeping_unit` | string | Exact match, max 100 |
+| `barcode` | string | Resolves matching variation barcodes to product `ids` (max 100 products) |
+| `sources` | `shopify` \| `wooCommerce` | Repeat. Key is `sources` |
+| `inventory` | `in_stock` \| `out_of_stock` | Single value |
+| `location_ids` | UUID[] | Products tagged to these outlets. Exactly one UUID also scopes top-level `quantity` |
+| `channels` | `pos` \| `invoice` \| `online_store` \| `self_serve` | Repeat |
+| `price_from` / `price_to` | number | Major units in the business currency |
 | `show_sold_out` | boolean | |
-| `currency` | string | 3-letter display currency |
-| `page` | number | Default `1` |
-| `per_page` | number | Default `10` |
+| `currency` | string | 3-letter lowercase display currency |
+| `order_by[field]` | `asc` \| `desc` | Fields: `id`, `name`, `price`, `order`, `created_at`, `updated_at`, `published_at`, `is_pinned`. Default `id` desc |
 
 ## Response
 
-Paginated Laravel envelope. List **eager-loads** `locations`, `variations.locations`, `variations.variationValues`, images, categories, add-ons.
-
 ```ts
 type ListProductsResponse = {
-  data: HitPayProduct[]
+  data: Product[]
   links: {
     first: string
     last: string
@@ -63,86 +62,87 @@ type ListProductsResponse = {
   }
   meta: {
     current_page: number
-    from: number
+    from: number | null
     last_page: number
     path: string
     per_page: number
-    to: number
+    to: number | null
     total: number
   }
 }
 ```
 
-`GET /v1/products/{id}` returns **one** `HitPayProduct` (same resource, not wrapped in `{ data }`).
+List loads categories, images, add-ons, locations, and variations (values, images, locations).
 
 ### Product
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | HitPay product id |
-| `business_id` | string | |
-| `category_id` | Category[] | Loaded category **objects**, not UUID strings |
+| `id` | UUID | |
+| `business_id` | UUID | |
+| `category_id` | Category[] | Category **objects**, not UUID strings |
 | `name` | string | |
 | `headline` | string \| null | |
 | `description` | string | May contain HTML |
 | `stock_keeping_unit` | string \| null | |
-| `barcode` | string \| null | Present when `defaultVariation` is loaded (show more often than list) |
-| `business_currency_price` | object | `{ currency, price, price_display, price_stored }` in the business currency |
-| `currency` | string | Display currency (request `currency` or business default) |
+| `barcode` | string \| null | From the default variation when that relation is loaded |
+| `business_currency_price` | object | `{ currency, price, price_stored, price_display }` plus optional `price_before_discount`, `price_before_discount_stored`, `price_before_discount_display` |
+| `supported_currency_prices` | object[] \| omitted | When supported-currency prices are loaded |
+| `currency` | string | Display currency (`currency` query or business default) |
 | `price` | number | Major units |
 | `price_before_discount` | number \| null | |
-| `price_display` | string | e.g. `SGD 15.00`; range when variants have different prices |
+| `price_display` | string | Range string when variants have different prices |
 | `price_stored` | integer | Minor units |
 | `is_unavailable_for_selected_currency` | boolean | |
-| `is_manageable` | integer | `0` or `1` |
+| `price_source` | string \| omitted | Only when a converted price was used |
+| `is_manageable` | `0` \| `1` | |
 | `is_pinned` | boolean | |
-| `status` | string | `draft` \| `published` |
+| `status` | `draft` \| `published` | |
 | `product_weight` | integer \| null | Grams |
 | `delivery_method_required` | boolean | |
 | `has_variations` | boolean | |
 | `is_shopify` | boolean | |
 | `is_woocommerce` | boolean | |
 | `order` | integer | |
-| `quantity` | integer \| null | **Total** product qty (not a per-location breakdown) |
+| `quantity` | integer \| null | Product total, or one outlet when a single `location_ids` is sent |
 | `quantity_alert_level` | integer \| null | |
 | `min_order_quantity` / `max_order_quantity` | integer \| null | |
 | `emoji` | string \| null | |
 | `open_amount` | boolean | |
 | `product_url` | string | |
 | `variations_count` | integer | |
-| `variations` | Variation[] | Always present on this list |
-| `images` | Image[] | Omitted when the product is Shopify-backed (`shopify` object instead) |
+| `variations` | Variation[] | Present when variations are loaded |
+| `images` | Image[] | Omitted when `shopify` is present |
 | `image` | string | Convenience URL |
-| `shopify` | object \| omitted | `{ id, inventory_item_id, sku, image_url }` |
+| `shopify` | object \| omitted | `{ id, inventory_item_id, sku, image_url }` when the product has a Shopify id |
 | `is_published` | boolean | |
-| `published_at` | datetime \| null | |
-| `created_at` / `updated_at` | datetime | |
+| `published_at` | datetime \| null | Atom |
+| `created_at` / `updated_at` | datetime | Atom |
+| `order_in_category` | integer \| null | Category pivot order; usually `null` on this list |
 | `allow_back_order` | boolean | |
 | `available` | boolean | |
 | `type` | string | Default `physical` |
 | `password_protected` | boolean | |
-| `digital_content` | object[] \| null | |
+| `digital_content` | object[] \| null | Sorted by `order` |
 | `auto_tag_new_locations` | boolean | |
 | `channels` | string[] | `pos`, `invoice`, `online_store`, `self_serve` |
-| `locations` | Location[] | Per-outlet inventory (see below) |
-| `is_inventory_tracked` | boolean | Any location has `manage_inventory` |
-| `is_online_store_inventory_tracked` | boolean | |
-| `product_unit` / `product_unit_abbreviation` / `product_unit_value` | mixed | |
+| `locations` | Location[] | Per-outlet inventory |
+| `product_unit` | string \| null | |
+| `product_unit_abbreviation` | string \| null | |
+| `product_unit_value` | number \| null | |
 | `handle` | string \| null | |
-| `pos_color` | string \| null | From first category with a POS color |
+| `pos_color` | string \| null | First category that has a POS color |
 | `product_add_ons` | object[] | Present when add-ons are loaded |
-| `tax` | object | Only if `tax` is loaded (usually not on list) |
+| `is_inventory_tracked` | boolean | Any loaded location has `manage_inventory` |
+| `is_online_store_inventory_tracked` | boolean | |
+| `tax` | object \| omitted | Only if `tax` was loaded (not on this list) |
 
-There are **no** `variation_key_1`…`3` on this resource. Option names live on each variation’s `values[]`.
-
-`starts_at` / `ends_at` are **not** on this resource (they were on `OldProduct` only).
+Option names live on each variation’s `values[]`. There are no `variation_key_*` / `variation_value_*` fields.
 
 ### Location (product or variation)
 
-Included on list/show. Pivot stock is `inventory`:
-
 ```ts
-type HitPayProductLocation = {
+type ProductLocation = {
   id: string
   name: string
   street: string | null
@@ -163,40 +163,54 @@ type HitPayProductLocation = {
 }
 ```
 
-Use `locations[].inventory.quantity` for stock **in that outlet**. Top-level `quantity` is the product/variation total.
+Use `locations[].inventory.quantity` for that outlet. Top-level `quantity` is the total (or the one filtered outlet).
 
 ### Variation
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | Variation id |
+| `id` | UUID | |
 | `stock_keeping_unit` | string \| null | |
 | `barcode` | string \| null | |
 | `description` | string \| null | |
-| `values` | `{ key: string; value: string }[]` | e.g. `{ key: "Size", value: "M" }` |
-| `business_currency_price` | object | |
+| `values` | `{ key: string; value: string }[]` | Sorted by `key` |
+| `business_currency_price` | object | Same shape as the product’s business-currency price |
 | `price` / `price_display` / `price_stored` | number / string / integer | |
 | `is_unavailable_for_selected_currency` | boolean | |
-| `quantity` | integer \| null | Total for this variant |
+| `price_source` | string \| omitted | |
+| `quantity` | integer \| null | |
 | `quantity_alert_level` | integer \| null | |
 | `image` | Image[] | |
 | `product_variation_weight` | number \| null | |
-| `open_amount` | boolean | |
+| `open_amount` | boolean | Same as the parent product |
 | `order` | integer | |
-| `locations` | Location[] | Same `inventory` shape as the product |
-
-No `variation_value_1`…`3` or dimension fields (`weight`/`length`/`width`/`depth`) on this resource.
+| `locations` | Location[] | Same `inventory` shape |
+| `supported_currency_prices` | object[] \| omitted | |
 
 ### Image
 
-`id`, `caption`, `alt_text`, `group`, `order`, `extension`, `status`, `disk`, `url`, `created_at`, `other_dimensions[]` (`size` + `path`), `urls` map (`icon` \| `large` \| `small` \| `medium` \| `thumbnail`).
+| Field | Type |
+|---|---|
+| `id` | UUID |
+| `caption` | string \| null |
+| `alt_text` | string \| null |
+| `group` | string \| null |
+| `order` | integer |
+| `extension` | string \| null |
+| `status` | string \| null |
+| `disk` | string \| null |
+| `url` | string | Original |
+| `other_dimensions` | `{ size: string; path: string }[]` |
+| `urls` | Record of size → URL (`icon`, `large`, `small`, `medium`, `thumbnail`, …) |
+| `created_at` | datetime |
+| `pivot` | object \| omitted |
 
 ### Category (in `category_id`)
 
-At least `id`, `name`, `handle`, `is_active`, `total_products`, plus other category columns the model serializes.
+Includes at least `id`, `name`, `handle`, `is_active`, `total_products`, plus the other category columns on the model.
 
 ## App rules
 
-- Snapshot listed products into Turso when the workflow needs a local working set (stock counter, browse cache). Keep the HitPay `id`. Persist `locations[].inventory` if the app cares about outlet stock.
-- Do not refetch `/v1/products` on every row after a snapshot exists.
+- ResourcePicker `product` is the only way generated screens list products. This file is for the picker loader or a totals-only sheet.
+- Snapshot into Turso from the picker payload (`id` + `resource`). Persist `locations[].inventory` if the app needs outlet stock.
 - Never invent another products path. Never return connector tokens to the browser.

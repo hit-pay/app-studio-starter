@@ -1,6 +1,8 @@
 # List Coupons
 
-`GET /v1/coupons` — Scope: `commerce:read`. Paginated, default `per_page` 10, max 100.
+`GET /v1/coupons` — paginated coupons.
+
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -27,29 +29,37 @@ const listCoupons = createServerFn({ method: 'GET' })
 
 | Name | Type | Notes |
 |---|---|---|
-| `keywords` | string | Search |
-| `per_page` | integer | Default 10, max 100 |
+| `keywords` | string | `name` LIKE |
+| `perPage` / `per_page` | integer | Default `10`, max `100` |
 | `page` | integer | |
+
+Sorted by `id` desc. Promotions are eager-loaded internally but not in the list JSON.
 
 ## Response
 
-Paginated. Coupon fields:
+Length-aware `{ data, links, meta }`.
 
-| Field | Type | Notes |
-|---|---|---|
-| `id` / `business_id` | UUID | |
-| `name` / `code` | string | |
-| `fixed_amount` / `percentage` | number | |
-| `coupons_left` | integer \| null | |
-| `is_promo_banner` / `banner_text` | | |
-| `coupon_type` | string | |
-| `minimum_cart_amount` | number | |
-| `applies_to_ids` | array | |
-| `starts_at` / `ends_at` / `created_at` / `updated_at` | datetime | |
+### Coupon (list)
 
+| Field | Type |
+|---|---|
+| `id` | UUID |
+| `business_id` | UUID |
+| `name` | string |
+| `code` | string |
+| `fixed_amount` | number \| null |
+| `percentage` | number \| null |
+| `coupons_left` | integer \| null |
+| `is_promo_banner` | boolean |
+| `banner_text` | string \| null |
+| `created_at` / `updated_at` | datetime |
+| `starts_at` / `ends_at` | datetime \| null |
+| `coupon_type` | string \| null |
+| `minimum_cart_amount` | number \| null |
+| `deleted_at` | datetime \| null |
+
+List rows do **not** include `applies_to_ids`.
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
-- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet/wake — not a generated catalog UI.
+- ResourcePicker `coupon` is the only generated-screen list.

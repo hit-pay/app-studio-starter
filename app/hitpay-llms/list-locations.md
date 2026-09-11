@@ -1,10 +1,10 @@
 # List Locations
 
-`GET /v1/locations` — paginated locations for the authenticated business.
+`GET /v1/locations` — paginated outlets.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
-Cashiers and managers only see locations assigned to them.
+Cashiers and managers only receive locations assigned to them.
 
 ## Call
 
@@ -22,42 +22,37 @@ const listLocations = createServerFn({ method: 'GET' })
     query.set('perPage', '500')
     if (data.keywords) query.set('keywords', data.keywords)
     const response = await hitpayRequest(`/v1/locations?${query}`)
-    if (response.status === 401) throw new Error('HitPay location access was denied.')
     if (!response.ok) throw new Error('Could not load locations.')
-    return response.json() as Promise<ListLocationsResponse>
+    return response.json()
   })
 ```
 
-Use `perPage` (camelCase), not `per_page`.
+`perPage` and `per_page` both work.
 
 ## Query
 
 | Name | Type | Notes |
 |---|---|---|
-| `keywords` | string | Location name (space-separated) or exact UUID |
-| `perPage` | integer | Default `500`, min `1` |
+| `keywords` | string | Exact UUID → `id`. Otherwise up to 3 space-separated words on `name` |
+| `perPage` / `per_page` | integer | Default `500` |
+| `page` | integer | Default `1` |
 
-## Responses
+Sorted by `created_at` desc.
 
-**200** — paginated envelope:
+## Response
 
 ```ts
 type ListLocationsResponse = {
-  data: HitPayLocation[]
-  links: {
-    first: string
-    last: string
-    prev: string | null
-    next: string | null
-  }
+  data: Location[]
+  links: { first: string; last: string; prev: string | null; next: string | null }
   meta: {
     current_page: number
-    per_page: number
-    from: number
-    to: number
-    total: number
+    from: number | null
     last_page: number
     path: string
+    per_page: number
+    to: number | null
+    total: number
   }
 }
 ```
@@ -66,27 +61,20 @@ type ListLocationsResponse = {
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | UUID | Location id |
-| `business_id` | UUID | Owning business |
-| `name` | string | e.g. `Main Store` |
-| `street` | string | |
-| `city` | string | |
-| `state` | string | |
-| `country` | string | Code or name, e.g. `SG` |
-| `postal_code` | string | |
-| `active` | boolean | |
-| `pickups` | array | Pickup configs; empty when not loaded |
+| `id` | UUID | |
+| `name` | string | |
+| `street` | string \| null | |
+| `postal_code` | string \| null | |
+| `city` | string \| null | |
+| `state` | string \| null | |
+| `country` | string \| null | |
 | `created_at` / `updated_at` | datetime | |
-
-**401** — missing or invalid API key / OAuth token:
-
-```json
-{ "message": "…" }
-```
+| `active` | boolean | |
+| `business_id` | UUID | |
+| `inventory` | omitted | Only when this location is nested on a product (pivot) |
+| `pickups` | array | `[]` unless pickups were loaded |
 
 ## App rules
 
-- Use location `id` values as `location_ids` on products and as `location_id` on orders.
-- Snapshot locations into Turso when the workflow needs a local working set (outlet picker, stock counter). Keep the HitPay `id`.
-- Do not refetch `/v1/locations` on every row after a snapshot exists.
-- Never invent another locations list path. Never return connector tokens to the browser.
+- ResourcePicker `location` is the only generated-screen list.
+- Snapshot from the picker. Never invent another locations path.

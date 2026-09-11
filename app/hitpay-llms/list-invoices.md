@@ -1,8 +1,8 @@
 # List Invoices
 
-`GET /v1/invoices` — list invoices with status and search filters. Public docs: get all invoices.
+`GET /v1/invoices` — cursor-paginated invoices.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app. Scope: `commerce:read`.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -13,58 +13,80 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const listInvoices = createServerFn({ method: 'GET' })
-  .inputValidator((data: { status?: string; customer_email?: string; reference?: string } = {}) => data)
+  .inputValidator((data: { status?: string; keywords?: string; cursor?: string } = {}) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()
     query.set('per_page', '10')
-    query.set('page', '1')
+    if (data.cursor) query.set('cursor', data.cursor)
     if (data.status) query.set('status', data.status)
-    if (data.customer_email) query.set('customer_email', data.customer_email)
-    if (data.reference) query.set('reference', data.reference)
+    if (data.keywords) query.set('keywords', data.keywords)
     const response = await hitpayRequest(`/v1/invoices?${query}`)
     if (!response.ok) throw new Error('Could not load invoices.')
     return response.json()
   })
 ```
 
+This list is **cursor** pagination. `page` is ignored.
+
 ## Query
 
 | Name | Type | Notes |
 |---|---|---|
-| `per_page` | string / integer | Default `10`. One page only — do not walk every page. |
-| `page` | string / integer | Default `1` |
-| `status` | string | `draft`, `sent`, `pending`, `overdue`, `paid` (and other invoice / repeating statuses the API accepts) |
-| `customer_email` | string | Exact email filter |
-| `reference` | string | Invoice reference |
-| `keywords` | string | Search (dashboard-style) |
-| `type` | string | Invoice type |
-| `parent_id` | string | Recurring parent |
+| `per_page` | integer | Default `25`. Allowed: `5`, `10`, `20`, `25`, `50`, `100`, `1000` |
+| `cursor` | string | |
+| `status` | string | Regular: `pending`, `sent`, `paid`, `all`, `overdue`, `draft`, `partiality_paid`, `voided`. Repeating (with `type=repeating_invoice`): `all`, `active`, `canceled`, `paused`, `paid`, `completed` |
+| `customer_email` | email | Exact `email` column |
+| `reference` | string | Exact `reference` |
+| `keywords` | string | Comma-separated. Matches `invoice_number`, `reference`, customer name; exact customer email when a token is an email |
+| `type` | string | e.g. `invoice`, `repeating_invoice` |
+| `parent_id` | string | Child invoices of a repeating parent |
 
-No filter-by-invoice-id list. Do not invent `ids[]`.
+After paging, the controller also loads children, payment requests + charges, recipients, line items, and partial-payment requests.
 
 ## Response
 
-Paginated collection (`data` + pagination meta). Use `data`.
+Cursor envelope: `{ data, links, meta }`.
 
-### Invoice (list row)
+### Invoice
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | HitPay invoice id |
-| `invoice_number` / `reference` | string | |
-| `status` | string | |
+| `id` | UUID | |
+| `business_id` | UUID | |
+| `type` | string | |
+| `business_customer_id` | UUID \| null | |
+| `location_id` | UUID \| null | |
+| `reference` / `invoice_number` | string \| null | |
+| `email` | string \| null | |
+| `status` | string | Computed display status |
 | `currency` | string | |
-| `amount` / `subtotal` / `amount_paid` / `balance_amount` | number | |
-| `email` | string | |
-| `invoice_date` / `due_date` | date | |
-| `business_location_id` | string \| null | |
-| `customer` | object \| null | When loaded |
-| `type` / `channel` | string | |
-| `created_at` / `updated_at` | datetime | |
+| `amount` / `balance_amount` / `amount_paid` / `amount_no_tax` / `subtotal` | number | Major units |
+| `customer` | object \| null | Same customer object as `list-customers` |
+| `send_email_by_default` / `send_email` / `webhook` | boolean | |
+| `channel` | string | Default `dashboard` |
+| `tax_settings_id` | UUID \| null | |
+| `tax_setting` | object \| null | |
+| `products` | array | Line SKUs |
+| `stackable_discounts` | array | |
+| `invoice_type` / `payment_by` | string | |
+| `memo` / `footer` / `attached_file` | string \| null | |
+| `created_at` / `updated_at` | datetime | Atom |
+| `invoice_date` / `due_date` | date \| null | |
+| `payment_requests` | array | |
+| `charges` | array | |
+| `allow_partial_payments` | boolean | |
+| `partial_payments` / `payment_detail_pending` / `payment_detail_paid` | | Only when partial payments are enabled |
+| `invoice_link` | string | |
+| `custom_fields` | array | |
+| `custom_fields_config` | array | Empty on list unless set |
+| `payment_methods` | string[] \| null | |
+| `recipients` | array | |
+| `location` | object \| null | |
+| `void_reason` / `voided_by_user_id` / `voided_at` | | |
+| repeating / late-fee fields | | When that invoice type has them |
 
 ## App rules
 
-- Browse / add invoices: ResourcePicker `type: 'invoice'`. Call this list only from the picker loader, a receivables sheet, or a wake.
-- Persist a **sheet** or this one page (default 10). Do not replica-sync all invoices.
-- Never invent another invoices list path. Never return connector tokens to the browser.
+- ResourcePicker `invoice` is the only generated-screen list.
+- Snapshot from the picker. Never invent another invoices path.

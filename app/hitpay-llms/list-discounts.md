@@ -1,6 +1,8 @@
 # List Discounts
 
-`GET /v1/discounts` — Scope: `commerce:read`.
+`GET /v1/discounts` — paginated discounts.
+
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -11,15 +13,14 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const listDiscounts = createServerFn({ method: 'GET' })
-  .inputValidator((data: { keywords?: string; currency?: string; pos_discount?: boolean } = {}) => data)
+  .inputValidator((data: { keywords?: string; pos_discount?: boolean } = {}) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()
     query.set('per_page', '10')
-    query.set('page', '1')
     if (data.keywords) query.set('keywords', data.keywords)
-    if (data.currency) query.set('currency', data.currency)
-    if (data.pos_discount != null) query.set('pos_discount', data.pos_discount ? '1' : '0')
+    if (data.pos_discount === true) query.set('pos_discount', '1')
+    if (data.pos_discount === false) query.set('pos_discount', '0')
     const response = await hitpayRequest(`/v1/discounts?${query}`)
     if (!response.ok) throw new Error('Could not load discounts.')
     return response.json()
@@ -30,31 +31,43 @@ const listDiscounts = createServerFn({ method: 'GET' })
 
 | Name | Type | Notes |
 |---|---|---|
-| `pos_discount` | boolean | POS-only discounts |
-| `currency` | string | |
-| `keywords` | string | |
-| `page` / `current_page` | integer | |
-| `per_page` | integer | Default 10 |
+| `pos_discount` | boolean | `1` POS, `0` not POS |
+| `currency` | string | 3-letter, lowercased. Filters discounts for that checkout currency |
+| `keywords` | string | `name` or `description` LIKE |
+| `perPage` / `per_page` | integer | Default `10`, max `100` |
+| `page` / `current_page` | integer | Default `1` |
+
+Sorted by `id` desc.
 
 ## Response
 
-| Field | Type |
-|---|---|
-| `id` | UUID |
-| `name` / `description` | string |
-| `minimum_cart_amount` / `minimum_cart_amount_readable` | |
-| `fixed_amount` / `fixed_amount_readable` | |
-| `percentage` | number |
-| `currency` | string |
-| `is_currency_null` | boolean |
-| `discount_type` | string |
-| `pos_discount` | boolean |
-| `applies_to_ids` | array |
-| `created_at` / `updated_at` | datetime |
+Length-aware `{ data, links, meta }`.
 
+### Discount
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID | |
+| `business_id` | UUID | |
+| `name` | string | |
+| `description` | string \| null | |
+| `minimum_cart_amount` | integer \| null | Minor units |
+| `fixed_amount` | integer \| null | Minor units |
+| `fixed_amount_readable` | number | Major units |
+| `minimum_cart_amount_readable` | number | Major units |
+| `percentage` | number \| null | |
+| `currency` | string \| null | Effective currency |
+| `is_currency_null` | boolean | Legacy row with null stored currency |
+| `is_promo_banner` | boolean | |
+| `banner_text` | string \| null | |
+| `created_at` / `updated_at` | datetime | |
+| `starts_at` / `ends_at` | datetime \| null | |
+| `discount_type` | string | |
+| `deleted_at` | datetime \| null | |
+| `applies_to_ids` | array \| null | |
+| `applies_to_type_name` | string | Display name for `discount_type` |
+| `pos_discount` | boolean | |
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
-- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet/wake — not a generated catalog UI.
+- ResourcePicker `discount` is the only generated-screen list.

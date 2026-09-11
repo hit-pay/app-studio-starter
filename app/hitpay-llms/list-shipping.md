@@ -1,6 +1,8 @@
 # List Shipping
 
-`GET /v1/shipping` — Scope: `commerce:read`. **Not paginated.**
+`GET /v1/shipping` — all shipping methods (not paginated). Path is singular.
+
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
 ## Call
 
@@ -15,7 +17,7 @@ const listShipping = createServerFn({ method: 'GET' })
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()
-    if (data.currency) query.set('currency', data.currency)
+    if (data.currency) query.set('currency', data.currency.toLowerCase())
     const response = await hitpayRequest(`/v1/shipping?${query}`)
     if (!response.ok) throw new Error('Could not load shipping.')
     return response.json()
@@ -26,23 +28,43 @@ const listShipping = createServerFn({ method: 'GET' })
 
 | Name | Type | Notes |
 |---|---|---|
-| `currency` | string | Display conversion |
+| `currency` | string | Optional 3-letter display currency (query string only) |
 
 ## Response
 
-```json
-{
-  "is_enabled": true,
-  "is_can_pick_up": false,
-  "shippings": []
+```ts
+type ListShippingResponse = {
+  is_enabled: boolean
+  is_can_pick_up: boolean
+  shippings: Shipping[]
 }
 ```
 
-Shipping item: `id`, `calculation`, `name`, `description`, `formula`, `is_active`, `slots`, fulfilment times, `blackout_dates`, rate / country fields.
+Not a `{ data, meta }` list. Use `shippings`.
 
+### Shipping
+
+| Field | Type | Notes |
+|---|---|---|
+| `id` | UUID | |
+| `calculation` | string | |
+| `name` | string | |
+| `description` | string \| null | |
+| `formula` | string \| null | |
+| `is_active` | boolean | From `active` |
+| `slots` | unknown | |
+| `fulfilment_time_min` / `fulfilment_time_max` | integer \| null | |
+| `cut_off_time` | string \| null | |
+| `blackout_dates` | unknown | |
+| `business_currency_price` | object | When the business currency is known |
+| `currency` | string \| omitted | Display currency |
+| `rate` | integer \| null | Minor units in the display currency |
+| `weight_range_pricing` | array \| null | |
+| `is_unavailable_for_selected_currency` | boolean | |
+| `price_source` | string \| omitted | |
+| `countries` | `{ country: string; states: unknown }[]` | Always loaded on this list |
+| `created_at` / `updated_at` | datetime | Atom |
 
 ## App rules
 
-- Call only from `createServerFn`. Never return connector tokens to the browser.
-- Never invent another path. Never implement HTTP DELETE.
-- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet/wake — not a generated catalog UI.
+- ResourcePicker `shipping` is the only generated-screen list.

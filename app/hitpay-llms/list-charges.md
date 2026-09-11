@@ -1,8 +1,10 @@
 # List Charges
 
-`GET /v1/charges` — list charges with pagination and filters. Public docs: charges list (`per_page`).
+`GET /v1/charges` — cursor-paginated charges.
 
-Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`. Do not fetch docs.hitpayapp.com from the running app. Scope: `payments:read`.
+Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
+
+`keywords` (without `payout_id`) or `remark` uses the search index; otherwise the standard index.
 
 ## Call
 
@@ -35,51 +37,69 @@ const listCharges = createServerFn({ method: 'GET' })
   })
 ```
 
-Repeat array keys (`location_ids[]`, `payment_methods[]`, `statuses[]`, `user_ids[]`).
-
 ## Query
 
 | Name | Type | Notes |
 |---|---|---|
-| `per_page` | integer | Default `25`. Allowed page sizes include `10`, `15`, `20`, `25`, `40`, `50`, `75`, `99`. One page only — do not walk `cursor` through history. |
-| `cursor` | string | `meta.next_cursor` from the previous page. Do not use unless the user asked for another page. |
-| `keywords` | string | Search amount, charge id, customer email, remark |
-| `status` | `succeeded` \| `failed` \| `refunded` | Shorthand; maps to `statuses` |
-| `statuses[]` | `success` \| `succeeded` \| `succeeded_manually` \| `pending` \| `failed` \| `refunded` \| `cancelled` \| `partially_refunded` \| `void` | Repeat for multiple. Default (if omitted): succeeded, succeeded_manually, refunded, void |
-| `location_ids[]` | UUID[] | Max 10 |
-| `user_ids[]` | string[] | Staff uuid or numeric id |
-| `date_from` / `date_to` | `YYYY-MM-DD` | Created date range |
-| `amount_from` / `amount_to` | number | |
-| `payment_methods[]` | string | e.g. `cash`, `card` — till / cash-up |
+| `per_page` | integer | Default `25`. Allowed: `10`, `15`, `20`, `25`, `40`, `50`, `75`, `99` |
+| `cursor` | string | Next page |
+| `keywords` | string | Max 100. Switches to search when `payout_id` is absent |
+| `remark` | string | Max 255. Also switches to search |
+| `status` | `succeeded` \| `failed` \| `refunded` | Shorthand. `succeeded` → statuses `succeeded` and `refunded=false`. `failed` → `failed` + `canceled`. `refunded` → `refunded=true` |
+| `statuses` | string[] | Max 10. `canceled`, `failed`, `refunded`, `partially_refunded`, `requires_customer_action`, `requires_payment_method`, `succeeded`, `succeeded_manually`, `void`, `pending`. Omit (and no `refunded`) → `succeeded`, `succeeded_manually`, `refunded`, `void` |
+| `refunded` | boolean | |
+| `location_ids` | string[] | Max 10 |
+| `user_ids` | string[] | Max 10, distinct |
+| `date_from` / `date_to` | `Y-m-d` | Must be before tomorrow |
+| `amount_from` / `amount_to` | number | `>= 0` |
+| `payment_methods` | string[] | e.g. `cash`, `card` |
 | `payment_request_id` | UUID | |
-| `customer_id` | UUID | |
-| `payout_id` | UUID | |
+| `customer_id` | UUID | Must belong to the business |
+| `relatable` | string | `type:id` |
+| `channel` | string | Plugin channel |
+| `order_reference_number` | string | Max 255 |
+| `customer_email` | email | |
+| `payment_reference_number` | string | Max 255 |
+| `customer_name` | string | Max 255 |
+| `id` | UUID | One charge id |
+| `payout_id` | UUID | Uses the index (not search) even with keywords |
 
-No filter-by-charge-id list. Do not invent `ids[]`.
+List loads `businessUser.user`, `businessLocation`, `entityMetadata`.
 
 ## Response
 
-`{ data, links, meta }`. Use `data`. `meta.next_cursor` / `meta.prev_cursor`, `meta.per_page`.
+Cursor envelope: `{ data, links, meta }` with `meta.next_cursor`, `meta.prev_cursor`, `meta.per_page`.
 
-### Charge
+### Charge (list)
 
 | Field | Type | Notes |
 |---|---|---|
-| `id` | string | HitPay charge id |
+| `id` | UUID | |
 | `currency` / `home_currency` | string | |
-| `amount` | number | Display amount |
-| `status` | string | |
-| `payment_method` | object | `name` (e.g. `card`, `cash`) plus logos / card `data` |
-| `customer_id` / `customer` | string / object \| null | |
+| `exchange_rate` | string \| number \| null | |
+| `amount` | number | Charge currency, major units |
+| `home_currency_amount` | number \| null | |
+| `fixed_fee` / `discount_fee` | number | Home currency |
+| `discount_fee_rate` | number | Percent |
+| `net_amount` | number | Home amount minus fees |
+| `remark` | string \| null | |
+| `status` | string | `partially_refunded` when the charge is only partly refunded |
+| `payment_method` | object | Method name, logos, optional card `data` |
+| `customer_id` | UUID \| null | |
+| `customer` | object \| null | |
+| `payment_request_id` | string \| null | Plugin provider reference |
+| `webhook_status` | boolean | |
+| `order_reference_number` | string \| null | |
+| `payment_reference_number` | string \| null | Provider charge id |
+| `executor` | object \| null | |
 | `location` | `{ id, name, address }` \| null | |
-| `channel` | string | |
-| `remark` | string | |
-| `order_reference_number` | string | |
-| `closed_at` / `created_at` / `updated_at` | datetime | |
+| `channel` | string \| null | Plugin provider |
+| `admin_fee` | boolean | |
+| `closed_at` / `created_at` / `updated_at` | datetime \| null | Atom |
+| `metadata` | object | |
+| `xborder` | boolean | Always `false` |
 
 ## App rules
 
-- Browse / add charges: ResourcePicker `type: 'charge'`. Call this list only from the picker loader, a cash-up sheet (filters), or a scheduled wake.
-- Persist the **sheet** (totals, counts, optional line snapshot of this one page). Do not grow a full charges replica or page until empty.
-- Cash-up: `date_from` + `date_to` + `location_ids[]` + `payment_methods[]=cash` + `status=succeeded`.
-- Never invent another charges list path. Never return connector tokens to the browser.
+- ResourcePicker `charge` for picking. Totals-only cash-up may call this list with date/location/method filters — do not render charge rows from a generated screen.
+- Never invent another charges list path.
