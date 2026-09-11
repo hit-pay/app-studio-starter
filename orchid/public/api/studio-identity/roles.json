@@ -1,0 +1,8 @@
+{
+  "roles": [
+    { "id": "role-owner", "title": "Owner" },
+    { "id": "role-admin", "title": "Admin" },
+    { "id": "role-manager", "title": "Manager" },
+    { "id": "role-cashier", "title": "Cashier" }
+  ]
+}

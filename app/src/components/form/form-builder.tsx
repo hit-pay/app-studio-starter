@@ -12,6 +12,8 @@ import {
 import { cn } from '@/lib/utils'
 import { Checkbox, CheckboxGroup } from '@ui/form/checkbox'
 import { Select } from '@/components/form/select'
+import { StaffSelect } from '@/components/form/staff-select'
+import { RoleSelect } from '@/components/form/role-select'
 import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
 import {
   Field,
@@ -699,6 +701,57 @@ function SchemaForm({
                           field.handleChange,
                         )
                       }}
+                    />
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
+                  </Field>
+                )
+              }
+
+              if (type === 'staff') {
+                const titles = item.props?.roleTitles
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
+                    <StaffSelect
+                      name={item.path}
+                      label={false}
+                      multiple={item.props?.multiple === true}
+                      value={
+                        item.props?.multiple === true
+                          ? Array.isArray(value) ? value.map(String) : []
+                          : value == null || value === '' ? null : String(value)
+                      }
+                      invalid={invalid}
+                      placeholder={placeholder}
+                      roleTitles={Array.isArray(titles) ? titles.map(String) : undefined}
+                      locationId={typeof item.props?.locationId === 'string' ? item.props.locationId : undefined}
+                      onValueChange={(next) =>
+                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                      }
+                    />
+                    <FieldHint invalid={invalid} message={message} description={item.description} />
+                  </Field>
+                )
+              }
+
+              if (type === 'role') {
+                return (
+                  <Field data-invalid={invalid || undefined}>
+                    <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
+                    <RoleSelect
+                      name={item.path}
+                      label={false}
+                      multiple={item.props?.multiple === true}
+                      value={
+                        item.props?.multiple === true
+                          ? Array.isArray(value) ? value.map(String) : []
+                          : value == null || value === '' ? null : String(value)
+                      }
+                      invalid={invalid}
+                      placeholder={placeholder}
+                      onValueChange={(next) =>
+                        changeField(item, [{ path: item.path, value: next }], field.handleChange)
+                      }
                     />
                     <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>

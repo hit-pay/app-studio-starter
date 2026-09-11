@@ -26,6 +26,8 @@ const NEED = {
   'text-editor': 'rich text, notes, wysiwyg, lexical',
   'date-picker': 'date picker, date range picker, datetime picker, calendar popover',
   select: 'dropdown, select, searchable select, multi select, pick one option',
+  'staff-select': 'assignee, reviewer, pick staff, staff dropdown',
+  'role-select': 'pick role, notify role, role dropdown',
   'confirmation-modal': 'confirm, delete, destructive, are you sure',
   'copy-button': 'copy to clipboard, copy id, copy phone, copy url',
   'resource-picker':
@@ -128,6 +130,8 @@ const BLOCK_SUBGROUP = {
   'metric-card': 'Displaying Data',
   'choice-card': 'Form',
   select: 'Form',
+  'staff-select': 'Form',
+  'role-select': 'Form',
   'date-picker': 'Form',
   'form-builder': 'Form',
   'quantity-input': 'Form',
@@ -137,7 +141,7 @@ const BLOCK_SUBGROUP = {
   'page-layout': 'Layout',
   command: 'Overlays',
   'confirmation-modal': 'Overlays',
-  'resource-picker': 'Overlays',
+  'resource-picker': 'Form',
 }
 
 const ALIGNUI_ORDER = [

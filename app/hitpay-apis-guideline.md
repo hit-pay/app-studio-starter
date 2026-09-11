@@ -6,7 +6,7 @@ Document **OAuth public API only** (`oauth.any-scope` on `/v1/…`). Do not docu
 
 **Never implement HTTP DELETE** (products, customers, orders, invoices, payment requests, recurring, settings). Pause / resume are POST where documented.
 
-All OAuth lists the merchant **picks** go through ResourcePicker (`charge`, `invoice`, `payment-request`, `subscription-plan`, `recurring-billing`, `coupon`, `discount`, `tax`, `shipping`, `pickup`, `add-on`, `store-page`, plus product/customer/order/location/category). Generated screens must not `list-*` to build a picker **or to display a catalog/table/feed**. `list-*` docs are for the picker loader or totals-only computed sheets. Staff: `fetchStaffAppMembers()` / `fetchAppRoles()`.
+All OAuth lists the merchant **picks** go through ResourcePicker (`charge`, `invoice`, `payment-request`, `subscription-plan`, `recurring-billing`, `coupon`, `discount`, `tax`, `shipping`, `pickup`, `add-on`, `store-page`, plus product/customer/order/location/category). Generated screens must not `list-*` to build a picker **or to display a catalog/table/feed**. `list-*` docs are for the picker loader or totals-only computed sheets. Staff / role fields: `StaffSelect` / `RoleSelect` (or FormBuilder `staff` / `role`).
 
 # Needs
 

@@ -64,8 +64,10 @@ import { Route as ComponentsMetricCardRouteImport } from './routes/components/me
 import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
 import { Route as ComponentsResourcePickerRouteImport } from './routes/components/resource-picker'
+import { Route as ComponentsRoleSelectRouteImport } from './routes/components/role-select'
 import { Route as ComponentsSelectRouteImport } from './routes/components/select'
 import { Route as ComponentsSidebarRouteImport } from './routes/components/sidebar'
+import { Route as ComponentsStaffSelectRouteImport } from './routes/components/staff-select'
 import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
 
 const IndexRoute = IndexRouteImport.update({
@@ -345,6 +347,11 @@ const ComponentsResourcePickerRoute =
     path: '/components/resource-picker',
     getParentRoute: () => rootRouteImport,
   } as any)
+const ComponentsRoleSelectRoute = ComponentsRoleSelectRouteImport.update({
+  id: '/components/role-select',
+  path: '/components/role-select',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
   id: '/components/select',
   path: '/components/select',
@@ -353,6 +360,11 @@ const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
 const ComponentsSidebarRoute = ComponentsSidebarRouteImport.update({
   id: '/components/sidebar',
   path: '/components/sidebar',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsStaffSelectRoute = ComponentsStaffSelectRouteImport.update({
+  id: '/components/staff-select',
+  path: '/components/staff-select',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsTextEditorRoute = ComponentsTextEditorRouteImport.update({
@@ -415,8 +427,10 @@ export interface FileRoutesByFullPath {
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
+  '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
+  '/components/staff-select': typeof ComponentsStaffSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
   '/components/': typeof ComponentsIndexRoute
@@ -475,8 +489,10 @@ export interface FileRoutesByTo {
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
+  '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
+  '/components/staff-select': typeof ComponentsStaffSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui': typeof BaseUiIndexRoute
   '/components': typeof ComponentsIndexRoute
@@ -536,8 +552,10 @@ export interface FileRoutesById {
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
+  '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/sidebar': typeof ComponentsSidebarRoute
+  '/components/staff-select': typeof ComponentsStaffSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/base-ui/': typeof BaseUiIndexRoute
   '/components/': typeof ComponentsIndexRoute
@@ -598,8 +616,10 @@ export interface FileRouteTypes {
     | '/components/page-layout'
     | '/components/quantity-input'
     | '/components/resource-picker'
+    | '/components/role-select'
     | '/components/select'
     | '/components/sidebar'
+    | '/components/staff-select'
     | '/components/text-editor'
     | '/base-ui/'
     | '/components/'
@@ -658,8 +678,10 @@ export interface FileRouteTypes {
     | '/components/page-layout'
     | '/components/quantity-input'
     | '/components/resource-picker'
+    | '/components/role-select'
     | '/components/select'
     | '/components/sidebar'
+    | '/components/staff-select'
     | '/components/text-editor'
     | '/base-ui'
     | '/components'
@@ -718,8 +740,10 @@ export interface FileRouteTypes {
     | '/components/page-layout'
     | '/components/quantity-input'
     | '/components/resource-picker'
+    | '/components/role-select'
     | '/components/select'
     | '/components/sidebar'
+    | '/components/staff-select'
     | '/components/text-editor'
     | '/base-ui/'
     | '/components/'
@@ -779,8 +803,10 @@ export interface RootRouteChildren {
   ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
   ComponentsResourcePickerRoute: typeof ComponentsResourcePickerRoute
+  ComponentsRoleSelectRoute: typeof ComponentsRoleSelectRoute
   ComponentsSelectRoute: typeof ComponentsSelectRoute
   ComponentsSidebarRoute: typeof ComponentsSidebarRoute
+  ComponentsStaffSelectRoute: typeof ComponentsStaffSelectRoute
   ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
   BaseUiIndexRoute: typeof BaseUiIndexRoute
   ComponentsIndexRoute: typeof ComponentsIndexRoute
@@ -1173,6 +1199,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsResourcePickerRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/components/role-select': {
+      id: '/components/role-select'
+      path: '/components/role-select'
+      fullPath: '/components/role-select'
+      preLoaderRoute: typeof ComponentsRoleSelectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/components/select': {
       id: '/components/select'
       path: '/components/select'
@@ -1185,6 +1218,13 @@ declare module '@tanstack/react-router' {
       path: '/components/sidebar'
       fullPath: '/components/sidebar'
       preLoaderRoute: typeof ComponentsSidebarRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/staff-select': {
+      id: '/components/staff-select'
+      path: '/components/staff-select'
+      fullPath: '/components/staff-select'
+      preLoaderRoute: typeof ComponentsStaffSelectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/text-editor': {
@@ -1251,8 +1291,10 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
   ComponentsResourcePickerRoute: ComponentsResourcePickerRoute,
+  ComponentsRoleSelectRoute: ComponentsRoleSelectRoute,
   ComponentsSelectRoute: ComponentsSelectRoute,
   ComponentsSidebarRoute: ComponentsSidebarRoute,
+  ComponentsStaffSelectRoute: ComponentsStaffSelectRoute,
   ComponentsTextEditorRoute: ComponentsTextEditorRoute,
   BaseUiIndexRoute: BaseUiIndexRoute,
   ComponentsIndexRoute: ComponentsIndexRoute,

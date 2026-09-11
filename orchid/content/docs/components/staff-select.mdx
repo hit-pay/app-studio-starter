@@ -1,0 +1,13 @@
+import { StaffSelectDemo } from '../../../src/components/doc/doc-demos'
+
+<StaffSelectDemo />
+
+App-member dropdown. Fetches `GET /api/apps/{appId}/staff-app-members` (same as App Studio). Docs serve a fake response for that path.
+
+```tsx
+import { StaffSelect } from '@/components/form/staff-select'
+
+<StaffSelect name="assignee_id" />
+```
+
+Do not fetch staff on the screen. Do not call `/v1/staffs`. Persist `id` plus name snapshot. Optional: `multiple`, `roleTitles`, `locationId`.

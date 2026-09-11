@@ -6,7 +6,19 @@
   "outputDirectory": "dist",
   "rewrites": [
     {
-      "source": "/((?!r/|assets/|registry\\.json|orchid-tokens\\.css|llms\\.txt|llms/).*)",
+      "source": "/api/apps/:appId/staff-app-members",
+      "destination": "/api/studio-identity/staff-app-members.json"
+    },
+    {
+      "source": "/api/apps/:appId/roles",
+      "destination": "/api/studio-identity/roles.json"
+    },
+    {
+      "source": "/api/apps/:appId/user/info",
+      "destination": "/api/studio-identity/user.json"
+    },
+    {
+      "source": "/((?!r/|assets/|api/|registry\\.json|orchid-tokens\\.css|llms\\.txt|llms/).*)",
       "destination": "/index.html"
     }
   ],

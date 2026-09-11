@@ -1,0 +1,42 @@
+{
+  "members": [
+    {
+      "id": "user-1",
+      "name": "Aisha Tan",
+      "email": "aisha@example.test",
+      "role_id": "role-owner",
+      "role": { "id": "role-owner", "title": "Owner" },
+      "locations": [
+        { "id": "loc-orchard", "name": "Orchard" },
+        { "id": "loc-tampines", "name": "Tampines" }
+      ]
+    },
+    {
+      "id": "user-2",
+      "name": "Ben Lim",
+      "email": "ben@example.test",
+      "role_id": "role-manager",
+      "role": { "id": "role-manager", "title": "Manager" },
+      "locations": [{ "id": "loc-orchard", "name": "Orchard" }]
+    },
+    {
+      "id": "user-3",
+      "name": "Chloe Ong",
+      "email": "chloe@example.test",
+      "role_id": "role-cashier",
+      "role": { "id": "role-cashier", "title": "Cashier" },
+      "locations": [{ "id": "loc-tampines", "name": "Tampines" }]
+    },
+    {
+      "id": "user-4",
+      "name": "Danish Rahman",
+      "email": "danish@example.test",
+      "role_id": "role-admin",
+      "role": { "id": "role-admin", "title": "Admin" },
+      "locations": [
+        { "id": "loc-orchard", "name": "Orchard" },
+        { "id": "loc-tampines", "name": "Tampines" }
+      ]
+    }
+  ]
+}

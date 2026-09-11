@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 51 components.
-- Installable registry items: 53, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 53 components.
+- Installable registry items: 55, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -130,9 +130,21 @@ Schema-driven create/edit form. Use Detail Card for a read-only record.
 Minus/plus stepper; click the value to type.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
 
+#### [Resource Picker](https://orchid-ui-hitpay.vercel.app/llms/resource-picker.md)
+Search and select HitPay products, categories, customers, orders, or locations.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resource-picker.json)
+
+#### [Role Select](https://orchid-ui-hitpay.vercel.app/llms/role-select.md)
+Business role dropdown. Docs use a fake roles API.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/role-select.json)
+
 #### [Select](https://orchid-ui-hitpay.vercel.app/llms/select.md)
 Props picker for a closed list or a searchable / multi select.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
+
+#### [Staff Select](https://orchid-ui-hitpay.vercel.app/llms/staff-select.md)
+App-member dropdown. Docs use a fake staff-app-members API.
+[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/staff-select.json)
 
 #### [Text Editor](https://orchid-ui-hitpay.vercel.app/llms/text-editor.md)
 Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
@@ -167,10 +179,6 @@ Searchable command palette. Drive it with open, onOpenChange, and groups.
 #### [Confirmation Modal](https://orchid-ui-hitpay.vercel.app/llms/confirmation-modal.md)
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/confirmation-modal.json)
-
-#### [Resource Picker](https://orchid-ui-hitpay.vercel.app/llms/resource-picker.md)
-Search and select HitPay products, categories, customers, orders, or locations.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resource-picker.json)
 
 ## Base Components
 
@@ -316,7 +324,7 @@ Keyboard key and grouped shortcut display.
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, sidebar, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, sidebar, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, staff-select, role-select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, aspect-ratio, chart, file-upload, form-section
 
 ## Usage Guidance
 

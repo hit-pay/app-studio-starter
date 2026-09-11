@@ -44,7 +44,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | `src/routes/__root.tsx` | `QueryProvider`, `ConfirmationModalProvider`, `ResourcePickerProvider`, `Toaster` |
 | `src/components/` | Orchid blocks — **use these first** (`@/components/…`) |
 | `src/ui/` | Orchid primitives — last resort (`@ui/…`) |
-| `src/lib/hitpay.ts` | Browser user / roles / staff-app-members |
+| `src/lib/hitpay.ts` | Browser `useHitPayUser()` / `fetchStaffAppMembers` / `fetchAppRoles` |
 | `src/lib/hitpay-roles.ts` | HitPay role titles (only place they are listed) |
 | `src/lib/server/` | Server helpers used only from `createServerFn` |
 | `src/lib/server/hitpay.ts` | Hopped session + server-side connector values |
@@ -100,12 +100,14 @@ Before writing JSX for a screen, name the block(s) you will use (`PageLayout` + 
 | Customer / contact / payee | `@/components/displaying-data/customer-card` | `Avatar` + `Badge` collage |
 | Create/edit fields | `@/components/form/form-builder` | `@ui/form/field` + `Input` per field |
 | Pick from a list | `@/components/form/select` | `@ui/form/combobox` children, custom dropdown |
+| Assignee / reviewer / pick staff | `@/components/form/staff-select` | `fetchStaffAppMembers()` on the screen, `/v1/staffs`, custom staff dropdown |
+| Pick a role to store | `@/components/form/role-select` | `fetchAppRoles()` on the screen, custom role dropdown |
 | Date / range / datetime | `@/components/form/date-picker` | `@ui/form/calendar` + `Popover` |
 | Quantity stepper | `@/components/form/quantity-input` | custom plus/minus `Button`s |
 | Option cards / choose one | `@/components/form/choice-card` | radio + styled boxes |
 | Rich notes | `@/components/form/text-editor` | raw `Textarea` for rich text |
 | Confirm delete / destructive | `@/components/overlays/confirmation-modal` | custom `Dialog` |
-| Pick any HitPay OAuth list (products, customers, orders, locations, categories, charges, invoices, payment requests, plans, recurring, coupons, discounts, taxes, shipping, pickups, add-ons, store pages) | `@/components/overlays/resource-picker` | custom search `Dialog`, Data Table as a picker, `list-*` to fill a picker |
+| Pick any HitPay OAuth list (products, customers, orders, locations, categories, charges, invoices, payment requests, plans, recurring, coupons, discounts, taxes, shipping, pickups, add-ons, store pages) | `@/components/form/resource-picker` | custom search `Dialog`, Data Table as a picker, `list-*` to fill a picker |
 | Command palette | `@/components/overlays/command` | custom `Dialog` + input |
 | Copy id / phone / URL | `@/components/actions/copy-button` | custom clipboard `Button` |
 | No records / first-use / search miss | `@/components/displaying-data/empty` | custom centered copy + `Button`s |
@@ -129,13 +131,13 @@ Always give the app its own Turso schema for **app-owned** workflow state (sessi
 
 **All HitPay resource sync is “picker → sprite BE add”.** HitPay list APIs have **no filter-by-id**. Do not `list-*` the catalog, do not invent `ids[]`, and do not loop `get-*-details` to rebuild a cache.
 
-Use `@/components/overlays/resource-picker` / `useResourcePicker()` → `await pick({ type })` for **every** HitPay list the user picks from. Types: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `payment-request` | `subscription-plan` | `recurring-billing` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on` | `store-page`. Pass the picker result into a `createServerFn`. The handler upserts Turso from that payload (`id` + `resource` fields). That is the only catalog sync.
+Use `@/components/form/resource-picker` / `useResourcePicker()` → `await pick({ type })` for **every** HitPay list the user picks from. Types: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `payment-request` | `subscription-plan` | `recurring-billing` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on` | `store-page`. Pass the picker result into a `createServerFn`. The handler upserts Turso from that payload (`id` + `resource` fields). That is the only catalog sync.
 
 Do **not** call `list-*` from generated screens to browse, fill a table, or render a feed. The picker load already lists. `list-*` docs exist for the ResourcePicker loader and for **totals-only** computed sheets (cash-up sums with date/location/method filters) — never to display those API rows. Wake `data` is persisted to Turso and shown from there.
 
-Staff pickers stay on `fetchStaffAppMembers()` / `fetchAppRoles()` (not OAuth `/v1/staffs`).
+Assignee / reviewer / notify-role fields use `<StaffSelect name="assignee_id" />` / `<RoleSelect name="notify_role_id" />` (or FormBuilder `type: 'staff'` / `type: 'role'`). Those blocks already call `fetchStaffAppMembers()` / `fetchAppRoles()` in the browser (`GET /api/apps/{appId}/staff-app-members` and `/roles`). Do not wrap them in `createServerFn`. Never `/v1/staffs`. Persist `id` + name snapshot on the workflow row — no staff directory screen.
 
-Staff stays on `fetchStaffAppMembers()` / `fetchAppRoles()`. Live create/update/delete of catalog still uses HitPay write APIs when the merchant asked to change HitPay data — then the app keeps its Turso row from the write response or a new picker add, not a list sync.
+Live create/update of HitPay catalog still uses write APIs when the merchant asked to change HitPay data — then the app keeps its Turso row from the write response or a new picker add, not a list sync.
 
 If a scheduled wake POSTs `data`, persist it. Do not list-sync or re-fetch picked ids from HitPay.
 
@@ -175,7 +177,7 @@ CREATE INDEX idx_files_entity ON files(entity_type, entity_id);
 Auth is the host dashboard. Owner/Admin app creation, configuration, publishing, and Connector / Integration management happen in App Studio outside the generated app. The generated app only implements the embedded business workflow. Never build login, signup, password fields, or a hardcoded staff list.
 
 - Role titles live in `#/lib/hitpay-roles`: `HITPAY_ALL_ROLES` (floor work) and `HITPAY_MANAGER_ROLES` (approvals, settings, refunds). Import those arrays; keep titles out of routes.
-- **Browser — `#/lib/hitpay`:** `useHitPayUser()` on app screens. Hide or disable actions with `user.role.title`. Use `fetchStaffAppMembers()` (`GET /api/apps/{appId}/staff-app-members`) / `fetchAppRoles()` for staff pickers, assignee dropdowns, and reviewer lists — never invent staff in SQL or React state. Each staff row has `id`, `name`, `email`, `role` (`id` + `title`), and `locations` (`id` + `name`). Never call `/members`.
+- **Browser — `#/lib/hitpay`:** `useHitPayUser()` on app screens. Hide or disable actions with `user.role.title`. Assignee / reviewer / stored role: `StaffSelect` / `RoleSelect` only. Never invent staff in SQL or React state. Never call `/members` or `/v1/staffs`.
 - **Server — `#/lib/server/hitpay`:** Every `createServerFn` that reads or writes business data must call `requireHitPayRoles(HITPAY_ALL_ROLES)` or `requireHitPayRoles(HITPAY_MANAGER_ROLES)` before touching Turso or external APIs. Use `getHitPaySession()` for the trusted actor. Persist `session.id` (and name/email when useful) on audit columns such as `created_by`, `counted_by`, `approved_by`. Never trust `data.userId`, `data.staffName`, or similar client fields for identity.
 - Manager-only actions (approve, delete others' records, change settings) must use `HITPAY_MANAGER_ROLES`.
 

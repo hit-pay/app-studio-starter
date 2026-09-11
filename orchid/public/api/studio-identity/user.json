@@ -1,0 +1,6 @@
+{
+  "id": "user-1",
+  "email": "aisha@example.test",
+  "name": "Aisha Tan",
+  "role": { "id": "role-owner", "title": "Owner" }
+}

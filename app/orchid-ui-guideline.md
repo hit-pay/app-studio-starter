@@ -18,9 +18,11 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - rich text, notes, wysiwyg, lexical → `text-editor`
 - date picker, date range picker, datetime picker, calendar popover → `date-picker`
 - dropdown, select, searchable select, multi select, pick one option → `select`
+- assignee, reviewer, pick staff, staff dropdown → `staff-select`
+- pick role, notify role, role dropdown → `role-select`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
 - copy to clipboard, copy id, copy phone, copy url → `copy-button`
-- pick product, pick customer, pick order, pick location, pick category, pick charge, pick invoice, pick payment request, pick coupon, pick discount, pick tax, pick shipping, pick pickup, pick add-on, pick store page, pick plan, pick recurring, resource picker, catalog picker → `resource-picker`
+- pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker → `resource-picker`
 - command palette, search commands, cmdk → `command`
 - toast, snackbar, notify, success message → `toast`
 - banner, alert, inline notice → `banner`
@@ -107,6 +109,13 @@ Import `@/components/form/form-builder` — `src/components/form/form-builder.ts
 Docs: `orchid-llms/form-builder.md`
 Related: `src/components/form/form-builder-model.ts`.
 
+## `resource-picker` — Resource Picker
+
+Need: pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker
+Promise picker for HitPay list records (products, categories, customers, orders, locations). const pick = useResourcePicker(); await pick({ type }).
+Import `@/components/form/resource-picker` — `src/components/form/resource-picker.tsx`.
+Docs: `orchid-llms/resource-picker.md`
+
 ## `choice-card` — Choice Card
 
 Need: choose one, option cards, plan, method
@@ -121,6 +130,20 @@ Props picker for a closed list or a searchable / multi select.
 Import `@/components/form/select` — `src/components/form/select.tsx`.
 Docs: `orchid-llms/select.md`
 Related: `src/ui/form/combobox.tsx`.
+
+## `staff-select` — Staff Select
+
+Need: assignee, reviewer, pick staff, staff dropdown
+App-member dropdown. Loads staff-app-members. Do not fetch on the screen.
+Import `@/components/form/staff-select` — `src/components/form/staff-select.tsx`.
+Docs: `orchid-llms/staff-select.md`
+
+## `role-select` — Role Select
+
+Need: pick role, notify role, role dropdown
+Business role dropdown. Loads /roles. Do not fetch on the screen.
+Import `@/components/form/role-select` — `src/components/form/role-select.tsx`.
+Docs: `orchid-llms/role-select.md`
 
 ## `quantity-input` — Quantity Input
 
@@ -175,13 +198,6 @@ Need: confirm, delete, destructive, are you sure
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 Import `@/components/overlays/confirmation-modal` — `src/components/overlays/confirmation-modal.tsx`.
 Docs: `orchid-llms/confirmation-modal.md`
-
-## `resource-picker` — Resource Picker
-
-Need: pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker
-Promise picker for HitPay OAuth list records. const pick = useResourcePicker(); await pick({ type }).
-Import `@/components/overlays/resource-picker` — `src/components/overlays/resource-picker.tsx`.
-Docs: `orchid-llms/resource-picker.md`
 
 ## `command` — Command
 

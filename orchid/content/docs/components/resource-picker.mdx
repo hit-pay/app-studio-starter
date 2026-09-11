@@ -2,14 +2,14 @@ import { ResourcePickerDemo } from '../../../src/components/doc/doc-demos'
 
 <ResourcePickerDemo />
 
-Click a button, pick a row, confirm. The panel below the buttons shows selected ids and the HitPay-shaped `resource` JSON. Cancel shows “Cancelled”. The demo `load` talks to a **fake** `{ data: [...] }` list (same envelope as HitPay `/v1/…` lists), then maps rows to picker items. In App Studio the real loader is already on the root — do not remount `ResourcePickerProvider`.
+Click a button, pick a row, confirm. The panel below the buttons shows selected ids and the HitPay-shaped `resource` JSON. Cancel shows “Cancelled”. Docs use a fake `/v1/…` list envelope, then the **same** `mapResourcePickerPayload` as App Studio’s `loadResourcePickerPage`. In the starter, do not remount `ResourcePickerProvider` — the real loader is already on the root.
 
 ## App Studio usage
 
 ```tsx
 import { useState } from 'react'
 import { Button } from '@ui/actions/button'
-import { useResourcePicker, type ResourcePickerResult } from '@/components/overlays/resource-picker'
+import { useResourcePicker, type ResourcePickerResult } from '@/components/form/resource-picker'
 
 function AddProducts() {
   const pick = useResourcePicker()
@@ -89,7 +89,7 @@ function fakeHitPayList(type: ResourcePickerType) {
 }
 ```
 
-Map `data[]` to `{ id, title, badge, image, resource, children }` the same way App Studio’s `loadResourcePickerPage` does. Result after select: `{ id, resource, children? }` — `resource` is the original HitPay row.
+`shadcn add @orchid/resource-picker` only replaces the dialog UI. It does not ship the starter loader (`#/lib/resource-picker.ts`). Map `data[]` (shipping: `shippings[]`) with `mapResourcePickerPayload`. Result after select: `{ id, resource, children? }` — `resource` is the original HitPay row.
 
 - `action`: `add` (default) or `select`
 - `multiple`: omit/`false` = one, `true` = unlimited, number = cap

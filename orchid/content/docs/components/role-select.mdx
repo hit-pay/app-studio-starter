@@ -1,0 +1,13 @@
+import { RoleSelectDemo } from '../../../src/components/doc/doc-demos'
+
+<RoleSelectDemo />
+
+Business role dropdown. Fetches `GET /api/apps/{appId}/roles` (same as App Studio). Docs serve a fake response for that path.
+
+```tsx
+import { RoleSelect } from '@/components/form/role-select'
+
+<RoleSelect name="notify_role_id" />
+```
+
+Gate buttons with `useHitPayUser().user.role.title`. Use this select only to store a role id.

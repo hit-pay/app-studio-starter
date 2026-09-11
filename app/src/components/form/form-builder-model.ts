@@ -3,6 +3,8 @@ export const SCHEMA_FORM_TYPES = [
   'password',
   'textarea',
   'select',
+  'staff',
+  'role',
   'combobox',
   'radio',
   'choice-card',

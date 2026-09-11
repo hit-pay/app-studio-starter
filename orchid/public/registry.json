@@ -53,6 +53,8 @@
         "@orchid/input-group",
         "@orchid/textarea",
         "@orchid/select",
+        "@orchid/staff-select",
+        "@orchid/role-select",
         "@orchid/quantity-input",
         "@orchid/text-editor",
         "@orchid/checkbox",
@@ -333,9 +335,9 @@
       ],
       "files": [
         {
-          "path": "src/components/overlays/resource-picker.tsx",
+          "path": "src/components/form/resource-picker.tsx",
           "type": "registry:ui",
-          "target": "@components/overlays/resource-picker.tsx"
+          "target": "@components/form/resource-picker.tsx"
         }
       ]
     },
@@ -904,6 +906,72 @@
           "path": "src/ui/form/combobox.tsx",
           "type": "registry:file",
           "target": "@ui/form/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "staff-select",
+      "type": "registry:ui",
+      "title": "Staff Select",
+      "description": "App-member dropdown. GET /api/apps/{appId}/staff-app-members. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/select",
+        "@orchid/field"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/staff-select.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/staff-select.tsx"
+        },
+        {
+          "path": "src/lib/hitpay.ts",
+          "type": "registry:lib",
+          "target": "lib/hitpay.ts"
+        },
+        {
+          "path": "src/lib/hitpay-roles.ts",
+          "type": "registry:lib",
+          "target": "lib/hitpay-roles.ts"
+        },
+        {
+          "path": "src/lib/studio-app-id.ts",
+          "type": "registry:lib",
+          "target": "lib/studio-app-id.ts"
+        }
+      ]
+    },
+    {
+      "name": "role-select",
+      "type": "registry:ui",
+      "title": "Role Select",
+      "description": "Business role dropdown. GET /api/apps/{appId}/roles. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/select",
+        "@orchid/field"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/role-select.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/role-select.tsx"
+        },
+        {
+          "path": "src/lib/hitpay.ts",
+          "type": "registry:lib",
+          "target": "lib/hitpay.ts"
+        },
+        {
+          "path": "src/lib/hitpay-roles.ts",
+          "type": "registry:lib",
+          "target": "lib/hitpay-roles.ts"
+        },
+        {
+          "path": "src/lib/studio-app-id.ts",
+          "type": "registry:lib",
+          "target": "lib/studio-app-id.ts"
         }
       ]
     },

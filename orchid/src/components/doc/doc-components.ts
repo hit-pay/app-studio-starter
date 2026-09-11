@@ -222,6 +222,17 @@ export const DOC_BLOCKS = [
       "Props picker for a closed list or a searchable / multi select.",
   },
   {
+    to: "/components/staff-select" as const,
+    name: "Staff Select",
+    description:
+      "App-member dropdown. Docs use a fake staff-app-members API.",
+  },
+  {
+    to: "/components/role-select" as const,
+    name: "Role Select",
+    description: "Business role dropdown. Docs use a fake roles API.",
+  },
+  {
     to: "/components/detail-card" as const,
     name: "Detail Card",
     description:
@@ -424,14 +435,17 @@ export const DOC_BLOCK_GROUPS = [
   blockGroup("Form", [
     "/components/choice-card",
     "/components/select",
+    "/components/staff-select",
+    "/components/role-select",
     "/components/date-picker",
     "/components/form-builder",
     "/components/quantity-input",
     "/components/text-editor",
+    "/components/resource-picker",
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Navigation", ["/components/sidebar"]),
-  blockGroup("Overlays", ["/components/command", "/components/confirmation-modal", "/components/resource-picker"]),
+  blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);
 
 export const DOC_GUIDES = [
