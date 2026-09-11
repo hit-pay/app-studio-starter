@@ -33,7 +33,7 @@ Do not list `/v1/invoices` to load one id.
 
 ## Response
 
-**200** — one invoice object (not wrapped in `{ data }`). Same fields as each `list-invoices` `data[]` item. Show loads customer, payment requests + charges, and fills `custom_fields_config`.
+**200** — one invoice object (not wrapped in `{ data }`). Same nested fields as each `list-invoices` `data[]` item.
 
 **403 / 404** — not owned or missing.
 

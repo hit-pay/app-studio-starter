@@ -70,78 +70,33 @@ type ListProductsResponse = {
     total: number
   }
 }
-```
 
-List loads categories, images, add-ons, locations, and variations (values, images, locations).
+type Money = {
+  currency: string
+  price: number
+  price_stored: number
+  price_display: string
+  price_before_discount?: number
+  price_before_discount_stored?: number
+  price_before_discount_display?: string
+}
 
-### Product
+type SupportedCurrencyPrice = {
+  currency: string
+  price: number
+  price_stored: number
+  price_display: string
+  price_before_discount?: number
+  price_before_discount_stored?: number
+  price_before_discount_display?: string
+}
 
-| Field | Type | Notes |
-|---|---|---|
-| `id` | UUID | |
-| `business_id` | UUID | |
-| `category_id` | Category[] | Category **objects**, not UUID strings |
-| `name` | string | |
-| `headline` | string \| null | |
-| `description` | string | May contain HTML |
-| `stock_keeping_unit` | string \| null | |
-| `barcode` | string \| null | From the default variation when that relation is loaded |
-| `business_currency_price` | object | `{ currency, price, price_stored, price_display }` plus optional `price_before_discount`, `price_before_discount_stored`, `price_before_discount_display` |
-| `supported_currency_prices` | object[] \| omitted | When supported-currency prices are loaded |
-| `currency` | string | Display currency (`currency` query or business default) |
-| `price` | number | Major units |
-| `price_before_discount` | number \| null | |
-| `price_display` | string | Range string when variants have different prices |
-| `price_stored` | integer | Minor units |
-| `is_unavailable_for_selected_currency` | boolean | |
-| `price_source` | string \| omitted | Only when a converted price was used |
-| `is_manageable` | `0` \| `1` | |
-| `is_pinned` | boolean | |
-| `status` | `draft` \| `published` | |
-| `product_weight` | integer \| null | Grams |
-| `delivery_method_required` | boolean | |
-| `has_variations` | boolean | |
-| `is_shopify` | boolean | |
-| `is_woocommerce` | boolean | |
-| `order` | integer | |
-| `quantity` | integer \| null | Product total, or one outlet when a single `location_ids` is sent |
-| `quantity_alert_level` | integer \| null | |
-| `min_order_quantity` / `max_order_quantity` | integer \| null | |
-| `emoji` | string \| null | |
-| `open_amount` | boolean | |
-| `product_url` | string | |
-| `variations_count` | integer | |
-| `variations` | Variation[] | Present when variations are loaded |
-| `images` | Image[] | Omitted when `shopify` is present |
-| `image` | string | Convenience URL |
-| `shopify` | object \| omitted | `{ id, inventory_item_id, sku, image_url }` when the product has a Shopify id |
-| `is_published` | boolean | |
-| `published_at` | datetime \| null | Atom |
-| `created_at` / `updated_at` | datetime | Atom |
-| `order_in_category` | integer \| null | Category pivot order; usually `null` on this list |
-| `allow_back_order` | boolean | |
-| `available` | boolean | |
-| `type` | string | Default `physical` |
-| `password_protected` | boolean | |
-| `digital_content` | object[] \| null | Sorted by `order` |
-| `auto_tag_new_locations` | boolean | |
-| `channels` | string[] | `pos`, `invoice`, `online_store`, `self_serve` |
-| `locations` | Location[] | Per-outlet inventory |
-| `product_unit` | string \| null | |
-| `product_unit_abbreviation` | string \| null | |
-| `product_unit_value` | number \| null | |
-| `handle` | string \| null | |
-| `pos_color` | string \| null | First category that has a POS color |
-| `product_add_ons` | object[] | Present when add-ons are loaded |
-| `is_inventory_tracked` | boolean | Any loaded location has `manage_inventory` |
-| `is_online_store_inventory_tracked` | boolean | |
-| `tax` | object \| omitted | Only if `tax` was loaded (not on this list) |
+type Inventory = {
+  manage_inventory: boolean
+  quantity: number
+  quantity_alert_level: number | null
+}
 
-Option names live on each variation’s `values[]`. There are no `variation_key_*` / `variation_value_*` fields.
-
-### Location (product or variation)
-
-```ts
 type ProductLocation = {
   id: string
   name: string
@@ -154,60 +109,272 @@ type ProductLocation = {
   business_id: string
   created_at: string
   updated_at: string
-  inventory: {
-    manage_inventory: boolean
-    quantity: number
-    quantity_alert_level: number | null
-  }
-  pickups: unknown[]
+  inventory: Inventory
+  pickups: []
+}
+
+type ImageDimension = { size: string; path: string }
+
+type Image = {
+  id: string
+  caption: string | null
+  alt_text: string | null
+  group: string | null
+  order: number
+  extension: string | null
+  status: string | null
+  disk: string | null
+  url: string
+  other_dimensions: ImageDimension[]
+  urls?: Record<string, string> // icon, large, small, medium, thumbnail, …
+  created_at: string
+  pivot?: Record<string, unknown>
+}
+
+type Category = {
+  id: string
+  business_id: string
+  name: string
+  handle: string | null
+  description: string | null
+  active: boolean
+  is_active: boolean
+  order: number
+  parent_id: string | null
+  total_products: number
+  emoji: string | null
+  pos_color: string | null
+  created_at: string
+  updated_at: string
+}
+
+type Variation = {
+  id: string
+  stock_keeping_unit: string | null
+  barcode: string | null
+  description: string | null
+  values: { key: string; value: string }[]
+  business_currency_price: Money
+  price: number
+  price_display: string
+  price_stored: number
+  is_unavailable_for_selected_currency: boolean
+  price_source?: string
+  quantity: number | null
+  quantity_alert_level: number | null
+  image: Image[]
+  product_variation_weight: number | null
+  open_amount: boolean
+  order: number
+  locations: ProductLocation[]
+  supported_currency_prices?: SupportedCurrencyPrice[]
+}
+
+type Shopify = {
+  id: string
+  inventory_item_id: string | null
+  sku: string | null
+  image_url: string | null
+}
+
+type DigitalContent = {
+  name: string
+  order: number
+  type: 'file' | 'link'
+  link?: string
+  file?: unknown
+}
+
+type AddOnOptionValue = {
+  option_value: string
+  option_price: number | null
+  price_source?: string
+  is_unavailable_for_selected_currency?: boolean
+}
+
+type ProductAddOn = {
+  id: string
+  business_id: string
+  name: string
+  option_type: string
+  option_values: AddOnOptionValue[] | null
+  min_selection: number | null
+  max_selection: number | null
+  is_required: boolean | number
+  created_at: string
+  updated_at: string
+  pivot?: Record<string, unknown>
+}
+
+type Tax = {
+  id: string
+  name: string
+  applies_overseas: boolean
+  applies_locally: boolean
+  rate: number // percent (stored rate × 100)
+}
+
+type Product = {
+  id: string
+  business_id: string
+  category_id: Category[]
+  name: string
+  headline: string | null
+  description: string
+  stock_keeping_unit: string | null
+  barcode: string | null
+  business_currency_price: Money
+  supported_currency_prices?: SupportedCurrencyPrice[]
+  currency: string
+  price: number
+  price_before_discount: number | null
+  price_display: string
+  price_stored: number
+  is_unavailable_for_selected_currency: boolean
+  price_source?: string
+  is_manageable: 0 | 1
+  is_pinned: boolean
+  status: 'draft' | 'published'
+  product_weight: number | null
+  delivery_method_required: boolean
+  has_variations: boolean
+  is_shopify: boolean
+  is_woocommerce: boolean
+  order: number
+  quantity: number | null
+  quantity_alert_level: number | null
+  min_order_quantity: number | null
+  max_order_quantity: number | null
+  emoji: string | null
+  open_amount: boolean
+  product_url: string
+  variations_count: number
+  variations: Variation[]
+  images?: Image[]
+  image?: string
+  shopify?: Shopify
+  is_published: boolean
+  published_at: string | null
+  created_at: string
+  updated_at: string
+  order_in_category: number | null
+  allow_back_order: boolean
+  available: boolean
+  type: string
+  password_protected: boolean
+  digital_content: DigitalContent[] | null
+  auto_tag_new_locations: boolean
+  channels: Array<'pos' | 'invoice' | 'online_store' | 'self_serve'>
+  locations: ProductLocation[]
+  product_unit: string | null
+  product_unit_abbreviation: string | null
+  product_unit_value: number | null
+  handle: string | null
+  pos_color: string | null
+  product_add_ons: ProductAddOn[]
+  is_inventory_tracked: boolean
+  is_online_store_inventory_tracked: boolean
+  tax?: Tax
 }
 ```
 
-Use `locations[].inventory.quantity` for that outlet. Top-level `quantity` is the total (or the one filtered outlet).
+If the product has a Shopify id, `shopify` is present and `images` / `image` are omitted. Otherwise `images` + `image` are present.
 
-### Variation
+Option names live on `variations[].values[]` (`{ key, value }`). There are no `variation_key_*` / `variation_value_*` fields. `tax` is not in this response.
 
-| Field | Type | Notes |
-|---|---|---|
-| `id` | UUID | |
-| `stock_keeping_unit` | string \| null | |
-| `barcode` | string \| null | |
-| `description` | string \| null | |
-| `values` | `{ key: string; value: string }[]` | Sorted by `key` |
-| `business_currency_price` | object | Same shape as the product’s business-currency price |
-| `price` / `price_display` / `price_stored` | number / string / integer | |
-| `is_unavailable_for_selected_currency` | boolean | |
-| `price_source` | string \| omitted | |
-| `quantity` | integer \| null | |
-| `quantity_alert_level` | integer \| null | |
-| `image` | Image[] | |
-| `product_variation_weight` | number \| null | |
-| `open_amount` | boolean | Same as the parent product |
-| `order` | integer | |
-| `locations` | Location[] | Same `inventory` shape |
-| `supported_currency_prices` | object[] \| omitted | |
+### Inventory
 
-### Image
+Every product has `locations[]`. Every variation has `variations[].locations[]`. Each location object includes `inventory`:
 
-| Field | Type |
+```ts
+inventory: {
+  manage_inventory: boolean
+  quantity: number
+  quantity_alert_level: number | null
+}
+```
+
+Read stock from those nested objects. Top-level `quantity` / `quantity_alert_level` are totals (or one outlet when the request sends exactly one `location_ids`).
+
+```json
+{
+  "id": "9c1e0001-0000-4000-8000-000000000001",
+  "quantity": 15,
+  "quantity_alert_level": 3,
+  "is_manageable": 1,
+  "is_inventory_tracked": true,
+  "is_online_store_inventory_tracked": true,
+  "has_variations": true,
+  "locations": [
+    {
+      "id": "9c1e0002-0000-4000-8000-000000000001",
+      "name": "Main Store",
+      "street": "1 Harbourfront",
+      "postal_code": "098632",
+      "city": "Singapore",
+      "state": null,
+      "country": "sg",
+      "active": true,
+      "business_id": "9c1e0000-0000-4000-8000-000000000001",
+      "created_at": "2026-01-01T00:00:00+00:00",
+      "updated_at": "2026-01-02T00:00:00+00:00",
+      "inventory": {
+        "manage_inventory": true,
+        "quantity": 15,
+        "quantity_alert_level": 3
+      },
+      "pickups": []
+    }
+  ],
+  "variations": [
+    {
+      "id": "9c1e0003-0000-4000-8000-000000000011",
+      "values": [{ "key": "Size", "value": "M" }],
+      "quantity": 10,
+      "quantity_alert_level": 2,
+      "locations": [
+        {
+          "id": "9c1e0002-0000-4000-8000-000000000001",
+          "name": "Main Store",
+          "street": "1 Harbourfront",
+          "postal_code": "098632",
+          "city": "Singapore",
+          "state": null,
+          "country": "sg",
+          "active": true,
+          "business_id": "9c1e0000-0000-4000-8000-000000000001",
+          "created_at": "2026-01-01T00:00:00+00:00",
+          "updated_at": "2026-01-02T00:00:00+00:00",
+          "inventory": {
+            "manage_inventory": true,
+            "quantity": 10,
+            "quantity_alert_level": 2
+          },
+          "pickups": []
+        }
+      ]
+    }
+  ]
+}
+```
+
+| Path | Meaning |
 |---|---|
-| `id` | UUID |
-| `caption` | string \| null |
-| `alt_text` | string \| null |
-| `group` | string \| null |
-| `order` | integer |
-| `extension` | string \| null |
-| `status` | string \| null |
-| `disk` | string \| null |
-| `url` | string | Original |
-| `other_dimensions` | `{ size: string; path: string }[]` |
-| `urls` | Record of size → URL (`icon`, `large`, `small`, `medium`, `thumbnail`, …) |
-| `created_at` | datetime |
-| `pivot` | object \| omitted |
+| `quantity` / `quantity_alert_level` | Product total. One `location_ids` → that outlet only |
+| `is_manageable` | `1` if inventory is managed for the (filtered) location |
+| `is_inventory_tracked` | `true` if any `locations[].inventory.manage_inventory` is true |
+| `is_online_store_inventory_tracked` | `false` if any online-store qty is `null` |
+| `locations[]` | Outlets tagged on the product |
+| `locations[].inventory` | Stock for that product × outlet |
+| `locations[].inventory.manage_inventory` | Whether this outlet tracks stock |
+| `locations[].inventory.quantity` | Units in that outlet (`0` if qty is null) |
+| `locations[].inventory.quantity_alert_level` | Low-stock threshold |
+| `locations[].pickups` | Always `[]` |
+| `variations[].quantity` / `quantity_alert_level` | Variant total (or one outlet when a single `location_ids` is sent) |
+| `variations[].locations[]` | Same location shape for that variant × outlet |
+| `variations[].locations[].inventory` | Stock for that variant × outlet |
 
-### Category (in `category_id`)
-
-Includes at least `id`, `name`, `handle`, `is_active`, `total_products`, plus the other category columns on the model.
+No-variant product: use `locations[].inventory`. Product with variants: use `variations[].locations[].inventory`. `inventory` has only those three keys.
 
 ## App rules
 

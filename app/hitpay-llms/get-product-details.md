@@ -43,7 +43,7 @@ Do not call `GET /v1/products` to load one id.
 
 ## Response
 
-**200** — one product object (not wrapped in `{ data }`). Same fields as each `list-products` `data[]` item, including `category_id` (category objects), `variations[].values[]`, `locations[].inventory`, images, and `product_add_ons`.
+**200** — one `Product` object (not wrapped in `{ data }`). Same nested JSON as each `list-products` `data[]` item (`hitpay-llms/list-products.md`).
 
 **404** — product not found.
 

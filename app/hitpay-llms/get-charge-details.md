@@ -33,7 +33,7 @@ Do not list `/v1/charges` to load one id.
 
 ## Response
 
-**200** — one charge object (not wrapped in `{ data }`). Show loads customer, payment request, webhook logs, target, executor, location, fees, and refunds.
+**200** — one charge object (not wrapped in `{ data }`).
 
 List fields plus:
 

@@ -33,7 +33,7 @@ const listCoupons = createServerFn({ method: 'GET' })
 | `perPage` / `per_page` | integer | Default `10`, max `100` |
 | `page` | integer | |
 
-Sorted by `id` desc. Promotions are eager-loaded internally but not in the list JSON.
+Sorted by `id` desc.
 
 ## Response
 

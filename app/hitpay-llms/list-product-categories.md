@@ -48,8 +48,6 @@ Without `parent_id`, `keywords`, or `get_children=1`, only top-level categories 
 | `sort` / `sort_by` | `order` \| `name` | |
 | `order` / `sort_by_direction` | `asc` \| `desc` | |
 
-The public list always eager-loads two levels of children plus images.
-
 ## Response
 
 Default (`paginate` true):

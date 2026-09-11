@@ -42,8 +42,6 @@ This list is **cursor** pagination. `page` is ignored.
 | `type` | string | e.g. `invoice`, `repeating_invoice` |
 | `parent_id` | string | Child invoices of a repeating parent |
 
-After paging, the controller also loads children, payment requests + charges, recipients, line items, and partial-payment requests.
-
 ## Response
 
 Cursor envelope: `{ data, links, meta }`.

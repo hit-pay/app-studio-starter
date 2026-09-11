@@ -39,7 +39,7 @@ Do not list `/v1/orders` to load one id.
 
 ## Response
 
-**200** — one order object (not wrapped in `{ data }`). Same fields as each `list-orders` `data[]` item. Show always loads customer, products (with images), charges (with entity metadata), line items + children, location, and coupon.
+**200** — one order object (not wrapped in `{ data }`). Same nested fields as each `list-orders` `data[]` item.
 
 **404** — order not found.
 

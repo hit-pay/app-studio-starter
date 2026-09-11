@@ -64,8 +64,6 @@ const listCharges = createServerFn({ method: 'GET' })
 | `id` | UUID | One charge id |
 | `payout_id` | UUID | Uses the index (not search) even with keywords |
 
-List loads `businessUser.user`, `businessLocation`, `entityMetadata`.
-
 ## Response
 
 Cursor envelope: `{ data, links, meta }` with `meta.next_cursor`, `meta.prev_cursor`, `meta.per_page`.

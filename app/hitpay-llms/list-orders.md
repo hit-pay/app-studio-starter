@@ -44,7 +44,7 @@ const listOrders = createServerFn({ method: 'GET' })
 | `channels` | array | `point_of_sale`, `quick_sale`, `store_checkout`. Max 10 |
 | `with` | string \| array | `customer`, `products`, `charges` (comma-separated). `products` is always loaded after paging. `charges` loads `charges.entityMetadata` |
 
-List always eager-loads `businessLocation`, `lineItems.children`, `taxSetting`, `business`, `customer`. Staff cashiers only see `store_checkout`. Managers are limited to their location ids.
+Staff cashiers only see `store_checkout`. Managers are limited to their location ids.
 
 ## Response
 
