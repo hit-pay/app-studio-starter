@@ -8,10 +8,49 @@ const out = join(root, '..', 'app', 'orchid-catalog.md')
 const homepage = registry.homepage?.replace(/\/$/, '') ?? ''
 const docsDir = join(root, 'public', 'llms')
 
+const NEED = {
+  'data-table':
+    'rows and columns, spreadsheet, searchable table, column filter, sort, pagination',
+  'data-list':
+    'compact row list, card list, people list, products list, activity feed, checklist',
+  'detail-card':
+    'one record, detail page fields, invoice detail, leave detail, key-value summary',
+  'metric-card': 'kpi, dashboard, stat, revenue, volume, count, percent',
+  'customer-card': 'customer, beneficiary, contact, payee',
+  'form-builder':
+    'multi-field form, create form, edit form, schema fields, validation',
+  'form-layout': 'create/edit page shell, form modal shell, save and cancel',
+  'page-layout': 'browse page shell, detail page shell, page title, back button, page actions',
+  'app-studio-layout': 'iframe app shell, app name, app-level tabs, app sidebar',
+  'choice-card': 'choose one, option cards, plan, method',
+  'quantity-input': 'stepper, quantity, plus minus, stock count',
+  'text-editor': 'rich text, notes, wysiwyg, lexical',
+  'date-picker': 'date picker, date range picker, datetime picker, calendar popover',
+  sidebar: 'primary navigation, nested app navigation, accordion navigation',
+  'sub-sidebar': 'child navigation panel, section links',
+  'confirmation-modal': 'confirm, delete, destructive, are you sure',
+  command: 'command palette, search commands, cmdk',
+  toast: 'toast, snackbar, notify, success message',
+  alert: 'alert, banner, inline notice',
+  empty: 'empty state, no records, first-use state',
+  skeleton: 'loading placeholder, skeleton rows',
+  spinner: 'loading spinner, indeterminate loading',
+  chart: 'chart, graph, time series, dashboard visualization',
+  dialog: 'dialog, modal content, overlay form',
+  drawer: 'drawer, side panel, bottom sheet',
+  'dropdown-menu': 'overflow menu, action menu, context actions',
+  tabs: 'in-page tabs, tab panel',
+  badge: 'status badge, label, role badge',
+  table: 'html table markup',
+  list: 'listitem primitives',
+}
+
 const lines = [
   '# Orchid catalog',
   '',
-  'Grep this file for the blocks this request needs. Do not read it in full or open every listed source/docs. Use **Base Components** only when no block covers the job. Categories: actions, displaying-data, feedback, form, layout, navigation, overlays, utils.',
+  'Find the block that matches the job. Use its summary and import first. Open the source or Docs URL only when the props remain unclear. Use **Base Components** only when no block covers the job.',
+  '',
+  '# Needs',
   '',
 ]
 
@@ -136,23 +175,25 @@ function writeItem(item) {
   const files = item.files ?? []
   const primary = files.find((file) => file.type === 'registry:ui') ?? files[0]
   const location = primary
-    ? `Import \`${importPath(primary.target)}\`; read \`${installedPath(primary.target)}\`.`
+    ? `Import \`${importPath(primary.target)}\` — \`${installedPath(primary.target)}\`.`
     : ''
   const companions = files
     .filter((file) => file !== primary)
     .map((file) => `\`${installedPath(file.target)}\``)
   const companionLine = companions.length
-    ? `Related source: ${companions.join(', ')}.`
+    ? `Related: ${companions.join(', ')}.`
     : ''
   const docsFile = join(docsDir, `${item.name}.md`)
   const docsLine =
-    homepage && existsSync(docsFile)
-      ? `Docs: ${homepage}/llms/${item.name}.md`
+    primary && homepage && existsSync(docsFile)
+      ? `Reference: \`${installedPath(primary.target)}\`; ${homepage}/llms/${item.name}.md`
       : ''
+  const need = NEED[item.name]
+  const needLine = need ? `Need: ${need}` : ''
   lines.push(
     `## \`${item.name}\` — ${item.title}`,
     '',
-    ...[item.description ?? '', location, companionLine, docsLine].filter(Boolean),
+    ...[needLine, item.description ?? '', location, docsLine, companionLine].filter(Boolean),
     '',
   )
 }
@@ -173,6 +214,11 @@ function writeAlignedGroups(items, subgroupMap) {
   }
   for (const item of other) writeItem(item)
 }
+
+for (const [name, words] of Object.entries(NEED)) {
+  lines.push(`- ${words} → \`${name}\``)
+}
+lines.push('')
 
 for (const [section, items] of grouped) {
   if (items.length === 0) continue

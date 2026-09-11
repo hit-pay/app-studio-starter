@@ -100,7 +100,7 @@
       "name": "form-builder",
       "type": "registry:ui",
       "title": "Form Builder",
-      "description": "Multi-field create/edit from a JSON schema. Wrap in FormLayout; submit through formId. Use when the screen is a form, not a detail view. types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone. Unknown types throw.",
+      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": [
         "@tanstack/react-form"
       ],
@@ -138,7 +138,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Schema-driven collection when the user needs search, column filters, sorting, or pagination. Do not default every list here \u2014 use Data List for compact collections and Detail Card for one record. rowActions defaults to true (Edit + Delete). One-field edits use cells. editColumns only toggles column visibility.",
+      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. rowActions defaults to Edit + Delete. Edit one field in a cell; editColumns only toggles which columns are visible.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -186,7 +186,7 @@
       "name": "sub-sidebar",
       "type": "registry:ui",
       "title": "Sub Sidebar",
-      "description": "Standalone flat child navigation with a blue active state. Not used by AppStudioLayout sidebar mode.",
+      "description": "Flat child navigation with a blue active state. AppStudioLayout sidebar mode uses its own built-in list.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [
@@ -218,7 +218,7 @@
       "name": "list",
       "type": "registry:ui",
       "title": "List",
-      "description": "Row primitives (ListItem, title, media, meta, actions). layout default|stack|media, selected.",
+      "description": "Low-level ListItem parts (title, media, meta, actions). layout default|stack|media. App lists use Data List.",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -278,7 +278,7 @@
       "name": "form-layout",
       "type": "registry:ui",
       "title": "Form Layout",
-      "description": "Create/edit scroll shell (page or modal). When the form is FormBuilder, one form uses formId = FormBuilder id. Several forms use actions.save.onClick. Use PageLayout for browse/show.",
+      "description": "Page or modal shell for create/edit. One FormBuilder: formId matches the builder id. Several forms: actions.save.onClick. Browse and show pages use PageLayout.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",
@@ -558,7 +558,7 @@
       "name": "metric-card",
       "type": "registry:ui",
       "title": "Metric Card",
-      "description": "Dashboard KPI tile: icon, title, value, optional percent change. Use for revenue, volume, counts \u2014 not for a record's fields (use Detail Card).",
+      "description": "KPI tile for a dashboard number: icon, title, value, optional percent change (revenue, volume, counts).",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -577,7 +577,7 @@
       "name": "data-list",
       "type": "registry:ui",
       "title": "Data List",
-      "description": "Pass items[] only: key, title, optional description, details, media, actions.menu / actions.hover. Use when the list does not need search, filters, sort, or pagination. Do not assemble ListItem parts. Not for one record \u2014 use Detail Card.",
+      "description": "Stacked card or row list from items[]. Each item: key, title, optional description, details, media, actions.menu / actions.hover. For people, products, or activity without table search, filters, sort, or pagination.",
       "dependencies": [],
       "registryDependencies": [
         "@orchid/list",
@@ -595,7 +595,7 @@
       "name": "detail-card",
       "type": "registry:ui",
       "title": "Detail Card",
-      "description": "Read-only key/value card for one record (invoice, leave request, customer). Use on show/detail pages. Not a collection \u2014 use Data List or Data Table for many items. items plus optional title, columns, style default|border. Values can be React nodes.",
+      "description": "Read-only key/value card for one record on a show page (invoice, leave request, customer). items, optional title, columns, style default|border. Values can be React nodes.",
       "dependencies": [
         "class-variance-authority"
       ],
@@ -740,7 +740,7 @@
       "name": "table",
       "type": "registry:ui",
       "title": "Table",
-      "description": "Semantic HTML table with Orchid styling.",
+      "description": "Low-level HTML table markup. App collections with search or pagination use Data Table.",
       "dependencies": [],
       "registryDependencies": [],
       "files": [

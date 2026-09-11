@@ -339,7 +339,7 @@ export const DOC_BLOCKS = [
     to: "/components/data-table" as const,
     name: "Data Table",
     description:
-      "Schema-driven table when the list needs search, filters, sort, or pagination.",
+      "Rows-and-columns table with search, filters, sort, and pagination.",
   },
   {
     to: "/components/confirmation-modal" as const,

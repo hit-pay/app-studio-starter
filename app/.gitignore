@@ -6,6 +6,7 @@ dist-ssr
 *.local
 .env
 .nitro
+.output
 .tanstack
 .wrangler
 .vinxi
