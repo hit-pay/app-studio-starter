@@ -3,6 +3,8 @@ export const SCHEMA_FORM_TYPES = [
   'password',
   'textarea',
   'select',
+  'staff',
+  'role',
   'combobox',
   'radio',
   'choice-card',
@@ -107,6 +109,8 @@ export const SCHEMA_FORM_EXAMPLE_FIELDS: SchemaFormField[] = [
       { value: 'card', label: 'Card', description: 'Visa, Mastercard, AMEX' },
     ],
   },
+  { key: 'assignee', title: 'Assignee', type: 'staff' },
+  { key: 'notify_role', title: 'Notify role', type: 'role' },
   { key: 'receipt', title: 'Receipt', type: 'file' },
   { key: 'documents', title: 'Documents', type: 'file', props: { multiple: true } },
 ]
@@ -228,6 +232,10 @@ export function isMultiFile(field: SchemaFormField) {
   return field.type === 'file' && field.props?.multiple === true
 }
 
+export function isMultiStaffOrRole(field: SchemaFormField) {
+  return (field.type === 'staff' || field.type === 'role') && field.props?.multiple === true
+}
+
 function defaultValueFor(field: SchemaFormField): unknown {
   if (field.type === 'input-group' && !inputGroupKeys(field)) {
     return inputGroupValue(field, field.value)
@@ -241,8 +249,16 @@ function defaultValueFor(field: SchemaFormField): unknown {
   ) {
     return false
   }
-  if (field.type === 'checkbox-group' || isMultiCombobox(field) || isMultiFile(field)) {
+  if (
+    field.type === 'checkbox-group' ||
+    isMultiCombobox(field) ||
+    isMultiFile(field) ||
+    isMultiStaffOrRole(field)
+  ) {
     return []
+  }
+  if (field.type === 'staff' || field.type === 'role') {
+    return null
   }
   if (field.type === 'slider') return 0
   if (field.type === 'quantity') return 1
@@ -365,7 +381,15 @@ export function fieldsWithValues(fields: SchemaFormField[], values: SchemaFormVa
 
 function isEmpty(value: unknown, field: SchemaFormField) {
   const type = field.type
-  if (isMultiCombobox(field)) return !Array.isArray(value) || value.length === 0
+  if (isMultiCombobox(field) || isMultiStaffOrRole(field)) {
+    return !Array.isArray(value) || value.length === 0
+  }
+  if (field.type === 'staff' || field.type === 'role') {
+    if (value && typeof value === 'object' && !Array.isArray(value) && 'id' in value) {
+      return String((value as { id?: unknown }).id ?? '').trim() === ''
+    }
+    return value == null || value === ''
+  }
   if (
     type === 'accepted' ||
     type === 'checkbox' ||

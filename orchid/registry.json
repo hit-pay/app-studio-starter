@@ -93,7 +93,7 @@
       "name": "form-builder",
       "type": "registry:ui",
       "title": "Form Builder",
-      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
+      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": [
         "@tanstack/react-form"
       ],
@@ -101,6 +101,8 @@
         "@orchid/button",
         "@orchid/checkbox",
         "@orchid/select",
+        "@orchid/staff-select",
+        "@orchid/role-select",
         "@orchid/date-picker",
         "@orchid/field",
         "@orchid/input",
