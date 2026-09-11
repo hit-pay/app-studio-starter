@@ -123,32 +123,6 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       return mapResourcePickerPayload(data, await response.json())
     }
 
-    if (data.type === 'payment-request') {
-      query.set('current_page', String(page))
-      query.set('per_page', '10')
-      if (data.query) query.set('search', data.query)
-      const response = await hitpayRequest(`/v1/payment-requests?${query}`)
-      if (!response.ok) throw new Error('Could not load payment requests.')
-      return mapResourcePickerPayload(data, await response.json())
-    }
-
-    if (data.type === 'subscription-plan') {
-      query.set('per_page', '10')
-      if (data.query) query.set('reference', data.query)
-      const response = await hitpayRequest(`/v1/subscription-plan?${query}`)
-      if (!response.ok) throw new Error('Could not load subscription plans.')
-      return mapResourcePickerPayload(data, await response.json())
-    }
-
-    if (data.type === 'recurring-billing') {
-      query.set('per_page', '10')
-      if (data.query) query.set('customer_email', data.query)
-      if (data.filter !== 'all') query.set('status', data.filter)
-      const response = await hitpayRequest(`/v1/recurring-billing?${query}`)
-      if (!response.ok) throw new Error('Could not load recurring billings.')
-      return mapResourcePickerPayload(data, await response.json())
-    }
-
     if (data.type === 'coupon') {
       query.set('per_page', '10')
       query.set('page', String(page))
@@ -197,15 +171,6 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       if (data.query) query.set('keywords', data.query)
       const response = await hitpayRequest(`/v1/add-ons?${query}`)
       if (!response.ok) throw new Error('Could not load add-ons.')
-      return mapResourcePickerPayload(data, await response.json())
-    }
-
-    if (data.type === 'store-page') {
-      query.set('per_page', '20')
-      if (data.query) query.set('keywords', data.query)
-      if (data.filter === 'published' || data.filter === 'draft') query.set('status', data.filter)
-      const response = await hitpayRequest(`/v1/store-pages?${query}`)
-      if (!response.ok) throw new Error('Could not load store pages.')
       return mapResourcePickerPayload(data, await response.json())
     }
 

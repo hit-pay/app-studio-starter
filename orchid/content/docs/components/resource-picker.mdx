@@ -35,7 +35,7 @@ function AddProducts() {
 
 Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm, send `selected` into a `createServerFn` and upsert Turso from `id` + `resource`.
 
-`type`: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `payment-request` | `subscription-plan` | `recurring-billing` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on` | `store-page`.
+`type`: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on`.
 
 ```tsx
 await pick({ type: 'charge' })

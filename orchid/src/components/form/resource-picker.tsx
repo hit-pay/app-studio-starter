@@ -28,16 +28,12 @@ const RESOURCE_PICKER_TYPES = [
   'location',
   'charge',
   'invoice',
-  'payment-request',
-  'subscription-plan',
-  'recurring-billing',
   'coupon',
   'discount',
   'tax',
   'shipping',
   'pickup',
   'add-on',
-  'store-page',
 ] as const
 
 type ResourcePickerType = (typeof RESOURCE_PICKER_TYPES)[number]
@@ -123,16 +119,12 @@ const LABELS: Record<ResourcePickerType, { singular: string; plural: string }> =
   location: { singular: 'location', plural: 'locations' },
   charge: { singular: 'charge', plural: 'charges' },
   invoice: { singular: 'invoice', plural: 'invoices' },
-  'payment-request': { singular: 'payment request', plural: 'payment requests' },
-  'subscription-plan': { singular: 'subscription plan', plural: 'subscription plans' },
-  'recurring-billing': { singular: 'recurring billing', plural: 'recurring billings' },
   coupon: { singular: 'coupon', plural: 'coupons' },
   discount: { singular: 'discount', plural: 'discounts' },
   tax: { singular: 'tax', plural: 'taxes' },
   shipping: { singular: 'shipping method', plural: 'shipping methods' },
   pickup: { singular: 'pickup', plural: 'pickups' },
   'add-on': { singular: 'add-on', plural: 'add-ons' },
-  'store-page': { singular: 'store page', plural: 'store pages' },
 }
 
 const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
@@ -174,19 +166,6 @@ const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
     { value: 'overdue', label: 'Overdue' },
     { value: 'paid', label: 'Paid' },
   ],
-  'payment-request': [
-    { value: 'all', label: 'All statuses' },
-    { value: 'pending', label: 'Pending' },
-    { value: 'completed', label: 'Completed' },
-  ],
-  'subscription-plan': ALL_FILTER,
-  'recurring-billing': [
-    { value: 'all', label: 'All statuses' },
-    { value: 'active', label: 'Active' },
-    { value: 'paused', label: 'Paused' },
-    { value: 'canceled', label: 'Canceled' },
-    { value: 'completed', label: 'Completed' },
-  ],
   coupon: ALL_FILTER,
   discount: [
     { value: 'all', label: 'All discounts' },
@@ -201,11 +180,6 @@ const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
   ],
   pickup: ALL_FILTER,
   'add-on': ALL_FILTER,
-  'store-page': [
-    { value: 'all', label: 'All pages' },
-    { value: 'published', label: 'Published' },
-    { value: 'draft', label: 'Draft' },
-  ],
 }
 
 const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {

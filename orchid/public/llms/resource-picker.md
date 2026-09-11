@@ -40,16 +40,12 @@ const TYPE_BUTTONS: { type: ResourcePickerOptions['type']; label: string; option
     { type: 'product-category', label: 'Add categories', options: { multiple: true } },
     { type: 'charge', label: 'Select charge' },
     { type: 'invoice', label: 'Select invoices', options: { multiple: true } },
-    { type: 'payment-request', label: 'Select payment request' },
-    { type: 'subscription-plan', label: 'Select plan' },
-    { type: 'recurring-billing', label: 'Select recurring' },
     { type: 'coupon', label: 'Select coupon' },
     { type: 'discount', label: 'Select discount' },
     { type: 'tax', label: 'Select tax' },
     { type: 'shipping', label: 'Select shipping' },
     { type: 'pickup', label: 'Select pickup' },
     { type: 'add-on', label: 'Select add-on' },
-    { type: 'store-page', label: 'Select store page' },
   ]
 
 function ResourcePickerButtons() {
@@ -154,7 +150,7 @@ function AddProducts() {
 
 Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm, send `selected` into a `createServerFn` and upsert Turso from `id` + `resource`.
 
-`type`: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `payment-request` | `subscription-plan` | `recurring-billing` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on` | `store-page`.
+`type`: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on`.
 
 ```tsx
 await pick({ type: 'charge' })

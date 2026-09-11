@@ -191,44 +191,6 @@ function mapResourcePickerPayload(
     }
   }
 
-  if (type === 'payment-request') {
-    return {
-      items: rows
-        .filter((row) => data.filter === 'all' || row.status === data.filter)
-        .map((row) => ({
-          id: String(row.id),
-          title: String(row.purpose || row.reference_number || row.name || row.id),
-          badge: typeof row.status === 'string' ? row.status : undefined,
-          resource: asRecord(row),
-        })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'subscription-plan') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.name || row.reference || row.id),
-        badge: typeof row.status === 'string' ? row.status : undefined,
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'recurring-billing') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.name || row.customer_email || row.reference || row.id),
-        badge: typeof row.status === 'string' ? row.status : undefined,
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
   if (type === 'coupon') {
     return {
       items: rows.map((row) => ({
@@ -303,18 +265,6 @@ function mapResourcePickerPayload(
       items: rows.map((row) => ({
         id: String(row.id),
         title: String(row.name || row.id),
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
-  }
-
-  if (type === 'store-page') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.title || row.page_path || row.id),
-        badge: row.enabled === false ? 'Off' : undefined,
         resource: asRecord(row),
       })),
       hasMore: hasMore(payload, page),

@@ -31,16 +31,12 @@ const TYPE_BUTTONS: { type: ResourcePickerOptions['type']; label: string; option
     { type: 'product-category', label: 'Add categories', options: { multiple: true } },
     { type: 'charge', label: 'Select charge' },
     { type: 'invoice', label: 'Select invoices', options: { multiple: true } },
-    { type: 'payment-request', label: 'Select payment request' },
-    { type: 'subscription-plan', label: 'Select plan' },
-    { type: 'recurring-billing', label: 'Select recurring' },
     { type: 'coupon', label: 'Select coupon' },
     { type: 'discount', label: 'Select discount' },
     { type: 'tax', label: 'Select tax' },
     { type: 'shipping', label: 'Select shipping' },
     { type: 'pickup', label: 'Select pickup' },
     { type: 'add-on', label: 'Select add-on' },
-    { type: 'store-page', label: 'Select store page' },
   ]
 
 function ResourcePickerButtons() {

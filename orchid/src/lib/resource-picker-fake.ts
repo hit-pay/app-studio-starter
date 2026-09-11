@@ -172,45 +172,6 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       email: 'wei@example.com',
     },
   ],
-  'payment-request': [
-    {
-      id: '9c1e0008-0000-4000-8000-000000000001',
-      purpose: 'Deposit',
-      reference_number: 'DEP-1',
-      status: 'pending',
-      amount: '200.00',
-      currency: 'sgd',
-    },
-    {
-      id: '9c1e0008-0000-4000-8000-000000000002',
-      purpose: 'Balance',
-      name: 'Priya Nair',
-      status: 'completed',
-      amount: '50.00',
-      currency: 'sgd',
-    },
-  ],
-  'subscription-plan': [
-    {
-      id: '9c1e0009-0000-4000-8000-000000000001',
-      name: 'Monthly retainer',
-      reference: 'retainer',
-      cycle: 'monthly',
-      amount: 99,
-      currency: 'sgd',
-      status: 'published',
-    },
-  ],
-  'recurring-billing': [
-    {
-      id: '9c1e000a-0000-4000-8000-000000000001',
-      name: 'Monthly retainer',
-      customer_email: 'priya@example.com',
-      status: 'active',
-      amount: 99,
-      currency: 'sgd',
-    },
-  ],
   coupon: [{ id: '9c1e000b-0000-4000-8000-000000000001', name: 'Welcome', code: 'WELCOME10', percentage: 10 }],
   discount: [
     {
@@ -227,9 +188,6 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
     { id: '9c1e000f-0000-4000-8000-000000000001', name: 'Main Store pickup', address: '1 Harbourfront', status: 'active' },
   ],
   'add-on': [{ id: '9c1e0010-0000-4000-8000-000000000001', name: 'Gift wrap' }],
-  'store-page': [
-    { id: '9c1e0011-0000-4000-8000-000000000001', title: 'About', page_path: '/about', enabled: true, status: 'published' },
-  ],
 }
 
 function includesNeedle(row: FakeRecord, keys: string[], needle: string) {
@@ -312,21 +270,6 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
     })
   }
 
-  if (data.type === 'payment-request' && needle) {
-    rows = rows.filter((row) => includesNeedle(row, ['purpose', 'reference_number', 'name', 'id'], needle))
-  }
-
-  if (data.type === 'subscription-plan' && needle) {
-    rows = rows.filter((row) => includesNeedle(row, ['reference', 'name', 'id'], needle))
-  }
-
-  if (data.type === 'recurring-billing') {
-    rows = rows.filter((row) => {
-      if (data.filter !== 'all' && row.status !== data.filter) return false
-      return !needle || includesNeedle(row, ['customer_email'], needle)
-    })
-  }
-
   if (data.type === 'coupon' && needle) {
     rows = rows.filter((row) => includesNeedle(row, ['name', 'code', 'id'], needle))
   }
@@ -345,13 +288,6 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
 
   if (data.type === 'add-on' && needle) {
     rows = rows.filter((row) => includesNeedle(row, ['name', 'id'], needle))
-  }
-
-  if (data.type === 'store-page') {
-    rows = rows.filter((row) => {
-      if ((data.filter === 'published' || data.filter === 'draft') && row.status !== data.filter) return false
-      return includesNeedle(row, ['title', 'page_path', 'id'], needle)
-    })
   }
 
   if (data.type === 'shipping') {
