@@ -2,46 +2,102 @@ import { ResourcePickerDemo } from '../../../src/components/doc/doc-demos'
 
 <ResourcePickerDemo />
 
-Promise picker for HitPay products, categories, customers, orders, and locations. Do not rebuild a search `Dialog`.
+Click a button, pick a row, confirm. The panel below the buttons shows selected ids and the HitPay-shaped `resource` JSON. Cancel shows “Cancelled”. The demo `load` talks to a **fake** `{ data: [...] }` list (same envelope as HitPay `/v1/…` lists), then maps rows to picker items. In App Studio the real loader is already on the root — do not remount `ResourcePickerProvider`.
 
-In App Studio the provider is already on the app root. Call `useResourcePicker()` only. Do not mount another `ResourcePickerProvider` and do not write a `load` function.
+## App Studio usage
 
 ```tsx
-import { useResourcePicker } from '@/components/overlays/resource-picker'
+import { useState } from 'react'
+import { Button } from '@ui/actions/button'
+import { useResourcePicker, type ResourcePickerResult } from '@/components/overlays/resource-picker'
 
-const resourcePicker = useResourcePicker()
+function AddProducts() {
+  const pick = useResourcePicker()
+  const [selected, setSelected] = useState<ResourcePickerResult[] | null>(null)
 
-const selected = await resourcePicker({ type: 'product', multiple: 1 })
-if (!selected) return // cancelled
-
-const [product] = selected
-const variationIds = product.children?.map((child) => child.id) ?? []
+  return (
+    <>
+      <Button
+        onClick={async () => {
+          const next = await pick({ type: 'product', multiple: true })
+          if (next) setSelected(next)
+        }}
+      >
+        Add products
+      </Button>
+      {selected ? (
+        <pre>{JSON.stringify(selected, null, 2)}</pre>
+      ) : null}
+    </>
+  )
+}
 ```
 
-`type`: `product` | `product-category` | `customer` | `order` | `location`.
+Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm, send `selected` into a `createServerFn` and upsert Turso from `id` + `resource`.
+
+`type`: `product` | `product-category` | `customer` | `order` | `location` | `charge` | `invoice` | `payment-request` | `subscription-plan` | `recurring-billing` | `coupon` | `discount` | `tax` | `shipping` | `pickup` | `add-on` | `store-page`.
 
 ```tsx
-await resourcePicker({ type: 'customer', action: 'select', multiple: true })
-await resourcePicker({ type: 'order', multiple: 5 })
-await resourcePicker({ type: 'location', action: 'select' })
-await resourcePicker({
+await pick({ type: 'charge' })
+await pick({ type: 'invoice', multiple: true })
+await pick({ type: 'customer', action: 'select', multiple: true })
+await pick({ type: 'location', action: 'select' })
+await pick({
   type: 'product',
   query: 'lamp',
   filter: { status: 'published', variants: false },
 })
-await resourcePicker({
-  type: 'product',
-  selectionIds: [{ id: 'prod_1', children: [{ id: 'var_1' }] }],
-})
 ```
 
-- `action`: `add` (default) or `select` — dialog title and confirm label
-- `multiple`: omit/`false` = one, `true` = unlimited, number = cap
-- `query`: initial search box
-- `selectionIds`: preselected `{ id, children?: { id }[] }`
-- `filter.status`: initial status (`published`, `draft`, order status, …)
-- `filter.variants`: `false` hides product variations
-- `filter.query`: extra hidden search terms sent to the loader
-- Cancel returns `undefined`
+## Fake HitPay list (docs demo only)
 
-Each result is `{ id, resource?, children? }`. For products, selected variations are in `children`. Other types omit `children`.
+```ts
+function fakeHitPayList(type: ResourcePickerType) {
+  return {
+    data: [
+      {
+        id: '9c1e0001-0000-4000-8000-000000000002',
+        name: 'Ceramic table lamp',
+        status: 'published',
+        currency: 'sgd',
+        price: 89,
+        price_display: 'S$89.00',
+        images: [{ url: 'https://placehold.co/64x64/eee/333?text=L' }],
+        variations: [
+          {
+            id: '9c1e0001-0000-4000-8000-000000000021',
+            description: 'Warm white',
+            quantity: 8,
+            price: 89,
+            price_display: 'S$89.00',
+          },
+        ],
+      },
+      {
+        id: '9c1e0001-0000-4000-8000-000000000003',
+        name: 'Cotton tote bag',
+        status: 'published',
+        currency: 'sgd',
+        price: 18,
+        price_display: 'S$18.00',
+        quantity: 40,
+        images: [{ url: 'https://placehold.co/64x64/eee/333?text=T' }],
+        variations: [],
+      },
+    ],
+  }
+}
+```
+
+Map `data[]` to `{ id, title, badge, image, resource, children }` the same way App Studio’s `loadResourcePickerPage` does. Result after select: `{ id, resource, children? }` — `resource` is the original HitPay row.
+
+- `action`: `add` (default) or `select`
+- `multiple`: omit/`false` = one, `true` = unlimited, number = cap
+- `query`: initial search
+- `selectionIds`: preselected `{ id, children?: { id }[] }`
+- `filter.status`: initial status (product, order, invoice, charge, location, shipping, discount POS/online, …)
+- `filter.variants`: `false` hides product variations
+- Dialog also shows type-specific extras: product **Stock** + **Channel**, charge **Method**
+- `load` receives `{ type, query, filter, extras, page, cursor }` and should return `{ items, hasMore, cursor? }`
+- When `hasMore` is true, the dialog shows **Load more** plus the resource name and appends the next page
+- Cancel returns `undefined`

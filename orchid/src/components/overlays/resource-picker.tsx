@@ -26,6 +26,18 @@ const RESOURCE_PICKER_TYPES = [
   'customer',
   'order',
   'location',
+  'charge',
+  'invoice',
+  'payment-request',
+  'subscription-plan',
+  'recurring-billing',
+  'coupon',
+  'discount',
+  'tax',
+  'shipping',
+  'pickup',
+  'add-on',
+  'store-page',
 ] as const
 
 type ResourcePickerType = (typeof RESOURCE_PICKER_TYPES)[number]
@@ -54,13 +66,16 @@ type ResourcePickerItem = {
 type ResourcePickerPage = {
   items: ResourcePickerItem[]
   hasMore?: boolean
+  cursor?: string
 }
 
 type ResourcePickerLoadInput = {
   type: ResourcePickerType
   query: string
   filter: string
+  extras?: Record<string, string>
   page: number
+  cursor?: string
 }
 
 type ResourcePickerLoad = (input: ResourcePickerLoadInput) => Promise<ResourcePickerPage>
@@ -95,35 +110,137 @@ type ResourcePickerRequest = ResourcePickerOptions & {
   resolve: (value: ResourcePickerResult[] | undefined) => void
 }
 
+type FilterOption = { value: string; label: string }
+type ExtraFilter = { key: string; label: string; options: FilterOption[] }
+
+const ALL_FILTER: FilterOption[] = [{ value: 'all', label: 'All' }]
+
 const LABELS: Record<ResourcePickerType, { singular: string; plural: string }> = {
   product: { singular: 'product', plural: 'products' },
   'product-category': { singular: 'category', plural: 'categories' },
   customer: { singular: 'customer', plural: 'customers' },
   order: { singular: 'order', plural: 'orders' },
   location: { singular: 'location', plural: 'locations' },
+  charge: { singular: 'charge', plural: 'charges' },
+  invoice: { singular: 'invoice', plural: 'invoices' },
+  'payment-request': { singular: 'payment request', plural: 'payment requests' },
+  'subscription-plan': { singular: 'subscription plan', plural: 'subscription plans' },
+  'recurring-billing': { singular: 'recurring billing', plural: 'recurring billings' },
+  coupon: { singular: 'coupon', plural: 'coupons' },
+  discount: { singular: 'discount', plural: 'discounts' },
+  tax: { singular: 'tax', plural: 'taxes' },
+  shipping: { singular: 'shipping method', plural: 'shipping methods' },
+  pickup: { singular: 'pickup', plural: 'pickups' },
+  'add-on': { singular: 'add-on', plural: 'add-ons' },
+  'store-page': { singular: 'store page', plural: 'store pages' },
 }
 
-const FILTERS: Record<ResourcePickerType, { value: string; label: string }[]> = {
+const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
   product: [
-    { value: 'all', label: 'All' },
+    { value: 'all', label: 'All statuses' },
     { value: 'published', label: 'Published' },
     { value: 'draft', label: 'Draft' },
   ],
   'product-category': [
-    { value: 'all', label: 'All' },
+    { value: 'all', label: 'All categories' },
     { value: 'active', label: 'Active' },
     { value: 'inactive', label: 'Inactive' },
   ],
-  customer: [{ value: 'all', label: 'All' }],
+  customer: ALL_FILTER,
   order: [
-    { value: 'all', label: 'All' },
+    { value: 'all', label: 'All statuses' },
     { value: 'completed', label: 'Completed' },
     { value: 'sent', label: 'Sent' },
     { value: 'draft', label: 'Draft' },
     { value: 'expired', label: 'Expired' },
     { value: 'canceled', label: 'Canceled' },
   ],
-  location: [{ value: 'all', label: 'All' }],
+  location: [
+    { value: 'all', label: 'All locations' },
+    { value: 'active', label: 'Active' },
+    { value: 'inactive', label: 'Inactive' },
+  ],
+  charge: [
+    { value: 'all', label: 'All statuses' },
+    { value: 'succeeded', label: 'Succeeded' },
+    { value: 'failed', label: 'Failed' },
+    { value: 'refunded', label: 'Refunded' },
+  ],
+  invoice: [
+    { value: 'all', label: 'All statuses' },
+    { value: 'draft', label: 'Draft' },
+    { value: 'sent', label: 'Sent' },
+    { value: 'pending', label: 'Pending' },
+    { value: 'overdue', label: 'Overdue' },
+    { value: 'paid', label: 'Paid' },
+  ],
+  'payment-request': [
+    { value: 'all', label: 'All statuses' },
+    { value: 'pending', label: 'Pending' },
+    { value: 'completed', label: 'Completed' },
+  ],
+  'subscription-plan': ALL_FILTER,
+  'recurring-billing': [
+    { value: 'all', label: 'All statuses' },
+    { value: 'active', label: 'Active' },
+    { value: 'paused', label: 'Paused' },
+    { value: 'canceled', label: 'Canceled' },
+    { value: 'completed', label: 'Completed' },
+  ],
+  coupon: ALL_FILTER,
+  discount: [
+    { value: 'all', label: 'All discounts' },
+    { value: 'pos', label: 'POS' },
+    { value: 'online', label: 'Online' },
+  ],
+  tax: ALL_FILTER,
+  shipping: [
+    { value: 'all', label: 'All methods' },
+    { value: 'active', label: 'Active' },
+    { value: 'inactive', label: 'Inactive' },
+  ],
+  pickup: ALL_FILTER,
+  'add-on': ALL_FILTER,
+  'store-page': [
+    { value: 'all', label: 'All pages' },
+    { value: 'published', label: 'Published' },
+    { value: 'draft', label: 'Draft' },
+  ],
+}
+
+const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
+  product: [
+    {
+      key: 'inventory',
+      label: 'Stock',
+      options: [
+        { value: 'all', label: 'All stock' },
+        { value: 'in_stock', label: 'In stock' },
+        { value: 'out_of_stock', label: 'Out of stock' },
+      ],
+    },
+    {
+      key: 'channel',
+      label: 'Channel',
+      options: [
+        { value: 'all', label: 'All channels' },
+        { value: 'pos', label: 'POS' },
+        { value: 'online_store', label: 'Online store' },
+        { value: 'invoice', label: 'Invoice' },
+      ],
+    },
+  ],
+  charge: [
+    {
+      key: 'payment_method',
+      label: 'Method',
+      options: [
+        { value: 'all', label: 'All methods' },
+        { value: 'cash', label: 'Cash' },
+        { value: 'card', label: 'Card' },
+      ],
+    },
+  ],
 }
 
 const ResourcePickerContext = React.createContext<ResourcePickerFn | null>(null)
@@ -135,8 +252,12 @@ function maxCount(multiple: boolean | number | undefined) {
   return 1
 }
 
+function pickerLabels(type: ResourcePickerType) {
+  return LABELS[type] ?? { singular: type.replaceAll('-', ' '), plural: `${type.replaceAll('-', ' ')}s` }
+}
+
 function titleCase(action: 'add' | 'select', type: ResourcePickerType) {
-  const noun = LABELS[type].plural
+  const noun = pickerLabels(type).plural
   return `${action === 'select' ? 'Select' : 'Add'} ${noun}`
 }
 
@@ -216,16 +337,19 @@ function ResourcePickerDialog({
   const load = React.useContext(ResourcePickerLoadContext)
   const type = request?.type ?? 'product'
   const action = request?.action ?? 'add'
-  const labels = LABELS[type]
-  const filters = FILTERS[type]
+  const labels = pickerLabels(type)
+  const filters = FILTERS[type] ?? ALL_FILTER
+  const extraFilters = EXTRA_FILTERS[type] ?? []
   const showVariants = request?.filter?.variants !== false && type === 'product'
   const limit = maxCount(request?.multiple)
   const hiddenQuery = request?.filter?.query ?? ''
 
   const [search, setSearch] = React.useState('')
   const [filter, setFilter] = React.useState('all')
+  const [extras, setExtras] = React.useState<Record<string, string>>({})
   const [items, setItems] = React.useState<ResourcePickerItem[]>([])
   const [page, setPage] = React.useState(1)
+  const [cursor, setCursor] = React.useState<string | undefined>()
   const [hasMore, setHasMore] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const [error, setError] = React.useState<string | null>(null)
@@ -237,9 +361,11 @@ function ResourcePickerDialog({
     if (!open || !request) return
     setSearch(request.query ?? '')
     setFilter(request.filter?.status ?? 'all')
+    setExtras({})
     setItems([])
     setCache(new Map())
     setPage(1)
+    setCursor(undefined)
     setHasMore(false)
     setError(null)
     const next = new Map<string, Set<string>>()
@@ -261,7 +387,9 @@ function ResourcePickerDialog({
         type,
         query: [search.trim(), hiddenQuery].filter(Boolean).join(' '),
         filter,
+        extras,
         page,
+        cursor: page === 1 ? undefined : cursor,
       })
         .then((result) => {
           if (cancelled) return
@@ -272,6 +400,7 @@ function ResourcePickerDialog({
             return next
           })
           setHasMore(Boolean(result.hasMore))
+          setCursor(result.cursor)
           setError(null)
         })
         .catch((cause) => {
@@ -286,7 +415,7 @@ function ResourcePickerDialog({
       cancelled = true
       window.clearTimeout(handle)
     }
-  }, [filter, hiddenQuery, load, open, page, request, search, type])
+  }, [extras, filter, hiddenQuery, load, open, page, request, search, type])
 
   function selectedCount() {
     return selected.size
@@ -383,13 +512,14 @@ function ResourcePickerDialog({
         <DialogDescription className="sr-only">
           Search and select {labels.plural}.
         </DialogDescription>
-        <div className="flex gap-2 px-5 pb-3">
+        <div className="flex flex-wrap gap-2 px-5 pb-3">
           <div className="relative min-w-0 flex-1">
             <SearchRegular className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-oc-muted-foreground" />
             <Input
               value={search}
               onChange={(event) => {
                 setPage(1)
+                setCursor(undefined)
                 setSearch(event.currentTarget.value)
               }}
               placeholder={`Search ${labels.plural}`}
@@ -398,17 +528,33 @@ function ResourcePickerDialog({
           </div>
           {showFilter ? (
             <Select
-              className="w-44 shrink-0"
+              className="w-40 shrink-0"
               options={filters}
               value={filter}
-              placeholder="Search by All"
+              placeholder="Status"
               onValueChange={(value) => {
                 if (value == null) return
                 setPage(1)
+                setCursor(undefined)
                 setFilter(String(value))
               }}
             />
           ) : null}
+          {extraFilters.map((group) => (
+            <Select
+              key={group.key}
+              className="w-36 shrink-0"
+              options={group.options}
+              value={extras[group.key] ?? 'all'}
+              placeholder={group.label}
+              onValueChange={(value) => {
+                if (value == null) return
+                setPage(1)
+                setCursor(undefined)
+                setExtras((current) => ({ ...current, [group.key]: String(value) }))
+              }}
+            />
+          ))}
         </div>
         <div className="max-h-[min(28rem,50vh)] min-h-48 overflow-y-auto border-y border-oc-border">
           {loading && items.length === 0 ? (
@@ -537,14 +683,14 @@ function ResourcePickerDialog({
             </ul>
           )}
           {hasMore ? (
-            <div className="flex justify-center py-3">
+            <div className="flex justify-center border-t border-oc-border py-3">
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
                 disabled={loading}
                 onClick={() => setPage((current) => current + 1)}
               >
-                Load more
+                {loading ? 'Loading…' : `Load more ${labels.plural}`}
               </Button>
             </div>
           ) : null}

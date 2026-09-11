@@ -20,7 +20,7 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - dropdown, select, searchable select, multi select, pick one option → `select`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
 - copy to clipboard, copy id, copy phone, copy url → `copy-button`
-- pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker → `resource-picker`
+- pick product, pick customer, pick order, pick location, pick category, pick charge, pick invoice, pick payment request, pick coupon, pick discount, pick tax, pick shipping, pick pickup, pick add-on, pick store page, pick plan, pick recurring, resource picker, catalog picker → `resource-picker`
 - command palette, search commands, cmdk → `command`
 - toast, snackbar, notify, success message → `toast`
 - banner, alert, inline notice → `banner`
@@ -179,7 +179,7 @@ Docs: `orchid-llms/confirmation-modal.md`
 ## `resource-picker` — Resource Picker
 
 Need: pick product, pick customer, pick order, pick location, pick category, resource picker, catalog picker
-Promise picker for HitPay list records (products, categories, customers, orders, locations). const pick = useResourcePicker(); await pick({ type }).
+Promise picker for HitPay OAuth list records. const pick = useResourcePicker(); await pick({ type }).
 Import `@/components/overlays/resource-picker` — `src/components/overlays/resource-picker.tsx`.
 Docs: `orchid-llms/resource-picker.md`
 
