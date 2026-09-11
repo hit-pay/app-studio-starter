@@ -10,7 +10,7 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Checkbox, CheckboxGroup } from '@/base-ui/form/checkbox'
+import { Checkbox, CheckboxGroup } from '@ui/form/checkbox'
 import {
   Combobox,
   ComboboxChip,
@@ -23,7 +23,7 @@ import {
   ComboboxList,
   ComboboxValue,
   useComboboxAnchor,
-} from '@/base-ui/form/combobox'
+} from '@ui/form/combobox'
 import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
 import {
   Field,
@@ -32,30 +32,30 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from '@/base-ui/form/field'
-import { Input } from '@/base-ui/form/input'
+} from '@ui/form/field'
+import { Input } from '@ui/form/input'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupSeparator,
   InputGroupText,
-} from '@/base-ui/form/input-group'
-import { RadioGroup, RadioGroupItem } from '@/base-ui/form/radio-group'
+} from '@ui/form/input-group'
+import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/base-ui/form/select'
-import { FormSectionItem } from '@/base-ui/form/form-section'
+} from '@ui/form/select'
+import { FormSectionItem } from '@ui/form/form-section'
 import { QuantityInput } from '@/components/form/quantity-input'
 import { ChoiceCard, ChoiceCardGroup } from '@/components/form/choice-card'
-import { Slider } from '@/base-ui/form/slider'
-import { Textarea } from '@/base-ui/form/textarea'
-import { Switch } from '@/base-ui/form/switch'
-import { Button } from '@/base-ui/actions/button'
+import { Slider } from '@ui/form/slider'
+import { Textarea } from '@ui/form/textarea'
+import { Switch } from '@ui/form/switch'
+import { Button } from '@ui/actions/button'
 import {
   FileUpload,
   FileUploadAction,
@@ -65,7 +65,7 @@ import {
   FileUploadGroup,
   FileUploadMedia,
   FileUploadTitle,
-} from '@/base-ui/form/file-upload'
+} from '@ui/form/file-upload'
 import {
   controlType,
   dateRangeValue,

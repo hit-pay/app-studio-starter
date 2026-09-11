@@ -7,7 +7,7 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/base-ui/displaying-data/table";
+} from "@ui/displaying-data/table";
 
 const INVOICES = [
   {

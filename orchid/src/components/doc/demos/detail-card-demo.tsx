@@ -1,6 +1,6 @@
-import { Avatar, AvatarFallback, AvatarImage } from '@/base-ui/displaying-data/avatar'
+import { Avatar, AvatarFallback, AvatarImage } from '@ui/displaying-data/avatar'
 import { DetailCard } from '@/components/displaying-data/detail-card'
-import { Badge } from '@/base-ui/displaying-data/badge'
+import { Badge } from '@ui/displaying-data/badge'
 
 const PHOTO = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop'
 

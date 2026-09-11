@@ -5,7 +5,7 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@/base-ui/actions/button'
+import { Button } from '@ui/actions/button'
 
 function clamp(value: number, min?: number, max?: number) {
   let next = value

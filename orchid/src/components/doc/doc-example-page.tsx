@@ -47,7 +47,7 @@ function DocExamplePage({
         : to === "/base-ui"
           ? {
               name: "Base Components",
-              description: "Primitives under src/base-ui.",
+              description: "Primitives under src/ui.",
             }
         : (DOC_GUIDE_ITEMS.find((entry) => entry.to === to) ??
           DOC_COMPONENTS.find((entry) => entry.to === to) ??

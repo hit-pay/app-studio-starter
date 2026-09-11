@@ -4,7 +4,7 @@ import {
   SearchRegular,
   AlertRegular,
 } from '@mingcute/react/core-regular'
-import { Button } from '@/base-ui/actions/button'
+import { Button } from '@ui/actions/button'
 import {
   Empty,
   EmptyContent,
@@ -12,7 +12,7 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from '@/base-ui/displaying-data/empty'
+} from '@ui/displaying-data/empty'
 
 function EmptyDemo() {
   return (

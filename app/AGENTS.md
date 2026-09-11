@@ -36,7 +36,8 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 |---|---|
 | `src/routes/` | File routes; `index.tsx` is `/` |
 | `src/routes/__root.tsx` | `QueryProvider`, `ConfirmationModalProvider`, `Toaster` |
-| `src/components/`, `src/base-ui/` | Orchid blocks / base (`@/…`) |
+| `src/components/` | Orchid blocks — **use these first** (`@/components/…`) |
+| `src/ui/` | Orchid primitives — last resort (`@ui/…`) |
 | `src/lib/hitpay.ts` | Browser user / roles / members |
 | `src/lib/hitpay-roles.ts` | HitPay role titles (only place they are listed) |
 | `src/lib/server/` | Server helpers used only from `createServerFn` |
@@ -45,9 +46,10 @@ Workspace: `/home/sprite/workspace`. Extend this project. Stack: Bun, TanStack S
 | `src/lib/server/db.ts`, `migrate.ts` | Turso HTTP + migrations |
 | `migrations/` | Ordered SQL |
 | `orchid-catalog.md` | Which Orchid block to use |
+| `orchid-llms/` | Local Orchid docs — read these, never the public site |
 | `src/routeTree.gen.ts` | Generated — do not edit |
 
-Aliases: `#/*` and `@/*` → `src/*`.
+Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
 Leave unchanged unless the request needs it: `vite.config.ts`, `start.mjs`, `src/router.tsx`, `src/lib/hitpay.ts`, `src/lib/server/hitpay.ts`, `src/lib/server/db.ts`, `src/lib/server/migrate.ts`, `src/lib/form-draft.ts`, `src/lib/studio-app-id.ts`, `components.json`, `.mcp.json`. You may add a missing Orchid provider in `__root.tsx`. Never hand-edit `.output/` or `.nitro/`.
 
@@ -72,7 +74,29 @@ createServerFn({ method: 'POST' })
 
 ## Orchid
 
-`grep` `orchid-catalog.md` for the few blocks this request needs. Do not `sed`/`Read` the whole catalog or dump sources. Open a component source only if the import or props are unclear. Do not `shadcn add`, invent a kit, overwrite installed components, or assemble a block from base parts. Import path is the catalog `Import \`@/…\`` line.
+**Blocks before primitives.** Implement screens with `@/components/…` blocks. Do not build the same UI from `@ui/…` pieces. Assembling `Card` + `Input` + `Table` + `Button` is wrong when a block already covers the job — it writes too much code and drifts from Orchid.
+
+1. `grep` `orchid-catalog.md` under **Components & Blocks** / **Needs** for this screen (list, form, detail, KPI, confirm, layout).
+2. Import that block. Pass props or a schema. If props are unclear, `Read` `orchid-llms/{name}.md` (for example `orchid-llms/page-layout.md`). Do not open orchid-ui-hitpay.vercel.app or any other external docs URL. Open the installed source only after the local doc is still unclear.
+3. Use `@ui/…` only when no block matches: a single `Button`/`Badge`/`Spinner`/`Empty`, or a primitive the block does not expose.
+4. Never `shadcn add`, invent a kit, overwrite installed components, or rebuild a block from `@ui`.
+
+| Job | Use this block | Do not use |
+|---|---|---|
+| Browse rows, search, filter, sort | `@/components/displaying-data/data-table` | `@ui/displaying-data/table`, custom filters |
+| Compact list, cards, activity, people | `@/components/displaying-data/data-list` | `@ui/displaying-data/list`, stacked `Card`s |
+| One record / show page fields | `@/components/displaying-data/detail-card` | hand-rolled `dl` / `Card` rows |
+| KPI / dashboard number | `@/components/displaying-data/metric-card` | custom stat tiles |
+| Customer / contact / payee | `@/components/displaying-data/customer-card` | `Avatar` + `Badge` collage |
+| Create/edit fields | `@/components/form/form-builder` | `@ui/form/field` + `Input`/`Select` per field |
+| Date / range / datetime | `@/components/form/date-picker` | `@ui/form/calendar` + `Popover` |
+| Quantity stepper | `@/components/form/quantity-input` | custom plus/minus `Button`s |
+| Option cards / choose one | `@/components/form/choice-card` | radio + styled `Card`s |
+| Rich notes | `@/components/form/text-editor` | raw `Textarea` for rich text |
+| Confirm delete / destructive | `@/components/overlays/confirmation-modal` | custom `Dialog` |
+| Command palette | `@/components/overlays/command` | custom `Dialog` + input |
+
+Layout imports: `@/components/layout/app-studio-layout`, `page-layout`, `form-layout`. Catalog import line is `Import \`@/components/…\`` (blocks) or `Import \`@ui/…\`` (primitives only).
 
 - Icons: `@mingcute/react/core-regular`. No `lucide-react`.
 - Confirms: `useConfirmationModal()`. Toasts: existing `<Toaster placement="top-center">`. No extra providers.
@@ -189,8 +213,8 @@ Every data screen must handle all of:
 
 | State | Use |
 |---|---|
-| Loading | `Spinner` or `Skeleton` from catalog |
-| Empty | `Empty` block when there are no records yet |
+| Loading | `Spinner` or `Skeleton` from `@ui` (no block) |
+| Empty | `@ui/displaying-data/empty` when there are no records yet |
 | Error | Inline message + retry; never a blank screen |
 | Success | Toast after save/delete; refreshed list/detail |
 
@@ -210,7 +234,7 @@ Use the endpoint contract to choose the method, parameters, request body, and re
 ## Work sequence
 
 1. Infer the workflow from the request. Do not tour the repo (`pwd`, `rg --files`, `sed` of catalog/layouts/primitives).
-2. Follow Orchid and Auth above, then implement.
+2. For each screen, pick a `@/components` block from the table above. Add `@ui` imports only after that choice. Then follow Auth and implement.
 3. `PLAN.md` only for several screens — short checkboxes.
 4. If routes changed, `bun run generate-routes`.
 5. Once: `bun run lint` then `bun run build`. Fix and rerun that pair only. Zero exit required. Do not start `dev`/`vite`/`start` or touch the `app-studio` Sprite service.

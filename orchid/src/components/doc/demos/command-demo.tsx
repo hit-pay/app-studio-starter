@@ -5,9 +5,9 @@ import {
   User3Regular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@/base-ui/actions/button'
+import { Button } from '@ui/actions/button'
 import { Command } from '@/components/overlays/command'
-import { toast } from '@/base-ui/feedback/toast'
+import { toast } from '@ui/feedback/toast'
 
 function CommandDemo() {
   const [open, setOpen] = useState(false)

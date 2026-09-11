@@ -1,4 +1,4 @@
-import { CopyButton } from '@/base-ui/actions/copy-button'
+import { CopyButton } from '@ui/actions/copy-button'
 
 function CopyButtonDemo() {
   return (

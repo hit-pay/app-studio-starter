@@ -8,8 +8,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/base-ui/layout/accordion";
-import { Badge } from "@/base-ui/displaying-data/badge";
+} from "@ui/layout/accordion";
+import { Badge } from "@ui/displaying-data/badge";
 
 function AccordionDemo() {
   return (

@@ -34,9 +34,9 @@ import {
 } from '@mingcute/react/core-regular';
 
 import { cn } from "@/lib/utils";
-import { Badge, BadgeRemove } from "@/base-ui/displaying-data/badge";
-import { Button } from "@/base-ui/actions/button";
-import { Checkbox } from "@/base-ui/form/checkbox";
+import { Badge, BadgeRemove } from "@ui/displaying-data/badge";
+import { Button } from "@ui/actions/button";
+import { Checkbox } from "@ui/form/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,7 +47,7 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/base-ui/overlays/dropdown-menu";
+} from "@ui/overlays/dropdown-menu";
 import {
   Empty,
   EmptyContent,
@@ -55,14 +55,14 @@ import {
   EmptyHeader,
   EmptyMedia,
   EmptyTitle,
-} from "@/base-ui/displaying-data/empty";
-import { Field, FieldLabel } from "@/base-ui/form/field";
+} from "@ui/displaying-data/empty";
+import { Field, FieldLabel } from "@ui/form/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@/base-ui/form/input-group";
+} from "@ui/form/input-group";
 import {
   Pagination,
   PaginationContent,
@@ -71,19 +71,19 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@/base-ui/navigation/pagination";
+} from "@ui/navigation/pagination";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/base-ui/overlays/popover";
+} from "@ui/overlays/popover";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/base-ui/form/select";
+} from "@ui/form/select";
 import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,

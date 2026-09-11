@@ -7,11 +7,11 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Avatar, AvatarFallback, AvatarImage } from '@/base-ui/displaying-data/avatar'
-import { Button } from '@/base-ui/actions/button'
-import { Badge } from '@/base-ui/displaying-data/badge'
-import { CopyButton } from '@/base-ui/actions/copy-button'
-import { Skeleton } from '@/base-ui/feedback/skeleton'
+import { Avatar, AvatarFallback, AvatarImage } from '@ui/displaying-data/avatar'
+import { Button } from '@ui/actions/button'
+import { Badge } from '@ui/displaying-data/badge'
+import { CopyButton } from '@ui/actions/copy-button'
+import { Skeleton } from '@ui/feedback/skeleton'
 
 type CustomerCardAddress = {
   street?: string

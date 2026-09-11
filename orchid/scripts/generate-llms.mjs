@@ -1,4 +1,5 @@
 import {
+  cpSync,
   existsSync,
   mkdirSync,
   readFileSync,
@@ -334,7 +335,7 @@ const lines = [
   "- Install `@orchid/all` after the registry is configured. Do not pick a subset.",
   "- Read Components & Blocks first. Match the job to each item's when-to-use description. Use a block when one exists. Only then read Base Components. Do not default to a shortlist of favorites.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
-  "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Blocks live under `src/components/{category}` (`@/components/{category}/…`) and are ready to use through props or a schema. Base items live under `src/base-ui/{category}` (`@/base-ui/{category}/…`). Do not assemble a block from many base components.",
+  "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Always start with Components & Blocks under `src/components/{category}` (`@/components/{category}/…`) via props or a schema. Use Base items under `src/ui/{category}` (`@ui/{category}/…`) only when no block covers the job. Do not assemble a block from many base components.",
   "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
   "- AppStudioLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.",
   "",
@@ -342,6 +343,11 @@ const lines = [
 
 mkdirSync(dirname(output), { recursive: true });
 writeFileSync(output, lines.join("\n"));
+
+const appLlms = join(root, "..", "app", "orchid-llms");
+rmSync(appLlms, { recursive: true, force: true });
+cpSync(docsDir, appLlms, { recursive: true });
+
 console.log(
-  `Wrote ${output} and ${markdownCount} markdown docs in ${docsDir}`,
+  `Wrote ${output} and ${markdownCount} markdown docs in ${docsDir} and ${appLlms}`,
 );

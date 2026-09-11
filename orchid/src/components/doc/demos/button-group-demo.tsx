@@ -8,19 +8,19 @@ import {
   ArrowRightUpRegular,
 } from '@mingcute/react/core-regular';
 
-import { Button } from "@/base-ui/actions/button";
+import { Button } from "@ui/actions/button";
 import {
   ButtonGroup,
   ButtonGroupSeparator,
   ButtonGroupText,
-} from "@/base-ui/actions/button-group";
+} from "@ui/actions/button-group";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@/base-ui/overlays/dropdown-menu";
+} from "@ui/overlays/dropdown-menu";
 
 const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
 

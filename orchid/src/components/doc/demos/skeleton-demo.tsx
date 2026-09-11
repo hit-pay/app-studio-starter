@@ -1,4 +1,4 @@
-import { Skeleton } from "@/base-ui/feedback/skeleton";
+import { Skeleton } from "@ui/feedback/skeleton";
 
 function SkeletonDemo() {
   return (

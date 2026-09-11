@@ -5,7 +5,6 @@ import { fileURLToPath } from 'node:url'
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const registry = JSON.parse(readFileSync(join(root, 'registry.json'), 'utf8'))
 const out = join(root, '..', 'app', 'orchid-catalog.md')
-const homepage = registry.homepage?.replace(/\/$/, '') ?? ''
 const docsDir = join(root, 'public', 'llms')
 
 const NEED = {
@@ -46,7 +45,7 @@ const NEED = {
 const lines = [
   '# Orchid catalog',
   '',
-  'Find the block that matches the job. Use its summary and import first. Open the source or Docs URL only when the props remain unclear. Use **Base Components** only when no block covers the job.',
+  'Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not rebuild a block from `@ui` primitives — that writes too much code. Open `orchid-llms/{name}.md` only when the props remain unclear. Do not fetch orchid-ui-hitpay.vercel.app. Use **Base Components** (`@ui/…`) only when no block covers the job (a single Button, Badge, Spinner, or Empty).',
   '',
   '# Needs',
   '',
@@ -59,7 +58,7 @@ const sectionFor = (item) => {
   if (primary?.target?.startsWith('@/components/') || primary?.target?.startsWith('@components/')) {
     return 'Components & Blocks'
   }
-  if (primary?.target?.startsWith('@/base-ui/') || primary?.target?.startsWith('@base-ui/')) {
+  if (primary?.target?.startsWith('@ui/') || primary?.target?.startsWith('@/ui/')) {
     return 'Base Components'
   }
   return 'Base Components'
@@ -67,7 +66,7 @@ const sectionFor = (item) => {
 
 const installedPath = (target) => {
   if (target.startsWith('@/')) return `src/${target.slice('@/'.length)}`
-  if (target.startsWith('@base-ui/')) return `src/base-ui/${target.slice('@base-ui/'.length)}`
+  if (target.startsWith('@ui/')) return `src/ui/${target.slice('@ui/'.length)}`
   if (target.startsWith('@components/')) {
     return `src/components/${target.slice('@components/'.length)}`
   }
@@ -77,6 +76,7 @@ const installedPath = (target) => {
 
 const importPath = (target) => {
   const path = installedPath(target).replace(/\.(tsx?|jsx?)$/, '')
+  if (path.startsWith('src/ui/')) return `@ui/${path.slice('src/ui/'.length)}`
   return path.startsWith('src/') ? `@/${path.slice('src/'.length)}` : `@/${path}`
 }
 
@@ -180,10 +180,9 @@ function writeItem(item) {
     ? `Related: ${companions.join(', ')}.`
     : ''
   const docsFile = join(docsDir, `${item.name}.md`)
-  const docsLine =
-    primary && homepage && existsSync(docsFile)
-      ? `Reference: \`${installedPath(primary.target)}\`; ${homepage}/llms/${item.name}.md`
-      : ''
+  const docsLine = existsSync(docsFile)
+    ? `Docs: \`orchid-llms/${item.name}.md\``
+    : ''
   const need = NEED[item.name]
   const needLine = need ? `Need: ${need}` : ''
   lines.push(

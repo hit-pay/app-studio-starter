@@ -1,4 +1,4 @@
-import { Checkbox } from '@/base-ui/form/checkbox'
+import { Checkbox } from '@ui/form/checkbox'
 import {
   Field,
   FieldDescription,
@@ -7,9 +7,9 @@ import {
   FieldLabel,
   FieldLegend,
   FieldSet,
-} from '@/base-ui/form/field'
-import { Input } from '@/base-ui/form/input'
-import { Switch } from '@/base-ui/form/switch'
+} from '@ui/form/field'
+import { Input } from '@ui/form/input'
+import { Switch } from '@ui/form/switch'
 
 function FieldDemo() {
   return (

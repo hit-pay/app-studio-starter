@@ -6,8 +6,8 @@ import {
   PencilRegular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@/base-ui/actions/button'
-import { Badge } from '@/base-ui/displaying-data/badge'
+import { Button } from '@ui/actions/button'
+import { Badge } from '@ui/displaying-data/badge'
 import { DataList } from '@/components/displaying-data/data-list'
 
 const moreMenu = [

@@ -1,12 +1,12 @@
 import { DownRegular } from '@mingcute/react/core-regular';
-import { Checkbox, CheckboxGroup } from "@/base-ui/form/checkbox";
+import { Checkbox, CheckboxGroup } from "@ui/form/checkbox";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "@/base-ui/layout/collapsible";
-import { Field, FieldLabel } from "@/base-ui/form/field";
-import { Input } from "@/base-ui/form/input";
+} from "@ui/layout/collapsible";
+import { Field, FieldLabel } from "@ui/form/field";
+import { Input } from "@ui/form/input";
 
 function CollapsibleDemo() {
   return (

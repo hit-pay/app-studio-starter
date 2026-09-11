@@ -17,8 +17,8 @@ import {
   ListItemTitle,
   ListItemToken,
   ListItemTrailing,
-} from '@/base-ui/displaying-data/list'
-import { DropdownMenuItem } from '@/base-ui/overlays/dropdown-menu'
+} from '@ui/displaying-data/list'
+import { DropdownMenuItem } from '@ui/overlays/dropdown-menu'
 
 type DataListLayout = 'default' | 'stack' | 'media'
 

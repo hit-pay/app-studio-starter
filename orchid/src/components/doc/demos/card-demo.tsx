@@ -1,4 +1,4 @@
-import { Button } from '@/base-ui/actions/button'
+import { Button } from '@ui/actions/button'
 import {
   Card,
   CardAction,
@@ -7,7 +7,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle,
-} from '@/base-ui/layout/card'
+} from '@ui/layout/card'
 
 function CardDemo() {
   return (

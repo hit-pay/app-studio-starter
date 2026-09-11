@@ -7,8 +7,8 @@ forms, data tables, page layouts, sidebars, confirmations, and common business
 workflows. Orchid uses the shadcn CLI as its installer. It does not provide a
 separate Orchid CLI.
 
-Base items install under `src/base-ui/{category}` and import from
-`@/base-ui/{category}/<name>`. Blocks install under `src/components/{category}`
+Base items install under `src/ui/{category}` and import from
+`@ui/{category}/<name>`. Blocks install under `src/components/{category}`
 and import from `@/components/{category}/<name>`. Categories match the catalog
 groups (actions, displaying-data, feedback, form, layout, navigation, overlays,
 utils). The CLI writes the source into your application.
@@ -63,7 +63,7 @@ bunx --bun shadcn@latest add @orchid/all
 
 Use this for a new application. Do not install a subset. The namespace keeps
 Orchid items separate from the default shadcn registry. Registry dependencies
-are installed automatically. Import a base item from `@/base-ui/actions/button`
+are installed automatically. Import a base item from `@ui/actions/button`
 and a block from `@/components/form/form-builder`.
 
 Orchid maintainers build the published registry with `bun run registry:build`.

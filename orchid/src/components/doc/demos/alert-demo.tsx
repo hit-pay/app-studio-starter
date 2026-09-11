@@ -10,8 +10,8 @@ import {
   AlertAction,
   AlertDescription,
   AlertTitle,
-} from "@/base-ui/feedback/alert";
-import { Button } from "@/base-ui/actions/button";
+} from "@ui/feedback/alert";
+import { Button } from "@ui/actions/button";
 
 function AlertDemo() {
   return (

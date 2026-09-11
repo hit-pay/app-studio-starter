@@ -4,14 +4,14 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/base-ui/form/field";
+} from "@ui/form/field";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/base-ui/form/select";
+} from "@ui/form/select";
 
 function SelectDemo() {
   return (

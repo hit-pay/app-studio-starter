@@ -6,7 +6,7 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@/base-ui/overlays/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/overlays/tooltip'
 
 const metricCardIconVariants = cva('inline-flex shrink-0 items-center justify-center [&_svg]:size-5', {
   variants: {

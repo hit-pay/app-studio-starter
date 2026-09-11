@@ -6,7 +6,7 @@ import {
   BadgeRemove,
   UserBadge,
   type BadgeTone,
-} from '@/base-ui/displaying-data/badge'
+} from '@ui/displaying-data/badge'
 
 const VARIANTS = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const
 const TONES = [

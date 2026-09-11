@@ -15,15 +15,15 @@ import {
   ComboboxSeparator,
   ComboboxValue,
   useComboboxAnchor,
-} from "@/base-ui/form/combobox";
+} from "@ui/form/combobox";
 import {
   Field,
   FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@/base-ui/form/field";
-import type { BadgeTone } from "@/base-ui/displaying-data/badge";
+} from "@ui/form/field";
+import type { BadgeTone } from "@ui/displaying-data/badge";
 
 const currencies = [
   "SGD — Singapore Dollar",

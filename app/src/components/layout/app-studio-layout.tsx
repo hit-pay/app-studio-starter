@@ -2,8 +2,8 @@ import { useState, type ComponentProps, type ReactNode } from 'react'
 import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@/base-ui/actions/button'
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@/base-ui/overlays/drawer'
+import { Button } from '@ui/actions/button'
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@ui/overlays/drawer'
 
 type AppStudioNavigationItem = {
   id: string

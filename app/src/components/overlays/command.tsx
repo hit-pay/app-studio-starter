@@ -9,8 +9,8 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@/base-ui/overlays/dialog'
-import { InputGroup, InputGroupAddon } from '@/base-ui/form/input-group'
+} from '@ui/overlays/dialog'
+import { InputGroup, InputGroupAddon } from '@ui/form/input-group'
 
 type CommandItem = {
   value: string

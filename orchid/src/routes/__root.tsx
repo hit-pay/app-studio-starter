@@ -2,7 +2,7 @@ import { Outlet, createRootRoute } from '@tanstack/react-router'
 import { DocHeader } from '@/components/doc/doc-header'
 import { DocSidebar } from '@/components/doc/doc-sidebar'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
-import { Toaster } from '@/base-ui/feedback/toast'
+import { Toaster } from '@ui/feedback/toast'
 
 function NotFound() {
   return (

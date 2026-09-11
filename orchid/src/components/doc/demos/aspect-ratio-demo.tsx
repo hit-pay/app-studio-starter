@@ -1,4 +1,4 @@
-import { AspectRatio } from '@/base-ui/layout/aspect-ratio'
+import { AspectRatio } from '@ui/layout/aspect-ratio'
 
 function AspectRatioDemo() {
   return (

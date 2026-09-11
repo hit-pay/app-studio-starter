@@ -4,7 +4,7 @@ import {
   CopyRegular,
 } from '@mingcute/react/core-regular';
 
-import { Button } from "@/base-ui/actions/button";
+import { Button } from "@ui/actions/button";
 
 const REGISTRY_URL = "https://orchid-ui-hitpay.vercel.app/registry.json";
 const TOKENS_URL = "https://orchid-ui-hitpay.vercel.app/orchid-tokens.css";
@@ -37,15 +37,15 @@ After the framework is chosen, work autonomously and use Bun as the package mana
 3. Keep the generated framework structure. Create or update components.json with:
    - "style": "base-nova"
    - "aliases.components": "@/components"
-   - "aliases.base-ui": "@/base-ui"
+   - "aliases.ui": "@/ui"
    - "aliases.lib": "@/lib"
    - "aliases.hooks": "@/hooks"
    - "aliases.utils": "@/lib/utils"
    - "registries.@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
-   Keep compatible generated settings and ensure @/* resolves to the source directory.
+   Keep compatible generated settings, ensure @/* resolves to the source directory, and add a TypeScript path @ui/* → src/ui/*.
 4. Fetch https://orchid-ui-hitpay.vercel.app/orchid-tokens.css and merge it once into the generated global stylesheet. Preserve the --oc-* variables and Tailwind @theme mappings without duplicating tokens.
 5. Read https://orchid-ui-hitpay.vercel.app/registry.json, then install the complete catalog with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Do not skip items.
-6. Read Components & Blocks first (@/components/<category>/<name>). Use base items from @/base-ui/<category>/<name> only when no block covers the job. Reuse Orchid components and compose missing patterns from Orchid primitives.
+6. Read Components & Blocks first (@/components/<category>/<name>). Use base items from @ui/<category>/<name> only when no block covers the job. Reuse Orchid components and compose missing patterns from Orchid primitives.
 7. Use Orchid UI for all interface elements. Do not install or use official @shadcn components. The shadcn CLI is only the transport for the custom @orchid registry.
 8. Use oc-* design tokens instead of shadcn tokens or hard-coded colors.
 9. Run the project's typecheck and production build, fix setup-related errors, and summarize the project created, files changed, and components added.
@@ -187,14 +187,14 @@ function InstallationDemo() {
           Orchid UI. Components are installed in{" "}
           <code className="text-oc-foreground">{`src/components/{category}`}</code>{" "}
           (blocks first) and{" "}
-          <code className="text-oc-foreground">{`src/base-ui/{category}`}</code>{" "}
+          <code className="text-oc-foreground">{`src/ui/{category}`}</code>{" "}
           (base). Import from{" "}
           <code className="text-oc-foreground">
             {`@/components/{category}/<name>`}
           </code>{" "}
           or{" "}
           <code className="text-oc-foreground">
-            {`@/base-ui/{category}/<name>`}
+            {`@ui/{category}/<name>`}
           </code>
           .
         </p>

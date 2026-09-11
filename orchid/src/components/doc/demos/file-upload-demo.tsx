@@ -17,9 +17,9 @@ import {
   FileUploadGroup,
   FileUploadMedia,
   FileUploadTitle,
-} from '@/base-ui/form/file-upload'
-import { Button } from '@/base-ui/actions/button'
-import { Spinner } from '@/base-ui/feedback/spinner'
+} from '@ui/form/file-upload'
+import { Button } from '@ui/actions/button'
+import { Spinner } from '@ui/feedback/spinner'
 
 type UploadItem = {
   id: string

@@ -7,7 +7,7 @@ import {
   BreadcrumbList,
   BreadcrumbPage,
   BreadcrumbSeparator,
-} from "@/base-ui/navigation/breadcrumb";
+} from "@ui/navigation/breadcrumb";
 
 function BreadcrumbDemo() {
   return (

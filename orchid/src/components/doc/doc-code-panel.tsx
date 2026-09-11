@@ -4,7 +4,7 @@ import {
   CopyRegular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@/base-ui/actions/button'
+import { Button } from '@ui/actions/button'
 
 function DocCodePanel({
   filename,

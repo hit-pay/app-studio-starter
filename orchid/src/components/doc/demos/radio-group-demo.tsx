@@ -1,5 +1,5 @@
-import { Label } from '@/base-ui/form/label'
-import { RadioGroup, RadioGroupItem } from '@/base-ui/form/radio-group'
+import { Label } from '@ui/form/label'
+import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
 
 
 function RadioGroupDemo() {
