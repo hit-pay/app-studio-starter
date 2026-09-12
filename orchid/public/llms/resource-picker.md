@@ -9,6 +9,7 @@ Search and select HitPay products, customers, orders, charges, invoices, or add-
 ```tsx
 import { useState } from 'react'
 
+// Docs demo only. App Studio uses `#/lib/resource-picker` on the root provider — do not copy this file or `resource-picker-fake` into app/.
 import { fakeHitPayListPayload } from '#/lib/resource-picker-fake'
 import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
 import { Button } from '@ui/actions/button'
@@ -110,7 +111,7 @@ function ResourcePickerDemo() {
 export { ResourcePickerDemo }
 ```
 
-Click a button, pick a row, confirm. The panel below the buttons shows selected ids and the HitPay-shaped `resource` JSON. Cancel shows “Cancelled”. Docs use a fake `/v1/…` list envelope, then the **same** `mapResourcePickerPayload` as App Studio’s `loadResourcePickerPage`. In the starter, do not remount `ResourcePickerProvider` — the real loader is already on the root.
+Click a button, pick a row, confirm. The panel below the buttons shows selected ids and the HitPay-shaped `resource` JSON. Cancel shows “Cancelled”. Docs use `fakeHitPayListPayload` (same query/filter/extras as the starter) then the **same** `mapResourcePickerPayload` as App Studio’s `loadResourcePickerPage`. In the starter, do not remount `ResourcePickerProvider` and do not copy `resource-picker-fake` into the app — the real loader is `#/lib/resource-picker`.
 
 ## App Studio usage
 
@@ -158,43 +159,7 @@ await pick({
 
 ## Fake HitPay list (docs demo only)
 
-```ts
-function fakeHitPayList(type: ResourcePickerType) {
-  return {
-    data: [
-      {
-        id: '9c1e0001-0000-4000-8000-000000000002',
-        name: 'Ceramic table lamp',
-        status: 'published',
-        currency: 'sgd',
-        price: 89,
-        price_display: 'S$89.00',
-        images: [{ url: 'https://placehold.co/64x64/eee/333?text=L' }],
-        variations: [
-          {
-            id: '9c1e0001-0000-4000-8000-000000000021',
-            description: 'Warm white',
-            quantity: 8,
-            price: 89,
-            price_display: 'S$89.00',
-          },
-        ],
-      },
-      {
-        id: '9c1e0001-0000-4000-8000-000000000003',
-        name: 'Cotton tote bag',
-        status: 'published',
-        currency: 'sgd',
-        price: 18,
-        price_display: 'S$18.00',
-        quantity: 40,
-        images: [{ url: 'https://placehold.co/64x64/eee/333?text=T' }],
-        variations: [],
-      },
-    ],
-  }
-}
-```
+The docs demo calls `fakeHitPayListPayload(input)` in `orchid/src/lib/resource-picker-fake.ts`. It applies the same `query` / `filter` / `extras` the starter sends to `/v1/…` (status, stock, channel, category, location, dates), then `mapResourcePickerPayload`. Do not paste that module into App Studio.
 
 `shadcn add @orchid/resource-picker` only replaces the dialog UI. It does not ship the starter loader (`#/lib/resource-picker.ts`). Map `data[]` with `mapResourcePickerPayload`. Result after select: `{ id, resource, children? }` — `resource` is the original HitPay row.
 
@@ -204,9 +169,9 @@ function fakeHitPayList(type: ResourcePickerType) {
 - `selectionIds`: preselected `{ id, children?: { id }[] }`
 - `filter.status`: initial status (product, order, invoice, charge)
 - `filter.variants`: `false` hides product variations
-- `filter.locationId`: initial outlet for product (`location_ids`) and order (`location_id`) pickers
+- `filter.locationId`: initial outlet for product (`location_ids`) and order (`location_ids[]`) pickers
 - `filter.categoryId`: initial category for product picker (`GET /v1/products` `categories`)
-- `filter.channel`: initial channel for product (`pos` / `online_store` / `invoice`) or order (`point_of_sale` / `quick_sale` / `store_checkout`)
+- `filter.channel`: initial channel for product (`pos` / `online_store` / `invoice` / `self_serve`) or order (`point_of_sale` / `quick_sale` / `store_checkout`)
 - Dialog also shows type-specific extras: product **Stock** + **Channel** + **Category** + **Location**, order **Channel** + **Location**, charge **Method**
 - `load` receives `{ type, query, filter, extras, page, cursor }` and should return `{ items, hasMore, cursor? }`
 - When `hasMore` is true, the dialog shows **Load more** plus the resource name and appends the next page

@@ -20,6 +20,7 @@ type ProductCategorySelectProps = {
     selected: ProductCategoryRow | ProductCategoryRow[] | null,
   ) => void
   load?: () => Promise<{ items: ProductCategoryRow[] }>
+  clearable?: boolean
 }
 
 function categoryLabel(row: ProductCategoryRow) {

@@ -229,7 +229,9 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
       if (data.extras?.inventory === 'out_of_stock' && productQuantity(row) > 0) return false
       if (data.extras?.channel && data.extras.channel !== 'all') {
         const channels = row.channels
-        if (Array.isArray(channels) && !channels.map(String).includes(data.extras.channel)) return false
+        if (!Array.isArray(channels) || !channels.map(String).includes(data.extras.channel)) {
+          return false
+        }
       }
       if (data.extras?.location_id && data.extras.location_id !== 'all') {
         const locations = row.locations

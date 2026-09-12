@@ -93,7 +93,7 @@
       "name": "form-builder",
       "type": "registry:ui",
       "title": "Form Builder",
-      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
+      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, coupon, discount, tax, shipping, pickup, product-category, location, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.",
       "dependencies": [
         "@tanstack/react-form"
       ],
@@ -103,6 +103,13 @@
         "@orchid/select",
         "@orchid/staff-select",
         "@orchid/role-select",
+        "@orchid/coupon-select",
+        "@orchid/discount-select",
+        "@orchid/tax-select",
+        "@orchid/shipping-select",
+        "@orchid/pickup-select",
+        "@orchid/product-category-select",
+        "@orchid/location-select",
         "@orchid/date-picker",
         "@orchid/field",
         "@orchid/input",
@@ -132,7 +139,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. rowActions defaults to Edit + Delete. Edit one field in a cell; editColumns only toggles which columns are visible.",
+      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -303,7 +310,7 @@
       "name": "resource-picker",
       "type": "registry:ui",
       "title": "Resource Picker",
-      "description": "Promise picker for HitPay list records (products, categories, customers, orders, locations). const pick = useResourcePicker(); await pick({ type }).",
+      "description": "Promise picker for HitPay list records (products, customers, orders, charges, invoices, add-ons). const pick = useResourcePicker(); await pick({ type }).",
       "dependencies": [
         "@mingcute/react"
       ],
@@ -315,6 +322,9 @@
         "@orchid/input",
         "@orchid/radio-group",
         "@orchid/select",
+        "@orchid/location-select",
+        "@orchid/product-category-select",
+        "@orchid/date-picker",
         "@orchid/dialog"
       ],
       "files": [
@@ -957,6 +967,90 @@
           "type": "registry:lib",
           "target": "lib/studio-app-id.ts"
         }
+      ]
+    },
+    {
+      "name": "coupon-select",
+      "type": "registry:ui",
+      "title": "Coupon Select",
+      "description": "Coupon dropdown. GET /v1/coupons. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/coupon-select.tsx", "type": "registry:ui", "target": "@components/form/coupon-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
+      ]
+    },
+    {
+      "name": "discount-select",
+      "type": "registry:ui",
+      "title": "Discount Select",
+      "description": "Discount dropdown. GET /v1/discounts. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/discount-select.tsx", "type": "registry:ui", "target": "@components/form/discount-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
+      ]
+    },
+    {
+      "name": "tax-select",
+      "type": "registry:ui",
+      "title": "Tax Select",
+      "description": "Tax dropdown. GET /v1/taxes. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/tax-select.tsx", "type": "registry:ui", "target": "@components/form/tax-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
+      ]
+    },
+    {
+      "name": "shipping-select",
+      "type": "registry:ui",
+      "title": "Shipping Select",
+      "description": "Shipping dropdown. GET /v1/shipping. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/shipping-select.tsx", "type": "registry:ui", "target": "@components/form/shipping-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
+      ]
+    },
+    {
+      "name": "pickup-select",
+      "type": "registry:ui",
+      "title": "Pickup Select",
+      "description": "Pickup dropdown. GET /v1/pickups. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/pickup-select.tsx", "type": "registry:ui", "target": "@components/form/pickup-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
+      ]
+    },
+    {
+      "name": "product-category-select",
+      "type": "registry:ui",
+      "title": "Product Category Select",
+      "description": "Category dropdown. GET /v1/product-category. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/product-category-select.tsx", "type": "registry:ui", "target": "@components/form/product-category-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
+      ]
+    },
+    {
+      "name": "location-select",
+      "type": "registry:ui",
+      "title": "Location Select",
+      "description": "Location dropdown. GET /v1/locations. Do not fetch on the screen.",
+      "dependencies": [],
+      "registryDependencies": ["@orchid/select", "@orchid/field"],
+      "files": [
+        { "path": "src/components/form/location-select.tsx", "type": "registry:ui", "target": "@components/form/location-select.tsx" },
+        { "path": "src/components/form/hitpay-named-select.tsx", "type": "registry:file", "target": "@components/form/hitpay-named-select.tsx" }
       ]
     },
     {

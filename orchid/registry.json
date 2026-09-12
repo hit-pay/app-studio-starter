@@ -324,6 +324,7 @@
         "@orchid/select",
         "@orchid/location-select",
         "@orchid/product-category-select",
+        "@orchid/date-picker",
         "@orchid/dialog"
       ],
       "files": [

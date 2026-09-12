@@ -1,5 +1,6 @@
 import { useState } from 'react'
 
+// Docs demo only. App Studio uses `#/lib/resource-picker` on the root provider — do not copy this file or `resource-picker-fake` into app/.
 import { fakeHitPayListPayload } from '#/lib/resource-picker-fake'
 import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
 import { Button } from '@ui/actions/button'

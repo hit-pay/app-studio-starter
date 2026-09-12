@@ -40,6 +40,7 @@ type SelectProps = Omit<ComponentProps<'div'>, 'onChange'> & {
   id?: string
   size?: 'sm' | 'default' | 'inline'
   contentClassName?: string
+  clearable?: boolean
   onBlur?: () => void
 }
 
@@ -69,6 +70,7 @@ function Select({
   size = 'default',
   className,
   contentClassName,
+  clearable = false,
   onBlur,
 }: SelectProps) {
   const chips = useComboboxAnchor()
@@ -156,6 +158,7 @@ function Select({
           id={id}
           className={className}
           disabled={disabled}
+          showClear={clearable}
           placeholder={searchPlaceholder ?? placeholder ?? 'Search'}
           aria-invalid={invalid || undefined}
           onBlur={onBlur}

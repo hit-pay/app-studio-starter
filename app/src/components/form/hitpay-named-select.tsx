@@ -23,6 +23,7 @@ type HitPayNamedSelectProps<T extends HitPayNamedRow> = {
   empty: string
   getLabel: (row: T) => string
   load: HitPayNamedSelectLoad<T>
+  clearable?: boolean
 }
 
 function pickRows<T extends HitPayNamedRow>(rows: T[], value: string | string[] | null) {
@@ -45,6 +46,7 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
   empty,
   getLabel,
   load,
+  clearable = false,
 }: HitPayNamedSelectProps<T>) {
   const [rows, setRows] = useState<T[]>([])
   const [loading, setLoading] = useState(true)
@@ -87,6 +89,7 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
         empty={empty}
         disabled={disabled || loading}
         invalid={invalid}
+        clearable={clearable}
         onValueChange={(next) => onValueChange?.(next, pickRows(rows, next))}
       />
     </>

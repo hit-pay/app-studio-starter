@@ -17,6 +17,7 @@ type LocationSelectProps = {
   defaultValue?: string | string[] | null
   onValueChange?: (value: string | string[] | null, selected: LocationRow | LocationRow[] | null) => void
   load?: () => Promise<{ items: LocationRow[] }>
+  clearable?: boolean
 }
 
 function locationLabel(row: LocationRow) {

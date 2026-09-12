@@ -174,6 +174,7 @@ const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
         { value: 'pos', label: 'POS' },
         { value: 'online_store', label: 'Online store' },
         { value: 'invoice', label: 'Invoice' },
+        { value: 'self_serve', label: 'Self serve' },
       ],
     },
   ],
@@ -539,10 +540,11 @@ function ResourcePickerDialog({
           ))}
           {type === 'product' ? (
             <div className="min-w-0 flex-1 [&_button]:w-full">
-              <ProductCategorySelect
-                name="resource_picker_category"
-                label={false}
-                placeholder="All categories"
+                <ProductCategorySelect
+                  name="resource_picker_category"
+                  label={false}
+                  clearable
+                  placeholder="All categories"
                 value={extras.category_id ?? null}
                 onValueChange={(value) => {
                   setPage(1)
@@ -559,10 +561,11 @@ function ResourcePickerDialog({
           ) : null}
           {type === 'product' || type === 'order' ? (
             <div className="min-w-0 flex-1 [&_button]:w-full">
-              <LocationSelect
-                name="resource_picker_location"
-                label={false}
-                placeholder="All locations"
+                <LocationSelect
+                  name="resource_picker_location"
+                  label={false}
+                  clearable
+                  placeholder="All locations"
                 value={extras.location_id ?? null}
                 onValueChange={(value) => {
                   setPage(1)
@@ -595,8 +598,7 @@ function ResourcePickerDialog({
                     return next
                   }
                   next.date_from = format(range.from, 'yyyy-MM-dd')
-                  if (range.to) next.date_to = format(range.to, 'yyyy-MM-dd')
-                  else delete next.date_to
+                  next.date_to = format(range.to ?? range.from, 'yyyy-MM-dd')
                   return next
                 })
               }}

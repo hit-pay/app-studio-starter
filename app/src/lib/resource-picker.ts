@@ -6,6 +6,20 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 import type { ResourcePickerLoadInput, ResourcePickerPage } from '@/components/form/resource-picker'
 
+const ORDER_STATUSES = ['completed', 'pending', 'sent', 'draft', 'expired', 'canceled'] as const
+const CHARGE_STATUSES = [
+  'canceled',
+  'failed',
+  'refunded',
+  'partially_refunded',
+  'requires_customer_action',
+  'requires_payment_method',
+  'succeeded',
+  'succeeded_manually',
+  'void',
+  'pending',
+] as const
+
 const loadResourcePickerPage = createServerFn({ method: 'GET' })
   .inputValidator((data: ResourcePickerLoadInput) => data)
   .handler(async ({ data }): Promise<ResourcePickerPage> => {
@@ -48,22 +62,19 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       query.set('page', String(page))
       query.set('perPage', '25')
       if (data.query) query.set('keywords', data.query)
-      if (data.filter !== 'all') query.append('statuses[]', data.filter)
+      if (data.filter === 'all') {
+        for (const status of ORDER_STATUSES) query.append('statuses[]', status)
+      } else {
+        query.append('statuses[]', data.filter)
+      }
       if (data.extras?.channel && data.extras.channel !== 'all') {
         query.append('channels', data.extras.channel)
       }
       if (data.extras?.location_id && data.extras.location_id !== 'all') {
-        query.append('location_id', data.extras.location_id)
+        query.append('location_ids[]', data.extras.location_id)
       }
       if (data.extras?.date_from) query.set('dateFrom', data.extras.date_from)
-      if (data.extras?.date_to) {
-        query.set(
-          'dateTo',
-          data.extras.date_to === data.extras.date_from
-            ? `${data.extras.date_to} 23:59:59`
-            : data.extras.date_to,
-        )
-      }
+      if (data.extras?.date_to) query.set('dateTo', data.extras.date_to)
       const response = await hitpayRequest(`/v1/orders?${query}`)
       if (!response.ok) throw new Error('Could not load orders.')
       return mapResourcePickerPayload(data, await response.json())
@@ -72,7 +83,11 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
     if (data.type === 'charge') {
       query.set('per_page', '25')
       if (data.query) query.set('keywords', data.query)
-      if (data.filter !== 'all') query.set('status', data.filter)
+      if (data.filter === 'all') {
+        for (const status of CHARGE_STATUSES) query.append('statuses[]', status)
+      } else {
+        query.set('status', data.filter)
+      }
       if (data.cursor) query.set('cursor', data.cursor)
       if (data.extras?.payment_method && data.extras.payment_method !== 'all') {
         query.append('payment_methods[]', data.extras.payment_method)
