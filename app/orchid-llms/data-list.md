@@ -7,6 +7,8 @@ Card/row collection when search, filters, sort, or pagination are not needed.
 ## Example
 
 ```tsx
+import { useState } from 'react'
+
 import {
   BankRegular,
   CurrencyDollarRegular,
@@ -18,6 +20,7 @@ import {
 import { Button } from '@ui/actions/button'
 import { Badge } from '@ui/displaying-data/badge'
 import { DataList } from '@/components/displaying-data/data-list'
+import { QuantityInput } from '@/components/form/quantity-input'
 
 const moreMenu = [
   { key: 'edit', label: 'Edit' },
@@ -25,6 +28,8 @@ const moreMenu = [
 ]
 
 function DataListDemo() {
+  const [count, setCount] = useState(1303)
+
   return (
     <>
       <div className="space-y-3">
@@ -214,6 +219,33 @@ function DataListDemo() {
           ]}
         />
       </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Inventory count · trailing quantity
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'testing-stock-counter',
+              title: 'Testing Stock Counter App',
+              description: 'No SKU',
+              meta: 'Last counted 9/12/2026',
+              trailing: (
+                <QuantityInput
+                  value={count}
+                  min={0}
+                  onValueChange={setCount}
+                  aria-label="Testing Stock Counter App quantity"
+                />
+              ),
+            },
+          ]}
+        />
+        <p className="text-xs text-oc-muted-foreground">
+          Select a location, add products, adjust the quantity, then save the count.
+        </p>
+      </div>
     </>
   )
 }
@@ -263,6 +295,8 @@ Content
 - `meta` — muted supporting text
 - `layout` — `default` | `stack` | `media` (media is automatic when `media` is set)
 - `selected`
+- `trailing` — a right-side React node, including interactive controls such as
+  `QuantityInput`; it is rendered in every layout, including `stack`
 
 Actions — prefer `actions` (do not import `DropdownMenu` for the ⋮ menu)
 
@@ -275,7 +309,43 @@ actions: {
 }
 ```
 
-Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of `actions`.
+Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of
+`actions`. Trailing controls stop propagation so clicking a control does not
+open the list row. Use `trailing` for per-row controls; do not put a
+`QuantityInput` in `description`, `details`, or `copyRows`.
+
+## Inventory quantity example
+
+Use `trailing` for a quantity control that must stay on the right side of each
+product row. Keep the quantity in the row state and persist it when the user
+saves the count:
+
+```tsx
+import { QuantityInput } from '@/components/form/quantity-input'
+
+<DataList
+  items={[
+    {
+      key: product.id,
+      title: product.name,
+      description: product.sku ?? 'No SKU',
+      meta: `Last counted ${lastCountedAt}`,
+      trailing: (
+        <QuantityInput
+          value={quantity}
+          min={0}
+          onValueChange={setQuantity}
+          aria-label={`${product.name} quantity`}
+        />
+      ),
+    },
+  ]}
+/>
+```
+
+The quantity control is visible in `default`, `media`, and `stack` layouts.
+Choose `DataTable` instead when the inventory list needs search, filters,
+sorting, or pagination.
 
 ## List props
 

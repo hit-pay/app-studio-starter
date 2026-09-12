@@ -1,3 +1,5 @@
+import { useState } from 'react'
+
 import {
   BankRegular,
   CurrencyDollarRegular,
@@ -9,6 +11,7 @@ import {
 import { Button } from '@ui/actions/button'
 import { Badge } from '@ui/displaying-data/badge'
 import { DataList } from '@/components/displaying-data/data-list'
+import { QuantityInput } from '@/components/form/quantity-input'
 
 const moreMenu = [
   { key: 'edit', label: 'Edit' },
@@ -16,6 +19,8 @@ const moreMenu = [
 ]
 
 function DataListDemo() {
+  const [count, setCount] = useState(1303)
+
   return (
     <>
       <div className="space-y-3">
@@ -204,6 +209,33 @@ function DataListDemo() {
             },
           ]}
         />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Inventory count · trailing quantity
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'testing-stock-counter',
+              title: 'Testing Stock Counter App',
+              description: 'No SKU',
+              meta: 'Last counted 9/12/2026',
+              trailing: (
+                <QuantityInput
+                  value={count}
+                  min={0}
+                  onValueChange={setCount}
+                  aria-label="Testing Stock Counter App quantity"
+                />
+              ),
+            },
+          ]}
+        />
+        <p className="text-xs text-oc-muted-foreground">
+          Select a location, add products, adjust the quantity, then save the count.
+        </p>
       </div>
     </>
   )

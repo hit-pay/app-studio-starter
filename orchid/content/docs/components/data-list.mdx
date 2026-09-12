@@ -44,6 +44,8 @@ Content
 - `meta` — muted supporting text
 - `layout` — `default` | `stack` | `media` (media is automatic when `media` is set)
 - `selected`
+- `trailing` — a right-side React node, including interactive controls such as
+  `QuantityInput`; it is rendered in every layout, including `stack`
 
 Actions — prefer `actions` (do not import `DropdownMenu` for the ⋮ menu)
 
@@ -56,7 +58,43 @@ actions: {
 }
 ```
 
-Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of `actions`.
+Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of
+`actions`. Trailing controls stop propagation so clicking a control does not
+open the list row. Use `trailing` for per-row controls; do not put a
+`QuantityInput` in `description`, `details`, or `copyRows`.
+
+## Inventory quantity example
+
+Use `trailing` for a quantity control that must stay on the right side of each
+product row. Keep the quantity in the row state and persist it when the user
+saves the count:
+
+```tsx
+import { QuantityInput } from '@/components/form/quantity-input'
+
+<DataList
+  items={[
+    {
+      key: product.id,
+      title: product.name,
+      description: product.sku ?? 'No SKU',
+      meta: `Last counted ${lastCountedAt}`,
+      trailing: (
+        <QuantityInput
+          value={quantity}
+          min={0}
+          onValueChange={setQuantity}
+          aria-label={`${product.name} quantity`}
+        />
+      ),
+    },
+  ]}
+/>
+```
+
+The quantity control is visible in `default`, `media`, and `stack` layouts.
+Choose `DataTable` instead when the inventory list needs search, filters,
+sorting, or pagination.
 
 ## List props
 

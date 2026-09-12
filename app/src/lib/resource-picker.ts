@@ -31,7 +31,9 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       query.set('page', String(page))
       query.set('per_page', '25')
       if (data.query) query.append('keywords', data.query)
-      if (data.filter === 'published' || data.filter === 'draft') query.append('statuses', data.filter)
+      if (data.filter === 'published' || data.filter === 'draft') {
+        query.append('statuses[]', data.filter)
+      }
       if (data.extras?.inventory === 'in_stock' || data.extras?.inventory === 'out_of_stock') {
         query.append('inventory', data.extras.inventory)
       }

@@ -26,7 +26,7 @@ const listProducts = createServerFn({ method: 'GET' })
   })
 ```
 
-Repeat array filters as the same key (`statuses=published&statuses=draft`). `per_page` and `perPage` both set page size (1–100). Default page size is `10`.
+Repeat array filters with bracket syntax (`statuses[]=published&statuses[]=draft`). The API validates `statuses` as an array; sending a scalar `statuses=published` is invalid. `per_page` and `perPage` both set page size (1–100). Default page size is `10`.
 
 ## Query
 
@@ -35,7 +35,7 @@ Repeat array filters as the same key (`statuses=published&statuses=draft`). `per
 | `page` | integer | Default `1` |
 | `per_page` / `perPage` | integer | Default `10`, max `100` |
 | `keywords` | string | Space-split; matches `name`, `emoji`, `stock_keeping_unit` |
-| `statuses` | `draft` \| `published` | Repeat for multiple |
+| `statuses[]` | `draft` \| `published` | Repeat for multiple; Laravel validates this as an array |
 | `categories` | UUID[] | Category ids |
 | `ids` | UUID[] | Limit to these product ids |
 | `stock_keeping_unit` | string | Exact match, max 100 |
