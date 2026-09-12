@@ -61,7 +61,7 @@ Docs: `orchid-llms/copy-button.md`
 ## `data-table` — Data Table
 
 Need: rows and columns, spreadsheet, searchable table, column filter, sort, pagination
-Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. rowActions defaults to Edit + Delete. Edit one field in a cell; editColumns only toggles which columns are visible.
+Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row edit/delete uses rowActions + onRowAction. Edit one field in a cell; editColumns only toggles which columns are visible.
 Import `@/components/displaying-data/data-table` — `src/components/displaying-data/data-table.tsx`.
 Docs: `orchid-llms/data-table.md`
 Related: `src/components/displaying-data/data-table-model.ts`.

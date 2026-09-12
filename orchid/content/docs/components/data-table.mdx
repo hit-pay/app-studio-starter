@@ -11,10 +11,14 @@ it contains keys, labels, supported icon keys, variants, disabled state, and dro
 never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
 chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
 
-`editColumns` is the column-visibility popover. `rowActions` defaults to `true`: the row ⋮
-menu shows Edit + Delete. Set `rowActions: false` to hide it. Pass `onRowAction`.
-`rowActions: ["edit"]` is enough when delete is not needed. That menu opens `FormLayout`
-for multi-field edits. Neither `editColumns` nor `type: "status"` makes a cell editable.
+`editColumns` is the column-visibility popover. Set `rowActions` to `["edit"]`,
+`["delete"]`, or both when the list needs the row ⋮ menu. Pass `onRowAction`.
+That menu opens `FormLayout` for multi-field edits. Neither `editColumns` nor
+`type: "status"` makes a cell editable.
+
+`onRowClick(row)` opens the record (detail / show page) from a browse list. Clicks on
+checkboxes, the row ⋮ menu, links, and `cells` controls do not fire it. Do not put
+`DataTable` inside `FormLayout`.
 
 One-field updates (status, assignee, stage) use `cells` on `DataTable`, not the schema.
 Search, sort, and filters still use `row[column.key]`. Only listed keys override; other
@@ -89,6 +93,9 @@ const table = useDataTable({
       />
     ),
   }}
+  onRowAction={(action, row) => {
+    console.log(action, row.id);
+  }}
 />
 ```
 
@@ -127,6 +134,12 @@ function ProductList() {
   return (
     <DataTable
       table={table}
+      onRowClick={(row) => {
+        console.log(row.id);
+      }}
+      onRowAction={(action, row) => {
+        console.log(action, row.id);
+      }}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
       }}
@@ -184,6 +197,12 @@ function ProductList() {
   return (
     <DataTable
       table={table}
+      onRowClick={(row) => {
+        console.log(row.id);
+      }}
+      onRowAction={(action, row) => {
+        console.log(action, row.id);
+      }}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
       }}

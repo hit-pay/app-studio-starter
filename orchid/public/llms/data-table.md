@@ -45,7 +45,7 @@ Optional
 - sort — { fields[{ key, title }], defaultKey, defaultDir } or false
 - pagination — { pageSize, pageSizes[] } or false
 - editColumns — false to hide the column-visibility popover (not inline edit)
-- rowActions — default true (Edit + Delete ⋮). true or omit shows it. false hides. ["edit"] / ["delete"] to keep one. Wire onRowAction.
+- rowActions — ["edit"], ["delete"], or both. Menu renders when this array is set. Wire onRowAction.
 - selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
 - emptyState — optional title, description, and JSON-friendly actions
 
@@ -59,9 +59,10 @@ Query state (table.query)
 Column layout (table.columnOrder, table.hiddenKeys)
 - Edit Column popover toggles visibility and drag-reorders active columns
 
-Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction.
+Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction / onRowClick.
 One-field row edit: pass cells={{ status: (value, row) => <StatusCell /> }} on <DataTable>, then persist. Schema stays JSON. Search/sort still use row[column.key].
-Multi-field edit: rowActions edit → FormBuilder. Do not treat editColumns or type status as editable.
+Multi-field edit (only if asked): rowActions + onRowAction → FormLayout. Do not treat editColumns or type status as editable.
+Open a record: pass onRowClick on <DataTable>. Checkbox, ⋮ menu, and cells controls do not fire it.
 
 Example
 {
@@ -119,7 +120,7 @@ Example
     "defaultDir": "desc"
   },
   "pagination": { "pageSize": 10, "pageSizes": [10, 20, 50] },
-  "rowActions": true,
+  "rowActions": ["edit", "delete"],
   "selectionActions": [
     { "key": "publish", "label": "Publish", "icon": "publish" },
     {
@@ -237,6 +238,14 @@ function SchemaTableDemo() {
                 />
               ),
             }}
+            onRowClick={(row) => {
+              console.log("Row click", row.id);
+              setLastChange({ key: "rowClick", id: row.id });
+            }}
+            onRowAction={(action, row) => {
+              console.log("Row action", action, row.id);
+              setLastChange({ key: "rowAction", action, id: row.id });
+            }}
             onSelectionAction={(action, selectedIds) => {
               console.log("Selection action", action.key, selectedIds);
             }}
@@ -311,10 +320,14 @@ it contains keys, labels, supported icon keys, variants, disabled state, and dro
 never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
 chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
 
-`editColumns` is the column-visibility popover. `rowActions` defaults to `true`: the row ⋮
-menu shows Edit + Delete. Set `rowActions: false` to hide it. Pass `onRowAction`.
-`rowActions: ["edit"]` is enough when delete is not needed. That menu opens `FormLayout`
-for multi-field edits. Neither `editColumns` nor `type: "status"` makes a cell editable.
+`editColumns` is the column-visibility popover. Set `rowActions` to `["edit"]`,
+`["delete"]`, or both when the list needs the row ⋮ menu. Pass `onRowAction`.
+That menu opens `FormLayout` for multi-field edits. Neither `editColumns` nor
+`type: "status"` makes a cell editable.
+
+`onRowClick(row)` opens the record (detail / show page) from a browse list. Clicks on
+checkboxes, the row ⋮ menu, links, and `cells` controls do not fire it. Do not put
+`DataTable` inside `FormLayout`.
 
 One-field updates (status, assignee, stage) use `cells` on `DataTable`, not the schema.
 Search, sort, and filters still use `row[column.key]`. Only listed keys override; other
@@ -389,6 +402,9 @@ const table = useDataTable({
       />
     ),
   }}
+  onRowAction={(action, row) => {
+    console.log(action, row.id);
+  }}
 />
 ```
 
@@ -427,6 +443,12 @@ function ProductList() {
   return (
     <DataTable
       table={table}
+      onRowClick={(row) => {
+        console.log(row.id);
+      }}
+      onRowAction={(action, row) => {
+        console.log(action, row.id);
+      }}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
       }}
@@ -484,6 +506,12 @@ function ProductList() {
   return (
     <DataTable
       table={table}
+      onRowClick={(row) => {
+        console.log(row.id);
+      }}
+      onRowAction={(action, row) => {
+        console.log(action, row.id);
+      }}
       onSelectionAction={(action, selectedIds) => {
         console.log(action.key, selectedIds);
       }}

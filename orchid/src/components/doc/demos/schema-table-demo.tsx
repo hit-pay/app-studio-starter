@@ -36,7 +36,7 @@ Optional
 - sort — { fields[{ key, title }], defaultKey, defaultDir } or false
 - pagination — { pageSize, pageSizes[] } or false
 - editColumns — false to hide the column-visibility popover (not inline edit)
-- rowActions — default true (Edit + Delete ⋮). true or omit shows it. false hides. ["edit"] / ["delete"] to keep one. Wire onRowAction.
+- rowActions — ["edit"], ["delete"], or both. Menu renders when this array is set. Wire onRowAction.
 - selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
 - emptyState — optional title, description, and JSON-friendly actions
 
@@ -50,9 +50,10 @@ Query state (table.query)
 Column layout (table.columnOrder, table.hiddenKeys)
 - Edit Column popover toggles visibility and drag-reorders active columns
 
-Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction.
+Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction / onRowClick.
 One-field row edit: pass cells={{ status: (value, row) => <StatusCell /> }} on <DataTable>, then persist. Schema stays JSON. Search/sort still use row[column.key].
-Multi-field edit: rowActions edit → FormBuilder. Do not treat editColumns or type status as editable.
+Multi-field edit (only if asked): rowActions + onRowAction → FormLayout. Do not treat editColumns or type status as editable.
+Open a record: pass onRowClick on <DataTable>. Checkbox, ⋮ menu, and cells controls do not fire it.
 
 Example
 {
@@ -110,7 +111,7 @@ Example
     "defaultDir": "desc"
   },
   "pagination": { "pageSize": 10, "pageSizes": [10, 20, 50] },
-  "rowActions": true,
+  "rowActions": ["edit", "delete"],
   "selectionActions": [
     { "key": "publish", "label": "Publish", "icon": "publish" },
     {
@@ -227,6 +228,14 @@ function SchemaTableDemo() {
                   onStatusChange={(status) => setStatus(row.id, status)}
                 />
               ),
+            }}
+            onRowClick={(row) => {
+              console.log("Row click", row.id);
+              setLastChange({ key: "rowClick", id: row.id });
+            }}
+            onRowAction={(action, row) => {
+              console.log("Row action", action, row.id);
+              setLastChange({ key: "rowAction", action, id: row.id });
             }}
             onSelectionAction={(action, selectedIds) => {
               console.log("Selection action", action.key, selectedIds);

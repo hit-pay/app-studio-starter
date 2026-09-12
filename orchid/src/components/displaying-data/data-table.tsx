@@ -83,7 +83,6 @@ import {
   orderedVisibleColumns,
   paginationItems,
   queryTable,
-  resolveRowActions,
   syncColumnOrder,
   type SchemaTableActionIcon,
   type SchemaTableActionItem,
@@ -1259,11 +1258,23 @@ function SchemaTableTabs({ table }: { table: SchemaTableApi }) {
   );
 }
 
+function isInteractiveRowClickTarget(target: EventTarget | null) {
+  return (
+    target instanceof Element &&
+    Boolean(
+      target.closest(
+        "button, a, input, textarea, select, label, [role='checkbox'], [role='menuitem'], [role='menu'], [data-slot='dropdown-menu-content']",
+      ),
+    )
+  );
+}
+
 /** Complete list surface: toolbar, grid, empty, pagination. Render directly in PageLayout. Do not wrap it. */
 function SchemaTable({
   table,
   cells,
   onRowAction,
+  onRowClick,
   onSelectionAction,
   onEmptyAction,
   className,
@@ -1271,6 +1282,7 @@ function SchemaTable({
   table: SchemaTableApi;
   cells?: SchemaTableCells;
   onRowAction?: (action: SchemaTableRowAction, row: SchemaTableRow) => void;
+  onRowClick?: (row: SchemaTableRow) => void;
   onSelectionAction?: (
     action: SchemaTableActionItem,
     selectedIds: string[],
@@ -1279,7 +1291,7 @@ function SchemaTable({
   className?: string;
 }) {
   const columns = table.visibleColumns;
-  const actions = resolveRowActions(table.schema.rowActions);
+  const actions = table.schema.rowActions ?? [];
   const pageIds = table.rows.map((row) => row.id);
   const selectedOnPage = pageIds.filter((id) => table.selected.includes(id));
   const allSelected =
@@ -1437,7 +1449,24 @@ function SchemaTable({
             </DataTableEmpty>
           ) : (
             table.rows.map((row) => (
-              <DataTableRow key={row.id}>
+              <DataTableRow
+                key={row.id}
+                className={onRowClick ? "cursor-pointer" : undefined}
+                tabIndex={onRowClick ? 0 : undefined}
+                onClick={(event) => {
+                  if (!onRowClick || isInteractiveRowClickTarget(event.target)) {
+                    return;
+                  }
+                  onRowClick(row);
+                }}
+                onKeyDown={(event) => {
+                  if (!onRowClick) return;
+                  if (event.key !== "Enter" && event.key !== " ") return;
+                  if (isInteractiveRowClickTarget(event.target)) return;
+                  event.preventDefault();
+                  onRowClick(row);
+                }}
+              >
                 {table.schema.selection ? (
                   <DataTableCell type="checkbox">
                     <Checkbox
