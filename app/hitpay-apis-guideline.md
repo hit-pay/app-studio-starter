@@ -2,7 +2,20 @@
 
 Read `hitpay-llms/{name}.md` before calling HitPay. Do not fetch docs.hitpayapp.com or invent paths. Call documented paths with `hitpayRequest` from `#/lib/server/hitpay-api`. Auth is the hopped `HITPAY_ACCESS_TOKEN` / `HITPAY_API_URL` — do not send `X-BUSINESS-API-KEY`.
 
+When opening an endpoint doc, read `Quick decision`, `Call`, and `App rules`
+first. Read its detailed `Query` and `Response` sections only for fields the
+current implementation needs.
+
 OAuth public API only (`/v1/…`). No HTTP DELETE. No invented create/update POST.
+
+## Quick decision
+
+- Add products, customers, orders, charges, invoices, or add-ons → `ResourcePicker`, then persist its payload to Turso.
+- Pick staff or roles → `StaffSelect` / `RoleSelect`.
+- Pick coupons, discounts, taxes, shipping, pickups, categories, or locations → the matching `*Select`.
+- Show one record whose id is already stored → `get-*-details`.
+- Calculate totals without rendering API rows → the relevant `list-*` endpoint.
+- Never use `list-*` to populate a visible table, list, or feed.
 
 **`list-*`:** ResourcePicker / `*Select` loaders, or totals with **no rows rendered**. Never a visible catalog/table/feed.
 

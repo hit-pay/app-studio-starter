@@ -4,36 +4,9 @@
 
 Business role dropdown. Docs use a fake roles API.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from 'react'
-
-import { RoleSelect } from '@/components/form/role-select'
-import type { HitPayRole } from '#/lib/hitpay'
-import { FieldGroup } from '@ui/form/field'
-
-function RoleSelectDemo() {
-  const [roleId, setRoleId] = useState<string | null>(null)
-  const [role, setRole] = useState<HitPayRole | null>(null)
-
-  return (
-    <FieldGroup className="max-w-sm">
-      <RoleSelect
-        name="notify_role_id"
-        value={roleId}
-        description={role ? `Selected ${role.title}` : 'GET /api/apps/{appId}/roles'}
-        onValueChange={(value, selected) => {
-          setRoleId(typeof value === 'string' ? value : null)
-          setRole(selected && !Array.isArray(selected) ? selected : null)
-        }}
-      />
-    </FieldGroup>
-  )
-}
-
-export { RoleSelectDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Business role dropdown. Fetches `GET /api/apps/{appId}/roles` (same as App Studio). Docs serve a fake response for that path.
 

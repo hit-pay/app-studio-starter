@@ -4,64 +4,9 @@
 
 Date, range, and date-time selection with popover and calendar helpers.
 
-## Example
+## Interactive example
 
-```tsx
-import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
-import { Label } from '@ui/form/label'
-
-function DatePickerDemo() {
-  return (
-    <>
-      <div className="space-y-8">
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Basic
-          </p>
-          <Label>Invoice due date</Label>
-          <DatePicker />
-        </div>
-
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Range
-          </p>
-          <p className="text-xs text-oc-muted-foreground">Settlement period for PayNow and Cards</p>
-          <DatePickerRange
-            defaultSelected={{
-              from: new Date(2026, 0, 20),
-              to: new Date(2026, 1, 9),
-            }}
-          />
-        </div>
-
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Date of birth
-          </p>
-          <Label>Date of birth</Label>
-          <DatePicker
-            placeholder="Select date"
-            defaultSelected={new Date(1994, 5, 15)}
-            startMonth={new Date(1900, 0)}
-            endMonth={new Date()}
-          />
-        </div>
-
-        <div className="space-y-3">
-          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-            Date and time
-          </p>
-          <Label>Delivery at</Label>
-          <DateTimePicker defaultSelected={new Date(2026, 8, 15, 9, 30)} />
-        </div>
-      </div>
-    </>
-  )
-}
-
-export { DatePickerDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Use `DatePicker`, `DatePickerRange`, or `DateTimePicker`. Do not import `@ui/form/calendar`.
 

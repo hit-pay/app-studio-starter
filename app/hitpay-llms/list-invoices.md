@@ -13,7 +13,7 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const listInvoices = createServerFn({ method: 'GET' })
-  .inputValidator((data: { status?: string; keywords?: string; cursor?: string } = {}) => data)
+  .validator((data: { status?: string; keywords?: string; cursor?: string } = {}) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()

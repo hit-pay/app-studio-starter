@@ -13,7 +13,7 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const getOrder = createServerFn({ method: 'GET' })
-  .inputValidator((data: { orderId: string }) => data)
+  .validator((data: { orderId: string }) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const response = await hitpayRequest(`/v1/orders/${data.orderId}`)

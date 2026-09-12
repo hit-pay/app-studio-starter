@@ -2,6 +2,19 @@
 
 Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Open `orchid-llms/{name}.md` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.
 
+# Quick decision
+
+- Browse/search/filter/sort rows → `DataTable`
+- Compact rows/cards without table tools → `DataList`
+- One record → `DetailCard`
+- Create/edit fields → `FormBuilder` inside `FormLayout`
+- Page shell → `PageLayout`; embedded app shell → `AppLayout`
+- Pick HitPay catalog records → `ResourcePicker`
+- Pick staff, role, location, category, coupon, discount, tax, shipping, or pickup → the matching `*Select`
+- Date, quantity, choice cards, rich notes, confirmation → `DatePicker`, `QuantityInput`, `ChoiceCard`, `TextEditor`, `ConfirmationModal`
+
+Use the named block directly. Do not recreate it from base primitives.
+
 # Needs
 
 - rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete → `data-table`

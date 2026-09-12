@@ -159,8 +159,7 @@ function mdxToMarkdown(source, mdxFile, title, description) {
   body = body.replace(/<([A-Z][A-Za-z0-9]*)\s*\/>/g, (_all, name) => {
     const file = demoFiles.get(name);
     if (!file) return "";
-    const code = readFileSync(file, "utf8").trim();
-    return `## Example\n\n\`\`\`tsx\n${code}\n\`\`\`\n`;
+    return `## Interactive example\n\nThe interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.\n`;
   });
 
   body = body.replace(/\]\(([^)]+)\)/g, (_all, href) => `](${rewriteDocHref(href)})`);

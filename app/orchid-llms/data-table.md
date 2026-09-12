@@ -4,316 +4,24 @@
 
 Rows-and-columns table with search, filters, sort, and pagination.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from "react";
-import { CheckRegular, DownRegular } from "@mingcute/react/core-regular";
-import { DocCodePanel } from "@/components/doc/doc-code-panel";
-import {
-  SchemaTable,
-  SCHEMA_TABLE_EXAMPLE_ROWS,
-  SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useSchemaTable,
-  type SchemaTableRow,
-} from "@/components/displaying-data/data-table";
-import { Badge } from "@ui/displaying-data/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/layout/tabs";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@ui/overlays/dropdown-menu";
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
-const STATUSES = ["Published", "Draft"] as const;
+# Quick decision
 
-const SCHEMA_PROMPT = `Schema Table schema prompt
-
-Pass one schema object to useSchemaTable({ schema, data }).
-
-Required
-- columns[] — key, title; type text | amount | date | status | image | empty
-
-Optional
-- mode — client (filter in kit from a Query/DB collection) | server (Query fetches the page; pass data + total + onQueryChange)
-- selection — checkbox column
-- search — { placeholder, debounceMs } or false (server search defaults to 300ms)
-- tabs[] — key, title, value (matches tabKey on the row, default tabKey is status)
-- tabKey — row field for tabs
-- filters[] — key, title, options[{ value, label }]
-- sort — { fields[{ key, title }], defaultKey, defaultDir } or false
-- pagination — { pageSize, pageSizes[] } or false
-- editColumns — true to show the column-visibility popover (default off; not inline edit)
-- rowActions — ["edit"], ["delete"], or both. Menu renders when this array is set. Wire onRowAction.
-- selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
-- emptyState — optional title, description, and JSON-friendly actions
-
-Column optional
-- sortable, hidden, locked (fixed, no hide/reorder), icon, search: false (exclude from search)
-- type status is a read-only badge. Inline edit is not a schema field.
-
-Query state (table.query)
-- search, tab, filters, sortKey, sortDir, page, pageSize
-
-Column layout (table.columnOrder, table.hiddenKeys)
-- Edit Column popover toggles visibility and drag-reorders active columns
-
-Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction / onRowClick.
-One-field row edit: pass cells={{ status: (value, row) => <StatusCell /> }} on <DataTable>, then persist. Schema stays JSON. Search/sort still use row[column.key].
-Multi-field edit (only if asked): rowActions + onRowAction → FormLayout. Do not treat editColumns or type status as editable.
-Open a record: pass onRowClick on <DataTable>. Checkbox, ⋮ menu, and cells controls do not fire it.
-
-Example
-{
-  "key": "products",
-  "mode": "client",
-  "selection": true,
-  "search": { "placeholder": "Search products" },
-  "tabKey": "status",
-  "tabs": [
-    { "key": "all", "title": "All" },
-    { "key": "published", "title": "Published", "value": "Published" },
-    { "key": "draft", "title": "Draft", "value": "Draft" }
-  ],
-  "filters": [
-    {
-      "key": "category",
-      "title": "Category",
-      "options": [
-        { "value": "Apparel", "label": "Apparel" },
-        { "value": "Membership", "label": "Membership" },
-        { "value": "Workshop", "label": "Workshop" }
-      ]
-    },
-    {
-      "key": "inventory",
-      "title": "Inventory",
-      "options": [
-        { "value": "In stock", "label": "In stock" },
-        { "value": "Inventory not tracked", "label": "Inventory not tracked" }
-      ]
-    },
-    {
-      "key": "source",
-      "title": "Source",
-      "options": [
-        { "value": "Manual", "label": "Manual" },
-        { "value": "Import", "label": "Import" }
-      ]
-    },
-    {
-      "key": "channel",
-      "title": "Channel",
-      "options": [
-        { "value": "Online Store", "label": "Online Store" },
-        { "value": "POS", "label": "POS" }
-      ]
-    }
-  ],
-  "sort": {
-    "fields": [
-      { "key": "created", "title": "Created" },
-      { "key": "name", "title": "Product name" }
-    ],
-    "defaultKey": "created",
-    "defaultDir": "desc"
-  },
-  "pagination": { "pageSize": 10, "pageSizes": [10, 20, 50] },
-  "rowActions": ["edit", "delete"],
-  "selectionActions": [
-    { "key": "publish", "label": "Publish", "icon": "publish" },
-    {
-      "key": "more",
-      "label": "More actions",
-      "icon": "more",
-      "presentation": "dropdown",
-      "items": [
-        { "key": "duplicate", "label": "Duplicate", "icon": "duplicate" },
-        { "key": "delete", "label": "Delete", "icon": "delete", "variant": "destructive", "separator": true }
-      ]
-    }
-  ],
-  "emptyState": {
-    "title": "No products to display",
-    "description": "Add a product to start building your catalog.",
-    "actions": [{ "key": "add", "label": "Add product", "icon": "add" }]
-  },
-  "columns": [
-    { "key": "image", "title": "Image", "type": "image", "search": false },
-    { "key": "name", "title": "Product name", "type": "text", "icon": true, "locked": true },
-    { "key": "inventory", "title": "Available quantity", "type": "text", "search": false },
-    { "key": "category", "title": "Category", "type": "text" },
-    { "key": "amount", "title": "Amount", "type": "amount", "search": false },
-    { "key": "status", "title": "Status", "type": "status", "search": false }
-  ]
-}`;
-
-function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
-  const code = typeof data === "string" ? data : JSON.stringify(data, null, 2);
-  return <DocCodePanel filename={filename} code={code} />;
-}
-
-function StatusCell({
-  value,
-  onStatusChange,
-}: {
-  value: unknown;
-  onStatusChange: (status: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger
-        nativeButton
-        className="inline-flex"
-        render={
-          <button
-            type="button"
-            className="inline-flex rounded-full outline-none focus-visible:ring-2 focus-visible:ring-oc-ring"
-          >
-            <Badge tone={value === "Published" ? "green" : "grey"}>
-              {String(value ?? "–")}
-              <DownRegular />
-            </Badge>
-          </button>
-        }
-      />
-      <DropdownMenuContent align="start">
-        {STATUSES.map((status) => {
-          const selected = status === value;
-          return (
-            <DropdownMenuItem
-              key={status}
-              data-active={selected || undefined}
-              className={selected ? "bg-oc-dark-blue-soft font-medium" : undefined}
-              onClick={() => {
-                onStatusChange(status);
-                setOpen(false);
-              }}
-            >
-              {status}
-              {selected ? <CheckRegular className="ml-auto" /> : null}
-            </DropdownMenuItem>
-          );
-        })}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
-
-function SchemaTableDemo() {
-  const [rows, setRows] = useState<SchemaTableRow[]>(() =>
-    SCHEMA_TABLE_EXAMPLE_ROWS.map((row) => ({ ...row })),
-  );
-  const [lastChange, setLastChange] = useState<unknown>(null);
-  const table = useSchemaTable({
-    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
-    data: rows,
-    onQueryChange: (query, change) => {
-      console.log("Query change", query, change);
-      setLastChange(change);
-    },
-  });
-  const [tab, setTab] = useState("result");
-
-  const setStatus = (id: string, status: string) => {
-    setRows((current) =>
-      current.map((row) => (row.id === id ? { ...row, status } : row)),
-    );
-  };
-
-  return (
-    <>
-      <div className="grid min-w-0 gap-6 xl:grid-cols-3">
-        <div className="min-w-0 xl:col-span-2">
-          <SchemaTable
-            table={table}
-            cells={{
-              status: (value, row) => (
-                <StatusCell
-                  value={value}
-                  onStatusChange={(status) => setStatus(row.id, status)}
-                />
-              ),
-            }}
-            onRowClick={(row) => {
-              console.log("Row click", row.id);
-              setLastChange({ key: "rowClick", id: row.id });
-            }}
-            onRowAction={(action, row) => {
-              console.log("Row action", action, row.id);
-              setLastChange({ key: "rowAction", action, id: row.id });
-            }}
-            onSelectionAction={(action, selectedIds) => {
-              console.log("Selection action", action.key, selectedIds);
-            }}
-            onEmptyAction={(action) => {
-              console.log("Empty action", action.key);
-            }}
-          />
-        </div>
-        <div className="flex min-w-0 flex-col gap-4">
-          <Tabs
-            value={tab}
-            onValueChange={(value) => setTab(String(value))}
-            className="min-w-0 gap-3"
-          >
-            <TabsList variant="line">
-              <TabsTrigger value="result">Result</TabsTrigger>
-              <TabsTrigger value="schema">Schema</TabsTrigger>
-              <TabsTrigger value="prompt">Prompt</TabsTrigger>
-            </TabsList>
-            <TabsContent value="result" className="min-w-0">
-              <JsonPanel
-                filename="result.json"
-                data={{
-                  search: table.query.search,
-                  lastChange,
-                  tab: table.query.tab,
-                  filters: table.query.filters,
-                  sort: {
-                    key: table.query.sortKey,
-                    dir: table.query.sortDir,
-                  },
-                  pagination: {
-                    page: table.page,
-                    pageSize: table.pageSize,
-                    pageCount: table.pageCount,
-                    filteredCount: table.filteredCount,
-                  },
-                  selected: table.selected,
-                  columns: {
-                    order: table.columnOrder,
-                    hidden: table.hiddenKeys,
-                    visible: table.visibleColumns.map((column) => column.key),
-                  },
-                }}
-              />
-            </TabsContent>
-            <TabsContent value="schema" className="min-w-0">
-              <JsonPanel
-                filename="schema.json"
-                data={SCHEMA_TABLE_EXAMPLE_SCHEMA}
-              />
-            </TabsContent>
-            <TabsContent value="prompt" className="min-w-0">
-              <JsonPanel filename="prompt.txt" data={SCHEMA_PROMPT} />
-            </TabsContent>
-          </Tabs>
-        </div>
-      </div>
-    </>
-  );
-}
-
-export { SchemaTableDemo };
-```
+Use `DataTable` when the collection needs search, filters, sorting, pagination,
+row selection, or row actions. The table already renders its search, filter,
+sort, pagination, and column-visibility controls from the schema. Do not build
+those controls separately.
 
 Use `DataTable` when the list needs search, column filters, sorting, or pagination.
 Use `DataList` for compact collections without those tools, and `DetailCard` for one record.
 Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
+
+`DataTable` already includes a filter button and filter popover. Do not build a
+separate filter row or a custom `Select` outside the table. Define the available
+filters in `schema.filters`; the table applies all active filters together.
 
 Configure `selectionActions` and `emptyState.actions` in the schema. The config is JSON-friendly:
 it contains keys, labels, supported icon keys, variants, disabled state, and dropdown items—but
@@ -332,6 +40,47 @@ checkboxes, the row ⋮ menu, links, and `cells` controls do not fire it. Do not
 One-field updates (status, assignee, stage) use `cells` on `DataTable`, not the schema.
 Search, sort, and filters still use `row[column.key]`. Only listed keys override; other
 columns keep the built-in `type` render (`status` is a read-only badge until overridden).
+
+## Built-in filters
+
+Each filter has a `key`, display `title`, and exact-match `options`. The option
+`value` must match the row value for that key; `label` is only the text shown
+in the popover and active-filter chip. Multiple configured filters are combined
+with AND logic. Clearing a filter removes its key from `table.query.filters`.
+
+```tsx
+const schema = {
+  columns: [
+    { key: "name", title: "Product" },
+    { key: "status", title: "Status", type: "status" },
+    { key: "inventory", title: "Inventory" },
+  ],
+  filters: [
+    {
+      key: "status",
+      title: "Status",
+      options: [
+        { value: "published", label: "Published" },
+        { value: "draft", label: "Draft" },
+      ],
+    },
+    {
+      key: "inventory",
+      title: "Inventory",
+      options: [
+        { value: "in_stock", label: "In stock" },
+        { value: "not_tracked", label: "Inventory not tracked" },
+      ],
+    },
+  ],
+} satisfies SchemaTableSchema
+```
+
+In `mode: "client"` (the default), filtering is performed against the loaded
+`data` rows. In `mode: "server"`, the table does not filter or sort rows
+locally; handle `query.filters` in `onQueryChange` and fetch the filtered page
+from your data source. The callback receives `change.key === "filters"` when
+the user applies or clears filters.
 
 ```tsx
 function StatusCell({

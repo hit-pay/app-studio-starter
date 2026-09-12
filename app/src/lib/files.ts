@@ -28,7 +28,7 @@ function decodeBase64(dataBase64: string): Uint8Array {
 }
 
 export const uploadFile = createServerFn({ method: 'POST' })
-  .inputValidator((data: {
+  .validator((data: {
     name: string
     mimeType: string
     dataBase64: string
@@ -47,7 +47,7 @@ export const uploadFile = createServerFn({ method: 'POST' })
   })
 
 export const getFile = createServerFn({ method: 'GET' })
-  .inputValidator((data: { id: string }) => data)
+  .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<(FileMeta & { dataBase64: string }) | null> => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const file = await loadStoredFile(data.id)
@@ -64,14 +64,14 @@ export const getFile = createServerFn({ method: 'GET' })
   })
 
 export const listFiles = createServerFn({ method: 'GET' })
-  .inputValidator((data: { entityType: string; entityId: string }) => data)
+  .validator((data: { entityType: string; entityId: string }) => data)
   .handler(async ({ data }): Promise<FileMeta[]> => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     return loadStoredFiles(data)
   })
 
 export const deleteFile = createServerFn({ method: 'POST' })
-  .inputValidator((data: { id: string }) => data)
+  .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<void> => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     await removeStoredFile(data.id)

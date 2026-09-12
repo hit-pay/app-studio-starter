@@ -4,6 +4,13 @@
 
 Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
+## Quick decision
+
+For cash-up or till reconciliation, use this endpoint only to calculate
+aggregates such as total cash, card, or charge amounts for a date/location
+range. Do not render its `data[]` rows in the app. Persist the completed
+cash-up, entered counts, variance, actor, and timestamp in Turso.
+
 `keywords` (without `payout_id`) or `remark` uses the search index; otherwise the standard index.
 
 ## Call
@@ -15,7 +22,7 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const listCharges = createServerFn({ method: 'GET' })
-  .inputValidator((data: {
+  .validator((data: {
     date_from?: string
     date_to?: string
     location_ids?: string[]

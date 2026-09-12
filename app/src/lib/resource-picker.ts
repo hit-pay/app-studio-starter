@@ -21,7 +21,7 @@ const CHARGE_STATUSES = [
 ] as const
 
 const loadResourcePickerPage = createServerFn({ method: 'GET' })
-  .inputValidator((data: ResourcePickerLoadInput) => data)
+  .validator((data: ResourcePickerLoadInput) => data)
   .handler(async ({ data }): Promise<ResourcePickerPage> => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()

@@ -4,31 +4,9 @@
 
 Pickup dropdown. Loads GET /v1/pickups.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from 'react'
-
-import { PickupSelect } from '@/components/form/pickup-select'
-import { FieldGroup } from '@ui/form/field'
-
-function PickupSelectDemo() {
-  const [pickupId, setPickupId] = useState<string | null>(null)
-
-  return (
-    <FieldGroup className="max-w-sm">
-      <PickupSelect
-        name="pickup_id"
-        value={pickupId}
-        description="GET /v1/pickups"
-        onValueChange={(value) => setPickupId(typeof value === 'string' ? value : null)}
-      />
-    </FieldGroup>
-  )
-}
-
-export { PickupSelectDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Pickup dropdown. Loads `GET /v1/pickups`. Do not call `list-pickups` on the screen.
 

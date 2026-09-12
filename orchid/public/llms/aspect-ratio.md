@@ -4,39 +4,8 @@
 
 Box that keeps a width/height ratio, such as 16/9.
 
-## Example
+## Interactive example
 
-```tsx
-import { AspectRatio } from '@ui/layout/aspect-ratio'
-
-function AspectRatioDemo() {
-  return (
-    <div className="grid gap-8 md:grid-cols-2">
-      <div className="space-y-3">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          16 / 9
-        </p>
-        <AspectRatio ratio={16 / 9} className="overflow-hidden rounded-lg bg-oc-muted">
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-oc-muted-foreground">
-            Menu photo
-          </div>
-        </AspectRatio>
-      </div>
-      <div className="space-y-3">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          1 / 1
-        </p>
-        <AspectRatio ratio={1} className="overflow-hidden rounded-lg bg-oc-muted">
-          <div className="absolute inset-0 flex items-center justify-center text-sm text-oc-muted-foreground">
-            Logo
-          </div>
-        </AspectRatio>
-      </div>
-    </div>
-  )
-}
-
-export { AspectRatioDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 `ratio` is width ÷ height (`16/9`, `4/3`, `1`).

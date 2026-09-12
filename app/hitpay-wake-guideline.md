@@ -2,6 +2,13 @@
 
 The HitPay → app webhook is the prebuilt `POST /webhooks/hitpay/schedule`.
 
+# Quick decision
+
+- Use wake only for scheduled reminders that map to `none`, `low_stock`, or `top_products`.
+- Persist incoming `data` to Turso and render the persisted snapshot.
+- Do not use wake for cash-up, sales, orders, invoices, or charge events.
+- Do not create another webhook route or invent a HitPay send endpoint.
+
 Persist POST `data` and show it from Turso. Do not re-list HitPay to rebuild wake rows.
 
 Wire wake UI/send only if the merchant asked for a scheduled reminder that maps to a `source` below. Otherwise leave the prebuilt route unused.

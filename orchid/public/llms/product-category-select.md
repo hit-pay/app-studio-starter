@@ -4,31 +4,9 @@
 
 Category dropdown. Loads GET /v1/product-category.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from 'react'
-
-import { ProductCategorySelect } from '@/components/form/product-category-select'
-import { FieldGroup } from '@ui/form/field'
-
-function ProductCategorySelectDemo() {
-  const [categoryId, setCategoryId] = useState<string | null>(null)
-
-  return (
-    <FieldGroup className="max-w-sm">
-      <ProductCategorySelect
-        name="category_id"
-        value={categoryId}
-        description="GET /v1/product-category"
-        onValueChange={(value) => setCategoryId(typeof value === 'string' ? value : null)}
-      />
-    </FieldGroup>
-  )
-}
-
-export { ProductCategorySelectDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Product category dropdown. Loads `GET /v1/product-category`. Do not call `list-product-categories` on the screen.
 

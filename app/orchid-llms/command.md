@@ -4,79 +4,8 @@
 
 Searchable command palette. Drive it with open, onOpenChange, and groups.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from 'react'
-import {
-  FileRegular,
-  StoreRegular,
-  User3Regular,
-} from '@mingcute/react/core-regular'
-
-import { Button } from '@ui/actions/button'
-import { Command } from '@/components/overlays/command'
-import { toast } from '@ui/feedback/toast'
-
-function CommandDemo() {
-  const [open, setOpen] = useState(false)
-
-  function go(value: string) {
-    toast.add({ title: value, type: 'success' })
-  }
-
-  return (
-    <div className="space-y-4">
-      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-        Palette
-      </p>
-      <Button variant="outline" onClick={() => setOpen(true)}>
-        Search
-      </Button>
-      <Command
-        open={open}
-        onOpenChange={setOpen}
-        placeholder="Search invoices, customers, pages…"
-        empty="No results"
-        groups={[
-          {
-            heading: 'Pages',
-            items: [
-              {
-                value: 'invoices',
-                label: 'Invoices',
-                keywords: ['billing'],
-                shortcut: 'I',
-                icon: <FileRegular className="size-4 text-oc-muted-foreground" />,
-                onSelect: go,
-              },
-              {
-                value: 'outlets',
-                label: 'Outlets',
-                keywords: ['pos', 'store'],
-                icon: <StoreRegular className="size-4 text-oc-muted-foreground" />,
-                onSelect: go,
-              },
-            ],
-          },
-          {
-            heading: 'Customers',
-            items: [
-              {
-                value: 'alex turner',
-                label: 'Alex Turner',
-                icon: <User3Regular className="size-4 text-oc-muted-foreground" />,
-                onSelect: go,
-              },
-            ],
-          },
-        ]}
-      />
-    </div>
-  )
-}
-
-export { CommandDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Use `Command` from `@/components/overlays/command` with `open`, `onOpenChange`, and `groups`. Do not assemble a palette from `Dialog` plus cmdk primitives.

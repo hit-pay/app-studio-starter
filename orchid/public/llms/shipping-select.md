@@ -4,31 +4,9 @@
 
 Shipping method dropdown. Loads GET /v1/shipping.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from 'react'
-
-import { ShippingSelect } from '@/components/form/shipping-select'
-import { FieldGroup } from '@ui/form/field'
-
-function ShippingSelectDemo() {
-  const [shippingId, setShippingId] = useState<string | null>(null)
-
-  return (
-    <FieldGroup className="max-w-sm">
-      <ShippingSelect
-        name="shipping_id"
-        value={shippingId}
-        description="GET /v1/shipping"
-        onValueChange={(value) => setShippingId(typeof value === 'string' ? value : null)}
-      />
-    </FieldGroup>
-  )
-}
-
-export { ShippingSelectDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Shipping method dropdown. Loads `GET /v1/shipping`. Do not call `list-shipping` on the screen.
 

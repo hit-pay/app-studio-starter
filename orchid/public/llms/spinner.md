@@ -4,38 +4,6 @@
 
 Indeterminate loading icon sized through className.
 
-## Example
+## Interactive example
 
-```tsx
-import { Button } from "@ui/actions/button";
-import { Spinner } from "@ui/feedback/spinner";
-
-function SpinnerDemo() {
-  return (
-    <>
-      <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          Size
-        </p>
-        <div className="flex items-center gap-6">
-          <Spinner className="size-3" />
-          <Spinner className="size-4" />
-          <Spinner className="size-8" />
-        </div>
-      </div>
-
-      <div className="space-y-4">
-        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
-          On a button
-        </p>
-        <Button disabled>
-          <Spinner aria-label="Saving" />
-          Saving invoice
-        </Button>
-      </div>
-    </>
-  );
-}
-
-export { SpinnerDemo };
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.

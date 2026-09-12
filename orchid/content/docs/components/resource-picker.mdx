@@ -2,6 +2,17 @@ import { ResourcePickerDemo } from '../../../src/components/doc/doc-demos'
 
 <ResourcePickerDemo />
 
+# Quick decision
+
+Use `ResourcePicker` only when the user adds or selects HitPay catalog records:
+`product`, `customer`, `order`, `charge`, `invoice`, or `add-on`. Use the
+dedicated `*Select` components for categories, locations, coupons, discounts,
+taxes, shipping, and pickups.
+
+The picker is not a page table. Do not call `list-*` from a screen to render
+rows. Confirmed results must be sent to a server function and persisted to
+Turso; cancelled results are `undefined`.
+
 `ResourcePicker` is a promise-based picker for HitPay catalog records. It is not a
 general-purpose table and it is not a data source for rendering a page list.
 Use it when a user must add or select products, customers, orders, charges,

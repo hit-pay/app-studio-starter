@@ -4,6 +4,31 @@
 
 Call only from `createServerFn` via `hitpayRequest` in `#/lib/server/hitpay-api`.
 
+## Quick decision
+
+Use this endpoint only inside the product `ResourcePicker` loader or for a
+totals-only calculation. Do not use it to populate a visible product table or
+to rebuild products already persisted in Turso. For one known product id, use
+`get-product-details`.
+
+## Stock shape
+
+Stock is location- and variation-aware. Do not hardcode outlet ids, outlet
+names, variant ids, or quantity values. Select the outlet at runtime and pass
+its id as the single `location_ids[]` filter when the screen needs
+location-specific stock.
+
+Read the returned quantity according to the product shape:
+
+- no variants: use `locations[].inventory.quantity`;
+- with variants: use `variations[].locations[].inventory.quantity`;
+- top-level `quantity` is an aggregate, or the selected outlet quantity when
+  exactly one `location_ids[]` is sent.
+
+The picker result keeps the original HitPay row in `resource`. Persist the
+selected product/variation ids and the relevant stock snapshot in Turso; do
+not treat the example values in this document as application data.
+
 ## Call
 
 ```ts
@@ -13,7 +38,7 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const listProducts = createServerFn({ method: 'GET' })
-  .inputValidator((data: { page?: number; keywords?: string } = {}) => data)
+  .validator((data: { page?: number; keywords?: string } = {}) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()

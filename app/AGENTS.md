@@ -20,8 +20,8 @@ Answer when they only ask a question. Edit and finish the implementation when th
 
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
-1. `grep` `orchid-ui-guideline.md` **Needs**. Name the `@/components` block(s), then implement. `@ui` only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, `Read` `orchid-llms/{name}.md`.
-2. `grep` `hitpay-apis-guideline.md`, then `Read` `hitpay-llms/{name}.md` before any merchant HTTP. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
+1. Choose the matching `@/components` block from the **Needs** section of `orchid-ui-guideline.md`, name the block(s), then implement. `@ui` is only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, read `orchid-llms/{name}.md`.
+2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run lint` then `bun run build` (zero exit).
 
 | Job | Block |
@@ -89,7 +89,7 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
-Input on `createServerFn`: `.inputValidator()` then `.handler()`. GET with no input: `.handler()` only.
+Input on `createServerFn`: `.validator()` then `.handler()`. GET with no input: `.handler()` only.
 
 ## Data
 
@@ -132,7 +132,7 @@ import { db } from '#/lib/server/db'
 import { ensureMigrations } from '#/lib/server/migrate'
 
 const saveCountLine = createServerFn({ method: 'POST' })
-  .inputValidator((data: { sessionId: string; itemId: string; counted: number }) => data)
+  .validator((data: { sessionId: string; itemId: string; counted: number }) => data)
   .handler(async ({ data }) => {
     const actor = await requireHitPayRoles(HITPAY_ALL_ROLES)
     await ensureMigrations()

@@ -4,31 +4,9 @@
 
 Discount dropdown. Loads GET /v1/discounts.
 
-## Example
+## Interactive example
 
-```tsx
-import { useState } from 'react'
-
-import { DiscountSelect } from '@/components/form/discount-select'
-import { FieldGroup } from '@ui/form/field'
-
-function DiscountSelectDemo() {
-  const [discountId, setDiscountId] = useState<string | null>(null)
-
-  return (
-    <FieldGroup className="max-w-sm">
-      <DiscountSelect
-        name="discount_id"
-        value={discountId}
-        description="GET /v1/discounts"
-        onValueChange={(value) => setDiscountId(typeof value === 'string' ? value : null)}
-      />
-    </FieldGroup>
-  )
-}
-
-export { DiscountSelectDemo }
-```
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 Discount dropdown. Loads `GET /v1/discounts`. Do not call `list-discounts` on the screen.
 

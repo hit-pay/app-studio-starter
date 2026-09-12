@@ -1,4 +1,26 @@
 # Simple Prompts
+
+## Fast MVP contract
+
+These prompts are intentionally short. For every prompt, build the smallest
+working embedded-app MVP first:
+
+- one primary workflow, not the entire business domain;
+- one browse screen, one create/edit flow, and one show screen only when needed;
+- Turso for app-owned records, history, approvals, and audit fields;
+- existing Orchid blocks and documented HitPay integrations only;
+- loading, empty, error, and success states;
+- no speculative integrations, extra dashboards, background jobs, or advanced
+  automation unless the prompt explicitly requires them.
+
+Do not spend time scanning the whole repository. Read only the relevant
+guidelines and component/API docs, name the blocks and data source, then
+create a short `PLAN.md` for multi-file work. Keep the plan updated as the
+work progresses and mark it complete at the end so it serves as agent memory.
+If a requested capability has no documented endpoint or existing helper, keep
+that part app-owned or state the limitation instead of inventing an API. Run
+targeted lint after editing and build once after implementation.
+
 1. **Expense Claims and Approvals** — Build an app for staff to submit expense claims with evidence and for managers to approve, reject, and track reimbursements.
 2. **Supplier Bill Approval** — Build an app to record supplier bills, verify documents, run multi-level approvals, and track payment schedules and status.
 3. **Purchase Requisition Manager** — Build an app to manage purchase requests, justification, cost centers, budget checks, approvers, and decisions before purchase orders.
@@ -128,7 +150,10 @@
 100. **Decision and Action Register** — Build an app to record decisions, context, options, approvers, reasons, action items, owners, deadlines, and outcomes.
 # Simple Prompts for Embedded Apps 101–200
 
-Copy one prompt below into App Studio. Each prompt is intentionally concise so the agent can infer the workflow, database, validation, roles, and UI from `AGENTS.md`.
+Copy one prompt below into App Studio. Each prompt is a starting point for the
+Fast MVP contract above, not a request to implement every possible feature in
+the domain. The agent should infer only the smallest workflow needed to make
+the prompt usable.
 
 ## 11. Marketing, Merchandising, and Community
 

@@ -13,7 +13,7 @@ import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
 
 const getAddOn = createServerFn({ method: 'GET' })
-  .inputValidator((data: { addOnId: string; withProducts?: boolean }) => data)
+  .validator((data: { addOnId: string; withProducts?: boolean }) => data)
   .handler(async ({ data }) => {
     await requireHitPayRoles(HITPAY_ALL_ROLES)
     const query = new URLSearchParams()
