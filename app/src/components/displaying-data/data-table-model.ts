@@ -102,6 +102,7 @@ export type SchemaTableSchema = {
       }
     | false;
   pagination?: { pageSize?: number; pageSizes?: number[] } | false;
+  /** Column-visibility popover. Default off. Set `true` to enable. */
   editColumns?: boolean;
   /** Row ⋮ menu. Set `["edit"]`, `["delete"]`, or both. */
   rowActions?: SchemaTableRowAction[];
@@ -352,6 +353,7 @@ export const SCHEMA_TABLE_EXAMPLE_SCHEMA: SchemaTableSchema = {
   key: "products",
   mode: "client",
   selection: true,
+  editColumns: true,
   search: { placeholder: "Search products" },
   tabKey: "status",
   tabs: [

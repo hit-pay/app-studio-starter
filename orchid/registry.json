@@ -139,7 +139,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row edit/delete uses rowActions + onRowAction. Edit one field in a cell; editColumns only toggles which columns are visible.",
+      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",

@@ -1,10 +1,10 @@
 # Orchid catalog
 
-Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Do not rebuild a block from primitives — that writes too much code. Open `orchid-llms/{name}.md` only when the props remain unclear. Do not fetch orchid-ui-hitpay.vercel.app. Use **Base Components** (`@ui/…`) only after no block covers the job (a single Button, Badge, or Spinner).
+Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Open `orchid-llms/{name}.md` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.
 
 # Needs
 
-- rows and columns, spreadsheet, searchable table, column filter, sort, pagination → `data-table`
+- rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete → `data-table`
 - compact row list, card list, people list, products list, activity feed, checklist → `data-list`
 - one record, detail page fields, invoice detail, leave detail, key-value summary → `detail-card`
 - kpi, dashboard, stat, revenue, volume, count, percent → `metric-card`
@@ -20,30 +20,27 @@ Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or
 - dropdown, select, searchable select, multi select, pick one option → `select`
 - assignee, reviewer, pick staff, staff dropdown → `staff-select`
 - pick role, notify role, role dropdown → `role-select`
+- pick coupon, coupon dropdown → `coupon-select`
+- pick discount, discount dropdown → `discount-select`
+- pick tax, tax dropdown → `tax-select`
+- pick shipping method → `shipping-select`
+- pick pickup → `pickup-select`
+- pick category, product category dropdown → `product-category-select`
+- pick location, location dropdown → `location-select`
 - confirm, delete, destructive, are you sure → `confirmation-modal`
 - copy to clipboard, copy id, copy phone, copy url → `copy-button`
 - pick product, pick customer, pick order, resource picker, catalog picker → `resource-picker`
-- pick category, product category dropdown → `product-category-select`
-- pick location, location dropdown → `location-select`
 - command palette, search commands, cmdk → `command`
-- toast, snackbar, notify, success message → `toast`
-- banner, alert, inline notice → `banner`
+- toast, snackbar, notify, success message → `toast` (`@ui`, after a block)
+- banner, alert, inline notice → `banner` (`@ui`)
 - empty state, no records, first-use state → `empty`
-- loading placeholder, skeleton rows → `skeleton`
-- loading spinner, indeterminate loading → `spinner`
-- chart, graph, time series, dashboard visualization → `chart`
-- dialog, modal content, overlay form → `dialog`
-- drawer, side panel, bottom sheet → `drawer`
-- overflow menu, action menu, context actions → `dropdown-menu`
-- in-page tabs, tab panel → `tabs`
-- status badge, label, role badge → `badge`
-
-# Utils
-
-## `utils` — Utils
-
-Cn() Tailwind class merge. Import from @/lib/utils.
-Import `@/lib/utils` — `src/lib/utils.ts`.
+- loading placeholder, skeleton rows → `skeleton` (`@ui`)
+- loading spinner → `spinner` (`@ui`)
+- chart, graph, time series → `chart` (`@ui`)
+- extra dialog (not FormLayout modal, not confirmation) → `dialog` (`@ui`)
+- extra drawer (not FormLayout modal, not confirmation) → `drawer` (`@ui`)
+- in-page tabs (not AppLayout tabs) → `tabs` (`@ui`)
+- status badge, label → `badge` (`@ui`)
 
 # Components & Blocks
 
@@ -60,8 +57,8 @@ Docs: `orchid-llms/copy-button.md`
 
 ## `data-table` — Data Table
 
-Need: rows and columns, spreadsheet, searchable table, column filter, sort, pagination
-Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row edit/delete uses rowActions + onRowAction. Edit one field in a cell; editColumns only toggles which columns are visible.
+Need: rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete
+Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.
 Import `@/components/displaying-data/data-table` — `src/components/displaying-data/data-table.tsx`.
 Docs: `orchid-llms/data-table.md`
 Related: `src/components/displaying-data/data-table-model.ts`.
@@ -136,65 +133,74 @@ Related: `src/ui/form/combobox.tsx`.
 ## `staff-select` — Staff Select
 
 Need: assignee, reviewer, pick staff, staff dropdown
-App-member dropdown. Loads staff-app-members. Do not fetch on the screen.
+App-member dropdown. GET /api/apps/{appId}/staff-app-members. Do not fetch on the screen.
 Import `@/components/form/staff-select` — `src/components/form/staff-select.tsx`.
 Docs: `orchid-llms/staff-select.md`
+Related: `src/lib/hitpay.ts`, `src/lib/hitpay-roles.ts`, `src/lib/studio-app-id.ts`.
 
 ## `role-select` — Role Select
 
 Need: pick role, notify role, role dropdown
-Business role dropdown. Loads /roles. Do not fetch on the screen.
+Business role dropdown. GET /api/apps/{appId}/roles. Do not fetch on the screen.
 Import `@/components/form/role-select` — `src/components/form/role-select.tsx`.
 Docs: `orchid-llms/role-select.md`
+Related: `src/lib/hitpay.ts`, `src/lib/hitpay-roles.ts`, `src/lib/studio-app-id.ts`.
 
 ## `coupon-select` — Coupon Select
 
 Need: pick coupon, coupon dropdown
-Loads GET /v1/coupons. Do not fetch on the screen. Do not use ResourcePicker.
+Coupon dropdown. GET /v1/coupons. Do not fetch on the screen.
 Import `@/components/form/coupon-select` — `src/components/form/coupon-select.tsx`.
 Docs: `orchid-llms/coupon-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `discount-select` — Discount Select
 
 Need: pick discount, discount dropdown
-Loads GET /v1/discounts. Do not fetch on the screen. Do not use ResourcePicker.
+Discount dropdown. GET /v1/discounts. Do not fetch on the screen.
 Import `@/components/form/discount-select` — `src/components/form/discount-select.tsx`.
 Docs: `orchid-llms/discount-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `tax-select` — Tax Select
 
 Need: pick tax, tax dropdown
-Loads GET /v1/taxes. Do not fetch on the screen. Do not use ResourcePicker.
+Tax dropdown. GET /v1/taxes. Do not fetch on the screen.
 Import `@/components/form/tax-select` — `src/components/form/tax-select.tsx`.
 Docs: `orchid-llms/tax-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `shipping-select` — Shipping Select
 
 Need: pick shipping method
-Loads GET /v1/shipping. Do not fetch on the screen. Do not use ResourcePicker.
+Shipping dropdown. GET /v1/shipping. Do not fetch on the screen.
 Import `@/components/form/shipping-select` — `src/components/form/shipping-select.tsx`.
 Docs: `orchid-llms/shipping-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `pickup-select` — Pickup Select
 
 Need: pick pickup
-Loads GET /v1/pickups. Do not fetch on the screen. Do not use ResourcePicker.
+Pickup dropdown. GET /v1/pickups. Do not fetch on the screen.
 Import `@/components/form/pickup-select` — `src/components/form/pickup-select.tsx`.
 Docs: `orchid-llms/pickup-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `product-category-select` — Product Category Select
 
 Need: pick category, product category dropdown
-Loads GET /v1/product-category. Do not fetch on the screen. Do not use ResourcePicker.
+Category dropdown. GET /v1/product-category. Do not fetch on the screen.
 Import `@/components/form/product-category-select` — `src/components/form/product-category-select.tsx`.
 Docs: `orchid-llms/product-category-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `location-select` — Location Select
 
 Need: pick location, location dropdown
-Loads GET /v1/locations. Do not fetch on the screen. Do not use ResourcePicker.
+Location dropdown. GET /v1/locations. Do not fetch on the screen.
 Import `@/components/form/location-select` — `src/components/form/location-select.tsx`.
 Docs: `orchid-llms/location-select.md`
+Related: `src/components/form/hitpay-named-select.tsx`.
 
 ## `quantity-input` — Quantity Input
 
@@ -277,7 +283,7 @@ Docs: `orchid-llms/button-group.md`
 
 ## `badge` — Badge
 
-Need: status badge, label, role badge
+Need: status badge, label
 Badge with render support plus Orchid tones, appearances, removable badges, and user roles.
 Import `@ui/displaying-data/badge` — `src/ui/displaying-data/badge.tsx`.
 Docs: `orchid-llms/badge.md`
@@ -290,7 +296,7 @@ Docs: `orchid-llms/avatar.md`
 
 ## `chart` — Chart
 
-Need: chart, graph, time series, dashboard visualization
+Need: chart, graph, time series
 Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.
 Import `@ui/displaying-data/chart` — `src/ui/displaying-data/chart.tsx`.
 Docs: `orchid-llms/chart.md`
@@ -326,7 +332,7 @@ Docs: `orchid-llms/skeleton.md`
 
 ## `spinner` — Spinner
 
-Need: loading spinner, indeterminate loading
+Need: loading spinner
 Indeterminate loading icon sized through className.
 Import `@ui/feedback/spinner` — `src/ui/feedback/spinner.tsx`.
 Docs: `orchid-llms/spinner.md`
@@ -409,7 +415,7 @@ Docs: `orchid-llms/accordion.md`
 
 ## `tabs` — Tabs
 
-Need: in-page tabs, tab panel
+Need: in-page tabs (not AppLayout tabs)
 Horizontal or vertical tabs with default and line variants.
 Import `@ui/layout/tabs` — `src/ui/layout/tabs.tsx`.
 Docs: `orchid-llms/tabs.md`
@@ -438,7 +444,6 @@ Docs: `orchid-llms/pagination.md`
 
 ## `dropdown-menu` — Dropdown Menu
 
-Need: overflow menu, action menu, context actions
 Menu with items, checkbox and radio selection, submenus, and Orchid styling.
 Import `@ui/overlays/dropdown-menu` — `src/ui/overlays/dropdown-menu.tsx`.
 Docs: `orchid-llms/dropdown-menu.md`
@@ -451,14 +456,14 @@ Docs: `orchid-llms/tooltip.md`
 
 ## `dialog` — Dialog
 
-Need: dialog, modal content, overlay form
+Need: extra dialog (not FormLayout modal, not confirmation)
 Dialog primitives with Orchid sizes and persistent mode.
 Import `@ui/overlays/dialog` — `src/ui/overlays/dialog.tsx`.
 Docs: `orchid-llms/dialog.md`
 
 ## `drawer` — Drawer
 
-Need: drawer, side panel, bottom sheet
+Need: extra drawer (not FormLayout modal, not confirmation)
 Swipeable edge panel. Set swipeDirection to up, right, down, or left.
 Import `@ui/overlays/drawer` — `src/ui/overlays/drawer.tsx`.
 Docs: `orchid-llms/drawer.md`

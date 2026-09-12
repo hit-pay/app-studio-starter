@@ -1,62 +1,66 @@
 # HitPay API
 
-Local merchant API notes for this app. Read `hitpay-llms/{name}.md` before calling HitPay. Do not fetch docs.hitpayapp.com or invent endpoints. Call only documented paths with `hitpayRequest` from `#/lib/server/hitpay-api`. Auth is the hopped `HITPAY_ACCESS_TOKEN` / `HITPAY_API_URL` — do not send `X-BUSINESS-API-KEY` from app code.
+Read `hitpay-llms/{name}.md` before calling HitPay. Do not fetch docs.hitpayapp.com or invent paths. Call documented paths with `hitpayRequest` from `#/lib/server/hitpay-api`. Auth is the hopped `HITPAY_ACCESS_TOKEN` / `HITPAY_API_URL` — do not send `X-BUSINESS-API-KEY`.
 
-Document **OAuth public API only** (`oauth.any-scope` on `/v1/…`). Do not document API-key-only routes (webhooks, static QR, balances, transfers, beneficiaries, staffs).
+OAuth public API only (`/v1/…`). No HTTP DELETE. No invented create/update POST.
 
-**Never implement HTTP DELETE** (products, customers, orders, invoices, settings). Do not invent create / update / POST write paths — those docs are not in this folder.
+**`list-*`:** ResourcePicker / `*Select` loaders, or totals with **no rows rendered**. Never a visible catalog/table/feed.
 
-All OAuth lists the merchant **adds as catalog rows** go through ResourcePicker (`charge`, `invoice`, `add-on`, plus product/customer/order). Generated screens must not `list-*` to build a picker **or to display a catalog/table/feed**. `list-*` docs are for the picker/select loader or totals-only computed sheets. Staff / role: `StaffSelect` / `RoleSelect`. Coupon / discount / tax / shipping / pickup / category / location: the matching `*Select` (or FormBuilder types).
+**`get-*-details`:** show/refresh one record whose id is already in Turso (or just picked and upserted). Do not loop get-by-id to rebuild a list.
+
+Staff / role → `StaffSelect` / `RoleSelect`. Coupon / discount / tax / shipping / pickup / category / location → matching `*Select`. Catalog add (product, customer, order, charge, invoice, add-on) → ResourcePicker.
 
 # Needs
 
-- pick products / add SKUs to the app → ResourcePicker `product` (never `list-products` on a screen)
-- show product → `get-product-details`
-- pick product categories → `ProductCategorySelect`
-- pick / show orders → ResourcePicker `order` / `get-order-details`
-- pick / show customers → ResourcePicker `customer` / `get-customer-details`
-- pick locations → `LocationSelect`
-- till / cash-up **totals** (do not render charge rows) → `list-charges` / `get-charge-details`. No wake / webhook.
-- pick / show invoices → ResourcePicker `invoice` / `get-invoice-details`
+- add products / SKUs → ResourcePicker `product`
+- show one product → `get-product-details` (id already stored)
+- product categories → `ProductCategorySelect`
+- add / show orders → ResourcePicker `order` / `get-order-details`
+- add / show customers → ResourcePicker `customer` / `get-customer-details`
+- locations → `LocationSelect`
+- totals only (no charge rows on screen) → `list-charges` / `get-charge-details`
+- add / show invoices → ResourcePicker `invoice` / `get-invoice-details`
 - coupons / discounts / taxes → `CouponSelect` / `DiscountSelect` / `TaxSelect`
 - shipping / pickups → `ShippingSelect` / `PickupSelect`
 - add-ons → ResourcePicker `add-on` / `get-add-on`
-- scheduled wake snapshots → `listWakeEvents` / `listLatestWakeRows` (`#/lib/hitpay-wake`, Turso — not a HitPay HTTP list)
+- scheduled wake snapshots → `hitpay-wake-guideline.md` (Turso, not a HitPay list)
 
 # Endpoints
 
+`list-*` below are **not** for browse screens.
+
 ## Products
 
-- `list-products` — `GET /v1/products` — `hitpay-llms/list-products.md`
+- `list-products` — `GET /v1/products` — picker loader — `hitpay-llms/list-products.md`
 - `get-product-details` — `GET /v1/products/{product_id}` — `hitpay-llms/get-product-details.md`
-- `list-product-categories` — `GET /v1/product-category` — `hitpay-llms/list-product-categories.md`
+- `list-product-categories` — `GET /v1/product-category` — `ProductCategorySelect` — `hitpay-llms/list-product-categories.md`
 
 ## Orders
 
-- `list-orders` — `GET /v1/orders` — `hitpay-llms/list-orders.md`
+- `list-orders` — `GET /v1/orders` — picker loader — `hitpay-llms/list-orders.md`
 - `get-order-details` — `GET /v1/orders/{order_id}` — `hitpay-llms/get-order-details.md`
 
 ## Customers
 
-- `list-customers` — `GET /v1/customers` — `hitpay-llms/list-customers.md`
+- `list-customers` — `GET /v1/customers` — picker loader — `hitpay-llms/list-customers.md`
 - `get-customer-details` — `GET /v1/customers/{customer_id}` — `hitpay-llms/get-customer-details.md`
 
 ## Locations
 
-- `list-locations` — `GET /v1/locations` — `hitpay-llms/list-locations.md`
+- `list-locations` — `GET /v1/locations` — `LocationSelect` — `hitpay-llms/list-locations.md`
 
 ## Charges and invoices
 
-- `list-charges` — `GET /v1/charges` — `hitpay-llms/list-charges.md`
+- `list-charges` — `GET /v1/charges` — totals or picker — `hitpay-llms/list-charges.md`
 - `get-charge-details` — `GET /v1/charges/{charge_id}` — `hitpay-llms/get-charge-details.md`
-- `list-invoices` — `GET /v1/invoices` — `hitpay-llms/list-invoices.md`
+- `list-invoices` — `GET /v1/invoices` — picker loader — `hitpay-llms/list-invoices.md`
 - `get-invoice-details` — `GET /v1/invoices/{invoice_id}` — `hitpay-llms/get-invoice-details.md`
 
 ## Commerce extras
 
-- `list-coupons` — `/v1/coupons`
-- `list-discounts` — `/v1/discounts`
-- `list-taxes` — `/v1/taxes`
-- `list-shipping` — `/v1/shipping`
-- `list-pickups` — `/v1/pickups`
-- `list-add-ons` / `get-add-on` — `/v1/add-ons`
+- `list-coupons` — `/v1/coupons` — `CouponSelect` — `hitpay-llms/list-coupons.md`
+- `list-discounts` — `/v1/discounts` — `DiscountSelect` — `hitpay-llms/list-discounts.md`
+- `list-taxes` — `/v1/taxes` — `TaxSelect` — `hitpay-llms/list-taxes.md`
+- `list-shipping` — `/v1/shipping` — `ShippingSelect` — `hitpay-llms/list-shipping.md`
+- `list-pickups` — `/v1/pickups` — `PickupSelect` — `hitpay-llms/list-pickups.md`
+- `list-add-ons` / `get-add-on` — `/v1/add-ons` — ResourcePicker / show — `hitpay-llms/list-add-ons.md`

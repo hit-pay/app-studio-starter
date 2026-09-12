@@ -1086,7 +1086,7 @@ function SchemaTableEditColumns({ table }: { table: SchemaTableApi }) {
   const [open, setOpen] = useState(false);
   const [dragKey, setDragKey] = useState<string | null>(null);
 
-  if (table.schema.editColumns === false) return null;
+  if (table.schema.editColumns !== true) return null;
   const locked = table.schema.columns.filter((column) => column.locked);
   const byKey = new Map(
     table.schema.columns.map((column) => [column.key, column]),

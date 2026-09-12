@@ -11,7 +11,7 @@ it contains keys, labels, supported icon keys, variants, disabled state, and dro
 never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
 chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
 
-`editColumns` is the column-visibility popover. Set `rowActions` to `["edit"]`,
+`editColumns` is the optional column-visibility popover (`true` to show it; default off). Set `rowActions` to `["edit"]`,
 `["delete"]`, or both when the list needs the row ⋮ menu. Pass `onRowAction`.
 That menu opens `FormLayout` for multi-field edits. Neither `editColumns` nor
 `type: "status"` makes a cell editable.

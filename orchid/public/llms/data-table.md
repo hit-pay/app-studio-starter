@@ -44,7 +44,7 @@ Optional
 - filters[] — key, title, options[{ value, label }]
 - sort — { fields[{ key, title }], defaultKey, defaultDir } or false
 - pagination — { pageSize, pageSizes[] } or false
-- editColumns — false to hide the column-visibility popover (not inline edit)
+- editColumns — true to show the column-visibility popover (default off; not inline edit)
 - rowActions — ["edit"], ["delete"], or both. Menu renders when this array is set. Wire onRowAction.
 - selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
 - emptyState — optional title, description, and JSON-friendly actions
@@ -320,7 +320,7 @@ it contains keys, labels, supported icon keys, variants, disabled state, and dro
 never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
 chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
 
-`editColumns` is the column-visibility popover. Set `rowActions` to `["edit"]`,
+`editColumns` is the optional column-visibility popover (`true` to show it; default off). Set `rowActions` to `["edit"]`,
 `["delete"]`, or both when the list needs the row ⋮ menu. Pass `onRowAction`.
 That menu opens `FormLayout` for multi-field edits. Neither `editColumns` nor
 `type: "status"` makes a cell editable.

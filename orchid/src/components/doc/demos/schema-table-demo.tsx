@@ -35,7 +35,7 @@ Optional
 - filters[] — key, title, options[{ value, label }]
 - sort — { fields[{ key, title }], defaultKey, defaultDir } or false
 - pagination — { pageSize, pageSizes[] } or false
-- editColumns — false to hide the column-visibility popover (not inline edit)
+- editColumns — true to show the column-visibility popover (default off; not inline edit)
 - rowActions — ["edit"], ["delete"], or both. Menu renders when this array is set. Wire onRowAction.
 - selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
 - emptyState — optional title, description, and JSON-friendly actions

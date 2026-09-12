@@ -9,7 +9,7 @@ const docsDir = join(root, 'public', 'llms')
 
 const NEED = {
   'data-table':
-    'rows and columns, spreadsheet, searchable table, column filter, sort, pagination',
+    'rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete',
   'data-list':
     'compact row list, card list, people list, products list, activity feed, checklist',
   'detail-card':
@@ -44,19 +44,32 @@ const NEED = {
   banner: 'banner, alert, inline notice',
   empty: 'empty state, no records, first-use state',
   skeleton: 'loading placeholder, skeleton rows',
-  spinner: 'loading spinner, indeterminate loading',
-  chart: 'chart, graph, time series, dashboard visualization',
-  dialog: 'dialog, modal content, overlay form',
-  drawer: 'drawer, side panel, bottom sheet',
-  'dropdown-menu': 'overflow menu, action menu, context actions',
-  tabs: 'in-page tabs, tab panel',
-  badge: 'status badge, label, role badge',
+  spinner: 'loading spinner',
+  chart: 'chart, graph, time series',
+  dialog: 'extra dialog (not FormLayout modal, not confirmation)',
+  drawer: 'extra drawer (not FormLayout modal, not confirmation)',
+  tabs: 'in-page tabs (not AppLayout tabs)',
+  badge: 'status badge, label',
 }
+
+const BASE_NEED_NOTE = {
+  toast: '`@ui`, after a block',
+  banner: '`@ui`',
+  skeleton: '`@ui`',
+  spinner: '`@ui`',
+  chart: '`@ui`',
+  dialog: '`@ui`',
+  drawer: '`@ui`',
+  tabs: '`@ui`',
+  badge: '`@ui`',
+}
+
+const SKIP_NEED_INDEX = new Set(['dropdown-menu'])
 
 const lines = [
   '# Orchid catalog',
   '',
-  'Hard rule: use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Do not rebuild a block from primitives — that writes too much code. Open `orchid-llms/{name}.md` only when the props remain unclear. Do not fetch orchid-ui-hitpay.vercel.app. Use **Base Components** (`@ui/…`) only after no block covers the job (a single Button, Badge, or Spinner).',
+  'Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Open `orchid-llms/{name}.md` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.',
   '',
   '# Needs',
   '',
@@ -224,12 +237,15 @@ function writeAlignedGroups(items, subgroupMap) {
 }
 
 for (const [name, words] of Object.entries(NEED)) {
-  lines.push(`- ${words} → \`${name}\``)
+  if (SKIP_NEED_INDEX.has(name)) continue
+  const note = BASE_NEED_NOTE[name]
+  lines.push(note ? `- ${words} → \`${name}\` (${note})` : `- ${words} → \`${name}\``)
 }
 lines.push('')
 
 for (const [section, items] of grouped) {
   if (items.length === 0) continue
+  if (section === 'Utils') continue
   lines.push(`# ${section}`, '')
   if (section === 'Base Components') {
     writeAlignedGroups(items, BASE_SUBGROUP)
