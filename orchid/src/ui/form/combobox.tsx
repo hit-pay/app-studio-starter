@@ -224,7 +224,7 @@ function ComboboxContent({
           data-slot="combobox-content"
           data-chips={!!anchor}
           className={cn(
-            'group/combobox-content relative z-50 max-h-(--available-height) w-(--anchor-width) min-w-(--anchor-width) origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
+            'group/combobox-content relative z-50 max-h-(--available-height) w-max min-w-[max(10rem,var(--anchor-width))] origin-(--transform-origin) overflow-x-hidden overflow-y-auto rounded-lg border border-oc-border bg-oc-background p-2 text-oc-foreground shadow-oc-popup outline-none duration-100 data-open:animate-in data-open:fade-in-0 data-open:zoom-in-95 data-closed:animate-out data-closed:fade-out-0 data-closed:zoom-out-95',
             className,
           )}
           {...props}
@@ -259,7 +259,7 @@ function ComboboxItem({
       data-slot="combobox-item"
       data-variant={variant}
       className={cn(
-        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-normal text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50',
+        'group/combobox-item relative flex w-full cursor-pointer items-center gap-2 rounded p-2 text-sm leading-normal whitespace-nowrap text-oc-foreground outline-hidden select-none hover:bg-oc-dark-blue-soft data-highlighted:bg-oc-dark-blue-soft data-disabled:pointer-events-none data-disabled:opacity-50',
         !checkbox && 'pr-8',
         className,
       )}

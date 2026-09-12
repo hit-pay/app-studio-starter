@@ -3,6 +3,11 @@ import type { ResourcePickerLoadInput, ResourcePickerType } from '@/components/f
 
 type FakeRecord = Record<string, unknown>
 
+const FAKE_MAIN_STORE = { id: '9c1e0005-0000-4000-8000-000000000001', name: 'Main Store' }
+const FAKE_WAREHOUSE = { id: '9c1e0005-0000-4000-8000-000000000002', name: 'Warehouse' }
+const FAKE_FURNITURE = { id: '9c1e0002-0000-4000-8000-000000000001', name: 'Furniture' }
+const FAKE_LIGHTING = { id: '9c1e0002-0000-4000-8000-000000000002', name: 'Lighting' }
+
 const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
   product: [
     {
@@ -12,6 +17,8 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       currency: 'sgd',
       price: 5800,
       price_display: 'S$5,800.00',
+      locations: [FAKE_MAIN_STORE, FAKE_WAREHOUSE],
+      category_id: [FAKE_FURNITURE],
       images: [{ url: 'https://placehold.co/64x64/eee/333?text=S' }],
       variations: [
         {
@@ -37,6 +44,8 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       currency: 'sgd',
       price: 89,
       price_display: 'S$89.00',
+      locations: [FAKE_MAIN_STORE],
+      category_id: [FAKE_LIGHTING],
       images: [{ url: 'https://placehold.co/64x64/eee/333?text=L' }],
       variations: [
         {
@@ -57,6 +66,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       price_display: 'S$18.00',
       quantity: 40,
       channels: ['pos', 'online_store'],
+      locations: [FAKE_WAREHOUSE],
       images: [{ url: 'https://placehold.co/64x64/eee/333?text=T' }],
       variations: [],
     },
@@ -100,9 +110,36 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
     { id: '9c1e0003-0000-4000-8000-000000000002', name: 'Wei Chen', email: 'wei@example.com', phone_number: '98887766' },
   ],
   order: [
-    { id: '9c1e0004-0000-4000-8000-000000000001', order_display_number: 2048, status: 'draft', amount: 120, currency: 'sgd', created_at: '2026-08-01T10:00:00+00:00' },
-    { id: '9c1e0004-0000-4000-8000-000000000002', order_display_number: 2049, status: 'completed', amount: 89, currency: 'sgd', created_at: '2026-09-02T10:00:00+00:00' },
-    { id: '9c1e0004-0000-4000-8000-000000000003', order_display_number: 2050, status: 'requires_business_action', amount: 46, currency: 'sgd', created_at: '2026-09-10T10:00:00+00:00' },
+    {
+      id: '9c1e0004-0000-4000-8000-000000000001',
+      order_display_number: 2048,
+      status: 'draft',
+      amount: 120,
+      currency: 'sgd',
+      channel: 'quick_sale',
+      location_id: FAKE_WAREHOUSE.id,
+      created_at: '2026-08-01T10:00:00+00:00',
+    },
+    {
+      id: '9c1e0004-0000-4000-8000-000000000002',
+      order_display_number: 2049,
+      status: 'completed',
+      amount: 89,
+      currency: 'sgd',
+      channel: 'point_of_sale',
+      location_id: FAKE_MAIN_STORE.id,
+      created_at: '2026-09-02T10:00:00+00:00',
+    },
+    {
+      id: '9c1e0004-0000-4000-8000-000000000003',
+      order_display_number: 2050,
+      status: 'requires_business_action',
+      amount: 46,
+      currency: 'sgd',
+      channel: 'store_checkout',
+      location_id: FAKE_MAIN_STORE.id,
+      created_at: '2026-09-10T10:00:00+00:00',
+    },
   ],
   charge: [
     {
@@ -194,6 +231,38 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
         const channels = row.channels
         if (Array.isArray(channels) && !channels.map(String).includes(data.extras.channel)) return false
       }
+      if (data.extras?.location_id && data.extras.location_id !== 'all') {
+        const locations = row.locations
+        if (
+          !Array.isArray(locations) ||
+          !locations.some((location) => {
+            return (
+              location &&
+              typeof location === 'object' &&
+              'id' in location &&
+              String((location as { id?: unknown }).id) === data.extras?.location_id
+            )
+          })
+        ) {
+          return false
+        }
+      }
+      if (data.extras?.category_id && data.extras.category_id !== 'all') {
+        const categories = row.category_id
+        if (
+          !Array.isArray(categories) ||
+          !categories.some((category) => {
+            return (
+              category &&
+              typeof category === 'object' &&
+              'id' in category &&
+              String((category as { id?: unknown }).id) === data.extras?.category_id
+            )
+          })
+        ) {
+          return false
+        }
+      }
       return true
     })
   }
@@ -206,6 +275,16 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
     rows = rows.filter((row) => {
       if (!inDateRange(row, data.extras)) return false
       if (needle && !includesNeedle(row, ['order_display_number', 'id'], needle)) return false
+      if (data.extras?.channel && data.extras.channel !== 'all' && row.channel !== data.extras.channel) {
+        return false
+      }
+      if (
+        data.extras?.location_id &&
+        data.extras.location_id !== 'all' &&
+        row.location_id !== data.extras.location_id
+      ) {
+        return false
+      }
       if (data.filter === 'all') return true
       if (data.filter === 'pending') {
         return row.status === 'pending' || row.status === 'requires_business_action'

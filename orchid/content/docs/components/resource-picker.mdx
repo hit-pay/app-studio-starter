@@ -96,7 +96,10 @@ function fakeHitPayList(type: ResourcePickerType) {
 - `selectionIds`: preselected `{ id, children?: { id }[] }`
 - `filter.status`: initial status (product, order, invoice, charge)
 - `filter.variants`: `false` hides product variations
-- Dialog also shows type-specific extras: product **Stock** + **Channel**, charge **Method**
+- `filter.locationId`: initial outlet for product (`location_ids`) and order (`location_id`) pickers
+- `filter.categoryId`: initial category for product picker (`GET /v1/products` `categories`)
+- `filter.channel`: initial channel for product (`pos` / `online_store` / `invoice`) or order (`point_of_sale` / `quick_sale` / `store_checkout`)
+- Dialog also shows type-specific extras: product **Stock** + **Channel** + **Category** + **Location**, order **Channel** + **Location**, charge **Method**
 - `load` receives `{ type, query, filter, extras, page, cursor }` and should return `{ items, hasMore, cursor? }`
 - When `hasMore` is true, the dialog shows **Load more** plus the resource name and appends the next page
 - Cancel returns `undefined`

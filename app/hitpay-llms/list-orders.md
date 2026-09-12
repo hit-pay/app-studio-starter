@@ -42,6 +42,7 @@ const listOrders = createServerFn({ method: 'GET' })
 | `dateTo` | date | Must be after `dateFrom`. `created_at` through end of that day |
 | `online_store` | boolean | `channel=store_checkout` and a charge in succeeded / refunded / canceled / failed |
 | `channels` | array | `point_of_sale`, `quick_sale`, `store_checkout`. Max 10 |
+| `location_id` | UUID | Outlet. ResourcePicker order filter |
 | `with` | string \| array | `customer`, `products`, `charges` (comma-separated). `products` is always loaded after paging. `charges` loads `charges.entityMetadata` |
 
 Staff cashiers only see `store_checkout`. Managers are limited to their location ids.

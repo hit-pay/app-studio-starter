@@ -11,6 +11,8 @@ import { Badge } from '@ui/displaying-data/badge'
 import { Spinner } from '@ui/feedback/spinner'
 import { Checkbox } from '@ui/form/checkbox'
 import { DatePickerRange } from '@/components/form/date-picker'
+import { LocationSelect } from '@/components/form/location-select'
+import { ProductCategorySelect } from '@/components/form/product-category-select'
 import { Select } from '@/components/form/select'
 import { Input } from '@ui/form/input'
 import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
@@ -88,6 +90,9 @@ type ResourcePickerOptions = {
     query?: string
     variants?: boolean
     status?: string
+    locationId?: string
+    categoryId?: string
+    channel?: string
   }
 }
 
@@ -169,6 +174,18 @@ const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
         { value: 'pos', label: 'POS' },
         { value: 'online_store', label: 'Online store' },
         { value: 'invoice', label: 'Invoice' },
+      ],
+    },
+  ],
+  order: [
+    {
+      key: 'channel',
+      label: 'Channel',
+      options: [
+        { value: 'all', label: 'All channels' },
+        { value: 'point_of_sale', label: 'POS' },
+        { value: 'quick_sale', label: 'Quick sale' },
+        { value: 'store_checkout', label: 'Online store' },
       ],
     },
   ],
@@ -319,7 +336,13 @@ function ResourcePickerDialog({
     if (!open || !request) return
     setSearch(request.query ?? '')
     setFilter(request.filter?.status ?? 'all')
-    setExtras({})
+    setExtras(() => {
+      const next: Record<string, string> = {}
+      if (request.filter?.locationId) next.location_id = request.filter.locationId
+      if (request.filter?.categoryId) next.category_id = request.filter.categoryId
+      if (request.filter?.channel) next.channel = request.filter.channel
+      return next
+    })
     setItems([])
     setCache(new Map())
     setPage(1)
@@ -470,8 +493,8 @@ function ResourcePickerDialog({
         <DialogDescription className="sr-only">
           Search and select {labels.plural}.
         </DialogDescription>
-        <div className="flex flex-wrap gap-2 px-5 pb-3">
-          <div className="relative min-w-0 flex-1">
+        <div className="flex flex-col gap-2 px-5 pb-3">
+          <div className="relative w-full min-w-0">
             <SearchRegular className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-oc-muted-foreground" />
             <Input
               value={search}
@@ -481,12 +504,13 @@ function ResourcePickerDialog({
                 setSearch(event.currentTarget.value)
               }}
               placeholder={`Search ${labels.plural}`}
-              className="pl-8"
+              className="w-full pl-8"
             />
           </div>
+          <div className="flex gap-2">
           {showFilter ? (
             <Select
-              className="w-40 shrink-0"
+              className="min-w-0 flex-1"
               options={filters}
               value={filter}
               placeholder="Status"
@@ -501,7 +525,7 @@ function ResourcePickerDialog({
           {extraFilters.map((group) => (
             <Select
               key={group.key}
-              className="w-36 shrink-0"
+              className="min-w-0 flex-1"
               options={group.options}
               value={extras[group.key] ?? 'all'}
               placeholder={group.label}
@@ -513,9 +537,49 @@ function ResourcePickerDialog({
               }}
             />
           ))}
+          {type === 'product' ? (
+            <div className="min-w-0 flex-1 [&_button]:w-full">
+              <ProductCategorySelect
+                name="resource_picker_category"
+                label={false}
+                placeholder="All categories"
+                value={extras.category_id ?? null}
+                onValueChange={(value) => {
+                  setPage(1)
+                  setCursor(undefined)
+                  setExtras((current) => {
+                    const next = { ...current }
+                    if (typeof value === 'string' && value) next.category_id = value
+                    else delete next.category_id
+                    return next
+                  })
+                }}
+              />
+            </div>
+          ) : null}
+          {type === 'product' || type === 'order' ? (
+            <div className="min-w-0 flex-1 [&_button]:w-full">
+              <LocationSelect
+                name="resource_picker_location"
+                label={false}
+                placeholder="All locations"
+                value={extras.location_id ?? null}
+                onValueChange={(value) => {
+                  setPage(1)
+                  setCursor(undefined)
+                  setExtras((current) => {
+                    const next = { ...current }
+                    if (typeof value === 'string' && value) next.location_id = value
+                    else delete next.location_id
+                    return next
+                  })
+                }}
+              />
+            </div>
+          ) : null}
           {DATE_FILTER_TYPES.has(type) ? (
             <DatePickerRange
-              className="w-[16.5rem] shrink-0"
+              className="min-w-0 flex-1"
               placeholder="Date range"
               selected={extrasDateRange(extras)}
               disabled={{ after: startOfDay(new Date()) }}
@@ -538,6 +602,7 @@ function ResourcePickerDialog({
               }}
             />
           ) : null}
+          </div>
         </div>
         <div className="max-h-[min(28rem,50vh)] min-h-48 overflow-y-auto border-y border-oc-border">
           {loading && items.length === 0 ? (

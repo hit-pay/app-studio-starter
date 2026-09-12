@@ -322,6 +322,8 @@
         "@orchid/input",
         "@orchid/radio-group",
         "@orchid/select",
+        "@orchid/location-select",
+        "@orchid/product-category-select",
         "@orchid/dialog"
       ],
       "files": [

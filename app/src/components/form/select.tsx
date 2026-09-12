@@ -39,6 +39,7 @@ type SelectProps = Omit<ComponentProps<'div'>, 'onChange'> & {
   invalid?: boolean
   id?: string
   size?: 'sm' | 'default' | 'inline'
+  contentClassName?: string
   onBlur?: () => void
 }
 
@@ -67,6 +68,7 @@ function Select({
   id,
   size = 'default',
   className,
+  contentClassName,
   onBlur,
 }: SelectProps) {
   const chips = useComboboxAnchor()
@@ -108,7 +110,7 @@ function Select({
             onBlur={onBlur}
           />
         </ComboboxChips>
-        <ComboboxContent anchor={chips}>
+        <ComboboxContent anchor={chips} className={contentClassName}>
           <ComboboxSelectAll />
           <ComboboxSeparator />
           <ComboboxEmpty>{empty}</ComboboxEmpty>
@@ -181,7 +183,7 @@ function Select({
           </ComboboxValue>
         </ComboboxTrigger>
       )}
-      <ComboboxContent>
+      <ComboboxContent className={contentClassName}>
         <ComboboxEmpty>{empty}</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => {
