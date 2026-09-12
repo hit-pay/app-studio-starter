@@ -15,6 +15,7 @@ Answer when they only ask a question. Edit and finish the implementation when th
 9. Do not expose Turso, connector values, or HitPay tokens to the browser (loader, props, JSON, storage, or `process.env` for credentials).
 10. Do not rewrite applied migration files.
 11. Do not trust client `userId` / `staffName` (or similar) for identity.
+12. If the app has a collection or history, the home route starts with the list. Use `PageLayout` with `DataTable` or `DataList`, and put a primary `Create` / `Add` action in the page header. Open `FormLayout` only after that action; do not make the create form the home screen.
 
 # How to build
 
