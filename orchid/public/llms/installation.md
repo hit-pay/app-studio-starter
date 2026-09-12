@@ -19,6 +19,19 @@ and import from `@/components/{category}/<name>`. Categories match the catalog
 groups (actions, displaying-data, feedback, form, layout, navigation, overlays,
 utils). The CLI writes the source into your application.
 
+## Guidance for AI agents
+
+Use a component block when one matches the job. Blocks live under
+`@/components/{category}` and are the preferred building blocks for screens.
+Use base primitives from `@ui/{category}` only when no Orchid block covers the
+job; do not recreate a block by composing its internal primitives.
+
+Before implementing a screen, read the relevant component page and verify the
+installed source for the exact props and exports. The examples in this
+documentation are usage patterns, not a complete TypeScript API signature.
+Preserve existing `components.json`, path aliases, and MCP configuration when
+adding Orchid.
+
 ## Prerequisites
 
 Use a current JavaScript runtime and a project supported by the shadcn CLI. The

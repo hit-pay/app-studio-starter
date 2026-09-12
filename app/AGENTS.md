@@ -16,6 +16,29 @@ Answer when they only ask a question. Edit and finish the implementation when th
 10. Do not rewrite applied migration files.
 11. Do not trust client `userId` / `staffName` (or similar) for identity.
 
+## LLM documentation workflow
+
+The local Markdown files are the implementation reference for this app:
+
+1. Read `orchid-ui-guideline.md` to choose the block.
+2. Read `orchid-llms/{name}.md` for the block's props and usage.
+3. Read `hitpay-apis-guideline.md` to choose the integration pattern.
+4. Read the matching `hitpay-llms/{name}.md` before writing HitPay HTTP.
+5. Read `hitpay-wake-guideline.md` or `hitpay-llms/wake-schedules.md` only for
+   scheduled reminders.
+
+`orchid-llms/` and `hitpay-llms/` under `app/` are local copies for the app
+agent. Do not fetch external documentation and do not assume an endpoint,
+field, webhook, mutation, or filter exists unless the local docs state it.
+When docs conflict, follow this priority: the specific endpoint/component
+document, then its guideline index, then this file. Verify the installed
+component source for exact TypeScript exports when a docs example is
+incomplete.
+
+There is no LLM generator in `app/`; do not edit a generated-output directory
+or add generated headers. If Orchid source docs change, regenerate their
+published/local copies from `orchid/` before relying on them here.
+
 # How to build
 
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
