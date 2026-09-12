@@ -72,5 +72,4 @@ shifts per day.
 2. Build the page summary and cash-up form.
 3. Add the Turso-backed history table with status and variance.
 4. Handle loading, empty, error, validation, and success states.
-5. Run targeted lint, then build once. Update `PLAN.md` and mark all steps
-   complete.
+5. Run targeted lint, then build once.

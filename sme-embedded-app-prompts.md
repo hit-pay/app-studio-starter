@@ -14,9 +14,8 @@ working embedded-app MVP first:
   automation unless the prompt explicitly requires them.
 
 Do not spend time scanning the whole repository. Read only the relevant
-guidelines and component/API docs, name the blocks and data source, then
-create a short `PLAN.md` for multi-file work. Keep the plan updated as the
-work progresses and mark it complete at the end so it serves as agent memory.
+guidelines and component/API docs, then name the blocks and data source before
+implementing. Keep the plan internal and move to implementation quickly.
 If a requested capability has no documented endpoint or existing helper, keep
 that part app-owned or state the limitation instead of inventing an API. Run
 targeted lint after editing and build once after implementation.
