@@ -25,6 +25,17 @@ Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest com
 2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
+## Page patterns
+
+Use these four patterns as the default page structures. Choose the pattern first,
+then select the Orchid blocks from `orchid-ui-guideline.md`. Do not create a
+separate Patterns page unless the user explicitly asks for a pattern gallery.
+
+- **Homepage** — `AppLayout` + `PageLayout` + `MetricCard`/`Banner` + the primary next action.
+- **Resource index** — `PageLayout` + `DataTable` for search/filter/sort/pagination, or `DataList` for a compact collection.
+- **Details** — `PageLayout` + `DetailCard`, with `FormLayout`/`FormBuilder` when the record is editable.
+- **Settings** — `PageLayout` + `FormSection` + `FormBuilder` or controls such as `Switch`; save changes with feedback.
+
 | Job | Block |
 |---|---|
 | Browse rows, search, filter, sort, open a row | DataTable (`onRowClick` → show) |
