@@ -4,25 +4,14 @@ import { fileURLToPath } from "node:url";
 
 import {
   DOC_ALL_COMPONENTS,
-  DOC_BASE_GROUPS,
-  DOC_BLOCK_GROUPS,
   DOC_GUIDES,
 } from "../src/components/doc/doc-components.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
-const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const output = join(root, "public", "llms.txt");
 const appOutput = join(root, "..", "app", "orchid-ui-guideline.md");
 const legacyDocsDir = join(root, "public", "llms");
-const homepage = registry.homepage?.replace(/\/$/, "");
-
-if (!homepage) {
-  throw new Error("registry.json must define a homepage.");
-}
-
 const documented = [...DOC_ALL_COMPONENTS];
-const registryByName = new Map(registry.items.map((item) => [item.name, item]));
-
 function slug(item) {
   return item.to.replace(/^\//, "").split("/").at(-1);
 }
@@ -41,20 +30,6 @@ function assertUnique(items, field, label) {
 assertUnique(documented, slug, "slug");
 assertUnique(documented, (item) => item.name, "name");
 
-for (const item of documented) {
-  const name = slug(item);
-  if (!registryByName.has(name)) {
-    throw new Error(
-      `Documented component "${item.name}" (${item.to}) has no registry item "${name}".`,
-    );
-  }
-}
-
-const link = (path) => path;
-const docsLink = (item) => `/llms.txt#${slug(item)}`;
-const registryItems = registry.items.filter(
-  (item) => item.name !== "all" && item.name !== "utils",
-);
 const guideItems = DOC_GUIDES.flatMap((item) => [
   item,
   ...("children" in item ? item.children : []),
@@ -174,36 +149,7 @@ function mdxToMarkdown(source, mdxFile, title, description, anchor) {
 
 function generateMarkdownDocs() {
   const pages = [...guideItems, ...documented];
-  const documentedNames = new Set(documented.map((item) => slug(item)));
-  const registryOnly = registryItems
-    .filter((item) => !documentedNames.has(item.name))
-    .map((item) => ({
-      to: `/${item.name}`,
-      name: item.title,
-      description: item.description,
-      registryOnly: true,
-    }));
-
-  return [...pages, ...registryOnly].map((item) => {
-    if ("registryOnly" in item) {
-      const registryItem = registryByName.get(slug(item));
-      const target = registryItem?.files?.[0]?.target ?? `@ui/${slug(item)}`;
-      return [
-        `<a id="${slug(item)}"></a>`,
-        `# ${item.name}`,
-        "",
-        item.description,
-        "",
-        "## Usage",
-        "",
-        "```tsx",
-        `import { ${item.name} } from "${target.startsWith("@ui/") ? target : `@ui/${slug(item)}`}";`,
-        "",
-        `<${item.name} />`,
-        "```",
-        "",
-      ].join("\n");
-    }
+  return pages.map((item) => {
     const mdxFile = findMdx(item);
     return mdxToMarkdown(
       readFileSync(mdxFile, "utf8"),
@@ -215,152 +161,13 @@ function generateMarkdownDocs() {
   });
 }
 
-function docsItem(item) {
-  const name = slug(item);
-  return [
-    `### [${item.name}](${docsLink(item)})`,
-    item.description,
-    `[Registry JSON](${link(`/r/${name}.json`)})`,
-    "",
-  ];
-}
-
-function docsSection(title, items) {
-  return [`## ${title}`, "", ...items.flatMap(docsItem)];
-}
-
-function docsGroupedSection(title, groups) {
-  return [
-    `## ${title}`,
-    "",
-    ...groups.flatMap((group) => [
-      `### ${group.label}`,
-      "",
-      ...group.items.flatMap((item) => {
-        const name = slug(item);
-        return [
-          `#### [${item.name}](${docsLink(item)})`,
-          item.description,
-          `[Registry JSON](${link(`/r/${name}.json`)})`,
-          "",
-        ];
-      }),
-    ]),
-  ];
-}
-
 const markdownDocs = generateMarkdownDocs();
-
-const lines = [
-  "# Orchid UI Documentation",
-  "",
-  `AI/LLM note: after \`@orchid\` is in \`components.json\`, install every item with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Use the [registry index](${link("/registry.json")}) as the machine-readable catalog. Read the generated documentation in ${link("/llms.txt")} for intent and examples, then verify exports and props in the installed source.`,
-  "",
-  "## Overview",
-  "",
-  "Orchid is an AI-ready, open-code UI collection focused on business applications for HitPay-style workflows. It is distributed as a shadcn-compatible registry and provides React and TypeScript source styled with Tailwind CSS v4.",
-  "",
-  "### Quick Stats",
-  "",
-  `- Documentation pages: ${guideItems.length} guides and ${DOC_ALL_COMPONENTS.length} components.`,
-  `- Installable registry items: ${registryItems.length}, excluding the helper entries \`all\` and \`utils\`.`,
-  `- Markdown docs: ${link("/llms.txt")} — one file containing every guide and component.`,
-  "",
-  "### Installation",
-  "",
-  "After `@orchid` is in `components.json`, install every Orchid component. Do not install one item, a shortlist, or any other subset:",
-  "",
-  "```bash",
-  "bunx --bun shadcn@latest add @orchid/all",
-  "```",
-  "",
-  "## AI Resources",
-  "",
-  `- [Registry Index](${link("/registry.json")}) — machine-readable catalog and dependency graph.`,
-  `- [Markdown docs](${link("/llms.txt")}) — generated documentation for agents (not the HTML site).`,
-  `- [Orchid Theme Tokens](${link("/orchid-tokens.css")}) — published CSS variables and Tailwind CSS v4 theme mappings.`,
-  `- [Installation Guide](${docsLink({ to: "/installation", name: "Installation" })}) — initialize a project and add Orchid items with the shadcn CLI.`,
-  `- [components.json Guide](${docsLink({ to: "/components-json", name: "components.json" })}) — configure aliases, Tailwind CSS, and the Orchid namespace.`,
-  `- [Theming Guide](${docsLink({ to: "/theming", name: "Theming" })}) — install and customize Orchid light and dark tokens.`,
-  "",
-  "## MCP Setup for AI Agents",
-  "",
-  "Orchid does not run a separate MCP server. Use the official shadcn MCP server, which can browse, search, and install items from any shadcn-compatible registry configured in the project's `components.json`.",
-  "",
-  "First, make sure the Orchid namespace is present in `components.json`:",
-  "",
-  "```json",
-  "{",
-  '  "registries": {',
-  `    "@orchid": "${homepage}/r/{name}.json"`,
-  "  }",
-  "}",
-  "```",
-  "",
-  "For Cursor, create or merge `.cursor/mcp.json`:",
-  "",
-  "```json",
-  "{",
-  '  "mcpServers": {',
-  '    "shadcn": {',
-  '      "command": "npx",',
-  '      "args": ["shadcn@latest", "mcp"]',
-  "    }",
-  "  }",
-  "}",
-  "```",
-  "",
-  "For Claude Code, use the same server entry in `.mcp.json`. For Codex, add the following to `~/.codex/config.toml`:",
-  "",
-  "```toml",
-  "[mcp_servers.shadcn]",
-  'command = "npx"',
-  'args = ["shadcn@latest", "mcp"]',
-  "```",
-  "",
-  "An AI agent configuring MCP should preserve existing MCP servers and existing `components.json` settings, merge only the entries above, and ask before changing user-level configuration. Restart or re-enable the MCP client after configuration.",
-  "",
-  "Example prompts after setup:",
-  "",
-  "- Show all components available in the Orchid registry.",
-  "- Install the complete catalog with `@orchid/all`.",
-  "- Find the Orchid block that matches a form, a collection, or a single-record detail view.",
-  "",
-  "## Getting Started",
-  "",
-  ...DOC_GUIDES.flatMap((guide) => [
-    `- [${guide.name}](${docsLink(guide)}) — ${guide.description}`,
-    ...("children" in guide
-      ? guide.children.map(
-          (child) =>
-            `  - [${child.name}](${docsLink(child)}) — ${child.description}`,
-        )
-      : []),
-  ]),
-  "",
-  ...docsGroupedSection("Components & Blocks", DOC_BLOCK_GROUPS),
-  ...docsGroupedSection("Base Components", DOC_BASE_GROUPS),
-  "## Complete Registry List (for AI reference)",
-  "",
-  registryItems.map((item) => item.name).join(", "),
-  "",
-  "## Usage Guidance",
-  "",
-  "- Prefer `llms.txt` over HTML example pages.",
-  "- Install `@orchid/all` after the registry is configured. Do not pick a subset.",
-  "- Read Components & Blocks first. Match the job to each item's when-to-use description. Use a block when one exists. Only then read Base Components. Do not default to a shortlist of favorites.",
-  "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
-  "- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Always start with Components & Blocks under `src/components/{category}` (`@/components/{category}/…`) via props or a schema. Use Base items under `src/ui/{category}` (`@ui/{category}/…`) only when no block covers the job. Do not assemble a block from many base components.",
-  "- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.",
-  "- AppLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.",
-  "",
-];
 
 mkdirSync(dirname(output), { recursive: true });
 rmSync(legacyDocsDir, { recursive: true, force: true });
-const document = [...lines, ...markdownDocs].join("\n\n").replaceAll(homepage, "");
+const document = markdownDocs.join("\n\n");
 writeFileSync(output, document);
-writeFileSync(appOutput, document.replaceAll("/llms.txt", "/orchid-ui-guidelines.md"));
+writeFileSync(appOutput, document.replaceAll("/llms.txt", "/orchid-ui-guideline.md"));
 
 console.log(
   `Wrote ${output} and ${appOutput} with ${markdownDocs.length} documentation sections`,

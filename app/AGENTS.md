@@ -21,7 +21,7 @@ Answer when they only ask a question. Edit and finish the implementation when th
 
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
-1. Choose the matching `@/components` block from the **Needs** section of `orchid-ui-guideline.md`, name the block(s), then implement. `@ui` is only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, read `orchid-llms/{name}.md`.
+1. Choose the matching `@/components` block from `orchid-ui-guideline.md`, name the block(s), then implement. `@ui` is only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, read the matching component section in `orchid-ui-guideline.md`.
 2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
@@ -85,7 +85,8 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `src/routes/webhooks/hitpay/schedule.ts` | Wake webhook |
 | `src/lib/files.ts` / `server/files.ts` | Prebuilt uploads (`files` table) |
 | `migrations/` | Ordered SQL |
-| `orchid-llms/`, `hitpay-llms/` | Local docs |
+| `orchid-ui-guideline.md` | Orchid component documentation and usage |
+| `hitpay-llms/` | HitPay API reference docs |
 | `hitpay-wake-guideline.md` | Scheduled wakes |
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
