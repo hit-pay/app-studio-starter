@@ -38,13 +38,13 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
         query.append('inventory', data.extras.inventory)
       }
       if (data.extras?.channel && data.extras.channel !== 'all') {
-        query.append('channels', data.extras.channel)
+        query.append('channels[]', data.extras.channel)
       }
       if (data.extras?.location_id && data.extras.location_id !== 'all') {
-        query.append('location_ids', data.extras.location_id)
+        query.append('location_ids[]', data.extras.location_id)
       }
       if (data.extras?.category_id && data.extras.category_id !== 'all') {
-        query.append('categories', data.extras.category_id)
+        query.append('categories[]', data.extras.category_id)
       }
       const response = await hitpayRequest(`/v1/products?${query}`)
       if (!response.ok) throw new Error('Could not load products.')
@@ -70,7 +70,7 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
         query.append('statuses[]', data.filter)
       }
       if (data.extras?.channel && data.extras.channel !== 'all') {
-        query.append('channels', data.extras.channel)
+        query.append('channels[]', data.extras.channel)
       }
       if (data.extras?.location_id && data.extras.location_id !== 'all') {
         query.append('location_ids[]', data.extras.location_id)
