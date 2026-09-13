@@ -6,7 +6,7 @@ Answer when they only ask a question. Edit and finish the implementation when th
 
 1. Do not start a screen from `@ui`. Do not rebuild a **Components & Blocks** entry from primitives.
 2. Do not fill a visible table / list / feed from a HitPay `list-*` API.
-3. After ResourcePicker (or wake `data`), persist the payload and render Turso. Do not re-list HitPay to rebuild those rows. `get-*-details` is only for a show page when Turso already has that id.
+3. After ResourcePicker, persist the payload and render Turso. Do not re-list HitPay to rebuild those rows. `get-*-details` is only for a show page when Turso already has that id.
 4. Do not edit `src/routeTree.gen.ts`. Do not hardcode or prepend the app id on routes.
 5. Do not read cookies or `Authorization` in the browser. Do not import `src/lib/server/*` from browser components.
 6. Do not use bare browser-storage keys or store secrets there. Do not put passwords or files in form drafts.
@@ -22,7 +22,7 @@ Answer when they only ask a question. Edit and finish the implementation when th
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
 1. Choose the matching `@/components` block from `orchid-ui-guideline.md`, name the block(s), then implement. `@ui` is only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, read the matching component section in `orchid-ui-guideline.md`.
-2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
+2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
 ## Stack
@@ -42,14 +42,10 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `src/lib/server/hitpay.ts` | Session + connectors |
 | `src/lib/server/hitpay-api.ts` | `hitpayRequest('/v1/…')` |
 | `src/lib/server/db.ts`, `migrate.ts` | Turso |
-| `src/lib/hitpay-wake.ts` / `server/hitpay-wake.ts` | Wake snapshots |
-| `src/lib/server/hitpay-wake-hook.ts` | `onScheduledWake` — extend only |
-| `src/routes/webhooks/hitpay/schedule.ts` | Wake webhook |
 | `src/lib/files.ts` / `server/files.ts` | Prebuilt uploads (`files` table) |
 | `migrations/` | Ordered SQL |
 | `orchid-ui-guideline.md` | Orchid component documentation and usage |
 | `hitpay-llms/` | HitPay API reference docs |
-| `hitpay-wake-guideline.md` | Scheduled wakes |
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
@@ -69,7 +65,7 @@ No matching HitPay path → Turso-only and say so.
 
 Browser storage is shared on `app-studio.{domain}`. Prefix with `studioStorageKey('…')` from `#/lib/studio-app-id`. Drafts (`#/lib/form`): on `createServerFn` failure, `writeFormDraft`; on reopen, merge `readFormDraft`; on success or cancel, `clearFormDraft`.
 
-Uploads are prebuilt (like the wake webhook). Table `files` is in `migrations/002_files.sql`. Use `#/lib/files`: `uploadFile` / `getFile` / `listFiles` / `deleteFile`. UI: `@ui/form/file-upload`. Business rows store `files.id` only. Do not create another files table or put blobs on workflow rows. Max 10 MB.
+Uploads are prebuilt. Table `files` is in `migrations/001_files.sql`. Use `#/lib/files`: `uploadFile` / `getFile` / `listFiles` / `deleteFile`. UI: `@ui/form/file-upload`. Business rows store `files.id` only. Do not create another files table or put blobs on workflow rows. Max 10 MB.
 
 ## Auth
 

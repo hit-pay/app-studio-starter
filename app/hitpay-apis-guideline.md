@@ -36,7 +36,6 @@ Staff / role → `StaffSelect` / `RoleSelect`. Coupon / discount / tax / shippin
 - coupons / discounts / taxes → `CouponSelect` / `DiscountSelect` / `TaxSelect`
 - shipping / pickups → `ShippingSelect` / `PickupSelect`
 - add-ons → ResourcePicker `add-on` / `get-add-on`
-- scheduled wake snapshots → `hitpay-wake-guideline.md` (Turso, not a HitPay list)
 
 # Endpoints
 
