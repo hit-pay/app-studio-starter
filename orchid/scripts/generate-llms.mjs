@@ -1,11 +1,4 @@
-import {
-  cpSync,
-  existsSync,
-  mkdirSync,
-  readFileSync,
-  rmSync,
-  writeFileSync,
-} from "node:fs";
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -19,7 +12,7 @@ import {
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const output = join(root, "public", "llms.txt");
-const docsDir = join(root, "public", "llms");
+const legacyDocsDir = join(root, "public", "llms");
 const homepage = registry.homepage?.replace(/\/$/, "");
 
 if (!homepage) {
@@ -57,7 +50,7 @@ for (const item of documented) {
 }
 
 const link = (path) => `${homepage}${path}`;
-const docsLink = (item) => link(`/llms/${slug(item)}.md`);
+const docsLink = (item) => `${link("/llms.txt")}#${slug(item)}`;
 const registryItems = registry.items.filter(
   (item) => item.name !== "all" && item.name !== "utils",
 );
@@ -135,7 +128,7 @@ function rewriteDocHref(href) {
     return `${homepage}${href}`;
   }
   const name = path.replace(/^\//, "").replaceAll("/", "-");
-  return `${homepage}/llms/${name}.md${hash ? `#${hash}` : ""}`;
+  return `${homepage}/llms.txt#${name}${hash ? `-${hash}` : ""}`;
 }
 
 function mdxToMarkdown(source, mdxFile, title, description) {
@@ -179,24 +172,17 @@ function mdxToMarkdown(source, mdxFile, title, description) {
   ].join("\n");
 }
 
-function writeMarkdownDocs() {
-  rmSync(docsDir, { recursive: true, force: true });
-  mkdirSync(docsDir, { recursive: true });
-
+function generateMarkdownDocs() {
   const pages = [...guideItems, ...documented];
-  for (const item of pages) {
+  return pages.map((item) => {
     const mdxFile = findMdx(item);
-    writeFileSync(
-      join(docsDir, `${slug(item)}.md`),
-      mdxToMarkdown(
-        readFileSync(mdxFile, "utf8"),
-        mdxFile,
-        item.name,
-        item.description,
-      ),
+    return mdxToMarkdown(
+      readFileSync(mdxFile, "utf8"),
+      mdxFile,
+      item.name,
+      item.description,
     );
-  }
-  return pages.length;
+  });
 }
 
 function docsItem(item) {
@@ -233,12 +219,12 @@ function docsGroupedSection(title, groups) {
   ];
 }
 
-const markdownCount = writeMarkdownDocs();
+const markdownDocs = generateMarkdownDocs();
 
 const lines = [
   "# Orchid UI Documentation",
   "",
-  `AI/LLM note: after \`@orchid\` is in \`components.json\`, install every item with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Use the [registry index](${link("/registry.json")}) as the machine-readable catalog. Read the generated Markdown docs under ${link("/llms/")} for intent and examples, then verify exports and props in the installed source.`,
+  `AI/LLM note: after \`@orchid\` is in \`components.json\`, install every item with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Use the [registry index](${link("/registry.json")}) as the machine-readable catalog. Read the generated documentation in ${link("/llms.txt")} for intent and examples, then verify exports and props in the installed source.`,
   "",
   "## Overview",
   "",
@@ -248,7 +234,7 @@ const lines = [
   "",
   `- Documentation pages: ${guideItems.length} guides and ${DOC_ALL_COMPONENTS.length} components.`,
   `- Installable registry items: ${registryItems.length}, excluding the helper entries \`all\` and \`utils\`.`,
-  `- Markdown docs: ${link("/llms/")} — one \`.md\` file per guide and component.`,
+  `- Markdown docs: ${link("/llms.txt")} — one file containing every guide and component.`,
   "",
   "### Installation",
   "",
@@ -261,7 +247,7 @@ const lines = [
   "## AI Resources",
   "",
   `- [Registry Index](${link("/registry.json")}) — machine-readable catalog and dependency graph.`,
-  `- [Markdown docs](${link("/llms/")}) — generated \`.md\` pages for agents (not the HTML site).`,
+  `- [Markdown docs](${link("/llms.txt")}) — generated documentation for agents (not the HTML site).`,
   `- [Orchid Theme Tokens](${link("/orchid-tokens.css")}) — published CSS variables and Tailwind CSS v4 theme mappings.`,
   `- [Installation Guide](${docsLink({ to: "/installation", name: "Installation" })}) — initialize a project and add Orchid items with the shadcn CLI.`,
   `- [components.json Guide](${docsLink({ to: "/components-json", name: "components.json" })}) — configure aliases, Tailwind CSS, and the Orchid namespace.`,
@@ -330,7 +316,7 @@ const lines = [
   "",
   "## Usage Guidance",
   "",
-  "- Prefer the Markdown docs under `/llms/*.md` over HTML example pages.",
+  "- Prefer `llms.txt` over HTML example pages.",
   "- Install `@orchid/all` after the registry is configured. Do not pick a subset.",
   "- Read Components & Blocks first. Match the job to each item's when-to-use description. Use a block when one exists. Only then read Base Components. Do not default to a shortlist of favorites.",
   "- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.",
@@ -341,12 +327,14 @@ const lines = [
 ];
 
 mkdirSync(dirname(output), { recursive: true });
-writeFileSync(output, lines.join("\n"));
+rmSync(legacyDocsDir, { recursive: true, force: true });
+writeFileSync(output, [...lines, ...markdownDocs].join("\n\n"));
 
 const appLlms = join(root, "..", "app", "orchid-llms");
 rmSync(appLlms, { recursive: true, force: true });
-cpSync(docsDir, appLlms, { recursive: true });
+mkdirSync(appLlms, { recursive: true });
+writeFileSync(join(appLlms, "llms.txt"), readFileSync(output));
 
 console.log(
-  `Wrote ${output} and ${markdownCount} markdown docs in ${docsDir} and ${appLlms}`,
+  `Wrote ${output} with ${markdownDocs.length} documentation sections and ${appLlms}/llms.txt`,
 );
