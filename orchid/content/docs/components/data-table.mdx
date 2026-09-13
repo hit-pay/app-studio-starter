@@ -2,8 +2,6 @@ import { SchemaTableDemo } from "../../../src/components/doc/doc-demos"
 
 <SchemaTableDemo />
 
-# Quick decision
-
 Use `DataTable` when the collection needs search, filters, sorting, pagination,
 row selection, or row actions. The table already renders its search, filter,
 sort, pagination, and column-visibility controls from the schema. Do not build
@@ -34,8 +32,6 @@ checkboxes, the row ⋮ menu, links, and `cells` controls do not fire it. Do not
 One-field updates (status, assignee, stage) use `cells` on `DataTable`, not the schema.
 Search, sort, and filters still use `row[column.key]`. Only listed keys override; other
 columns keep the built-in `type` render (`status` is a read-only badge until overridden).
-
-## Built-in filters
 
 Each filter has a `key`, display `title`, and exact-match `options`. The option
 `value` must match the row value for that key; `label` is only the text shown

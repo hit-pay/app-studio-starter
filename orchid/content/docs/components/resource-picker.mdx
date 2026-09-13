@@ -2,8 +2,6 @@ import { ResourcePickerDemo } from '../../../src/components/doc/doc-demos'
 
 <ResourcePickerDemo />
 
-# Quick decision
-
 Use `ResourcePicker` only when the user adds or selects HitPay catalog records:
 `product`, `customer`, `order`, `charge`, `invoice`, or `add-on`. Use the
 dedicated `*Select` components for categories, locations, coupons, discounts,
@@ -27,8 +25,6 @@ The promise resolves to selected records, or `undefined` when the user cancels.
 Each result keeps the HitPay row in `resource`; persist that payload instead of
 re-fetching the selected id.
 
-## App Studio usage
-
 
 Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm,
 send `selected` into a `createServerFn` and upsert Turso from `id` plus the
@@ -38,8 +34,6 @@ HitPay list APIs.
 `type` is one of `product`, `customer`, `order`, `charge`, `invoice`, or
 `add-on`. Category, location, coupon, discount, tax, shipping, and pickup use
 their dedicated Select components, not this picker.
-
-## Provider and loader
 
 `ResourcePickerProvider` requires a `load` callback. The callback receives the
 current search state and must return normalized picker rows:
@@ -53,8 +47,6 @@ In App Studio, use the existing root provider and loader from
 `#/lib/resource-picker`. Do not remount `ResourcePickerProvider` and do not copy
 the docs-only `resource-picker-fake` module into the app.
 
-
-## Fake HitPay list (docs demo only)
 
 The docs demo calls `fakeHitPayListPayload(input)` in `orchid/src/lib/resource-picker-fake.ts`. It applies the same `query` / `filter` / `extras` the starter sends to `/v1/…` (status, stock, channel, category, location, dates), then `mapResourcePickerPayload`. Do not paste that module into App Studio.
 

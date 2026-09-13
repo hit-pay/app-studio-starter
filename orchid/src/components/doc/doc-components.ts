@@ -323,9 +323,9 @@ export function docBlocksByName() {
 }
 
 export const DOC_ALL_COMPONENTS = [
+  ...DOC_BLOCKS,
   ...DOC_COMPONENTS,
   ...DOC_FORMS,
-  ...DOC_BLOCKS,
 ] as const;
 
 export function docAllComponentsByName() {

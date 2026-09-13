@@ -5,8 +5,6 @@ import { SchemaFormDemo } from "../../../src/components/doc/doc-demos"
 Use `FormBuilder` for multi-field create/edit. Use `DetailCard` for a read-only record.
 Unknown `type` values throw. Use only the listed FormBuilder types. Render inside `FormLayout`. Do not wrap in `Card`.
 
-## Change callback
-
 `SchemaForm` accepts `onChange?: (values: SchemaFormValues, change: SchemaFormChange) => void`.
 It runs once for each user interaction, after constructing the latest nested values snapshot. It
 does not run on the initial render or when props rerender.
@@ -24,21 +22,15 @@ Submission remains external. Configure submission through `useSchemaForm({ onSub
 `id` to the form, and point an external button at that id:
 
 
-## Column layout
-
 `columns` creates a responsive grid: one column on small screens, then the configured number of columns at the appropriate breakpoints. Rules can target fields by name or control type.
 
 
 Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one column. `section` and `section-item` fields always span the full row.
 
-## Choice card
-
 Use `type: "choice-card"` for a single card-style choice. Each option can include a `description`. The stored value is the selected `option.value`.
 
 
 `props.alignment` is `Vertical` (default) or `Horizontal`. `props.cardAlignment` is `Left` (default) or `Center`.
-
-## Staff and role
 
 Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. Use `type: "coupon"` / `"discount"` / `"tax"` / `"shipping"` / `"pickup"` / `"product-category"` / `"location"` for those HitPay dropdowns. They render the matching Select. The stored value is `{ id, name }` (or an array when `props.multiple` is true).
 

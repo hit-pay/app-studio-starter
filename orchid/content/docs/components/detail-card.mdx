@@ -5,12 +5,3 @@ import { DetailCardDemo } from '../../../src/components/doc/doc-demos'
 Use `DetailCard` for a read-only key/value view of **one** record (invoice, leave request,
 customer). Use `DataList` or `DataTable` for collections. Do not assemble label/value stacks
 from `Card`.
-
-## API
-
-`DetailCard` accepts `items`, plus optional `title`, `columns`, `style`, and `className`.
-It also supports standard `div` attributes except the native `style`, `title`, and `children` props.
-
-Each item requires a unique string `key` and a React `value`. Items can also set `label`,
-`copyValue`, `alignment`, `size`, `colSpan`, and `className`. Because `value` is a React node,
-it can render text, links, badges, or custom content.
