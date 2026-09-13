@@ -5,8 +5,8 @@ Answer when they only ask a question. Edit and finish the implementation when th
 # RULES
 
 1. Do not start a screen from `@ui`. Do not rebuild a **Components & Blocks** entry from primitives.
-2. Do not fill a visible table / list / feed from a HitPay `list-*` API.
-3. After ResourcePicker, persist the payload and render Turso. Do not re-list HitPay to rebuild those rows. `get-*-details` is only for a show page when Turso already has that id.
+2. Never render a visible table, list, feed, or collection directly from any HitPay API.
+3. For every HitPay resource (product, customer, order, charge, invoice, or add-on), use `useResourcePicker()` for selection, persist the returned payload through `createServerFn`, and render rows only from Turso. Do not call `list-*` to build or refresh visible rows. `get-*-details` is only for a show page when Turso already has that id.
 4. Do not edit `src/routeTree.gen.ts`. Do not hardcode or prepend the app id on routes.
 5. Do not read cookies or `Authorization` in the browser. Do not import `src/lib/server/*` from browser components.
 6. Do not use bare browser-storage keys or store secrets there. Do not put passwords or files in form drafts.
@@ -55,7 +55,13 @@ Input on `createServerFn`: `.validator()` then `.handler()`. GET with no input: 
 
 Visible rows = Turso (picker upserts or app-owned workflow). Picker / `*Select` may call HitPay lists. Totals-only sheets may call `list-*` if **no rows** from that list are rendered. HitPay list APIs have **no filter-by-id**.
 
-`useResourcePicker()` → `await pick({ type })` → `createServerFn` upserts from the **payload** (`id` + fields). Types: `product` | `customer` | `order` | `charge` | `invoice` | `add-on`.
+For every HitPay catalog resource, the required flow is:
+
+`useResourcePicker()` → `await pick({ type })` → `createServerFn` upsert from the **payload** (`id` + fields) → query Turso for visible rows.
+
+Types: `product` | `customer` | `order` | `charge` | `invoice` | `add-on`.
+The only `list-*` calls allowed in the app are internal ResourcePicker / `*Select`
+loaders or totals-only calculations where no API rows are rendered.
 
 `*Select` / FormBuilder types already load their lists. Persist `id` + name snapshot.
 
