@@ -1,7 +1,7 @@
 'use client'
 
 import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
-import { loadProductCategoriesForSelect } from '#/lib/hitpay-commerce-selects'
+import { loadCollectionsForSelect } from '#/lib/hitpay-commerce-selects'
 
 type ProductCategoryRow = { id: string; name?: string | null }
 
@@ -28,7 +28,7 @@ function categoryLabel(row: ProductCategoryRow) {
 }
 
 function defaultLoad() {
-  return loadProductCategoriesForSelect()
+  return loadCollectionsForSelect()
 }
 
 function ProductCategorySelect({

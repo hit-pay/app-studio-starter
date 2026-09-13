@@ -43,10 +43,10 @@ function flattenCategories(rows: CategoryRow[]): NamedRow[] {
   return items
 }
 
-const loadProductCategoriesForSelect = createServerFn({ method: 'GET' }).handler(async () => {
+const loadCollectionsForSelect = createServerFn({ method: 'GET' }).handler(async () => {
   await requireHitPayRoles(HITPAY_ALL_ROLES)
-  const response = await hitpayRequest('/v1/product-category?perPage=100&get_children=1&format=flat')
-  if (!response.ok) throw new Error('Could not load product categories.')
+  const response = await hitpayRequest('/v1/products-categories?perPage=100&get_children=1&format=flat')
+  if (!response.ok) throw new Error('Could not load collections.')
   return { items: flattenCategories(asList<CategoryRow>(await response.json())) }
 })
 
@@ -67,7 +67,7 @@ export {
   loadDiscountsForSelect,
   loadLocationsForSelect,
   loadPickupsForSelect,
-  loadProductCategoriesForSelect,
+  loadCollectionsForSelect,
   loadShippingsForSelect,
   loadTaxesForSelect,
 }

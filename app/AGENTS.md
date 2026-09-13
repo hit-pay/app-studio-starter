@@ -39,7 +39,7 @@ Keep discovery targeted:
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
 1. Explore the installed `src/components/` and `src/ui/` source to choose the matching Orchid block. Prefer existing blocks over rebuilding them. Use `@ui` only for a control that no block exposes (Button, Badge, Spinner). Read the selected component source and its demo when props are unclear.
-2. Read the relevant `Call` and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read detailed `Query` and `Response` sections only when needed.
+2. For HitPay catalog additions, read `resource-picker-schema.md` and use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
 ## Stack
@@ -61,7 +61,7 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `src/lib/server/db.ts`, `migrate.ts` | Turso |
 | `src/lib/files.ts` / `server/files.ts` | Prebuilt uploads (`files` table) |
 | `migrations/` | Ordered SQL |
-| `hitpay-llms/` | HitPay API reference docs |
+| `resource-picker-schema.md` | ResourcePicker payload and persistence rules |
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
@@ -104,7 +104,7 @@ Read connector values only inside `createServerFn` (`getConnectorValue` / `getCo
 - `*_DATABASE_URL` → `#/lib/server/db` only
 - `*_WEBHOOK_URL` / `*_CONNECTION_URL` → `POST` JSON
 - Other `*_ACCESS_TOKEN` / `*_API_KEY` → as that provider expects
-- HitPay merchant API (`HITPAY_ACCESS_TOKEN`, `HITPAY_API_URL`): only when the request needs HitPay HTTP. Server-side, from the connected HitPay integration. Documented paths only (`hitpay-apis-guideline.md` / `hitpay-llms/`). Call with `hitpayRequest` from `#/lib/server/hitpay-api`.
+- HitPay merchant API (`HITPAY_ACCESS_TOKEN`, `HITPAY_API_URL`): only when the request needs HitPay HTTP. Server-side, from the connected HitPay integration. Call with `hitpayRequest` from `#/lib/server/hitpay-api`.
 
 ```ts
 import { createServerFn } from '@tanstack/react-start'
