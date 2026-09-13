@@ -6,28 +6,6 @@ Pass **`items` only**. Do not import row primitives. Do not
 use `DataTable` unless the list needs search, filters, sort, or pagination.
 Do not wrap `DataList`.
 
-```tsx
-import { DataList } from '@/components/displaying-data/data-list'
-
-<DataList
-  items={[
-    {
-      key: '1',
-      title: 'Priya Nair',
-      description: 'INV-2048 · Cards · SGD 128.00',
-      details: [{ key: 'city', text: 'Singapore' }],
-      actions: {
-        onClick: () => {},
-        menu: [
-          { key: 'edit', label: 'Edit', onClick: () => {} },
-          { key: 'delete', label: 'Delete', destructive: true, onClick: () => {} },
-        ],
-      },
-    },
-  ]}
-/>
-```
-
 ## Item shape
 
 Each item is one object. Required: `key`, `title`.
@@ -49,14 +27,6 @@ Content
 
 Actions — prefer `actions` (do not import `DropdownMenu` for the ⋮ menu)
 
-```ts
-actions: {
-  onClick?: () => void
-  trailing?: ReactNode
-  menu?: { key?: string; label: string; destructive?: boolean; onClick?: () => void }[]
-  hover?: { key: string; label: string; icon?: ReactNode; destructive?: boolean; onClick?: () => void }[]
-}
-```
 
 Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of
 `actions`. Trailing controls stop propagation so clicking a control does not
@@ -68,29 +38,6 @@ open the list row. Use `trailing` for per-row controls; do not put a
 Use `trailing` for a quantity control that must stay on the right side of each
 product row. Keep the quantity in the row state and persist it when the user
 saves the count:
-
-```tsx
-import { QuantityInput } from '@/components/form/quantity-input'
-
-<DataList
-  items={[
-    {
-      key: product.id,
-      title: product.name,
-      description: product.sku ?? 'No SKU',
-      meta: `Last counted ${lastCountedAt}`,
-      trailing: (
-        <QuantityInput
-          value={quantity}
-          min={0}
-          onValueChange={setQuantity}
-          aria-label={`${product.name} quantity`}
-        />
-      ),
-    },
-  ]}
-/>
-```
 
 The quantity control is visible in `default`, `media`, and `stack` layouts.
 Choose `DataTable` instead when the inventory list needs search, filters,

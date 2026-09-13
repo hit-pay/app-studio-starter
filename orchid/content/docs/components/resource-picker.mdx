@@ -29,32 +29,6 @@ re-fetching the selected id.
 
 ## App Studio usage
 
-```tsx
-import { useState } from 'react'
-import { Button } from '@ui/actions/button'
-import { useResourcePicker, type ResourcePickerResult } from '@/components/form/resource-picker'
-
-function AddProducts() {
-  const pick = useResourcePicker()
-  const [selected, setSelected] = useState<ResourcePickerResult[] | null>(null)
-
-  return (
-    <>
-      <Button
-        onClick={async () => {
-          const next = await pick({ type: 'product', multiple: true })
-          if (next) setSelected(next)
-        }}
-      >
-        Add products
-      </Button>
-      {selected ? (
-        <pre>{JSON.stringify(selected, null, 2)}</pre>
-      ) : null}
-    </>
-  )
-}
-```
 
 Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm,
 send `selected` into a `createServerFn` and upsert Turso from `id` plus the
@@ -70,22 +44,6 @@ their dedicated Select components, not this picker.
 `ResourcePickerProvider` requires a `load` callback. The callback receives the
 current search state and must return normalized picker rows:
 
-```tsx
-import {
-  ResourcePickerProvider,
-  type ResourcePickerLoad,
-} from '@/components/form/resource-picker'
-
-const load: ResourcePickerLoad = async (input) => {
-  // Call the authorized server function here. Never expose access tokens.
-  const response = await loadResourcePickerPage(input)
-  return response // { items, hasMore?, cursor? }
-}
-
-<ResourcePickerProvider load={load}>
-  <App />
-</ResourcePickerProvider>
-```
 
 The loader owns the mapping from the HitPay API envelope to
 `{ items, hasMore, cursor? }`. Each item needs an `id` and `title`; it may also
@@ -95,16 +53,6 @@ In App Studio, use the existing root provider and loader from
 `#/lib/resource-picker`. Do not remount `ResourcePickerProvider` and do not copy
 the docs-only `resource-picker-fake` module into the app.
 
-```tsx
-await pick({ type: 'charge' })
-await pick({ type: 'invoice', multiple: true })
-await pick({ type: 'customer', action: 'select', multiple: true })
-await pick({
-  type: 'product',
-  query: 'lamp',
-  filter: { status: 'published', variants: false },
-})
-```
 
 ## Fake HitPay list (docs demo only)
 

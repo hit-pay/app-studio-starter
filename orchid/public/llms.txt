@@ -3925,18 +3925,6 @@ Use `DatePicker`, `DatePickerRange`, or `DateTimePicker`. Do not import `@ui/for
 
 ## Variants
 
-```tsx
-import {
-  DatePicker,
-  DatePickerRange,
-  DateTimePicker,
-} from '@/components/form/date-picker'
-
-<DatePicker placeholder="Invoice due date" />
-<DatePickerRange placeholder="Settlement period" />
-<DateTimePicker placeholder="Delivery date and time" />
-```
-
 Click the month/year caption to open a month grid. Click the year in that panel to jump by 12-year pages. Default is `captionLayout="dropdown"`; use `captionLayout="label"` for chevrons only. `startMonth` / `endMonth` limit the range (default 1900 through current year + 10). Use **Clear** to reset the value and **Done** to close the picker. Range pickers include left-side shortcuts: Today, Yesterday, This week, This month, and Last month.
 
 
@@ -4019,19 +4007,6 @@ export { SelectDemo }
 
 One props-driven picker. Do not import `@ui/form/combobox` children.
 
-```tsx
-import { Select } from '@/components/form/select'
-
-<Select
-  options={[
-    { value: 'sgd', label: 'SGD' },
-    { value: 'usd', label: 'USD' },
-  ]}
-  value={currency}
-  onValueChange={(value) => setCurrency(typeof value === 'string' ? value : null)}
-/>
-```
-
 - Default is a closed list.
 - `searchable` — type to filter.
 - `multiple` — chips. Value is `string[]`.
@@ -4094,12 +4069,6 @@ export { StaffSelectDemo }
 
 App-member dropdown. Fetches `GET /api/apps/{appId}/staff-app-members` (same as App Studio). Docs serve a fake response for that path.
 
-```tsx
-import { StaffSelect } from '@/components/form/staff-select'
-
-<StaffSelect name="assignee_id" />
-```
-
 Do not fetch staff on the screen. Do not call `/v1/staffs`. Persist `id` plus name snapshot. Optional: `multiple`, `roleTitles`, `locationId`.
 
 
@@ -4143,12 +4112,6 @@ export { RoleSelectDemo }
 
 Business role dropdown. Fetches `GET /api/apps/{appId}/roles` (same as App Studio). Docs serve a fake response for that path.
 
-```tsx
-import { RoleSelect } from '@/components/form/role-select'
-
-<RoleSelect name="notify_role_id" />
-```
-
 Gate buttons with `useHitPayUser().user.role.title`. Use this select only to store a role id.
 
 
@@ -4186,12 +4149,6 @@ export { CouponSelectDemo }
 ```
 
 Coupon dropdown. Loads `GET /v1/coupons`. Do not call `list-coupons` on the screen.
-
-```tsx
-import { CouponSelect } from '@/components/form/coupon-select'
-
-<CouponSelect name="coupon_id" />
-```
 
 Persist `id` plus name snapshot. Optional: `multiple`.
 
@@ -4231,12 +4188,6 @@ export { DiscountSelectDemo }
 
 Discount dropdown. Loads `GET /v1/discounts`. Do not call `list-discounts` on the screen.
 
-```tsx
-import { DiscountSelect } from '@/components/form/discount-select'
-
-<DiscountSelect name="discount_id" />
-```
-
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
@@ -4274,12 +4225,6 @@ export { TaxSelectDemo }
 ```
 
 Tax dropdown. Loads `GET /v1/taxes`. Do not call `list-taxes` on the screen.
-
-```tsx
-import { TaxSelect } from '@/components/form/tax-select'
-
-<TaxSelect name="tax_id" />
-```
 
 Persist `id` plus name snapshot. Optional: `multiple`.
 
@@ -4319,12 +4264,6 @@ export { ShippingSelectDemo }
 
 Shipping method dropdown. Loads `GET /v1/shipping`. Do not call `list-shipping` on the screen.
 
-```tsx
-import { ShippingSelect } from '@/components/form/shipping-select'
-
-<ShippingSelect name="shipping_id" />
-```
-
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
@@ -4362,12 +4301,6 @@ export { PickupSelectDemo }
 ```
 
 Pickup dropdown. Loads `GET /v1/pickups`. Do not call `list-pickups` on the screen.
-
-```tsx
-import { PickupSelect } from '@/components/form/pickup-select'
-
-<PickupSelect name="pickup_id" />
-```
 
 Persist `id` plus name snapshot. Optional: `multiple`.
 
@@ -4407,12 +4340,6 @@ export { ProductCategorySelectDemo }
 
 Product category dropdown. Loads `GET /v1/product-category`. Do not call `list-product-categories` on the screen.
 
-```tsx
-import { ProductCategorySelect } from '@/components/form/product-category-select'
-
-<ProductCategorySelect name="category_id" />
-```
-
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
@@ -4450,12 +4377,6 @@ export { LocationSelectDemo }
 ```
 
 Location dropdown. Loads `GET /v1/locations`. Do not call `list-locations` on the screen.
-
-```tsx
-import { LocationSelect } from '@/components/form/location-select'
-
-<LocationSelect name="location_id" />
-```
 
 Persist `id` plus name snapshot. Optional: `multiple`.
 
@@ -4851,20 +4772,6 @@ export { EmptyDemo }
 
 One props-driven empty state. Do not import `@ui/displaying-data/empty` children.
 
-```tsx
-import { Empty } from '@/components/displaying-data/empty'
-
-<Empty
-  media="icon"
-  title="No invoices yet"
-  description="Create an invoice to bill a customer."
-  actions={[{ key: 'create', label: 'Create invoice' }]}
-  onAction={(action) => {
-    if (action.key === 'create') createInvoice()
-  }}
-/>
-```
-
 - `title` is required.
 - `media`: `icon` | `search` | `upgrade`. Omit for text only.
 - `icon` overrides the default media glyph.
@@ -5131,28 +5038,6 @@ Pass **`items` only**. Do not import row primitives. Do not
 use `DataTable` unless the list needs search, filters, sort, or pagination.
 Do not wrap `DataList`.
 
-```tsx
-import { DataList } from '@/components/displaying-data/data-list'
-
-<DataList
-  items={[
-    {
-      key: '1',
-      title: 'Priya Nair',
-      description: 'INV-2048 · Cards · SGD 128.00',
-      details: [{ key: 'city', text: 'Singapore' }],
-      actions: {
-        onClick: () => {},
-        menu: [
-          { key: 'edit', label: 'Edit', onClick: () => {} },
-          { key: 'delete', label: 'Delete', destructive: true, onClick: () => {} },
-        ],
-      },
-    },
-  ]}
-/>
-```
-
 ## Item shape
 
 Each item is one object. Required: `key`, `title`.
@@ -5174,15 +5059,6 @@ Content
 
 Actions — prefer `actions` (do not import `DropdownMenu` for the ⋮ menu)
 
-```ts
-actions: {
-  onClick?: () => void
-  trailing?: ReactNode
-  menu?: { key?: string; label: string; destructive?: boolean; onClick?: () => void }[]
-  hover?: { key: string; label: string; icon?: ReactNode; destructive?: boolean; onClick?: () => void }[]
-}
-```
-
 Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of
 `actions`. Trailing controls stop propagation so clicking a control does not
 open the list row. Use `trailing` for per-row controls; do not put a
@@ -5193,29 +5069,6 @@ open the list row. Use `trailing` for per-row controls; do not put a
 Use `trailing` for a quantity control that must stay on the right side of each
 product row. Keep the quantity in the row state and persist it when the user
 saves the count:
-
-```tsx
-import { QuantityInput } from '@/components/form/quantity-input'
-
-<DataList
-  items={[
-    {
-      key: product.id,
-      title: product.name,
-      description: product.sku ?? 'No SKU',
-      meta: `Last counted ${lastCountedAt}`,
-      trailing: (
-        <QuantityInput
-          value={quantity}
-          min={0}
-          onValueChange={setQuantity}
-          aria-label={`${product.name} quantity`}
-        />
-      ),
-    },
-  ]}
-/>
-```
 
 The quantity control is visible in `default`, `media`, and `stack` layouts.
 Choose `DataTable` instead when the inventory list needs search, filters,
@@ -5425,16 +5278,6 @@ function TextEditorDemo() {
 export { TextEditorDemo }
 ```
 
-```tsx
-import { TextEditor } from "@/components/form/text-editor";
-
-<TextEditor
-  onValueChange={(document) => {
-    // persist Lexical JSON (SerializedEditorState)
-  }}
-/>
-```
-
 `onValueChange` receives Lexical editor state. Store it as JSON text. Do not persist HTML.
 
 
@@ -5640,17 +5483,6 @@ function AppLayoutDemo() {
 }
 
 export { AppLayoutDemo }
-```
-
-## Default
-
-```tsx
-import { AppLayout } from "@/components/layout/app-layout";
-import { PageLayout } from "@/components/layout/page-layout";
-
-<AppLayout appName="Invoices" className="h-full">
-  <PageLayout title="Invoices">…</PageLayout>
-</AppLayout>
 ```
 
 ## Tabs
@@ -6319,43 +6151,10 @@ export { FormLayoutModalDemo };
 Page mode is the default. Save submits the external form identified by
 `formId`; the submit button does not need to live inside `FormBuilder`.
 
-```tsx
-import { FormLayout } from "@/components/layout/form-layout";
-import { FormBuilder } from "@/components/form/form-builder";
-
-<FormLayout
-  title="Create product"
-  description="Add a product to your catalog."
-  formId="product-form"
-  onClose={handleClose}
-  actions={{ save: { label: "Create" } }}
->
-  <FormBuilder id="product-form" form={form} />
-</FormLayout>;
-```
-
 ## Modal mode
 
 Modal mode preserves controlled dialog semantics through `open` and
 `onOpenChange`. `size` and `persistent` are available only in modal mode.
-
-```tsx
-<FormLayout
-  mode="modal"
-  open={open}
-  onOpenChange={setOpen}
-  title="Create customer"
-  description="Add a new customer"
-  formId="customer-form"
-  onClose={handleClose}
-  actions={{
-    cancel: { disabled: isSaving },
-    save: { label: "Save customer", disabled: isSaving },
-  }}
->
-  <FormBuilder id="customer-form" form={form} />
-</FormLayout>
-```
 
 Both actions are rendered by default. Cancel calls `onClose`; in modal mode it
 then closes the controlled dialog. Save submits `formId`. Each action supports
@@ -6857,38 +6656,9 @@ interaction. When both values change together, both paths are included in `chang
 Submission remains external. Configure submission through `useSchemaForm({ onSubmit })`, assign an
 `id` to the form, and point an external button at that id:
 
-```tsx
-const form = useSchemaForm({ fields, onSubmit: saveValues })
-
-<SchemaForm id="settings-form" form={form} onChange={handleChange} />
-<Button type="submit" form="settings-form">Save</Button>
-```
-
 ## Column layout
 
 `columns` creates a responsive grid: one column on small screens, then the configured number of columns at the appropriate breakpoints. Rules can target fields by name or control type.
-
-```tsx
-const fields = [
-  {
-    key: "product_name",
-    title: "Product Name",
-    type: "input",
-    props: { colSpan: "full" },
-  },
-  { key: "sku", title: "SKU", type: "input" },
-  { key: "barcode", title: "Barcode", type: "input" },
-]
-
-<SchemaForm
-  form={form}
-  layout={{
-    columns: 2,
-    fields: { product_name: "full" },
-    types: { textarea: "full" },
-  }}
-/>
-```
 
 Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one column. `section` and `section-item` fields always span the full row.
 
@@ -6896,40 +6666,11 @@ Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one colu
 
 Use `type: "choice-card"` for a single card-style choice. Each option can include a `description`. The stored value is the selected `option.value`.
 
-```tsx
-const fields = [
-  {
-    key: "channel",
-    title: "Channel",
-    type: "choice-card",
-    required: true,
-    options: [
-      { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
-      { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
-    ],
-    value: "paynow",
-  },
-]
-```
-
 `props.alignment` is `Vertical` (default) or `Horizontal`. `props.cardAlignment` is `Left` (default) or `Center`.
 
 ## Staff and role
 
 Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. Use `type: "coupon"` / `"discount"` / `"tax"` / `"shipping"` / `"pickup"` / `"product-category"` / `"location"` for those HitPay dropdowns. They render the matching Select. The stored value is `{ id, name }` (or an array when `props.multiple` is true).
-
-```tsx
-const fields = [
-  { key: "assignee", title: "Assignee", type: "staff", required: true },
-  {
-    key: "reviewers",
-    title: "Reviewers",
-    type: "staff",
-    props: { multiple: true, roleTitles: ["Manager", "Admin"] },
-  },
-  { key: "notify_role", title: "Notify role", type: "role" },
-]
-```
 
 Do not fetch staff or roles on the screen. Optional staff `props`: `multiple`, `roleTitles`, `locationId`.
 
@@ -7288,114 +7029,11 @@ Each filter has a `key`, display `title`, and exact-match `options`. The option
 in the popover and active-filter chip. Multiple configured filters are combined
 with AND logic. Clearing a filter removes its key from `table.query.filters`.
 
-```tsx
-const schema = {
-  columns: [
-    { key: "name", title: "Product" },
-    { key: "status", title: "Status", type: "status" },
-    { key: "inventory", title: "Inventory" },
-  ],
-  filters: [
-    {
-      key: "status",
-      title: "Status",
-      options: [
-        { value: "published", label: "Published" },
-        { value: "draft", label: "Draft" },
-      ],
-    },
-    {
-      key: "inventory",
-      title: "Inventory",
-      options: [
-        { value: "in_stock", label: "In stock" },
-        { value: "not_tracked", label: "Inventory not tracked" },
-      ],
-    },
-  ],
-} satisfies SchemaTableSchema
-```
-
 In `mode: "client"` (the default), filtering is performed against the loaded
 `data` rows. In `mode: "server"`, the table does not filter or sort rows
 locally; handle `query.filters` in `onQueryChange` and fetch the filtered page
 from your data source. The callback receives `change.key === "filters"` when
 the user applies or clears filters.
-
-```tsx
-function StatusCell({
-  value,
-  onStatusChange,
-}: {
-  value: unknown;
-  onStatusChange: (status: string) => void;
-}) {
-  const [open, setOpen] = useState(false);
-
-  return (
-    <DropdownMenu open={open} onOpenChange={setOpen}>
-      <DropdownMenuTrigger
-        nativeButton
-        className="inline-flex"
-        render={
-          <button type="button" className="inline-flex rounded-full">
-            <Badge tone={value === "Published" ? "green" : "grey"}>
-              {String(value ?? "–")}
-              <DownRegular />
-            </Badge>
-          </button>
-        }
-      />
-      <DropdownMenuContent align="start">
-        {["Published", "Draft"].map((status) => {
-          const selected = status === value;
-          return (
-            <DropdownMenuItem
-              key={status}
-              data-active={selected || undefined}
-              className={selected ? "bg-oc-dark-blue-soft font-medium" : undefined}
-              onClick={() => {
-                onStatusChange(status);
-                setOpen(false);
-              }}
-            >
-              {status}
-              {selected ? <CheckRegular className="ml-auto" /> : null}
-            </DropdownMenuItem>
-          );
-        })}
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-}
-
-const [rows, setRows] = useState(SCHEMA_TABLE_EXAMPLE_ROWS);
-const table = useDataTable({
-  schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  data: rows,
-});
-
-<DataTable
-  table={table}
-  cells={{
-    status: (value, row) => (
-      <StatusCell
-        value={value}
-        onStatusChange={(status) =>
-          setRows((current) =>
-            current.map((item) =>
-              item.id === row.id ? { ...item, status } : item,
-            ),
-          )
-        }
-      />
-    ),
-  }}
-  onRowAction={(action, row) => {
-    console.log(action, row.id);
-  }}
-/>
-```
 
 `onQueryChange(query, change)` receives the final query after page-reset rules and a typed
 discriminated change payload. The `change.key` is one of `search`, `tab`, `filters`, `sort`,
@@ -7408,117 +7046,7 @@ instant. Clearing search cancels pending work and emits immediately.
 
 ## Usage with TanStack Query
 
-```tsx
-import { useQuery } from "@tanstack/react-query";
-import {
-  DataTable,
-  SCHEMA_TABLE_EXAMPLE_ROWS,
-  SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useDataTable,
-} from "@/components/displaying-data/data-table";
-
-function ProductList() {
-  const products = useQuery({
-    queryKey: ["products"],
-    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
-    initialData: SCHEMA_TABLE_EXAMPLE_ROWS,
-    staleTime: 30_000,
-  });
-  const table = useDataTable({
-    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
-    data: products.data,
-  });
-
-  return (
-    <DataTable
-      table={table}
-      onRowClick={(row) => {
-        console.log(row.id);
-      }}
-      onRowAction={(action, row) => {
-        console.log(action, row.id);
-      }}
-      onSelectionAction={(action, selectedIds) => {
-        console.log(action.key, selectedIds);
-      }}
-      onEmptyAction={(action) => {
-        console.log(action.key);
-      }}
-    />
-  );
-}
-```
-
 ## Usage with TanStack DB
-
-```tsx
-import { QueryClient } from "@tanstack/query-core";
-import {
-  DbClient,
-  DbProvider,
-  collectionOptions,
-  useDbClient,
-  useLiveQuery,
-} from "@tanstack/react-db";
-import { queryCollectionOptions } from "@tanstack/query-db-collection";
-import {
-  DataTable,
-  SCHEMA_TABLE_EXAMPLE_ROWS,
-  SCHEMA_TABLE_EXAMPLE_SCHEMA,
-  useDataTable,
-} from "@/components/displaying-data/data-table";
-
-const queryClient = new QueryClient();
-const dbClient = new DbClient({ queryClient });
-
-const productCollection = collectionOptions("products", (client) =>
-  queryCollectionOptions({
-    id: "products",
-    queryKey: ["products"],
-    staleTime: 30_000,
-    queryClient: client.requireDependency<QueryClient>("queryClient"),
-    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
-    getKey: (item) => item.id,
-  }),
-);
-
-function ProductList() {
-  useDbClient().collection(productCollection);
-  const { data: rows } = useLiveQuery({
-    query: (q) => q.from({ product: productCollection }),
-  });
-  const table = useDataTable({
-    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
-    data: rows ?? SCHEMA_TABLE_EXAMPLE_ROWS,
-  });
-
-  return (
-    <DataTable
-      table={table}
-      onRowClick={(row) => {
-        console.log(row.id);
-      }}
-      onRowAction={(action, row) => {
-        console.log(action, row.id);
-      }}
-      onSelectionAction={(action, selectedIds) => {
-        console.log(action.key, selectedIds);
-      }}
-      onEmptyAction={(action) => {
-        console.log(action.key);
-      }}
-    />
-  );
-}
-
-function ProductsPage() {
-  return (
-    <DbProvider client={dbClient}>
-      <ProductList />
-    </DbProvider>
-  );
-}
-```
 
 
 <a id="confirmation-modal"></a>
@@ -7753,33 +7281,6 @@ re-fetching the selected id.
 
 ## App Studio usage
 
-```tsx
-import { useState } from 'react'
-import { Button } from '@ui/actions/button'
-import { useResourcePicker, type ResourcePickerResult } from '@/components/form/resource-picker'
-
-function AddProducts() {
-  const pick = useResourcePicker()
-  const [selected, setSelected] = useState<ResourcePickerResult[] | null>(null)
-
-  return (
-    <>
-      <Button
-        onClick={async () => {
-          const next = await pick({ type: 'product', multiple: true })
-          if (next) setSelected(next)
-        }}
-      >
-        Add products
-      </Button>
-      {selected ? (
-        <pre>{JSON.stringify(selected, null, 2)}</pre>
-      ) : null}
-    </>
-  )
-}
-```
-
 Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm,
 send `selected` into a `createServerFn` and upsert Turso from `id` plus the
 needed fields in `resource`. The picker is the only UI allowed to browse these
@@ -7794,23 +7295,6 @@ their dedicated Select components, not this picker.
 `ResourcePickerProvider` requires a `load` callback. The callback receives the
 current search state and must return normalized picker rows:
 
-```tsx
-import {
-  ResourcePickerProvider,
-  type ResourcePickerLoad,
-} from '@/components/form/resource-picker'
-
-const load: ResourcePickerLoad = async (input) => {
-  // Call the authorized server function here. Never expose access tokens.
-  const response = await loadResourcePickerPage(input)
-  return response // { items, hasMore?, cursor? }
-}
-
-<ResourcePickerProvider load={load}>
-  <App />
-</ResourcePickerProvider>
-```
-
 The loader owns the mapping from the HitPay API envelope to
 `{ items, hasMore, cursor? }`. Each item needs an `id` and `title`; it may also
 include `image`, `badge`, `resource`, and selectable `children`.
@@ -7818,17 +7302,6 @@ include `image`, `badge`, `resource`, and selectable `children`.
 In App Studio, use the existing root provider and loader from
 `#/lib/resource-picker`. Do not remount `ResourcePickerProvider` and do not copy
 the docs-only `resource-picker-fake` module into the app.
-
-```tsx
-await pick({ type: 'charge' })
-await pick({ type: 'invoice', multiple: true })
-await pick({ type: 'customer', action: 'select', multiple: true })
-await pick({
-  type: 'product',
-  query: 'lamp',
-  filter: { status: 'published', variants: false },
-})
-```
 
 ## Fake HitPay list (docs demo only)
 
@@ -7996,9 +7469,3 @@ export { CopyButtonDemo }
 ```
 
 Icon that copies `value` and shows `Copied!`.
-
-```tsx
-import { CopyButton } from '@/components/actions/copy-button'
-
-<CopyButton value="+65 8123 4567" />
-```
