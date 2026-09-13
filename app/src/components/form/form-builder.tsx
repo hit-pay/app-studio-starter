@@ -10,7 +10,7 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Checkbox, CheckboxGroup } from '@ui/form/checkbox'
+import { Checkbox, CheckboxGroup } from '@ui/checkbox'
 import { CouponSelect } from '@/components/form/coupon-select'
 import { DiscountSelect } from '@/components/form/discount-select'
 import { LocationSelect } from '@/components/form/location-select'
@@ -29,23 +29,23 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from '@ui/form/field'
-import { Input } from '@ui/form/input'
+} from '@ui/field'
+import { Input } from '@ui/input'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
   InputGroupSeparator,
   InputGroupText,
-} from '@ui/form/input-group'
-import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
-import { FormSectionItem } from '@ui/form/form-section'
+} from '@ui/input-group'
+import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
+import { FormSectionItem } from '@ui/form-section'
 import { QuantityInput } from '@/components/form/quantity-input'
 import { ChoiceCard, ChoiceCardGroup } from '@/components/form/choice-card'
-import { Slider } from '@ui/form/slider'
-import { Textarea } from '@ui/form/textarea'
-import { Switch } from '@ui/form/switch'
-import { Button } from '@ui/actions/button'
+import { Slider } from '@ui/slider'
+import { Textarea } from '@ui/textarea'
+import { Switch } from '@ui/switch'
+import { Button } from '@ui/button'
 import {
   FileUpload,
   FileUploadAction,
@@ -55,7 +55,7 @@ import {
   FileUploadGroup,
   FileUploadMedia,
   FileUploadTitle,
-} from '@ui/form/file-upload'
+} from '@ui/file-upload'
 import {
   controlType,
   dateRangeValue,

@@ -4,7 +4,7 @@ import { useRender } from '@base-ui/react/use-render'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@ui/actions/button'
+import { Button } from '@ui/button'
 
 const fileUploadVariants = cva(
   'group/file-upload relative flex w-fit max-w-full min-w-0 shrink-0 flex-wrap rounded-xl border border-oc-border bg-oc-card text-oc-card-foreground transition-colors focus-within:ring-1 focus-within:ring-oc-info-border/50 has-[>a,>button]:hover:bg-oc-muted/50 data-[state=error]:border-oc-destructive/30 data-[state=idle]:border-dashed',

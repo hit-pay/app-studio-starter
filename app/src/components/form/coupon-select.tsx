@@ -1,7 +1,7 @@
 'use client'
 
 import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
-import { loadCouponsForSelect } from '#/lib/hitpay-commerce-selects'
+import { loadCouponsForSelect } from '@/lib/hitpay-commerce-selects'
 
 type CouponRow = { id: string; name?: string | null; code?: string | null }
 

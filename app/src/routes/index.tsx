@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { useHitPayUser } from '#/lib/hitpay'
-import { Spinner } from '@ui/feedback/spinner'
-import { Button } from '@ui/actions/button'
+import { Spinner } from '@ui/spinner'
+import { Button } from '@ui/button'
 import { AppLayout } from '@/components/layout/app-layout'
 
 export const Route = createFileRoute('/')({ component: Home })

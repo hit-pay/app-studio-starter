@@ -3,14 +3,14 @@
 import { useEffect, type ReactNode } from "react";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@ui/actions/button";
+import { Button } from "@ui/button";
 import {
   Dialog,
   DialogContent,
   DialogDescription,
   DialogTitle,
-} from "@ui/overlays/dialog";
-import { Kbd } from "@ui/utils/kbd";
+} from "@ui/dialog";
+import { Kbd } from "@ui/kbd";
 
 type FormLayoutAction = {
   label?: ReactNode;

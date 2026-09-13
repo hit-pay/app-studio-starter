@@ -4,7 +4,7 @@ import { QueryProvider } from '#/lib/query'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
 import { ResourcePickerProvider } from '@/components/form/resource-picker'
 import { loadResourcePickerPage } from '#/lib/resource-picker'
-import { Toaster } from '@ui/feedback/toast'
+import { Toaster } from '@ui/toast'
 import '../styles.css'
 
 function NotFound() {

@@ -7,7 +7,7 @@ import {
   CloseRegular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@ui/actions/button'
+import { Button } from '@ui/button'
 import {
   Dialog,
   DialogClose,
@@ -16,8 +16,8 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@ui/overlays/dialog'
-import { Input } from '@ui/form/input'
+} from '@ui/dialog'
+import { Input } from '@ui/input'
 import { cn } from '@/lib/utils'
 
 type ConfirmationModalType = 'delete' | 'warning' | 'success' | 'question'

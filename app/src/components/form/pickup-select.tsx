@@ -1,7 +1,7 @@
 'use client'
 
 import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
-import { loadPickupsForSelect } from '#/lib/hitpay-commerce-selects'
+import { loadPickupsForSelect } from '@/lib/hitpay-commerce-selects'
 
 type PickupRow = { id: string; name?: string | null; address?: string | null }
 

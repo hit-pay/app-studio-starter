@@ -34,9 +34,9 @@ import {
 } from '@mingcute/react/core-regular';
 
 import { cn } from "@/lib/utils";
-import { Badge, BadgeRemove } from "@ui/displaying-data/badge";
-import { Button } from "@ui/actions/button";
-import { Checkbox } from "@ui/form/checkbox";
+import { Badge, BadgeRemove } from "@ui/badge";
+import { Button } from "@ui/button";
+import { Checkbox } from "@ui/checkbox";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -47,16 +47,16 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
-} from "@ui/overlays/dropdown-menu";
+} from "@ui/dropdown-menu";
 import { Empty } from "@/components/displaying-data/empty";
 import { Select } from "@/components/form/select";
-import { Field, FieldLabel } from "@ui/form/field";
+import { Field, FieldLabel } from "@ui/field";
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupButton,
   InputGroupInput,
-} from "@ui/form/input-group";
+} from "@ui/input-group";
 import {
   Pagination,
   PaginationContent,
@@ -65,12 +65,12 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from "@ui/navigation/pagination";
+} from "@ui/pagination";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@ui/overlays/popover";
+} from "@ui/popover";
 import {
   SCHEMA_TABLE_EXAMPLE_ROWS,
   SCHEMA_TABLE_EXAMPLE_SCHEMA,

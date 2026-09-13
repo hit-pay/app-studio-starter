@@ -17,7 +17,7 @@ import {
   ComboboxTrigger,
   ComboboxValue,
   useComboboxAnchor,
-} from '@ui/form/combobox'
+} from '@ui/combobox'
 
 type SelectOption = {
   value: string

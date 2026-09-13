@@ -2,7 +2,7 @@ import { useState, type ComponentProps } from 'react'
 import { CopyRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@ui/overlays/tooltip'
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@ui/tooltip'
 
 function CopyButton({
   className,

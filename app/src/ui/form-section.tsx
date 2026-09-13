@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react'
 import { QuestionRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/overlays/tooltip'
+import { Tooltip, TooltipContent, TooltipTrigger } from '@ui/tooltip'
 
 function SectionHint({ hint }: { hint: string }) {
   return (

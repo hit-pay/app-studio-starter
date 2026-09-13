@@ -1,7 +1,7 @@
 'use client'
 
 import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
-import { loadLocationsForSelect } from '#/lib/hitpay-commerce-selects'
+import { loadLocationsForSelect } from '@/lib/hitpay-commerce-selects'
 
 type LocationRow = { id: string; name?: string | null }
 

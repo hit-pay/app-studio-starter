@@ -1,7 +1,7 @@
 'use client'
 
 import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
-import { loadTaxesForSelect } from '#/lib/hitpay-commerce-selects'
+import { loadTaxesForSelect } from '@/lib/hitpay-commerce-selects'
 
 type TaxRow = { id: string; name?: string | null }
 

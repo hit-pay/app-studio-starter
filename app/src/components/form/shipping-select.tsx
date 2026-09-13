@@ -1,7 +1,7 @@
 'use client'
 
 import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
-import { loadShippingsForSelect } from '#/lib/hitpay-commerce-selects'
+import { loadShippingsForSelect } from '@/lib/hitpay-commerce-selects'
 
 type ShippingRow = { id: string; name?: string | null }
 

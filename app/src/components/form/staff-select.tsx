@@ -5,7 +5,7 @@ import {
   fetchStaffAppMembers,
   type HitPayStaffAppMember,
 } from '@/lib/hitpay'
-import { Field, FieldDescription, FieldLabel } from '@ui/form/field'
+import { Field, FieldDescription, FieldLabel } from '@ui/field'
 
 type StaffSelectLoad = () => Promise<{ members: HitPayStaffAppMember[] }>
 

@@ -7,7 +7,7 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@ui/actions/button'
+import { Button } from '@ui/button'
 
 type EmptyMedia = 'icon' | 'search' | 'upgrade'
 
