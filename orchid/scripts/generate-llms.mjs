@@ -330,11 +330,6 @@ mkdirSync(dirname(output), { recursive: true });
 rmSync(legacyDocsDir, { recursive: true, force: true });
 writeFileSync(output, [...lines, ...markdownDocs].join("\n\n"));
 
-const appLlms = join(root, "..", "app", "orchid-llms");
-rmSync(appLlms, { recursive: true, force: true });
-mkdirSync(appLlms, { recursive: true });
-writeFileSync(join(appLlms, "llms.txt"), readFileSync(output));
-
 console.log(
-  `Wrote ${output} with ${markdownDocs.length} documentation sections and ${appLlms}/llms.txt`,
+  `Wrote ${output} with ${markdownDocs.length} documentation sections`,
 );

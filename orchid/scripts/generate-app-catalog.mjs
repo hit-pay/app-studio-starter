@@ -1,11 +1,11 @@
-import { existsSync, readFileSync, writeFileSync } from 'node:fs'
+import { readFileSync, writeFileSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const registry = JSON.parse(readFileSync(join(root, 'registry.json'), 'utf8'))
 const out = join(root, '..', 'app', 'orchid-ui-guideline.md')
-const docsDir = join(root, 'public', 'llms')
+const llms = readFileSync(join(root, 'public', 'llms.txt'), 'utf8')
 
 const NEED = {
   'data-table':
@@ -67,7 +67,7 @@ const SKIP_NEED_INDEX = new Set(['dropdown-menu'])
 const lines = [
   '# Orchid catalog',
   '',
-  'Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Open `orchid-llms/{name}.md` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.',
+  'Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Read `orchid-llms/llms.txt` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.',
   '',
   '# Needs',
   '',
@@ -213,10 +213,7 @@ function writeItem(item) {
   const companionLine = companions.length
     ? `Related: ${companions.join(', ')}.`
     : ''
-  const docsFile = join(docsDir, `${item.name}.md`)
-  const docsLine = existsSync(docsFile)
-    ? `Docs: \`orchid-llms/${item.name}.md\``
-    : ''
+  const docsLine = `Docs: \`orchid-llms/llms.txt#${item.name}\``
   const need = NEED[item.name]
   const needLine = need ? `Need: ${need}` : ''
   const usageLine = USAGE[item.name] ?? ''
@@ -267,5 +264,5 @@ for (const [section, items] of grouped) {
   for (const item of items) writeItem(item)
 }
 
-writeFileSync(out, `${lines.join('\n').trimEnd()}\n`)
+writeFileSync(out, `${lines.join('\n').trimEnd()}\n\n# Detailed Orchid Component Usage\n\n${llms}\n`)
 console.log(`Wrote ${out}`)

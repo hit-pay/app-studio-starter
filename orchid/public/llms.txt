@@ -2,7 +2,7 @@
 
 
 
-AI/LLM note: after `@orchid` is in `components.json`, install every item with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Use the [registry index](https://orchid-ui-hitpay.vercel.app/registry.json) as the machine-readable catalog. Read the generated Markdown docs under https://orchid-ui-hitpay.vercel.app/llms/ for intent and examples, then verify exports and props in the installed source.
+AI/LLM note: after `@orchid` is in `components.json`, install every item with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Use the [registry index](https://orchid-ui-hitpay.vercel.app/registry.json) as the machine-readable catalog. Read the generated documentation in https://orchid-ui-hitpay.vercel.app/llms.txt for intent and examples, then verify exports and props in the installed source.
 
 
 

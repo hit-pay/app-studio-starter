@@ -18,7 +18,7 @@
       "destination": "/api/studio-identity/user.json"
     },
     {
-      "source": "/((?!r/|assets/|api/|registry\\.json|orchid-tokens\\.css|llms\\.txt|llms/).*)",
+      "source": "/((?!r/|assets/|api/|registry\\.json|orchid-tokens\\.css|llms\\.txt).*)",
       "destination": "/index.html"
     }
   ],
@@ -29,23 +29,6 @@
         {
           "key": "Content-Type",
           "value": "text/plain; charset=utf-8"
-        },
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=60, stale-while-revalidate=300"
-        }
-      ]
-    },
-    {
-      "source": "/llms/(.*).md",
-      "headers": [
-        {
-          "key": "Content-Type",
-          "value": "text/markdown; charset=utf-8"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
         },
         {
           "key": "Cache-Control",
