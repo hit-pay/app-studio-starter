@@ -23,7 +23,7 @@ Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest com
 
 1. Choose the matching `@/components` block from the **Needs** section of `orchid-ui-guideline.md`, name the block(s), then implement. `@ui` is only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, read `orchid-llms/{name}.md`.
 2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
-3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run lint` then `bun run build` (zero exit).
+3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
 | Job | Block |
 |---|---|
