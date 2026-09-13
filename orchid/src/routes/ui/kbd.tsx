@@ -2,15 +2,15 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { DocMdx } from '@/components/doc/doc-mdx'
-import Docs from '../../../content/docs/components/form-section.mdx'
+import Docs from '../../../content/docs/components/kbd.mdx'
 
-export const Route = createFileRoute('/base-ui/form-section')({
+export const Route = createFileRoute('/ui/kbd')({
   component: Page,
 })
 
 function Page() {
   return (
-    <DocExamplePage to="/base-ui/form-section">
+    <DocExamplePage to="/ui/kbd">
       <DocMdx>
         <Docs />
       </DocMdx>

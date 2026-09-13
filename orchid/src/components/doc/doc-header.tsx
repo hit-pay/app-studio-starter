@@ -28,7 +28,7 @@ function DocHeader() {
   const docsActive = DOC_PATHS.has(pathname);
   const blocksActive =
     pathname === "/components" || pathname.startsWith("/components/");
-  const baseActive = pathname === "/base-ui" || pathname.startsWith("/base-ui/");
+  const baseActive = pathname === "/ui" || pathname.startsWith("/ui/");
 
   useEffect(() => {
     document.documentElement.classList.toggle("dark", theme === "dark");
@@ -50,7 +50,7 @@ function DocHeader() {
             Docs
           </Link>
           <Link
-            to="/base-ui"
+            to="/ui"
             aria-current={baseActive ? "page" : undefined}
             className={navClass(baseActive)}
           >

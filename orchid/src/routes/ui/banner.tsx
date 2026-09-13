@@ -2,17 +2,17 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { DocExamplePage } from "@/components/doc/doc-example-page";
 import { DocMdx } from "@/components/doc/doc-mdx";
-import TabsDemoDocs from "../../../content/docs/components/tabs.mdx";
+import BannerDocs from "../../../content/docs/components/banner.mdx";
 
-export const Route = createFileRoute("/base-ui/tabs")({
-  component: TabsExamplesPage,
+export const Route = createFileRoute("/ui/banner")({
+  component: BannerExamplesPage,
 });
 
-function TabsExamplesPage() {
+function BannerExamplesPage() {
   return (
-    <DocExamplePage to="/base-ui/tabs">
+    <DocExamplePage to="/ui/banner">
       <DocMdx>
-        <TabsDemoDocs />
+        <BannerDocs />
       </DocMdx>
     </DocExamplePage>
   );

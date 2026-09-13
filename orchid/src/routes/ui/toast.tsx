@@ -4,13 +4,13 @@ import { DocExamplePage } from "@/components/doc/doc-example-page";
 import { DocMdx } from "@/components/doc/doc-mdx";
 import ToastDemoDocs from "../../../content/docs/components/toast.mdx";
 
-export const Route = createFileRoute("/base-ui/toast")({
+export const Route = createFileRoute("/ui/toast")({
   component: ToastExamplesPage,
 });
 
 function ToastExamplesPage() {
   return (
-    <DocExamplePage to="/base-ui/toast">
+    <DocExamplePage to="/ui/toast">
       <DocMdx>
         <ToastDemoDocs />
       </DocMdx>

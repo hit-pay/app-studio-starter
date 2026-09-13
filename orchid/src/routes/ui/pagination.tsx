@@ -2,15 +2,15 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { DocExamplePage } from '@/components/doc/doc-example-page'
 import { DocMdx } from '@/components/doc/doc-mdx'
-import Docs from '../../../content/docs/components/file-upload.mdx'
+import Docs from '../../../content/docs/components/pagination.mdx'
 
-export const Route = createFileRoute('/base-ui/file-upload')({
+export const Route = createFileRoute('/ui/pagination')({
   component: Page,
 })
 
 function Page() {
   return (
-    <DocExamplePage to="/base-ui/file-upload">
+    <DocExamplePage to="/ui/pagination">
       <DocMdx>
         <Docs />
       </DocMdx>

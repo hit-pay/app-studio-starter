@@ -31,13 +31,13 @@ function DocSidebar() {
   const navigate = useNavigate();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  if (pathname === "/" || pathname === "/components" || pathname === "/base-ui") {
+  if (pathname === "/" || pathname === "/components" || pathname === "/ui") {
     return null;
   }
 
   const showGuides = DOC_GUIDES.some((item) => item.to === pathname);
   const showBlocks = pathname.startsWith("/components/");
-  const showBase = pathname.startsWith("/base-ui/");
+  const showBase = pathname.startsWith("/ui/");
 
   if (!showGuides && !showBlocks && !showBase) {
     return null;

@@ -1,94 +1,94 @@
 export const DOC_COMPONENTS = [
   {
-    to: "/base-ui/button" as const,
+    to: "/ui/button" as const,
     name: "Button",
     description:
       "Standard variants, sizes, icon buttons, native props, and polymorphic rendering.",
   },
   {
-    to: "/base-ui/button-group" as const,
+    to: "/ui/button-group" as const,
     name: "Button Group",
     description:
       "Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.",
   },
   {
-    to: "/base-ui/dropdown-menu" as const,
+    to: "/ui/dropdown-menu" as const,
     name: "Dropdown Menu",
     description:
       "Items, selection, submenus, and shortcuts with Orchid styling.",
   },
   {
-    to: "/base-ui/toast" as const,
+    to: "/ui/toast" as const,
     name: "Toast",
     description:
       "Toast manager with semantic types, actions, close, and placement.",
   },
   {
-    to: "/base-ui/banner" as const,
+    to: "/ui/banner" as const,
     name: "Banner",
     description:
       "In-page notification with semantic variants and an optional action.",
   },
   {
-    to: "/base-ui/badge" as const,
+    to: "/ui/badge" as const,
     name: "Badge",
     description:
       "Standard variants with Orchid tones, appearances, removal, and user roles.",
   },
   {
-    to: "/base-ui/avatar" as const,
+    to: "/ui/avatar" as const,
     name: "Avatar",
     description:
       "Image, fallback, badge, and group primitives with Orchid styling.",
   },
   {
-    to: "/base-ui/tooltip" as const,
+    to: "/ui/tooltip" as const,
     name: "Tooltip",
     description:
       "Hover and focus tooltip with Orchid styling.",
   },
   {
-    to: "/base-ui/tabs" as const,
+    to: "/ui/tabs" as const,
     name: "Tabs",
     description:
       "Horizontal or vertical tabs with default and line variants.",
   },
   {
-    to: "/base-ui/skeleton" as const,
+    to: "/ui/skeleton" as const,
     name: "Skeleton",
     description: "Placeholder pulse with Orchid styling.",
   },
   {
-    to: "/base-ui/spinner" as const,
+    to: "/ui/spinner" as const,
     name: "Spinner",
     description:
       "Indeterminate loading icon sized through className.",
   },
   {
-    to: "/base-ui/dialog" as const,
+    to: "/ui/dialog" as const,
     name: "Dialog",
     description:
       "Dialog primitives with Orchid sizes and persistent mode.",
   },
   {
-    to: "/base-ui/drawer" as const,
+    to: "/ui/drawer" as const,
     name: "Drawer",
     description:
       "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
   },
   {
-    to: "/base-ui/pagination" as const,
+    to: "/ui/pagination" as const,
     name: "Pagination",
     description:
       "Page links with previous, next, ellipsis, and an optional range label.",
   },
   {
-    to: "/base-ui/kbd" as const,
+    to: "/ui/kbd" as const,
     name: "Kbd",
     description: "Keyboard key and grouped shortcut display.",
   },
   {
-    to: "/base-ui/file-upload" as const,
+    to: "/ui/file-upload" as const,
     name: "File Upload",
     description:
       "File and image upload row with upload state, media, and a vertical group.",
@@ -101,58 +101,58 @@ export function docComponentsByName() {
 
 export const DOC_FORMS = [
   {
-    to: "/base-ui/field" as const,
+    to: "/ui/field" as const,
     name: "Field",
     description:
       "Label, description, error, and grouped field composition.",
   },
   {
-    to: "/base-ui/label" as const,
+    to: "/ui/label" as const,
     name: "Label",
     description: "Accessible label with Orchid typography.",
   },
   {
-    to: "/base-ui/input" as const,
+    to: "/ui/input" as const,
     name: "Input",
     description: "Text and file input with Orchid states.",
   },
   {
-    to: "/base-ui/input-group" as const,
+    to: "/ui/input-group" as const,
     name: "Input Group",
     description:
       "Input, textarea, addon, and button composition.",
   },
   {
-    to: "/base-ui/textarea" as const,
+    to: "/ui/textarea" as const,
     name: "Textarea",
     description:
       "Auto-sizing textarea with Orchid form styling.",
   },
   {
-    to: "/base-ui/checkbox" as const,
+    to: "/ui/checkbox" as const,
     name: "Checkbox",
     description:
       "Checkbox with Orchid states and an optional group helper.",
   },
   {
-    to: "/base-ui/radio-group" as const,
+    to: "/ui/radio-group" as const,
     name: "Radio Group",
     description:
       "Radio group and item primitives with Orchid styling.",
   },
   {
-    to: "/base-ui/switch" as const,
+    to: "/ui/switch" as const,
     name: "Switch",
     description: "Switch in default and small Orchid sizes.",
   },
   {
-    to: "/base-ui/slider" as const,
+    to: "/ui/slider" as const,
     name: "Slider",
     description:
       "Single, range, or vertical slider with Orchid styling.",
   },
   {
-    to: "/base-ui/form-section" as const,
+    to: "/ui/form-section" as const,
     name: "Form Section",
     description: "Heading plus FormSectionGroup and FormSectionItem.",
   },
@@ -361,43 +361,43 @@ function baseGroup(
 /** AlignUI-style groups for Base Components. */
 export const DOC_BASE_GROUPS = [
   baseGroup("Actions", [
-    "/base-ui/button",
-    "/base-ui/button-group",
+    "/ui/button",
+    "/ui/button-group",
   ]),
   baseGroup("Displaying Data", [
-    "/base-ui/avatar",
-    "/base-ui/badge",
+    "/ui/avatar",
+    "/ui/badge",
   ]),
   baseGroup("Feedback", [
-    "/base-ui/banner",
-    "/base-ui/skeleton",
-    "/base-ui/spinner",
-    "/base-ui/toast",
+    "/ui/banner",
+    "/ui/skeleton",
+    "/ui/spinner",
+    "/ui/toast",
   ]),
   baseGroup("Form", [
-    "/base-ui/checkbox",
-    "/base-ui/field",
-    "/base-ui/file-upload",
-    "/base-ui/form-section",
-    "/base-ui/input",
-    "/base-ui/input-group",
-    "/base-ui/label",
-    "/base-ui/radio-group",
-    "/base-ui/slider",
-    "/base-ui/switch",
-    "/base-ui/textarea",
+    "/ui/checkbox",
+    "/ui/field",
+    "/ui/file-upload",
+    "/ui/form-section",
+    "/ui/input",
+    "/ui/input-group",
+    "/ui/label",
+    "/ui/radio-group",
+    "/ui/slider",
+    "/ui/switch",
+    "/ui/textarea",
   ]),
   baseGroup("Layout", [
-    "/base-ui/tabs",
+    "/ui/tabs",
   ]),
-  baseGroup("Navigation", ["/base-ui/pagination"]),
+  baseGroup("Navigation", ["/ui/pagination"]),
   baseGroup("Overlays", [
-    "/base-ui/dialog",
-    "/base-ui/dropdown-menu",
-    "/base-ui/drawer",
-    "/base-ui/tooltip",
+    "/ui/dialog",
+    "/ui/dropdown-menu",
+    "/ui/drawer",
+    "/ui/tooltip",
   ]),
-  baseGroup("Utils", ["/base-ui/kbd"]),
+  baseGroup("Utils", ["/ui/kbd"]),
 ] as const;
 
 const BLOCK_BY_TO = new Map(DOC_BLOCKS.map((item) => [item.to, item]));
@@ -474,7 +474,7 @@ export const DOC_GUIDE_ITEMS = DOC_GUIDES;
 export const DOC_CRUMBS: Record<string, string> = {
   "/": "Home",
   "/components": "Components & Blocks",
-  "/base-ui": "Base Components",
+  "/ui": "Base Components",
   ...Object.fromEntries(DOC_GUIDE_ITEMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_FORMS.map((item) => [item.to, item.name])),

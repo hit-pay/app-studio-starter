@@ -15,7 +15,7 @@ type DocPath =
   | (typeof DOC_BLOCKS)[number]["to"]
   | (typeof DOC_GUIDE_ITEMS)[number]["to"]
   | "/components"
-  | "/base-ui"
+  | "/ui"
   | "/";
 
 function DocExamplePage({
@@ -44,7 +44,7 @@ function DocExamplePage({
             description:
               "Ready-to-use blocks driven by props or a schema.",
           }
-        : to === "/base-ui"
+        : to === "/ui"
           ? {
               name: "Base Components",
               description: "Primitives under src/ui.",
