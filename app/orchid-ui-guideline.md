@@ -2,19 +2,6 @@
 
 Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Open `orchid-llms/{name}.md` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.
 
-# Quick decision
-
-- Browse/search/filter/sort rows → `DataTable`
-- Compact rows/cards without table tools → `DataList`
-- One record → `DetailCard`
-- Create/edit fields → `FormBuilder` inside `FormLayout`
-- Page shell → `PageLayout`; embedded app shell → `AppLayout`
-- Pick HitPay catalog records → `ResourcePicker`
-- Pick staff, role, location, category, coupon, discount, tax, shipping, or pickup → the matching `*Select`
-- Date, quantity, choice cards, rich notes, confirmation → `DatePicker`, `QuantityInput`, `ChoiceCard`, `TextEditor`, `ConfirmationModal`
-
-Use the named block directly. Do not recreate it from base primitives.
-
 # Needs
 
 - rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete → `data-table`
@@ -49,7 +36,6 @@ Use the named block directly. Do not recreate it from base primitives.
 - empty state, no records, first-use state → `empty`
 - loading placeholder, skeleton rows → `skeleton` (`@ui`)
 - loading spinner → `spinner` (`@ui`)
-- chart, graph, time series → `chart` (`@ui`)
 - extra dialog (not FormLayout modal, not confirmation) → `dialog` (`@ui`)
 - extra drawer (not FormLayout modal, not confirmation) → `drawer` (`@ui`)
 - in-page tabs (not AppLayout tabs) → `tabs` (`@ui`)
@@ -71,6 +57,7 @@ Docs: `orchid-llms/copy-button.md`
 ## `data-table` — Data Table
 
 Need: rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete
+Usage: `schema.filters` and `schema.rowActions` (for example `["edit", "delete"]`) go inside schema. `onRowClick` and `onRowAction` are DataTable props. Do not create a separate filter row.
 Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.
 Import `@/components/displaying-data/data-table` — `src/components/displaying-data/data-table.tsx`.
 Docs: `orchid-llms/data-table.md`
@@ -100,6 +87,7 @@ Docs: `orchid-llms/metric-card.md`
 ## `data-list` — Data List
 
 Need: compact row list, card list, people list, products list, activity feed, checklist
+Usage: Use for compact collections without table tools. Put row controls such as QuantityInput in item `trailing`.
 Stacked card or row list from items[]. Each item: key, title, optional description, details, media, actions.menu / actions.hover. For people, products, or activity without table search, filters, sort, or pagination.
 Import `@/components/displaying-data/data-list` — `src/components/displaying-data/data-list.tsx`.
 Docs: `orchid-llms/data-list.md`
@@ -116,6 +104,7 @@ Docs: `orchid-llms/detail-card.md`
 ## `form-builder` — Form Builder
 
 Need: multi-field form, create form, edit form, schema fields, validation
+Usage: Use `useSchemaForm({ fields, onSubmit })` and render FormBuilder inside FormLayout.
 JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, coupon, discount, tax, shipping, pickup, product-category, location, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
 Import `@/components/form/form-builder` — `src/components/form/form-builder.tsx`.
 Docs: `orchid-llms/form-builder.md`
@@ -124,6 +113,7 @@ Related: `src/components/form/form-builder-model.ts`.
 ## `resource-picker` — Resource Picker
 
 Need: pick product, pick customer, pick order, resource picker, catalog picker
+Usage: Use `useResourcePicker` for catalog records, then persist the selected resource to Turso.
 Promise picker for HitPay list records (products, customers, orders, charges, invoices, add-ons). const pick = useResourcePicker(); await pick({ type }).
 Import `@/components/form/resource-picker` — `src/components/form/resource-picker.tsx`.
 Docs: `orchid-llms/resource-picker.md`
@@ -242,6 +232,7 @@ Related: `src/ui/form/calendar.tsx`.
 ## `form-layout` — Form Layout
 
 Need: create/edit page shell, form modal shell, save and cancel
+Usage: `formId` must match the FormBuilder id; use `mode="modal"` for a focused create form.
 Page or modal shell for create/edit. One FormBuilder: formId matches the builder id. Several forms: actions.save.onClick. Browse and show pages use PageLayout.
 Import `@/components/layout/form-layout` — `src/components/layout/form-layout.tsx`.
 Docs: `orchid-llms/form-layout.md`
@@ -256,6 +247,7 @@ Docs: `orchid-llms/app-layout.md`
 ## `page-layout` — Page Layout
 
 Need: browse page shell, detail page shell, page title, back button, page actions
+Usage: Use `actions` for Create/Add and `onBack` only on nested screens.
 Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.
 Import `@/components/layout/page-layout` — `src/components/layout/page-layout.tsx`.
 Docs: `orchid-llms/page-layout.md`
@@ -307,13 +299,6 @@ Compound avatar with image, fallback, badge, group, and Orchid business styling.
 Import `@ui/displaying-data/avatar` — `src/ui/displaying-data/avatar.tsx`.
 Docs: `orchid-llms/avatar.md`
 
-## `chart` — Chart
-
-Need: chart, graph, time series
-Recharts wrapper with Orchid tooltip, legend, and chart tokens for dashboard series.
-Import `@ui/displaying-data/chart` — `src/ui/displaying-data/chart.tsx`.
-Docs: `orchid-llms/chart.md`
-
 ## Feedback
 
 ## `banner` — Banner
@@ -329,12 +314,6 @@ Need: toast, snackbar, notify, success message
 Base UI toast with additive placement options and Orchid semantic styling.
 Import `@ui/feedback/toast` — `src/ui/feedback/toast.tsx`.
 Docs: `orchid-llms/toast.md`
-
-## `progress` — Progress
-
-Compound progress with label, value, track, and indicator primitives.
-Import `@ui/feedback/progress` — `src/ui/feedback/progress.tsx`.
-Docs: `orchid-llms/progress.md`
 
 ## `skeleton` — Skeleton
 
@@ -420,30 +399,12 @@ Docs: `orchid-llms/form-section.md`
 
 ## Layout
 
-## `accordion` — Accordion
-
-Base UI accordion with Orchid styling.
-Import `@ui/layout/accordion` — `src/ui/layout/accordion.tsx`.
-Docs: `orchid-llms/accordion.md`
-
 ## `tabs` — Tabs
 
 Need: in-page tabs (not AppLayout tabs)
 Horizontal or vertical tabs with default and line variants.
 Import `@ui/layout/tabs` — `src/ui/layout/tabs.tsx`.
 Docs: `orchid-llms/tabs.md`
-
-## `collapsible` — Collapsible
-
-Root, Trigger, and Content primitives with Orchid styling.
-Import `@ui/layout/collapsible` — `src/ui/layout/collapsible.tsx`.
-Docs: `orchid-llms/collapsible.md`
-
-## `aspect-ratio` — Aspect Ratio
-
-Box that keeps a width/height ratio.
-Import `@ui/layout/aspect-ratio` — `src/ui/layout/aspect-ratio.tsx`.
-Docs: `orchid-llms/aspect-ratio.md`
 
 ## Navigation
 

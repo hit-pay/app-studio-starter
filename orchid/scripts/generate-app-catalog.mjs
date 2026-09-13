@@ -45,7 +45,6 @@ const NEED = {
   empty: 'empty state, no records, first-use state',
   skeleton: 'loading placeholder, skeleton rows',
   spinner: 'loading spinner',
-  chart: 'chart, graph, time series',
   dialog: 'extra dialog (not FormLayout modal, not confirmation)',
   drawer: 'extra drawer (not FormLayout modal, not confirmation)',
   tabs: 'in-page tabs (not AppLayout tabs)',
@@ -57,7 +56,6 @@ const BASE_NEED_NOTE = {
   banner: '`@ui`',
   skeleton: '`@ui`',
   spinner: '`@ui`',
-  chart: '`@ui`',
   dialog: '`@ui`',
   drawer: '`@ui`',
   tabs: '`@ui`',
@@ -110,9 +108,7 @@ const BASE_SUBGROUP = {
   'file-upload': 'Form',
   avatar: 'Displaying Data',
   badge: 'Displaying Data',
-  chart: 'Displaying Data',
   banner: 'Feedback',
-  progress: 'Feedback',
   skeleton: 'Feedback',
   spinner: 'Feedback',
   toast: 'Feedback',
@@ -126,9 +122,6 @@ const BASE_SUBGROUP = {
   slider: 'Form',
   switch: 'Form',
   textarea: 'Form',
-  accordion: 'Layout',
-  'aspect-ratio': 'Layout',
-  collapsible: 'Layout',
   tabs: 'Layout',
   pagination: 'Navigation',
   dialog: 'Overlays',
@@ -193,6 +186,21 @@ for (const item of registry.items) {
   grouped.get(sectionFor(item)).push(item)
 }
 
+const USAGE = {
+  'data-table':
+    'Usage: `schema.filters` and `schema.rowActions` (for example `["edit", "delete"]`) go inside schema. `onRowClick` and `onRowAction` are DataTable props. Do not create a separate filter row.',
+  'data-list':
+    'Usage: Use for compact collections without table tools. Put row controls such as QuantityInput in item `trailing`.',
+  'form-builder':
+    'Usage: Use `useSchemaForm({ fields, onSubmit })` and render FormBuilder inside FormLayout.',
+  'form-layout':
+    'Usage: `formId` must match the FormBuilder id; use `mode="modal"` for a focused create form.',
+  'page-layout':
+    'Usage: Use `actions` for Create/Add and `onBack` only on nested screens.',
+  'resource-picker':
+    'Usage: Use `useResourcePicker` for catalog records, then persist the selected resource to Turso.',
+}
+
 function writeItem(item) {
   const files = item.files ?? []
   const primary = files.find((file) => file.type === 'registry:ui') ?? files[0]
@@ -211,10 +219,11 @@ function writeItem(item) {
     : ''
   const need = NEED[item.name]
   const needLine = need ? `Need: ${need}` : ''
+  const usageLine = USAGE[item.name] ?? ''
   lines.push(
     `## \`${item.name}\` — ${item.title}`,
     '',
-    ...[needLine, item.description ?? '', location, docsLine, companionLine].filter(Boolean),
+    ...[needLine, usageLine, item.description ?? '', location, docsLine, companionLine].filter(Boolean),
     '',
   )
 }

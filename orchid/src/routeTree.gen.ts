@@ -15,16 +15,12 @@ import { Route as InstallationRouteImport } from './routes/installation'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as ThemingRouteImport } from './routes/theming'
 import { Route as BaseUiIndexRouteImport } from './routes/base-ui/index'
-import { Route as BaseUiAccordionRouteImport } from './routes/base-ui/accordion'
-import { Route as BaseUiAspectRatioRouteImport } from './routes/base-ui/aspect-ratio'
 import { Route as BaseUiAvatarRouteImport } from './routes/base-ui/avatar'
 import { Route as BaseUiBadgeRouteImport } from './routes/base-ui/badge'
 import { Route as BaseUiBannerRouteImport } from './routes/base-ui/banner'
 import { Route as BaseUiButtonRouteImport } from './routes/base-ui/button'
 import { Route as BaseUiButtonGroupRouteImport } from './routes/base-ui/button-group'
-import { Route as BaseUiChartRouteImport } from './routes/base-ui/chart'
 import { Route as BaseUiCheckboxRouteImport } from './routes/base-ui/checkbox'
-import { Route as BaseUiCollapsibleRouteImport } from './routes/base-ui/collapsible'
 import { Route as BaseUiDialogRouteImport } from './routes/base-ui/dialog'
 import { Route as BaseUiDrawerRouteImport } from './routes/base-ui/drawer'
 import { Route as BaseUiDropdownMenuRouteImport } from './routes/base-ui/dropdown-menu'
@@ -36,7 +32,6 @@ import { Route as BaseUiInputGroupRouteImport } from './routes/base-ui/input-gro
 import { Route as BaseUiKbdRouteImport } from './routes/base-ui/kbd'
 import { Route as BaseUiLabelRouteImport } from './routes/base-ui/label'
 import { Route as BaseUiPaginationRouteImport } from './routes/base-ui/pagination'
-import { Route as BaseUiProgressRouteImport } from './routes/base-ui/progress'
 import { Route as BaseUiRadioGroupRouteImport } from './routes/base-ui/radio-group'
 import { Route as BaseUiSkeletonRouteImport } from './routes/base-ui/skeleton'
 import { Route as BaseUiSliderRouteImport } from './routes/base-ui/slider'
@@ -106,16 +101,6 @@ const BaseUiIndexRoute = BaseUiIndexRouteImport.update({
   path: '/base-ui/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiAccordionRoute = BaseUiAccordionRouteImport.update({
-  id: '/base-ui/accordion',
-  path: '/base-ui/accordion',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseUiAspectRatioRoute = BaseUiAspectRatioRouteImport.update({
-  id: '/base-ui/aspect-ratio',
-  path: '/base-ui/aspect-ratio',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BaseUiAvatarRoute = BaseUiAvatarRouteImport.update({
   id: '/base-ui/avatar',
   path: '/base-ui/avatar',
@@ -141,19 +126,9 @@ const BaseUiButtonGroupRoute = BaseUiButtonGroupRouteImport.update({
   path: '/base-ui/button-group',
   getParentRoute: () => rootRouteImport,
 } as any)
-const BaseUiChartRoute = BaseUiChartRouteImport.update({
-  id: '/base-ui/chart',
-  path: '/base-ui/chart',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const BaseUiCheckboxRoute = BaseUiCheckboxRouteImport.update({
   id: '/base-ui/checkbox',
   path: '/base-ui/checkbox',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseUiCollapsibleRoute = BaseUiCollapsibleRouteImport.update({
-  id: '/base-ui/collapsible',
-  path: '/base-ui/collapsible',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiDialogRoute = BaseUiDialogRouteImport.update({
@@ -209,11 +184,6 @@ const BaseUiLabelRoute = BaseUiLabelRouteImport.update({
 const BaseUiPaginationRoute = BaseUiPaginationRouteImport.update({
   id: '/base-ui/pagination',
   path: '/base-ui/pagination',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const BaseUiProgressRoute = BaseUiProgressRouteImport.update({
-  id: '/base-ui/progress',
-  path: '/base-ui/progress',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BaseUiRadioGroupRoute = BaseUiRadioGroupRouteImport.update({
@@ -419,16 +389,12 @@ export interface FileRoutesByFullPath {
   '/installation': typeof InstallationRoute
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
-  '/base-ui/accordion': typeof BaseUiAccordionRoute
-  '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
   '/base-ui/banner': typeof BaseUiBannerRoute
   '/base-ui/button': typeof BaseUiButtonRoute
   '/base-ui/button-group': typeof BaseUiButtonGroupRoute
-  '/base-ui/chart': typeof BaseUiChartRoute
   '/base-ui/checkbox': typeof BaseUiCheckboxRoute
-  '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
   '/base-ui/dialog': typeof BaseUiDialogRoute
   '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
@@ -440,7 +406,6 @@ export interface FileRoutesByFullPath {
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
-  '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
   '/base-ui/skeleton': typeof BaseUiSkeletonRoute
   '/base-ui/slider': typeof BaseUiSliderRoute
@@ -487,16 +452,12 @@ export interface FileRoutesByTo {
   '/installation': typeof InstallationRoute
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
-  '/base-ui/accordion': typeof BaseUiAccordionRoute
-  '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
   '/base-ui/banner': typeof BaseUiBannerRoute
   '/base-ui/button': typeof BaseUiButtonRoute
   '/base-ui/button-group': typeof BaseUiButtonGroupRoute
-  '/base-ui/chart': typeof BaseUiChartRoute
   '/base-ui/checkbox': typeof BaseUiCheckboxRoute
-  '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
   '/base-ui/dialog': typeof BaseUiDialogRoute
   '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
@@ -508,7 +469,6 @@ export interface FileRoutesByTo {
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
-  '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
   '/base-ui/skeleton': typeof BaseUiSkeletonRoute
   '/base-ui/slider': typeof BaseUiSliderRoute
@@ -556,16 +516,12 @@ export interface FileRoutesById {
   '/installation': typeof InstallationRoute
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
-  '/base-ui/accordion': typeof BaseUiAccordionRoute
-  '/base-ui/aspect-ratio': typeof BaseUiAspectRatioRoute
   '/base-ui/avatar': typeof BaseUiAvatarRoute
   '/base-ui/badge': typeof BaseUiBadgeRoute
   '/base-ui/banner': typeof BaseUiBannerRoute
   '/base-ui/button': typeof BaseUiButtonRoute
   '/base-ui/button-group': typeof BaseUiButtonGroupRoute
-  '/base-ui/chart': typeof BaseUiChartRoute
   '/base-ui/checkbox': typeof BaseUiCheckboxRoute
-  '/base-ui/collapsible': typeof BaseUiCollapsibleRoute
   '/base-ui/dialog': typeof BaseUiDialogRoute
   '/base-ui/drawer': typeof BaseUiDrawerRoute
   '/base-ui/dropdown-menu': typeof BaseUiDropdownMenuRoute
@@ -577,7 +533,6 @@ export interface FileRoutesById {
   '/base-ui/kbd': typeof BaseUiKbdRoute
   '/base-ui/label': typeof BaseUiLabelRoute
   '/base-ui/pagination': typeof BaseUiPaginationRoute
-  '/base-ui/progress': typeof BaseUiProgressRoute
   '/base-ui/radio-group': typeof BaseUiRadioGroupRoute
   '/base-ui/skeleton': typeof BaseUiSkeletonRoute
   '/base-ui/slider': typeof BaseUiSliderRoute
@@ -626,16 +581,12 @@ export interface FileRouteTypes {
     | '/installation'
     | '/setup'
     | '/theming'
-    | '/base-ui/accordion'
-    | '/base-ui/aspect-ratio'
     | '/base-ui/avatar'
     | '/base-ui/badge'
     | '/base-ui/banner'
     | '/base-ui/button'
     | '/base-ui/button-group'
-    | '/base-ui/chart'
     | '/base-ui/checkbox'
-    | '/base-ui/collapsible'
     | '/base-ui/dialog'
     | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
@@ -647,7 +598,6 @@ export interface FileRouteTypes {
     | '/base-ui/kbd'
     | '/base-ui/label'
     | '/base-ui/pagination'
-    | '/base-ui/progress'
     | '/base-ui/radio-group'
     | '/base-ui/skeleton'
     | '/base-ui/slider'
@@ -694,16 +644,12 @@ export interface FileRouteTypes {
     | '/installation'
     | '/setup'
     | '/theming'
-    | '/base-ui/accordion'
-    | '/base-ui/aspect-ratio'
     | '/base-ui/avatar'
     | '/base-ui/badge'
     | '/base-ui/banner'
     | '/base-ui/button'
     | '/base-ui/button-group'
-    | '/base-ui/chart'
     | '/base-ui/checkbox'
-    | '/base-ui/collapsible'
     | '/base-ui/dialog'
     | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
@@ -715,7 +661,6 @@ export interface FileRouteTypes {
     | '/base-ui/kbd'
     | '/base-ui/label'
     | '/base-ui/pagination'
-    | '/base-ui/progress'
     | '/base-ui/radio-group'
     | '/base-ui/skeleton'
     | '/base-ui/slider'
@@ -762,16 +707,12 @@ export interface FileRouteTypes {
     | '/installation'
     | '/setup'
     | '/theming'
-    | '/base-ui/accordion'
-    | '/base-ui/aspect-ratio'
     | '/base-ui/avatar'
     | '/base-ui/badge'
     | '/base-ui/banner'
     | '/base-ui/button'
     | '/base-ui/button-group'
-    | '/base-ui/chart'
     | '/base-ui/checkbox'
-    | '/base-ui/collapsible'
     | '/base-ui/dialog'
     | '/base-ui/drawer'
     | '/base-ui/dropdown-menu'
@@ -783,7 +724,6 @@ export interface FileRouteTypes {
     | '/base-ui/kbd'
     | '/base-ui/label'
     | '/base-ui/pagination'
-    | '/base-ui/progress'
     | '/base-ui/radio-group'
     | '/base-ui/skeleton'
     | '/base-ui/slider'
@@ -831,16 +771,12 @@ export interface RootRouteChildren {
   InstallationRoute: typeof InstallationRoute
   SetupRoute: typeof SetupRoute
   ThemingRoute: typeof ThemingRoute
-  BaseUiAccordionRoute: typeof BaseUiAccordionRoute
-  BaseUiAspectRatioRoute: typeof BaseUiAspectRatioRoute
   BaseUiAvatarRoute: typeof BaseUiAvatarRoute
   BaseUiBadgeRoute: typeof BaseUiBadgeRoute
   BaseUiBannerRoute: typeof BaseUiBannerRoute
   BaseUiButtonRoute: typeof BaseUiButtonRoute
   BaseUiButtonGroupRoute: typeof BaseUiButtonGroupRoute
-  BaseUiChartRoute: typeof BaseUiChartRoute
   BaseUiCheckboxRoute: typeof BaseUiCheckboxRoute
-  BaseUiCollapsibleRoute: typeof BaseUiCollapsibleRoute
   BaseUiDialogRoute: typeof BaseUiDialogRoute
   BaseUiDrawerRoute: typeof BaseUiDrawerRoute
   BaseUiDropdownMenuRoute: typeof BaseUiDropdownMenuRoute
@@ -852,7 +788,6 @@ export interface RootRouteChildren {
   BaseUiKbdRoute: typeof BaseUiKbdRoute
   BaseUiLabelRoute: typeof BaseUiLabelRoute
   BaseUiPaginationRoute: typeof BaseUiPaginationRoute
-  BaseUiProgressRoute: typeof BaseUiProgressRoute
   BaseUiRadioGroupRoute: typeof BaseUiRadioGroupRoute
   BaseUiSkeletonRoute: typeof BaseUiSkeletonRoute
   BaseUiSliderRoute: typeof BaseUiSliderRoute
@@ -938,20 +873,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/accordion': {
-      id: '/base-ui/accordion'
-      path: '/base-ui/accordion'
-      fullPath: '/base-ui/accordion'
-      preLoaderRoute: typeof BaseUiAccordionRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/base-ui/aspect-ratio': {
-      id: '/base-ui/aspect-ratio'
-      path: '/base-ui/aspect-ratio'
-      fullPath: '/base-ui/aspect-ratio'
-      preLoaderRoute: typeof BaseUiAspectRatioRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/base-ui/avatar': {
       id: '/base-ui/avatar'
       path: '/base-ui/avatar'
@@ -987,25 +908,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BaseUiButtonGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/base-ui/chart': {
-      id: '/base-ui/chart'
-      path: '/base-ui/chart'
-      fullPath: '/base-ui/chart'
-      preLoaderRoute: typeof BaseUiChartRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/base-ui/checkbox': {
       id: '/base-ui/checkbox'
       path: '/base-ui/checkbox'
       fullPath: '/base-ui/checkbox'
       preLoaderRoute: typeof BaseUiCheckboxRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/base-ui/collapsible': {
-      id: '/base-ui/collapsible'
-      path: '/base-ui/collapsible'
-      fullPath: '/base-ui/collapsible'
-      preLoaderRoute: typeof BaseUiCollapsibleRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/dialog': {
@@ -1083,13 +990,6 @@ declare module '@tanstack/react-router' {
       path: '/base-ui/pagination'
       fullPath: '/base-ui/pagination'
       preLoaderRoute: typeof BaseUiPaginationRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/base-ui/progress': {
-      id: '/base-ui/progress'
-      path: '/base-ui/progress'
-      fullPath: '/base-ui/progress'
-      preLoaderRoute: typeof BaseUiProgressRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/base-ui/radio-group': {
@@ -1367,16 +1267,12 @@ const rootRouteChildren: RootRouteChildren = {
   InstallationRoute: InstallationRoute,
   SetupRoute: SetupRoute,
   ThemingRoute: ThemingRoute,
-  BaseUiAccordionRoute: BaseUiAccordionRoute,
-  BaseUiAspectRatioRoute: BaseUiAspectRatioRoute,
   BaseUiAvatarRoute: BaseUiAvatarRoute,
   BaseUiBadgeRoute: BaseUiBadgeRoute,
   BaseUiBannerRoute: BaseUiBannerRoute,
   BaseUiButtonRoute: BaseUiButtonRoute,
   BaseUiButtonGroupRoute: BaseUiButtonGroupRoute,
-  BaseUiChartRoute: BaseUiChartRoute,
   BaseUiCheckboxRoute: BaseUiCheckboxRoute,
-  BaseUiCollapsibleRoute: BaseUiCollapsibleRoute,
   BaseUiDialogRoute: BaseUiDialogRoute,
   BaseUiDrawerRoute: BaseUiDrawerRoute,
   BaseUiDropdownMenuRoute: BaseUiDropdownMenuRoute,
@@ -1388,7 +1284,6 @@ const rootRouteChildren: RootRouteChildren = {
   BaseUiKbdRoute: BaseUiKbdRoute,
   BaseUiLabelRoute: BaseUiLabelRoute,
   BaseUiPaginationRoute: BaseUiPaginationRoute,
-  BaseUiProgressRoute: BaseUiProgressRoute,
   BaseUiRadioGroupRoute: BaseUiRadioGroupRoute,
   BaseUiSkeletonRoute: BaseUiSkeletonRoute,
   BaseUiSliderRoute: BaseUiSliderRoute,

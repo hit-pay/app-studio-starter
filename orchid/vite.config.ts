@@ -164,7 +164,6 @@ export default defineConfig({
   },
   optimizeDeps: {
     include: [
-      'recharts',
       'react',
       'react-dom',
       'lexical',

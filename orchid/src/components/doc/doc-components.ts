@@ -36,18 +36,6 @@ export const DOC_COMPONENTS = [
       "Standard variants with Orchid tones, appearances, removal, and user roles.",
   },
   {
-    to: "/base-ui/accordion" as const,
-    name: "Accordion",
-    description:
-      "Composable expand-and-collapse sections with primitives.",
-  },
-  {
-    to: "/base-ui/progress" as const,
-    name: "Progress",
-    description:
-      "Progress with composable label, value, track, and indicator.",
-  },
-  {
     to: "/base-ui/avatar" as const,
     name: "Avatar",
     description:
@@ -98,24 +86,6 @@ export const DOC_COMPONENTS = [
     to: "/base-ui/kbd" as const,
     name: "Kbd",
     description: "Keyboard key and grouped shortcut display.",
-  },
-  {
-    to: "/base-ui/collapsible" as const,
-    name: "Collapsible",
-    description:
-      "Expand-and-collapse primitives with Orchid styling.",
-  },
-  {
-    to: "/base-ui/aspect-ratio" as const,
-    name: "Aspect Ratio",
-    description:
-      "Box that keeps a width/height ratio, such as 16/9.",
-  },
-  {
-    to: "/base-ui/chart" as const,
-    name: "Chart",
-    description:
-      "Recharts wrapper with Orchid tooltip, legend, and chart tokens.",
   },
   {
     to: "/base-ui/file-upload" as const,
@@ -397,11 +367,9 @@ export const DOC_BASE_GROUPS = [
   baseGroup("Displaying Data", [
     "/base-ui/avatar",
     "/base-ui/badge",
-    "/base-ui/chart",
   ]),
   baseGroup("Feedback", [
     "/base-ui/banner",
-    "/base-ui/progress",
     "/base-ui/skeleton",
     "/base-ui/spinner",
     "/base-ui/toast",
@@ -420,9 +388,6 @@ export const DOC_BASE_GROUPS = [
     "/base-ui/textarea",
   ]),
   baseGroup("Layout", [
-    "/base-ui/accordion",
-    "/base-ui/aspect-ratio",
-    "/base-ui/collapsible",
     "/base-ui/tabs",
   ]),
   baseGroup("Navigation", ["/base-ui/pagination"]),
