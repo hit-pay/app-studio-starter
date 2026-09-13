@@ -65,6 +65,6 @@ Paginated collection (`data` + pagination meta). Use `data`.
 
 ## App rules
 
-- Browse / add invoices: ResourcePicker `type: 'invoice'`. Call this list only from the picker loader, a receivables sheet, or a wake.
+- Browse / add invoices: ResourcePicker `type: 'invoice'`. Call this list only from the picker loader or a receivables sheet.
 - Persist a **sheet** or this one page (default 10). Do not replica-sync all invoices.
 - Never invent another invoices list path. Never return connector tokens to the browser.

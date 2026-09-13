@@ -11,6 +11,14 @@ For short prompts:
 - Do not ask for clarification when a safe, non-destructive default is clear.
 - Ask for confirmation only for destructive choices or changes with broad impact.
 
+Keep discovery targeted:
+- Do not dump or read the entire source tree.
+- Start from the active route and search for existing usage patterns.
+- Read only components relevant to the requested workflow.
+- Do not inspect deleted features or unrelated API documentation.
+- Avoid reading the same file more than once unless it changed.
+- Stop discovery and implement once the workflow is clear.
+
 # RULES
 
 1. Do not start a screen from `@ui`. Do not rebuild a **Components & Blocks** entry from primitives.

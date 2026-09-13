@@ -79,7 +79,7 @@ No filter-by-charge-id list. Do not invent `ids[]`.
 
 ## App rules
 
-- Browse / add charges: ResourcePicker `type: 'charge'`. Call this list only from the picker loader, a cash-up sheet (filters), or a scheduled wake.
+- Browse / add charges: ResourcePicker `type: 'charge'`. Call this list only from the picker loader or a cash-up sheet (filters).
 - Persist the **sheet** (totals, counts, optional line snapshot of this one page). Do not grow a full charges replica or page until empty.
 - Cash-up: `date_from` + `date_to` + `location_ids[]` + `payment_methods[]=cash` + `status=succeeded`.
 - Never invent another charges list path. Never return connector tokens to the browser.

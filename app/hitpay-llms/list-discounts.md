@@ -57,4 +57,4 @@ const listDiscounts = createServerFn({ method: 'GET' })
 
 - Call only from `createServerFn`. Never return connector tokens to the browser.
 - Never invent another path. Never implement HTTP DELETE.
-- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet/wake — not a generated catalog UI.
+- Browse via ResourcePicker (matching type). This list path is for the picker loader or a one-page sheet — not a generated catalog UI.
