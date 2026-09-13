@@ -47,9 +47,6 @@ Registry `target` uses shadcn placeholders, not import paths:
 Do not use `@/ui/…` as a target. The CLI treats `@/` as a folder and
 writes `src/@/…`. Code imports stay `@ui/…` and `@/components/…`.
 
-Do not add a TypeScript path `@base-ui/*`. That would shadow the `@base-ui/react`
-package. Use `@ui/…` instead.
-
 Do not manually choose a destination when adding an item. The registry target
 and your aliases determine it consistently.
 

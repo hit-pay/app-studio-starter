@@ -142,9 +142,6 @@ Registry `target` uses shadcn placeholders, not import paths:
 Do not use `@/ui/…` as a target. The CLI treats `@/` as a folder and
 writes `src/@/…`. Code imports stay `@ui/…` and `@/components/…`.
 
-Do not add a TypeScript path `@base-ui/*`. That would shadow the `@base-ui/react`
-package. Use `@ui/…` instead.
-
 Do not manually choose a destination when adding an item. The registry target
 and your aliases determine it consistently.
 
@@ -216,9 +213,98 @@ Review [Components](/orchid-ui-guideline.md#components-json), then install the c
 
 Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/button-demo.tsx` demo source.
+
+```tsx
+import {
+  ArrowRightUpRegular,
+  CircleDashRegular,
+  AddRegular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular'
+
+import { Button } from '@ui/actions/button'
+
+const VARIANTS = ['default', 'outline', 'secondary', 'ghost', 'destructive', 'link'] as const
+const SIZES = ['xs', 'sm', 'default', 'lg'] as const
+const ICON_SIZES = ['icon-xs', 'icon-sm', 'icon', 'icon-lg'] as const
+
+function ButtonDemo() {
+  return (
+    <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Variants
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          {VARIANTS.map((variant) => (
+            <Button key={variant} variant={variant}>
+              {variant === 'destructive' ? <Delete2Regular data-icon="inline-start" /> : null}
+              {variant}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      <div id="sizes" className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Size
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          {SIZES.map((size) => (
+            <Button key={size} size={size}>
+              <CircleDashRegular data-icon="inline-start" />
+              {size}
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Icon size
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          {ICON_SIZES.map((size) => (
+            <Button key={size} size={size} aria-label={`Add with ${size} button`}>
+              <AddRegular />
+            </Button>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Render as link
+        </p>
+        <Button variant="outline" render={<a href="#sizes" />}>
+          Review sizes
+          <ArrowRightUpRegular data-icon="inline-end" />
+        </Button>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Disabled
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <Button disabled>Default</Button>
+          <Button variant="outline" disabled>
+            Outline
+          </Button>
+          <Button variant="destructive" disabled>
+            Destructive
+          </Button>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { ButtonDemo }
+```
 
 
 <a id="button-group"></a>
@@ -226,9 +312,178 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/button-group-demo.tsx` demo source.
+
+```tsx
+import {
+  DownRegular,
+  CopyRegular,
+  AddRegular,
+  SendRegular,
+  Delete2Regular,
+  More1Regular,
+  ArrowRightUpRegular,
+} from '@mingcute/react/core-regular';
+
+import { Button } from "@ui/actions/button";
+import {
+  ButtonGroup,
+  ButtonGroupSeparator,
+  ButtonGroupText,
+} from "@ui/actions/button-group";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@ui/overlays/dropdown-menu";
+
+const paymentLink = "https://hitpay.shop/pay/pl_8f2a91";
+
+function IconToolbar({
+  variant,
+}: {
+  variant: "ghost" | "border";
+}) {
+  return (
+    <ButtonGroup variant={variant} aria-label="Payment link actions">
+      <DropdownMenu>
+        <DropdownMenuTrigger
+          nativeButton
+          render={
+            <Button variant="ghost" size="icon-xs" aria-label="More">
+              <More1Regular />
+            </Button>
+          }
+        />
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem>Mark invoice as paid</DropdownMenuItem>
+          <DropdownMenuItem>Send reminder</DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">Void invoice</DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        render={<a href={paymentLink} target="_blank" rel="noreferrer" />}
+        aria-label="Open payment link"
+      >
+        <ArrowRightUpRegular />
+      </Button>
+      <Button
+        variant="ghost"
+        size="icon-xs"
+        aria-label="Copy payment link"
+        onClick={() => void navigator.clipboard.writeText(paymentLink)}
+      >
+        <CopyRegular />
+      </Button>
+    </ButtonGroup>
+  );
+}
+
+function ButtonGroupDemo() {
+  return (
+    <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <IconToolbar variant="ghost" />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Border
+        </p>
+        <IconToolbar variant="border" />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Split dropdown
+        </p>
+        <ButtonGroup>
+          <Button>
+            <AddRegular data-icon="inline-start" />
+            Create invoice
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              nativeButton
+              render={
+                <Button size="icon" aria-label="More invoice actions">
+                  <DownRegular />
+                </Button>
+              }
+            />
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>
+                <CopyRegular />
+                Duplicate invoice
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <SendRegular />
+                Create and send
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                <Delete2Regular />
+                Discard draft
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </ButtonGroup>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Horizontal
+        </p>
+        <ButtonGroup aria-label="Reporting period">
+          <Button variant="outline">Day</Button>
+          <Button variant="outline">Week</Button>
+          <Button variant="outline">Month</Button>
+        </ButtonGroup>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Vertical
+        </p>
+        <ButtonGroup orientation="vertical" aria-label="Invoice actions">
+          <Button variant="outline">View invoice</Button>
+          <Button variant="outline">Send reminder</Button>
+          <Button variant="outline">Download PDF</Button>
+        </ButtonGroup>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Text and separator
+        </p>
+        <ButtonGroup>
+          <ButtonGroupText>INV-2048</ButtonGroupText>
+          <ButtonGroupSeparator />
+          <Button
+            variant="outline"
+            size="icon"
+            aria-label="Copy invoice number"
+          >
+            <CopyRegular />
+          </Button>
+        </ButtonGroup>
+      </div>
+    </>
+  );
+}
+
+export { ButtonGroupDemo };
+```
 
 Use `variant="ghost"` for a loose icon toolbar (Default). Use `variant="border"`
 for the same toolbar inside a framed group; dividers render between children
@@ -241,9 +496,222 @@ polymorphic `Button`.
 
 Items, selection, submenus, and shortcuts with Orchid styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/dropdown-menu-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+import {
+  DownRegular,
+  BankCardRegular,
+  LinkRegular,
+  PencilRegular,
+  RepeatRegular,
+  SendRegular,
+  StoreRegular,
+  Delete2Regular,
+} from '@mingcute/react/core-regular'
+import { Button } from '@ui/actions/button'
+import { ButtonGroup } from '@ui/actions/button-group'
+import {
+  DropdownMenu,
+  DropdownMenuCheckboxItem,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuRadioGroup,
+  DropdownMenuRadioItem,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from '@ui/overlays/dropdown-menu'
+
+function OpenButton({ children }: { children: React.ReactNode }) {
+  return (
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        nativeButton
+        className="inline-flex w-fit"
+        render={
+          <Button variant="secondary" size="sm">
+            Invoice actions
+          </Button>
+        }
+      />
+      <DropdownMenuContent align="start">{children}</DropdownMenuContent>
+    </DropdownMenu>
+  )
+}
+
+function DropdownMenuDemo() {
+  const [showArchived, setShowArchived] = useState(false)
+  const [currency, setCurrency] = useState('sgd')
+
+  return (
+    <>
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Dropdown Menu
+        </p>
+        <OpenButton>
+          <DropdownMenuItem>
+            <PencilRegular />
+            Edit invoice
+            <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>
+          </DropdownMenuItem>
+          <DropdownMenuItem>
+            <SendRegular />
+            Send payment link
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">
+            <Delete2Regular />
+            Void invoice
+          </DropdownMenuItem>
+        </OpenButton>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Dropdown
+        </p>
+        <OpenButton>
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Commerce</DropdownMenuLabel>
+            <DropdownMenuItem>
+              <LinkRegular />
+              Payment Link
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <RepeatRegular />
+              Recurring
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuLabel>Sales</DropdownMenuLabel>
+            <DropdownMenuItem>
+              <StoreRegular />
+              Online Store
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <BankCardRegular />
+              Point of Sale
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem variant="destructive">
+            <Delete2Regular />
+            Delete invoice
+          </DropdownMenuItem>
+        </OpenButton>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Split button
+        </p>
+        <ButtonGroup>
+          <Button variant="secondary" size="sm">
+            Invoice actions
+          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger
+              nativeButton
+              render={
+                <Button variant="secondary" size="icon-sm" aria-label="More invoice actions">
+                  <DownRegular />
+                </Button>
+              }
+            />
+            <DropdownMenuContent align="end">
+              <DropdownMenuItem>
+                <PencilRegular />
+                Edit INV-2048
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <SendRegular />
+                Resend to Priya Nair
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem variant="destructive">
+                <Delete2Regular />
+                Refund SGD 128.00
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        </ButtonGroup>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Payment channels
+        </p>
+        <DropdownMenu>
+          <DropdownMenuTrigger
+            nativeButton
+            className="inline-flex w-fit"
+            render={
+              <Button variant="secondary" size="sm">
+                Enable channel
+              </Button>
+            }
+          />
+          <DropdownMenuContent align="start">
+            <DropdownMenuGroup>
+              <DropdownMenuLabel>Singapore</DropdownMenuLabel>
+              <DropdownMenuItem>PayNow</DropdownMenuItem>
+              <DropdownMenuItem>Cards</DropdownMenuItem>
+              <DropdownMenuItem>GrabPay</DropdownMenuItem>
+              <DropdownMenuItem>WeChat Pay</DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Selection and submenu
+        </p>
+        <DropdownMenu>
+          <DropdownMenuTrigger render={<Button variant="outline" />}>
+            View options
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuCheckboxItem
+              checked={showArchived}
+              onCheckedChange={setShowArchived}
+            >
+              Show archived
+            </DropdownMenuCheckboxItem>
+            <DropdownMenuSeparator />
+            <DropdownMenuLabel>Currency</DropdownMenuLabel>
+            <DropdownMenuRadioGroup value={currency} onValueChange={setCurrency}>
+              <DropdownMenuRadioItem value="sgd">SGD</DropdownMenuRadioItem>
+              <DropdownMenuRadioItem value="usd">USD</DropdownMenuRadioItem>
+            </DropdownMenuRadioGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuSub>
+              <DropdownMenuSubTrigger>More tools</DropdownMenuSubTrigger>
+              <DropdownMenuSubContent>
+                <DropdownMenuItem>Duplicate invoice</DropdownMenuItem>
+                <DropdownMenuItem>Download PDF</DropdownMenuItem>
+              </DropdownMenuSubContent>
+            </DropdownMenuSub>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </div>
+    </>
+  )
+}
+
+export { DropdownMenuDemo }
+```
 
 
 <a id="toast"></a>
@@ -251,9 +719,224 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Toast manager with semantic types, actions, close, and placement.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/toast-demo.tsx` demo source.
+
+```tsx
+import { useState } from "react";
+import { Button } from "@ui/actions/button";
+import {
+  createToastManager,
+  toast,
+  Toaster,
+  type ToastPlacement,
+} from "@ui/feedback/toast";
+
+const placementToast = createToastManager();
+const PLACEMENTS: ToastPlacement[] = [
+  "top-left",
+  "top-center",
+  "top-right",
+  "bottom-left",
+  "bottom-center",
+  "bottom-right",
+];
+
+function ToastDemo() {
+  const [placement, setPlacement] = useState<ToastPlacement>("bottom-right");
+
+  return (
+    <>
+      <Toaster toastManager={placementToast} placement={placement} />
+      <>
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Placement
+          </p>
+          <div className="flex flex-wrap gap-2">
+            {PLACEMENTS.map((item) => (
+              <Button
+                key={item}
+                variant={placement === item ? "secondary" : "outline"}
+                size="sm"
+                onClick={() => {
+                  setPlacement(item);
+                  placementToast.add({
+                    title: item,
+                    description: `Toast positioned at ${item}.`,
+                    type: "info",
+                  });
+                }}
+              >
+                {item}
+              </Button>
+            ))}
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Programmatic floating toast. Mount{" "}
+            <code className="font-mono">Toaster</code> in the root layout.
+            Placement supports top-left, top-center, top-right, bottom-left,
+            bottom-center, and bottom-right.
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() =>
+              toast.add({
+                title: "Invoice created",
+                description: "INV-2048 · SGD 128.00 · Priya Nair",
+              })
+            }
+          >
+            Create invoice
+          </Button>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Types
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "Payment received",
+                  description: "PayNow · INV-2048 · SGD 128.00",
+                  type: "success",
+                })
+              }
+            >
+              Payment received
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "Recurring charge scheduled",
+                  description: "Alex Turner · next run 1 Sep",
+                  type: "info",
+                })
+              }
+            >
+              Recurring scheduled
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "Inventory refreshed",
+                  description:
+                    "HitPay products are checked if a connector is available.",
+                  type: "info",
+                })
+              }
+            >
+              Long description
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "PayNow is slower than usual",
+                  description: "Consider Cards or GrabPay for new links",
+                  type: "warning",
+                })
+              }
+            >
+              Channel warning
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "Refund failed",
+                  description: "Could not refund SGD 48.00 on INV-2048",
+                  type: "error",
+                })
+              }
+            >
+              Refund failed
+            </Button>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Action
+          </p>
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              const id = toast.add({
+                title: "Payment link sent",
+                description: "Sent to Priya Nair for INV-2048",
+                actionProps: {
+                  children: "Undo",
+                  onClick() {
+                    toast.close(id);
+                  },
+                },
+              });
+            }}
+          >
+            Undo send link
+          </Button>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Commerce
+          </p>
+          <div className="flex flex-wrap gap-2">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "Online Store published",
+                  description: "Home page is live with weekend offers",
+                  type: "success",
+                })
+              }
+            >
+              Publish store
+            </Button>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() =>
+                toast.add({
+                  title: "POS sale charged",
+                  description: "HP-POS-04 · GrabPay · SGD 24.50",
+                  type: "success",
+                })
+              }
+            >
+              Charge POS
+            </Button>
+          </div>
+        </div>
+      </>
+    </>
+  );
+}
+
+export { ToastDemo };
+```
 
 
 <a id="banner"></a>
@@ -261,9 +944,156 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 In-page notification with semantic variants and an optional action.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/banner-demo.tsx` demo source.
+
+```tsx
+import {
+  CheckCircleRegular,
+  InformationRegular,
+  AlertRegular,
+  CloseCircleRegular,
+} from '@mingcute/react/core-regular';
+
+import {
+  Banner,
+  BannerAction,
+  BannerDescription,
+  BannerTitle,
+} from "@ui/feedback/banner";
+import { Button } from "@ui/actions/button";
+
+function BannerDemo() {
+  return (
+    <>
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <Banner>
+            <InformationRegular />
+            <BannerTitle>PayNow delay</BannerTitle>
+            <BannerDescription>
+              Payments may take longer than usual. Consider using Cards or
+              GrabPay while the channel recovers.
+            </BannerDescription>
+          </Banner>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Success
+          </p>
+          <Banner variant="success">
+            <CheckCircleRegular />
+            <BannerTitle>Payment received</BannerTitle>
+            <BannerDescription>
+              SGD 128.00 for INV-2048 was paid successfully through PayNow.
+            </BannerDescription>
+          </Banner>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Warning
+          </p>
+          <Banner variant="warning">
+            <AlertRegular />
+            <BannerTitle>Low stock</BannerTitle>
+            <BannerDescription>
+              SKU-TEA-12 has 3 units remaining. Restock before the weekend
+              promotion.
+            </BannerDescription>
+          </Banner>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Destructive
+          </p>
+          <Banner variant="destructive">
+            <CloseCircleRegular />
+            <BannerTitle>Refund failed</BannerTitle>
+            <BannerDescription>
+              We could not refund SGD 48.00 on INV-2048. Retry or contact the
+              customer.
+            </BannerDescription>
+          </Banner>
+        </div>
+      </div>
+
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default action
+          </p>
+          <Banner>
+            <InformationRegular />
+            <BannerTitle>PayNow delay</BannerTitle>
+            <BannerDescription>
+              Payments may take longer than usual.
+            </BannerDescription>
+            <BannerAction>
+              <Button variant="outline" size="sm">
+                View status
+              </Button>
+            </BannerAction>
+          </Banner>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Bottom action
+          </p>
+          <Banner variant="success">
+            <CheckCircleRegular />
+            <BannerTitle>Invoice created</BannerTitle>
+            <BannerDescription>
+              INV-2048 for SGD 128.00 was created and sent to Priya Nair.
+            </BannerDescription>
+            <BannerAction placement="bottom">
+              <Button variant="outline" size="sm">
+                View invoice
+              </Button>
+              <Button size="sm">Send reminder</Button>
+            </BannerAction>
+          </Banner>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Above page header
+        </p>
+        <Banner>
+          <InformationRegular />
+          <BannerTitle>Scheduled maintenance</BannerTitle>
+          <BannerDescription>
+            Dashboard reporting may be delayed between 02:00 and 02:30 SGT.
+          </BannerDescription>
+        </Banner>
+        <header className="flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
+          <div className="min-w-0 flex-1">
+            <h2 className="wrap-break-word text-lg leading-6 font-medium text-oc-foreground">
+              Invoices
+            </h2>
+            <p className="wrap-break-word text-sm leading-5 text-oc-muted-foreground">
+              Create, send, and track invoices across payment channels.
+            </p>
+          </div>
+          <div className="flex justify-end sm:shrink-0">
+            <Button>Create invoice</Button>
+          </div>
+        </header>
+      </div>
+    </>
+  );
+}
+
+export { BannerDemo };
+```
 
 
 <a id="badge"></a>
@@ -271,9 +1101,133 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Standard variants with Orchid tones, appearances, removal, and user roles.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/badge-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+import { CircleDashRegular } from '@mingcute/react/core-regular'
+
+import {
+  Badge,
+  BadgeRemove,
+  UserBadge,
+  type BadgeTone,
+} from '@ui/displaying-data/badge'
+
+const VARIANTS = ['default', 'secondary', 'destructive', 'outline', 'ghost', 'link'] as const
+const TONES = [
+  'blue',
+  'purple',
+  'orange',
+  'red',
+  'light-red',
+  'white',
+  'dark-blue',
+  'grey',
+  'tosca',
+  'green',
+] as const
+const APPEARANCES = ['soft', 'outline', 'ghost'] as const
+
+const TONE_LABEL: Record<BadgeTone, string> = {
+  blue: 'PayNow',
+  purple: 'Cards',
+  orange: 'GrabPay',
+  red: 'Failed',
+  'light-red': 'Refunded',
+  white: 'Draft',
+  'dark-blue': 'HitPay',
+  grey: 'Void',
+  tosca: 'WeChat Pay',
+  green: 'Paid',
+}
+
+function RemovableBadge({ tone, children }: { tone: BadgeTone; children: string }) {
+  const [visible, setVisible] = useState(true)
+
+  if (!visible) return null
+
+  return (
+    <Badge tone={tone}>
+      {children}
+      <BadgeRemove onClick={() => setVisible(false)} />
+    </Badge>
+  )
+}
+
+function BadgeDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Variants
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          {VARIANTS.map((variant) => (
+            <Badge
+              key={variant}
+              variant={variant}
+              render={variant === 'link' ? <a href="#usage" /> : undefined}
+            >
+              {variant}
+            </Badge>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-6">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Orchid tones
+        </p>
+        <div className="space-y-4">
+          {TONES.map((tone) => (
+            <div key={tone} className="flex flex-wrap items-center gap-3">
+              {APPEARANCES.map((appearance) => (
+                <Badge key={appearance} tone={tone} appearance={appearance}>
+                  {TONE_LABEL[tone]}
+                </Badge>
+              ))}
+              <Badge tone={tone}>
+                <CircleDashRegular data-icon="inline-start" />
+                {TONE_LABEL[tone]}
+              </Badge>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Removable
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <RemovableBadge tone="blue">Invoice</RemovableBadge>
+          <RemovableBadge tone="purple">Payment Link</RemovableBadge>
+          <RemovableBadge tone="tosca">Recurring</RemovableBadge>
+          <RemovableBadge tone="dark-blue">Point of Sale</RemovableBadge>
+          <RemovableBadge tone="green">Online Store</RemovableBadge>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          User role
+        </p>
+        <div className="flex flex-wrap items-center gap-3">
+          <UserBadge role="owner" />
+          <UserBadge role="admin" />
+          <UserBadge role="manager" />
+          <UserBadge role="cashier" />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { BadgeDemo }
+```
 
 
 <a id="avatar"></a>
@@ -281,9 +1235,114 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Image, fallback, badge, and group primitives with Orchid styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/avatar-demo.tsx` demo source.
+
+```tsx
+import { CheckRegular } from '@mingcute/react/core-regular';
+
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from "@ui/displaying-data/avatar";
+
+const SIZES = ["sm", "default", "lg"] as const;
+const PHOTO =
+  "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop";
+const ALEX_PHOTO =
+  "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=128&h=128&fit=crop";
+
+function AvatarDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Image and fallback
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Avatar>
+            <AvatarImage src={PHOTO} alt="Priya Nair" />
+            <AvatarFallback>PN</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src="/missing-avatar.jpg" alt="Alex Turner" />
+            <AvatarFallback>AT</AvatarFallback>
+          </Avatar>
+          <Avatar variant="business">
+            <AvatarFallback>H</AvatarFallback>
+          </Avatar>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Size
+        </p>
+        <div className="flex flex-wrap items-end gap-4">
+          {SIZES.map((size) => (
+            <Avatar key={size} size={size}>
+              <AvatarFallback>PN</AvatarFallback>
+            </Avatar>
+          ))}
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Badge
+        </p>
+        <div className="flex flex-wrap items-center gap-4">
+          <Avatar size="sm">
+            <AvatarImage src={PHOTO} alt="Priya Nair" />
+            <AvatarFallback>PN</AvatarFallback>
+            <AvatarBadge />
+          </Avatar>
+          <Avatar>
+            <AvatarImage src={PHOTO} alt="Priya Nair" />
+            <AvatarFallback>PN</AvatarFallback>
+            <AvatarBadge>
+              <CheckRegular />
+            </AvatarBadge>
+          </Avatar>
+          <Avatar size="lg">
+            <AvatarFallback>AT</AvatarFallback>
+            <AvatarBadge>
+              <CheckRegular />
+            </AvatarBadge>
+          </Avatar>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Group
+        </p>
+        <AvatarGroup>
+          <Avatar>
+            <AvatarImage src={PHOTO} alt="Priya Nair" />
+            <AvatarFallback>PN</AvatarFallback>
+          </Avatar>
+          <Avatar>
+            <AvatarImage src={ALEX_PHOTO} alt="Alex Turner" />
+            <AvatarFallback>AT</AvatarFallback>
+          </Avatar>
+          <Avatar variant="business">
+            <AvatarFallback>H</AvatarFallback>
+          </Avatar>
+          <AvatarGroupCount>+2</AvatarGroupCount>
+        </AvatarGroup>
+      </div>
+    </>
+  );
+}
+
+export { AvatarDemo };
+```
 
 
 <a id="tooltip"></a>
@@ -291,9 +1350,120 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Hover and focus tooltip with Orchid styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/tooltip-demo.tsx` demo source.
+
+```tsx
+import { Button } from "@ui/actions/button";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@ui/overlays/tooltip";
+
+function Tip({
+  side,
+  label,
+  content,
+}: {
+  side: "top" | "bottom" | "left" | "right";
+  label: string;
+  content: string;
+}) {
+  return (
+    <Tooltip>
+      <TooltipTrigger
+        className="inline-flex w-fit"
+        render={
+          <Button variant="outline" size="sm">
+            {label}
+          </Button>
+        }
+      />
+      <TooltipContent side={side}>{content}</TooltipContent>
+    </Tooltip>
+  );
+}
+
+function TooltipDemo() {
+  return (
+    <TooltipProvider>
+      <>
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Placement
+          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <Tip
+              side="top"
+              label="Top"
+              content="Send payment link to Priya Nair"
+            />
+            <Tip
+              side="bottom"
+              label="Bottom"
+              content="Charge SGD 48.00 on POS"
+            />
+            <Tip side="left" label="Left" content="Refund INV-2048" />
+            <Tip side="right" label="Right" content="Void this sale" />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Payment channels
+          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <Tip
+              side="top"
+              label="PayNow"
+              content="Instant SGD transfer via PayNow QR"
+            />
+            <Tip
+              side="top"
+              label="Cards"
+              content="Visa, Mastercard, and AMEX"
+            />
+            <Tip
+              side="top"
+              label="GrabPay"
+              content="Wallet checkout in Singapore"
+            />
+            <Tip
+              side="top"
+              label="WeChat Pay"
+              content="Accept WeChat Pay in SGD"
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Commerce
+          </p>
+          <div className="flex flex-wrap items-center gap-6">
+            <Tip side="bottom" label="Invoice" content="INV-2048 is overdue" />
+            <Tip
+              side="bottom"
+              label="Recurring"
+              content="Next charge for Alex Turner on 1 Sep"
+            />
+            <Tip
+              side="bottom"
+              label="Stock"
+              content="SKU-TEA-12 has 24 units"
+            />
+          </div>
+        </div>
+      </>
+    </TooltipProvider>
+  );
+}
+
+export { TooltipDemo };
+```
 
 
 <a id="tabs"></a>
@@ -301,9 +1471,128 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Horizontal or vertical tabs with default and line variants.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/tabs-demo.tsx` demo source.
+
+```tsx
+import {
+  CellphoneRegular,
+  MonitorRegular,
+} from '@mingcute/react/core-regular';
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@ui/layout/tabs";
+
+function TabsDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <Tabs defaultValue="invoice">
+          <TabsList variant="line">
+            <TabsTrigger value="invoice">Invoice</TabsTrigger>
+            <TabsTrigger value="link">Payment Link</TabsTrigger>
+            <TabsTrigger value="recurring">
+              Recurring
+              <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-oc-neutral-soft px-1.5 text-xs">
+                8
+              </span>
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="invoice">
+            INV-2048 · Priya Nair · SGD 128.00 · Cards
+          </TabsContent>
+          <TabsContent value="link">
+            Weekend brunch link · SGD 48.00 · PayNow and GrabPay
+          </TabsContent>
+          <TabsContent value="recurring">
+            8 active plans including Alex Turner · SGD 29.00 / month
+          </TabsContent>
+        </Tabs>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Pills
+        </p>
+        <Tabs defaultValue="pos">
+          <TabsList>
+            <TabsTrigger value="pos">
+              <CellphoneRegular data-icon="inline-start" />
+              Point of Sale
+            </TabsTrigger>
+            <TabsTrigger value="store">
+              <MonitorRegular data-icon="inline-start" />
+              Online Store
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="pos">
+            Terminal HP-POS-04 · last sale SGD 24.50 via GrabPay
+          </TabsContent>
+          <TabsContent value="store">
+            Home page published · PayNow and Cards at checkout
+          </TabsContent>
+        </Tabs>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Custom size
+        </p>
+        <Tabs defaultValue="commerce">
+          <TabsList
+            variant="line"
+            className="**:data-[slot=tabs-trigger]:px-4 **:data-[slot=tabs-trigger]:py-2.5 **:data-[slot=tabs-trigger]:text-base"
+          >
+            <TabsTrigger value="commerce">Commerce</TabsTrigger>
+            <TabsTrigger value="channels">Payment Channels</TabsTrigger>
+            <TabsTrigger value="data">Customer Data</TabsTrigger>
+          </TabsList>
+          <TabsContent value="commerce">
+            Invoice, Payment Link, Recurring, POS, and Online Store
+          </TabsContent>
+          <TabsContent value="channels">
+            PayNow, Cards, GrabPay, WeChat Pay · SGD
+          </TabsContent>
+          <TabsContent value="data">
+            Priya Nair, Alex Turner, and product SKUs
+          </TabsContent>
+        </Tabs>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Product data
+        </p>
+        <Tabs defaultValue="stock">
+          <TabsList variant="line">
+            <TabsTrigger value="stock">Stock</TabsTrigger>
+            <TabsTrigger value="sku">SKUs</TabsTrigger>
+            <TabsTrigger value="sold">
+              Sold today
+              <span className="inline-flex min-w-5 items-center justify-center rounded-full bg-oc-neutral-soft px-1.5 text-xs">
+                12
+              </span>
+            </TabsTrigger>
+          </TabsList>
+          <TabsContent value="stock">
+            Matcha Latte · SKU-TEA-12 · 24 units remaining
+          </TabsContent>
+          <TabsContent value="sku">
+            SKU-TEA-12, SKU-BKR-03, SKU-POS-01
+          </TabsContent>
+          <TabsContent value="sold">
+            12 POS sales · SGD 286.00 · mixed PayNow and Cards
+          </TabsContent>
+        </Tabs>
+      </div>
+    </>
+  );
+}
+
+export { TabsDemo };
+```
 
 
 <a id="skeleton"></a>
@@ -311,9 +1600,86 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Placeholder pulse with Orchid styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/skeleton-demo.tsx` demo source.
+
+```tsx
+import { Skeleton } from "@ui/feedback/skeleton";
+
+function SkeletonDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <p className="text-xs text-oc-muted-foreground">
+          Loading invoice INV-2026-0842
+        </p>
+        <div className="flex max-w-sm flex-col gap-2">
+          <Skeleton className="h-4 w-3/4" />
+          <Skeleton className="h-4 w-full" />
+          <Skeleton className="h-4 w-1/2" />
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Circle
+        </p>
+        <p className="text-xs text-oc-muted-foreground">Customer Data</p>
+        <div className="flex items-center gap-2">
+          <Skeleton className="size-8 rounded-full" />
+          <div className="flex min-w-0 flex-1 flex-col gap-1">
+            <Skeleton className="h-4 w-40" />
+            <Skeleton className="h-3.5 w-56" />
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Commerce overview
+        </p>
+        <div className="grid max-w-xl gap-3 sm:grid-cols-3">
+          <div className="space-y-2">
+            <Skeleton className="h-3 w-20" />
+            <Skeleton className="h-6 w-28" />
+            <p className="text-xs text-oc-muted-foreground">Payment Links</p>
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-3 w-20" />
+            <Skeleton className="h-6 w-28" />
+            <p className="text-xs text-oc-muted-foreground">Point of Sale</p>
+          </div>
+          <div className="space-y-2">
+            <Skeleton className="h-3 w-20" />
+            <Skeleton className="h-6 w-28" />
+            <p className="text-xs text-oc-muted-foreground">Online Store</p>
+          </div>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Product Data
+        </p>
+        <div className="flex max-w-sm items-center gap-3">
+          <Skeleton className="size-12 rounded-md" />
+          <div className="flex min-w-0 flex-1 flex-col gap-1.5">
+            <Skeleton className="h-4 w-32" />
+            <Skeleton className="h-3.5 w-24" />
+            <Skeleton className="h-3 w-16" />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { SkeletonDemo };
+```
 
 
 <a id="spinner"></a>
@@ -321,9 +1687,43 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Indeterminate loading icon sized through className.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/spinner-demo.tsx` demo source.
+
+```tsx
+import { Button } from "@ui/actions/button";
+import { Spinner } from "@ui/feedback/spinner";
+
+function SpinnerDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Size
+        </p>
+        <div className="flex items-center gap-6">
+          <Spinner className="size-3" />
+          <Spinner className="size-4" />
+          <Spinner className="size-8" />
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          On a button
+        </p>
+        <Button disabled>
+          <Spinner aria-label="Saving" />
+          Saving invoice
+        </Button>
+      </div>
+    </>
+  );
+}
+
+export { SpinnerDemo };
+```
 
 
 <a id="dialog"></a>
@@ -331,9 +1731,232 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Dialog primitives with Orchid sizes and persistent mode.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/dialog-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+import { Button } from '@ui/actions/button'
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@ui/overlays/dialog'
+import { Field, FieldGroup, FieldLabel } from '@ui/form/field'
+import { Input } from '@ui/form/input'
+import { Textarea } from '@ui/form/textarea'
+
+function DialogDemo() {
+  return (
+    <>
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <Dialog>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Review invoice
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Review invoice INV-2048</DialogTitle>
+                <DialogDescription>
+                  Confirm details before sending to the customer.
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-sm text-oc-foreground">
+                Alex Turner · SGD 128.00 · PayNow or card.
+              </p>
+              <DialogFooter>
+                <DialogClose render={<Button variant="outline" />}>Cancel</DialogClose>
+                <Button>Send invoice</Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Form
+          </p>
+          <CustomerFormDialog />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Custom border
+          </p>
+          <Dialog>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Bordered dialog
+            </DialogTrigger>
+            <DialogContent className="border border-oc-border">
+              <DialogHeader>
+                <DialogTitle>Bordered dialog</DialogTitle>
+                <DialogDescription>
+                  Dialog does not have a border variant. Use the Orchid border token through
+                  className when stronger separation is needed.
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-sm text-oc-foreground">
+                The border uses <code>border-oc-border</code> and follows the active theme.
+              </p>
+              <DialogFooter showCloseButton />
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Without close icon
+          </p>
+          <Dialog>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Customer details
+            </DialogTrigger>
+            <DialogContent showCloseButton={false}>
+              <DialogHeader>
+                <DialogTitle>Customer details</DialogTitle>
+                <DialogDescription>Read-only customer information.</DialogDescription>
+              </DialogHeader>
+              <p className="text-sm text-oc-foreground">
+                Alex Turner · alex@studio.co · last paid via Payment Link.
+              </p>
+              <DialogFooter showCloseButton />
+            </DialogContent>
+          </Dialog>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Orchid sizes
+          </p>
+          <div className="flex flex-wrap gap-3">
+            <Dialog>
+              <DialogTrigger render={<Button variant="outline" />}>Small</DialogTrigger>
+              <DialogContent size="sm">
+                <DialogHeader>
+                  <DialogTitle>Small dialog</DialogTitle>
+                  <DialogDescription>Compact confirmation or short content.</DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger render={<Button variant="outline" />}>Default</DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Default dialog</DialogTitle>
+                  <DialogDescription>Suitable for most short workflows.</DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+            <Dialog>
+              <DialogTrigger render={<Button variant="outline" />}>Large</DialogTrigger>
+              <DialogContent size="lg">
+                <DialogHeader>
+                  <DialogTitle>Large dialog</DialogTitle>
+                  <DialogDescription>More room for forms and detailed content.</DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Persistent
+          </p>
+          <Dialog persistent>
+            <DialogTrigger render={<Button variant="outline" />}>
+              Connect POS terminal
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Connect POS terminal</DialogTitle>
+                <DialogDescription>
+                  Clicking outside will not close this Orchid dialog.
+                </DialogDescription>
+              </DialogHeader>
+              <p className="text-sm text-oc-foreground">
+                Pair Orchard 01 before leaving this step.
+              </p>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+    </>
+  )
+}
+
+function CustomerFormDialog() {
+  const [open, setOpen] = useState(false)
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger render={<Button />}>Add customer</DialogTrigger>
+      <DialogContent>
+        <form
+          onSubmit={(event) => {
+            event.preventDefault()
+            setOpen(false)
+          }}
+        >
+          <DialogHeader className="-mx-4 -mt-4 border-b border-oc-border px-5 py-4 pr-12">
+            <DialogTitle>Add customer</DialogTitle>
+          </DialogHeader>
+          <div className="space-y-4 py-5">
+            <DialogDescription>Enter the customer details below.</DialogDescription>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="dialog-customer-name">Name</FieldLabel>
+                <Input
+                  id="dialog-customer-name"
+                  name="name"
+                  placeholder="Alex Turner"
+                  required
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="dialog-customer-email">Email</FieldLabel>
+                <Input
+                  id="dialog-customer-email"
+                  name="email"
+                  type="email"
+                  placeholder="alex@example.com"
+                  required
+                />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="dialog-customer-note">Note</FieldLabel>
+                <Textarea
+                  id="dialog-customer-note"
+                  name="note"
+                  placeholder="Optional customer note"
+                />
+              </Field>
+            </FieldGroup>
+          </div>
+          <DialogFooter>
+            <DialogClose render={<Button type="button" variant="outline" />}>
+              Cancel
+            </DialogClose>
+            <Button type="submit">Save customer</Button>
+          </DialogFooter>
+        </form>
+      </DialogContent>
+    </Dialog>
+  )
+}
+
+export { DialogDemo }
+```
 
 
 <a id="drawer"></a>
@@ -341,9 +1964,119 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Swipeable edge panel. Set swipeDirection to up, right, down, or left.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/drawer-demo.tsx` demo source.
+
+```tsx
+import { Button } from '@ui/actions/button'
+import { Field, FieldLabel } from '@ui/form/field'
+import { Input } from '@ui/form/input'
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from '@ui/overlays/drawer'
+
+function DrawerDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Down
+        </p>
+        <Drawer showSwipeHandle>
+          <DrawerTrigger render={<Button variant="outline" />}>
+            Open
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Invoice peek</DrawerTitle>
+              <DrawerDescription>
+                Read-only panel. Create or edit uses a centered Dialog.
+              </DrawerDescription>
+            </DrawerHeader>
+            <Field className="p-4">
+              <FieldLabel htmlFor="drawer-memo">Memo</FieldLabel>
+              <Input id="drawer-memo" defaultValue="Studio membership — March" />
+            </Field>
+            <DrawerFooter>
+              <DrawerClose render={<Button variant="outline" />}>
+                Cancel
+              </DrawerClose>
+              <Button>Save</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Right
+        </p>
+        <Drawer swipeDirection="right">
+          <DrawerTrigger render={<Button variant="outline" />}>
+            Details
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Invoice peek</DrawerTitle>
+              <DrawerDescription>
+                Side drawer for a quick look at one record.
+              </DrawerDescription>
+            </DrawerHeader>
+            <Field className="p-4">
+              <FieldLabel htmlFor="drawer-right-memo">Memo</FieldLabel>
+              <Input id="drawer-right-memo" defaultValue="Studio membership — March" />
+            </Field>
+            <DrawerFooter>
+              <DrawerClose render={<Button variant="outline" />}>
+                Cancel
+              </DrawerClose>
+              <Button>Save</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Left
+        </p>
+        <Drawer swipeDirection="left">
+          <DrawerTrigger render={<Button variant="outline" />}>
+            Filters
+          </DrawerTrigger>
+          <DrawerContent>
+            <DrawerHeader>
+              <DrawerTitle>Filters</DrawerTitle>
+              <DrawerDescription>
+                Narrow the records shown in this list.
+              </DrawerDescription>
+            </DrawerHeader>
+            <p className="p-4 text-sm leading-normal text-oc-foreground">
+              Status, channel, and date range for this list.
+            </p>
+            <DrawerFooter>
+              <DrawerClose render={<Button variant="outline" />}>
+                Cancel
+              </DrawerClose>
+              <Button>Apply</Button>
+            </DrawerFooter>
+          </DrawerContent>
+        </Drawer>
+      </div>
+    </>
+  )
+}
+
+export { DrawerDemo }
+```
 
 Use `Drawer` from `@ui/overlays/drawer`. Set `swipeDirection` to `up`, `right`, `down`, or `left`. `DrawerContent` composes portal, overlay, viewport, and popup. Pass `showSwipeHandle` when the drawer should show a drag affordance. Do not use Sheet.
 
@@ -353,9 +2086,189 @@ Use `Drawer` from `@ui/overlays/drawer`. Set `swipeDirection` to `up`, `right`, 
 
 Page links with previous, next, ellipsis, and an optional range label.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/pagination-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationInfo,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from '@ui/navigation/pagination'
+
+function DefaultPagination() {
+  const [page, setPage] = useState(2)
+  const total = 15
+
+  return (
+    <Pagination>
+      <PaginationPrevious
+        href={`?page=${Math.max(1, page - 1)}`}
+        aria-disabled={page === 1}
+        tabIndex={page === 1 ? -1 : undefined}
+        onClick={(event) => {
+          event.preventDefault()
+          setPage((p) => Math.max(1, p - 1))
+        }}
+      />
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationLink
+            href="?page=1"
+            isActive={page === 1}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(1)
+            }}
+          >
+            1
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            href="?page=2"
+            isActive={page === 2}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(2)
+            }}
+          >
+            2
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            href="?page=3"
+            isActive={page === 3}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(3)
+            }}
+          >
+            3
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            href="?page=4"
+            isActive={page === 4}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(4)
+            }}
+          >
+            4
+          </PaginationLink>
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationEllipsis />
+        </PaginationItem>
+        <PaginationItem>
+          <PaginationLink
+            href={`?page=${total}`}
+            isActive={page === total}
+            onClick={(event) => {
+              event.preventDefault()
+              setPage(total)
+            }}
+          >
+            15
+          </PaginationLink>
+        </PaginationItem>
+      </PaginationContent>
+      <PaginationNext
+        href={`?page=${Math.min(total, page + 1)}`}
+        aria-disabled={page === total}
+        tabIndex={page === total ? -1 : undefined}
+        onClick={(event) => {
+          event.preventDefault()
+          setPage((p) => Math.min(total, p + 1))
+        }}
+      />
+    </Pagination>
+  )
+}
+
+function InvoicePagination() {
+  const [page, setPage] = useState(2)
+  const total = 8
+  const from = (page - 1) * 10 + 1
+  const to = Math.min(page * 10, total * 10)
+
+  return (
+    <div className="flex w-full flex-wrap items-center justify-between gap-4">
+      <PaginationInfo>
+        Showing {from}–{to} of {total * 10} invoices
+      </PaginationInfo>
+      <Pagination className="w-auto justify-end">
+        <PaginationPrevious
+          href={`?page=${Math.max(1, page - 1)}`}
+          aria-disabled={page === 1}
+          tabIndex={page === 1 ? -1 : undefined}
+          onClick={(event) => {
+            event.preventDefault()
+            setPage((p) => Math.max(1, p - 1))
+          }}
+        />
+        <PaginationContent>
+          {Array.from({ length: total }, (_, index) => index + 1).map((item) => (
+            <PaginationItem key={item}>
+              <PaginationLink
+                href={`?page=${item}`}
+                isActive={item === page}
+                onClick={(event) => {
+                  event.preventDefault()
+                  setPage(item)
+                }}
+              >
+                {item}
+              </PaginationLink>
+            </PaginationItem>
+          ))}
+        </PaginationContent>
+        <PaginationNext
+          href={`?page=${Math.min(total, page + 1)}`}
+          aria-disabled={page === total}
+          tabIndex={page === total ? -1 : undefined}
+          onClick={(event) => {
+            event.preventDefault()
+            setPage((p) => Math.min(total, p + 1))
+          }}
+        />
+      </Pagination>
+    </div>
+  )
+}
+
+function PaginationDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <DefaultPagination />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          With range
+        </p>
+        <InvoicePagination />
+      </div>
+    </>
+  )
+}
+
+export { PaginationDemo }
+```
 
 
 <a id="kbd"></a>
@@ -363,9 +2276,41 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Keyboard key and grouped shortcut display.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/kbd-demo.tsx` demo source.
+
+```tsx
+import { Kbd, KbdGroup } from '@ui/utils/kbd'
+
+function KbdDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <p className="flex flex-wrap items-center gap-2 text-sm leading-normal text-oc-foreground">
+          Close
+          <Kbd>Esc</Kbd>
+        </p>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Group
+        </p>
+        <KbdGroup>
+          <Kbd>⌘</Kbd>
+          <Kbd>K</Kbd>
+        </KbdGroup>
+      </div>
+    </>
+  )
+}
+
+export { KbdDemo }
+```
 
 
 <a id="file-upload"></a>
@@ -373,9 +2318,275 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 File and image upload row with upload state, media, and a vertical group.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/file-upload-demo.tsx` demo source.
+
+```tsx
+import { useEffect, useId, useRef, useState } from 'react'
+import {
+  FileCodeRegular,
+  FileRegular,
+  TableRegular,
+  PicRegular,
+  UploadRegular,
+  CloseRegular,
+} from '@mingcute/react/core-regular'
+
+import {
+  FileUpload,
+  FileUploadAction,
+  FileUploadActions,
+  FileUploadContent,
+  FileUploadDescription,
+  FileUploadGroup,
+  FileUploadMedia,
+  FileUploadTitle,
+} from '@ui/form/file-upload'
+import { Button } from '@ui/actions/button'
+import { Spinner } from '@ui/feedback/spinner'
+
+type UploadItem = {
+  id: string
+  file: File
+  preview?: string
+  progress: number
+  state: 'uploading' | 'done'
+}
+
+function formatSize(bytes: number) {
+  if (bytes < 1024) {
+    return `${bytes} B`
+  }
+  if (bytes < 1024 * 1024) {
+    return `${(bytes / 1024).toFixed(1)} KB`
+  }
+  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`
+}
+
+function fileKind(file: File) {
+  if (file.type.startsWith('image/')) {
+    return 'image'
+  }
+  if (file.type === 'application/pdf' || file.name.endsWith('.pdf')) {
+    return 'pdf'
+  }
+  if (file.type.includes('sheet') || /\.(csv|xlsx|xls)$/i.test(file.name)) {
+    return 'sheet'
+  }
+  if (/\.(tsx|ts|jsx|js|json)$/i.test(file.name)) {
+    return 'code'
+  }
+  return 'file'
+}
+
+function FileGlyph({ file }: { file: File }) {
+  switch (fileKind(file)) {
+    case 'image':
+      return <PicRegular />
+    case 'pdf':
+      return <FileRegular />
+    case 'sheet':
+      return <TableRegular />
+    case 'code':
+      return <FileCodeRegular />
+    default:
+      return <FileRegular />
+  }
+}
+
+function useUploadList() {
+  const [items, setItems] = useState<UploadItem[]>([])
+  const itemsRef = useRef(items)
+  itemsRef.current = items
+
+  useEffect(() => {
+    return () => {
+      for (const item of itemsRef.current) {
+        if (item.preview) {
+          URL.revokeObjectURL(item.preview)
+        }
+      }
+    }
+  }, [])
+
+  const addFiles = (files: FileList | File[], mode: 'append' | 'replace' = 'append') => {
+    const next = Array.from(files).map((file) => ({
+      id: `${file.name}-${file.size}-${file.lastModified}-${crypto.randomUUID()}`,
+      file,
+      preview: file.type.startsWith('image/') ? URL.createObjectURL(file) : undefined,
+      progress: 0,
+      state: 'uploading' as const,
+    }))
+
+    setItems((current) => {
+      if (mode === 'replace') {
+        for (const item of current) {
+          if (item.preview) {
+            URL.revokeObjectURL(item.preview)
+          }
+        }
+        return next
+      }
+      return [...current, ...next]
+    })
+
+    for (const item of next) {
+      const started = Date.now()
+      const tick = () => {
+        const progress = Math.min(100, Math.round(((Date.now() - started) / 1200) * 100))
+        setItems((current) =>
+          current.map((entry) =>
+            entry.id === item.id
+              ? { ...entry, progress, state: progress >= 100 ? 'done' : 'uploading' }
+              : entry,
+          ),
+        )
+        if (progress < 100) {
+          window.setTimeout(tick, 80)
+        }
+      }
+      window.setTimeout(tick, 80)
+    }
+  }
+
+  const remove = (id: string) => {
+    setItems((current) => {
+      const found = current.find((item) => item.id === id)
+      if (found?.preview) {
+        URL.revokeObjectURL(found.preview)
+      }
+      return current.filter((item) => item.id !== id)
+    })
+  }
+
+  return { items, addFiles, remove }
+}
+
+function UploadItemCard({
+  item,
+  onRemove,
+}: {
+  item: UploadItem
+  onRemove: () => void
+}) {
+  const kind = fileKind(item.file)
+  const typeLabel = item.file.type || 'File'
+
+  return (
+    <FileUpload state={item.state} className="w-full max-w-md">
+      <FileUploadMedia variant={kind === 'image' && item.preview ? 'image' : 'icon'}>
+        {item.state === 'uploading' ? (
+          <Spinner />
+        ) : kind === 'image' && item.preview ? (
+          <img src={item.preview} alt="" />
+        ) : (
+          <FileGlyph file={item.file} />
+        )}
+      </FileUploadMedia>
+      <FileUploadContent>
+        <FileUploadTitle>{item.file.name}</FileUploadTitle>
+        <FileUploadDescription>
+          {item.state === 'uploading'
+            ? `Uploading · ${item.progress}%`
+            : `${typeLabel} · ${formatSize(item.file.size)}`}
+        </FileUploadDescription>
+      </FileUploadContent>
+      <FileUploadActions>
+        <FileUploadAction aria-label={`Remove ${item.file.name}`} onClick={onRemove}>
+          <CloseRegular />
+        </FileUploadAction>
+      </FileUploadActions>
+    </FileUpload>
+  )
+}
+
+function FilePicker({
+  multiple,
+  onPick,
+}: {
+  multiple?: boolean
+  onPick: (files: FileList) => void
+}) {
+  const inputRef = useRef<HTMLInputElement>(null)
+  const inputId = useId()
+
+  return (
+    <>
+      <input
+        id={inputId}
+        ref={inputRef}
+        type="file"
+        multiple={multiple}
+        className="sr-only"
+        onChange={(event) => {
+          if (event.target.files?.length) {
+            onPick(event.target.files)
+          }
+          event.target.value = ''
+        }}
+      />
+      <Button type="button" variant="outline" size="sm" onClick={() => inputRef.current?.click()}>
+        <UploadRegular />
+        {multiple ? 'Choose files' : 'Choose file'}
+      </Button>
+    </>
+  )
+}
+
+function SingleUploadDemo() {
+  const { items, addFiles, remove } = useUploadList()
+  const current = items[0]
+
+  return (
+    <div className="space-y-3">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+        Upload one
+      </p>
+      <FilePicker
+        onPick={(files) => {
+          const first = files[0]
+          if (first) {
+            addFiles([first], 'replace')
+          }
+        }}
+      />
+      {current ? <UploadItemCard item={current} onRemove={() => remove(current.id)} /> : null}
+    </div>
+  )
+}
+
+function ManyUploadDemo() {
+  const { items, addFiles, remove } = useUploadList()
+
+  return (
+    <div className="space-y-3">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+        Upload many
+      </p>
+      <FilePicker multiple onPick={addFiles} />
+      {items.length ? (
+        <FileUploadGroup>
+          {items.map((item) => (
+            <UploadItemCard key={item.id} item={item} onRemove={() => remove(item.id)} />
+          ))}
+        </FileUploadGroup>
+      ) : null}
+    </div>
+  )
+}
+
+function FileUploadDemo() {
+  return (
+    <div className="grid gap-8">
+      <SingleUploadDemo />
+      <ManyUploadDemo />
+    </div>
+  )
+}
+
+export { FileUploadDemo }
+```
 
 Wire a real `<input type="file">` (single or `multiple`) and set `state="uploading"` while the file is in flight. Show `Spinner` in `FileUploadMedia` — do not add a title shimmer. After success, switch to `state="done"` and keep the file icon or image preview. `FileUploadGroup` stacks many files vertically. Label icon-only `FileUploadAction`s. Do not call `npx shadcn add file-upload`.
 
@@ -385,9 +2596,75 @@ Wire a real `<input type="file">` (single or `multiple`) and set `state="uploadi
 
 Label, description, error, and grouped field composition.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/field-demo.tsx` demo source.
+
+```tsx
+import { Checkbox } from '@ui/form/checkbox'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+  FieldLegend,
+  FieldSet,
+} from '@ui/form/field'
+import { Input } from '@ui/form/input'
+import { Switch } from '@ui/form/switch'
+
+function FieldDemo() {
+  return (
+    <>
+      <div className="space-y-8">
+        <FieldSet className="max-w-sm">
+          <FieldLegend>Customer Data</FieldLegend>
+          <FieldDescription>Shown on invoices, receipts, and Online Store orders.</FieldDescription>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="full-name">Full name</FieldLabel>
+              <Input id="full-name" placeholder="Alex Turner" />
+              <FieldDescription>Billing name on INV-2048.</FieldDescription>
+            </Field>
+            <Field data-invalid>
+              <FieldLabel htmlFor="customer-email">Email</FieldLabel>
+              <Input id="customer-email" placeholder="alex@example.com" aria-invalid />
+              <FieldError>Enter a valid email to send the payment link.</FieldError>
+            </Field>
+            <Field orientation="horizontal">
+              <Switch defaultChecked />
+              <FieldLabel>Email receipt after Point of Sale</FieldLabel>
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox id="save-customer-data" defaultChecked />
+              <FieldLabel htmlFor="save-customer-data">Save to Customer Data</FieldLabel>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+
+        <FieldSet className="max-w-sm">
+          <FieldLegend>Product Data</FieldLegend>
+          <FieldDescription>Shared by Online Store and Point of Sale.</FieldDescription>
+          <FieldGroup>
+            <Field>
+              <FieldLabel htmlFor="product-name">Product name</FieldLabel>
+              <Input id="product-name" defaultValue="Classic White Tee" />
+              <FieldDescription>Catalog title on the storefront.</FieldDescription>
+            </Field>
+            <Field orientation="horizontal">
+              <Switch />
+              <FieldLabel>Track inventory</FieldLabel>
+            </Field>
+          </FieldGroup>
+        </FieldSet>
+      </div>
+    </>
+  )
+}
+
+export { FieldDemo }
+```
 
 
 <a id="label"></a>
@@ -395,9 +2672,41 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Accessible label with Orchid typography.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/label-demo.tsx` demo source.
+
+```tsx
+import { Checkbox } from '@ui/form/checkbox'
+import { Label } from '@ui/form/label'
+
+function LabelDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Invoice
+        </p>
+        <div className="flex items-center gap-2">
+          <Checkbox id="gst" defaultChecked />
+          <Label htmlFor="gst">Add GST to this invoice</Label>
+        </div>
+      </div>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Recurring
+        </p>
+        <div className="flex items-center gap-2">
+          <Checkbox id="auto-charge" />
+          <Label htmlFor="auto-charge">Charge the card on file each billing cycle</Label>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { LabelDemo }
+```
 
 
 <a id="input"></a>
@@ -405,9 +2714,91 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Text and file input with Orchid states.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/input-demo.tsx` demo source.
+
+```tsx
+import {
+  MailRegular,
+  SearchRegular,
+} from '@mingcute/react/core-regular'
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from '@ui/form/field'
+import { Input } from '@ui/form/input'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupInput,
+} from '@ui/form/input-group'
+
+function InputDemo() {
+  return (
+    <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Invoice
+        </p>
+        <FieldGroup className="max-w-sm">
+          <Field>
+            <FieldLabel htmlFor="invoice-number">Invoice number</FieldLabel>
+            <Input id="invoice-number" defaultValue="INV-2048" placeholder="INV-0001" />
+            <FieldDescription>Shown on the PDF and payment page.</FieldDescription>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="customer-email">Customer email</FieldLabel>
+            <InputGroup>
+              <InputGroupAddon>
+                <MailRegular />
+              </InputGroupAddon>
+              <InputGroupInput id="customer-email" placeholder="alex@example.com" />
+            </InputGroup>
+            <FieldDescription>Where we send the invoice and receipt.</FieldDescription>
+          </Field>
+          <Field data-invalid>
+            <FieldLabel htmlFor="invoice-amount">Amount</FieldLabel>
+            <Input id="invoice-amount" placeholder="0.00" aria-invalid />
+            <FieldError>Enter an amount greater than SGD 0.00.</FieldError>
+          </Field>
+        </FieldGroup>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Product Data
+        </p>
+        <FieldGroup className="max-w-sm">
+          <Field>
+            <FieldLabel htmlFor="sku">SKU</FieldLabel>
+            <Input id="sku" defaultValue="TEE-WHT-M" placeholder="SKU" />
+            <FieldDescription>Used in Online Store and Point of Sale.</FieldDescription>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="product-search">Search products</FieldLabel>
+            <InputGroup>
+              <InputGroupAddon>
+                <SearchRegular />
+              </InputGroupAddon>
+              <InputGroupInput id="product-search" placeholder="Classic White Tee" />
+            </InputGroup>
+          </Field>
+          <Field>
+            <FieldLabel htmlFor="sku-disabled">Archived SKU</FieldLabel>
+            <Input id="sku-disabled" defaultValue="OLD-SKU-01" disabled />
+          </Field>
+        </FieldGroup>
+      </div>
+    </>
+  )
+}
+
+export { InputDemo }
+```
 
 
 <a id="input-group"></a>
@@ -415,9 +2806,145 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Input, textarea, addon, and button composition.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/input-group-demo.tsx` demo source.
+
+```tsx
+import { SearchRegular } from '@mingcute/react/core-regular'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@ui/form/field'
+import {
+  InputGroup,
+  InputGroupAddon,
+  InputGroupButton,
+  InputGroupInput,
+  InputGroupSeparator,
+  InputGroupText,
+  InputGroupTextarea,
+} from '@ui/form/input-group'
+import { Select } from '@/components/form/select'
+
+function CurrencySelect({ defaultValue = 'SGD' }: { defaultValue?: string }) {
+  return (
+    <Select
+      size="inline"
+      className="uppercase"
+      defaultValue={defaultValue}
+      options={[
+        { value: 'SGD', label: 'SGD' },
+        { value: 'USD', label: 'USD' },
+        { value: 'MYR', label: 'MYR' },
+        { value: 'IDR', label: 'IDR' },
+      ]}
+    />
+  )
+}
+
+function InputGroupDemo() {
+  return (
+    <>
+      <FieldGroup className="max-w-sm">
+        <Field>
+          <FieldLabel>Invoice amount</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon className="px-2 py-0">
+              <CurrencySelect />
+            </InputGroupAddon>
+            <InputGroupSeparator />
+            <InputGroupInput placeholder="128.00" />
+          </InputGroup>
+          <FieldDescription>Amount billed on this invoice.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Payment link amount</FieldLabel>
+          <InputGroup>
+            <InputGroupInput placeholder="49.00" />
+            <InputGroupSeparator />
+            <InputGroupAddon align="inline-end" className="px-2 py-0">
+              <CurrencySelect defaultValue="SGD" />
+            </InputGroupAddon>
+          </InputGroup>
+          <FieldDescription>Fixed amount the customer pays via the link.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Online Store URL</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon className="self-stretch bg-oc-muted">
+              <InputGroupText className='pr-2'>https://hitpay.shop/</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupSeparator />
+            <InputGroupInput placeholder="studio" />
+          </InputGroup>
+          <FieldDescription>Public storefront path for this merchant.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Customer search</FieldLabel>
+          <InputGroup>
+            <InputGroupInput placeholder="Search customers" />
+            <InputGroupAddon align="inline-end">
+              <InputGroupButton size="icon-xs" aria-label="Search">
+                <SearchRegular />
+              </InputGroupButton>
+            </InputGroupAddon>
+          </InputGroup>
+        </Field>
+      </FieldGroup>
+
+      <FieldGroup className="max-w-sm">
+        <Field>
+          <FieldLabel>Recurring charge</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon className="px-2 py-0">
+              <CurrencySelect />
+            </InputGroupAddon>
+            <InputGroupSeparator />
+            <InputGroupInput placeholder="29.00" />
+          </InputGroup>
+          <FieldDescription>Billed each cycle until the plan is cancelled.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>POS tip amount</FieldLabel>
+          <InputGroup>
+            <InputGroupInput placeholder="2.00" />
+            <InputGroupSeparator />
+            <InputGroupAddon align="inline-end" className="px-2 py-0">
+              <CurrencySelect />
+            </InputGroupAddon>
+          </InputGroup>
+          <FieldDescription>Optional tip collected at the POS terminal.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Payment channel fee</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon className="self-stretch bg-oc-muted">
+              <InputGroupText className="pr-2">%</InputGroupText>
+            </InputGroupAddon>
+            <InputGroupSeparator />
+            <InputGroupInput placeholder="2.9" />
+          </InputGroup>
+          <FieldDescription>Percentage fee for this payment channel.</FieldDescription>
+        </Field>
+
+        <Field>
+          <FieldLabel>Payment note</FieldLabel>
+          <InputGroup>
+            <InputGroupAddon align="block-start">Internal note</InputGroupAddon>
+            <InputGroupTextarea placeholder="Add context for your team…" />
+            <InputGroupAddon align="block-end">Visible only to staff</InputGroupAddon>
+          </InputGroup>
+        </Field>
+      </FieldGroup>
+    </>
+  )
+}
+
+export { InputGroupDemo }
+```
 
 
 <a id="textarea"></a>
@@ -425,9 +2952,75 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Auto-sizing textarea with Orchid form styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/textarea-demo.tsx` demo source.
+
+```tsx
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldGroup,
+  FieldLabel,
+} from "@ui/form/field";
+import { Textarea } from "@ui/form/textarea";
+
+function TextareaDemo() {
+  return (
+    <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Invoice
+        </p>
+        <FieldGroup className="max-w-sm">
+          <Field>
+            <FieldLabel htmlFor="invoice-notes">Invoice notes</FieldLabel>
+            <Textarea
+              id="invoice-notes"
+              placeholder="Payment due in 14 days. Bank transfer details on the PDF."
+            />
+            <FieldDescription>
+              Visible to the customer on the invoice.
+            </FieldDescription>
+          </Field>
+        </FieldGroup>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Online Store
+        </p>
+        <FieldGroup className="max-w-sm">
+          <Field>
+            <FieldLabel htmlFor="product-desc">Product description</FieldLabel>
+            <Textarea
+              id="product-desc"
+              defaultValue="Soft cotton tee. Ships from Singapore. Available in-store and online."
+            />
+            <FieldDescription>
+              Used on the product page and POS receipt.
+            </FieldDescription>
+          </Field>
+          <Field data-invalid>
+            <FieldLabel htmlFor="refund-reason">Refund reason</FieldLabel>
+            <Textarea
+              id="refund-reason"
+              placeholder="Describe the refund"
+              aria-invalid
+            />
+            <FieldError>
+              A refund reason is required for this payment.
+            </FieldError>
+          </Field>
+        </FieldGroup>
+      </div>
+    </>
+  );
+}
+
+export { TextareaDemo };
+```
 
 
 <a id="checkbox"></a>
@@ -435,9 +3028,141 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Checkbox with Orchid states and an optional group helper.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/checkbox-demo.tsx` demo source.
+
+```tsx
+import { Checkbox, CheckboxGroup } from "@ui/form/checkbox";
+import {
+  Field,
+  FieldContent,
+  FieldDescription,
+  FieldLabel,
+} from "@ui/form/field";
+import { Label } from "@ui/form/label";
+
+function CheckboxDemo() {
+  return (
+    <>
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Basic
+          </p>
+          <div className="flex items-center gap-2">
+            <Checkbox id="email-receipt" defaultChecked />
+            <Label htmlFor="email-receipt">Send receipt by email</Label>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Description
+          </p>
+          <Field orientation="horizontal" className="max-w-sm">
+            <Checkbox id="attach-product-data" />
+            <FieldContent>
+              <FieldLabel htmlFor="attach-product-data">
+                Attach Product Data
+              </FieldLabel>
+              <FieldDescription>
+                Include SKU, quantity, and SGD amount on INV-2026-0842.
+              </FieldDescription>
+            </FieldContent>
+          </Field>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            States
+          </p>
+          <div className="flex flex-col gap-2">
+            <Field orientation="horizontal">
+              <Checkbox id="unchecked-state" />
+              <FieldLabel htmlFor="unchecked-state">Unchecked</FieldLabel>
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox id="checked-state" defaultChecked />
+              <FieldLabel htmlFor="checked-state">Checked</FieldLabel>
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox id="indeterminate-state" indeterminate />
+              <FieldLabel htmlFor="indeterminate-state">
+                Indeterminate
+              </FieldLabel>
+            </Field>
+            <Field orientation="horizontal" data-invalid>
+              <Checkbox id="invalid-state" aria-invalid />
+              <FieldLabel htmlFor="invalid-state">Invalid</FieldLabel>
+            </Field>
+            <Field orientation="horizontal" data-disabled>
+              <Checkbox id="disabled-state" disabled />
+              <FieldLabel htmlFor="disabled-state">Disabled</FieldLabel>
+            </Field>
+            <Field orientation="horizontal" data-disabled>
+              <Checkbox id="checked-disabled-state" defaultChecked disabled />
+              <FieldLabel htmlFor="checked-disabled-state">
+                Checked and disabled
+              </FieldLabel>
+            </Field>
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Vertical group
+          </p>
+          <CheckboxGroup
+            label="Payment Channels"
+            alignment="vertical"
+            defaultValue={["paynow"]}
+          >
+            <Field orientation="horizontal">
+              <Checkbox id="channel-paynow" value="paynow" />
+              <FieldLabel htmlFor="channel-paynow">PayNow</FieldLabel>
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox id="channel-cards" value="cards" />
+              <FieldLabel htmlFor="channel-cards">Cards</FieldLabel>
+            </Field>
+            <Field orientation="horizontal">
+              <Checkbox id="channel-grabpay" value="grabpay" />
+              <FieldLabel htmlFor="channel-grabpay">GrabPay</FieldLabel>
+            </Field>
+          </CheckboxGroup>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Horizontal group
+          </p>
+          <CheckboxGroup
+            label="Commerce"
+            alignment="horizontal"
+            defaultValue={["invoice"]}
+          >
+            <Field orientation="horizontal" className="w-auto">
+              <Checkbox id="commerce-invoice" value="invoice" />
+              <FieldLabel htmlFor="commerce-invoice">Invoice</FieldLabel>
+            </Field>
+            <Field orientation="horizontal" className="w-auto">
+              <Checkbox id="commerce-link" value="link" />
+              <FieldLabel htmlFor="commerce-link">Payment Link</FieldLabel>
+            </Field>
+            <Field orientation="horizontal" className="w-auto">
+              <Checkbox id="commerce-pos" value="pos" />
+              <FieldLabel htmlFor="commerce-pos">Point of Sale</FieldLabel>
+            </Field>
+          </CheckboxGroup>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { CheckboxDemo };
+```
 
 
 <a id="radio-group"></a>
@@ -445,9 +3170,98 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Radio group and item primitives with Orchid styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/radio-group-demo.tsx` demo source.
+
+```tsx
+import { Label } from '@ui/form/label'
+import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
+
+function RadioGroupDemo() {
+  return (
+    <>
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Vertical
+          </p>
+          <RadioGroup defaultValue="paynow">
+            {[
+              ['paynow', 'PayNow'],
+              ['cards', 'Cards'],
+              ['link', 'Payment Link'],
+              ['pos', 'Point of Sale'],
+            ].map(([value, label]) => (
+              <div key={value} className="flex items-center gap-2">
+                <RadioGroupItem value={value} id={`payment-${value}`} />
+                <Label htmlFor={`payment-${value}`}>{label}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Horizontal
+          </p>
+          <RadioGroup className="flex flex-wrap gap-4" defaultValue="sgd">
+            {['SGD', 'USD', 'MYR'].map((currency) => (
+              <div key={currency} className="flex items-center gap-2">
+                <RadioGroupItem value={currency.toLowerCase()} id={`currency-${currency}`} />
+                <Label htmlFor={`currency-${currency}`}>{currency}</Label>
+              </div>
+            ))}
+          </RadioGroup>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            States
+          </p>
+          <RadioGroup defaultValue="active">
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="default" id="status-default" />
+              <Label htmlFor="status-default">Draft invoice</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="active" id="status-active" />
+              <Label htmlFor="status-active">Sent</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="error" id="status-error" aria-invalid />
+              <Label htmlFor="status-error">Failed PayNow</Label>
+            </div>
+            <div className="flex items-center gap-2">
+              <RadioGroupItem value="disabled" id="status-disabled" disabled />
+              <Label htmlFor="status-disabled">Voided</Label>
+            </div>
+          </RadioGroup>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Description
+          </p>
+          <RadioGroup defaultValue="invoice">
+            <div className="flex items-start gap-2">
+              <RadioGroupItem value="invoice" id="invoice" />
+              <div className="grid gap-0.5">
+                <Label htmlFor="invoice">Invoice</Label>
+                <p className="text-xs leading-normal text-oc-muted-foreground">
+                  Create INV-2026-0842 and email it to the customer.
+                </p>
+              </div>
+            </div>
+          </RadioGroup>
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { RadioGroupDemo }
+```
 
 
 <a id="switch"></a>
@@ -455,9 +3269,105 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Switch in default and small Orchid sizes.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/switch-demo.tsx` demo source.
+
+```tsx
+import { Label } from "@ui/form/label";
+import { Switch } from "@ui/form/switch";
+
+function ToggleRow({
+  id,
+  label,
+  defaultChecked,
+  disabled,
+  size,
+}: {
+  id: string;
+  label: string;
+  defaultChecked?: boolean;
+  disabled?: boolean;
+  size?: "default" | "sm";
+}) {
+  return (
+    <div className="flex items-center gap-3">
+      <Switch
+        id={id}
+        size={size}
+        defaultChecked={defaultChecked}
+        disabled={disabled}
+      />
+      <Label htmlFor={id}>{label}</Label>
+    </div>
+  );
+}
+
+function SwitchDemo() {
+  return (
+    <>
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <div className="flex items-center gap-4">
+            <Switch />
+            <Switch defaultChecked />
+            <Switch disabled />
+            <Switch defaultChecked disabled />
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Small
+          </p>
+          <div className="flex items-center gap-4">
+            <Switch size="sm" />
+            <Switch size="sm" defaultChecked />
+            <Switch size="sm" disabled />
+            <Switch size="sm" defaultChecked disabled />
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Payment Channels
+          </p>
+          <div className="flex flex-col gap-3">
+            <ToggleRow id="paynow" label="Accept PayNow" defaultChecked />
+            <ToggleRow id="cards" label="Accept Cards" defaultChecked />
+            <ToggleRow id="wechat" label="Accept WeChat Pay" />
+          </div>
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Commerce
+          </p>
+          <div className="flex flex-col gap-3">
+            <ToggleRow
+              id="recurring"
+              label="Enable Recurring billing"
+              defaultChecked
+            />
+            <ToggleRow id="store" label="Publish Online Store" defaultChecked />
+            <ToggleRow
+              id="pos"
+              label="Point of Sale tips"
+              size="sm"
+              defaultChecked
+            />
+          </div>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { SwitchDemo };
+```
 
 
 <a id="slider"></a>
@@ -465,9 +3375,81 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Single, range, or vertical slider with Orchid styling.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/slider-demo.tsx` demo source.
+
+```tsx
+import { Slider } from "@ui/form/slider";
+
+function SliderDemo() {
+  return (
+    <>
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Point of Sale tip (SGD)
+          </p>
+          <Slider defaultValue={8} max={20} />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Dragged
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Online Store discount (%)
+          </p>
+          <Slider defaultValue={15} />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Range
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Invoice amount filter (SGD)
+          </p>
+          <Slider defaultValue={[25, 75]} />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Multiple thumbs
+          </p>
+          <p className="text-xs text-oc-muted-foreground">Payout bands</p>
+          <Slider defaultValue={[20, 40, 70]} />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Low-stock alert
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            SKU HP-MUG-001 reorder at units
+          </p>
+          <Slider defaultValue={12} max={100} />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Recurring retry window
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Days to retry a failed Cards charge
+          </p>
+          <Slider defaultValue={3} max={14} />
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { SliderDemo };
+```
 
 
 <a id="form-section"></a>
@@ -475,9 +3457,147 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Heading plus FormSectionGroup and FormSectionItem.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/form-section-demo.tsx` demo source.
+
+```tsx
+import { ExternalLinkRegular } from '@mingcute/react/core-regular'
+import { Button } from '@ui/actions/button'
+import { Badge } from '@ui/displaying-data/badge'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@ui/form/field'
+import { Input } from '@ui/form/input'
+import { FormSection, FormSectionGroup, FormSectionItem } from '@ui/form/form-section'
+import { Switch } from '@ui/form/switch'
+import { TooltipProvider } from '@ui/overlays/tooltip'
+
+function FormSectionDemo() {
+  return (
+    <TooltipProvider>
+      <>
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <FormSection
+            title="Online Store"
+            description="Storefront URL, theme, and password protection."
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Badge and action
+          </p>
+          <FormSection
+            title="Payment Channels"
+            description="Upgrade to accept GrabPay, PayNow, and cards at checkout."
+            badge={<Badge tone="purple">Upgrade</Badge>}
+            actions={<Button>Upgrade Now</Button>}
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Notification
+          </p>
+          <FormSection
+            title="Invoices"
+            description="Overdue invoices that need a reminder."
+            notification={2}
+            hint="Unread items that need a response."
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Button group
+          </p>
+          <FormSection
+            title="Online Store theme"
+            description="Preview changes before they go live."
+            actions={
+              <>
+                <Button variant="secondary" size="sm">
+                  Preview
+                  <ExternalLinkRegular />
+                </Button>
+                <Button size="sm">
+                  Save
+                </Button>
+              </>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Recurring
+          </p>
+          <FormSection
+            title="Recurring"
+            description="Monthly membership billed to saved payment methods."
+            badge={<Badge tone="blue">Active</Badge>}
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            POS
+          </p>
+          <FormSection
+            title="Point of Sale"
+            description="Terminals, receipts, and in-store payment channels."
+            actions={
+              <Button variant="secondary" size="sm">
+                Manage terminals
+              </Button>
+            }
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            With form
+          </p>
+          <FormSectionGroup className="max-w-xl">
+            <FormSection
+              title="Online Store"
+              description="These fields share the same left edge as the section title."
+            />
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="store-name">Store name</FieldLabel>
+                <Input id="store-name" placeholder="HitPay Studio" />
+                <FieldDescription>Shown on invoices and receipts.</FieldDescription>
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="store-url">Store URL</FieldLabel>
+                <Input id="store-url" placeholder="your-store.hitpay.shop" />
+              </Field>
+              <FormSectionItem
+                title="Password protection"
+                description="Visitors must enter a password before they can view the store."
+                actions={<Switch defaultChecked />}
+              >
+                <Input placeholder="Enter password" type="password" />
+              </FormSectionItem>
+              <FormSectionItem
+                variant="background"
+                title="Guest checkout"
+                description="Let customers pay without creating an account."
+                actions={<Switch defaultChecked />}
+              />
+            </FieldGroup>
+          </FormSectionGroup>
+        </div>
+      </>
+    </TooltipProvider>
+  )
+}
+
+export { FormSectionDemo }
+```
 
 
 <a id="choice-card"></a>
@@ -485,9 +3605,120 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Selectable cards with left or center icon, no radio dot.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/choice-card-demo.tsx` demo source.
+
+```tsx
+import {
+  BankCardRegular,
+  LinkRegular,
+  QrcodeRegular,
+  RepeatRegular,
+  ShoppingBag1Regular,
+  StoreRegular,
+} from '@mingcute/react/core-regular';
+import { ChoiceCard, ChoiceCardGroup } from "@/components/form/choice-card";
+
+function ChoiceCardDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Left
+        </p>
+        <ChoiceCardGroup defaultValue="paynow">
+          <ChoiceCard
+            value="paynow"
+            alignment="left"
+            iconAlign="left"
+            icon={<QrcodeRegular />}
+            title="PayNow"
+            description="Instant SGD transfers via QR"
+          />
+          <ChoiceCard
+            value="cards"
+            alignment="left"
+            iconAlign="left"
+            icon={<BankCardRegular />}
+            title="Cards"
+            description="Visa, Mastercard, and AMEX"
+          />
+          <ChoiceCard
+            value="link"
+            alignment="left"
+            iconAlign="left"
+            icon={<LinkRegular />}
+            title="Payment Link"
+            description="Share a checkout URL with the customer"
+          />
+        </ChoiceCardGroup>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Center
+        </p>
+        <ChoiceCardGroup defaultValue="invoice" alignment="horizontal">
+          <ChoiceCard
+            value="invoice"
+            alignment="center"
+            iconAlign="center"
+            icon={<ShoppingBag1Regular />}
+            title="Invoice"
+            description="INV-2026"
+            className="flex-1"
+          />
+          <ChoiceCard
+            value="recurring"
+            alignment="center"
+            iconAlign="center"
+            icon={<RepeatRegular />}
+            title="Recurring"
+            description="Subscriptions"
+            className="flex-1"
+          />
+          <ChoiceCard
+            value="pos"
+            alignment="center"
+            iconAlign="center"
+            icon={<StoreRegular />}
+            title="Point of Sale"
+            description="In-store"
+            className="flex-1"
+          />
+        </ChoiceCardGroup>
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Commerce channel
+        </p>
+        <ChoiceCardGroup defaultValue="online-store">
+          <ChoiceCard
+            value="online-store"
+            alignment="left"
+            iconAlign="left"
+            icon={<ShoppingBag1Regular />}
+            title="Online Store"
+            description="Sell SKUs on your HitPay storefront"
+          />
+          <ChoiceCard
+            value="pos"
+            alignment="left"
+            iconAlign="left"
+            icon={<StoreRegular />}
+            title="Point of Sale"
+            description="Collect SGD at the counter with Cards or PayNow"
+          />
+        </ChoiceCardGroup>
+      </div>
+    </>
+  );
+}
+
+export { ChoiceCardDemo };
+```
 
 
 <a id="customer-card"></a>
@@ -495,9 +3726,133 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Small, Big, and Float customer or beneficiary cards.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/customer-card-demo.tsx` demo source.
+
+```tsx
+import type { ReactNode } from 'react'
+import { Chat1Regular } from '@mingcute/react/core-regular'
+import { Button } from '@ui/actions/button'
+import { Badge } from '@ui/displaying-data/badge'
+import { CustomerCard, type CustomerCardData } from '@/components/displaying-data/customer-card'
+
+const CUSTOMER: CustomerCardData = {
+  name: 'Alex Turner',
+  email: 'alex@studio.co',
+  phone: '8373 3739 18',
+  phoneCountryCode: '65',
+  address: {
+    street: '12 Orchard Road',
+    state: 'Singapore',
+  },
+}
+
+const POS_CUSTOMER: CustomerCardData = {
+  name: 'Chloe Tan',
+  email: 'chloe@tan.co',
+  phone: '9123 4567',
+  phoneCountryCode: '65',
+  address: {
+    street: 'Tanjong Pagar Centre',
+    state: 'Singapore',
+  },
+}
+
+function ExampleBlock({
+  title,
+  children,
+}: {
+  title: string
+  children: ReactNode
+}) {
+  return (
+    <div className="space-y-3">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+        {title}
+      </p>
+      {children}
+    </div>
+  )
+}
+
+function CustomerCardDemo() {
+  return (
+    <>
+      <ExampleBlock title="Small">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <CustomerCard variant="small" customer={CUSTOMER} />
+          <CustomerCard variant="small" customer={CUSTOMER} hover />
+          <CustomerCard variant="small" customer={CUSTOMER} active />
+          <CustomerCard variant="small" customer={CUSTOMER} loading />
+          <CustomerCard variant="big" customer={CUSTOMER} loading />
+        </div>
+      </ExampleBlock>
+
+      <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <ExampleBlock title="Big">
+          <CustomerCard variant="big" customer={CUSTOMER} />
+        </ExampleBlock>
+
+        <ExampleBlock title="Float">
+          <CustomerCard variant="float" customer={CUSTOMER} />
+        </ExampleBlock>
+
+        <ExampleBlock title="Empty">
+          <CustomerCard variant="empty" />
+        </ExampleBlock>
+
+        <ExampleBlock title="Invoice payer">
+          <CustomerCard
+            variant="small"
+            customer={CUSTOMER}
+            badge={<Badge tone="blue">Invoice</Badge>}
+          />
+        </ExampleBlock>
+
+        <ExampleBlock title="Recurring subscriber">
+          <CustomerCard
+            variant="small"
+            customer={CUSTOMER}
+            badge={<Badge tone="purple">Recurring</Badge>}
+          />
+        </ExampleBlock>
+
+        <ExampleBlock title="POS walk-in">
+          <CustomerCard
+            variant="small"
+            customer={POS_CUSTOMER}
+            badge={<Badge tone="green">POS</Badge>}
+          />
+        </ExampleBlock>
+
+        <ExampleBlock title="Edit and action">
+          <CustomerCard
+            variant="big"
+            customer={CUSTOMER}
+            edit
+            hover
+            bottom={
+              <Button variant="ghost" size="sm" className="w-full">
+                <Chat1Regular />
+                Start Chat
+              </Button>
+            }
+          />
+        </ExampleBlock>
+
+        <ExampleBlock title="Closable">
+          <div className="p-2">
+            <CustomerCard variant="small" customer={CUSTOMER} closable />
+          </div>
+        </ExampleBlock>
+      </div>
+    </>
+  )
+}
+
+export { CustomerCardDemo }
+```
 
 
 <a id="date-picker"></a>
@@ -505,9 +3860,66 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 
 Date, range, and date-time selection with popover and calendar helpers.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/date-picker-demo.tsx` demo source.
+
+```tsx
+import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
+import { Label } from '@ui/form/label'
+
+function DatePickerDemo() {
+  return (
+    <>
+      <div className="space-y-8">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Basic
+          </p>
+          <Label>Invoice due date</Label>
+          <DatePicker />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Range
+          </p>
+          <p className="text-xs text-oc-muted-foreground">Settlement period for PayNow and Cards</p>
+          <DatePickerRange
+            defaultSelected={{
+              from: new Date(2026, 0, 20),
+              to: new Date(2026, 1, 9),
+            }}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Date of birth
+          </p>
+          <Label>Date of birth</Label>
+          <DatePicker
+            placeholder="Select date"
+            defaultSelected={new Date(1994, 5, 15)}
+            startMonth={new Date(1900, 0)}
+            endMonth={new Date()}
+          />
+        </div>
+
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Date and time
+          </p>
+          <Label>Delivery at</Label>
+          <DateTimePicker defaultSelected={new Date(2026, 8, 15, 9, 30)} />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { DatePickerDemo }
+```
 
 Use `DatePicker`, `DatePickerRange`, or `DateTimePicker`. Do not import `@ui/form/calendar`.
 
@@ -533,9 +3945,77 @@ Click the month/year caption to open a month grid. Click the year in that panel 
 
 Props picker for a closed list or a searchable / multi select.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { Select } from '@/components/form/select'
+import {
+  Field,
+  FieldDescription,
+  FieldGroup,
+  FieldLabel,
+} from '@ui/form/field'
+
+const currencies = [
+  { value: 'SGD', label: 'SGD — Singapore Dollar' },
+  { value: 'USD', label: 'USD — US Dollar' },
+  { value: 'MYR', label: 'MYR — Malaysian Ringgit' },
+  { value: 'IDR', label: 'IDR — Indonesian Rupiah' },
+]
+
+const channels = [
+  { value: 'pos', label: 'POS' },
+  { value: 'invoice', label: 'Invoice' },
+  { value: 'online_store', label: 'Online Store' },
+]
+
+function SelectDemo() {
+  const [currency, setCurrency] = useState<string | null>('SGD')
+  const [channel, setChannel] = useState<string | null>(null)
+  const [methods, setMethods] = useState<string[]>(['pos'])
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <Field>
+        <FieldLabel>Currency</FieldLabel>
+        <Select
+          options={currencies}
+          value={currency}
+          onValueChange={(value) => setCurrency(typeof value === 'string' ? value : null)}
+        />
+        <FieldDescription>Closed list — no search box.</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel>Sales channel</FieldLabel>
+        <Select
+          searchable
+          options={channels}
+          value={channel}
+          placeholder="Search channels"
+          onValueChange={(value) => setChannel(typeof value === 'string' ? value : null)}
+        />
+        <FieldDescription>Set searchable when the list is long.</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel>Methods</FieldLabel>
+        <Select
+          multiple
+          options={channels}
+          value={methods}
+          onValueChange={(value) => setMethods(Array.isArray(value) ? value : [])}
+        />
+        <FieldDescription>multiple adds chips.</FieldDescription>
+      </Field>
+    </FieldGroup>
+  )
+}
+
+export { SelectDemo }
+```
 
 One props-driven picker. Do not import `@ui/form/combobox` children.
 
@@ -565,9 +4045,52 @@ In Form Builder, `type: "select"` is this block without search. `type: "combobox
 
 App-member dropdown. Docs use a fake staff-app-members API.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/staff-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { StaffSelect } from '@/components/form/staff-select'
+import type { HitPayStaffAppMember } from '#/lib/hitpay'
+import { FieldGroup } from '@ui/form/field'
+
+function StaffSelectDemo() {
+  const [assigneeId, setAssigneeId] = useState<string | null>(null)
+  const [assignee, setAssignee] = useState<HitPayStaffAppMember | null>(null)
+  const [reviewerIds, setReviewerIds] = useState<string[]>([])
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <StaffSelect
+        name="assignee_id"
+        value={assigneeId}
+        description={
+          assignee
+            ? `${assignee.email} · ${assignee.role?.title}`
+            : 'GET /api/apps/{appId}/staff-app-members'
+        }
+        onValueChange={(value, selected) => {
+          setAssigneeId(typeof value === 'string' ? value : null)
+          setAssignee(selected && !Array.isArray(selected) ? selected : null)
+        }}
+      />
+      <StaffSelect
+        name="reviewer_ids"
+        label="Reviewers"
+        multiple
+        roleTitles={['Manager', 'Admin']}
+        value={reviewerIds}
+        description="Same path, filtered to Manager and Admin."
+        onValueChange={(value) => setReviewerIds(Array.isArray(value) ? value : [])}
+      />
+    </FieldGroup>
+  )
+}
+
+export { StaffSelectDemo }
+```
 
 App-member dropdown. Fetches `GET /api/apps/{appId}/staff-app-members` (same as App Studio). Docs serve a fake response for that path.
 
@@ -585,9 +4108,38 @@ Do not fetch staff on the screen. Do not call `/v1/staffs`. Persist `id` plus na
 
 Business role dropdown. Docs use a fake roles API.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/role-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { RoleSelect } from '@/components/form/role-select'
+import type { HitPayRole } from '#/lib/hitpay'
+import { FieldGroup } from '@ui/form/field'
+
+function RoleSelectDemo() {
+  const [roleId, setRoleId] = useState<string | null>(null)
+  const [role, setRole] = useState<HitPayRole | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <RoleSelect
+        name="notify_role_id"
+        value={roleId}
+        description={role ? `Selected ${role.title}` : 'GET /api/apps/{appId}/roles'}
+        onValueChange={(value, selected) => {
+          setRoleId(typeof value === 'string' ? value : null)
+          setRole(selected && !Array.isArray(selected) ? selected : null)
+        }}
+      />
+    </FieldGroup>
+  )
+}
+
+export { RoleSelectDemo }
+```
 
 Business role dropdown. Fetches `GET /api/apps/{appId}/roles` (same as App Studio). Docs serve a fake response for that path.
 
@@ -605,9 +4157,33 @@ Gate buttons with `useHitPayUser().user.role.title`. Use this select only to sto
 
 Coupon dropdown. Loads GET /v1/coupons.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/coupon-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { CouponSelect } from '@/components/form/coupon-select'
+import { FieldGroup } from '@ui/form/field'
+
+function CouponSelectDemo() {
+  const [couponId, setCouponId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <CouponSelect
+        name="coupon_id"
+        value={couponId}
+        description="GET /v1/coupons"
+        onValueChange={(value) => setCouponId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { CouponSelectDemo }
+```
 
 Coupon dropdown. Loads `GET /v1/coupons`. Do not call `list-coupons` on the screen.
 
@@ -625,9 +4201,33 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Discount dropdown. Loads GET /v1/discounts.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/discount-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { DiscountSelect } from '@/components/form/discount-select'
+import { FieldGroup } from '@ui/form/field'
+
+function DiscountSelectDemo() {
+  const [discountId, setDiscountId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <DiscountSelect
+        name="discount_id"
+        value={discountId}
+        description="GET /v1/discounts"
+        onValueChange={(value) => setDiscountId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { DiscountSelectDemo }
+```
 
 Discount dropdown. Loads `GET /v1/discounts`. Do not call `list-discounts` on the screen.
 
@@ -645,9 +4245,33 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Tax dropdown. Loads GET /v1/taxes.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/tax-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { TaxSelect } from '@/components/form/tax-select'
+import { FieldGroup } from '@ui/form/field'
+
+function TaxSelectDemo() {
+  const [taxId, setTaxId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <TaxSelect
+        name="tax_id"
+        value={taxId}
+        description="GET /v1/taxes"
+        onValueChange={(value) => setTaxId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { TaxSelectDemo }
+```
 
 Tax dropdown. Loads `GET /v1/taxes`. Do not call `list-taxes` on the screen.
 
@@ -665,9 +4289,33 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Shipping method dropdown. Loads GET /v1/shipping.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/shipping-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { ShippingSelect } from '@/components/form/shipping-select'
+import { FieldGroup } from '@ui/form/field'
+
+function ShippingSelectDemo() {
+  const [shippingId, setShippingId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <ShippingSelect
+        name="shipping_id"
+        value={shippingId}
+        description="GET /v1/shipping"
+        onValueChange={(value) => setShippingId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { ShippingSelectDemo }
+```
 
 Shipping method dropdown. Loads `GET /v1/shipping`. Do not call `list-shipping` on the screen.
 
@@ -685,9 +4333,33 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Pickup dropdown. Loads GET /v1/pickups.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/pickup-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { PickupSelect } from '@/components/form/pickup-select'
+import { FieldGroup } from '@ui/form/field'
+
+function PickupSelectDemo() {
+  const [pickupId, setPickupId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <PickupSelect
+        name="pickup_id"
+        value={pickupId}
+        description="GET /v1/pickups"
+        onValueChange={(value) => setPickupId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { PickupSelectDemo }
+```
 
 Pickup dropdown. Loads `GET /v1/pickups`. Do not call `list-pickups` on the screen.
 
@@ -705,9 +4377,33 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Category dropdown. Loads GET /v1/product-category.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/product-category-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { ProductCategorySelect } from '@/components/form/product-category-select'
+import { FieldGroup } from '@ui/form/field'
+
+function ProductCategorySelectDemo() {
+  const [categoryId, setCategoryId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <ProductCategorySelect
+        name="category_id"
+        value={categoryId}
+        description="GET /v1/product-category"
+        onValueChange={(value) => setCategoryId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { ProductCategorySelectDemo }
+```
 
 Product category dropdown. Loads `GET /v1/product-category`. Do not call `list-product-categories` on the screen.
 
@@ -725,9 +4421,33 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Location dropdown. Loads GET /v1/locations.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/location-select-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { LocationSelect } from '@/components/form/location-select'
+import { FieldGroup } from '@ui/form/field'
+
+function LocationSelectDemo() {
+  const [locationId, setLocationId] = useState<string | null>(null)
+
+  return (
+    <FieldGroup className="max-w-sm">
+      <LocationSelect
+        name="location_id"
+        value={locationId}
+        description="GET /v1/locations"
+        onValueChange={(value) => setLocationId(typeof value === 'string' ? value : null)}
+      />
+    </FieldGroup>
+  )
+}
+
+export { LocationSelectDemo }
+```
 
 Location dropdown. Loads `GET /v1/locations`. Do not call `list-locations` on the screen.
 
@@ -745,9 +4465,301 @@ Persist `id` plus name snapshot. Optional: `multiple`.
 
 Read-only key/value card for one record. Not a collection.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/detail-card-demo.tsx` demo source.
+
+```tsx
+import { Avatar, AvatarFallback, AvatarImage } from '@ui/displaying-data/avatar'
+import { DetailCard } from '@/components/displaying-data/detail-card'
+import { Badge } from '@ui/displaying-data/badge'
+
+const PHOTO = 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop'
+
+function DetailCardDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <DetailCard
+          columns={2}
+          items={[
+            {
+              key: 'invoice',
+              label: 'Invoice',
+              value: 'INV-2026-0842',
+              alignment: 'vertical',
+            },
+            {
+              key: 'customer',
+              label: 'Customer',
+              value: 'alex@arcticmonkey.io',
+              alignment: 'vertical',
+            },
+            {
+              key: 'status',
+              label: 'Status',
+              value: <Badge tone="green">Paid</Badge>,
+              alignment: 'vertical',
+            },
+            {
+              key: 'channel',
+              label: 'Channel',
+              value: 'PayNow',
+              alignment: 'vertical',
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Border
+        </p>
+        <DetailCard
+          title="Payment details"
+          columns={2}
+          style="border"
+          items={[
+            {
+              key: 'email',
+              label: 'Email',
+              value: 'alex@arcticmonkey.io',
+              copyValue: 'alex@arcticmonkey.io',
+              alignment: 'vertical',
+            },
+            {
+              key: 'phone',
+              label: 'Phone',
+              value: '+65 8123 4567',
+              alignment: 'vertical',
+            },
+            {
+              key: 'status',
+              label: 'Status',
+              value: <Badge tone="green">Paid</Badge>,
+              alignment: 'vertical',
+            },
+            {
+              key: 'method',
+              label: 'Method',
+              value: 'Cards',
+              alignment: 'vertical',
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          3 columns, 2 rows
+        </p>
+        <DetailCard
+          columns={3}
+          style="border"
+          items={[
+            {
+              key: 'created',
+              label: 'Created',
+              value: '25 Aug 2026',
+              alignment: 'vertical',
+            },
+            {
+              key: 'channel',
+              label: 'Channel',
+              value: 'Online Store',
+              alignment: 'vertical',
+            },
+            {
+              key: 'currency',
+              label: 'Currency',
+              value: 'SGD',
+              alignment: 'vertical',
+            },
+            {
+              key: 'amount',
+              label: 'Amount',
+              value: '128.00',
+              alignment: 'vertical',
+              size: 'big',
+            },
+            { key: 'fee', label: 'Fee', value: '3.20', alignment: 'vertical' },
+            {
+              key: 'net',
+              label: 'Net',
+              value: '124.80',
+              alignment: 'vertical',
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Colspan
+        </p>
+        <DetailCard
+          title="Customer data"
+          columns={4}
+          style="border"
+          items={[
+            {
+              key: 'customer',
+              label: 'Customer',
+              value: (
+                <span className="inline-flex items-center gap-2">
+                  <Avatar size="sm">
+                    <AvatarImage src={PHOTO} alt="" />
+                    <AvatarFallback>AT</AvatarFallback>
+                  </Avatar>
+                  Alex Turner
+                </span>
+              ),
+              alignment: 'vertical',
+              colSpan: 2,
+            },
+            {
+              key: 'email',
+              label: 'Email',
+              value: 'alex@arcticmonkey.io',
+              alignment: 'vertical',
+            },
+            {
+              key: 'phone',
+              label: 'Phone',
+              value: '+65 8123 4567',
+              alignment: 'vertical',
+            },
+            {
+              key: 'address',
+              label: 'Billing address',
+              value: '1 Raffles Place, Singapore 048616',
+              alignment: 'vertical',
+              colSpan: 3,
+            },
+            {
+              key: 'country',
+              label: 'Country',
+              value: 'SG',
+              alignment: 'vertical',
+            },
+            {
+              key: 'payment-id',
+              label: 'Payment ID',
+              value: 'pay_8f2a91',
+              copyValue: 'pay_8f2a91',
+              alignment: 'vertical',
+              colSpan: 4,
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Stacked rows
+        </p>
+        <DetailCard
+          items={[
+            { key: 'email', label: 'Email', value: 'alex@arcticmonkey.io' },
+            { key: 'phone', label: 'Phone', value: '+65 8123 4567' },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Stacked rows, Border
+        </p>
+        <DetailCard
+          style="border"
+          items={[
+            { key: 'email', label: 'Email', value: 'alex@arcticmonkey.io' },
+            { key: 'phone', label: 'Phone', value: '+65 8123 4567' },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Product Data
+        </p>
+        <DetailCard
+          title="SKU"
+          columns={2}
+          style="border"
+          items={[
+            {
+              key: 'sku',
+              label: 'SKU',
+              value: 'HP-MUG-001',
+              alignment: 'vertical',
+            },
+            {
+              key: 'price',
+              label: 'Price',
+              value: 'SGD 28.00',
+              alignment: 'vertical',
+            },
+            {
+              key: 'inventory',
+              label: 'Inventory',
+              value: '42 in stock',
+              alignment: 'vertical',
+            },
+            {
+              key: 'sold-via',
+              label: 'Sold via',
+              value: 'Online Store',
+              alignment: 'vertical',
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Recurring plan
+        </p>
+        <DetailCard
+          columns={2}
+          style="border"
+          items={[
+            {
+              key: 'plan',
+              label: 'Plan',
+              value: 'Monthly membership',
+              alignment: 'vertical',
+            },
+            {
+              key: 'amount',
+              label: 'Amount',
+              value: 'SGD 49.00',
+              alignment: 'vertical',
+            },
+            {
+              key: 'next-charge',
+              label: 'Next charge',
+              value: '1 Sep 2026',
+              alignment: 'vertical',
+            },
+            {
+              key: 'method',
+              label: 'Method',
+              value: 'Cards',
+              alignment: 'vertical',
+            },
+          ]}
+        />
+      </div>
+    </>
+  )
+}
+
+export { DetailCardDemo }
+```
 
 Use `DetailCard` for a read-only key/value view of **one** record (invoice, leave request,
 customer). Use `DataList` or `DataTable` for collections. Do not assemble label/value stacks
@@ -768,9 +4780,74 @@ it can render text, links, badges, or custom content.
 
 Props empty state with optional media and actions.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/empty-demo.tsx` demo source.
+
+```tsx
+import { AddRegular } from '@mingcute/react/core-regular'
+import { Empty } from '@/components/displaying-data/empty'
+
+function EmptyDemo() {
+  return (
+    <div className="grid gap-12 md:grid-cols-2">
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          No invoices
+        </p>
+        <Empty
+          media="icon"
+          title="No invoices yet"
+          description="Create an invoice to bill a customer by email or payment link."
+          actions={[
+            { key: 'learn', label: 'Learn more', variant: 'outline' },
+            {
+              key: 'create',
+              label: 'Create invoice',
+              icon: <AddRegular data-icon="inline-start" />,
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Search not found
+        </p>
+        <Empty
+          media="search"
+          title="No matching invoices"
+          description="Try another invoice number, customer, or payment channel."
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Upgrade
+        </p>
+        <Empty
+          media="upgrade"
+          title="Upgrade to Point of Sale"
+          description="Accept in-store payments on a HitPay terminal."
+          actions={[{ key: 'upgrade', label: 'Upgrade now' }]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Text only
+        </p>
+        <Empty
+          title="No customers yet"
+          description="Customer Data appears here after a payment, invoice, or POS sale."
+        />
+      </div>
+    </div>
+  )
+}
+
+export { EmptyDemo }
+```
 
 One props-driven empty state. Do not import `@ui/displaying-data/empty` children.
 
@@ -799,9 +4876,256 @@ import { Empty } from '@/components/displaying-data/empty'
 
 Card/row collection when search, filters, sort, or pagination are not needed.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/data-list-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import {
+  BankRegular,
+  CurrencyDollarRegular,
+  Delete2Regular,
+  MapPinRegular,
+  PencilRegular,
+} from '@mingcute/react/core-regular'
+
+import { Button } from '@ui/actions/button'
+import { Badge } from '@ui/displaying-data/badge'
+import { DataList } from '@/components/displaying-data/data-list'
+import { QuantityInput } from '@/components/form/quantity-input'
+
+const moreMenu = [
+  { key: 'edit', label: 'Edit' },
+  { key: 'delete', label: 'Delete', destructive: true },
+]
+
+function DataListDemo() {
+  const [count, setCount] = useState(1303)
+
+  return (
+    <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'dbs',
+              title: 'DBS Multiplier',
+              description: 'Alex Turner',
+              badges: (
+                <>
+                  <Badge tone="dark-blue">Default</Badge>
+                  <Badge tone="blue">HitPay</Badge>
+                  <Badge tone="purple">Stripe</Badge>
+                </>
+              ),
+              details: [
+                { key: 'city', icon: <MapPinRegular />, text: 'Singapore' },
+                { key: 'currency', icon: <CurrencyDollarRegular />, text: 'SGD' },
+                { key: 'account', icon: <BankRegular />, text: '***3123' },
+              ],
+            },
+            {
+              key: 'priya',
+              title: 'Priya Nair',
+              description: 'INV-2048 · Cards · SGD 128.00',
+              badges: <Badge tone="green">Paid</Badge>,
+              details: [
+                { key: 'city', icon: <MapPinRegular />, text: 'Singapore' },
+                { key: 'currency', icon: <CurrencyDollarRegular />, text: 'SGD' },
+              ],
+            },
+            {
+              key: 'matcha',
+              title: 'Matcha Latte',
+              description: 'SKU-TEA-12 · Online Store and POS',
+              layout: 'media',
+              meta: '24 in stock',
+              badges: <Badge tone="green">Active</Badge>,
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Hover actions
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'edit',
+              title: 'DBS Multiplier',
+              description: 'Alex Turner',
+              badges: (
+                <>
+                  <Badge tone="dark-blue">Default</Badge>
+                  <Badge tone="blue">HitPay</Badge>
+                </>
+              ),
+              details: [
+                { key: 'city', icon: <MapPinRegular />, text: 'Singapore' },
+                { key: 'currency', icon: <CurrencyDollarRegular />, text: 'SGD' },
+              ],
+              hoverActions: [
+                { key: 'edit', label: 'Edit', icon: <PencilRegular className="size-4" /> },
+                {
+                  key: 'delete',
+                  label: 'Delete',
+                  destructive: true,
+                  icon: <Delete2Regular className="size-4" />,
+                },
+              ],
+            },
+            {
+              key: 'selected',
+              title: 'DBS Multiplier',
+              description: 'Alex Turner',
+              selected: true,
+              badges: <Badge tone="dark-blue">Default</Badge>,
+              details: [{ key: 'city', icon: <MapPinRegular />, text: 'Singapore' }],
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Stack · copy fields
+        </p>
+        <DataList
+          layout="stack"
+          items={[
+            {
+              key: 'invoice',
+              title: 'Invoice paid',
+              meta: (
+                <>
+                  <span className="text-xs text-oc-muted-foreground">-</span>
+                  <span className="text-xs text-oc-muted-foreground">20 Aug 2026</span>
+                </>
+              ),
+              copyRows: [
+                {
+                  label: 'URL:',
+                  value: 'https://hooks.hitpayapp.com/invoice/a9ad4444-e1da-46d9-9d83-4da6cb602ab9',
+                },
+                {
+                  label: 'Salt:',
+                  value: 'JDJ5JDEwJHUvekxEVWpoUjV5Ty9qdFg1bENrVC40eDZJVnNNSFFKdmozTkpqWHVqZ3cybHFTOXZINjNx',
+                },
+              ],
+            },
+            {
+              key: 'link',
+              title: 'Payment link paid',
+              menu: moreMenu,
+              meta: (
+                <>
+                  <span className="text-xs text-oc-muted-foreground">-</span>
+                  <span className="text-xs text-oc-muted-foreground">20 Aug 2026</span>
+                </>
+              ),
+              copyRows: [
+                {
+                  label: 'URL:',
+                  value: 'https://hooks.hitpayapp.com/payment-link/a9ad4444-e1da-46d9-9d83-4da6cb602ab9',
+                },
+              ],
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Media
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'home',
+              title: 'Home',
+              description: 'Welcome to our store. Discover new arrivals and seasonal offers.',
+              media: {
+                src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              },
+              meta: 'Last updated : 20 Aug 2026',
+              badges: <Badge tone="green">Published</Badge>,
+            },
+            {
+              key: 'brunch',
+              title: 'Weekend brunch',
+              description: 'Payment Link landing page for SGD 48.00 brunch sets.',
+              media: {
+                src: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop',
+              },
+              meta: 'Last updated : 18 Aug 2026',
+              badges: <Badge tone="grey">Draft</Badge>,
+              menu: moreMenu,
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Logo · tokens · trailing
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'store',
+              title: 'HitPay Store',
+              logo: (
+                <span className="flex size-8 items-center justify-center rounded-full bg-oc-primary text-xs font-semibold text-oc-primary-foreground">
+                  H
+                </span>
+              ),
+              tokensLabel: 'Payment methods',
+              tokens: ['Visa', 'WC', 'MC', 'AP', 'PN'],
+              trailing: <Button size="default">Connect</Button>,
+            },
+          ]}
+        />
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Inventory count · trailing quantity
+        </p>
+        <DataList
+          items={[
+            {
+              key: 'testing-stock-counter',
+              title: 'Testing Stock Counter App',
+              description: 'No SKU',
+              meta: 'Last counted 9/12/2026',
+              trailing: (
+                <QuantityInput
+                  value={count}
+                  min={0}
+                  onValueChange={setCount}
+                  aria-label="Testing Stock Counter App quantity"
+                />
+              ),
+            },
+          ]}
+        />
+        <p className="text-xs text-oc-muted-foreground">
+          Select a location, add products, adjust the quantity, then save the count.
+        </p>
+      </div>
+    </>
+  )
+}
+
+export { DataListDemo }
+```
 
 Pass **`items` only**. Do not import row primitives. Do not
 use `DataTable` unless the list needs search, filters, sort, or pagination.
@@ -907,9 +5231,71 @@ sorting, or pagination.
 
 Minus/plus stepper; click the value to type.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/quantity-input-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { QuantityInput } from '@/components/form/quantity-input'
+
+function QuantityInputDemo() {
+  const [quantity, setQuantity] = useState(2)
+  const [stock, setStock] = useState(24)
+
+  return (
+    <>
+      <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <p className="text-xs text-oc-muted-foreground">Invoice line qty · SKU-TEA-12</p>
+          <QuantityInput value={quantity} min={0} max={99} onValueChange={setQuantity} />
+        </div>
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Uncontrolled
+          </p>
+          <p className="text-xs text-oc-muted-foreground">POS cart items</p>
+          <QuantityInput defaultValue={3} min={1} max={10} />
+        </div>
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Disabled
+          </p>
+          <p className="text-xs text-oc-muted-foreground">Locked recurring seats</p>
+          <QuantityInput defaultValue={5} disabled />
+        </div>
+      </div>
+
+      <div className="grid gap-8 md:grid-cols-2">
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Product stock
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Online Store inventory for Matcha Latte
+          </p>
+          <QuantityInput value={stock} min={0} max={999} onValueChange={setStock} />
+        </div>
+        <div className="space-y-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Recurring seats
+          </p>
+          <p className="text-xs text-oc-muted-foreground">
+            Alex Turner · monthly plan quantity
+          </p>
+          <QuantityInput defaultValue={1} min={1} max={20} />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { QuantityInputDemo }
+```
 
 
 <a id="text-editor"></a>
@@ -919,9 +5305,125 @@ Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
 
 Rich text for notes and handover, built with [Lexical](https://lexical.dev/) (Meta). Toolbar: bold, italic, underline, heading, lists. Use `Textarea` for a single plain field.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/text-editor-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { TextEditor, type TextEditorDocument } from '@/components/form/text-editor'
+
+const handoverNote = JSON.stringify({
+  root: {
+    children: [
+      {
+        children: [
+          {
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            style: '',
+            text: 'Shift handover',
+            type: 'text',
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        type: 'heading',
+        version: 1,
+        tag: 'h2',
+      },
+      {
+        children: [
+          {
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            style: '',
+            text: 'Note what the next team needs to know. Keep it short.',
+            type: 'text',
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        type: 'paragraph',
+        version: 1,
+      },
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+    type: 'root',
+    version: 1,
+  },
+})
+
+const lockedNote = JSON.stringify({
+  root: {
+    children: [
+      {
+        children: [
+          {
+            detail: 0,
+            format: 0,
+            mode: 'normal',
+            style: '',
+            text: 'This note is locked. Staff can read it, not edit it.',
+            type: 'text',
+            version: 1,
+          },
+        ],
+        direction: 'ltr',
+        format: '',
+        indent: 0,
+        type: 'paragraph',
+        version: 1,
+      },
+    ],
+    direction: 'ltr',
+    format: '',
+    indent: 0,
+    type: 'root',
+    version: 1,
+  },
+})
+
+function TextEditorDemo() {
+  const [document, setDocument] = useState<TextEditorDocument | null>(null)
+
+  return (
+    <div className="space-y-6">
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <p className="text-sm text-oc-muted-foreground">
+          Bold, italic, heading, and lists. Persist Lexical JSON.
+        </p>
+        <TextEditor defaultValue={handoverNote} onValueChange={setDocument} />
+      </div>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Read only
+        </p>
+        <TextEditor editable={false} defaultValue={lockedNote} />
+      </div>
+      {document ? (
+        <p className="text-xs text-oc-muted-foreground">
+          {document.root.children.length} top-level blocks
+        </p>
+      ) : null}
+    </div>
+  )
+}
+
+export { TextEditorDemo }
+```
 
 ```tsx
 import { TextEditor } from "@/components/form/text-editor";
@@ -941,9 +5443,130 @@ import { TextEditor } from "@/components/form/text-editor";
 
 Dashboard KPI tile. Use for summaries, not a record's fields.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/metric-card-demo.tsx` demo source.
+
+```tsx
+import {
+  CurrencyDollarRegular,
+  LinkRegular,
+  RepeatRegular,
+  RefreshAnticlockwise1Regular,
+  ShoppingBag1Regular,
+  CheckboxRegular,
+  StoreRegular,
+  GroupRegular,
+} from '@mingcute/react/core-regular';
+import { MetricCard } from "@/components/displaying-data/metric-card";
+import { TooltipProvider } from "@ui/overlays/tooltip";
+
+function MetricCardDemo() {
+  return (
+    <TooltipProvider>
+      <>
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            4 items
+          </p>
+          <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <MetricCard
+              icon={<CurrencyDollarRegular />}
+              iconColor="blue"
+              title="Gross volume"
+              content="SGD 11,170.00"
+              info
+              tooltip="PayNow, Cards, and Payment Link volume this period"
+              percentValue={10}
+              percentTooltip="Compared to last month"
+            />
+            <MetricCard
+              icon={<CurrencyDollarRegular />}
+              iconColor="blue"
+              title="This month"
+              content="SGD 1,870.00"
+              percentValue={4}
+              percentTooltip="Compared to last month"
+            />
+            <MetricCard
+              icon={<CheckboxRegular />}
+              iconColor="green"
+              title="Paid invoices"
+              content="20"
+              percentValue={12}
+            />
+            <MetricCard
+              icon={<RefreshAnticlockwise1Regular />}
+              iconColor="red"
+              title="Refunded"
+              content="3"
+              percentValue={-2}
+            />
+          </div>
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Default
+          </p>
+          <MetricCard
+            icon={<ShoppingBag1Regular />}
+            title="Online Store sales"
+            content="SGD 12,480.00"
+            info
+            tooltip="SKU sales before fees"
+            percentValue={12}
+            percentTooltip="Vs last period"
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Footer
+          </p>
+          <MetricCard
+            icon={<GroupRegular />}
+            title="Customers"
+            content="86"
+            footer="Customer Data updated just now"
+          />
+        </div>
+
+        <div className="space-y-4">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Commerce mix
+          </p>
+          <div className="grid w-full gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <MetricCard
+              icon={<LinkRegular />}
+              iconColor="blue"
+              title="Payment Links"
+              content="SGD 4,260.00"
+              percentValue={8}
+            />
+            <MetricCard
+              icon={<RepeatRegular />}
+              iconColor="green"
+              title="Recurring"
+              content="SGD 2,140.00"
+              percentValue={6}
+            />
+            <MetricCard
+              icon={<StoreRegular />}
+              iconColor="blue"
+              title="Point of Sale"
+              content="SGD 3,890.00"
+              percentValue={3}
+            />
+          </div>
+        </div>
+      </>
+    </TooltipProvider>
+  );
+}
+
+export { MetricCardDemo };
+```
 
 Use `MetricCard` for dashboard KPIs (revenue, volume, counts). Use `DetailCard` for a
 record's fields.
@@ -958,9 +5581,66 @@ HitPay App Studio embedded pane frame. Not generic app chrome.
 every route inside the dashboard iframe — not as generic website chrome.
 Put `PageLayout` or `FormLayout` inside for page chrome.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/app-layout-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+import { AppLayout } from '@/components/layout/app-layout'
+import { PageLayout } from '@/components/layout/page-layout'
+
+function AppLayoutDemo() {
+  const [tab, setTab] = useState('overview')
+  const [sidebar, setSidebar] = useState('home')
+
+  return (
+    <div className="flex min-h-0 flex-col gap-8">
+      <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
+        <AppLayout
+          className="h-full"
+          appName="Invoices"
+          variant="tabs"
+          navigationItems={[
+            { id: 'overview', label: 'Overview' },
+            { id: 'sent', label: 'Sent' },
+          ]}
+          activeNavigation={tab}
+          onNavigationChange={setTab}
+        >
+          <PageLayout title={tab === 'overview' ? 'Overview' : 'Sent'}>
+            <p className="text-sm text-oc-muted-foreground">
+              Frame the embedded pane with AppLayout, then put PageLayout inside.
+            </p>
+          </PageLayout>
+        </AppLayout>
+      </div>
+      <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
+        <AppLayout
+          className="h-full"
+          appName="Settings"
+          variant="sidebar"
+          sidebarItems={[
+            { id: 'home', label: 'General' },
+            { id: 'team', label: 'Team' },
+          ]}
+          activeSidebar={sidebar}
+          onSidebarChange={setSidebar}
+        >
+          <PageLayout title={sidebar === 'home' ? 'General' : 'Team'}>
+            <p className="text-sm text-oc-muted-foreground">
+              Sidebar mode opens a drawer on small screens.
+            </p>
+          </PageLayout>
+        </AppLayout>
+      </div>
+    </div>
+  )
+}
+
+export { AppLayoutDemo }
+```
 
 ## Default
 
@@ -993,9 +5673,149 @@ Standard route page with header, optional onBack, and scrollable content.
 The `actions` prop accepts any React node so pages can provide the controls they need.
 Pass `onBack` on nested screens (show/edit) to put a back control beside the title. Omit it on the root list.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/page-layout-demo.tsx` demo source.
+
+```tsx
+import { DocCodePanel } from "@/components/doc/doc-code-panel";
+import { Badge } from "@ui/displaying-data/badge";
+import { Button } from "@ui/actions/button";
+import { DetailCard } from "@/components/displaying-data/detail-card";
+import { PageLayout } from "@/components/layout/page-layout";
+
+const INVOICE_LIST_USAGE = `import { Button } from '@ui/actions/button'
+import { PageLayout } from '@/components/layout/page-layout'
+
+function InvoiceListPageExample() {
+  return (
+    <div className="h-96 overflow-hidden rounded-xl border border-oc-border">
+      <PageLayout
+        title="Invoices"
+        description="Create, send, and track invoices across payment channels."
+        actions={<Button>Create invoice</Button>}
+      >
+        <div className="rounded-xl border border-oc-border p-6 text-sm text-oc-muted-foreground">
+          Invoice table or empty state goes here.
+        </div>
+      </PageLayout>
+    </div>
+  )
+}`;
+
+const INVOICE_DETAIL_USAGE = `import { Badge } from '@ui/displaying-data/badge'
+import { Button } from '@ui/actions/button'
+import { DetailCard } from '@/components/displaying-data/detail-card'
+import { PageLayout } from '@/components/layout/page-layout'
+
+function InvoiceDetailPageExample() {
+  return (
+    <div className="h-112 overflow-hidden rounded-xl border border-oc-border">
+      <PageLayout
+        title="INV-2048"
+        description="https://pay.hitpayapp.com/inv-2048"
+        copyValue="https://pay.hitpayapp.com/inv-2048"
+        badge={<Badge tone="green">Paid</Badge>}
+        actions={<Button variant="outline">Edit</Button>}
+        onBack={() => {}}
+      >
+        <DetailCard
+          columns={2}
+          items={[
+            { key: 'customer', label: 'Customer', value: 'Alex Turner', alignment: 'vertical' },
+            { key: 'email', label: 'Email', value: 'alex@studio.co', alignment: 'vertical' },
+            { key: 'amount', label: 'Amount', value: 'SGD 128.00', alignment: 'vertical' },
+            { key: 'channel', label: 'Channel', value: 'PayNow', alignment: 'vertical' },
+          ]}
+        />
+      </PageLayout>
+    </div>
+  )
+}`;
+
+function PageLayoutDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <div className="h-96 overflow-hidden rounded-xl border border-oc-border">
+          <PageLayout
+            title="Invoices"
+            description="Create, send, and track invoices across payment channels."
+            actions={<Button>Create invoice</Button>}
+          >
+            <div className="rounded-xl border border-oc-border p-6 text-sm text-oc-muted-foreground">
+              Invoice table or empty state goes here.
+            </div>
+          </PageLayout>
+        </div>
+        <div className="flex min-w-0 flex-col gap-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Usage
+          </p>
+          <DocCodePanel
+            filename="invoice-list-page.tsx"
+            code={INVOICE_LIST_USAGE}
+          />
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div className="h-112 overflow-hidden rounded-xl border border-oc-border">
+          <PageLayout
+            title="INV-2048"
+            description="https://pay.hitpayapp.com/inv-2048"
+            copyValue="https://pay.hitpayapp.com/inv-2048"
+            badge={<Badge tone="green">Paid</Badge>}
+            actions={<Button variant="outline">Edit</Button>}
+            onBack={() => {}}
+          >
+            <DetailCard
+              columns={2}
+              items={[
+                {
+                  key: "customer",
+                  label: "Customer",
+                  value: "Alex Turner",
+                  alignment: "vertical",
+                },
+                {
+                  key: "email",
+                  label: "Email",
+                  value: "alex@studio.co",
+                  alignment: "vertical",
+                },
+                {
+                  key: "amount",
+                  label: "Amount",
+                  value: "SGD 128.00",
+                  alignment: "vertical",
+                },
+                {
+                  key: "channel",
+                  label: "Channel",
+                  value: "PayNow",
+                  alignment: "vertical",
+                },
+              ]}
+            />
+          </PageLayout>
+        </div>
+        <div className="flex min-w-0 flex-col gap-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            Usage
+          </p>
+          <DocCodePanel
+            filename="invoice-detail-page.tsx"
+            code={INVOICE_DETAIL_USAGE}
+          />
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { PageLayoutDemo };
+```
 
 
 <a id="form-layout"></a>
@@ -1007,13 +5827,492 @@ Create and edit form shell with page and modal modes.
 presentation, headings, scrolling, close behavior, and actions. `FormBuilder`
 renders the fields inside that shell.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/form-layout-page-demo.tsx` demo source.
 
-## Interactive example
+```tsx
+import { useRef, useState } from "react";
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+import { Button } from "@ui/actions/button";
+import { FormLayout } from "@/components/layout/form-layout";
+import {
+  SchemaForm,
+  useSchemaForm,
+  type SchemaFormField,
+} from "@/components/form/form-builder";
+import { toast } from "@ui/feedback/toast";
+
+const PRODUCT_FIELDS: SchemaFormField[] = [
+  {
+    key: "basics",
+    title: "Basics",
+    type: "section",
+    description: "Long form to test page-body scroll under the top actions.",
+  },
+  {
+    key: "name",
+    title: "Product name",
+    type: "input",
+    placeholder: "Studio Membership",
+    required: true,
+    value: "",
+  },
+  { key: "sku", title: "SKU", type: "input", placeholder: "SKU-MEM-001", value: "" },
+  { key: "barcode", title: "Barcode", type: "input", value: "" },
+  {
+    key: "price",
+    title: "Price (SGD)",
+    type: "input",
+    placeholder: "29.00",
+    required: true,
+    value: "",
+  },
+  { key: "compare_at", title: "Compare-at price", type: "input", value: "" },
+  { key: "cost", title: "Cost price", type: "input", value: "" },
+  {
+    key: "qty",
+    title: "Quantity",
+    type: "quantity",
+    value: 1,
+    min: 0,
+    max: 999,
+  },
+  {
+    key: "description",
+    title: "Description",
+    type: "textarea",
+    placeholder: "Shown in Online Store, POS, invoices, and payment links.",
+    value: "",
+  },
+  { key: "inventory", title: "Inventory", type: "section" },
+  { key: "warehouse", title: "Warehouse", type: "input", value: "Harbourfront" },
+  { key: "bin", title: "Bin location", type: "input", value: "" },
+  { key: "reorder_at", title: "Reorder date", type: "date", value: "" },
+  { key: "supplier", title: "Supplier", type: "input", value: "" },
+  { key: "supplier_sku", title: "Supplier SKU", type: "input", value: "" },
+  { key: "seo", title: "SEO", type: "section" },
+  { key: "seo_title", title: "SEO title", type: "input", value: "" },
+  { key: "seo_description", title: "SEO description", type: "textarea", value: "" },
+  { key: "slug", title: "URL handle", type: "input", value: "" },
+  { key: "notes", title: "Internal notes", type: "textarea", value: "" },
+];
+
+const PRODUCT_DETAILS_FIELDS: SchemaFormField[] = [
+  {
+    key: "name",
+    title: "Product name",
+    type: "input",
+    placeholder: "T-shirt",
+    required: true,
+    value: "",
+  },
+  {
+    key: "sku",
+    title: "SKU",
+    type: "input",
+    placeholder: "TS 123456",
+    value: "",
+  },
+  {
+    key: "barcode",
+    title: "Barcode",
+    type: "input",
+    placeholder: "123456",
+    value: "",
+  },
+  {
+    key: "price",
+    title: "Selling price (SGD)",
+    type: "input",
+    placeholder: "100.00",
+    required: true,
+    value: "",
+  },
+  {
+    key: "description",
+    title: "Description",
+    type: "textarea",
+    value: "",
+  },
+];
+
+const PUBLISH_SETTINGS_FIELDS: SchemaFormField[] = [
+  {
+    key: "status",
+    title: "Status",
+    type: "select",
+    options: [
+      { value: "draft", label: "Draft" },
+      { value: "published", label: "Published" },
+    ],
+    value: "published",
+  },
+  {
+    key: "image",
+    title: "Product image",
+    type: "file",
+    description: "Upload the primary product image.",
+    value: "",
+  },
+  {
+    key: "category",
+    title: "Category",
+    type: "combobox",
+    placeholder: "Select category",
+    options: [
+      { value: "apparel", label: "Apparel" },
+      { value: "accessories", label: "Accessories" },
+      { value: "home", label: "Home" },
+    ],
+    value: "",
+  },
+  {
+    key: "availability",
+    title: "Availability",
+    type: "checkbox-group",
+    options: [
+      { value: "online-store", label: "Online Store" },
+      { value: "point-of-sale", label: "Point of Sale" },
+    ],
+    value: ["online-store", "point-of-sale"],
+  },
+];
+
+function FormLayoutPageDemo() {
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Full page with top actions
+        </p>
+        <ClosePageExample />
+      </div>
+
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Two-column product form
+        </p>
+        <TwoColumnPageExample />
+      </div>
+    </>
+  );
+}
+
+function ClosePageExample() {
+  const [creating, setCreating] = useState(false);
+
+  if (!creating) {
+    return <Button onClick={() => setCreating(true)}>Create product</Button>;
+  }
+
+  return (
+    <div className="h-144 overflow-hidden rounded-xl border border-oc-border">
+      <ProductForm
+        id="close-product-form"
+        onClose={() => setCreating(false)}
+        onSaved={() => setCreating(false)}
+      />
+    </div>
+  );
+}
+
+function ProductForm({
+  id,
+  onClose,
+  onSaved,
+}: {
+  id: string;
+  onClose: () => void;
+  onSaved?: () => void;
+}) {
+  const form = useSchemaForm({
+    fields: PRODUCT_FIELDS,
+    onSubmit: () => {
+      toast.add({ title: "Product saved", type: "success" });
+      onSaved?.();
+    },
+  });
+
+  return (
+    <FormLayout
+      title="Create product"
+      description="Add a product to your catalog and sales channels."
+      onClose={onClose}
+      formId={id}
+      actions={{
+        save: { label: "Create" },
+      }}
+    >
+      <SchemaForm id={id} form={form} className="max-w-none" />
+    </FormLayout>
+  );
+}
+
+function TwoColumnPageExample() {
+  const [creating, setCreating] = useState(false);
+
+  if (!creating) {
+    return (
+      <Button onClick={() => setCreating(true)}>Create advanced product</Button>
+    );
+  }
+
+  return (
+    <div className="h-160 overflow-hidden rounded-xl border border-oc-border">
+      <TwoColumnProductForm
+        onClose={() => setCreating(false)}
+        onSaved={() => setCreating(false)}
+      />
+    </div>
+  );
+}
+
+function TwoColumnProductForm({
+  onClose,
+  onSaved,
+}: {
+  onClose: () => void;
+  onSaved: () => void;
+}) {
+  const submittedForms = useRef(new Set<"details" | "settings">());
+
+  const completeSave = (section: "details" | "settings") => {
+    submittedForms.current.add(section);
+    if (submittedForms.current.size !== 2) return;
+
+    toast.add({ title: "Product saved", type: "success" });
+    onSaved();
+  };
+
+  const productDetails = useSchemaForm({
+    fields: PRODUCT_DETAILS_FIELDS,
+    onSubmit: () => completeSave("details"),
+  });
+  const publishSettings = useSchemaForm({
+    fields: PUBLISH_SETTINGS_FIELDS,
+    onSubmit: () => completeSave("settings"),
+  });
+  const saving = productDetails.isSubmitting || publishSettings.isSubmitting;
+
+  const save = () => {
+    submittedForms.current.clear();
+    void Promise.all([productDetails.submit(), publishSettings.submit()]);
+  };
+
+  return (
+    <FormLayout
+      title="Add product"
+      description="Configure the product details and pricing."
+      onClose={onClose}
+      className="[&>div:last-child>div]:max-w-none"
+      actions={{
+        save: {
+          label: "Create",
+          disabled: saving,
+          onClick: save,
+        },
+      }}
+    >
+      <div className="grid min-h-full lg:grid-cols-[minmax(0,3fr)_minmax(18rem,2fr)]">
+        <div className="pb-8 lg:pr-8 lg:pb-0">
+          <SchemaForm form={productDetails} className="max-w-none" />
+        </div>
+
+        <div className="border-t border-oc-border pt-8 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
+          <div className="mb-6">
+            <h2 className="text-base font-semibold text-oc-foreground">
+              Publish
+            </h2>
+            <p className="mt-1 text-sm text-oc-muted-foreground">
+              Set visibility and product organization.
+            </p>
+          </div>
+          <SchemaForm form={publishSettings} className="max-w-none" />
+        </div>
+      </div>
+    </FormLayout>
+  );
+}
+
+export { FormLayoutPageDemo };
+```
+
+## Example implementation
+
+The example below is the actual `src/components/doc/demos/form-layout-modal-demo.tsx` demo source.
+
+```tsx
+import { useState } from "react";
+
+import { Button } from "@ui/actions/button";
+import { FormLayout } from "@/components/layout/form-layout";
+import {
+  SchemaForm,
+  useSchemaForm,
+  type SchemaFormField,
+} from "@/components/form/form-builder";
+import { toast } from "@ui/feedback/toast";
+
+const CUSTOMER_FIELDS: SchemaFormField[] = [
+  {
+    key: "contact",
+    title: "Contact",
+    type: "section",
+    description: "Long form to test modal body scroll and a pinned footer.",
+  },
+  { key: "name", title: "Name", type: "input", required: true, value: "" },
+  {
+    key: "email",
+    title: "Email",
+    type: "input",
+    validation: "email",
+    required: true,
+    value: "",
+  },
+  { key: "phone", title: "Phone", type: "phone", value: "" },
+  { key: "job_title", title: "Job title", type: "input", value: "" },
+  { key: "company", title: "Company", type: "input", value: "" },
+  { key: "website", title: "Website", type: "input", value: "" },
+  {
+    key: "address",
+    title: "Address",
+    type: "section",
+    description: "Billing and shipping.",
+  },
+  { key: "line1", title: "Address line 1", type: "input", required: true, value: "" },
+  { key: "line2", title: "Address line 2", type: "input", value: "" },
+  { key: "city", title: "City", type: "input", value: "" },
+  { key: "state", title: "State / region", type: "input", value: "" },
+  { key: "postal", title: "Postal code", type: "input", value: "" },
+  { key: "country", title: "Country", type: "input", value: "Singapore" },
+  {
+    key: "billing",
+    title: "Billing",
+    type: "section",
+  },
+  {
+    key: "channel",
+    title: "Preferred channel",
+    type: "choice-card",
+    options: [
+      { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
+      { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
+    ],
+    value: "paynow",
+  },
+  {
+    key: "amount+currency",
+    title: "Credit limit",
+    type: "input-group",
+    options: [
+      { value: "sgd", label: "SGD" },
+      { value: "usd", label: "USD" },
+    ],
+    value: { amount: "", currency: "sgd" },
+  },
+  {
+    key: "tax_id",
+    title: "Tax ID",
+    type: "input",
+    value: "",
+  },
+  {
+    key: "invoice_email",
+    title: "Invoice email",
+    type: "input",
+    validation: "email",
+    value: "",
+  },
+  {
+    key: "preferences",
+    title: "Preferences",
+    type: "section",
+  },
+  {
+    key: "locale",
+    title: "Language",
+    type: "select",
+    options: [
+      { value: "en", label: "English" },
+      { value: "id", label: "Bahasa Indonesia" },
+      { value: "zh", label: "Chinese" },
+    ],
+    value: "en",
+  },
+  {
+    key: "tags",
+    title: "Tags",
+    type: "combobox",
+    props: { multiple: true },
+    options: [
+      { value: "vip", label: "VIP" },
+      { value: "wholesale", label: "Wholesale" },
+      { value: "retail", label: "Retail" },
+    ],
+    value: [],
+  },
+  {
+    key: "channels",
+    title: "Notify via",
+    type: "checkbox-group",
+    options: [
+      { value: "email", label: "Email" },
+      { value: "sms", label: "SMS" },
+      { value: "whatsapp", label: "WhatsApp" },
+    ],
+    value: ["email"],
+  },
+  { key: "newsletter", title: "Subscribe to updates", type: "switch", value: false },
+  { key: "notes", title: "Internal notes", type: "textarea", value: "" },
+  { key: "handoff", title: "Handoff notes", type: "textarea", value: "" },
+  {
+    key: "next_follow_up",
+    title: "Next follow-up",
+    type: "datetime",
+    value: "",
+  },
+];
+
+function FormLayoutModalDemo() {
+  const [open, setOpen] = useState(false);
+  const formId = "customer-form";
+  const form = useSchemaForm({
+    fields: CUSTOMER_FIELDS,
+    onSubmit: () => {
+      toast.add({ title: "Customer saved", type: "success" });
+      setOpen(false);
+    },
+  });
+
+  return (
+    <>
+      <div className="space-y-4">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Customer form
+        </p>
+        <Button onClick={() => setOpen(true)}>Add customer</Button>
+        <FormLayout
+          mode="modal"
+          open={open}
+          onOpenChange={setOpen}
+          title="Add customer"
+          description="Scroll the fields. Cancel and Save stay pinned at the bottom."
+          formId={formId}
+          size="lg"
+          actions={{
+            save: { label: "Save customer" },
+          }}
+        >
+          <SchemaForm id={formId} form={form} />
+        </FormLayout>
+      </div>
+    </>
+  );
+}
+
+export { FormLayoutModalDemo };
+```
 
 ## Page mode
 
@@ -1068,9 +6367,474 @@ custom `label`, `icon`, `onClick`, `disabled`, and `loading` values.
 
 Schema-driven create/edit form. Use Detail Card for a read-only record.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/schema-form-demo.tsx` demo source.
+
+```tsx
+import { useState } from "react";
+
+import { DocCodePanel } from "@/components/doc/doc-code-panel";
+import { Button } from "@ui/actions/button";
+import {
+  SchemaForm,
+  useSchemaForm,
+  type SchemaFormChange,
+  type SchemaFormField,
+} from "@/components/form/form-builder";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@ui/layout/tabs";
+
+const OPTIONS = [
+  { value: "a", label: "Option A" },
+  { value: "b", label: "Option B" },
+];
+
+const ACCOUNT_FIELDS: SchemaFormField[] = [
+  {
+    key: "section",
+    title: "Account",
+    type: "section",
+    description: "One SchemaForm instance.",
+  },
+  {
+    key: "input",
+    title: "Input",
+    type: "input",
+    placeholder: "Placeholder",
+    required: true,
+    maxLength: 32,
+    value: "",
+  },
+  {
+    key: "email",
+    title: "Email",
+    type: "input",
+    placeholder: "name@example.com",
+    validation: "email",
+    value: "",
+  },
+  {
+    key: "password",
+    title: "Password",
+    type: "password",
+    required: true,
+    placeholder: "At least 8 characters",
+    description: "At least 8 characters, with a letter and a number.",
+    validation: "/^(?=.*[A-Za-z])(?=.*\\d).{8,}$/",
+    value: "",
+  },
+  {
+    key: "textarea",
+    title: "Textarea",
+    type: "textarea",
+    placeholder: "Placeholder",
+    minLength: 12,
+    description: "At least 12 characters.",
+    value: "",
+  },
+  {
+    key: "select",
+    title: "Select",
+    type: "select",
+    placeholder: "Select",
+    required: true,
+    options: OPTIONS,
+    value: "a",
+  },
+  {
+    key: "combobox",
+    title: "Combobox",
+    type: "combobox",
+    placeholder: "Search",
+    options: OPTIONS,
+    value: "a",
+  },
+  {
+    key: "combobox_multiple",
+    title: "Combobox (multiple)",
+    type: "combobox",
+    props: { multiple: true },
+    placeholder: "Search",
+    options: OPTIONS,
+    value: ["a"],
+  },
+  {
+    key: "assignee",
+    title: "Assignee",
+    type: "staff",
+    required: true,
+  },
+  {
+    key: "notify_role",
+    title: "Notify role",
+    type: "role",
+  },
+  {
+    key: "qty",
+    title: "Quantity",
+    type: "quantity",
+    value: 1,
+    min: 1,
+    max: 99,
+  },
+  {
+    key: "when",
+    title: "Date",
+    type: "date",
+    value: "",
+  },
+  {
+    key: "at",
+    title: "Date and time",
+    type: "datetime",
+    value: "",
+  },
+];
+
+const DETAILS_FIELDS: SchemaFormField[] = [
+  {
+    key: "section",
+    title: "Details",
+    type: "section",
+    description: "Second SchemaForm on the same page.",
+  },
+  {
+    key: "radio",
+    title: "Radio",
+    type: "radio",
+    options: OPTIONS,
+    value: "a",
+  },
+  {
+    key: "channel",
+    title: "Channel",
+    type: "choice-card",
+    required: true,
+    options: [
+      { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
+      { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
+    ],
+    props: { alignment: "vertical", cardAlignment: "left" },
+    value: "paynow",
+  },
+  {
+    key: "accepted",
+    title: "I accept the terms",
+    type: "accepted",
+    required: true,
+    validation: "accepted",
+    value: false,
+  },
+  {
+    key: "address",
+    title: "Address",
+    type: "object",
+    fields: [
+      {
+        key: "heading",
+        title: "Address",
+        type: "section",
+        description: "Nested object — values live under address.",
+      },
+      {
+        key: "line1",
+        title: "Line 1",
+        type: "input",
+        placeholder: "1 Harbourfront Avenue",
+        required: true,
+        value: "",
+      },
+      {
+        key: "city",
+        title: "City",
+        type: "input",
+        placeholder: "Singapore",
+        value: "Singapore",
+      },
+      {
+        key: "postal",
+        title: "Postal code",
+        type: "input",
+        placeholder: "098632",
+        value: "",
+      },
+    ],
+  },
+  {
+    key: "checkbox_group",
+    title: "Checkbox group",
+    type: "checkbox-group",
+    options: OPTIONS,
+    value: ["a"],
+  },
+  {
+    key: "switch",
+    title: "Switch",
+    type: "switch",
+    value: false,
+  },
+  {
+    key: "slider",
+    title: "Slider",
+    type: "slider",
+    value: 40,
+    max: 100,
+  },
+  {
+    key: "min+max",
+    title: "Slider range",
+    type: "slider",
+    value: { min: 20, max: 80 },
+    max: 100,
+  },
+  {
+    key: "slider_range",
+    title: "Slider range (object)",
+    type: "slider",
+    value: { min: 10, max: 70 },
+    max: 100,
+  },
+  {
+    key: "date",
+    title: "Date",
+    type: "date",
+    value: "2026-08-15",
+  },
+  {
+    key: "from+to",
+    title: "Date range",
+    type: "date-range",
+    value: { from: "2026-01-20", to: "2026-02-09" },
+  },
+  {
+    key: "date_range",
+    title: "Date range (object)",
+    type: "date-range",
+    value: { from: "2026-03-01", to: "2026-03-15" },
+  },
+  {
+    key: "amount+currency",
+    title: "Input group",
+    type: "input-group",
+    placeholder: "0.00",
+    options: [
+      { value: "sgd", label: "SGD" },
+      { value: "usd", label: "USD" },
+      { value: "myr", label: "MYR" },
+    ],
+    required: true,
+    props: { align: "end" },
+    value: { amount: "", currency: "sgd" },
+  },
+  {
+    key: "receipt",
+    title: "Receipt",
+    type: "file",
+    description: "Upload one file.",
+  },
+  {
+    key: "documents",
+    title: "Documents",
+    type: "file",
+    props: { multiple: true },
+    description: "Upload several files.",
+  },
+  {
+    key: "password_protection",
+    title: "Password protection",
+    type: "section-item",
+    description:
+      "Visitors must enter a password before they can view the store.",
+    value: false,
+  },
+  {
+    key: "store_password",
+    title: "Store password",
+    type: "password",
+    placeholder: "Enter password",
+    required: true,
+    showIf: "password_protection",
+    showIfValue: true,
+  },
+  {
+    key: "guest_checkout",
+    title: "Guest checkout",
+    type: "section-item",
+    description: "Let customers pay without creating an account.",
+    props: { background: true },
+    showIf: "password_protection",
+    showIfValue: true,
+    value: false,
+  },
+];
+
+const TYPE_PROMPT = `Schema Form field prompt
+
+Each item in fields is one control.
+
+Required
+- key, title, type
+
+Optional
+- required, placeholder, description, options, value
+- validation, hidden, maxLength, minLength, min, max
+- props — control options (e.g. combobox multiple, section-item background, colSpan)
+- fields — nested object children
+- showIf / showIfValue — show a field when another field matches
+
+Layout
+- layout.columns — responsive column count, 1 through 4
+- layout.fields — span by field key or nested path
+- layout.types — default span by control type
+- props.colSpan — field-level override; accepts 1, 2, 3, 4, or "full"
+
+Types
+- input | password | textarea | phone
+- select
+- combobox — searchable; add props.multiple for chips
+- radio | choice-card | checkbox-group | accepted | switch
+- checkbox — alias of accepted (same single checkbox control)
+- choice-card — pick one; options may include description; props.alignment vertical|horizontal
+- slider — single value; range via key "min+max" or one key with value { min, max }
+- input-group — key "amount+currency" writes amount + currency
+- date | datetime | date-range | file | quantity
+- file — one File; add props.multiple for File[]
+- date-range — key "from+to" writes from + to, or one key with { from, to }
+- object — nest with fields[]
+- hidden | section | section-item — row with title + switch
+
+showIf
+- showIf: "password_protection"
+- showIfValue: true
+- or arrays (AND): showIf: ["a", "b"], showIfValue: [true, "delivery"]
+
+Validation
+- pipes: email | max:255 | phone | valid_url | accepted
+- or regex: /^[A-Z]{4}SG[A-Z0-9]{2}([A-Z0-9]{3})?$/
+
+hidden: true hides the control (or type: "hidden"); the value still submits.
+
+State lives in useSchemaForm. Render with <SchemaForm form={account} />. Call account.submit() from the host.
+
+Example — combobox multiple
+{
+  "key": "channels",
+  "title": "Payment channels",
+  "type": "combobox",
+  "props": { "multiple": true },
+  "options": [
+    { "value": "paynow", "label": "PayNow" },
+    { "value": "card", "label": "Card" }
+  ],
+  "value": ["paynow"]
+}
+
+Example — choice-card
+{
+  "key": "channel",
+  "title": "Channel",
+  "type": "choice-card",
+  "required": true,
+  "options": [
+    { "value": "paynow", "label": "PayNow", "description": "Instant bank transfer" },
+    { "value": "card", "label": "Card", "description": "Visa, Mastercard, AMEX" }
+  ],
+  "props": { "alignment": "vertical", "cardAlignment": "left" },
+  "value": "paynow"
+}`;
+
+function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
+  const code =
+    typeof data === "string"
+      ? data
+      : JSON.stringify(
+          data,
+          (_key, value) =>
+            value instanceof File
+              ? { name: value.name, size: value.size, type: value.type }
+              : value,
+          2,
+        );
+  return <DocCodePanel filename={filename} code={code} />;
+}
+
+function SchemaFormDemo() {
+  const account = useSchemaForm({ fields: ACCOUNT_FIELDS });
+  const details = useSchemaForm({ fields: DETAILS_FIELDS });
+  const [tab, setTab] = useState("result");
+  const [lastChange, setLastChange] = useState<SchemaFormChange | null>(null);
+  const validating = account.isSubmitting || details.isSubmitting;
+
+  return (
+    <>
+      <div className="grid min-w-0 gap-6 xl:grid-cols-3">
+        <SchemaForm
+          form={account}
+          onChange={(_values, change) => setLastChange(change)}
+          className="max-w-none"
+          layout={{
+            columns: 2,
+            fields: { input: "full" },
+            types: { textarea: "full" },
+          }}
+        />
+        <SchemaForm form={details} className="max-w-none" />
+        <div className="flex min-w-0 flex-col gap-4">
+          <Button
+            variant="default"
+            disabled={validating}
+            aria-busy={validating}
+            onClick={() =>
+              void Promise.all([account.submit(), details.submit()])
+            }
+          >
+            {validating ? "Validating…" : "Validate"}
+          </Button>
+          <Tabs
+            value={tab}
+            onValueChange={(value) => setTab(String(value))}
+            className="min-w-0 gap-3"
+          >
+            <TabsList variant="line">
+              <TabsTrigger value="result">Result</TabsTrigger>
+              <TabsTrigger value="errors">Errors</TabsTrigger>
+              <TabsTrigger value="schema">Schema</TabsTrigger>
+              <TabsTrigger value="prompt">Prompt</TabsTrigger>
+            </TabsList>
+            <TabsContent value="result" className="min-w-0">
+              <JsonPanel
+                filename="result.json"
+                data={{
+                  account: account.values,
+                  details: details.values,
+                  lastChange,
+                }}
+              />
+            </TabsContent>
+            <TabsContent value="errors" className="min-w-0">
+              <JsonPanel
+                filename="errors.json"
+                data={{ account: account.errors, details: details.errors }}
+              />
+            </TabsContent>
+            <TabsContent value="schema" className="min-w-0">
+              <JsonPanel
+                filename="fields.json"
+                data={{ account: ACCOUNT_FIELDS, details: DETAILS_FIELDS }}
+              />
+            </TabsContent>
+            <TabsContent value="prompt" className="min-w-0">
+              <JsonPanel filename="prompt.txt" data={TYPE_PROMPT} />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { SchemaFormDemo };
+```
 
 Use `FormBuilder` for multi-field create/edit. Use `DetailCard` for a read-only record.
 Unknown `type` values throw. Use only the listed FormBuilder types. Render inside `FormLayout`. Do not wrap in `Card`.
@@ -1175,9 +6939,314 @@ Do not fetch staff or roles on the screen. Optional staff `props`: `multiple`, `
 
 Rows-and-columns table with search, filters, sort, and pagination.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/schema-table-demo.tsx` demo source.
+
+```tsx
+import { useState } from "react";
+import { CheckRegular, DownRegular } from "@mingcute/react/core-regular";
+import { DocCodePanel } from "@/components/doc/doc-code-panel";
+import {
+  SchemaTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useSchemaTable,
+  type SchemaTableRow,
+} from "@/components/displaying-data/data-table";
+import { Badge } from "@ui/displaying-data/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/layout/tabs";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@ui/overlays/dropdown-menu";
+
+const STATUSES = ["Published", "Draft"] as const;
+
+const SCHEMA_PROMPT = `Schema Table schema prompt
+
+Pass one schema object to useSchemaTable({ schema, data }).
+
+Required
+- columns[] — key, title; type text | amount | date | status | image | empty
+
+Optional
+- mode — client (filter in kit from a Query/DB collection) | server (Query fetches the page; pass data + total + onQueryChange)
+- selection — checkbox column
+- search — { placeholder, debounceMs } or false (server search defaults to 300ms)
+- tabs[] — key, title, value (matches tabKey on the row, default tabKey is status)
+- tabKey — row field for tabs
+- filters[] — key, title, options[{ value, label }]
+- sort — { fields[{ key, title }], defaultKey, defaultDir } or false
+- pagination — { pageSize, pageSizes[] } or false
+- editColumns — true to show the column-visibility popover (default off; not inline edit)
+- rowActions — ["edit"], ["delete"], or both. Menu renders when this array is set. Wire onRowAction.
+- selectionActions — JSON-friendly buttons/dropdowns; callbacks receive the chosen leaf action and selected IDs
+- emptyState — optional title, description, and JSON-friendly actions
+
+Column optional
+- sortable, hidden, locked (fixed, no hide/reorder), icon, search: false (exclude from search)
+- type status is a read-only badge. Inline edit is not a schema field.
+
+Query state (table.query)
+- search, tab, filters, sortKey, sortDir, page, pageSize
+
+Column layout (table.columnOrder, table.hiddenKeys)
+- Edit Column popover toggles visibility and drag-reorders active columns
+
+Action config contains no functions or React nodes. Handle behavior with onSelectionAction / onEmptyAction / onRowAction / onRowClick.
+One-field row edit: pass cells={{ status: (value, row) => <StatusCell /> }} on <DataTable>, then persist. Schema stays JSON. Search/sort still use row[column.key].
+Multi-field edit (only if asked): rowActions + onRowAction → FormLayout. Do not treat editColumns or type status as editable.
+Open a record: pass onRowClick on <DataTable>. Checkbox, ⋮ menu, and cells controls do not fire it.
+
+Example
+{
+  "key": "products",
+  "mode": "client",
+  "selection": true,
+  "search": { "placeholder": "Search products" },
+  "tabKey": "status",
+  "tabs": [
+    { "key": "all", "title": "All" },
+    { "key": "published", "title": "Published", "value": "Published" },
+    { "key": "draft", "title": "Draft", "value": "Draft" }
+  ],
+  "filters": [
+    {
+      "key": "category",
+      "title": "Category",
+      "options": [
+        { "value": "Apparel", "label": "Apparel" },
+        { "value": "Membership", "label": "Membership" },
+        { "value": "Workshop", "label": "Workshop" }
+      ]
+    },
+    {
+      "key": "inventory",
+      "title": "Inventory",
+      "options": [
+        { "value": "In stock", "label": "In stock" },
+        { "value": "Inventory not tracked", "label": "Inventory not tracked" }
+      ]
+    },
+    {
+      "key": "source",
+      "title": "Source",
+      "options": [
+        { "value": "Manual", "label": "Manual" },
+        { "value": "Import", "label": "Import" }
+      ]
+    },
+    {
+      "key": "channel",
+      "title": "Channel",
+      "options": [
+        { "value": "Online Store", "label": "Online Store" },
+        { "value": "POS", "label": "POS" }
+      ]
+    }
+  ],
+  "sort": {
+    "fields": [
+      { "key": "created", "title": "Created" },
+      { "key": "name", "title": "Product name" }
+    ],
+    "defaultKey": "created",
+    "defaultDir": "desc"
+  },
+  "pagination": { "pageSize": 10, "pageSizes": [10, 20, 50] },
+  "rowActions": ["edit", "delete"],
+  "selectionActions": [
+    { "key": "publish", "label": "Publish", "icon": "publish" },
+    {
+      "key": "more",
+      "label": "More actions",
+      "icon": "more",
+      "presentation": "dropdown",
+      "items": [
+        { "key": "duplicate", "label": "Duplicate", "icon": "duplicate" },
+        { "key": "delete", "label": "Delete", "icon": "delete", "variant": "destructive", "separator": true }
+      ]
+    }
+  ],
+  "emptyState": {
+    "title": "No products to display",
+    "description": "Add a product to start building your catalog.",
+    "actions": [{ "key": "add", "label": "Add product", "icon": "add" }]
+  },
+  "columns": [
+    { "key": "image", "title": "Image", "type": "image", "search": false },
+    { "key": "name", "title": "Product name", "type": "text", "icon": true, "locked": true },
+    { "key": "inventory", "title": "Available quantity", "type": "text", "search": false },
+    { "key": "category", "title": "Category", "type": "text" },
+    { "key": "amount", "title": "Amount", "type": "amount", "search": false },
+    { "key": "status", "title": "Status", "type": "status", "search": false }
+  ]
+}`;
+
+function JsonPanel({ filename, data }: { filename: string; data: unknown }) {
+  const code = typeof data === "string" ? data : JSON.stringify(data, null, 2);
+  return <DocCodePanel filename={filename} code={code} />;
+}
+
+function StatusCell({
+  value,
+  onStatusChange,
+}: {
+  value: unknown;
+  onStatusChange: (status: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger
+        nativeButton
+        className="inline-flex"
+        render={
+          <button
+            type="button"
+            className="inline-flex rounded-full outline-none focus-visible:ring-2 focus-visible:ring-oc-ring"
+          >
+            <Badge tone={value === "Published" ? "green" : "grey"}>
+              {String(value ?? "–")}
+              <DownRegular />
+            </Badge>
+          </button>
+        }
+      />
+      <DropdownMenuContent align="start">
+        {STATUSES.map((status) => {
+          const selected = status === value;
+          return (
+            <DropdownMenuItem
+              key={status}
+              data-active={selected || undefined}
+              className={selected ? "bg-oc-dark-blue-soft font-medium" : undefined}
+              onClick={() => {
+                onStatusChange(status);
+                setOpen(false);
+              }}
+            >
+              {status}
+              {selected ? <CheckRegular className="ml-auto" /> : null}
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+function SchemaTableDemo() {
+  const [rows, setRows] = useState<SchemaTableRow[]>(() =>
+    SCHEMA_TABLE_EXAMPLE_ROWS.map((row) => ({ ...row })),
+  );
+  const [lastChange, setLastChange] = useState<unknown>(null);
+  const table = useSchemaTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: rows,
+    onQueryChange: (query, change) => {
+      console.log("Query change", query, change);
+      setLastChange(change);
+    },
+  });
+  const [tab, setTab] = useState("result");
+
+  const setStatus = (id: string, status: string) => {
+    setRows((current) =>
+      current.map((row) => (row.id === id ? { ...row, status } : row)),
+    );
+  };
+
+  return (
+    <>
+      <div className="grid min-w-0 gap-6 xl:grid-cols-3">
+        <div className="min-w-0 xl:col-span-2">
+          <SchemaTable
+            table={table}
+            cells={{
+              status: (value, row) => (
+                <StatusCell
+                  value={value}
+                  onStatusChange={(status) => setStatus(row.id, status)}
+                />
+              ),
+            }}
+            onRowClick={(row) => {
+              console.log("Row click", row.id);
+              setLastChange({ key: "rowClick", id: row.id });
+            }}
+            onRowAction={(action, row) => {
+              console.log("Row action", action, row.id);
+              setLastChange({ key: "rowAction", action, id: row.id });
+            }}
+            onSelectionAction={(action, selectedIds) => {
+              console.log("Selection action", action.key, selectedIds);
+            }}
+            onEmptyAction={(action) => {
+              console.log("Empty action", action.key);
+            }}
+          />
+        </div>
+        <div className="flex min-w-0 flex-col gap-4">
+          <Tabs
+            value={tab}
+            onValueChange={(value) => setTab(String(value))}
+            className="min-w-0 gap-3"
+          >
+            <TabsList variant="line">
+              <TabsTrigger value="result">Result</TabsTrigger>
+              <TabsTrigger value="schema">Schema</TabsTrigger>
+              <TabsTrigger value="prompt">Prompt</TabsTrigger>
+            </TabsList>
+            <TabsContent value="result" className="min-w-0">
+              <JsonPanel
+                filename="result.json"
+                data={{
+                  search: table.query.search,
+                  lastChange,
+                  tab: table.query.tab,
+                  filters: table.query.filters,
+                  sort: {
+                    key: table.query.sortKey,
+                    dir: table.query.sortDir,
+                  },
+                  pagination: {
+                    page: table.page,
+                    pageSize: table.pageSize,
+                    pageCount: table.pageCount,
+                    filteredCount: table.filteredCount,
+                  },
+                  selected: table.selected,
+                  columns: {
+                    order: table.columnOrder,
+                    hidden: table.hiddenKeys,
+                    visible: table.visibleColumns.map((column) => column.key),
+                  },
+                }}
+              />
+            </TabsContent>
+            <TabsContent value="schema" className="min-w-0">
+              <JsonPanel
+                filename="schema.json"
+                data={SCHEMA_TABLE_EXAMPLE_SCHEMA}
+              />
+            </TabsContent>
+            <TabsContent value="prompt" className="min-w-0">
+              <JsonPanel filename="prompt.txt" data={SCHEMA_PROMPT} />
+            </TabsContent>
+          </Tabs>
+        </div>
+      </div>
+    </>
+  );
+}
+
+export { SchemaTableDemo };
+```
 
 # Quick decision
 
@@ -1457,9 +7526,88 @@ function ProductsPage() {
 
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/confirmation-modal-demo.tsx` demo source.
+
+```tsx
+import { Button } from '@ui/actions/button'
+import { useConfirmationModal } from '@/components/overlays/confirmation-modal'
+
+function ConfirmationModalDemo() {
+  const confirm = useConfirmationModal()
+
+  async function show(options: Parameters<typeof confirm>[0]) {
+    await confirm(options)
+  }
+
+  return (
+    <div className="flex flex-wrap gap-3">
+      <Button
+        variant="destructive"
+        onClick={() =>
+          show({
+            type: 'delete',
+            message: 'Do you want to delete this payment link?',
+            description: "The action can't be undone.",
+          })
+        }
+      >
+        Delete
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          show({
+            type: 'warning',
+            message: 'Continue with this high-risk action?',
+            description: 'Review the details before continuing.',
+          })
+        }
+      >
+        Warning
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          show({
+            type: 'success',
+            message: 'The payment link was created successfully.',
+          })
+        }
+      >
+        Success
+      </Button>
+      <Button
+        variant="outline"
+        onClick={() =>
+          show({
+            type: 'question',
+            message: 'Do you want to publish these changes?',
+          })
+        }
+      >
+        Question
+      </Button>
+      <Button
+        variant="destructive"
+        onClick={() =>
+          show({
+            type: 'delete',
+            message: 'Delete the weekend-workshop payment link?',
+            description: "The action can't be undone.",
+            confirmPhrase: 'weekend-workshop',
+          })
+        }
+      >
+        Type to confirm
+      </Button>
+    </div>
+  )
+}
+
+export { ConfirmationModalDemo }
+```
 
 Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` from `@/components/overlays/confirmation-modal` for delete/warning confirms. Do not assemble a confirm dialog from `Dialog`.
 
@@ -1469,9 +7617,114 @@ Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationMod
 
 Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/resource-picker-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+
+// Docs demo only. App Studio uses `#/lib/resource-picker` on the root provider — do not copy this file or `resource-picker-fake` into app/.
+import { fakeHitPayListPayload } from '#/lib/resource-picker-fake'
+import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
+import { Button } from '@ui/actions/button'
+import {
+  ResourcePickerProvider,
+  useResourcePicker,
+  type ResourcePickerLoad,
+  type ResourcePickerOptions,
+  type ResourcePickerResult,
+} from '@/components/form/resource-picker'
+
+const PAGE_SIZE = 2
+
+const demoLoad: ResourcePickerLoad = async (input) => {
+  await new Promise((resolve) => setTimeout(resolve, 180))
+  const mapped = mapResourcePickerPayload(input, fakeHitPayListPayload(input))
+  const start = ((input.page || 1) - 1) * PAGE_SIZE
+  const items = mapped.items.slice(start, start + PAGE_SIZE)
+  return { items, hasMore: start + PAGE_SIZE < mapped.items.length }
+}
+
+const TYPE_BUTTONS: { type: ResourcePickerOptions['type']; label: string; options?: Partial<ResourcePickerOptions> }[] =
+  [
+    { type: 'product', label: 'Add product', options: { multiple: 1 } },
+    { type: 'product', label: 'Add products', options: { multiple: true } },
+    { type: 'customer', label: 'Select customers', options: { action: 'select', multiple: true } },
+    { type: 'order', label: 'Add orders', options: { multiple: 5 } },
+    { type: 'charge', label: 'Select charge' },
+    { type: 'invoice', label: 'Select invoices', options: { multiple: true } },
+    { type: 'add-on', label: 'Select add-on' },
+  ]
+
+function ResourcePickerButtons() {
+  const resourcePicker = useResourcePicker()
+  const [selected, setSelected] = useState<ResourcePickerResult[] | null>(null)
+  const [cancelled, setCancelled] = useState(false)
+
+  async function open(options: ResourcePickerOptions) {
+    const next = await resourcePicker(options)
+    if (!next) {
+      setCancelled(true)
+      setSelected(null)
+      return
+    }
+    setCancelled(false)
+    setSelected(next)
+  }
+
+  return (
+    <div className="space-y-4">
+      <div className="flex flex-wrap gap-2">
+        {TYPE_BUTTONS.map((button) => (
+          <Button
+            key={`${button.type}-${button.label}`}
+            variant="outline"
+            size="sm"
+            onClick={() => open({ type: button.type, ...button.options })}
+          >
+            {button.label}
+          </Button>
+        ))}
+      </div>
+
+      {cancelled ? <p className="text-sm text-oc-muted-foreground">Cancelled — nothing selected.</p> : null}
+
+      {selected ? (
+        <div className="space-y-2 rounded-lg border border-oc-border p-3">
+          <p className="text-sm font-medium">Selected ({selected.length})</p>
+          <ul className="space-y-1 text-sm">
+            {selected.map((item) => (
+              <li key={item.id}>
+                <span className="font-mono text-xs">{item.id}</span>
+                {item.children?.length ? (
+                  <span className="text-oc-muted-foreground">
+                    {' '}
+                    → {item.children.map((child) => child.id).join(', ')}
+                  </span>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+          <pre className="max-h-72 overflow-auto rounded-md bg-oc-muted p-3 text-xs leading-5">
+            {JSON.stringify(selected, null, 2)}
+          </pre>
+        </div>
+      ) : null}
+    </div>
+  )
+}
+
+function ResourcePickerDemo() {
+  return (
+    <ResourcePickerProvider load={demoLoad}>
+      <ResourcePickerButtons />
+    </ResourcePickerProvider>
+  )
+}
+
+export { ResourcePickerDemo }
+```
 
 # Quick decision
 
@@ -1611,9 +7864,82 @@ choices.
 
 Searchable command palette. Drive it with open, onOpenChange, and groups.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/command-demo.tsx` demo source.
+
+```tsx
+import { useState } from 'react'
+import {
+  FileRegular,
+  StoreRegular,
+  User3Regular,
+} from '@mingcute/react/core-regular'
+
+import { Button } from '@ui/actions/button'
+import { Command } from '@/components/overlays/command'
+import { toast } from '@ui/feedback/toast'
+
+function CommandDemo() {
+  const [open, setOpen] = useState(false)
+
+  function go(value: string) {
+    toast.add({ title: value, type: 'success' })
+  }
+
+  return (
+    <div className="space-y-4">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+        Palette
+      </p>
+      <Button variant="outline" onClick={() => setOpen(true)}>
+        Search
+      </Button>
+      <Command
+        open={open}
+        onOpenChange={setOpen}
+        placeholder="Search invoices, customers, pages…"
+        empty="No results"
+        groups={[
+          {
+            heading: 'Pages',
+            items: [
+              {
+                value: 'invoices',
+                label: 'Invoices',
+                keywords: ['billing'],
+                shortcut: 'I',
+                icon: <FileRegular className="size-4 text-oc-muted-foreground" />,
+                onSelect: go,
+              },
+              {
+                value: 'outlets',
+                label: 'Outlets',
+                keywords: ['pos', 'store'],
+                icon: <StoreRegular className="size-4 text-oc-muted-foreground" />,
+                onSelect: go,
+              },
+            ],
+          },
+          {
+            heading: 'Customers',
+            items: [
+              {
+                value: 'alex turner',
+                label: 'Alex Turner',
+                icon: <User3Regular className="size-4 text-oc-muted-foreground" />,
+                onSelect: go,
+              },
+            ],
+          },
+        ]}
+      />
+    </div>
+  )
+}
+
+export { CommandDemo }
+```
 
 Use `Command` from `@/components/overlays/command` with `open`, `onOpenChange`, and `groups`. Do not assemble a palette from `Dialog` plus cmdk primitives.
 
@@ -1623,9 +7949,51 @@ Use `Command` from `@/components/overlays/command` with `open`, `onOpenChange`, 
 
 Copy icon that writes a value and shows Copied!.
 
-## Interactive example
+## Example implementation
 
-The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+The example below is the actual `src/components/doc/demos/copy-button-demo.tsx` demo source.
+
+```tsx
+import { CopyButton } from '@/components/actions/copy-button'
+
+function CopyButtonDemo() {
+  return (
+    <>
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Default
+        </p>
+        <div className="flex items-center gap-2 text-sm leading-normal text-oc-foreground">
+          <span>+65 8123 4567</span>
+          <CopyButton value="+65 8123 4567" />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Invoice number
+        </p>
+        <div className="flex items-center gap-2 text-sm leading-normal text-oc-foreground">
+          <span>INV-2026-0842</span>
+          <CopyButton value="INV-2026-0842" />
+        </div>
+      </div>
+
+      <div className="space-y-3">
+        <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+          Payment Link
+        </p>
+        <div className="flex items-center gap-2 text-sm leading-normal text-oc-foreground">
+          <span>hitpay.shop/pay/pl_8f2a91</span>
+          <CopyButton value="https://hitpay.shop/pay/pl_8f2a91" />
+        </div>
+      </div>
+    </>
+  )
+}
+
+export { CopyButtonDemo }
+```
 
 Icon that copies `value` and shows `Copied!`.
 
