@@ -2,7 +2,7 @@
 
 
 
-AI/LLM note: after `@orchid` is in `components.json`, install every item with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Use the [registry index](https://orchid-ui-hitpay.vercel.app/registry.json) as the machine-readable catalog. Read the generated documentation in https://orchid-ui-hitpay.vercel.app/llms.txt for intent and examples, then verify exports and props in the installed source.
+AI/LLM note: after `@orchid` is in `components.json`, install every item with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Use the [registry index](/registry.json) as the machine-readable catalog. Read the generated documentation in /llms.txt for intent and examples, then verify exports and props in the installed source.
 
 
 
@@ -22,7 +22,7 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 - Installable registry items: 56, excluding the helper entries `all` and `utils`.
 
-- Markdown docs: https://orchid-ui-hitpay.vercel.app/llms.txt — one file containing every guide and component.
+- Markdown docs: /llms.txt — one file containing every guide and component.
 
 
 
@@ -46,17 +46,17 @@ bunx --bun shadcn@latest add @orchid/all
 
 
 
-- [Registry Index](https://orchid-ui-hitpay.vercel.app/registry.json) — machine-readable catalog and dependency graph.
+- [Registry Index](/registry.json) — machine-readable catalog and dependency graph.
 
-- [Markdown docs](https://orchid-ui-hitpay.vercel.app/llms.txt) — generated documentation for agents (not the HTML site).
+- [Markdown docs](/llms.txt) — generated documentation for agents (not the HTML site).
 
-- [Orchid Theme Tokens](https://orchid-ui-hitpay.vercel.app/orchid-tokens.css) — published CSS variables and Tailwind CSS v4 theme mappings.
+- [Orchid Theme Tokens](/orchid-tokens.css) — published CSS variables and Tailwind CSS v4 theme mappings.
 
-- [Installation Guide](https://orchid-ui-hitpay.vercel.app/llms.txt#installation) — initialize a project and add Orchid items with the shadcn CLI.
+- [Installation Guide](/llms.txt#installation) — initialize a project and add Orchid items with the shadcn CLI.
 
-- [components.json Guide](https://orchid-ui-hitpay.vercel.app/llms.txt#components-json) — configure aliases, Tailwind CSS, and the Orchid namespace.
+- [components.json Guide](/llms.txt#components-json) — configure aliases, Tailwind CSS, and the Orchid namespace.
 
-- [Theming Guide](https://orchid-ui-hitpay.vercel.app/llms.txt#theming) — install and customize Orchid light and dark tokens.
+- [Theming Guide](/llms.txt#theming) — install and customize Orchid light and dark tokens.
 
 
 
@@ -78,7 +78,7 @@ First, make sure the Orchid namespace is present in `components.json`:
 
   "registries": {
 
-    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
+    "@orchid": "/r/{name}.json"
 
   }
 
@@ -150,11 +150,11 @@ Example prompts after setup:
 
 
 
-- [Installation](https://orchid-ui-hitpay.vercel.app/llms.txt#installation) — What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.
+- [Installation](/llms.txt#installation) — What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.
 
-- [components.json](https://orchid-ui-hitpay.vercel.app/llms.txt#components-json) — Configure aliases, Tailwind CSS, and the Orchid registry namespace.
+- [components.json](/llms.txt#components-json) — Configure aliases, Tailwind CSS, and the Orchid registry namespace.
 
-- [Theming](https://orchid-ui-hitpay.vercel.app/llms.txt#theming) — Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.
+- [Theming](/llms.txt#theming) — Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.
 
 
 
@@ -166,11 +166,11 @@ Example prompts after setup:
 
 
 
-#### [Copy Button](https://orchid-ui-hitpay.vercel.app/llms.txt#copy-button)
+#### [Copy Button](/llms.txt#copy-button)
 
 Copy icon that writes a value and shows Copied!.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/copy-button.json)
+[Registry JSON](/r/copy-button.json)
 
 
 
@@ -178,51 +178,51 @@ Copy icon that writes a value and shows Copied!.
 
 
 
-#### [Customer Card](https://orchid-ui-hitpay.vercel.app/llms.txt#customer-card)
+#### [Customer Card](/llms.txt#customer-card)
 
 Small, Big, and Float customer or beneficiary cards.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/customer-card.json)
+[Registry JSON](/r/customer-card.json)
 
 
 
-#### [Data List](https://orchid-ui-hitpay.vercel.app/llms.txt#data-list)
+#### [Data List](/llms.txt#data-list)
 
 Card/row collection when search, filters, sort, or pagination are not needed.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-list.json)
+[Registry JSON](/r/data-list.json)
 
 
 
-#### [Data Table](https://orchid-ui-hitpay.vercel.app/llms.txt#data-table)
+#### [Data Table](/llms.txt#data-table)
 
 Rows-and-columns table with search, filters, sort, and pagination.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/data-table.json)
+[Registry JSON](/r/data-table.json)
 
 
 
-#### [Detail Card](https://orchid-ui-hitpay.vercel.app/llms.txt#detail-card)
+#### [Detail Card](/llms.txt#detail-card)
 
 Read-only key/value card for one record. Not a collection.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/detail-card.json)
+[Registry JSON](/r/detail-card.json)
 
 
 
-#### [Empty](https://orchid-ui-hitpay.vercel.app/llms.txt#empty)
+#### [Empty](/llms.txt#empty)
 
 Props empty state with optional media and actions.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/empty.json)
+[Registry JSON](/r/empty.json)
 
 
 
-#### [Metric Card](https://orchid-ui-hitpay.vercel.app/llms.txt#metric-card)
+#### [Metric Card](/llms.txt#metric-card)
 
 Dashboard KPI tile. Use for summaries, not a record's fields.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/metric-card.json)
+[Registry JSON](/r/metric-card.json)
 
 
 
@@ -230,131 +230,131 @@ Dashboard KPI tile. Use for summaries, not a record's fields.
 
 
 
-#### [Choice Card](https://orchid-ui-hitpay.vercel.app/llms.txt#choice-card)
+#### [Choice Card](/llms.txt#choice-card)
 
 Selectable cards with left or center icon, no radio dot.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/choice-card.json)
+[Registry JSON](/r/choice-card.json)
 
 
 
-#### [Coupon Select](https://orchid-ui-hitpay.vercel.app/llms.txt#coupon-select)
+#### [Coupon Select](/llms.txt#coupon-select)
 
 Coupon dropdown. Loads GET /v1/coupons.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/coupon-select.json)
+[Registry JSON](/r/coupon-select.json)
 
 
 
-#### [Date Picker](https://orchid-ui-hitpay.vercel.app/llms.txt#date-picker)
+#### [Date Picker](/llms.txt#date-picker)
 
 Date, range, and date-time selection with popover and calendar helpers.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/date-picker.json)
+[Registry JSON](/r/date-picker.json)
 
 
 
-#### [Discount Select](https://orchid-ui-hitpay.vercel.app/llms.txt#discount-select)
+#### [Discount Select](/llms.txt#discount-select)
 
 Discount dropdown. Loads GET /v1/discounts.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/discount-select.json)
+[Registry JSON](/r/discount-select.json)
 
 
 
-#### [Form Builder](https://orchid-ui-hitpay.vercel.app/llms.txt#form-builder)
+#### [Form Builder](/llms.txt#form-builder)
 
 Schema-driven create/edit form. Use Detail Card for a read-only record.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-builder.json)
+[Registry JSON](/r/form-builder.json)
 
 
 
-#### [Location Select](https://orchid-ui-hitpay.vercel.app/llms.txt#location-select)
+#### [Location Select](/llms.txt#location-select)
 
 Location dropdown. Loads GET /v1/locations.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/location-select.json)
+[Registry JSON](/r/location-select.json)
 
 
 
-#### [Pickup Select](https://orchid-ui-hitpay.vercel.app/llms.txt#pickup-select)
+#### [Pickup Select](/llms.txt#pickup-select)
 
 Pickup dropdown. Loads GET /v1/pickups.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/pickup-select.json)
+[Registry JSON](/r/pickup-select.json)
 
 
 
-#### [Product Category Select](https://orchid-ui-hitpay.vercel.app/llms.txt#product-category-select)
+#### [Product Category Select](/llms.txt#product-category-select)
 
 Category dropdown. Loads GET /v1/product-category.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/product-category-select.json)
+[Registry JSON](/r/product-category-select.json)
 
 
 
-#### [Quantity Input](https://orchid-ui-hitpay.vercel.app/llms.txt#quantity-input)
+#### [Quantity Input](/llms.txt#quantity-input)
 
 Minus/plus stepper; click the value to type.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/quantity-input.json)
+[Registry JSON](/r/quantity-input.json)
 
 
 
-#### [Resource Picker](https://orchid-ui-hitpay.vercel.app/llms.txt#resource-picker)
+#### [Resource Picker](/llms.txt#resource-picker)
 
 Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/resource-picker.json)
+[Registry JSON](/r/resource-picker.json)
 
 
 
-#### [Role Select](https://orchid-ui-hitpay.vercel.app/llms.txt#role-select)
+#### [Role Select](/llms.txt#role-select)
 
 Business role dropdown. Docs use a fake roles API.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/role-select.json)
+[Registry JSON](/r/role-select.json)
 
 
 
-#### [Select](https://orchid-ui-hitpay.vercel.app/llms.txt#select)
+#### [Select](/llms.txt#select)
 
 Props picker for a closed list or a searchable / multi select.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/select.json)
+[Registry JSON](/r/select.json)
 
 
 
-#### [Shipping Select](https://orchid-ui-hitpay.vercel.app/llms.txt#shipping-select)
+#### [Shipping Select](/llms.txt#shipping-select)
 
 Shipping method dropdown. Loads GET /v1/shipping.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/shipping-select.json)
+[Registry JSON](/r/shipping-select.json)
 
 
 
-#### [Staff Select](https://orchid-ui-hitpay.vercel.app/llms.txt#staff-select)
+#### [Staff Select](/llms.txt#staff-select)
 
 App-member dropdown. Docs use a fake staff-app-members API.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/staff-select.json)
+[Registry JSON](/r/staff-select.json)
 
 
 
-#### [Tax Select](https://orchid-ui-hitpay.vercel.app/llms.txt#tax-select)
+#### [Tax Select](/llms.txt#tax-select)
 
 Tax dropdown. Loads GET /v1/taxes.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tax-select.json)
+[Registry JSON](/r/tax-select.json)
 
 
 
-#### [Text Editor](https://orchid-ui-hitpay.vercel.app/llms.txt#text-editor)
+#### [Text Editor](/llms.txt#text-editor)
 
 Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/text-editor.json)
+[Registry JSON](/r/text-editor.json)
 
 
 
@@ -362,27 +362,27 @@ Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
 
 
 
-#### [App Layout](https://orchid-ui-hitpay.vercel.app/llms.txt#app-layout)
+#### [App Layout](/llms.txt#app-layout)
 
 HitPay App Studio embedded pane frame. Not generic app chrome.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/app-layout.json)
+[Registry JSON](/r/app-layout.json)
 
 
 
-#### [Form Layout](https://orchid-ui-hitpay.vercel.app/llms.txt#form-layout)
+#### [Form Layout](/llms.txt#form-layout)
 
 Create and edit form shell with page and modal modes.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-layout.json)
+[Registry JSON](/r/form-layout.json)
 
 
 
-#### [Page Layout](https://orchid-ui-hitpay.vercel.app/llms.txt#page-layout)
+#### [Page Layout](/llms.txt#page-layout)
 
 Standard route page with header, optional onBack, and scrollable content.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/page-layout.json)
+[Registry JSON](/r/page-layout.json)
 
 
 
@@ -390,19 +390,19 @@ Standard route page with header, optional onBack, and scrollable content.
 
 
 
-#### [Command](https://orchid-ui-hitpay.vercel.app/llms.txt#command)
+#### [Command](/llms.txt#command)
 
 Searchable command palette. Drive it with open, onOpenChange, and groups.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/command.json)
+[Registry JSON](/r/command.json)
 
 
 
-#### [Confirmation Modal](https://orchid-ui-hitpay.vercel.app/llms.txt#confirmation-modal)
+#### [Confirmation Modal](/llms.txt#confirmation-modal)
 
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/confirmation-modal.json)
+[Registry JSON](/r/confirmation-modal.json)
 
 
 
@@ -414,19 +414,19 @@ Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
 
 
 
-#### [Button](https://orchid-ui-hitpay.vercel.app/llms.txt#button)
+#### [Button](/llms.txt#button)
 
 Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button.json)
+[Registry JSON](/r/button.json)
 
 
 
-#### [Button Group](https://orchid-ui-hitpay.vercel.app/llms.txt#button-group)
+#### [Button Group](/llms.txt#button-group)
 
 Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/button-group.json)
+[Registry JSON](/r/button-group.json)
 
 
 
@@ -434,19 +434,19 @@ Attached controls, plus ghost and border icon toolbars. Compose overflow with Dr
 
 
 
-#### [Avatar](https://orchid-ui-hitpay.vercel.app/llms.txt#avatar)
+#### [Avatar](/llms.txt#avatar)
 
 Image, fallback, badge, and group primitives with Orchid styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/avatar.json)
+[Registry JSON](/r/avatar.json)
 
 
 
-#### [Badge](https://orchid-ui-hitpay.vercel.app/llms.txt#badge)
+#### [Badge](/llms.txt#badge)
 
 Standard variants with Orchid tones, appearances, removal, and user roles.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/badge.json)
+[Registry JSON](/r/badge.json)
 
 
 
@@ -454,35 +454,35 @@ Standard variants with Orchid tones, appearances, removal, and user roles.
 
 
 
-#### [Banner](https://orchid-ui-hitpay.vercel.app/llms.txt#banner)
+#### [Banner](/llms.txt#banner)
 
 In-page notification with semantic variants and an optional action.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/banner.json)
+[Registry JSON](/r/banner.json)
 
 
 
-#### [Skeleton](https://orchid-ui-hitpay.vercel.app/llms.txt#skeleton)
+#### [Skeleton](/llms.txt#skeleton)
 
 Placeholder pulse with Orchid styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/skeleton.json)
+[Registry JSON](/r/skeleton.json)
 
 
 
-#### [Spinner](https://orchid-ui-hitpay.vercel.app/llms.txt#spinner)
+#### [Spinner](/llms.txt#spinner)
 
 Indeterminate loading icon sized through className.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/spinner.json)
+[Registry JSON](/r/spinner.json)
 
 
 
-#### [Toast](https://orchid-ui-hitpay.vercel.app/llms.txt#toast)
+#### [Toast](/llms.txt#toast)
 
 Toast manager with semantic types, actions, close, and placement.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/toast.json)
+[Registry JSON](/r/toast.json)
 
 
 
@@ -490,91 +490,91 @@ Toast manager with semantic types, actions, close, and placement.
 
 
 
-#### [Checkbox](https://orchid-ui-hitpay.vercel.app/llms.txt#checkbox)
+#### [Checkbox](/llms.txt#checkbox)
 
 Checkbox with Orchid states and an optional group helper.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/checkbox.json)
+[Registry JSON](/r/checkbox.json)
 
 
 
-#### [Field](https://orchid-ui-hitpay.vercel.app/llms.txt#field)
+#### [Field](/llms.txt#field)
 
 Label, description, error, and grouped field composition.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/field.json)
+[Registry JSON](/r/field.json)
 
 
 
-#### [File Upload](https://orchid-ui-hitpay.vercel.app/llms.txt#file-upload)
+#### [File Upload](/llms.txt#file-upload)
 
 File and image upload row with upload state, media, and a vertical group.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/file-upload.json)
+[Registry JSON](/r/file-upload.json)
 
 
 
-#### [Form Section](https://orchid-ui-hitpay.vercel.app/llms.txt#form-section)
+#### [Form Section](/llms.txt#form-section)
 
 Heading plus FormSectionGroup and FormSectionItem.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/form-section.json)
+[Registry JSON](/r/form-section.json)
 
 
 
-#### [Input](https://orchid-ui-hitpay.vercel.app/llms.txt#input)
+#### [Input](/llms.txt#input)
 
 Text and file input with Orchid states.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/input.json)
+[Registry JSON](/r/input.json)
 
 
 
-#### [Input Group](https://orchid-ui-hitpay.vercel.app/llms.txt#input-group)
+#### [Input Group](/llms.txt#input-group)
 
 Input, textarea, addon, and button composition.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/input-group.json)
+[Registry JSON](/r/input-group.json)
 
 
 
-#### [Label](https://orchid-ui-hitpay.vercel.app/llms.txt#label)
+#### [Label](/llms.txt#label)
 
 Accessible label with Orchid typography.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/label.json)
+[Registry JSON](/r/label.json)
 
 
 
-#### [Radio Group](https://orchid-ui-hitpay.vercel.app/llms.txt#radio-group)
+#### [Radio Group](/llms.txt#radio-group)
 
 Radio group and item primitives with Orchid styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/radio-group.json)
+[Registry JSON](/r/radio-group.json)
 
 
 
-#### [Slider](https://orchid-ui-hitpay.vercel.app/llms.txt#slider)
+#### [Slider](/llms.txt#slider)
 
 Single, range, or vertical slider with Orchid styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/slider.json)
+[Registry JSON](/r/slider.json)
 
 
 
-#### [Switch](https://orchid-ui-hitpay.vercel.app/llms.txt#switch)
+#### [Switch](/llms.txt#switch)
 
 Switch in default and small Orchid sizes.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/switch.json)
+[Registry JSON](/r/switch.json)
 
 
 
-#### [Textarea](https://orchid-ui-hitpay.vercel.app/llms.txt#textarea)
+#### [Textarea](/llms.txt#textarea)
 
 Auto-sizing textarea with Orchid form styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/textarea.json)
+[Registry JSON](/r/textarea.json)
 
 
 
@@ -582,11 +582,11 @@ Auto-sizing textarea with Orchid form styling.
 
 
 
-#### [Tabs](https://orchid-ui-hitpay.vercel.app/llms.txt#tabs)
+#### [Tabs](/llms.txt#tabs)
 
 Horizontal or vertical tabs with default and line variants.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tabs.json)
+[Registry JSON](/r/tabs.json)
 
 
 
@@ -594,11 +594,11 @@ Horizontal or vertical tabs with default and line variants.
 
 
 
-#### [Pagination](https://orchid-ui-hitpay.vercel.app/llms.txt#pagination)
+#### [Pagination](/llms.txt#pagination)
 
 Page links with previous, next, ellipsis, and an optional range label.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/pagination.json)
+[Registry JSON](/r/pagination.json)
 
 
 
@@ -606,35 +606,35 @@ Page links with previous, next, ellipsis, and an optional range label.
 
 
 
-#### [Dialog](https://orchid-ui-hitpay.vercel.app/llms.txt#dialog)
+#### [Dialog](/llms.txt#dialog)
 
 Dialog primitives with Orchid sizes and persistent mode.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dialog.json)
+[Registry JSON](/r/dialog.json)
 
 
 
-#### [Drawer](https://orchid-ui-hitpay.vercel.app/llms.txt#drawer)
+#### [Drawer](/llms.txt#drawer)
 
 Swipeable edge panel. Set swipeDirection to up, right, down, or left.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/drawer.json)
+[Registry JSON](/r/drawer.json)
 
 
 
-#### [Dropdown Menu](https://orchid-ui-hitpay.vercel.app/llms.txt#dropdown-menu)
+#### [Dropdown Menu](/llms.txt#dropdown-menu)
 
 Items, selection, submenus, and shortcuts with Orchid styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/dropdown-menu.json)
+[Registry JSON](/r/dropdown-menu.json)
 
 
 
-#### [Tooltip](https://orchid-ui-hitpay.vercel.app/llms.txt#tooltip)
+#### [Tooltip](/llms.txt#tooltip)
 
 Hover and focus tooltip with Orchid styling.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tooltip.json)
+[Registry JSON](/r/tooltip.json)
 
 
 
@@ -642,11 +642,11 @@ Hover and focus tooltip with Orchid styling.
 
 
 
-#### [Kbd](https://orchid-ui-hitpay.vercel.app/llms.txt#kbd)
+#### [Kbd](/llms.txt#kbd)
 
 Keyboard key and grouped shortcut display.
 
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/kbd.json)
+[Registry JSON](/r/kbd.json)
 
 
 
@@ -678,8 +678,7 @@ form-builder, data-table, banner, empty, customer-card, form-layout, app-layout,
 
 
 
-<!-- Generated from content/docs/guides/installation.mdx. Do not edit. -->
-
+<a id="installation"></a>
 # Installation
 
 What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.
@@ -743,15 +742,15 @@ Add the `@orchid` namespace to `components.json`:
 ```json
 {
   "registries": {
-    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
+    "@orchid": "/r/{name}.json"
   }
 }
 ```
 
 The complete catalog is at
-[registry.json](https://orchid-ui-hitpay.vercel.app/registry.json). Then follow
-[Theming](https://orchid-ui-hitpay.vercel.app/llms.txt#theming) to import
-`https://orchid-ui-hitpay.vercel.app/orchid-tokens.css` into the global
+[registry.json](/registry.json). Then follow
+[Theming](/llms.txt#theming) to import
+`/orchid-tokens.css` into the global
 stylesheet configured in `components.json`.
 
 ## Add the complete catalog
@@ -769,8 +768,7 @@ Orchid maintainers build the published registry with `bun run registry:build`.
 Consumer applications do not need this command.
 
 
-<!-- Generated from content/docs/guides/components-json.mdx. Do not edit. -->
-
+<a id="components-json"></a>
 # components.json
 
 Configure aliases, Tailwind CSS, and the Orchid registry namespace.
@@ -804,7 +802,7 @@ settings:
     "hooks": "@/hooks"
   },
   "registries": {
-    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
+    "@orchid": "/r/{name}.json"
   }
 }
 ```
@@ -832,12 +830,11 @@ and your aliases determine it consistently.
 
 ## Next step
 
-Install the [Orchid theme tokens](https://orchid-ui-hitpay.vercel.app/llms.txt#theming), then add a component from
-[Installation](https://orchid-ui-hitpay.vercel.app/llms.txt#installation).
+Install the [Orchid theme tokens](/llms.txt#theming), then add a component from
+[Installation](/llms.txt#installation).
 
 
-<!-- Generated from content/docs/guides/theming.mdx. Do not edit. -->
-
+<a id="theming"></a>
 # Theming
 
 Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.
@@ -848,12 +845,12 @@ once in the global stylesheet referenced by `components.json`.
 ## Install the tokens
 
 Download
-[orchid-tokens.css](https://orchid-ui-hitpay.vercel.app/orchid-tokens.css) and
+[orchid-tokens.css](/orchid-tokens.css) and
 either import it from your global stylesheet or merge its contents there.
 
 ```css
 @import "tailwindcss";
-@import "https://orchid-ui-hitpay.vercel.app/orchid-tokens.css";
+@import "/orchid-tokens.css";
 ```
 
 If your build does not allow remote CSS imports, copy the deployed token file
@@ -889,13 +886,12 @@ components continue to resolve their utility classes.
 
 ## Next step
 
-Review [Components](https://orchid-ui-hitpay.vercel.app/llms.txt#components-json), then install the complete catalog with
+Review [Components](/llms.txt#components-json), then install the complete catalog with
 `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. See
-[Installation](https://orchid-ui-hitpay.vercel.app/llms.txt#installation) for init and add commands.
+[Installation](/llms.txt#installation) for init and add commands.
 
 
-<!-- Generated from content/docs/components/button.mdx. Do not edit. -->
-
+<a id="button"></a>
 # Button
 
 Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
@@ -905,8 +901,7 @@ Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/button-group.mdx. Do not edit. -->
-
+<a id="button-group"></a>
 # Button Group
 
 Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
@@ -921,8 +916,7 @@ automatically. Compose overflow actions with `DropdownMenu` and links with a
 polymorphic `Button`.
 
 
-<!-- Generated from content/docs/components/dropdown-menu.mdx. Do not edit. -->
-
+<a id="dropdown-menu"></a>
 # Dropdown Menu
 
 Items, selection, submenus, and shortcuts with Orchid styling.
@@ -932,8 +926,7 @@ Items, selection, submenus, and shortcuts with Orchid styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/toast.mdx. Do not edit. -->
-
+<a id="toast"></a>
 # Toast
 
 Toast manager with semantic types, actions, close, and placement.
@@ -943,8 +936,7 @@ Toast manager with semantic types, actions, close, and placement.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/banner.mdx. Do not edit. -->
-
+<a id="banner"></a>
 # Banner
 
 In-page notification with semantic variants and an optional action.
@@ -954,8 +946,7 @@ In-page notification with semantic variants and an optional action.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/badge.mdx. Do not edit. -->
-
+<a id="badge"></a>
 # Badge
 
 Standard variants with Orchid tones, appearances, removal, and user roles.
@@ -965,8 +956,7 @@ Standard variants with Orchid tones, appearances, removal, and user roles.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/avatar.mdx. Do not edit. -->
-
+<a id="avatar"></a>
 # Avatar
 
 Image, fallback, badge, and group primitives with Orchid styling.
@@ -976,8 +966,7 @@ Image, fallback, badge, and group primitives with Orchid styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/tooltip.mdx. Do not edit. -->
-
+<a id="tooltip"></a>
 # Tooltip
 
 Hover and focus tooltip with Orchid styling.
@@ -987,8 +976,7 @@ Hover and focus tooltip with Orchid styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/tabs.mdx. Do not edit. -->
-
+<a id="tabs"></a>
 # Tabs
 
 Horizontal or vertical tabs with default and line variants.
@@ -998,8 +986,7 @@ Horizontal or vertical tabs with default and line variants.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/skeleton.mdx. Do not edit. -->
-
+<a id="skeleton"></a>
 # Skeleton
 
 Placeholder pulse with Orchid styling.
@@ -1009,8 +996,7 @@ Placeholder pulse with Orchid styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/spinner.mdx. Do not edit. -->
-
+<a id="spinner"></a>
 # Spinner
 
 Indeterminate loading icon sized through className.
@@ -1020,8 +1006,7 @@ Indeterminate loading icon sized through className.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/dialog.mdx. Do not edit. -->
-
+<a id="dialog"></a>
 # Dialog
 
 Dialog primitives with Orchid sizes and persistent mode.
@@ -1031,8 +1016,7 @@ Dialog primitives with Orchid sizes and persistent mode.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/drawer.mdx. Do not edit. -->
-
+<a id="drawer"></a>
 # Drawer
 
 Swipeable edge panel. Set swipeDirection to up, right, down, or left.
@@ -1044,8 +1028,7 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 Use `Drawer` from `@ui/overlays/drawer`. Set `swipeDirection` to `up`, `right`, `down`, or `left`. `DrawerContent` composes portal, overlay, viewport, and popup. Pass `showSwipeHandle` when the drawer should show a drag affordance. Do not use Sheet.
 
 
-<!-- Generated from content/docs/components/pagination.mdx. Do not edit. -->
-
+<a id="pagination"></a>
 # Pagination
 
 Page links with previous, next, ellipsis, and an optional range label.
@@ -1055,8 +1038,7 @@ Page links with previous, next, ellipsis, and an optional range label.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/kbd.mdx. Do not edit. -->
-
+<a id="kbd"></a>
 # Kbd
 
 Keyboard key and grouped shortcut display.
@@ -1066,8 +1048,7 @@ Keyboard key and grouped shortcut display.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/file-upload.mdx. Do not edit. -->
-
+<a id="file-upload"></a>
 # File Upload
 
 File and image upload row with upload state, media, and a vertical group.
@@ -1079,8 +1060,7 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 Wire a real `<input type="file">` (single or `multiple`) and set `state="uploading"` while the file is in flight. Show `Spinner` in `FileUploadMedia` — do not add a title shimmer. After success, switch to `state="done"` and keep the file icon or image preview. `FileUploadGroup` stacks many files vertically. Label icon-only `FileUploadAction`s. Do not call `npx shadcn add file-upload`.
 
 
-<!-- Generated from content/docs/components/field.mdx. Do not edit. -->
-
+<a id="field"></a>
 # Field
 
 Label, description, error, and grouped field composition.
@@ -1090,8 +1070,7 @@ Label, description, error, and grouped field composition.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/label.mdx. Do not edit. -->
-
+<a id="label"></a>
 # Label
 
 Accessible label with Orchid typography.
@@ -1101,8 +1080,7 @@ Accessible label with Orchid typography.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/input.mdx. Do not edit. -->
-
+<a id="input"></a>
 # Input
 
 Text and file input with Orchid states.
@@ -1112,8 +1090,7 @@ Text and file input with Orchid states.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/input-group.mdx. Do not edit. -->
-
+<a id="input-group"></a>
 # Input Group
 
 Input, textarea, addon, and button composition.
@@ -1123,8 +1100,7 @@ Input, textarea, addon, and button composition.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/textarea.mdx. Do not edit. -->
-
+<a id="textarea"></a>
 # Textarea
 
 Auto-sizing textarea with Orchid form styling.
@@ -1134,8 +1110,7 @@ Auto-sizing textarea with Orchid form styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/checkbox.mdx. Do not edit. -->
-
+<a id="checkbox"></a>
 # Checkbox
 
 Checkbox with Orchid states and an optional group helper.
@@ -1145,8 +1120,7 @@ Checkbox with Orchid states and an optional group helper.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/radio-group.mdx. Do not edit. -->
-
+<a id="radio-group"></a>
 # Radio Group
 
 Radio group and item primitives with Orchid styling.
@@ -1156,8 +1130,7 @@ Radio group and item primitives with Orchid styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/switch.mdx. Do not edit. -->
-
+<a id="switch"></a>
 # Switch
 
 Switch in default and small Orchid sizes.
@@ -1167,8 +1140,7 @@ Switch in default and small Orchid sizes.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/slider.mdx. Do not edit. -->
-
+<a id="slider"></a>
 # Slider
 
 Single, range, or vertical slider with Orchid styling.
@@ -1178,8 +1150,7 @@ Single, range, or vertical slider with Orchid styling.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/form-section.mdx. Do not edit. -->
-
+<a id="form-section"></a>
 # Form Section
 
 Heading plus FormSectionGroup and FormSectionItem.
@@ -1189,8 +1160,7 @@ Heading plus FormSectionGroup and FormSectionItem.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/choice-card.mdx. Do not edit. -->
-
+<a id="choice-card"></a>
 # Choice Card
 
 Selectable cards with left or center icon, no radio dot.
@@ -1200,8 +1170,7 @@ Selectable cards with left or center icon, no radio dot.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/customer-card.mdx. Do not edit. -->
-
+<a id="customer-card"></a>
 # Customer Card
 
 Small, Big, and Float customer or beneficiary cards.
@@ -1211,8 +1180,7 @@ Small, Big, and Float customer or beneficiary cards.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/date-picker.mdx. Do not edit. -->
-
+<a id="date-picker"></a>
 # Date Picker
 
 Date, range, and date-time selection with popover and calendar helpers.
@@ -1240,8 +1208,7 @@ import {
 Click the month/year caption to open a month grid. Click the year in that panel to jump by 12-year pages. Default is `captionLayout="dropdown"`; use `captionLayout="label"` for chevrons only. `startMonth` / `endMonth` limit the range (default 1900 through current year + 10). Use **Clear** to reset the value and **Done** to close the picker. Range pickers include left-side shortcuts: Today, Yesterday, This week, This month, and Last month.
 
 
-<!-- Generated from content/docs/components/select.mdx. Do not edit. -->
-
+<a id="select"></a>
 # Select
 
 Props picker for a closed list or a searchable / multi select.
@@ -1273,8 +1240,7 @@ import { Select } from '@/components/form/select'
 In Form Builder, `type: "select"` is this block without search. `type: "combobox"` is the same block with `searchable`.
 
 
-<!-- Generated from content/docs/components/staff-select.mdx. Do not edit. -->
-
+<a id="staff-select"></a>
 # Staff Select
 
 App-member dropdown. Docs use a fake staff-app-members API.
@@ -1294,8 +1260,7 @@ import { StaffSelect } from '@/components/form/staff-select'
 Do not fetch staff on the screen. Do not call `/v1/staffs`. Persist `id` plus name snapshot. Optional: `multiple`, `roleTitles`, `locationId`.
 
 
-<!-- Generated from content/docs/components/role-select.mdx. Do not edit. -->
-
+<a id="role-select"></a>
 # Role Select
 
 Business role dropdown. Docs use a fake roles API.
@@ -1315,8 +1280,7 @@ import { RoleSelect } from '@/components/form/role-select'
 Gate buttons with `useHitPayUser().user.role.title`. Use this select only to store a role id.
 
 
-<!-- Generated from content/docs/components/coupon-select.mdx. Do not edit. -->
-
+<a id="coupon-select"></a>
 # Coupon Select
 
 Coupon dropdown. Loads GET /v1/coupons.
@@ -1336,8 +1300,7 @@ import { CouponSelect } from '@/components/form/coupon-select'
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/discount-select.mdx. Do not edit. -->
-
+<a id="discount-select"></a>
 # Discount Select
 
 Discount dropdown. Loads GET /v1/discounts.
@@ -1357,8 +1320,7 @@ import { DiscountSelect } from '@/components/form/discount-select'
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/tax-select.mdx. Do not edit. -->
-
+<a id="tax-select"></a>
 # Tax Select
 
 Tax dropdown. Loads GET /v1/taxes.
@@ -1378,8 +1340,7 @@ import { TaxSelect } from '@/components/form/tax-select'
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/shipping-select.mdx. Do not edit. -->
-
+<a id="shipping-select"></a>
 # Shipping Select
 
 Shipping method dropdown. Loads GET /v1/shipping.
@@ -1399,8 +1360,7 @@ import { ShippingSelect } from '@/components/form/shipping-select'
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/pickup-select.mdx. Do not edit. -->
-
+<a id="pickup-select"></a>
 # Pickup Select
 
 Pickup dropdown. Loads GET /v1/pickups.
@@ -1420,8 +1380,7 @@ import { PickupSelect } from '@/components/form/pickup-select'
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/product-category-select.mdx. Do not edit. -->
-
+<a id="product-category-select"></a>
 # Product Category Select
 
 Category dropdown. Loads GET /v1/product-category.
@@ -1441,8 +1400,7 @@ import { ProductCategorySelect } from '@/components/form/product-category-select
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/location-select.mdx. Do not edit. -->
-
+<a id="location-select"></a>
 # Location Select
 
 Location dropdown. Loads GET /v1/locations.
@@ -1462,8 +1420,7 @@ import { LocationSelect } from '@/components/form/location-select'
 Persist `id` plus name snapshot. Optional: `multiple`.
 
 
-<!-- Generated from content/docs/components/detail-card.mdx. Do not edit. -->
-
+<a id="detail-card"></a>
 # Detail Card
 
 Read-only key/value card for one record. Not a collection.
@@ -1486,8 +1443,7 @@ Each item requires a unique string `key` and a React `value`. Items can also set
 it can render text, links, badges, or custom content.
 
 
-<!-- Generated from content/docs/components/empty.mdx. Do not edit. -->
-
+<a id="empty"></a>
 # Empty
 
 Props empty state with optional media and actions.
@@ -1518,8 +1474,7 @@ import { Empty } from '@/components/displaying-data/empty'
 - `actions` is `{ key, label, variant?, disabled?, icon? }[]`.
 
 
-<!-- Generated from content/docs/components/data-list.mdx. Do not edit. -->
-
+<a id="data-list"></a>
 # Data List
 
 Card/row collection when search, filters, sort, or pagination are not needed.
@@ -1627,8 +1582,7 @@ sorting, or pagination.
 `items`, optional `layout`, `empty`, `className`. No `children`.
 
 
-<!-- Generated from content/docs/components/quantity-input.mdx. Do not edit. -->
-
+<a id="quantity-input"></a>
 # Quantity Input
 
 Minus/plus stepper; click the value to type.
@@ -1638,8 +1592,7 @@ Minus/plus stepper; click the value to type.
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/text-editor.mdx. Do not edit. -->
-
+<a id="text-editor"></a>
 # Text Editor
 
 Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
@@ -1663,8 +1616,7 @@ import { TextEditor } from "@/components/form/text-editor";
 `onValueChange` receives Lexical editor state. Store it as JSON text. Do not persist HTML.
 
 
-<!-- Generated from content/docs/components/metric-card.mdx. Do not edit. -->
-
+<a id="metric-card"></a>
 # Metric Card
 
 Dashboard KPI tile. Use for summaries, not a record's fields.
@@ -1677,8 +1629,7 @@ Use `MetricCard` for dashboard KPIs (revenue, volume, counts). Use `DetailCard` 
 record's fields.
 
 
-<!-- Generated from content/docs/components/app-layout.mdx. Do not edit. -->
-
+<a id="app-layout"></a>
 # App Layout
 
 HitPay App Studio embedded pane frame. Not generic app chrome.
@@ -1713,8 +1664,7 @@ Pass `navigationItems` for in-app tabs. `variant` can stay `default` or
 screens the list opens in a drawer.
 
 
-<!-- Generated from content/docs/components/page-layout.mdx. Do not edit. -->
-
+<a id="page-layout"></a>
 # Page Layout
 
 Standard route page with header, optional onBack, and scrollable content.
@@ -1728,8 +1678,7 @@ Pass `onBack` on nested screens (show/edit) to put a back control beside the tit
 The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
 
 
-<!-- Generated from content/docs/components/form-layout.mdx. Do not edit. -->
-
+<a id="form-layout"></a>
 # Form Layout
 
 Create and edit form shell with page and modal modes.
@@ -1794,8 +1743,7 @@ then closes the controlled dialog. Save submits `formId`. Each action supports
 custom `label`, `icon`, `onClick`, `disabled`, and `loading` values.
 
 
-<!-- Generated from content/docs/components/form-builder.mdx. Do not edit. -->
-
+<a id="form-builder"></a>
 # Form Builder
 
 Schema-driven create/edit form. Use Detail Card for a read-only record.
@@ -1902,8 +1850,7 @@ const fields = [
 Do not fetch staff or roles on the screen. Optional staff `props`: `multiple`, `roleTitles`, `locationId`.
 
 
-<!-- Generated from content/docs/components/data-table.mdx. Do not edit. -->
-
+<a id="data-table"></a>
 # Data Table
 
 Rows-and-columns table with search, filters, sort, and pagination.
@@ -2185,8 +2132,7 @@ function ProductsPage() {
 ```
 
 
-<!-- Generated from content/docs/components/confirmation-modal.mdx. Do not edit. -->
-
+<a id="confirmation-modal"></a>
 # Confirmation Modal
 
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
@@ -2198,8 +2144,7 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` from `@/components/overlays/confirmation-modal` for delete/warning confirms. Do not assemble a confirm dialog from `Dialog`.
 
 
-<!-- Generated from content/docs/components/resource-picker.mdx. Do not edit. -->
-
+<a id="resource-picker"></a>
 # Resource Picker
 
 Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
@@ -2341,8 +2286,7 @@ choices.
 - Cancel returns `undefined`
 
 
-<!-- Generated from content/docs/components/command.mdx. Do not edit. -->
-
+<a id="command"></a>
 # Command
 
 Searchable command palette. Drive it with open, onOpenChange, and groups.
@@ -2354,8 +2298,7 @@ The interactive example is rendered on the Orchid documentation page. Use the us
 Use `Command` from `@/components/overlays/command` with `open`, `onOpenChange`, and `groups`. Do not assemble a palette from `Dialog` plus cmdk primitives.
 
 
-<!-- Generated from content/docs/components/copy-button.mdx. Do not edit. -->
-
+<a id="copy-button"></a>
 # Copy Button
 
 Copy icon that writes a value and shows Copied!.
@@ -2370,4 +2313,32 @@ Icon that copies `value` and shows `Copied!`.
 import { CopyButton } from '@/components/actions/copy-button'
 
 <CopyButton value="+65 8123 4567" />
+```
+
+
+<a id="popover"></a>
+# Popover
+
+Non-modal popover primitives with Orchid styling.
+
+## Usage
+
+```tsx
+import { Popover } from "@ui/overlays/popover.tsx";
+
+<Popover />
+```
+
+
+<a id="separator"></a>
+# Separator
+
+Horizontal or vertical separator with Orchid styling.
+
+## Usage
+
+```tsx
+import { Separator } from "@ui/utils/separator.tsx";
+
+<Separator />
 ```

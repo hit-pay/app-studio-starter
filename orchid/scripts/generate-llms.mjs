@@ -12,6 +12,7 @@ import {
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const registry = JSON.parse(readFileSync(join(root, "registry.json"), "utf8"));
 const output = join(root, "public", "llms.txt");
+const appOutput = join(root, "..", "app", "orchid-ui-guideline.md");
 const legacyDocsDir = join(root, "public", "llms");
 const homepage = registry.homepage?.replace(/\/$/, "");
 
@@ -49,8 +50,8 @@ for (const item of documented) {
   }
 }
 
-const link = (path) => `${homepage}${path}`;
-const docsLink = (item) => `${link("/llms.txt")}#${slug(item)}`;
+const link = (path) => path;
+const docsLink = (item) => `/llms.txt#${slug(item)}`;
 const registryItems = registry.items.filter(
   (item) => item.name !== "all" && item.name !== "utils",
 );
@@ -125,13 +126,13 @@ function rewriteDocHref(href) {
     path === "/llms.txt" ||
     /\.\w+$/.test(path)
   ) {
-    return `${homepage}${href}`;
+    return href;
   }
   const name = path.replace(/^\//, "").replaceAll("/", "-");
-  return `${homepage}/llms.txt#${name}${hash ? `-${hash}` : ""}`;
+  return `/llms.txt#${name}${hash ? `-${hash}` : ""}`;
 }
 
-function mdxToMarkdown(source, mdxFile, title, description) {
+function mdxToMarkdown(source, mdxFile, title, description, anchor) {
   const imports = parseNamedImports(source);
   const demoFiles = new Map();
   for (const item of imports) {
@@ -161,8 +162,7 @@ function mdxToMarkdown(source, mdxFile, title, description) {
   body = body.replace(/\n{3,}/g, "\n\n").trim();
 
   return [
-    `<!-- Generated from ${mdxFile.replace(`${root}/`, "")}. Do not edit. -->`,
-    "",
+    `<a id="${anchor}"></a>`,
     `# ${title}`,
     "",
     description,
@@ -174,13 +174,43 @@ function mdxToMarkdown(source, mdxFile, title, description) {
 
 function generateMarkdownDocs() {
   const pages = [...guideItems, ...documented];
-  return pages.map((item) => {
+  const documentedNames = new Set(documented.map((item) => slug(item)));
+  const registryOnly = registryItems
+    .filter((item) => !documentedNames.has(item.name))
+    .map((item) => ({
+      to: `/${item.name}`,
+      name: item.title,
+      description: item.description,
+      registryOnly: true,
+    }));
+
+  return [...pages, ...registryOnly].map((item) => {
+    if ("registryOnly" in item) {
+      const registryItem = registryByName.get(slug(item));
+      const target = registryItem?.files?.[0]?.target ?? `@ui/${slug(item)}`;
+      return [
+        `<a id="${slug(item)}"></a>`,
+        `# ${item.name}`,
+        "",
+        item.description,
+        "",
+        "## Usage",
+        "",
+        "```tsx",
+        `import { ${item.name} } from "${target.startsWith("@ui/") ? target : `@ui/${slug(item)}`}";`,
+        "",
+        `<${item.name} />`,
+        "```",
+        "",
+      ].join("\n");
+    }
     const mdxFile = findMdx(item);
     return mdxToMarkdown(
       readFileSync(mdxFile, "utf8"),
       mdxFile,
       item.name,
       item.description,
+      slug(item),
     );
   });
 }
@@ -328,8 +358,10 @@ const lines = [
 
 mkdirSync(dirname(output), { recursive: true });
 rmSync(legacyDocsDir, { recursive: true, force: true });
-writeFileSync(output, [...lines, ...markdownDocs].join("\n\n"));
+const document = [...lines, ...markdownDocs].join("\n\n").replaceAll(homepage, "");
+writeFileSync(output, document);
+writeFileSync(appOutput, document.replaceAll("/llms.txt", "/orchid-ui-guidelines.md"));
 
 console.log(
-  `Wrote ${output} with ${markdownDocs.length} documentation sections`,
+  `Wrote ${output} and ${appOutput} with ${markdownDocs.length} documentation sections`,
 );

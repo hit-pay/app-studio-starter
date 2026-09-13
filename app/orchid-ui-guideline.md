@@ -1,463 +1,2344 @@
-# Orchid catalog
+# Orchid UI Documentation
 
-Use **Components & Blocks** (`@/components/…`) first. Pass props or a schema. Do not start a screen from `@ui`. Read `orchid-llms/llms.txt` when props are unclear. Do not fetch orchid-ui-hitpay.vercel.app. `@ui` only after the block is in the file.
 
-# Needs
 
-- rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete → `data-table`
-- compact row list, card list, people list, products list, activity feed, checklist → `data-list`
-- one record, detail page fields, invoice detail, leave detail, key-value summary → `detail-card`
-- kpi, dashboard, stat, revenue, volume, count, percent → `metric-card`
-- customer, beneficiary, contact, payee → `customer-card`
-- multi-field form, create form, edit form, schema fields, validation → `form-builder`
-- create/edit page shell, form modal shell, save and cancel → `form-layout`
-- browse page shell, detail page shell, page title, back button, page actions → `page-layout`
-- iframe app shell, app name, app-level tabs, app sidebar → `app-layout`
-- choose one, option cards, plan, method → `choice-card`
-- stepper, quantity, plus minus, stock count → `quantity-input`
-- rich text, notes, wysiwyg, lexical → `text-editor`
-- date picker, date range picker, datetime picker, calendar popover → `date-picker`
-- dropdown, select, searchable select, multi select, pick one option → `select`
-- assignee, reviewer, pick staff, staff dropdown → `staff-select`
-- pick role, notify role, role dropdown → `role-select`
-- pick coupon, coupon dropdown → `coupon-select`
-- pick discount, discount dropdown → `discount-select`
-- pick tax, tax dropdown → `tax-select`
-- pick shipping method → `shipping-select`
-- pick pickup → `pickup-select`
-- pick category, product category dropdown → `product-category-select`
-- pick location, location dropdown → `location-select`
-- confirm, delete, destructive, are you sure → `confirmation-modal`
-- copy to clipboard, copy id, copy phone, copy url → `copy-button`
-- pick product, pick customer, pick order, resource picker, catalog picker → `resource-picker`
-- command palette, search commands, cmdk → `command`
-- toast, snackbar, notify, success message → `toast` (`@ui`, after a block)
-- banner, alert, inline notice → `banner` (`@ui`)
-- empty state, no records, first-use state → `empty`
-- loading placeholder, skeleton rows → `skeleton` (`@ui`)
-- loading spinner → `spinner` (`@ui`)
-- extra dialog (not FormLayout modal, not confirmation) → `dialog` (`@ui`)
-- extra drawer (not FormLayout modal, not confirmation) → `drawer` (`@ui`)
-- in-page tabs (not AppLayout tabs) → `tabs` (`@ui`)
-- status badge, label → `badge` (`@ui`)
+AI/LLM note: after `@orchid` is in `components.json`, install every item with `bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. Use the [registry index](/registry.json) as the machine-readable catalog. Read the generated documentation in /orchid-ui-guidelines.md for intent and examples, then verify exports and props in the installed source.
 
-# Components & Blocks
 
-## Actions
 
-## `copy-button` — Copy Button
+## Overview
 
-Need: copy to clipboard, copy id, copy phone, copy url
-Copy a string (id, phone, URL). prop: value.
-Import `@/components/actions/copy-button` — `src/components/actions/copy-button.tsx`.
-Docs: `orchid-llms/llms.txt#copy-button`
 
-## Displaying Data
 
-## `data-table` — Data Table
+Orchid is an AI-ready, open-code UI collection focused on business applications for HitPay-style workflows. It is distributed as a shadcn-compatible registry and provides React and TypeScript source styled with Tailwind CSS v4.
 
-Need: rows and columns, spreadsheet, searchable table, column filter, sort, pagination, row click, row edit/delete
-Usage: `schema.filters` and `schema.rowActions` (for example `["edit", "delete"]`) go inside schema. `onRowClick` and `onRowAction` are DataTable props. Do not create a separate filter row.
-Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.
-Import `@/components/displaying-data/data-table` — `src/components/displaying-data/data-table.tsx`.
-Docs: `orchid-llms/llms.txt#data-table`
-Related: `src/components/displaying-data/data-table-model.ts`.
 
-## `empty` — Empty
 
-Need: empty state, no records, first-use state
-Props empty state. title, optional media and actions.
-Import `@/components/displaying-data/empty` — `src/components/displaying-data/empty.tsx`.
-Docs: `orchid-llms/llms.txt#empty`
+### Quick Stats
 
-## `customer-card` — Customer Card
 
-Need: customer, beneficiary, contact, payee
-Customer/beneficiary summary. variant small|big|float|empty, hover, active.
-Import `@/components/displaying-data/customer-card` — `src/components/displaying-data/customer-card.tsx`.
-Docs: `orchid-llms/llms.txt#customer-card`
 
-## `metric-card` — Metric Card
+- Documentation pages: 3 guides and 54 components.
 
-Need: kpi, dashboard, stat, revenue, volume, count, percent
-KPI tile for a dashboard number: icon, title, value, optional percent change (revenue, volume, counts).
-Import `@/components/displaying-data/metric-card` — `src/components/displaying-data/metric-card.tsx`.
-Docs: `orchid-llms/llms.txt#metric-card`
+- Installable registry items: 56, excluding the helper entries `all` and `utils`.
 
-## `data-list` — Data List
+- Markdown docs: /orchid-ui-guidelines.md — one file containing every guide and component.
 
-Need: compact row list, card list, people list, products list, activity feed, checklist
-Usage: Use for compact collections without table tools. Put row controls such as QuantityInput in item `trailing`.
-Stacked card or row list from items[]. Each item: key, title, optional description, details, media, actions.menu / actions.hover. For people, products, or activity without table search, filters, sort, or pagination.
-Import `@/components/displaying-data/data-list` — `src/components/displaying-data/data-list.tsx`.
-Docs: `orchid-llms/llms.txt#data-list`
 
-## `detail-card` — Detail Card
 
-Need: one record, detail page fields, invoice detail, leave detail, key-value summary
-Read-only key/value card for one record on a show page (invoice, leave request, customer). items, optional title, columns, style default|border. Values can be React nodes.
-Import `@/components/displaying-data/detail-card` — `src/components/displaying-data/detail-card.tsx`.
-Docs: `orchid-llms/llms.txt#detail-card`
+### Installation
 
-## Form
 
-## `form-builder` — Form Builder
 
-Need: multi-field form, create form, edit form, schema fields, validation
-Usage: Use `useSchemaForm({ fields, onSubmit })` and render FormBuilder inside FormLayout.
-JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, staff, role, coupon, discount, tax, shipping, pickup, product-category, location, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone.
-Import `@/components/form/form-builder` — `src/components/form/form-builder.tsx`.
-Docs: `orchid-llms/llms.txt#form-builder`
-Related: `src/components/form/form-builder-model.ts`.
+After `@orchid` is in `components.json`, install every Orchid component. Do not install one item, a shortlist, or any other subset:
 
-## `resource-picker` — Resource Picker
 
-Need: pick product, pick customer, pick order, resource picker, catalog picker
-Usage: Use `useResourcePicker` for catalog records, then persist the selected resource to Turso.
-Promise picker for HitPay list records (products, customers, orders, charges, invoices, add-ons). const pick = useResourcePicker(); await pick({ type }).
-Import `@/components/form/resource-picker` — `src/components/form/resource-picker.tsx`.
-Docs: `orchid-llms/llms.txt#resource-picker`
 
-## `choice-card` — Choice Card
+```bash
 
-Need: choose one, option cards, plan, method
-Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal.
-Import `@/components/form/choice-card` — `src/components/form/choice-card.tsx`.
-Docs: `orchid-llms/llms.txt#choice-card`
+bunx --bun shadcn@latest add @orchid/all
 
-## `select` — Select
+```
 
-Need: dropdown, select, searchable select, multi select, pick one option
+
+
+## AI Resources
+
+
+
+- [Registry Index](/registry.json) — machine-readable catalog and dependency graph.
+
+- [Markdown docs](/orchid-ui-guidelines.md) — generated documentation for agents (not the HTML site).
+
+- [Orchid Theme Tokens](/orchid-tokens.css) — published CSS variables and Tailwind CSS v4 theme mappings.
+
+- [Installation Guide](/orchid-ui-guidelines.md#installation) — initialize a project and add Orchid items with the shadcn CLI.
+
+- [components.json Guide](/orchid-ui-guidelines.md#components-json) — configure aliases, Tailwind CSS, and the Orchid namespace.
+
+- [Theming Guide](/orchid-ui-guidelines.md#theming) — install and customize Orchid light and dark tokens.
+
+
+
+## MCP Setup for AI Agents
+
+
+
+Orchid does not run a separate MCP server. Use the official shadcn MCP server, which can browse, search, and install items from any shadcn-compatible registry configured in the project's `components.json`.
+
+
+
+First, make sure the Orchid namespace is present in `components.json`:
+
+
+
+```json
+
+{
+
+  "registries": {
+
+    "@orchid": "/r/{name}.json"
+
+  }
+
+}
+
+```
+
+
+
+For Cursor, create or merge `.cursor/mcp.json`:
+
+
+
+```json
+
+{
+
+  "mcpServers": {
+
+    "shadcn": {
+
+      "command": "npx",
+
+      "args": ["shadcn@latest", "mcp"]
+
+    }
+
+  }
+
+}
+
+```
+
+
+
+For Claude Code, use the same server entry in `.mcp.json`. For Codex, add the following to `~/.codex/config.toml`:
+
+
+
+```toml
+
+[mcp_servers.shadcn]
+
+command = "npx"
+
+args = ["shadcn@latest", "mcp"]
+
+```
+
+
+
+An AI agent configuring MCP should preserve existing MCP servers and existing `components.json` settings, merge only the entries above, and ask before changing user-level configuration. Restart or re-enable the MCP client after configuration.
+
+
+
+Example prompts after setup:
+
+
+
+- Show all components available in the Orchid registry.
+
+- Install the complete catalog with `@orchid/all`.
+
+- Find the Orchid block that matches a form, a collection, or a single-record detail view.
+
+
+
+## Getting Started
+
+
+
+- [Installation](/orchid-ui-guidelines.md#installation) — What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.
+
+- [components.json](/orchid-ui-guidelines.md#components-json) — Configure aliases, Tailwind CSS, and the Orchid registry namespace.
+
+- [Theming](/orchid-ui-guidelines.md#theming) — Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.
+
+
+
+## Components & Blocks
+
+
+
+### Actions
+
+
+
+#### [Copy Button](/orchid-ui-guidelines.md#copy-button)
+
+Copy icon that writes a value and shows Copied!.
+
+[Registry JSON](/r/copy-button.json)
+
+
+
+### Displaying Data
+
+
+
+#### [Customer Card](/orchid-ui-guidelines.md#customer-card)
+
+Small, Big, and Float customer or beneficiary cards.
+
+[Registry JSON](/r/customer-card.json)
+
+
+
+#### [Data List](/orchid-ui-guidelines.md#data-list)
+
+Card/row collection when search, filters, sort, or pagination are not needed.
+
+[Registry JSON](/r/data-list.json)
+
+
+
+#### [Data Table](/orchid-ui-guidelines.md#data-table)
+
+Rows-and-columns table with search, filters, sort, and pagination.
+
+[Registry JSON](/r/data-table.json)
+
+
+
+#### [Detail Card](/orchid-ui-guidelines.md#detail-card)
+
+Read-only key/value card for one record. Not a collection.
+
+[Registry JSON](/r/detail-card.json)
+
+
+
+#### [Empty](/orchid-ui-guidelines.md#empty)
+
+Props empty state with optional media and actions.
+
+[Registry JSON](/r/empty.json)
+
+
+
+#### [Metric Card](/orchid-ui-guidelines.md#metric-card)
+
+Dashboard KPI tile. Use for summaries, not a record's fields.
+
+[Registry JSON](/r/metric-card.json)
+
+
+
+### Form
+
+
+
+#### [Choice Card](/orchid-ui-guidelines.md#choice-card)
+
+Selectable cards with left or center icon, no radio dot.
+
+[Registry JSON](/r/choice-card.json)
+
+
+
+#### [Coupon Select](/orchid-ui-guidelines.md#coupon-select)
+
+Coupon dropdown. Loads GET /v1/coupons.
+
+[Registry JSON](/r/coupon-select.json)
+
+
+
+#### [Date Picker](/orchid-ui-guidelines.md#date-picker)
+
+Date, range, and date-time selection with popover and calendar helpers.
+
+[Registry JSON](/r/date-picker.json)
+
+
+
+#### [Discount Select](/orchid-ui-guidelines.md#discount-select)
+
+Discount dropdown. Loads GET /v1/discounts.
+
+[Registry JSON](/r/discount-select.json)
+
+
+
+#### [Form Builder](/orchid-ui-guidelines.md#form-builder)
+
+Schema-driven create/edit form. Use Detail Card for a read-only record.
+
+[Registry JSON](/r/form-builder.json)
+
+
+
+#### [Location Select](/orchid-ui-guidelines.md#location-select)
+
+Location dropdown. Loads GET /v1/locations.
+
+[Registry JSON](/r/location-select.json)
+
+
+
+#### [Pickup Select](/orchid-ui-guidelines.md#pickup-select)
+
+Pickup dropdown. Loads GET /v1/pickups.
+
+[Registry JSON](/r/pickup-select.json)
+
+
+
+#### [Product Category Select](/orchid-ui-guidelines.md#product-category-select)
+
+Category dropdown. Loads GET /v1/product-category.
+
+[Registry JSON](/r/product-category-select.json)
+
+
+
+#### [Quantity Input](/orchid-ui-guidelines.md#quantity-input)
+
+Minus/plus stepper; click the value to type.
+
+[Registry JSON](/r/quantity-input.json)
+
+
+
+#### [Resource Picker](/orchid-ui-guidelines.md#resource-picker)
+
+Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
+
+[Registry JSON](/r/resource-picker.json)
+
+
+
+#### [Role Select](/orchid-ui-guidelines.md#role-select)
+
+Business role dropdown. Docs use a fake roles API.
+
+[Registry JSON](/r/role-select.json)
+
+
+
+#### [Select](/orchid-ui-guidelines.md#select)
+
 Props picker for a closed list or a searchable / multi select.
-Import `@/components/form/select` — `src/components/form/select.tsx`.
-Docs: `orchid-llms/llms.txt#select`
-Related: `src/ui/form/combobox.tsx`.
 
-## `staff-select` — Staff Select
+[Registry JSON](/r/select.json)
 
-Need: assignee, reviewer, pick staff, staff dropdown
-App-member dropdown. GET /api/apps/{appId}/staff-app-members. Do not fetch on the screen.
-Import `@/components/form/staff-select` — `src/components/form/staff-select.tsx`.
-Docs: `orchid-llms/llms.txt#staff-select`
-Related: `src/lib/hitpay.ts`, `src/lib/hitpay-roles.ts`, `src/lib/studio-app-id.ts`.
 
-## `role-select` — Role Select
 
-Need: pick role, notify role, role dropdown
-Business role dropdown. GET /api/apps/{appId}/roles. Do not fetch on the screen.
-Import `@/components/form/role-select` — `src/components/form/role-select.tsx`.
-Docs: `orchid-llms/llms.txt#role-select`
-Related: `src/lib/hitpay.ts`, `src/lib/hitpay-roles.ts`, `src/lib/studio-app-id.ts`.
+#### [Shipping Select](/orchid-ui-guidelines.md#shipping-select)
 
-## `coupon-select` — Coupon Select
+Shipping method dropdown. Loads GET /v1/shipping.
 
-Need: pick coupon, coupon dropdown
-Coupon dropdown. GET /v1/coupons. Do not fetch on the screen.
-Import `@/components/form/coupon-select` — `src/components/form/coupon-select.tsx`.
-Docs: `orchid-llms/llms.txt#coupon-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
+[Registry JSON](/r/shipping-select.json)
 
-## `discount-select` — Discount Select
 
-Need: pick discount, discount dropdown
-Discount dropdown. GET /v1/discounts. Do not fetch on the screen.
-Import `@/components/form/discount-select` — `src/components/form/discount-select.tsx`.
-Docs: `orchid-llms/llms.txt#discount-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
 
-## `tax-select` — Tax Select
+#### [Staff Select](/orchid-ui-guidelines.md#staff-select)
 
-Need: pick tax, tax dropdown
-Tax dropdown. GET /v1/taxes. Do not fetch on the screen.
-Import `@/components/form/tax-select` — `src/components/form/tax-select.tsx`.
-Docs: `orchid-llms/llms.txt#tax-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
+App-member dropdown. Docs use a fake staff-app-members API.
 
-## `shipping-select` — Shipping Select
+[Registry JSON](/r/staff-select.json)
 
-Need: pick shipping method
-Shipping dropdown. GET /v1/shipping. Do not fetch on the screen.
-Import `@/components/form/shipping-select` — `src/components/form/shipping-select.tsx`.
-Docs: `orchid-llms/llms.txt#shipping-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
 
-## `pickup-select` — Pickup Select
 
-Need: pick pickup
-Pickup dropdown. GET /v1/pickups. Do not fetch on the screen.
-Import `@/components/form/pickup-select` — `src/components/form/pickup-select.tsx`.
-Docs: `orchid-llms/llms.txt#pickup-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
+#### [Tax Select](/orchid-ui-guidelines.md#tax-select)
 
-## `product-category-select` — Product Category Select
+Tax dropdown. Loads GET /v1/taxes.
 
-Need: pick category, product category dropdown
-Category dropdown. GET /v1/product-category. Do not fetch on the screen.
-Import `@/components/form/product-category-select` — `src/components/form/product-category-select.tsx`.
-Docs: `orchid-llms/llms.txt#product-category-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
+[Registry JSON](/r/tax-select.json)
 
-## `location-select` — Location Select
 
-Need: pick location, location dropdown
-Location dropdown. GET /v1/locations. Do not fetch on the screen.
-Import `@/components/form/location-select` — `src/components/form/location-select.tsx`.
-Docs: `orchid-llms/llms.txt#location-select`
-Related: `src/components/form/hitpay-named-select.tsx`.
 
-## `quantity-input` — Quantity Input
+#### [Text Editor](/orchid-ui-guidelines.md#text-editor)
 
-Need: stepper, quantity, plus minus, stock count
-Integer stepper. min/max/step.
-Import `@/components/form/quantity-input` — `src/components/form/quantity-input.tsx`.
-Docs: `orchid-llms/llms.txt#quantity-input`
+Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
 
-## `text-editor` — Text Editor
+[Registry JSON](/r/text-editor.json)
 
-Need: rich text, notes, wysiwyg, lexical
-Lexical rich text for notes. Bold, italic, heading, lists. Persist editor JSON.
-Import `@/components/form/text-editor` — `src/components/form/text-editor.tsx`.
-Docs: `orchid-llms/llms.txt#text-editor`
 
-## `date-picker` — Date Picker
 
-Need: date picker, date range picker, datetime picker, calendar popover
-Date, range, and date-time picker. Do not import Calendar.
-Import `@/components/form/date-picker` — `src/components/form/date-picker.tsx`.
-Docs: `orchid-llms/llms.txt#date-picker`
-Related: `src/ui/form/calendar.tsx`.
+### Layout
 
-## Layout
 
-## `form-layout` — Form Layout
 
-Need: create/edit page shell, form modal shell, save and cancel
-Usage: `formId` must match the FormBuilder id; use `mode="modal"` for a focused create form.
-Page or modal shell for create/edit. One FormBuilder: formId matches the builder id. Several forms: actions.save.onClick. Browse and show pages use PageLayout.
-Import `@/components/layout/form-layout` — `src/components/layout/form-layout.tsx`.
-Docs: `orchid-llms/llms.txt#form-layout`
+#### [App Layout](/orchid-ui-guidelines.md#app-layout)
 
-## `app-layout` — App Layout
+HitPay App Studio embedded pane frame. Not generic app chrome.
 
-Need: iframe app shell, app name, app-level tabs, app sidebar
-HitPay App Studio embedded pane frame (not generic app chrome). Optional app name, tabs, and sidebar.
-Import `@/components/layout/app-layout` — `src/components/layout/app-layout.tsx`.
-Docs: `orchid-llms/llms.txt#app-layout`
+[Registry JSON](/r/app-layout.json)
 
-## `page-layout` — Page Layout
 
-Need: browse page shell, detail page shell, page title, back button, page actions
-Usage: Use `actions` for Create/Add and `onBack` only on nested screens.
-Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.
-Import `@/components/layout/page-layout` — `src/components/layout/page-layout.tsx`.
-Docs: `orchid-llms/llms.txt#page-layout`
 
-## Overlays
+#### [Form Layout](/orchid-ui-guidelines.md#form-layout)
 
-## `confirmation-modal` — Confirmation Modal
+Create and edit form shell with page and modal modes.
 
-Need: confirm, delete, destructive, are you sure
+[Registry JSON](/r/form-layout.json)
+
+
+
+#### [Page Layout](/orchid-ui-guidelines.md#page-layout)
+
+Standard route page with header, optional onBack, and scrollable content.
+
+[Registry JSON](/r/page-layout.json)
+
+
+
+### Overlays
+
+
+
+#### [Command](/orchid-ui-guidelines.md#command)
+
+Searchable command palette. Drive it with open, onOpenChange, and groups.
+
+[Registry JSON](/r/command.json)
+
+
+
+#### [Confirmation Modal](/orchid-ui-guidelines.md#confirmation-modal)
+
 Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
-Import `@/components/overlays/confirmation-modal` — `src/components/overlays/confirmation-modal.tsx`.
-Docs: `orchid-llms/llms.txt#confirmation-modal`
 
-## `command` — Command
+[Registry JSON](/r/confirmation-modal.json)
 
-Need: command palette, search commands, cmdk
-Searchable command palette driven by open, onOpenChange, and groups.
-Import `@/components/overlays/command` — `src/components/overlays/command.tsx`.
-Docs: `orchid-llms/llms.txt#command`
 
-# Base Components
 
-## Actions
+## Base Components
 
-## `button` — Button
 
-Base UI button with standard variants and sizes in Orchid styling.
-Import `@ui/actions/button` — `src/ui/actions/button.tsx`.
-Docs: `orchid-llms/llms.txt#button`
 
-## `button-group` — Button Group
+### Actions
 
-Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.
-Import `@ui/actions/button-group` — `src/ui/actions/button-group.tsx`.
-Docs: `orchid-llms/llms.txt#button-group`
 
-## Displaying Data
 
-## `badge` — Badge
+#### [Button](/orchid-ui-guidelines.md#button)
 
-Need: status badge, label
-Badge with render support plus Orchid tones, appearances, removable badges, and user roles.
-Import `@ui/displaying-data/badge` — `src/ui/displaying-data/badge.tsx`.
-Docs: `orchid-llms/llms.txt#badge`
+Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
 
-## `avatar` — Avatar
+[Registry JSON](/r/button.json)
 
-Compound avatar with image, fallback, badge, group, and Orchid business styling.
-Import `@ui/displaying-data/avatar` — `src/ui/displaying-data/avatar.tsx`.
-Docs: `orchid-llms/llms.txt#avatar`
 
-## Feedback
 
-## `banner` — Banner
+#### [Button Group](/orchid-ui-guidelines.md#button-group)
 
-Need: banner, alert, inline notice
-Banner with semantic variants and top-right or bottom action placement in Orchid styling.
-Import `@ui/feedback/banner` — `src/ui/feedback/banner.tsx`.
-Docs: `orchid-llms/llms.txt#banner`
+Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
 
-## `toast` — Toast
+[Registry JSON](/r/button-group.json)
 
-Need: toast, snackbar, notify, success message
-Base UI toast with additive placement options and Orchid semantic styling.
-Import `@ui/feedback/toast` — `src/ui/feedback/toast.tsx`.
-Docs: `orchid-llms/llms.txt#toast`
 
-## `skeleton` — Skeleton
 
-Need: loading placeholder, skeleton rows
-Animated loading placeholder with Orchid styling.
-Import `@ui/feedback/skeleton` — `src/ui/feedback/skeleton.tsx`.
-Docs: `orchid-llms/llms.txt#skeleton`
+### Displaying Data
 
-## `spinner` — Spinner
 
-Need: loading spinner
+
+#### [Avatar](/orchid-ui-guidelines.md#avatar)
+
+Image, fallback, badge, and group primitives with Orchid styling.
+
+[Registry JSON](/r/avatar.json)
+
+
+
+#### [Badge](/orchid-ui-guidelines.md#badge)
+
+Standard variants with Orchid tones, appearances, removal, and user roles.
+
+[Registry JSON](/r/badge.json)
+
+
+
+### Feedback
+
+
+
+#### [Banner](/orchid-ui-guidelines.md#banner)
+
+In-page notification with semantic variants and an optional action.
+
+[Registry JSON](/r/banner.json)
+
+
+
+#### [Skeleton](/orchid-ui-guidelines.md#skeleton)
+
+Placeholder pulse with Orchid styling.
+
+[Registry JSON](/r/skeleton.json)
+
+
+
+#### [Spinner](/orchid-ui-guidelines.md#spinner)
+
 Indeterminate loading icon sized through className.
-Import `@ui/feedback/spinner` — `src/ui/feedback/spinner.tsx`.
-Docs: `orchid-llms/llms.txt#spinner`
 
-## Form
+[Registry JSON](/r/spinner.json)
 
-## `field` — Field
 
-Field composition with Orchid form styling.
-Import `@ui/form/field` — `src/ui/form/field.tsx`.
-Docs: `orchid-llms/llms.txt#field`
 
-## `label` — Label
+#### [Toast](/orchid-ui-guidelines.md#toast)
+
+Toast manager with semantic types, actions, close, and placement.
+
+[Registry JSON](/r/toast.json)
+
+
+
+### Form
+
+
+
+#### [Checkbox](/orchid-ui-guidelines.md#checkbox)
+
+Checkbox with Orchid states and an optional group helper.
+
+[Registry JSON](/r/checkbox.json)
+
+
+
+#### [Field](/orchid-ui-guidelines.md#field)
+
+Label, description, error, and grouped field composition.
+
+[Registry JSON](/r/field.json)
+
+
+
+#### [File Upload](/orchid-ui-guidelines.md#file-upload)
+
+File and image upload row with upload state, media, and a vertical group.
+
+[Registry JSON](/r/file-upload.json)
+
+
+
+#### [Form Section](/orchid-ui-guidelines.md#form-section)
+
+Heading plus FormSectionGroup and FormSectionItem.
+
+[Registry JSON](/r/form-section.json)
+
+
+
+#### [Input](/orchid-ui-guidelines.md#input)
+
+Text and file input with Orchid states.
+
+[Registry JSON](/r/input.json)
+
+
+
+#### [Input Group](/orchid-ui-guidelines.md#input-group)
+
+Input, textarea, addon, and button composition.
+
+[Registry JSON](/r/input-group.json)
+
+
+
+#### [Label](/orchid-ui-guidelines.md#label)
 
 Accessible label with Orchid typography.
-Import `@ui/form/label` — `src/ui/form/label.tsx`.
-Docs: `orchid-llms/llms.txt#label`
 
-## `input` — Input
+[Registry JSON](/r/label.json)
 
-Base UI input with Orchid form styling.
-Import `@ui/form/input` — `src/ui/form/input.tsx`.
-Docs: `orchid-llms/llms.txt#input`
 
-## `input-group` — Input Group
 
-Input, textarea, addon, and button composition with Orchid styling.
-Import `@ui/form/input-group` — `src/ui/form/input-group.tsx`.
-Docs: `orchid-llms/llms.txt#input-group`
-
-## `textarea` — Textarea
-
-Auto-sizing textarea with Orchid form styling.
-Import `@ui/form/textarea` — `src/ui/form/textarea.tsx`.
-Docs: `orchid-llms/llms.txt#textarea`
-
-## `checkbox` — Checkbox
-
-Base UI checkbox with Orchid states and an optional CheckboxGroup helper.
-Import `@ui/form/checkbox` — `src/ui/form/checkbox.tsx`.
-Docs: `orchid-llms/llms.txt#checkbox`
-
-## `radio-group` — Radio Group
+#### [Radio Group](/orchid-ui-guidelines.md#radio-group)
 
 Radio group and item primitives with Orchid styling.
-Import `@ui/form/radio-group` — `src/ui/form/radio-group.tsx`.
-Docs: `orchid-llms/llms.txt#radio-group`
 
-## `switch` — Switch
+[Registry JSON](/r/radio-group.json)
 
-Base UI switch with default and small Orchid sizes.
-Import `@ui/form/switch` — `src/ui/form/switch.tsx`.
-Docs: `orchid-llms/llms.txt#switch`
 
-## `slider` — Slider
 
-Horizontal or vertical slider with Orchid styling.
-Import `@ui/form/slider` — `src/ui/form/slider.tsx`.
-Docs: `orchid-llms/llms.txt#slider`
+#### [Slider](/orchid-ui-guidelines.md#slider)
 
-## `file-upload` — File Upload
+Single, range, or vertical slider with Orchid styling.
 
-File and image upload row with upload state, media, actions, and a vertical group.
-Import `@ui/form/file-upload` — `src/ui/form/file-upload.tsx`.
-Docs: `orchid-llms/llms.txt#file-upload`
+[Registry JSON](/r/slider.json)
 
-## `form-section` — Form Section
 
-Form block heading. FormSectionGroup + FormSectionItem for settings rows.
-Import `@ui/form/form-section` — `src/ui/form/form-section.tsx`.
-Docs: `orchid-llms/llms.txt#form-section`
 
-## Layout
+#### [Switch](/orchid-ui-guidelines.md#switch)
 
-## `tabs` — Tabs
+Switch in default and small Orchid sizes.
 
-Need: in-page tabs (not AppLayout tabs)
+[Registry JSON](/r/switch.json)
+
+
+
+#### [Textarea](/orchid-ui-guidelines.md#textarea)
+
+Auto-sizing textarea with Orchid form styling.
+
+[Registry JSON](/r/textarea.json)
+
+
+
+### Layout
+
+
+
+#### [Tabs](/orchid-ui-guidelines.md#tabs)
+
 Horizontal or vertical tabs with default and line variants.
-Import `@ui/layout/tabs` — `src/ui/layout/tabs.tsx`.
-Docs: `orchid-llms/llms.txt#tabs`
 
-## Navigation
+[Registry JSON](/r/tabs.json)
 
-## `pagination` — Pagination
 
-Link pagination with Orchid buttons and an optional range label.
-Import `@ui/navigation/pagination` — `src/ui/navigation/pagination.tsx`.
-Docs: `orchid-llms/llms.txt#pagination`
 
-## Overlays
+### Navigation
 
-## `dropdown-menu` — Dropdown Menu
 
-Menu with items, checkbox and radio selection, submenus, and Orchid styling.
-Import `@ui/overlays/dropdown-menu` — `src/ui/overlays/dropdown-menu.tsx`.
-Docs: `orchid-llms/llms.txt#dropdown-menu`
 
-## `tooltip` — Tooltip
+#### [Pagination](/orchid-ui-guidelines.md#pagination)
 
-Base UI tooltip with Orchid styling.
-Import `@ui/overlays/tooltip` — `src/ui/overlays/tooltip.tsx`.
-Docs: `orchid-llms/llms.txt#tooltip`
+Page links with previous, next, ellipsis, and an optional range label.
 
-## `dialog` — Dialog
+[Registry JSON](/r/pagination.json)
 
-Need: extra dialog (not FormLayout modal, not confirmation)
+
+
+### Overlays
+
+
+
+#### [Dialog](/orchid-ui-guidelines.md#dialog)
+
 Dialog primitives with Orchid sizes and persistent mode.
-Import `@ui/overlays/dialog` — `src/ui/overlays/dialog.tsx`.
-Docs: `orchid-llms/llms.txt#dialog`
 
-## `drawer` — Drawer
+[Registry JSON](/r/dialog.json)
 
-Need: extra drawer (not FormLayout modal, not confirmation)
+
+
+#### [Drawer](/orchid-ui-guidelines.md#drawer)
+
 Swipeable edge panel. Set swipeDirection to up, right, down, or left.
-Import `@ui/overlays/drawer` — `src/ui/overlays/drawer.tsx`.
-Docs: `orchid-llms/llms.txt#drawer`
 
-## `popover` — Popover
+[Registry JSON](/r/drawer.json)
+
+
+
+#### [Dropdown Menu](/orchid-ui-guidelines.md#dropdown-menu)
+
+Items, selection, submenus, and shortcuts with Orchid styling.
+
+[Registry JSON](/r/dropdown-menu.json)
+
+
+
+#### [Tooltip](/orchid-ui-guidelines.md#tooltip)
+
+Hover and focus tooltip with Orchid styling.
+
+[Registry JSON](/r/tooltip.json)
+
+
+
+### Utils
+
+
+
+#### [Kbd](/orchid-ui-guidelines.md#kbd)
+
+Keyboard key and grouped shortcut display.
+
+[Registry JSON](/r/kbd.json)
+
+
+
+## Complete Registry List (for AI reference)
+
+
+
+form-builder, data-table, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, popover, separator, field, label, input, input-group, textarea, select, staff-select, role-select, coupon-select, discount-select, tax-select, shipping-select, pickup-select, product-category-select, location-select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, file-upload, form-section
+
+
+
+## Usage Guidance
+
+
+
+- Prefer `llms.txt` over HTML example pages.
+
+- Install `@orchid/all` after the registry is configured. Do not pick a subset.
+
+- Read Components & Blocks first. Match the job to each item's when-to-use description. Use a block when one exists. Only then read Base Components. Do not default to a shortlist of favorites.
+
+- Verify actual exports, props, and behavior in the installed source; documentation summaries are not API signatures.
+
+- Both catalogs use AlignUI groups as folders: actions, displaying-data, feedback, form, layout, navigation, overlays, utils. Always start with Components & Blocks under `src/components/{category}` (`@/components/{category}/…`) via props or a schema. Use Base items under `src/ui/{category}` (`@ui/{category}/…`) only when no block covers the job. Do not assemble a block from many base components.
+
+- Use Orchid `oc-*` design tokens, such as `bg-oc-background`, `text-oc-foreground`, and `border-oc-border`, instead of unrelated hard-coded theme colors.
+
+- AppLayout frames the App Studio embedded pane. PageLayout is the browse/show shell. FormLayout is the create/edit shell. Pick Form Builder, Data List, Data Table, Detail Card, and Metric Card from each item's docs — not from this list.
+
+
+
+<a id="installation"></a>
+# Installation
+
+What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.
+
+Orchid is an open-code component collection for application and business
+interfaces. You install its source into your project and retain full ownership
+of the resulting code.
+
+It combines UI primitives with higher-level components for
+forms, data tables, page layouts, sidebars, confirmations, and common business
+workflows. Orchid uses the shadcn CLI as its installer. It does not provide a
+separate Orchid CLI.
+
+Base items install under `src/ui/{category}` and import from
+`@ui/{category}/<name>`. Blocks install under `src/components/{category}`
+and import from `@/components/{category}/<name>`. Categories match the catalog
+groups (actions, displaying-data, feedback, form, layout, navigation, overlays,
+utils). The CLI writes the source into your application.
+
+## Guidance for AI agents
+
+Use a component block when one matches the job. Blocks live under
+`@/components/{category}` and are the preferred building blocks for screens.
+Use base primitives from `@ui/{category}` only when no Orchid block covers the
+job; do not recreate a block by composing its internal primitives.
+
+Before implementing a screen, read the relevant component page and verify the
+installed source for the exact props and exports. The examples in this
+documentation are usage patterns, not a complete TypeScript API signature.
+Preserve existing `components.json`, path aliases, and MCP configuration when
+adding Orchid.
+
+## Prerequisites
+
+Use a current JavaScript runtime and a project supported by the shadcn CLI. The
+examples use Bun. Orchid uses Tailwind CSS v4 and is distributed as open code:
+the CLI writes component source into your application.
+
+## Create the application
+
+Initialize a project with one of the supported shadcn templates:
+
+```bash
+bunx --bun shadcn@latest init -t vite
+```
+
+Supported template values:
+
+- `next` — Next.js
+- `vite` — Vite + React
+- `start` — TanStack Start
+- `react-router` — React Router
+- `astro` — Astro + React
+
+Enter the generated project directory when initialization finishes.
+
+## Configure the registry
+
+Add the `@orchid` namespace to `components.json`:
+
+```json
+{
+  "registries": {
+    "@orchid": "/r/{name}.json"
+  }
+}
+```
+
+The complete catalog is at
+[registry.json](/registry.json). Then follow
+[Theming](/orchid-ui-guidelines.md#theming) to import
+`/orchid-tokens.css` into the global
+stylesheet configured in `components.json`.
+
+## Add the complete catalog
+
+```bash
+bunx --bun shadcn@latest add @orchid/all
+```
+
+Use this for a new application. Do not install a subset. The namespace keeps
+Orchid items separate from the default shadcn registry. Registry dependencies
+are installed automatically. Import a base item from `@ui/actions/button`
+and a block from `@/components/form/form-builder`.
+
+Orchid maintainers build the published registry with `bun run registry:build`.
+Consumer applications do not need this command.
+
+
+<a id="components-json"></a>
+# components.json
+
+Configure aliases, Tailwind CSS, and the Orchid registry namespace.
+
+`components.json` tells the shadcn CLI where to write source files, which
+stylesheet contains Tailwind, and how to resolve the Orchid registry.
+
+## Recommended configuration
+
+Keep the compatible values generated by `shadcn init`, then verify these
+settings:
+
+```json
+{
+  "$schema": "https://ui.shadcn.com/schema.json",
+  "style": "base-nova",
+  "rsc": false,
+  "tsx": true,
+  "tailwind": {
+    "config": "",
+    "css": "src/styles.css",
+    "baseColor": "neutral",
+    "cssVariables": true,
+    "prefix": ""
+  },
+  "aliases": {
+    "components": "@/components",
+    "utils": "@/lib/utils",
+    "ui": "@/ui",
+    "lib": "@/lib",
+    "hooks": "@/hooks"
+  },
+  "registries": {
+    "@orchid": "/r/{name}.json"
+  }
+}
+```
+
+Use the actual global stylesheet path generated by your framework if it differs
+from `src/styles.css`. Ensure `@/*` resolves to your source directory and add a
+TypeScript path `@ui/*` → `src/ui/*`. Orchid uses `ui`, `components`, `utils`,
+`lib`, and `hooks`.
+
+## File destinations
+
+Registry `target` uses shadcn placeholders, not import paths:
+
+- `@ui/actions/button.tsx` → `src/ui/actions/button.tsx`
+- `@components/form/form-builder.tsx` → `src/components/form/form-builder.tsx`
+
+Do not use `@/ui/…` as a target. The CLI treats `@/` as a folder and
+writes `src/@/…`. Code imports stay `@ui/…` and `@/components/…`.
+
+Do not add a TypeScript path `@base-ui/*`. That would shadow the `@base-ui/react`
+package. Use `@ui/…` instead.
+
+Do not manually choose a destination when adding an item. The registry target
+and your aliases determine it consistently.
+
+## Next step
+
+Install the [Orchid theme tokens](/orchid-ui-guidelines.md#theming), then add a component from
+[Installation](/orchid-ui-guidelines.md#installation).
+
+
+<a id="theming"></a>
+# Theming
+
+Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.
+
+Orchid publishes a Tailwind CSS v4 token sheet for its components. Install it
+once in the global stylesheet referenced by `components.json`.
+
+## Install the tokens
+
+Download
+[orchid-tokens.css](/orchid-tokens.css) and
+either import it from your global stylesheet or merge its contents there.
+
+```css
+@import "tailwindcss";
+@import "/orchid-tokens.css";
+```
+
+If your build does not allow remote CSS imports, copy the deployed token file
+into the project and import the local file instead. Do not both import and paste
+the tokens, which would duplicate the definitions.
+
+The token sheet starts with the dark custom variant, followed by Tailwind
+`@theme inline` mappings and the light and dark variable sets. Place a merged
+copy after the project's Tailwind imports.
+
+## Token model
+
+CSS variables use the `--oc-*` prefix, such as `--oc-background` and
+`--oc-primary`. Tailwind mappings expose classes such as `bg-oc-background`,
+`text-oc-foreground`, and `border-oc-border`.
+
+Customize values in `:root` for the light theme. The `.dark` selector contains
+the dark theme values:
+
+```css
+:root {
+  --oc-primary: #2465de;
+}
+
+.dark {
+  --oc-primary: #ecece4;
+}
+```
+
+Apply the `dark` class to an ancestor—normally the document element—to activate
+dark mode. Keep the variable names and `@theme` mappings intact so installed
+components continue to resolve their utility classes.
+
+## Next step
+
+Review [Components](/orchid-ui-guidelines.md#components-json), then install the complete catalog with
+`bunx --bun shadcn@latest add @orchid/all`. Do not install a subset. See
+[Installation](/orchid-ui-guidelines.md#installation) for init and add commands.
+
+
+<a id="button"></a>
+# Button
+
+Standard variants, sizes, icon buttons, native props, and polymorphic rendering.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="button-group"></a>
+# Button Group
+
+Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `variant="ghost"` for a loose icon toolbar (Default). Use `variant="border"`
+for the same toolbar inside a framed group; dividers render between children
+automatically. Compose overflow actions with `DropdownMenu` and links with a
+polymorphic `Button`.
+
+
+<a id="dropdown-menu"></a>
+# Dropdown Menu
+
+Items, selection, submenus, and shortcuts with Orchid styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="toast"></a>
+# Toast
+
+Toast manager with semantic types, actions, close, and placement.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="banner"></a>
+# Banner
+
+In-page notification with semantic variants and an optional action.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="badge"></a>
+# Badge
+
+Standard variants with Orchid tones, appearances, removal, and user roles.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="avatar"></a>
+# Avatar
+
+Image, fallback, badge, and group primitives with Orchid styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="tooltip"></a>
+# Tooltip
+
+Hover and focus tooltip with Orchid styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="tabs"></a>
+# Tabs
+
+Horizontal or vertical tabs with default and line variants.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="skeleton"></a>
+# Skeleton
+
+Placeholder pulse with Orchid styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="spinner"></a>
+# Spinner
+
+Indeterminate loading icon sized through className.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="dialog"></a>
+# Dialog
+
+Dialog primitives with Orchid sizes and persistent mode.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="drawer"></a>
+# Drawer
+
+Swipeable edge panel. Set swipeDirection to up, right, down, or left.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `Drawer` from `@ui/overlays/drawer`. Set `swipeDirection` to `up`, `right`, `down`, or `left`. `DrawerContent` composes portal, overlay, viewport, and popup. Pass `showSwipeHandle` when the drawer should show a drag affordance. Do not use Sheet.
+
+
+<a id="pagination"></a>
+# Pagination
+
+Page links with previous, next, ellipsis, and an optional range label.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="kbd"></a>
+# Kbd
+
+Keyboard key and grouped shortcut display.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="file-upload"></a>
+# File Upload
+
+File and image upload row with upload state, media, and a vertical group.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Wire a real `<input type="file">` (single or `multiple`) and set `state="uploading"` while the file is in flight. Show `Spinner` in `FileUploadMedia` — do not add a title shimmer. After success, switch to `state="done"` and keep the file icon or image preview. `FileUploadGroup` stacks many files vertically. Label icon-only `FileUploadAction`s. Do not call `npx shadcn add file-upload`.
+
+
+<a id="field"></a>
+# Field
+
+Label, description, error, and grouped field composition.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="label"></a>
+# Label
+
+Accessible label with Orchid typography.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="input"></a>
+# Input
+
+Text and file input with Orchid states.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="input-group"></a>
+# Input Group
+
+Input, textarea, addon, and button composition.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="textarea"></a>
+# Textarea
+
+Auto-sizing textarea with Orchid form styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="checkbox"></a>
+# Checkbox
+
+Checkbox with Orchid states and an optional group helper.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="radio-group"></a>
+# Radio Group
+
+Radio group and item primitives with Orchid styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="switch"></a>
+# Switch
+
+Switch in default and small Orchid sizes.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="slider"></a>
+# Slider
+
+Single, range, or vertical slider with Orchid styling.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="form-section"></a>
+# Form Section
+
+Heading plus FormSectionGroup and FormSectionItem.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="choice-card"></a>
+# Choice Card
+
+Selectable cards with left or center icon, no radio dot.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="customer-card"></a>
+# Customer Card
+
+Small, Big, and Float customer or beneficiary cards.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="date-picker"></a>
+# Date Picker
+
+Date, range, and date-time selection with popover and calendar helpers.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `DatePicker`, `DatePickerRange`, or `DateTimePicker`. Do not import `@ui/form/calendar`.
+
+## Variants
+
+```tsx
+import {
+  DatePicker,
+  DatePickerRange,
+  DateTimePicker,
+} from '@/components/form/date-picker'
+
+<DatePicker placeholder="Invoice due date" />
+<DatePickerRange placeholder="Settlement period" />
+<DateTimePicker placeholder="Delivery date and time" />
+```
+
+Click the month/year caption to open a month grid. Click the year in that panel to jump by 12-year pages. Default is `captionLayout="dropdown"`; use `captionLayout="label"` for chevrons only. `startMonth` / `endMonth` limit the range (default 1900 through current year + 10). Use **Clear** to reset the value and **Done** to close the picker. Range pickers include left-side shortcuts: Today, Yesterday, This week, This month, and Last month.
+
+
+<a id="select"></a>
+# Select
+
+Props picker for a closed list or a searchable / multi select.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+One props-driven picker. Do not import `@ui/form/combobox` children.
+
+```tsx
+import { Select } from '@/components/form/select'
+
+<Select
+  options={[
+    { value: 'sgd', label: 'SGD' },
+    { value: 'usd', label: 'USD' },
+  ]}
+  value={currency}
+  onValueChange={(value) => setCurrency(typeof value === 'string' ? value : null)}
+/>
+```
+
+- Default is a closed list.
+- `searchable` — type to filter.
+- `multiple` — chips. Value is `string[]`.
+- `size`: `default` | `sm` | `inline` (input-group addon).
+
+In Form Builder, `type: "select"` is this block without search. `type: "combobox"` is the same block with `searchable`.
+
+
+<a id="staff-select"></a>
+# Staff Select
+
+App-member dropdown. Docs use a fake staff-app-members API.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+App-member dropdown. Fetches `GET /api/apps/{appId}/staff-app-members` (same as App Studio). Docs serve a fake response for that path.
+
+```tsx
+import { StaffSelect } from '@/components/form/staff-select'
+
+<StaffSelect name="assignee_id" />
+```
+
+Do not fetch staff on the screen. Do not call `/v1/staffs`. Persist `id` plus name snapshot. Optional: `multiple`, `roleTitles`, `locationId`.
+
+
+<a id="role-select"></a>
+# Role Select
+
+Business role dropdown. Docs use a fake roles API.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Business role dropdown. Fetches `GET /api/apps/{appId}/roles` (same as App Studio). Docs serve a fake response for that path.
+
+```tsx
+import { RoleSelect } from '@/components/form/role-select'
+
+<RoleSelect name="notify_role_id" />
+```
+
+Gate buttons with `useHitPayUser().user.role.title`. Use this select only to store a role id.
+
+
+<a id="coupon-select"></a>
+# Coupon Select
+
+Coupon dropdown. Loads GET /v1/coupons.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Coupon dropdown. Loads `GET /v1/coupons`. Do not call `list-coupons` on the screen.
+
+```tsx
+import { CouponSelect } from '@/components/form/coupon-select'
+
+<CouponSelect name="coupon_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="discount-select"></a>
+# Discount Select
+
+Discount dropdown. Loads GET /v1/discounts.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Discount dropdown. Loads `GET /v1/discounts`. Do not call `list-discounts` on the screen.
+
+```tsx
+import { DiscountSelect } from '@/components/form/discount-select'
+
+<DiscountSelect name="discount_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="tax-select"></a>
+# Tax Select
+
+Tax dropdown. Loads GET /v1/taxes.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Tax dropdown. Loads `GET /v1/taxes`. Do not call `list-taxes` on the screen.
+
+```tsx
+import { TaxSelect } from '@/components/form/tax-select'
+
+<TaxSelect name="tax_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="shipping-select"></a>
+# Shipping Select
+
+Shipping method dropdown. Loads GET /v1/shipping.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Shipping method dropdown. Loads `GET /v1/shipping`. Do not call `list-shipping` on the screen.
+
+```tsx
+import { ShippingSelect } from '@/components/form/shipping-select'
+
+<ShippingSelect name="shipping_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="pickup-select"></a>
+# Pickup Select
+
+Pickup dropdown. Loads GET /v1/pickups.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Pickup dropdown. Loads `GET /v1/pickups`. Do not call `list-pickups` on the screen.
+
+```tsx
+import { PickupSelect } from '@/components/form/pickup-select'
+
+<PickupSelect name="pickup_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="product-category-select"></a>
+# Product Category Select
+
+Category dropdown. Loads GET /v1/product-category.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Product category dropdown. Loads `GET /v1/product-category`. Do not call `list-product-categories` on the screen.
+
+```tsx
+import { ProductCategorySelect } from '@/components/form/product-category-select'
+
+<ProductCategorySelect name="category_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="location-select"></a>
+# Location Select
+
+Location dropdown. Loads GET /v1/locations.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Location dropdown. Loads `GET /v1/locations`. Do not call `list-locations` on the screen.
+
+```tsx
+import { LocationSelect } from '@/components/form/location-select'
+
+<LocationSelect name="location_id" />
+```
+
+Persist `id` plus name snapshot. Optional: `multiple`.
+
+
+<a id="detail-card"></a>
+# Detail Card
+
+Read-only key/value card for one record. Not a collection.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `DetailCard` for a read-only key/value view of **one** record (invoice, leave request,
+customer). Use `DataList` or `DataTable` for collections. Do not assemble label/value stacks
+from `Card`.
+
+## API
+
+`DetailCard` accepts `items`, plus optional `title`, `columns`, `style`, and `className`.
+It also supports standard `div` attributes except the native `style`, `title`, and `children` props.
+
+Each item requires a unique string `key` and a React `value`. Items can also set `label`,
+`copyValue`, `alignment`, `size`, `colSpan`, and `className`. Because `value` is a React node,
+it can render text, links, badges, or custom content.
+
+
+<a id="empty"></a>
+# Empty
+
+Props empty state with optional media and actions.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+One props-driven empty state. Do not import `@ui/displaying-data/empty` children.
+
+```tsx
+import { Empty } from '@/components/displaying-data/empty'
+
+<Empty
+  media="icon"
+  title="No invoices yet"
+  description="Create an invoice to bill a customer."
+  actions={[{ key: 'create', label: 'Create invoice' }]}
+  onAction={(action) => {
+    if (action.key === 'create') createInvoice()
+  }}
+/>
+```
+
+- `title` is required.
+- `media`: `icon` | `search` | `upgrade`. Omit for text only.
+- `icon` overrides the default media glyph.
+- `actions` is `{ key, label, variant?, disabled?, icon? }[]`.
+
+
+<a id="data-list"></a>
+# Data List
+
+Card/row collection when search, filters, sort, or pagination are not needed.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Pass **`items` only**. Do not import row primitives. Do not
+use `DataTable` unless the list needs search, filters, sort, or pagination.
+Do not wrap `DataList`.
+
+```tsx
+import { DataList } from '@/components/displaying-data/data-list'
+
+<DataList
+  items={[
+    {
+      key: '1',
+      title: 'Priya Nair',
+      description: 'INV-2048 · Cards · SGD 128.00',
+      details: [{ key: 'city', text: 'Singapore' }],
+      actions: {
+        onClick: () => {},
+        menu: [
+          { key: 'edit', label: 'Edit', onClick: () => {} },
+          { key: 'delete', label: 'Delete', destructive: true, onClick: () => {} },
+        ],
+      },
+    },
+  ]}
+/>
+```
+
+## Item shape
+
+Each item is one object. Required: `key`, `title`.
+
+Content
+
+- `description` — second line
+- `badges` — nodes beside the title (`Badge`)
+- `details` — `{ key, text, icon? }[]`
+- `tokens` / `tokensLabel` — chips
+- `copyRows` — `{ label, value }[]` with `layout="stack"`
+- `media` — `{ src, alt? }` or a React node
+- `logo` — mark beside the title
+- `meta` — muted supporting text
+- `layout` — `default` | `stack` | `media` (media is automatic when `media` is set)
+- `selected`
+- `trailing` — a right-side React node, including interactive controls such as
+  `QuantityInput`; it is rendered in every layout, including `stack`
+
+Actions — prefer `actions` (do not import `DropdownMenu` for the ⋮ menu)
+
+```ts
+actions: {
+  onClick?: () => void
+  trailing?: ReactNode
+  menu?: { key?: string; label: string; destructive?: boolean; onClick?: () => void }[]
+  hover?: { key: string; label: string; icon?: ReactNode; destructive?: boolean; onClick?: () => void }[]
+}
+```
+
+Top-level `onClick`, `trailing`, `menu`, and `hoverActions` are aliases of
+`actions`. Trailing controls stop propagation so clicking a control does not
+open the list row. Use `trailing` for per-row controls; do not put a
+`QuantityInput` in `description`, `details`, or `copyRows`.
+
+## Inventory quantity example
+
+Use `trailing` for a quantity control that must stay on the right side of each
+product row. Keep the quantity in the row state and persist it when the user
+saves the count:
+
+```tsx
+import { QuantityInput } from '@/components/form/quantity-input'
+
+<DataList
+  items={[
+    {
+      key: product.id,
+      title: product.name,
+      description: product.sku ?? 'No SKU',
+      meta: `Last counted ${lastCountedAt}`,
+      trailing: (
+        <QuantityInput
+          value={quantity}
+          min={0}
+          onValueChange={setQuantity}
+          aria-label={`${product.name} quantity`}
+        />
+      ),
+    },
+  ]}
+/>
+```
+
+The quantity control is visible in `default`, `media`, and `stack` layouts.
+Choose `DataTable` instead when the inventory list needs search, filters,
+sorting, or pagination.
+
+## List props
+
+`items`, optional `layout`, `empty`, `className`. No `children`.
+
+
+<a id="quantity-input"></a>
+# Quantity Input
+
+Minus/plus stepper; click the value to type.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="text-editor"></a>
+# Text Editor
+
+Lexical rich text: bold, italic, heading, lists. Persist editor JSON.
+
+Rich text for notes and handover, built with [Lexical](https://lexical.dev/) (Meta). Toolbar: bold, italic, underline, heading, lists. Use `Textarea` for a single plain field.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+```tsx
+import { TextEditor } from "@/components/form/text-editor";
+
+<TextEditor
+  onValueChange={(document) => {
+    // persist Lexical JSON (SerializedEditorState)
+  }}
+/>
+```
+
+`onValueChange` receives Lexical editor state. Store it as JSON text. Do not persist HTML.
+
+
+<a id="metric-card"></a>
+# Metric Card
+
+Dashboard KPI tile. Use for summaries, not a record's fields.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `MetricCard` for dashboard KPIs (revenue, volume, counts). Use `DetailCard` for a
+record's fields.
+
+
+<a id="app-layout"></a>
+# App Layout
+
+HitPay App Studio embedded pane frame. Not generic app chrome.
+
+`AppLayout` is the HitPay App Studio embedded pane frame. Use it around
+every route inside the dashboard iframe — not as generic website chrome.
+Put `PageLayout` or `FormLayout` inside for page chrome.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+## Default
+
+```tsx
+import { AppLayout } from "@/components/layout/app-layout";
+import { PageLayout } from "@/components/layout/page-layout";
+
+<AppLayout appName="Invoices" className="h-full">
+  <PageLayout title="Invoices">…</PageLayout>
+</AppLayout>
+```
+
+## Tabs
+
+Pass `navigationItems` for in-app tabs. `variant` can stay `default` or
+`tabs`.
+
+## Sidebar
+
+`variant="sidebar"` plus `sidebarItems` adds a flat child nav. On small
+screens the list opens in a drawer.
+
+
+<a id="page-layout"></a>
+# Page Layout
+
+Standard route page with header, optional onBack, and scrollable content.
+
+`PageLayout` renders its required header and wraps its children in a scrollable content area.
+The `actions` prop accepts any React node so pages can provide the controls they need.
+Pass `onBack` on nested screens (show/edit) to put a back control beside the title. Omit it on the root list.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+
+<a id="form-layout"></a>
+# Form Layout
+
+Create and edit form shell with page and modal modes.
+
+`FormLayout` is the shell for create and edit forms. It provides page or modal
+presentation, headings, scrolling, close behavior, and actions. `FormBuilder`
+renders the fields inside that shell.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+## Page mode
+
+Page mode is the default. Save submits the external form identified by
+`formId`; the submit button does not need to live inside `FormBuilder`.
+
+```tsx
+import { FormLayout } from "@/components/layout/form-layout";
+import { FormBuilder } from "@/components/form/form-builder";
+
+<FormLayout
+  title="Create product"
+  description="Add a product to your catalog."
+  formId="product-form"
+  onClose={handleClose}
+  actions={{ save: { label: "Create" } }}
+>
+  <FormBuilder id="product-form" form={form} />
+</FormLayout>;
+```
+
+## Modal mode
+
+Modal mode preserves controlled dialog semantics through `open` and
+`onOpenChange`. `size` and `persistent` are available only in modal mode.
+
+```tsx
+<FormLayout
+  mode="modal"
+  open={open}
+  onOpenChange={setOpen}
+  title="Create customer"
+  description="Add a new customer"
+  formId="customer-form"
+  onClose={handleClose}
+  actions={{
+    cancel: { disabled: isSaving },
+    save: { label: "Save customer", disabled: isSaving },
+  }}
+>
+  <FormBuilder id="customer-form" form={form} />
+</FormLayout>
+```
+
+Both actions are rendered by default. Cancel calls `onClose`; in modal mode it
+then closes the controlled dialog. Save submits `formId`. Each action supports
+custom `label`, `icon`, `onClick`, `disabled`, and `loading` values.
+
+
+<a id="form-builder"></a>
+# Form Builder
+
+Schema-driven create/edit form. Use Detail Card for a read-only record.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `FormBuilder` for multi-field create/edit. Use `DetailCard` for a read-only record.
+Unknown `type` values throw. Use only the listed FormBuilder types. Render inside `FormLayout`. Do not wrap in `Card`.
+
+## Change callback
+
+`SchemaForm` accepts `onChange?: (values: SchemaFormValues, change: SchemaFormChange) => void`.
+It runs once for each user interaction, after constructing the latest nested values snapshot. It
+does not run on the initial render or when props rerender.
+
+`change.path` is the primary changed path, `change.paths` contains every path changed by that
+interaction, and `change.value` / `change.previousValue` describe the primary value. The
+`changedValues` and `previousValues` records contain path-keyed metadata for every changed value,
+while `change.field` identifies the related flattened schema field.
+
+Paired controls such as `amount+currency`, `from+to`, and range sliders emit one callback per
+interaction. When both values change together, both paths are included in `change.paths`. Custom
+`renderField` controls use the same behavior when their `onChange` writes a paired object.
+
+Submission remains external. Configure submission through `useSchemaForm({ onSubmit })`, assign an
+`id` to the form, and point an external button at that id:
+
+```tsx
+const form = useSchemaForm({ fields, onSubmit: saveValues })
+
+<SchemaForm id="settings-form" form={form} onChange={handleChange} />
+<Button type="submit" form="settings-form">Save</Button>
+```
+
+## Column layout
+
+`columns` creates a responsive grid: one column on small screens, then the configured number of columns at the appropriate breakpoints. Rules can target fields by name or control type.
+
+```tsx
+const fields = [
+  {
+    key: "product_name",
+    title: "Product Name",
+    type: "input",
+    props: { colSpan: "full" },
+  },
+  { key: "sku", title: "SKU", type: "input" },
+  { key: "barcode", title: "Barcode", type: "input" },
+]
+
+<SchemaForm
+  form={form}
+  layout={{
+    columns: 2,
+    fields: { product_name: "full" },
+    types: { textarea: "full" },
+  }}
+/>
+```
+
+Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one column. `section` and `section-item` fields always span the full row.
+
+## Choice card
+
+Use `type: "choice-card"` for a single card-style choice. Each option can include a `description`. The stored value is the selected `option.value`.
+
+```tsx
+const fields = [
+  {
+    key: "channel",
+    title: "Channel",
+    type: "choice-card",
+    required: true,
+    options: [
+      { value: "paynow", label: "PayNow", description: "Instant bank transfer" },
+      { value: "card", label: "Card", description: "Visa, Mastercard, AMEX" },
+    ],
+    value: "paynow",
+  },
+]
+```
+
+`props.alignment` is `Vertical` (default) or `Horizontal`. `props.cardAlignment` is `Left` (default) or `Center`.
+
+## Staff and role
+
+Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. Use `type: "coupon"` / `"discount"` / `"tax"` / `"shipping"` / `"pickup"` / `"product-category"` / `"location"` for those HitPay dropdowns. They render the matching Select. The stored value is `{ id, name }` (or an array when `props.multiple` is true).
+
+```tsx
+const fields = [
+  { key: "assignee", title: "Assignee", type: "staff", required: true },
+  {
+    key: "reviewers",
+    title: "Reviewers",
+    type: "staff",
+    props: { multiple: true, roleTitles: ["Manager", "Admin"] },
+  },
+  { key: "notify_role", title: "Notify role", type: "role" },
+]
+```
+
+Do not fetch staff or roles on the screen. Optional staff `props`: `multiple`, `roleTitles`, `locationId`.
+
+
+<a id="data-table"></a>
+# Data Table
+
+Rows-and-columns table with search, filters, sort, and pagination.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+# Quick decision
+
+Use `DataTable` when the collection needs search, filters, sorting, pagination,
+row selection, or row actions. The table already renders its search, filter,
+sort, pagination, and column-visibility controls from the schema. Do not build
+those controls separately.
+
+Use `DataTable` when the list needs search, column filters, sorting, or pagination.
+Use `DataList` for compact collections without those tools, and `DetailCard` for one record.
+Put `DataTable` directly in `PageLayout`. Do not wrap it in `Card`.
+
+`DataTable` already includes a filter button and filter popover. Do not build a
+separate filter row or a custom `Select` outside the table. Define the available
+filters in `schema.filters`; the table applies all active filters together.
+
+Configure `selectionActions` and `emptyState.actions` in the schema. The config is JSON-friendly:
+it contains keys, labels, supported icon keys, variants, disabled state, and dropdown items—but
+never functions or React nodes. `onSelectionAction` receives the selected IDs snapshot and the
+chosen button or dropdown leaf item. `onEmptyAction` receives the chosen empty-state action.
+
+`editColumns` is the optional column-visibility popover (`true` to show it; default off). Set `rowActions` to `["edit"]`,
+`["delete"]`, or both when the list needs the row ⋮ menu. Pass `onRowAction`.
+That menu opens `FormLayout` for multi-field edits. Neither `editColumns` nor
+`type: "status"` makes a cell editable.
+
+`onRowClick(row)` opens the record (detail / show page) from a browse list. Clicks on
+checkboxes, the row ⋮ menu, links, and `cells` controls do not fire it. Do not put
+`DataTable` inside `FormLayout`.
+
+One-field updates (status, assignee, stage) use `cells` on `DataTable`, not the schema.
+Search, sort, and filters still use `row[column.key]`. Only listed keys override; other
+columns keep the built-in `type` render (`status` is a read-only badge until overridden).
+
+## Built-in filters
+
+Each filter has a `key`, display `title`, and exact-match `options`. The option
+`value` must match the row value for that key; `label` is only the text shown
+in the popover and active-filter chip. Multiple configured filters are combined
+with AND logic. Clearing a filter removes its key from `table.query.filters`.
+
+```tsx
+const schema = {
+  columns: [
+    { key: "name", title: "Product" },
+    { key: "status", title: "Status", type: "status" },
+    { key: "inventory", title: "Inventory" },
+  ],
+  filters: [
+    {
+      key: "status",
+      title: "Status",
+      options: [
+        { value: "published", label: "Published" },
+        { value: "draft", label: "Draft" },
+      ],
+    },
+    {
+      key: "inventory",
+      title: "Inventory",
+      options: [
+        { value: "in_stock", label: "In stock" },
+        { value: "not_tracked", label: "Inventory not tracked" },
+      ],
+    },
+  ],
+} satisfies SchemaTableSchema
+```
+
+In `mode: "client"` (the default), filtering is performed against the loaded
+`data` rows. In `mode: "server"`, the table does not filter or sort rows
+locally; handle `query.filters` in `onQueryChange` and fetch the filtered page
+from your data source. The callback receives `change.key === "filters"` when
+the user applies or clears filters.
+
+```tsx
+function StatusCell({
+  value,
+  onStatusChange,
+}: {
+  value: unknown;
+  onStatusChange: (status: string) => void;
+}) {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <DropdownMenu open={open} onOpenChange={setOpen}>
+      <DropdownMenuTrigger
+        nativeButton
+        className="inline-flex"
+        render={
+          <button type="button" className="inline-flex rounded-full">
+            <Badge tone={value === "Published" ? "green" : "grey"}>
+              {String(value ?? "–")}
+              <DownRegular />
+            </Badge>
+          </button>
+        }
+      />
+      <DropdownMenuContent align="start">
+        {["Published", "Draft"].map((status) => {
+          const selected = status === value;
+          return (
+            <DropdownMenuItem
+              key={status}
+              data-active={selected || undefined}
+              className={selected ? "bg-oc-dark-blue-soft font-medium" : undefined}
+              onClick={() => {
+                onStatusChange(status);
+                setOpen(false);
+              }}
+            >
+              {status}
+              {selected ? <CheckRegular className="ml-auto" /> : null}
+            </DropdownMenuItem>
+          );
+        })}
+      </DropdownMenuContent>
+    </DropdownMenu>
+  );
+}
+
+const [rows, setRows] = useState(SCHEMA_TABLE_EXAMPLE_ROWS);
+const table = useDataTable({
+  schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  data: rows,
+});
+
+<DataTable
+  table={table}
+  cells={{
+    status: (value, row) => (
+      <StatusCell
+        value={value}
+        onStatusChange={(status) =>
+          setRows((current) =>
+            current.map((item) =>
+              item.id === row.id ? { ...item, status } : item,
+            ),
+          )
+        }
+      />
+    ),
+  }}
+  onRowAction={(action, row) => {
+    console.log(action, row.id);
+  }}
+/>
+```
+
+`onQueryChange(query, change)` receives the final query after page-reset rules and a typed
+discriminated change payload. The `change.key` is one of `search`, `tab`, `filters`, `sort`,
+`page`, or `pageSize`, with the corresponding value fields.
+
+In server mode, search callbacks are debounced by 300ms while `table.query.search` updates
+immediately, keeping the input responsive. Configure the delay with
+`search: { placeholder: "Search products", debounceMs: 500 }`. Client-mode search remains
+instant. Clearing search cancels pending work and emits immediately.
+
+## Usage with TanStack Query
+
+```tsx
+import { useQuery } from "@tanstack/react-query";
+import {
+  DataTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useDataTable,
+} from "@/components/displaying-data/data-table";
+
+function ProductList() {
+  const products = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
+    initialData: SCHEMA_TABLE_EXAMPLE_ROWS,
+    staleTime: 30_000,
+  });
+  const table = useDataTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: products.data,
+  });
+
+  return (
+    <DataTable
+      table={table}
+      onRowClick={(row) => {
+        console.log(row.id);
+      }}
+      onRowAction={(action, row) => {
+        console.log(action, row.id);
+      }}
+      onSelectionAction={(action, selectedIds) => {
+        console.log(action.key, selectedIds);
+      }}
+      onEmptyAction={(action) => {
+        console.log(action.key);
+      }}
+    />
+  );
+}
+```
+
+## Usage with TanStack DB
+
+```tsx
+import { QueryClient } from "@tanstack/query-core";
+import {
+  DbClient,
+  DbProvider,
+  collectionOptions,
+  useDbClient,
+  useLiveQuery,
+} from "@tanstack/react-db";
+import { queryCollectionOptions } from "@tanstack/query-db-collection";
+import {
+  DataTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useDataTable,
+} from "@/components/displaying-data/data-table";
+
+const queryClient = new QueryClient();
+const dbClient = new DbClient({ queryClient });
+
+const productCollection = collectionOptions("products", (client) =>
+  queryCollectionOptions({
+    id: "products",
+    queryKey: ["products"],
+    staleTime: 30_000,
+    queryClient: client.requireDependency<QueryClient>("queryClient"),
+    queryFn: async () => SCHEMA_TABLE_EXAMPLE_ROWS,
+    getKey: (item) => item.id,
+  }),
+);
+
+function ProductList() {
+  useDbClient().collection(productCollection);
+  const { data: rows } = useLiveQuery({
+    query: (q) => q.from({ product: productCollection }),
+  });
+  const table = useDataTable({
+    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    data: rows ?? SCHEMA_TABLE_EXAMPLE_ROWS,
+  });
+
+  return (
+    <DataTable
+      table={table}
+      onRowClick={(row) => {
+        console.log(row.id);
+      }}
+      onRowAction={(action, row) => {
+        console.log(action, row.id);
+      }}
+      onSelectionAction={(action, selectedIds) => {
+        console.log(action.key, selectedIds);
+      }}
+      onEmptyAction={(action) => {
+        console.log(action.key);
+      }}
+    />
+  );
+}
+
+function ProductsPage() {
+  return (
+    <DbProvider client={dbClient}>
+      <ProductList />
+    </DbProvider>
+  );
+}
+```
+
+
+<a id="confirmation-modal"></a>
+# Confirmation Modal
+
+Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Mount `ConfirmationModalProvider` once at the app root. Call `useConfirmationModal()` from `@/components/overlays/confirmation-modal` for delete/warning confirms. Do not assemble a confirm dialog from `Dialog`.
+
+
+<a id="resource-picker"></a>
+# Resource Picker
+
+Search and select HitPay products, customers, orders, charges, invoices, or add-ons.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+# Quick decision
+
+Use `ResourcePicker` only when the user adds or selects HitPay catalog records:
+`product`, `customer`, `order`, `charge`, `invoice`, or `add-on`. Use the
+dedicated `*Select` components for categories, locations, coupons, discounts,
+taxes, shipping, and pickups.
+
+The picker is not a page table. Do not call `list-*` from a screen to render
+rows. Confirmed results must be sent to a server function and persisted to
+Turso; cancelled results are `undefined`.
+
+`ResourcePicker` is a promise-based picker for HitPay catalog records. It is not a
+general-purpose table and it is not a data source for rendering a page list.
+Use it when a user must add or select products, customers, orders, charges,
+invoices, or add-ons.
+
+The docs demo is self-contained: it mounts `ResourcePickerProvider` with a fake
+loader. In an application, mount the provider **once** at the app root and pass
+an authorized server-backed `load` function. Do not mount another provider in a
+route.
+
+The promise resolves to selected records, or `undefined` when the user cancels.
+Each result keeps the HitPay row in `resource`; persist that payload instead of
+re-fetching the selected id.
+
+## App Studio usage
+
+```tsx
+import { useState } from 'react'
+import { Button } from '@ui/actions/button'
+import { useResourcePicker, type ResourcePickerResult } from '@/components/form/resource-picker'
+
+function AddProducts() {
+  const pick = useResourcePicker()
+  const [selected, setSelected] = useState<ResourcePickerResult[] | null>(null)
+
+  return (
+    <>
+      <Button
+        onClick={async () => {
+          const next = await pick({ type: 'product', multiple: true })
+          if (next) setSelected(next)
+        }}
+      >
+        Add products
+      </Button>
+      {selected ? (
+        <pre>{JSON.stringify(selected, null, 2)}</pre>
+      ) : null}
+    </>
+  )
+}
+```
+
+Do not rebuild a search `Dialog` or call `list-*` from the screen. After confirm,
+send `selected` into a `createServerFn` and upsert Turso from `id` plus the
+needed fields in `resource`. The picker is the only UI allowed to browse these
+HitPay list APIs.
+
+`type` is one of `product`, `customer`, `order`, `charge`, `invoice`, or
+`add-on`. Category, location, coupon, discount, tax, shipping, and pickup use
+their dedicated Select components, not this picker.
+
+## Provider and loader
+
+`ResourcePickerProvider` requires a `load` callback. The callback receives the
+current search state and must return normalized picker rows:
+
+```tsx
+import {
+  ResourcePickerProvider,
+  type ResourcePickerLoad,
+} from '@/components/form/resource-picker'
+
+const load: ResourcePickerLoad = async (input) => {
+  // Call the authorized server function here. Never expose access tokens.
+  const response = await loadResourcePickerPage(input)
+  return response // { items, hasMore?, cursor? }
+}
+
+<ResourcePickerProvider load={load}>
+  <App />
+</ResourcePickerProvider>
+```
+
+The loader owns the mapping from the HitPay API envelope to
+`{ items, hasMore, cursor? }`. Each item needs an `id` and `title`; it may also
+include `image`, `badge`, `resource`, and selectable `children`.
+
+In App Studio, use the existing root provider and loader from
+`#/lib/resource-picker`. Do not remount `ResourcePickerProvider` and do not copy
+the docs-only `resource-picker-fake` module into the app.
+
+```tsx
+await pick({ type: 'charge' })
+await pick({ type: 'invoice', multiple: true })
+await pick({ type: 'customer', action: 'select', multiple: true })
+await pick({
+  type: 'product',
+  query: 'lamp',
+  filter: { status: 'published', variants: false },
+})
+```
+
+## Fake HitPay list (docs demo only)
+
+The docs demo calls `fakeHitPayListPayload(input)` in `orchid/src/lib/resource-picker-fake.ts`. It applies the same `query` / `filter` / `extras` the starter sends to `/v1/…` (status, stock, channel, category, location, dates), then `mapResourcePickerPayload`. Do not paste that module into App Studio.
+
+`shadcn add @orchid/resource-picker` installs the picker UI only. It does not
+ship a HitPay API loader or `mapResourcePickerPayload`. In App Studio, the real
+loader is `#/lib/resource-picker.ts`; map the API `data[]` with the existing
+mapper before returning the normalized page.
+
+Result after confirm: `{ id, resource?, children? }[]`. `resource` is the
+original HitPay row. `children` is used for product variations or other nested
+choices.
+
+- `action`: `add` (default) or `select`
+- `multiple`: omit/`false` = one, `true` = unlimited, number = cap
+- `query`: initial search
+- `selectionIds`: preselected `{ id, children?: { id }[] }`
+- `filter.status`: initial status (product, order, invoice, charge)
+- `filter.variants`: `false` hides product variations
+- `filter.locationId`: initial outlet for product (`location_ids`) and order (`location_ids[]`) pickers
+- `filter.categoryId`: initial category for product picker (`GET /v1/products` `categories`)
+- `filter.channel`: initial channel for product (`pos` / `online_store` / `invoice` / `self_serve`) or order (`point_of_sale` / `quick_sale` / `store_checkout`)
+- Dialog also shows type-specific extras: product **Stock** + **Channel** + **Category** + **Location**, order **Channel** + **Location**, charge **Method**
+- `load` receives `{ type, query, filter, extras, page, cursor }`. `filter` is the selected status string; `extras` contains type-specific filters such as `inventory`, `channel`, `location_id`, `category_id`, `payment_method`, `date_from`, and `date_to`.
+- `load` must return `{ items, hasMore?, cursor? }`; set `hasMore` when another page can be loaded
+- When `hasMore` is true, the dialog shows **Load more** plus the resource name and appends the next page
+- Cancel returns `undefined`
+
+
+<a id="command"></a>
+# Command
+
+Searchable command palette. Drive it with open, onOpenChange, and groups.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Use `Command` from `@/components/overlays/command` with `open`, `onOpenChange`, and `groups`. Do not assemble a palette from `Dialog` plus cmdk primitives.
+
+
+<a id="copy-button"></a>
+# Copy Button
+
+Copy icon that writes a value and shows Copied!.
+
+## Interactive example
+
+The interactive example is rendered on the Orchid documentation page. Use the usage guidance below and verify the installed component source for the exact API.
+
+Icon that copies `value` and shows `Copied!`.
+
+```tsx
+import { CopyButton } from '@/components/actions/copy-button'
+
+<CopyButton value="+65 8123 4567" />
+```
+
+
+<a id="popover"></a>
+# Popover
 
 Non-modal popover primitives with Orchid styling.
-Import `@ui/overlays/popover` — `src/ui/overlays/popover.tsx`.
-Docs: `orchid-llms/llms.txt#popover`
 
-## Utils
+## Usage
 
-## `kbd` — Kbd
+```tsx
+import { Popover } from "@ui/overlays/popover.tsx";
 
-Keyboard key and key group with Orchid styling.
-Import `@ui/utils/kbd` — `src/ui/utils/kbd.tsx`.
-Docs: `orchid-llms/llms.txt#kbd`
+<Popover />
+```
 
-## `separator` — Separator
+
+<a id="separator"></a>
+# Separator
 
 Horizontal or vertical separator with Orchid styling.
-Import `@ui/utils/separator` — `src/ui/utils/separator.tsx`.
-Docs: `orchid-llms/llms.txt#separator`
+
+## Usage
+
+```tsx
+import { Separator } from "@ui/utils/separator.tsx";
+
+<Separator />
+```
