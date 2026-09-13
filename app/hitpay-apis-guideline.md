@@ -2,9 +2,6 @@
 
 Read `hitpay-llms/{name}.md` before calling HitPay. Do not fetch docs.hitpayapp.com or invent paths. Call documented paths with `hitpayRequest` from `#/lib/server/hitpay-api`. Auth is the hopped `HITPAY_ACCESS_TOKEN` / `HITPAY_API_URL` — do not send `X-BUSINESS-API-KEY`.
 
-When opening an endpoint doc, read `Quick decision`, `Call`, and `App rules`
-first. Read its detailed `Query` and `Response` sections only for fields the
-current implementation needs.
 
 OAuth public API only (`/v1/…`). No HTTP DELETE. No invented create/update POST.
 
@@ -22,20 +19,6 @@ OAuth public API only (`/v1/…`). No HTTP DELETE. No invented create/update POS
 **`get-*-details`:** show/refresh one record whose id is already in Turso (or just picked and upserted). Do not loop get-by-id to rebuild a list.
 
 Staff / role → `StaffSelect` / `RoleSelect`. Coupon / discount / tax / shipping / pickup / category / location → matching `*Select`. Catalog add (product, customer, order, charge, invoice, add-on) → ResourcePicker.
-
-# Needs
-
-- add products / SKUs → ResourcePicker `product`
-- show one product → `get-product-details` (id already stored)
-- product categories → `ProductCategorySelect`
-- add / show orders → ResourcePicker `order` / `get-order-details`
-- add / show customers → ResourcePicker `customer` / `get-customer-details`
-- locations → `LocationSelect`
-- totals only (no charge rows on screen) → `list-charges` / `get-charge-details`
-- add / show invoices → ResourcePicker `invoice` / `get-invoice-details`
-- coupons / discounts / taxes → `CouponSelect` / `DiscountSelect` / `TaxSelect`
-- shipping / pickups → `ShippingSelect` / `PickupSelect`
-- add-ons → ResourcePicker `add-on` / `get-add-on`
 
 # Endpoints
 

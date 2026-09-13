@@ -21,7 +21,7 @@ Answer when they only ask a question. Edit and finish the implementation when th
 
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
-1. Choose the matching `@/components` block from `orchid-ui-guideline.md`, name the block(s), then implement. `@ui` is only for a control that block does not expose (Button, Badge, Spinner). If props are unclear, read the matching component section in `orchid-ui-guideline.md`.
+1. Explore the installed `src/components/` and `src/ui/` source to choose the matching Orchid block. Prefer existing blocks over rebuilding them. Use `@ui` only for a control that no block exposes (Button, Badge, Spinner). Read the selected component source and its demo when props are unclear.
 2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
@@ -44,7 +44,7 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `src/lib/server/db.ts`, `migrate.ts` | Turso |
 | `src/lib/files.ts` / `server/files.ts` | Prebuilt uploads (`files` table) |
 | `migrations/` | Ordered SQL |
-| `orchid-ui-guideline.md` | Orchid component documentation and usage |
+| `src/components/`, `src/ui/` | Orchid component blocks, primitives, and source-of-truth props |
 | `hitpay-llms/` | HitPay API reference docs |
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.

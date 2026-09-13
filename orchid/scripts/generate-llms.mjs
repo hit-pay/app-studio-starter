@@ -8,7 +8,6 @@ import {
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const output = join(root, "public", "llms.txt");
-const appOutput = join(root, "..", "app", "orchid-ui-guideline.md");
 const legacyDocsDir = join(root, "public", "llms");
 const documented = [...DOC_ALL_COMPONENTS];
 function slug(item) {
@@ -115,8 +114,5 @@ mkdirSync(dirname(output), { recursive: true });
 rmSync(legacyDocsDir, { recursive: true, force: true });
 const document = markdownDocs.join("\n\n");
 writeFileSync(output, document);
-writeFileSync(appOutput, document.replaceAll("/llms.txt", "/orchid-ui-guideline.md"));
 
-console.log(
-  `Wrote ${output} and ${appOutput} with ${markdownDocs.length} documentation sections`,
-);
+console.log(`Wrote ${output} with ${markdownDocs.length} documentation sections`);
