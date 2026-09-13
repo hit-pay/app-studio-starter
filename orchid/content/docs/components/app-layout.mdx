@@ -1,13 +1,4 @@
 import { AppLayoutDemo } from "../../../src/components/doc/doc-demos"
 
-`AppLayout` is the HitPay App Studio embedded pane frame. Use it around
-every route inside the dashboard iframe — not as generic website chrome.
-Put `PageLayout` or `FormLayout` inside for page chrome.
-
+Use `AppLayout` as the embedded HitPay App Studio frame around every dashboard route. Choose it for app navigation and shell chrome; do not use it as generic website chrome.
 <AppLayoutDemo />
-
-Pass `navigationItems` for in-app tabs. `variant` can stay `default` or
-`tabs`.
-
-`variant="sidebar"` plus `sidebarItems` adds a flat child nav. On small
-screens the list opens in a drawer.

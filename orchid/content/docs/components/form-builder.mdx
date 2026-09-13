@@ -1,38 +1,4 @@
 import { SchemaFormDemo } from "../../../src/components/doc/doc-demos"
 
+Use `FormBuilder` for schema-driven multi-field create or edit forms. Choose it when fields, layout, and controls can be described by a schema; use `DetailCard` for read-only data.
 <SchemaFormDemo />
-
-Use `FormBuilder` for multi-field create/edit. Use `DetailCard` for a read-only record.
-Unknown `type` values throw. Use only the listed FormBuilder types. Render inside `FormLayout`. Do not wrap in `Card`.
-
-`SchemaForm` accepts `onChange?: (values: SchemaFormValues, change: SchemaFormChange) => void`.
-It runs once for each user interaction, after constructing the latest nested values snapshot. It
-does not run on the initial render or when props rerender.
-
-`change.path` is the primary changed path, `change.paths` contains every path changed by that
-interaction, and `change.value` / `change.previousValue` describe the primary value. The
-`changedValues` and `previousValues` records contain path-keyed metadata for every changed value,
-while `change.field` identifies the related flattened schema field.
-
-Paired controls such as `amount+currency`, `from+to`, and range sliders emit one callback per
-interaction. When both values change together, both paths are included in `change.paths`. Custom
-`renderField` controls use the same behavior when their `onChange` writes a paired object.
-
-Submission remains external. Configure submission through `useSchemaForm({ onSubmit })`, assign an
-`id` to the form, and point an external button at that id:
-
-
-`columns` creates a responsive grid: one column on small screens, then the configured number of columns at the appropriate breakpoints. Rules can target fields by name or control type.
-
-
-Span priority is `props.colSpan`, `layout.fields`, `layout.types`, then one column. `section` and `section-item` fields always span the full row.
-
-Use `type: "choice-card"` for a single card-style choice. Each option can include a `description`. The stored value is the selected `option.value`.
-
-
-`props.alignment` is `Vertical` (default) or `Horizontal`. `props.cardAlignment` is `Left` (default) or `Center`.
-
-Use `type: "staff"` and `type: "role"` for HitPay app members and business roles. Use `type: "coupon"` / `"discount"` / `"tax"` / `"shipping"` / `"pickup"` / `"product-category"` / `"location"` for those HitPay dropdowns. They render the matching Select. The stored value is `{ id, name }` (or an array when `props.multiple` is true).
-
-
-Do not fetch staff or roles on the screen. Optional staff `props`: `multiple`, `roleTitles`, `locationId`.

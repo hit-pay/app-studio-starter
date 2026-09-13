@@ -1,20 +1,5 @@
 import { FormLayoutPageDemo, FormLayoutModalDemo } from "../../../src/components/doc/doc-demos"
 
-`FormLayout` is the shell for create and edit forms. It provides page or modal
-presentation, headings, scrolling, close behavior, and actions. `FormBuilder`
-renders the fields inside that shell.
-
+Use `FormLayout` as the page or modal shell for create and edit forms. Choose it for headings, scrolling, close behavior, and actions around fields; use `PageLayout` for non-form pages and `FormBuilder` for the fields.
 <FormLayoutPageDemo />
 <FormLayoutModalDemo />
-
-Page mode is the default. Save submits the external form identified by
-`formId`; the submit button does not need to live inside `FormBuilder`.
-
-
-Modal mode preserves controlled dialog semantics through `open` and
-`onOpenChange`. `size` and `persistent` are available only in modal mode.
-
-
-Both actions are rendered by default. Cancel calls `onClose`; in modal mode it
-then closes the controlled dialog. Save submits `formId`. Each action supports
-custom `label`, `icon`, `onClick`, `disabled`, and `loading` values.

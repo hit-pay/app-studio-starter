@@ -25,55 +25,6 @@ Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest com
 2. Read the relevant quick decision, `Call`, and `App rules` sections in `hitpay-llms/{name}.md` before merchant HTTP. Read its detailed query/response sections only when needed. Scheduled reminder → `Read` `hitpay-wake-guideline.md`.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
-## Page patterns
-
-Use these four patterns as the default page structures. Choose the pattern first,
-then select the Orchid blocks from `orchid-ui-guideline.md`. Do not create a
-separate Patterns page unless the user explicitly asks for a pattern gallery.
-
-- **Homepage** — `AppLayout` + `PageLayout` + `MetricCard`/`Banner` + the primary next action.
-- **Resource index** — `PageLayout` + `DataTable` for search/filter/sort/pagination, or `DataList` for a compact collection.
-- **Details** — `PageLayout` + `DetailCard`, with `FormLayout`/`FormBuilder` when the record is editable.
-- **Settings** — `PageLayout` + `FormSection` + `FormBuilder` or controls such as `Switch`; save changes with feedback.
-
-| Job | Block |
-|---|---|
-| Browse rows, search, filter, sort, open a row | DataTable (`onRowClick` → show) |
-| Edit / delete / more on a list row | DataTable `rowActions` + `onRowAction` |
-| Compact list, cards, activity, people | DataList |
-| One record / show fields | DetailCard |
-| KPI number | MetricCard |
-| Customer / contact / payee | CustomerCard |
-| Create/edit fields | FormBuilder inside FormLayout |
-| Browse / show shell | PageLayout |
-| App pane tabs / sidebar | AppLayout |
-| Closed list / search select | Select |
-| Assignee / staff | StaffSelect |
-| Store a role | RoleSelect |
-| Coupon / discount / tax / shipping / pickup / category / location | matching `*Select` |
-| Date / range / datetime | DatePicker |
-| Quantity | QuantityInput |
-| Option cards | ChoiceCard |
-| Rich notes | TextEditor |
-| Confirm delete | `useConfirmationModal()` |
-| Add HitPay catalog rows (product, customer, order, charge, invoice, add-on) | `useResourcePicker()` → `pick({ type })` |
-| Copy id / phone / URL | CopyButton |
-| No records | Empty |
-| Command palette | Command |
-
-Imports: `@/components/…` for blocks, `@ui/…` for primitives. Catalog line is `Import \`@/components/…\`` or `Import \`@ui/…\``. Icons: `@mingcute/react/core-regular`. Toasts: existing `<Toaster placement="top-center">`.
-
-```
-AppLayout
-  └─ PageLayout     browse + show
-  └─ FormLayout     create/edit (`mode="page"` | `"modal"`)
-       └─ FormBuilder
-```
-
-Loading: `@ui` Spinner / Skeleton. Error: inline + retry. Success: toast + invalidate.
-
-The dashboard owns chrome; the app owns only the pane. Usable at narrow widths. Prefer one focused screen; add routes or tabs only when they clarify the job.
-
 ## Stack
 
 Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`@libsql/client`), Orchid. SPA (`defaultSsr: false`). `APP_STUDIO_APP_ID` sets `/{appId}/` — use `Link` / `createFileRoute`. `createServerFn` is the only server API.

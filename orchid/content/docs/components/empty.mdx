@@ -1,10 +1,4 @@
 import { EmptyDemo } from '../../../src/components/doc/doc-demos'
 
+Use `Empty` when a collection or section has no content to show. Choose it to explain the empty state and offer a relevant action; use `Spinner` while content is loading.
 <EmptyDemo />
-
-One props-driven empty state. Do not import `@ui/displaying-data/empty` children.
-
-- `title` is required.
-- `media`: `icon` | `search` | `upgrade`. Omit for text only.
-- `icon` overrides the default media glyph.
-- `actions` is `{ key, label, variant?, disabled?, icon? }[]`.

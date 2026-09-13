@@ -1,8 +1,4 @@
 import { StaffSelectDemo } from '../../../src/components/doc/doc-demos'
 
+Use `StaffSelect` when a form needs to choose HitPay app staff. Choose it instead of fetching staff directly in the screen.
 <StaffSelectDemo />
-
-App-member dropdown. Fetches `GET /api/apps/{appId}/staff-app-members` (same as App Studio). Docs serve a fake response for that path.
-
-
-Do not fetch staff on the screen. Do not call `/v1/staffs`. Persist `id` plus name snapshot. Optional: `multiple`, `roleTitles`, `locationId`.
