@@ -8,8 +8,8 @@ Orchid is an AI-ready, open-code UI collection focused on business applications 
 
 ### Quick Stats
 
-- Documentation pages: 3 guides and 59 components.
-- Installable registry items: 61, excluding the helper entries `all` and `utils`.
+- Documentation pages: 3 guides and 54 components.
+- Installable registry items: 56, excluding the helper entries `all` and `utils`.
 - Markdown docs: https://orchid-ui-hitpay.vercel.app/llms/ — one `.md` file per guide and component.
 
 ### Installation
@@ -224,19 +224,11 @@ Image, fallback, badge, and group primitives with Orchid styling.
 Standard variants with Orchid tones, appearances, removal, and user roles.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/badge.json)
 
-#### [Chart](https://orchid-ui-hitpay.vercel.app/llms/chart.md)
-Recharts wrapper with Orchid tooltip, legend, and chart tokens.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/chart.json)
-
 ### Feedback
 
 #### [Banner](https://orchid-ui-hitpay.vercel.app/llms/banner.md)
 In-page notification with semantic variants and an optional action.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/banner.json)
-
-#### [Progress](https://orchid-ui-hitpay.vercel.app/llms/progress.md)
-Progress with composable label, value, track, and indicator.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/progress.json)
 
 #### [Skeleton](https://orchid-ui-hitpay.vercel.app/llms/skeleton.md)
 Placeholder pulse with Orchid styling.
@@ -298,18 +290,6 @@ Auto-sizing textarea with Orchid form styling.
 
 ### Layout
 
-#### [Accordion](https://orchid-ui-hitpay.vercel.app/llms/accordion.md)
-Composable expand-and-collapse sections with primitives.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/accordion.json)
-
-#### [Aspect Ratio](https://orchid-ui-hitpay.vercel.app/llms/aspect-ratio.md)
-Box that keeps a width/height ratio, such as 16/9.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/aspect-ratio.json)
-
-#### [Collapsible](https://orchid-ui-hitpay.vercel.app/llms/collapsible.md)
-Expand-and-collapse primitives with Orchid styling.
-[Registry JSON](https://orchid-ui-hitpay.vercel.app/r/collapsible.json)
-
 #### [Tabs](https://orchid-ui-hitpay.vercel.app/llms/tabs.md)
 Horizontal or vertical tabs with default and line variants.
 [Registry JSON](https://orchid-ui-hitpay.vercel.app/r/tabs.json)
@@ -346,7 +326,7 @@ Keyboard key and grouped shortcut display.
 
 ## Complete Registry List (for AI reference)
 
-form-builder, data-table, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, accordion, progress, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, collapsible, popover, separator, field, label, input, input-group, textarea, select, staff-select, role-select, coupon-select, discount-select, tax-select, shipping-select, pickup-select, product-category-select, location-select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, aspect-ratio, chart, file-upload, form-section
+form-builder, data-table, banner, empty, customer-card, form-layout, app-layout, page-layout, confirmation-modal, resource-picker, button, button-group, dropdown-menu, toast, badge, avatar, tooltip, tabs, choice-card, metric-card, data-list, detail-card, copy-button, skeleton, spinner, dialog, drawer, pagination, command, kbd, popover, separator, field, label, input, input-group, textarea, select, staff-select, role-select, coupon-select, discount-select, tax-select, shipping-select, pickup-select, product-category-select, location-select, quantity-input, text-editor, checkbox, radio-group, switch, slider, date-picker, file-upload, form-section
 
 ## Usage Guidance
 
