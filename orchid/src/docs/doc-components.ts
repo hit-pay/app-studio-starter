@@ -83,11 +83,6 @@ export const DOC_COMPONENTS = [
       "Page links with previous, next, ellipsis, and an optional range label.",
   },
   {
-    to: "/ui/kbd" as const,
-    name: "Kbd",
-    description: "Keyboard key and grouped shortcut display.",
-  },
-  {
     to: "/ui/file-upload" as const,
     name: "File Upload",
     description:
@@ -397,7 +392,7 @@ export const DOC_BASE_GROUPS = [
     "/ui/drawer",
     "/ui/tooltip",
   ]),
-  baseGroup("Utils", ["/ui/kbd"]),
+  baseGroup("Utils", []),
 ] as const;
 
 const BLOCK_BY_TO = new Map(DOC_BLOCKS.map((item) => [item.to, item]));

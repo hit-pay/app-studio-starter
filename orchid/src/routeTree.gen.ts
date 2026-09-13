@@ -58,7 +58,6 @@ import { Route as UiFileUploadRouteImport } from './routes/ui/file-upload'
 import { Route as UiFormSectionRouteImport } from './routes/ui/form-section'
 import { Route as UiInputRouteImport } from './routes/ui/input'
 import { Route as UiInputGroupRouteImport } from './routes/ui/input-group'
-import { Route as UiKbdRouteImport } from './routes/ui/kbd'
 import { Route as UiLabelRouteImport } from './routes/ui/label'
 import { Route as UiPaginationRouteImport } from './routes/ui/pagination'
 import { Route as UiRadioGroupRouteImport } from './routes/ui/radio-group'
@@ -322,11 +321,6 @@ const UiInputGroupRoute = UiInputGroupRouteImport.update({
   path: '/ui/input-group',
   getParentRoute: () => rootRouteImport,
 } as any)
-const UiKbdRoute = UiKbdRouteImport.update({
-  id: '/ui/kbd',
-  path: '/ui/kbd',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const UiLabelRoute = UiLabelRouteImport.update({
   id: '/ui/label',
   path: '/ui/label',
@@ -431,7 +425,6 @@ export interface FileRoutesByFullPath {
   '/ui/form-section': typeof UiFormSectionRoute
   '/ui/input': typeof UiInputRoute
   '/ui/input-group': typeof UiInputGroupRoute
-  '/ui/kbd': typeof UiKbdRoute
   '/ui/label': typeof UiLabelRoute
   '/ui/pagination': typeof UiPaginationRoute
   '/ui/radio-group': typeof UiRadioGroupRoute
@@ -494,7 +487,6 @@ export interface FileRoutesByTo {
   '/ui/form-section': typeof UiFormSectionRoute
   '/ui/input': typeof UiInputRoute
   '/ui/input-group': typeof UiInputGroupRoute
-  '/ui/kbd': typeof UiKbdRoute
   '/ui/label': typeof UiLabelRoute
   '/ui/pagination': typeof UiPaginationRoute
   '/ui/radio-group': typeof UiRadioGroupRoute
@@ -558,7 +550,6 @@ export interface FileRoutesById {
   '/ui/form-section': typeof UiFormSectionRoute
   '/ui/input': typeof UiInputRoute
   '/ui/input-group': typeof UiInputGroupRoute
-  '/ui/kbd': typeof UiKbdRoute
   '/ui/label': typeof UiLabelRoute
   '/ui/pagination': typeof UiPaginationRoute
   '/ui/radio-group': typeof UiRadioGroupRoute
@@ -623,7 +614,6 @@ export interface FileRouteTypes {
     | '/ui/form-section'
     | '/ui/input'
     | '/ui/input-group'
-    | '/ui/kbd'
     | '/ui/label'
     | '/ui/pagination'
     | '/ui/radio-group'
@@ -686,7 +676,6 @@ export interface FileRouteTypes {
     | '/ui/form-section'
     | '/ui/input'
     | '/ui/input-group'
-    | '/ui/kbd'
     | '/ui/label'
     | '/ui/pagination'
     | '/ui/radio-group'
@@ -749,7 +738,6 @@ export interface FileRouteTypes {
     | '/ui/form-section'
     | '/ui/input'
     | '/ui/input-group'
-    | '/ui/kbd'
     | '/ui/label'
     | '/ui/pagination'
     | '/ui/radio-group'
@@ -813,7 +801,6 @@ export interface RootRouteChildren {
   UiFormSectionRoute: typeof UiFormSectionRoute
   UiInputRoute: typeof UiInputRoute
   UiInputGroupRoute: typeof UiInputGroupRoute
-  UiKbdRoute: typeof UiKbdRoute
   UiLabelRoute: typeof UiLabelRoute
   UiPaginationRoute: typeof UiPaginationRoute
   UiRadioGroupRoute: typeof UiRadioGroupRoute
@@ -1174,13 +1161,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof UiInputGroupRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/ui/kbd': {
-      id: '/ui/kbd'
-      path: '/ui/kbd'
-      fullPath: '/ui/kbd'
-      preLoaderRoute: typeof UiKbdRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/ui/label': {
       id: '/ui/label'
       path: '/ui/label'
@@ -1309,7 +1289,6 @@ const rootRouteChildren: RootRouteChildren = {
   UiFormSectionRoute: UiFormSectionRoute,
   UiInputRoute: UiInputRoute,
   UiInputGroupRoute: UiInputGroupRoute,
-  UiKbdRoute: UiKbdRoute,
   UiLabelRoute: UiLabelRoute,
   UiPaginationRoute: UiPaginationRoute,
   UiRadioGroupRoute: UiRadioGroupRoute,

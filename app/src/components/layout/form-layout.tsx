@@ -10,7 +10,6 @@ import {
   DialogDescription,
   DialogTitle,
 } from "@ui/dialog";
-import { Kbd } from "@ui/kbd";
 
 type FormLayoutAction = {
   label?: ReactNode;
@@ -139,7 +138,7 @@ function PageFormLayout({
             onClick={onClose}
           >
             Close
-            <Kbd>Esc</Kbd>
+            Esc
           </button>
         ) : (
           <span />

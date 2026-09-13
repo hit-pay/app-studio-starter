@@ -39,7 +39,6 @@
         "@orchid/drawer",
         "@orchid/pagination",
         "@orchid/command",
-        "@orchid/kbd",
         "@orchid/popover",
         "@orchid/separator",
         "@orchid/field",
@@ -230,7 +229,6 @@
       "registryDependencies": [
         "@orchid/button",
         "@orchid/dialog",
-        "@orchid/kbd"
       ],
       "files": [
         {
@@ -679,21 +677,6 @@
           "path": "src/components/overlays/command.tsx",
           "type": "registry:ui",
           "target": "@components/overlays/command.tsx"
-        }
-      ]
-    },
-    {
-      "name": "kbd",
-      "type": "registry:ui",
-      "title": "Kbd",
-      "description": "Keyboard key and key group with Orchid styling.",
-      "dependencies": [],
-      "registryDependencies": [],
-      "files": [
-        {
-          "path": "src/ui/kbd.tsx",
-          "type": "registry:ui",
-          "target": "@ui/kbd.tsx"
         }
       ]
     },

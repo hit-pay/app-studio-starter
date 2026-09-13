@@ -62,7 +62,6 @@ export const IndexDemo = wrapped.IndexDemo;
 export const InputDemo = wrapped.InputDemo;
 export const InputGroupDemo = wrapped.InputGroupDemo;
 export const InstallationDemo = wrapped.InstallationDemo;
-export const KbdDemo = wrapped.KbdDemo;
 export const LabelDemo = wrapped.LabelDemo;
 export const MetricCardDemo = wrapped.MetricCardDemo;
 export const PageLayoutDemo = wrapped.PageLayoutDemo;
