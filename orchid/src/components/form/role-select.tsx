@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react'
 
 import { Select } from '@/components/form/select'
 import { fetchAppRoles, type HitPayRole } from '#/lib/hitpay'
-import { Field, FieldDescription, FieldLabel } from '@ui/form/field'
+import { Field, FieldDescription, FieldLabel } from '@ui/field'
 
 type RoleSelectLoad = () => Promise<{ roles: HitPayRole[] }>
 

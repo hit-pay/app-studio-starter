@@ -20,7 +20,7 @@ import {
 
 import { cn } from '@/lib/utils'
 import { checkboxControlVariants } from './checkbox'
-import { BadgeRemove, badgeVariants, type BadgeAppearance, type BadgeTone } from '@ui/displaying-data/badge'
+import { BadgeRemove, badgeVariants, type BadgeAppearance, type BadgeTone } from '@ui/badge'
 import { InputGroup, InputGroupAddon, InputGroupButton, InputGroupInput } from './input-group'
 
 type ComboboxSelectionContextValue = {

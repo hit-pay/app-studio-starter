@@ -1,10 +1,10 @@
-import { Button } from "@ui/actions/button";
+import { Button } from "@ui/button";
 import {
   Tooltip,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
-} from "@ui/overlays/tooltip";
+} from "@ui/tooltip";
 
 function Tip({
   side,

@@ -1,11 +1,11 @@
 import { useState } from "react";
-import { Button } from "@ui/actions/button";
+import { Button } from "@ui/button";
 import {
   createToastManager,
   toast,
   Toaster,
   type ToastPlacement,
-} from "@ui/feedback/toast";
+} from "@ui/toast";
 
 const placementToast = createToastManager();
 const PLACEMENTS: ToastPlacement[] = [

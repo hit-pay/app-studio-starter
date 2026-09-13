@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { RoleSelect } from '@/components/form/role-select'
 import type { HitPayRole } from '#/lib/hitpay'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function RoleSelectDemo() {
   const [roleId, setRoleId] = useState<string | null>(null)

@@ -10,8 +10,8 @@ import {
   BannerAction,
   BannerDescription,
   BannerTitle,
-} from "@ui/feedback/banner";
-import { Button } from "@ui/actions/button";
+} from "@ui/banner";
+import { Button } from "@ui/button";
 
 function BannerDemo() {
   return (

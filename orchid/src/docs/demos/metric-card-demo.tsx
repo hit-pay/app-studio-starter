@@ -9,7 +9,7 @@ import {
   GroupRegular,
 } from '@mingcute/react/core-regular';
 import { MetricCard } from "@/components/displaying-data/metric-card";
-import { TooltipProvider } from "@ui/overlays/tooltip";
+import { TooltipProvider } from "@ui/tooltip";
 
 function MetricCardDemo() {
   return (

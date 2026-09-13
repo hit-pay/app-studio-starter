@@ -33,7 +33,7 @@ import {
   UnderlineRegular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@ui/actions/button'
+import { Button } from '@ui/button'
 import { cn } from '@/lib/utils'
 
 export type TextEditorDocument = SerializedEditorState

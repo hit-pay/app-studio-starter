@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { PickupSelect } from '@/components/form/pickup-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function PickupSelectDemo() {
   const [pickupId, setPickupId] = useState<string | null>(null)

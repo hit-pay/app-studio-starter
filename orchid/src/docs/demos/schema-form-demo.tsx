@@ -1,14 +1,14 @@
 import { useState } from "react";
 
 import { DocCodePanel } from "@/docs/doc-code-panel";
-import { Button } from "@ui/actions/button";
+import { Button } from "@ui/button";
 import {
   SchemaForm,
   useSchemaForm,
   type SchemaFormChange,
   type SchemaFormField,
 } from "@/components/form/form-builder";
-import { Tabs, TabsList, TabsContent, TabsTrigger } from "@ui/layout/tabs";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@ui/tabs";
 
 const OPTIONS = [
   { value: "a", label: "Option A" },

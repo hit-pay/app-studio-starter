@@ -6,16 +6,16 @@ import { AddRegular, CloseRegular, MinimizeRegular, SearchRegular } from '@mingc
 import { format, startOfDay } from 'date-fns'
 import type { DateRange } from 'react-day-picker'
 
-import { Button } from '@ui/actions/button'
-import { Badge } from '@ui/displaying-data/badge'
-import { Spinner } from '@ui/feedback/spinner'
-import { Checkbox } from '@ui/form/checkbox'
+import { Button } from '@ui/button'
+import { Badge } from '@ui/badge'
+import { Spinner } from '@ui/spinner'
+import { Checkbox } from '@ui/checkbox'
 import { DatePickerRange } from '@/components/form/date-picker'
 import { LocationSelect } from '@/components/form/location-select'
 import { ProductCategorySelect } from '@/components/form/product-category-select'
 import { Select } from '@/components/form/select'
-import { Input } from '@ui/form/input'
-import { RadioGroup, RadioGroupItem } from '@ui/form/radio-group'
+import { Input } from '@ui/input'
+import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
 import {
   Dialog,
   DialogClose,
@@ -24,7 +24,7 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@ui/overlays/dialog'
+} from '@ui/dialog'
 
 const RESOURCE_PICKER_TYPES = [
   'product',

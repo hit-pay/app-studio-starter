@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { DiscountSelect } from '@/components/form/discount-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function DiscountSelectDemo() {
   const [discountId, setDiscountId] = useState<string | null>(null)

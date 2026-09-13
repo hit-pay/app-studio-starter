@@ -1,4 +1,4 @@
-import { Slider } from "@ui/form/slider";
+import { Slider } from "@ui/slider";
 
 function SliderDemo() {
   return (

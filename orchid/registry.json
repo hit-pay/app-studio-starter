@@ -171,9 +171,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/feedback/banner.tsx",
+          "path": "src/ui/banner.tsx",
           "type": "registry:ui",
-          "target": "@ui/feedback/banner.tsx"
+          "target": "@ui/banner.tsx"
         }
       ]
     },
@@ -342,9 +342,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/actions/button.tsx",
+          "path": "src/ui/button.tsx",
           "type": "registry:ui",
-          "target": "@ui/actions/button.tsx"
+          "target": "@ui/button.tsx"
         }
       ]
     },
@@ -362,9 +362,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/actions/button-group.tsx",
+          "path": "src/ui/button-group.tsx",
           "type": "registry:ui",
-          "target": "@ui/actions/button-group.tsx"
+          "target": "@ui/button-group.tsx"
         }
       ]
     },
@@ -381,9 +381,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/overlays/dropdown-menu.tsx",
+          "path": "src/ui/dropdown-menu.tsx",
           "type": "registry:ui",
-          "target": "@ui/overlays/dropdown-menu.tsx"
+          "target": "@ui/dropdown-menu.tsx"
         }
       ]
     },
@@ -401,9 +401,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/feedback/toast.tsx",
+          "path": "src/ui/toast.tsx",
           "type": "registry:ui",
-          "target": "@ui/feedback/toast.tsx"
+          "target": "@ui/toast.tsx"
         }
       ]
     },
@@ -420,9 +420,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/displaying-data/badge.tsx",
+          "path": "src/ui/badge.tsx",
           "type": "registry:ui",
-          "target": "@ui/displaying-data/badge.tsx"
+          "target": "@ui/badge.tsx"
         }
       ]
     },
@@ -437,9 +437,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/displaying-data/avatar.tsx",
+          "path": "src/ui/avatar.tsx",
           "type": "registry:ui",
-          "target": "@ui/displaying-data/avatar.tsx"
+          "target": "@ui/avatar.tsx"
         }
       ]
     },
@@ -454,9 +454,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/overlays/tooltip.tsx",
+          "path": "src/ui/tooltip.tsx",
           "type": "registry:ui",
-          "target": "@ui/overlays/tooltip.tsx"
+          "target": "@ui/tooltip.tsx"
         }
       ]
     },
@@ -472,9 +472,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/layout/tabs.tsx",
+          "path": "src/ui/tabs.tsx",
           "type": "registry:ui",
-          "target": "@ui/layout/tabs.tsx"
+          "target": "@ui/tabs.tsx"
         }
       ]
     },
@@ -581,9 +581,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/feedback/skeleton.tsx",
+          "path": "src/ui/skeleton.tsx",
           "type": "registry:ui",
-          "target": "@ui/feedback/skeleton.tsx"
+          "target": "@ui/skeleton.tsx"
         }
       ]
     },
@@ -598,9 +598,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/feedback/spinner.tsx",
+          "path": "src/ui/spinner.tsx",
           "type": "registry:ui",
-          "target": "@ui/feedback/spinner.tsx"
+          "target": "@ui/spinner.tsx"
         }
       ]
     },
@@ -619,9 +619,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/overlays/dialog.tsx",
+          "path": "src/ui/dialog.tsx",
           "type": "registry:ui",
-          "target": "@ui/overlays/dialog.tsx"
+          "target": "@ui/dialog.tsx"
         }
       ]
     },
@@ -636,9 +636,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/overlays/drawer.tsx",
+          "path": "src/ui/drawer.tsx",
           "type": "registry:ui",
-          "target": "@ui/overlays/drawer.tsx"
+          "target": "@ui/drawer.tsx"
         }
       ]
     },
@@ -655,9 +655,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/navigation/pagination.tsx",
+          "path": "src/ui/pagination.tsx",
           "type": "registry:ui",
-          "target": "@ui/navigation/pagination.tsx"
+          "target": "@ui/pagination.tsx"
         }
       ]
     },
@@ -691,9 +691,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/utils/kbd.tsx",
+          "path": "src/ui/kbd.tsx",
           "type": "registry:ui",
-          "target": "@ui/utils/kbd.tsx"
+          "target": "@ui/kbd.tsx"
         }
       ]
     },
@@ -708,9 +708,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/overlays/popover.tsx",
+          "path": "src/ui/popover.tsx",
           "type": "registry:ui",
-          "target": "@ui/overlays/popover.tsx"
+          "target": "@ui/popover.tsx"
         }
       ]
     },
@@ -725,9 +725,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/utils/separator.tsx",
+          "path": "src/ui/separator.tsx",
           "type": "registry:ui",
-          "target": "@ui/utils/separator.tsx"
+          "target": "@ui/separator.tsx"
         }
       ]
     },
@@ -745,9 +745,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/form/field.tsx",
+          "path": "src/ui/field.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/field.tsx"
+          "target": "@ui/field.tsx"
         }
       ]
     },
@@ -760,9 +760,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/label.tsx",
+          "path": "src/ui/label.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/label.tsx"
+          "target": "@ui/label.tsx"
         }
       ]
     },
@@ -777,9 +777,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/input.tsx",
+          "path": "src/ui/input.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/input.tsx"
+          "target": "@ui/input.tsx"
         }
       ]
     },
@@ -798,9 +798,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/form/input-group.tsx",
+          "path": "src/ui/input-group.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/input-group.tsx"
+          "target": "@ui/input-group.tsx"
         }
       ]
     },
@@ -813,9 +813,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/textarea.tsx",
+          "path": "src/ui/textarea.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/textarea.tsx"
+          "target": "@ui/textarea.tsx"
         }
       ]
     },
@@ -840,9 +840,9 @@
           "target": "@components/form/select.tsx"
         },
         {
-          "path": "src/ui/form/combobox.tsx",
+          "path": "src/ui/combobox.tsx",
           "type": "registry:file",
-          "target": "@ui/form/combobox.tsx"
+          "target": "@ui/combobox.tsx"
         }
       ]
     },
@@ -1127,9 +1127,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/checkbox.tsx",
+          "path": "src/ui/checkbox.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/checkbox.tsx"
+          "target": "@ui/checkbox.tsx"
         }
       ]
     },
@@ -1144,9 +1144,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/radio-group.tsx",
+          "path": "src/ui/radio-group.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/radio-group.tsx"
+          "target": "@ui/radio-group.tsx"
         }
       ]
     },
@@ -1161,9 +1161,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/switch.tsx",
+          "path": "src/ui/switch.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/switch.tsx"
+          "target": "@ui/switch.tsx"
         }
       ]
     },
@@ -1178,9 +1178,9 @@
       "registryDependencies": [],
       "files": [
         {
-          "path": "src/ui/form/slider.tsx",
+          "path": "src/ui/slider.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/slider.tsx"
+          "target": "@ui/slider.tsx"
         }
       ]
     },
@@ -1206,9 +1206,9 @@
           "target": "@components/form/date-picker.tsx"
         },
         {
-          "path": "src/ui/form/calendar.tsx",
+          "path": "src/ui/calendar.tsx",
           "type": "registry:file",
-          "target": "@ui/form/calendar.tsx"
+          "target": "@ui/calendar.tsx"
         }
       ]
     },
@@ -1223,9 +1223,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/form/file-upload.tsx",
+          "path": "src/ui/file-upload.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/file-upload.tsx"
+          "target": "@ui/file-upload.tsx"
         }
       ]
     },
@@ -1242,9 +1242,9 @@
       ],
       "files": [
         {
-          "path": "src/ui/form/form-section.tsx",
+          "path": "src/ui/form-section.tsx",
           "type": "registry:ui",
-          "target": "@ui/form/form-section.tsx"
+          "target": "@ui/form-section.tsx"
         }
       ]
     }

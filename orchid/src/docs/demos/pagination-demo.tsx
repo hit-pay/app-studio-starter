@@ -8,7 +8,7 @@ import {
   PaginationLink,
   PaginationNext,
   PaginationPrevious,
-} from '@ui/navigation/pagination'
+} from '@ui/pagination'
 
 
 function DefaultPagination() {

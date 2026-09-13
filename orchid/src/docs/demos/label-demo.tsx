@@ -1,5 +1,5 @@
-import { Checkbox } from '@ui/form/checkbox'
-import { Label } from '@ui/form/label'
+import { Checkbox } from '@ui/checkbox'
+import { Label } from '@ui/label'
 
 
 function LabelDemo() {

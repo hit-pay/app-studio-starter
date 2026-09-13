@@ -7,7 +7,7 @@ import {
   AvatarGroup,
   AvatarGroupCount,
   AvatarImage,
-} from "@ui/displaying-data/avatar";
+} from "@ui/avatar";
 
 const SIZES = ["sm", "default", "lg"] as const;
 const PHOTO =

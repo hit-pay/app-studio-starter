@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Button } from '@ui/actions/button'
+import { Button } from '@ui/button'
 import {
   Dialog,
   DialogClose,
@@ -9,10 +9,10 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '@ui/overlays/dialog'
-import { Field, FieldGroup, FieldLabel } from '@ui/form/field'
-import { Input } from '@ui/form/input'
-import { Textarea } from '@ui/form/textarea'
+} from '@ui/dialog'
+import { Field, FieldGroup, FieldLabel } from '@ui/field'
+import { Input } from '@ui/input'
+import { Textarea } from '@ui/textarea'
 
 function DialogDemo() {
   return (

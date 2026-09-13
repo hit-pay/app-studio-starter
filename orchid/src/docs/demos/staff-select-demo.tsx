@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 import { StaffSelect } from '@/components/form/staff-select'
 import type { HitPayStaffAppMember } from '#/lib/hitpay'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function StaffSelectDemo() {
   const [assigneeId, setAssigneeId] = useState<string | null>(null)

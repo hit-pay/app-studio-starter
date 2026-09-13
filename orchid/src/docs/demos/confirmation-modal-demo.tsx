@@ -1,4 +1,4 @@
-import { Button } from '@ui/actions/button'
+import { Button } from '@ui/button'
 import { useConfirmationModal } from '@/components/overlays/confirmation-modal'
 
 function ConfirmationModalDemo() {

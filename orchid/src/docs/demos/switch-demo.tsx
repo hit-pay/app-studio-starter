@@ -1,5 +1,5 @@
-import { Label } from "@ui/form/label";
-import { Switch } from "@ui/form/switch";
+import { Label } from "@ui/label";
+import { Switch } from "@ui/switch";
 
 function ToggleRow({
   id,

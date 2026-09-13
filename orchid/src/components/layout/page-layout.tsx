@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from "react";
 import { LeftRegular } from "@mingcute/react/core-regular";
 
 import { cn } from "@/lib/utils";
-import { Button } from "@ui/actions/button";
+import { Button } from "@ui/button";
 import { CopyButton } from "@/components/actions/copy-button";
 
 function Header({

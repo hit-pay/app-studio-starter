@@ -1,5 +1,5 @@
 import { SearchRegular } from '@mingcute/react/core-regular'
-import { Field, FieldDescription, FieldGroup, FieldLabel } from '@ui/form/field'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@ui/field'
 import {
   InputGroup,
   InputGroupAddon,
@@ -8,7 +8,7 @@ import {
   InputGroupSeparator,
   InputGroupText,
   InputGroupTextarea,
-} from '@ui/form/input-group'
+} from '@ui/input-group'
 import { Select } from '@/components/form/select'
 
 function CurrencySelect({ defaultValue = 'SGD' }: { defaultValue?: string }) {

@@ -8,14 +8,14 @@ import {
   useSchemaTable,
   type SchemaTableRow,
 } from "@/components/displaying-data/data-table";
-import { Badge } from "@ui/displaying-data/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/layout/tabs";
+import { Badge } from "@ui/badge";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@ui/tabs";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@ui/overlays/dropdown-menu";
+} from "@ui/dropdown-menu";
 
 const STATUSES = ["Published", "Draft"] as const;
 

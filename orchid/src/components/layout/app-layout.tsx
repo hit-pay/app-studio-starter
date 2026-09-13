@@ -4,8 +4,8 @@ import { useState, type ComponentProps, type ReactNode } from 'react'
 import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@ui/actions/button'
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@ui/overlays/drawer'
+import { Button } from '@ui/button'
+import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@ui/drawer'
 
 type AppLayoutNavigationItem = {
   id: string

@@ -8,13 +8,13 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from '@ui/form/field'
-import { Input } from '@ui/form/input'
+} from '@ui/field'
+import { Input } from '@ui/input'
 import {
   InputGroup,
   InputGroupAddon,
   InputGroupInput,
-} from '@ui/form/input-group'
+} from '@ui/input-group'
 
 
 function InputDemo() {

@@ -1,6 +1,6 @@
-import { Button } from '@ui/actions/button'
-import { Field, FieldLabel } from '@ui/form/field'
-import { Input } from '@ui/form/input'
+import { Button } from '@ui/button'
+import { Field, FieldLabel } from '@ui/field'
+import { Input } from '@ui/input'
 import {
   Drawer,
   DrawerClose,
@@ -10,7 +10,7 @@ import {
   DrawerHeader,
   DrawerTitle,
   DrawerTrigger,
-} from '@ui/overlays/drawer'
+} from '@ui/drawer'
 
 function DrawerDemo() {
   return (

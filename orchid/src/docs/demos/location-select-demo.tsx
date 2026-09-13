@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { LocationSelect } from '@/components/form/location-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function LocationSelectDemo() {
   const [locationId, setLocationId] = useState<string | null>(null)

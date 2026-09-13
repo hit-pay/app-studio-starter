@@ -4,8 +4,8 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
-} from "@ui/form/field";
-import { Textarea } from "@ui/form/textarea";
+} from "@ui/field";
+import { Textarea } from "@ui/textarea";
 
 function TextareaDemo() {
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { ProductCategorySelect } from '@/components/form/product-category-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function ProductCategorySelectDemo() {
   const [categoryId, setCategoryId] = useState<string | null>(null)

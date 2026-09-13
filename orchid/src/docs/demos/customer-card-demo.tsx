@@ -1,7 +1,7 @@
 import type { ReactNode } from 'react'
 import { Chat1Regular } from '@mingcute/react/core-regular'
-import { Button } from '@ui/actions/button'
-import { Badge } from '@ui/displaying-data/badge'
+import { Button } from '@ui/button'
+import { Badge } from '@ui/badge'
 import { CustomerCard, type CustomerCardData } from '@/components/displaying-data/customer-card'
 
 const CUSTOMER: CustomerCardData = {

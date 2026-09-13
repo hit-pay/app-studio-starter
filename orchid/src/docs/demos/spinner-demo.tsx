@@ -1,5 +1,5 @@
-import { Button } from "@ui/actions/button";
-import { Spinner } from "@ui/feedback/spinner";
+import { Button } from "@ui/button";
+import { Spinner } from "@ui/spinner";
 
 function SpinnerDemo() {
   return (

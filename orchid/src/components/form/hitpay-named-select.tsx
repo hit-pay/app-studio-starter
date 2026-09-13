@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from 'react'
 
 import { Select } from '@/components/form/select'
-import { Field, FieldDescription, FieldLabel } from '@ui/form/field'
+import { Field, FieldDescription, FieldLabel } from '@ui/field'
 
 type HitPayNamedRow = { id: string }
 

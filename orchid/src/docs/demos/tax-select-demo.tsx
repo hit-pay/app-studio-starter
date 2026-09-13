@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { TaxSelect } from '@/components/form/tax-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function TaxSelectDemo() {
   const [taxId, setTaxId] = useState<string | null>(null)

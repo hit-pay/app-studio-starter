@@ -8,8 +8,8 @@ import {
   PencilRegular,
 } from '@mingcute/react/core-regular'
 
-import { Button } from '@ui/actions/button'
-import { Badge } from '@ui/displaying-data/badge'
+import { Button } from '@ui/button'
+import { Badge } from '@ui/badge'
 import { DataList } from '@/components/displaying-data/data-list'
 import { QuantityInput } from '@/components/form/quantity-input'
 

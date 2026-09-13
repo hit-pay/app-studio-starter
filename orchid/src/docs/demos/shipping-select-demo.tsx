@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { ShippingSelect } from '@/components/form/shipping-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function ShippingSelectDemo() {
   const [shippingId, setShippingId] = useState<string | null>(null)

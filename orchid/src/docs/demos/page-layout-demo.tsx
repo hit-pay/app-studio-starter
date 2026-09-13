@@ -1,10 +1,10 @@
 import { DocCodePanel } from "@/docs/doc-code-panel";
-import { Badge } from "@ui/displaying-data/badge";
-import { Button } from "@ui/actions/button";
+import { Badge } from "@ui/badge";
+import { Button } from "@ui/button";
 import { DetailCard } from "@/components/displaying-data/detail-card";
 import { PageLayout } from "@/components/layout/page-layout";
 
-const INVOICE_LIST_USAGE = `import { Button } from '@ui/actions/button'
+const INVOICE_LIST_USAGE = `import { Button } from '@ui/button'
 import { PageLayout } from '@/components/layout/page-layout'
 
 function InvoiceListPageExample() {
@@ -23,8 +23,8 @@ function InvoiceListPageExample() {
   )
 }`;
 
-const INVOICE_DETAIL_USAGE = `import { Badge } from '@ui/displaying-data/badge'
-import { Button } from '@ui/actions/button'
+const INVOICE_DETAIL_USAGE = `import { Badge } from '@ui/badge'
+import { Button } from '@ui/button'
 import { DetailCard } from '@/components/displaying-data/detail-card'
 import { PageLayout } from '@/components/layout/page-layout'
 

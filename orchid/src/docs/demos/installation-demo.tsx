@@ -4,7 +4,7 @@ import {
   CopyRegular,
 } from '@mingcute/react/core-regular';
 
-import { Button } from "@ui/actions/button";
+import { Button } from "@ui/button";
 
 const REGISTRY_URL = "https://orchid-ui-hitpay.vercel.app/registry.json";
 const TOKENS_URL = "https://orchid-ui-hitpay.vercel.app/orchid-tokens.css";
@@ -187,7 +187,7 @@ function InstallationDemo() {
           Orchid UI. Components are installed in{" "}
           <code className="text-oc-foreground">{`src/components/{category}`}</code>{" "}
           (blocks first) and{" "}
-          <code className="text-oc-foreground">{`src/ui/{category}`}</code>{" "}
+          <code className="text-oc-foreground">{`src/ui`}</code>{" "}
           (base). Import from{" "}
           <code className="text-oc-foreground">
             {`@/components/{category}/<name>`}

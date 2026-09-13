@@ -6,7 +6,7 @@ import {
   FieldDescription,
   FieldGroup,
   FieldLabel,
-} from '@ui/form/field'
+} from '@ui/field'
 
 const currencies = [
   { value: 'SGD', label: 'SGD — Singapore Dollar' },

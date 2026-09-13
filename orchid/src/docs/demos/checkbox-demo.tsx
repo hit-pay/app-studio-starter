@@ -1,11 +1,11 @@
-import { Checkbox, CheckboxGroup } from "@ui/form/checkbox";
+import { Checkbox, CheckboxGroup } from "@ui/checkbox";
 import {
   Field,
   FieldContent,
   FieldDescription,
   FieldLabel,
-} from "@ui/form/field";
-import { Label } from "@ui/form/label";
+} from "@ui/field";
+import { Label } from "@ui/label";
 
 function CheckboxDemo() {
   return (

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 
 import { CouponSelect } from '@/components/form/coupon-select'
-import { FieldGroup } from '@ui/form/field'
+import { FieldGroup } from '@ui/field'
 
 function CouponSelectDemo() {
   const [couponId, setCouponId] = useState<string | null>(null)

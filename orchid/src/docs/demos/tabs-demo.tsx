@@ -2,7 +2,7 @@ import {
   CellphoneRegular,
   MonitorRegular,
 } from '@mingcute/react/core-regular';
-import { Tabs, TabsList, TabsContent, TabsTrigger } from "@ui/layout/tabs";
+import { Tabs, TabsList, TabsContent, TabsTrigger } from "@ui/tabs";
 
 function TabsDemo() {
   return (

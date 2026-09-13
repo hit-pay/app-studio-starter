@@ -1,11 +1,11 @@
 import { ExternalLinkRegular } from '@mingcute/react/core-regular'
-import { Button } from '@ui/actions/button'
-import { Badge } from '@ui/displaying-data/badge'
-import { Field, FieldDescription, FieldGroup, FieldLabel } from '@ui/form/field'
-import { Input } from '@ui/form/input'
-import { FormSection, FormSectionGroup, FormSectionItem } from '@ui/form/form-section'
-import { Switch } from '@ui/form/switch'
-import { TooltipProvider } from '@ui/overlays/tooltip'
+import { Button } from '@ui/button'
+import { Badge } from '@ui/badge'
+import { Field, FieldDescription, FieldGroup, FieldLabel } from '@ui/field'
+import { Input } from '@ui/input'
+import { FormSection, FormSectionGroup, FormSectionItem } from '@ui/form-section'
+import { Switch } from '@ui/switch'
+import { TooltipProvider } from '@ui/tooltip'
 
 function FormSectionDemo() {
   return (

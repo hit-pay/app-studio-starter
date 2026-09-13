@@ -16,10 +16,10 @@ import { CalendarRegular } from '@mingcute/react/core-regular'
 import type { DateRange, Matcher } from 'react-day-picker'
 
 import { cn } from '@/lib/utils'
-import { Button } from '@ui/actions/button'
-import { Calendar } from '@ui/form/calendar'
-import { Input } from '@ui/form/input'
-import { Popover, PopoverContent, PopoverTrigger } from '@ui/overlays/popover'
+import { Button } from '@ui/button'
+import { Calendar } from '@ui/calendar'
+import { Input } from '@ui/input'
+import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover'
 
 type CaptionLayout = NonNullable<ComponentProps<typeof Calendar>['captionLayout']>
 

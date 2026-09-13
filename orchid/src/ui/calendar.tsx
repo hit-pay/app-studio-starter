@@ -16,7 +16,7 @@ import {
 } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
-import { Button, buttonVariants } from '@ui/actions/button'
+import { Button, buttonVariants } from '@ui/button'
 
 function Calendar({
   className,
