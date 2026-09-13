@@ -228,7 +228,7 @@
       "dependencies": [],
       "registryDependencies": [
         "@orchid/button",
-        "@orchid/dialog",
+        "@orchid/dialog"
       ],
       "files": [
         {

@@ -376,15 +376,6 @@ Source file: `src/ui/pagination.tsx`.
 Use `Pagination` to navigate between pages of an already paginated collection. Choose it when pagination is handled outside the component; use `DataTable` when table query controls are also needed.
 
 
-<a id="kbd"></a>
-# Kbd
-
-Keyboard key and grouped shortcut display.
-Source file: `src/ui/kbd.tsx`.
-
-Use `Kbd` to display a keyboard key or shortcut in help text and command hints. Choose it for documentation or discoverability, not as an interactive control.
-
-
 <a id="file-upload"></a>
 # File Upload
 
