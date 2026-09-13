@@ -39,7 +39,7 @@ Keep discovery targeted:
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
 1. Explore the installed `src/components/` and `src/ui/` source to choose the matching Orchid block. Prefer existing blocks over rebuilding them. Use `@ui` only for a control that no block exposes (Button, Badge, Spinner). Read the selected component source and its demo when props are unclear.
-2. For HitPay catalog additions, read `resource-picker-schema.md` and use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
+2. For HitPay catalog additions, read `schema-resource-picker.md` and use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
 3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
 ## Stack
@@ -61,7 +61,7 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `src/lib/server/db.ts`, `migrate.ts` | Turso |
 | `src/lib/files.ts` / `server/files.ts` | Prebuilt uploads (`files` table) |
 | `migrations/` | Ordered SQL |
-| `resource-picker-schema.md` | ResourcePicker payload and persistence rules |
+| `schema-resource-picker.md` | ResourcePicker payload and persistence rules |
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
