@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { DocExamplePage } from '@/components/doc/doc-example-page'
-import { DocMdx } from '@/components/doc/doc-mdx'
-import Docs from '../../../content/docs/components/role-select.mdx'
+import { DocExamplePage } from '@/docs/doc-example-page'
+import { DocMdx } from '@/docs/doc-mdx'
+import Docs from '../../../docs/components/role-select.mdx'
 
 export const Route = createFileRoute('/components/role-select')({
   component: Page,

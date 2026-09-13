@@ -1,6 +1,6 @@
 import { Outlet, createRootRoute } from '@tanstack/react-router'
-import { DocHeader } from '@/components/doc/doc-header'
-import { DocSidebar } from '@/components/doc/doc-sidebar'
+import { DocHeader } from '@/docs/doc-header'
+import { DocSidebar } from '@/docs/doc-sidebar'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
 import { Toaster } from '@ui/feedback/toast'
 

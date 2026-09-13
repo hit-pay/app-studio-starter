@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import CheckboxDocs from "../../../content/docs/components/checkbox.mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
+import CheckboxDocs from "../../../docs/ui/checkbox.mdx";
 
 export const Route = createFileRoute("/ui/checkbox")({
   component: CheckboxExamplesPage,

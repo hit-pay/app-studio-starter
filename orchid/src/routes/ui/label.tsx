@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { DocExamplePage } from '@/components/doc/doc-example-page'
-import { DocMdx } from '@/components/doc/doc-mdx'
-import Docs from '../../../content/docs/components/label.mdx'
+import { DocExamplePage } from '@/docs/doc-example-page'
+import { DocMdx } from '@/docs/doc-mdx'
+import Docs from '../../../docs/ui/label.mdx'
 
 export const Route = createFileRoute('/ui/label')({
   component: Page,

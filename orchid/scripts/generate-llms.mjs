@@ -4,12 +4,15 @@ import { fileURLToPath } from "node:url";
 
 import {
   DOC_ALL_COMPONENTS,
-} from "../src/components/doc/doc-components.ts";
+} from "../src/docs/doc-components.ts";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
 const output = join(root, "public", "llms.txt");
 const legacyDocsDir = join(root, "public", "llms");
-const documented = [...DOC_ALL_COMPONENTS];
+const documented = [
+  ...DOC_ALL_COMPONENTS.filter((item) => item.to.startsWith("/components/")),
+  ...DOC_ALL_COMPONENTS.filter((item) => item.to.startsWith("/ui/")),
+];
 function slug(item) {
   return item.to.replace(/^\//, "").split("/").at(-1);
 }
@@ -31,7 +34,8 @@ assertUnique(documented, (item) => item.name, "name");
 function findMdx(item) {
   const name = slug(item);
   const candidates = [
-    join(root, "content/docs/components", `${name}.mdx`),
+    join(root, "docs/components", `${name}.mdx`),
+    join(root, "docs/ui", `${name}.mdx`),
     join(root, "content/docs/guides", `${name}.mdx`),
   ];
   const found = candidates.find((path) => existsSync(path));

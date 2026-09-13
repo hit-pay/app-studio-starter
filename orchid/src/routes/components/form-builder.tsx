@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import FormBuilderDocs from "../../../content/docs/components/form-builder.mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
+import FormBuilderDocs from "../../../docs/components/form-builder.mdx";
 
 export const Route = createFileRoute("/components/form-builder")({
   component: FormBuilderPage,

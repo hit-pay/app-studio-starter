@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
 import InstallationDocs from "../../content/docs/guides/installation.mdx";
 
 export const Route = createFileRoute("/installation")({

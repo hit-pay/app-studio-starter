@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { ComponentCatalog } from "@/components/doc/component-catalog";
-import { DocExamplePage } from "@/components/doc/doc-example-page";
+import { ComponentCatalog } from "@/docs/component-catalog";
+import { DocExamplePage } from "@/docs/doc-example-page";
 
 export const Route = createFileRoute("/ui/")({
   component: BaseComponentsPage,

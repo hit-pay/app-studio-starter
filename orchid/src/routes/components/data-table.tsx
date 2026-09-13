@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import DataTableDocs from "../../../content/docs/components/data-table.mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
+import DataTableDocs from "../../../docs/components/data-table.mdx";
 
 export const Route = createFileRoute("/components/data-table")({
   component: DataTablePage,

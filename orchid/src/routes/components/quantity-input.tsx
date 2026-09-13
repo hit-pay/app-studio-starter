@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { DocExamplePage } from '@/components/doc/doc-example-page'
-import { DocMdx } from '@/components/doc/doc-mdx'
-import QuantityInputDocs from '../../../content/docs/components/quantity-input.mdx'
+import { DocExamplePage } from '@/docs/doc-example-page'
+import { DocMdx } from '@/docs/doc-mdx'
+import QuantityInputDocs from '../../../docs/components/quantity-input.mdx'
 
 export const Route = createFileRoute('/components/quantity-input')({
   component: QuantityInputExamplesPage,

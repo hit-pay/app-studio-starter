@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import MetricCardDemoDocs from "../../../content/docs/components/metric-card.mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
+import MetricCardDemoDocs from "../../../docs/components/metric-card.mdx";
 
 export const Route = createFileRoute("/components/metric-card")({
   component: MetricCardExamplesPage,

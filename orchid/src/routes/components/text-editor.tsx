@@ -1,8 +1,8 @@
 import { createFileRoute } from '@tanstack/react-router'
 
-import { DocExamplePage } from '@/components/doc/doc-example-page'
-import { DocMdx } from '@/components/doc/doc-mdx'
-import TextEditorDocs from '../../../content/docs/components/text-editor.mdx'
+import { DocExamplePage } from '@/docs/doc-example-page'
+import { DocMdx } from '@/docs/doc-mdx'
+import TextEditorDocs from '../../../docs/components/text-editor.mdx'
 
 export const Route = createFileRoute('/components/text-editor')({
   component: TextEditorExamplesPage,

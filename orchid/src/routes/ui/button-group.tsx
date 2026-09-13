@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import ButtonGroupDocs from "../../../content/docs/components/button-group.mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
+import ButtonGroupDocs from "../../../docs/ui/button-group.mdx";
 
 export const Route = createFileRoute("/ui/button-group")({
   component: ButtonGroupExamplesPage,

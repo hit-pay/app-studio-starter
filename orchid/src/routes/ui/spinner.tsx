@@ -1,8 +1,8 @@
 import { createFileRoute } from "@tanstack/react-router";
 
-import { DocExamplePage } from "@/components/doc/doc-example-page";
-import { DocMdx } from "@/components/doc/doc-mdx";
-import SpinnerDemoDocs from "../../../content/docs/components/spinner.mdx";
+import { DocExamplePage } from "@/docs/doc-example-page";
+import { DocMdx } from "@/docs/doc-mdx";
+import SpinnerDemoDocs from "../../../docs/ui/spinner.mdx";
 
 export const Route = createFileRoute("/ui/spinner")({
   component: SpinnerExamplesPage,
