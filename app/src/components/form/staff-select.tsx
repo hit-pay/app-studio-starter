@@ -29,7 +29,7 @@ type StaffSelectProps = {
 }
 
 function staffLabel(member: HitPayStaffAppMember) {
-  return member.name?.trim() || member.email?.trim() || member.id
+  return member.name?.trim() || member.id
 }
 
 function filterMembers(

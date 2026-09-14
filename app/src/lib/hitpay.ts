@@ -27,7 +27,6 @@ export type HitPayStaffLocation = {
 
 export type HitPayStaffAppMember = {
   id: string
-  email: string | null
   name: string | null
   role_id: string | null
   role: HitPayRole | null
