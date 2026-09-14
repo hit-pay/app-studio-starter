@@ -45,29 +45,3 @@
   "voided_at": null
 }
 ```
-<!--
-| `id` | UUID | |
-| `business_id` | UUID | |
-| `type` / `invoice_type` | string | `invoice` or `repeating_invoice` |
-| `invoice_number` / `reference` | string | |
-| `status` | string | `draft`, `sent`, `pending`, `overdue`, `paid`, … |
-| `currency` | string | |
-| `amount` / `subtotal` / `amount_paid` / `balance_amount` / `amount_no_tax` | number | |
-| `email` | string | |
-| `business_customer_id` / `customer` | UUID / object \| null | |
-| `location_id` / `location` | UUID / object \| null | |
-| `invoice_date` / `due_date` | `YYYY-MM-DD` | |
-| `products` | array | Line SKUs |
-| `stackable_discounts` | array | |
-| `tax_settings_id` / `tax_setting` | UUID / object \| null | |
-| `payment_methods` | string[] | |
-| `payment_requests` / `charges` | array | |
-| `allow_partial_payments` / `partial_payments` | boolean / array | |
-| `invoice_link` | string | |
-| `memo` / `footer` / `description` | string | |
-| `custom_fields` / `custom_fields_config` | array / object | |
-| `recipients` | array | |
-| `send_email` / `webhook` / `channel` | | |
-| `created_at` / `updated_at` | datetime | |
-| void / late-fee / repeating cycle fields | | When applicable |
--->
