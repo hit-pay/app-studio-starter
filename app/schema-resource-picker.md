@@ -35,6 +35,45 @@ When implementing a resource picker workflow, read the matching response schema 
 - Invoice: `docs/schema-invoice.md`
 - Add-on: `docs/schema-add-on.md`
 
+## Product and variation selection
+
+A selected product is one parent item. Its selected variations are separate child items inside `children`.
+
+If one product has two selected variations, the result contains:
+
+```ts
+[
+  {
+    id: 'product_123',
+    resource: {
+      // Full product response. Read docs/schema-product.md.
+    },
+    children: [
+      {
+        id: 'variation_1',
+        resource: {
+          // Full variation response.
+        },
+      },
+      {
+        id: 'variation_2',
+        resource: {
+          // Full variation response.
+        },
+      },
+    ],
+  },
+]
+```
+
+Implementation requirements:
+
+- Treat `result.length` as the number of selected parent products.
+- Treat `result[i].children.length` as the number of selected variations for that product.
+- Iterate over every child when saving or processing variant-level data.
+- Do not use only `result[0].resource` when variants are selected.
+- If `children` is absent or empty, the selection is product-level.
+
 ## Implementation rules
 
 - Call ResourcePicker with `useResourcePicker()` and `pick({ type })`.
