@@ -46,10 +46,37 @@
   "slot_date": null,
   "slot_time": null,
   "messages": [],
-  "products": [],
+  "products": [
+    {
+      "id": "ordered_product_123",
+      "name": "Example Product",
+      "description": "Example product description",
+      "quantity": 1,
+      "stock_keeping_unit": "SKU-123",
+      "unit_price": 100,
+      "total_price": 100,
+      "variation": {
+        "id": "product_variation_123",
+        "name": "Default",
+        "product_id": "product_123"
+      }
+    }
+  ],
   "is_digital_products": false,
   "charges": [],
-  "line_items": [],
+  "line_items": [
+    {
+      "id": "line_item_123",
+      "name": "Example Product",
+      "item_type": "product",
+      "quantity": 1,
+      "related_id": "product_variation_123",
+      "unit_price": 100,
+      "line_item_amount": 100,
+      "params": {},
+      "children": []
+    }
+  ],
   "order_form": null,
   "order_form_response": null,
   "coupon": null,
