@@ -1,9 +1,9 @@
 'use client'
 
-import { useEffect, useMemo, useState } from 'react'
-
+import { useMemo } from 'react'
 import { Select } from '@/components/form/select'
 import { Field, FieldDescription, FieldLabel } from '@ui/field'
+import { selectEntry, selectStore, useSelectOptions } from '@/lib/select-store'
 
 type HitPayNamedRow = { id: string }
 
@@ -48,31 +48,10 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
   load,
   clearable = false,
 }: HitPayNamedSelectProps<T>) {
-  const [rows, setRows] = useState<T[]>([])
-  const [loading, setLoading] = useState(true)
-  const [hasMore, setHasMore] = useState(false)
-  const [page, setPage] = useState(1)
-
-  useEffect(() => {
-    let cancelled = false
-    setLoading(true)
-    load(page)
-      .then((payload) => {
-        if (!cancelled) {
-          setRows((current) => (page === 1 ? payload.items : [...current, ...payload.items]))
-          setHasMore(Boolean(payload.hasMore))
-        }
-      })
-      .catch(() => {
-        if (!cancelled) setRows([])
-      })
-      .finally(() => {
-        if (!cancelled) setLoading(false)
-      })
-    return () => {
-      cancelled = true
-    }
-  }, [load, page])
+  const entry = useSelectOptions<T>(name, load)
+  const rows = entry.items as T[]
+  const loading = entry.loading
+  const hasMore = entry.hasMore
 
   const options = useMemo(
     () => rows.map((row) => ({ value: row.id, label: getLabel(row) })),
@@ -98,7 +77,16 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
         onValueChange={(next) => onValueChange?.(next, pickRows(rows, next))}
       />
       {hasMore ? (
-        <button type="button" className="mt-2 text-sm text-oc-primary" disabled={loading} onClick={() => setPage((current) => current + 1)}>
+        <button type="button" className="mt-2 text-sm text-oc-primary" disabled={loading} onClick={() => {
+          const nextPage = entry.page + 1
+          selectStore.setState((state) => ({ ...state, [name]: { ...selectEntry(name), ...entry, loading: true, page: nextPage } }))
+          load(nextPage).then((result) => {
+            selectStore.setState((state) => ({
+              ...state,
+              [name]: { ...selectEntry(name), ...entry, items: [...rows, ...result.items], hasMore: Boolean(result.hasMore), loading: false, page: nextPage },
+            }))
+          })
+        }}>
           {loading ? 'Loading…' : 'Load more'}
         </button>
       ) : null}

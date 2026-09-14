@@ -21,6 +21,8 @@
     "@mingcute/react": "^3.0.2",
     "@tanstack/react-form": "^1.33.5",
     "@tanstack/react-router": "^1.132.0",
+    "@tanstack/react-store": "^0.11.1",
+    "@tanstack/store": "^0.11.1",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cmdk": "^1.1.1",
