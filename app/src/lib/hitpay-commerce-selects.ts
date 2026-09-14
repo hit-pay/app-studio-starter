@@ -83,7 +83,7 @@ const loadProductCategoriesForSelect = createServerFn({ method: 'GET' }).handler
   if (productCategoriesRequest) return productCategoriesRequest
 
   productCategoriesRequest = (async () => {
-  const response = await hitpayRequest('/v1/products-categories?perPage=100&get_children=1&format=flat')
+    const response = await hitpayRequest('/v1/product-category?perPage=25&get_children=1&format=flat')
   if (!response.ok) throw new Error('Could not load product categories.')
     const value = { items: flattenCategories(asList<CategoryRow>(await response.json())) }
     productCategoriesCache = {

@@ -7,7 +7,7 @@ import { Field, FieldDescription, FieldLabel } from '@ui/field'
 
 type HitPayNamedRow = { id: string }
 
-type HitPayNamedSelectLoad<T extends HitPayNamedRow> = () => Promise<{ items: T[] }>
+type HitPayNamedSelectLoad<T extends HitPayNamedRow> = (page: number) => Promise<{ items: T[]; hasMore?: boolean }>
 
 type HitPayNamedSelectProps<T extends HitPayNamedRow> = {
   name: string
@@ -50,13 +50,18 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
 }: HitPayNamedSelectProps<T>) {
   const [rows, setRows] = useState<T[]>([])
   const [loading, setLoading] = useState(true)
+  const [hasMore, setHasMore] = useState(false)
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     let cancelled = false
     setLoading(true)
-    load()
+    load(page)
       .then((payload) => {
-        if (!cancelled) setRows(payload.items)
+        if (!cancelled) {
+          setRows((current) => (page === 1 ? payload.items : [...current, ...payload.items]))
+          setHasMore(Boolean(payload.hasMore))
+        }
       })
       .catch(() => {
         if (!cancelled) setRows([])
@@ -67,7 +72,7 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
     return () => {
       cancelled = true
     }
-  }, [load])
+  }, [load, page])
 
   const options = useMemo(
     () => rows.map((row) => ({ value: row.id, label: getLabel(row) })),
@@ -92,6 +97,11 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
         clearable={clearable}
         onValueChange={(next) => onValueChange?.(next, pickRows(rows, next))}
       />
+      {hasMore ? (
+        <button type="button" className="mt-2 text-sm text-oc-primary" disabled={loading} onClick={() => setPage((current) => current + 1)}>
+          {loading ? 'Loading…' : 'Load more'}
+        </button>
+      ) : null}
     </>
   )
 
