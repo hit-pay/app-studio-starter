@@ -126,3 +126,7 @@ const saveCountLine = createServerFn({ method: 'POST' })
     })
   })
 ```
+
+## Response style
+
+Write final responses in simple, non-technical language for a business owner. Focus on what was completed and what the user can do next. Avoid developer terms, commands, file paths, and internal verification details. Mention a technical detail only when it explains a problem or the user explicitly asks for it.
