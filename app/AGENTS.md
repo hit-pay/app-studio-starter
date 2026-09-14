@@ -39,8 +39,9 @@ Keep discovery targeted:
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
 1. Explore the installed `src/components/` and `src/ui/` source to choose the matching Orchid block. Prefer existing blocks over rebuilding them. Use `@ui` only for a control that no block exposes (Button, Badge, Spinner). Read the selected component source and its demo when props are unclear.
-2. For HitPay catalog additions, read `schema-resource-picker.md` and use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
-3. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
+2. For HitPay catalog additions, read `schema-resource-picker.md` and the matching resource schema in `docs/*-schema.md`; use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
+3. For non-picker HitPay API workflows (for example, stock synchronization), consult the relevant API documentation in `docs/`, including `docs/product-api-queries.md`, `docs/order-api-queries.md`, `docs/invoice-api-queries.md`, and `docs/charge-api-queries.md`.
+4. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
 ## Stack
 

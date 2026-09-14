@@ -28,12 +28,12 @@ Store the HitPay `id` as the primary identifier. Store display fields as snapsho
 
 When implementing a resource picker workflow, read the matching response schema before writing code. Do not add API response JSON to this file.
 
-- Product: `docs/schema-product.md`
-- Customer: `docs/schema-customer.md`
-- Order: `docs/schema-order.md`
-- Charge: `docs/schema-charge.md`
-- Invoice: `docs/schema-invoice.md`
-- Add-on: `docs/schema-add-on.md`
+- Product: `docs/product-schema.md`
+- Customer: `docs/customer-schema.md`
+- Order: `docs/order-schema.md`
+- Charge: `docs/charge-schema.md`
+- Invoice: `docs/invoice-schema.md`
+- Add-on: `docs/add-on-schema.md`
 
 ## Product and variation selection
 
@@ -46,7 +46,7 @@ If one product has two selected variations, the result contains:
   {
     id: 'product_123',
     resource: {
-      // Full product response. Read docs/schema-product.md.
+      // Full product response. Read docs/product-schema.md.
     },
     children: [
       {
