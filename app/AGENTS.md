@@ -23,7 +23,7 @@ Keep discovery targeted:
 
 1. Do not start a screen from `@ui`. Do not rebuild a **Components & Blocks** entry from primitives.
 2. Never render a visible table, list, feed, or collection directly from any HitPay API.
-3. For every HitPay resource (product, customer, order, charge, invoice, or add-on), use `useResourcePicker()` for selection, persist the returned payload through `createServerFn`, and render rows only from Turso. Do not call `list-*` to build or refresh visible rows. `get-*-details` is only for a show page when Turso already has that id.
+3. For every HitPay resource (product, customer, order, charge, invoice, or add-on), use `useResourcePicker()` for selection, persist the returned payload through `createServerFn`, and render rows only from Turso. Do not call HitPay list endpoints to build or refresh visible rows.
 4. Do not edit `src/routeTree.gen.ts`. Do not hardcode or prepend the app id on routes.
 5. Do not read cookies or `Authorization` in the browser. Do not import `src/lib/server/*` from browser components.
 6. Do not use bare browser-storage keys or store secrets there. Do not put passwords or files in form drafts.
@@ -39,7 +39,7 @@ Keep discovery targeted:
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
 1. Explore the installed `src/components/` and `src/ui/` source to choose the matching Orchid block. Prefer existing blocks over rebuilding them. Use `@ui` only for a control that no block exposes (Button, Badge, Spinner). Read the selected component source and its demo when props are unclear.
-2. For HitPay catalog additions, read `schema-resource-picker.md` and the matching resource schema in `docs/*-schema.md`; use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
+2. For HitPay catalog additions, read `schema-resource-picker.md` and the matching resource schema in `docs/schema-{category}.md`; use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
 3. For non-picker HitPay API workflows (for example, stock synchronization), consult the relevant API documentation in `docs/`, including `docs/product-api-queries.md`, `docs/order-api-queries.md`, `docs/invoice-api-queries.md`, and `docs/charge-api-queries.md`.
 4. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
@@ -70,14 +70,14 @@ Input on `createServerFn`: `.validator()` then `.handler()`. GET with no input: 
 
 ## Data
 
-Visible rows = Turso (picker upserts or app-owned workflow). Picker / `*Select` may call HitPay lists. Totals-only sheets may call `list-*` if **no rows** from that list are rendered. HitPay list APIs have **no filter-by-id**.
+Visible rows = Turso (picker upserts or app-owned workflow). Picker / `*Select` may call HitPay list endpoints only for selection controls. Totals-only sheets may call list endpoints if **no rows** from that list are rendered.
 
 For every HitPay catalog resource, the required flow is:
 
 `useResourcePicker()` → `await pick({ type })` → `createServerFn` upsert from the **payload** (`id` + fields) → query Turso for visible rows.
 
 Types: `product` | `customer` | `order` | `charge` | `invoice` | `add-on`.
-The only `list-*` calls allowed in the app are internal ResourcePicker / `*Select`
+The only HitPay list calls allowed in the app are internal ResourcePicker / `*Select`
 loaders or totals-only calculations where no API rows are rendered.
 
 `*Select` / FormBuilder types already load their lists. Persist `id` + name snapshot.
@@ -127,6 +127,4 @@ const saveCountLine = createServerFn({ method: 'POST' })
   })
 ```
 
-## Response style
 
-Write final responses in simple, non-technical language for a business owner. Focus on what was completed and what the user can do next. Avoid developer terms, commands, file paths, and internal verification details. Mention a technical detail only when it explains a problem or the user explicitly asks for it.
