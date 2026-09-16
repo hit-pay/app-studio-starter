@@ -6,11 +6,12 @@ Endpoint:
 GET /api/apps/{app}/current-user
 ```
 
-This endpoint uses the authenticated HitPay session. The `{app}` value comes
-from `APP_STUDIO_APP_ID`; do not accept an app ID from user input.
+This endpoint uses the `app_studio_user_token` HttpOnly cookie. Do not send
+the Dashboard session cookie or a Bearer token to this endpoint. The `{app}`
+value comes from `APP_STUDIO_APP_ID`; do not accept an app ID from user input.
 
 The response contains the current user, the effective app role, and a
-short-lived `appToken`:
+short-lived app token:
 
 ```json
 {
@@ -21,7 +22,7 @@ short-lived `appToken`:
     "id": "role_123",
     "title": "Owner"
   },
-  "appToken": "<short-lived-token>"
+  "appToken": "<short-lived-app-token>"
 }
 ```
 
@@ -33,16 +34,16 @@ Field meanings:
 - `role`: effective role for this app, or `null`.
 - `role.id`: role ID.
 - `role.title`: role title used by the starter's role checks.
-- `appToken`: short-lived token used for subsequent proxy API and MCP
-  requests. Keep it in memory only.
+- `appToken`: token for subsequent proxy API and MCP requests.
 
-Use the token only as:
+Use the app token only as:
 
 ```http
 Authorization: Bearer <appToken>
 ```
 
-Never log, persist, or send the token to a provider. Never request or expose
+The starter runtime manages the `app_studio_user_token` cookie. Keep the app
+token server-side. Never log, persist, or send it to a provider. Never request or expose
 HitPay API keys, Turso URLs, or Turso auth tokens from the starter app.
 
 On success, the endpoint returns `200` with JSON. A missing or expired HitPay
