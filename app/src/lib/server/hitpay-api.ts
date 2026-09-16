@@ -9,6 +9,11 @@ const proxyPaths: Record<string, string> = {
   '/v1/invoices': '/integrations/hitpay/invoices',
   '/v1/product-category': '/integrations/hitpay/product-categories',
   '/v1/locations': '/integrations/hitpay/locations',
+  '/v1/coupons': '/integrations/hitpay/coupons',
+  '/v1/discounts': '/integrations/hitpay/discounts',
+  '/v1/taxes': '/integrations/hitpay/taxes',
+  '/v1/pickups': '/integrations/hitpay/pickups',
+  '/v1/shipping': '/integrations/hitpay/shipping',
 }
 
 /**

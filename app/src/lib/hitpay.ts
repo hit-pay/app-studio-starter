@@ -68,6 +68,18 @@ export const fetchUserInfo = () => loadUserInfo()
 export const fetchAppRoles = () => loadAppRoles()
 export const fetchStaffAppMembers = () => loadStaffAppMembers()
 
+let userInfoRequest: ReturnType<typeof fetchUserInfo> | null = null
+
+function fetchUserInfoOnce() {
+  if (!userInfoRequest) {
+    userInfoRequest = fetchUserInfo().catch((error) => {
+      userInfoRequest = null
+      throw error
+    })
+  }
+  return userInfoRequest
+}
+
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useHitPayUser(): {
   user: HitPayUser | null
@@ -86,7 +98,7 @@ export function useHitPayUser(): {
     setLoading(true)
     setError(null)
 
-    fetchUserInfo()
+    fetchUserInfoOnce()
       .then((next) => {
         if (!cancelled) {
           setUser(next)
@@ -109,5 +121,13 @@ export function useHitPayUser(): {
     }
   }, [attempt])
 
-  return { user, error, loading, retry: () => setAttempt((value) => value + 1) }
+  return {
+    user,
+    error,
+    loading,
+    retry: () => {
+      userInfoRequest = null
+      setAttempt((value) => value + 1)
+    },
+  }
 }

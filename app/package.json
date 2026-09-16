@@ -6,6 +6,7 @@
     "#/*": "./src/*"
   },
   "scripts": {
+    "dev": "bun --bun vite dev",
     "generate-routes": "bun --bun tsr generate",
     "build": "bun --bun vite build",
     "start": "bun start.mjs"
