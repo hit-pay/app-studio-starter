@@ -166,7 +166,10 @@ function DataListCard({
             {itemLayout !== 'media' ? hoverActions : null}
           </div>
           {item.trailing != null || moreMenu != null ? (
-            <div className="flex shrink-0 items-center gap-2">
+            <div
+              className="flex shrink-0 items-center gap-2"
+              onClick={(event) => event.stopPropagation()}
+            >
               {moreMenu != null ? <DataListMore menu={moreMenu} /> : null}
               {item.trailing}
             </div>
@@ -193,7 +196,15 @@ function DataListStackBody({
           <p className="text-sm font-medium leading-[1.5] text-oc-foreground">{item.title}</p>
           {item.meta}
         </div>
-        {moreMenu != null ? <DataListMore menu={moreMenu} /> : null}
+        {item.trailing != null || moreMenu != null ? (
+          <div
+            className="flex shrink-0 items-center gap-2"
+            onClick={(event) => event.stopPropagation()}
+          >
+            {moreMenu != null ? <DataListMore menu={moreMenu} /> : null}
+            {item.trailing}
+          </div>
+        ) : null}
       </div>
       {item.copyRows?.length ? (
         <div className="space-y-2">

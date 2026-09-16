@@ -1,36 +1,13 @@
 import { getRequest } from '@tanstack/react-start/server'
+import { getAppToken } from '#/lib/server/app-token'
 
 type Statement = { sql: string; args?: unknown[] }
 type Result = { columns: string[]; rows: unknown[][] }
-const tokenByRequest = new WeakMap<Request, Promise<string>>()
-
-async function appToken(): Promise<string> {
-  const request = getRequest()
-  const cached = tokenByRequest.get(request)
-  if (cached) return cached
-
-  const pending = (async () => {
-    const appId = process.env.APP_STUDIO_APP_ID?.trim()
-    if (!appId) throw new Error('APP_STUDIO_APP_ID is not configured.')
-    const response = await fetch(
-      new URL(`/api/apps/${encodeURIComponent(appId)}/current-user`, request.url),
-      { headers: { accept: 'application/json' } },
-    )
-    const body = await response.json() as { appToken?: unknown }
-    if (!response.ok || typeof body.appToken !== 'string') {
-      throw new Error('Unable to authorize the App Studio proxy request.')
-    }
-    return body.appToken
-  })()
-  tokenByRequest.set(request, pending)
-  return pending
-}
-
 async function proxy(operation: 'query' | 'batch' | 'migrations', body: unknown): Promise<any> {
   const request = getRequest()
   const appId = process.env.APP_STUDIO_APP_ID?.trim()
   if (!appId) throw new Error('APP_STUDIO_APP_ID is not configured.')
-  const token = await appToken()
+  const token = await getAppToken()
 
   const response = await fetch(
     new URL(`/api/apps/${encodeURIComponent(appId)}/integrations/turso/${operation}`, request.url),
