@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
+import { getCookie, setCookie } from '@tanstack/react-start/server'
 import { studioAppId } from '@/lib/studio-app-id'
 
 export {
@@ -52,6 +53,8 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
   }
 
   if (token) headers.set('authorization', `Bearer ${token}`)
+  const storedUserToken = getCookie('app_studio_user_token')
+  if (storedUserToken) headers.set('cookie', `app_studio_user_token=${storedUserToken}`)
   const url = proxyUrl(path)
   const response = await fetch(url, { headers })
   if (!response.ok) {
@@ -61,7 +64,19 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
       + `hasBearer=${headers.has('authorization')}).`,
     )
   }
-  return response.json() as Promise<T>
+  const body = await response.json() as T & { userToken?: unknown }
+
+  if (path === '/current-user' && typeof body.userToken === 'string') {
+    setCookie('app_studio_user_token', body.userToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: 900,
+    })
+  }
+
+  return body
 }
 
 const loadUserInfo = createServerFn({ method: 'GET' }).handler(() =>

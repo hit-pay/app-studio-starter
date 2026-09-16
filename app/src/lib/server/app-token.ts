@@ -1,10 +1,12 @@
 import { getCookie, getRequest, setCookie } from '@tanstack/react-start/server'
 
 const TOKEN_COOKIE = 'app-studio-token'
+const USER_TOKEN_COOKIE = 'app_studio_user_token'
 const TOKEN_MAX_AGE = 60 * 60
 
 type CurrentUserResponse = {
   appToken?: unknown
+  userToken?: unknown
 }
 
 function appId(): string {
@@ -63,7 +65,21 @@ export async function getAppToken(forceRefresh = false): Promise<string> {
     maxAge: TOKEN_MAX_AGE,
   })
 
+  if (typeof (body as { userToken?: unknown }).userToken === 'string') {
+    setCookie(USER_TOKEN_COOKIE, (body as { userToken: string }).userToken, {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'lax',
+      path: '/',
+      maxAge: TOKEN_MAX_AGE,
+    })
+  }
+
   return body.appToken
+}
+
+export function getUserToken(): string | undefined {
+  return getCookie(USER_TOKEN_COOKIE)
 }
 
 export function invalidateAppToken(): void {
