@@ -1,11 +1,12 @@
-import { resolve } from 'node:path'
-import { pathToFileURL } from 'node:url'
+import { dirname, resolve } from 'node:path'
+import { fileURLToPath, pathToFileURL } from 'node:url'
 
 process.env.HOST ??= '0.0.0.0'
 process.env.NITRO_HOST ??= process.env.HOST
 
+const appRoot = dirname(fileURLToPath(import.meta.url))
 const ssrEntry = pathToFileURL(
-  resolve('.nitro/vite/services/ssr/server.js'),
+  resolve(appRoot, '.nitro/vite/services/ssr/server.js'),
 ).href
 
 let ssr
@@ -32,4 +33,4 @@ Bun.serve = (options) =>
     hostname: options.hostname || '0.0.0.0',
   })
 
-await import('./.output/server/index.mjs')
+await import(pathToFileURL(resolve(appRoot, '.output/server/index.mjs')).href)
