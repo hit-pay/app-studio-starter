@@ -35,7 +35,14 @@ export async function getAppToken(forceRefresh = false): Promise<string> {
 
   const response = await fetch(
     proxyUrl(`/api/apps/${encodeURIComponent(appId())}/current-user`),
-    { headers: { accept: 'application/json' } },
+    {
+      headers: {
+        accept: 'application/json',
+        ...(getRequest().headers.get('cookie')
+          ? { cookie: getRequest().headers.get('cookie')! }
+          : {}),
+      },
+    },
   )
   const body = await response.json() as CurrentUserResponse
 

@@ -53,9 +53,15 @@ export async function getHitPaySession(): Promise<HitPaySession> {
       throw new Error('Sign in to HitPay to use this app.')
     }
 
+    const cookie = request.headers.get('cookie')
     const response = await fetch(
       proxyUrl(`/api/apps/${encodeURIComponent(appId)}/current-user`),
-      { headers: { accept: 'application/json' } },
+      {
+        headers: {
+          accept: 'application/json',
+          ...(cookie ? { cookie } : {}),
+        },
+      },
     )
 
     if (!response.ok) {
