@@ -1,8 +1,6 @@
 import { getRequest } from '@tanstack/react-start/server'
 
-const TOKEN_COOKIE = 'app-studio-token'
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
-const TOKEN_MAX_AGE = 60 * 60
 
 type CurrentUserResponse = {
   appToken?: unknown
@@ -26,15 +24,7 @@ export function proxyUrl(path: string): URL {
   return new URL(path, `${origin}/`)
 }
 
-export async function getAppToken(forceRefresh = false): Promise<string> {
-  if (!forceRefresh) {
-    const cached = getCookie(TOKEN_COOKIE)
-
-    if (cached) {
-      return cached
-    }
-  }
-
+export async function getAppToken(): Promise<string> {
   const response = await fetch(
     proxyUrl(`/api/apps/${encodeURIComponent(appId())}/current-user`),
     {
@@ -57,14 +47,6 @@ export async function getAppToken(forceRefresh = false): Promise<string> {
     )
   }
 
-  setCookie(TOKEN_COOKIE, body.appToken, {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax',
-    path: '/',
-    maxAge: TOKEN_MAX_AGE,
-  })
-
   return body.appToken
 }
 
@@ -78,12 +60,3 @@ export function getUserToken(): string | undefined {
     ?.slice(`${USER_TOKEN_COOKIE}=`.length)
 }
 
-export function invalidateAppToken(): void {
-  setCookie(TOKEN_COOKIE, '', {
-    httpOnly: true,
-    secure: true,
-    sameSite: 'lax',
-    path: '/',
-    maxAge: 0,
-  })
-}

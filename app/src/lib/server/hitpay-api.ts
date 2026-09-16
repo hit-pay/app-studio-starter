@@ -1,6 +1,6 @@
 import { getRequest } from '@tanstack/react-start/server'
 import { studioAppId } from '#/lib/studio-app-id'
-import { getAppToken, invalidateAppToken, proxyUrl } from '#/lib/server/app-token'
+import { getAppToken, proxyUrl } from '#/lib/server/app-token'
 
 const proxyPaths: Record<string, string> = {
   '/v1/products': '/integrations/hitpay/products',
@@ -34,7 +34,7 @@ export async function hitpayRequest(path: string, init: RequestInit = {}): Promi
   for (let attempt = 0; attempt < 2; attempt += 1) {
     const headers = new Headers(init.headers)
     headers.set('accept', 'application/json')
-    headers.set('authorization', `Bearer ${await getAppToken(attempt === 1)}`)
+    headers.set('authorization', `Bearer ${await getAppToken()}`)
     const response = await fetch(
       proxyUrl(`/api/apps/${encodeURIComponent(appId)}${proxyPath}${url.search}`),
       { ...init, headers, signal: init.signal ?? AbortSignal.timeout(15_000) },
@@ -44,7 +44,6 @@ export async function hitpayRequest(path: string, init: RequestInit = {}): Promi
       return response
     }
 
-    invalidateAppToken()
   }
 
   throw new Error('Unable to authorize the App Studio proxy request.')
