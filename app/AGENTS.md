@@ -63,6 +63,7 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `migrations/` | Ordered SQL |
 | `schema-resource-picker.md` | ResourcePicker payload and persistence rules |
 | `docs/mcp-tools.md` | App Studio MCP server and tool catalog |
+| `docs/current-user.md` | Current-user response and app-token contract |
 | `docs/turso/` | Turso MCP operations and runtime migration guidance |
 | `docs/hitpay/` | HitPay resource schemas matching MCP tools |
 
@@ -93,7 +94,7 @@ Every `createServerFn` that reads/writes business data: `requireHitPayRoles(HITP
 
 All runtime provider access goes through App Studio's proxy:
 
-- Obtain the short-lived `appToken` from `/api/apps/{app}/user/info`.
+- Obtain the short-lived `appToken` from `/api/apps/{app}/current-user`.
 - Send only `Authorization: Bearer {appToken}` to proxy API and MCP requests.
 - Never request, store, log, or forward a HitPay secret/API key in the app.
 - HitPay API keys, Turso URLs, Turso auth tokens, and provider credentials remain inside the proxy.
@@ -140,7 +141,7 @@ The starter app uses the App Studio proxy for platform and Turso access.
 
 ### HitPay endpoints
 
-The browser calls `/api/apps/{app}/user/info` to obtain a short-lived
+The browser calls `/api/apps/{app}/current-user` to obtain a short-lived
 `appToken`, then sends it as `Authorization: Bearer {appToken}` to the roles
 and staff endpoints. The token remains in memory.
 

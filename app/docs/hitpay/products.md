@@ -1,3 +1,31 @@
+# HitPay Products
+
+MCP tool: `hitpay_list_products`
+
+Proxy endpoint:
+
+```text
+GET /api/apps/{app}/integrations/hitpay/products
+```
+
+Upstream:
+
+```text
+GET /v1/products
+```
+
+Authentication:
+
+```http
+Authorization: Bearer {appToken}
+```
+
+The business API key remains inside the App Studio proxy. Use the advertised
+MCP schema for runtime arguments. Do not render live provider data directly;
+persist approved snapshots in Turso when the workflow needs visible rows.
+
+Response item schema:
+
 ```json
 {
   "id": "product_123",

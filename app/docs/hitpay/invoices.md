@@ -1,3 +1,31 @@
+# HitPay Invoices
+
+MCP tool: `hitpay_list_invoices`
+
+Proxy endpoint:
+
+```text
+GET /api/apps/{app}/integrations/hitpay/invoices
+```
+
+Upstream:
+
+```text
+GET /v1/invoices
+```
+
+Authentication:
+
+```http
+Authorization: Bearer {appToken}
+```
+
+The business API key remains inside the App Studio proxy. Use the advertised
+MCP schema for runtime arguments and persist approved snapshots in Turso
+before rendering application rows.
+
+Response item schema:
+
 ```json
 {
   "id": "invoice_123",
