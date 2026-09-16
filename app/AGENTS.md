@@ -94,6 +94,9 @@ Every `createServerFn` that reads/writes business data: `requireHitPayRoles(HITP
 
 All runtime provider access goes through App Studio's proxy:
 
+- Use the server-side `APP_STUDIO_PROXY_URL` environment variable as the base
+  URL for every App Studio API request. Never derive proxy URLs from
+  `request.url`, because server functions may run on the Sprite host.
 - Obtain the short-lived `appToken` from `/api/apps/{app}/current-user`.
 - Send only `Authorization: Bearer {appToken}` to proxy API and MCP requests.
 - Never request, store, log, or forward a HitPay secret/API key in the app.

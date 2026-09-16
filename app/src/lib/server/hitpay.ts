@@ -1,4 +1,5 @@
 import { getRequest } from '@tanstack/react-start/server'
+import { proxyUrl } from '#/lib/server/app-token'
 
 export type HitPaySessionRole = {
   id: string
@@ -53,7 +54,7 @@ export async function getHitPaySession(): Promise<HitPaySession> {
     }
 
     const response = await fetch(
-      new URL(`/api/apps/${encodeURIComponent(appId)}/current-user`, request.url),
+      proxyUrl(`/api/apps/${encodeURIComponent(appId)}/current-user`),
       { headers: { accept: 'application/json' } },
     )
 

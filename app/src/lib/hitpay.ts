@@ -38,7 +38,9 @@ export type HitPayStaffAppMember = {
 function proxyUrl(path: string): URL {
   const request = getRequest()
   const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
-  return new URL(`/api/apps/${encodeURIComponent(appId)}${path}`, request.url)
+  const origin = process.env.APP_STUDIO_PROXY_URL?.trim() || new URL(request.url).origin
+
+  return new URL(`/api/apps/${encodeURIComponent(appId)}${path}`, `${origin}/`)
 }
 
 async function proxyJson<T>(path: string, token?: string): Promise<T> {

@@ -1,16 +1,14 @@
-import { getRequest } from '@tanstack/react-start/server'
-import { getAppToken } from '#/lib/server/app-token'
+import { getAppToken, proxyUrl } from '#/lib/server/app-token'
 
 type Statement = { sql: string; args?: unknown[] }
 type Result = { columns: string[]; rows: unknown[][] }
 async function proxy(operation: 'query' | 'batch' | 'migrations', body: unknown): Promise<any> {
-  const request = getRequest()
   const appId = process.env.APP_STUDIO_APP_ID?.trim()
   if (!appId) throw new Error('APP_STUDIO_APP_ID is not configured.')
   const token = await getAppToken()
 
   const response = await fetch(
-    new URL(`/api/apps/${encodeURIComponent(appId)}/integrations/turso/${operation}`, request.url),
+    proxyUrl(`/api/apps/${encodeURIComponent(appId)}/integrations/turso/${operation}`),
     {
       method: 'POST',
       headers: {

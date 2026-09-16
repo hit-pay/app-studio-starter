@@ -1,6 +1,6 @@
 import { getRequest } from '@tanstack/react-start/server'
 import { studioAppId } from '#/lib/studio-app-id'
-import { getAppToken, invalidateAppToken } from '#/lib/server/app-token'
+import { getAppToken, invalidateAppToken, proxyUrl } from '#/lib/server/app-token'
 
 const proxyPaths: Record<string, string> = {
   '/v1/products': '/integrations/hitpay/products',
@@ -36,7 +36,7 @@ export async function hitpayRequest(path: string, init: RequestInit = {}): Promi
     headers.set('accept', 'application/json')
     headers.set('authorization', `Bearer ${await getAppToken(attempt === 1)}`)
     const response = await fetch(
-      new URL(`/api/apps/${encodeURIComponent(appId)}${proxyPath}${url.search}`, request.url),
+      proxyUrl(`/api/apps/${encodeURIComponent(appId)}${proxyPath}${url.search}`),
       { ...init, headers, signal: init.signal ?? AbortSignal.timeout(15_000) },
     )
 

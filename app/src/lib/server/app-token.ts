@@ -17,6 +17,13 @@ function appId(): string {
   return value
 }
 
+export function proxyUrl(path: string): URL {
+  const request = getRequest()
+  const origin = process.env.APP_STUDIO_PROXY_URL?.trim() || new URL(request.url).origin
+
+  return new URL(path, `${origin}/`)
+}
+
 export async function getAppToken(forceRefresh = false): Promise<string> {
   if (!forceRefresh) {
     const cached = getCookie(TOKEN_COOKIE)
@@ -26,9 +33,8 @@ export async function getAppToken(forceRefresh = false): Promise<string> {
     }
   }
 
-  const request = getRequest()
   const response = await fetch(
-    new URL(`/api/apps/${encodeURIComponent(appId())}/current-user`, request.url),
+    proxyUrl(`/api/apps/${encodeURIComponent(appId())}/current-user`),
     { headers: { accept: 'application/json' } },
   )
   const body = await response.json() as CurrentUserResponse
