@@ -4,7 +4,6 @@ const USER_TOKEN_COOKIE = 'app_studio_user_token'
 
 type CurrentUserResponse = {
   appToken?: unknown
-  userToken?: unknown
 }
 
 function appId(): string {
