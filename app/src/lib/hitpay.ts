@@ -52,8 +52,15 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
   }
 
   if (token) headers.set('authorization', `Bearer ${token}`)
-  const response = await fetch(proxyUrl(path), { headers })
-  if (!response.ok) throw new Error('Unable to load HitPay app data.')
+  const url = proxyUrl(path)
+  const response = await fetch(url, { headers })
+  if (!response.ok) {
+    throw new Error(
+      `Unable to load HitPay app data (HTTP ${response.status}, `
+      + `path=${url.pathname}, hasCookie=${headers.has('cookie')}, `
+      + `hasBearer=${headers.has('authorization')}).`,
+    )
+  }
   return response.json() as Promise<T>
 }
 

@@ -47,7 +47,12 @@ export async function getAppToken(forceRefresh = false): Promise<string> {
   const body = await response.json() as CurrentUserResponse
 
   if (!response.ok || typeof body.appToken !== 'string' || body.appToken === '') {
-    throw new Error('Unable to authorize the App Studio proxy request.')
+    throw new Error(
+      `Unable to authorize the App Studio proxy request `
+      + `(HTTP ${response.status}, path=${new URL(response.url).pathname}, `
+      + `hasCookie=${response.url !== '' && getRequest().headers.has('cookie')}, `
+      + `hasToken=${typeof body.appToken === 'string' && body.appToken !== ''}).`,
+    )
   }
 
   setCookie(TOKEN_COOKIE, body.appToken, {
