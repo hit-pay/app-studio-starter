@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react'
+import { createServerFn } from '@tanstack/react-start'
+import { getRequest } from '@tanstack/react-start/server'
 import { studioAppId } from '@/lib/studio-app-id'
 
 export {
@@ -33,47 +35,38 @@ export type HitPayStaffAppMember = {
   locations: HitPayStaffLocation[]
 }
 
-function assertBrowser(): void {
-  if (typeof window === 'undefined') {
-    throw new Error(
-      'useHitPayUser and fetch* are browser-only. In createServerFn import getHitPaySession from #/lib/server/hitpay.',
-    )
-  }
+function proxyUrl(path: string): URL {
+  const request = getRequest()
+  const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
+  return new URL(`/api/apps/${encodeURIComponent(appId)}${path}`, request.url)
 }
 
-function appStudioApi(path: '/user/info' | '/roles' | '/staff-app-members'): string {
-  return `/api/apps/${encodeURIComponent(studioAppId())}${path}`
+async function proxyJson<T>(path: string, token?: string): Promise<T> {
+  const headers = new Headers({ accept: 'application/json' })
+  if (token) headers.set('authorization', `Bearer ${token}`)
+  const response = await fetch(proxyUrl(path), { headers })
+  if (!response.ok) throw new Error('Unable to load HitPay app data.')
+  return response.json() as Promise<T>
 }
 
-async function hitpayGet<T>(path: '/user/info' | '/roles' | '/staff-app-members'): Promise<T> {
-  assertBrowser()
+const loadUserInfo = createServerFn({ method: 'GET' }).handler(() =>
+  proxyJson<HitPayUser & { appToken?: string }>('/current-user'))
 
-  const response = await fetch(appStudioApi(path), {
-    credentials: 'include',
-    headers: { accept: 'application/json' },
-  })
+const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () => {
+  const user = await proxyJson<{ appToken?: string }>('/current-user')
+  if (!user.appToken) throw new Error('Unable to authorize HitPay app data.')
+  return proxyJson<{ roles: HitPayRole[] }>('/roles', user.appToken)
+})
 
-  if (response.status === 401) {
-    throw new Error('Sign in to HitPay to use this app.')
-  }
+const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () => {
+  const user = await proxyJson<{ appToken?: string }>('/current-user')
+  if (!user.appToken) throw new Error('Unable to authorize HitPay app data.')
+  return proxyJson<{ members: HitPayStaffAppMember[] }>('/staff-app-members', user.appToken)
+})
 
-  if (response.status >= 500) {
-    throw new Error('HitPay is temporarily unavailable. Try again shortly.')
-  }
-
-  if (!response.ok) {
-    throw new Error('You do not have access to this app.')
-  }
-
-  return (await response.json()) as T
-}
-
-export const fetchUserInfo = () => hitpayGet<HitPayUser>('/user/info')
-
-export const fetchAppRoles = () => hitpayGet<{ roles: HitPayRole[] }>('/roles')
-
-export const fetchStaffAppMembers = () =>
-  hitpayGet<{ members: HitPayStaffAppMember[] }>('/staff-app-members')
+export const fetchUserInfo = () => loadUserInfo()
+export const fetchAppRoles = () => loadAppRoles()
+export const fetchStaffAppMembers = () => loadStaffAppMembers()
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useHitPayUser(): {

@@ -45,3 +45,11 @@
   "voided_at": null
 }
 ```
+
+## Query Parameters
+
+MCP tool: `hitpay_list_invoices`
+
+Supported filters include `status`, `customer_email`, `reference`, `keywords`,
+`type`, `parent_id`, `relations`, `extra_attributes`, `count`, `sort_by`,
+`sort_by_direction`, `per_page`, and `cursor`.

@@ -89,3 +89,12 @@
   "type": "charge"
 }
 ```
+
+## Query Parameters
+
+MCP tool: `hitpay_list_charges`
+
+Supported filters include `keywords`, `remark`, `status`, `statuses[]`,
+`refunded`, `location_ids[]`, `user_ids[]`, `date_from`, `date_to`,
+`payment_methods[]`, `payment_request_id`, `channel`, `relatable`,
+`amount_from`, `amount_to`, and `per_page`.

@@ -115,3 +115,14 @@
   "updated_at": "2026-01-01T00:00:00+00:00"
 }
 ```
+
+## Query Parameters
+
+MCP tool: `hitpay_list_products`
+
+Supported filters include `ids[]`, `barcode`, `perPage`/`per_page`, `page`,
+`stock_keeping_unit`, `statuses[]`, `categories[]`, `inventory`,
+`location_ids[]`, `channels[]`, `keywords`, `price_from`, `price_to`,
+`show_sold_out`, `currency`, and `order_by[field]`.
+
+Use `ids[]` for product ID filtering, not `product_ids[]`.

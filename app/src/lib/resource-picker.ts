@@ -111,15 +111,6 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       return mapResourcePickerPayload(data, await response.json())
     }
 
-    if (data.type === 'add-on') {
-      query.set('per_page', '20')
-      query.set('page', String(page))
-      if (data.query) query.set('keywords', data.query)
-      const response = await hitpayRequest(`/v1/add-ons?${query}`)
-      if (!response.ok) throw new Error('Could not load add-ons.')
-      return mapResourcePickerPayload(data, await response.json())
-    }
-
     throw new Error(`Unsupported resource picker type: ${data.type}`)
   })
 

@@ -1,24 +1,44 @@
-import { getConnectorValue } from '#/lib/server/hitpay'
+import { getRequest } from '@tanstack/react-start/server'
+import { studioAppId } from '#/lib/studio-app-id'
 
+const proxyPaths: Record<string, string> = {
+  '/v1/products': '/integrations/hitpay/products',
+  '/v1/customers': '/integrations/hitpay/customers',
+  '/v1/orders': '/integrations/hitpay/orders',
+  '/v1/charges': '/integrations/hitpay/charges',
+  '/v1/invoices': '/integrations/hitpay/invoices',
+  '/v1/product-category': '/integrations/hitpay/product-categories',
+  '/v1/locations': '/integrations/hitpay/locations',
+}
+
+/**
+ * Server-only HitPay access through App Studio.
+ * The app sends only its short-lived appToken; provider secrets stay in the proxy.
+ */
 export async function hitpayRequest(path: string, init: RequestInit = {}): Promise<Response> {
-  const base = (await getConnectorValue('HITPAY_API_URL')).replace(/\/$/, '')
-  const token = await getConnectorValue('HITPAY_ACCESS_TOKEN')
-  const suffix = path.startsWith('/') ? path : `/${path}`
+  const request = getRequest()
+  const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
+  const url = new URL(path, request.url)
+  const proxyPath = proxyPaths[url.pathname]
 
-  if (path.startsWith('http://') || path.startsWith('https://')) {
-    throw new Error('hitpayRequest expects a path like /v1/products, not a full URL.')
+  if (!proxyPath) {
+    throw new Error(`Unsupported HitPay proxy path: ${url.pathname}`)
+  }
+
+  const userInfo = await fetch(
+    new URL(`/api/apps/${encodeURIComponent(appId)}/current-user`, request.url),
+    { headers: { accept: 'application/json' } },
+  )
+  const user = await userInfo.json() as { appToken?: unknown }
+  if (!userInfo.ok || typeof user.appToken !== 'string' || user.appToken === '') {
+    throw new Error('Unable to authorize the App Studio proxy request.')
   }
 
   const headers = new Headers(init.headers)
-  headers.set('authorization', `Bearer ${token}`)
-
-  if (!headers.has('accept')) {
-    headers.set('accept', 'application/json')
-  }
-
-  return fetch(`${base}${suffix}`, {
-    ...init,
-    headers,
-    signal: init.signal ?? AbortSignal.timeout(15_000),
-  })
+  headers.set('accept', 'application/json')
+  headers.set('authorization', `Bearer ${user.appToken}`)
+  return fetch(
+    new URL(`/api/apps/${encodeURIComponent(appId)}${proxyPath}${url.search}`, request.url),
+    { ...init, headers, signal: init.signal ?? AbortSignal.timeout(15_000) },
+  )
 }

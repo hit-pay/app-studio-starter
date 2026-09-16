@@ -114,3 +114,12 @@
   }
 }
 ```
+
+## Query Parameters
+
+MCP tool: `hitpay_list_orders`
+
+Supported filters include `version`, `statuses[]`, `keywords`, `dateFrom`,
+`dateTo`, `online_store`, `channels[]`, `with`, `page`, and `per_page`.
+Supported statuses are `completed`, `pending`, `sent`, `draft`, `expired`,
+and `canceled`.

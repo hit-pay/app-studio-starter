@@ -23,7 +23,7 @@ Keep discovery targeted:
 
 1. Do not start a screen from `@ui`. Do not rebuild a **Components & Blocks** entry from primitives.
 2. Never render a visible table, list, feed, or collection directly from any HitPay API.
-3. For every HitPay resource (product, customer, order, charge, invoice, or add-on), use `useResourcePicker()` for selection, persist the returned payload through `createServerFn`, and render rows only from Turso. Do not call HitPay list endpoints to build or refresh visible rows.
+3. For every supported HitPay resource (product, customer, order, charge, invoice, location, or product category), use `useResourcePicker()` for selection, persist the returned payload through `createServerFn`, and render rows only from Turso. Do not call HitPay list endpoints to build or refresh visible rows. Add-ons are not supported by the App Studio MCP/proxy.
 4. Do not edit `src/routeTree.gen.ts`. Do not hardcode or prepend the app id on routes.
 5. Do not read cookies or `Authorization` in the browser. Do not import `src/lib/server/*` from browser components.
 6. Do not use bare browser-storage keys or store secrets there. Do not put passwords or files in form drafts.
@@ -39,8 +39,8 @@ Keep discovery targeted:
 Workspace: `/home/sprite/workspace`. Extend this project. Infer the smallest complete workflow (data, screens, validation, empty/error/loading). Recurring work = template vs dated occurrence. History = rows with actor + timestamp.
 
 1. Explore the installed `src/components/` and `src/ui/` source to choose the matching Orchid block. Prefer existing blocks over rebuilding them. Use `@ui` only for a control that no block exposes (Button, Badge, Spinner). Read the selected component source and its demo when props are unclear.
-2. For HitPay catalog additions, read `schema-resource-picker.md` and the matching resource schema in `docs/schema-{category}.md`; use `ResourcePicker`. Implement merchant HTTP only in server code; do not create endpoint-specific agent docs.
-3. For non-picker HitPay API workflows (for example, stock synchronization), consult the relevant API documentation in `docs/`, including `docs/product-api-queries.md`, `docs/order-api-queries.md`, `docs/invoice-api-queries.md`, and `docs/charge-api-queries.md`.
+2. For HitPay catalog additions, read `schema-resource-picker.md` and the matching `docs/hitpay/{resource}.md` schema; use `ResourcePicker`. Read `docs/mcp-tools.md` for the current MCP contract. The available resources mirror the MCP tools: `hitpay_list_products`, `hitpay_list_locations`, `hitpay_list_product_categories`, `hitpay_list_customers`, `hitpay_list_charges`, `hitpay_list_invoices`, and `hitpay_list_orders`.
+3. Do not invent direct HitPay API endpoints or provider connector requests. If a workflow is not covered by an MCP tool or proxy route, keep it Turso-only and explain the limitation.
 4. Auth on every mutating/read `createServerFn`. If routes changed: `bun run generate-routes`. Once: `bun run build` (zero exit).
 
 ## Stack
@@ -57,12 +57,14 @@ Bun, TanStack Start/Router, Vite, Nitro, React, TypeScript, Tailwind 4, Turso (`
 | `src/lib/hitpay-roles.ts` | Role title arrays |
 | `src/lib/form.ts` | `useForm`, drafts, `studioStorageKey` |
 | `src/lib/server/` | Server-only, from `createServerFn` |
-| `src/lib/server/hitpay.ts` | Session + connectors |
-| `src/lib/server/hitpay-api.ts` | `hitpayRequest('/v1/…')` |
+| `src/lib/server/hitpay.ts` | Session + server-only Turso environment |
 | `src/lib/server/db.ts`, `migrate.ts` | Turso |
 | `src/lib/files.ts` / `server/files.ts` | Prebuilt uploads (`files` table) |
 | `migrations/` | Ordered SQL |
 | `schema-resource-picker.md` | ResourcePicker payload and persistence rules |
+| `docs/mcp-tools.md` | App Studio MCP server and tool catalog |
+| `docs/turso/` | Turso MCP operations and runtime migration guidance |
+| `docs/hitpay/` | HitPay resource schemas matching MCP tools |
 
 Aliases: `#/*` and `@/*` → `src/*`; `@ui/*` → `src/ui/*`.
 
@@ -70,19 +72,10 @@ Input on `createServerFn`: `.validator()` then `.handler()`. GET with no input: 
 
 ## Data
 
-Visible rows = Turso (picker upserts or app-owned workflow). Picker / `*Select` may call HitPay list endpoints only for selection controls. Totals-only sheets may call list endpoints if **no rows** from that list are rendered.
+Visible rows are Turso-owned data. Do not add direct HitPay API reads, resource-picker persistence, or provider connector flows in generated apps.
 
-For every HitPay catalog resource, the required flow is:
-
-`useResourcePicker()` → `await pick({ type })` → `createServerFn` upsert from the **payload** (`id` + fields) → query Turso for visible rows.
-
-Types: `product` | `customer` | `order` | `charge` | `invoice` | `add-on`.
-The only HitPay list calls allowed in the app are internal ResourcePicker / `*Select`
-loaders or totals-only calculations where no API rows are rendered.
-
-`*Select` / FormBuilder types already load their lists. Persist `id` + name snapshot.
-
-No matching HitPay path → Turso-only and say so.
+If a workflow needs merchant or payment data, use the approved server-side integration when it
+becomes available; otherwise make the workflow Turso-only and say so.
 
 `db` only inside `createServerFn`. New tables: `migrations/00x_….sql`. `await ensureMigrations()` first. The runner applies migrations in a transaction — keep files compatible with that. SQLite `TEXT` / `INTEGER` / `REAL`, one statement per `execute()`, `?` params, `batch()` for related writes. React Query; invalidate after writes.
 
@@ -98,14 +91,13 @@ Gate UI with `useHitPayUser()` + `user.role.title`.
 
 Every `createServerFn` that reads/writes business data: `requireHitPayRoles(HITPAY_ALL_ROLES)` (floor work) or `HITPAY_MANAGER_ROLES` (approvals, settings, refunds, delete others) before Turso or HTTP. Actor = `getHitPaySession()`. Persist `session.id` on audit columns, and name/email when useful. Titles only from `#/lib/hitpay-roles`.
 
-The product concept is **Connectors / Integrations**: providers the Owner/Admin connected in App Studio settings. Use that language in app copy and agent responses.
+All runtime provider access goes through App Studio's proxy:
 
-Read connector values only inside `createServerFn` (`getConnectorValue` / `getConnector` / `getConnectors`). Use them for the upstream request and return only safe business data. A missing key means the merchant must connect that provider in Settings → Connectors / Integrations.
-
-- `*_DATABASE_URL` → `#/lib/server/db` only
-- `*_WEBHOOK_URL` / `*_CONNECTION_URL` → `POST` JSON
-- Other `*_ACCESS_TOKEN` / `*_API_KEY` → as that provider expects
-- HitPay merchant API (`HITPAY_ACCESS_TOKEN`, `HITPAY_API_URL`): only when the request needs HitPay HTTP. Server-side, from the connected HitPay integration. Call with `hitpayRequest` from `#/lib/server/hitpay-api`.
+- Obtain the short-lived `appToken` from `/api/apps/{app}/user/info`.
+- Send only `Authorization: Bearer {appToken}` to proxy API and MCP requests.
+- Never request, store, log, or forward a HitPay secret/API key in the app.
+- HitPay API keys, Turso URLs, Turso auth tokens, and provider credentials remain inside the proxy.
+- Turso queries, batches, and migrations use the proxy integration endpoints; browser code receives results only.
 
 ```ts
 import { createServerFn } from '@tanstack/react-start'
@@ -126,5 +118,47 @@ const saveCountLine = createServerFn({ method: 'POST' })
     })
   })
 ```
+
+## App Studio Proxy and MCP
+
+## App Studio MCP
+
+The App Studio MCP server is named `hitpay-app-studio`.
+Connect to it through:
+
+```text
+/mcp
+```
+
+Available tools are exposed dynamically through `MCP tools/list`. Use the
+server's advertised tool names and schemas rather than inventing endpoints.
+The Turso tools are `turso_query`, `turso_batch`, and
+`turso_apply_migrations`. HitPay tools are limited to the resources listed in
+the MCP tool catalog.
+
+The starter app uses the App Studio proxy for platform and Turso access.
+
+### HitPay endpoints
+
+The browser calls `/api/apps/{app}/user/info` to obtain a short-lived
+`appToken`, then sends it as `Authorization: Bearer {appToken}` to the roles
+and staff endpoints. The token remains in memory.
+
+### Turso MCP tools and endpoints
+
+The agent uses the authenticated MCP server tools:
+
+- `turso_query`
+- `turso_batch`
+- `turso_apply_migrations`
+
+Runtime server functions obtain `appToken` through `/current-user`, then call:
+
+- `POST /api/apps/{app}/integrations/turso/query`
+- `POST /api/apps/{app}/integrations/turso/batch`
+- `POST /api/apps/{app}/integrations/turso/migrations`
+
+The proxy handles authentication and Turso credential loading. The app only
+receives API results. Never put Turso credentials in generated app code.
 
 

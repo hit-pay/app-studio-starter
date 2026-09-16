@@ -1,72 +1,69 @@
-import { createClient, type Client } from '@libsql/client/http'
+import { getRequest } from '@tanstack/react-start/server'
 
-import { getConnectors } from '#/lib/server/hitpay'
+type Statement = { sql: string; args?: unknown[] }
+type Result = { columns: string[]; rows: unknown[][] }
+const tokenByRequest = new WeakMap<Request, Promise<string>>()
 
-const clients = new Map<string, Client>()
+async function appToken(): Promise<string> {
+  const request = getRequest()
+  const cached = tokenByRequest.get(request)
+  if (cached) return cached
 
-function tursoHttpUrl(url: string): string {
-  return url.replace(/^libsql:/i, 'https:')
-}
-
-function envEnding(env: Record<string, string>, suffix: string): string {
-  const match = Object.entries(env).find(([key]) => key === suffix || key.endsWith(`_${suffix}`))
-
-  return match?.[1] ?? ''
-}
-
-async function requireDb(): Promise<Client> {
-  const connectors = await getConnectors()
-  const databaseKeys = Object.keys(connectors).filter(
-    (key) => key.endsWith('_DATABASE_URL') || key === 'DATABASE_URL',
-  )
-  const urlKey =
-    ['TURSO_DATABASE_URL', 'DATABASE_URL'].find((key) => databaseKeys.includes(key)) ??
-    (databaseKeys.length === 1 ? databaseKeys[0] : undefined)
-
-  if (databaseKeys.length > 1 && urlKey === undefined) {
-    throw new Error(
-      'Multiple database connectors are configured. Set TURSO_DATABASE_URL or DATABASE_URL explicitly.',
+  const pending = (async () => {
+    const appId = process.env.APP_STUDIO_APP_ID?.trim()
+    if (!appId) throw new Error('APP_STUDIO_APP_ID is not configured.')
+    const response = await fetch(
+      new URL(`/api/apps/${encodeURIComponent(appId)}/current-user`, request.url),
+      { headers: { accept: 'application/json' } },
     )
-  }
-
-  const prefix =
-    urlKey === undefined || urlKey === 'DATABASE_URL'
-      ? ''
-      : urlKey.replace(/_DATABASE_URL$/, '')
-  const url = urlKey === undefined ? '' : connectors[urlKey] ?? ''
-  const authToken =
-    prefix === '' ? envEnding(connectors, 'AUTH_TOKEN') : (connectors[`${prefix}_AUTH_TOKEN`] ?? '')
-
-  if (!url || !authToken) {
-    throw new Error('Database is not configured for this app.')
-  }
-
-  const key = `${url}\0${authToken}`
-  const existing = clients.get(key)
-
-  if (existing) {
-    return existing
-  }
-
-  // HTTP Hrana only. The default Node client uses native libsql / WebSocket
-  // and fails with ConnectionRefused on the sprite allowlist.
-  const client = createClient({ url: tursoHttpUrl(url), authToken })
-  clients.set(key, client)
-
-  return client
+    const body = await response.json() as { appToken?: unknown }
+    if (!response.ok || typeof body.appToken !== 'string') {
+      throw new Error('Unable to authorize the App Studio proxy request.')
+    }
+    return body.appToken
+  })()
+  tokenByRequest.set(request, pending)
+  return pending
 }
 
-type Db = Pick<Client, 'execute' | 'batch' | 'executeMultiple'>
+async function proxy(operation: 'query' | 'batch' | 'migrations', body: unknown): Promise<any> {
+  const request = getRequest()
+  const appId = process.env.APP_STUDIO_APP_ID?.trim()
+  if (!appId) throw new Error('APP_STUDIO_APP_ID is not configured.')
+  const token = await appToken()
 
-/** Lazy Turso client — credentials from X-App-Studio-Connectors, not Sprite service env. */
+  const response = await fetch(
+    new URL(`/api/apps/${encodeURIComponent(appId)}/integrations/turso/${operation}`, request.url),
+    {
+      method: 'POST',
+      headers: {
+        accept: 'application/json',
+        'content-type': 'application/json',
+        authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify(body),
+    },
+  )
+  if (!response.ok) throw new Error(`Turso proxy returned HTTP ${response.status}.`)
+  return response.json()
+}
+
+type Db = {
+  execute(statement: string | Statement): Promise<Result>
+  batch(statements: Statement[]): Promise<unknown>
+  executeMultiple(sql: string): Promise<unknown>
+}
+
+/** Turso client facade backed by the latest App Studio proxy. */
 export const db: Db = {
-  execute(...args) {
-    return requireDb().then((client) => client.execute(...args))
+  execute(statement) {
+    const value = typeof statement === 'string' ? { sql: statement, args: [] } : statement
+    return proxy('query', value).then((body) => body.results?.[0] ?? { columns: [], rows: [] })
   },
-  batch(...args) {
-    return requireDb().then((client) => client.batch(...args))
+  batch(statements) {
+    return proxy('batch', { operations: statements })
   },
-  executeMultiple(...args) {
-    return requireDb().then((client) => client.executeMultiple(...args))
+  executeMultiple(sql) {
+    return proxy('migrations', { name: 'runtime', statements: sql.split(';').map((item) => item.trim()).filter(Boolean) })
   },
 }

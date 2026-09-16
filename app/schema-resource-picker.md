@@ -9,7 +9,8 @@ Use `ResourcePicker` to add catalog resources from HitPay. ResourcePicker is onl
 - `order`
 - `charge`
 - `invoice`
-- `add-on`
+- `location`
+- `product-category`
 
 ## Minimum payload
 
@@ -28,12 +29,13 @@ Store the HitPay `id` as the primary identifier. Store display fields as snapsho
 
 When implementing a resource picker workflow, read the matching response schema before writing code. Do not add API response JSON to this file.
 
-- Product: `docs/product-schema.md`
-- Customer: `docs/customer-schema.md`
-- Order: `docs/order-schema.md`
-- Charge: `docs/charge-schema.md`
-- Invoice: `docs/invoice-schema.md`
-- Add-on: `docs/add-on-schema.md`
+- Product: `docs/hitpay/products.md` (`hitpay_list_products`)
+- Customer: `docs/hitpay/customers.md` (`hitpay_list_customers`)
+- Order: `docs/hitpay/orders.md` (`hitpay_list_orders`)
+- Charge: `docs/hitpay/charges.md` (`hitpay_list_charges`)
+- Invoice: `docs/hitpay/invoices.md` (`hitpay_list_invoices`)
+- Location: `hitpay_list_locations`
+- Product category: `hitpay_list_product_categories`
 
 ## Product and variation selection
 
@@ -46,7 +48,7 @@ If one product has two selected variations, the result contains:
   {
     id: 'product_123',
     resource: {
-      // Full product response. Read docs/product-schema.md.
+      // Full product response. Read docs/hitpay/products.md.
     },
     children: [
       {
@@ -80,4 +82,4 @@ Implementation requirements:
 - Send the picker payload to `createServerFn`.
 - Validate roles and persist the payload on the server; do not trust client-provided identity.
 - Do not send connector values, tokens, or credentials to the browser.
-- Use the matching `*Select` for coupons, discounts, taxes, shipping, pickups, categories, and locations—not ResourcePicker.
+- Do not use unsupported legacy resources such as add-ons, coupons, discounts, taxes, shipping, or pickups.
