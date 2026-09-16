@@ -18,8 +18,11 @@ function appId(): string {
 }
 
 export function proxyUrl(path: string): URL {
-  const request = getRequest()
-  const origin = process.env.APP_STUDIO_PROXY_URL?.trim() || new URL(request.url).origin
+  const origin = process.env.APP_STUDIO_PROXY_URL?.trim()
+
+  if (!origin) {
+    throw new Error('APP_STUDIO_PROXY_URL is not configured.')
+  }
 
   return new URL(path, `${origin}/`)
 }

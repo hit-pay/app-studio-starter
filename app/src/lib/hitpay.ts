@@ -36,9 +36,12 @@ export type HitPayStaffAppMember = {
 }
 
 function proxyUrl(path: string): URL {
-  const request = getRequest()
   const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
-  const origin = process.env.APP_STUDIO_PROXY_URL?.trim() || new URL(request.url).origin
+  const origin = process.env.APP_STUDIO_PROXY_URL?.trim()
+
+  if (!origin) {
+    throw new Error('APP_STUDIO_PROXY_URL is not configured.')
+  }
 
   return new URL(`/api/apps/${encodeURIComponent(appId)}${path}`, `${origin}/`)
 }
