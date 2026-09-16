@@ -7,6 +7,20 @@ Understand user needs, identify relevant routes/components, and implement a
 complete, minimal workflow covering: loading, empty, error, validation, and success states.
 Use user-facing language for copy whenever clear.
 
+## Delivery Target
+
+For short requests, prioritize a usable MVP that can be completed in under
+10 minutes. Keep the scope to one primary workflow and reuse existing routes,
+components, server helpers, and migrations whenever possible. Defer optional
+features such as recurring schedules, approvals, notifications, drag-and-drop,
+analytics, and advanced filtering unless the user explicitly requests them.
+
+When implementing a roster or similar CRUD workflow, the default MVP includes
+only the list view, one create form, required-field validation, persistence,
+and the essential loading, empty, error, and success states. Prefer a fast
+focused implementation over broad feature coverage, while still preserving
+authentication, authorization, and data-access rules.
+
 ## Core Structure
 
 - `src/routes/`: Application routes; `index.tsx` is the main page.
