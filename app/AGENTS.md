@@ -21,10 +21,10 @@ filters, or confirmations when they belong in the requested app.
   - `current-user.ts` — `useCurrentUser` (wraps `getSession`)
   - `resource/` — `loadResourcePickerPage` for ResourcePicker and ResourceList
   - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
-  - `utils.ts` — `cn`
+  - `utils.ts` — `cn`, `storageKey` (unique localStorage keys; app is on a subdomain)
 - `src/server/lib/` — Node only; do not import from components
   - `session.ts` — `getSession`, `requireRoles`
-  - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`, `studioAppId`
+  - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`
   - `proxy.ts` — `proxyRequest` for `/v1/*`
   - `db.ts`, `migrate.ts`, `files.ts` — Turso
 - `migrations/` — Turso SQL
@@ -90,6 +90,19 @@ Read `docs/current-user.md` before role or session logic. Browser:
 `useCurrentUser` from `#/lib/current-user`. Server: `getSession` /
 `requireRoles` from `#/server/lib/session`. Tokens stay on the server via
 `getAppToken()` from `#/server/lib/app-token`. Roles: `#/lib/roles`.
+
+## localStorage
+
+This app runs under a path/subdomain of a shared HitPay Dashboard origin.
+Never use bare keys like `theme`. Always `storageKey` from `#/lib/utils`
+so values stay unique per app id:
+
+```ts
+localStorage.setItem(storageKey('theme'), 'dark')
+const theme = localStorage.getItem(storageKey('theme'))
+```
+
+Yields `app-studio:{appId}:theme` (light/dark, drafts, UI prefs).
 
 ## Working rules
 

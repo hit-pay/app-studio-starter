@@ -1,5 +1,5 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { appApiUrl, studioAppId } from '#/server/lib/app-token'
+import { appApiUrl } from '#/server/lib/app-token'
 
 export type SessionRole = {
   id: string
@@ -47,7 +47,7 @@ export async function getSession(): Promise<Session> {
   }
 
   const pending = (async () => {
-    const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
+    const appId = process.env.APP_STUDIO_APP_ID?.trim()
 
     if (!appId) {
       throw new Error('Sign in to use this app.')
