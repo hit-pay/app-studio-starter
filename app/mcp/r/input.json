@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "input",
+  "title": "Input",
+  "description": "Base UI input with Orchid form styling.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/ui/input.tsx",
+      "content": "import type { ComponentProps } from 'react'\nimport { Input as InputPrimitive } from '@base-ui/react/input'\n\nimport { cn } from '@/lib/utils'\n\nconst inputSurface =\n  'h-9 w-full min-w-0 overflow-visible rounded-lg border border-oc-border bg-oc-background px-2 py-1 text-base leading-normal text-oc-foreground shadow-[0_1px_3px_rgba(0,0,0,0.04),0_1.5px_1.5px_rgba(0,0,0,0.09)] outline-none transition-shadow file:inline-flex file:h-6 file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-oc-foreground placeholder:text-oc-muted-foreground focus-visible:border-oc-primary focus-visible:shadow-[0_0_0_3px_var(--oc-info-border)] disabled:pointer-events-none disabled:cursor-not-allowed disabled:bg-oc-muted disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:shadow-[0_0_0_3px_var(--oc-destructive-border)] md:text-sm'\n\nfunction Input({ className, type, ...props }: ComponentProps<'input'>) {\n  return (\n    <InputPrimitive\n      type={type}\n      data-slot=\"input\"\n      className={cn(inputSurface, className)}\n      {...props}\n    />\n  )\n}\n\nexport { Input, inputSurface }\n",
+      "type": "registry:ui",
+      "target": "@ui/input.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

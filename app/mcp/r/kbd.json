@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "kbd",
+  "title": "Kbd",
+  "description": "Keyboard key and key group with Orchid styling.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/ui/kbd.tsx",
+      "content": "import * as React from 'react'\n\nimport { cn } from '@/lib/utils'\n\nfunction Kbd({ className, ...props }: React.ComponentProps<'kbd'>) {\n  return (\n    <kbd\n      data-slot=\"kbd\"\n      className={cn(\n        \"pointer-events-none inline-flex h-5 w-fit min-w-5 items-center justify-center gap-1 rounded border border-oc-border bg-oc-background px-1.5 font-sans text-xs leading-normal font-medium text-oc-muted-foreground select-none [&_svg:not([class*='size-'])]:size-3\",\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction KbdGroup({ className, ...props }: React.ComponentProps<'kbd'>) {\n  return (\n    <kbd\n      data-slot=\"kbd-group\"\n      className={cn('inline-flex items-center gap-1', className)}\n      {...props}\n    />\n  )\n}\n\nexport { Kbd, KbdGroup }\n",
+      "type": "registry:ui",
+      "target": "@ui/kbd.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

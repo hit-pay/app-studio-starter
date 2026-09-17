@@ -21,6 +21,6 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
+    "@orchid": "./mcp/r/{name}.json"
   }
 }

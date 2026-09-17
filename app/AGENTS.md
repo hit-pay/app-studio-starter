@@ -10,15 +10,15 @@ routes. Then run `bun run generate-routes`.
 
 - `src/routes/` — pages. `index.tsx` is the home/list entry. Add sibling
   route files for extra screens (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
-- `src/ui/` and `src/components/` — Orchid UI. Change installed files only when
-  the user asks.
+- `src/ui/` and `src/components/` — installed Orchid. Change those files only when
+  the user asks. Learn props/examples from orchid-ui MCP, not by dumping the source.
 - `src/lib/` — UI-imported helpers (`createServerFn` + browser hooks). Put new
   `createServerFn` here. List/CRUD persist goes through these fns + `requireRoles`.
   - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
   - `current-user.ts` — `useCurrentUser` (wraps `getSession`); roles/staff via `appJson`
   - `resource.ts` — `loadResourcePage`, `mapResourcePayload` for ResourcePicker and ResourceList
   - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
-  - `utils.ts` — `cn`, `storageKey`
+  - `utils.ts` — `cn`
 - `src/server/lib/` — Node only. Database, proxy, tokens, `requireRoles`. Keep
   imports in server/lib helpers, not in UI components.
   - `session.ts` — `getSession`, `requireRoles`
@@ -35,15 +35,21 @@ routes. Then run `bun run generate-routes`.
 
 ## Orchid UI
 
+Explore orchid-ui MCP **before** writing screens. Call `list_orchid_components`
+(search), then `get_orchid_component` (`name` or `names[]`) for props and
+examples. That catalog is local stdio (`bun run mcp`,
+`mcp/orchid-ui-catalog.json`) — a small JSON payload, faster than reading
+`src/ui` / `src/components` source.
+
 On disk today: `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`,
 `button`, `dialog`, `drawer`, `input`, `skeleton`, `spinner`, `toast`, `tooltip`.
 
 `__root.tsx` already mounts `AppLayout`, `Toaster`, and
 `ConfirmationModalProvider`.
 
-Orchid-ui MCP (`list_orchid_components`, `get_orchid_component`) and
-`npx shadcn@latest add @orchid/<slug> -y --overwrite` are available. Explore
-local files or MCP as you see fit.
+Install a missing slug from the local registry files (`mcp/r/{name}.json`):
+
+`npx shadcn@latest add ./mcp/r/<slug>.json -y --overwrite`
 
 ## API / Resource and Database
 
@@ -64,17 +70,6 @@ Dashboard iframe session (not a login page). Read `docs/current-user.md`.
 Browser: `useCurrentUser` from `#/lib/current-user`. Server: `getSession` /
 `requireRoles` from `#/server/lib/session`. Tokens: `getAppToken()` from
 `#/server/lib/app-token`. Roles: `#/lib/roles`.
-
-## localStorage
-
-Shared Dashboard origin — UI prefs only (theme, dismissed banners),
-namespaced with `storageKey` from `#/lib/utils`. 
-
-```ts
-localStorage.setItem(storageKey('theme'), 'dark')
-```
-
-Yields `app-studio:{appId}:theme`.
 
 ## Output
 

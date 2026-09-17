@@ -1,0 +1,17 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "sub-sidebar",
+  "title": "Sub Sidebar",
+  "description": "Flat child navigation with a blue active state. AppStudioLayout sidebar mode uses its own built-in list.",
+  "dependencies": [],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/components/navigation/sub-sidebar.tsx",
+      "content": "import type { ComponentProps, ReactNode } from 'react'\n\nimport { cn } from '@/lib/utils'\n\ntype SubSidebarItemConfig = {\n  id: string\n  label: ReactNode\n  disabled?: boolean\n}\n\n/** Public nested nav. Import this file — do not reuse Sidebar internals. */\nfunction SubSidebar({\n  className,\n  items,\n  activeItem,\n  onItemChange,\n  ...props\n}: ComponentProps<'aside'> & {\n  items: SubSidebarItemConfig[]\n  activeItem?: string\n  onItemChange?: (id: string, item: SubSidebarItemConfig) => void\n}) {\n  return (\n    <aside\n      data-slot=\"sub-sidebar\"\n      className={cn(\n        'flex h-full w-64 shrink-0 flex-col bg-oc-background',\n        className,\n      )}\n      {...props}\n    >\n      <nav\n        data-slot=\"sub-sidebar-content\"\n        aria-label=\"Section navigation\"\n        className=\"flex min-h-0 flex-1 flex-col gap-1 overflow-y-auto px-3 py-4\"\n      >\n        {items.map((item) => (\n          <button\n            key={item.id}\n            type=\"button\"\n            data-slot=\"sub-sidebar-item\"\n            aria-current={item.id === activeItem ? 'page' : undefined}\n            disabled={item.disabled}\n            className={cn(\n              'flex min-h-9 w-full min-w-0 cursor-pointer items-center rounded-lg px-3 py-2 text-left text-sm text-oc-foreground outline-none transition-colors',\n              'hover:bg-oc-neutral-soft focus-visible:ring-2 focus-visible:ring-oc-ring',\n              'disabled:pointer-events-none disabled:opacity-50',\n              item.id === activeItem &&\n                'bg-oc-neutral-soft font-medium text-oc-primary hover:bg-oc-neutral-soft',\n            )}\n            onClick={() => onItemChange?.(item.id, item)}\n          >\n            {item.label}\n          </button>\n        ))}\n      </nav>\n    </aside>\n  )\n}\n\nexport { SubSidebar }\nexport type { SubSidebarItemConfig }\n",
+      "type": "registry:ui",
+      "target": "@components/navigation/sub-sidebar.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,1049 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry.json",
+  "name": "orchid",
+  "homepage": "https://orchid-ui-hitpay.vercel.app",
+  "items": [
+    {
+      "name": "all",
+      "type": "registry:ui",
+      "title": "All",
+      "description": "Installs every Orchid UI component. all.tsx re-exports Toaster + toast.",
+      "registryDependencies": [
+        "@orchid/form-builder",
+        "@orchid/data-table",
+        "@orchid/banner",
+        "@orchid/empty",
+        "@orchid/file-upload",
+        "@orchid/customer-card",
+        "@orchid/form-layout",
+        "@orchid/page-layout",
+        "@orchid/app-layout",
+        "@orchid/confirmation-modal",
+        "@orchid/resource-picker",
+        "@orchid/button",
+        "@orchid/button-group",
+        "@orchid/dropdown-menu",
+        "@orchid/toast",
+        "@orchid/badge",
+        "@orchid/avatar",
+        "@orchid/tooltip",
+        "@orchid/tabs",
+        "@orchid/choice-card",
+        "@orchid/metric-card",
+        "@orchid/detail-card",
+        "@orchid/data-list",
+        "@orchid/copy-button",
+        "@orchid/skeleton",
+        "@orchid/spinner",
+        "@orchid/dialog",
+        "@orchid/drawer",
+        "@orchid/pagination",
+        "@orchid/command",
+        "@orchid/popover",
+        "@orchid/separator",
+        "@orchid/field",
+        "@orchid/label",
+        "@orchid/input",
+        "@orchid/input-group",
+        "@orchid/textarea",
+        "@orchid/select",
+        "@orchid/quantity-input",
+        "@orchid/text-editor",
+        "@orchid/checkbox",
+        "@orchid/radio-group",
+        "@orchid/switch",
+        "@orchid/slider",
+        "@orchid/date-picker",
+        "@orchid/form-section"
+      ],
+      "files": [
+        {
+          "path": "src/ui/all.tsx",
+          "type": "registry:ui",
+          "target": "@ui/all.tsx"
+        }
+      ]
+    },
+    {
+      "name": "utils",
+      "type": "registry:lib",
+      "title": "Utils",
+      "description": "Cn() Tailwind class merge. Import from @/lib/utils.",
+      "dependencies": [
+        "clsx",
+        "tailwind-merge"
+      ],
+      "files": [
+        {
+          "path": "src/lib/utils.ts",
+          "type": "registry:lib",
+          "target": "lib/utils.ts"
+        }
+      ]
+    },
+    {
+      "name": "form-builder",
+      "type": "registry:ui",
+      "title": "Form Builder",
+      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone. Use ResourcePicker or renderField for HitPay catalog entities.",
+      "dependencies": [
+        "@tanstack/react-form"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/select",
+        "@orchid/date-picker",
+        "@orchid/field",
+        "@orchid/input",
+        "@orchid/input-group",
+        "@orchid/quantity-input",
+        "@orchid/radio-group",
+        "@orchid/form-section",
+        "@orchid/slider",
+        "@orchid/textarea",
+        "@orchid/switch",
+        "@orchid/file-upload"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/form-builder.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/form-builder.tsx"
+        },
+        {
+          "path": "src/components/form/form-builder-model.ts",
+          "type": "registry:file",
+          "target": "@components/form/form-builder-model.ts"
+        }
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.",
+      "registryDependencies": [
+        "@orchid/badge",
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/dropdown-menu",
+        "@orchid/empty",
+        "@orchid/field",
+        "@orchid/input-group",
+        "@orchid/pagination",
+        "@orchid/popover",
+        "@orchid/select"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/data-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/data-table.tsx"
+        },
+        {
+          "path": "src/components/displaying-data/data-table-model.ts",
+          "type": "registry:file",
+          "target": "@components/displaying-data/data-table-model.ts"
+        }
+      ]
+    },
+    {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "Banner with semantic variants and top-right or bottom action placement in Orchid styling.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/banner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/banner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Props empty state. title, optional media and actions.",
+      "dependencies": [
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/empty.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/empty.tsx"
+        }
+      ]
+    },
+    {
+      "name": "customer-card",
+      "type": "registry:ui",
+      "title": "Customer Card",
+      "description": "Customer/beneficiary summary. variant small|big|float|empty, hover, active.",
+      "dependencies": [
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/avatar",
+        "@orchid/button",
+        "@orchid/badge",
+        "@orchid/copy-button",
+        "@orchid/skeleton"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/customer-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/customer-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-layout",
+      "type": "registry:ui",
+      "title": "Form Layout",
+      "description": "Page or modal shell for create/edit. One FormBuilder: formId matches the builder id. Several forms: actions.save.onClick. Browse and show pages use PageLayout.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/form-layout.tsx",
+          "type": "registry:ui",
+          "target": "@components/layout/form-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "app-layout",
+      "type": "registry:ui",
+      "title": "App Layout",
+      "description": "HitPay App Studio embedded pane frame (not generic app chrome). TanStack Router: navigationItems[].to, variant tabs|sidebar, layout route with Outlet.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/drawer"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-layout.tsx",
+          "type": "registry:ui",
+          "target": "@components/layout/app-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "page-layout",
+      "type": "registry:ui",
+      "title": "Page Layout",
+      "description": "Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/page-layout.tsx",
+          "type": "registry:ui",
+          "target": "@components/layout/page-layout.tsx"
+        }
+      ]
+    },
+    {
+      "name": "confirmation-modal",
+      "type": "registry:ui",
+      "title": "Confirmation Modal",
+      "description": "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/dialog",
+        "@orchid/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/overlays/confirmation-modal.tsx",
+          "type": "registry:ui",
+          "target": "@components/overlays/confirmation-modal.tsx"
+        }
+      ]
+    },
+    {
+      "name": "resource-picker",
+      "type": "registry:ui",
+      "title": "Resource Picker",
+      "description": "Promise picker for HitPay list records (products, orders, charges, invoices). const pick = useResourcePicker(); await pick({ type }).",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/badge",
+        "@orchid/spinner",
+        "@orchid/checkbox",
+        "@orchid/input",
+        "@orchid/radio-group",
+        "@orchid/select",
+        "@orchid/date-picker",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/resource-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/resource-picker.tsx"
+        },
+        {
+          "path": "src/components/form/hitpay-named-select.tsx",
+          "type": "registry:file",
+          "target": "@components/form/hitpay-named-select.tsx"
+        },
+        {
+          "path": "src/lib/select-store.ts",
+          "type": "registry:lib",
+          "target": "lib/select-store.ts"
+        },
+        {
+          "path": "src/lib/hitpay-commerce-selects.ts",
+          "type": "registry:lib",
+          "target": "lib/hitpay-commerce-selects.ts"
+        }
+      ]
+    },
+    {
+      "name": "resource-list",
+      "type": "registry:ui",
+      "title": "Resource List",
+      "description": "Server-driven HitPay catalog table (SchemaTable). ResourceListProvider + same ResourceLoad as the picker.",
+      "dependencies": ["@mingcute/react"],
+      "registryDependencies": [
+        "@orchid/data-table",
+        "@orchid/resource-picker",
+        "@orchid/spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/resource-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/resource-list.tsx"
+        },
+        {
+          "path": "src/lib/resource-catalog.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-catalog.ts"
+        },
+        {
+          "path": "src/lib/resource-list-map.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-list-map.ts"
+        },
+        {
+          "path": "src/lib/resource-list-schema.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-list-schema.ts"
+        },
+        {
+          "path": "src/components/form/resource-picker-filter-form.tsx",
+          "type": "registry:file",
+          "target": "@components/form/resource-picker-filter-form.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Base UI button with standard variants and sizes in Orchid styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/separator"
+      ],
+      "files": [
+        {
+          "path": "src/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Menu with items, checkbox and radio selection, submenus, and Orchid styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dropdown-menu.tsx"
+        }
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Base UI toast with additive placement options and Orchid semantic styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/toast.tsx",
+          "type": "registry:ui",
+          "target": "@ui/toast.tsx"
+        }
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Badge with render support plus Orchid tones, appearances, removable badges, and user roles.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "@ui/badge.tsx"
+        }
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Compound avatar with image, fallback, badge, and group support.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/avatar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Base UI tooltip with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tooltip.tsx"
+        }
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Horizontal or vertical tabs with default and line variants.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tabs.tsx"
+        }
+      ]
+    },
+    {
+      "name": "choice-card",
+      "type": "registry:ui",
+      "title": "Choice Card",
+      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/form/choice-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/choice-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "metric-card",
+      "type": "registry:ui",
+      "title": "Metric Card",
+      "description": "KPI tile for a dashboard number: icon, title, value, optional percent change (revenue, volume, counts).",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/metric-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/metric-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "data-list",
+      "type": "registry:ui",
+      "title": "Data List",
+      "description": "Stacked card or row list from items[]. Each item: key, title, optional description, details, media, actions.menu / actions.hover. For people, products, or activity without table search, filters, sort, or pagination.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/copy-button",
+        "@orchid/dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/data-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/data-list.tsx"
+        }
+      ]
+    },
+    {
+      "name": "detail-card",
+      "type": "registry:ui",
+      "title": "Detail Card",
+      "description": "Read-only key/value card for one record on a show page (invoice, leave request, customer). items, optional title, columns, style default|border. Values can be React nodes.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/detail-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/detail-card.tsx"
+        }
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Copy a string (id, phone, URL). prop: value.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/actions/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/actions/copy-button.tsx"
+        }
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Animated loading placeholder with Orchid styling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@ui/skeleton.tsx"
+        }
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Indeterminate loading icon sized through className.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/spinner.tsx"
+        }
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Dialog primitives with Orchid sizes and persistent mode.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dialog.tsx"
+        }
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/drawer.tsx"
+        }
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Link pagination with Orchid buttons and an optional range label.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@ui/pagination.tsx"
+        }
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Searchable command palette driven by open, onOpenChange, and groups.",
+      "dependencies": [
+        "cmdk",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/dialog",
+        "@orchid/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/overlays/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/overlays/command.tsx"
+        }
+      ]
+    },
+    {
+      "name": "popover",
+      "type": "registry:ui",
+      "title": "Popover",
+      "description": "Non-modal popover primitives with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/popover.tsx",
+          "type": "registry:ui",
+          "target": "@ui/popover.tsx"
+        }
+      ]
+    },
+    {
+      "name": "separator",
+      "type": "registry:ui",
+      "title": "Separator",
+      "description": "Horizontal or vertical separator with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/separator.tsx",
+          "type": "registry:ui",
+          "target": "@ui/separator.tsx"
+        }
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Field composition with Orchid form styling.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/label",
+        "@orchid/separator"
+      ],
+      "files": [
+        {
+          "path": "src/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "@ui/field.tsx"
+        }
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Accessible label with Orchid typography.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "@ui/label.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Base UI input with Orchid form styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input, textarea, addon, and button composition with Orchid styling.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/textarea"
+      ],
+      "files": [
+        {
+          "path": "src/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Auto-sizing textarea with Orchid form styling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/textarea.tsx"
+        }
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Props picker for a closed list or a searchable / multi select.",
+      "dependencies": [
+        "@base-ui/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/checkbox",
+        "@orchid/badge",
+        "@orchid/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/select.tsx"
+        },
+        {
+          "path": "src/ui/combobox.tsx",
+          "type": "registry:file",
+          "target": "@ui/combobox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "quantity-input",
+      "type": "registry:ui",
+      "title": "Quantity Input",
+      "description": "Integer stepper. min/max/step.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/quantity-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/quantity-input.tsx"
+        }
+      ]
+    },
+    {
+      "name": "text-editor",
+      "type": "registry:ui",
+      "title": "Text Editor",
+      "description": "Lexical rich text for notes. Bold, italic, heading, lists. Persist editor JSON.",
+      "dependencies": [
+        "lexical",
+        "@lexical/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/text-editor.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/text-editor.tsx"
+        }
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Base UI checkbox with Orchid states and an optional CheckboxGroup helper.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@ui/checkbox.tsx"
+        }
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Radio group and item primitives with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/radio-group.tsx"
+        }
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Base UI switch with default and small Orchid sizes.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/switch.tsx"
+        }
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Horizontal or vertical slider with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "@ui/slider.tsx"
+        }
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Date, range, and date-time picker. Do not import Calendar.",
+      "dependencies": [
+        "date-fns",
+        "@mingcute/react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/popover"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/date-picker.tsx"
+        },
+        {
+          "path": "src/ui/calendar.tsx",
+          "type": "registry:file",
+          "target": "@ui/calendar.tsx"
+        }
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:ui",
+      "title": "File Upload",
+      "description": "File and image upload row with upload state, media, actions, and a vertical group.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/file-upload.tsx",
+          "type": "registry:ui",
+          "target": "@ui/file-upload.tsx"
+        }
+      ]
+    },
+    {
+      "name": "form-section",
+      "type": "registry:ui",
+      "title": "Form Section",
+      "description": "Form block heading. FormSectionGroup + FormSectionItem for settings rows.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/ui/form-section.tsx",
+          "type": "registry:ui",
+          "target": "@ui/form-section.tsx"
+        }
+      ]
+    }
+  ]
+}

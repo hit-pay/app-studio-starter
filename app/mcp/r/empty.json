@@ -1,0 +1,22 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "empty",
+  "title": "Empty",
+  "description": "Props empty state. title, optional media and actions.",
+  "dependencies": [
+    "class-variance-authority",
+    "@mingcute/react"
+  ],
+  "registryDependencies": [
+    "@orchid/button"
+  ],
+  "files": [
+    {
+      "path": "src/components/displaying-data/empty.tsx",
+      "content": "import type { ComponentProps, ReactNode } from 'react'\nimport { cva } from 'class-variance-authority'\nimport {\n  AlertRegular,\n  FileRegular,\n  SearchRegular,\n} from '@mingcute/react/core-regular'\n\nimport { cn } from '@/lib/utils'\nimport { Button } from '@ui/button'\n\ntype EmptyMedia = 'icon' | 'search' | 'upgrade'\n\ntype EmptyAction = {\n  key: string\n  label: string\n  variant?: ComponentProps<typeof Button>['variant']\n  disabled?: boolean\n  icon?: ReactNode\n}\n\ntype EmptyProps = Omit<ComponentProps<'div'>, 'title'> & {\n  title: string\n  description?: string\n  media?: EmptyMedia\n  icon?: ReactNode\n  actions?: EmptyAction[]\n  onAction?: (action: EmptyAction) => void\n}\n\nconst emptyMediaVariants = cva(\n  'mb-2 flex shrink-0 items-center justify-center [&_svg]:pointer-events-none [&_svg]:shrink-0',\n  {\n    variants: {\n      variant: {\n        icon: 'size-16 rounded-full border border-oc-neutral-soft bg-oc-neutral text-oc-muted-foreground [&_svg:not([class*=size-])]:size-8',\n        search:\n          'size-16 rounded-full border border-oc-neutral-soft bg-oc-neutral text-oc-muted-foreground [&_svg:not([class*=size-])]:size-8',\n        upgrade:\n          'size-16 rounded-full border border-oc-warning-chip-border bg-oc-warning-soft text-oc-warning [&_svg:not([class*=size-])]:size-8',\n      },\n    },\n  },\n)\n\nfunction defaultMediaIcon(media: EmptyMedia) {\n  if (media === 'search') return <SearchRegular />\n  if (media === 'upgrade') return <AlertRegular />\n  return <FileRegular />\n}\n\nfunction Empty({\n  title,\n  description,\n  media,\n  icon,\n  actions,\n  onAction,\n  className,\n  ...props\n}: EmptyProps) {\n  const mediaIcon = media ? (icon ?? defaultMediaIcon(media)) : icon\n  const rowActions = (actions?.length ?? 0) > 1\n\n  return (\n    <div\n      data-slot=\"empty\"\n      className={cn(\n        'flex w-full min-w-0 flex-1 flex-col items-center justify-center gap-6 rounded-xl p-6 text-center text-balance',\n        className,\n      )}\n      {...props}\n    >\n      <div data-slot=\"empty-header\" className=\"flex max-w-sm flex-col items-center gap-2\">\n        {mediaIcon ? (\n          <div\n            data-slot=\"empty-icon\"\n            data-variant={media ?? 'icon'}\n            className={emptyMediaVariants({ variant: media ?? 'icon' })}\n          >\n            {mediaIcon}\n          </div>\n        ) : null}\n        <div data-slot=\"empty-title\" className=\"text-base leading-6 font-medium text-oc-foreground\">\n          {title}\n        </div>\n        {description ? (\n          <p\n            data-slot=\"empty-description\"\n            className=\"text-sm leading-normal text-oc-muted-foreground [&>a]:underline [&>a]:underline-offset-4 [&>a:hover]:text-oc-primary\"\n          >\n            {description}\n          </p>\n        ) : null}\n      </div>\n      {actions?.length ? (\n        <div\n          data-slot=\"empty-content\"\n          className={cn(\n            'flex w-full max-w-sm min-w-0 items-center gap-2.5 text-sm text-balance',\n            rowActions ? 'flex-row justify-center' : 'flex-col',\n          )}\n        >\n          {actions.map((action) => (\n            <Button\n              key={action.key}\n              variant={action.variant ?? 'default'}\n              size=\"sm\"\n              disabled={action.disabled}\n              onClick={() => onAction?.(action)}\n            >\n              {action.icon}\n              {action.label}\n            </Button>\n          ))}\n        </div>\n      ) : null}\n    </div>\n  )\n}\n\nexport { Empty }\nexport type { EmptyAction, EmptyMedia, EmptyProps }\n",
+      "type": "registry:ui",
+      "target": "@components/displaying-data/empty.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

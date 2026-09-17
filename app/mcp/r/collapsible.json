@@ -1,0 +1,19 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "collapsible",
+  "title": "Collapsible",
+  "description": "Root, Trigger, and Content primitives with Orchid styling.",
+  "dependencies": [
+    "@base-ui/react"
+  ],
+  "registryDependencies": [],
+  "files": [
+    {
+      "path": "src/ui/collapsible.tsx",
+      "content": "'use client'\n\nimport { Collapsible as CollapsiblePrimitive } from '@base-ui/react/collapsible'\n\nimport { cn } from '@/lib/utils'\n\n/**\n * One open/close panel. For several sections use Accordion.\n */\nfunction Collapsible({ className, ...props }: CollapsiblePrimitive.Root.Props) {\n  return (\n    <CollapsiblePrimitive.Root\n      data-slot=\"collapsible\"\n      className={cn('group/collapsible flex w-full min-w-0 flex-col', className)}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleTrigger({\n  className,\n  ...props\n}: CollapsiblePrimitive.Trigger.Props) {\n  return (\n    <CollapsiblePrimitive.Trigger\n      data-slot=\"collapsible-trigger\"\n      className={cn(\n        'flex w-full cursor-pointer items-center justify-between gap-2 rounded-lg bg-oc-dark-blue-soft px-3 py-2 text-left text-sm leading-normal font-medium text-oc-foreground outline-none hover:bg-oc-dark-blue-soft/80',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nfunction CollapsibleContent({ className, ...props }: CollapsiblePrimitive.Panel.Props) {\n  return (\n    <CollapsiblePrimitive.Panel\n      data-slot=\"collapsible-content\"\n      className={cn(\n        'overflow-hidden pt-3 text-sm leading-normal text-oc-foreground',\n        'data-open:overflow-visible data-starting-style:overflow-hidden data-ending-style:overflow-hidden',\n        className,\n      )}\n      {...props}\n    />\n  )\n}\n\nexport { Collapsible, CollapsibleTrigger, CollapsibleContent }\n",
+      "type": "registry:ui",
+      "target": "@ui/collapsible.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://ui.shadcn.com/schema/registry-item.json",
+  "name": "pagination",
+  "title": "Pagination",
+  "description": "Link pagination with Orchid buttons and an optional range label.",
+  "dependencies": [
+    "@mingcute/react"
+  ],
+  "registryDependencies": [
+    "@orchid/button"
+  ],
+  "files": [
+    {
+      "path": "src/ui/pagination.tsx",
+      "content": "import * as React from 'react'\nimport {\n  LeftRegular,\n  RightRegular,\n  More1Regular,\n} from '@mingcute/react/core-regular'\n\nimport { Button } from '@ui/button'\nimport { cn } from '@/lib/utils'\n\nfunction Pagination({ className, ...props }: React.ComponentProps<'nav'>) {\n  return (\n    <nav\n      role=\"navigation\"\n      data-slot=\"pagination\"\n      aria-label=\"pagination\"\n      className={cn('mx-auto flex w-fit max-w-full items-center justify-center', className)}\n      {...props}\n    />\n  )\n}\n\nfunction PaginationContent({ className, ...props }: React.ComponentProps<'ul'>) {\n  return (\n    <ul\n      data-slot=\"pagination-content\"\n      className={cn('flex items-center gap-0.5', className)}\n      {...props}\n    />\n  )\n}\n\nfunction PaginationItem({ ...props }: React.ComponentProps<'li'>) {\n  return <li data-slot=\"pagination-item\" {...props} />\n}\n\ntype PaginationLinkProps = {\n  isActive?: boolean\n} & Pick<React.ComponentProps<typeof Button>, 'size'> &\n  React.ComponentProps<'a'>\n\nfunction PaginationLink({\n  className,\n  isActive,\n  size = 'icon',\n  ...props\n}: PaginationLinkProps) {\n  return (\n    <Button\n      variant={isActive ? 'outline' : 'ghost'}\n      size={size}\n      className={cn('aria-disabled:pointer-events-none aria-disabled:opacity-50', className)}\n      nativeButton={false}\n      render={\n        <a\n          aria-current={isActive ? 'page' : undefined}\n          data-slot=\"pagination-link\"\n          data-active={isActive}\n          {...props}\n        />\n      }\n    />\n  )\n}\n\nfunction PaginationPrevious({\n  className,\n  text = 'Previous',\n  ...props\n}: React.ComponentProps<typeof PaginationLink> & { text?: string }) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to previous page\"\n      size=\"default\"\n      className={cn('pl-1.5!', className)}\n      {...props}\n    >\n      <LeftRegular data-icon=\"inline-start\" />\n      <span className=\"hidden sm:block\">{text}</span>\n    </PaginationLink>\n  )\n}\n\nfunction PaginationNext({\n  className,\n  text = 'Next',\n  ...props\n}: React.ComponentProps<typeof PaginationLink> & { text?: string }) {\n  return (\n    <PaginationLink\n      aria-label=\"Go to next page\"\n      size=\"default\"\n      className={cn('pr-1.5!', className)}\n      {...props}\n    >\n      <span className=\"hidden sm:block\">{text}</span>\n      <RightRegular data-icon=\"inline-end\" />\n    </PaginationLink>\n  )\n}\n\nfunction PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'>) {\n  return (\n    <span\n      data-slot=\"pagination-ellipsis\"\n      role=\"presentation\"\n      aria-hidden\n      className={cn(\n        \"flex size-9 items-center justify-center text-oc-muted-foreground [&_svg:not([class*='size-'])]:size-4\",\n        className,\n      )}\n      {...props}\n    >\n      <More1Regular />\n      <span className=\"sr-only\">More pages</span>\n    </span>\n  )\n}\n\nfunction PaginationInfo({ className, ...props }: React.ComponentProps<'p'>) {\n  return (\n    <p\n      data-slot=\"pagination-info\"\n      className={cn('text-sm leading-normal text-oc-muted-foreground', className)}\n      {...props}\n    />\n  )\n}\n\nexport {\n  Pagination,\n  PaginationContent,\n  PaginationEllipsis,\n  PaginationInfo,\n  PaginationItem,\n  PaginationLink,\n  PaginationNext,\n  PaginationPrevious,\n}\n",
+      "type": "registry:ui",
+      "target": "@ui/pagination.tsx"
+    }
+  ],
+  "type": "registry:ui"
+}
