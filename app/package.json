@@ -6,6 +6,7 @@
     "#/*": "./src/*"
   },
   "scripts": {
+    "mcp": "bun mcp/stdio.ts",
     "dev": "bun --bun vite dev",
     "generate-routes": "bun --bun tsr generate",
     "build": "bun --bun vite build",
@@ -16,6 +17,7 @@
     "@lexical/react": "^0.50.0",
     "@libsql/client": "0.14.0",
     "@mingcute/react": "^3.0.2",
+    "@modelcontextprotocol/server": "^2.0.0",
     "@tanstack/query-db-collection": "^1.2.10",
     "@tanstack/react-db": "^0.3.5",
     "@tanstack/react-form": "^1.33.5",

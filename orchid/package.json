@@ -12,6 +12,7 @@
     "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r && cp registry.json public/registry.json",
     "generate-mcp-catalog": "bun scripts/generate-mcp-catalog.ts",
     "verify-mcp": "bun scripts/verify-mcp-catalog.ts",
+    "mcp": "bun scripts/mcp.ts",
     "verify-mcp:handler": "bun scripts/verify-mcp-handler.ts",
     "verify-mcp:local": "MCP_URL=http://127.0.0.1:5177/api/mcp bun scripts/verify-mcp-handler.ts",
     "build": "bun run registry:build && bun run generate-mcp-catalog && bun run tanstack:build"

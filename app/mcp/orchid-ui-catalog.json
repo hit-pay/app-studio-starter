@@ -1,0 +1,2455 @@
+{
+  "components": [
+    {
+      "name": "button",
+      "type": "registry:ui",
+      "title": "Button",
+      "description": "Base UI button with standard variants and sizes in Orchid styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/button.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "variant": [
+          "default",
+          "outline",
+          "secondary",
+          "ghost",
+          "destructive",
+          "link"
+        ],
+        "size": [
+          "xs",
+          "sm",
+          "default",
+          "lg",
+          "icon-xs",
+          "icon-sm",
+          "icon",
+          "icon-lg"
+        ],
+        "iconOnly": [
+          true,
+          false
+        ],
+        "shape": [
+          "default",
+          "circle"
+        ],
+        "disabled": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Save action",
+          "code": "<Button onClick={save}>Save</Button>"
+        },
+        {
+          "description": "Button sizes",
+          "code": "<Button size=\"lg\">Large</Button>"
+        },
+        {
+          "description": "Icon-only buttons",
+          "code": "<Button size=\"icon\" aria-label=\"Add\"><AddIcon /></Button>"
+        },
+        {
+          "description": "Render as a link",
+          "code": "<Button variant=\"outline\" render={<a href=\"/settings\" />}>\n  Review settings\n</Button>"
+        },
+        {
+          "description": "Disabled states",
+          "code": "<Button disabled>Default</Button>"
+        }
+      ],
+      "related_components": [
+        "button-group"
+      ]
+    },
+    {
+      "name": "button-group",
+      "type": "registry:ui",
+      "title": "Button Group",
+      "description": "Attached controls plus ghost and border icon toolbars. Overflow actions compose with DropdownMenu.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/separator"
+      ],
+      "files": [
+        {
+          "path": "src/ui/button-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/button-group.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "variant": [
+          "default",
+          "ghost",
+          "border"
+        ],
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Grouped actions",
+          "code": "<ButtonGroup>\n  <Button>Create invoice</Button>\n  <Button size=\"icon\" aria-label=\"More actions\">\n    <DownIcon />\n  </Button>\n</ButtonGroup>"
+        },
+        {
+          "description": "Reporting period",
+          "code": "<ButtonGroup aria-label=\"Reporting period\">\n  <Button variant=\"outline\">Day</Button>\n  <Button variant=\"outline\">Week</Button>\n  <Button variant=\"outline\">Month</Button>\n</ButtonGroup>"
+        },
+        {
+          "description": "Split dropdown",
+          "code": "<ButtonGroup>\n  <Button>Create invoice</Button>\n  <DropdownMenu>\n    <DropdownMenuTrigger\n      nativeButton\n      render={<Button size=\"icon\" aria-label=\"More actions\"><DownIcon /></Button>}\n    />\n    <DropdownMenuContent>\n      <DropdownMenuItem>Duplicate invoice</DropdownMenuItem>\n      <DropdownMenuItem>Send invoice</DropdownMenuItem>\n    </DropdownMenuContent>\n  </DropdownMenu>\n</ButtonGroup>"
+        }
+      ],
+      "related_components": [
+        "button",
+        "dropdown-menu",
+        "separator"
+      ]
+    },
+    {
+      "name": "avatar",
+      "type": "registry:ui",
+      "title": "Avatar",
+      "description": "Compound avatar with image, fallback, badge, and group support.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/avatar.tsx",
+          "type": "registry:ui",
+          "target": "@ui/avatar.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "size": [
+          "sm",
+          "default",
+          "lg"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Image with fallback",
+          "code": "<Avatar>\n  <AvatarImage src={photoUrl} alt=\"Priya Nair\" />\n  <AvatarFallback>PN</AvatarFallback>\n</Avatar>"
+        },
+        {
+          "description": "Avatar with badge",
+          "code": "<Avatar>\n  <AvatarFallback>PN</AvatarFallback>\n  <AvatarBadge><CheckIcon /></AvatarBadge>\n</Avatar>"
+        },
+        {
+          "description": "Avatar group",
+          "code": "<AvatarGroup>\n  <Avatar><AvatarFallback>PN</AvatarFallback></Avatar>\n  <Avatar><AvatarFallback>AT</AvatarFallback></Avatar>\n  <AvatarGroupCount>+2</AvatarGroupCount>\n</AvatarGroup>"
+        }
+      ],
+      "related_components": [
+        "customer-card",
+        "avatar-group"
+      ]
+    },
+    {
+      "name": "badge",
+      "type": "registry:ui",
+      "title": "Badge",
+      "description": "Badge with render support plus Orchid tones, appearances, removable badges, and user roles.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/badge.tsx",
+          "type": "registry:ui",
+          "target": "@ui/badge.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "variant": [
+          "default",
+          "secondary",
+          "destructive",
+          "outline",
+          "ghost",
+          "link"
+        ],
+        "tone": [
+          "blue",
+          "purple",
+          "orange",
+          "red",
+          "light-red",
+          "white",
+          "dark-blue",
+          "grey",
+          "tosca",
+          "green"
+        ],
+        "appearance": [
+          "soft",
+          "outline",
+          "ghost"
+        ],
+        "role": [
+          "owner",
+          "admin",
+          "manager",
+          "cashier"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Status variants",
+          "code": "<Badge>Paid</Badge>\n<Badge variant=\"secondary\">Pending</Badge>\n<Badge variant=\"destructive\">Failed</Badge>"
+        },
+        {
+          "description": "Orchid tones and appearances",
+          "code": "<Badge tone=\"green\">Paid</Badge>\n<Badge tone=\"purple\" appearance=\"outline\">Cards</Badge>\n<Badge tone=\"orange\" appearance=\"ghost\">Review</Badge>"
+        },
+        {
+          "description": "Badge with icon",
+          "code": "<Badge tone=\"blue\">\n  <CircleDashIcon data-icon=\"inline-start\" />\n  PayNow\n</Badge>"
+        },
+        {
+          "description": "Removable badge",
+          "code": "<Badge tone=\"tosca\">\n  Recurring\n  <BadgeRemove />\n</Badge>"
+        },
+        {
+          "description": "User role badge",
+          "code": "<UserBadge role=\"admin\" />"
+        }
+      ],
+      "related_components": [
+        "avatar",
+        "banner",
+        "select"
+      ]
+    },
+    {
+      "name": "banner",
+      "type": "registry:ui",
+      "title": "Banner",
+      "description": "Banner with semantic variants and top-right or bottom action placement in Orchid styling.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/banner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/banner.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "variant": [
+          "default",
+          "success",
+          "warning",
+          "destructive"
+        ],
+        "placement": [
+          "top-right",
+          "bottom"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Default notice",
+          "code": "<Banner>\n  <InformationIcon />\n  <BannerTitle>PayNow delay</BannerTitle>\n  <BannerDescription>\n    Payments may take longer than usual. Consider using Cards or GrabPay.\n  </BannerDescription>\n</Banner>"
+        },
+        {
+          "description": "Success and warning",
+          "code": "<Banner variant=\"success\">\n  <CheckCircleIcon />\n  <BannerTitle>Payment received</BannerTitle>\n  <BannerDescription>\n    SGD 128.00 for INV-2048 was paid through PayNow.\n  </BannerDescription>\n</Banner>"
+        },
+        {
+          "description": "Top-right action",
+          "code": "<Banner>\n  <InformationIcon />\n  <BannerTitle>PayNow delay</BannerTitle>\n  <BannerDescription>Payments may take longer than usual.</BannerDescription>\n  <BannerAction>\n    <Button variant=\"outline\" size=\"sm\">View status</Button>\n  </BannerAction>\n</Banner>"
+        },
+        {
+          "description": "Bottom actions",
+          "code": "<Banner variant=\"success\">\n  <CheckCircleIcon />\n  <BannerTitle>Invoice created</BannerTitle>\n  <BannerDescription>\n    INV-2048 for SGD 128.00 was created and sent to Priya Nair.\n  </BannerDescription>\n  <BannerAction placement=\"bottom\">\n    <Button variant=\"outline\" size=\"sm\">View invoice</Button>\n    <Button size=\"sm\">Send reminder</Button>\n  </BannerAction>\n</Banner>"
+        }
+      ],
+      "related_components": [
+        "toast",
+        "button",
+        "badge"
+      ]
+    },
+    {
+      "name": "skeleton",
+      "type": "registry:ui",
+      "title": "Skeleton",
+      "description": "Animated loading placeholder with Orchid styling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/skeleton.tsx",
+          "type": "registry:ui",
+          "target": "@ui/skeleton.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "className": "string"
+      },
+      "examples": [
+        {
+          "description": "Text lines",
+          "code": "<div className=\"flex max-w-sm flex-col gap-2\">\n  <Skeleton className=\"h-4 w-3/4\" />\n  <Skeleton className=\"h-4 w-full\" />\n  <Skeleton className=\"h-4 w-1/2\" />\n</div>"
+        },
+        {
+          "description": "Avatar and name",
+          "code": "<div className=\"flex items-center gap-2\">\n  <Skeleton className=\"size-8 rounded-full\" />\n  <div className=\"flex min-w-0 flex-1 flex-col gap-1\">\n    <Skeleton className=\"h-4 w-40\" />\n    <Skeleton className=\"h-3.5 w-56\" />\n  </div>\n</div>"
+        },
+        {
+          "description": "Product row",
+          "code": "<div className=\"flex max-w-sm items-center gap-3\">\n  <Skeleton className=\"size-12 rounded-md\" />\n  <div className=\"flex min-w-0 flex-1 flex-col gap-1.5\">\n    <Skeleton className=\"h-4 w-32\" />\n    <Skeleton className=\"h-3.5 w-24\" />\n    <Skeleton className=\"h-3 w-16\" />\n  </div>\n</div>"
+        }
+      ],
+      "related_components": [
+        "spinner",
+        "avatar",
+        "customer-card"
+      ]
+    },
+    {
+      "name": "spinner",
+      "type": "registry:ui",
+      "title": "Spinner",
+      "description": "Indeterminate loading icon sized through className.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/spinner.tsx",
+          "type": "registry:ui",
+          "target": "@ui/spinner.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "className": "string",
+        "aria-label": "string"
+      },
+      "examples": [
+        {
+          "description": "Default size",
+          "code": "<Spinner />"
+        },
+        {
+          "description": "Custom sizes",
+          "code": "<div className=\"flex items-center gap-6\">\n  <Spinner className=\"size-3\" />\n  <Spinner className=\"size-4\" />\n  <Spinner className=\"size-8\" />\n</div>"
+        },
+        {
+          "description": "Inside a button",
+          "code": "<Button disabled>\n  <Spinner aria-label=\"Saving\" />\n  Saving invoice\n</Button>"
+        }
+      ],
+      "related_components": [
+        "skeleton",
+        "button"
+      ]
+    },
+    {
+      "name": "toast",
+      "type": "registry:ui",
+      "title": "Toast",
+      "description": "Base UI toast with additive placement options and Orchid semantic styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/toast.tsx",
+          "type": "registry:ui",
+          "target": "@ui/toast.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "type": [
+          "success",
+          "info",
+          "warning",
+          "error",
+          "loading"
+        ],
+        "placement": [
+          "top-left",
+          "top-center",
+          "top-right",
+          "bottom-left",
+          "bottom-center",
+          "bottom-right"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Default toast",
+          "code": "<Button\n  variant=\"outline\"\n  size=\"sm\"\n  onClick={() =>\n    toast.add({\n      title: \"Invoice created\",\n      description: \"INV-2048 · SGD 128.00 · Priya Nair\",\n    })\n  }\n>\n  Create invoice\n</Button>"
+        },
+        {
+          "description": "Semantic types",
+          "code": "<Button\n  variant=\"outline\"\n  size=\"sm\"\n  onClick={() =>\n    toast.add({\n      title: \"Payment received\",\n      description: \"PayNow · INV-2048 · SGD 128.00\",\n      type: \"success\",\n    })\n  }\n>\n  Payment received\n</Button>"
+        },
+        {
+          "description": "Toast with action",
+          "code": "<Button\n  variant=\"outline\"\n  size=\"sm\"\n  onClick={() => {\n    const id = toast.add({\n      title: \"Payment link sent\",\n      description: \"Sent to Priya Nair for INV-2048\",\n      actionProps: {\n        children: \"Undo\",\n        onClick() {\n          toast.close(id);\n        },\n      },\n    });\n  }}\n>\n  Undo send link\n</Button>"
+        }
+      ],
+      "related_components": [
+        "banner",
+        "button"
+      ]
+    },
+    {
+      "name": "checkbox",
+      "type": "registry:ui",
+      "title": "Checkbox",
+      "description": "Base UI checkbox with Orchid states and an optional CheckboxGroup helper.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/checkbox.tsx",
+          "type": "registry:ui",
+          "target": "@ui/checkbox.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "indeterminate": "boolean",
+        "disabled": "boolean",
+        "alignment": [
+          "vertical",
+          "horizontal"
+        ]
+      },
+      "examples": [
+        {
+          "description": "With label",
+          "code": "<div className=\"flex items-center gap-2\">\n  <Checkbox id=\"email-receipt\" defaultChecked />\n  <Label htmlFor=\"email-receipt\">Send receipt by email</Label>\n</div>"
+        },
+        {
+          "description": "Indeterminate",
+          "code": "<div className=\"flex items-center gap-2\">\n  <Checkbox id=\"select-all\" indeterminate />\n  <Label htmlFor=\"select-all\">Select all invoices</Label>\n</div>"
+        },
+        {
+          "description": "Checkbox group",
+          "code": "<CheckboxGroup label=\"Payment channels\" defaultValue={[\"paynow\"]}>\n  <div className=\"flex items-center gap-2\">\n    <Checkbox id=\"channel-paynow\" value=\"paynow\" />\n    <Label htmlFor=\"channel-paynow\">PayNow</Label>\n  </div>\n  <div className=\"flex items-center gap-2\">\n    <Checkbox id=\"channel-cards\" value=\"cards\" />\n    <Label htmlFor=\"channel-cards\">Cards</Label>\n  </div>\n</CheckboxGroup>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "label",
+        "radio-group",
+        "switch"
+      ]
+    },
+    {
+      "name": "field",
+      "type": "registry:ui",
+      "title": "Field",
+      "description": "Field composition with Orchid form styling.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/label",
+        "@orchid/separator"
+      ],
+      "files": [
+        {
+          "path": "src/ui/field.tsx",
+          "type": "registry:ui",
+          "target": "@ui/field.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "orientation": [
+          "vertical",
+          "horizontal",
+          "responsive"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Label and description",
+          "code": "<Field>\n  <FieldLabel htmlFor=\"full-name\">Full name</FieldLabel>\n  <Input id=\"full-name\" placeholder=\"Alex Turner\" />\n  <FieldDescription>Billing name on INV-2048.</FieldDescription>\n</Field>"
+        },
+        {
+          "description": "Validation error",
+          "code": "<Field data-invalid>\n  <FieldLabel htmlFor=\"customer-email\">Email</FieldLabel>\n  <Input id=\"customer-email\" placeholder=\"alex@example.com\" aria-invalid />\n  <FieldError>Enter a valid email to send the payment link.</FieldError>\n</Field>"
+        },
+        {
+          "description": "Horizontal layout",
+          "code": "<Field orientation=\"horizontal\">\n  <Switch defaultChecked />\n  <FieldLabel>Email receipt after Point of Sale</FieldLabel>\n</Field>"
+        }
+      ],
+      "related_components": [
+        "label",
+        "input",
+        "checkbox",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "file-upload",
+      "type": "registry:ui",
+      "title": "File Upload",
+      "description": "File and image upload row with upload state, media, actions, and a vertical group.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/file-upload.tsx",
+          "type": "registry:ui",
+          "target": "@ui/file-upload.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "state": [
+          "idle",
+          "uploading",
+          "processing",
+          "error",
+          "done"
+        ],
+        "size": [
+          "default",
+          "sm",
+          "xs"
+        ],
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Uploaded file",
+          "code": "<FileUpload state=\"done\" className=\"w-full max-w-md\">\n  <FileUploadMedia variant=\"icon\">\n    <FileIcon />\n  </FileUploadMedia>\n  <FileUploadContent>\n    <FileUploadTitle>invoice-2048.pdf</FileUploadTitle>\n    <FileUploadDescription>PDF · 128 KB</FileUploadDescription>\n  </FileUploadContent>\n  <FileUploadActions>\n    <FileUploadAction aria-label=\"Remove invoice-2048.pdf\">\n      <CloseIcon />\n    </FileUploadAction>\n  </FileUploadActions>\n</FileUpload>"
+        },
+        {
+          "description": "Uploading",
+          "code": "<FileUpload state=\"uploading\" className=\"w-full max-w-md\">\n  <FileUploadMedia>\n    <Spinner />\n  </FileUploadMedia>\n  <FileUploadContent>\n    <FileUploadTitle>store-banner.png</FileUploadTitle>\n    <FileUploadDescription>Uploading · 64%</FileUploadDescription>\n  </FileUploadContent>\n</FileUpload>"
+        },
+        {
+          "description": "Idle picker",
+          "code": "<FileUpload state=\"idle\" className=\"w-full max-w-md\">\n  <FileUploadMedia>\n    <UploadIcon />\n  </FileUploadMedia>\n  <FileUploadContent>\n    <FileUploadTitle>Upload receipt</FileUploadTitle>\n    <FileUploadDescription>PDF or image up to 10 MB</FileUploadDescription>\n  </FileUploadContent>\n</FileUpload>"
+        },
+        {
+          "description": "Multiple files",
+          "code": "<FileUploadGroup>\n  <FileUpload state=\"done\" className=\"w-full max-w-md\">\n    <FileUploadMedia variant=\"icon\">\n      <FileIcon />\n    </FileUploadMedia>\n    <FileUploadContent>\n      <FileUploadTitle>terms.pdf</FileUploadTitle>\n      <FileUploadDescription>PDF · 42 KB</FileUploadDescription>\n    </FileUploadContent>\n  </FileUpload>\n  <FileUpload state=\"done\" className=\"w-full max-w-md\">\n    <FileUploadMedia variant=\"icon\">\n      <FileIcon />\n    </FileUploadMedia>\n    <FileUploadContent>\n      <FileUploadTitle>logo.svg</FileUploadTitle>\n      <FileUploadDescription>SVG · 8 KB</FileUploadDescription>\n    </FileUploadContent>\n  </FileUpload>\n</FileUploadGroup>"
+        }
+      ],
+      "related_components": [
+        "button",
+        "spinner",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "form-section",
+      "type": "registry:ui",
+      "title": "Form Section",
+      "description": "Form block heading. FormSectionGroup + FormSectionItem for settings rows.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/ui/form-section.tsx",
+          "type": "registry:ui",
+          "target": "@ui/form-section.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "variant": [
+          "default",
+          "background"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Section heading",
+          "code": "<FormSection\n  title=\"Online Store\"\n  description=\"Storefront URL, theme, and password protection.\"\n/>"
+        },
+        {
+          "description": "Badge and actions",
+          "code": "<FormSection\n  title=\"Payment Channels\"\n  description=\"Upgrade to accept GrabPay, PayNow, and cards at checkout.\"\n  badge={<Badge tone=\"purple\">Upgrade</Badge>}\n  actions={<Button>Upgrade Now</Button>}\n/>"
+        },
+        {
+          "description": "Settings row",
+          "code": "<FormSectionItem\n  title=\"Password protection\"\n  description=\"Visitors must enter a password before they can view the store.\"\n  actions={<Switch defaultChecked />}\n>\n  <Input placeholder=\"Enter password\" type=\"password\" />\n</FormSectionItem>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "tooltip",
+        "form-builder",
+        "badge",
+        "button"
+      ]
+    },
+    {
+      "name": "input",
+      "type": "registry:ui",
+      "title": "Input",
+      "description": "Base UI input with Orchid form styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/input.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "type": "string",
+        "disabled": "boolean",
+        "aria-invalid": "boolean"
+      },
+      "examples": [
+        {
+          "description": "With field label",
+          "code": "<Field>\n  <FieldLabel htmlFor=\"invoice-number\">Invoice number</FieldLabel>\n  <Input id=\"invoice-number\" defaultValue=\"INV-2048\" placeholder=\"INV-0001\" />\n  <FieldDescription>Shown on the PDF and payment page.</FieldDescription>\n</Field>"
+        },
+        {
+          "description": "Invalid state",
+          "code": "<Field data-invalid>\n  <FieldLabel htmlFor=\"invoice-amount\">Amount</FieldLabel>\n  <Input id=\"invoice-amount\" placeholder=\"0.00\" aria-invalid />\n  <FieldError>Enter an amount greater than SGD 0.00.</FieldError>\n</Field>"
+        },
+        {
+          "description": "Disabled",
+          "code": "<Field>\n  <FieldLabel htmlFor=\"sku-disabled\">Archived SKU</FieldLabel>\n  <Input id=\"sku-disabled\" defaultValue=\"OLD-SKU-01\" disabled />\n</Field>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "input-group",
+        "textarea",
+        "label"
+      ]
+    },
+    {
+      "name": "input-group",
+      "type": "registry:ui",
+      "title": "Input Group",
+      "description": "Input, textarea, addon, and button composition with Orchid styling.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/textarea"
+      ],
+      "files": [
+        {
+          "path": "src/ui/input-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/input-group.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "align": [
+          "inline-start",
+          "inline-end",
+          "block-start",
+          "block-end"
+        ],
+        "size": [
+          "xs",
+          "sm",
+          "icon-xs",
+          "icon-sm"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Leading icon",
+          "code": "<InputGroup>\n  <InputGroupAddon>\n    <MailIcon />\n  </InputGroupAddon>\n  <InputGroupInput placeholder=\"alex@example.com\" />\n</InputGroup>"
+        },
+        {
+          "description": "Prefix text",
+          "code": "<InputGroup>\n  <InputGroupAddon className=\"self-stretch bg-oc-muted\">\n    <InputGroupText className=\"pr-2\">https://hitpay.shop/</InputGroupText>\n  </InputGroupAddon>\n  <InputGroupSeparator />\n  <InputGroupInput placeholder=\"studio\" />\n</InputGroup>"
+        },
+        {
+          "description": "Trailing button",
+          "code": "<InputGroup>\n  <InputGroupInput placeholder=\"Search customers\" />\n  <InputGroupAddon align=\"inline-end\">\n    <InputGroupButton size=\"icon-xs\" aria-label=\"Search\">\n      <SearchIcon />\n    </InputGroupButton>\n  </InputGroupAddon>\n</InputGroup>"
+        },
+        {
+          "description": "Textarea with addons",
+          "code": "<InputGroup>\n  <InputGroupAddon align=\"block-start\">Internal note</InputGroupAddon>\n  <InputGroupTextarea placeholder=\"Add context for your team…\" />\n</InputGroup>"
+        }
+      ],
+      "related_components": [
+        "input",
+        "textarea",
+        "field",
+        "button",
+        "select"
+      ]
+    },
+    {
+      "name": "label",
+      "type": "registry:ui",
+      "title": "Label",
+      "description": "Accessible label with Orchid typography.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/label.tsx",
+          "type": "registry:ui",
+          "target": "@ui/label.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "htmlFor": "string",
+        "className": "string"
+      },
+      "examples": [
+        {
+          "description": "Checkbox label",
+          "code": "<div className=\"flex items-center gap-2\">\n  <Checkbox id=\"gst\" defaultChecked />\n  <Label htmlFor=\"gst\">Add GST to this invoice</Label>\n</div>"
+        },
+        {
+          "description": "Input label",
+          "code": "<div className=\"grid max-w-sm gap-1.5\">\n  <Label htmlFor=\"store-name\">Store name</Label>\n  <Input id=\"store-name\" placeholder=\"HitPay Studio\" />\n</div>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "input",
+        "checkbox",
+        "radio-group"
+      ]
+    },
+    {
+      "name": "radio-group",
+      "type": "registry:ui",
+      "title": "Radio Group",
+      "description": "Radio group and item primitives with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/radio-group.tsx",
+          "type": "registry:ui",
+          "target": "@ui/radio-group.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "disabled": "boolean",
+        "aria-invalid": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Vertical options",
+          "code": "<RadioGroup defaultValue=\"paynow\">\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"paynow\" id=\"payment-paynow\" />\n    <Label htmlFor=\"payment-paynow\">PayNow</Label>\n  </div>\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"cards\" id=\"payment-cards\" />\n    <Label htmlFor=\"payment-cards\">Cards</Label>\n  </div>\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"link\" id=\"payment-link\" />\n    <Label htmlFor=\"payment-link\">Payment Link</Label>\n  </div>\n</RadioGroup>"
+        },
+        {
+          "description": "Horizontal layout",
+          "code": "<RadioGroup className=\"flex flex-wrap gap-4\" defaultValue=\"sgd\">\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"sgd\" id=\"currency-sgd\" />\n    <Label htmlFor=\"currency-sgd\">SGD</Label>\n  </div>\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"usd\" id=\"currency-usd\" />\n    <Label htmlFor=\"currency-usd\">USD</Label>\n  </div>\n  <div className=\"flex items-center gap-2\">\n    <RadioGroupItem value=\"myr\" id=\"currency-myr\" />\n    <Label htmlFor=\"currency-myr\">MYR</Label>\n  </div>\n</RadioGroup>"
+        },
+        {
+          "description": "Option with description",
+          "code": "<RadioGroup defaultValue=\"invoice\">\n  <div className=\"flex items-start gap-2\">\n    <RadioGroupItem value=\"invoice\" id=\"commerce-invoice\" />\n    <div className=\"grid gap-0.5\">\n      <Label htmlFor=\"commerce-invoice\">Invoice</Label>\n      <p className=\"text-xs leading-normal text-oc-muted-foreground\">\n        Create INV-2048 and email it to the customer.\n      </p>\n    </div>\n  </div>\n</RadioGroup>"
+        }
+      ],
+      "related_components": [
+        "label",
+        "field",
+        "checkbox",
+        "choice-card"
+      ]
+    },
+    {
+      "name": "slider",
+      "type": "registry:ui",
+      "title": "Slider",
+      "description": "Horizontal or vertical slider with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/slider.tsx",
+          "type": "registry:ui",
+          "target": "@ui/slider.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "min": "number",
+        "max": "number",
+        "disabled": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Single value",
+          "code": "<Slider defaultValue={8} max={20} />"
+        },
+        {
+          "description": "Default range",
+          "code": "<Slider defaultValue={15} />"
+        },
+        {
+          "description": "Range selection",
+          "code": "<Slider defaultValue={[25, 75]} />"
+        }
+      ],
+      "related_components": [
+        "field",
+        "switch",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "switch",
+      "type": "registry:ui",
+      "title": "Switch",
+      "description": "Base UI switch with default and small Orchid sizes.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/switch.tsx",
+          "type": "registry:ui",
+          "target": "@ui/switch.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "size": [
+          "default",
+          "sm"
+        ],
+        "disabled": "boolean",
+        "aria-invalid": "boolean"
+      },
+      "examples": [
+        {
+          "description": "With label",
+          "code": "<div className=\"flex items-center gap-3\">\n  <Switch id=\"paynow\" defaultChecked />\n  <Label htmlFor=\"paynow\">Accept PayNow</Label>\n</div>"
+        },
+        {
+          "description": "Small size",
+          "code": "<div className=\"flex items-center gap-3\">\n  <Switch id=\"pos-tips\" size=\"sm\" defaultChecked />\n  <Label htmlFor=\"pos-tips\">Point of Sale tips</Label>\n</div>"
+        },
+        {
+          "description": "Disabled states",
+          "code": "<div className=\"flex items-center gap-4\">\n  <Switch disabled />\n  <Switch defaultChecked disabled />\n</div>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "form-section",
+        "checkbox",
+        "label"
+      ]
+    },
+    {
+      "name": "textarea",
+      "type": "registry:ui",
+      "title": "Textarea",
+      "description": "Auto-sizing textarea with Orchid form styling.",
+      "dependencies": [],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/textarea.tsx",
+          "type": "registry:ui",
+          "target": "@ui/textarea.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "disabled": "boolean",
+        "aria-invalid": "boolean",
+        "rows": "number"
+      },
+      "examples": [
+        {
+          "description": "With field label",
+          "code": "<Field>\n  <FieldLabel htmlFor=\"invoice-notes\">Invoice notes</FieldLabel>\n  <Textarea\n    id=\"invoice-notes\"\n    placeholder=\"Payment due in 14 days. Bank transfer details on the PDF.\"\n  />\n  <FieldDescription>Visible to the customer on the invoice.</FieldDescription>\n</Field>"
+        },
+        {
+          "description": "Default value",
+          "code": "<Field>\n  <FieldLabel htmlFor=\"product-desc\">Product description</FieldLabel>\n  <Textarea\n    id=\"product-desc\"\n    defaultValue=\"Soft cotton tee. Ships from Singapore.\"\n  />\n</Field>"
+        },
+        {
+          "description": "Validation error",
+          "code": "<Field data-invalid>\n  <FieldLabel htmlFor=\"refund-reason\">Refund reason</FieldLabel>\n  <Textarea id=\"refund-reason\" placeholder=\"Describe the refund\" aria-invalid />\n  <FieldError>A refund reason is required for this payment.</FieldError>\n</Field>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "input",
+        "input-group",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "tabs",
+      "type": "registry:ui",
+      "title": "Tabs",
+      "description": "Horizontal or vertical tabs with default and line variants.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/tabs.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tabs.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "orientation": [
+          "horizontal",
+          "vertical"
+        ],
+        "variant": [
+          "default",
+          "line"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Line tabs",
+          "code": "<Tabs defaultValue=\"invoice\">\n  <TabsList variant=\"line\">\n    <TabsTrigger value=\"invoice\">Invoice</TabsTrigger>\n    <TabsTrigger value=\"link\">Payment Link</TabsTrigger>\n    <TabsTrigger value=\"recurring\">Recurring</TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"invoice\">\n    INV-2048 · Priya Nair · SGD 128.00\n  </TabsContent>\n  <TabsContent value=\"link\">\n    Weekend brunch link · SGD 48.00 · PayNow\n  </TabsContent>\n  <TabsContent value=\"recurring\">\n    8 active plans · Alex Turner · SGD 29.00 / month\n  </TabsContent>\n</Tabs>"
+        },
+        {
+          "description": "Pill tabs with icons",
+          "code": "<Tabs defaultValue=\"pos\">\n  <TabsList>\n    <TabsTrigger value=\"pos\">\n      <PosIcon data-icon=\"inline-start\" />\n      Point of Sale\n    </TabsTrigger>\n    <TabsTrigger value=\"store\">\n      <StoreIcon data-icon=\"inline-start\" />\n      Online Store\n    </TabsTrigger>\n  </TabsList>\n  <TabsContent value=\"pos\">\n    Terminal HP-POS-04 · last sale SGD 24.50\n  </TabsContent>\n  <TabsContent value=\"store\">\n    Home page published · PayNow and Cards\n  </TabsContent>\n</Tabs>"
+        }
+      ],
+      "related_components": [
+        "page-layout",
+        "app-layout",
+        "button"
+      ]
+    },
+    {
+      "name": "pagination",
+      "type": "registry:ui",
+      "title": "Pagination",
+      "description": "Link pagination with Orchid buttons and an optional range label.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/pagination.tsx",
+          "type": "registry:ui",
+          "target": "@ui/pagination.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "isActive": "boolean",
+        "size": [
+          "default",
+          "icon"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Page links",
+          "code": "<Pagination>\n  <PaginationPrevious href=\"?page=1\" aria-disabled />\n  <PaginationContent>\n    <PaginationItem>\n      <PaginationLink href=\"?page=1\" isActive>\n        1\n      </PaginationLink>\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationLink href=\"?page=2\">2</PaginationLink>\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationLink href=\"?page=3\">3</PaginationLink>\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationEllipsis />\n    </PaginationItem>\n    <PaginationItem>\n      <PaginationLink href=\"?page=15\">15</PaginationLink>\n    </PaginationItem>\n  </PaginationContent>\n  <PaginationNext href=\"?page=2\" />\n</Pagination>"
+        },
+        {
+          "description": "With range label",
+          "code": "<div className=\"flex w-full flex-wrap items-center justify-between gap-4\">\n  <PaginationInfo>Showing 11–20 of 80 invoices</PaginationInfo>\n  <Pagination className=\"w-auto justify-end\">\n    <PaginationPrevious href=\"?page=1\" />\n    <PaginationContent>\n      <PaginationItem>\n        <PaginationLink href=\"?page=1\">1</PaginationLink>\n      </PaginationItem>\n      <PaginationItem>\n        <PaginationLink href=\"?page=2\" isActive>\n          2\n        </PaginationLink>\n      </PaginationItem>\n      <PaginationItem>\n        <PaginationLink href=\"?page=3\">3</PaginationLink>\n      </PaginationItem>\n    </PaginationContent>\n    <PaginationNext href=\"?page=3\" />\n  </Pagination>\n</div>"
+        }
+      ],
+      "related_components": [
+        "data-table",
+        "button"
+      ]
+    },
+    {
+      "name": "dialog",
+      "type": "registry:ui",
+      "title": "Dialog",
+      "description": "Dialog primitives with Orchid sizes and persistent mode.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/ui/dialog.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dialog.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "size": [
+          "sm",
+          "default",
+          "medium",
+          "lg",
+          "confirmation",
+          "fullscreen"
+        ],
+        "persistent": "boolean",
+        "showCloseButton": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Confirmation",
+          "code": "<Dialog>\n  <DialogTrigger render={<Button variant=\"outline\" />}>\n    Review invoice\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>Review invoice INV-2048</DialogTitle>\n      <DialogDescription>\n        Confirm details before sending to the customer.\n      </DialogDescription>\n    </DialogHeader>\n    <p className=\"text-sm text-oc-foreground\">\n      Alex Turner · SGD 128.00 · PayNow or card.\n    </p>\n    <DialogFooter>\n      <DialogClose render={<Button variant=\"outline\" />}>Cancel</DialogClose>\n      <Button>Send invoice</Button>\n    </DialogFooter>\n  </DialogContent>\n</Dialog>"
+        },
+        {
+          "description": "Large size",
+          "code": "<Dialog>\n  <DialogTrigger render={<Button variant=\"outline\" />}>Add customer</DialogTrigger>\n  <DialogContent size=\"lg\">\n    <DialogHeader>\n      <DialogTitle>Add customer</DialogTitle>\n      <DialogDescription>Enter the customer details below.</DialogDescription>\n    </DialogHeader>\n    <DialogFooter showCloseButton />\n  </DialogContent>\n</Dialog>"
+        },
+        {
+          "description": "Persistent",
+          "code": "<Dialog persistent>\n  <DialogTrigger render={<Button variant=\"outline\" />}>\n    Connect POS terminal\n  </DialogTrigger>\n  <DialogContent>\n    <DialogHeader>\n      <DialogTitle>Connect POS terminal</DialogTitle>\n      <DialogDescription>\n        Clicking outside will not close this dialog.\n      </DialogDescription>\n    </DialogHeader>\n  </DialogContent>\n</Dialog>"
+        }
+      ],
+      "related_components": [
+        "drawer",
+        "confirmation-modal",
+        "form-layout",
+        "button"
+      ]
+    },
+    {
+      "name": "drawer",
+      "type": "registry:ui",
+      "title": "Drawer",
+      "description": "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/drawer.tsx",
+          "type": "registry:ui",
+          "target": "@ui/drawer.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "swipeDirection": [
+          "up",
+          "right",
+          "down",
+          "left"
+        ],
+        "showSwipeHandle": "boolean",
+        "modal": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Bottom sheet",
+          "code": "<Drawer showSwipeHandle>\n  <DrawerTrigger render={<Button variant=\"outline\" />}>Open</DrawerTrigger>\n  <DrawerContent>\n    <DrawerHeader>\n      <DrawerTitle>Invoice peek</DrawerTitle>\n      <DrawerDescription>\n        Read-only panel. Create or edit uses a centered Dialog.\n      </DrawerDescription>\n    </DrawerHeader>\n    <DrawerFooter>\n      <DrawerClose render={<Button variant=\"outline\" />}>Cancel</DrawerClose>\n      <Button>Save</Button>\n    </DrawerFooter>\n  </DrawerContent>\n</Drawer>"
+        },
+        {
+          "description": "Right edge",
+          "code": "<Drawer swipeDirection=\"right\">\n  <DrawerTrigger render={<Button variant=\"outline\" />}>Details</DrawerTrigger>\n  <DrawerContent>\n    <DrawerHeader>\n      <DrawerTitle>Invoice peek</DrawerTitle>\n      <DrawerDescription>\n        Side drawer for a quick look at one record.\n      </DrawerDescription>\n    </DrawerHeader>\n    <p className=\"p-4 text-sm text-oc-foreground\">\n      INV-2048 · Priya Nair · SGD 128.00\n    </p>\n    <DrawerFooter>\n      <DrawerClose render={<Button variant=\"outline\" />}>Close</DrawerClose>\n    </DrawerFooter>\n  </DrawerContent>\n</Drawer>"
+        },
+        {
+          "description": "Left filters",
+          "code": "<Drawer swipeDirection=\"left\">\n  <DrawerTrigger render={<Button variant=\"outline\" />}>Filters</DrawerTrigger>\n  <DrawerContent>\n    <DrawerHeader>\n      <DrawerTitle>Filters</DrawerTitle>\n      <DrawerDescription>\n        Narrow the records shown in this list.\n      </DrawerDescription>\n    </DrawerHeader>\n    <DrawerFooter>\n      <DrawerClose render={<Button variant=\"outline\" />}>Cancel</DrawerClose>\n      <Button>Apply</Button>\n    </DrawerFooter>\n  </DrawerContent>\n</Drawer>"
+        }
+      ],
+      "related_components": [
+        "dialog",
+        "app-layout",
+        "button",
+        "field"
+      ]
+    },
+    {
+      "name": "dropdown-menu",
+      "type": "registry:ui",
+      "title": "Dropdown Menu",
+      "description": "Menu with items, checkbox and radio selection, submenus, and Orchid styling.",
+      "dependencies": [
+        "@base-ui/react",
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/dropdown-menu.tsx",
+          "type": "registry:ui",
+          "target": "@ui/dropdown-menu.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "variant": [
+          "default",
+          "destructive"
+        ],
+        "side": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Invoice actions",
+          "code": "<DropdownMenu>\n  <DropdownMenuTrigger render={<Button variant=\"secondary\" size=\"sm\" />}>\n    Invoice actions\n  </DropdownMenuTrigger>\n  <DropdownMenuContent align=\"start\">\n    <DropdownMenuItem>\n      <EditIcon />\n      Edit invoice\n      <DropdownMenuShortcut>⌘E</DropdownMenuShortcut>\n    </DropdownMenuItem>\n    <DropdownMenuItem>\n      <SendIcon />\n      Send payment link\n    </DropdownMenuItem>\n    <DropdownMenuSeparator />\n    <DropdownMenuItem variant=\"destructive\">\n      <DeleteIcon />\n      Void invoice\n    </DropdownMenuItem>\n  </DropdownMenuContent>\n</DropdownMenu>"
+        },
+        {
+          "description": "Grouped menu",
+          "code": "<DropdownMenu>\n  <DropdownMenuTrigger render={<Button variant=\"secondary\" size=\"sm\" />}>\n    Create\n  </DropdownMenuTrigger>\n  <DropdownMenuContent align=\"start\">\n    <DropdownMenuGroup>\n      <DropdownMenuLabel>Commerce</DropdownMenuLabel>\n      <DropdownMenuItem>Payment Link</DropdownMenuItem>\n      <DropdownMenuItem>Recurring</DropdownMenuItem>\n    </DropdownMenuGroup>\n    <DropdownMenuSeparator />\n    <DropdownMenuGroup>\n      <DropdownMenuLabel>Sales</DropdownMenuLabel>\n      <DropdownMenuItem>Online Store</DropdownMenuItem>\n      <DropdownMenuItem>Point of Sale</DropdownMenuItem>\n    </DropdownMenuGroup>\n  </DropdownMenuContent>\n</DropdownMenu>"
+        },
+        {
+          "description": "Submenu",
+          "code": "<DropdownMenu>\n  <DropdownMenuTrigger render={<Button variant=\"outline\" />}>\n    More tools\n  </DropdownMenuTrigger>\n  <DropdownMenuContent>\n    <DropdownMenuSub>\n      <DropdownMenuSubTrigger>Export</DropdownMenuSubTrigger>\n      <DropdownMenuSubContent>\n        <DropdownMenuItem>Duplicate invoice</DropdownMenuItem>\n        <DropdownMenuItem>Download PDF</DropdownMenuItem>\n      </DropdownMenuSubContent>\n    </DropdownMenuSub>\n  </DropdownMenuContent>\n</DropdownMenu>"
+        }
+      ],
+      "related_components": [
+        "button-group",
+        "button",
+        "data-table"
+      ]
+    },
+    {
+      "name": "tooltip",
+      "type": "registry:ui",
+      "title": "Tooltip",
+      "description": "Base UI tooltip with Orchid styling.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/ui/tooltip.tsx",
+          "type": "registry:ui",
+          "target": "@ui/tooltip.tsx"
+        }
+      ],
+      "category": "ui",
+      "props": {
+        "side": [
+          "top",
+          "bottom",
+          "left",
+          "right"
+        ],
+        "align": [
+          "start",
+          "center",
+          "end"
+        ],
+        "arrowHidden": "boolean",
+        "delay": "number"
+      },
+      "examples": [
+        {
+          "description": "Default tooltip",
+          "code": "<Tooltip>\n  <TooltipTrigger render={<Button variant=\"outline\" size=\"sm\" />}>\n    PayNow\n  </TooltipTrigger>\n  <TooltipContent>Instant SGD transfer via PayNow QR</TooltipContent>\n</Tooltip>"
+        },
+        {
+          "description": "Placement",
+          "code": "<Tooltip>\n  <TooltipTrigger render={<Button variant=\"outline\" size=\"sm\" />}>\n    Invoice\n  </TooltipTrigger>\n  <TooltipContent side=\"bottom\">INV-2048 is overdue</TooltipContent>\n</Tooltip>"
+        },
+        {
+          "description": "Without arrow",
+          "code": "<Tooltip>\n  <TooltipTrigger render={<Button variant=\"ghost\" size=\"icon-sm\" aria-label=\"Help\" />}>\n    ?\n  </TooltipTrigger>\n  <TooltipContent arrowHidden>Refund policy for card payments</TooltipContent>\n</Tooltip>"
+        }
+      ],
+      "related_components": [
+        "copy-button",
+        "form-section",
+        "button"
+      ]
+    },
+    {
+      "name": "app-layout",
+      "type": "registry:ui",
+      "title": "App Layout",
+      "description": "HitPay App Studio embedded pane frame (not generic app chrome). TanStack Router: navigationItems[].to, variant tabs|sidebar, layout route with Outlet.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/drawer"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/app-layout.tsx",
+          "type": "registry:ui",
+          "target": "@components/layout/app-layout.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "variant": [
+          "default (no nav chrome)",
+          "tabs (horizontal)",
+          "sidebar (vertical)"
+        ],
+        "appName": "ReactNode",
+        "appBarActions": "ReactNode (right of app name in top bar)",
+        "children": "ReactNode — layout route: <Outlet /> for child pages",
+        "className": "string — shell routes often h-full min-h-0",
+        "navigationItems[].id": "string",
+        "navigationItems[].label": "ReactNode",
+        "navigationItems[].to": "TanStack Router path (must match createFileRoute; active from URL)"
+      },
+      "examples": [
+        {
+          "description": "Tab layout route (route.tsx)",
+          "code": "import { createFileRoute, Outlet } from \"@tanstack/react-router\";\nimport { AppLayout } from \"@/components/layout/app-layout\";\nimport { Button } from \"@ui/button\";\n\nexport const Route = createFileRoute(\"/invoices\")({\n  component: InvoicesShell,\n});\n\nfunction InvoicesShell() {\n  return (\n    <AppLayout\n      className=\"h-full min-h-0\"\n      appName=\"Invoices\"\n      appBarActions={<Button size=\"sm\">Create invoice</Button>}\n      variant=\"tabs\"\n      navigationItems={[\n        { id: \"overview\", label: \"Overview\", to: \"/invoices\" },\n        { id: \"sent\", label: \"Sent\", to: \"/invoices/sent\" },\n      ]}\n    >\n      <Outlet />\n    </AppLayout>\n  );\n}"
+        },
+        {
+          "description": "Sidebar layout route (route.tsx)",
+          "code": "import { createFileRoute, Outlet } from \"@tanstack/react-router\";\nimport { AppLayout } from \"@/components/layout/app-layout\";\n\nexport const Route = createFileRoute(\"/settings\")({\n  component: SettingsShell,\n});\n\nfunction SettingsShell() {\n  return (\n    <AppLayout\n      className=\"h-full min-h-0\"\n      appName=\"Settings\"\n      variant=\"sidebar\"\n      navigationItems={[\n        { id: \"home\", label: \"General\", to: \"/settings\" },\n        { id: \"team\", label: \"Team\", to: \"/settings/team\" },\n      ]}\n    >\n      <Outlet />\n    </AppLayout>\n  );\n}"
+        },
+        {
+          "description": "Child route page",
+          "code": "import { createFileRoute } from \"@tanstack/react-router\";\nimport { PageLayout } from \"@/components/layout/page-layout\";\n\nexport const Route = createFileRoute(\"/invoices/sent\")({\n  component: SentInvoicesPage,\n});\n\nfunction SentInvoicesPage() {\n  return (\n    <PageLayout title=\"Sent\" description=\"Invoices awaiting payment.\">\n      {/* DataTable, Empty, etc. */}\n    </PageLayout>\n  );\n}"
+        }
+      ],
+      "related_components": [
+        "page-layout",
+        "form-layout",
+        "drawer",
+        "button"
+      ]
+    },
+    {
+      "name": "copy-button",
+      "type": "registry:ui",
+      "title": "Copy Button",
+      "description": "Copy a string (id, phone, URL). prop: value.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/actions/copy-button.tsx",
+          "type": "registry:ui",
+          "target": "@components/actions/copy-button.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "value": "string",
+        "label": "string"
+      },
+      "examples": [
+        {
+          "description": "Beside text",
+          "code": "<div className=\"flex items-center gap-2 text-sm text-oc-foreground\">\n  <span>INV-2048</span>\n  <CopyButton value=\"INV-2048\" />\n</div>"
+        },
+        {
+          "description": "Phone number",
+          "code": "<div className=\"flex items-center gap-2 text-sm text-oc-foreground\">\n  <span>+65 8123 4567</span>\n  <CopyButton value=\"+65 8123 4567\" />\n</div>"
+        },
+        {
+          "description": "Custom copied label",
+          "code": "<div className=\"flex items-center gap-2 text-sm text-oc-foreground\">\n  <span>hitpay.shop/pay/pl_8f2a91</span>\n  <CopyButton\n    value=\"https://hitpay.shop/pay/pl_8f2a91\"\n    label=\"Link copied!\"\n  />\n</div>"
+        }
+      ],
+      "related_components": [
+        "tooltip",
+        "page-layout",
+        "detail-card",
+        "data-list"
+      ]
+    },
+    {
+      "name": "customer-card",
+      "type": "registry:ui",
+      "title": "Customer Card",
+      "description": "Customer/beneficiary summary. variant small|big|float|empty, hover, active.",
+      "dependencies": [
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/avatar",
+        "@orchid/button",
+        "@orchid/badge",
+        "@orchid/copy-button",
+        "@orchid/skeleton"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/customer-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/customer-card.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "variant": [
+          "small",
+          "big",
+          "float",
+          "empty"
+        ],
+        "hover": "boolean",
+        "active": "boolean",
+        "loading": "boolean",
+        "edit": "boolean",
+        "closable": "boolean",
+        "beneficiary": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Small summary",
+          "code": "<CustomerCard variant=\"small\" customer={customer} />"
+        },
+        {
+          "description": "Expanded details",
+          "code": "<CustomerCard variant=\"big\" customer={customer} />"
+        },
+        {
+          "description": "With badge",
+          "code": "<CustomerCard\n  variant=\"small\"\n  customer={customer}\n  badge={<Badge tone=\"blue\">Invoice</Badge>}\n/>"
+        },
+        {
+          "description": "Empty state",
+          "code": "<CustomerCard variant=\"empty\" />"
+        }
+      ],
+      "related_components": [
+        "avatar",
+        "detail-card",
+        "copy-button",
+        "badge"
+      ]
+    },
+    {
+      "name": "data-list",
+      "type": "registry:ui",
+      "title": "Data List",
+      "description": "Stacked card or row list from items[]. Each item: key, title, optional description, details, media, actions.menu / actions.hover. For people, products, or activity without table search, filters, sort, or pagination.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/copy-button",
+        "@orchid/dropdown-menu"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/data-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/data-list.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "layout": [
+          "default",
+          "stack",
+          "media"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Default rows",
+          "code": "<DataList\n  items={[\n    {\n      key: \"priya\",\n      title: \"Priya Nair\",\n      description: \"INV-2048 · Cards · SGD 128.00\",\n      badges: <Badge tone=\"green\">Paid</Badge>,\n      details: [\n        { key: \"city\", text: \"Singapore\" },\n        { key: \"currency\", text: \"SGD\" },\n      ],\n    },\n    {\n      key: \"matcha\",\n      title: \"Matcha Latte\",\n      description: \"SKU-TEA-12 · Online Store and POS\",\n      meta: \"24 in stock\",\n      badges: <Badge tone=\"green\">Active</Badge>,\n    },\n  ]}\n/>"
+        },
+        {
+          "description": "Stack with copy rows",
+          "code": "<DataList\n  layout=\"stack\"\n  items={[\n    {\n      key: \"invoice\",\n      title: \"Invoice paid\",\n      copyRows: [\n        {\n          label: \"URL:\",\n          value: \"https://hooks.hitpayapp.com/invoice/a9ad4444\",\n        },\n      ],\n    },\n  ]}\n/>"
+        },
+        {
+          "description": "Media layout",
+          "code": "<DataList\n  items={[\n    {\n      key: \"home\",\n      title: \"Home\",\n      description: \"Welcome to our store.\",\n      layout: \"media\",\n      media: {\n        src: \"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop\",\n      },\n      badges: <Badge tone=\"green\">Published</Badge>,\n    },\n  ]}\n/>"
+        }
+      ],
+      "related_components": [
+        "data-table",
+        "detail-card",
+        "copy-button",
+        "dropdown-menu"
+      ]
+    },
+    {
+      "name": "data-table",
+      "type": "registry:ui",
+      "title": "Data Table",
+      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.",
+      "registryDependencies": [
+        "@orchid/badge",
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/dropdown-menu",
+        "@orchid/empty",
+        "@orchid/field",
+        "@orchid/input-group",
+        "@orchid/pagination",
+        "@orchid/popover",
+        "@orchid/select"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/data-table.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/data-table.tsx"
+        },
+        {
+          "path": "src/components/displaying-data/data-table-model.ts",
+          "type": "registry:file",
+          "target": "@components/displaying-data/data-table-model.ts"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "mode": [
+          "client",
+          "server"
+        ],
+        "selection": "boolean",
+        "editColumns": "boolean",
+        "rowActions": [
+          "edit",
+          "delete"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Schema-driven table",
+          "code": "function DataTableExample() {\n  const table = useDataTable({\n    schema: SCHEMA_TABLE_EXAMPLE_SCHEMA,\n    data: SCHEMA_TABLE_EXAMPLE_ROWS,\n  });\n\n  return (\n    <DataTable\n      table={table}\n      onRowAction={() => undefined}\n      onRowClick={() => undefined}\n    />\n  );\n}\n\nrender(<DataTableExample />);"
+        },
+        {
+          "description": "Invoices with row actions",
+          "code": "function InvoiceTableExample() {\n  const table = useDataTable({\n    schema: {\n      key: \"invoices\",\n      search: { placeholder: \"Search invoices\" },\n      rowActions: [\"edit\", \"delete\"],\n      pagination: { pageSize: 5 },\n      columns: [\n        { key: \"name\", title: \"Customer\", type: \"text\", locked: true },\n        { key: \"amount\", title: \"Amount\", type: \"amount\", search: false },\n        { key: \"status\", title: \"Status\", type: \"status\", search: false },\n      ],\n    },\n    data: [\n      { id: \"inv-2048\", name: \"Priya Nair\", amount: 128, status: \"Paid\" },\n      { id: \"inv-2049\", name: \"Alex Turner\", amount: 48, status: \"Pending\" },\n    ],\n  });\n\n  return (\n    <DataTable\n      table={table}\n      onRowAction={() => undefined}\n      onRowClick={() => undefined}\n    />\n  );\n}\n\nrender(<InvoiceTableExample />);"
+        }
+      ],
+      "related_components": [
+        "data-list",
+        "detail-card",
+        "empty",
+        "pagination"
+      ]
+    },
+    {
+      "name": "detail-card",
+      "type": "registry:ui",
+      "title": "Detail Card",
+      "description": "Read-only key/value card for one record on a show page (invoice, leave request, customer). items, optional title, columns, style default|border. Values can be React nodes.",
+      "dependencies": [
+        "class-variance-authority"
+      ],
+      "registryDependencies": [
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/detail-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/detail-card.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "style": [
+          "default",
+          "border"
+        ],
+        "columns": "number",
+        "alignment": [
+          "horizontal",
+          "vertical"
+        ],
+        "size": [
+          "small",
+          "big"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Two-column grid",
+          "code": "<DetailCard\n  columns={2}\n  items={[\n    {\n      key: \"invoice\",\n      label: \"Invoice\",\n      value: \"INV-2048\",\n      alignment: \"vertical\",\n    },\n    {\n      key: \"customer\",\n      label: \"Customer\",\n      value: \"alex@studio.co\",\n      alignment: \"vertical\",\n    },\n    {\n      key: \"status\",\n      label: \"Status\",\n      value: <Badge tone=\"green\">Paid</Badge>,\n      alignment: \"vertical\",\n    },\n    {\n      key: \"channel\",\n      label: \"Channel\",\n      value: \"PayNow\",\n      alignment: \"vertical\",\n    },\n  ]}\n/>"
+        },
+        {
+          "description": "Border style with copy",
+          "code": "<DetailCard\n  title=\"Payment details\"\n  columns={2}\n  style=\"border\"\n  items={[\n    {\n      key: \"email\",\n      label: \"Email\",\n      value: \"alex@studio.co\",\n      copyValue: \"alex@studio.co\",\n      alignment: \"vertical\",\n    },\n    {\n      key: \"phone\",\n      label: \"Phone\",\n      value: \"+65 8123 4567\",\n      alignment: \"vertical\",\n    },\n    {\n      key: \"status\",\n      label: \"Status\",\n      value: <Badge tone=\"green\">Paid</Badge>,\n      alignment: \"vertical\",\n    },\n    {\n      key: \"method\",\n      label: \"Method\",\n      value: \"Cards\",\n      alignment: \"vertical\",\n    },\n  ]}\n/>"
+        },
+        {
+          "description": "Stacked rows",
+          "code": "<DetailCard\n  items={[\n    { key: \"email\", label: \"Email\", value: \"alex@studio.co\" },\n    { key: \"phone\", label: \"Phone\", value: \"+65 8123 4567\" },\n  ]}\n/>"
+        }
+      ],
+      "related_components": [
+        "data-list",
+        "data-table",
+        "copy-button",
+        "customer-card"
+      ]
+    },
+    {
+      "name": "empty",
+      "type": "registry:ui",
+      "title": "Empty",
+      "description": "Props empty state. title, optional media and actions.",
+      "dependencies": [
+        "class-variance-authority",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/empty.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/empty.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "media": [
+          "icon",
+          "search",
+          "upgrade"
+        ]
+      },
+      "examples": [
+        {
+          "description": "With actions",
+          "code": "<Empty\n  media=\"icon\"\n  title=\"No invoices yet\"\n  description=\"Create an invoice to bill a customer by email or payment link.\"\n  actions={[\n    { key: \"learn\", label: \"Learn more\", variant: \"outline\" },\n    {\n      key: \"create\",\n      label: \"Create invoice\",\n      icon: <AddIcon data-icon=\"inline-start\" />,\n    },\n  ]}\n/>"
+        },
+        {
+          "description": "Search empty state",
+          "code": "<Empty\n  media=\"search\"\n  title=\"No matching invoices\"\n  description=\"Try another invoice number, customer, or payment channel.\"\n/>"
+        },
+        {
+          "description": "Text only",
+          "code": "<Empty\n  title=\"No customers yet\"\n  description=\"Customer Data appears here after a payment, invoice, or POS sale.\"\n/>"
+        }
+      ],
+      "related_components": [
+        "data-table",
+        "data-list",
+        "spinner",
+        "button"
+      ]
+    },
+    {
+      "name": "metric-card",
+      "type": "registry:ui",
+      "title": "Metric Card",
+      "description": "KPI tile for a dashboard number: icon, title, value, optional percent change (revenue, volume, counts).",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/tooltip"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/metric-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/metric-card.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "iconColor": [
+          "blue",
+          "green",
+          "red",
+          "grey"
+        ],
+        "info": "boolean",
+        "transparent": "boolean",
+        "loading": "boolean"
+      },
+      "examples": [
+        {
+          "description": "KPI with percent change",
+          "code": "<MetricCard\n  icon={<RevenueIcon />}\n  iconColor=\"blue\"\n  title=\"Gross volume\"\n  content=\"SGD 11,170.00\"\n  info\n  tooltip=\"PayNow, Cards, and Payment Link volume this period\"\n  percentValue={10}\n  percentTooltip=\"Compared to last month\"\n/>"
+        },
+        {
+          "description": "With footer",
+          "code": "<MetricCard\n  icon={<CustomersIcon />}\n  title=\"Customers\"\n  content=\"86\"\n  footer=\"Customer Data updated just now\"\n/>"
+        },
+        {
+          "description": "Loading",
+          "code": "<MetricCard title=\"Gross volume\" content=\"—\" loading />"
+        }
+      ],
+      "related_components": [
+        "detail-card",
+        "page-layout",
+        "tooltip"
+      ]
+    },
+    {
+      "name": "choice-card",
+      "type": "registry:ui",
+      "title": "Choice Card",
+      "description": "Pick one as a card (no radio dot). ChoiceCardGroup alignment vertical|horizontal.",
+      "dependencies": [
+        "@base-ui/react"
+      ],
+      "registryDependencies": [],
+      "files": [
+        {
+          "path": "src/components/form/choice-card.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/choice-card.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "alignment": [
+          "vertical",
+          "horizontal",
+          "left",
+          "center"
+        ],
+        "iconAlign": [
+          "left",
+          "center"
+        ]
+      },
+      "examples": [
+        {
+          "description": "Vertical group",
+          "code": "<ChoiceCardGroup defaultValue=\"paynow\">\n  <ChoiceCard\n    value=\"paynow\"\n    icon={<PayNowIcon />}\n    title=\"PayNow\"\n    description=\"Instant SGD transfers via QR\"\n  />\n  <ChoiceCard\n    value=\"cards\"\n    icon={<CardsIcon />}\n    title=\"Cards\"\n    description=\"Visa, Mastercard, and AMEX\"\n  />\n  <ChoiceCard\n    value=\"link\"\n    icon={<LinkIcon />}\n    title=\"Payment Link\"\n    description=\"Share a checkout URL with the customer\"\n  />\n</ChoiceCardGroup>"
+        },
+        {
+          "description": "Horizontal centered cards",
+          "code": "<ChoiceCardGroup defaultValue=\"invoice\" alignment=\"horizontal\">\n  <ChoiceCard\n    value=\"invoice\"\n    alignment=\"center\"\n    iconAlign=\"center\"\n    icon={<InvoiceIcon />}\n    title=\"Invoice\"\n    description=\"INV-2048\"\n    className=\"flex-1\"\n  />\n  <ChoiceCard\n    value=\"recurring\"\n    alignment=\"center\"\n    iconAlign=\"center\"\n    icon={<RecurringIcon />}\n    title=\"Recurring\"\n    description=\"Subscriptions\"\n    className=\"flex-1\"\n  />\n</ChoiceCardGroup>"
+        }
+      ],
+      "related_components": [
+        "radio-group",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "date-picker",
+      "type": "registry:ui",
+      "title": "Date Picker",
+      "description": "Date, range, and date-time picker. Do not import Calendar.",
+      "dependencies": [
+        "date-fns",
+        "@mingcute/react",
+        "react-day-picker"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/input",
+        "@orchid/popover"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/date-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/date-picker.tsx"
+        },
+        {
+          "path": "src/ui/calendar.tsx",
+          "type": "registry:file",
+          "target": "@ui/calendar.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "placeholder": "string",
+        "captionLayout": [
+          "dropdown",
+          "label",
+          "month",
+          "year"
+        ],
+        "defaultSelected": "Date | DateRange",
+        "selected": "Date | DateRange",
+        "onSelect": "function",
+        "startMonth": "Date",
+        "endMonth": "Date",
+        "disabled": "Matcher | Matcher[]"
+      },
+      "examples": [
+        {
+          "description": "Single date",
+          "code": "<>\n  <Label>Invoice due date</Label>\n  <DatePicker />\n</>"
+        },
+        {
+          "description": "Settlement range",
+          "code": "<DatePickerRange\n  defaultSelected={{\n    from: new Date(2026, 0, 20),\n    to: new Date(2026, 1, 9),\n  }}\n/>"
+        },
+        {
+          "description": "Date and time",
+          "code": "<>\n  <Label>Delivery at</Label>\n  <DateTimePicker defaultSelected={new Date(2026, 8, 15, 9, 30)} />\n</>"
+        },
+        {
+          "description": "Bounded (date of birth)",
+          "code": "<DatePicker\n  placeholder=\"Select date\"\n  defaultSelected={new Date(1994, 5, 15)}\n  startMonth={new Date(1900, 0)}\n  endMonth={new Date()}\n/>"
+        }
+      ],
+      "related_components": [
+        "field",
+        "label",
+        "input",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "form-builder",
+      "type": "registry:ui",
+      "title": "Form Builder",
+      "description": "JSON-schema form for create/edit. Wrap in FormLayout and submit through formId. Field types: input, password, textarea, select, combobox, radio, choice-card, checkbox, checkbox-group, accepted, switch, slider, input-group, date, datetime, date-range, file, quantity, object, section, section-item, hidden, phone. Use ResourcePicker or renderField for HitPay catalog entities.",
+      "dependencies": [
+        "@tanstack/react-form"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/checkbox",
+        "@orchid/select",
+        "@orchid/date-picker",
+        "@orchid/field",
+        "@orchid/input",
+        "@orchid/input-group",
+        "@orchid/quantity-input",
+        "@orchid/radio-group",
+        "@orchid/form-section",
+        "@orchid/slider",
+        "@orchid/textarea",
+        "@orchid/switch",
+        "@orchid/file-upload"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/form-builder.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/form-builder.tsx"
+        },
+        {
+          "path": "src/components/form/form-builder-model.ts",
+          "type": "registry:file",
+          "target": "@components/form/form-builder-model.ts"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "type": [
+          "input",
+          "password",
+          "textarea",
+          "select",
+          "combobox",
+          "radio",
+          "choice-card",
+          "checkbox",
+          "checkbox-group",
+          "accepted",
+          "switch",
+          "slider",
+          "input-group",
+          "object",
+          "hidden",
+          "phone",
+          "date",
+          "datetime",
+          "date-range",
+          "file",
+          "quantity",
+          "section",
+          "section-item"
+        ],
+        "columns": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "colSpan": [
+          1,
+          2,
+          3,
+          4,
+          "full"
+        ],
+        "required": "boolean",
+        "showIf": "string | string[]",
+        "renderField": "function"
+      },
+      "examples": [
+        {
+          "description": "Schema-driven fields",
+          "code": "function FormBuilderExample() {\n  const form = useFormBuilder({\n    fields: [\n      {\n        key: \"name\",\n        title: \"Customer name\",\n        type: \"input\",\n        placeholder: \"Priya Nair\",\n        required: true,\n      },\n      { key: \"qty\", title: \"Quantity\", type: \"quantity\", value: 1, min: 1, max: 99 },\n      { key: \"due\", title: \"Due date\", type: \"date\" },\n      {\n        key: \"channel\",\n        title: \"Payment channel\",\n        type: \"choice-card\",\n        options: [\n          { value: \"paynow\", label: \"PayNow\", description: \"Instant bank transfer\" },\n          { value: \"card\", label: \"Card\", description: \"Visa, Mastercard, AMEX\" },\n        ],\n      },\n    ],\n    onSubmit: () => undefined,\n  });\n\n  return (\n    <>\n      <FormBuilder form={form} id=\"invoice-form\" />\n      <Button type=\"submit\" form=\"invoice-form\">\n        Save invoice\n      </Button>\n    </>\n  );\n}\n\nrender(<FormBuilderExample />);"
+        },
+        {
+          "description": "Two-column layout",
+          "code": "function FormLayoutExample() {\n  const form = useFormBuilder({\n    fields: [\n      { key: \"basics\", title: \"Basics\", type: \"section\" },\n      { key: \"name\", title: \"Product name\", type: \"input\", required: true, value: \"\" },\n      { key: \"sku\", title: \"SKU\", type: \"input\", value: \"\" },\n      { key: \"price\", title: \"Price (SGD)\", type: \"input\", required: true, value: \"\" },\n      { key: \"qty\", title: \"Quantity\", type: \"quantity\", value: 1, min: 0, max: 999 },\n      {\n        key: \"description\",\n        title: \"Description\",\n        type: \"textarea\",\n        props: { colSpan: \"full\" },\n        value: \"\",\n      },\n    ],\n    onSubmit: () => undefined,\n  });\n\n  return (\n    <FormBuilder\n      form={form}\n      layout={{ columns: 2, types: { section: \"full\", textarea: \"full\" } }}\n    />\n  );\n}\n\nrender(<FormLayoutExample />);"
+        },
+        {
+          "description": "Conditional field (showIf)",
+          "code": "function ConditionalFormExample() {\n  const form = useFormBuilder({\n    fields: [\n      {\n        key: \"kind\",\n        title: \"Fulfillment\",\n        type: \"radio\",\n        options: [\n          { value: \"shipping\", label: \"Shipping\" },\n          { value: \"pickup\", label: \"Pickup\" },\n        ],\n        value: \"shipping\",\n      },\n      {\n        key: \"address\",\n        title: \"Shipping address\",\n        type: \"textarea\",\n        showIf: \"kind\",\n        showIfValue: \"shipping\",\n        value: \"\",\n      },\n      {\n        key: \"pickup_note\",\n        title: \"Pickup instructions\",\n        type: \"input\",\n        showIf: \"kind\",\n        showIfValue: \"pickup\",\n        value: \"\",\n      },\n    ],\n    onSubmit: () => undefined,\n  });\n\n  return <FormBuilder form={form} />;\n}\n\nrender(<ConditionalFormExample />);"
+        }
+      ],
+      "related_components": [
+        "form-layout",
+        "field",
+        "choice-card",
+        "date-picker",
+        "detail-card"
+      ]
+    },
+    {
+      "name": "quantity-input",
+      "type": "registry:ui",
+      "title": "Quantity Input",
+      "description": "Integer stepper. min/max/step.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/quantity-input.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/quantity-input.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "value": "number",
+        "defaultValue": "number",
+        "min": "number",
+        "max": "number",
+        "step": "number",
+        "disabled": "boolean",
+        "name": "string",
+        "onValueChange": "function"
+      },
+      "examples": [
+        {
+          "description": "Invoice line quantity",
+          "code": "<QuantityInput defaultValue={2} min={0} max={99} />"
+        },
+        {
+          "description": "With field label",
+          "code": "<Field>\n  <FieldLabel>Quantity</FieldLabel>\n  <QuantityInput name=\"quantity\" defaultValue={1} min={1} max={10} />\n  <FieldDescription>POS cart · SKU-TEA-12</FieldDescription>\n</Field>"
+        },
+        {
+          "description": "Disabled",
+          "code": "<QuantityInput defaultValue={5} disabled />"
+        }
+      ],
+      "related_components": [
+        "field",
+        "input",
+        "slider",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "text-editor",
+      "type": "registry:ui",
+      "title": "Text Editor",
+      "description": "Lexical rich text for notes. Bold, italic, heading, lists. Persist editor JSON.",
+      "dependencies": [
+        "lexical",
+        "@lexical/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/utils"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/text-editor.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/text-editor.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "defaultValue": "TextEditorDocument | string (Lexical JSON)",
+        "editable": "boolean",
+        "onValueChange": "function"
+      },
+      "examples": [
+        {
+          "description": "Empty note",
+          "code": "function EmptyNoteExample() {\n  return <TextEditor />;\n}\n\nrender(<EmptyNoteExample />);"
+        },
+        {
+          "description": "Prefilled handover",
+          "code": "function HandoverNoteExample() {\n  const HANDOVER_NOTE = \"{\\\"root\\\":{\\\"children\\\":[{\\\"children\\\":[{\\\"detail\\\":0,\\\"format\\\":0,\\\"mode\\\":\\\"normal\\\",\\\"style\\\":\\\"\\\",\\\"text\\\":\\\"Shift handover\\\",\\\"type\\\":\\\"text\\\",\\\"version\\\":1}],\\\"direction\\\":\\\"ltr\\\",\\\"format\\\":\\\"\\\",\\\"indent\\\":0,\\\"type\\\":\\\"heading\\\",\\\"version\\\":1,\\\"tag\\\":\\\"h2\\\"},{\\\"children\\\":[{\\\"detail\\\":0,\\\"format\\\":0,\\\"mode\\\":\\\"normal\\\",\\\"style\\\":\\\"\\\",\\\"text\\\":\\\"Note what the next team needs to know. Keep it short.\\\",\\\"type\\\":\\\"text\\\",\\\"version\\\":1}],\\\"direction\\\":\\\"ltr\\\",\\\"format\\\":\\\"\\\",\\\"indent\\\":0,\\\"type\\\":\\\"paragraph\\\",\\\"version\\\":1}],\\\"direction\\\":\\\"ltr\\\",\\\"format\\\":\\\"\\\",\\\"indent\\\":0,\\\"type\\\":\\\"root\\\",\\\"version\\\":1}}\";\n  return <TextEditor defaultValue={HANDOVER_NOTE} />;\n}\n\nrender(<HandoverNoteExample />);"
+        },
+        {
+          "description": "Read only",
+          "code": "function ReadonlyNoteExample() {\n  const READONLY_NOTE = \"{\\\"root\\\":{\\\"children\\\":[{\\\"children\\\":[{\\\"detail\\\":0,\\\"format\\\":0,\\\"mode\\\":\\\"normal\\\",\\\"style\\\":\\\"\\\",\\\"text\\\":\\\"This note is locked. Staff can read it, not edit it.\\\",\\\"type\\\":\\\"text\\\",\\\"version\\\":1}],\\\"direction\\\":\\\"ltr\\\",\\\"format\\\":\\\"\\\",\\\"indent\\\":0,\\\"type\\\":\\\"paragraph\\\",\\\"version\\\":1}],\\\"direction\\\":\\\"ltr\\\",\\\"format\\\":\\\"\\\",\\\"indent\\\":0,\\\"type\\\":\\\"root\\\",\\\"version\\\":1}}\";\n  return <TextEditor editable={false} defaultValue={READONLY_NOTE} />;\n}\n\nrender(<ReadonlyNoteExample />);"
+        }
+      ],
+      "related_components": [
+        "textarea",
+        "field",
+        "form-builder"
+      ]
+    },
+    {
+      "name": "select",
+      "type": "registry:ui",
+      "title": "Select",
+      "description": "Props picker for a closed list or a searchable / multi select.",
+      "dependencies": [
+        "@base-ui/react",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/checkbox",
+        "@orchid/badge",
+        "@orchid/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/select.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/select.tsx"
+        },
+        {
+          "path": "src/ui/combobox.tsx",
+          "type": "registry:file",
+          "target": "@ui/combobox.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "options[].value": "string (required)",
+        "options[].label": "string (required) — trigger, chips, default row title",
+        "options[].description": "string — secondary line in menu; searchable",
+        "options[].image": "string | null — thumbnail URL in menu row",
+        "options[].disabled": "boolean",
+        "options": "SelectOption[]",
+        "value": "string | string[] | null",
+        "defaultValue": "string | string[] | null",
+        "onValueChange": "(value: string | string[] | null) => void",
+        "multiple": "boolean — chip input + checkbox rows",
+        "searchable": "boolean — filter by label and description",
+        "placeholder": "string — closed trigger or multi chip input",
+        "searchPlaceholder": "string — searchable input placeholder",
+        "empty": "string — no matches message",
+        "disabled": "boolean",
+        "invalid": "boolean",
+        "id": "string",
+        "size": [
+          "sm",
+          "default",
+          "inline"
+        ],
+        "contentClassName": "string",
+        "clearable": "boolean — searchable single select only",
+        "onBlur": "function",
+        "renderOption": "(option: SelectOption) => ReactNode — custom row; label still drives trigger and search"
+      },
+      "examples": [
+        {
+          "description": "Closed list",
+          "code": "function CurrencySelectExample() {\n  const CURRENCY_OPTIONS = [\n  { value: \"SGD\", label: \"SGD — Singapore Dollar\" },\n  { value: \"USD\", label: \"USD — US Dollar\" },\n  { value: \"MYR\", label: \"MYR — Malaysian Ringgit\" },\n  { value: \"IDR\", label: \"IDR — Indonesian Rupiah\" },\n];\n  return (\n    <Field>\n      <FieldLabel>Currency</FieldLabel>\n      <Select options={CURRENCY_OPTIONS} defaultValue=\"SGD\" />\n      <FieldDescription>Ordinary dropdown — no search field.</FieldDescription>\n    </Field>\n  );\n}\n\nrender(<CurrencySelectExample />);"
+        },
+        {
+          "description": "Searchable",
+          "code": "function ChannelSelectExample() {\n  const CHANNEL_OPTIONS = [\n  { value: \"pos\", label: \"POS\" },\n  { value: \"invoice\", label: \"Invoice\" },\n  { value: \"online_store\", label: \"Online Store\" },\n];\n  return (\n    <Field>\n      <FieldLabel>Sales channel</FieldLabel>\n      <Select\n        searchable\n        options={CHANNEL_OPTIONS}\n        placeholder=\"Search channels\"\n      />\n    </Field>\n  );\n}\n\nrender(<ChannelSelectExample />);"
+        },
+        {
+          "description": "Rich options (name + description + image)",
+          "code": "function LocationSelectExample() {\n  const LOCATION_OPTIONS = [\n  {\n    value: \"loc-main\",\n    label: \"Main Store\",\n    description: \"1 Harbourfront Walk, Singapore 098632\",\n  },\n  {\n    value: \"loc-wh\",\n    label: \"Warehouse\",\n    description: \"10 Tuas Avenue, Singapore 639135\",\n  },\n  {\n    value: \"loc-popup\",\n    label: \"Pop-up @ Orchard\",\n    description: \"Limited hours · Fri–Sun only\",\n    image: \"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=64&h=64&fit=crop\",\n  },\n];\n  return (\n    <Field>\n      <FieldLabel>Location</FieldLabel>\n      <Select\n        searchable\n        clearable\n        options={LOCATION_OPTIONS}\n        placeholder=\"Choose location\"\n      />\n      <FieldDescription>\n        Pass description or image on each option. Trigger shows label only.\n      </FieldDescription>\n    </Field>\n  );\n}\n\nrender(<LocationSelectExample />);"
+        },
+        {
+          "description": "Multiple with chips",
+          "code": "function MultiSelectExample() {\n  const CHANNEL_OPTIONS = [\n  { value: \"pos\", label: \"POS\" },\n  { value: \"invoice\", label: \"Invoice\" },\n  { value: \"online_store\", label: \"Online Store\" },\n];\n  return (\n    <Field>\n      <FieldLabel>Methods</FieldLabel>\n      <Select multiple options={CHANNEL_OPTIONS} defaultValue={[\"pos\"]} />\n    </Field>\n  );\n}\n\nrender(<MultiSelectExample />);"
+        }
+      ],
+      "related_components": [
+        "field",
+        "form-builder",
+        "resource-picker",
+        "choice-card"
+      ]
+    },
+    {
+      "name": "form-layout",
+      "type": "registry:ui",
+      "title": "Form Layout",
+      "description": "Page or modal shell for create/edit. One FormBuilder: formId matches the builder id. Several forms: actions.save.onClick. Browse and show pages use PageLayout.",
+      "dependencies": [],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/form-layout.tsx",
+          "type": "registry:ui",
+          "target": "@components/layout/form-layout.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "mode": [
+          "page",
+          "modal"
+        ],
+        "title": "string",
+        "description": "string",
+        "formId": "string",
+        "actions": "FormLayoutActions",
+        "onClose": "function",
+        "open": "boolean",
+        "onOpenChange": "function",
+        "size": [
+          "sm",
+          "default",
+          "lg",
+          "medium",
+          "fullscreen",
+          "confirmation"
+        ],
+        "persistent": "boolean"
+      },
+      "examples": [
+        {
+          "description": "Page create form",
+          "code": "function PageFormLayoutExample() {\n  const FORM_LAYOUT_FIELDS = [\n  {\n    key: \"name\",\n    title: \"Product name\",\n    type: \"input\",\n    placeholder: \"Studio Membership\",\n    required: true,\n    value: \"\",\n  },\n  { key: \"sku\", title: \"SKU\", type: \"input\", placeholder: \"SKU-MEM-001\", value: \"\" },\n  {\n    key: \"qty\",\n    title: \"Quantity\",\n    type: \"quantity\",\n    value: 1,\n    min: 0,\n    max: 999,\n  },\n  {\n    key: \"description\",\n    title: \"Description\",\n    type: \"textarea\",\n    placeholder: \"Shown in Online Store, POS, and invoices.\",\n    value: \"\",\n  },\n];\n  const formId = \"product-form\";\n  const form = useFormBuilder({\n    fields: FORM_LAYOUT_FIELDS,\n    onSubmit: () => undefined,\n  });\n\n  return (\n    <div className=\"h-96 overflow-hidden rounded-lg border border-oc-border\">\n      <FormLayout\n        title=\"Add product\"\n        description=\"Scroll the body; Save submits through formId.\"\n        formId={formId}\n        onClose={() => undefined}\n        actions={{ save: { label: \"Save product\" } }}\n      >\n        <FormBuilder id={formId} form={form} />\n      </FormLayout>\n    </div>\n  );\n}\n\nrender(<PageFormLayoutExample />);"
+        },
+        {
+          "description": "Modal create form",
+          "code": "function ModalFormLayoutExample() {\n  const FORM_LAYOUT_FIELDS = [\n  {\n    key: \"name\",\n    title: \"Product name\",\n    type: \"input\",\n    placeholder: \"Studio Membership\",\n    required: true,\n    value: \"\",\n  },\n  { key: \"sku\", title: \"SKU\", type: \"input\", placeholder: \"SKU-MEM-001\", value: \"\" },\n  {\n    key: \"qty\",\n    title: \"Quantity\",\n    type: \"quantity\",\n    value: 1,\n    min: 0,\n    max: 999,\n  },\n  {\n    key: \"description\",\n    title: \"Description\",\n    type: \"textarea\",\n    placeholder: \"Shown in Online Store, POS, and invoices.\",\n    value: \"\",\n  },\n];\n  const [open, setOpen] = useState(false);\n  const formId = \"customer-form\";\n  const form = useFormBuilder({\n    fields: FORM_LAYOUT_FIELDS,\n    onSubmit: () => setOpen(false),\n  });\n\n  return (\n    <>\n      <Button onClick={() => setOpen(true)}>Add customer</Button>\n      <FormLayout\n        mode=\"modal\"\n        open={open}\n        onOpenChange={setOpen}\n        title=\"Add customer\"\n        description=\"Cancel and Save stay pinned while fields scroll.\"\n        formId={formId}\n        size=\"lg\"\n        actions={{ save: { label: \"Save customer\" } }}\n      >\n        <FormBuilder id={formId} form={form} />\n      </FormLayout>\n    </>\n  );\n}\n\nrender(<ModalFormLayoutExample />);"
+        }
+      ],
+      "related_components": [
+        "form-builder",
+        "page-layout",
+        "dialog",
+        "button"
+      ]
+    },
+    {
+      "name": "page-layout",
+      "type": "registry:ui",
+      "title": "Page Layout",
+      "description": "Standard route page with built-in responsive padding, header, and scrollable content. Pass onBack on nested screens for a header back control.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/copy-button"
+      ],
+      "files": [
+        {
+          "path": "src/components/layout/page-layout.tsx",
+          "type": "registry:ui",
+          "target": "@components/layout/page-layout.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "title": "ReactNode",
+        "description": "ReactNode",
+        "badge": "ReactNode",
+        "copyValue": "string",
+        "actions": "ReactNode",
+        "onBack": "function",
+        "loading": "boolean",
+        "headerClassName": "string",
+        "contentClassName": "string"
+      },
+      "examples": [
+        {
+          "description": "List page",
+          "code": "<div className=\"h-96 overflow-hidden rounded-xl border border-oc-border\">\n  <PageLayout\n    title=\"Invoices\"\n    description=\"Create, send, and track invoices across payment channels.\"\n    actions={<Button>Create invoice</Button>}\n  >\n    <div className=\"rounded-xl border border-oc-border p-6 text-sm text-oc-muted-foreground\">\n      Invoice table or empty state goes here.\n    </div>\n  </PageLayout>\n</div>"
+        },
+        {
+          "description": "Nested detail with back",
+          "code": "<div className=\"h-[28rem] overflow-hidden rounded-xl border border-oc-border\">\n  <PageLayout\n    title=\"INV-2048\"\n    description=\"https://pay.hitpayapp.com/inv-2048\"\n    copyValue=\"https://pay.hitpayapp.com/inv-2048\"\n    badge={<Badge tone=\"green\">Paid</Badge>}\n    actions={<Button variant=\"outline\">Edit</Button>}\n    onBack={() => undefined}\n  >\n    <DetailCard\n      columns={2}\n      items={[\n        { key: \"customer\", label: \"Customer\", value: \"Alex Turner\", alignment: \"vertical\" },\n        { key: \"email\", label: \"Email\", value: \"alex@studio.co\", alignment: \"vertical\" },\n        { key: \"amount\", label: \"Amount\", value: \"SGD 128.00\", alignment: \"vertical\" },\n        { key: \"channel\", label: \"Channel\", value: \"PayNow\", alignment: \"vertical\" },\n      ]}\n    />\n  </PageLayout>\n</div>"
+        }
+      ],
+      "related_components": [
+        "app-layout",
+        "form-layout",
+        "detail-card",
+        "copy-button",
+        "button"
+      ]
+    },
+    {
+      "name": "command",
+      "type": "registry:ui",
+      "title": "Command",
+      "description": "Searchable command palette driven by open, onOpenChange, and groups.",
+      "dependencies": [
+        "cmdk",
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/dialog",
+        "@orchid/input-group"
+      ],
+      "files": [
+        {
+          "path": "src/components/overlays/command.tsx",
+          "type": "registry:ui",
+          "target": "@components/overlays/command.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "open": "boolean",
+        "onOpenChange": "function",
+        "title": "string",
+        "description": "string",
+        "placeholder": "string",
+        "empty": "ReactNode",
+        "groups": "CommandGroup[]",
+        "items[].value": "string",
+        "items[].keywords": "string[]",
+        "items[].shortcut": "string",
+        "items[].onSelect": "function"
+      },
+      "examples": [
+        {
+          "description": "Controlled palette",
+          "code": "function CommandExample() {\n  const [open, setOpen] = useState(false);\n  const COMMAND_GROUPS = [\n    {\n      heading: \"Pages\",\n      items: [\n        {\n          value: \"invoices\",\n          label: \"Invoices\",\n          keywords: [\"billing\"],\n          shortcut: \"I\",\n          onSelect: () => undefined,\n        },\n        {\n          value: \"outlets\",\n          label: \"Outlets\",\n          keywords: [\"pos\", \"store\"],\n          onSelect: () => undefined,\n        },\n      ],\n    },\n    {\n      heading: \"Customers\",\n      items: [\n        {\n          value: \"alex-turner\",\n          label: \"Alex Turner\",\n          onSelect: () => undefined,\n        },\n      ],\n    },\n  ];\n\n  return (\n    <>\n      <Button variant=\"outline\" onClick={() => setOpen(true)}>\n        Search\n      </Button>\n      <Command\n        open={open}\n        onOpenChange={setOpen}\n        placeholder=\"Search invoices, customers, pages…\"\n        groups={COMMAND_GROUPS}\n      />\n    </>\n  );\n}\n\nrender(<CommandExample />);"
+        }
+      ],
+      "related_components": [
+        "dialog",
+        "select",
+        "dropdown-menu"
+      ]
+    },
+    {
+      "name": "confirmation-modal",
+      "type": "registry:ui",
+      "title": "Confirmation Modal",
+      "description": "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/dialog",
+        "@orchid/input"
+      ],
+      "files": [
+        {
+          "path": "src/components/overlays/confirmation-modal.tsx",
+          "type": "registry:ui",
+          "target": "@components/overlays/confirmation-modal.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "ConfirmationModalProvider": "mount once at app root (e.g. __root.tsx)",
+        "useConfirmationModal().confirm": "Promise<boolean> — true if confirmed, false if cancelled",
+        "confirm().type": [
+          "delete",
+          "warning",
+          "success",
+          "question"
+        ],
+        "confirm().message": "ReactNode (required)",
+        "confirm().title": "ReactNode",
+        "confirm().description": "ReactNode",
+        "confirm().confirmLabel": "ReactNode",
+        "confirm().cancelLabel": "ReactNode",
+        "confirm().confirmPhrase": "string (type-to-confirm)",
+        "confirm().inputPlaceholder": "string"
+      },
+      "examples": [
+        {
+          "description": "Delete confirm",
+          "code": "function DeleteLinkExample() {\n  const confirm = useConfirmationModal();\n\n  return (\n    <Button\n      variant=\"destructive\"\n      onClick={async () => {\n        const ok = await confirm({\n          type: \"delete\",\n          message: \"Do you want to delete this payment link?\",\n          description: \"The action can't be undone.\",\n        });\n        if (ok) {\n          save();\n        }\n      }}\n    >\n      Delete link\n    </Button>\n  );\n}\n\nrender(<DeleteLinkExample />);"
+        },
+        {
+          "description": "Type phrase to confirm",
+          "code": "const ok = await confirm({\n  type: \"delete\",\n  message: \"Delete the weekend-workshop payment link?\",\n  description: \"The action can't be undone.\",\n  confirmPhrase: \"weekend-workshop\",\n});"
+        }
+      ],
+      "related_components": [
+        "dialog",
+        "button",
+        "input"
+      ]
+    },
+    {
+      "name": "resource-picker",
+      "type": "registry:ui",
+      "title": "Resource Picker",
+      "description": "Promise picker for HitPay list records (products, orders, charges, invoices). const pick = useResourcePicker(); await pick({ type }).",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/button",
+        "@orchid/badge",
+        "@orchid/spinner",
+        "@orchid/checkbox",
+        "@orchid/input",
+        "@orchid/radio-group",
+        "@orchid/select",
+        "@orchid/date-picker",
+        "@orchid/dialog"
+      ],
+      "files": [
+        {
+          "path": "src/components/form/resource-picker.tsx",
+          "type": "registry:ui",
+          "target": "@components/form/resource-picker.tsx"
+        },
+        {
+          "path": "src/components/form/hitpay-named-select.tsx",
+          "type": "registry:file",
+          "target": "@components/form/hitpay-named-select.tsx"
+        },
+        {
+          "path": "src/lib/select-store.ts",
+          "type": "registry:lib",
+          "target": "lib/select-store.ts"
+        },
+        {
+          "path": "src/lib/hitpay-commerce-selects.ts",
+          "type": "registry:lib",
+          "target": "lib/hitpay-commerce-selects.ts"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "ResourcePickerProvider.load": "ResourceLoad (required)",
+        "pick().type": "product | order | charge | invoice",
+        "pick().action": [
+          "add",
+          "select"
+        ],
+        "pick().multiple": "boolean | number (max selections)",
+        "pick().query": "string (initial search → keywords upstream)",
+        "pick().selectionIds": "ResourcePickerSelectionId[] (pre-selected ids + optional child ids)",
+        "pick().filter.status": "string (maps to statuses[] or invoice status)",
+        "pick().filter.locationId": "string (product/charge location_ids[] via extras)",
+        "pick().filter.categoryId": "string (product categories[])",
+        "load(input).page": "number — products, orders, charges",
+        "load(input).cursor": "string — invoices (and meta.next_cursor when present)",
+        "load(input).extras.category_ids": "comma-separated ids → product categories[] (multi)",
+        "load(input).extras.location_id": "product/charge location_ids[]",
+        "load(input).extras.channel": "product/ order channels[]",
+        "load(input).extras.date_from / date_to": "orders dateFrom/dateTo; charges date_from/date_to",
+        "load(input).extras.payment_method": "charges payment_methods[]",
+        "load(input).extras.inventory": "product inventory in_stock | out_of_stock",
+        "result[].id": "string",
+        "result[].resource": "ResourceRecord (optional snapshot)",
+        "result[].children": "product variation rows"
+      },
+      "examples": [
+        {
+          "description": "Pick products",
+          "code": "function PickProductsExample() {\n  const pick = useResourcePicker();\n\n  return (\n    <Button\n      variant=\"outline\"\n      onClick={async () => {\n        const items = await pick({ type: \"product\", multiple: 3 });\n        if (items) {\n          console.log(items);\n        }\n      }}\n    >\n      Add up to 3 products\n    </Button>\n  );\n}\n\nrender(\n  <ResourcePickerProvider load={demoLoad}>\n    <PickProductsExample />\n  </ResourcePickerProvider>,\n);"
+        },
+        {
+          "description": "App Studio load (`#/lib/resource`, shared with ResourceList)",
+          "code": "// src/lib/resource.ts — HitPay products, orders, charges, invoices\nimport { loadResourcePage } from \"#/lib/resource\";\nimport { ResourcePickerProvider } from \"@/components/form/resource-picker\";\n\n<ResourcePickerProvider load={(input) => loadResourcePage({ data: input })}>\n  {children}\n</ResourcePickerProvider>"
+        },
+        {
+          "description": "Pre-selected variants",
+          "code": "const items = await pick({\n  type: \"product\",\n  multiple: true,\n  selectionIds: [\n    { id: \"prod_1\", children: [{ id: \"var_a\" }] },\n    { id: \"prod_2\" },\n  ],\n});"
+        }
+      ],
+      "related_components": [
+        "dialog",
+        "select",
+        "form-builder",
+        "data-table",
+        "resource-list"
+      ]
+    },
+    {
+      "name": "resource-list",
+      "type": "registry:ui",
+      "title": "Resource List",
+      "description": "Server-driven HitPay catalog table (SchemaTable). ResourceListProvider + same ResourceLoad as the picker.",
+      "dependencies": [
+        "@mingcute/react"
+      ],
+      "registryDependencies": [
+        "@orchid/data-table",
+        "@orchid/resource-picker",
+        "@orchid/spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/resource-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/resource-list.tsx"
+        },
+        {
+          "path": "src/lib/resource-catalog.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-catalog.ts"
+        },
+        {
+          "path": "src/lib/resource-list-map.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-list-map.ts"
+        },
+        {
+          "path": "src/lib/resource-list-schema.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-list-schema.ts"
+        },
+        {
+          "path": "src/components/form/resource-picker-filter-form.tsx",
+          "type": "registry:file",
+          "target": "@components/form/resource-picker-filter-form.tsx"
+        }
+      ],
+      "category": "components",
+      "props": {
+        "ResourceListProvider.load": "ResourceLoad (required)",
+        "ResourceListProvider.children": "ReactNode",
+        "ResourceList.type": "product | order | charge | invoice",
+        "ResourceList.className": "string",
+        "ResourceList.onRowClick": "(row) => void",
+        "ResourceList.onRowAction": "(action, row) => void",
+        "ResourceList.onSelectionAction": "(action, selectedIds) => void",
+        "ResourceList.onEmptyAction": "(action) => void",
+        "ResourceList.cells": "optional SchemaTableCells overrides",
+        "load(input).type": "product | order | charge | invoice",
+        "load(input).query": "string → keywords upstream",
+        "load(input).filter": "string (status; maps to statuses[] or invoice status)",
+        "load(input).page": "number — products, orders, charges",
+        "load(input).cursor": "string — invoices",
+        "load(input).extras.category_ids": "comma-separated ids → product categories[] (multi)",
+        "load(input).extras.location_id": "product/charge location_ids[]",
+        "load(input).extras.channel": "product/order channels[]",
+        "load(input).extras.date_from / date_to": "orders dateFrom/dateTo; charges date_from/date_to",
+        "load(input).extras.payment_method": "charges payment_methods[]",
+        "load(input).extras.inventory": "product inventory in_stock | out_of_stock",
+        "ResourcePage.items": "ResourceItem[]",
+        "ResourcePage.hasMore": "boolean",
+        "ResourcePage.total": "optional meta total",
+        "ResourcePage.cursor": "invoices"
+      },
+      "examples": [
+        {
+          "description": "Products",
+          "code": "function ProductResourceListExample() {\n  return (\n    <ResourceListProvider load={demoLoad}>\n      <ResourceList\n        type=\"product\"\n        className=\"min-w-0\"\n        onRowAction={(action, row) => console.log(action, row.id)}\n        onSelectionAction={(action, ids) => console.log(action.key, ids)}\n        onEmptyAction={(action) => console.log(action.key)}\n      />\n    </ResourceListProvider>\n  );\n}\n\nrender(<ProductResourceListExample />);"
+        },
+        {
+          "description": "Orders",
+          "code": "function OrderResourceListExample() {\n  return (\n    <ResourceListProvider load={demoLoad}>\n      <ResourceList\n        type=\"order\"\n        className=\"min-w-0\"\n        onRowAction={(action, row) => console.log(action, row.id)}\n        onSelectionAction={(action, ids) => console.log(action.key, ids)}\n        onEmptyAction={(action) => console.log(action.key)}\n      />\n    </ResourceListProvider>\n  );\n}\n\nrender(<OrderResourceListExample />);"
+        },
+        {
+          "description": "Charges",
+          "code": "function ChargeResourceListExample() {\n  return (\n    <ResourceListProvider load={demoLoad}>\n      <ResourceList\n        type=\"charge\"\n        className=\"min-w-0\"\n        onRowAction={(action, row) => console.log(action, row.id)}\n        onSelectionAction={(action, ids) => console.log(action.key, ids)}\n        onEmptyAction={(action) => console.log(action.key)}\n      />\n    </ResourceListProvider>\n  );\n}\n\nrender(<ChargeResourceListExample />);"
+        },
+        {
+          "description": "Invoices",
+          "code": "function InvoiceResourceListExample() {\n  return (\n    <ResourceListProvider load={demoLoad}>\n      <ResourceList\n        type=\"invoice\"\n        className=\"min-w-0\"\n        onRowAction={(action, row) => console.log(action, row.id)}\n        onSelectionAction={(action, ids) => console.log(action.key, ids)}\n        onEmptyAction={(action) => console.log(action.key)}\n      />\n    </ResourceListProvider>\n  );\n}\n\nrender(<InvoiceResourceListExample />);"
+        },
+        {
+          "description": "App Studio load (`#/lib/resource`, shared with ResourcePicker)",
+          "code": "// src/lib/resource.ts — same load as ResourcePicker\nimport { loadResourcePage } from \"#/lib/resource\";\nimport { ResourceListProvider } from \"@/components/displaying-data/resource-list\";\n\n<ResourceListProvider load={(input) => loadResourcePage({ data: input })}>\n  {children}\n</ResourceListProvider>"
+        },
+        {
+          "description": "Product catalog route",
+          "code": "import { ResourceList } from \"@/components/displaying-data/resource-list\";\n\nexport function ProductsPage() {\n  return (\n    <ResourceList\n      type=\"product\"\n      onRowClick={(row) => {\n        console.log(row.id, row.resource);\n      }}\n    />\n  );\n}"
+        }
+      ],
+      "related_components": [
+        "data-table",
+        "resource-picker",
+        "form-builder",
+        "empty",
+        "pagination"
+      ]
+    }
+  ]
+}
