@@ -30,6 +30,22 @@ const buttonGroupDocs = {
   <Button variant="outline">Month</Button>
 </ButtonGroup>`,
     },
+    {
+      description: "Split dropdown",
+      code: `<ButtonGroup>
+  <Button>Create invoice</Button>
+  <DropdownMenu>
+    <DropdownMenuTrigger
+      nativeButton
+      render={<Button size="icon" aria-label="More actions"><DownIcon /></Button>}
+    />
+    <DropdownMenuContent>
+      <DropdownMenuItem>Duplicate invoice</DropdownMenuItem>
+      <DropdownMenuItem>Send invoice</DropdownMenuItem>
+    </DropdownMenuContent>
+  </DropdownMenu>
+</ButtonGroup>`,
+    },
   ],
   related_components: ["button", "dropdown-menu", "separator"],
 };

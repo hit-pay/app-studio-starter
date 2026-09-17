@@ -1,4 +1,25 @@
+import { DocExamples } from "../doc-code-panel"
 import { ButtonGroupDemo } from "../doc-demos"
+import { Button } from "../../src/ui/button"
+import { ButtonGroup } from "../../src/ui/button-group"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "../../src/ui/dropdown-menu"
+import { DownRegular } from "@mingcute/react/core-regular"
+import buttonGroupDocs from "./button-group"
 
-Use `ButtonGroup` to visually group related actions or mutually related controls. Choose it when the actions share context; use `Tabs` for navigation between views.
-<ButtonGroupDemo />
+<DocExamples
+  examples={buttonGroupDocs.examples}
+  scope={{
+    Button,
+    ButtonGroup,
+    DownIcon: DownRegular,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuItem,
+    DropdownMenuTrigger,
+  }}
+/>

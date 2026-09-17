@@ -3,8 +3,10 @@ import {
   CheckRegular,
   CopyRegular,
 } from '@mingcute/react/core-regular'
+import { LiveError, LivePreview, LiveProvider } from 'react-live'
 
 import { Button } from '@ui/button'
+import { AddRegular } from '@mingcute/react/core-regular'
 
 function DocCodePanel({
   filename,
@@ -39,4 +41,39 @@ function DocCodePanel({
   )
 }
 
-export { DocCodePanel }
+function DocExamples({
+  examples,
+  scope = {},
+}: {
+  examples: Array<{ description: string; code: string }>
+  scope?: Record<string, unknown>
+}) {
+  return (
+    <div className="grid gap-6">
+      {examples.map((example) => (
+        <div key={example.description} className="grid gap-3">
+          <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+            {example.description}
+          </p>
+          <LiveProvider
+            code={example.code}
+            scope={{
+              AddIcon: AddRegular,
+              Button,
+              save: () => undefined,
+              ...scope,
+            }}
+          >
+            <div className="flex min-h-16 items-center rounded-xl border border-solid border-oc-border p-4">
+              <LivePreview />
+            </div>
+            <LiveError className="text-sm text-oc-destructive" />
+          </LiveProvider>
+          <DocCodePanel filename="usage.tsx" code={example.code} />
+        </div>
+      ))}
+    </div>
+  )
+}
+
+export { DocCodePanel, DocExamples }
