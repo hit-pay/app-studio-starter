@@ -11,12 +11,20 @@ import { AppLayout } from '@/components/layout/app-layout'
 import { PageLayout } from '@/components/layout/page-layout'
 import { Button } from '@ui/button'
 
-const invoicesRootRoute = createRootRoute({ component: () => <Outlet /> })
+function DemoRoot() {
+  return (
+    <div className="flex h-full min-h-0 flex-col bg-oc-background">
+      <Outlet />
+    </div>
+  )
+}
+
+const invoicesRootRoute = createRootRoute({ component: DemoRoot })
 
 function InvoicesShell() {
   return (
     <AppLayout
-      className="h-full"
+      className="h-full min-h-0"
       appName="Invoices"
       appBarActions={<Button size="sm">Create invoice</Button>}
       variant="tabs"
@@ -67,12 +75,12 @@ const invoicesDemoRouter = createRouter({
   history: createMemoryHistory({ initialEntries: ['/invoices'] }),
 })
 
-const settingsRootRoute = createRootRoute({ component: () => <Outlet /> })
+const settingsRootRoute = createRootRoute({ component: DemoRoot })
 
 function SettingsShell() {
   return (
     <AppLayout
-      className="h-full"
+      className="h-full min-h-0"
       appName="Settings"
       variant="sidebar"
       navigationItems={[
@@ -120,15 +128,32 @@ const settingsDemoRouter = createRouter({
   history: createMemoryHistory({ initialEntries: ['/settings'] }),
 })
 
+function AppLayoutDemoFrame({
+  label,
+  router,
+}: {
+  label: string
+  router: typeof invoicesDemoRouter | typeof settingsDemoRouter
+}) {
+  return (
+    <div className="grid gap-3">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+        {label}
+      </p>
+      <div className="h-80 overflow-hidden rounded-lg border border-solid border-oc-border bg-oc-background">
+        <div className="h-full min-h-0">
+          <RouterProvider router={router} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
 function AppLayoutDemo() {
   return (
     <div className="flex min-h-0 flex-col gap-8">
-      <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
-        <RouterProvider router={invoicesDemoRouter} />
-      </div>
-      <div className="h-80 overflow-hidden rounded-lg border border-oc-border">
-        <RouterProvider router={settingsDemoRouter} />
-      </div>
+      <AppLayoutDemoFrame label="Tabs" router={invoicesDemoRouter} />
+      <AppLayoutDemoFrame label="Sidebar" router={settingsDemoRouter} />
     </div>
   )
 }

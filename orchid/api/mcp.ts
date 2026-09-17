@@ -42,6 +42,8 @@ import textEditorDocs from "../docs/components/text-editor";
 import selectDocs from "../docs/components/select";
 import formLayoutDocs from "../docs/components/form-layout";
 import pageLayoutDocs from "../docs/components/page-layout";
+import commandDocs from "../docs/components/command";
+import confirmationModalDocs from "../docs/components/confirmation-modal";
 
 const handler = createMcpHandler(
   (server) => {
@@ -55,7 +57,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs, dataListDocs, dataTableDocs, detailCardDocs, emptyDocs, metricCardDocs, choiceCardDocs, datePickerDocs, formBuilderDocs, quantityInputDocs, textEditorDocs, selectDocs, formLayoutDocs, pageLayoutDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs, dataListDocs, dataTableDocs, detailCardDocs, emptyDocs, metricCardDocs, choiceCardDocs, datePickerDocs, formBuilderDocs, quantityInputDocs, textEditorDocs, selectDocs, formLayoutDocs, pageLayoutDocs, commandDocs, confirmationModalDocs].filter(
           (component) => !category || component.category === category,
         );
 

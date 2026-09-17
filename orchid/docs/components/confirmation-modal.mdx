@@ -1,2 +1,30 @@
+import { DocCodePanel, DocExamples, DocPropsTable } from "../doc-code-panel"
+import { ConfirmationModalDemo } from "../ui/demos/confirmation-modal-demo"
+import { useConfirmationModal } from "../../src/components/overlays/confirmation-modal"
+import confirmationModalDocs from "./confirmation-modal"
 
-Use `ConfirmationModal` to ask for confirmation before a consequential action. Choose it for a focused yes/no decision; use `Dialog` for general content or interaction.
+Use `ConfirmationModal` to ask for confirmation before a consequential action. Mount **`ConfirmationModalProvider`** once at the app root, then call **`useConfirmationModal()`** anywhere below. The hook returns `confirm(options)` which resolves to `true` or `false`. Choose it for a focused yes/no decision; use `Dialog` for general content or interaction.
+
+## Props
+
+<DocPropsTable props={confirmationModalDocs.props} />
+
+## Examples
+
+<ConfirmationModalDemo />
+
+<DocExamples
+  noInline
+  examples={[confirmationModalDocs.examples[0]]}
+  scope={{
+    useConfirmationModal,
+    save: () => undefined,
+  }}
+/>
+
+<div className="grid gap-3">
+  <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+    {confirmationModalDocs.examples[1].description}
+  </p>
+  <DocCodePanel filename="usage.tsx" code={confirmationModalDocs.examples[1].code} />
+</div>

@@ -9,6 +9,13 @@ const appLayoutDocs = {
   ...appLayoutRegistry,
   category: "components",
   requiresTanStackRouter: true,
+  usage: [
+    "TanStack Start only: put AppLayout in a layout route (route.tsx), wrap child routes with <Outlet />.",
+    "Use one navigationItems array for all variants; variant tabs = horizontal links, variant sidebar = vertical links (+ mobile drawer).",
+    "Each item needs id, label, and to (router path). Active item is derived from the URL — no onNavigationChange.",
+    "Child routes render PageLayout (or form/content); paths in to must match createFileRoute paths (e.g. /invoices and /invoices/sent).",
+    "Optional appBarActions for buttons on the right of appName. Must render inside RouterProvider.",
+  ].join(" "),
   props: {
     variant: ["default (no nav chrome)", "tabs (horizontal)", "sidebar (vertical)"],
     appName: "ReactNode",

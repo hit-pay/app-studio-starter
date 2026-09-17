@@ -1,11 +1,14 @@
 import { DocCodePanel, DocPropsTable } from "../doc-code-panel"
+import { AppLayoutDemo } from "../ui/demos/app-layout-demo"
 import appLayoutDocs from "./app-layout"
 
-Use `AppLayout` as the embedded HitPay App Studio frame around dashboard routes built with **TanStack Start / TanStack Router**. Put it in a **layout route** (`route.tsx`), set `navigationItems[].to`, pick `variant="tabs"` or `variant="sidebar"` for layout, and render child routes with `<Outlet />`. Navigation and active state come from the router only — no separate change handlers. Use `appBarActions` for controls aligned to the right of `appName` (for example a primary button). Do not use this component outside a router tree.
+<AppLayoutDemo />
 
 ## Props
 
 <DocPropsTable props={appLayoutDocs.props} />
+
+## TanStack Start routes
 
 <div className="grid gap-6">
   {appLayoutDocs.examples.map((example) => (
