@@ -16,8 +16,12 @@ filters, or confirmations when they belong in the requested app.
 ## Layout
 
 - `src/routes/` — pages; `index.tsx` is the main page
-- `src/lib/` — app helpers (HitPay, Turso, form draft)
-- `src/lib/resource/` — HitPay load + map for Orchid ResourcePicker and ResourceList
+- `src/lib/` — app helpers (session, roles, Turso, proxy)
+- `src/lib/resource/` — load + map for Orchid ResourcePicker and ResourceList
+- `src/lib/roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
+- `src/lib/current-user.ts` — `useCurrentUser` (browser)
+- `src/lib/server/session.ts` — `getSession`, `requireRoles`
+- `src/lib/server/proxy.ts` — `proxyRequest` for `/v1/*` via App Studio
 - `src/lib/server/` — `createServerFn` only
 - `migrations/` — Turso
 - `docs/current-user.md` — current user, role, and session cookie contract
@@ -48,7 +52,8 @@ Call MCP before writing UI or data code. Start with `tools/list`.
    result after install.
 
 2. App Studio — `tools/list`, then call the advertised tools. Persist list
-   data in Turso via `createServerFn` and existing role/session checks.
+   data in Turso via `createServerFn` and `requireRoles` from
+   `#/lib/server/session`.
 
    After App Studio MCP, if you need request/response schema or query
    details, read only the matching files:
@@ -68,7 +73,7 @@ Do not ship pre-installed components in this starter. Find components via
 Orchid MCP, then `npx shadcn@latest add @orchid/<name> … -y` (creates
 `src/components/` and `src/ui/`). Compose pages from those installs. Do not
 build custom visual components, ad-hoc HTML layouts, or third-party UI kits.
-Keep HitPay mapping/load in `src/lib/resource/` — app helpers for Orchid
+Keep mapping/load in `src/lib/resource/` — app helpers for Orchid
 ResourcePicker and ResourceList, not Orchid files. Import
 `loadResourcePickerPage` from `#/lib/resource`.
 

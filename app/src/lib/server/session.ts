@@ -1,21 +1,21 @@
 import { getRequest } from '@tanstack/react-start/server'
 import { proxyUrl } from '#/lib/server/app-token'
 
-export type HitPaySessionRole = {
+export type SessionRole = {
   id: string
   title: string
 }
 
-export type HitPaySession = {
+export type Session = {
   id: string
   email: string
   name: string | null
-  role: HitPaySessionRole | null
+  role: SessionRole | null
 }
 
-const sessionByRequest = new WeakMap<Request, Promise<HitPaySession>>()
+const sessionByRequest = new WeakMap<Request, Promise<Session>>()
 
-function sessionFromPayload(parsed: Record<string, unknown>): HitPaySession | null {
+function sessionFromPayload(parsed: Record<string, unknown>): Session | null {
   if (typeof parsed.id !== 'string' || typeof parsed.email !== 'string') {
     return null
   }
@@ -30,15 +30,15 @@ function sessionFromPayload(parsed: Record<string, unknown>): HitPaySession | nu
       role !== null
       && typeof role === 'object'
       && !Array.isArray(role)
-      && typeof (role as HitPaySessionRole).id === 'string'
-      && typeof (role as HitPaySessionRole).title === 'string'
-        ? { id: (role as HitPaySessionRole).id, title: (role as HitPaySessionRole).title }
+      && typeof (role as SessionRole).id === 'string'
+      && typeof (role as SessionRole).title === 'string'
+        ? { id: (role as SessionRole).id, title: (role as SessionRole).title }
         : null,
   }
 }
 
-/** Trusted identity loaded through the App Studio user-info proxy. */
-export async function getHitPaySession(): Promise<HitPaySession> {
+/** Trusted identity from GET /api/apps/{app}/current-user. See docs/current-user.md. */
+export async function getSession(): Promise<Session> {
   const request = getRequest()
   const cached = sessionByRequest.get(request)
 
@@ -50,7 +50,7 @@ export async function getHitPaySession(): Promise<HitPaySession> {
     const appId = process.env.APP_STUDIO_APP_ID?.trim() ?? ''
 
     if (!appId) {
-      throw new Error('Sign in to HitPay to use this app.')
+      throw new Error('Sign in to use this app.')
     }
 
     const cookie = request.headers.get('cookie')
@@ -65,14 +65,14 @@ export async function getHitPaySession(): Promise<HitPaySession> {
     )
 
     if (!response.ok) {
-      throw new Error('Sign in to HitPay to use this app.')
+      throw new Error('Sign in to use this app.')
     }
 
     const body = await response.json() as Record<string, unknown>
     const session = sessionFromPayload(body)
 
     if (session === null) {
-      throw new Error('The HitPay user response is malformed.')
+      throw new Error('The current-user response is malformed.')
     }
 
     return session
@@ -88,10 +88,10 @@ export async function getHitPaySession(): Promise<HitPaySession> {
   }
 }
 
-export async function requireHitPayRoles(
+export async function requireRoles(
   allowedTitles: readonly string[],
-): Promise<HitPaySession> {
-  const session = await getHitPaySession()
+): Promise<Session> {
+  const session = await getSession()
   const title = session.role?.title
 
   if (!title || !allowedTitles.includes(title)) {

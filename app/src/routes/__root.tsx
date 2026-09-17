@@ -1,6 +1,5 @@
 import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
 
-import { QueryProvider } from '#/lib/query'
 import '../styles.css'
 
 function NotFound() {
@@ -18,7 +17,7 @@ export const Route = createRootRoute({
     meta: [
       { charSet: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'HitPay App' },
+      { title: 'App' },
     ],
     links: [
       { rel: 'icon', href: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="%232465de"/></svg>' },
@@ -40,7 +39,7 @@ function RootDocument({ children }: { children: React.ReactNode }) {
         <HeadContent />
       </head>
       <body className="h-full">
-        <QueryProvider>{children}</QueryProvider>
+        {children}
         <Scripts />
       </body>
     </html>

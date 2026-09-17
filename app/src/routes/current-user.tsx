@@ -1,12 +1,12 @@
 import { createFileRoute } from '@tanstack/react-router'
-import { useHitPayUser } from '#/lib/hitpay'
+import { useCurrentUser } from '#/lib/current-user'
 
 export const Route = createFileRoute('/current-user')({
   component: CurrentUserPage,
 })
 
 function CurrentUserPage() {
-  const { user, error, loading } = useHitPayUser()
+  const { user, error, loading } = useCurrentUser()
 
   return (
     <main className="mx-auto w-full max-w-2xl p-6">

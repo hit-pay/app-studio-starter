@@ -1,5 +1,5 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { studioAppId } from '#/lib/studio-app-id'
+import { studioAppId } from '#/lib/utils'
 import { getAppToken, proxyUrl } from '#/lib/server/app-token'
 
 const proxyPaths: Record<string, string> = {
@@ -17,18 +17,15 @@ const proxyPaths: Record<string, string> = {
   '/v1/shipping': '/integrations/hitpay/shipping',
 }
 
-/**
- * Server-only HitPay access through App Studio.
- * The app sends only its short-lived app token cookie; provider secrets stay in the proxy.
- */
-export async function hitpayRequest(path: string, init: RequestInit = {}): Promise<Response> {
+/** Server-only App Studio proxy. Provider secrets stay in the proxy. */
+export async function proxyRequest(path: string, init: RequestInit = {}): Promise<Response> {
   const request = getRequest()
   const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
   const url = new URL(path, request.url)
   const proxyPath = proxyPaths[url.pathname]
 
   if (!proxyPath) {
-    throw new Error(`Unsupported HitPay proxy path: ${url.pathname}`)
+    throw new Error(`Unsupported proxy path: ${url.pathname}`)
   }
 
   for (let attempt = 0; attempt < 2; attempt += 1) {
@@ -43,7 +40,6 @@ export async function hitpayRequest(path: string, init: RequestInit = {}): Promi
     if (response.status !== 401 || attempt === 1) {
       return response
     }
-
   }
 
   throw new Error('Unable to authorize the App Studio proxy request.')

@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 
-import { HITPAY_ALL_ROLES } from '#/lib/hitpay-roles'
-import { requireHitPayRoles } from '#/lib/server/hitpay'
+import { ALL_ROLES } from '#/lib/roles'
+import { requireRoles } from '#/lib/server/session'
 import {
   deleteFile as removeStoredFile,
   FILE_MAX_BYTES,
@@ -36,7 +36,7 @@ export const uploadFile = createServerFn({ method: 'POST' })
     entityId?: string | null
   }) => data)
   .handler(async ({ data }): Promise<FileMeta> => {
-    await requireHitPayRoles(HITPAY_ALL_ROLES)
+    await requireRoles(ALL_ROLES)
     return insertFile({
       name: data.name,
       mimeType: data.mimeType,
@@ -49,7 +49,7 @@ export const uploadFile = createServerFn({ method: 'POST' })
 export const getFile = createServerFn({ method: 'GET' })
   .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<(FileMeta & { dataBase64: string }) | null> => {
-    await requireHitPayRoles(HITPAY_ALL_ROLES)
+    await requireRoles(ALL_ROLES)
     const file = await loadStoredFile(data.id)
 
     if (!file) {
@@ -66,13 +66,13 @@ export const getFile = createServerFn({ method: 'GET' })
 export const listFiles = createServerFn({ method: 'GET' })
   .validator((data: { entityType: string; entityId: string }) => data)
   .handler(async ({ data }): Promise<FileMeta[]> => {
-    await requireHitPayRoles(HITPAY_ALL_ROLES)
+    await requireRoles(ALL_ROLES)
     return loadStoredFiles(data)
   })
 
 export const deleteFile = createServerFn({ method: 'POST' })
   .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<void> => {
-    await requireHitPayRoles(HITPAY_ALL_ROLES)
+    await requireRoles(ALL_ROLES)
     await removeStoredFile(data.id)
   })

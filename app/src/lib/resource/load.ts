@@ -1,9 +1,9 @@
-/** HitPay list queries for ResourcePicker and ResourceList — see app/docs/hitpay/{products,orders,charges,invoices}.md */
+/** List queries for ResourcePicker and ResourceList — see docs/hitpay/{products,orders,charges,invoices}.md */
 import { createServerFn } from '@tanstack/react-start'
 
-import { HITPAY_ALL_ROLES } from '#/lib/hitpay-roles'
-import { requireHitPayRoles } from '#/lib/server/hitpay'
-import { hitpayRequest } from '#/lib/server/hitpay-api'
+import { ALL_ROLES } from '#/lib/roles'
+import { requireRoles } from '#/lib/server/session'
+import { proxyRequest } from '#/lib/server/proxy'
 
 import { mapResourcePickerPayload } from './map'
 import type { ResourcePickerLoadInput, ResourcePickerPage } from './map'
@@ -39,7 +39,7 @@ const CHARGE_STATUSES = [
 const loadResourcePickerPage = createServerFn({ method: 'GET' })
   .validator((data: ResourcePickerLoadInput) => data)
   .handler(async ({ data }): Promise<ResourcePickerPage> => {
-    await requireHitPayRoles(HITPAY_ALL_ROLES)
+    await requireRoles(ALL_ROLES)
     const query = new URLSearchParams()
     const page = data.page || 1
 
@@ -62,7 +62,7 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       for (const categoryId of categoryIdsFromExtras(data.extras)) {
         query.append('categories[]', categoryId)
       }
-      const response = await hitpayRequest(`/v1/products?${query}`)
+      const response = await proxyRequest(`/v1/products?${query}`)
       if (!response.ok) throw new Error('Could not load products.')
       return mapResourcePickerPayload(data, await response.json())
     }
@@ -81,7 +81,7 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       }
       if (data.extras?.date_from) query.set('dateFrom', data.extras.date_from)
       if (data.extras?.date_to) query.set('dateTo', data.extras.date_to)
-      const response = await hitpayRequest(`/v1/orders?${query}`)
+      const response = await proxyRequest(`/v1/orders?${query}`)
       if (!response.ok) throw new Error('Could not load orders.')
       return mapResourcePickerPayload(data, await response.json())
     }
@@ -103,7 +103,7 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       }
       if (data.extras?.date_from) query.set('date_from', data.extras.date_from)
       if (data.extras?.date_to) query.set('date_to', data.extras.date_to)
-      const response = await hitpayRequest(`/v1/charges?${query}`)
+      const response = await proxyRequest(`/v1/charges?${query}`)
       if (!response.ok) throw new Error('Could not load charges.')
       return mapResourcePickerPayload(data, await response.json())
     }
@@ -113,7 +113,7 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       if (data.query) query.set('keywords', data.query)
       if (data.filter !== 'all') query.set('status', data.filter)
       if (data.cursor) query.set('cursor', data.cursor)
-      const response = await hitpayRequest(`/v1/invoices?${query}`)
+      const response = await proxyRequest(`/v1/invoices?${query}`)
       if (!response.ok) throw new Error('Could not load invoices.')
       return mapResourcePickerPayload(data, await response.json())
     }

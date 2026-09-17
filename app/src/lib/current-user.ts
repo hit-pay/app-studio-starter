@@ -1,39 +1,39 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
-import { studioAppId } from '@/lib/studio-app-id'
+import { studioAppId } from '#/lib/utils'
 import { getAppToken } from '#/lib/server/app-token'
 
 export {
-  HITPAY_ALL_ROLES,
-  HITPAY_MANAGER_ROLES,
-  HITPAY_ROLE,
-} from '@/lib/hitpay-roles'
-export type { HitPayRoleTitle } from '@/lib/hitpay-roles'
+  ALL_ROLES,
+  MANAGER_ROLES,
+  ROLE,
+} from '@/lib/roles'
+export type { RoleTitle } from '@/lib/roles'
 
-export type HitPayRole = {
+export type Role = {
   id: string
   title: string
 }
 
-export type HitPayUser = {
+export type CurrentUser = {
   id: string
   email: string
   name: string | null
-  role: HitPayRole | null
+  role: Role | null
 }
 
-export type HitPayStaffLocation = {
+export type StaffLocation = {
   id: string
   name: string | null
 }
 
-export type HitPayStaffAppMember = {
+export type StaffAppMember = {
   id: string
   name: string | null
   role_id: string | null
-  role: HitPayRole | null
-  locations: HitPayStaffLocation[]
+  role: Role | null
+  locations: StaffLocation[]
 }
 
 function proxyUrl(path: string): URL {
@@ -61,7 +61,7 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
   const response = await fetch(url, { headers })
   if (!response.ok) {
     throw new Error(
-      `Unable to load HitPay app data (HTTP ${response.status}, `
+      `Unable to load app data (HTTP ${response.status}, `
       + `path=${url.pathname}, hasCookie=${headers.has('cookie')}, `
       + `hasBearer=${headers.has('authorization')}).`,
     )
@@ -70,13 +70,13 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
 }
 
 const loadUserInfo = createServerFn({ method: 'GET' }).handler(() =>
-  proxyJson<HitPayUser>('/current-user'))
+  proxyJson<CurrentUser>('/current-user'))
 
 const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
-  proxyJson<{ roles: HitPayRole[] }>('/roles', await getAppToken()))
+  proxyJson<{ roles: Role[] }>('/roles', await getAppToken()))
 
 const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () =>
-  proxyJson<{ members: HitPayStaffAppMember[] }>('/staff-app-members', await getAppToken()))
+  proxyJson<{ members: StaffAppMember[] }>('/staff-app-members', await getAppToken()))
 
 export const fetchUserInfo = () => loadUserInfo()
 export const fetchAppRoles = () => loadAppRoles()
@@ -95,13 +95,13 @@ function fetchUserInfoOnce() {
 }
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
-export function useHitPayUser(): {
-  user: HitPayUser | null
+export function useCurrentUser(): {
+  user: CurrentUser | null
   error: string | null
   loading: boolean
   retry: () => void
 } {
-  const [user, setUser] = useState<HitPayUser | null>(null)
+  const [user, setUser] = useState<CurrentUser | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [attempt, setAttempt] = useState(0)

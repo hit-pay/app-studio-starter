@@ -1,5 +1,5 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { studioAppId } from '#/lib/studio-app-id'
+import { studioAppId } from '#/lib/utils'
 
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
 
