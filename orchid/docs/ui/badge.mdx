@@ -1,2 +1,25 @@
 
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  Badge,
+  BadgeRemove,
+  UserBadge,
+} from "../../src/ui/badge"
+import { CircleDashRegular } from "@mingcute/react/core-regular"
+import badgeDocs from "./badge"
+
 Use `Badge` for a short, non-interactive status, category, or count label. Choose it when the value should be scanned inline; use `Banner` for a prominent message.
+
+## Props
+
+<DocPropsTable props={badgeDocs.props} />
+
+<DocExamples
+  examples={badgeDocs.examples}
+  scope={{
+    Badge,
+    BadgeRemove,
+    CircleDashIcon: CircleDashRegular,
+    UserBadge,
+  }}
+/>

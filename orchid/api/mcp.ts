@@ -4,6 +4,7 @@ import { z } from "zod";
 import buttonDocs from "../docs/ui/button";
 import buttonGroupDocs from "../docs/ui/button-group";
 import avatarDocs from "../docs/ui/avatar";
+import badgeDocs from "../docs/ui/badge";
 
 const handler = createMcpHandler(
   (server) => {
@@ -16,7 +17,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs].filter(
           (component) => !category || component.category === category,
         );
 
