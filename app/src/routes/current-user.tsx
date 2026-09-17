@@ -16,7 +16,6 @@ function CurrentUserPage() {
   return (
     <PageLayout
       title="Current user"
-      description={loading ? undefined : user?.email}
       onBack={() => navigate({ to: '/' })}
     >
       {loading ? (

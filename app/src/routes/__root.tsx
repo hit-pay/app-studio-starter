@@ -18,7 +18,8 @@ function NotFound() {
 
 function CurrentUserAction() {
   const { user, loading } = useCurrentUser()
-  const label = loading ? '…' : user?.name || user?.email || 'Current user'
+  const name = user?.name?.trim() || user?.email || '…'
+  const label = loading ? '…' : `Signed in as ${name}`
 
   return (
     <Link to="/current-user" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
