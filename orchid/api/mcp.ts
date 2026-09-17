@@ -53,7 +53,7 @@ function slimComponent(component: CatalogEntry) {
     category: component.category,
     related_components: component.related_components,
     example_count: component.examples?.length ?? 0,
-    install: `npx shadcn@latest add @orchid/${component.name}`,
+    install: `npx shadcn@latest add @orchid/${component.name} -y --overwrite`,
     use: "Call get_orchid_component with this name for props, examples, and files.",
   };
 }
@@ -133,7 +133,7 @@ const handler = createMcpHandler(
                 text: JSON.stringify({
                   component: {
                     ...component,
-                    install: `npx shadcn@latest add @orchid/${component.name}`,
+                    install: `npx shadcn@latest add @orchid/${component.name} -y --overwrite`,
                   },
                 }),
             },
