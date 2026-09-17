@@ -60,10 +60,10 @@ render(
     {
       description: "App Studio load (`#/lib/resource`, shared with ResourceList)",
       code: `// src/lib/resource — HitPay products, orders, charges, invoices
-import { loadResourcePickerPage } from "#/lib/resource";
+import { loadResourcePage } from "#/lib/resource";
 import { ResourcePickerProvider } from "@/components/form/resource-picker";
 
-<ResourcePickerProvider load={(input) => loadResourcePickerPage({ data: input })}>
+<ResourcePickerProvider load={(input) => loadResourcePage({ data: input })}>
   {children}
 </ResourcePickerProvider>`,
     },

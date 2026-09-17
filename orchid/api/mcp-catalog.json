@@ -2335,7 +2335,7 @@
         },
         {
           "description": "App Studio load (`#/lib/resource`, shared with ResourceList)",
-          "code": "// src/lib/resource — HitPay products, orders, charges, invoices\nimport { loadResourcePickerPage } from \"#/lib/resource\";\nimport { ResourcePickerProvider } from \"@/components/form/resource-picker\";\n\n<ResourcePickerProvider load={(input) => loadResourcePickerPage({ data: input })}>\n  {children}\n</ResourcePickerProvider>"
+          "code": "// src/lib/resource — HitPay products, orders, charges, invoices\nimport { loadResourcePage } from \"#/lib/resource\";\nimport { ResourcePickerProvider } from \"@/components/form/resource-picker\";\n\n<ResourcePickerProvider load={(input) => loadResourcePage({ data: input })}>\n  {children}\n</ResourcePickerProvider>"
         },
         {
           "description": "Pre-selected variants",
@@ -2436,7 +2436,7 @@
         },
         {
           "description": "App Studio load (`#/lib/resource`, shared with ResourcePicker)",
-          "code": "// src/lib/resource — same load as ResourcePicker\nimport { loadResourcePickerPage } from \"#/lib/resource\";\nimport { ResourceListProvider } from \"@/components/displaying-data/resource-list\";\n\n<ResourceListProvider load={(input) => loadResourcePickerPage({ data: input })}>\n  {children}\n</ResourceListProvider>"
+          "code": "// src/lib/resource — same load as ResourcePicker\nimport { loadResourcePage } from \"#/lib/resource\";\nimport { ResourceListProvider } from \"@/components/displaying-data/resource-list\";\n\n<ResourceListProvider load={(input) => loadResourcePage({ data: input })}>\n  {children}\n</ResourceListProvider>"
         },
         {
           "description": "Product catalog route",

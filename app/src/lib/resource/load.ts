@@ -36,7 +36,7 @@ const CHARGE_STATUSES = [
   'pending',
 ] as const
 
-const loadResourcePickerPage = createServerFn({ method: 'GET' })
+const loadResourcePage = createServerFn({ method: 'GET' })
   .validator((data: ResourcePickerLoadInput) => data)
   .handler(async ({ data }): Promise<ResourcePickerPage> => {
     await requireRoles(ALL_ROLES)
@@ -121,4 +121,4 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
     throw new Error(`Unsupported resource picker type: ${data.type}`)
   })
 
-export { loadResourcePickerPage }
+export { loadResourcePage }

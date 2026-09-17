@@ -150,7 +150,7 @@ function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
   }
 }
 
-/** Post-fetch mapping + the client filters `loadResourcePickerPage` already applies. */
+/** Post-fetch mapping; `loadResourcePage` already applied client filters. */
 function mapResourcePickerPayload(
   data: ResourcePickerLoadInput,
   payload: unknown,

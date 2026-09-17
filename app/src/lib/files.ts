@@ -9,7 +9,7 @@ import {
   insertFile,
   listFiles as loadStoredFiles,
   type FileMeta,
-} from '#/server/lib/files'
+} from '#/server/lib/file-store'
 
 export type { FileMeta }
 export { FILE_MAX_BYTES }

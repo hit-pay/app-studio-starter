@@ -47,17 +47,16 @@ export async function getSession(): Promise<Session> {
   }
 
   const pending = (async () => {
-    const appId = process.env.APP_STUDIO_APP_ID?.trim()
+    const cookie = request.headers.get('cookie')
 
-    if (!appId) {
+    if (!cookie) {
       throw new Error('Sign in to use this app.')
     }
 
-    const cookie = request.headers.get('cookie')
     const response = await fetch(appApiUrl('/current-user'), {
       headers: {
         accept: 'application/json',
-        ...(cookie ? { cookie } : {}),
+        cookie,
       },
     })
 

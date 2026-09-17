@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
-import { getRequest } from '@tanstack/react-start/server'
-import { appApiUrl, getAppToken } from '#/server/lib/app-token'
+import { appJson, getAppToken } from '#/server/lib/app-token'
 import { getSession, type Session, type SessionRole } from '#/server/lib/session'
 
 export type CurrentUser = Session
@@ -20,36 +19,13 @@ export type StaffAppMember = {
   locations: StaffLocation[]
 }
 
-async function proxyJson<T>(path: string, token?: string): Promise<T> {
-  const headers = new Headers({ accept: 'application/json' })
-  const cookie = getRequest().headers.get('cookie')
-
-  if (cookie) {
-    headers.set('cookie', cookie)
-  }
-  if (token) {
-    headers.set('authorization', `Bearer ${token}`)
-  }
-
-  const url = appApiUrl(path)
-  const response = await fetch(url, { headers })
-  if (!response.ok) {
-    throw new Error(
-      `Unable to load app data (HTTP ${response.status}, `
-      + `path=${url.pathname}, hasCookie=${headers.has('cookie')}, `
-      + `hasBearer=${headers.has('authorization')}).`,
-    )
-  }
-  return response.json() as Promise<T>
-}
-
 const loadUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
 
 const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
-  proxyJson<{ roles: Role[] }>('/roles', await getAppToken()))
+  appJson<{ roles: Role[] }>('/roles', await getAppToken()))
 
 const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () =>
-  proxyJson<{ members: StaffAppMember[] }>('/staff-app-members', await getAppToken()))
+  appJson<{ members: StaffAppMember[] }>('/staff-app-members', await getAppToken()))
 
 export const fetchUserInfo = () => loadUserInfo()
 export const fetchAppRoles = () => loadAppRoles()

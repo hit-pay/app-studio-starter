@@ -66,10 +66,10 @@ const resourceListDocs = {
     {
       description: "App Studio load (`#/lib/resource`, shared with ResourcePicker)",
       code: `// src/lib/resource — same load as ResourcePicker
-import { loadResourcePickerPage } from "#/lib/resource";
+import { loadResourcePage } from "#/lib/resource";
 import { ResourceListProvider } from "@/components/displaying-data/resource-list";
 
-<ResourceListProvider load={(input) => loadResourcePickerPage({ data: input })}>
+<ResourceListProvider load={(input) => loadResourcePage({ data: input })}>
   {children}
 </ResourceListProvider>`,
     },

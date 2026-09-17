@@ -1,4 +1,4 @@
-/** Docs / live examples only — fake HitPay pagination. App Studio uses loadResourcePickerPage. */
+/** Docs / live examples only — fake HitPay pagination. App Studio uses loadResourcePage. */
 import { fakeHitPayListPayload } from '#/lib/resource-picker-fake'
 import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
 import type { ResourcePickerLoad } from '@/components/form/resource-picker'

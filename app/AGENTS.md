@@ -17,16 +17,16 @@ filters, or confirmations when they belong in the requested app.
 
 - `src/routes/` — pages; `index.tsx` is the main page
 - `src/lib/` — helpers the UI may import (`createServerFn` + browser hooks)
-  - `files.ts` — file RPC
-  - `current-user.ts` — `useCurrentUser` (wraps `getSession`)
-  - `resource/` — `loadResourcePickerPage` for ResourcePicker and ResourceList
+  - `files.ts` — file RPC (`uploadFile`, `getFile`, `listFiles`, `deleteFile`)
+  - `current-user.ts` — `useCurrentUser` (wraps `getSession`); roles/staff via `appJson`
+  - `resource/` — `loadResourcePage` for ResourcePicker and ResourceList
   - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
   - `utils.ts` — `cn`, `storageKey` (unique localStorage keys; app is on a subdomain)
 - `src/server/lib/` — Node only; do not import from components
   - `session.ts` — `getSession`, `requireRoles`
-  - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`
+  - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`, `appJson`
   - `proxy.ts` — `proxyRequest` for `/v1/*`
-  - `db.ts`, `migrate.ts`, `files.ts` — Turso
+  - `db.ts`, `migrate.ts`, `file-store.ts` — Turso (blobs in `file-store`, not `files.ts`)
 - `migrations/` — Turso SQL
 - `docs/current-user.md` — current user, role, and session cookie contract
 - `docs/hitpay/` — resource schemas after App Studio MCP
@@ -82,7 +82,7 @@ Orchid MCP, then `npx shadcn@latest add @orchid/<name> … -y` (creates
 build custom visual components, ad-hoc HTML layouts, or third-party UI kits.
 Keep mapping/load in `src/lib/resource/` — app helpers for Orchid
 ResourcePicker and ResourceList, not Orchid files. Import
-`loadResourcePickerPage` from `#/lib/resource`.
+`loadResourcePage` from `#/lib/resource`.
 
 ## Auth / current user
 
