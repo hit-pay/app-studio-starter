@@ -1,34 +1,21 @@
 ## Orchid UI MCP
 
-Component docs for AI assistants are served only over MCP. Do not rely on a local catalog in consumer apps.
-
 ```text
-https://orchid-ui-hitpay.vercel.app/mcp
+https://orchid-ui-hitpay.vercel.app/api/mcp
 ```
 
-(`https://orchid-ui-hitpay.vercel.app/api/mcp` is the same handler.)
-
-### Connect
+Streamable HTTP. No authentication. Start with `tools/list`.
 
 ```json
 {
   "mcpServers": {
     "orchid-ui": {
-      "url": "https://orchid-ui-hitpay.vercel.app/mcp"
+      "url": "https://orchid-ui-hitpay.vercel.app/api/mcp"
     }
   }
 }
 ```
 
-Streamable HTTP. No authentication.
+Tools: `list_orchid_components` (search), then `get_orchid_component` (`install`, props, examples, files).
 
-### Tools
-
-1. `list_orchid_components` — search (`search`, optional `category`: `ui` | `components`). Slim list: name, title, description, `install`.
-2. `get_orchid_component` — one slug. Full props, examples, files, `install` (`npx shadcn@latest add @orchid/<name>`).
-
-Install via shadcn registry `@orchid` → `https://orchid-ui-hitpay.vercel.app/r/{name}.json`.
-
-### Recommended flow
-
-Search → get → run `install` → copy App Studio examples from the tool result. Prefer Orchid components over custom UI.
+Registry: `https://orchid-ui-hitpay.vercel.app/r/{name}.json` (`npx shadcn@latest add @orchid/<name>`).

@@ -20,7 +20,7 @@ Short requests: a usable MVP in under 10 minutes.
 
 ## UI — Orchid MCP
 
-https://orchid-ui-hitpay.vercel.app/mcp
+https://orchid-ui-hitpay.vercel.app/api/mcp
 
 `tools/list`, then search → get → install from the tool `install` field.
 Use App Studio examples from the MCP result. Prefer an Orchid component from

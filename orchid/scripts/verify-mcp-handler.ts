@@ -1,6 +1,6 @@
 /**
  * Smoke-test Orchid MCP handler (initialize, list, search, get).
- * Default: import api/mcp.ts in-process. Set MCP_URL to hit HTTP (e.g. dev server).
+ * Default: import api/mcp.ts in-process. Set MCP_URL to hit HTTP (e.g. http://127.0.0.1:5177/api/mcp).
  */
 import { POST } from "../api/mcp.ts";
 

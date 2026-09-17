@@ -137,7 +137,7 @@ function orchidMcpDevApi(): Plugin {
     configureServer(server) {
       server.middlewares.use(async (request, response, next) => {
         const pathname = request.url?.split('?')[0]
-        if (pathname !== '/api/mcp' && pathname !== '/mcp') {
+        if (pathname !== '/api/mcp') {
           next()
           return
         }
