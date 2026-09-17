@@ -1,2 +1,18 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Label } from "../../src/ui/label"
+import { Switch } from "../../src/ui/switch"
+import switchDocs from "./switch"
 
-Use `Switch` for an immediate on/off setting or preference. Choose it for a single boolean setting; use `Checkbox` when it is one option among several selections.
+Use `Switch` for a single on/off setting that takes effect immediately. Pair it with `Label` or `Field` for accessible names; use `Checkbox` when the choice is part of a form submission rather than instant toggling.
+
+## Props
+
+<DocPropsTable props={switchDocs.props} />
+
+<DocExamples
+  examples={switchDocs.examples}
+  scope={{
+    Label,
+    Switch,
+  }}
+/>

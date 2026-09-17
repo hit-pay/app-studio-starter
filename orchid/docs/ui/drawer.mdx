@@ -1,2 +1,34 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Button } from "../../src/ui/button"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "../../src/ui/drawer"
+import drawerDocs from "./drawer"
 
-Use `Drawer` for contextual content or controls that should slide in while preserving the page context. Choose it when a side panel is more suitable than a centered modal.
+Use `Drawer` for swipeable edge panels: bottom sheets, side detail panes, or filter rails. Set `swipeDirection` to `up`, `right`, `down`, or `left`; enable `showSwipeHandle` on bottom sheets when a drag affordance helps.
+
+## Props
+
+<DocPropsTable props={drawerDocs.props} />
+
+<DocExamples
+  examples={drawerDocs.examples}
+  scope={{
+    Button,
+    Drawer,
+    DrawerClose,
+    DrawerContent,
+    DrawerDescription,
+    DrawerFooter,
+    DrawerHeader,
+    DrawerTitle,
+    DrawerTrigger,
+  }}
+/>

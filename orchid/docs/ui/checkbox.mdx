@@ -1,2 +1,17 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Checkbox, CheckboxGroup } from "../../src/ui/checkbox"
+import { Label } from "../../src/ui/label"
+import checkboxDocs from "./checkbox"
 
-Use `Checkbox` for independent boolean choices, including multiple selections. Choose it when options can be selected together; use `RadioGroup` when exactly one option is allowed.
+## Props
+
+<DocPropsTable props={checkboxDocs.props} />
+
+<DocExamples
+  examples={checkboxDocs.examples}
+  scope={{
+    Checkbox,
+    CheckboxGroup,
+    Label,
+  }}
+/>

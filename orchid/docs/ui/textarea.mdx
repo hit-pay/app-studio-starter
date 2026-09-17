@@ -1,2 +1,26 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "../../src/ui/field"
+import { Textarea } from "../../src/ui/textarea"
+import textareaDocs from "./textarea"
 
-Use `Textarea` for plain multi-line text such as notes or descriptions. Choose it when formatting is unnecessary; use `TextEditor` for rich text.
+Use `Textarea` for multi-line text with auto-sizing height and Orchid form styling. Wrap it in `Field` for labels, descriptions, and errors; use `InputGroupTextarea` when the control sits inside an input group.
+
+## Props
+
+<DocPropsTable props={textareaDocs.props} />
+
+<DocExamples
+  examples={textareaDocs.examples}
+  scope={{
+    Field,
+    FieldDescription,
+    FieldError,
+    FieldLabel,
+    Textarea,
+  }}
+/>

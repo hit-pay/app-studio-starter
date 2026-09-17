@@ -1,2 +1,26 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "../../src/ui/field"
+import { Input } from "../../src/ui/input"
+import { Switch } from "../../src/ui/switch"
+import fieldDocs from "./field"
 
-Use `Field` to provide a consistent label, description, validation message, and layout around a form control. Choose it when composing a custom field; use `FormBuilder` for schema-driven forms.
+## Props
+
+<DocPropsTable props={fieldDocs.props} />
+
+<DocExamples
+  examples={fieldDocs.examples}
+  scope={{
+    Field,
+    FieldDescription,
+    FieldError,
+    FieldLabel,
+    Input,
+    Switch,
+  }}
+/>

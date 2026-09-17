@@ -1,2 +1,26 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  Field,
+  FieldDescription,
+  FieldError,
+  FieldLabel,
+} from "../../src/ui/field"
+import { Input } from "../../src/ui/input"
+import inputDocs from "./input"
 
-Use `Input` for a single-line text, numeric, email, or similar value. Choose it for ordinary text entry; use `Textarea` for multi-line content.
+Use `Input` for single-line text, email, number, and other native input types with Orchid form styling. Wrap it in `Field` for labels and errors; use `InputGroup` when you need leading or trailing addons.
+
+## Props
+
+<DocPropsTable props={inputDocs.props} />
+
+<DocExamples
+  examples={inputDocs.examples}
+  scope={{
+    Field,
+    FieldDescription,
+    FieldError,
+    FieldLabel,
+    Input,
+  }}
+/>

@@ -1,2 +1,25 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "../../src/ui/tabs"
+import {
+  CellphoneRegular,
+  MonitorRegular,
+} from "@mingcute/react/core-regular"
+import tabsDocs from "./tabs"
 
-Use `Tabs` to switch between related views that share the same page context. Choose it for navigation among peer sections, not for submitting a form value.
+Use `Tabs` to switch related views without leaving the page. Set `orientation` on `Tabs` for vertical layouts; use `TabsList` `variant="line"` for underline tabs or the default pill style.
+
+## Props
+
+<DocPropsTable props={tabsDocs.props} />
+
+<DocExamples
+  examples={tabsDocs.examples}
+  scope={{
+    PosIcon: CellphoneRegular,
+    StoreIcon: MonitorRegular,
+    Tabs,
+    TabsContent,
+    TabsList,
+    TabsTrigger,
+  }}
+/>

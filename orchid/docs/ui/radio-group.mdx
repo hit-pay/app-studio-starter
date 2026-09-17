@@ -1,2 +1,19 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Label } from "../../src/ui/label"
+import { RadioGroup, RadioGroupItem } from "../../src/ui/radio-group"
+import radioGroupDocs from "./radio-group"
 
-Use `RadioGroup` for mutually exclusive choices where exactly one option is selected. Choose it for a small visible set; use `Select` for longer lists.
+Use `RadioGroup` when exactly one option must be selected from a short list. Pair `RadioGroupItem` with `Label` (or `Field`) for accessible labels; use `Checkbox` or `CheckboxGroup` when multiple selections are allowed.
+
+## Props
+
+<DocPropsTable props={radioGroupDocs.props} />
+
+<DocExamples
+  examples={radioGroupDocs.examples}
+  scope={{
+    Label,
+    RadioGroup,
+    RadioGroupItem,
+  }}
+/>

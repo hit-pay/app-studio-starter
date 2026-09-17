@@ -1,2 +1,34 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Button } from "../../src/ui/button"
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../../src/ui/dialog"
+import dialogDocs from "./dialog"
 
-Use `Dialog` for focused content or an interaction that temporarily overlays the current page. Choose it for general modal content; use `ConfirmationModal` for a simple consequential-action confirmation.
+Use `Dialog` for focused tasks that interrupt the page: confirmations, short forms, or read-only detail. Set `persistent` when outside clicks should not dismiss the modal; pick `size` on `DialogContent` for Orchid layout presets.
+
+## Props
+
+<DocPropsTable props={dialogDocs.props} />
+
+<DocExamples
+  examples={dialogDocs.examples}
+  scope={{
+    Button,
+    Dialog,
+    DialogClose,
+    DialogContent,
+    DialogDescription,
+    DialogFooter,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  }}
+/>

@@ -1,2 +1,42 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  FileUpload,
+  FileUploadAction,
+  FileUploadActions,
+  FileUploadContent,
+  FileUploadDescription,
+  FileUploadGroup,
+  FileUploadMedia,
+  FileUploadTitle,
+} from "../../src/ui/file-upload"
+import { Spinner } from "../../src/ui/spinner"
+import {
+  CloseRegular,
+  FileRegular,
+  UploadRegular,
+} from "@mingcute/react/core-regular"
+import fileUploadDocs from "./file-upload"
 
-Use `FileUpload` when users need to select or upload files. Choose it for file input workflows; use `Input` for text or URL values.
+Use `FileUpload` to show a file or image row with upload state, preview media, and remove actions. Compose rows in `FileUploadGroup` for multiple attachments; wire a hidden `<input type="file">` or `FileUploadTrigger` for picking files.
+
+## Props
+
+<DocPropsTable props={fileUploadDocs.props} />
+
+<DocExamples
+  examples={fileUploadDocs.examples}
+  scope={{
+    CloseIcon: CloseRegular,
+    FileIcon: FileRegular,
+    FileUpload,
+    FileUploadAction,
+    FileUploadActions,
+    FileUploadContent,
+    FileUploadDescription,
+    FileUploadGroup,
+    FileUploadMedia,
+    FileUploadTitle,
+    Spinner,
+    UploadIcon: UploadRegular,
+  }}
+/>

@@ -1,2 +1,33 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Badge } from "../../src/ui/badge"
+import { Button } from "../../src/ui/button"
+import {
+  FormSection,
+  FormSectionItem,
+} from "../../src/ui/form-section"
+import { Input } from "../../src/ui/input"
+import { Switch } from "../../src/ui/switch"
+import { TooltipProvider } from "../../src/ui/tooltip"
+import formSectionDocs from "./form-section"
 
-Use `FormSection` to group related fields within a form. Choose it to create clear sections in a custom form; use `FormBuilder` sections for schema-driven forms.
+Use `FormSection` for a form block heading with optional badge, hint, notification count, and actions. Group sections with `FormSectionGroup` and use `FormSectionItem` for settings rows that include controls.
+
+<TooltipProvider>
+
+## Props
+
+<DocPropsTable props={formSectionDocs.props} />
+
+<DocExamples
+  examples={formSectionDocs.examples}
+  scope={{
+    Badge,
+    Button,
+    FormSection,
+    FormSectionItem,
+    Input,
+    Switch,
+  }}
+/>
+
+</TooltipProvider>

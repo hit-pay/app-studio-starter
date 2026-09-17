@@ -1,2 +1,48 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Button } from "../../src/ui/button"
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
+} from "../../src/ui/dropdown-menu"
+import {
+  Delete2Regular,
+  PencilRegular,
+  SendRegular,
+} from "@mingcute/react/core-regular"
+import dropdownMenuDocs from "./dropdown-menu"
 
-Use `DropdownMenu` for a compact menu of related actions opened from a trigger. Choose it for actions, not for selecting a persistent form value.
+Use `DropdownMenu` for action lists, overflow menus, and grouped commands. Compose with `DropdownMenuItem`, checkbox and radio items, or `DropdownMenuSub` for nested menus; pair `DropdownMenuTrigger` with `Button` via `render`.
+
+## Props
+
+<DocPropsTable props={dropdownMenuDocs.props} />
+
+<DocExamples
+  examples={dropdownMenuDocs.examples}
+  scope={{
+    Button,
+    DeleteIcon: Delete2Regular,
+    DropdownMenu,
+    DropdownMenuContent,
+    DropdownMenuGroup,
+    DropdownMenuItem,
+    DropdownMenuLabel,
+    DropdownMenuSeparator,
+    DropdownMenuShortcut,
+    DropdownMenuSub,
+    DropdownMenuSubContent,
+    DropdownMenuSubTrigger,
+    DropdownMenuTrigger,
+    EditIcon: PencilRegular,
+    SendIcon: SendRegular,
+  }}
+/>

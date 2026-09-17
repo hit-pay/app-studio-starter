@@ -1,2 +1,16 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Slider } from "../../src/ui/slider"
+import sliderDocs from "./slider"
 
-Use `Slider` when users choose a numeric value or range along a bounded continuum. Choose it when direct manipulation is useful; use `Input` when exact text entry is primary.
+Use `Slider` to pick one value or a range along a numeric scale. Pass a number for one thumb or an array for range and multi-thumb sliders; set `min` and `max` to match your domain.
+
+## Props
+
+<DocPropsTable props={sliderDocs.props} />
+
+<DocExamples
+  examples={sliderDocs.examples}
+  scope={{
+    Slider,
+  }}
+/>

@@ -1,2 +1,32 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationInfo,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "../../src/ui/pagination"
+import paginationDocs from "./pagination"
 
-Use `Pagination` to navigate between pages of an already paginated collection. Choose it when pagination is handled outside the component; use `DataTable` when table query controls are also needed.
+Use `Pagination` for link-based page navigation with previous/next controls. Compose page numbers with `PaginationLink` and `isActive`; add `PaginationInfo` when you need a “Showing X–Y of Z” label beside the controls.
+
+## Props
+
+<DocPropsTable props={paginationDocs.props} />
+
+<DocExamples
+  examples={paginationDocs.examples}
+  scope={{
+    Pagination,
+    PaginationContent,
+    PaginationEllipsis,
+    PaginationInfo,
+    PaginationItem,
+    PaginationLink,
+    PaginationNext,
+    PaginationPrevious,
+  }}
+/>
