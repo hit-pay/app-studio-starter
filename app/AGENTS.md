@@ -16,27 +16,61 @@ filters, or confirmations when they belong in the requested app.
 ## Layout
 
 - `src/routes/` — pages; `index.tsx` is the main page
-- `src/components/`, `src/ui/` — installed Orchid runtime
+- `src/components/` — Orchid blocks/layouts only
+- `src/ui/` — Orchid primitives only
 - `src/lib/` — client helpers
 - `src/lib/server/` — `createServerFn` only
 - `migrations/` — Turso
-- `docs/hitpay/`, `docs/turso/` — payload shapes after MCP discovery
+- `docs/current-user.md` — current user, role, and session cookie contract
+- `docs/hitpay/` — HitPay resource schemas after App Studio MCP
+- `docs/turso/` — Turso query, batch, and migration schemas after App Studio MCP
 
 ## MCP is mandatory
 
 Do not invent Orchid components, HitPay endpoints, or Turso tool names.
-Call MCP before writing UI or data code.
+Call MCP before writing UI or data code. Start with `tools/list`.
 
-1. Orchid — `https://orchid-ui-hitpay.vercel.app/api/mcp`  
-   `tools/list` → search → get → install from the tool `install` field.  
-   Use App Studio examples from the MCP result. Prefer installed Orchid
-   components over custom UI.
+| | URL |
+|---|---|
+| Orchid UI | `https://orchid-ui-hitpay.vercel.app/api/mcp` |
+| App Studio | `{APP_STUDIO_PROXY_URL}/mcp` |
 
-2. App Studio — `{APP_STUDIO_PROXY_URL}/mcp` 
-   `tools/list`, then call the advertised tools. Persist list data in Turso
-   via `createServerFn` and existing role/session checks.
+1. Orchid — `tools/list` → search → get. Then install every needed component
+   in one command with `-y`:
+
+   `npx shadcn@latest add @orchid/button @orchid/card @orchid/dialog @orchid/input -y`
+
+   Swap names for the MCP registry names (`https://orchid-ui-hitpay.vercel.app/r/{name}.json`).
+   Do not copy component source by hand. Use App Studio examples from the MCP
+   result after install.
+
+2. App Studio — `tools/list`, then call the advertised tools. Persist list
+   data in Turso via `createServerFn` and existing role/session checks.
+
+   After App Studio MCP, if you need request/response schema or query
+   details, read only the matching files:
+
+   - `docs/hitpay/` — charges, customers, invoices, locations, orders,
+     products, product-categories, roles, staff-members
+   - `docs/turso/` — `query.md`, `batch.md`, `migrations.md`
+
+   Do not invent fields, SQL, or endpoints that are not in MCP plus these
+   docs.
 
 If MCP is unavailable, stop and report the blocker. Do not guess APIs.
+
+## UI — Orchid only
+
+All UI comes from installed Orchid `src/components/` and `src/ui/`.
+Find components via Orchid MCP, then
+`npx shadcn@latest add @orchid/<name> … -y`, then compose the page. Do not
+build custom visual components, ad-hoc HTML layouts, or third-party UI kits.
+
+## Auth / current user
+
+Read `docs/current-user.md` before role or session logic. Use
+`GET /api/apps/{app}/current-user` as documented there. Tokens stay on the
+server via `getAppToken()` — never in the browser.
 
 ## Working rules
 
