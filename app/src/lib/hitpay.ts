@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
 import { studioAppId } from '@/lib/studio-app-id'
+import { getAppToken } from '#/lib/server/app-token'
 
 export {
   HITPAY_ALL_ROLES,
@@ -71,17 +72,11 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
 const loadUserInfo = createServerFn({ method: 'GET' }).handler(() =>
   proxyJson<HitPayUser & { appToken?: string }>('/current-user'))
 
-const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () => {
-  const user = await proxyJson<{ appToken?: string }>('/current-user')
-  if (!user.appToken) throw new Error('Unable to authorize HitPay app data.')
-  return proxyJson<{ roles: HitPayRole[] }>('/roles', user.appToken)
-})
+const loadAppRoles = createServerFn({ method: 'GET' }).handler(() =>
+  proxyJson<{ roles: HitPayRole[] }>('/roles', getAppToken()))
 
-const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () => {
-  const user = await proxyJson<{ appToken?: string }>('/current-user')
-  if (!user.appToken) throw new Error('Unable to authorize HitPay app data.')
-  return proxyJson<{ members: HitPayStaffAppMember[] }>('/staff-app-members', user.appToken)
-})
+const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(() =>
+  proxyJson<{ members: HitPayStaffAppMember[] }>('/staff-app-members', getAppToken()))
 
 export const fetchUserInfo = () => loadUserInfo()
 export const fetchAppRoles = () => loadAppRoles()
