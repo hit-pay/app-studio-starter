@@ -31,14 +31,14 @@ function PrebuildPage() {
   return (
     <PageLayout
       title="Prebuild"
-      description="Contoh ResourcePicker dan ResourceList (#/business)."
+      description="ResourcePicker and ResourceList examples from #/business."
       onBack={() => navigate({ to: '/' })}
     >
       <div className="flex min-w-0 flex-col gap-8">
         <section className="flex min-w-0 flex-col gap-3">
           <h2 className="text-sm font-medium">ResourcePicker</h2>
           <p className="text-sm text-oc-muted-foreground">
-            Buka dialog, pilih record HitPay, lalu lihat hasil promise di bawah.
+            Open the dialog, pick a HitPay record, then inspect the promise result below.
           </p>
           <div className="flex flex-wrap gap-2">
             {RESOURCE_PICKER_TYPES.map((type) => (
@@ -62,7 +62,7 @@ function PrebuildPage() {
           </div>
           <pre className="max-h-48 overflow-auto rounded-xl border border-oc-border bg-oc-muted/40 p-3 text-xs">
             {picked === undefined
-              ? 'Belum ada pilihan (cancel = undefined).'
+              ? 'Nothing selected yet (cancel returns undefined).'
               : JSON.stringify(
                   picked.map((row) => ({
                     id: row.id,
@@ -80,7 +80,7 @@ function PrebuildPage() {
         <section className="flex min-w-0 flex-col gap-3">
           <h2 className="text-sm font-medium">ResourceList</h2>
           <p className="text-sm text-oc-muted-foreground">
-            Tabel katalog dengan search, tab status, dan filter. Klik baris untuk melihat id.
+            Catalog table with search, status tabs, and filters. Click a row to see its id.
           </p>
           <div className="flex flex-wrap gap-2">
             {RESOURCE_PICKER_TYPES.map((type) => (
