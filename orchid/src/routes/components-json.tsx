@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 
 import { DocExamplePage } from "@/docs/doc-example-page";
 import { DocMdx } from "@/docs/doc-mdx";
-import ComponentsJsonDocs from "../../content/docs/guides/components-json.mdx";
+import ComponentsJsonDocs from "../../docs/guides/components-json.mdx";
 
 export const Route = createFileRoute("/components-json")({
   component: ComponentsJsonPage,

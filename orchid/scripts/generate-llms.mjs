@@ -36,7 +36,7 @@ function findMdx(item) {
   const candidates = [
     join(root, "docs/components", `${name}.mdx`),
     join(root, "docs/ui", `${name}.mdx`),
-    join(root, "content/docs/guides", `${name}.mdx`),
+    join(root, "docs/guides", `${name}.mdx`),
   ];
   const found = candidates.find((path) => existsSync(path));
   if (!found) {
