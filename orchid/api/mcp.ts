@@ -2,6 +2,7 @@ import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
 // @ts-ignore — component documentation is intentionally authored as standalone JavaScript.
 import buttonDocs from "../docs/ui/button.js";
+import buttonGroupDocs from "../docs/ui/button-group";
 
 const handler = createMcpHandler(
   (server) => {
@@ -14,7 +15,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs].filter(
           (component) => !category || component.category === category,
         );
 
