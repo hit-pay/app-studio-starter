@@ -3,20 +3,14 @@
 import * as React from 'react'
 import { AddRegular, CloseRegular, MinimizeRegular, SearchRegular } from '@mingcute/react/core-regular'
 
-import { format, startOfDay } from 'date-fns'
-import type { DateRange } from 'react-day-picker'
-
 import { Button } from '@ui/button'
 import { Badge } from '@ui/badge'
 import { Spinner } from '@ui/spinner'
 import { Checkbox } from '@ui/checkbox'
-import { DatePickerRange } from '@/components/form/date-picker'
-import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
 import {
-  loadLocationsForSelect,
-  loadProductCategoriesForSelect,
-} from '#/lib/hitpay-commerce-selects'
-import { Select } from '@/components/form/select'
+  buildResourcePickerFilterFields,
+  ResourcePickerFilterMenu,
+} from '@/components/form/resource-picker-filter-form'
 import { Input } from '@ui/input'
 import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
 import {
@@ -114,6 +108,21 @@ function categoryIdsFromExtras(extras: Record<string, string>) {
   return []
 }
 
+function filtersAreActive(
+  status: string,
+  extras: Record<string, string>,
+  type: ResourcePickerType,
+) {
+  if (status !== 'all') return true
+  if (categoryIdsFromExtras(extras).length > 0) return true
+  if (extras.location_id) return true
+  if (extras.date_from || extras.date_to) return true
+  for (const group of EXTRA_FILTERS[type] ?? []) {
+    if ((extras[group.key] ?? 'all') !== 'all') return true
+  }
+  return false
+}
+
 type ResourcePickerResult = {
   id: string
   resource?: ResourcePickerRecord
@@ -173,7 +182,7 @@ const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
   product: [
     {
       key: 'inventory',
-      label: 'Stock',
+      label: 'Inventory',
       options: [
         { value: 'all', label: 'All stock' },
         { value: 'in_stock', label: 'In stock' },
@@ -215,22 +224,6 @@ const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
       ],
     },
   ],
-}
-
-const DATE_FILTER_TYPES = new Set<ResourcePickerType>(['order', 'charge'])
-
-function parseYmd(value?: string): Date | undefined {
-  if (!value) return undefined
-  const [year, month, day] = value.split('-').map(Number)
-  if (!year || !month || !day) return undefined
-  return new Date(year, month - 1, day)
-}
-
-function extrasDateRange(extras: Record<string, string>): DateRange | undefined {
-  const from = parseYmd(extras.date_from)
-  const to = parseYmd(extras.date_to)
-  if (!from && !to) return undefined
-  return { from: from ?? to, to }
 }
 
 const ResourcePickerContext = React.createContext<ResourcePickerFn | null>(null)
@@ -345,6 +338,12 @@ function ResourcePickerDialog({
   const [expanded, setExpanded] = React.useState<Set<string>>(new Set())
   const [selected, setSelected] = React.useState<Map<string, Set<string>>>(new Map())
   const [cache, setCache] = React.useState<Map<string, ResourcePickerItem>>(new Map())
+  const [filtersOpen, setFiltersOpen] = React.useState(false)
+
+  const filterFields = React.useMemo(
+    () => buildResourcePickerFilterFields(type, filters, extraFilters),
+    [type, filters, extraFilters],
+  )
 
   React.useEffect(() => {
     if (!open || !request) return
@@ -505,8 +504,10 @@ function ResourcePickerDialog({
   }
 
   const confirmLabel = action === 'select' ? 'Select' : 'Add'
-  const showFilter = filters.length > 1
   const exclusiveChildren = limit === 1
+  const hasFilterMenu = filterFields.length > 0
+  const filtersActive = filtersAreActive(filter, extras, type)
+  const resultCountLabel = `${items.length}${hasMore ? '+' : ''} result${items.length === 1 ? '' : 's'}`
 
   return (
     <Dialog persistent open={open} onOpenChange={(next) => { if (!next) onCancel() }}>
@@ -525,8 +526,8 @@ function ResourcePickerDialog({
         <DialogDescription className="sr-only">
           Search and select {labels.plural}.
         </DialogDescription>
-        <div className="flex flex-col gap-2 px-5 pb-3">
-          <div className="relative w-full min-w-0">
+        <div className="flex items-center gap-2 px-5 pb-3">
+          <div className="relative min-w-0 flex-1">
             <SearchRegular className="pointer-events-none absolute top-1/2 left-2.5 size-4 -translate-y-1/2 text-oc-muted-foreground" />
             <Input
               value={search}
@@ -538,114 +539,27 @@ function ResourcePickerDialog({
               className="w-full pl-8"
             />
           </div>
-          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
-          {showFilter ? (
-            <Select
-              className="w-full min-w-0"
-              options={filters}
-              value={filter}
-              placeholder="Status"
-              onValueChange={(value) => {
-                if (value == null) return
+          {hasFilterMenu ? (
+            <ResourcePickerFilterMenu
+              key={type}
+              type={type}
+              statusOptions={filters}
+              extraFilters={extraFilters}
+              open={filtersOpen}
+              onOpenChange={setFiltersOpen}
+              appliedStatus={filter}
+              appliedExtras={extras}
+              filtersActive={filtersActive}
+              applyLabel={resultCountLabel}
+              loading={loading}
+              onApply={(status, nextExtras) => {
                 paginationRef.current = { page: 0 }
-                setFilter(String(value))
+                setFilter(status)
+                setExtras(nextExtras)
+                setFiltersOpen(false)
               }}
             />
           ) : null}
-          {extraFilters.map((group) => (
-            <Select
-              key={group.key}
-              className="w-full min-w-0"
-              options={group.options}
-              value={extras[group.key] ?? 'all'}
-              placeholder={group.label}
-              onValueChange={(value) => {
-                if (value == null) return
-                paginationRef.current = { page: 0 }
-                setExtras((current) => ({ ...current, [group.key]: String(value) }))
-              }}
-            />
-          ))}
-          {type === 'product' ? (
-            <div className="w-full min-w-0 sm:col-span-2 [&_[data-slot=combobox-chips]]:w-full [&_button]:w-full">
-                <HitPayNamedSelect
-                  name="resource_picker_category"
-                  label={false}
-                  multiple
-                  clearable
-                  placeholder="All categories"
-                  empty="No categories."
-                  getLabel={(row) => row.name?.trim() || row.id}
-                  load={() =>
-                    loadProductCategoriesForSelect().then((result) => ({ items: result.items }))
-                  }
-                  value={(() => {
-                    const ids = categoryIdsFromExtras(extras)
-                    return ids.length ? ids : null
-                  })()}
-                  onValueChange={(value) => {
-                    paginationRef.current = { page: 0 }
-                    setExtras((current) => {
-                      const next = { ...current }
-                      delete next.category_id
-                      if (Array.isArray(value) && value.length > 0) {
-                        next.category_ids = value.join(',')
-                      } else {
-                        delete next.category_ids
-                      }
-                      return next
-                    })
-                  }}
-                />
-            </div>
-          ) : null}
-          {type === 'product' || type === 'charge' ? (
-            <div className="w-full min-w-0 [&_button]:w-full">
-                <HitPayNamedSelect
-                  name="resource_picker_location"
-                  label={false}
-                  clearable
-                  placeholder="All locations"
-                  empty="No locations."
-                  getLabel={(row) => row.name?.trim() || row.id}
-                  load={() => loadLocationsForSelect().then((result) => ({ items: result.items }))}
-                  value={extras.location_id ?? null}
-                  onValueChange={(value) => {
-                    paginationRef.current = { page: 0 }
-                    setExtras((current) => {
-                      const next = { ...current }
-                      if (typeof value === 'string' && value) next.location_id = value
-                      else delete next.location_id
-                      return next
-                    })
-                  }}
-                />
-            </div>
-          ) : null}
-          {DATE_FILTER_TYPES.has(type) ? (
-            <DatePickerRange
-              className="w-full min-w-0 sm:col-span-2"
-              placeholder="Date range"
-              selected={extrasDateRange(extras)}
-              disabled={{ after: startOfDay(new Date()) }}
-              endMonth={new Date()}
-              onSelect={(range) => {
-                paginationRef.current = { page: 0 }
-                setExtras((current) => {
-                  const next = { ...current }
-                  if (!range?.from) {
-                    delete next.date_from
-                    delete next.date_to
-                    return next
-                  }
-                  next.date_from = format(range.from, 'yyyy-MM-dd')
-                  next.date_to = format(range.to ?? range.from, 'yyyy-MM-dd')
-                  return next
-                })
-              }}
-            />
-          ) : null}
-          </div>
         </div>
         <div className="max-h-[min(28rem,50vh)] min-h-48 overflow-y-auto border-y border-oc-border">
           {loading && items.length === 0 ? (
