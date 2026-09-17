@@ -14,20 +14,21 @@ import type { SchemaTableRowAction } from '@/components/displaying-data/data-tab
 import {
   buildResourcePickerFilterFields,
   ResourcePickerFilterMenu,
-} from '@/components/form/resource-picker-filter-form'
-import type { ResourceLoad, ResourceType } from '@/components/form/resource-picker'
+} from '#/business/filter-form'
+import type { ResourceLoad, ResourceType } from '#/business/resource-picker'
 import {
   resourceCatalogFiltersActive,
   RESOURCE_EXTRA_FILTERS,
   RESOURCE_STATUS_FILTERS,
-} from '@/lib/resource-catalog'
-import { estimateListTotal, resourcePickerItemsToRows } from '@/lib/resource-list-map'
+} from '#/business/catalog'
+import { estimateListTotal, resourcePickerItemsToRows } from '#/business/list-map'
 import {
   resourceListSchema,
   resourceListToolbarFilterKeys,
-} from '@/lib/resource-list-schema'
+} from '#/business/list-schema'
 import { Spinner } from '@ui/spinner'
 import { cn } from '@/lib/utils'
+import { loadResourcePage } from '#/lib/resource'
 
 const ResourceListLoadContext = React.createContext<ResourceLoad | null>(null)
 
@@ -86,12 +87,16 @@ function listQuerySignature(
   })
 }
 
+function defaultResourceLoad(input: Parameters<ResourceLoad>[0]) {
+  return loadResourcePage({ data: input })
+}
+
 function ResourceListProvider({
   children,
-  load,
+  load = defaultResourceLoad,
 }: {
   children: React.ReactNode
-  load: ResourceLoad
+  load?: ResourceLoad
 }) {
   return (
     <ResourceListLoadContext.Provider value={load}>{children}</ResourceListLoadContext.Provider>

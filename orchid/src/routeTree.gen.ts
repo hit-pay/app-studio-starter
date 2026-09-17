@@ -31,8 +31,6 @@ import { Route as ComponentsFormLayoutRouteImport } from './routes/components/fo
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
 import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
-import { Route as ComponentsResourceListRouteImport } from './routes/components/resource-list'
-import { Route as ComponentsResourcePickerRouteImport } from './routes/components/resource-picker'
 import { Route as ComponentsSelectRouteImport } from './routes/components/select'
 import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
 import { Route as UiIndexRouteImport } from './routes/ui/index'
@@ -173,17 +171,6 @@ const ComponentsQuantityInputRoute = ComponentsQuantityInputRouteImport.update({
   path: '/components/quantity-input',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsResourceListRoute = ComponentsResourceListRouteImport.update({
-  id: '/components/resource-list',
-  path: '/components/resource-list',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsResourcePickerRoute =
-  ComponentsResourcePickerRouteImport.update({
-    id: '/components/resource-picker',
-    path: '/components/resource-picker',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
   id: '/components/select',
   path: '/components/select',
@@ -347,8 +334,6 @@ export interface FileRoutesByFullPath {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
-  '/components/resource-list': typeof ComponentsResourceListRoute
-  '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/ui/avatar': typeof UiAvatarRoute
@@ -401,8 +386,6 @@ export interface FileRoutesByTo {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
-  '/components/resource-list': typeof ComponentsResourceListRoute
-  '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/ui/avatar': typeof UiAvatarRoute
@@ -456,8 +439,6 @@ export interface FileRoutesById {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
-  '/components/resource-list': typeof ComponentsResourceListRoute
-  '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/ui/avatar': typeof UiAvatarRoute
@@ -512,8 +493,6 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
-    | '/components/resource-list'
-    | '/components/resource-picker'
     | '/components/select'
     | '/components/text-editor'
     | '/ui/avatar'
@@ -566,8 +545,6 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
-    | '/components/resource-list'
-    | '/components/resource-picker'
     | '/components/select'
     | '/components/text-editor'
     | '/ui/avatar'
@@ -620,8 +597,6 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
-    | '/components/resource-list'
-    | '/components/resource-picker'
     | '/components/select'
     | '/components/text-editor'
     | '/ui/avatar'
@@ -675,8 +650,6 @@ export interface RootRouteChildren {
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
   ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
-  ComponentsResourceListRoute: typeof ComponentsResourceListRoute
-  ComponentsResourcePickerRoute: typeof ComponentsResourcePickerRoute
   ComponentsSelectRoute: typeof ComponentsSelectRoute
   ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
   UiAvatarRoute: typeof UiAvatarRoute
@@ -862,20 +835,6 @@ declare module '@tanstack/react-router' {
       path: '/components/quantity-input'
       fullPath: '/components/quantity-input'
       preLoaderRoute: typeof ComponentsQuantityInputRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/resource-list': {
-      id: '/components/resource-list'
-      path: '/components/resource-list'
-      fullPath: '/components/resource-list'
-      preLoaderRoute: typeof ComponentsResourceListRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/resource-picker': {
-      id: '/components/resource-picker'
-      path: '/components/resource-picker'
-      fullPath: '/components/resource-picker'
-      preLoaderRoute: typeof ComponentsResourcePickerRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/select': {
@@ -1099,8 +1058,6 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,
   ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
-  ComponentsResourceListRoute: ComponentsResourceListRoute,
-  ComponentsResourcePickerRoute: ComponentsResourcePickerRoute,
   ComponentsSelectRoute: ComponentsSelectRoute,
   ComponentsTextEditorRoute: ComponentsTextEditorRoute,
   UiAvatarRoute: UiAvatarRoute,

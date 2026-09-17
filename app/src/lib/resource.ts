@@ -1,4 +1,4 @@
-/** Shared load for Orchid ResourcePicker and ResourceList. See docs/hitpay/{products,orders,charges,invoices}.md */
+/** Shared load for ResourcePicker and ResourceList. See docs/hitpay/{products,orders,charges,invoices}.md */
 import { createServerFn } from '@tanstack/react-start'
 
 import { ALL_ROLES } from '#/lib/roles'

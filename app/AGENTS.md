@@ -14,6 +14,9 @@ routes. Then run `bun run generate-routes`.
   route files for extra screens (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
 - `src/ui/` and `src/components/` — installed Orchid. Change those files only when
   the user asks. Learn props/examples from orchid-ui MCP, not by dumping the source.
+- `src/business/` — HitPay ResourcePicker / ResourceList (not Orchid). Real API
+  via `#/lib/resource` and `#/business/commerce`. Import from `#/business/…`.
+  `__root.tsx` already mounts `ResourcePickerProvider` and `ResourceListProvider`.
 - `src/lib/` — UI-imported helpers (`createServerFn` + browser hooks). Put new
   `createServerFn` here. List/CRUD persist goes through these fns + `requireRoles`
   + `db.execute` (`#/server/lib/db`).
@@ -67,8 +70,9 @@ Use MCP when you need live API / Resource lists or Database runtime tools
 (query, batch, apply migrations). Start with `tools/list`, then the matching
 docs file.
 
-ResourcePicker / ResourceList: `#/lib/resource`
-(`loadResourcePage`, `mapResourcePayload`, `ResourcePage`, `ResourceItem`).
+ResourcePicker / ResourceList live in `#/business/` (picker, list, filters).
+Load HitPay lists with `#/lib/resource` (`loadResourcePage`). Locations and
+product categories for filters: `#/business/commerce`.
 
 ## Auth / current user
 

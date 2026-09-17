@@ -1,4 +1,4 @@
-import type { ResourceItem, ResourceType } from '@/components/form/resource-picker'
+import type { ResourceItem, ResourceType } from '#/business/resource-picker'
 import type { SchemaTableRow } from '@/components/displaying-data/data-table-model'
 
 function readRecordField(

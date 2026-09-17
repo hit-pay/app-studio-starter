@@ -14,7 +14,6 @@
     "@orchid/page-layout",
     "@orchid/app-layout",
     "@orchid/confirmation-modal",
-    "@orchid/resource-picker",
     "@orchid/button",
     "@orchid/button-group",
     "@orchid/dropdown-menu",

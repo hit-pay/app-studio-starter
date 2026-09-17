@@ -19,7 +19,6 @@
         "@orchid/page-layout",
         "@orchid/app-layout",
         "@orchid/confirmation-modal",
-        "@orchid/resource-picker",
         "@orchid/button",
         "@orchid/button-group",
         "@orchid/dropdown-menu",
@@ -68,7 +67,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
-      "description": "cn() and studioAppId(). Import from @/lib/utils.",
+      "description": "cn(). Import from @/lib/utils.",
       "dependencies": [
         "clsx",
         "tailwind-merge"
@@ -122,7 +121,7 @@
       "name": "data-table",
       "type": "registry:ui",
       "title": "Data Table",
-      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row ⋮ edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.",
+      "description": "Rows-and-columns table with search, column filters, sort, and pagination. Pass columns + data. onRowClick opens a record. Row \u22ee edit/delete uses rowActions + onRowAction (not a custom DropdownMenu). editColumns (default off) only toggles which columns are visible.",
       "registryDependencies": [
         "@orchid/badge",
         "@orchid/button",
@@ -285,87 +284,6 @@
           "path": "src/components/overlays/confirmation-modal.tsx",
           "type": "registry:ui",
           "target": "@components/overlays/confirmation-modal.tsx"
-        }
-      ]
-    },
-    {
-      "name": "resource-picker",
-      "type": "registry:ui",
-      "title": "Resource Picker",
-      "description": "Promise picker for HitPay list records (products, orders, charges, invoices). const pick = useResourcePicker(); await pick({ type }).",
-      "dependencies": [
-        "@mingcute/react"
-      ],
-      "registryDependencies": [
-        "@orchid/button",
-        "@orchid/badge",
-        "@orchid/spinner",
-        "@orchid/checkbox",
-        "@orchid/input",
-        "@orchid/radio-group",
-        "@orchid/select",
-        "@orchid/date-picker",
-        "@orchid/dialog"
-      ],
-      "files": [
-        {
-          "path": "src/components/form/resource-picker.tsx",
-          "type": "registry:ui",
-          "target": "@components/form/resource-picker.tsx"
-        },
-        {
-          "path": "src/components/form/hitpay-named-select.tsx",
-          "type": "registry:file",
-          "target": "@components/form/hitpay-named-select.tsx"
-        },
-        {
-          "path": "src/lib/select-store.ts",
-          "type": "registry:lib",
-          "target": "lib/select-store.ts"
-        },
-        {
-          "path": "src/lib/hitpay-commerce-selects.ts",
-          "type": "registry:lib",
-          "target": "lib/hitpay-commerce-selects.ts"
-        }
-      ]
-    },
-    {
-      "name": "resource-list",
-      "type": "registry:ui",
-      "title": "Resource List",
-      "description": "Server-driven HitPay catalog table (SchemaTable). ResourceListProvider + same ResourceLoad as the picker.",
-      "dependencies": ["@mingcute/react"],
-      "registryDependencies": [
-        "@orchid/data-table",
-        "@orchid/resource-picker",
-        "@orchid/spinner"
-      ],
-      "files": [
-        {
-          "path": "src/components/displaying-data/resource-list.tsx",
-          "type": "registry:ui",
-          "target": "@components/displaying-data/resource-list.tsx"
-        },
-        {
-          "path": "src/lib/resource-catalog.ts",
-          "type": "registry:lib",
-          "target": "lib/resource-catalog.ts"
-        },
-        {
-          "path": "src/lib/resource-list-map.ts",
-          "type": "registry:lib",
-          "target": "lib/resource-list-map.ts"
-        },
-        {
-          "path": "src/lib/resource-list-schema.ts",
-          "type": "registry:lib",
-          "target": "lib/resource-list-schema.ts"
-        },
-        {
-          "path": "src/components/form/resource-picker-filter-form.tsx",
-          "type": "registry:file",
-          "target": "@components/form/resource-picker-filter-form.tsx"
         }
       ]
     },

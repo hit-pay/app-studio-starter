@@ -42,8 +42,6 @@ import formLayoutDocs from "../docs/components/form-layout";
 import pageLayoutDocs from "../docs/components/page-layout";
 import commandDocs from "../docs/components/command";
 import confirmationModalDocs from "../docs/components/confirmation-modal";
-import resourcePickerDocs from "../docs/components/resource-picker";
-import resourceListDocs from "../docs/components/resource-list";
 
 const orchidComponentCatalog = [
   buttonDocs,
@@ -89,8 +87,6 @@ const orchidComponentCatalog = [
   pageLayoutDocs,
   commandDocs,
   confirmationModalDocs,
-  resourcePickerDocs,
-  resourceListDocs,
 ] as Array<{ category: string; name?: string }>;
 
 export { orchidComponentCatalog };

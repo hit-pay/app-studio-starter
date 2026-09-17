@@ -17,7 +17,7 @@ const listOrchidComponentsArgs = {
   name: z
     .string()
     .optional()
-    .describe("Exact component slug, e.g. resource-picker"),
+    .describe("Exact component slug, e.g. data-table"),
 } satisfies z.ZodRawShape;
 
 const getOrchidComponentArgs = {
@@ -115,7 +115,7 @@ export function registerOrchidTools(server: McpServer) {
     "list_orchid_components",
     {
       description:
-        "Search or list Orchid UI components (slim: name, title, description, category, install). Always search before building UI. Then get_orchid_component with name or names[] for props/examples/files. Filter category: ui | components. Filter name: exact slug (full docs). HitPay resource-picker and resource-list share ResourceLoad; types product|order|charge|invoice.",
+        "Search or list Orchid UI components (slim: name, title, description, category, install). Always search before building UI. Then get_orchid_component with name or names[] for props/examples/files. Filter category: ui | components. Filter name: exact slug (full docs).",
       inputSchema: listOrchidComponentsArgs,
     },
     async (args) => {

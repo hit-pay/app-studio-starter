@@ -9,7 +9,7 @@ import {
   RESOURCE_EXTRA_FILTERS,
   RESOURCE_STATUS_FILTERS,
   type ResourceCatalogType,
-} from '@/lib/resource-catalog'
+} from '#/business/catalog'
 
 const RESOURCE_LIST_SELECTION_ACTIONS: SchemaTableSelectionAction[] = [
   { key: 'export', label: 'Export', icon: 'download' },

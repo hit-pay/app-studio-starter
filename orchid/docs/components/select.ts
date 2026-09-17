@@ -138,7 +138,6 @@ render(<MultiSelectExample />);`,
   related_components: [
     "field",
     "form-builder",
-    "resource-picker",
     "choice-card",
   ],
 };

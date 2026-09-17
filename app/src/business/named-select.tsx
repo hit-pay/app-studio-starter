@@ -3,7 +3,7 @@
 import { useMemo } from 'react'
 import { Select } from '@/components/form/select'
 import { Field, FieldDescription, FieldLabel } from '@ui/field'
-import { selectEntry, selectStore, useSelectOptions } from '@/lib/select-store'
+import { selectEntry, selectStore, useSelectOptions } from '#/business/select-store'
 
 type HitPayNamedRow = { id: string }
 

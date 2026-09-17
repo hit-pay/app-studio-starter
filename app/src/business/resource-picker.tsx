@@ -7,16 +7,17 @@ import { Button } from '@ui/button'
 import { Badge } from '@ui/badge'
 import { Spinner } from '@ui/spinner'
 import { Checkbox } from '@ui/checkbox'
+import { loadResourcePage } from '#/lib/resource'
 import {
   buildResourcePickerFilterFields,
   ResourcePickerFilterMenu,
-} from '@/components/form/resource-picker-filter-form'
+} from '#/business/filter-form'
 import {
   RESOURCE_CATALOG_LABELS,
   RESOURCE_EXTRA_FILTERS,
   RESOURCE_STATUS_FILTERS,
   resourceCatalogFiltersActive,
-} from '@/lib/resource-catalog'
+} from '#/business/catalog'
 import { Input } from '@ui/input'
 import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
 import {
@@ -140,12 +141,16 @@ function titleCase(action: 'add' | 'select', type: ResourceType) {
   return `${action === 'select' ? 'Select' : 'Add'} ${noun}`
 }
 
+function defaultResourceLoad(input: ResourceLoadInput) {
+  return loadResourcePage({ data: input })
+}
+
 function ResourcePickerProvider({
   children,
-  load,
+  load = defaultResourceLoad,
 }: {
   children: React.ReactNode
-  load: ResourceLoad
+  load?: ResourceLoad
 }) {
   const [request, setRequest] = React.useState<ResourcePickerRequest | null>(null)
   const [open, setOpen] = React.useState(false)

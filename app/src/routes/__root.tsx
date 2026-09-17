@@ -1,5 +1,7 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 
+import { ResourceListProvider } from '#/business/resource-list'
+import { ResourcePickerProvider } from '#/business/resource-picker'
 import { useCurrentUser } from '#/lib/current-user'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
@@ -32,17 +34,21 @@ function AppShell() {
   return (
     <Toaster>
       <ConfirmationModalProvider>
-        <AppLayout
-          className="h-full min-h-0"
-          appName={
-            <Link to="/" className="min-w-0 truncate outline-none hover:opacity-80">
-              App
-            </Link>
-          }
-          appBarActions={<CurrentUserAction />}
-        >
-          <Outlet />
-        </AppLayout>
+        <ResourcePickerProvider>
+          <ResourceListProvider>
+            <AppLayout
+              className="h-full min-h-0"
+              appName={
+                <Link to="/" className="min-w-0 truncate outline-none hover:opacity-80">
+                  App
+                </Link>
+              }
+              appBarActions={<CurrentUserAction />}
+            >
+              <Outlet />
+            </AppLayout>
+          </ResourceListProvider>
+        </ResourcePickerProvider>
       </ConfirmationModalProvider>
     </Toaster>
   )

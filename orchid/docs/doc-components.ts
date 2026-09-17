@@ -56,8 +56,6 @@ export const DOC_BLOCKS = [
   docNavFromRegistry("/components/form-builder", "form-builder"),
   docNavFromRegistry("/components/data-table", "data-table"),
   docNavFromRegistry("/components/confirmation-modal", "confirmation-modal"),
-  docNavFromRegistry("/components/resource-picker", "resource-picker"),
-  docNavFromRegistry("/components/resource-list", "resource-list"),
   docNavFromRegistry("/components/command", "command"),
   docNavFromRegistry("/components/copy-button", "copy-button"),
 ] as const;
@@ -177,8 +175,6 @@ export const DOC_BLOCK_GROUPS = [
     "/components/form-builder",
     "/components/quantity-input",
     "/components/text-editor",
-    "/components/resource-picker",
-    "/components/resource-list",
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
