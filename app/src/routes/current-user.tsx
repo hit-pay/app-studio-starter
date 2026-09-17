@@ -1,22 +1,27 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, useNavigate } from '@tanstack/react-router'
+
 import { useCurrentUser } from '#/lib/current-user'
+import { PageLayout } from '@/components/layout/page-layout'
 
 export const Route = createFileRoute('/current-user')({
   component: CurrentUserPage,
 })
 
 function CurrentUserPage() {
+  const navigate = useNavigate()
   const { user, error, loading } = useCurrentUser()
 
   return (
-    <main className="mx-auto w-full max-w-2xl p-6">
-      <h1 className="text-2xl font-semibold tracking-tight">Current user</h1>
-      {loading ? (
-        <p className="mt-4 text-sm text-oc-muted-foreground">Loading…</p>
-      ) : error ? (
-        <p className="mt-4 text-sm text-oc-destructive">{error}</p>
+    <PageLayout
+      title="Current user"
+      description={user?.email}
+      loading={loading}
+      onBack={() => navigate({ to: '/' })}
+    >
+      {error ? (
+        <p className="text-sm text-oc-destructive">{error}</p>
       ) : user ? (
-        <dl className="mt-6 space-y-4 text-sm">
+        <dl className="space-y-4 text-sm">
           <div>
             <dt className="text-oc-muted-foreground">Name</dt>
             <dd className="font-medium">{user.name || '—'}</dd>
@@ -31,6 +36,6 @@ function CurrentUserPage() {
           </div>
         </dl>
       ) : null}
-    </main>
+    </PageLayout>
   )
 }

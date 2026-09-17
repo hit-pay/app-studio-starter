@@ -1,4 +1,10 @@
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
+import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+
+import { useCurrentUser } from '#/lib/current-user'
+import { AppLayout } from '@/components/layout/app-layout'
+import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
+import { buttonVariants } from '@ui/button'
+import { Toaster } from '@ui/toast'
 
 import '../styles.css'
 
@@ -10,8 +16,40 @@ function NotFound() {
   )
 }
 
+function CurrentUserAction() {
+  const { user, loading } = useCurrentUser()
+  const label = loading ? '…' : user?.name || user?.email || 'Current user'
+
+  return (
+    <Link to="/current-user" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
+      {label}
+    </Link>
+  )
+}
+
+function AppShell() {
+  return (
+    <Toaster>
+      <ConfirmationModalProvider>
+        <AppLayout
+          className="h-full min-h-0"
+          appName={
+            <Link to="/" className="min-w-0 truncate outline-none hover:opacity-80">
+              App
+            </Link>
+          }
+          appBarActions={<CurrentUserAction />}
+        >
+          <Outlet />
+        </AppLayout>
+      </ConfirmationModalProvider>
+    </Toaster>
+  )
+}
+
 export const Route = createRootRoute({
   ssr: false,
+  component: AppShell,
   notFoundComponent: NotFound,
   head: () => ({
     meta: [
