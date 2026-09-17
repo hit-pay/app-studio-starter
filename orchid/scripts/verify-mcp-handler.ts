@@ -1,5 +1,5 @@
 /**
- * Smoke-test Orchid MCP handler (initialize + list_orchid_components).
+ * Smoke-test Orchid MCP handler (initialize, list, search, get).
  * Default: import api/mcp.ts in-process. Set MCP_URL to hit HTTP (e.g. dev server).
  */
 import { POST } from "../api/mcp.ts";
@@ -106,5 +106,66 @@ if (filtered.components.length !== 1 || (filtered.components[0] as { name?: stri
   throw new Error("name filter failed for resource-picker");
 }
 
+const searchRes = await mcpPost(
+  {
+    jsonrpc: "2.0",
+    id: 4,
+    method: "tools/call",
+    params: {
+      name: "list_orchid_components",
+      arguments: { search: "picker" },
+    },
+  },
+  viaHttp,
+);
+const searched = parseToolText(await searchRes.text());
+const searchNames = searched.components.map((c) => (c as { name?: string }).name);
+if (!searchNames.includes("resource-picker")) {
+  throw new Error(`search 'picker' missed resource-picker: ${searchNames.join(", ")}`);
+}
+
+const getRes = await mcpPost(
+  {
+    jsonrpc: "2.0",
+    id: 5,
+    method: "tools/call",
+    params: {
+      name: "get_orchid_component",
+      arguments: { name: "button" },
+    },
+  },
+  viaHttp,
+);
+const getText = await getRes.text();
+if (!getRes.ok) {
+  throw new Error(`get_orchid_component failed: ${getRes.status} ${getText}`);
+}
+const getDataLine = getText.split("\n").find((line) => line.startsWith("data: "));
+if (!getDataLine) {
+  throw new Error(`Unexpected get_orchid_component response: ${getText.slice(0, 400)}`);
+}
+const getEnvelope = JSON.parse(getDataLine.slice(6)) as {
+  result?: { content?: Array<{ text?: string }> };
+};
+const getPayload = JSON.parse(getEnvelope.result?.content?.[0]?.text ?? "{}") as {
+  component?: { name?: string; examples?: unknown[]; install?: string };
+};
+if (getPayload.component?.name !== "button" || !getPayload.component.examples?.length) {
+  throw new Error("get_orchid_component did not return full button docs");
+}
+if (
+  getPayload.component &&
+  "install" in getPayload.component === false
+) {
+  throw new Error("get_orchid_component missing install command");
+}
+
+const listed = components[0] as { examples?: unknown; install?: string };
+if (listed?.examples) {
+  throw new Error("list without name should be slim (no examples)");
+}
+
 const mode = viaHttp ? `HTTP ${mcpUrl}` : "in-process handler";
-console.log(`MCP OK (${mode}): ${components.length} components, filter by name works.`);
+console.log(
+  `MCP OK (${mode}): ${components.length} components, name filter, search, and get work.`,
+);

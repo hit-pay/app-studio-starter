@@ -1,91 +1,34 @@
 ## Orchid UI MCP
 
-Orchid UI provides an MCP server for AI assistants:
+Component docs for AI assistants are served only over MCP. Do not rely on a local catalog in consumer apps.
 
 ```text
-https://orchid-ui-hitpay.vercel.app/api/mcp
+https://orchid-ui-hitpay.vercel.app/mcp
 ```
 
-### Connect
+(`https://orchid-ui-hitpay.vercel.app/api/mcp` is the same handler.)
 
-Configure an MCP client such as Cursor with:
+### Connect
 
 ```json
 {
   "mcpServers": {
     "orchid-ui": {
-      "url": "https://orchid-ui-hitpay.vercel.app/api/mcp"
+      "url": "https://orchid-ui-hitpay.vercel.app/mcp"
     }
   }
 }
 ```
 
-The server uses Streamable HTTP. No authentication is currently required.
+Streamable HTTP. No authentication.
 
-### Available tool
+### Tools
 
-#### `list_orchid_components`
+1. `list_orchid_components` — search (`search`, optional `category`: `ui` | `components`). Slim list: name, title, description, `install`.
+2. `get_orchid_component` — one slug. Full props, examples, files, `install` (`npx shadcn@latest add @orchid/<name>`).
 
-Returns `{ "components": [ ... ] }` — one object per Orchid doc entry (from `docs/ui/*.ts` and `docs/components/*.ts`).
+Install via shadcn registry `@orchid` → `https://orchid-ui-hitpay.vercel.app/r/{name}.json`.
 
-Optional filters:
+### Recommended flow
 
-```json
-{ "category": "components" }
-```
-
-```json
-{ "name": "resource-list" }
-```
-
-```json
-{ "category": "components", "name": "resource-picker" }
-```
-
-Each component object typically includes:
-
-- `name`, `title`, `description`, `category` (`ui` | `components`)
-- `props` — flat map of prop/API paths to allowed values or type hints
-- `examples` — `{ description, code }[]` (use **App Studio load** snippets for HitPay apps, not `demoLoad` / `render()` from Orchid docs site)
-- `related_components` — other registry names
-- `files`, `registryDependencies` — shadcn-style install metadata from `registry.json`
-
-HitPay catalog pair:
-
-| name | role |
-|------|------|
-| `resource-picker` | Modal `useResourcePicker()` + `pick({ type })` |
-| `resource-list` | Page table `ResourceList` + same `ResourcePickerLoad` |
-
-Both use `loadResourcePickerPage` + `mapResourcePickerPayload`; types `product` \| `order` \| `charge` \| `invoice`. Query mapping is documented in `props` (`load(input).*`, `pick().*`) and in App Studio `app/docs/hitpay/*.md`.
-
-Example (truncated) for `resource-picker`:
-
-```json
-{
-  "components": [
-    {
-      "name": "resource-picker",
-      "title": "Resource Picker",
-      "category": "components",
-      "description": "Promise picker for HitPay list records...",
-      "props": {
-        "ResourcePickerProvider.load": "ResourcePickerLoad (required)",
-        "pick().type": "product | order | charge | invoice"
-      },
-      "examples": [
-        { "description": "App Studio load (HitPay docs)", "code": "..." }
-      ],
-      "related_components": ["resource-list", "data-table", "dialog"]
-    }
-  ]
-}
-```
-
-### Recommended AI behavior
-
-1. Call `list_orchid_components` with `name` or `category` before implementing Orchid UI.
-2. Read `description` and `props` to choose picker vs list vs data-table.
-3. For HitPay lists, wire `ResourcePickerProvider` / `ResourceListProvider` with `loadResourcePickerPage`; follow `props` and HitPay markdown docs.
-4. Copy from `examples` labeled App Studio / route snippets; ignore Orchid-only `demoLoad` and `render()` in live doc examples unless building Orchid docs.
-5. Prefer Orchid components over custom implementations when a matching component exists.
+Search → get → run `install` → copy App Studio examples from the tool result. Prefer Orchid components over custom UI.

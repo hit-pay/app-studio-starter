@@ -22,7 +22,11 @@ const textEditorDocs = {
   examples: [
     {
       description: "Empty note",
-      code: `<TextEditor />`,
+      code: `function EmptyNoteExample() {
+  return <TextEditor />;
+}
+
+render(<EmptyNoteExample />);`,
     },
     {
       description: "Prefilled handover",
