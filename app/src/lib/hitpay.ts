@@ -72,11 +72,11 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
 const loadUserInfo = createServerFn({ method: 'GET' }).handler(() =>
   proxyJson<HitPayUser>('/current-user'))
 
-const loadAppRoles = createServerFn({ method: 'GET' }).handler(() =>
-  proxyJson<{ roles: HitPayRole[] }>('/roles', getAppToken()))
+const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
+  proxyJson<{ roles: HitPayRole[] }>('/roles', await getAppToken()))
 
-const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(() =>
-  proxyJson<{ members: HitPayStaffAppMember[] }>('/staff-app-members', getAppToken()))
+const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () =>
+  proxyJson<{ members: HitPayStaffAppMember[] }>('/staff-app-members', await getAppToken()))
 
 export const fetchUserInfo = () => loadUserInfo()
 export const fetchAppRoles = () => loadAppRoles()
