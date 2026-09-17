@@ -1958,7 +1958,7 @@
       "examples": [
         {
           "description": "Empty note",
-          "code": "<TextEditor />"
+          "code": "function EmptyNoteExample() {\n  return <TextEditor />;\n}\n\nrender(<EmptyNoteExample />);"
         },
         {
           "description": "Prefilled handover",
@@ -2334,8 +2334,8 @@
           "code": "function PickProductsExample() {\n  const pick = useResourcePicker();\n\n  return (\n    <Button\n      variant=\"outline\"\n      onClick={async () => {\n        const items = await pick({ type: \"product\", multiple: 3 });\n        if (items) {\n          console.log(items);\n        }\n      }}\n    >\n      Add up to 3 products\n    </Button>\n  );\n}\n\nrender(\n  <ResourcePickerProvider load={demoLoad}>\n    <PickProductsExample />\n  </ResourcePickerProvider>,\n);"
         },
         {
-          "description": "App Studio load (HitPay docs)",
-          "code": "// See app/docs/hitpay/products.md, orders.md, charges.md, invoices.md\nimport { loadResourcePickerPage } from \"#/lib/resource-picker\";\n\n<ResourcePickerProvider load={loadResourcePickerPage}>\n  {children}\n</ResourcePickerProvider>"
+          "description": "App Studio load (`#/lib/resource`, shared with ResourceList)",
+          "code": "// src/lib/resource — HitPay products, orders, charges, invoices\nimport { loadResourcePickerPage } from \"#/lib/resource\";\nimport { ResourcePickerProvider } from \"@/components/form/resource-picker\";\n\n<ResourcePickerProvider load={(input) => loadResourcePickerPage({ data: input })}>\n  {children}\n</ResourcePickerProvider>"
         },
         {
           "description": "Pre-selected variants",
@@ -2435,8 +2435,8 @@
           "code": "function InvoiceResourceListExample() {\n  return (\n    <ResourceListProvider load={demoLoad}>\n      <ResourceList\n        type=\"invoice\"\n        className=\"min-w-0\"\n        onRowAction={(action, row) => console.log(action, row.id)}\n        onSelectionAction={(action, ids) => console.log(action.key, ids)}\n        onEmptyAction={(action) => console.log(action.key)}\n      />\n    </ResourceListProvider>\n  );\n}\n\nrender(<InvoiceResourceListExample />);"
         },
         {
-          "description": "App Studio load (HitPay docs)",
-          "code": "// See app/docs/hitpay/products.md, orders.md, charges.md, invoices.md\nimport { loadResourcePickerPage } from \"#/lib/resource-picker\";\nimport { ResourceListProvider } from \"@/components/displaying-data/resource-list\";\n\n<ResourceListProvider load={(input) => loadResourcePickerPage({ data: input })}>\n  {children}\n</ResourceListProvider>"
+          "description": "App Studio load (`#/lib/resource`, shared with ResourcePicker)",
+          "code": "// src/lib/resource — same load as ResourcePicker\nimport { loadResourcePickerPage } from \"#/lib/resource\";\nimport { ResourceListProvider } from \"@/components/displaying-data/resource-list\";\n\n<ResourceListProvider load={(input) => loadResourcePickerPage({ data: input })}>\n  {children}\n</ResourceListProvider>"
         },
         {
           "description": "Product catalog route",

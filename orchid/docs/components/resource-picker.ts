@@ -58,11 +58,12 @@ render(
 );`,
     },
     {
-      description: "App Studio load (HitPay docs)",
-      code: `// See app/docs/hitpay/products.md, orders.md, charges.md, invoices.md
-import { loadResourcePickerPage } from "#/lib/resource-picker";
+      description: "App Studio load (`#/lib/resource`, shared with ResourceList)",
+      code: `// src/lib/resource — HitPay products, orders, charges, invoices
+import { loadResourcePickerPage } from "#/lib/resource";
+import { ResourcePickerProvider } from "@/components/form/resource-picker";
 
-<ResourcePickerProvider load={loadResourcePickerPage}>
+<ResourcePickerProvider load={(input) => loadResourcePickerPage({ data: input })}>
   {children}
 </ResourcePickerProvider>`,
     },

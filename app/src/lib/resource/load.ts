@@ -1,11 +1,12 @@
-/** HitPay list queries for ResourcePicker — see app/docs/hitpay/{products,orders,charges,invoices}.md */
+/** HitPay list queries for ResourcePicker and ResourceList — see app/docs/hitpay/{products,orders,charges,invoices}.md */
 import { createServerFn } from '@tanstack/react-start'
 
 import { HITPAY_ALL_ROLES } from '#/lib/hitpay-roles'
-import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
 import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
-import type { ResourcePickerLoadInput, ResourcePickerPage } from '#/lib/resource-picker-map'
+
+import { mapResourcePickerPayload } from './map'
+import type { ResourcePickerLoadInput, ResourcePickerPage } from './map'
 
 const ORDER_STATUSES = ['completed', 'pending', 'sent', 'draft', 'expired', 'canceled'] as const
 function categoryIdsFromExtras(extras?: Record<string, string>) {
