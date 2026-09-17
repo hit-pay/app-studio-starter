@@ -1,5 +1,4 @@
-You are the App Studio builder. Ship a usable embedded HitPay Dashboard
-iframe app.
+You are the App Studio builder. Ship a usable embedded Dashboard iframe app.
 
 Work for **up to 15 minutes**, then stop and summarize what shipped vs what
 is left. Cover the screens the request needs: persist, session/roles, and
@@ -14,33 +13,27 @@ routes. Then run `bun run generate-routes`.
 - `src/ui/` and `src/components/` — already-installed Orchid. Read these for
   props, imports, and examples. Change them only when the user asks.
 - `src/lib/` — UI-imported helpers (`createServerFn` + browser hooks). Put new
-  `createServerFn` here.
+  `createServerFn` here. List/CRUD persist goes through these fns + `requireRoles`.
   - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
   - `current-user.ts` — `useCurrentUser` (wraps `getSession`); roles/staff via `appJson`
   - `resource.ts` — `loadResourcePage`, `mapResourcePayload` for ResourcePicker and ResourceList
   - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
   - `utils.ts` — `cn`, `storageKey`
-- `src/server/lib/` — Node only. Turso, proxy, tokens, `requireRoles`. Keep
+- `src/server/lib/` — Node only. Database, proxy, tokens, `requireRoles`. Keep
   imports in server/lib helpers, not in UI components.
   - `session.ts` — `getSession`, `requireRoles`
   - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`, `appJson`
   - `proxy.ts` — `proxyRequest` for `/v1/*`
-  - `db.ts`, `migrate.ts`, `file-store.ts` — Turso (blobs in `file-store`)
-- `migrations/` — Turso SQL. Write app-owned tables here using `docs/turso/`.
+  - `db.ts`, `migrate.ts`, `file-store.ts` — Database (blobs in `file-store`)
+- `migrations/` — Database SQL. Write app-owned tables here using `docs/turso/`.
 - `docs/current-user.md` — session cookie contract
-- `docs/hitpay/` — HitPay resource fields
-- `docs/turso/` — query, batch, and migration patterns
+- `docs/hitpay/` — API / Resource fields
+- `docs/turso/` — Database query, batch, and migration patterns
 
 `src/routeTree.gen.ts` is generated: after route changes run
 `bun run generate-routes`. Keep tokens and secrets on the server.
 
-## Stack to reuse
-
-- Routes, helpers, and session: `src/routes`, `src/lib`, `src/server/lib`, `docs/current-user.md`
-- UI: installed Orchid in `src/ui` / `src/components`
-- List/CRUD persist: Turso via `createServerFn` + `requireRoles`
-
-## Orchid
+## Orchid UI
 
 Already installed — import these: `app-layout`, `page-layout`,
 `confirmation-modal`, `copy-button`, `button`, `dialog`, `drawer`, `input`,
@@ -59,16 +52,16 @@ For a component that is missing on disk, use orchid-ui MCP
 Use the MCP `install` field. For components already on disk, the local files
 are enough.
 
-## HitPay / Turso
+## API / Resource and Database
 
-HitPay fields and Turso tool names come from **app-studio** MCP plus
+API / Resource fields and Database tool names come from **app-studio** MCP plus
 `docs/hitpay/` and `docs/turso/`. App-owned SQL lives in `migrations/` from
 those docs.
 
-Use MCP when you need live HitPay lists or Turso runtime tools
-(`turso_query`, `turso_batch`, `turso_apply_migrations`). Start with
-`tools/list`, then the matching docs file. If MCP is down, keep the UI
-working with local persist.
+Use MCP when you need live API / Resource lists or Database runtime tools
+(query, batch, apply migrations). Start with `tools/list`, then the matching
+docs file. If MCP is down, still persist in the Database through `db.ts` /
+`createServerFn` (the app proxy, not MCP).
 
 ResourcePicker / ResourceList: `#/lib/resource`
 (`loadResourcePage`, `mapResourcePayload`, `ResourcePage`, `ResourceItem`).
@@ -82,12 +75,11 @@ Browser: `useCurrentUser` from `#/lib/current-user`. Server: `getSession` /
 
 ## localStorage
 
-Shared HitPay Dashboard origin — namespace keys with `storageKey` from
-`#/lib/utils`:
+Shared Dashboard origin — UI prefs only (theme, dismissed banners),
+namespaced with `storageKey` from `#/lib/utils`. 
 
 ```ts
 localStorage.setItem(storageKey('theme'), 'dark')
-const theme = localStorage.getItem(storageKey('theme'))
 ```
 
 Yields `app-studio:{appId}:theme`.
