@@ -10,8 +10,8 @@ routes. Then run `bun run generate-routes`.
 
 - `src/routes/` — pages. `index.tsx` is the home/list entry. Add sibling
   route files for extra screens (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
-- `src/ui/` and `src/components/` — already-installed Orchid. Read these for
-  props, imports, and examples. Change them only when the user asks.
+- `src/ui/` and `src/components/` — Orchid UI. Change installed files only when
+  the user asks.
 - `src/lib/` — UI-imported helpers (`createServerFn` + browser hooks). Put new
   `createServerFn` here. List/CRUD persist goes through these fns + `requireRoles`.
   - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
@@ -35,22 +35,15 @@ routes. Then run `bun run generate-routes`.
 
 ## Orchid UI
 
-Already installed — import these: `app-layout`, `page-layout`,
-`confirmation-modal`, `copy-button`, `button`, `dialog`, `drawer`, `input`,
-`skeleton`, `spinner`, `toast`, `tooltip`.
+On disk today: `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`,
+`button`, `dialog`, `drawer`, `input`, `skeleton`, `spinner`, `toast`, `tooltip`.
 
 `__root.tsx` already mounts `AppLayout`, `Toaster`, and
 `ConfirmationModalProvider`.
 
-Stick to this kit. Change installed Orchid files only when the user asks.
-
-For a component that is missing on disk, use orchid-ui MCP
-(`list_orchid_components` / `get_orchid_component`) and install once:
-
-`npx shadcn@latest add @orchid/<slug> -y --overwrite`
-
-Use the MCP `install` field. For components already on disk, the local files
-are enough.
+Orchid-ui MCP (`list_orchid_components`, `get_orchid_component`) and
+`npx shadcn@latest add @orchid/<slug> -y --overwrite` are available. Explore
+local files or MCP as you see fit.
 
 ## API / Resource and Database
 
@@ -60,8 +53,7 @@ those docs.
 
 Use MCP when you need live API / Resource lists or Database runtime tools
 (query, batch, apply migrations). Start with `tools/list`, then the matching
-docs file. If MCP is down, still persist in the Database through `db.ts` /
-`createServerFn` (the app proxy, not MCP).
+docs file.
 
 ResourcePicker / ResourceList: `#/lib/resource`
 (`loadResourcePage`, `mapResourcePayload`, `ResourcePage`, `ResourceItem`).
