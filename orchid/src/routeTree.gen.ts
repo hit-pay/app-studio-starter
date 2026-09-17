@@ -20,28 +20,19 @@ import { Route as ComponentsChoiceCardRouteImport } from './routes/components/ch
 import { Route as ComponentsCommandRouteImport } from './routes/components/command'
 import { Route as ComponentsConfirmationModalRouteImport } from './routes/components/confirmation-modal'
 import { Route as ComponentsCopyButtonRouteImport } from './routes/components/copy-button'
-import { Route as ComponentsCouponSelectRouteImport } from './routes/components/coupon-select'
 import { Route as ComponentsCustomerCardRouteImport } from './routes/components/customer-card'
 import { Route as ComponentsDataListRouteImport } from './routes/components/data-list'
 import { Route as ComponentsDataTableRouteImport } from './routes/components/data-table'
 import { Route as ComponentsDatePickerRouteImport } from './routes/components/date-picker'
 import { Route as ComponentsDetailCardRouteImport } from './routes/components/detail-card'
-import { Route as ComponentsDiscountSelectRouteImport } from './routes/components/discount-select'
 import { Route as ComponentsEmptyRouteImport } from './routes/components/empty'
 import { Route as ComponentsFormBuilderRouteImport } from './routes/components/form-builder'
 import { Route as ComponentsFormLayoutRouteImport } from './routes/components/form-layout'
-import { Route as ComponentsLocationSelectRouteImport } from './routes/components/location-select'
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
 import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
-import { Route as ComponentsPickupSelectRouteImport } from './routes/components/pickup-select'
-import { Route as ComponentsProductCategorySelectRouteImport } from './routes/components/product-category-select'
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
 import { Route as ComponentsResourcePickerRouteImport } from './routes/components/resource-picker'
-import { Route as ComponentsRoleSelectRouteImport } from './routes/components/role-select'
 import { Route as ComponentsSelectRouteImport } from './routes/components/select'
-import { Route as ComponentsShippingSelectRouteImport } from './routes/components/shipping-select'
-import { Route as ComponentsStaffSelectRouteImport } from './routes/components/staff-select'
-import { Route as ComponentsTaxSelectRouteImport } from './routes/components/tax-select'
 import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
 import { Route as UiIndexRouteImport } from './routes/ui/index'
 import { Route as UiAvatarRouteImport } from './routes/ui/avatar'
@@ -126,11 +117,6 @@ const ComponentsCopyButtonRoute = ComponentsCopyButtonRouteImport.update({
   path: '/components/copy-button',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsCouponSelectRoute = ComponentsCouponSelectRouteImport.update({
-  id: '/components/coupon-select',
-  path: '/components/coupon-select',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ComponentsCustomerCardRoute = ComponentsCustomerCardRouteImport.update({
   id: '/components/customer-card',
   path: '/components/customer-card',
@@ -156,12 +142,6 @@ const ComponentsDetailCardRoute = ComponentsDetailCardRouteImport.update({
   path: '/components/detail-card',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsDiscountSelectRoute =
-  ComponentsDiscountSelectRouteImport.update({
-    id: '/components/discount-select',
-    path: '/components/discount-select',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ComponentsEmptyRoute = ComponentsEmptyRouteImport.update({
   id: '/components/empty',
   path: '/components/empty',
@@ -177,12 +157,6 @@ const ComponentsFormLayoutRoute = ComponentsFormLayoutRouteImport.update({
   path: '/components/form-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsLocationSelectRoute =
-  ComponentsLocationSelectRouteImport.update({
-    id: '/components/location-select',
-    path: '/components/location-select',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ComponentsMetricCardRoute = ComponentsMetricCardRouteImport.update({
   id: '/components/metric-card',
   path: '/components/metric-card',
@@ -193,17 +167,6 @@ const ComponentsPageLayoutRoute = ComponentsPageLayoutRouteImport.update({
   path: '/components/page-layout',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ComponentsPickupSelectRoute = ComponentsPickupSelectRouteImport.update({
-  id: '/components/pickup-select',
-  path: '/components/pickup-select',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsProductCategorySelectRoute =
-  ComponentsProductCategorySelectRouteImport.update({
-    id: '/components/product-category-select',
-    path: '/components/product-category-select',
-    getParentRoute: () => rootRouteImport,
-  } as any)
 const ComponentsQuantityInputRoute = ComponentsQuantityInputRouteImport.update({
   id: '/components/quantity-input',
   path: '/components/quantity-input',
@@ -215,30 +178,9 @@ const ComponentsResourcePickerRoute =
     path: '/components/resource-picker',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ComponentsRoleSelectRoute = ComponentsRoleSelectRouteImport.update({
-  id: '/components/role-select',
-  path: '/components/role-select',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const ComponentsSelectRoute = ComponentsSelectRouteImport.update({
   id: '/components/select',
   path: '/components/select',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsShippingSelectRoute =
-  ComponentsShippingSelectRouteImport.update({
-    id: '/components/shipping-select',
-    path: '/components/shipping-select',
-    getParentRoute: () => rootRouteImport,
-  } as any)
-const ComponentsStaffSelectRoute = ComponentsStaffSelectRouteImport.update({
-  id: '/components/staff-select',
-  path: '/components/staff-select',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ComponentsTaxSelectRoute = ComponentsTaxSelectRouteImport.update({
-  id: '/components/tax-select',
-  path: '/components/tax-select',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsTextEditorRoute = ComponentsTextEditorRouteImport.update({
@@ -388,28 +330,19 @@ export interface FileRoutesByFullPath {
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
   '/components/copy-button': typeof ComponentsCopyButtonRoute
-  '/components/coupon-select': typeof ComponentsCouponSelectRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
   '/components/data-list': typeof ComponentsDataListRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
   '/components/detail-card': typeof ComponentsDetailCardRoute
-  '/components/discount-select': typeof ComponentsDiscountSelectRoute
   '/components/empty': typeof ComponentsEmptyRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
-  '/components/location-select': typeof ComponentsLocationSelectRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
-  '/components/pickup-select': typeof ComponentsPickupSelectRoute
-  '/components/product-category-select': typeof ComponentsProductCategorySelectRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
-  '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
-  '/components/shipping-select': typeof ComponentsShippingSelectRoute
-  '/components/staff-select': typeof ComponentsStaffSelectRoute
-  '/components/tax-select': typeof ComponentsTaxSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/ui/avatar': typeof UiAvatarRoute
   '/ui/badge': typeof UiBadgeRoute
@@ -450,28 +383,19 @@ export interface FileRoutesByTo {
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
   '/components/copy-button': typeof ComponentsCopyButtonRoute
-  '/components/coupon-select': typeof ComponentsCouponSelectRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
   '/components/data-list': typeof ComponentsDataListRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
   '/components/detail-card': typeof ComponentsDetailCardRoute
-  '/components/discount-select': typeof ComponentsDiscountSelectRoute
   '/components/empty': typeof ComponentsEmptyRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
-  '/components/location-select': typeof ComponentsLocationSelectRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
-  '/components/pickup-select': typeof ComponentsPickupSelectRoute
-  '/components/product-category-select': typeof ComponentsProductCategorySelectRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
-  '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
-  '/components/shipping-select': typeof ComponentsShippingSelectRoute
-  '/components/staff-select': typeof ComponentsStaffSelectRoute
-  '/components/tax-select': typeof ComponentsTaxSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/ui/avatar': typeof UiAvatarRoute
   '/ui/badge': typeof UiBadgeRoute
@@ -513,28 +437,19 @@ export interface FileRoutesById {
   '/components/command': typeof ComponentsCommandRoute
   '/components/confirmation-modal': typeof ComponentsConfirmationModalRoute
   '/components/copy-button': typeof ComponentsCopyButtonRoute
-  '/components/coupon-select': typeof ComponentsCouponSelectRoute
   '/components/customer-card': typeof ComponentsCustomerCardRoute
   '/components/data-list': typeof ComponentsDataListRoute
   '/components/data-table': typeof ComponentsDataTableRoute
   '/components/date-picker': typeof ComponentsDatePickerRoute
   '/components/detail-card': typeof ComponentsDetailCardRoute
-  '/components/discount-select': typeof ComponentsDiscountSelectRoute
   '/components/empty': typeof ComponentsEmptyRoute
   '/components/form-builder': typeof ComponentsFormBuilderRoute
   '/components/form-layout': typeof ComponentsFormLayoutRoute
-  '/components/location-select': typeof ComponentsLocationSelectRoute
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
-  '/components/pickup-select': typeof ComponentsPickupSelectRoute
-  '/components/product-category-select': typeof ComponentsProductCategorySelectRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
-  '/components/role-select': typeof ComponentsRoleSelectRoute
   '/components/select': typeof ComponentsSelectRoute
-  '/components/shipping-select': typeof ComponentsShippingSelectRoute
-  '/components/staff-select': typeof ComponentsStaffSelectRoute
-  '/components/tax-select': typeof ComponentsTaxSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
   '/ui/avatar': typeof UiAvatarRoute
   '/ui/badge': typeof UiBadgeRoute
@@ -577,28 +492,19 @@ export interface FileRouteTypes {
     | '/components/command'
     | '/components/confirmation-modal'
     | '/components/copy-button'
-    | '/components/coupon-select'
     | '/components/customer-card'
     | '/components/data-list'
     | '/components/data-table'
     | '/components/date-picker'
     | '/components/detail-card'
-    | '/components/discount-select'
     | '/components/empty'
     | '/components/form-builder'
     | '/components/form-layout'
-    | '/components/location-select'
     | '/components/metric-card'
     | '/components/page-layout'
-    | '/components/pickup-select'
-    | '/components/product-category-select'
     | '/components/quantity-input'
     | '/components/resource-picker'
-    | '/components/role-select'
     | '/components/select'
-    | '/components/shipping-select'
-    | '/components/staff-select'
-    | '/components/tax-select'
     | '/components/text-editor'
     | '/ui/avatar'
     | '/ui/badge'
@@ -639,28 +545,19 @@ export interface FileRouteTypes {
     | '/components/command'
     | '/components/confirmation-modal'
     | '/components/copy-button'
-    | '/components/coupon-select'
     | '/components/customer-card'
     | '/components/data-list'
     | '/components/data-table'
     | '/components/date-picker'
     | '/components/detail-card'
-    | '/components/discount-select'
     | '/components/empty'
     | '/components/form-builder'
     | '/components/form-layout'
-    | '/components/location-select'
     | '/components/metric-card'
     | '/components/page-layout'
-    | '/components/pickup-select'
-    | '/components/product-category-select'
     | '/components/quantity-input'
     | '/components/resource-picker'
-    | '/components/role-select'
     | '/components/select'
-    | '/components/shipping-select'
-    | '/components/staff-select'
-    | '/components/tax-select'
     | '/components/text-editor'
     | '/ui/avatar'
     | '/ui/badge'
@@ -701,28 +598,19 @@ export interface FileRouteTypes {
     | '/components/command'
     | '/components/confirmation-modal'
     | '/components/copy-button'
-    | '/components/coupon-select'
     | '/components/customer-card'
     | '/components/data-list'
     | '/components/data-table'
     | '/components/date-picker'
     | '/components/detail-card'
-    | '/components/discount-select'
     | '/components/empty'
     | '/components/form-builder'
     | '/components/form-layout'
-    | '/components/location-select'
     | '/components/metric-card'
     | '/components/page-layout'
-    | '/components/pickup-select'
-    | '/components/product-category-select'
     | '/components/quantity-input'
     | '/components/resource-picker'
-    | '/components/role-select'
     | '/components/select'
-    | '/components/shipping-select'
-    | '/components/staff-select'
-    | '/components/tax-select'
     | '/components/text-editor'
     | '/ui/avatar'
     | '/ui/badge'
@@ -764,28 +652,19 @@ export interface RootRouteChildren {
   ComponentsCommandRoute: typeof ComponentsCommandRoute
   ComponentsConfirmationModalRoute: typeof ComponentsConfirmationModalRoute
   ComponentsCopyButtonRoute: typeof ComponentsCopyButtonRoute
-  ComponentsCouponSelectRoute: typeof ComponentsCouponSelectRoute
   ComponentsCustomerCardRoute: typeof ComponentsCustomerCardRoute
   ComponentsDataListRoute: typeof ComponentsDataListRoute
   ComponentsDataTableRoute: typeof ComponentsDataTableRoute
   ComponentsDatePickerRoute: typeof ComponentsDatePickerRoute
   ComponentsDetailCardRoute: typeof ComponentsDetailCardRoute
-  ComponentsDiscountSelectRoute: typeof ComponentsDiscountSelectRoute
   ComponentsEmptyRoute: typeof ComponentsEmptyRoute
   ComponentsFormBuilderRoute: typeof ComponentsFormBuilderRoute
   ComponentsFormLayoutRoute: typeof ComponentsFormLayoutRoute
-  ComponentsLocationSelectRoute: typeof ComponentsLocationSelectRoute
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
   ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
-  ComponentsPickupSelectRoute: typeof ComponentsPickupSelectRoute
-  ComponentsProductCategorySelectRoute: typeof ComponentsProductCategorySelectRoute
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
   ComponentsResourcePickerRoute: typeof ComponentsResourcePickerRoute
-  ComponentsRoleSelectRoute: typeof ComponentsRoleSelectRoute
   ComponentsSelectRoute: typeof ComponentsSelectRoute
-  ComponentsShippingSelectRoute: typeof ComponentsShippingSelectRoute
-  ComponentsStaffSelectRoute: typeof ComponentsStaffSelectRoute
-  ComponentsTaxSelectRoute: typeof ComponentsTaxSelectRoute
   ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
   UiAvatarRoute: typeof UiAvatarRoute
   UiBadgeRoute: typeof UiBadgeRoute
@@ -895,13 +774,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsCopyButtonRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/coupon-select': {
-      id: '/components/coupon-select'
-      path: '/components/coupon-select'
-      fullPath: '/components/coupon-select'
-      preLoaderRoute: typeof ComponentsCouponSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/customer-card': {
       id: '/components/customer-card'
       path: '/components/customer-card'
@@ -937,13 +809,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsDetailCardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/discount-select': {
-      id: '/components/discount-select'
-      path: '/components/discount-select'
-      fullPath: '/components/discount-select'
-      preLoaderRoute: typeof ComponentsDiscountSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/empty': {
       id: '/components/empty'
       path: '/components/empty'
@@ -965,13 +830,6 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsFormLayoutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/location-select': {
-      id: '/components/location-select'
-      path: '/components/location-select'
-      fullPath: '/components/location-select'
-      preLoaderRoute: typeof ComponentsLocationSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/metric-card': {
       id: '/components/metric-card'
       path: '/components/metric-card'
@@ -984,20 +842,6 @@ declare module '@tanstack/react-router' {
       path: '/components/page-layout'
       fullPath: '/components/page-layout'
       preLoaderRoute: typeof ComponentsPageLayoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/pickup-select': {
-      id: '/components/pickup-select'
-      path: '/components/pickup-select'
-      fullPath: '/components/pickup-select'
-      preLoaderRoute: typeof ComponentsPickupSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/product-category-select': {
-      id: '/components/product-category-select'
-      path: '/components/product-category-select'
-      fullPath: '/components/product-category-select'
-      preLoaderRoute: typeof ComponentsProductCategorySelectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/quantity-input': {
@@ -1014,39 +858,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ComponentsResourcePickerRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/components/role-select': {
-      id: '/components/role-select'
-      path: '/components/role-select'
-      fullPath: '/components/role-select'
-      preLoaderRoute: typeof ComponentsRoleSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/components/select': {
       id: '/components/select'
       path: '/components/select'
       fullPath: '/components/select'
       preLoaderRoute: typeof ComponentsSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/shipping-select': {
-      id: '/components/shipping-select'
-      path: '/components/shipping-select'
-      fullPath: '/components/shipping-select'
-      preLoaderRoute: typeof ComponentsShippingSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/staff-select': {
-      id: '/components/staff-select'
-      path: '/components/staff-select'
-      fullPath: '/components/staff-select'
-      preLoaderRoute: typeof ComponentsStaffSelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/components/tax-select': {
-      id: '/components/tax-select'
-      path: '/components/tax-select'
-      fullPath: '/components/tax-select'
-      preLoaderRoute: typeof ComponentsTaxSelectRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/text-editor': {
@@ -1252,28 +1068,19 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsCommandRoute: ComponentsCommandRoute,
   ComponentsConfirmationModalRoute: ComponentsConfirmationModalRoute,
   ComponentsCopyButtonRoute: ComponentsCopyButtonRoute,
-  ComponentsCouponSelectRoute: ComponentsCouponSelectRoute,
   ComponentsCustomerCardRoute: ComponentsCustomerCardRoute,
   ComponentsDataListRoute: ComponentsDataListRoute,
   ComponentsDataTableRoute: ComponentsDataTableRoute,
   ComponentsDatePickerRoute: ComponentsDatePickerRoute,
   ComponentsDetailCardRoute: ComponentsDetailCardRoute,
-  ComponentsDiscountSelectRoute: ComponentsDiscountSelectRoute,
   ComponentsEmptyRoute: ComponentsEmptyRoute,
   ComponentsFormBuilderRoute: ComponentsFormBuilderRoute,
   ComponentsFormLayoutRoute: ComponentsFormLayoutRoute,
-  ComponentsLocationSelectRoute: ComponentsLocationSelectRoute,
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,
   ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
-  ComponentsPickupSelectRoute: ComponentsPickupSelectRoute,
-  ComponentsProductCategorySelectRoute: ComponentsProductCategorySelectRoute,
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
   ComponentsResourcePickerRoute: ComponentsResourcePickerRoute,
-  ComponentsRoleSelectRoute: ComponentsRoleSelectRoute,
   ComponentsSelectRoute: ComponentsSelectRoute,
-  ComponentsShippingSelectRoute: ComponentsShippingSelectRoute,
-  ComponentsStaffSelectRoute: ComponentsStaffSelectRoute,
-  ComponentsTaxSelectRoute: ComponentsTaxSelectRoute,
   ComponentsTextEditorRoute: ComponentsTextEditorRoute,
   UiAvatarRoute: UiAvatarRoute,
   UiBadgeRoute: UiBadgeRoute,

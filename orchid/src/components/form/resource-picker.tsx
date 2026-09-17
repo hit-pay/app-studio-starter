@@ -11,8 +11,11 @@ import { Badge } from '@ui/badge'
 import { Spinner } from '@ui/spinner'
 import { Checkbox } from '@ui/checkbox'
 import { DatePickerRange } from '@/components/form/date-picker'
-import { LocationSelect } from '@/components/form/location-select'
-import { ProductCategorySelect } from '@/components/form/product-category-select'
+import { HitPayNamedSelect } from '@/components/form/hitpay-named-select'
+import {
+  loadLocationsForSelect,
+  loadProductCategoriesForSelect,
+} from '#/lib/hitpay-commerce-selects'
 import { Select } from '@/components/form/select'
 import { Input } from '@ui/input'
 import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
@@ -540,44 +543,52 @@ function ResourcePickerDialog({
           ))}
           {type === 'product' ? (
             <div className="min-w-0 flex-1 [&_button]:w-full">
-                <ProductCategorySelect
+                <HitPayNamedSelect
                   name="resource_picker_category"
                   label={false}
                   clearable
                   placeholder="All categories"
-                value={extras.category_id ?? null}
-                onValueChange={(value) => {
-                  setPage(1)
-                  setCursor(undefined)
-                  setExtras((current) => {
-                    const next = { ...current }
-                    if (typeof value === 'string' && value) next.category_id = value
-                    else delete next.category_id
-                    return next
-                  })
-                }}
-              />
+                  empty="No categories."
+                  getLabel={(row) => row.name?.trim() || row.id}
+                  load={() =>
+                    loadProductCategoriesForSelect().then((result) => ({ items: result.items }))
+                  }
+                  value={extras.category_id ?? null}
+                  onValueChange={(value) => {
+                    setPage(1)
+                    setCursor(undefined)
+                    setExtras((current) => {
+                      const next = { ...current }
+                      if (typeof value === 'string' && value) next.category_id = value
+                      else delete next.category_id
+                      return next
+                    })
+                  }}
+                />
             </div>
           ) : null}
           {type === 'product' || type === 'order' ? (
             <div className="min-w-0 flex-1 [&_button]:w-full">
-                <LocationSelect
+                <HitPayNamedSelect
                   name="resource_picker_location"
                   label={false}
                   clearable
                   placeholder="All locations"
-                value={extras.location_id ?? null}
-                onValueChange={(value) => {
-                  setPage(1)
-                  setCursor(undefined)
-                  setExtras((current) => {
-                    const next = { ...current }
-                    if (typeof value === 'string' && value) next.location_id = value
-                    else delete next.location_id
-                    return next
-                  })
-                }}
-              />
+                  empty="No locations."
+                  getLabel={(row) => row.name?.trim() || row.id}
+                  load={() => loadLocationsForSelect().then((result) => ({ items: result.items }))}
+                  value={extras.location_id ?? null}
+                  onValueChange={(value) => {
+                    setPage(1)
+                    setCursor(undefined)
+                    setExtras((current) => {
+                      const next = { ...current }
+                      if (typeof value === 'string' && value) next.location_id = value
+                      else delete next.location_id
+                      return next
+                    })
+                  }}
+                />
             </div>
           ) : null}
           {DATE_FILTER_TYPES.has(type) ? (

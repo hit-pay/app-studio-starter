@@ -11,16 +11,7 @@ import {
 
 import { cn } from '@/lib/utils'
 import { Checkbox, CheckboxGroup } from '@ui/checkbox'
-import { CouponSelect } from '@/components/form/coupon-select'
-import { DiscountSelect } from '@/components/form/discount-select'
-import { LocationSelect } from '@/components/form/location-select'
-import { PickupSelect } from '@/components/form/pickup-select'
-import { ProductCategorySelect } from '@/components/form/product-category-select'
-import { RoleSelect } from '@/components/form/role-select'
 import { Select } from '@/components/form/select'
-import { ShippingSelect } from '@/components/form/shipping-select'
-import { StaffSelect } from '@/components/form/staff-select'
-import { TaxSelect } from '@/components/form/tax-select'
 import { DatePicker, DatePickerRange, DateTimePicker } from '@/components/form/date-picker'
 import {
   Field,
@@ -70,7 +61,6 @@ import {
   isDisplayed,
   isMultiCombobox,
   isMultiFile,
-  isMultiStaffOrRole,
   isPlainObject,
   nestValues,
   pairKeys,
@@ -213,45 +203,6 @@ function FieldHint({
   if (invalid) return <FieldError>{message}</FieldError>
   if (description) return <FieldDescription>{description}</FieldDescription>
   return null
-}
-
-type StaffRoleSnapshot = { id: string; name: string }
-
-function idsFromSnapshot(value: unknown, multiple: boolean): string | string[] | null {
-  if (multiple) {
-    if (!Array.isArray(value)) return []
-    return value.map((entry) =>
-      entry && typeof entry === 'object' && 'id' in entry
-        ? String((entry as StaffRoleSnapshot).id)
-        : String(entry),
-    )
-  }
-  if (value && typeof value === 'object' && !Array.isArray(value) && 'id' in value) {
-    return String((value as StaffRoleSnapshot).id)
-  }
-  if (typeof value === 'string' && value) return value
-  return null
-}
-
-function snapshotFromPick(
-  selected:
-    | { id: string; name?: string | null; email?: string | null; title?: string; code?: string | null; address?: string | null }
-    | { id: string; name?: string | null; email?: string | null; title?: string; code?: string | null; address?: string | null }[]
-    | null,
-): StaffRoleSnapshot | StaffRoleSnapshot[] | null {
-  if (selected == null) return null
-  const toSnap = (row: {
-    id: string
-    name?: string | null
-    email?: string | null
-    title?: string
-    code?: string | null
-    address?: string | null
-  }) => ({
-    id: row.id,
-    name: row.name?.trim() || row.code?.trim() || row.address?.trim() || row.email?.trim() || row.title?.trim() || row.id,
-  })
-  return Array.isArray(selected) ? selected.map(toSnap) : toSnap(selected)
 }
 
 function FormComboboxField({
@@ -748,125 +699,6 @@ function SchemaForm({
                           field.handleChange,
                         )
                       }}
-                    />
-                    <FieldHint invalid={invalid} message={message} description={item.description} />
-                  </Field>
-                )
-              }
-
-              if (type === 'staff') {
-                const multiple = isMultiStaffOrRole(item)
-                const roleTitles = Array.isArray(item.props?.roleTitles)
-                  ? (item.props.roleTitles as string[])
-                  : undefined
-                const locationId =
-                  typeof item.props?.locationId === 'string' ? item.props.locationId : undefined
-                return (
-                  <Field data-invalid={invalid || undefined}>
-                    <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
-                    <StaffSelect
-                      name={item.path}
-                      label={false}
-                      multiple={multiple}
-                      roleTitles={roleTitles}
-                      locationId={locationId}
-                      value={idsFromSnapshot(value, multiple)}
-                      invalid={invalid}
-                      placeholder={placeholder ?? 'Select staff'}
-                      onValueChange={(_next, selected) =>
-                        changeField(
-                          item,
-                          [{ path: item.path, value: snapshotFromPick(selected) }],
-                          field.handleChange,
-                        )
-                      }
-                    />
-                    <FieldHint invalid={invalid} message={message} description={item.description} />
-                  </Field>
-                )
-              }
-
-              if (type === 'role') {
-                const multiple = isMultiStaffOrRole(item)
-                return (
-                  <Field data-invalid={invalid || undefined}>
-                    <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
-                    <RoleSelect
-                      name={item.path}
-                      label={false}
-                      multiple={multiple}
-                      value={idsFromSnapshot(value, multiple)}
-                      invalid={invalid}
-                      placeholder={placeholder ?? 'Select role'}
-                      onValueChange={(_next, selected) =>
-                        changeField(
-                          item,
-                          [{ path: item.path, value: snapshotFromPick(selected) }],
-                          field.handleChange,
-                        )
-                      }
-                    />
-                    <FieldHint invalid={invalid} message={message} description={item.description} />
-                  </Field>
-                )
-              }
-
-              if (
-                type === 'coupon' ||
-                type === 'discount' ||
-                type === 'tax' ||
-                type === 'shipping' ||
-                type === 'pickup' ||
-                type === 'product-category' ||
-                type === 'location'
-              ) {
-                const multiple = isMultiStaffOrRole(item)
-                const CommerceSelect =
-                  type === 'coupon'
-                    ? CouponSelect
-                    : type === 'discount'
-                      ? DiscountSelect
-                      : type === 'tax'
-                        ? TaxSelect
-                        : type === 'shipping'
-                          ? ShippingSelect
-                          : type === 'pickup'
-                            ? PickupSelect
-                            : type === 'product-category'
-                              ? ProductCategorySelect
-                              : LocationSelect
-                const selectPlaceholder =
-                  placeholder ??
-                  (type === 'coupon'
-                    ? 'Select coupon'
-                    : type === 'discount'
-                      ? 'Select discount'
-                      : type === 'tax'
-                        ? 'Select tax'
-                        : type === 'shipping'
-                          ? 'Select shipping'
-                          : type === 'pickup'
-                            ? 'Select pickup'
-                            : type === 'product-category'
-                              ? 'Select category'
-                              : 'Select location')
-                return (
-                  <Field data-invalid={invalid || undefined}>
-                    <FieldLabel htmlFor={item.path}>{item.title}</FieldLabel>
-                    <CommerceSelect
-                      name={item.path}
-                      label={false}
-                      multiple={multiple}
-                      value={idsFromSnapshot(value, multiple)}
-                      invalid={invalid}
-                      placeholder={selectPlaceholder}
-                      onValueChange={(_next, selected) =>
-                        changeField(
-                          item,
-                          [{ path: item.path, value: snapshotFromPick(selected) }],
-                          field.handleChange,
-                        )
-                      }
                     />
                     <FieldHint invalid={invalid} message={message} description={item.description} />
                   </Field>

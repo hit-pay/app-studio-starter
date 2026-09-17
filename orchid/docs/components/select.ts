@@ -68,7 +68,6 @@ const selectDocs = {
     "field",
     "form-builder",
     "resource-picker",
-    "staff-select",
   ],
 };
 

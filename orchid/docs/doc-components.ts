@@ -181,52 +181,6 @@ export const DOC_BLOCKS = [
       "Props picker for a closed list or a searchable / multi select.",
   },
   {
-    to: "/components/staff-select" as const,
-    name: "Staff Select",
-    description:
-      "App-member dropdown. Docs use a fake staff-app-members API.",
-  },
-  {
-    to: "/components/role-select" as const,
-    name: "Role Select",
-    description: "Business role dropdown. Docs use a fake roles API.",
-  },
-  {
-    to: "/components/coupon-select" as const,
-    name: "Coupon Select",
-    description: "Coupon dropdown. Loads GET /v1/coupons.",
-  },
-  {
-    to: "/components/discount-select" as const,
-    name: "Discount Select",
-    description: "Discount dropdown. Loads GET /v1/discounts.",
-  },
-  {
-    to: "/components/tax-select" as const,
-    name: "Tax Select",
-    description: "Tax dropdown. Loads GET /v1/taxes.",
-  },
-  {
-    to: "/components/shipping-select" as const,
-    name: "Shipping Select",
-    description: "Shipping method dropdown. Loads GET /v1/shipping.",
-  },
-  {
-    to: "/components/pickup-select" as const,
-    name: "Pickup Select",
-    description: "Pickup dropdown. Loads GET /v1/pickups.",
-  },
-  {
-    to: "/components/product-category-select" as const,
-    name: "Product Category Select",
-    description: "Category dropdown. Loads GET /v1/product-category.",
-  },
-  {
-    to: "/components/location-select" as const,
-    name: "Location Select",
-    description: "Location dropdown. Loads GET /v1/locations.",
-  },
-  {
     to: "/components/detail-card" as const,
     name: "Detail Card",
     description:
@@ -424,15 +378,6 @@ export const DOC_BLOCK_GROUPS = [
   blockGroup("Form", [
     "/components/choice-card",
     "/components/select",
-    "/components/staff-select",
-    "/components/role-select",
-    "/components/coupon-select",
-    "/components/discount-select",
-    "/components/tax-select",
-    "/components/shipping-select",
-    "/components/pickup-select",
-    "/components/product-category-select",
-    "/components/location-select",
     "/components/date-picker",
     "/components/form-builder",
     "/components/quantity-input",

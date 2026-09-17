@@ -85,17 +85,6 @@ const ACCOUNT_FIELDS: SchemaFormField[] = [
     value: ["a"],
   },
   {
-    key: "assignee",
-    title: "Assignee",
-    type: "staff",
-    required: true,
-  },
-  {
-    key: "notify_role",
-    title: "Notify role",
-    type: "role",
-  },
-  {
     key: "qty",
     title: "Quantity",
     type: "quantity",
