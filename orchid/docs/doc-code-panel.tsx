@@ -76,4 +76,29 @@ function DocExamples({
   )
 }
 
-export { DocCodePanel, DocExamples }
+function DocPropsTable({ props }: { props: Record<string, unknown> }) {
+  return (
+    <div className="overflow-hidden rounded-xl border border-solid border-oc-border">
+      <table className="w-full text-left text-sm">
+        <thead className="bg-oc-muted text-xs uppercase">
+          <tr>
+            <th className="px-3 py-2">Prop</th>
+            <th className="px-3 py-2">Values</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Object.entries(props).map(([name, value]) => (
+            <tr key={name} className="border-t border-solid border-oc-border">
+              <td className="px-3 py-2 font-mono text-oc-foreground">{name}</td>
+              <td className="px-3 py-2 font-mono text-oc-muted-foreground">
+                {Array.isArray(value) ? value.join(" | ") : String(value)}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+export { DocCodePanel, DocExamples, DocPropsTable }
