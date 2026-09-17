@@ -1,2 +1,28 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { CustomerCard } from "../../src/components/displaying-data/customer-card"
+import { Badge } from "../../src/ui/badge"
+import customerCardDocs from "./customer-card"
 
 Use `CustomerCard` to show a compact summary of one customer. Choose it for a selected or referenced customer; use `DetailCard` for a fuller read-only record.
+
+## Props
+
+<DocPropsTable props={customerCardDocs.props} />
+
+<DocExamples
+  examples={customerCardDocs.examples}
+  scope={{
+    Badge,
+    CustomerCard,
+    customer: {
+      name: "Alex Turner",
+      email: "alex@studio.co",
+      phone: "8373 3739 18",
+      phoneCountryCode: "65",
+      address: {
+        street: "12 Orchard Road",
+        state: "Singapore",
+      },
+    },
+  }}
+/>

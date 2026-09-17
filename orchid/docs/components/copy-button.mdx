@@ -1,2 +1,16 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { CopyButton } from "../../src/components/actions/copy-button"
+import copyButtonDocs from "./copy-button"
 
 Use `CopyButton` beside text that users may need to copy, such as IDs, links, or tokens. Choose it for a one-click copy affordance, not for editing the value.
+
+## Props
+
+<DocPropsTable props={copyButtonDocs.props} />
+
+<DocExamples
+  examples={copyButtonDocs.examples}
+  scope={{
+    CopyButton,
+  }}
+/>

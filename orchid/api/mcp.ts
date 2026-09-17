@@ -25,19 +25,24 @@ import paginationDocs from "../docs/ui/pagination";
 import dialogDocs from "../docs/ui/dialog";
 import drawerDocs from "../docs/ui/drawer";
 import dropdownMenuDocs from "../docs/ui/dropdown-menu";
+import tooltipDocs from "../docs/ui/tooltip";
+import appLayoutDocs from "../docs/components/app-layout";
+import copyButtonDocs from "../docs/components/copy-button";
+import customerCardDocs from "../docs/components/customer-card";
 
 const handler = createMcpHandler(
   (server) => {
     server.registerTool(
       "list_orchid_components",
       {
-        description: "Returns a small sample list of Orchid UI components.",
+        description:
+          "Returns Orchid UI and component docs. Filter with category: ui or components.",
         inputSchema: {
           category: z.string().optional(),
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs].filter(
           (component) => !category || component.category === category,
         );
 

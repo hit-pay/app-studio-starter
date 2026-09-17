@@ -1,0 +1,27 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Button } from "../../src/ui/button"
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../../src/ui/tooltip"
+import tooltipDocs from "./tooltip"
+
+<TooltipProvider>
+
+## Props
+
+<DocPropsTable props={tooltipDocs.props} />
+
+<DocExamples
+  examples={tooltipDocs.examples}
+  scope={{
+    Button,
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+  }}
+/>
+
+</TooltipProvider>
