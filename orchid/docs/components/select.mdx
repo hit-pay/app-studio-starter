@@ -1,28 +1,24 @@
-import { DocExamples, DocPropsTable, DocRegistryDescription } from "../doc-code-panel"
+import {
+  DocExamples,
+  DocPropsSection,
+  DocRegistryDescription,
+} from "../doc-code-panel"
 import { Select } from "../../src/components/form/select"
 import {
   Field,
   FieldDescription,
   FieldLabel,
 } from "../../src/ui/field"
-import selectDocs, {
-  SELECT_CHANNEL_OPTIONS,
-  SELECT_CURRENCY_OPTIONS,
-  SELECT_LOCATION_OPTIONS,
-} from "./select"
+import selectDocs from "./select.ts"
 
 <DocRegistryDescription description={selectDocs.description} />
 
-## Props
-
-<DocPropsTable props={selectDocs.props} />
+<DocPropsSection props={selectDocs.props} />
 
 <DocExamples
+  noInline
   examples={selectDocs.examples}
   scope={{
-    CHANNEL_OPTIONS: SELECT_CHANNEL_OPTIONS,
-    CURRENCY_OPTIONS: SELECT_CURRENCY_OPTIONS,
-    LOCATION_OPTIONS: SELECT_LOCATION_OPTIONS,
     Field,
     FieldDescription,
     FieldLabel,

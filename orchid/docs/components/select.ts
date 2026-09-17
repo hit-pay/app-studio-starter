@@ -5,20 +5,20 @@ const selectRegistry = registry.items.find(
   (item: { name: string }) => item.name === "select",
 );
 
-export const SELECT_CURRENCY_OPTIONS = [
+const CURRENCY_OPTIONS = `[
   { value: "SGD", label: "SGD — Singapore Dollar" },
   { value: "USD", label: "USD — US Dollar" },
   { value: "MYR", label: "MYR — Malaysian Ringgit" },
   { value: "IDR", label: "IDR — Indonesian Rupiah" },
-];
+]`;
 
-export const SELECT_CHANNEL_OPTIONS = [
+const CHANNEL_OPTIONS = `[
   { value: "pos", label: "POS" },
   { value: "invoice", label: "Invoice" },
   { value: "online_store", label: "Online Store" },
-];
+]`;
 
-export const SELECT_LOCATION_OPTIONS = [
+const LOCATION_OPTIONS = `[
   {
     value: "loc-main",
     label: "Main Store",
@@ -35,7 +35,7 @@ export const SELECT_LOCATION_OPTIONS = [
     description: "Limited hours · Fri–Sun only",
     image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=64&h=64&fit=crop",
   },
-];
+]`;
 
 const selectDocs = {
   ...selectRegistry,
@@ -67,44 +67,72 @@ const selectDocs = {
   examples: [
     {
       description: "Closed list",
-      code: `<Field>
-  <FieldLabel>Currency</FieldLabel>
-  <Select options={CURRENCY_OPTIONS} defaultValue="SGD" />
-  <FieldDescription>Ordinary dropdown — no search field.</FieldDescription>
-</Field>`,
+      code: `function CurrencySelectExample() {
+  const CURRENCY_OPTIONS = ${CURRENCY_OPTIONS};
+  return (
+    <Field>
+      <FieldLabel>Currency</FieldLabel>
+      <Select options={CURRENCY_OPTIONS} defaultValue="SGD" />
+      <FieldDescription>Ordinary dropdown — no search field.</FieldDescription>
+    </Field>
+  );
+}
+
+render(<CurrencySelectExample />);`,
     },
     {
       description: "Searchable",
-      code: `<Field>
-  <FieldLabel>Sales channel</FieldLabel>
-  <Select
-    searchable
-    options={CHANNEL_OPTIONS}
-    placeholder="Search channels"
-  />
-</Field>`,
+      code: `function ChannelSelectExample() {
+  const CHANNEL_OPTIONS = ${CHANNEL_OPTIONS};
+  return (
+    <Field>
+      <FieldLabel>Sales channel</FieldLabel>
+      <Select
+        searchable
+        options={CHANNEL_OPTIONS}
+        placeholder="Search channels"
+      />
+    </Field>
+  );
+}
+
+render(<ChannelSelectExample />);`,
     },
     {
       description: "Rich options (name + description + image)",
-      code: `<Field>
-  <FieldLabel>Location</FieldLabel>
-  <Select
-    searchable
-    clearable
-    options={LOCATION_OPTIONS}
-    placeholder="Choose location"
-  />
-  <FieldDescription>
-    Pass description or image on each option. Trigger shows label only.
-  </FieldDescription>
-</Field>`,
+      code: `function LocationSelectExample() {
+  const LOCATION_OPTIONS = ${LOCATION_OPTIONS};
+  return (
+    <Field>
+      <FieldLabel>Location</FieldLabel>
+      <Select
+        searchable
+        clearable
+        options={LOCATION_OPTIONS}
+        placeholder="Choose location"
+      />
+      <FieldDescription>
+        Pass description or image on each option. Trigger shows label only.
+      </FieldDescription>
+    </Field>
+  );
+}
+
+render(<LocationSelectExample />);`,
     },
     {
       description: "Multiple with chips",
-      code: `<Field>
-  <FieldLabel>Methods</FieldLabel>
-  <Select multiple options={CHANNEL_OPTIONS} defaultValue={["pos"]} />
-</Field>`,
+      code: `function MultiSelectExample() {
+  const CHANNEL_OPTIONS = ${CHANNEL_OPTIONS};
+  return (
+    <Field>
+      <FieldLabel>Methods</FieldLabel>
+      <Select multiple options={CHANNEL_OPTIONS} defaultValue={["pos"]} />
+    </Field>
+  );
+}
+
+render(<MultiSelectExample />);`,
     },
   ],
   related_components: [
