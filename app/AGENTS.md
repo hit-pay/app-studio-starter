@@ -47,9 +47,10 @@ On disk today: `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`,
 `__root.tsx` already mounts `AppLayout`, `Toaster`, and
 `ConfirmationModalProvider`.
 
-Install a missing slug from the local registry files (`mcp/r/{name}.json`):
+Install a missing slug from the local registry hosted at `public/r` (app
+server on port 3000, path `/${APP_STUDIO_APP_ID}/r/{name}.json`):
 
-`npx shadcn@latest add ./mcp/r/<slug>.json -y --overwrite`
+`npx shadcn@latest add @orchid/<slug> -y --overwrite`
 
 ## API / Resource and Database
 

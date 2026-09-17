@@ -21,6 +21,6 @@
   "menuColor": "default",
   "menuAccent": "subtle",
   "registries": {
-    "@orchid": "./mcp/r/{name}.json"
+    "@orchid": "http://127.0.0.1:3000/${APP_STUDIO_APP_ID}/r/{name}.json"
   }
 }
