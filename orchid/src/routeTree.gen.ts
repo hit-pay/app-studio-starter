@@ -31,6 +31,7 @@ import { Route as ComponentsFormLayoutRouteImport } from './routes/components/fo
 import { Route as ComponentsMetricCardRouteImport } from './routes/components/metric-card'
 import { Route as ComponentsPageLayoutRouteImport } from './routes/components/page-layout'
 import { Route as ComponentsQuantityInputRouteImport } from './routes/components/quantity-input'
+import { Route as ComponentsResourceListRouteImport } from './routes/components/resource-list'
 import { Route as ComponentsResourcePickerRouteImport } from './routes/components/resource-picker'
 import { Route as ComponentsSelectRouteImport } from './routes/components/select'
 import { Route as ComponentsTextEditorRouteImport } from './routes/components/text-editor'
@@ -170,6 +171,11 @@ const ComponentsPageLayoutRoute = ComponentsPageLayoutRouteImport.update({
 const ComponentsQuantityInputRoute = ComponentsQuantityInputRouteImport.update({
   id: '/components/quantity-input',
   path: '/components/quantity-input',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ComponentsResourceListRoute = ComponentsResourceListRouteImport.update({
+  id: '/components/resource-list',
+  path: '/components/resource-list',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ComponentsResourcePickerRoute =
@@ -341,6 +347,7 @@ export interface FileRoutesByFullPath {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/resource-list': typeof ComponentsResourceListRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
@@ -394,6 +401,7 @@ export interface FileRoutesByTo {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/resource-list': typeof ComponentsResourceListRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
@@ -448,6 +456,7 @@ export interface FileRoutesById {
   '/components/metric-card': typeof ComponentsMetricCardRoute
   '/components/page-layout': typeof ComponentsPageLayoutRoute
   '/components/quantity-input': typeof ComponentsQuantityInputRoute
+  '/components/resource-list': typeof ComponentsResourceListRoute
   '/components/resource-picker': typeof ComponentsResourcePickerRoute
   '/components/select': typeof ComponentsSelectRoute
   '/components/text-editor': typeof ComponentsTextEditorRoute
@@ -503,6 +512,7 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
+    | '/components/resource-list'
     | '/components/resource-picker'
     | '/components/select'
     | '/components/text-editor'
@@ -556,6 +566,7 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
+    | '/components/resource-list'
     | '/components/resource-picker'
     | '/components/select'
     | '/components/text-editor'
@@ -609,6 +620,7 @@ export interface FileRouteTypes {
     | '/components/metric-card'
     | '/components/page-layout'
     | '/components/quantity-input'
+    | '/components/resource-list'
     | '/components/resource-picker'
     | '/components/select'
     | '/components/text-editor'
@@ -663,6 +675,7 @@ export interface RootRouteChildren {
   ComponentsMetricCardRoute: typeof ComponentsMetricCardRoute
   ComponentsPageLayoutRoute: typeof ComponentsPageLayoutRoute
   ComponentsQuantityInputRoute: typeof ComponentsQuantityInputRoute
+  ComponentsResourceListRoute: typeof ComponentsResourceListRoute
   ComponentsResourcePickerRoute: typeof ComponentsResourcePickerRoute
   ComponentsSelectRoute: typeof ComponentsSelectRoute
   ComponentsTextEditorRoute: typeof ComponentsTextEditorRoute
@@ -849,6 +862,13 @@ declare module '@tanstack/react-router' {
       path: '/components/quantity-input'
       fullPath: '/components/quantity-input'
       preLoaderRoute: typeof ComponentsQuantityInputRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/components/resource-list': {
+      id: '/components/resource-list'
+      path: '/components/resource-list'
+      fullPath: '/components/resource-list'
+      preLoaderRoute: typeof ComponentsResourceListRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/components/resource-picker': {
@@ -1079,6 +1099,7 @@ const rootRouteChildren: RootRouteChildren = {
   ComponentsMetricCardRoute: ComponentsMetricCardRoute,
   ComponentsPageLayoutRoute: ComponentsPageLayoutRoute,
   ComponentsQuantityInputRoute: ComponentsQuantityInputRoute,
+  ComponentsResourceListRoute: ComponentsResourceListRoute,
   ComponentsResourcePickerRoute: ComponentsResourcePickerRoute,
   ComponentsSelectRoute: ComponentsSelectRoute,
   ComponentsTextEditorRoute: ComponentsTextEditorRoute,

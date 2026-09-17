@@ -79,6 +79,13 @@ function DocExamples({
   )
 }
 
+function DocRegistryDescription({ description }: { description?: string | null }) {
+  if (!description?.trim()) return null
+  return (
+    <p className="text-sm leading-6 text-oc-muted-foreground">{description}</p>
+  )
+}
+
 function DocPropsTable({ props }: { props: Record<string, unknown> }) {
   return (
     <div className="overflow-hidden rounded-xl border border-solid border-oc-border">
@@ -104,4 +111,26 @@ function DocPropsTable({ props }: { props: Record<string, unknown> }) {
   )
 }
 
-export { DocCodePanel, DocExamples, DocPropsTable }
+function DocPropsSection({
+  title = 'Props',
+  props,
+}: {
+  title?: string
+  props?: Record<string, unknown> | null
+}) {
+  if (!props || Object.keys(props).length === 0) return null
+  return (
+    <div className="grid gap-3">
+      <h2 className="text-lg font-semibold text-oc-foreground">{title}</h2>
+      <DocPropsTable props={props} />
+    </div>
+  )
+}
+
+export {
+  DocCodePanel,
+  DocExamples,
+  DocPropsSection,
+  DocPropsTable,
+  DocRegistryDescription,
+}

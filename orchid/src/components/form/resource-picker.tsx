@@ -11,6 +11,12 @@ import {
   buildResourcePickerFilterFields,
   ResourcePickerFilterMenu,
 } from '@/components/form/resource-picker-filter-form'
+import {
+  RESOURCE_CATALOG_LABELS,
+  RESOURCE_EXTRA_FILTERS,
+  RESOURCE_STATUS_FILTERS,
+  resourceCatalogFiltersActive,
+} from '@/lib/resource-catalog'
 import { Input } from '@ui/input'
 import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
 import {
@@ -59,6 +65,8 @@ type ResourcePickerPage = {
   items: ResourcePickerItem[]
   hasMore?: boolean
   cursor?: string
+  /** Upstream total when meta exposes it (lists / pagination). */
+  total?: number
 }
 
 type ResourcePickerLoadInput = {
@@ -95,34 +103,6 @@ type ResourcePickerOptions = {
   }
 }
 
-function categoryIdsFromExtras(extras: Record<string, string>) {
-  if (extras.category_ids) {
-    return extras.category_ids
-      .split(',')
-      .map((id) => id.trim())
-      .filter(Boolean)
-  }
-  if (extras.category_id && extras.category_id !== 'all') {
-    return [extras.category_id]
-  }
-  return []
-}
-
-function filtersAreActive(
-  status: string,
-  extras: Record<string, string>,
-  type: ResourcePickerType,
-) {
-  if (status !== 'all') return true
-  if (categoryIdsFromExtras(extras).length > 0) return true
-  if (extras.location_id) return true
-  if (extras.date_from || extras.date_to) return true
-  for (const group of EXTRA_FILTERS[type] ?? []) {
-    if ((extras[group.key] ?? 'all') !== 'all') return true
-  }
-  return false
-}
-
 type ResourcePickerResult = {
   id: string
   resource?: ResourcePickerRecord
@@ -135,96 +115,7 @@ type ResourcePickerRequest = ResourcePickerOptions & {
   resolve: (value: ResourcePickerResult[] | undefined) => void
 }
 
-type FilterOption = { value: string; label: string }
-type ExtraFilter = { key: string; label: string; options: FilterOption[] }
-
-const ALL_FILTER: FilterOption[] = [{ value: 'all', label: 'All' }]
-
-const LABELS: Record<ResourcePickerType, { singular: string; plural: string }> = {
-  product: { singular: 'product', plural: 'products' },
-  order: { singular: 'order', plural: 'orders' },
-  charge: { singular: 'charge', plural: 'charges' },
-  invoice: { singular: 'invoice', plural: 'invoices' },
-}
-
-const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
-  product: [
-    { value: 'all', label: 'All statuses' },
-    { value: 'published', label: 'Published' },
-    { value: 'draft', label: 'Draft' },
-  ],
-  order: [
-    { value: 'all', label: 'All statuses' },
-    { value: 'completed', label: 'Completed' },
-    { value: 'pending', label: 'Pending' },
-    { value: 'sent', label: 'Sent' },
-    { value: 'draft', label: 'Draft' },
-    { value: 'expired', label: 'Expired' },
-    { value: 'canceled', label: 'Canceled' },
-  ],
-  charge: [
-    { value: 'all', label: 'All statuses' },
-    { value: 'succeeded', label: 'Succeeded' },
-    { value: 'failed', label: 'Failed' },
-    { value: 'refunded', label: 'Refunded' },
-  ],
-  invoice: [
-    { value: 'all', label: 'All statuses' },
-    { value: 'draft', label: 'Draft' },
-    { value: 'sent', label: 'Sent' },
-    { value: 'pending', label: 'Pending' },
-    { value: 'overdue', label: 'Overdue' },
-    { value: 'paid', label: 'Paid' },
-  ],
-}
-
-const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
-  product: [
-    {
-      key: 'inventory',
-      label: 'Inventory',
-      options: [
-        { value: 'all', label: 'All stock' },
-        { value: 'in_stock', label: 'In stock' },
-        { value: 'out_of_stock', label: 'Out of stock' },
-      ],
-    },
-    {
-      key: 'channel',
-      label: 'Channel',
-      options: [
-        { value: 'all', label: 'All channels' },
-        { value: 'pos', label: 'POS' },
-        { value: 'online_store', label: 'Online store' },
-        { value: 'invoice', label: 'Invoice' },
-        { value: 'self_serve', label: 'Self serve' },
-      ],
-    },
-  ],
-  order: [
-    {
-      key: 'channel',
-      label: 'Channel',
-      options: [
-        { value: 'all', label: 'All channels' },
-        { value: 'point_of_sale', label: 'POS' },
-        { value: 'quick_sale', label: 'Quick sale' },
-        { value: 'store_checkout', label: 'Online store' },
-      ],
-    },
-  ],
-  charge: [
-    {
-      key: 'payment_method',
-      label: 'Method',
-      options: [
-        { value: 'all', label: 'All methods' },
-        { value: 'cash', label: 'Cash' },
-        { value: 'card', label: 'Card' },
-      ],
-    },
-  ],
-}
+const ALL_FILTER = [{ value: 'all', label: 'All' }] as const
 
 const ResourcePickerContext = React.createContext<ResourcePickerFn | null>(null)
 const ResourcePickerLoadContext = React.createContext<ResourcePickerLoad | null>(null)
@@ -236,7 +127,12 @@ function maxCount(multiple: boolean | number | undefined) {
 }
 
 function pickerLabels(type: ResourcePickerType) {
-  return LABELS[type] ?? { singular: type.replaceAll('-', ' '), plural: `${type.replaceAll('-', ' ')}s` }
+  return (
+    RESOURCE_CATALOG_LABELS[type] ?? {
+      singular: type.replaceAll('-', ' '),
+      plural: `${type.replaceAll('-', ' ')}s`,
+    }
+  )
 }
 
 function titleCase(action: 'add' | 'select', type: ResourcePickerType) {
@@ -321,8 +217,8 @@ function ResourcePickerDialog({
   const type = request?.type ?? 'product'
   const action = request?.action ?? 'add'
   const labels = pickerLabels(type)
-  const filters = FILTERS[type] ?? ALL_FILTER
-  const extraFilters = EXTRA_FILTERS[type] ?? []
+  const filters = RESOURCE_STATUS_FILTERS[type] ?? ALL_FILTER
+  const extraFilters = RESOURCE_EXTRA_FILTERS[type] ?? []
   const showVariants = request?.filter?.variants !== false && type === 'product'
   const limit = maxCount(request?.multiple)
   const hiddenQuery = request?.filter?.query ?? ''
@@ -506,7 +402,7 @@ function ResourcePickerDialog({
   const confirmLabel = action === 'select' ? 'Select' : 'Add'
   const exclusiveChildren = limit === 1
   const hasFilterMenu = filterFields.length > 0
-  const filtersActive = filtersAreActive(filter, extras, type)
+  const filtersActive = resourceCatalogFiltersActive(filter, extras, type)
   const resultCountLabel = `${items.length}${hasMore ? '+' : ''} result${items.length === 1 ? '' : 's'}`
 
   return (

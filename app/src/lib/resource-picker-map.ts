@@ -5,6 +5,16 @@ import type {
   ResourcePickerRecord,
   ResourcePickerType,
 } from '@/components/form/resource-picker'
+function extractListTotal(payload: unknown): number | undefined {
+  if (!payload || typeof payload !== 'object') return undefined
+  const meta = (payload as { meta?: Record<string, unknown> }).meta
+  if (!meta) return undefined
+  for (const key of ['total', 'total_count', 'count']) {
+    const value = meta[key]
+    if (typeof value === 'number' && Number.isFinite(value)) return value
+  }
+  return undefined
+}
 
 function asRecord(value: unknown): ResourcePickerRecord {
   return value as ResourcePickerRecord
@@ -78,6 +88,7 @@ function pageResult(items: ResourcePickerItem[], payload: unknown, page: number)
     items,
     hasMore: hasMore(payload, page) || Boolean(cursor),
     cursor,
+    total: extractListTotal(payload),
   }
 }
 
@@ -129,7 +140,11 @@ function mapResourcePickerPayload(
   const rows = rowsOf(type, payload)
 
   if (type === 'product') {
-    return { items: rows.map(mapProduct), hasMore: hasMore(payload, page) }
+    return {
+      items: rows.map(mapProduct),
+      hasMore: hasMore(payload, page),
+      total: extractListTotal(payload),
+    }
   }
 
   if (type === 'order') {
@@ -144,6 +159,7 @@ function mapResourcePickerPayload(
         resource: asRecord(order),
       })),
       hasMore: hasMore(payload, page),
+      total: extractListTotal(payload),
     }
   }
 

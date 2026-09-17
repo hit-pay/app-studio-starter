@@ -69,7 +69,6 @@ export const PaginationDemo = wrapped.PaginationDemo;
 export const ProgressDemo = wrapped.ProgressDemo;
 export const QuantityInputDemo = wrapped.QuantityInputDemo;
 export const RadioGroupDemo = wrapped.RadioGroupDemo;
-export const ResourcePickerDemo = wrapped.ResourcePickerDemo;
 export const SchemaFormDemo = wrapped.SchemaFormDemo;
 export const SchemaTableDemo = wrapped.SchemaTableDemo;
 export const SkeletonDemo = wrapped.SkeletonDemo;

@@ -1,21 +1,22 @@
-import { DocCodePanel, DocExamples, DocPropsTable } from "../doc-code-panel"
-import { ResourcePickerDemo, demoLoad } from "../ui/demos/resource-picker-demo"
+import {
+  DocCodePanel,
+  DocExamples,
+  DocPropsSection,
+  DocRegistryDescription,
+} from "../doc-code-panel"
 import {
   ResourcePickerProvider,
   useResourcePicker,
 } from "../../src/components/form/resource-picker"
+import { resourcePickerDemoLoad } from "../../src/lib/resource-picker-demo-load"
 import { Button } from "../../src/ui/button"
-import resourcePickerDocs from "./resource-picker"
+import resourcePickerDocs from "./resource-picker.ts"
 
-Use **`ResourcePicker`** when users must search, filter, and confirm HitPay list records (**products, orders, charges, invoices**). Wire **`load`** to the same query parameters documented in App Studio **`app/docs/hitpay/`** (`products.md`, `orders.md`, `charges.md`, `invoices.md`). Mount **`ResourcePickerProvider`** with a **`load`** function once near the root, then call **`useResourcePicker()`** and **`await pick({ type, … })`**. The promise resolves to selected rows or **`undefined`** when cancelled. Choose it instead of a full-page table or `Select` for long lists; use **`Select`** with `description` / `image` for small static option sets.
+<DocRegistryDescription description={resourcePickerDocs.description} />
 
-## Props
+<DocPropsSection props={resourcePickerDocs.props} />
 
-<DocPropsTable props={resourcePickerDocs.props} />
-
-## Examples
-
-<ResourcePickerDemo />
+<h2 className="text-lg font-semibold text-oc-foreground">Examples</h2>
 
 <DocExamples
   noInline
@@ -24,7 +25,7 @@ Use **`ResourcePicker`** when users must search, filter, and confirm HitPay list
     ResourcePickerProvider,
     useResourcePicker,
     Button,
-    demoLoad,
+    demoLoad: resourcePickerDemoLoad,
   }}
 />
 

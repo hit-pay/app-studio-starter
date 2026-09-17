@@ -1,93 +1,21 @@
+import { docNavFromRegistry } from "./registry-meta";
+
 export const DOC_COMPONENTS = [
-  {
-    to: "/ui/button" as const,
-    name: "Button",
-    description:
-      "Standard variants, sizes, icon buttons, native props, and polymorphic rendering.",
-  },
-  {
-    to: "/ui/button-group" as const,
-    name: "Button Group",
-    description:
-      "Attached controls, plus ghost and border icon toolbars. Compose overflow with DropdownMenu.",
-  },
-  {
-    to: "/ui/dropdown-menu" as const,
-    name: "Dropdown Menu",
-    description:
-      "Items, selection, submenus, and shortcuts with Orchid styling.",
-  },
-  {
-    to: "/ui/toast" as const,
-    name: "Toast",
-    description:
-      "Toast manager with semantic types, actions, close, and placement.",
-  },
-  {
-    to: "/ui/banner" as const,
-    name: "Banner",
-    description:
-      "In-page notification with semantic variants and an optional action.",
-  },
-  {
-    to: "/ui/badge" as const,
-    name: "Badge",
-    description:
-      "Standard variants with Orchid tones, appearances, removal, and user roles.",
-  },
-  {
-    to: "/ui/avatar" as const,
-    name: "Avatar",
-    description:
-      "Image, fallback, badge, and group primitives with Orchid styling.",
-  },
-  {
-    to: "/ui/tooltip" as const,
-    name: "Tooltip",
-    description:
-      "Hover and focus tooltip with Orchid styling.",
-  },
-  {
-    to: "/ui/tabs" as const,
-    name: "Tabs",
-    description:
-      "Horizontal or vertical tabs with default and line variants.",
-  },
-  {
-    to: "/ui/skeleton" as const,
-    name: "Skeleton",
-    description: "Placeholder pulse with Orchid styling.",
-  },
-  {
-    to: "/ui/spinner" as const,
-    name: "Spinner",
-    description:
-      "Indeterminate loading icon sized through className.",
-  },
-  {
-    to: "/ui/dialog" as const,
-    name: "Dialog",
-    description:
-      "Dialog primitives with Orchid sizes and persistent mode.",
-  },
-  {
-    to: "/ui/drawer" as const,
-    name: "Drawer",
-    description:
-      "Swipeable edge panel. Set swipeDirection to up, right, down, or left.",
-  },
-  {
-    to: "/ui/pagination" as const,
-    name: "Pagination",
-    description:
-      "Page links with previous, next, ellipsis, and an optional range label.",
-  },
-  {
-    to: "/ui/file-upload" as const,
-    name: "File Upload",
-    description:
-      "File and image upload row with upload state, media, and a vertical group.",
-  },
+  docNavFromRegistry("/ui/button", "button"),
+  docNavFromRegistry("/ui/button-group", "button-group"),
+  docNavFromRegistry("/ui/dropdown-menu", "dropdown-menu"),
+  docNavFromRegistry("/ui/toast", "toast"),
+  docNavFromRegistry("/ui/banner", "banner"),
+  docNavFromRegistry("/ui/badge", "badge"),
+  docNavFromRegistry("/ui/avatar", "avatar"),
+  docNavFromRegistry("/ui/tooltip", "tooltip"),
+  docNavFromRegistry("/ui/tabs", "tabs"),
+  docNavFromRegistry("/ui/skeleton", "skeleton"),
+  docNavFromRegistry("/ui/spinner", "spinner"),
+  docNavFromRegistry("/ui/dialog", "dialog"),
+  docNavFromRegistry("/ui/drawer", "drawer"),
+  docNavFromRegistry("/ui/pagination", "pagination"),
+  docNavFromRegistry("/ui/file-upload", "file-upload"),
 ] as const;
 
 export function docComponentsByName() {
@@ -95,62 +23,16 @@ export function docComponentsByName() {
 }
 
 export const DOC_FORMS = [
-  {
-    to: "/ui/field" as const,
-    name: "Field",
-    description:
-      "Label, description, error, and grouped field composition.",
-  },
-  {
-    to: "/ui/label" as const,
-    name: "Label",
-    description: "Accessible label with Orchid typography.",
-  },
-  {
-    to: "/ui/input" as const,
-    name: "Input",
-    description: "Text and file input with Orchid states.",
-  },
-  {
-    to: "/ui/input-group" as const,
-    name: "Input Group",
-    description:
-      "Input, textarea, addon, and button composition.",
-  },
-  {
-    to: "/ui/textarea" as const,
-    name: "Textarea",
-    description:
-      "Auto-sizing textarea with Orchid form styling.",
-  },
-  {
-    to: "/ui/checkbox" as const,
-    name: "Checkbox",
-    description:
-      "Checkbox with Orchid states and an optional group helper.",
-  },
-  {
-    to: "/ui/radio-group" as const,
-    name: "Radio Group",
-    description:
-      "Radio group and item primitives with Orchid styling.",
-  },
-  {
-    to: "/ui/switch" as const,
-    name: "Switch",
-    description: "Switch in default and small Orchid sizes.",
-  },
-  {
-    to: "/ui/slider" as const,
-    name: "Slider",
-    description:
-      "Single, range, or vertical slider with Orchid styling.",
-  },
-  {
-    to: "/ui/form-section" as const,
-    name: "Form Section",
-    description: "Heading plus FormSectionGroup and FormSectionItem.",
-  },
+  docNavFromRegistry("/ui/field", "field"),
+  docNavFromRegistry("/ui/label", "label"),
+  docNavFromRegistry("/ui/input", "input"),
+  docNavFromRegistry("/ui/input-group", "input-group"),
+  docNavFromRegistry("/ui/textarea", "textarea"),
+  docNavFromRegistry("/ui/checkbox", "checkbox"),
+  docNavFromRegistry("/ui/radio-group", "radio-group"),
+  docNavFromRegistry("/ui/switch", "switch"),
+  docNavFromRegistry("/ui/slider", "slider"),
+  docNavFromRegistry("/ui/form-section", "form-section"),
 ] as const;
 
 export function docFormsByName() {
@@ -158,113 +40,26 @@ export function docFormsByName() {
 }
 
 export const DOC_BLOCKS = [
-  {
-    to: "/components/choice-card" as const,
-    name: "Choice Card",
-    description: "Selectable cards with left or center icon, no radio dot.",
-  },
-  {
-    to: "/components/customer-card" as const,
-    name: "Customer Card",
-    description: "Small, Big, and Float customer or beneficiary cards.",
-  },
-  {
-    to: "/components/date-picker" as const,
-    name: "Date Picker",
-    description:
-      "Date, range, and date-time selection with popover and calendar helpers.",
-  },
-  {
-    to: "/components/select" as const,
-    name: "Select",
-    description:
-      "Props picker for a closed list or a searchable / multi select.",
-  },
-  {
-    to: "/components/detail-card" as const,
-    name: "Detail Card",
-    description:
-      "Read-only key/value card for one record. Not a collection.",
-  },
-  {
-    to: "/components/empty" as const,
-    name: "Empty",
-    description: "Props empty state with optional media and actions.",
-  },
-  {
-    to: "/components/data-list" as const,
-    name: "Data List",
-    description:
-      "Card/row collection when search, filters, sort, or pagination are not needed.",
-  },
-  {
-    to: "/components/quantity-input" as const,
-    name: "Quantity Input",
-    description: "Minus/plus stepper; click the value to type.",
-  },
-  {
-    to: "/components/text-editor" as const,
-    name: "Text Editor",
-    description: "Lexical rich text: bold, italic, heading, lists. Persist editor JSON.",
-  },
-  {
-    to: "/components/metric-card" as const,
-    name: "Metric Card",
-    description:
-      "Dashboard KPI tile. Use for summaries, not a record's fields.",
-  },
-  {
-    to: "/components/app-layout" as const,
-    name: "App Layout",
-    description:
-      "HitPay App Studio embedded pane frame. Not generic app chrome.",
-  },
-  {
-    to: "/components/page-layout" as const,
-    name: "Page Layout",
-    description:
-      "Standard route page with header, optional onBack, and scrollable content.",
-  },
-  {
-    to: "/components/form-layout" as const,
-    name: "Form Layout",
-    description: "Create and edit form shell with page and modal modes.",
-  },
-  {
-    to: "/components/form-builder" as const,
-    name: "Form Builder",
-    description:
-      "Schema-driven create/edit form. Use Detail Card for a read-only record.",
-  },
-  {
-    to: "/components/data-table" as const,
-    name: "Data Table",
-    description:
-      "Rows-and-columns table with search, filters, sort, and pagination.",
-  },
-  {
-    to: "/components/confirmation-modal" as const,
-    name: "Confirmation Modal",
-    description:
-      "Prebuilt Promise-based confirmation modal invoked with useConfirmationModal.",
-  },
-  {
-    to: "/components/resource-picker" as const,
-    name: "Resource Picker",
-    description:
-      "Search and select HitPay products, orders, charges, or invoices (app/docs/hitpay).",
-  },
-  {
-    to: "/components/command" as const,
-    name: "Command",
-    description:
-      "Searchable command palette. Drive it with open, onOpenChange, and groups.",
-  },
-  {
-    to: "/components/copy-button" as const,
-    name: "Copy Button",
-    description: "Copy icon that writes a value and shows Copied!.",
-  },
+  docNavFromRegistry("/components/choice-card", "choice-card"),
+  docNavFromRegistry("/components/customer-card", "customer-card"),
+  docNavFromRegistry("/components/date-picker", "date-picker"),
+  docNavFromRegistry("/components/select", "select"),
+  docNavFromRegistry("/components/detail-card", "detail-card"),
+  docNavFromRegistry("/components/empty", "empty"),
+  docNavFromRegistry("/components/data-list", "data-list"),
+  docNavFromRegistry("/components/quantity-input", "quantity-input"),
+  docNavFromRegistry("/components/text-editor", "text-editor"),
+  docNavFromRegistry("/components/metric-card", "metric-card"),
+  docNavFromRegistry("/components/app-layout", "app-layout"),
+  docNavFromRegistry("/components/page-layout", "page-layout"),
+  docNavFromRegistry("/components/form-layout", "form-layout"),
+  docNavFromRegistry("/components/form-builder", "form-builder"),
+  docNavFromRegistry("/components/data-table", "data-table"),
+  docNavFromRegistry("/components/confirmation-modal", "confirmation-modal"),
+  docNavFromRegistry("/components/resource-picker", "resource-picker"),
+  docNavFromRegistry("/components/resource-list", "resource-list"),
+  docNavFromRegistry("/components/command", "command"),
+  docNavFromRegistry("/components/copy-button", "copy-button"),
 ] as const;
 
 export function docBlocksByName() {
@@ -383,6 +178,7 @@ export const DOC_BLOCK_GROUPS = [
     "/components/quantity-input",
     "/components/text-editor",
     "/components/resource-picker",
+    "/components/resource-list",
   ]),
   blockGroup("Layout", ["/components/app-layout", "/components/form-layout", "/components/page-layout"]),
   blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),

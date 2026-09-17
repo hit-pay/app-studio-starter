@@ -1,4 +1,4 @@
-import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { DocExamples, DocPropsTable, DocRegistryDescription } from "../doc-code-panel"
 import {
   DataTable,
   SCHEMA_TABLE_EXAMPLE_ROWS,
@@ -7,7 +7,8 @@ import {
 } from "../../src/components/displaying-data/data-table"
 import dataTableDocs from "./data-table"
 
-Use `DataTable` for collections that need search, filters, sorting, pagination, selection, or row actions. Pass a JSON `schema` and row `data` to `useDataTable`, then render `<DataTable table={table} />` with `onRowClick`, `onRowAction`, and optional `cells` overrides.
+
+<DocRegistryDescription description={dataTableDocs.description} />
 
 ## Props
 

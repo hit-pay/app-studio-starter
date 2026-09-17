@@ -1,4 +1,4 @@
-import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { DocExamples, DocPropsTable, DocRegistryDescription } from "../doc-code-panel"
 import { Select } from "../../src/components/form/select"
 import {
   Field,
@@ -11,7 +11,7 @@ import selectDocs, {
   SELECT_LOCATION_OPTIONS,
 } from "./select"
 
-Use `Select` for choosing one or more values from a finite option list. Each option is `{ value, label }` at minimum; add **`description`** and **`image`** for two-line or thumbnail rows in the menu (the closed trigger still shows **`label`** only). Use **`renderOption`** when you need full control of the row. Choose `ResourcePicker` when users must browse paginated HitPay catalog records.
+<DocRegistryDescription description={selectDocs.description} />
 
 ## Props
 

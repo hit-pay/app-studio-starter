@@ -331,6 +331,45 @@
       ]
     },
     {
+      "name": "resource-list",
+      "type": "registry:ui",
+      "title": "Resource List",
+      "description": "Server-driven HitPay catalog table (SchemaTable). ResourceListProvider + same ResourcePickerLoad as the picker.",
+      "dependencies": ["@mingcute/react"],
+      "registryDependencies": [
+        "@orchid/data-table",
+        "@orchid/resource-picker",
+        "@orchid/spinner"
+      ],
+      "files": [
+        {
+          "path": "src/components/displaying-data/resource-list.tsx",
+          "type": "registry:ui",
+          "target": "@components/displaying-data/resource-list.tsx"
+        },
+        {
+          "path": "src/lib/resource-catalog.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-catalog.ts"
+        },
+        {
+          "path": "src/lib/resource-list-map.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-list-map.ts"
+        },
+        {
+          "path": "src/lib/resource-list-schema.ts",
+          "type": "registry:lib",
+          "target": "lib/resource-list-schema.ts"
+        },
+        {
+          "path": "src/components/form/resource-picker-filter-form.tsx",
+          "type": "registry:file",
+          "target": "@components/form/resource-picker-filter-form.tsx"
+        }
+      ]
+    },
+    {
       "name": "button",
       "type": "registry:ui",
       "title": "Button",

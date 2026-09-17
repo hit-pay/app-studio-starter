@@ -1273,6 +1273,7 @@ function isInteractiveRowClickTarget(target: EventTarget | null) {
 function SchemaTable({
   table,
   cells,
+  toolbarExtra,
   onRowAction,
   onRowClick,
   onSelectionAction,
@@ -1281,6 +1282,7 @@ function SchemaTable({
 }: {
   table: SchemaTableApi;
   cells?: SchemaTableCells;
+  toolbarExtra?: ReactNode;
   onRowAction?: (action: SchemaTableRowAction, row: SchemaTableRow) => void;
   onRowClick?: (row: SchemaTableRow) => void;
   onSelectionAction?: (
@@ -1387,6 +1389,7 @@ function SchemaTable({
             )}
             <div className="flex min-w-0 items-center justify-end gap-2">
               <SchemaTableSearch table={table} />
+              {toolbarExtra}
               <SchemaTableFilterPopover table={table} />
               <SchemaTableSortMenu table={table} />
               <SchemaTableEditColumns table={table} />

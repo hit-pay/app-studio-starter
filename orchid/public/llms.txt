@@ -26,8 +26,9 @@ The server uses Streamable HTTP. No authentication is currently required.
 
 #### `list_orchid_components`
 
-Returns Orchid components and their documentation metadata. Use the optional
-`category` argument to filter results.
+Returns Orchid components and their documentation metadata (including
+**resource-picker** and **resource-list** with shared `loadResourcePickerPage`).
+Use the optional `category` argument to filter results.
 
 Example input:
 

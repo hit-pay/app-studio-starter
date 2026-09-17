@@ -22,12 +22,17 @@ import { Button } from '@ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover'
 import { FilterRegular } from '@mingcute/react/core-regular'
 
-export type ResourcePickerFilterType = 'product' | 'order' | 'charge' | 'invoice'
+import type { ResourceCatalogType } from '@/lib/resource-catalog'
+import {
+  RESOURCE_DATE_FILTER_TYPES,
+  type CatalogExtraFilter,
+  type CatalogFilterOption,
+} from '@/lib/resource-catalog'
 
-type FilterOption = { value: string; label: string }
-type ExtraFilter = { key: string; label: string; options: FilterOption[] }
+export type ResourcePickerFilterType = ResourceCatalogType
 
-const DATE_FILTER_TYPES = new Set<ResourcePickerFilterType>(['order', 'charge'])
+type FilterOption = CatalogFilterOption
+type ExtraFilter = CatalogExtraFilter
 
 const RESOURCE_PICKER_LOAD_PROP = 'resourcePickerLoad' as const
 
@@ -95,7 +100,7 @@ export function buildResourcePickerFilterFields(
     })
   }
 
-  if (DATE_FILTER_TYPES.has(type)) {
+  if (RESOURCE_DATE_FILTER_TYPES.has(type)) {
     fields.push({
       key: 'date_range',
       title: 'Date range',

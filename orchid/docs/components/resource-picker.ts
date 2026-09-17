@@ -92,7 +92,7 @@ import { loadResourcePickerPage } from "#/lib/resource-picker";
 });`,
     },
   ],
-  related_components: ["dialog", "select", "form-builder", "data-table"],
+  related_components: ["dialog", "select", "form-builder", "data-table", "resource-list"],
 };
 
 export default resourcePickerDocs;

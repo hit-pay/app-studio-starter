@@ -1,4 +1,4 @@
-import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { DocExamples, DocPropsTable, DocRegistryDescription } from "../doc-code-panel"
 import { QuantityInput } from "../../src/components/form/quantity-input"
 import {
   Field,
@@ -7,7 +7,8 @@ import {
 } from "../../src/ui/field"
 import quantityInputDocs from "./quantity-input"
 
-Use `QuantityInput` for bounded numeric quantities that users increment or decrement. Choose it for counts or inventory quantities, not arbitrary numeric text.
+
+<DocRegistryDescription description={quantityInputDocs.description} />
 
 ## Props
 
