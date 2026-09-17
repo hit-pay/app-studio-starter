@@ -44,6 +44,7 @@ import formLayoutDocs from "../docs/components/form-layout";
 import pageLayoutDocs from "../docs/components/page-layout";
 import commandDocs from "../docs/components/command";
 import confirmationModalDocs from "../docs/components/confirmation-modal";
+import resourcePickerDocs from "../docs/components/resource-picker";
 
 const handler = createMcpHandler(
   (server) => {
@@ -51,13 +52,13 @@ const handler = createMcpHandler(
       "list_orchid_components",
       {
         description:
-          "Returns Orchid UI and component docs. Filter with category: ui or components. app-layout requires TanStack Router (layout route + navigationItems[].to + Outlet; variant tabs | sidebar).",
+          "Returns Orchid UI and component docs. Filter with category: ui or components. app-layout requires TanStack Router (layout route + navigationItems[].to + Outlet; variant tabs | sidebar). resource-picker: ResourcePickerProvider + loadResourcePickerPage; types product|order|charge|invoice; queries per app/docs/hitpay/*.md.",
         inputSchema: {
           category: z.string().optional(),
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs, dataListDocs, dataTableDocs, detailCardDocs, emptyDocs, metricCardDocs, choiceCardDocs, datePickerDocs, formBuilderDocs, quantityInputDocs, textEditorDocs, selectDocs, formLayoutDocs, pageLayoutDocs, commandDocs, confirmationModalDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs, dataListDocs, dataTableDocs, detailCardDocs, emptyDocs, metricCardDocs, choiceCardDocs, datePickerDocs, formBuilderDocs, quantityInputDocs, textEditorDocs, selectDocs, formLayoutDocs, pageLayoutDocs, commandDocs, confirmationModalDocs, resourcePickerDocs].filter(
           (component) => !category || component.category === category,
         );
 

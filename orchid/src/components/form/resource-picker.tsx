@@ -31,11 +31,9 @@ import {
 
 const RESOURCE_PICKER_TYPES = [
   'product',
-  'customer',
   'order',
   'charge',
   'invoice',
-  'add-on',
 ] as const
 
 type ResourcePickerType = (typeof RESOURCE_PICKER_TYPES)[number]
@@ -118,11 +116,9 @@ const ALL_FILTER: FilterOption[] = [{ value: 'all', label: 'All' }]
 
 const LABELS: Record<ResourcePickerType, { singular: string; plural: string }> = {
   product: { singular: 'product', plural: 'products' },
-  customer: { singular: 'customer', plural: 'customers' },
   order: { singular: 'order', plural: 'orders' },
   charge: { singular: 'charge', plural: 'charges' },
   invoice: { singular: 'invoice', plural: 'invoices' },
-  'add-on': { singular: 'add-on', plural: 'add-ons' },
 }
 
 const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
@@ -131,7 +127,6 @@ const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
     { value: 'published', label: 'Published' },
     { value: 'draft', label: 'Draft' },
   ],
-  customer: ALL_FILTER,
   order: [
     { value: 'all', label: 'All statuses' },
     { value: 'completed', label: 'Completed' },
@@ -155,7 +150,6 @@ const FILTERS: Record<ResourcePickerType, FilterOption[]> = {
     { value: 'overdue', label: 'Overdue' },
     { value: 'paid', label: 'Paid' },
   ],
-  'add-on': ALL_FILTER,
 }
 
 const EXTRA_FILTERS: Partial<Record<ResourcePickerType, ExtraFilter[]>> = {
@@ -327,10 +321,9 @@ function ResourcePickerDialog({
   const [filter, setFilter] = React.useState('all')
   const [extras, setExtras] = React.useState<Record<string, string>>({})
   const [items, setItems] = React.useState<ResourcePickerItem[]>([])
-  const [page, setPage] = React.useState(1)
-  const [cursor, setCursor] = React.useState<string | undefined>()
   const [hasMore, setHasMore] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
+  const paginationRef = React.useRef<{ page: number; cursor?: string }>({ page: 0 })
   const [error, setError] = React.useState<string | null>(null)
   const [expanded, setExpanded] = React.useState<Set<string>>(new Set())
   const [selected, setSelected] = React.useState<Map<string, Set<string>>>(new Map())
@@ -349,8 +342,7 @@ function ResourcePickerDialog({
     })
     setItems([])
     setCache(new Map())
-    setPage(1)
-    setCursor(undefined)
+    paginationRef.current = { page: 0 }
     setHasMore(false)
     setError(null)
     const next = new Map<string, Set<string>>()
@@ -363,44 +355,59 @@ function ResourcePickerDialog({
     setExpanded(openParents)
   }, [open, request])
 
+  const listQuery = [search.trim(), hiddenQuery].filter(Boolean).join(' ')
+
+  const fetchList = React.useCallback(
+    async (append: boolean) => {
+      if (!load || !request) return
+      const nextPage = append ? paginationRef.current.page + 1 : 1
+      const nextCursor = append ? paginationRef.current.cursor : undefined
+      setLoading(true)
+      setError(null)
+      try {
+        const result = await load({
+          type,
+          query: listQuery,
+          filter,
+          extras,
+          page: nextPage,
+          cursor: nextCursor,
+        })
+        setItems((current) => (append ? [...current, ...result.items] : result.items))
+        setCache((current) => {
+          const next = new Map(current)
+          for (const item of result.items) next.set(item.id, item)
+          return next
+        })
+        paginationRef.current = { page: nextPage, cursor: result.cursor }
+        setHasMore(Boolean(result.hasMore))
+      } catch (cause) {
+        setError(cause instanceof Error ? cause.message : 'Could not load records.')
+      } finally {
+        setLoading(false)
+      }
+    },
+    [extras, filter, listQuery, load, request, type],
+  )
+
   React.useEffect(() => {
     if (!open || !request || !load) return
+    paginationRef.current = { page: 0 }
     let cancelled = false
     const handle = window.setTimeout(() => {
-      setLoading(true)
-      load({
-        type,
-        query: [search.trim(), hiddenQuery].filter(Boolean).join(' '),
-        filter,
-        extras,
-        page,
-        cursor: page === 1 ? undefined : cursor,
-      })
-        .then((result) => {
-          if (cancelled) return
-          setItems((current) => (page === 1 ? result.items : [...current, ...result.items]))
-          setCache((current) => {
-            const next = new Map(current)
-            for (const item of result.items) next.set(item.id, item)
-            return next
-          })
-          setHasMore(Boolean(result.hasMore))
-          setCursor(result.cursor)
-          setError(null)
-        })
-        .catch((cause) => {
-          if (cancelled) return
-          setError(cause instanceof Error ? cause.message : 'Could not load records.')
-        })
-        .finally(() => {
-          if (!cancelled) setLoading(false)
-        })
+      if (cancelled) return
+      void fetchList(false)
     }, 250)
     return () => {
       cancelled = true
       window.clearTimeout(handle)
     }
-  }, [extras, filter, hiddenQuery, load, open, page, request, search, type])
+  }, [extras, filter, fetchList, load, open, request, search, type])
+
+  const loadMore = React.useCallback(() => {
+    if (loading || !hasMore) return
+    void fetchList(true)
+  }, [fetchList, hasMore, loading])
 
   function selectedCount() {
     return selected.size
@@ -503,8 +510,7 @@ function ResourcePickerDialog({
             <Input
               value={search}
               onChange={(event) => {
-                setPage(1)
-                setCursor(undefined)
+                paginationRef.current = { page: 0 }
                 setSearch(event.currentTarget.value)
               }}
               placeholder={`Search ${labels.plural}`}
@@ -520,8 +526,7 @@ function ResourcePickerDialog({
               placeholder="Status"
               onValueChange={(value) => {
                 if (value == null) return
-                setPage(1)
-                setCursor(undefined)
+                paginationRef.current = { page: 0 }
                 setFilter(String(value))
               }}
             />
@@ -535,8 +540,7 @@ function ResourcePickerDialog({
               placeholder={group.label}
               onValueChange={(value) => {
                 if (value == null) return
-                setPage(1)
-                setCursor(undefined)
+                paginationRef.current = { page: 0 }
                 setExtras((current) => ({ ...current, [group.key]: String(value) }))
               }}
             />
@@ -555,8 +559,7 @@ function ResourcePickerDialog({
                   }
                   value={extras.category_id ?? null}
                   onValueChange={(value) => {
-                    setPage(1)
-                    setCursor(undefined)
+                    paginationRef.current = { page: 0 }
                     setExtras((current) => {
                       const next = { ...current }
                       if (typeof value === 'string' && value) next.category_id = value
@@ -567,7 +570,7 @@ function ResourcePickerDialog({
                 />
             </div>
           ) : null}
-          {type === 'product' || type === 'order' ? (
+          {type === 'product' || type === 'charge' ? (
             <div className="min-w-0 flex-1 [&_button]:w-full">
                 <HitPayNamedSelect
                   name="resource_picker_location"
@@ -579,8 +582,7 @@ function ResourcePickerDialog({
                   load={() => loadLocationsForSelect().then((result) => ({ items: result.items }))}
                   value={extras.location_id ?? null}
                   onValueChange={(value) => {
-                    setPage(1)
-                    setCursor(undefined)
+                    paginationRef.current = { page: 0 }
                     setExtras((current) => {
                       const next = { ...current }
                       if (typeof value === 'string' && value) next.location_id = value
@@ -599,8 +601,7 @@ function ResourcePickerDialog({
               disabled={{ after: startOfDay(new Date()) }}
               endMonth={new Date()}
               onSelect={(range) => {
-                setPage(1)
-                setCursor(undefined)
+                paginationRef.current = { page: 0 }
                 setExtras((current) => {
                   const next = { ...current }
                   if (!range?.from) {
@@ -749,7 +750,7 @@ function ResourcePickerDialog({
                 variant="outline"
                 size="sm"
                 disabled={loading}
-                onClick={() => setPage((current) => current + 1)}
+                onClick={loadMore}
               >
                 {loading ? 'Loading…' : `Load more ${labels.plural}`}
               </Button>

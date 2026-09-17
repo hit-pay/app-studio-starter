@@ -252,7 +252,7 @@ export const DOC_BLOCKS = [
     to: "/components/resource-picker" as const,
     name: "Resource Picker",
     description:
-      "Search and select HitPay products, customers, orders, charges, invoices, or add-ons.",
+      "Search and select HitPay products, orders, charges, or invoices (app/docs/hitpay).",
   },
   {
     to: "/components/command" as const,

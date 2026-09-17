@@ -1,6 +1,6 @@
 'use client'
 
-import type { ComponentProps } from 'react'
+import type { ComponentProps, ReactNode } from 'react'
 
 import {
   Combobox as ComboboxPrimitive,
@@ -22,6 +22,10 @@ import {
 type SelectOption = {
   value: string
   label: string
+  /** Secondary line in the dropdown (and search matching when searchable). */
+  description?: string
+  /** Optional image URL shown beside the label in the list. */
+  image?: string | null
   disabled?: boolean
 }
 
@@ -42,10 +46,53 @@ type SelectProps = Omit<ComponentProps<'div'>, 'onChange'> & {
   contentClassName?: string
   clearable?: boolean
   onBlur?: () => void
+  /** Override dropdown row content. `label` is still used for the trigger, chips, and search text. */
+  renderOption?: (option: SelectOption) => ReactNode
+}
+
+function optionByValue(options: SelectOption[], value: string) {
+  return options.find((option) => option.value === value)
 }
 
 function optionLabel(options: SelectOption[], value: string) {
-  return options.find((option) => option.value === value)?.label ?? value
+  return optionByValue(options, value)?.label ?? value
+}
+
+function optionSearchText(option: SelectOption) {
+  return [option.label, option.description].filter(Boolean).join(' ')
+}
+
+function SelectOptionContent({
+  option,
+  renderOption,
+}: {
+  option: SelectOption
+  renderOption?: (option: SelectOption) => ReactNode
+}) {
+  if (renderOption) return <>{renderOption(option)}</>
+
+  const rich = Boolean(option.description || option.image)
+  if (!rich) return <>{option.label}</>
+
+  return (
+    <span className="flex min-w-0 flex-1 items-center gap-2 whitespace-normal">
+      {option.image ? (
+        <img
+          src={option.image}
+          alt=""
+          className="size-8 shrink-0 rounded-md border border-oc-border object-cover"
+        />
+      ) : null}
+      <span className="min-w-0 flex-1">
+        <span className="block truncate font-medium leading-snug">{option.label}</span>
+        {option.description ? (
+          <span className="block truncate text-xs leading-snug text-oc-muted-foreground">
+            {option.description}
+          </span>
+        ) : null}
+      </span>
+    </span>
+  )
 }
 
 function knownValues(options: SelectOption[], value: unknown) {
@@ -72,10 +119,15 @@ function Select({
   contentClassName,
   clearable = false,
   onBlur,
+  renderOption,
 }: SelectProps) {
   const chips = useComboboxAnchor()
   const values = options.map((option) => option.value)
   const labelOf = (item: unknown) => optionLabel(options, String(item ?? ''))
+  const searchLabelOf = (item: unknown) => {
+    const option = optionByValue(options, String(item ?? ''))
+    return option ? optionSearchText(option) : String(item ?? '')
+  }
 
   if (multiple) {
     const selected = value !== undefined ? knownValues(options, value) : undefined
@@ -89,7 +141,7 @@ function Select({
         value={selected}
         defaultValue={defaultSelected}
         disabled={disabled}
-        itemToStringLabel={labelOf}
+        itemToStringLabel={searchLabelOf}
         onValueChange={(next) =>
           onValueChange?.(Array.isArray(next) ? next.map(String) : [])
         }
@@ -118,10 +170,27 @@ function Select({
           <ComboboxEmpty>{empty}</ComboboxEmpty>
           <ComboboxList>
             {(item: string) => {
-              const option = options.find((entry) => entry.value === item)
+              const option = optionByValue(options, item)
+              if (!option) {
+                return (
+                  <ComboboxItem key={item} value={item} variant="checkbox">
+                    {item}
+                  </ComboboxItem>
+                )
+              }
               return (
-                <ComboboxItem key={item} value={item} variant="checkbox" disabled={option?.disabled}>
-                  {option?.label ?? item}
+                <ComboboxItem
+                  key={item}
+                  value={item}
+                  variant="checkbox"
+                  disabled={option.disabled}
+                  className={
+                    option.description || option.image || renderOption
+                      ? 'items-start py-2.5 whitespace-normal'
+                      : undefined
+                  }
+                >
+                  <SelectOptionContent option={option} renderOption={renderOption} />
                 </ComboboxItem>
               )
             }}
@@ -150,7 +219,7 @@ function Select({
       defaultValue={defaultSelected}
       disabled={disabled}
       filter={searchable ? undefined : null}
-      itemToStringLabel={labelOf}
+      itemToStringLabel={searchable ? searchLabelOf : labelOf}
       onValueChange={(next) => onValueChange?.(next == null ? null : String(next))}
     >
       {searchable ? (
@@ -190,10 +259,26 @@ function Select({
         <ComboboxEmpty>{empty}</ComboboxEmpty>
         <ComboboxList>
           {(item: string) => {
-            const option = options.find((entry) => entry.value === item)
+            const option = optionByValue(options, item)
+            if (!option) {
+              return (
+                <ComboboxItem key={item} value={item}>
+                  {item}
+                </ComboboxItem>
+              )
+            }
             return (
-              <ComboboxItem key={item} value={item} disabled={option?.disabled}>
-                {option?.label ?? item}
+              <ComboboxItem
+                key={item}
+                value={item}
+                disabled={option.disabled}
+                className={
+                  option.description || option.image || renderOption
+                    ? 'items-start py-2.5 whitespace-normal'
+                    : undefined
+                }
+              >
+                <SelectOptionContent option={option} renderOption={renderOption} />
               </ComboboxItem>
             )
           }}

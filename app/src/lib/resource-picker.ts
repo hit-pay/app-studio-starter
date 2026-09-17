@@ -1,3 +1,4 @@
+/** HitPay list queries for ResourcePicker — see app/docs/hitpay/{products,orders,charges,invoices}.md */
 import { createServerFn } from '@tanstack/react-start'
 
 import { HITPAY_ALL_ROLES } from '#/lib/hitpay-roles'
@@ -51,18 +52,9 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       return mapResourcePickerPayload(data, await response.json())
     }
 
-    if (data.type === 'customer') {
-      query.set('per_page', '25')
-      if (data.query) query.set('keywords', data.query)
-      if (data.cursor) query.set('cursor', data.cursor)
-      const response = await hitpayRequest(`/v1/customers?${query}`)
-      if (!response.ok) throw new Error('Could not load customers.')
-      return mapResourcePickerPayload(data, await response.json())
-    }
-
     if (data.type === 'order') {
       query.set('page', String(page))
-      query.set('perPage', '25')
+      query.set('per_page', '25')
       if (data.query) query.set('keywords', data.query)
       if (data.filter === 'all') {
         for (const status of ORDER_STATUSES) query.append('statuses[]', status)
@@ -72,9 +64,6 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       if (data.extras?.channel && data.extras.channel !== 'all') {
         query.append('channels[]', data.extras.channel)
       }
-      if (data.extras?.location_id && data.extras.location_id !== 'all') {
-        query.append('location_ids[]', data.extras.location_id)
-      }
       if (data.extras?.date_from) query.set('dateFrom', data.extras.date_from)
       if (data.extras?.date_to) query.set('dateTo', data.extras.date_to)
       const response = await hitpayRequest(`/v1/orders?${query}`)
@@ -83,14 +72,17 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
     }
 
     if (data.type === 'charge') {
+      query.set('page', String(page))
       query.set('per_page', '25')
       if (data.query) query.set('keywords', data.query)
       if (data.filter === 'all') {
         for (const status of CHARGE_STATUSES) query.append('statuses[]', status)
       } else {
-        query.set('status', data.filter)
+        query.append('statuses[]', data.filter)
       }
-      if (data.cursor) query.set('cursor', data.cursor)
+      if (data.extras?.location_id && data.extras.location_id !== 'all') {
+        query.append('location_ids[]', data.extras.location_id)
+      }
       if (data.extras?.payment_method && data.extras.payment_method !== 'all') {
         query.append('payment_methods[]', data.extras.payment_method)
       }

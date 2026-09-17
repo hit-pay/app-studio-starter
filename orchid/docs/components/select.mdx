@@ -8,9 +8,10 @@ import {
 import selectDocs, {
   SELECT_CHANNEL_OPTIONS,
   SELECT_CURRENCY_OPTIONS,
+  SELECT_LOCATION_OPTIONS,
 } from "./select"
 
-Use `Select` for choosing one or more values from a finite option list. Choose it for ordinary options; use `ResourcePicker` when users must browse and pick HitPay catalog records (products, customers, orders, and similar).
+Use `Select` for choosing one or more values from a finite option list. Each option is `{ value, label }` at minimum; add **`description`** and **`image`** for two-line or thumbnail rows in the menu (the closed trigger still shows **`label`** only). Use **`renderOption`** when you need full control of the row. Choose `ResourcePicker` when users must browse paginated HitPay catalog records.
 
 ## Props
 
@@ -21,6 +22,7 @@ Use `Select` for choosing one or more values from a finite option list. Choose i
   scope={{
     CHANNEL_OPTIONS: SELECT_CHANNEL_OPTIONS,
     CURRENCY_OPTIONS: SELECT_CURRENCY_OPTIONS,
+    LOCATION_OPTIONS: SELECT_LOCATION_OPTIONS,
     Field,
     FieldDescription,
     FieldLabel,

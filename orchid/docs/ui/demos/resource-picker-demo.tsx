@@ -26,11 +26,9 @@ const TYPE_BUTTONS: { type: ResourcePickerOptions['type']; label: string; option
   [
     { type: 'product', label: 'Add product', options: { multiple: 1 } },
     { type: 'product', label: 'Add products', options: { multiple: true } },
-    { type: 'customer', label: 'Select customers', options: { action: 'select', multiple: true } },
     { type: 'order', label: 'Add orders', options: { multiple: 5 } },
     { type: 'charge', label: 'Select charge' },
     { type: 'invoice', label: 'Select invoices', options: { multiple: true } },
-    { type: 'add-on', label: 'Select add-on' },
   ]
 
 function ResourcePickerButtons() {
@@ -99,4 +97,4 @@ function ResourcePickerDemo() {
   )
 }
 
-export { ResourcePickerDemo }
+export { ResourcePickerDemo, demoLoad }

@@ -1,4 +1,3 @@
-import { customerMatches } from '#/lib/resource-picker-map'
 import type { ResourcePickerLoadInput, ResourcePickerType } from '@/components/form/resource-picker'
 
 type FakeRecord = Record<string, unknown>
@@ -105,10 +104,6 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       variations: [],
     },
   ],
-  customer: [
-    { id: '9c1e0003-0000-4000-8000-000000000001', name: 'Priya Nair', email: 'priya@example.com', phone_number: '91234567' },
-    { id: '9c1e0003-0000-4000-8000-000000000002', name: 'Wei Chen', email: 'wei@example.com', phone_number: '98887766' },
-  ],
   order: [
     {
       id: '9c1e0004-0000-4000-8000-000000000001',
@@ -188,7 +183,6 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       email: 'wei@example.com',
     },
   ],
-  'add-on': [{ id: '9c1e0010-0000-4000-8000-000000000001', name: 'Gift wrap' }],
 }
 
 function includesNeedle(row: FakeRecord, keys: string[], needle: string) {
@@ -269,10 +263,6 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
     })
   }
 
-  if (data.type === 'customer' && needle) {
-    rows = rows.filter((row) => customerMatches(row, needle))
-  }
-
   if (data.type === 'order') {
     rows = rows.filter((row) => {
       if (!inDateRange(row, data.extras)) return false
@@ -320,10 +310,6 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
       if (data.filter !== 'all' && row.status !== data.filter) return false
       return includesNeedle(row, ['invoice_number', 'reference', 'email', 'id'], needle)
     })
-  }
-
-  if (data.type === 'add-on' && needle) {
-    rows = rows.filter((row) => includesNeedle(row, ['name', 'id'], needle))
   }
 
   return { data: rows }

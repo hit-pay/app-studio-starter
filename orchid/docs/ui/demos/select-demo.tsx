@@ -21,10 +21,24 @@ const channels = [
   { value: 'online_store', label: 'Online Store' },
 ]
 
+const locations = [
+  {
+    value: 'loc-main',
+    label: 'Main Store',
+    description: '1 Harbourfront Walk, Singapore 098632',
+  },
+  {
+    value: 'loc-wh',
+    label: 'Warehouse',
+    description: '10 Tuas Avenue, Singapore 639135',
+  },
+]
+
 function SelectDemo() {
   const [currency, setCurrency] = useState<string | null>('SGD')
   const [channel, setChannel] = useState<string | null>(null)
   const [methods, setMethods] = useState<string[]>(['pos'])
+  const [location, setLocation] = useState<string | null>(null)
 
   return (
     <FieldGroup className="max-w-sm">
@@ -47,6 +61,18 @@ function SelectDemo() {
           onValueChange={(value) => setChannel(typeof value === 'string' ? value : null)}
         />
         <FieldDescription>Set searchable when the list is long.</FieldDescription>
+      </Field>
+      <Field>
+        <FieldLabel>Location</FieldLabel>
+        <Select
+          searchable
+          clearable
+          options={locations}
+          value={location}
+          placeholder="Choose location"
+          onValueChange={(value) => setLocation(typeof value === 'string' ? value : null)}
+        />
+        <FieldDescription>Options support description (and optional image) in the menu.</FieldDescription>
       </Field>
       <Field>
         <FieldLabel>Methods</FieldLabel>

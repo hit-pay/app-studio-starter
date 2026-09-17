@@ -1,2 +1,43 @@
+import { DocCodePanel, DocExamples, DocPropsTable } from "../doc-code-panel"
+import { ResourcePickerDemo, demoLoad } from "../ui/demos/resource-picker-demo"
+import {
+  ResourcePickerProvider,
+  useResourcePicker,
+} from "../../src/components/form/resource-picker"
+import { Button } from "../../src/ui/button"
+import resourcePickerDocs from "./resource-picker"
 
-Use `ResourcePicker` when users must add or select HitPay catalog records such as products, customers, orders, charges, invoices, or add-ons. Choose it instead of a page table or a one-off entity dropdown; wire category and location filters inside the picker when needed.
+Use **`ResourcePicker`** when users must search, filter, and confirm HitPay list records (**products, orders, charges, invoices**). Wire **`load`** to the same query parameters documented in App Studio **`app/docs/hitpay/`** (`products.md`, `orders.md`, `charges.md`, `invoices.md`). Mount **`ResourcePickerProvider`** with a **`load`** function once near the root, then call **`useResourcePicker()`** and **`await pick({ type, … })`**. The promise resolves to selected rows or **`undefined`** when cancelled. Choose it instead of a full-page table or `Select` for long lists; use **`Select`** with `description` / `image` for small static option sets.
+
+## Props
+
+<DocPropsTable props={resourcePickerDocs.props} />
+
+## Examples
+
+<ResourcePickerDemo />
+
+<DocExamples
+  noInline
+  examples={[resourcePickerDocs.examples[0]]}
+  scope={{
+    ResourcePickerProvider,
+    useResourcePicker,
+    Button,
+    demoLoad,
+  }}
+/>
+
+<div className="grid gap-3">
+  <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+    {resourcePickerDocs.examples[1].description}
+  </p>
+  <DocCodePanel filename="app-shell.tsx" code={resourcePickerDocs.examples[1].code} />
+</div>
+
+<div className="grid gap-3">
+  <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+    {resourcePickerDocs.examples[2].description}
+  </p>
+  <DocCodePanel filename="pick.tsx" code={resourcePickerDocs.examples[2].code} />
+</div>

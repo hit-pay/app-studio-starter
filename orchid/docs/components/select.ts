@@ -18,23 +18,51 @@ export const SELECT_CHANNEL_OPTIONS = [
   { value: "online_store", label: "Online Store" },
 ];
 
+export const SELECT_LOCATION_OPTIONS = [
+  {
+    value: "loc-main",
+    label: "Main Store",
+    description: "1 Harbourfront Walk, Singapore 098632",
+  },
+  {
+    value: "loc-wh",
+    label: "Warehouse",
+    description: "10 Tuas Avenue, Singapore 639135",
+  },
+  {
+    value: "loc-popup",
+    label: "Pop-up @ Orchard",
+    description: "Limited hours · Fri–Sun only",
+    image: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=64&h=64&fit=crop",
+  },
+];
+
 const selectDocs = {
   ...selectRegistry,
   category: "components",
   props: {
+    "options[].value": "string (required)",
+    "options[].label": "string (required) — trigger, chips, default row title",
+    "options[].description": "string — secondary line in menu; searchable",
+    "options[].image": "string | null — thumbnail URL in menu row",
+    "options[].disabled": "boolean",
     options: "SelectOption[]",
     value: "string | string[] | null",
     defaultValue: "string | string[] | null",
-    onValueChange: "function",
-    multiple: "boolean",
-    searchable: "boolean",
-    placeholder: "string",
-    searchPlaceholder: "string",
-    empty: "string",
+    onValueChange: "(value: string | string[] | null) => void",
+    multiple: "boolean — chip input + checkbox rows",
+    searchable: "boolean — filter by label and description",
+    placeholder: "string — closed trigger or multi chip input",
+    searchPlaceholder: "string — searchable input placeholder",
+    empty: "string — no matches message",
     disabled: "boolean",
     invalid: "boolean",
+    id: "string",
     size: ["sm", "default", "inline"],
-    clearable: "boolean",
+    contentClassName: "string",
+    clearable: "boolean — searchable single select only",
+    onBlur: "function",
+    renderOption: "(option: SelectOption) => ReactNode — custom row; label still drives trigger and search",
   },
   examples: [
     {
@@ -57,6 +85,21 @@ const selectDocs = {
 </Field>`,
     },
     {
+      description: "Rich options (name + description + image)",
+      code: `<Field>
+  <FieldLabel>Location</FieldLabel>
+  <Select
+    searchable
+    clearable
+    options={LOCATION_OPTIONS}
+    placeholder="Choose location"
+  />
+  <FieldDescription>
+    Pass description or image on each option. Trigger shows label only.
+  </FieldDescription>
+</Field>`,
+    },
+    {
       description: "Multiple with chips",
       code: `<Field>
   <FieldLabel>Methods</FieldLabel>
@@ -68,6 +111,7 @@ const selectDocs = {
     "field",
     "form-builder",
     "resource-picker",
+    "choice-card",
   ],
 };
 

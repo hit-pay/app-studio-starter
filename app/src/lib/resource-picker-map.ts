@@ -72,9 +72,13 @@ function productImage(product: Record<string, unknown>): string | null {
   return typeof product.image === 'string' ? product.image : null
 }
 
-function cursorPage(items: ResourcePickerItem[], payload: unknown): ResourcePickerPage {
+function pageResult(items: ResourcePickerItem[], payload: unknown, page: number): ResourcePickerPage {
   const cursor = nextCursor(payload)
-  return { items, hasMore: Boolean(cursor), cursor }
+  return {
+    items,
+    hasMore: hasMore(payload, page) || Boolean(cursor),
+    cursor,
+  }
 }
 
 function rowsOf(_type: ResourcePickerType, payload: unknown): Record<string, unknown>[] {
@@ -103,23 +107,6 @@ function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
   }
 }
 
-function mapCustomer(customer: Record<string, unknown>): ResourcePickerItem {
-  return {
-    id: String(customer.id),
-    title: String(customer.name || customer.email || customer.id),
-    resource: asRecord(customer),
-  }
-}
-
-function customerMatches(customer: Record<string, unknown>, needle: string) {
-  if (!needle) return true
-  const hay = [customer.name, customer.email, customer.phone_number]
-    .filter((value) => typeof value === 'string')
-    .join(' ')
-    .toLowerCase()
-  return hay.includes(needle)
-}
-
 /** Post-fetch mapping + the client filters `loadResourcePickerPage` already applies. */
 function mapResourcePickerPayload(
   data: ResourcePickerLoadInput,
@@ -131,10 +118,6 @@ function mapResourcePickerPayload(
 
   if (type === 'product') {
     return { items: rows.map(mapProduct), hasMore: hasMore(payload, page) }
-  }
-
-  if (type === 'customer') {
-    return cursorPage(rows.map(mapCustomer), payload)
   }
 
   if (type === 'order') {
@@ -153,7 +136,7 @@ function mapResourcePickerPayload(
   }
 
   if (type === 'charge') {
-    return cursorPage(
+    return pageResult(
       rows.map((charge) => ({
         id: String(charge.id),
         title: [charge.remark, charge.amount, charge.currency].filter(Boolean).join(' · ') || String(charge.id),
@@ -161,11 +144,12 @@ function mapResourcePickerPayload(
         resource: asRecord(charge),
       })),
       payload,
+      page,
     )
   }
 
   if (type === 'invoice') {
-    return cursorPage(
+    return pageResult(
       rows.map((invoice) => ({
         id: String(invoice.id),
         title: String(invoice.invoice_number || invoice.reference || invoice.email || invoice.id),
@@ -173,21 +157,11 @@ function mapResourcePickerPayload(
         resource: asRecord(invoice),
       })),
       payload,
+      page,
     )
-  }
-
-  if (type === 'add-on') {
-    return {
-      items: rows.map((row) => ({
-        id: String(row.id),
-        title: String(row.name || row.id),
-        resource: asRecord(row),
-      })),
-      hasMore: hasMore(payload, page),
-    }
   }
 
   throw new Error(`Unsupported resource picker type: ${data.type}`)
 }
 
-export { asList, customerMatches, hasMore, mapCustomer, mapResourcePickerPayload, nextCursor }
+export { asList, hasMore, mapResourcePickerPayload, nextCursor }
