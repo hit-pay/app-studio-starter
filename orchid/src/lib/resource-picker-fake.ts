@@ -1,4 +1,4 @@
-import type { ResourcePickerLoadInput, ResourcePickerType } from '@/components/form/resource-picker'
+import type { ResourceLoadInput, ResourceType } from '@/components/form/resource-picker'
 
 type FakeRecord = Record<string, unknown>
 
@@ -7,7 +7,7 @@ const FAKE_WAREHOUSE = { id: '9c1e0005-0000-4000-8000-000000000002', name: 'Ware
 const FAKE_FURNITURE = { id: '9c1e0002-0000-4000-8000-000000000001', name: 'Furniture' }
 const FAKE_LIGHTING = { id: '9c1e0002-0000-4000-8000-000000000002', name: 'Lighting' }
 
-const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
+const FAKE_HITPAY: Record<ResourceType, FakeRecord[]> = {
   product: [
     {
       id: '9c1e0001-0000-4000-8000-000000000001',
@@ -214,7 +214,7 @@ function productQuantity(product: FakeRecord) {
 }
 
 /** Fake HitPay list envelope after the same query/filter/extras the starter sends to `/v1/…`. */
-function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
+function fakeHitPayListPayload(data: ResourceLoadInput): unknown {
   const needle = data.query.trim().toLowerCase()
   let rows = FAKE_HITPAY[data.type] ?? []
 

@@ -33,7 +33,7 @@ const resourceListDocs = {
   ...resourceListRegistry,
   category: "components",
   props: {
-    "ResourceListProvider.load": "ResourcePickerLoad (required)",
+    "ResourceListProvider.load": "ResourceLoad (required)",
     "ResourceListProvider.children": "ReactNode",
     "ResourceList.type": "product | order | charge | invoice",
     "ResourceList.className": "string",
@@ -53,10 +53,10 @@ const resourceListDocs = {
     "load(input).extras.date_from / date_to": "orders dateFrom/dateTo; charges date_from/date_to",
     "load(input).extras.payment_method": "charges payment_methods[]",
     "load(input).extras.inventory": "product inventory in_stock | out_of_stock",
-    "ResourcePickerPage.items": "ResourcePickerItem[]",
-    "ResourcePickerPage.hasMore": "boolean",
-    "ResourcePickerPage.total": "optional meta total",
-    "ResourcePickerPage.cursor": "invoices",
+    "ResourcePage.items": "ResourceItem[]",
+    "ResourcePage.hasMore": "boolean",
+    "ResourcePage.total": "optional meta total",
+    "ResourcePage.cursor": "invoices",
   },
   examples: [
     liveResourceListExample("product", "Products"),

@@ -78,7 +78,7 @@ const handler = createMcpHandler(
       "list_orchid_components",
       {
         description:
-          "Search or list Orchid UI components (slim: name, title, description, category, install). Always search before building UI. Then get_orchid_component for props/examples/files. Filter category: ui | components. Filter name: exact slug (full docs). HitPay resource-picker and resource-list share ResourcePickerLoad; types product|order|charge|invoice.",
+          "Search or list Orchid UI components (slim: name, title, description, category, install). Always search before building UI. Then get_orchid_component for props/examples/files. Filter category: ui | components. Filter name: exact slug (full docs). HitPay resource-picker and resource-list share ResourceLoad; types product|order|charge|invoice.",
         inputSchema: listOrchidComponentsArgs,
       },
       async (args) => {

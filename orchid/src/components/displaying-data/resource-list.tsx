@@ -15,7 +15,7 @@ import {
   buildResourcePickerFilterFields,
   ResourcePickerFilterMenu,
 } from '@/components/form/resource-picker-filter-form'
-import type { ResourcePickerLoad, ResourcePickerType } from '@/components/form/resource-picker'
+import type { ResourceLoad, ResourceType } from '@/components/form/resource-picker'
 import {
   resourceCatalogFiltersActive,
   RESOURCE_EXTRA_FILTERS,
@@ -29,15 +29,15 @@ import {
 import { Spinner } from '@ui/spinner'
 import { cn } from '@/lib/utils'
 
-const ResourceListLoadContext = React.createContext<ResourcePickerLoad | null>(null)
+const ResourceListLoadContext = React.createContext<ResourceLoad | null>(null)
 
 function resourceListLoadInput(
-  type: ResourcePickerType,
+  type: ResourceType,
   query: SchemaTableQuery,
   status: string,
   extras: Record<string, string>,
   cursor?: string,
-): Parameters<ResourcePickerLoad>[0] {
+): Parameters<ResourceLoad>[0] {
   return {
     type,
     query: query.search.trim(),
@@ -49,7 +49,7 @@ function resourceListLoadInput(
 }
 
 function mergeLoadExtras(
-  type: ResourcePickerType,
+  type: ResourceType,
   query: SchemaTableQuery,
   popoverExtras: Record<string, string>,
 ): { status: string; extras: Record<string, string> } {
@@ -69,7 +69,7 @@ function mergeLoadExtras(
 }
 
 function listQuerySignature(
-  type: ResourcePickerType,
+  type: ResourceType,
   query: SchemaTableQuery,
   popoverExtras: Record<string, string>,
 ) {
@@ -91,7 +91,7 @@ function ResourceListProvider({
   load,
 }: {
   children: React.ReactNode
-  load: ResourcePickerLoad
+  load: ResourceLoad
 }) {
   return (
     <ResourceListLoadContext.Provider value={load}>{children}</ResourceListLoadContext.Provider>
@@ -107,7 +107,7 @@ function useResourceListLoad() {
 }
 
 type ResourceListProps = {
-  type: ResourcePickerType
+  type: ResourceType
   className?: string
   cells?: SchemaTableCells
   onRowAction?: (action: SchemaTableRowAction, row: SchemaTableRow) => void

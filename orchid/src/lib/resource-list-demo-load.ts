@@ -1,15 +1,15 @@
 /** Docs / live examples only — fake HitPay pagination. App Studio uses loadResourcePage. */
 import { fakeHitPayListPayload } from '#/lib/resource-picker-fake'
-import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
-import type { ResourcePickerLoad, ResourcePickerType } from '@/components/form/resource-picker'
+import { mapResourcePayload } from '#/lib/resource-picker-map'
+import type { ResourceLoad, ResourceType } from '@/components/form/resource-picker'
 
-function demoPageSize(type: ResourcePickerType) {
+function demoPageSize(type: ResourceType) {
   return type === 'invoice' ? 10 : 25
 }
 
-const resourceListDemoLoad: ResourcePickerLoad = async (input) => {
+const resourceListDemoLoad: ResourceLoad = async (input) => {
   await new Promise((resolve) => setTimeout(resolve, 160))
-  const mapped = mapResourcePickerPayload(input, fakeHitPayListPayload(input))
+  const mapped = mapResourcePayload(input, fakeHitPayListPayload(input))
   const pageSize = demoPageSize(input.type)
   const page = input.page || 1
   const start = (page - 1) * pageSize

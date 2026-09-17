@@ -5,8 +5,8 @@ import { ALL_ROLES } from '#/lib/roles'
 import { requireRoles } from '#/server/lib/session'
 import { proxyRequest } from '#/server/lib/proxy'
 
-import { mapResourcePickerPayload } from './map'
-import type { ResourcePickerLoadInput, ResourcePickerPage } from './map'
+import { mapResourcePayload } from './map'
+import type { ResourceLoadInput, ResourcePage } from './map'
 
 const ORDER_STATUSES = ['completed', 'pending', 'sent', 'draft', 'expired', 'canceled'] as const
 function categoryIdsFromExtras(extras?: Record<string, string>) {
@@ -37,8 +37,8 @@ const CHARGE_STATUSES = [
 ] as const
 
 const loadResourcePage = createServerFn({ method: 'GET' })
-  .validator((data: ResourcePickerLoadInput) => data)
-  .handler(async ({ data }): Promise<ResourcePickerPage> => {
+  .validator((data: ResourceLoadInput) => data)
+  .handler(async ({ data }): Promise<ResourcePage> => {
     await requireRoles(ALL_ROLES)
     const query = new URLSearchParams()
     const page = data.page || 1
@@ -64,7 +64,7 @@ const loadResourcePage = createServerFn({ method: 'GET' })
       }
       const response = await proxyRequest(`/v1/products?${query}`)
       if (!response.ok) throw new Error('Could not load products.')
-      return mapResourcePickerPayload(data, await response.json())
+      return mapResourcePayload(data, await response.json())
     }
 
     if (data.type === 'order') {
@@ -83,7 +83,7 @@ const loadResourcePage = createServerFn({ method: 'GET' })
       if (data.extras?.date_to) query.set('dateTo', data.extras.date_to)
       const response = await proxyRequest(`/v1/orders?${query}`)
       if (!response.ok) throw new Error('Could not load orders.')
-      return mapResourcePickerPayload(data, await response.json())
+      return mapResourcePayload(data, await response.json())
     }
 
     if (data.type === 'charge') {
@@ -105,7 +105,7 @@ const loadResourcePage = createServerFn({ method: 'GET' })
       if (data.extras?.date_to) query.set('date_to', data.extras.date_to)
       const response = await proxyRequest(`/v1/charges?${query}`)
       if (!response.ok) throw new Error('Could not load charges.')
-      return mapResourcePickerPayload(data, await response.json())
+      return mapResourcePayload(data, await response.json())
     }
 
     if (data.type === 'invoice') {
@@ -115,7 +115,7 @@ const loadResourcePage = createServerFn({ method: 'GET' })
       if (data.cursor) query.set('cursor', data.cursor)
       const response = await proxyRequest(`/v1/invoices?${query}`)
       if (!response.ok) throw new Error('Could not load invoices.')
-      return mapResourcePickerPayload(data, await response.json())
+      return mapResourcePayload(data, await response.json())
     }
 
     throw new Error(`Unsupported resource picker type: ${data.type}`)

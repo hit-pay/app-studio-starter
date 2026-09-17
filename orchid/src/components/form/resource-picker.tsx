@@ -36,10 +36,10 @@ const RESOURCE_PICKER_TYPES = [
   'invoice',
 ] as const
 
-type ResourcePickerType = (typeof RESOURCE_PICKER_TYPES)[number]
+type ResourceType = (typeof RESOURCE_PICKER_TYPES)[number]
 
-type ResourcePickerRecord = {
-  [key: string]: string | number | boolean | null | ResourcePickerRecord | ResourcePickerRecord[]
+type ResourceRecord = {
+  [key: string]: string | number | boolean | null | ResourceRecord | ResourceRecord[]
 }
 
 type ResourcePickerChild = {
@@ -47,10 +47,10 @@ type ResourcePickerChild = {
   title: string
   meta?: string
   trailing?: string
-  resource?: ResourcePickerRecord
+  resource?: ResourceRecord
 }
 
-type ResourcePickerItem = {
+type ResourceItem = {
   id: string
   title: string
   /** Secondary line under the title (e.g. product SKU). */
@@ -58,19 +58,19 @@ type ResourcePickerItem = {
   image?: string | null
   badge?: string
   children?: ResourcePickerChild[]
-  resource?: ResourcePickerRecord
+  resource?: ResourceRecord
 }
 
-type ResourcePickerPage = {
-  items: ResourcePickerItem[]
+type ResourcePage = {
+  items: ResourceItem[]
   hasMore?: boolean
   cursor?: string
   /** Upstream total when meta exposes it (lists / pagination). */
   total?: number
 }
 
-type ResourcePickerLoadInput = {
-  type: ResourcePickerType
+type ResourceLoadInput = {
+  type: ResourceType
   query: string
   filter: string
   extras?: Record<string, string>
@@ -78,7 +78,7 @@ type ResourcePickerLoadInput = {
   cursor?: string
 }
 
-type ResourcePickerLoad = (input: ResourcePickerLoadInput) => Promise<ResourcePickerPage>
+type ResourceLoad = (input: ResourceLoadInput) => Promise<ResourcePage>
 
 type ResourcePickerSelectionId = {
   id: string
@@ -86,7 +86,7 @@ type ResourcePickerSelectionId = {
 }
 
 type ResourcePickerOptions = {
-  type: ResourcePickerType
+  type: ResourceType
   action?: 'add' | 'select'
   multiple?: boolean | number
   query?: string
@@ -105,8 +105,8 @@ type ResourcePickerOptions = {
 
 type ResourcePickerResult = {
   id: string
-  resource?: ResourcePickerRecord
-  children?: { id: string; resource?: ResourcePickerRecord }[]
+  resource?: ResourceRecord
+  children?: { id: string; resource?: ResourceRecord }[]
 }
 
 type ResourcePickerFn = (options: ResourcePickerOptions) => Promise<ResourcePickerResult[] | undefined>
@@ -118,7 +118,7 @@ type ResourcePickerRequest = ResourcePickerOptions & {
 const ALL_FILTER = [{ value: 'all', label: 'All' }] as const
 
 const ResourcePickerContext = React.createContext<ResourcePickerFn | null>(null)
-const ResourcePickerLoadContext = React.createContext<ResourcePickerLoad | null>(null)
+const ResourceLoadContext = React.createContext<ResourceLoad | null>(null)
 
 function maxCount(multiple: boolean | number | undefined) {
   if (multiple === true) return Number.POSITIVE_INFINITY
@@ -126,7 +126,7 @@ function maxCount(multiple: boolean | number | undefined) {
   return 1
 }
 
-function pickerLabels(type: ResourcePickerType) {
+function pickerLabels(type: ResourceType) {
   return (
     RESOURCE_CATALOG_LABELS[type] ?? {
       singular: type.replaceAll('-', ' '),
@@ -135,7 +135,7 @@ function pickerLabels(type: ResourcePickerType) {
   )
 }
 
-function titleCase(action: 'add' | 'select', type: ResourcePickerType) {
+function titleCase(action: 'add' | 'select', type: ResourceType) {
   const noun = pickerLabels(type).plural
   return `${action === 'select' ? 'Select' : 'Add'} ${noun}`
 }
@@ -145,7 +145,7 @@ function ResourcePickerProvider({
   load,
 }: {
   children: React.ReactNode
-  load: ResourcePickerLoad
+  load: ResourceLoad
 }) {
   const [request, setRequest] = React.useState<ResourcePickerRequest | null>(null)
   const [open, setOpen] = React.useState(false)
@@ -188,7 +188,7 @@ function ResourcePickerProvider({
   )
 
   return (
-    <ResourcePickerLoadContext.Provider value={load}>
+    <ResourceLoadContext.Provider value={load}>
       <ResourcePickerContext.Provider value={pick}>
         {children}
         <ResourcePickerDialog
@@ -198,7 +198,7 @@ function ResourcePickerProvider({
           onConfirm={(value) => finish(value)}
         />
       </ResourcePickerContext.Provider>
-    </ResourcePickerLoadContext.Provider>
+    </ResourceLoadContext.Provider>
   )
 }
 
@@ -213,7 +213,7 @@ function ResourcePickerDialog({
   onCancel: () => void
   onConfirm: (value: ResourcePickerResult[]) => void
 }) {
-  const load = React.useContext(ResourcePickerLoadContext)
+  const load = React.useContext(ResourceLoadContext)
   const type = request?.type ?? 'product'
   const action = request?.action ?? 'add'
   const labels = pickerLabels(type)
@@ -226,14 +226,14 @@ function ResourcePickerDialog({
   const [search, setSearch] = React.useState('')
   const [filter, setFilter] = React.useState('all')
   const [extras, setExtras] = React.useState<Record<string, string>>({})
-  const [items, setItems] = React.useState<ResourcePickerItem[]>([])
+  const [items, setItems] = React.useState<ResourceItem[]>([])
   const [hasMore, setHasMore] = React.useState(false)
   const [loading, setLoading] = React.useState(false)
   const paginationRef = React.useRef<{ page: number; cursor?: string }>({ page: 0 })
   const [error, setError] = React.useState<string | null>(null)
   const [expanded, setExpanded] = React.useState<Set<string>>(new Set())
   const [selected, setSelected] = React.useState<Map<string, Set<string>>>(new Map())
-  const [cache, setCache] = React.useState<Map<string, ResourcePickerItem>>(new Map())
+  const [cache, setCache] = React.useState<Map<string, ResourceItem>>(new Map())
   const [filtersOpen, setFiltersOpen] = React.useState(false)
 
   const filterFields = React.useMemo(
@@ -333,7 +333,7 @@ function ResourcePickerDialog({
     return selectedCount() >= limit
   }
 
-  function parentState(item: ResourcePickerItem) {
+  function parentState(item: ResourceItem) {
     const kids = showVariants ? (item.children ?? []) : []
     const picked = selected.get(item.id)
     if (!picked) return { checked: false, indeterminate: false }
@@ -345,7 +345,7 @@ function ResourcePickerDialog({
     }
   }
 
-  function toggleParent(item: ResourcePickerItem) {
+  function toggleParent(item: ResourceItem) {
     setSelected((current) => {
       const next = new Map(current)
       if (next.has(item.id)) {
@@ -363,7 +363,7 @@ function ResourcePickerDialog({
     }
   }
 
-  function toggleChild(item: ResourcePickerItem, childId: string, exclusive: boolean) {
+  function toggleChild(item: ResourceItem, childId: string, exclusive: boolean) {
     setSelected((current) => {
       const next = new Map(current)
       if (!next.has(item.id)) {
@@ -634,15 +634,15 @@ function useResourcePicker() {
 
 export { RESOURCE_PICKER_TYPES, ResourcePickerProvider, useResourcePicker }
 export type {
-  ResourcePickerRecord,
+  ResourceRecord,
   ResourcePickerChild,
   ResourcePickerFn,
-  ResourcePickerItem,
-  ResourcePickerLoad,
-  ResourcePickerLoadInput,
+  ResourceItem,
+  ResourceLoad,
+  ResourceLoadInput,
   ResourcePickerOptions,
-  ResourcePickerPage,
+  ResourcePage,
   ResourcePickerResult,
   ResourcePickerSelectionId,
-  ResourcePickerType,
+  ResourceType,
 }

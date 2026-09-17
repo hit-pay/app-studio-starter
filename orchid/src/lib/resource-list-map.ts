@@ -1,4 +1,4 @@
-import type { ResourcePickerItem, ResourcePickerType } from '@/components/form/resource-picker'
+import type { ResourceItem, ResourceType } from '@/components/form/resource-picker'
 import type { SchemaTableRow } from '@/components/displaying-data/data-table-model'
 
 function readRecordField(
@@ -24,8 +24,8 @@ function formatMoney(record: Record<string, unknown> | undefined) {
 }
 
 export function resourcePickerItemToRow(
-  type: ResourcePickerType,
-  item: ResourcePickerItem,
+  type: ResourceType,
+  item: ResourceItem,
 ): SchemaTableRow {
   const record = item.resource as Record<string, unknown> | undefined
 
@@ -81,8 +81,8 @@ export function resourcePickerItemToRow(
 }
 
 export function resourcePickerItemsToRows(
-  type: ResourcePickerType,
-  items: ResourcePickerItem[],
+  type: ResourceType,
+  items: ResourceItem[],
 ): SchemaTableRow[] {
   return items.map((item) => resourcePickerItemToRow(type, item))
 }

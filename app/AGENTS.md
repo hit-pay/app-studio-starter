@@ -80,9 +80,9 @@ Do not ship pre-installed components in this starter. Find components via
 Orchid MCP, then `npx shadcn@latest add @orchid/<name> … -y` (creates
 `src/components/` and `src/ui/`). Compose pages from those installs. Do not
 build custom visual components, ad-hoc HTML layouts, or third-party UI kits.
-Keep mapping/load in `src/lib/resource/` — app helpers for Orchid
-ResourcePicker and ResourceList, not Orchid files. Import
-`loadResourcePage` from `#/lib/resource`.
+Keep mapping/load in `src/lib/resource/` — shared `ResourceLoad` for Orchid
+ResourcePicker and ResourceList (`loadResourcePage`, `ResourcePage`,
+`ResourceItem`). Import from `#/lib/resource`.
 
 ## Auth / current user
 

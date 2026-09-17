@@ -334,7 +334,7 @@
       "name": "resource-list",
       "type": "registry:ui",
       "title": "Resource List",
-      "description": "Server-driven HitPay catalog table (SchemaTable). ResourceListProvider + same ResourcePickerLoad as the picker.",
+      "description": "Server-driven HitPay catalog table (SchemaTable). ResourceListProvider + same ResourceLoad as the picker.",
       "dependencies": ["@mingcute/react"],
       "registryDependencies": [
         "@orchid/data-table",

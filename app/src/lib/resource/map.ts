@@ -1,6 +1,6 @@
-export type ResourcePickerType = 'product' | 'order' | 'charge' | 'invoice'
-export type ResourcePickerRecord = Record<string, unknown>
-export type ResourcePickerItem = {
+export type ResourceType = 'product' | 'order' | 'charge' | 'invoice'
+export type ResourceRecord = Record<string, unknown>
+export type ResourceItem = {
   id: string
   title: string
   subtitle?: string
@@ -8,19 +8,19 @@ export type ResourcePickerItem = {
   badge?: string
   meta?: string
   trailing?: string
-  resource?: ResourcePickerRecord
-  children?: ResourcePickerItem[]
+  resource?: ResourceRecord
+  children?: ResourceItem[]
 }
-export type ResourcePickerLoadInput = {
-  type: ResourcePickerType
+export type ResourceLoadInput = {
+  type: ResourceType
   page?: number
   cursor?: string
   query?: string
   filter?: string
   extras?: Record<string, string>
 }
-export type ResourcePickerPage = {
-  items: ResourcePickerItem[]
+export type ResourcePage = {
+  items: ResourceItem[]
   hasMore: boolean
   cursor?: string
   total?: number
@@ -36,8 +36,8 @@ function extractListTotal(payload: unknown): number | undefined {
   return undefined
 }
 
-function asRecord(value: unknown): ResourcePickerRecord {
-  return value as ResourcePickerRecord
+function asRecord(value: unknown): ResourceRecord {
+  return value as ResourceRecord
 }
 
 type Paginated<T> = {
@@ -102,7 +102,7 @@ function productImage(product: Record<string, unknown>): string | null {
   return typeof product.image === 'string' ? product.image : null
 }
 
-function pageResult(items: ResourcePickerItem[], payload: unknown, page: number): ResourcePickerPage {
+function pageResult(items: ResourceItem[], payload: unknown, page: number): ResourcePage {
   const cursor = nextCursor(payload)
   return {
     items,
@@ -112,7 +112,7 @@ function pageResult(items: ResourcePickerItem[], payload: unknown, page: number)
   }
 }
 
-function rowsOf(_type: ResourcePickerType, payload: unknown): Record<string, unknown>[] {
+function rowsOf(_type: ResourceType, payload: unknown): Record<string, unknown>[] {
   return asList<Record<string, unknown>>(payload)
 }
 
@@ -121,7 +121,7 @@ function readSku(row: Record<string, unknown>) {
   return typeof raw === 'string' && raw.trim() ? raw.trim() : undefined
 }
 
-function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
+function mapProduct(product: Record<string, unknown>): ResourceItem {
   const variations = Array.isArray(product.variations) ? product.variations : []
   const productSku = readSku(product)
   return {
@@ -151,10 +151,10 @@ function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
 }
 
 /** Post-fetch mapping; `loadResourcePage` already applied client filters. */
-function mapResourcePickerPayload(
-  data: ResourcePickerLoadInput,
+function mapResourcePayload(
+  data: ResourceLoadInput,
   payload: unknown,
-): ResourcePickerPage {
+): ResourcePage {
   const page = data.page || 1
   const type = data.type
   const rows = rowsOf(type, payload)
@@ -212,4 +212,4 @@ function mapResourcePickerPayload(
   throw new Error(`Unsupported resource picker type: ${data.type}`)
 }
 
-export { asList, hasMore, mapResourcePickerPayload, nextCursor }
+export { asList, hasMore, mapResourcePayload, nextCursor }

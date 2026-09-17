@@ -9,7 +9,7 @@ const resourcePickerDocs = {
   ...resourcePickerRegistry,
   category: "components",
   props: {
-    "ResourcePickerProvider.load": "ResourcePickerLoad (required)",
+    "ResourcePickerProvider.load": "ResourceLoad (required)",
     "pick().type": "product | order | charge | invoice",
     "pick().action": ["add", "select"],
     "pick().multiple": "boolean | number (max selections)",
@@ -27,7 +27,7 @@ const resourcePickerDocs = {
     "load(input).extras.payment_method": "charges payment_methods[]",
     "load(input).extras.inventory": "product inventory in_stock | out_of_stock",
     "result[].id": "string",
-    "result[].resource": "ResourcePickerRecord (optional snapshot)",
+    "result[].resource": "ResourceRecord (optional snapshot)",
     "result[].children": "product variation rows",
   },
   examples: [

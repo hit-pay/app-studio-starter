@@ -1,9 +1,9 @@
 export { loadResourcePage } from './load'
-export { asList, hasMore, mapResourcePickerPayload, nextCursor } from './map'
+export { asList, hasMore, mapResourcePayload, nextCursor } from './map'
 export type {
-  ResourcePickerItem,
-  ResourcePickerLoadInput,
-  ResourcePickerPage,
-  ResourcePickerRecord,
-  ResourcePickerType,
+  ResourceItem,
+  ResourceLoadInput,
+  ResourcePage,
+  ResourceRecord,
+  ResourceType,
 } from './map'

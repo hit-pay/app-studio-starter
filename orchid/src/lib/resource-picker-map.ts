@@ -1,9 +1,9 @@
 import type {
-  ResourcePickerItem,
-  ResourcePickerLoadInput,
-  ResourcePickerPage,
-  ResourcePickerRecord,
-  ResourcePickerType,
+  ResourceItem,
+  ResourceLoadInput,
+  ResourcePage,
+  ResourceRecord,
+  ResourceType,
 } from '@/components/form/resource-picker'
 function extractListTotal(payload: unknown): number | undefined {
   if (!payload || typeof payload !== 'object') return undefined
@@ -16,8 +16,8 @@ function extractListTotal(payload: unknown): number | undefined {
   return undefined
 }
 
-function asRecord(value: unknown): ResourcePickerRecord {
-  return value as ResourcePickerRecord
+function asRecord(value: unknown): ResourceRecord {
+  return value as ResourceRecord
 }
 
 type Paginated<T> = {
@@ -82,7 +82,7 @@ function productImage(product: Record<string, unknown>): string | null {
   return typeof product.image === 'string' ? product.image : null
 }
 
-function pageResult(items: ResourcePickerItem[], payload: unknown, page: number): ResourcePickerPage {
+function pageResult(items: ResourceItem[], payload: unknown, page: number): ResourcePage {
   const cursor = nextCursor(payload)
   return {
     items,
@@ -92,7 +92,7 @@ function pageResult(items: ResourcePickerItem[], payload: unknown, page: number)
   }
 }
 
-function rowsOf(_type: ResourcePickerType, payload: unknown): Record<string, unknown>[] {
+function rowsOf(_type: ResourceType, payload: unknown): Record<string, unknown>[] {
   return asList<Record<string, unknown>>(payload)
 }
 
@@ -101,7 +101,7 @@ function readSku(row: Record<string, unknown>) {
   return typeof raw === 'string' && raw.trim() ? raw.trim() : undefined
 }
 
-function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
+function mapProduct(product: Record<string, unknown>): ResourceItem {
   const variations = Array.isArray(product.variations) ? product.variations : []
   const productSku = readSku(product)
   return {
@@ -131,10 +131,10 @@ function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
 }
 
 /** Post-fetch mapping; `loadResourcePage` already applied client filters. */
-function mapResourcePickerPayload(
-  data: ResourcePickerLoadInput,
+function mapResourcePayload(
+  data: ResourceLoadInput,
   payload: unknown,
-): ResourcePickerPage {
+): ResourcePage {
   const page = data.page || 1
   const type = data.type
   const rows = rowsOf(type, payload)
@@ -192,4 +192,4 @@ function mapResourcePickerPayload(
   throw new Error(`Unsupported resource picker type: ${data.type}`)
 }
 
-export { asList, hasMore, mapResourcePickerPayload, nextCursor }
+export { asList, hasMore, mapResourcePayload, nextCursor }
