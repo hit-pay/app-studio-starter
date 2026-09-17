@@ -19,29 +19,15 @@ export type StaffAppMember = {
   locations: StaffLocation[]
 }
 
-const loadUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
+export const fetchUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
 
-const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
+export const fetchAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
   appJson<{ roles: Role[] }>('/roles', await getAppToken()))
 
-const loadStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () =>
+export const fetchStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () =>
   appJson<{ members: StaffAppMember[] }>('/staff-app-members', await getAppToken()))
 
-export const fetchUserInfo = () => loadUserInfo()
-export const fetchAppRoles = () => loadAppRoles()
-export const fetchStaffAppMembers = () => loadStaffAppMembers()
-
 let userInfoRequest: ReturnType<typeof fetchUserInfo> | null = null
-
-function fetchUserInfoOnce() {
-  if (!userInfoRequest) {
-    userInfoRequest = fetchUserInfo().catch((error) => {
-      userInfoRequest = null
-      throw error
-    })
-  }
-  return userInfoRequest
-}
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useCurrentUser(): {
@@ -61,11 +47,16 @@ export function useCurrentUser(): {
     setLoading(true)
     setError(null)
 
-    fetchUserInfoOnce()
+    if (!userInfoRequest) {
+      userInfoRequest = fetchUserInfo().catch((caught) => {
+        userInfoRequest = null
+        throw caught
+      })
+    }
+
+    userInfoRequest
       .then((next) => {
-        if (!cancelled) {
-          setUser(next)
-        }
+        if (!cancelled) setUser(next)
       })
       .catch((caught) => {
         if (!cancelled) {
@@ -74,9 +65,7 @@ export function useCurrentUser(): {
         }
       })
       .finally(() => {
-        if (!cancelled) {
-          setLoading(false)
-        }
+        if (!cancelled) setLoading(false)
       })
 
     return () => {

@@ -19,7 +19,7 @@ filters, or confirmations when they belong in the requested app.
 - `src/lib/` — helpers the UI may import (`createServerFn` + browser hooks)
   - `files.ts` — file RPC (`uploadFile`, `getFile`, `listFiles`, `deleteFile`)
   - `current-user.ts` — `useCurrentUser` (wraps `getSession`); roles/staff via `appJson`
-  - `resource/` — `loadResourcePage` for ResourcePicker and ResourceList
+  - `resource.ts` — `loadResourcePage` + `mapResourcePayload` for ResourcePicker and ResourceList
   - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
   - `utils.ts` — `cn`, `storageKey` (unique localStorage keys; app is on a subdomain)
 - `src/server/lib/` — Node only; do not import from components
@@ -80,8 +80,8 @@ Do not ship pre-installed components in this starter. Find components via
 Orchid MCP, then `npx shadcn@latest add @orchid/<name> … -y` (creates
 `src/components/` and `src/ui/`). Compose pages from those installs. Do not
 build custom visual components, ad-hoc HTML layouts, or third-party UI kits.
-Keep mapping/load in `src/lib/resource/` — shared `ResourceLoad` for Orchid
-ResourcePicker and ResourceList (`loadResourcePage`, `ResourcePage`,
+Keep mapping/load in `src/lib/resource.ts` for Orchid ResourcePicker and
+ResourceList (`loadResourcePage`, `mapResourcePayload`, `ResourcePage`,
 `ResourceItem`). Import from `#/lib/resource`.
 
 ## Auth / current user

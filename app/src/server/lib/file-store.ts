@@ -25,34 +25,6 @@ export type StoredFile = FileMeta & {
 const META_COLUMNS =
   'id, entity_type, entity_id, name, mime_type, size, storage_provider, storage_key, created_at, updated_at'
 
-function asBytes(value: unknown): Uint8Array {
-  if (value instanceof Uint8Array) {
-    return value
-  }
-  if (value instanceof ArrayBuffer) {
-    return new Uint8Array(value)
-  }
-  if (ArrayBuffer.isView(value)) {
-    return new Uint8Array(value.buffer, value.byteOffset, value.byteLength)
-  }
-  throw new Error('File data is missing.')
-}
-
-function mapMeta(row: Record<string, unknown>): FileMeta {
-  return {
-    id: String(row.id),
-    entityType: row.entity_type == null ? null : String(row.entity_type),
-    entityId: row.entity_id == null ? null : String(row.entity_id),
-    name: String(row.name),
-    mimeType: String(row.mime_type),
-    size: Number(row.size),
-    storageProvider: String(row.storage_provider),
-    storageKey: String(row.storage_key),
-    createdAt: String(row.created_at),
-    updatedAt: String(row.updated_at),
-  }
-}
-
 export async function insertFile(input: {
   entityType?: string | null
   entityId?: string | null
@@ -62,46 +34,31 @@ export async function insertFile(input: {
 }): Promise<FileMeta> {
   await ensureMigrations()
 
-  if (!input.name.trim()) {
-    throw new Error('File name is required.')
-  }
-  if (input.data.byteLength === 0) {
-    throw new Error('File is empty.')
-  }
-  if (input.data.byteLength > FILE_MAX_BYTES) {
-    throw new Error('File is larger than 10 MB.')
-  }
+  if (!input.name.trim()) throw new Error('File name is required.')
+  if (input.data.byteLength === 0) throw new Error('File is empty.')
+  if (input.data.byteLength > FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
 
   const id = randomUUID()
   const now = new Date().toISOString()
   const entityType = input.entityType?.trim() || null
   const entityId = input.entityId?.trim() || null
+  const mimeType = input.mimeType.trim() || 'application/octet-stream'
+  const name = input.name.trim()
 
   await db.execute({
     sql: `INSERT INTO files (
       id, entity_type, entity_id, name, mime_type, size,
       storage_provider, storage_key, data, created_at, updated_at
     ) VALUES (?, ?, ?, ?, ?, ?, 'turso', ?, ?, ?, ?)`,
-    args: [
-      id,
-      entityType,
-      entityId,
-      input.name.trim(),
-      input.mimeType.trim() || 'application/octet-stream',
-      input.data.byteLength,
-      `turso:${id}`,
-      input.data,
-      now,
-      now,
-    ],
+    args: [id, entityType, entityId, name, mimeType, input.data.byteLength, `turso:${id}`, input.data, now, now],
   })
 
   return {
     id,
     entityType,
     entityId,
-    name: input.name.trim(),
-    mimeType: input.mimeType.trim() || 'application/octet-stream',
+    name,
+    mimeType,
     size: input.data.byteLength,
     storageProvider: 'turso',
     storageKey: `turso:${id}`,
@@ -118,12 +75,28 @@ export async function getFile(id: string): Promise<StoredFile | null> {
     args: [id],
   })
   const row = result.rows[0] as Record<string, unknown> | undefined
+  if (!row) return null
 
-  if (!row) {
-    return null
+  const value = row.data
+  let data: Uint8Array
+  if (value instanceof Uint8Array) data = value
+  else if (value instanceof ArrayBuffer) data = new Uint8Array(value)
+  else if (ArrayBuffer.isView(value)) data = new Uint8Array(value.buffer, value.byteOffset, value.byteLength)
+  else throw new Error('File data is missing.')
+
+  return {
+    id: String(row.id),
+    entityType: row.entity_type == null ? null : String(row.entity_type),
+    entityId: row.entity_id == null ? null : String(row.entity_id),
+    name: String(row.name),
+    mimeType: String(row.mime_type),
+    size: Number(row.size),
+    storageProvider: String(row.storage_provider),
+    storageKey: String(row.storage_key),
+    createdAt: String(row.created_at),
+    updatedAt: String(row.updated_at),
+    data,
   }
-
-  return { ...mapMeta(row), data: asBytes(row.data) }
 }
 
 export async function listFiles(input: {
@@ -139,14 +112,24 @@ export async function listFiles(input: {
     args: [input.entityType, input.entityId],
   })
 
-  return result.rows.map((row) => mapMeta(row as Record<string, unknown>))
+  return result.rows.map((row) => {
+    const record = row as Record<string, unknown>
+    return {
+      id: String(record.id),
+      entityType: record.entity_type == null ? null : String(record.entity_type),
+      entityId: record.entity_id == null ? null : String(record.entity_id),
+      name: String(record.name),
+      mimeType: String(record.mime_type),
+      size: Number(record.size),
+      storageProvider: String(record.storage_provider),
+      storageKey: String(record.storage_key),
+      createdAt: String(record.created_at),
+      updatedAt: String(record.updated_at),
+    }
+  })
 }
 
 export async function deleteFile(id: string): Promise<void> {
   await ensureMigrations()
-
-  await db.execute({
-    sql: 'DELETE FROM files WHERE id = ?',
-    args: [id],
-  })
+  await db.execute({ sql: 'DELETE FROM files WHERE id = ?', args: [id] })
 }

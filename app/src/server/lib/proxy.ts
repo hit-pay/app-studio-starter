@@ -16,17 +16,6 @@ const proxyPaths: Record<string, string> = {
   '/v1/shipping': '/integrations/hitpay/shipping',
 }
 
-async function fetchProxy(proxyPath: string, search: string, init: RequestInit): Promise<Response> {
-  const headers = new Headers(init.headers)
-  headers.set('accept', 'application/json')
-  headers.set('authorization', `Bearer ${await getAppToken()}`)
-  return fetch(appApiUrl(`${proxyPath}${search}`), {
-    ...init,
-    headers,
-    signal: init.signal ?? AbortSignal.timeout(15_000),
-  })
-}
-
 /** Server-only App Studio proxy. Provider secrets stay in the proxy. */
 export async function proxyRequest(path: string, init: RequestInit = {}): Promise<Response> {
   const request = getRequest()
@@ -37,15 +26,24 @@ export async function proxyRequest(path: string, init: RequestInit = {}): Promis
     throw new Error(`Unsupported proxy path: ${url.pathname}`)
   }
 
-  const response = await fetchProxy(proxyPath, url.search, init)
-  if (response.status !== 401) {
-    return response
-  }
+  const headers = new Headers(init.headers)
+  headers.set('accept', 'application/json')
+  headers.set('authorization', `Bearer ${await getAppToken()}`)
+  const response = await fetch(appApiUrl(`${proxyPath}${url.search}`), {
+    ...init,
+    headers,
+    signal: init.signal ?? AbortSignal.timeout(15_000),
+  })
+  if (response.status !== 401) return response
 
-  const retry = await fetchProxy(proxyPath, url.search, init)
+  headers.set('authorization', `Bearer ${await getAppToken()}`)
+  const retry = await fetch(appApiUrl(`${proxyPath}${url.search}`), {
+    ...init,
+    headers,
+    signal: init.signal ?? AbortSignal.timeout(15_000),
+  })
   if (retry.status === 401) {
     throw new Error('Unable to authorize the App Studio proxy request.')
   }
-
   return retry
 }

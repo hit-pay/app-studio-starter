@@ -3,16 +3,6 @@ import { studioAppId } from '#/lib/utils'
 
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
 
-function cookieValue(name: string): string | undefined {
-  const cookie = getRequest().headers.get('cookie') ?? ''
-
-  return cookie
-    .split(';')
-    .map((item) => item.trim())
-    .find((item) => item.startsWith(`${name}=`))
-    ?.slice(`${name}=`.length)
-}
-
 export function proxyUrl(path: string): URL {
   const origin = process.env.APP_STUDIO_PROXY_URL?.trim()
 
@@ -34,7 +24,12 @@ export function appApiUrl(path: string): URL {
  * `/token` endpoint from the caller's `app_studio_user_token` session cookie.
  */
 export async function getAppToken(): Promise<string> {
-  const userToken = cookieValue(USER_TOKEN_COOKIE)
+  const cookie = getRequest().headers.get('cookie') ?? ''
+  const userToken = cookie
+    .split(';')
+    .map((item) => item.trim())
+    .find((item) => item.startsWith(`${USER_TOKEN_COOKIE}=`))
+    ?.slice(`${USER_TOKEN_COOKIE}=`.length)
 
   if (!userToken) {
     throw new Error('App Studio user token cookie is missing.')
@@ -62,12 +57,8 @@ export async function appJson<T>(path: string, token?: string): Promise<T> {
   const headers = new Headers({ accept: 'application/json' })
   const cookie = getRequest().headers.get('cookie')
 
-  if (cookie) {
-    headers.set('cookie', cookie)
-  }
-  if (token) {
-    headers.set('authorization', `Bearer ${token}`)
-  }
+  if (cookie) headers.set('cookie', cookie)
+  if (token) headers.set('authorization', `Bearer ${token}`)
 
   const url = appApiUrl(path)
   const response = await fetch(url, { headers })
