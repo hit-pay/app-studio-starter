@@ -11,7 +11,6 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CurrentUserRouteImport } from './routes/current-user'
-import { Route as PrebuildRouteImport } from './routes/prebuild'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,40 +22,31 @@ const CurrentUserRoute = CurrentUserRouteImport.update({
   path: '/current-user',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PrebuildRoute = PrebuildRouteImport.update({
-  id: '/prebuild',
-  path: '/prebuild',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/current-user': typeof CurrentUserRoute
-  '/prebuild': typeof PrebuildRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/current-user': typeof CurrentUserRoute
-  '/prebuild': typeof PrebuildRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/current-user': typeof CurrentUserRoute
-  '/prebuild': typeof PrebuildRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/current-user' | '/prebuild'
+  fullPaths: '/' | '/current-user'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/current-user' | '/prebuild'
-  id: '__root__' | '/' | '/current-user' | '/prebuild'
+  to: '/' | '/current-user'
+  id: '__root__' | '/' | '/current-user'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   CurrentUserRoute: typeof CurrentUserRoute
-  PrebuildRoute: typeof PrebuildRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -75,31 +65,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CurrentUserRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/prebuild': {
-      id: '/prebuild'
-      path: '/prebuild'
-      fullPath: '/prebuild'
-      preLoaderRoute: typeof PrebuildRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   CurrentUserRoute: CurrentUserRoute,
-  PrebuildRoute: PrebuildRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}
