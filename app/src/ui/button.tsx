@@ -17,11 +17,11 @@ const DESTRUCTIVE_SOLID =
   'border-oc-destructive-button-border bg-linear-to-b from-oc-destructive-button-default-start to-oc-destructive-button-default-stop text-oc-destructive-button-text shadow-[0_1.5px_0_0_var(--oc-destructive-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-oc-destructive-button-hover-start hover:to-oc-destructive-button-hover-stop active:from-oc-destructive-button-pressed-start active:to-oc-destructive-button-pressed-stop active:shadow-none disabled:from-oc-destructive-button-disabled-start disabled:to-oc-destructive-button-disabled-stop disabled:shadow-none'
 
 const SIZE_SM =
-  'h-7 min-w-7 gap-1.5 rounded-lg px-2 text-xs leading-normal has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*="size-"])]:size-4'
+  'h-7 min-w-7 gap-1.5 rounded-lg px-2 text-xs leading-normal has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*=size-])]:size-4'
 const SIZE_DEFAULT =
-  'h-9 min-w-9 gap-2 rounded-lg px-3 py-2 text-sm leading-normal has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 [&_svg:not([class*="size-"])]:size-4.5'
+  'h-9 min-w-9 gap-2 rounded-lg px-3 py-2 text-sm leading-normal has-data-[icon=inline-end]:pr-2.5 has-data-[icon=inline-start]:pl-2.5 [&_svg:not([class*=size-])]:size-4.5'
 const SIZE_LG =
-  'h-11 min-w-11 gap-2 rounded-lg px-4 py-2.5 text-base leading-normal has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 [&_svg:not([class*="size-"])]:size-5'
+  'h-11 min-w-11 gap-2 rounded-lg px-4 py-2.5 text-base leading-normal has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3 [&_svg:not([class*=size-])]:size-5'
 
 const buttonVariants = cva(
   'group/button inline-flex shrink-0 cursor-pointer items-center justify-center overflow-visible border border-solid bg-clip-padding font-medium leading-normal whitespace-nowrap outline-none transition-all select-none focus-visible:border-oc-primary focus-visible:ring-3 focus-visible:ring-oc-info-border/50 active:not-aria-[haspopup]:translate-y-px disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-oc-destructive aria-invalid:ring-3 aria-invalid:ring-oc-destructive-border/50 [&_svg]:pointer-events-none [&_svg]:shrink-0',
@@ -37,13 +37,13 @@ const buttonVariants = cva(
       },
       size: {
         default: SIZE_DEFAULT,
-        xs: 'h-6 min-w-6 gap-1 rounded-lg px-2 text-xs leading-4 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*="size-"])]:size-3',
+        xs: 'h-6 min-w-6 gap-1 rounded-lg px-2 text-xs leading-4 has-data-[icon=inline-end]:pr-1.5 has-data-[icon=inline-start]:pl-1.5 [&_svg:not([class*=size-])]:size-3',
         sm: SIZE_SM,
         lg: SIZE_LG,
-        icon: 'size-9 min-w-9 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-4.5',
-        'icon-xs': 'size-6 min-w-6 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-3',
-        'icon-sm': 'size-7 min-w-7 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-4',
-        'icon-lg': 'size-11 min-w-11 rounded-lg p-0 [&_svg:not([class*="size-"])]:size-5',
+        icon: 'size-9 min-w-9 rounded-lg p-0 [&_svg:not([class*=size-])]:size-4.5',
+        'icon-xs': 'size-6 min-w-6 rounded-lg p-0 [&_svg:not([class*=size-])]:size-3',
+        'icon-sm': 'size-7 min-w-7 rounded-lg p-0 [&_svg:not([class*=size-])]:size-4',
+        'icon-lg': 'size-11 min-w-11 rounded-lg p-0 [&_svg:not([class*=size-])]:size-5',
       },
       iconOnly: {
         true: 'p-0',

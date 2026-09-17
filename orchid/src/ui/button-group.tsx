@@ -90,7 +90,7 @@ function ButtonGroupText({
     props: mergeProps<'div'>(
       {
         className: cn(
-          'flex items-center gap-2 rounded-lg border border-oc-border bg-oc-neutral px-2.5 text-sm font-medium text-oc-foreground [&_svg]:pointer-events-none [&_svg:not([class*="size-"])]:size-4',
+          'flex items-center gap-2 rounded-lg border border-oc-border bg-oc-neutral px-2.5 text-sm font-medium text-oc-foreground [&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-4',
           className,
         ),
       },

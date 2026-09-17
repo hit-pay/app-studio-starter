@@ -106,7 +106,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<'span'
       role="presentation"
       aria-hidden
       className={cn(
-        "flex size-9 items-center justify-center text-oc-muted-foreground [&_svg:not([class*='size-'])]:size-4",
+        "flex size-9 items-center justify-center text-oc-muted-foreground [&_svg:not([class*=size-])]:size-4",
         className,
       )}
       {...props}

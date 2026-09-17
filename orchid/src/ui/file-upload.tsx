@@ -51,7 +51,7 @@ function FileUpload({
 }
 
 const fileUploadMediaVariants = cva(
-  "relative flex aspect-square w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-oc-muted text-oc-foreground group-data-[orientation=vertical]/file-upload:w-full group-data-[size=sm]/file-upload:w-8 group-data-[size=xs]/file-upload:w-7 group-data-[size=xs]/file-upload:rounded-md group-data-[state=error]/file-upload:bg-oc-destructive/10 group-data-[state=error]/file-upload:text-oc-destructive group-data-[orientation=vertical]/file-upload:*:data-[slot=spinner]:size-6! [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 group-data-[orientation=vertical]/file-upload:[&_svg:not([class*='size-'])]:size-6 group-data-[size=xs]/file-upload:[&_svg:not([class*='size-'])]:size-3.5",
+  "relative flex aspect-square w-10 shrink-0 items-center justify-center overflow-hidden rounded-lg bg-oc-muted text-oc-foreground group-data-[orientation=vertical]/file-upload:w-full group-data-[size=sm]/file-upload:w-8 group-data-[size=xs]/file-upload:w-7 group-data-[size=xs]/file-upload:rounded-md group-data-[state=error]/file-upload:bg-oc-destructive/10 group-data-[state=error]/file-upload:text-oc-destructive group-data-[orientation=vertical]/file-upload:*:data-[slot=spinner]:size-6! [&_svg]:pointer-events-none [&_svg:not([class*=size-])]:size-4 group-data-[orientation=vertical]/file-upload:[&_svg:not([class*=size-])]:size-6 group-data-[size=xs]/file-upload:[&_svg:not([class*=size-])]:size-3.5",
   {
     variants: {
       variant: {

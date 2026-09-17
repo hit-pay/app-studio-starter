@@ -134,7 +134,7 @@ function ComboboxTrigger({
                 'group/combobox-trigger justify-between whitespace-nowrap',
                 size === 'sm' ? 'h-7' : 'h-9',
               )
-          : "cursor-pointer [&_svg:not([class*='size-'])]:size-4",
+          : "cursor-pointer [&_svg:not([class*=size-])]:size-4",
         className,
       )}
       {...props}
