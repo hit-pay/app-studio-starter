@@ -53,14 +53,64 @@ const handler = createMcpHandler(
       "list_orchid_components",
       {
         description:
-          "Returns Orchid UI and component docs. Filter with category: ui or components. app-layout requires TanStack Router (layout route + navigationItems[].to + Outlet; variant tabs | sidebar). resource-picker and resource-list share loadResourcePickerPage; types product|order|charge|invoice; queries per app/docs/hitpay/*.md.",
+          "Returns Orchid component docs as JSON { components: [...] }. Each entry: name, title, description, category, usage, props, examples[{description,code}], related_components, files (registry install paths). Filter category: ui | components. Filter name: e.g. resource-picker | resource-list. HitPay: both share ResourcePickerLoad + loadResourcePickerPage; types product|order|charge|invoice; API shapes in app/docs/hitpay/*.md. Prefer examples titled App Studio load for production wiring.",
         inputSchema: {
           category: z.string().optional(),
+          name: z.string().optional(),
         },
       },
-      async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs, dataListDocs, dataTableDocs, detailCardDocs, emptyDocs, metricCardDocs, choiceCardDocs, datePickerDocs, formBuilderDocs, quantityInputDocs, textEditorDocs, selectDocs, formLayoutDocs, pageLayoutDocs, commandDocs, confirmationModalDocs, resourcePickerDocs, resourceListDocs].filter(
-          (component) => !category || component.category === category,
+      async ({ category, name }) => {
+        const catalog = [
+          buttonDocs,
+          buttonGroupDocs,
+          avatarDocs,
+          badgeDocs,
+          bannerDocs,
+          skeletonDocs,
+          spinnerDocs,
+          toastDocs,
+          checkboxDocs,
+          fieldDocs,
+          fileUploadDocs,
+          formSectionDocs,
+          inputDocs,
+          inputGroupDocs,
+          labelDocs,
+          radioGroupDocs,
+          sliderDocs,
+          switchDocs,
+          textareaDocs,
+          tabsDocs,
+          paginationDocs,
+          dialogDocs,
+          drawerDocs,
+          dropdownMenuDocs,
+          tooltipDocs,
+          appLayoutDocs,
+          copyButtonDocs,
+          customerCardDocs,
+          dataListDocs,
+          dataTableDocs,
+          detailCardDocs,
+          emptyDocs,
+          metricCardDocs,
+          choiceCardDocs,
+          datePickerDocs,
+          formBuilderDocs,
+          quantityInputDocs,
+          textEditorDocs,
+          selectDocs,
+          formLayoutDocs,
+          pageLayoutDocs,
+          commandDocs,
+          confirmationModalDocs,
+          resourcePickerDocs,
+          resourceListDocs,
+        ] as Array<{ category: string; name?: string }>;
+        const components = catalog.filter(
+          (component) =>
+            (!category || component.category === category) &&
+            (!name || component.name === name),
         );
 
         return {

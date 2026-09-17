@@ -26,31 +26,59 @@ The server uses Streamable HTTP. No authentication is currently required.
 
 #### `list_orchid_components`
 
-Returns Orchid components and their documentation metadata (including
-**resource-picker** and **resource-list** with shared `loadResourcePickerPage`).
-Use the optional `category` argument to filter results.
+Returns `{ "components": [ ... ] }` — one object per Orchid doc entry (from `docs/ui/*.ts` and `docs/components/*.ts`).
 
-Example input:
+Optional filters:
 
 ```json
-{
-  "category": "ui"
-}
+{ "category": "components" }
 ```
 
-The current sample response describes the `button` component:
+```json
+{ "name": "resource-list" }
+```
+
+```json
+{ "category": "components", "name": "resource-picker" }
+```
+
+Each component object typically includes:
+
+- `name`, `title`, `description`, `category` (`ui` | `components`)
+- `usage` — long integration paragraph
+- `props` — flat map of prop/API paths to allowed values or type hints
+- `examples` — `{ description, code }[]` (use **App Studio load** snippets for HitPay apps, not `demoLoad` / `render()` from Orchid docs site)
+- `related_components` — other registry names
+- `files`, `registryDependencies` — shadcn-style install metadata from `registry.json`
+
+HitPay catalog pair:
+
+| name | role |
+|------|------|
+| `resource-picker` | Modal `useResourcePicker()` + `pick({ type })` |
+| `resource-list` | Page table `ResourceList` + same `ResourcePickerLoad` |
+
+Both use `loadResourcePickerPage` + `mapResourcePickerPayload`; types `product` \| `order` \| `charge` \| `invoice`. Query mapping is documented in `props` (`load(input).*`, `pick().*`) and in App Studio `app/docs/hitpay/*.md`.
+
+Example (truncated) for `resource-picker`:
 
 ```json
 {
   "components": [
     {
-      "name": "button",
-      "title": "Button",
-      "category": "ui",
-      "description": "A button for explicit actions such as save, submit, or delete.",
-      "when_to_use": ["Submit form", "Save data", "Trigger an action"],
-      "avoid_when": ["Navigating between pages", "Displaying passive status"],
-      "source": "src/ui/button.tsx"
+      "name": "resource-picker",
+      "title": "Resource Picker",
+      "category": "components",
+      "description": "Promise picker for HitPay list records...",
+      "usage": "Mount ResourcePickerProvider once... loadResourcePickerPage...",
+      "props": {
+        "ResourcePickerProvider.load": "ResourcePickerLoad (required)",
+        "pick().type": "product | order | charge | invoice"
+      },
+      "examples": [
+        { "description": "App Studio load (HitPay docs)", "code": "..." }
+      ],
+      "related_components": ["resource-list", "data-table", "dialog"]
     }
   ]
 }
@@ -58,8 +86,8 @@ The current sample response describes the `button` component:
 
 ### Recommended AI behavior
 
-1. Call `list_orchid_components` before creating Orchid UI.
-2. Use `when_to_use` to choose the appropriate component.
-3. Check `avoid_when` before composing a UI.
-4. Follow the listed variants, sizes, dependencies, and examples.
+1. Call `list_orchid_components` with `name` or `category` before implementing Orchid UI.
+2. Read `description` and `usage` to choose picker vs list vs data-table.
+3. For HitPay lists, wire `ResourcePickerProvider` / `ResourceListProvider` with `loadResourcePickerPage`; follow `props` and HitPay markdown docs.
+4. Copy from `examples` labeled App Studio / route snippets; ignore Orchid-only `demoLoad` and `render()` in live doc examples unless building Orchid docs.
 5. Prefer Orchid components over custom implementations when a matching component exists.
