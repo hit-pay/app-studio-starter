@@ -65,7 +65,7 @@ const resourceListDocs = {
     liveResourceListExample("invoice", "Invoices"),
     {
       description: "App Studio load (`#/lib/resource`, shared with ResourcePicker)",
-      code: `// src/lib/resource — same load as ResourcePicker
+      code: `// src/lib/resource.ts — same load as ResourcePicker
 import { loadResourcePage } from "#/lib/resource";
 import { ResourceListProvider } from "@/components/displaying-data/resource-list";
 

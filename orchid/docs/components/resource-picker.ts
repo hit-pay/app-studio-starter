@@ -59,7 +59,7 @@ render(
     },
     {
       description: "App Studio load (`#/lib/resource`, shared with ResourceList)",
-      code: `// src/lib/resource — HitPay products, orders, charges, invoices
+      code: `// src/lib/resource.ts — HitPay products, orders, charges, invoices
 import { loadResourcePage } from "#/lib/resource";
 import { ResourcePickerProvider } from "@/components/form/resource-picker";
 
