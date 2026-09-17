@@ -6,7 +6,7 @@
     "#/*": "./src/*"
   },
   "scripts": {
-    "mcp": "bun mcp/stdio.ts",
+    "mcp": "bun public/mcp/stdio.ts",
     "dev": "bun --bun vite dev",
     "generate-routes": "bun --bun tsr generate",
     "build": "bun --bun vite build",

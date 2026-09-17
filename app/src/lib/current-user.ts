@@ -6,26 +6,10 @@ import { getSession, type Session, type SessionRole } from '#/server/lib/session
 export type CurrentUser = Session
 export type Role = SessionRole
 
-export type StaffLocation = {
-  id: string
-  name: string | null
-}
-
-export type StaffAppMember = {
-  id: string
-  name: string | null
-  role_id: string | null
-  role: Role | null
-  locations: StaffLocation[]
-}
-
 export const fetchUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
 
 export const fetchAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
   appJson<{ roles: Role[] }>('/roles', await getAppToken()))
-
-export const fetchStaffAppMembers = createServerFn({ method: 'GET' }).handler(async () =>
-  appJson<{ members: StaffAppMember[] }>('/staff-app-members', await getAppToken()))
 
 let userInfoRequest: ReturnType<typeof fetchUserInfo> | null = null
 

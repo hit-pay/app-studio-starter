@@ -15,7 +15,7 @@ export type Session = {
 
 const sessionByRequest = new WeakMap<Request, Promise<Session>>()
 
-/** Trusted identity from GET /api/apps/{app}/current-user. See docs/current-user.md. */
+/** Trusted identity from GET /api/apps/{app}/current-user. */
 export async function getSession(): Promise<Session> {
   const request = getRequest()
   const cached = sessionByRequest.get(request)
