@@ -6,11 +6,10 @@ Endpoint:
 GET /api/apps/{app}/current-user
 ```
 
-This endpoint uses the `app_studio_user_token` HttpOnly cookie. Do not send
-the Dashboard session cookie or a Bearer token to this endpoint. The `{app}`
-value comes from `APP_STUDIO_APP_ID`; do not accept an app ID from user input.
+This endpoint uses the `app_studio_user_token` HttpOnly cookie. `{app}` is
+`APP_STUDIO_APP_ID`.
 
-The response contains only the current user and their effective app role:
+The response is the current user and their effective app role:
 
 ```json
 {
@@ -33,21 +32,7 @@ Field meanings:
 - `role.id`: role ID.
 - `role.title`: role title used by the starter's role checks.
 
-This endpoint does not return an app token. The short-lived app token is
-delivered separately as the `app_studio_app_token` HttpOnly cookie, set by
-the App Studio proxy on sprite bootstrap. Read it server-side with
-`getAppToken()` from `#/lib/server/app-token` — never fetch this endpoint to
-obtain it. Use the app token only as:
+This endpoint returns user profile only. Proxy Bearer tokens come from
+`getAppToken()` in `#/lib/server/app-token`. Keep tokens on the server.
 
-```http
-Authorization: Bearer <appToken>
-```
-
-The starter runtime manages both the `app_studio_user_token` and
-`app_studio_app_token` cookies. Keep the app token server-side. Never log,
-persist, or send it to a provider. Never request or expose HitPay API keys,
-Turso URLs, or Turso auth tokens from the starter app.
-
-On success, the endpoint returns `200` with JSON. A missing or expired HitPay
-session returns an authentication error. An invalid app access grant must not
-be treated as a valid user response.
+Success is `200` JSON. Missing or expired HitPay session is an auth error.

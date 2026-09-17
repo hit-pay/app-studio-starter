@@ -6,10 +6,14 @@
   "outputDirectory": "dist",
   "functions": {
     "api/mcp.ts": {
-      "maxDuration": 30
+      "maxDuration": 180
     }
   },
   "rewrites": [
+    {
+      "source": "/mcp",
+      "destination": "/api/mcp"
+    },
     {
       "source": "/api/apps/:appId/staff-app-members",
       "destination": "/api/studio-identity/staff-app-members.json"
@@ -23,7 +27,7 @@
       "destination": "/api/studio-identity/user.json"
     },
     {
-      "source": "/((?!r/|assets/|api/|registry\\.json|orchid-tokens\\.css|llms\\.txt).*)",
+      "source": "/((?!r/|assets/|api/|mcp|registry\\.json|orchid-tokens\\.css|llms\\.txt).*)",
       "destination": "/index.html"
     }
   ],

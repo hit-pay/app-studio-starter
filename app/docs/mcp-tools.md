@@ -1,10 +1,8 @@
-# App Studio MCP Tools
+# MCP
 
-MCP server: `hitpay-app-studio`
+| | URL |
+|---|---|
+| Orchid UI | `https://orchid-ui-hitpay.vercel.app/mcp` |
+| App Studio | `{APP_STUDIO_PROXY_URL}/mcp` |
 
-Connect through `/mcp` and discover the current contract with `tools/list`.
-Use the short-lived app token only as:
-
-```http
-Authorization: Bearer <appToken>
-```
+Start with `tools/list` on the server you need.
