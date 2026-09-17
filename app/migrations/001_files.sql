@@ -1,4 +1,4 @@
-CREATE TABLE files (
+CREATE TABLE IF NOT EXISTS files (
   id TEXT PRIMARY KEY,
   entity_type TEXT,
   entity_id TEXT,
@@ -11,4 +11,4 @@ CREATE TABLE files (
   created_at TEXT NOT NULL,
   updated_at TEXT NOT NULL
 );
-CREATE INDEX idx_files_entity ON files(entity_type, entity_id);
+CREATE INDEX IF NOT EXISTS idx_files_entity ON files(entity_type, entity_id);

@@ -14,6 +14,14 @@ Authentication:
 Authorization: Bearer {appToken}
 ```
 
-Apply ordered migration statements with a migration name. Generated app code
-must call `ensureMigrations()` before database access; credentials remain in
-the proxy.
+Runtime: `db.execute()` / `db.batch()` already call `ensureMigrations()` before
+talking to the proxy. Credentials stay in the proxy.
+
+Rules for `migrations/*.sql`:
+
+- SQLite / libSQL only (not Postgres).
+- New schema = a new numbered file (`002_….sql`). Do not rewrite a file that
+  may already be recorded in `_migrations`.
+- Prefer `CREATE TABLE IF NOT EXISTS` and `CREATE INDEX IF NOT EXISTS`.
+- Do not wrap files in `BEGIN` / `COMMIT` — the runner applies statements as one
+  migration batch and then records the filename.

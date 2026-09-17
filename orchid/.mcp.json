@@ -1,8 +1,0 @@
-{
-  "mcpServers": {
-    "orchid-ui": {
-      "command": "bun",
-      "args": ["run", "mcp"]
-    }
-  }
-}

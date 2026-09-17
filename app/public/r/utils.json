@@ -2,7 +2,7 @@
   "$schema": "https://ui.shadcn.com/schema/registry-item.json",
   "name": "utils",
   "title": "Utils",
-  "description": "Cn() Tailwind class merge. Import from @/lib/utils.",
+  "description": "cn() and studioAppId(). Import from @/lib/utils.",
   "dependencies": [
     "clsx",
     "tailwind-merge"
@@ -10,7 +10,7 @@
   "files": [
     {
       "path": "src/lib/utils.ts",
-      "content": "import { clsx, type ClassValue } from 'clsx'\nimport { twMerge } from 'tailwind-merge'\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n",
+      "content": "import { clsx, type ClassValue } from 'clsx'\nimport { twMerge } from 'tailwind-merge'\n\nexport function cn(...inputs: ClassValue[]) {\n  return twMerge(clsx(inputs))\n}\n\n/** First path segment of the iframe URL, or `APP_STUDIO_APP_ID`. */\nexport function studioAppId(): string {\n  if (typeof window !== 'undefined') {\n    const fromPath = window.location.pathname.split('/').filter(Boolean)[0]\n\n    if (fromPath && fromPath !== 'api') return fromPath\n  }\n\n  const fromEnv =\n    (typeof process !== 'undefined' ? process.env.APP_STUDIO_APP_ID : undefined)?.trim() ||\n    String(import.meta.env.APP_STUDIO_APP_ID ?? '').trim()\n\n  return fromEnv || 'local'\n}\n",
       "type": "registry:lib",
       "target": "lib/utils.ts"
     }

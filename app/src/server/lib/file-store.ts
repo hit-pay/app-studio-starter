@@ -1,7 +1,6 @@
 import { randomUUID } from 'node:crypto'
 
 import { db } from '#/server/lib/db'
-import { ensureMigrations } from '#/server/lib/migrate'
 
 export const FILE_MAX_BYTES = 10 * 1024 * 1024
 
@@ -32,8 +31,6 @@ export async function insertFile(input: {
   mimeType: string
   data: Uint8Array
 }): Promise<FileMeta> {
-  await ensureMigrations()
-
   if (!input.name.trim()) throw new Error('File name is required.')
   if (input.data.byteLength === 0) throw new Error('File is empty.')
   if (input.data.byteLength > FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
@@ -68,8 +65,6 @@ export async function insertFile(input: {
 }
 
 export async function getFile(id: string): Promise<StoredFile | null> {
-  await ensureMigrations()
-
   const result = await db.execute({
     sql: `SELECT ${META_COLUMNS}, data FROM files WHERE id = ?`,
     args: [id],
@@ -103,8 +98,6 @@ export async function listFiles(input: {
   entityType: string
   entityId: string
 }): Promise<FileMeta[]> {
-  await ensureMigrations()
-
   const result = await db.execute({
     sql: `SELECT ${META_COLUMNS} FROM files
       WHERE entity_type = ? AND entity_id = ?
@@ -130,6 +123,5 @@ export async function listFiles(input: {
 }
 
 export async function deleteFile(id: string): Promise<void> {
-  await ensureMigrations()
   await db.execute({ sql: 'DELETE FROM files WHERE id = ?', args: [id] })
 }

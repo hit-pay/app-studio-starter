@@ -5,6 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+/** First path segment of the iframe URL, or `APP_STUDIO_APP_ID`. */
 export function studioAppId(): string {
   if (typeof window !== 'undefined') {
     const fromPath = window.location.pathname.split('/').filter(Boolean)[0]
@@ -17,15 +18,4 @@ export function studioAppId(): string {
     String(import.meta.env.APP_STUDIO_APP_ID ?? '').trim()
 
   return fromEnv || 'local'
-}
-
-/** Prefix localStorage keys per app. Hosts share origin; keys must not collide. */
-export function storageKey(suffix: string): string {
-  const part = suffix.replace(/^:+/, '')
-
-  if (!part) {
-    throw new Error('Storage key suffix is required.')
-  }
-
-  return `app-studio:${studioAppId()}:${part}`
 }

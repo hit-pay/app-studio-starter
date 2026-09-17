@@ -19,6 +19,10 @@
       "destination": "/api/studio-identity/roles.json"
     },
     {
+      "source": "/api/apps/:appId/current-user",
+      "destination": "/api/studio-identity/user.json"
+    },
+    {
       "source": "/api/apps/:appId/user/info",
       "destination": "/api/studio-identity/user.json"
     },

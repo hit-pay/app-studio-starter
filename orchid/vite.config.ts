@@ -76,7 +76,7 @@ const FAKE_USER = {
   role: FAKE_ROLES[0],
 }
 
-const STUDIO_IDENTITY = /^\/api\/apps\/[^/]+\/(user\/info|roles|staff-app-members)\/?$/
+const STUDIO_IDENTITY = /^\/api\/apps\/[^/]+\/(current-user|user\/info|roles|staff-app-members)\/?$/
 
 function fakeStudioIdentityBody(pathname: string) {
   const match = pathname.match(STUDIO_IDENTITY)

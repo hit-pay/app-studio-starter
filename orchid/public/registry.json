@@ -68,7 +68,7 @@
       "name": "utils",
       "type": "registry:lib",
       "title": "Utils",
-      "description": "Cn() Tailwind class merge. Import from @/lib/utils.",
+      "description": "cn() and studioAppId(). Import from @/lib/utils.",
       "dependencies": [
         "clsx",
         "tailwind-merge"

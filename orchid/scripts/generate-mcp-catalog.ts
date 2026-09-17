@@ -4,12 +4,13 @@ import { fileURLToPath } from "node:url";
 
 import { orchidComponentCatalog } from "../api/mcp-catalog-source.ts";
 
-const outPath = resolve(
-  dirname(fileURLToPath(import.meta.url)),
-  "../api/mcp-catalog.json",
+const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const payload = `${JSON.stringify({ components: orchidComponentCatalog }, null, 2)}\n`;
+const orchidOut = resolve(root, "api/mcp-catalog.json");
+const appOut = resolve(root, "../app/mcp/orchid-ui-catalog.json");
+
+writeFileSync(orchidOut, payload);
+writeFileSync(appOut, payload);
+console.log(
+  `Wrote ${orchidComponentCatalog.length} components to ${orchidOut} and ${appOut}`,
 );
-writeFileSync(
-  outPath,
-  `${JSON.stringify({ components: orchidComponentCatalog }, null, 2)}\n`,
-);
-console.log(`Wrote ${orchidComponentCatalog.length} components to ${outPath}`);
