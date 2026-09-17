@@ -1,7 +1,12 @@
 import { createMcpHandler } from "mcp-handler";
 import { z } from "zod";
 
-import mcpCatalog from "./mcp-catalog.json";
+import mcpCatalog from "./mcp-catalog.json" with { type: "json" };
+
+const listOrchidComponentsArgs = {
+  category: z.string().optional(),
+  name: z.string().optional(),
+} satisfies z.ZodRawShape;
 
 type CatalogEntry = (typeof mcpCatalog.components)[number];
 
@@ -12,12 +17,10 @@ const handler = createMcpHandler(
       {
         description:
           "Returns Orchid component docs as JSON { components: [...] }. Each entry: name, title, description, category, props, examples[{description,code}], related_components, files (registry install paths). Filter category: ui | components. Filter name: e.g. resource-picker | resource-list. HitPay: both share ResourcePickerLoad + loadResourcePickerPage; types product|order|charge|invoice; API shapes in app/docs/hitpay/*.md. Prefer examples titled App Studio load for production wiring.",
-        inputSchema: {
-          category: z.string().optional(),
-          name: z.string().optional(),
-        },
+        inputSchema: listOrchidComponentsArgs,
       },
-      async ({ category, name }) => {
+      async (args) => {
+        const { category, name } = args;
         const components = (mcpCatalog.components as CatalogEntry[]).filter(
           (component) =>
             (!category || component.category === category) &&
