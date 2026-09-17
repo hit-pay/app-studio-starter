@@ -19,7 +19,7 @@ const proxyPaths: Record<string, string> = {
 
 /**
  * Server-only HitPay access through App Studio.
- * The app sends only its short-lived appToken; provider secrets stay in the proxy.
+ * The app sends only its short-lived app token cookie; provider secrets stay in the proxy.
  */
 export async function hitpayRequest(path: string, init: RequestInit = {}): Promise<Response> {
   const request = getRequest()

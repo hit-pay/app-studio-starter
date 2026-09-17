@@ -56,8 +56,9 @@ The latest MCP contract is located in `docs/mcp-tools.md`. The MCP server is nam
   invoices, and orders
 
 For payload details, refer to the relevant `docs/hitpay/` or `docs/turso/` files.
-Use short-lived app tokens from the `current-user` endpoint only on the server;
-do not request or pass provider credentials.
+Use `getAppToken()` from `#/lib/server/app-token` to read the short-lived app
+token (delivered via the `app_studio_app_token` HttpOnly cookie) only on the
+server; do not request or pass provider credentials.
 
 ## Final Output
 

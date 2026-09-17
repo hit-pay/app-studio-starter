@@ -10,8 +10,7 @@ This endpoint uses the `app_studio_user_token` HttpOnly cookie. Do not send
 the Dashboard session cookie or a Bearer token to this endpoint. The `{app}`
 value comes from `APP_STUDIO_APP_ID`; do not accept an app ID from user input.
 
-The response contains the current user, the effective app role, and a
-short-lived app token:
+The response contains only the current user and their effective app role:
 
 ```json
 {
@@ -21,8 +20,7 @@ short-lived app token:
   "role": {
     "id": "role_123",
     "title": "Owner"
-  },
-  "appToken": "<short-lived-app-token>"
+  }
 }
 ```
 
@@ -34,17 +32,21 @@ Field meanings:
 - `role`: effective role for this app, or `null`.
 - `role.id`: role ID.
 - `role.title`: role title used by the starter's role checks.
-- `appToken`: token for subsequent proxy API and MCP requests.
 
-Use the app token only as:
+This endpoint does not return an app token. The short-lived app token is
+delivered separately as the `app_studio_app_token` HttpOnly cookie, set by
+the App Studio proxy on sprite bootstrap. Read it server-side with
+`getAppToken()` from `#/lib/server/app-token` — never fetch this endpoint to
+obtain it. Use the app token only as:
 
 ```http
 Authorization: Bearer <appToken>
 ```
 
-The starter runtime manages the `app_studio_user_token` cookie. Keep the app
-token server-side. Never log, persist, or send it to a provider. Never request or expose
-HitPay API keys, Turso URLs, or Turso auth tokens from the starter app.
+The starter runtime manages both the `app_studio_user_token` and
+`app_studio_app_token` cookies. Keep the app token server-side. Never log,
+persist, or send it to a provider. Never request or expose HitPay API keys,
+Turso URLs, or Turso auth tokens from the starter app.
 
 On success, the endpoint returns `200` with JSON. A missing or expired HitPay
 session returns an authentication error. An invalid app access grant must not
