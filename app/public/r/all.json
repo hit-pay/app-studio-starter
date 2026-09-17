@@ -52,7 +52,7 @@
   ],
   "files": [
     {
-      "path": "src/ui/all.tsx",
+      "path": "src/components/ui/all.tsx",
       "content": "/** Root mount only. `@orchid/all` installs every item via registryDependencies — this file is not a barrel. */\nexport { Toaster, toast } from '@ui/toast'\n",
       "type": "registry:ui",
       "target": "@ui/all.tsx"

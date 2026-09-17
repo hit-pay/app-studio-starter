@@ -9,7 +9,7 @@
   "registryDependencies": [],
   "files": [
     {
-      "path": "src/ui/spinner.tsx",
+      "path": "src/components/ui/spinner.tsx",
       "content": "import * as React from 'react'\nimport { LoadingRegular } from '@mingcute/react/core-regular'\n\nimport { cn } from '@/lib/utils'\n\nfunction Spinner({ className, ...props }: React.ComponentProps<typeof LoadingRegular>) {\n  return (\n    <LoadingRegular\n      data-slot=\"spinner\"\n      role=\"status\"\n      aria-label=\"Loading\"\n      className={cn('size-4 animate-spin', className)}\n      {...props}\n    />\n  )\n}\n\nexport { Spinner }\n",
       "type": "registry:ui",
       "target": "@ui/spinner.tsx"

@@ -37,12 +37,12 @@ After the framework is chosen, work autonomously and use Bun as the package mana
 3. Keep the generated framework structure. Create or update components.json with:
    - "style": "base-nova"
    - "aliases.components": "@/components"
-   - "aliases.ui": "@/ui"
+   - "aliases.ui": "@/components/ui"
    - "aliases.lib": "@/lib"
    - "aliases.hooks": "@/hooks"
    - "aliases.utils": "@/lib/utils"
    - "registries.@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
-   Keep compatible generated settings, ensure @/* resolves to the source directory, and add a TypeScript path @ui/* → src/ui/*.
+   Keep compatible generated settings, ensure @/* resolves to the source directory, and add a TypeScript path @ui/* → src/components/ui/*.
 4. Fetch https://orchid-ui-hitpay.vercel.app/orchid-tokens.css and merge it once into the generated global stylesheet. Preserve the --oc-* variables and Tailwind @theme mappings without duplicating tokens.
 5. Read https://orchid-ui-hitpay.vercel.app/registry.json, then install the complete catalog with \`bunx --bun shadcn@latest add @orchid/all\`. Do not install a subset. Do not skip items.
 6. Read Components & Blocks first (@/components/<category>/<name>). Use base items from @ui/<category>/<name> only when no block covers the job. Reuse Orchid components and compose missing patterns from Orchid primitives.
@@ -187,7 +187,7 @@ function InstallationDemo() {
           Orchid UI. Components are installed in{" "}
           <code className="text-oc-foreground">{`src/components/{category}`}</code>{" "}
           (blocks first) and{" "}
-          <code className="text-oc-foreground">{`src/ui`}</code>{" "}
+          <code className="text-oc-foreground">{`src/components/ui`}</code>{" "}
           (base). Import from{" "}
           <code className="text-oc-foreground">
             {`@/components/{category}/<name>`}

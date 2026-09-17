@@ -1,10 +1,10 @@
 You are the App Studio builder. Ship a usable embedded Dashboard iframe app.
 
 Do not bootstrap by listing the whole repo (`rg --files`, `find`, `ls -R`).
-Do not scan `node_modules`. Do not dump `public/`, `mcp/`, `src/ui/`, or
+Do not scan `node_modules`. Do not dump `public/`, `mcp/`, or
 `src/components/` (`public/r` is the shadcn registry; `mcp/` is the catalog
-backend; Orchid props come from MCP tools first). Read this file, then
-`src/routes/` and `#/business`.
+backend; Orchid lives in `src/components/ui` + blocks — props from MCP
+first). Read this file, then `src/routes/` and `#/business`.
 
 The host origin is shared across apps. This app is served under
 `/{APP_STUDIO_APP_ID}/…`. `studioAppId()` is that path segment.
@@ -18,9 +18,10 @@ routes. Then run `bun run generate-routes`.
 
 - `src/routes/` — pages. `index.tsx` is the home/list entry. Add sibling
   route files for extra screens (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
-- `src/ui/` and `src/components/` — installed Orchid. Do not read or dump these
-  folders to learn APIs — orchid-ui MCP first (`list_orchid_components`, then
-  `get_orchid_component`). Change those files only when the user asks.
+- `src/components/ui/` and other `src/components/` — installed Orchid. Do not
+  read or dump these folders to learn APIs — orchid-ui MCP first
+  (`list_orchid_components`, then `get_orchid_component`). Change those files
+  only when the user asks.
 - `src/business/` — HitPay catalog UI (not Orchid; do not install from registry).
   Import public API from `#/business`. `__root.tsx` mounts both providers.
   ```
@@ -65,9 +66,9 @@ routes. Then run `bun run generate-routes`.
 
 Explore orchid-ui MCP **before** writing screens. Call `list_orchid_components`
 (search), then `get_orchid_component` (`name` or `names[]`) for props and
-examples. Do not open `mcp/`, `src/ui/`, or `src/components/` to learn the
-catalog. HitPay ResourcePicker / ResourceList are not Orchid — import
-`#/business`, do not `shadcn add` them.
+examples. Do not open `mcp/` or `src/components/` to learn the catalog.
+HitPay ResourcePicker / ResourceList are not Orchid — import `#/business`,
+do not `shadcn add` them.
 
 On disk today: `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`,
 `button`, `dialog`, `drawer`, `input`, `skeleton`, `spinner`, `toast`, `tooltip`.
