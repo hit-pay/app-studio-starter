@@ -7,6 +7,7 @@
     "paths": {
       "#/*": ["./src/*"],
       "@/*": ["./src/*"],
+      "@/docs/*": ["./docs/*"],
       "@ui/*": ["./src/ui/*"]
     },
     "lib": ["ES2022", "DOM", "DOM.Iterable"],

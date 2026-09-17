@@ -1,8 +1,11 @@
+import registry from "../../registry.json" with { type: "json" };
+
+const buttonRegistry = registry.items.find((item) => item.name === "button");
+
 const buttonDocs = {
-  name: "button",
-  title: "Button",
   category: "ui",
-  description: "A button for explicit actions such as save, submit, or delete.",
+  ...buttonRegistry,
+  // Custom AI guidance.
   when_to_use: ["Submit form", "Save data", "Trigger an action"],
   avoid_when: ["Navigating between pages", "Displaying passive status"],
   props: {
@@ -60,9 +63,7 @@ const buttonDocs = {
 </>`,
     },
   ],
-  related_components: ["button-group", "dialog", "toast"],
-  dependencies: ["@base-ui/react", "class-variance-authority"],
-  source: "src/ui/button.tsx",
+  related_components: ["button-group"],
 };
 
 export default buttonDocs;

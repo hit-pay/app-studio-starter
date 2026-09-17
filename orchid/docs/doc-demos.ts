@@ -2,11 +2,11 @@ import type { ComponentType } from "react";
 
 import { withDemoUsage } from "./doc-demo-usage";
 
-const demoModules = import.meta.glob("../../docs/ui/demos/*-demo.tsx", {
+const demoModules = import.meta.glob("./ui/demos/*-demo.tsx", {
   eager: true,
 }) as Record<string, Record<string, unknown>>;
 
-const demoSources = import.meta.glob("../../docs/ui/demos/*-demo.tsx", {
+const demoSources = import.meta.glob("./ui/demos/*-demo.tsx", {
   query: "?raw",
   import: "default",
   eager: true,
@@ -14,7 +14,7 @@ const demoSources = import.meta.glob("../../docs/ui/demos/*-demo.tsx", {
 
 const wrapped = Object.fromEntries(
   Object.entries(demoModules).flatMap(([path, mod]) => {
-    const filename = path.replace("../../docs/ui/demos/", "");
+    const filename = path.replace("./ui/demos/", "");
     const source = demoSources[path] ?? "";
     return Object.entries(mod)
       .filter(
