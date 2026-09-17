@@ -1,2 +1,23 @@
+import { useState } from "react"
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { FormBuilder, useFormBuilder } from "../../src/components/form/form-builder"
+import { FormLayout } from "../../src/components/layout/form-layout"
+import formLayoutDocs, { FORM_LAYOUT_EXAMPLE_FIELDS } from "./form-layout"
 
-Use `FormLayout` as the page or modal shell for create and edit forms. Choose it for headings, scrolling, close behavior, and actions around fields; use `PageLayout` for non-form pages and `FormBuilder` for the fields.
+Use `FormLayout` as the page or modal shell for create and edit forms. Pass the same `formId` to the layout actions and to `FormBuilder`. Choose it for headings, scrolling, close behavior, and actions around fields; use `PageLayout` for non-form pages and `FormBuilder` for the fields.
+
+## Props
+
+<DocPropsTable props={formLayoutDocs.props} />
+
+<DocExamples
+  noInline
+  examples={formLayoutDocs.examples}
+  scope={{
+    FORM_LAYOUT_FIELDS: FORM_LAYOUT_EXAMPLE_FIELDS,
+    FormBuilder,
+    FormLayout,
+    useFormBuilder,
+    useState,
+  }}
+/>

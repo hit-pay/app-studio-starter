@@ -1,2 +1,27 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { MetricCard } from "../../src/components/displaying-data/metric-card"
+import {
+  CurrencyDollarRegular,
+  GroupRegular,
+} from "@mingcute/react/core-regular"
+import { TooltipProvider } from "../../src/ui/tooltip"
+import metricCardDocs from "./metric-card"
 
 Use `MetricCard` to highlight a key aggregate or KPI with its label and value. Choose it for dashboard summaries, not for detailed records or editable values.
+
+<TooltipProvider>
+
+## Props
+
+<DocPropsTable props={metricCardDocs.props} />
+
+<DocExamples
+  examples={metricCardDocs.examples}
+  scope={{
+    CustomersIcon: GroupRegular,
+    MetricCard,
+    RevenueIcon: CurrencyDollarRegular,
+  }}
+/>
+
+</TooltipProvider>

@@ -13,6 +13,10 @@ type AppLayoutNavigationItem = {
   disabled?: boolean
 }
 
+function firstItemId(items?: AppLayoutNavigationItem[]) {
+  return items?.[0]?.id ?? ''
+}
+
 function AppLayout({
   className,
   variant = 'default',
@@ -20,10 +24,14 @@ function AppLayout({
   header,
   navigationItems,
   activeNavigation,
+  defaultActiveNavigation,
   onNavigationChange,
   sidebarItems,
   activeSidebar,
+  defaultActiveSidebar,
   onSidebarChange,
+  pages,
+  sidebarPages,
   children,
   ...props
 }: ComponentProps<'div'> & {
@@ -32,24 +40,70 @@ function AppLayout({
   header?: ReactNode
   navigationItems?: AppLayoutNavigationItem[]
   activeNavigation?: string
+  defaultActiveNavigation?: string
   onNavigationChange?: (id: string, item: AppLayoutNavigationItem) => void
   sidebarItems?: AppLayoutNavigationItem[]
   activeSidebar?: string
+  defaultActiveSidebar?: string
   onSidebarChange?: (id: string, item: AppLayoutNavigationItem) => void
+  /** When set with `navigationItems`, the active tab renders matching page content. */
+  pages?: Record<string, ReactNode>
+  /** When set with `sidebarItems`, the active sidebar item renders matching page content. */
+  sidebarPages?: Record<string, ReactNode>
 }) {
+  const navigationControlled =
+    activeNavigation !== undefined && onNavigationChange !== undefined
+  const sidebarControlled =
+    activeSidebar !== undefined && onSidebarChange !== undefined
+
+  const [internalNavigation, setInternalNavigation] = useState(() =>
+    activeNavigation ??
+      defaultActiveNavigation ??
+      firstItemId(navigationItems),
+  )
+  const [internalSidebar, setInternalSidebar] = useState(() =>
+    activeSidebar ?? defaultActiveSidebar ?? firstItemId(sidebarItems),
+  )
+
+  const resolvedNavigation = navigationControlled
+    ? activeNavigation
+    : internalNavigation
+  const resolvedSidebar = sidebarControlled ? activeSidebar : internalSidebar
+
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const hasSidebar = variant === 'sidebar' && Boolean(sidebarItems?.length)
   const showTopBar = Boolean(appName) || hasSidebar
+
+  function selectNavigation(id: string, item: AppLayoutNavigationItem) {
+    if (!navigationControlled) {
+      setInternalNavigation(id)
+    }
+    onNavigationChange?.(id, item)
+  }
+
+  function selectSidebar(id: string, item: AppLayoutNavigationItem) {
+    if (!sidebarControlled) {
+      setInternalSidebar(id)
+    }
+    onSidebarChange?.(id, item)
+  }
+
+  const mainChild =
+    navigationItems?.length && pages
+      ? (pages[resolvedNavigation ?? ''] ?? children)
+      : hasSidebar && sidebarPages
+        ? (sidebarPages[resolvedSidebar ?? ''] ?? children)
+        : children
 
   const sidebarNav = sidebarItems?.length ? (
     <AppSidebarContent>
       {sidebarItems.map((item) => (
         <AppSidebarItem
           key={item.id}
-          active={item.id === activeSidebar}
+          active={item.id === resolvedSidebar}
           disabled={item.disabled}
           onClick={() => {
-            onSidebarChange?.(item.id, item)
+            selectSidebar(item.id, item)
             setSidebarOpen(false)
           }}
         >
@@ -72,9 +126,9 @@ function AppLayout({
             {navigationItems.map((item) => (
               <AppNavItem
                 key={item.id}
-                active={item.id === activeNavigation}
+                active={item.id === resolvedNavigation}
                 disabled={item.disabled}
-                onClick={() => onNavigationChange?.(item.id, item)}
+                onClick={() => selectNavigation(item.id, item)}
               >
                 {item.label}
               </AppNavItem>
@@ -83,7 +137,7 @@ function AppLayout({
         </div>
       ) : null}
       <main data-slot="app-layout-main" className="min-h-0 min-w-0 flex-1">
-        {children}
+        {mainChild}
       </main>
     </div>
   )

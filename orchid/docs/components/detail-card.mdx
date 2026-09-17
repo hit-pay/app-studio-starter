@@ -1,2 +1,18 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { DetailCard } from "../../src/components/displaying-data/detail-card"
+import { Badge } from "../../src/ui/badge"
+import detailCardDocs from "./detail-card"
 
 Use `DetailCard` for a read-only key/value view of one record. Choose it for detail pages; use `DataList` or `DataTable` for collections and `FormBuilder` for editing.
+
+## Props
+
+<DocPropsTable props={detailCardDocs.props} />
+
+<DocExamples
+  examples={detailCardDocs.examples}
+  scope={{
+    Badge,
+    DetailCard,
+  }}
+/>

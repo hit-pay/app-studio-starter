@@ -44,9 +44,11 @@ function DocCodePanel({
 function DocExamples({
   examples,
   scope = {},
+  noInline = false,
 }: {
   examples: Array<{ description: string; code: string }>
   scope?: Record<string, unknown>
+  noInline?: boolean
 }) {
   return (
     <div className="grid gap-6">
@@ -57,6 +59,7 @@ function DocExamples({
           </p>
           <LiveProvider
             code={example.code}
+            noInline={noInline}
             scope={{
               AddIcon: AddRegular,
               Button,
@@ -64,7 +67,7 @@ function DocExamples({
               ...scope,
             }}
           >
-            <div className="flex min-h-16 items-center rounded-xl border border-solid border-oc-border p-4">
+            <div className="min-h-16 w-full min-w-0 rounded-xl border border-solid border-oc-border p-4 *:w-full">
               <LivePreview />
             </div>
             <LiveError className="text-sm text-oc-destructive" />

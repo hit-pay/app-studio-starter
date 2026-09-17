@@ -29,6 +29,19 @@ import tooltipDocs from "../docs/ui/tooltip";
 import appLayoutDocs from "../docs/components/app-layout";
 import copyButtonDocs from "../docs/components/copy-button";
 import customerCardDocs from "../docs/components/customer-card";
+import dataListDocs from "../docs/components/data-list";
+import dataTableDocs from "../docs/components/data-table";
+import detailCardDocs from "../docs/components/detail-card";
+import emptyDocs from "../docs/components/empty";
+import metricCardDocs from "../docs/components/metric-card";
+import choiceCardDocs from "../docs/components/choice-card";
+import datePickerDocs from "../docs/components/date-picker";
+import formBuilderDocs from "../docs/components/form-builder";
+import quantityInputDocs from "../docs/components/quantity-input";
+import textEditorDocs from "../docs/components/text-editor";
+import selectDocs from "../docs/components/select";
+import formLayoutDocs from "../docs/components/form-layout";
+import pageLayoutDocs from "../docs/components/page-layout";
 
 const handler = createMcpHandler(
   (server) => {
@@ -42,7 +55,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs, checkboxDocs, fieldDocs, fileUploadDocs, formSectionDocs, inputDocs, inputGroupDocs, labelDocs, radioGroupDocs, sliderDocs, switchDocs, textareaDocs, tabsDocs, paginationDocs, dialogDocs, drawerDocs, dropdownMenuDocs, tooltipDocs, appLayoutDocs, copyButtonDocs, customerCardDocs, dataListDocs, dataTableDocs, detailCardDocs, emptyDocs, metricCardDocs, choiceCardDocs, datePickerDocs, formBuilderDocs, quantityInputDocs, textEditorDocs, selectDocs, formLayoutDocs, pageLayoutDocs].filter(
           (component) => !category || component.category === category,
         );
 

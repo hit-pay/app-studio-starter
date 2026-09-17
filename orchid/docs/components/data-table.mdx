@@ -1,2 +1,25 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  DataTable,
+  SCHEMA_TABLE_EXAMPLE_ROWS,
+  SCHEMA_TABLE_EXAMPLE_SCHEMA,
+  useDataTable,
+} from "../../src/components/displaying-data/data-table"
+import dataTableDocs from "./data-table"
 
-Use `DataTable` for collections that need search, filters, sorting, pagination, selection, or row actions. Choose it instead of `DataList` when those tools are needed; use `DetailCard` for one record.
+Use `DataTable` for collections that need search, filters, sorting, pagination, selection, or row actions. Pass a JSON `schema` and row `data` to `useDataTable`, then render `<DataTable table={table} />` with `onRowClick`, `onRowAction`, and optional `cells` overrides.
+
+## Props
+
+<DocPropsTable props={dataTableDocs.props} />
+
+<DocExamples
+  noInline
+  examples={dataTableDocs.examples}
+  scope={{
+    DataTable,
+    SCHEMA_TABLE_EXAMPLE_ROWS,
+    SCHEMA_TABLE_EXAMPLE_SCHEMA,
+    useDataTable,
+  }}
+/>

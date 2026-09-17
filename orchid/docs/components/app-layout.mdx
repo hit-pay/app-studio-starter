@@ -3,7 +3,7 @@ import { AppLayout } from "../../src/components/layout/app-layout"
 import { PageLayout } from "../../src/components/layout/page-layout"
 import appLayoutDocs from "./app-layout"
 
-Use `AppLayout` as the embedded HitPay App Studio frame around every dashboard route. Choose it for app navigation and shell chrome; do not use it as generic website chrome.
+Use `AppLayout` as the embedded HitPay App Studio frame around every dashboard route. Tab and sidebar items update selection automatically; pass `pages` or `sidebarPages` to swap main content, or control routing yourself with `activeNavigation`, `onNavigationChange`, and `children`.
 
 ## Props
 

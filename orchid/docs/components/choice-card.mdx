@@ -1,2 +1,32 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  ChoiceCard,
+  ChoiceCardGroup,
+} from "../../src/components/form/choice-card"
+import {
+  BankCardRegular,
+  LinkRegular,
+  QrcodeRegular,
+  RepeatRegular,
+  ShoppingBag1Regular,
+} from "@mingcute/react/core-regular"
+import choiceCardDocs from "./choice-card"
 
-Use `ChoiceCard` for a single prominent card-style choice with optional explanatory text. Choose it when the choice benefits from more space than a radio; use `RadioGroup` for compact options.
+Use `ChoiceCard` for a single prominent card-style choice with optional explanatory text. Wrap options in `ChoiceCardGroup` so only one value is selected. Choose it when the choice benefits from more space than a radio; use `RadioGroup` for compact options.
+
+## Props
+
+<DocPropsTable props={choiceCardDocs.props} />
+
+<DocExamples
+  examples={choiceCardDocs.examples}
+  scope={{
+    CardsIcon: BankCardRegular,
+    ChoiceCard,
+    ChoiceCardGroup,
+    InvoiceIcon: ShoppingBag1Regular,
+    LinkIcon: LinkRegular,
+    PayNowIcon: QrcodeRegular,
+    RecurringIcon: RepeatRegular,
+  }}
+/>

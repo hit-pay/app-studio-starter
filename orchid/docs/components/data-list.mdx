@@ -1,2 +1,18 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { DataList } from "../../src/components/displaying-data/data-list"
+import { Badge } from "../../src/ui/badge"
+import dataListDocs from "./data-list"
 
 Use `DataList` for a compact collection that does not need search, filters, sorting, pagination, or row actions. Choose it instead of `DataTable` for simple lists; use `DetailCard` for one record.
+
+## Props
+
+<DocPropsTable props={dataListDocs.props} />
+
+<DocExamples
+  examples={dataListDocs.examples}
+  scope={{
+    Badge,
+    DataList,
+  }}
+/>

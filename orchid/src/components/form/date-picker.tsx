@@ -29,6 +29,9 @@ function yearEnd() {
   return new Date(new Date().getFullYear() + 10, 11)
 }
 
+const pickerTriggerClassName =
+  'w-full min-w-0 justify-start overflow-visible whitespace-normal text-left font-normal data-[empty=true]:text-oc-muted-foreground'
+
 function DatePickerActions({
   onClear,
   onDone,
@@ -81,40 +84,40 @@ function DatePicker({
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        render={
-          <Button
-            variant="outline"
-            data-empty={!date}
-            className={cn(
-              'w-full min-w-0 shrink justify-start overflow-visible text-left font-normal data-[empty=true]:text-oc-muted-foreground',
-              className,
-            )}
+    <div className="w-full min-w-0">
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger
+          className="w-full"
+          render={
+            <Button
+              variant="outline"
+              data-empty={!date}
+              className={cn(pickerTriggerClassName, className)}
+            />
+          }
+        >
+          <CalendarRegular data-icon="inline-start" />
+          {date ? (
+            <span className="min-w-0 flex-1 truncate">{format(date, 'PPP')}</span>
+          ) : (
+            <span className="min-w-0 flex-1">{placeholder}</span>
+          )}
+        </PopoverTrigger>
+        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+          <Calendar
+            className="p-5"
+            mode="single"
+            captionLayout={captionLayout}
+            startMonth={startMonth}
+            endMonth={endMonth ?? yearEnd()}
+            selected={date}
+            onSelect={commit}
+            disabled={disabled}
           />
-        }
-      >
-        <CalendarRegular data-icon="inline-start" />
-        {date ? (
-          <span className="min-w-0 truncate">{format(date, 'PPP')}</span>
-        ) : (
-          <span className="min-w-0 truncate">{placeholder}</span>
-        )}
-      </PopoverTrigger>
-      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-        <Calendar
-          className="p-5"
-          mode="single"
-          captionLayout={captionLayout}
-          startMonth={startMonth}
-          endMonth={endMonth ?? yearEnd()}
-          selected={date}
-          onSelect={commit}
-          disabled={disabled}
-        />
-        <DatePickerActions onClear={() => commit(undefined)} onDone={() => setOpen(false)} />
-      </PopoverContent>
-    </Popover>
+          <DatePickerActions onClear={() => commit(undefined)} onDone={() => setOpen(false)} />
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }
 
@@ -163,58 +166,58 @@ function DateTimePicker({
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        render={
-          <Button
-            variant="outline"
-            data-empty={!date}
-            className={cn(
-              'w-full min-w-0 shrink justify-start overflow-visible text-left font-normal data-[empty=true]:text-oc-muted-foreground',
-              className,
-            )}
-          />
-        }
-      >
-        <CalendarRegular data-icon="inline-start" />
-        {date ? (
-          <span className="min-w-0 truncate">{format(date, 'PPp')}</span>
-        ) : (
-          <span className="min-w-0 truncate">{placeholder}</span>
-        )}
-      </PopoverTrigger>
-      <PopoverContent className="w-auto overflow-hidden p-0" align="start">
-        <Calendar
-          className="p-5"
-          mode="single"
-          captionLayout={captionLayout}
-          startMonth={startMonth}
-          endMonth={endMonth ?? yearEnd()}
-          selected={date}
-          onSelect={(next) => {
-            if (!next) {
-              commit(undefined)
-              return
-            }
-            commit(date ? withTime(next, timeValue(date)) : withTime(next, '09:00'))
-          }}
-          disabled={disabled}
-        />
-        <div className="border-t border-solid border-oc-border p-3">
-          <Input
-            type="time"
-            aria-label="Time"
-            value={timeValue(date)}
-            disabled={!date}
-            onChange={(event) => {
-              if (!date) return
-              commit(withTime(date, event.target.value))
+    <div className="w-full min-w-0">
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger
+          className="w-full"
+          render={
+            <Button
+              variant="outline"
+              data-empty={!date}
+              className={cn(pickerTriggerClassName, className)}
+            />
+          }
+        >
+          <CalendarRegular data-icon="inline-start" />
+          {date ? (
+            <span className="min-w-0 flex-1 truncate">{format(date, 'PPp')}</span>
+          ) : (
+            <span className="min-w-0 flex-1">{placeholder}</span>
+          )}
+        </PopoverTrigger>
+        <PopoverContent className="w-auto overflow-hidden p-0" align="start">
+          <Calendar
+            className="p-5"
+            mode="single"
+            captionLayout={captionLayout}
+            startMonth={startMonth}
+            endMonth={endMonth ?? yearEnd()}
+            selected={date}
+            onSelect={(next) => {
+              if (!next) {
+                commit(undefined)
+                return
+              }
+              commit(date ? withTime(next, timeValue(date)) : withTime(next, '09:00'))
             }}
+            disabled={disabled}
           />
-        </div>
-        <DatePickerActions onClear={() => commit(undefined)} onDone={() => setOpen(false)} />
-      </PopoverContent>
-    </Popover>
+          <div className="border-t border-solid border-oc-border p-3">
+            <Input
+              type="time"
+              aria-label="Time"
+              value={timeValue(date)}
+              disabled={!date}
+              onChange={(event) => {
+                if (!date) return
+                commit(withTime(date, event.target.value))
+              }}
+            />
+          </div>
+          <DatePickerActions onClear={() => commit(undefined)} onDone={() => setOpen(false)} />
+        </PopoverContent>
+      </Popover>
+    </div>
   )
 }
 
@@ -298,28 +301,27 @@ function DatePickerRange({
   }
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger
-        render={
-          <Button
-            variant="outline"
-            data-empty={!range?.from}
-            className={cn(
-              'w-full min-w-0 shrink justify-start overflow-visible text-left font-normal data-[empty=true]:text-oc-muted-foreground',
-              className,
-            )}
-          />
-        }
-      >
-        <CalendarRegular data-icon="inline-start" />
-        <span className="min-w-0 truncate">
-          {range?.from
-            ? range.to
-              ? `${format(range.from, 'LLL dd, y')} - ${format(range.to, 'LLL dd, y')}`
-              : format(range.from, 'LLL dd, y')
-            : placeholder}
-        </span>
-      </PopoverTrigger>
+    <div className="w-full min-w-0">
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger
+          className="w-full"
+          render={
+            <Button
+              variant="outline"
+              data-empty={!range?.from}
+              className={cn(pickerTriggerClassName, className)}
+            />
+          }
+        >
+          <CalendarRegular data-icon="inline-start" />
+          <span className={cn('min-w-0 flex-1', range?.from ? 'truncate' : undefined)}>
+            {range?.from
+              ? range.to
+                ? `${format(range.from, 'LLL dd, y')} - ${format(range.to, 'LLL dd, y')}`
+                : format(range.from, 'LLL dd, y')
+              : placeholder}
+          </span>
+        </PopoverTrigger>
       <PopoverContent className="w-auto overflow-hidden p-0" align="start">
         <div className="flex">
           <div className="flex w-36 shrink-0 flex-col gap-0.5 border-r border-solid border-oc-border p-2">
@@ -360,7 +362,8 @@ function DatePickerRange({
           </div>
         </div>
       </PopoverContent>
-    </Popover>
+      </Popover>
+    </div>
   )
 }
 

@@ -12,7 +12,13 @@ const appLayoutDocs = {
     variant: ["default", "tabs", "sidebar"],
     appName: "ReactNode",
     activeNavigation: "string",
+    defaultActiveNavigation: "string",
+    onNavigationChange: "function",
     activeSidebar: "string",
+    defaultActiveSidebar: "string",
+    onSidebarChange: "function",
+    pages: "Record<string, ReactNode>",
+    sidebarPages: "Record<string, ReactNode>",
   },
   examples: [
     {
@@ -26,14 +32,23 @@ const appLayoutDocs = {
       { id: "overview", label: "Overview" },
       { id: "sent", label: "Sent" },
     ]}
-    activeNavigation="overview"
-  >
-    <PageLayout title="Overview">
-      <p className="text-sm text-oc-muted-foreground">
-        Frame the embedded pane with AppLayout, then put PageLayout inside.
-      </p>
-    </PageLayout>
-  </AppLayout>
+    pages={{
+      overview: (
+        <PageLayout title="Overview">
+          <p className="text-sm text-oc-muted-foreground">
+            Open and paid invoices for PayNow and Cards.
+          </p>
+        </PageLayout>
+      ),
+      sent: (
+        <PageLayout title="Sent">
+          <p className="text-sm text-oc-muted-foreground">
+            Invoices awaiting customer payment.
+          </p>
+        </PageLayout>
+      ),
+    }}
+  />
 </div>`,
     },
     {
@@ -47,14 +62,23 @@ const appLayoutDocs = {
       { id: "home", label: "General" },
       { id: "team", label: "Team" },
     ]}
-    activeSidebar="home"
-  >
-    <PageLayout title="General">
-      <p className="text-sm text-oc-muted-foreground">
-        Sidebar mode opens a drawer on small screens.
-      </p>
-    </PageLayout>
-  </AppLayout>
+    sidebarPages={{
+      home: (
+        <PageLayout title="General">
+          <p className="text-sm text-oc-muted-foreground">
+            Store name, timezone, and business profile.
+          </p>
+        </PageLayout>
+      ),
+      team: (
+        <PageLayout title="Team">
+          <p className="text-sm text-oc-muted-foreground">
+            Invite staff and manage roles.
+          </p>
+        </PageLayout>
+      ),
+    }}
+  />
 </div>`,
     },
   ],

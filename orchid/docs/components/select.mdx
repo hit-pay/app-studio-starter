@@ -1,2 +1,29 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Select } from "../../src/components/form/select"
+import {
+  Field,
+  FieldDescription,
+  FieldLabel,
+} from "../../src/ui/field"
+import selectDocs, {
+  SELECT_CHANNEL_OPTIONS,
+  SELECT_CURRENCY_OPTIONS,
+} from "./select"
 
 Use `Select` for choosing one or more values from a finite option list. Choose it for ordinary options; use a dedicated HitPay `*Select` or `ResourcePicker` when the data source has specialized behavior.
+
+## Props
+
+<DocPropsTable props={selectDocs.props} />
+
+<DocExamples
+  examples={selectDocs.examples}
+  scope={{
+    CHANNEL_OPTIONS: SELECT_CHANNEL_OPTIONS,
+    CURRENCY_OPTIONS: SELECT_CURRENCY_OPTIONS,
+    Field,
+    FieldDescription,
+    FieldLabel,
+    Select,
+  }}
+/>

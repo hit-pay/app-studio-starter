@@ -1,2 +1,21 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  FormBuilder,
+  useFormBuilder,
+} from "../../src/components/form/form-builder"
+import formBuilderDocs from "./form-builder"
 
-Use `FormBuilder` for schema-driven multi-field create or edit forms. Choose it when fields, layout, and controls can be described by a schema; use `DetailCard` for read-only data.
+Use `FormBuilder` for schema-driven multi-field create or edit forms. Call `useFormBuilder({ fields, onSubmit })`, pass the returned instance to `<FormBuilder form={…} />`, and wire the outer shell (for example `FormLayout`) with the same `form` `id` for submit. Choose it when fields, layout, and controls can be described by a schema; use `DetailCard` for read-only data.
+
+## Props
+
+<DocPropsTable props={formBuilderDocs.props} />
+
+<DocExamples
+  noInline
+  examples={formBuilderDocs.examples}
+  scope={{
+    FormBuilder,
+    useFormBuilder,
+  }}
+/>

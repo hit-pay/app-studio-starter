@@ -1,2 +1,24 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  DatePicker,
+  DatePickerRange,
+  DateTimePicker,
+} from "../../src/components/form/date-picker"
+import { Label } from "../../src/ui/label"
+import datePickerDocs from "./date-picker"
 
 Use `DatePicker` for one date, `DatePickerRange` for a date interval, or `DateTimePicker` for a date and time. Choose these components instead of importing the calendar primitive directly.
+
+## Props
+
+<DocPropsTable props={datePickerDocs.props} />
+
+<DocExamples
+  examples={datePickerDocs.examples}
+  scope={{
+    DatePicker,
+    DatePickerRange,
+    DateTimePicker,
+    Label,
+  }}
+/>
