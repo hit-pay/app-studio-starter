@@ -1,2 +1,30 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import {
+  Banner,
+  BannerAction,
+  BannerDescription,
+  BannerTitle,
+} from "../../src/ui/banner"
+import {
+  CheckCircleRegular,
+  InformationRegular,
+} from "@mingcute/react/core-regular"
+import bannerDocs from "./banner"
 
 Use `Banner` for a prominent page-level notice, warning, success, or error. Choose it for persistent context or action-needed feedback, not for transient feedback (use `Toast`).
+
+## Props
+
+<DocPropsTable props={bannerDocs.props} />
+
+<DocExamples
+  examples={bannerDocs.examples}
+  scope={{
+    Banner,
+    BannerAction,
+    BannerDescription,
+    BannerTitle,
+    CheckCircleIcon: CheckCircleRegular,
+    InformationIcon: InformationRegular,
+  }}
+/>

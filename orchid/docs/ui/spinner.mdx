@@ -1,2 +1,18 @@
+import { DocExamples, DocPropsTable } from "../doc-code-panel"
+import { Button } from "../../src/ui/button"
+import { Spinner } from "../../src/ui/spinner"
+import spinnerDocs from "./spinner"
 
 Use `Spinner` to indicate an indeterminate operation in progress. Choose it for actions or small regions; use `Skeleton` when the content layout is known.
+
+## Props
+
+<DocPropsTable props={spinnerDocs.props} />
+
+<DocExamples
+  examples={spinnerDocs.examples}
+  scope={{
+    Button,
+    Spinner,
+  }}
+/>

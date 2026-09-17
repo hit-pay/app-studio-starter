@@ -5,6 +5,10 @@ import buttonDocs from "../docs/ui/button";
 import buttonGroupDocs from "../docs/ui/button-group";
 import avatarDocs from "../docs/ui/avatar";
 import badgeDocs from "../docs/ui/badge";
+import bannerDocs from "../docs/ui/banner";
+import skeletonDocs from "../docs/ui/skeleton";
+import spinnerDocs from "../docs/ui/spinner";
+import toastDocs from "../docs/ui/toast";
 
 const handler = createMcpHandler(
   (server) => {
@@ -17,7 +21,7 @@ const handler = createMcpHandler(
         },
       },
       async ({ category }) => {
-        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs].filter(
+        const components = [buttonDocs, buttonGroupDocs, avatarDocs, badgeDocs, bannerDocs, skeletonDocs, spinnerDocs, toastDocs].filter(
           (component) => !category || component.category === category,
         );
 
