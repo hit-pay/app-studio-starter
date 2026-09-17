@@ -1,10 +1,30 @@
-import type {
-  ResourcePickerItem,
-  ResourcePickerLoadInput,
-  ResourcePickerPage,
-  ResourcePickerRecord,
-  ResourcePickerType,
-} from '@/components/form/resource-picker'
+export type ResourcePickerType = 'product' | 'order' | 'charge' | 'invoice'
+export type ResourcePickerRecord = Record<string, unknown>
+export type ResourcePickerItem = {
+  id: string
+  title: string
+  subtitle?: string
+  image?: string | null
+  badge?: string
+  meta?: string
+  trailing?: string
+  resource?: ResourcePickerRecord
+  children?: ResourcePickerItem[]
+}
+export type ResourcePickerLoadInput = {
+  type: ResourcePickerType
+  page?: number
+  cursor?: string
+  query?: string
+  filter?: string
+  extras?: Record<string, string>
+}
+export type ResourcePickerPage = {
+  items: ResourcePickerItem[]
+  hasMore: boolean
+  cursor?: string
+  total?: number
+}
 function extractListTotal(payload: unknown): number | undefined {
   if (!payload || typeof payload !== 'object') return undefined
   const meta = (payload as { meta?: Record<string, unknown> }).meta

@@ -45,7 +45,6 @@ Optional filters:
 Each component object typically includes:
 
 - `name`, `title`, `description`, `category` (`ui` | `components`)
-- `usage` — long integration paragraph
 - `props` — flat map of prop/API paths to allowed values or type hints
 - `examples` — `{ description, code }[]` (use **App Studio load** snippets for HitPay apps, not `demoLoad` / `render()` from Orchid docs site)
 - `related_components` — other registry names
@@ -70,7 +69,6 @@ Example (truncated) for `resource-picker`:
       "title": "Resource Picker",
       "category": "components",
       "description": "Promise picker for HitPay list records...",
-      "usage": "Mount ResourcePickerProvider once... loadResourcePickerPage...",
       "props": {
         "ResourcePickerProvider.load": "ResourcePickerLoad (required)",
         "pick().type": "product | order | charge | invoice"
@@ -87,7 +85,7 @@ Example (truncated) for `resource-picker`:
 ### Recommended AI behavior
 
 1. Call `list_orchid_components` with `name` or `category` before implementing Orchid UI.
-2. Read `description` and `usage` to choose picker vs list vs data-table.
+2. Read `description` and `props` to choose picker vs list vs data-table.
 3. For HitPay lists, wire `ResourcePickerProvider` / `ResourceListProvider` with `loadResourcePickerPage`; follow `props` and HitPay markdown docs.
 4. Copy from `examples` labeled App Studio / route snippets; ignore Orchid-only `demoLoad` and `render()` in live doc examples unless building Orchid docs.
 5. Prefer Orchid components over custom implementations when a matching component exists.

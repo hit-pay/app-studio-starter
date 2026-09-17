@@ -1,20 +1,21 @@
 import { useState } from "react"
-import { DocExamples, DocPropsTable, DocRegistryDescription } from "../doc-code-panel"
+import {
+  DocExamples,
+  DocPropsSection,
+  DocRegistryDescription,
+} from "../doc-code-panel"
 import { FormBuilder, useFormBuilder } from "../../src/components/form/form-builder"
 import { FormLayout } from "../../src/components/layout/form-layout"
-import formLayoutDocs, { FORM_LAYOUT_EXAMPLE_FIELDS } from "./form-layout"
+import formLayoutDocs from "./form-layout.ts"
 
 <DocRegistryDescription description={formLayoutDocs.description} />
 
-## Props
-
-<DocPropsTable props={formLayoutDocs.props} />
+<DocPropsSection props={formLayoutDocs.props} />
 
 <DocExamples
   noInline
   examples={formLayoutDocs.examples}
   scope={{
-    FORM_LAYOUT_FIELDS: FORM_LAYOUT_EXAMPLE_FIELDS,
     FormBuilder,
     FormLayout,
     useFormBuilder,

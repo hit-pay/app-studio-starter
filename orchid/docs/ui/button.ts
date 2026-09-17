@@ -1,10 +1,13 @@
+// @ts-ignore — registry metadata is JSON consumed by the Vite/Vercel bundler.
 import registry from "../../registry.json" with { type: "json" };
 
-const buttonRegistry = registry.items.find((item) => item.name === "button");
+const buttonRegistry = registry.items.find(
+  (item: { name: string }) => item.name === "button",
+);
 
 const buttonDocs = {
-  category: "ui",
   ...buttonRegistry,
+  category: "ui",
   props: {
     variant: ["default", "outline", "secondary", "ghost", "destructive", "link"],
     size: ["xs", "sm", "default", "lg", "icon-xs", "icon-sm", "icon", "icon-lg"],

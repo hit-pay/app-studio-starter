@@ -32,32 +32,17 @@ render(<${component} />);`,
 const resourceListDocs = {
   ...resourceListRegistry,
   category: "components",
-  usage: [
-    "Mount ResourceListProvider once near the app root and pass the same load as ResourcePicker (ResourcePickerLoad → ResourcePickerPage).",
-    "App Studio: loadResourcePickerPage (server) + mapResourcePickerPayload from #/lib/resource-picker-map. Query shapes follow app/docs/hitpay/*.md.",
-    "Render ResourceList with type product | order | charge | invoice. Server-mode SchemaTable with the same chrome as DataTable: status tabs, toolbar filters, search, sort menu, Edit column, row selection + header actions, row ⋮ menu, pagination.",
-    "Advanced HitPay filters (category, location/source, date range) stay in the filter popover; status + catalog extras align with tabs and toolbar filters.",
-    "Table query maps to load input: query (keywords), filter (tab/status), extras (toolbar filters + popover), page, cursor (invoices). Wire onRowAction, onSelectionAction, onEmptyAction for header/row/empty actions.",
-    "Rows expose row.resource as the HitPay record snapshot.",
-  ].join(" "),
   props: {
     "ResourceListProvider.load": "ResourcePickerLoad (required)",
     "ResourceListProvider.children": "ReactNode",
-    "ResourceList.type": RESOURCE_LIST_TYPES.join(" | "),
+    "ResourceList.type": "product | order | charge | invoice",
     "ResourceList.className": "string",
     "ResourceList.onRowClick": "(row) => void",
     "ResourceList.onRowAction": "(action, row) => void",
     "ResourceList.onSelectionAction": "(action, selectedIds) => void",
     "ResourceList.onEmptyAction": "(action) => void",
     "ResourceList.cells": "optional SchemaTableCells overrides",
-    "schema.tabs": "status tabs → load filter",
-    "schema.filters": "toolbar filters → load extras",
-    "schema.selection": "true — bulk header actions",
-    "schema.selectionActions": "export + dropdown (wire onSelectionAction)",
-    "schema.rowActions": "edit | delete (wire onRowAction)",
-    "schema.editColumns": "true",
-    "schema.sort": "toolbar sort (server lists: UI only until API sort)",
-    "load(input).type": RESOURCE_LIST_TYPES.join(" | "),
+    "load(input).type": "product | order | charge | invoice",
     "load(input).query": "string → keywords upstream",
     "load(input).filter": "string (status; maps to statuses[] or invoice status)",
     "load(input).page": "number — products, orders, charges",
@@ -108,4 +93,3 @@ export function ProductsPage() {
 };
 
 export default resourceListDocs;
-export { RESOURCE_LIST_TYPES };

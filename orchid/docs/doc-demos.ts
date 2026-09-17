@@ -41,7 +41,6 @@ export const CheckboxDemo = wrapped.CheckboxDemo;
 export const ChoiceCardDemo = wrapped.ChoiceCardDemo;
 export const CollapsibleDemo = wrapped.CollapsibleDemo;
 export const SelectDemo = wrapped.SelectDemo;
-export const CommandDemo = wrapped.CommandDemo;
 export const ConfirmationModalDemo = wrapped.ConfirmationModalDemo;
 export const CopyButtonDemo = wrapped.CopyButtonDemo;
 export const CustomerCardDemo = wrapped.CustomerCardDemo;

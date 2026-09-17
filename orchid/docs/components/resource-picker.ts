@@ -5,26 +5,12 @@ const resourcePickerRegistry = registry.items.find(
   (item: { name: string }) => item.name === "resource-picker",
 );
 
-const RESOURCE_PICKER_TYPES = [
-  "product",
-  "order",
-  "charge",
-  "invoice",
-] as const;
-
 const resourcePickerDocs = {
   ...resourcePickerRegistry,
   category: "components",
-  usage: [
-    "Mount ResourcePickerProvider once near the app root and pass load — an async function that calls HitPay list APIs and returns ResourcePickerPage (items, hasMore, cursor).",
-    "App Studio: implement load with loadResourcePickerPage (server) + mapResourcePickerPayload from #/lib/resource-picker-map. Query shapes follow app/docs/hitpay/*.md (GET /v1/products, /v1/orders, /v1/charges, /v1/invoices).",
-    "Pagination: products & orders use page + per_page; charges use page + per_page; invoices use per_page + cursor on load-more.",
-    "Call useResourcePicker(); pick({ type }) resolves to ResourcePickerResult[] or undefined when cancelled.",
-    "Products: variants, categories[], location_ids[], channels[], inventory, statuses[]. Orders: statuses[], channels[], dateFrom/dateTo. Charges: statuses[], location_ids[], payment_methods[], date_from/date_to. Invoices: status, keywords, cursor.",
-  ].join(" "),
   props: {
     "ResourcePickerProvider.load": "ResourcePickerLoad (required)",
-    "pick().type": RESOURCE_PICKER_TYPES.join(" | "),
+    "pick().type": "product | order | charge | invoice",
     "pick().action": ["add", "select"],
     "pick().multiple": "boolean | number (max selections)",
     "pick().query": "string (initial search → keywords upstream)",
@@ -96,4 +82,3 @@ import { loadResourcePickerPage } from "#/lib/resource-picker";
 };
 
 export default resourcePickerDocs;
-export { RESOURCE_PICKER_TYPES };

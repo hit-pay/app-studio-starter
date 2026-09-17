@@ -5,7 +5,7 @@ const formLayoutRegistry = registry.items.find(
   (item: { name: string }) => item.name === "form-layout",
 );
 
-export const FORM_LAYOUT_EXAMPLE_FIELDS = [
+const FORM_LAYOUT_FIELDS_SNIPPET = `const FORM_LAYOUT_FIELDS = [
   {
     key: "name",
     title: "Product name",
@@ -30,7 +30,7 @@ export const FORM_LAYOUT_EXAMPLE_FIELDS = [
     placeholder: "Shown in Online Store, POS, and invoices.",
     value: "",
   },
-];
+];`;
 
 const formLayoutDocs = {
   ...formLayoutRegistry,
@@ -51,6 +51,7 @@ const formLayoutDocs = {
     {
       description: "Page create form",
       code: `function PageFormLayoutExample() {
+  ${FORM_LAYOUT_FIELDS_SNIPPET}
   const formId = "product-form";
   const form = useFormBuilder({
     fields: FORM_LAYOUT_FIELDS,
@@ -77,6 +78,7 @@ render(<PageFormLayoutExample />);`,
     {
       description: "Modal create form",
       code: `function ModalFormLayoutExample() {
+  ${FORM_LAYOUT_FIELDS_SNIPPET}
   const [open, setOpen] = useState(false);
   const formId = "customer-form";
   const form = useFormBuilder({

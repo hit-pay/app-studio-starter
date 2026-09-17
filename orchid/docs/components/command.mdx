@@ -1,30 +1,20 @@
 import { useState } from "react"
-import { DocExamples, DocPropsTable, DocRegistryDescription } from "../doc-code-panel"
-import { CommandDemo } from "../ui/demos/command-demo"
+import {
+  DocExamples,
+  DocPropsSection,
+  DocRegistryDescription,
+} from "../doc-code-panel"
 import { Command } from "../../src/components/overlays/command"
-import commandDocs, { COMMAND_EXAMPLE_GROUPS } from "./command"
+import commandDocs from "./command.ts"
 
 <DocRegistryDescription description={commandDocs.description} />
 
-## Props
-
-<DocPropsTable props={commandDocs.props} />
-
-## Examples
-
-<CommandDemo />
+<DocPropsSection props={commandDocs.props} />
 
 <DocExamples
   noInline
-  examples={[commandDocs.examples[0]]}
+  examples={commandDocs.examples}
   scope={{
-    COMMAND_GROUPS: COMMAND_EXAMPLE_GROUPS.map((group) => ({
-      ...group,
-      items: group.items.map((item) => ({
-        ...item,
-        onSelect: () => undefined,
-      })),
-    })),
     Command,
     useState,
   }}

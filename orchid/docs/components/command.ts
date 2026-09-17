@@ -5,34 +5,6 @@ const commandRegistry = registry.items.find(
   (item: { name: string }) => item.name === "command",
 );
 
-export const COMMAND_EXAMPLE_GROUPS = [
-  {
-    heading: "Pages",
-    items: [
-      {
-        value: "invoices",
-        label: "Invoices",
-        keywords: ["billing"],
-        shortcut: "I",
-      },
-      {
-        value: "outlets",
-        label: "Outlets",
-        keywords: ["pos", "store"],
-      },
-    ],
-  },
-  {
-    heading: "Customers",
-    items: [
-      {
-        value: "alex-turner",
-        label: "Alex Turner",
-      },
-    ],
-  },
-];
-
 const commandDocs = {
   ...commandRegistry,
   category: "components",
@@ -54,6 +26,36 @@ const commandDocs = {
       description: "Controlled palette",
       code: `function CommandExample() {
   const [open, setOpen] = useState(false);
+  const COMMAND_GROUPS = [
+    {
+      heading: "Pages",
+      items: [
+        {
+          value: "invoices",
+          label: "Invoices",
+          keywords: ["billing"],
+          shortcut: "I",
+          onSelect: () => undefined,
+        },
+        {
+          value: "outlets",
+          label: "Outlets",
+          keywords: ["pos", "store"],
+          onSelect: () => undefined,
+        },
+      ],
+    },
+    {
+      heading: "Customers",
+      items: [
+        {
+          value: "alex-turner",
+          label: "Alex Turner",
+          onSelect: () => undefined,
+        },
+      ],
+    },
+  ];
 
   return (
     <>

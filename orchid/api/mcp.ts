@@ -53,7 +53,7 @@ const handler = createMcpHandler(
       "list_orchid_components",
       {
         description:
-          "Returns Orchid component docs as JSON { components: [...] }. Each entry: name, title, description, category, usage, props, examples[{description,code}], related_components, files (registry install paths). Filter category: ui | components. Filter name: e.g. resource-picker | resource-list. HitPay: both share ResourcePickerLoad + loadResourcePickerPage; types product|order|charge|invoice; API shapes in app/docs/hitpay/*.md. Prefer examples titled App Studio load for production wiring.",
+          "Returns Orchid component docs as JSON { components: [...] }. Each entry: name, title, description, category, props, examples[{description,code}], related_components, files (registry install paths). Filter category: ui | components. Filter name: e.g. resource-picker | resource-list. HitPay: both share ResourcePickerLoad + loadResourcePickerPage; types product|order|charge|invoice; API shapes in app/docs/hitpay/*.md. Prefer examples titled App Studio load for production wiring.",
         inputSchema: {
           category: z.string().optional(),
           name: z.string().optional(),

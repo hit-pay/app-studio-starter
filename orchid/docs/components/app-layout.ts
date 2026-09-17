@@ -8,21 +8,15 @@ const appLayoutRegistry = registry.items.find(
 const appLayoutDocs = {
   ...appLayoutRegistry,
   category: "components",
-  requiresTanStackRouter: true,
-  usage: [
-    "TanStack Start only: put AppLayout in a layout route (route.tsx), wrap child routes with <Outlet />.",
-    "Use one navigationItems array for all variants; variant tabs = horizontal links, variant sidebar = vertical links (+ mobile drawer).",
-    "Each item needs id, label, and to (router path). Active item is derived from the URL — no onNavigationChange.",
-    "Child routes render PageLayout (or form/content); paths in to must match createFileRoute paths (e.g. /invoices and /invoices/sent).",
-    "Optional appBarActions for buttons on the right of appName. Must render inside RouterProvider.",
-  ].join(" "),
   props: {
     variant: ["default (no nav chrome)", "tabs (horizontal)", "sidebar (vertical)"],
     appName: "ReactNode",
     appBarActions: "ReactNode (right of app name in top bar)",
+    children: "ReactNode — layout route: <Outlet /> for child pages",
+    className: "string — shell routes often h-full min-h-0",
     "navigationItems[].id": "string",
     "navigationItems[].label": "ReactNode",
-    "navigationItems[].to": "TanStack Router path (Link + active from URL)",
+    "navigationItems[].to": "TanStack Router path (must match createFileRoute; active from URL)",
   },
   examples: [
     {

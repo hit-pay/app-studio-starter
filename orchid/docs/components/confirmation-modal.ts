@@ -8,17 +8,17 @@ const confirmationModalRegistry = registry.items.find(
 const confirmationModalDocs = {
   ...confirmationModalRegistry,
   category: "components",
-  usage:
-    "Mount ConfirmationModalProvider once at the app root (e.g. __root.tsx). Call useConfirmationModal() in any child to open a Promise-based confirm — await returns true if confirmed, false if cancelled.",
   props: {
-    type: ["delete", "warning", "success", "question"],
-    message: "ReactNode (required)",
-    title: "ReactNode",
-    description: "ReactNode",
-    confirmLabel: "ReactNode",
-    cancelLabel: "ReactNode",
-    confirmPhrase: "string (type-to-confirm)",
-    inputPlaceholder: "string",
+    "ConfirmationModalProvider": "mount once at app root (e.g. __root.tsx)",
+    "useConfirmationModal().confirm": "Promise<boolean> — true if confirmed, false if cancelled",
+    "confirm().type": ["delete", "warning", "success", "question"],
+    "confirm().message": "ReactNode (required)",
+    "confirm().title": "ReactNode",
+    "confirm().description": "ReactNode",
+    "confirm().confirmLabel": "ReactNode",
+    "confirm().cancelLabel": "ReactNode",
+    "confirm().confirmPhrase": "string (type-to-confirm)",
+    "confirm().inputPlaceholder": "string",
   },
   examples: [
     {

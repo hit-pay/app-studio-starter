@@ -5,7 +5,7 @@ import { HITPAY_ALL_ROLES } from '#/lib/hitpay-roles'
 import { mapResourcePickerPayload } from '#/lib/resource-picker-map'
 import { requireHitPayRoles } from '#/lib/server/hitpay'
 import { hitpayRequest } from '#/lib/server/hitpay-api'
-import type { ResourcePickerLoadInput, ResourcePickerPage } from '@/components/form/resource-picker'
+import type { ResourcePickerLoadInput, ResourcePickerPage } from '#/lib/resource-picker-map'
 
 const ORDER_STATUSES = ['completed', 'pending', 'sent', 'draft', 'expired', 'canceled'] as const
 function categoryIdsFromExtras(extras?: Record<string, string>) {
