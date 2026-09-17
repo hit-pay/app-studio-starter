@@ -160,6 +160,37 @@ if (
   throw new Error("get_orchid_component missing install command");
 }
 
+const batchRes = await mcpPost(
+  {
+    jsonrpc: "2.0",
+    id: 6,
+    method: "tools/call",
+    params: {
+      name: "get_orchid_component",
+      arguments: { names: ["button", "page-layout", "missing-slug"] },
+    },
+  },
+  viaHttp,
+);
+const batchText = await batchRes.text();
+if (!batchRes.ok) {
+  throw new Error(`get_orchid_component names[] failed: ${batchRes.status} ${batchText}`);
+}
+const batch = parseToolText(batchText) as {
+  components: Array<{ name?: string; examples?: unknown[] }>;
+  not_found?: string[];
+};
+const batchNames = batch.components.map((entry) => entry.name);
+if (
+  batchNames.length !== 2
+  || !batchNames.includes("button")
+  || !batchNames.includes("page-layout")
+  || !batch.components.every((entry) => (entry.examples?.length ?? 0) > 0)
+  || !batch.not_found?.includes("missing-slug")
+) {
+  throw new Error(`get_orchid_component names[] returned unexpected payload: ${JSON.stringify(batchNames)}`);
+}
+
 const listed = components[0] as { examples?: unknown; install?: string };
 if (listed?.examples) {
   throw new Error("list without name should be slim (no examples)");
@@ -167,5 +198,5 @@ if (listed?.examples) {
 
 const mode = viaHttp ? `HTTP ${mcpUrl}` : "in-process handler";
 console.log(
-  `MCP OK (${mode}): ${components.length} components, name filter, search, and get work.`,
+  `MCP OK (${mode}): ${components.length} components, name filter, search, get, and batch get work.`,
 );

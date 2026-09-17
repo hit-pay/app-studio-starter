@@ -44,16 +44,39 @@ unavailable, stop and report the blocker.
 | Orchid UI | `https://orchid-ui-hitpay.vercel.app/api/mcp` |
 | App Studio | `{APP_STUDIO_PROXY_URL}/mcp` |
 
-1. Orchid — `tools/list` → search → get. Install every needed component in one
-   command (registry `https://orchid-ui-hitpay.vercel.app/r/{name}.json`):
+1. Orchid — `tools/list` → search → `get_orchid_component` for props and
+   examples (`name` for one slug, `names` for several). Do not invent
+   components. Do not copy source by hand.
 
-   `npx shadcn@latest add @orchid/button -y --overwrite`
+   Already installed (do not `shadcn add` these again). Compose pages from
+   them. For API/examples, call `get_orchid_component` with the slug:
 
-   Swap names for the MCP slugs. Do not copy component source by hand. Use
-   App Studio examples from the MCP result after install. This creates
-   `src/components/` and `src/ui/`. The starter has none; do not commit or
-   hand-copy Orchid into the starter. Compose pages from those installs only
-   — no custom visual components, ad-hoc HTML layouts, or third-party UI kits.
+   | Slug | Path |
+   |---|---|
+   | `app-layout` | `src/components/layout/app-layout.tsx` |
+   | `page-layout` | `src/components/layout/page-layout.tsx` |
+   | `confirmation-modal` | `src/components/overlays/confirmation-modal.tsx` |
+   | `copy-button` | `src/components/actions/copy-button.tsx` |
+   | `button` | `src/ui/button.tsx` |
+   | `dialog` | `src/ui/dialog.tsx` |
+   | `drawer` | `src/ui/drawer.tsx` |
+   | `input` | `src/ui/input.tsx` |
+   | `skeleton` | `src/ui/skeleton.tsx` |
+   | `spinner` | `src/ui/spinner.tsx` |
+   | `toast` | `src/ui/toast.tsx` |
+   | `tooltip` | `src/ui/tooltip.tsx` |
+
+   `__root.tsx` already mounts `AppLayout`, `Toaster`, and
+   `ConfirmationModalProvider`.
+
+   Anything else: one install using the `install` field from MCP
+   (`@orchid/<slug>`). Do not fetch registry JSON URLs.
+
+   `npx shadcn@latest add @orchid/empty -y --overwrite`
+
+   Prefer installed Orchid components. Customize layout, spacing, and extra
+   markup when the user asks. Do not pull in another UI kit. Do not rewrite
+   installed Orchid files unless the user asks.
 
 2. App Studio — `tools/list`, then the advertised tools. Persist list data in
    Turso via `createServerFn` and `requireRoles` from `#/server/lib/session`.
