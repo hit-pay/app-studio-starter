@@ -53,6 +53,8 @@ type ResourcePickerChild = {
 type ResourcePickerItem = {
   id: string
   title: string
+  /** Secondary line under the title (e.g. product SKU). */
+  subtitle?: string
   image?: string | null
   badge?: string
   children?: ResourcePickerChild[]
@@ -92,9 +94,24 @@ type ResourcePickerOptions = {
     variants?: boolean
     status?: string
     locationId?: string
+    /** @deprecated use categoryIds */
     categoryId?: string
+    categoryIds?: string[]
     channel?: string
   }
+}
+
+function categoryIdsFromExtras(extras: Record<string, string>) {
+  if (extras.category_ids) {
+    return extras.category_ids
+      .split(',')
+      .map((id) => id.trim())
+      .filter(Boolean)
+  }
+  if (extras.category_id && extras.category_id !== 'all') {
+    return [extras.category_id]
+  }
+  return []
 }
 
 type ResourcePickerResult = {
@@ -336,7 +353,11 @@ function ResourcePickerDialog({
     setExtras(() => {
       const next: Record<string, string> = {}
       if (request.filter?.locationId) next.location_id = request.filter.locationId
-      if (request.filter?.categoryId) next.category_id = request.filter.categoryId
+      if (request.filter?.categoryIds?.length) {
+        next.category_ids = request.filter.categoryIds.join(',')
+      } else if (request.filter?.categoryId) {
+        next.category_ids = request.filter.categoryId
+      }
       if (request.filter?.channel) next.channel = request.filter.channel
       return next
     })
@@ -517,10 +538,10 @@ function ResourcePickerDialog({
               className="w-full pl-8"
             />
           </div>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
           {showFilter ? (
             <Select
-              className="min-w-0 flex-1"
+              className="w-full min-w-0"
               options={filters}
               value={filter}
               placeholder="Status"
@@ -534,7 +555,7 @@ function ResourcePickerDialog({
           {extraFilters.map((group) => (
             <Select
               key={group.key}
-              className="min-w-0 flex-1"
+              className="w-full min-w-0"
               options={group.options}
               value={extras[group.key] ?? 'all'}
               placeholder={group.label}
@@ -546,10 +567,11 @@ function ResourcePickerDialog({
             />
           ))}
           {type === 'product' ? (
-            <div className="min-w-0 flex-1 [&_button]:w-full">
+            <div className="w-full min-w-0 sm:col-span-2 [&_[data-slot=combobox-chips]]:w-full [&_button]:w-full">
                 <HitPayNamedSelect
                   name="resource_picker_category"
                   label={false}
+                  multiple
                   clearable
                   placeholder="All categories"
                   empty="No categories."
@@ -557,13 +579,20 @@ function ResourcePickerDialog({
                   load={() =>
                     loadProductCategoriesForSelect().then((result) => ({ items: result.items }))
                   }
-                  value={extras.category_id ?? null}
+                  value={(() => {
+                    const ids = categoryIdsFromExtras(extras)
+                    return ids.length ? ids : null
+                  })()}
                   onValueChange={(value) => {
                     paginationRef.current = { page: 0 }
                     setExtras((current) => {
                       const next = { ...current }
-                      if (typeof value === 'string' && value) next.category_id = value
-                      else delete next.category_id
+                      delete next.category_id
+                      if (Array.isArray(value) && value.length > 0) {
+                        next.category_ids = value.join(',')
+                      } else {
+                        delete next.category_ids
+                      }
                       return next
                     })
                   }}
@@ -571,7 +600,7 @@ function ResourcePickerDialog({
             </div>
           ) : null}
           {type === 'product' || type === 'charge' ? (
-            <div className="min-w-0 flex-1 [&_button]:w-full">
+            <div className="w-full min-w-0 [&_button]:w-full">
                 <HitPayNamedSelect
                   name="resource_picker_location"
                   label={false}
@@ -595,7 +624,7 @@ function ResourcePickerDialog({
           ) : null}
           {DATE_FILTER_TYPES.has(type) ? (
             <DatePickerRange
-              className="min-w-0 flex-1"
+              className="w-full min-w-0 sm:col-span-2"
               placeholder="Date range"
               selected={extrasDateRange(extras)}
               disabled={{ after: startOfDay(new Date()) }}
@@ -676,11 +705,20 @@ function ResourcePickerDialog({
                       ) : null}
                       <button
                         type="button"
-                        className="flex min-w-0 flex-1 items-center gap-2 text-left"
+                        className="flex min-w-0 flex-1 flex-col gap-0.5 text-left"
                         onClick={() => toggleParent(item)}
                       >
-                        <p className="truncate text-sm font-medium text-oc-foreground">{item.title}</p>
-                        {item.badge ? <Badge tone="blue">{item.badge}</Badge> : null}
+                        <span className="flex min-w-0 items-center gap-2">
+                          <span className="truncate text-sm font-medium text-oc-foreground">
+                            {item.title}
+                          </span>
+                          {item.badge ? <Badge tone="blue">{item.badge}</Badge> : null}
+                        </span>
+                        {item.subtitle ? (
+                          <span className="truncate font-mono text-xs text-oc-muted-foreground">
+                            {item.subtitle}
+                          </span>
+                        ) : null}
                       </button>
                     </div>
                     {kids.length > 0 && isOpen ? (

@@ -85,21 +85,33 @@ function rowsOf(_type: ResourcePickerType, payload: unknown): Record<string, unk
   return asList<Record<string, unknown>>(payload)
 }
 
+function readSku(row: Record<string, unknown>) {
+  const raw = row.stock_keeping_unit ?? row.sku
+  return typeof raw === 'string' && raw.trim() ? raw.trim() : undefined
+}
+
 function mapProduct(product: Record<string, unknown>): ResourcePickerItem {
   const variations = Array.isArray(product.variations) ? product.variations : []
+  const productSku = readSku(product)
   return {
     id: String(product.id),
     title: String(product.name ?? product.id),
+    subtitle: productSku,
     image: productImage(product),
     badge: product.status === 'draft' ? 'Draft' : undefined,
     resource: asRecord(product),
     children: variations.map((variation) => {
       const row = variation as Record<string, unknown>
       const quantity = typeof row.quantity === 'number' ? row.quantity : null
+      const variantSku = readSku(row)
+      const metaParts = [
+        variantSku,
+        quantity == null ? undefined : `${quantity} available`,
+      ].filter(Boolean)
       return {
         id: String(row.id),
         title: variationTitle(row),
-        meta: quantity == null ? undefined : `${quantity} available`,
+        meta: metaParts.length ? metaParts.join(' · ') : undefined,
         trailing: typeof row.price_display === 'string' ? row.price_display : undefined,
         resource: asRecord(row),
       }

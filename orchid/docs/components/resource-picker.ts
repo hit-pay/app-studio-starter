@@ -34,7 +34,7 @@ const resourcePickerDocs = {
     "pick().filter.categoryId": "string (product categories[])",
     "load(input).page": "number — products, orders, charges",
     "load(input).cursor": "string — invoices (and meta.next_cursor when present)",
-    "load(input).extras.category_id": "product categories[]",
+    "load(input).extras.category_ids": "comma-separated ids → product categories[] (multi)",
     "load(input).extras.location_id": "product/charge location_ids[]",
     "load(input).extras.channel": "product/ order channels[]",
     "load(input).extras.date_from / date_to": "orders dateFrom/dateTo; charges date_from/date_to",

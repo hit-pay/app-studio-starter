@@ -12,6 +12,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
     {
       id: '9c1e0001-0000-4000-8000-000000000001',
       name: 'Mid-century modern shelf',
+      stock_keeping_unit: 'SHELF-MCM-001',
       status: 'draft',
       currency: 'sgd',
       price: 5800,
@@ -22,6 +23,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
       variations: [
         {
           id: '9c1e0001-0000-4000-8000-000000000011',
+          stock_keeping_unit: 'SHELF-MCM-001-OAK',
           values: [{ key: 'Finish', value: 'Oak' }],
           quantity: 3,
           price: 5800,
@@ -39,6 +41,7 @@ const FAKE_HITPAY: Record<ResourcePickerType, FakeRecord[]> = {
     {
       id: '9c1e0001-0000-4000-8000-000000000002',
       name: 'Ceramic table lamp',
+      stock_keeping_unit: 'LAMP-CER-002',
       status: 'published',
       currency: 'sgd',
       price: 89,
@@ -243,18 +246,27 @@ function fakeHitPayListPayload(data: ResourcePickerLoadInput): unknown {
           return false
         }
       }
-      if (data.extras?.category_id && data.extras.category_id !== 'all') {
+      const categoryFilter = data.extras?.category_ids
+        ? data.extras.category_ids
+            .split(',')
+            .map((id) => id.trim())
+            .filter(Boolean)
+        : data.extras?.category_id && data.extras.category_id !== 'all'
+          ? [data.extras.category_id]
+          : []
+      if (categoryFilter.length > 0) {
         const categories = row.category_id
         if (
           !Array.isArray(categories) ||
-          !categories.some((category) => {
-            return (
-              category &&
-              typeof category === 'object' &&
-              'id' in category &&
-              String((category as { id?: unknown }).id) === data.extras?.category_id
-            )
-          })
+          !categoryFilter.some((selectedId) =>
+            categories.some(
+              (category) =>
+                category &&
+                typeof category === 'object' &&
+                'id' in category &&
+                String((category as { id?: unknown }).id) === selectedId,
+            ),
+          )
         ) {
           return false
         }

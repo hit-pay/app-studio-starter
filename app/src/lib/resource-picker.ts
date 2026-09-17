@@ -8,6 +8,20 @@ import { hitpayRequest } from '#/lib/server/hitpay-api'
 import type { ResourcePickerLoadInput, ResourcePickerPage } from '@/components/form/resource-picker'
 
 const ORDER_STATUSES = ['completed', 'pending', 'sent', 'draft', 'expired', 'canceled'] as const
+function categoryIdsFromExtras(extras?: Record<string, string>) {
+  if (!extras) return []
+  if (extras.category_ids) {
+    return extras.category_ids
+      .split(',')
+      .map((id) => id.trim())
+      .filter(Boolean)
+  }
+  if (extras.category_id && extras.category_id !== 'all') {
+    return [extras.category_id]
+  }
+  return []
+}
+
 const CHARGE_STATUSES = [
   'canceled',
   'failed',
@@ -44,8 +58,8 @@ const loadResourcePickerPage = createServerFn({ method: 'GET' })
       if (data.extras?.location_id && data.extras.location_id !== 'all') {
         query.append('location_ids[]', data.extras.location_id)
       }
-      if (data.extras?.category_id && data.extras.category_id !== 'all') {
-        query.append('categories[]', data.extras.category_id)
+      for (const categoryId of categoryIdsFromExtras(data.extras)) {
+        query.append('categories[]', categoryId)
       }
       const response = await hitpayRequest(`/v1/products?${query}`)
       if (!response.ok) throw new Error('Could not load products.')
