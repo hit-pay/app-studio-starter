@@ -14,9 +14,22 @@ routes. Then run `bun run generate-routes`.
   route files for extra screens (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
 - `src/ui/` and `src/components/` — installed Orchid. Change those files only when
   the user asks. Learn props/examples from orchid-ui MCP, not by dumping the source.
-- `src/business/` — HitPay ResourcePicker / ResourceList (not Orchid). Real API
-  via `#/lib/resource` and `#/business/commerce`. Import from `#/business/…`.
-  `__root.tsx` already mounts `ResourcePickerProvider` and `ResourceListProvider`.
+- `src/business/` — HitPay catalog UI (not Orchid; do not install from registry).
+  Import public API from `#/business`. `__root.tsx` mounts both providers.
+  ```
+  import { useResourcePicker, ResourceList } from '#/business'
+  const pick = useResourcePicker()
+  await pick({ type: 'product' })
+  <ResourceList type="product" />
+  ```
+  - `resource-picker.tsx` — dialog picker (`useResourcePicker`)
+  - `resource-list.tsx` — SchemaTable list (`ResourceList`)
+  - `resource-catalog.ts` — labels, status tabs, extra filters
+  - `resource-filter-form.tsx` — filter popover (`ResourceFilterMenu`)
+  - `resource-list-schema.ts` / `resource-list-map.ts` — table schema + row map
+  - `resource-async-select.tsx` — async id+name Select for those filters
+  - `hitpay-named-record-loads.ts` — `loadHitPayLocations`, `loadHitPayProductCategories`, …
+  Pages load via `#/lib/resource` (`loadResourcePage`).
 - `src/lib/` — UI-imported helpers (`createServerFn` + browser hooks). Put new
   `createServerFn` here. List/CRUD persist goes through these fns + `requireRoles`
   + `db.execute` (`#/server/lib/db`).
@@ -47,7 +60,8 @@ Explore orchid-ui MCP **before** writing screens. Call `list_orchid_components`
 (search), then `get_orchid_component` (`name` or `names[]`) for props and
 examples. That catalog is local stdio (`bun run mcp`,
 `mcp/orchid-ui-catalog.json`) — a small JSON payload, faster than reading
-`src/ui` / `src/components` source.
+`src/ui` / `src/components` source. HitPay ResourcePicker / ResourceList are
+not Orchid — import `#/business`, do not `shadcn add` them.
 
 On disk today: `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`,
 `button`, `dialog`, `drawer`, `input`, `skeleton`, `spinner`, `toast`, `tooltip`.
@@ -70,9 +84,9 @@ Use MCP when you need live API / Resource lists or Database runtime tools
 (query, batch, apply migrations). Start with `tools/list`, then the matching
 docs file.
 
-ResourcePicker / ResourceList live in `#/business/` (picker, list, filters).
-Load HitPay lists with `#/lib/resource` (`loadResourcePage`). Locations and
-product categories for filters: `#/business/commerce`.
+ResourcePicker / ResourceList: `import { useResourcePicker, ResourceList } from '#/business'`.
+Load pages with `#/lib/resource`. Filter named records:
+`#/business/hitpay-named-record-loads` (`loadHitPayLocations`, `loadHitPayProductCategories`).
 
 ## Auth / current user
 

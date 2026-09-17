@@ -1,17 +1,18 @@
+/** Server fns: load HitPay named records (locations, categories, coupons, …) for selects. */
 import { createServerFn } from '@tanstack/react-start'
 
 import { ALL_ROLES } from '#/lib/roles'
 import { requireRoles } from '#/server/lib/session'
 import { proxyRequest } from '#/server/lib/proxy'
 
-export type NamedRow = {
+export type HitPayNamedRecord = {
   id: string
   name?: string | null
   code?: string | null
   address?: string | null
 }
 
-function rowsFromPayload(payload: unknown): NamedRow[] {
+function rowsFromPayload(payload: unknown): HitPayNamedRecord[] {
   const body = payload && typeof payload === 'object' ? (payload as { data?: unknown[] }) : null
   const rows = Array.isArray(payload)
     ? payload
@@ -39,24 +40,24 @@ async function loadNamed(path: string, label: string) {
   return { items: rowsFromPayload(await response.json()) }
 }
 
-export const loadCouponsForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayCoupons = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/coupons?per_page=100', 'coupons'),
 )
-export const loadDiscountsForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayDiscounts = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/discounts?per_page=100', 'discounts'),
 )
-export const loadTaxesForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayTaxes = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/taxes?per_page=100', 'taxes'),
 )
-export const loadShippingsForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayShippings = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/shipping?per_page=100', 'shipping'),
 )
-export const loadPickupsForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayPickups = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/pickups?per_page=100', 'pickups'),
 )
-export const loadProductCategoriesForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayProductCategories = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/product-category?per_page=100', 'categories'),
 )
-export const loadLocationsForSelect = createServerFn({ method: 'GET' }).handler(() =>
+export const loadHitPayLocations = createServerFn({ method: 'GET' }).handler(() =>
   loadNamed('/v1/locations?per_page=100', 'locations'),
 )

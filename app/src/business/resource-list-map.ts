@@ -1,3 +1,4 @@
+/** Map ResourcePicker items onto SchemaTable rows. */
 import type { ResourceItem, ResourceType } from '#/business/resource-picker'
 import type { SchemaTableRow } from '@/components/displaying-data/data-table-model'
 
@@ -23,7 +24,7 @@ function formatMoney(record: Record<string, unknown> | undefined) {
   return undefined
 }
 
-export function resourcePickerItemToRow(
+export function resourceItemToTableRow(
   type: ResourceType,
   item: ResourceItem,
 ): SchemaTableRow {
@@ -80,11 +81,11 @@ export function resourcePickerItemToRow(
   }
 }
 
-export function resourcePickerItemsToRows(
+export function resourceItemsToTableRows(
   type: ResourceType,
   items: ResourceItem[],
 ): SchemaTableRow[] {
-  return items.map((item) => resourcePickerItemToRow(type, item))
+  return items.map((item) => resourceItemToTableRow(type, item))
 }
 
 /** Fallback when upstream meta has no total but hasMore is known. */

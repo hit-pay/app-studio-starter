@@ -1,7 +1,6 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
 
-import { ResourceListProvider } from '#/business/resource-list'
-import { ResourcePickerProvider } from '#/business/resource-picker'
+import { ResourceListProvider, ResourcePickerProvider } from '#/business'
 import { useCurrentUser } from '#/lib/current-user'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'

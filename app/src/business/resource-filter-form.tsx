@@ -1,9 +1,11 @@
 'use client'
 
+/** Filter popover shared by ResourcePicker and ResourceList (category, location, dates). */
+
 import * as React from 'react'
 import { startOfDay } from 'date-fns'
 
-import { HitPayNamedSelect } from '#/business/named-select'
+import { ResourceAsyncSelect } from '#/business/resource-async-select'
 import {
   SchemaForm,
   useSchemaForm,
@@ -14,25 +16,25 @@ import {
 } from '@/components/form/form-builder'
 import { flattenFields, formValuesFromFields } from '@/components/form/form-builder-model'
 import {
-  loadLocationsForSelect,
-  loadProductCategoriesForSelect,
-} from '#/business/commerce'
+  loadHitPayLocations,
+  loadHitPayProductCategories,
+} from '#/business/hitpay-named-record-loads'
 import { DatePickerRange } from '@/components/form/date-picker'
 import { Button } from '@ui/button'
 import { Popover, PopoverContent, PopoverTrigger } from '@ui/popover'
 import { FilterRegular } from '@mingcute/react/core-regular'
 
-import type { ResourceCatalogType } from '#/business/catalog'
+import type { ResourceCatalogType } from '#/business/resource-catalog'
 import {
   RESOURCE_DATE_FILTER_TYPES,
-  type CatalogExtraFilter,
-  type CatalogFilterOption,
-} from '#/business/catalog'
+  type ResourceExtraFilter,
+  type ResourceFilterOption,
+} from '#/business/resource-catalog'
 
-export type ResourcePickerFilterType = ResourceCatalogType
+export type ResourceFilterType = ResourceCatalogType
 
-type FilterOption = CatalogFilterOption
-type ExtraFilter = CatalogExtraFilter
+type FilterOption = ResourceFilterOption
+type ExtraFilter = ResourceExtraFilter
 
 const RESOURCE_PICKER_LOAD_PROP = 'resourcePickerLoad' as const
 
@@ -49,18 +51,18 @@ function categoryIdsFromExtras(extras: Record<string, string>) {
   return []
 }
 
-export type ResourcePickerFilterFieldOptions = {
+export type ResourceFilterFieldOptions = {
   /** Status tabs on ResourceList — omit duplicate status select in the popover. */
   omitStatus?: boolean
   /** Keys already exposed as SchemaTable toolbar filters. */
   omitExtraFilterKeys?: string[]
 }
 
-export function buildResourcePickerFilterFields(
-  type: ResourcePickerFilterType,
+export function buildResourceFilterFields(
+  type: ResourceFilterType,
   statusOptions: FilterOption[],
   extraFilters: ExtraFilter[],
-  options?: ResourcePickerFilterFieldOptions,
+  options?: ResourceFilterFieldOptions,
 ): SchemaFormField[] {
   const fields: SchemaFormField[] = []
 
@@ -123,7 +125,7 @@ export function buildResourcePickerFilterFields(
   return fields
 }
 
-export function resourcePickerFilterValuesFromState(
+export function resourceFilterValuesFromState(
   status: string,
   extras: Record<string, string>,
   fields: SchemaFormField[],
@@ -152,7 +154,7 @@ export function resourcePickerFilterValuesFromState(
   return values
 }
 
-export function resourcePickerFilterStateFromValues(
+export function resourceFilterStateFromValues(
   values: SchemaFormValues,
   extraFilterKeys: string[],
 ): { status: string; extras: Record<string, string> } {
@@ -184,13 +186,13 @@ export function resourcePickerFilterStateFromValues(
   return { status, extras }
 }
 
-export function syncResourcePickerFilterForm(
+export function syncResourceFilterForm(
   form: SchemaFormInstance,
   fields: SchemaFormField[],
   status: string,
   extras: Record<string, string>,
 ) {
-  const values = resourcePickerFilterValuesFromState(status, extras, fields)
+  const values = resourceFilterValuesFromState(status, extras, fields)
   for (const field of flattenFields(fields)) {
     form.setFieldValue(field.path, values[field.key])
   }
@@ -210,7 +212,7 @@ function toLocalYmd(date: Date) {
   return `${year}-${month}-${day}`
 }
 
-export function resourcePickerFilterRenderField(ctx: SchemaFormRenderField) {
+export function resourceFilterRenderField(ctx: SchemaFormRenderField) {
   const loadKind = ctx.field.props?.[RESOURCE_PICKER_LOAD_PROP]
   if (loadKind === 'product-categories') {
     const ids = Array.isArray(ctx.value)
@@ -219,7 +221,7 @@ export function resourcePickerFilterRenderField(ctx: SchemaFormRenderField) {
         ? [ctx.value]
         : []
     return (
-      <HitPayNamedSelect
+      <ResourceAsyncSelect
         name={`rp_filter_${ctx.field.path}`}
         label={false}
         multiple
@@ -228,7 +230,7 @@ export function resourcePickerFilterRenderField(ctx: SchemaFormRenderField) {
         empty="No categories."
         getLabel={(row) => row.name?.trim() || row.id}
         load={() =>
-          loadProductCategoriesForSelect().then((result) => ({ items: result.items }))
+          loadHitPayProductCategories().then((result) => ({ items: result.items }))
         }
         value={ids.length ? ids : null}
         onValueChange={(value) => {
@@ -240,14 +242,14 @@ export function resourcePickerFilterRenderField(ctx: SchemaFormRenderField) {
   if (loadKind === 'locations') {
     const id = typeof ctx.value === 'string' && ctx.value ? ctx.value : null
     return (
-      <HitPayNamedSelect
+      <ResourceAsyncSelect
         name={`rp_filter_${ctx.field.path}`}
         label={false}
         clearable
         placeholder={ctx.placeholder ?? ctx.field.title}
         empty="No locations."
         getLabel={(row) => row.name?.trim() || row.id}
-        load={() => loadLocationsForSelect().then((result) => ({ items: result.items }))}
+        load={() => loadHitPayLocations().then((result) => ({ items: result.items }))}
         value={id}
         onValueChange={(value) => {
           ctx.onChange(typeof value === 'string' && value ? value : '')
@@ -288,8 +290,8 @@ export function resourcePickerFilterRenderField(ctx: SchemaFormRenderField) {
   return undefined
 }
 
-type ResourcePickerFilterMenuProps = {
-  type: ResourcePickerFilterType
+type ResourceFilterMenuProps = {
+  type: ResourceFilterType
   statusOptions: FilterOption[]
   extraFilters: ExtraFilter[]
   open: boolean
@@ -302,7 +304,7 @@ type ResourcePickerFilterMenuProps = {
   onApply: (status: string, extras: Record<string, string>) => void
 }
 
-export function ResourcePickerFilterMenu({
+export function ResourceFilterMenu({
   type,
   statusOptions,
   extraFilters,
@@ -314,9 +316,9 @@ export function ResourcePickerFilterMenu({
   applyLabel,
   loading,
   onApply,
-}: ResourcePickerFilterMenuProps) {
+}: ResourceFilterMenuProps) {
   const fields = React.useMemo(
-    () => buildResourcePickerFilterFields(type, statusOptions, extraFilters),
+    () => buildResourceFilterFields(type, statusOptions, extraFilters),
     [type, statusOptions, extraFilters],
   )
   const extraKeys = React.useMemo(() => extraFilters.map((group) => group.key), [extraFilters])
@@ -324,10 +326,10 @@ export function ResourcePickerFilterMenu({
 
   React.useEffect(() => {
     if (!open) return
-    syncResourcePickerFilterForm(builder.form, fields, appliedStatus, appliedExtras)
+    syncResourceFilterForm(builder.form, fields, appliedStatus, appliedExtras)
   }, [open, appliedStatus, appliedExtras, fields, builder.form])
 
-  const draft = resourcePickerFilterStateFromValues(builder.values, extraKeys)
+  const draft = resourceFilterStateFromValues(builder.values, extraKeys)
   const filtersDirty =
     draft.status !== appliedStatus || !extrasMatch(draft.extras, appliedExtras)
 
@@ -361,7 +363,7 @@ export function ResourcePickerFilterMenu({
         <SchemaForm
           form={builder}
           className="max-w-none gap-3"
-          renderField={(ctx) => resourcePickerFilterRenderField(ctx) ?? undefined}
+          renderField={(ctx) => resourceFilterRenderField(ctx) ?? undefined}
         />
         <div className="flex gap-2 pt-1">
           <Button
@@ -376,7 +378,7 @@ export function ResourcePickerFilterMenu({
             type="button"
             className="flex-1"
             onClick={() => {
-              const next = resourcePickerFilterStateFromValues(builder.values, extraKeys)
+              const next = resourceFilterStateFromValues(builder.values, extraKeys)
               onApply(next.status, next.extras)
             }}
           >

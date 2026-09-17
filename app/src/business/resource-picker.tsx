@@ -1,5 +1,7 @@
 'use client'
 
+/** Promise dialog: pick HitPay products, orders, charges, or invoices. */
+
 import * as React from 'react'
 import { AddRegular, CloseRegular, MinimizeRegular, SearchRegular } from '@mingcute/react/core-regular'
 
@@ -9,15 +11,15 @@ import { Spinner } from '@ui/spinner'
 import { Checkbox } from '@ui/checkbox'
 import { loadResourcePage } from '#/lib/resource'
 import {
-  buildResourcePickerFilterFields,
-  ResourcePickerFilterMenu,
-} from '#/business/filter-form'
+  buildResourceFilterFields,
+  ResourceFilterMenu,
+} from '#/business/resource-filter-form'
 import {
   RESOURCE_CATALOG_LABELS,
   RESOURCE_EXTRA_FILTERS,
   RESOURCE_STATUS_FILTERS,
   resourceCatalogFiltersActive,
-} from '#/business/catalog'
+} from '#/business/resource-catalog'
 import { Input } from '@ui/input'
 import { RadioGroup, RadioGroupItem } from '@ui/radio-group'
 import {
@@ -242,7 +244,7 @@ function ResourcePickerDialog({
   const [filtersOpen, setFiltersOpen] = React.useState(false)
 
   const filterFields = React.useMemo(
-    () => buildResourcePickerFilterFields(type, filters, extraFilters),
+    () => buildResourceFilterFields(type, filters, extraFilters),
     [type, filters, extraFilters],
   )
 
@@ -441,7 +443,7 @@ function ResourcePickerDialog({
             />
           </div>
           {hasFilterMenu ? (
-            <ResourcePickerFilterMenu
+            <ResourceFilterMenu
               key={type}
               type={type}
               statusOptions={filters}

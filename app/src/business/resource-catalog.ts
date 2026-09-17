@@ -1,12 +1,13 @@
+/** HitPay catalog types: product | order | charge | invoice, plus status/extra filters. */
 export const RESOURCE_CATALOG_TYPES = ['product', 'order', 'charge', 'invoice'] as const
 
 export type ResourceCatalogType = (typeof RESOURCE_CATALOG_TYPES)[number]
 
-export type CatalogFilterOption = { value: string; label: string }
-export type CatalogExtraFilter = {
+export type ResourceFilterOption = { value: string; label: string }
+export type ResourceExtraFilter = {
   key: string
   label: string
-  options: CatalogFilterOption[]
+  options: ResourceFilterOption[]
 }
 
 export const RESOURCE_CATALOG_LABELS: Record<
@@ -19,7 +20,7 @@ export const RESOURCE_CATALOG_LABELS: Record<
   invoice: { singular: 'invoice', plural: 'invoices' },
 }
 
-export const RESOURCE_STATUS_FILTERS: Record<ResourceCatalogType, CatalogFilterOption[]> = {
+export const RESOURCE_STATUS_FILTERS: Record<ResourceCatalogType, ResourceFilterOption[]> = {
   product: [
     { value: 'all', label: 'All statuses' },
     { value: 'published', label: 'Published' },
@@ -51,7 +52,7 @@ export const RESOURCE_STATUS_FILTERS: Record<ResourceCatalogType, CatalogFilterO
 }
 
 export const RESOURCE_EXTRA_FILTERS: Partial<
-  Record<ResourceCatalogType, CatalogExtraFilter[]>
+  Record<ResourceCatalogType, ResourceExtraFilter[]>
 > = {
   product: [
     {

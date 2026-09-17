@@ -1,5 +1,7 @@
 'use client'
 
+/** SchemaTable page for HitPay products, orders, charges, or invoices. */
+
 import * as React from 'react'
 
 import {
@@ -12,20 +14,20 @@ import {
 } from '@/components/displaying-data/data-table'
 import type { SchemaTableRowAction } from '@/components/displaying-data/data-table-model'
 import {
-  buildResourcePickerFilterFields,
-  ResourcePickerFilterMenu,
-} from '#/business/filter-form'
+  buildResourceFilterFields,
+  ResourceFilterMenu,
+} from '#/business/resource-filter-form'
 import type { ResourceLoad, ResourceType } from '#/business/resource-picker'
 import {
   resourceCatalogFiltersActive,
   RESOURCE_EXTRA_FILTERS,
   RESOURCE_STATUS_FILTERS,
-} from '#/business/catalog'
-import { estimateListTotal, resourcePickerItemsToRows } from '#/business/list-map'
+} from '#/business/resource-catalog'
+import { estimateListTotal, resourceItemsToTableRows } from '#/business/resource-list-map'
 import {
   resourceListSchema,
   resourceListToolbarFilterKeys,
-} from '#/business/list-schema'
+} from '#/business/resource-list-schema'
 import { Spinner } from '@ui/spinner'
 import { cn } from '@/lib/utils'
 import { loadResourcePage } from '#/lib/resource'
@@ -140,7 +142,7 @@ function ResourceListBody({
   )
   const filterFields = React.useMemo(
     () =>
-      buildResourcePickerFilterFields(type, statusOptions, extraFilters, {
+      buildResourceFilterFields(type, statusOptions, extraFilters, {
         omitStatus: true,
         omitExtraFilterKeys: toolbarFilterKeys,
       }),
@@ -184,7 +186,7 @@ function ResourceListBody({
         if (type === 'invoice' && result.cursor) {
           cursorRef.current.byPage[query.page] = result.cursor
         }
-        const nextRows = resourcePickerItemsToRows(type, result.items)
+        const nextRows = resourceItemsToTableRows(type, result.items)
         setRows(nextRows)
         setTotal(
           estimateListTotal(
@@ -230,7 +232,7 @@ function ResourceListBody({
   const resultCountLabel = `${total ?? rows.length} result${(total ?? rows.length) === 1 ? '' : 's'}`
 
   const filterToolbar = hasFilterMenu ? (
-    <ResourcePickerFilterMenu
+    <ResourceFilterMenu
       type={type}
       statusOptions={statusOptions}
       extraFilters={extraFilters}

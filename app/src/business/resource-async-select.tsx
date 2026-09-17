@@ -1,15 +1,17 @@
 'use client'
 
+/** Searchable Select that pages HitPay id+name records (used by resource filters). */
+
 import { useMemo } from 'react'
 import { Select } from '@/components/form/select'
 import { Field, FieldDescription, FieldLabel } from '@ui/field'
-import { selectEntry, selectStore, useSelectOptions } from '#/business/select-store'
+import { resourceAsyncSelectEntry, resourceAsyncSelectStore, useResourceAsyncSelectOptions } from '#/business/resource-async-select-store'
 
-type HitPayNamedRow = { id: string }
+type ResourceAsyncSelectRow = { id: string }
 
-type HitPayNamedSelectLoad<T extends HitPayNamedRow> = (page: number) => Promise<{ items: T[]; hasMore?: boolean }>
+type ResourceAsyncSelectLoad<T extends ResourceAsyncSelectRow> = (page: number) => Promise<{ items: T[]; hasMore?: boolean }>
 
-type HitPayNamedSelectProps<T extends HitPayNamedRow> = {
+type ResourceAsyncSelectProps<T extends ResourceAsyncSelectRow> = {
   name: string
   label?: string | false
   description?: string
@@ -22,17 +24,17 @@ type HitPayNamedSelectProps<T extends HitPayNamedRow> = {
   onValueChange?: (value: string | string[] | null, selected: T | T[] | null) => void
   empty: string
   getLabel: (row: T) => string
-  load: HitPayNamedSelectLoad<T>
+  load: ResourceAsyncSelectLoad<T>
   clearable?: boolean
 }
 
-function pickRows<T extends HitPayNamedRow>(rows: T[], value: string | string[] | null) {
+function pickRows<T extends ResourceAsyncSelectRow>(rows: T[], value: string | string[] | null) {
   if (value == null) return null
   if (Array.isArray(value)) return rows.filter((row) => value.includes(row.id))
   return rows.find((row) => row.id === value) ?? null
 }
 
-function HitPayNamedSelect<T extends HitPayNamedRow>({
+function ResourceAsyncSelect<T extends ResourceAsyncSelectRow>({
   name,
   label,
   description,
@@ -47,8 +49,8 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
   getLabel,
   load,
   clearable = false,
-}: HitPayNamedSelectProps<T>) {
-  const entry = useSelectOptions<T>(name, load)
+}: ResourceAsyncSelectProps<T>) {
+  const entry = useResourceAsyncSelectOptions<T>(name, load)
   const rows = entry.items as T[]
   const loading = entry.loading
   const hasMore = entry.hasMore
@@ -79,11 +81,11 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
       {hasMore ? (
         <button type="button" className="mt-2 text-sm text-oc-primary" disabled={loading} onClick={() => {
           const nextPage = entry.page + 1
-          selectStore.setState((state) => ({ ...state, [name]: { ...selectEntry(name), ...entry, loading: true, page: nextPage } }))
+          resourceAsyncSelectStore.setState((state) => ({ ...state, [name]: { ...resourceAsyncSelectEntry(name), ...entry, loading: true, page: nextPage } }))
           load(nextPage).then((result) => {
-            selectStore.setState((state) => ({
+            resourceAsyncSelectStore.setState((state) => ({
               ...state,
-              [name]: { ...selectEntry(name), ...entry, items: [...rows, ...result.items], hasMore: Boolean(result.hasMore), loading: false, page: nextPage },
+              [name]: { ...resourceAsyncSelectEntry(name), ...entry, items: [...rows, ...result.items], hasMore: Boolean(result.hasMore), loading: false, page: nextPage },
             }))
           })
         }}>
@@ -104,5 +106,5 @@ function HitPayNamedSelect<T extends HitPayNamedRow>({
   )
 }
 
-export { HitPayNamedSelect }
-export type { HitPayNamedRow, HitPayNamedSelectLoad, HitPayNamedSelectProps }
+export { ResourceAsyncSelect }
+export type { ResourceAsyncSelectRow, ResourceAsyncSelectLoad, ResourceAsyncSelectProps }

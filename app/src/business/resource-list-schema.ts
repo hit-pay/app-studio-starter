@@ -1,3 +1,4 @@
+/** SchemaTable columns, tabs, and toolbar filters per catalog type. */
 import type {
   SchemaTableFilter,
   SchemaTableSchema,
@@ -9,7 +10,7 @@ import {
   RESOURCE_EXTRA_FILTERS,
   RESOURCE_STATUS_FILTERS,
   type ResourceCatalogType,
-} from '#/business/catalog'
+} from '#/business/resource-catalog'
 
 const RESOURCE_LIST_SELECTION_ACTIONS: SchemaTableSelectionAction[] = [
   { key: 'export', label: 'Export', icon: 'download' },
