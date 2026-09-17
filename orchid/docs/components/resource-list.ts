@@ -14,7 +14,13 @@ function liveResourceListExample(type: (typeof RESOURCE_LIST_TYPES)[number], lab
     code: `function ${component}() {
   return (
     <ResourceListProvider load={demoLoad}>
-      <ResourceList type="${type}" className="min-w-0" />
+      <ResourceList
+        type="${type}"
+        className="min-w-0"
+        onRowAction={(action, row) => console.log(action, row.id)}
+        onSelectionAction={(action, ids) => console.log(action.key, ids)}
+        onEmptyAction={(action) => console.log(action.key)}
+      />
     </ResourceListProvider>
   );
 }
@@ -29,8 +35,9 @@ const resourceListDocs = {
   usage: [
     "Mount ResourceListProvider once near the app root and pass the same load as ResourcePicker (ResourcePickerLoad → ResourcePickerPage).",
     "App Studio: loadResourcePickerPage (server) + mapResourcePickerPayload from #/lib/resource-picker-map. Query shapes follow app/docs/hitpay/*.md.",
-    "Render ResourceList with type product | order | charge | invoice. Server-mode SchemaTable (search, filter popover, pagination).",
-    "Table query maps to load input: query (keywords), filter (status), extras (category_ids, location_id, channel, inventory, dates, payment_method), page, cursor (invoices).",
+    "Render ResourceList with type product | order | charge | invoice. Server-mode SchemaTable with the same chrome as DataTable: status tabs, toolbar filters, search, sort menu, Edit column, row selection + header actions, row ⋮ menu, pagination.",
+    "Advanced HitPay filters (category, location/source, date range) stay in the filter popover; status + catalog extras align with tabs and toolbar filters.",
+    "Table query maps to load input: query (keywords), filter (tab/status), extras (toolbar filters + popover), page, cursor (invoices). Wire onRowAction, onSelectionAction, onEmptyAction for header/row/empty actions.",
     "Rows expose row.resource as the HitPay record snapshot.",
   ].join(" "),
   props: {
@@ -43,6 +50,13 @@ const resourceListDocs = {
     "ResourceList.onSelectionAction": "(action, selectedIds) => void",
     "ResourceList.onEmptyAction": "(action) => void",
     "ResourceList.cells": "optional SchemaTableCells overrides",
+    "schema.tabs": "status tabs → load filter",
+    "schema.filters": "toolbar filters → load extras",
+    "schema.selection": "true — bulk header actions",
+    "schema.selectionActions": "export + dropdown (wire onSelectionAction)",
+    "schema.rowActions": "edit | delete (wire onRowAction)",
+    "schema.editColumns": "true",
+    "schema.sort": "toolbar sort (server lists: UI only until API sort)",
     "load(input).type": RESOURCE_LIST_TYPES.join(" | "),
     "load(input).query": "string → keywords upstream",
     "load(input).filter": "string (status; maps to statuses[] or invoice status)",

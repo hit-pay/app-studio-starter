@@ -22,7 +22,10 @@ import {
   RESOURCE_STATUS_FILTERS,
 } from '@/lib/resource-catalog'
 import { estimateListTotal, resourcePickerItemsToRows } from '@/lib/resource-list-map'
-import { resourceListSchema } from '@/lib/resource-list-schema'
+import {
+  resourceListSchema,
+  resourceListToolbarFilterKeys,
+} from '@/lib/resource-list-schema'
 import { Spinner } from '@ui/spinner'
 import { cn } from '@/lib/utils'
 
@@ -45,15 +48,37 @@ function resourceListLoadInput(
   }
 }
 
+function mergeLoadExtras(
+  type: ResourcePickerType,
+  query: SchemaTableQuery,
+  popoverExtras: Record<string, string>,
+): { status: string; extras: Record<string, string> } {
+  const status = query.tab || 'all'
+  const extras: Record<string, string> = { ...popoverExtras }
+
+  for (const [key, value] of Object.entries(query.filters)) {
+    if (value) extras[key] = value
+    else delete extras[key]
+  }
+
+  for (const group of RESOURCE_EXTRA_FILTERS[type] ?? []) {
+    if (!extras[group.key]) extras[group.key] = 'all'
+  }
+
+  return { status, extras }
+}
+
 function listQuerySignature(
   type: ResourcePickerType,
   query: SchemaTableQuery,
-  status: string,
-  extras: Record<string, string>,
+  popoverExtras: Record<string, string>,
 ) {
+  const { status, extras } = mergeLoadExtras(type, query, popoverExtras)
   return JSON.stringify({
     type,
     search: query.search,
+    tab: query.tab,
+    filters: query.filters,
     page: query.page,
     pageSize: query.pageSize,
     status,
@@ -104,9 +129,17 @@ function ResourceListBody({
   const schema = React.useMemo(() => resourceListSchema(type), [type])
   const statusOptions = RESOURCE_STATUS_FILTERS[type]
   const extraFilters = RESOURCE_EXTRA_FILTERS[type] ?? []
+  const toolbarFilterKeys = React.useMemo(
+    () => resourceListToolbarFilterKeys(type),
+    [type],
+  )
   const filterFields = React.useMemo(
-    () => buildResourcePickerFilterFields(type, statusOptions, extraFilters),
-    [type, statusOptions, extraFilters],
+    () =>
+      buildResourcePickerFilterFields(type, statusOptions, extraFilters, {
+        omitStatus: true,
+        omitExtraFilterKeys: toolbarFilterKeys,
+      }),
+    [type, statusOptions, extraFilters, toolbarFilterKeys],
   )
   const hasFilterMenu = filterFields.length > 0
 
@@ -114,14 +147,11 @@ function ResourceListBody({
   const [total, setTotal] = React.useState<number | undefined>()
   const [loading, setLoading] = React.useState(true)
   const [error, setError] = React.useState<string | null>(null)
-  const [status, setStatus] = React.useState('all')
-  const [extras, setExtras] = React.useState<Record<string, string>>({})
+  const [popoverExtras, setPopoverExtras] = React.useState<Record<string, string>>({})
   const [filtersOpen, setFiltersOpen] = React.useState(false)
 
-  const statusRef = React.useRef(status)
-  const extrasRef = React.useRef(extras)
-  statusRef.current = status
-  extrasRef.current = extras
+  const popoverExtrasRef = React.useRef(popoverExtras)
+  popoverExtrasRef.current = popoverExtras
 
   const cursorRef = React.useRef<{ signature: string; byPage: Record<number, string> }>({
     signature: '',
@@ -129,14 +159,11 @@ function ResourceListBody({
   })
 
   const fetchPage = React.useCallback(
-    async (
-      query: SchemaTableQuery,
-      nextStatus: string,
-      nextExtras: Record<string, string>,
-    ) => {
+    async (query: SchemaTableQuery) => {
       setLoading(true)
       setError(null)
-      const signature = listQuerySignature(type, query, nextStatus, nextExtras)
+      const { status, extras } = mergeLoadExtras(type, query, popoverExtrasRef.current)
+      const signature = listQuerySignature(type, query, popoverExtrasRef.current)
       if (cursorRef.current.signature !== signature) {
         cursorRef.current = { signature, byPage: {} }
       }
@@ -147,7 +174,7 @@ function ResourceListBody({
 
       try {
         const result = await load(
-          resourceListLoadInput(type, query, nextStatus, nextExtras, cursor),
+          resourceListLoadInput(type, query, status, extras, cursor),
         )
         if (type === 'invoice' && result.cursor) {
           cursorRef.current.byPage[query.page] = result.cursor
@@ -179,17 +206,22 @@ function ResourceListBody({
     data: rows,
     total,
     onQueryChange: (query) => {
-      void fetchPage(query, statusRef.current, extrasRef.current)
+      void fetchPage(query)
     },
   })
 
   React.useEffect(() => {
-    void fetchPage(table.query, statusRef.current, extrasRef.current)
-    // Initial load only; search/page/filters refetch via onQueryChange (incl. setPage after Apply).
+    void fetchPage(table.query)
+    // Initial load only; search/tabs/filters/page refetch via onQueryChange.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fetchPage])
 
-  const filtersActive = resourceCatalogFiltersActive(status, extras, type)
+  const { status: appliedStatus, extras: appliedLoadExtras } = mergeLoadExtras(
+    type,
+    table.query,
+    popoverExtras,
+  )
+  const filtersActive = resourceCatalogFiltersActive(appliedStatus, appliedLoadExtras, type)
   const resultCountLabel = `${total ?? rows.length} result${(total ?? rows.length) === 1 ? '' : 's'}`
 
   const filterToolbar = hasFilterMenu ? (
@@ -199,18 +231,16 @@ function ResourceListBody({
       extraFilters={extraFilters}
       open={filtersOpen}
       onOpenChange={setFiltersOpen}
-      appliedStatus={status}
-      appliedExtras={extras}
+      appliedStatus={appliedStatus}
+      appliedExtras={popoverExtras}
       filtersActive={filtersActive}
       applyLabel={resultCountLabel}
       loading={loading}
-      onApply={(nextStatus, nextExtras) => {
-        setStatus(nextStatus)
-        setExtras(nextExtras)
-        statusRef.current = nextStatus
-        extrasRef.current = nextExtras
+      onApply={(_status, nextExtras) => {
+        popoverExtrasRef.current = nextExtras
+        setPopoverExtras(nextExtras)
         setFiltersOpen(false)
-        table.setPage(1)
+        void fetchPage(table.query)
       }}
     />
   ) : null

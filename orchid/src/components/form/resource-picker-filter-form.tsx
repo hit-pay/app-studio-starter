@@ -49,10 +49,18 @@ function categoryIdsFromExtras(extras: Record<string, string>) {
   return []
 }
 
+export type ResourcePickerFilterFieldOptions = {
+  /** Status tabs on ResourceList — omit duplicate status select in the popover. */
+  omitStatus?: boolean
+  /** Keys already exposed as SchemaTable toolbar filters. */
+  omitExtraFilterKeys?: string[]
+}
+
 export function buildResourcePickerFilterFields(
   type: ResourcePickerFilterType,
   statusOptions: FilterOption[],
   extraFilters: ExtraFilter[],
+  options?: ResourcePickerFilterFieldOptions,
 ): SchemaFormField[] {
   const fields: SchemaFormField[] = []
 
@@ -68,6 +76,7 @@ export function buildResourcePickerFilterFields(
   }
 
   for (const group of extraFilters) {
+    if (options?.omitExtraFilterKeys?.includes(group.key)) continue
     fields.push({
       key: group.key,
       title: group.label,
@@ -89,7 +98,7 @@ export function buildResourcePickerFilterFields(
     })
   }
 
-  if (statusOptions.length > 1) {
+  if (statusOptions.length > 1 && !options?.omitStatus) {
     fields.push({
       key: 'status',
       title: 'Status',
