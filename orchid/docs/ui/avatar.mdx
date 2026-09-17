@@ -1,4 +1,26 @@
-import { AvatarDemo } from "../doc-demos"
+import { DocExamples } from "../doc-code-panel"
+import {
+  Avatar,
+  AvatarBadge,
+  AvatarFallback,
+  AvatarGroup,
+  AvatarGroupCount,
+  AvatarImage,
+} from "../../src/ui/avatar"
+import { CheckRegular } from "@mingcute/react/core-regular"
+import avatarDocs from "./avatar"
 
-Use `Avatar` to represent a person, team, or entity with an image or initials. Choose it for compact identity cues, not for full profile details.
-<AvatarDemo />
+<DocExamples
+  examples={avatarDocs.examples}
+  scope={{
+    Avatar,
+    AvatarBadge,
+    AvatarFallback,
+    AvatarGroup,
+    AvatarGroupCount,
+    AvatarImage,
+    CheckIcon: CheckRegular,
+    photoUrl:
+      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=128&h=128&fit=crop",
+  }}
+/>

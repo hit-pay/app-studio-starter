@@ -428,7 +428,7 @@
       "name": "avatar",
       "type": "registry:ui",
       "title": "Avatar",
-      "description": "Compound avatar with image, fallback, badge, group, and Orchid business styling.",
+      "description": "Compound avatar with image, fallback, badge, and group support.",
       "dependencies": [
         "@base-ui/react"
       ],

@@ -31,9 +31,6 @@ function AvatarDemo() {
             <AvatarImage src="/missing-avatar.jpg" alt="Alex Turner" />
             <AvatarFallback>AT</AvatarFallback>
           </Avatar>
-          <Avatar variant="business">
-            <AvatarFallback>H</AvatarFallback>
-          </Avatar>
         </div>
       </div>
 
@@ -88,9 +85,6 @@ function AvatarDemo() {
           <Avatar>
             <AvatarImage src={ALEX_PHOTO} alt="Alex Turner" />
             <AvatarFallback>AT</AvatarFallback>
-          </Avatar>
-          <Avatar variant="business">
-            <AvatarFallback>H</AvatarFallback>
           </Avatar>
           <AvatarGroupCount>+2</AvatarGroupCount>
         </AvatarGroup>

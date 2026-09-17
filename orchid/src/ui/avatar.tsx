@@ -8,17 +8,14 @@ import { cn } from '@/lib/utils'
 function Avatar({
   className,
   size = 'default',
-  variant = 'default',
   ...props
 }: AvatarPrimitive.Root.Props & {
   size?: 'default' | 'sm' | 'lg'
-  variant?: 'default' | 'business'
 }) {
   return (
     <AvatarPrimitive.Root
       data-slot="avatar"
       data-size={size}
-      data-variant={variant}
       className={cn(
         'group/avatar relative flex size-8 shrink-0 rounded-full select-none after:pointer-events-none after:absolute after:inset-0 after:z-10 after:rounded-full after:border after:border-solid after:border-oc-neutral-border data-[size=lg]:size-10 data-[size=sm]:size-6',
         className,
@@ -43,7 +40,7 @@ function AvatarFallback({ className, ...props }: AvatarPrimitive.Fallback.Props)
     <AvatarPrimitive.Fallback
       data-slot="avatar-fallback"
       className={cn(
-        'flex size-full items-center justify-center rounded-full bg-oc-neutral-strong text-base leading-none font-bold text-oc-primary-foreground group-data-[size=lg]/avatar:text-lg group-data-[size=sm]/avatar:text-xs group-data-[variant=business]/avatar:bg-oc-primary',
+        'flex size-full items-center justify-center rounded-full bg-oc-neutral-strong text-base leading-none font-bold text-oc-primary-foreground group-data-[size=lg]/avatar:text-lg group-data-[size=sm]/avatar:text-xs',
         className,
       )}
       {...props}
