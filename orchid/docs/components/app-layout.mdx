@@ -1,18 +1,19 @@
-import { DocExamples, DocPropsTable } from "../doc-code-panel"
-import { AppLayout } from "../../src/components/layout/app-layout"
-import { PageLayout } from "../../src/components/layout/page-layout"
+import { DocCodePanel, DocPropsTable } from "../doc-code-panel"
 import appLayoutDocs from "./app-layout"
 
-Use `AppLayout` as the embedded HitPay App Studio frame around every dashboard route. Tab and sidebar items update selection automatically; pass `pages` or `sidebarPages` to swap main content, or control routing yourself with `activeNavigation`, `onNavigationChange`, and `children`.
+Use `AppLayout` as the embedded HitPay App Studio frame around dashboard routes built with **TanStack Start / TanStack Router**. Put it in a **layout route** (`route.tsx`), set `navigationItems[].to`, pick `variant="tabs"` or `variant="sidebar"` for layout, and render child routes with `<Outlet />`. Navigation and active state come from the router only — no separate change handlers. Use `appBarActions` for controls aligned to the right of `appName` (for example a primary button). Do not use this component outside a router tree.
 
 ## Props
 
 <DocPropsTable props={appLayoutDocs.props} />
 
-<DocExamples
-  examples={appLayoutDocs.examples}
-  scope={{
-    AppLayout,
-    PageLayout,
-  }}
-/>
+<div className="grid gap-6">
+  {appLayoutDocs.examples.map((example) => (
+    <div key={example.description} className="grid gap-3">
+      <p className="text-xs font-medium tracking-[0.18em] text-oc-muted-foreground uppercase">
+        {example.description}
+      </p>
+      <DocCodePanel filename="route.tsx" code={example.code} />
+    </div>
+  ))}
+</div>

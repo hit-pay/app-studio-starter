@@ -49,7 +49,7 @@ const handler = createMcpHandler(
       "list_orchid_components",
       {
         description:
-          "Returns Orchid UI and component docs. Filter with category: ui or components.",
+          "Returns Orchid UI and component docs. Filter with category: ui or components. app-layout requires TanStack Router (layout route + navigationItems[].to + Outlet; variant tabs | sidebar).",
         inputSchema: {
           category: z.string().optional(),
         },

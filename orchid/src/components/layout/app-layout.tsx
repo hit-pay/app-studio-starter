@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, type ComponentProps, type ReactNode } from 'react'
+import { Link, useRouterState } from '@tanstack/react-router'
 import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
@@ -10,102 +11,65 @@ import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@ui/drawer'
 type AppLayoutNavigationItem = {
   id: string
   label: ReactNode
+  /** TanStack Router path — navigation uses `Link`; active state follows the URL. */
+  to: string
   disabled?: boolean
 }
 
-function firstItemId(items?: AppLayoutNavigationItem[]) {
-  return items?.[0]?.id ?? ''
+function isPathActive(pathname: string, to: string) {
+  if (to === '/') {
+    return pathname === '/'
+  }
+  return pathname === to || pathname.startsWith(`${to}/`)
+}
+
+function activeIdFromPath(pathname: string, items?: AppLayoutNavigationItem[]) {
+  if (!items?.length) {
+    return ''
+  }
+
+  const match = [...items]
+    .sort((left, right) => right.to.length - left.to.length)
+    .find((item) => isPathActive(pathname, item.to))
+
+  return match?.id ?? items[0]?.id ?? ''
 }
 
 function AppLayout({
   className,
   variant = 'default',
   appName,
+  appBarActions,
   header,
   navigationItems,
-  activeNavigation,
-  defaultActiveNavigation,
-  onNavigationChange,
-  sidebarItems,
-  activeSidebar,
-  defaultActiveSidebar,
-  onSidebarChange,
-  pages,
-  sidebarPages,
   children,
   ...props
 }: ComponentProps<'div'> & {
   variant?: 'default' | 'tabs' | 'sidebar'
   appName?: ReactNode
+  /** Renders at the end of the top app bar (right of `appName`). */
+  appBarActions?: ReactNode
   header?: ReactNode
   navigationItems?: AppLayoutNavigationItem[]
-  activeNavigation?: string
-  defaultActiveNavigation?: string
-  onNavigationChange?: (id: string, item: AppLayoutNavigationItem) => void
-  sidebarItems?: AppLayoutNavigationItem[]
-  activeSidebar?: string
-  defaultActiveSidebar?: string
-  onSidebarChange?: (id: string, item: AppLayoutNavigationItem) => void
-  /** When set with `navigationItems`, the active tab renders matching page content. */
-  pages?: Record<string, ReactNode>
-  /** When set with `sidebarItems`, the active sidebar item renders matching page content. */
-  sidebarPages?: Record<string, ReactNode>
 }) {
-  const navigationControlled =
-    activeNavigation !== undefined && onNavigationChange !== undefined
-  const sidebarControlled =
-    activeSidebar !== undefined && onSidebarChange !== undefined
-
-  const [internalNavigation, setInternalNavigation] = useState(() =>
-    activeNavigation ??
-      defaultActiveNavigation ??
-      firstItemId(navigationItems),
-  )
-  const [internalSidebar, setInternalSidebar] = useState(() =>
-    activeSidebar ?? defaultActiveSidebar ?? firstItemId(sidebarItems),
-  )
-
-  const resolvedNavigation = navigationControlled
-    ? activeNavigation
-    : internalNavigation
-  const resolvedSidebar = sidebarControlled ? activeSidebar : internalSidebar
+  const pathname = useRouterState({ select: (state) => state.location.pathname })
+  const resolvedActive = activeIdFromPath(pathname, navigationItems)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
-  const hasSidebar = variant === 'sidebar' && Boolean(sidebarItems?.length)
-  const showTopBar = Boolean(appName) || hasSidebar
+  const hasNavigation = Boolean(navigationItems?.length)
+  const showTabs = variant === 'tabs' && hasNavigation
+  const showSidebar = variant === 'sidebar' && hasNavigation
+  const showTopBar = Boolean(appName) || Boolean(appBarActions) || showSidebar
 
-  function selectNavigation(id: string, item: AppLayoutNavigationItem) {
-    if (!navigationControlled) {
-      setInternalNavigation(id)
-    }
-    onNavigationChange?.(id, item)
-  }
-
-  function selectSidebar(id: string, item: AppLayoutNavigationItem) {
-    if (!sidebarControlled) {
-      setInternalSidebar(id)
-    }
-    onSidebarChange?.(id, item)
-  }
-
-  const mainChild =
-    navigationItems?.length && pages
-      ? (pages[resolvedNavigation ?? ''] ?? children)
-      : hasSidebar && sidebarPages
-        ? (sidebarPages[resolvedSidebar ?? ''] ?? children)
-        : children
-
-  const sidebarNav = sidebarItems?.length ? (
+  const sidebarNav = showSidebar ? (
     <AppSidebarContent>
-      {sidebarItems.map((item) => (
+      {navigationItems!.map((item) => (
         <AppSidebarItem
           key={item.id}
-          active={item.id === resolvedSidebar}
+          to={item.to}
+          active={item.id === resolvedActive}
           disabled={item.disabled}
-          onClick={() => {
-            selectSidebar(item.id, item)
-            setSidebarOpen(false)
-          }}
+          onNavigate={() => setSidebarOpen(false)}
         >
           {item.label}
         </AppSidebarItem>
@@ -120,15 +84,15 @@ function AppLayout({
           {header}
         </div>
       ) : null}
-      {navigationItems?.length ? (
+      {showTabs ? (
         <div data-slot="app-layout-tabs" className="min-w-0 shrink-0">
           <AppNav>
-            {navigationItems.map((item) => (
+            {navigationItems!.map((item) => (
               <AppNavItem
                 key={item.id}
-                active={item.id === resolvedNavigation}
+                to={item.to}
+                active={item.id === resolvedActive}
                 disabled={item.disabled}
-                onClick={() => selectNavigation(item.id, item)}
               >
                 {item.label}
               </AppNavItem>
@@ -137,7 +101,7 @@ function AppLayout({
         </div>
       ) : null}
       <main data-slot="app-layout-main" className="min-h-0 min-w-0 flex-1">
-        {mainChild}
+        {children}
       </main>
     </div>
   )
@@ -157,7 +121,7 @@ function AppLayout({
           data-slot="app-layout-app-name"
           className="flex h-12 shrink-0 items-center gap-2 border-b border-solid border-oc-border px-4 text-sm font-medium text-oc-foreground sm:px-6"
         >
-          {hasSidebar ? (
+          {showSidebar ? (
             <Button
               type="button"
               variant="ghost"
@@ -169,24 +133,27 @@ function AppLayout({
               <MenuRegular />
             </Button>
           ) : null}
-          {appName ? <span className="min-w-0 truncate">{appName}</span> : null}
+          {appName ? (
+            <span className="min-w-0 truncate">{appName}</span>
+          ) : (
+            <span className="min-w-0 flex-1" />
+          )}
+          {appBarActions ? (
+            <div className="ml-auto flex shrink-0 items-center gap-2">{appBarActions}</div>
+          ) : null}
         </div>
       ) : null}
-      {variant === 'sidebar' ? (
+      {showSidebar ? (
         <div data-slot="app-layout-body" className="flex min-h-0 min-w-0 flex-1">
-          {hasSidebar ? (
-            <>
-              <AppSidebar className="hidden md:flex">{sidebarNav}</AppSidebar>
-              <Drawer open={sidebarOpen} onOpenChange={setSidebarOpen} swipeDirection="left">
-                <DrawerContent className="w-72 data-[swipe-direction=left]:w-72 sm:w-72">
-                  <DrawerHeader className="sr-only">
-                    <DrawerTitle>Navigation</DrawerTitle>
-                  </DrawerHeader>
-                  {sidebarNav}
-                </DrawerContent>
-              </Drawer>
-            </>
-          ) : null}
+          <AppSidebar className="hidden md:flex">{sidebarNav}</AppSidebar>
+          <Drawer open={sidebarOpen} onOpenChange={setSidebarOpen} swipeDirection="left">
+            <DrawerContent className="w-72 data-[swipe-direction=left]:w-72 sm:w-72">
+              <DrawerHeader className="sr-only">
+                <DrawerTitle>Navigation</DrawerTitle>
+              </DrawerHeader>
+              {sidebarNav}
+            </DrawerContent>
+          </Drawer>
           {page}
         </div>
       ) : (
@@ -195,6 +162,9 @@ function AppLayout({
     </div>
   )
 }
+
+const appNavItemClassName =
+  'relative mr-8 inline-flex h-11 shrink-0 cursor-pointer items-center text-sm font-medium text-oc-muted-foreground outline-none transition-colors last:mr-0 hover:text-oc-foreground focus-visible:ring-2 focus-visible:ring-oc-ring focus-visible:ring-offset-2 data-[active=true]:text-oc-foreground data-[active=true]:after:absolute data-[active=true]:after:inset-x-0 data-[active=true]:after:bottom-0 data-[active=true]:after:h-0.5 data-[active=true]:after:bg-oc-primary disabled:pointer-events-none disabled:opacity-50'
 
 function AppNav({ className, ...props }: ComponentProps<'nav'>) {
   return (
@@ -213,23 +183,31 @@ function AppNav({ className, ...props }: ComponentProps<'nav'>) {
 function AppNavItem({
   className,
   active = false,
-  ...props
-}: ComponentProps<'button'> & {
+  to,
+  disabled,
+  children,
+}: {
   active?: boolean
+  to: string
+  disabled?: boolean
+  children: ReactNode
+  className?: string
 }) {
   return (
-    <button
-      type="button"
+    <Link
+      to={to}
       data-slot="app-nav-item"
-      data-active={active || undefined}
-      className={cn(
-        'relative mr-8 inline-flex h-11 shrink-0 cursor-pointer items-center text-sm font-medium text-oc-muted-foreground outline-none transition-colors last:mr-0',
-        'hover:text-oc-foreground focus-visible:ring-2 focus-visible:ring-oc-ring focus-visible:ring-offset-2',
-        'data-active:text-oc-foreground data-active:after:absolute data-active:after:inset-x-0 data-active:after:bottom-0 data-active:after:h-0.5 data-active:after:bg-oc-primary',
-        className,
-      )}
-      {...props}
-    />
+      data-active={active ? true : undefined}
+      aria-disabled={disabled || undefined}
+      className={cn(appNavItemClassName, className)}
+      onClick={(event) => {
+        if (disabled) {
+          event.preventDefault()
+        }
+      }}
+    >
+      {children}
+    </Link>
   )
 }
 
@@ -257,30 +235,44 @@ function AppSidebarContent({ className, ...props }: ComponentProps<'nav'>) {
   )
 }
 
+const appSidebarItemClassName =
+  'flex min-h-9 w-full min-w-0 cursor-pointer items-center rounded-xl px-3 py-2 text-left text-sm text-oc-muted-foreground outline-none transition-colors hover:bg-oc-neutral-soft hover:text-oc-child-sidebar-foreground focus-visible:ring-2 focus-visible:ring-oc-ring disabled:pointer-events-none disabled:opacity-50 data-[active=true]:bg-oc-neutral-soft data-[active=true]:font-medium data-[active=true]:text-oc-child-sidebar-foreground data-[active=true]:hover:bg-oc-neutral-soft'
+
 function AppSidebarItem({
   className,
   active = false,
-  ...props
-}: ComponentProps<'button'> & {
+  to,
+  disabled,
+  onNavigate,
+  children,
+}: {
   active?: boolean
+  to: string
+  disabled?: boolean
+  onNavigate?: () => void
+  children: ReactNode
+  className?: string
 }) {
   return (
-    <button
-      type="button"
+    <Link
+      to={to}
       data-slot="app-sidebar-item"
+      data-active={active ? true : undefined}
       aria-current={active ? 'page' : undefined}
-      className={cn(
-        'flex min-h-9 w-full min-w-0 cursor-pointer items-center rounded-xl px-3 py-2 text-left text-sm text-oc-muted-foreground outline-none transition-colors',
-        'hover:bg-oc-neutral-soft hover:text-oc-child-sidebar-foreground focus-visible:ring-2 focus-visible:ring-oc-ring',
-        'disabled:pointer-events-none disabled:opacity-50',
-        active &&
-          'bg-oc-neutral-soft font-medium text-oc-child-sidebar-foreground hover:bg-oc-neutral-soft',
-        className,
-      )}
-      {...props}
-    />
+      aria-disabled={disabled || undefined}
+      className={cn(appSidebarItemClassName, className)}
+      onClick={(event) => {
+        if (disabled) {
+          event.preventDefault()
+          return
+        }
+        onNavigate?.()
+      }}
+    >
+      {children}
+    </Link>
   )
 }
 
-export { AppLayout }
+export { AppLayout, activeIdFromPath, isPathActive }
 export type { AppLayoutNavigationItem }

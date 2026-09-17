@@ -242,7 +242,7 @@
       "name": "app-layout",
       "type": "registry:ui",
       "title": "App Layout",
-      "description": "HitPay App Studio embedded pane frame (not generic app chrome). Optional app name, tabs, and sidebar.",
+      "description": "HitPay App Studio embedded pane frame (not generic app chrome). TanStack Router: navigationItems[].to, variant tabs|sidebar, layout route with Outlet.",
       "dependencies": [
         "@mingcute/react"
       ],
