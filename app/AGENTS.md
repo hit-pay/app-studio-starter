@@ -36,35 +36,27 @@ Prefer `bun run build` to validate. Secrets stay off the browser.
 ## MCP is mandatory
 
 Do not invent Orchid components, HitPay endpoints, or Turso tool names.
-Call MCP before writing UI or data code. Start with `tools/list`. If MCP is
-unavailable, stop and report the blocker.
+Call MCP before writing UI or data code. Start with `tools/list`. Stop only
+if those MCP calls fail.
 
-| | URL |
-|---|---|
-| Orchid UI | `https://orchid-ui-hitpay.vercel.app/api/mcp` |
-| App Studio | `{APP_STUDIO_PROXY_URL}/mcp` |
+Use the **orchid-ui** MCP: `list_orchid_components`, then
+`get_orchid_component` (`name` or `names[]` for several). Use the
+**app-studio** MCP for Turso and HitPay data. Do not fetch registry JSON URLs.
 
-1. Orchid — `tools/list` → search → `get_orchid_component` for props and
-   examples (`name` for one slug, `names` for several). Do not invent
-   components. Do not copy source by hand.
+Do **not** read `src/ui/` or `src/components/` to learn props or examples.
+Those files are installed Orchid — APIs come from `get_orchid_component`.
+Read local files only for routes, `src/lib/`, `src/server/lib/`, `docs/`,
+and `migrations/`.
 
-   Already installed (do not `shadcn add` these again). Compose pages from
-   them. For API/examples, call `get_orchid_component` with the slug:
+1. Orchid — MCP first. Search, then `get_orchid_component` for the slugs you
+   will use. Do not invent components. Do not copy source by hand.
 
-   | Slug | Path |
-   |---|---|
-   | `app-layout` | `src/components/layout/app-layout.tsx` |
-   | `page-layout` | `src/components/layout/page-layout.tsx` |
-   | `confirmation-modal` | `src/components/overlays/confirmation-modal.tsx` |
-   | `copy-button` | `src/components/actions/copy-button.tsx` |
-   | `button` | `src/ui/button.tsx` |
-   | `dialog` | `src/ui/dialog.tsx` |
-   | `drawer` | `src/ui/drawer.tsx` |
-   | `input` | `src/ui/input.tsx` |
-   | `skeleton` | `src/ui/skeleton.tsx` |
-   | `spinner` | `src/ui/spinner.tsx` |
-   | `toast` | `src/ui/toast.tsx` |
-   | `tooltip` | `src/ui/tooltip.tsx` |
+   Already installed (do not `shadcn add` these again). Import and compose.
+   Details: MCP, not the local files.
+
+   `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`,
+   `button`, `dialog`, `drawer`, `input`, `skeleton`, `spinner`, `toast`,
+   `tooltip`.
 
    `__root.tsx` already mounts `AppLayout`, `Toaster`, and
    `ConfirmationModalProvider`.
