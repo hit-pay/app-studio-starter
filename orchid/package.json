@@ -14,10 +14,12 @@
     "build": "bun run registry:build && bun run tanstack:build"
   },
   "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
     "@base-ui/react": "^1.7.0",
     "@lexical/react": "^0.50.0",
     "@mdx-js/react": "^3.1.1",
     "@mdx-js/rollup": "^3.1.1",
+    "mcp-handler": "^2.0.0",
     "@mingcute/react": "^3.0.2",
     "@tanstack/react-form": "^1.33.5",
     "@tanstack/react-router": "^1.132.0",
