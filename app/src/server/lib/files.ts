@@ -1,7 +1,7 @@
 import { randomUUID } from 'node:crypto'
 
-import { db } from '#/lib/server/db'
-import { ensureMigrations } from '#/lib/server/migrate'
+import { db } from '#/server/lib/db'
+import { ensureMigrations } from '#/server/lib/migrate'
 
 export const FILE_MAX_BYTES = 10 * 1024 * 1024
 

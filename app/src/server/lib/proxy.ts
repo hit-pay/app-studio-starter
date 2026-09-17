@@ -1,6 +1,5 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { studioAppId } from '#/lib/utils'
-import { getAppToken, proxyUrl } from '#/lib/server/app-token'
+import { appApiUrl, getAppToken } from '#/server/lib/app-token'
 
 const proxyPaths: Record<string, string> = {
   '/v1/products': '/integrations/hitpay/products',
@@ -17,10 +16,20 @@ const proxyPaths: Record<string, string> = {
   '/v1/shipping': '/integrations/hitpay/shipping',
 }
 
+async function fetchProxy(proxyPath: string, search: string, init: RequestInit): Promise<Response> {
+  const headers = new Headers(init.headers)
+  headers.set('accept', 'application/json')
+  headers.set('authorization', `Bearer ${await getAppToken()}`)
+  return fetch(appApiUrl(`${proxyPath}${search}`), {
+    ...init,
+    headers,
+    signal: init.signal ?? AbortSignal.timeout(15_000),
+  })
+}
+
 /** Server-only App Studio proxy. Provider secrets stay in the proxy. */
 export async function proxyRequest(path: string, init: RequestInit = {}): Promise<Response> {
   const request = getRequest()
-  const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
   const url = new URL(path, request.url)
   const proxyPath = proxyPaths[url.pathname]
 
@@ -28,19 +37,15 @@ export async function proxyRequest(path: string, init: RequestInit = {}): Promis
     throw new Error(`Unsupported proxy path: ${url.pathname}`)
   }
 
-  for (let attempt = 0; attempt < 2; attempt += 1) {
-    const headers = new Headers(init.headers)
-    headers.set('accept', 'application/json')
-    headers.set('authorization', `Bearer ${await getAppToken()}`)
-    const response = await fetch(
-      proxyUrl(`/api/apps/${encodeURIComponent(appId)}${proxyPath}${url.search}`),
-      { ...init, headers, signal: init.signal ?? AbortSignal.timeout(15_000) },
-    )
-
-    if (response.status !== 401 || attempt === 1) {
-      return response
-    }
+  const response = await fetchProxy(proxyPath, url.search, init)
+  if (response.status !== 401) {
+    return response
   }
 
-  throw new Error('Unable to authorize the App Studio proxy request.')
+  const retry = await fetchProxy(proxyPath, url.search, init)
+  if (retry.status === 401) {
+    throw new Error('Unable to authorize the App Studio proxy request.')
+  }
+
+  return retry
 }

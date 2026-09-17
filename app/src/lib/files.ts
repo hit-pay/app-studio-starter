@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 
 import { ALL_ROLES } from '#/lib/roles'
-import { requireRoles } from '#/lib/server/session'
+import { requireRoles } from '#/server/lib/session'
 import {
   deleteFile as removeStoredFile,
   FILE_MAX_BYTES,
@@ -9,7 +9,7 @@ import {
   insertFile,
   listFiles as loadStoredFiles,
   type FileMeta,
-} from '#/lib/server/files'
+} from '#/server/lib/files'
 
 export type { FileMeta }
 export { FILE_MAX_BYTES }

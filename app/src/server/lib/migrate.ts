@@ -1,7 +1,7 @@
 import { readdir, readFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
-import { db } from '#/lib/server/db'
+import { db } from '#/server/lib/db'
 
 let migrationPromise: Promise<void> | undefined
 

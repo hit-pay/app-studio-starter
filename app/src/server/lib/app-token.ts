@@ -1,7 +1,30 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { studioAppId } from '#/lib/utils'
 
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
+
+export function studioAppId(): string {
+  if (typeof window !== 'undefined') {
+    const fromPath = window.location.pathname.split('/').filter(Boolean)[0]
+
+    if (fromPath && fromPath !== 'api') return fromPath
+  }
+
+  const fromEnv =
+    (typeof process !== 'undefined' ? process.env.APP_STUDIO_APP_ID : undefined)?.trim() ||
+    String(import.meta.env.APP_STUDIO_APP_ID ?? '').trim()
+
+  return fromEnv || 'local'
+}
+
+export function studioStorageKey(suffix: string): string {
+  const part = suffix.replace(/^:+/, '')
+
+  if (!part) {
+    throw new Error('Storage key suffix is required.')
+  }
+
+  return `app-studio:${studioAppId()}:${part}`
+}
 
 function cookieValue(name: string): string | undefined {
   const cookie = getRequest().headers.get('cookie') ?? ''
@@ -23,19 +46,24 @@ export function proxyUrl(path: string): URL {
   return new URL(path, `${origin}/`)
 }
 
+export function appApiUrl(path: string): URL {
+  const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
+  const suffix = path.startsWith('/') ? path : `/${path}`
+  return proxyUrl(`/api/apps/${encodeURIComponent(appId)}${suffix}`)
+}
+
 /**
  * Short-lived app-level credential, minted on demand by the App Studio proxy's
  * `/token` endpoint from the caller's `app_studio_user_token` session cookie.
  */
 export async function getAppToken(): Promise<string> {
-  const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
   const userToken = cookieValue(USER_TOKEN_COOKIE)
 
   if (!userToken) {
     throw new Error('App Studio user token cookie is missing.')
   }
 
-  const response = await fetch(proxyUrl(`/api/apps/${encodeURIComponent(appId)}/token`), {
+  const response = await fetch(appApiUrl('/token'), {
     headers: { cookie: `${USER_TOKEN_COOKIE}=${userToken}` },
     signal: AbortSignal.timeout(15_000),
   })

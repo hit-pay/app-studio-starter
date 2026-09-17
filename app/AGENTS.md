@@ -16,21 +16,28 @@ filters, or confirmations when they belong in the requested app.
 ## Layout
 
 - `src/routes/` — pages; `index.tsx` is the main page
-- `src/lib/` — app helpers (session, roles, Turso, proxy)
-- `src/lib/resource/` — load + map for Orchid ResourcePicker and ResourceList
-- `src/lib/roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
-- `src/lib/current-user.ts` — `useCurrentUser` (browser)
-- `src/lib/server/session.ts` — `getSession`, `requireRoles`
-- `src/lib/server/proxy.ts` — `proxyRequest` for `/v1/*` via App Studio
-- `src/lib/server/` — `createServerFn` only
-- `migrations/` — Turso
+- `src/lib/` — helpers the UI may import (`createServerFn` + browser hooks)
+  - `files.ts` — file RPC
+  - `current-user.ts` — `useCurrentUser` (wraps `getSession`)
+  - `resource/` — `loadResourcePickerPage` for ResourcePicker and ResourceList
+  - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
+  - `utils.ts` — `cn`
+- `src/server/lib/` — Node only; do not import from components
+  - `session.ts` — `getSession`, `requireRoles`
+  - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`, `studioAppId`
+  - `proxy.ts` — `proxyRequest` for `/v1/*`
+  - `db.ts`, `migrate.ts`, `files.ts` — Turso
+- `migrations/` — Turso SQL
 - `docs/current-user.md` — current user, role, and session cookie contract
-- `docs/hitpay/` — HitPay resource schemas after App Studio MCP
-- `docs/turso/` — Turso query, batch, and migration schemas after App Studio MCP
+- `docs/hitpay/` — resource schemas after App Studio MCP
+- `docs/turso/` — query, batch, and migration schemas after App Studio MCP
 
 The starter has **no** installed Orchid UI. `src/components/` and `src/ui/`
 appear only after `npx shadcn@latest add @orchid/… -y`. Do not commit or
 hand-copy Orchid components into the starter.
+
+Put new `createServerFn` in `src/lib/`. Put Turso, proxy, tokens, and
+`requireRoles` in `src/server/lib/`.
 
 ## MCP is mandatory
 
@@ -53,7 +60,7 @@ Call MCP before writing UI or data code. Start with `tools/list`.
 
 2. App Studio — `tools/list`, then call the advertised tools. Persist list
    data in Turso via `createServerFn` and `requireRoles` from
-   `#/lib/server/session`.
+   `#/server/lib/session`.
 
    After App Studio MCP, if you need request/response schema or query
    details, read only the matching files:
@@ -79,9 +86,10 @@ ResourcePicker and ResourceList, not Orchid files. Import
 
 ## Auth / current user
 
-Read `docs/current-user.md` before role or session logic. Use
-`GET /api/apps/{app}/current-user` as documented there. Tokens stay on the
-server via `getAppToken()` — never in the browser.
+Read `docs/current-user.md` before role or session logic. Browser:
+`useCurrentUser` from `#/lib/current-user`. Server: `getSession` /
+`requireRoles` from `#/server/lib/session`. Tokens stay on the server via
+`getAppToken()` from `#/server/lib/app-token`. Roles: `#/lib/roles`.
 
 ## Working rules
 

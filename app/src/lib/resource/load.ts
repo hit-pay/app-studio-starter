@@ -2,8 +2,8 @@
 import { createServerFn } from '@tanstack/react-start'
 
 import { ALL_ROLES } from '#/lib/roles'
-import { requireRoles } from '#/lib/server/session'
-import { proxyRequest } from '#/lib/server/proxy'
+import { requireRoles } from '#/server/lib/session'
+import { proxyRequest } from '#/server/lib/proxy'
 
 import { mapResourcePickerPayload } from './map'
 import type { ResourcePickerLoadInput, ResourcePickerPage } from './map'

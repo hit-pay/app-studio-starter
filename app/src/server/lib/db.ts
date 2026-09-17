@@ -1,14 +1,12 @@
-import { getAppToken, proxyUrl } from '#/lib/server/app-token'
+import { appApiUrl, getAppToken } from '#/server/lib/app-token'
 
 type Statement = { sql: string; args?: unknown[] }
 type Result = { columns: string[]; rows: unknown[][] }
 async function proxy(operation: 'query' | 'batch' | 'migrations', body: unknown): Promise<any> {
-  const appId = process.env.APP_STUDIO_APP_ID?.trim()
-  if (!appId) throw new Error('APP_STUDIO_APP_ID is not configured.')
   const token = await getAppToken()
 
   const response = await fetch(
-    proxyUrl(`/api/apps/${encodeURIComponent(appId)}/integrations/turso/${operation}`),
+    appApiUrl(`/integrations/turso/${operation}`),
     {
       method: 'POST',
       headers: {

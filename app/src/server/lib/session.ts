@@ -1,5 +1,5 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { proxyUrl } from '#/lib/server/app-token'
+import { appApiUrl, studioAppId } from '#/server/lib/app-token'
 
 export type SessionRole = {
   id: string
@@ -47,22 +47,19 @@ export async function getSession(): Promise<Session> {
   }
 
   const pending = (async () => {
-    const appId = process.env.APP_STUDIO_APP_ID?.trim() ?? ''
+    const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
 
     if (!appId) {
       throw new Error('Sign in to use this app.')
     }
 
     const cookie = request.headers.get('cookie')
-    const response = await fetch(
-      proxyUrl(`/api/apps/${encodeURIComponent(appId)}/current-user`),
-      {
-        headers: {
-          accept: 'application/json',
-          ...(cookie ? { cookie } : {}),
-        },
+    const response = await fetch(appApiUrl('/current-user'), {
+      headers: {
+        accept: 'application/json',
+        ...(cookie ? { cookie } : {}),
       },
-    )
+    })
 
     if (!response.ok) {
       throw new Error('Sign in to use this app.')

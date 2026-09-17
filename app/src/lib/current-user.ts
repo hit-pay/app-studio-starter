@@ -1,27 +1,11 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
-import { studioAppId } from '#/lib/utils'
-import { getAppToken } from '#/lib/server/app-token'
+import { appApiUrl, getAppToken } from '#/server/lib/app-token'
+import { getSession, type Session, type SessionRole } from '#/server/lib/session'
 
-export {
-  ALL_ROLES,
-  MANAGER_ROLES,
-  ROLE,
-} from '@/lib/roles'
-export type { RoleTitle } from '@/lib/roles'
-
-export type Role = {
-  id: string
-  title: string
-}
-
-export type CurrentUser = {
-  id: string
-  email: string
-  name: string | null
-  role: Role | null
-}
+export type CurrentUser = Session
+export type Role = SessionRole
 
 export type StaffLocation = {
   id: string
@@ -36,17 +20,6 @@ export type StaffAppMember = {
   locations: StaffLocation[]
 }
 
-function proxyUrl(path: string): URL {
-  const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
-  const origin = process.env.APP_STUDIO_PROXY_URL?.trim()
-
-  if (!origin) {
-    throw new Error('APP_STUDIO_PROXY_URL is not configured.')
-  }
-
-  return new URL(`/api/apps/${encodeURIComponent(appId)}${path}`, `${origin}/`)
-}
-
 async function proxyJson<T>(path: string, token?: string): Promise<T> {
   const headers = new Headers({ accept: 'application/json' })
   const cookie = getRequest().headers.get('cookie')
@@ -54,10 +27,11 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
   if (cookie) {
     headers.set('cookie', cookie)
   }
+  if (token) {
+    headers.set('authorization', `Bearer ${token}`)
+  }
 
-  if (token) headers.set('authorization', `Bearer ${token}`)
-  if (cookie) headers.set('cookie', cookie)
-  const url = proxyUrl(path)
+  const url = appApiUrl(path)
   const response = await fetch(url, { headers })
   if (!response.ok) {
     throw new Error(
@@ -69,8 +43,7 @@ async function proxyJson<T>(path: string, token?: string): Promise<T> {
   return response.json() as Promise<T>
 }
 
-const loadUserInfo = createServerFn({ method: 'GET' }).handler(() =>
-  proxyJson<CurrentUser>('/current-user'))
+const loadUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
 
 const loadAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
   proxyJson<{ roles: Role[] }>('/roles', await getAppToken()))
