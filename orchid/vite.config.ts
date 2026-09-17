@@ -131,6 +131,46 @@ function fakeStudioIdentityApi(): Plugin {
   }
 }
 
+function orchidMcpDevApi(): Plugin {
+  return {
+    name: 'orchid-mcp-dev-api',
+    configureServer(server) {
+      server.middlewares.use(async (request, response, next) => {
+        if (request.url?.split('?')[0] !== '/api/mcp') {
+          next()
+          return
+        }
+
+        const { GET, POST, DELETE } = await import('./api/mcp.ts')
+        const method = request.method ?? 'GET'
+        const handler =
+          method === 'POST' ? POST : method === 'DELETE' ? DELETE : GET
+
+        const host = request.headers.host ?? '127.0.0.1:5177'
+        const url = `http://${host}${request.url}`
+        const chunks: Buffer[] = []
+        await new Promise<void>((resolve, reject) => {
+          request.on('data', (chunk) => chunks.push(chunk))
+          request.on('end', () => resolve())
+          request.on('error', reject)
+        })
+
+        const init: RequestInit = { method, headers: request.headers as HeadersInit }
+        if (method !== 'GET' && method !== 'HEAD' && chunks.length > 0) {
+          init.body = Buffer.concat(chunks)
+        }
+
+        const result = await handler(new Request(url, init))
+        response.statusCode = result.status
+        result.headers.forEach((value, key) => {
+          response.setHeader(key, value)
+        })
+        response.end(Buffer.from(await result.arrayBuffer()))
+      })
+    },
+  }
+}
+
 function publicOrchidTokens(): Plugin {
   return {
     name: 'public-orchid-tokens',
@@ -177,6 +217,7 @@ export default defineConfig({
   },
   plugins: [
     fakeStudioIdentityApi(),
+    orchidMcpDevApi(),
     publicOrchidTokens(),
     mdx({ providerImportSource: '@mdx-js/react' }),
     tailwindcss(),

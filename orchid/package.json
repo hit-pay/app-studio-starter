@@ -10,7 +10,11 @@
     "generate-routes": "bun --bun tsr generate",
     "tanstack:build": "bun run generate-routes && bun --bun vite build",
     "registry:build": "bunx --bun shadcn@4.17.0 build --output ./public/r && cp registry.json public/registry.json",
-    "build": "bun run registry:build && bun run tanstack:build"
+    "generate-mcp-catalog": "bun scripts/generate-mcp-catalog.ts",
+    "verify-mcp": "bun scripts/verify-mcp-catalog.ts",
+    "verify-mcp:handler": "bun scripts/verify-mcp-handler.ts",
+    "verify-mcp:local": "MCP_URL=http://127.0.0.1:5177/api/mcp bun scripts/verify-mcp-handler.ts",
+    "build": "bun run registry:build && bun run generate-mcp-catalog && bun run tanstack:build"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -29,6 +33,7 @@
     "date-fns": "^4.4.0",
     "lexical": "^0.50.0",
     "mcp-handler": "^2.0.0",
+    "zod": "^3.24.0",
     "react": "^19.2.0",
     "react-day-picker": "^10.0.1",
     "react-dom": "^19.2.0",
