@@ -4,39 +4,42 @@ Before reading files or running tools, tell the business owner in 1–2 plain se
 
 **Don't**: list the whole repo (`rg --files`, `find`, `ls -R`), scan `node_modules`, or dump `public/` (registry JSON, MCP catalog).
 
-**Start**: read this file, then `src/lib/`.
+**Start**: read this file, then `src/lib/`, `src/types/`, `src/enums/`.
 
-The host origin is shared across apps; this app is served under `/{APP_STUDIO_APP_ID}/…`. `studioAppId()` returns that path segment.
+The host origin is shared across apps; this app is served under `/{APP_STUDIO_APP_ID}/…`. `studioAppId()` (`#/lib/utils`) returns that path segment.
 
 Cover the screens the request needs: persist, session/roles, and loading/empty/error/validation states. New routes are cheap — split list vs detail vs settings when clearer. After route changes, run `bun run generate-routes`.
 
 ## Layout
 
-- **`src/routes/`** — pages. `index.tsx` = home/list. Add sibling files (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
-- **`src/components/ui/`** + Orchid blocks (`layout/`, `overlays/`, `actions/`) — don't dump to learn APIs; use orchid-ui MCP. Edit only when asked. Install extra slugs via `shadcn add`.
-- **`src/lib/`** — shared helpers. CRUD persist flows through `createServerFn` in `#/lib/server` + `requireRoles` + `db.execute` (`#/lib/server/db`).
+- **`src/routes/`** — pages. `index.tsx` = home. `user.tsx` = `/user` (signed-in profile). Add sibling files (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
+- **`src/components/`** — UI. `ui/` plus Orchid blocks (`layout/`, `overlays/`, `actions/`, `form/`, `displaying-data/`). Don't dump these to learn APIs; use orchid-ui MCP. Edit only when asked. Install extra slugs via `shadcn add`.
+- **`src/types/`** — shared data shapes (`#/types`): `User`, `UserRole`, `FileMeta`, `FileWithData`, `Location`, `Staff`, plus re-exports of `Provider` / `RoleTitle`.
+- **`src/enums/`** — value lists (`#/enums`): `ROLES`, `PROVIDER`.
+- **`src/lib/`** — browser hooks and helpers. UI imports hooks here, not `lib/server` or `business/server`.
   - `current-user.ts` — `useCurrentUser` (`#/lib/current-user`)
   - `files.ts` — `useFiles` (`#/lib/files`)
-  - `business/` — `useListStaffs`, `useListLocations` (`#/lib/business`); server fns in `business/server/`
+  - `business/` — `useListStaffs`, `useListLocations` (`#/lib/business`). See `business/README.md`.
   - `utils/` — `cn`, `studioAppId` (`#/lib/utils`)
-- **`src/enums/`** — `ROLES.ts`, `PROVIDER.ts` (`#/enums`)
-- **`src/types/`** — shared TS types (`#/types`)
-- **`src/lib/server/`** — Node-only helpers and all `createServerFn`s. Import from these files, not UI components.
-  - `current-user.ts` — `getCurrentUser`, `requireRoles`
+- **`src/lib/server/`** — Node helpers (cookie, token, DB). UI components must not import these.
+  - `current-user.ts` — `getCurrentUser` (`createServerFn`), `requireRoles`
   - `request.ts` — `request.get` / `.post` / `.patch` / `.put` / `.delete` (`endpoint`, optional `provider: 'hitpay'`). Always cookie + app token.
   - `db.ts` — `db`, `ensureMigrations`
-  - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
+  - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile` (`createServerFn`)
+- **`src/lib/business/server/`** — business `createServerFn`s (`listLocations`, `listStaffs`). Import from `#/lib/business/server` only inside `lib/business` hooks. New HitPay/list APIs go here, then wrap with a root hook.
 - **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an already-applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
 
 `src/routeTree.gen.ts` is generated — rerun `bun run generate-routes` after route edits. Keep tokens/secrets server-side.
+
+Put **new `createServerFn`s** next to their domain: files/user/token/DB in `#/lib/server`; HitPay/business lists in `#/lib/business/server`. Browser hooks live in `#/lib/*` (or `#/lib/business`). Shared types in `#/types`.
 
 ## Orchid UI
 
 Explore via orchid-ui MCP before writing screens: `list_orchid_components` (search), then `get_orchid_component` (`name`/`names[]`) for props/examples. Don't open `public/` or Orchid source to learn the catalog.
 
-On disk: `app-layout`, `page-layout`, `confirmation-modal`, `copy-button`, `button`, `dialog`, `drawer`, `input`, `skeleton`, `spinner`, `toast`, `tooltip`.
+On disk today (among others): `app-layout`, `page-layout`, `form-layout`, `confirmation-modal`, `copy-button`, `button`, `dialog`, `drawer`, `input`, `file-upload`, `skeleton`, `spinner`, `toast`, `tooltip`.
 
-`__root.tsx` already mounts `AppLayout`, `Toaster`, `ConfirmationModalProvider`.
+`__root.tsx` already mounts `AppLayout`, `Toaster`, `ConfirmationModalProvider`. Signed-in chip links to `/user`.
 
 Missing slug? Install from local registry at `public/r` (don't open those JSON files directly). App server port 3000, path `/${APP_STUDIO_APP_ID}/r/{name}.json`:
 
@@ -47,7 +50,7 @@ npx shadcn@latest add @orchid/<slug> -y --overwrite
 ## MCP vs local docs — don't mix these up
 
 - **`app-studio` MCP** — the business's live data (HitPay: customers, payments, products, orders, invoices, etc.), proxied so the API key never reaches this app. Use `tools/list`/`tools/call` to invoke, then `resources/list`/`resources/read` on `app-studio://docs/{tool}` for filters/schema (`app-studio://docs/direct-query` covers calling the proxy directly).
-- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getCurrentUser` (`#/lib/server/current-user`), `requireRoles` (`#/lib/server/current-user`), `request` (`#/lib/server/request`). Roles: `#/enums`. These hit the host REST endpoints (`/current-user`, `/token`, integrations) directly, proxied but not via MCP.
+- **Local helpers** — Browser: `useCurrentUser` (`#/lib/current-user`), `useFiles` (`#/lib/files`), `useListLocations` / `useListStaffs` (`#/lib/business`). Server: `getCurrentUser` / `requireRoles` (`#/lib/server/current-user`), `request` (`#/lib/server/request`). Roles: `#/enums`. Types: `#/types`. Host REST: `/current-user`, `/token`, integrations — proxied, not via MCP.
 
 ## Output
 
