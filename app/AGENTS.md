@@ -83,5 +83,7 @@ Roles: `#/lib/roles`.
 Build or fix the request. End every implement session with `bun run migrate`
 (fix failures if it breaks — a schema change must apply before anything else
 runs) then `bun run build` (fix failures if it breaks), then a short summary
-of what shipped, what is left, and any blockers. Questions: answer only, no
-file edits.
+for the business owner who asked, not a developer: 1-3 plain sentences on
+what changed and anything still blocking them — no file names, code,
+frameworks, libraries, or other programming terms. Questions: answer only,
+no file edits.
