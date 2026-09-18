@@ -1,6 +1,6 @@
 import { createServerFn } from '@tanstack/react-start'
 
-import { ALL_ROLES } from '#/lib/roles'
+import { ROLES } from '#/lib/enums'
 import { requireRoles } from '#/server/lib/session'
 import * as fileStore from '#/server/lib/file-store'
 import type { FileMeta } from '#/server/lib/file-store'
@@ -17,7 +17,7 @@ export const uploadFile = createServerFn({ method: 'POST' })
     entityId?: string | null
   }) => data)
   .handler(async ({ data }): Promise<FileMeta> => {
-    await requireRoles(ALL_ROLES)
+    await requireRoles(ROLES)
     const buffer = Buffer.from(data.dataBase64, 'base64')
     if (buffer.byteLength === 0) throw new Error('File is empty.')
     if (buffer.byteLength > fileStore.FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
@@ -33,7 +33,7 @@ export const uploadFile = createServerFn({ method: 'POST' })
 export const getFile = createServerFn({ method: 'GET' })
   .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<(FileMeta & { dataBase64: string }) | null> => {
-    await requireRoles(ALL_ROLES)
+    await requireRoles(ROLES)
     const file = await fileStore.getFile(data.id)
     if (!file) return null
     const { data: bytes, ...meta } = file
@@ -43,13 +43,13 @@ export const getFile = createServerFn({ method: 'GET' })
 export const listFiles = createServerFn({ method: 'GET' })
   .validator((data: { entityType: string; entityId: string }) => data)
   .handler(async ({ data }): Promise<FileMeta[]> => {
-    await requireRoles(ALL_ROLES)
+    await requireRoles(ROLES)
     return fileStore.listFiles(data)
   })
 
 export const deleteFile = createServerFn({ method: 'POST' })
   .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<void> => {
-    await requireRoles(ALL_ROLES)
+    await requireRoles(ROLES)
     await fileStore.deleteFile(data.id)
   })

@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
-import { appJson, getAppToken } from '#/server/lib/app-token'
 import { getSession, type Session, type SessionRole } from '#/server/lib/session'
 
 export type CurrentUser = Session
 export type Role = SessionRole
 
 export const fetchUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
-
-export const fetchAppRoles = createServerFn({ method: 'GET' }).handler(async () =>
-  appJson<{ roles: Role[] }>('/roles', await getAppToken()))
 
 let userInfoRequest: ReturnType<typeof fetchUserInfo> | null = null
 

@@ -14,14 +14,13 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
 - **`src/components/ui/`** + Orchid blocks (`layout/`, `overlays/`, `actions/`) — don't dump to learn APIs; use orchid-ui MCP. Edit only when asked. Install extra slugs via `shadcn add`.
 - **`src/lib/`** — UI-imported helpers (`createServerFn` + browser hooks). New `createServerFn`s go here. CRUD persist flows through these + `requireRoles` + `db.execute` (`#/server/lib/db`).
   - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
-  - `current-user.ts` — `useCurrentUser` (wraps `getSession`); roles/staff via `appJson`
-  - `staff.ts` — `listStaffs`
-  - `roles.ts` — `ROLE`, `ALL_ROLES`, `MANAGER_ROLES`
+  - `business/` — `list-staffs.ts` (`useListStaffs`), `list-locations.ts` (`useListLocations`) (import from `#/lib/business`)
+  - `enums/` — `ROLES.ts` (import from `#/lib/enums`)
+  - `current-user.ts` — `useCurrentUser` (wraps `getSession`); extra roles via `appJson`
   - `utils.ts` — `cn`
-- **`src/server/lib/`** — Node-only. DB, proxy, tokens, `requireRoles`. Keep these imports server-side, not in UI components.
+- **`src/server/lib/`** — Node-only. DB, tokens, `requireRoles`. Keep these imports server-side, not in UI components.
   - `session.ts` — `getSession`, `requireRoles`
   - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`, `appJson`
-  - `proxy.ts` — `proxyRequest` for `/v1/*`
   - `db.ts`, `migrate.ts`, `file-store.ts` — database (blobs in file-store)
 - **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
 
@@ -44,7 +43,7 @@ npx shadcn@latest add @orchid/<slug> -y --overwrite
 ## MCP vs local docs — don't mix these up
 
 - **`app-studio` MCP** — the business's live data (HitPay: customers, payments, products, orders, invoices, etc.), proxied so the API key never reaches this app. Use `tools/list`/`tools/call` to invoke, then `resources/list`/`resources/read` on `app-studio://docs/{tool}` for filters/schema (`app-studio://docs/direct-query` covers calling the proxy directly).
-- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getSession`/`requireRoles` (`#/server/lib/session`), `getAppToken()` (`#/server/lib/app-token`). Roles: `#/lib/roles`. These hit the app-studio server's plain REST endpoints (`/current-user`, `/token`) directly, proxied but not via MCP.
+- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getSession`/`requireRoles` (`#/server/lib/session`), `getAppToken()` (`#/server/lib/app-token`). Roles: `#/lib/enums`. These hit the app-studio server's plain REST endpoints (`/current-user`, `/token`) directly, proxied but not via MCP.
 
 ## Output
 
