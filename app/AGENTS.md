@@ -14,17 +14,18 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
 
 - **`src/routes/`** — pages. `index.tsx` = home/list. Add sibling files (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
 - **`src/components/ui/`** + Orchid blocks (`layout/`, `overlays/`, `actions/`) — don't dump to learn APIs; use orchid-ui MCP. Edit only when asked. Install extra slugs via `shadcn add`.
-- **`src/lib/`** — UI-imported helpers (`createServerFn` + browser hooks). New `createServerFn`s go here. CRUD persist flows through these + `requireRoles` + `db.execute` (`#/server/lib/db`).
-  - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
-  - `business/` — `list-staffs.ts` (`useListStaffs`), `list-locations.ts` (`useListLocations`) (import from `#/lib/business`)
+- **`src/lib/`** — UI helpers (browser hooks). CRUD persist flows through `createServerFn` in `#/lib/server` + `requireRoles` + `db.execute` (`#/lib/server/db`).
+  - `files.ts` — `useFiles` (`#/lib/files`)
+  - `business/` — `useListStaffs`, `useListLocations` (import from `#/lib/business`)
   - `enums/` — `ROLES.ts`, `PROVIDER.ts` (import from `#/lib/enums`)
-  - `current-user.ts` — `useCurrentUser` (wraps `getCurrentUser`)
+  - `current-user.ts` — `useCurrentUser`
   - `utils.ts` — `cn`
-- **`src/server/lib/`** — Node-only. Import from these files, not UI components.
+- **`src/lib/server/`** — Node-only helpers and all `createServerFn`s. Import from these files, not UI components.
   - `current-user.ts` — `getCurrentUser`, `requireRoles`
   - `request.ts` — `request.get` / `.post` / `.patch` / `.put` / `.delete` (`endpoint`, optional `provider: 'hitpay'`). Always cookie + app token.
   - `db.ts` — `db`, `ensureMigrations`
-  - `files.ts` — `insertFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
+  - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
+  - `business/` — `listLocations`, `listStaffs`
 - **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an already-applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
 
 `src/routeTree.gen.ts` is generated — rerun `bun run generate-routes` after route edits. Keep tokens/secrets server-side.
@@ -46,7 +47,7 @@ npx shadcn@latest add @orchid/<slug> -y --overwrite
 ## MCP vs local docs — don't mix these up
 
 - **`app-studio` MCP** — the business's live data (HitPay: customers, payments, products, orders, invoices, etc.), proxied so the API key never reaches this app. Use `tools/list`/`tools/call` to invoke, then `resources/list`/`resources/read` on `app-studio://docs/{tool}` for filters/schema (`app-studio://docs/direct-query` covers calling the proxy directly).
-- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getCurrentUser` (`#/server/lib/current-user`), `requireRoles` (`#/server/lib/current-user`), `request` (`#/server/lib/request`). Roles: `#/lib/enums`. These hit the host REST endpoints (`/current-user`, `/token`, integrations) directly, proxied but not via MCP.
+- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getCurrentUser` (`#/lib/server/current-user`), `requireRoles` (`#/lib/server/current-user`), `request` (`#/lib/server/request`). Roles: `#/lib/enums`. These hit the host REST endpoints (`/current-user`, `/token`, integrations) directly, proxied but not via MCP.
 
 ## Output
 

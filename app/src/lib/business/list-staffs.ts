@@ -1,22 +1,8 @@
 import { useEffect, useState } from 'react'
-import { createServerFn } from '@tanstack/react-start'
 
-import { request } from '#/server/lib/request'
+import { listStaffs } from '#/lib/server/business'
 
-export type Staff = {
-  id: string
-  name: string | null
-  role_id: string | null
-  role: { id: string; title: string } | null
-  locations: { id: string; name: string | null }[]
-}
-
-export const listStaffs = createServerFn({ method: 'GET' }).handler(async () => {
-  const { members } = await request.get<{ members: Staff[] }>({
-    endpoint: '/staff-app-members',
-  })
-  return members
-})
+export type Staff = Awaited<ReturnType<typeof listStaffs>>[number]
 
 let staffsRequest: ReturnType<typeof listStaffs> | null = null
 

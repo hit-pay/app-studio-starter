@@ -1,30 +1,8 @@
 import { useEffect, useState } from 'react'
-import { createServerFn } from '@tanstack/react-start'
 
-import { request } from '#/server/lib/request'
+import { listLocations } from '#/lib/server/business'
 
-export type Location = {
-  id: string
-  name: string | null
-}
-
-function asLocations(body: unknown): Location[] {
-  if (Array.isArray(body)) return body as Location[]
-  if (body && typeof body === 'object') {
-    const record = body as Record<string, unknown>
-    if (Array.isArray(record.data)) return record.data as Location[]
-    if (Array.isArray(record.locations)) return record.locations as Location[]
-  }
-  return []
-}
-
-export const listLocations = createServerFn({ method: 'GET' }).handler(async () => {
-  const body = await request.get<unknown>({
-    endpoint: '/locations',
-    provider: 'hitpay',
-  })
-  return asLocations(body)
-})
+export type Location = Awaited<ReturnType<typeof listLocations>>[number]
 
 let locationsRequest: ReturnType<typeof listLocations> | null = null
 

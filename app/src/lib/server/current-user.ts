@@ -1,6 +1,7 @@
+import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
 
-import { request } from '#/server/lib/request'
+import { request } from '#/lib/server/request'
 
 export type CurrentUserRole = {
   id: string
@@ -17,7 +18,7 @@ export type CurrentUser = {
 const currentUserByRequest = new WeakMap<Request, Promise<CurrentUser>>()
 
 /** Trusted identity from GET /api/apps/{app}/current-user. */
-export async function getCurrentUser(): Promise<CurrentUser> {
+export const getCurrentUser = createServerFn({ method: 'GET' }).handler(async (): Promise<CurrentUser> => {
   const incoming = getRequest()
   const cached = currentUserByRequest.get(incoming)
   if (cached) return cached
@@ -55,7 +56,7 @@ export async function getCurrentUser(): Promise<CurrentUser> {
     currentUserByRequest.delete(incoming)
     throw error
   }
-}
+})
 
 export async function requireRoles(allowedTitles: readonly string[]): Promise<CurrentUser> {
   const user = await getCurrentUser()

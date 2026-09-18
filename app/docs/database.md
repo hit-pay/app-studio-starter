@@ -6,7 +6,7 @@ baked into this sprite's env, so the server connects directly.
 ## Query
 
 Runtime app code should use the server-only `db.execute()` facade
-(`#/server/lib/db`) for a single parameterized SQL statement. It applies
+(`#/lib/server/db`) for a single parameterized SQL statement. It applies
 pending `migrations/` first, then runs the statement against Turso.
 
 ```ts
@@ -23,7 +23,7 @@ result.rows[0][1]
 ## Batch
 
 Runtime app code should use the server-only `db.batch()` facade
-(`#/server/lib/db`) for related parameterized SQL statements executed
+(`#/lib/server/db`) for related parameterized SQL statements executed
 together in a write transaction. It applies pending `migrations/` first.
 
 ```ts

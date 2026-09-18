@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react'
-import { createServerFn } from '@tanstack/react-start'
-import { getCurrentUser, type CurrentUser, type CurrentUserRole } from '#/server/lib/current-user'
+
+import { getCurrentUser, type CurrentUser, type CurrentUserRole } from '#/lib/server/current-user'
 
 export type { CurrentUser }
 export type Role = CurrentUserRole
 
-export const fetchUserInfo = createServerFn({ method: 'GET' }).handler(() => getCurrentUser())
-
-let userInfoRequest: ReturnType<typeof fetchUserInfo> | null = null
+let userInfoRequest: ReturnType<typeof getCurrentUser> | null = null
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useCurrentUser(): {
@@ -28,7 +26,7 @@ export function useCurrentUser(): {
     setError(null)
 
     if (!userInfoRequest) {
-      userInfoRequest = fetchUserInfo().catch((caught) => {
+      userInfoRequest = getCurrentUser().catch((caught) => {
         userInfoRequest = null
         throw caught
       })
