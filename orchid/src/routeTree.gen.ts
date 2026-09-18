@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ComponentsJsonRouteImport } from './routes/components-json'
 import { Route as InstallationRouteImport } from './routes/installation'
+import { Route as McpRouteImport } from './routes/mcp'
 import { Route as SetupRouteImport } from './routes/setup'
 import { Route as ThemingRouteImport } from './routes/theming'
 import { Route as ComponentsIndexRouteImport } from './routes/components/index'
@@ -73,6 +74,11 @@ const ComponentsJsonRoute = ComponentsJsonRouteImport.update({
 const InstallationRoute = InstallationRouteImport.update({
   id: '/installation',
   path: '/installation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const McpRoute = McpRouteImport.update({
+  id: '/mcp',
+  path: '/mcp',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SetupRoute = SetupRouteImport.update({
@@ -316,6 +322,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/components-json': typeof ComponentsJsonRoute
   '/installation': typeof InstallationRoute
+  '/mcp': typeof McpRoute
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
   '/components/app-layout': typeof ComponentsAppLayoutRoute
@@ -368,6 +375,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/components-json': typeof ComponentsJsonRoute
   '/installation': typeof InstallationRoute
+  '/mcp': typeof McpRoute
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
   '/components/app-layout': typeof ComponentsAppLayoutRoute
@@ -421,6 +429,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/components-json': typeof ComponentsJsonRoute
   '/installation': typeof InstallationRoute
+  '/mcp': typeof McpRoute
   '/setup': typeof SetupRoute
   '/theming': typeof ThemingRoute
   '/components/app-layout': typeof ComponentsAppLayoutRoute
@@ -475,6 +484,7 @@ export interface FileRouteTypes {
     | '/'
     | '/components-json'
     | '/installation'
+    | '/mcp'
     | '/setup'
     | '/theming'
     | '/components/app-layout'
@@ -527,6 +537,7 @@ export interface FileRouteTypes {
     | '/'
     | '/components-json'
     | '/installation'
+    | '/mcp'
     | '/setup'
     | '/theming'
     | '/components/app-layout'
@@ -579,6 +590,7 @@ export interface FileRouteTypes {
     | '/'
     | '/components-json'
     | '/installation'
+    | '/mcp'
     | '/setup'
     | '/theming'
     | '/components/app-layout'
@@ -632,6 +644,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ComponentsJsonRoute: typeof ComponentsJsonRoute
   InstallationRoute: typeof InstallationRoute
+  McpRoute: typeof McpRoute
   SetupRoute: typeof SetupRoute
   ThemingRoute: typeof ThemingRoute
   ComponentsAppLayoutRoute: typeof ComponentsAppLayoutRoute
@@ -702,6 +715,13 @@ declare module '@tanstack/react-router' {
       path: '/installation'
       fullPath: '/installation'
       preLoaderRoute: typeof InstallationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mcp': {
+      id: '/mcp'
+      path: '/mcp'
+      fullPath: '/mcp'
+      preLoaderRoute: typeof McpRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/setup': {
@@ -1040,6 +1060,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ComponentsJsonRoute: ComponentsJsonRoute,
   InstallationRoute: InstallationRoute,
+  McpRoute: McpRoute,
   SetupRoute: SetupRoute,
   ThemingRoute: ThemingRoute,
   ComponentsAppLayoutRoute: ComponentsAppLayoutRoute,

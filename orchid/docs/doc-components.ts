@@ -199,6 +199,12 @@ export const DOC_GUIDES = [
     description:
       "Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.",
   },
+  {
+    to: "/mcp" as const,
+    name: "MCP",
+    description:
+      "Connect an AI coding tool to the Orchid MCP server to look up components before writing code.",
+  },
 ] as const;
 
 export const DOC_GUIDE_ITEMS = DOC_GUIDES;

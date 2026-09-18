@@ -1,0 +1,139 @@
+Orchid publishes an MCP (Model Context Protocol) server so any AI coding
+tool can look up components and their exact props/examples before writing
+code, instead of guessing from training data or reading the registry JSON
+directly.
+
+## Endpoint
+
+```text
+https://orchid-ui-hitpay.vercel.app/api/mcp
+```
+
+This is a remote, streamable-HTTP MCP server — no install, no local process.
+Point your tool's MCP client at this URL.
+
+## Tools
+
+- `list_orchid_components` — search or list components (name, title,
+  description, category, install command). Filter by `search`, `category`
+  (`ui` | `components`), or an exact `name`.
+- `get_orchid_component` — full docs for one or more components: props,
+  examples, related components, and install command. Pass `name` for one
+  slug or `names` for several in a single call.
+
+Search first, then fetch full docs only for the components you're about to
+use.
+
+## Claude Code
+
+```bash
+claude mcp add --transport http orchid-ui https://orchid-ui-hitpay.vercel.app/api/mcp
+```
+
+Or add it directly to a project's `.mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "orchid-ui": {
+      "type": "http",
+      "url": "https://orchid-ui-hitpay.vercel.app/api/mcp"
+    }
+  }
+}
+```
+
+## Cursor
+
+Add to `.cursor/mcp.json` (project) or `~/.cursor/mcp.json` (global):
+
+```json
+{
+  "mcpServers": {
+    "orchid-ui": {
+      "url": "https://orchid-ui-hitpay.vercel.app/api/mcp"
+    }
+  }
+}
+```
+
+## Other tools
+
+Most MCP clients that support a remote/HTTP (or "streamable HTTP") server
+type accept the same shape: a server named `orchid-ui` with `url` set to the
+endpoint above. The exact config file location and field names vary by
+tool — check your tool's MCP documentation for its remote-server syntax if
+the examples above don't apply directly.
+
+## Project setup
+
+The tools above tell you what to install and what its props are, but the
+project still needs the shadcn CLI, the Orchid registry, and the Orchid CSS
+variables configured once before any `add` command will work.
+
+### 1. Initialize with shadcn
+
+```bash
+bunx --bun shadcn@latest init -t vite
+```
+
+`-t` accepts `next`, `vite`, `start` (TanStack Start), `react-router`, or
+`astro`. This generates `components.json` and a Tailwind CSS v4 project.
+
+### 2. Point components.json at the Orchid registry
+
+Add the `@orchid` namespace to `components.json` (keep the rest of what
+`init` generated):
+
+```json
+{
+  "registries": {
+    "@orchid": "https://orchid-ui-hitpay.vercel.app/r/{name}.json"
+  }
+}
+```
+
+`components.json` must point at the per-item template above
+(`/r/{name}.json`), not at
+[registry.json](https://orchid-ui-hitpay.vercel.app/registry.json) directly —
+`registry.json` is the full browsable catalog (every item's name, type, and
+dependencies), `/r/{name}.json` is what the CLI actually fetches per
+component when you run `add`.
+
+### 3. Install the Orchid CSS variables
+
+Import the token sheet from the global stylesheet referenced by
+`components.json` (e.g. `src/styles.css`), after the Tailwind import:
+
+```css
+@import "tailwindcss";
+@import "https://orchid-ui-hitpay.vercel.app/orchid-tokens.css";
+```
+
+Variables use the `--oc-*` prefix (`--oc-background`, `--oc-primary`, ...),
+mapped to Tailwind utilities like `bg-oc-background` and `text-oc-foreground`.
+Override values under `:root` (light) and `.dark` (dark) to theme; keep the
+variable names as-is so installed components keep resolving their classes.
+If your build can't do remote CSS imports, copy the file's contents in
+locally instead of pasting them a second time on top of the import.
+
+### 4. Install components
+
+```bash
+bunx --bun shadcn@latest add @orchid/all
+```
+
+Use `@orchid/all` for a new project (installs the full catalog; registry
+dependencies resolve automatically). For an existing project, install one
+slug at a time with the command `get_orchid_component` returns for it
+(`npx shadcn@latest add @orchid/<slug> -y --overwrite`).
+
+Full detail on each step: [Installation](/installation),
+[components.json](/components-json), [Theming](/theming).
+
+## Guidance for AI agents
+
+Always call `list_orchid_components` before building UI — do not assume a
+component's props or output from memory. Then call `get_orchid_component`
+with the exact slug(s) for full docs before writing code. Verify project
+setup (above) before the first `add` command in a new project.
