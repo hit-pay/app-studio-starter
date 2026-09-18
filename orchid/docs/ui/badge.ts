@@ -28,15 +28,19 @@ const badgeDocs = {
   examples: [
     {
       description: "Status variants",
-      code: `<Badge>Paid</Badge>
-<Badge variant="secondary">Pending</Badge>
-<Badge variant="destructive">Failed</Badge>`,
+      code: `<div className="flex flex-wrap items-center gap-2">
+  <Badge>Paid</Badge>
+  <Badge variant="secondary">Pending</Badge>
+  <Badge variant="destructive">Failed</Badge>
+</div>`,
     },
     {
       description: "Orchid tones and appearances",
-      code: `<Badge tone="green">Paid</Badge>
-<Badge tone="purple" appearance="outline">Cards</Badge>
-<Badge tone="orange" appearance="ghost">Review</Badge>`,
+      code: `<div className="flex flex-wrap items-center gap-2">
+  <Badge tone="green">Paid</Badge>
+  <Badge tone="purple" appearance="outline">Cards</Badge>
+  <Badge tone="orange" appearance="ghost">Review</Badge>
+</div>`,
     },
     {
       description: "Badge with icon",

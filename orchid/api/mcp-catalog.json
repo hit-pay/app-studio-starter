@@ -45,7 +45,8 @@
           "default",
           "circle"
         ],
-        "disabled": "boolean"
+        "disabled": "boolean",
+        "nativeButton": "boolean — false when render is not a native <button> (e.g. <a>)"
       },
       "examples": [
         {
@@ -62,7 +63,7 @@
         },
         {
           "description": "Render as a link",
-          "code": "<Button variant=\"outline\" render={<a href=\"/settings\" />}>\n  Review settings\n</Button>"
+          "code": "<Button variant=\"outline\" nativeButton={false} render={<a href=\"/settings\" />}>\n  Review settings\n</Button>"
         },
         {
           "description": "Disabled states",
@@ -222,11 +223,11 @@
       "examples": [
         {
           "description": "Status variants",
-          "code": "<Badge>Paid</Badge>\n<Badge variant=\"secondary\">Pending</Badge>\n<Badge variant=\"destructive\">Failed</Badge>"
+          "code": "<div className=\"flex flex-wrap items-center gap-2\">\n  <Badge>Paid</Badge>\n  <Badge variant=\"secondary\">Pending</Badge>\n  <Badge variant=\"destructive\">Failed</Badge>\n</div>"
         },
         {
           "description": "Orchid tones and appearances",
-          "code": "<Badge tone=\"green\">Paid</Badge>\n<Badge tone=\"purple\" appearance=\"outline\">Cards</Badge>\n<Badge tone=\"orange\" appearance=\"ghost\">Review</Badge>"
+          "code": "<div className=\"flex flex-wrap items-center gap-2\">\n  <Badge tone=\"green\">Paid</Badge>\n  <Badge tone=\"purple\" appearance=\"outline\">Cards</Badge>\n  <Badge tone=\"orange\" appearance=\"ghost\">Review</Badge>\n</div>"
         },
         {
           "description": "Badge with icon",

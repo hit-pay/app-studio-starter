@@ -41,6 +41,13 @@ function DocCodePanel({
   )
 }
 
+function previewCode(code: string, noInline: boolean) {
+  if (noInline) return code
+  const trimmed = code.trim()
+  if (/^(function |const |let |class |<>)/.test(trimmed)) return trimmed
+  return `<>${trimmed}</>`
+}
+
 function DocExamples({
   examples,
   scope = {},
@@ -58,7 +65,7 @@ function DocExamples({
             {example.description}
           </p>
           <LiveProvider
-            code={example.code}
+            code={previewCode(example.code, noInline)}
             noInline={noInline}
             scope={{
               AddIcon: AddRegular,

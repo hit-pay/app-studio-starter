@@ -1,7 +1,21 @@
+import { isValidElement } from 'react'
 import { Button as ButtonPrimitive } from '@base-ui/react/button'
 import { cva, type VariantProps } from 'class-variance-authority'
 
 import { cn } from '@/lib/utils'
+
+function usesNativeButton(
+  render: ButtonPrimitive.Props['render'],
+  nativeButton: ButtonPrimitive.Props['nativeButton'],
+) {
+  if (nativeButton != null) return nativeButton
+  if (render == null) return true
+  if (typeof render === 'string') return render === 'button'
+  if (isValidElement(render) && typeof render.type === 'string') {
+    return render.type === 'button'
+  }
+  return true
+}
 
 const PRIMARY_SOLID =
   'border-oc-primary-button-border bg-linear-to-b from-oc-primary-button-default-start to-oc-primary-button-default-stop text-oc-primary-button-text shadow-[0_1.5px_0_0_var(--oc-primary-button-shadow)] [text-shadow:0_1px_1px_rgba(0,0,0,0.12)] hover:from-oc-primary-button-hover-start hover:to-oc-primary-button-hover-stop active:from-oc-primary-button-pressed-start active:to-oc-primary-button-pressed-stop active:shadow-none disabled:from-oc-primary-button-disabled-start disabled:to-oc-primary-button-disabled-stop disabled:shadow-none'
@@ -74,6 +88,8 @@ function Button({
   size = 'default',
   iconOnly,
   shape = 'default',
+  nativeButton,
+  render,
   ...props
 }: ButtonPrimitive.Props & VariantProps<typeof buttonVariants>) {
   return (
@@ -90,6 +106,8 @@ function Button({
         }),
         className,
       )}
+      nativeButton={usesNativeButton(render, nativeButton)}
+      render={render}
       {...props}
     />
   )

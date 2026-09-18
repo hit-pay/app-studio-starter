@@ -14,6 +14,7 @@ const buttonDocs = {
     iconOnly: [true, false],
     shape: ["default", "circle"],
     disabled: "boolean",
+    nativeButton: "boolean — false when render is not a native <button> (e.g. <a>)",
   },
   examples: [
     {
@@ -30,7 +31,7 @@ const buttonDocs = {
     },
     {
       description: "Render as a link",
-      code: `<Button variant="outline" render={<a href="/settings" />}>
+      code: `<Button variant="outline" nativeButton={false} render={<a href="/settings" />}>
   Review settings
 </Button>`,
     },

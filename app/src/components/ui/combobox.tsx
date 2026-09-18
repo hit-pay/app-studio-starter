@@ -187,6 +187,7 @@ function ComboboxInput({
           <InputGroupButton
             variant="ghost"
             size="icon-xs"
+            nativeButton
             render={<ComboboxTrigger />}
             data-slot="input-group-button"
             className="group-has-data-[slot=combobox-clear]/input-group:hidden data-pressed:bg-transparent"
