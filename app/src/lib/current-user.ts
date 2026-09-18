@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
-import { getSession, type Session, type SessionRole } from '#/server/lib/session'
+import { getCurrentUser, type CurrentUser, type CurrentUserRole } from '#/server/lib/current-user'
 
-export type CurrentUser = Session
-export type Role = SessionRole
+export type { CurrentUser }
+export type Role = CurrentUserRole
 
-export const fetchUserInfo = createServerFn({ method: 'GET' }).handler(() => getSession())
+export const fetchUserInfo = createServerFn({ method: 'GET' }).handler(() => getCurrentUser())
 
 let userInfoRequest: ReturnType<typeof fetchUserInfo> | null = null
 

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 
-import { appJson, getAppToken } from '#/server/lib/app-token'
+import { appJson, getAppToken } from '#/server/lib/app-api'
 
 export type Location = {
   id: string

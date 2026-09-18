@@ -33,6 +33,6 @@ Field meanings:
 - `role.title`: role title used by the starter's role checks.
 
 This endpoint returns user profile only. Proxy Bearer tokens come from
-`getAppToken()` in `#/server/lib/app-token`. Keep tokens on the server.
+`getAppToken()` in `#/server/lib/app-api`. Keep tokens on the server.
 
 Success is `200` JSON. Missing or expired session is an auth error.

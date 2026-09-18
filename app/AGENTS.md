@@ -4,6 +4,8 @@ Before reading files or running tools, tell the business owner in 1–2 plain se
 
 **Don't**: list the whole repo (`rg --files`, `find`, `ls -R`), scan `node_modules`, or dump `public/` (registry JSON, MCP catalog).
 
+**Start**: read this file, then `src/lib/`.
+
 The host origin is shared across apps; this app is served under `/{APP_STUDIO_APP_ID}/…`. `studioAppId()` returns that path segment.
 
 Cover the screens the request needs: persist, session/roles, and loading/empty/error/validation states. New routes are cheap — split list vs detail vs settings when clearer. After route changes, run `bun run generate-routes`.
@@ -16,13 +18,14 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
   - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
   - `business/` — `list-staffs.ts` (`useListStaffs`), `list-locations.ts` (`useListLocations`) (import from `#/lib/business`)
   - `enums/` — `ROLES.ts` (import from `#/lib/enums`)
-  - `current-user.ts` — `useCurrentUser` (wraps `getSession`); extra roles via `appJson`
+  - `current-user.ts` — `useCurrentUser` (wraps `getCurrentUser`)
   - `utils.ts` — `cn`
-- **`src/server/lib/`** — Node-only. DB, tokens, `requireRoles`. Keep these imports server-side, not in UI components.
-  - `session.ts` — `getSession`, `requireRoles`
-  - `app-token.ts` — `getAppToken`, `proxyUrl`, `appApiUrl`, `appJson`
-  - `db.ts`, `migrate.ts`, `file-store.ts` — database (blobs in file-store)
-- **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
+- **`src/server/lib/`** — Node-only. Import from each folder's `index.ts` (or `db.ts`), not UI components.
+  - `current-user/` — `getCurrentUser`, `requireRoles`
+  - `app-api/` — `getAppToken`, `appJson`, `appApiUrl`, `proxyUrl`
+  - `db.ts` — `db`, `ensureMigrations`
+  - `files/` — `insertFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
+- **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an already-applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
 
 `src/routeTree.gen.ts` is generated — rerun `bun run generate-routes` after route edits. Keep tokens/secrets server-side.
 
@@ -43,7 +46,7 @@ npx shadcn@latest add @orchid/<slug> -y --overwrite
 ## MCP vs local docs — don't mix these up
 
 - **`app-studio` MCP** — the business's live data (HitPay: customers, payments, products, orders, invoices, etc.), proxied so the API key never reaches this app. Use `tools/list`/`tools/call` to invoke, then `resources/list`/`resources/read` on `app-studio://docs/{tool}` for filters/schema (`app-studio://docs/direct-query` covers calling the proxy directly).
-- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getSession`/`requireRoles` (`#/server/lib/session`), `getAppToken()` (`#/server/lib/app-token`). Roles: `#/lib/enums`. These hit the app-studio server's plain REST endpoints (`/current-user`, `/token`) directly, proxied but not via MCP.
+- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getCurrentUser` (`#/server/lib/current-user`), `requireRoles` (`#/server/lib/current-user`), `getAppToken` (`#/server/lib/app-api`). Roles: `#/lib/enums`. These hit the app-studio server's plain REST endpoints (`/current-user`, `/token`) directly, proxied but not via MCP.
 
 ## Output
 

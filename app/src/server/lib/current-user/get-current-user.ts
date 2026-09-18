@@ -1,24 +1,25 @@
 import { getRequest } from '@tanstack/react-start/server'
-import { appApiUrl } from '#/server/lib/app-token'
 
-export type SessionRole = {
+import { appApiUrl } from '#/server/lib/app-api'
+
+export type CurrentUserRole = {
   id: string
   title: string
 }
 
-export type Session = {
+export type CurrentUser = {
   id: string
   email: string
   name: string | null
-  role: SessionRole | null
+  role: CurrentUserRole | null
 }
 
-const sessionByRequest = new WeakMap<Request, Promise<Session>>()
+const currentUserByRequest = new WeakMap<Request, Promise<CurrentUser>>()
 
 /** Trusted identity from GET /api/apps/{app}/current-user. */
-export async function getSession(): Promise<Session> {
+export async function getCurrentUser(): Promise<CurrentUser> {
   const request = getRequest()
-  const cached = sessionByRequest.get(request)
+  const cached = currentUserByRequest.get(request)
 
   if (cached) return cached
 
@@ -45,28 +46,19 @@ export async function getSession(): Promise<Session> {
         role !== null
         && typeof role === 'object'
         && !Array.isArray(role)
-        && typeof (role as SessionRole).id === 'string'
-        && typeof (role as SessionRole).title === 'string'
-          ? { id: (role as SessionRole).id, title: (role as SessionRole).title }
+        && typeof (role as CurrentUserRole).id === 'string'
+        && typeof (role as CurrentUserRole).title === 'string'
+          ? { id: (role as CurrentUserRole).id, title: (role as CurrentUserRole).title }
           : null,
     }
   })()
 
-  sessionByRequest.set(request, pending)
+  currentUserByRequest.set(request, pending)
 
   try {
     return await pending
   } catch (error) {
-    sessionByRequest.delete(request)
+    currentUserByRequest.delete(request)
     throw error
   }
-}
-
-export async function requireRoles(allowedTitles: readonly string[]): Promise<Session> {
-  const session = await getSession()
-  const title = session.role?.title
-  if (!title || !allowedTitles.includes(title)) {
-    throw new Error('You do not have permission to do this.')
-  }
-  return session
 }

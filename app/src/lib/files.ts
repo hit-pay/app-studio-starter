@@ -1,12 +1,18 @@
 import { createServerFn } from '@tanstack/react-start'
 
 import { ROLES } from '#/lib/enums'
-import { requireRoles } from '#/server/lib/session'
-import * as fileStore from '#/server/lib/file-store'
-import type { FileMeta } from '#/server/lib/file-store'
+import {
+  FILE_MAX_BYTES,
+  deleteFile as deleteStoredFile,
+  getFile as getStoredFile,
+  insertFile,
+  listFiles as listStoredFiles,
+  type FileMeta,
+} from '#/server/lib/files'
+import { requireRoles } from '#/server/lib/current-user'
 
 export type { FileMeta }
-export { FILE_MAX_BYTES } from '#/server/lib/file-store'
+export { FILE_MAX_BYTES }
 
 export const uploadFile = createServerFn({ method: 'POST' })
   .validator((data: {
@@ -20,8 +26,8 @@ export const uploadFile = createServerFn({ method: 'POST' })
     await requireRoles(ROLES)
     const buffer = Buffer.from(data.dataBase64, 'base64')
     if (buffer.byteLength === 0) throw new Error('File is empty.')
-    if (buffer.byteLength > fileStore.FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
-    return fileStore.insertFile({
+    if (buffer.byteLength > FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
+    return insertFile({
       name: data.name,
       mimeType: data.mimeType,
       data: new Uint8Array(buffer),
@@ -34,7 +40,7 @@ export const getFile = createServerFn({ method: 'GET' })
   .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<(FileMeta & { dataBase64: string }) | null> => {
     await requireRoles(ROLES)
-    const file = await fileStore.getFile(data.id)
+    const file = await getStoredFile(data.id)
     if (!file) return null
     const { data: bytes, ...meta } = file
     return { ...meta, dataBase64: Buffer.from(bytes).toString('base64') }
@@ -44,12 +50,12 @@ export const listFiles = createServerFn({ method: 'GET' })
   .validator((data: { entityType: string; entityId: string }) => data)
   .handler(async ({ data }): Promise<FileMeta[]> => {
     await requireRoles(ROLES)
-    return fileStore.listFiles(data)
+    return listStoredFiles(data)
   })
 
 export const deleteFile = createServerFn({ method: 'POST' })
   .validator((data: { id: string }) => data)
   .handler(async ({ data }): Promise<void> => {
     await requireRoles(ROLES)
-    await fileStore.deleteFile(data.id)
+    await deleteStoredFile(data.id)
   })

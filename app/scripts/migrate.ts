@@ -1,4 +1,4 @@
-import { ensureMigrations } from '#/server/lib/migrate'
+import { ensureMigrations } from '#/server/lib/db'
 
 await ensureMigrations()
 console.log('Migrations applied.')
