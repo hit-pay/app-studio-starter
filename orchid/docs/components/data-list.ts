@@ -25,6 +25,13 @@ const dataListDocs = {
         { key: "city", text: "Singapore" },
         { key: "currency", text: "SGD" },
       ],
+      onClick: () => {},
+      actions: {
+        menu: [
+          { key: "edit", label: "Edit" },
+          { key: "delete", label: "Delete", destructive: true },
+        ],
+      },
     },
     {
       key: "matcha",
@@ -32,6 +39,13 @@ const dataListDocs = {
       description: "SKU-TEA-12 · Online Store and POS",
       meta: "24 in stock",
       badges: <Badge tone="green">Active</Badge>,
+      onClick: () => {},
+      actions: {
+        menu: [
+          { key: "edit", label: "Edit" },
+          { key: "delete", label: "Delete", destructive: true },
+        ],
+      },
     },
   ]}
 />`,
@@ -50,6 +64,13 @@ const dataListDocs = {
           value: "https://hooks.hitpayapp.com/invoice/a9ad4444",
         },
       ],
+      onClick: () => {},
+      actions: {
+        menu: [
+          { key: "edit", label: "Edit" },
+          { key: "delete", label: "Delete", destructive: true },
+        ],
+      },
     },
   ]}
 />`,
@@ -67,6 +88,33 @@ const dataListDocs = {
         src: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop",
       },
       badges: <Badge tone="green">Published</Badge>,
+      onClick: () => {},
+      actions: {
+        menu: [
+          { key: "edit", label: "Edit" },
+          { key: "delete", label: "Delete", destructive: true },
+        ],
+      },
+    },
+  ]}
+/>`,
+    },
+    {
+      description: "Row actions dropdown",
+      code: `<DataList
+  items={[
+    {
+      key: "priya",
+      title: "Priya Nair",
+      description: "INV-2048 · Cards · SGD 128.00",
+      badges: <Badge tone="green">Paid</Badge>,
+      onClick: () => {},
+      actions: {
+        menu: [
+          { key: "edit", label: "Edit" },
+          { key: "delete", label: "Delete", destructive: true },
+        ],
+      },
     },
   ]}
 />`,

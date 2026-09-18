@@ -1434,15 +1434,19 @@
       "examples": [
         {
           "description": "Default rows",
-          "code": "<DataList\n  items={[\n    {\n      key: \"priya\",\n      title: \"Priya Nair\",\n      description: \"INV-2048 · Cards · SGD 128.00\",\n      badges: <Badge tone=\"green\">Paid</Badge>,\n      details: [\n        { key: \"city\", text: \"Singapore\" },\n        { key: \"currency\", text: \"SGD\" },\n      ],\n    },\n    {\n      key: \"matcha\",\n      title: \"Matcha Latte\",\n      description: \"SKU-TEA-12 · Online Store and POS\",\n      meta: \"24 in stock\",\n      badges: <Badge tone=\"green\">Active</Badge>,\n    },\n  ]}\n/>"
+          "code": "<DataList\n  items={[\n    {\n      key: \"priya\",\n      title: \"Priya Nair\",\n      description: \"INV-2048 · Cards · SGD 128.00\",\n      badges: <Badge tone=\"green\">Paid</Badge>,\n      details: [\n        { key: \"city\", text: \"Singapore\" },\n        { key: \"currency\", text: \"SGD\" },\n      ],\n      onClick: () => {},\n      actions: {\n        menu: [\n          { key: \"edit\", label: \"Edit\" },\n          { key: \"delete\", label: \"Delete\", destructive: true },\n        ],\n      },\n    },\n    {\n      key: \"matcha\",\n      title: \"Matcha Latte\",\n      description: \"SKU-TEA-12 · Online Store and POS\",\n      meta: \"24 in stock\",\n      badges: <Badge tone=\"green\">Active</Badge>,\n      onClick: () => {},\n      actions: {\n        menu: [\n          { key: \"edit\", label: \"Edit\" },\n          { key: \"delete\", label: \"Delete\", destructive: true },\n        ],\n      },\n    },\n  ]}\n/>"
         },
         {
           "description": "Stack with copy rows",
-          "code": "<DataList\n  layout=\"stack\"\n  items={[\n    {\n      key: \"invoice\",\n      title: \"Invoice paid\",\n      copyRows: [\n        {\n          label: \"URL:\",\n          value: \"https://hooks.hitpayapp.com/invoice/a9ad4444\",\n        },\n      ],\n    },\n  ]}\n/>"
+          "code": "<DataList\n  layout=\"stack\"\n  items={[\n    {\n      key: \"invoice\",\n      title: \"Invoice paid\",\n      copyRows: [\n        {\n          label: \"URL:\",\n          value: \"https://hooks.hitpayapp.com/invoice/a9ad4444\",\n        },\n      ],\n      onClick: () => {},\n      actions: {\n        menu: [\n          { key: \"edit\", label: \"Edit\" },\n          { key: \"delete\", label: \"Delete\", destructive: true },\n        ],\n      },\n    },\n  ]}\n/>"
         },
         {
           "description": "Media layout",
-          "code": "<DataList\n  items={[\n    {\n      key: \"home\",\n      title: \"Home\",\n      description: \"Welcome to our store.\",\n      layout: \"media\",\n      media: {\n        src: \"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop\",\n      },\n      badges: <Badge tone=\"green\">Published</Badge>,\n    },\n  ]}\n/>"
+          "code": "<DataList\n  items={[\n    {\n      key: \"home\",\n      title: \"Home\",\n      description: \"Welcome to our store.\",\n      layout: \"media\",\n      media: {\n        src: \"https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=128&h=128&fit=crop\",\n      },\n      badges: <Badge tone=\"green\">Published</Badge>,\n      onClick: () => {},\n      actions: {\n        menu: [\n          { key: \"edit\", label: \"Edit\" },\n          { key: \"delete\", label: \"Delete\", destructive: true },\n        ],\n      },\n    },\n  ]}\n/>"
+        },
+        {
+          "description": "Row actions dropdown",
+          "code": "<DataList\n  items={[\n    {\n      key: \"priya\",\n      title: \"Priya Nair\",\n      description: \"INV-2048 · Cards · SGD 128.00\",\n      badges: <Badge tone=\"green\">Paid</Badge>,\n      onClick: () => {},\n      actions: {\n        menu: [\n          { key: \"edit\", label: \"Edit\" },\n          { key: \"delete\", label: \"Delete\", destructive: true },\n        ],\n      },\n    },\n  ]}\n/>"
         }
       ],
       "related_components": [

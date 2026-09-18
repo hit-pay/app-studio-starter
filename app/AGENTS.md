@@ -4,8 +4,6 @@ Before reading files or running tools, tell the business owner in 1–2 plain se
 
 **Don't**: list the whole repo (`rg --files`, `find`, `ls -R`), scan `node_modules`, or dump `public/` (registry JSON, MCP catalog).
 
-**Start**: read this file, then `src/routes/`.
-
 The host origin is shared across apps; this app is served under `/{APP_STUDIO_APP_ID}/…`. `studioAppId()` returns that path segment.
 
 Cover the screens the request needs: persist, session/roles, and loading/empty/error/validation states. New routes are cheap — split list vs detail vs settings when clearer. After route changes, run `bun run generate-routes`.
