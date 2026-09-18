@@ -20,11 +20,11 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
   - `enums/` — `ROLES.ts`, `PROVIDER.ts` (import from `#/lib/enums`)
   - `current-user.ts` — `useCurrentUser` (wraps `getCurrentUser`)
   - `utils.ts` — `cn`
-- **`src/server/lib/`** — Node-only. Import from each folder's `index.ts` (or `db.ts`), not UI components.
-  - `current-user/` — `getCurrentUser`, `requireRoles`
-  - `request/` — `request.get` / `.post` / `.patch` / `.put` / `.delete` (`endpoint`, optional `provider: 'hitpay'`). Always cookie + app token.
+- **`src/server/lib/`** — Node-only. Import from these files, not UI components.
+  - `current-user.ts` — `getCurrentUser`, `requireRoles`
+  - `request.ts` — `request.get` / `.post` / `.patch` / `.put` / `.delete` (`endpoint`, optional `provider: 'hitpay'`). Always cookie + app token.
   - `db.ts` — `db`, `ensureMigrations`
-  - `files/` — `insertFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
+  - `files.ts` — `insertFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
 - **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an already-applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
 
 `src/routeTree.gen.ts` is generated — rerun `bun run generate-routes` after route edits. Keep tokens/secrets server-side.
