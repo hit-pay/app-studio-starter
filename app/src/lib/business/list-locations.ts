@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { listLocations } from '#/lib/server/business'
-import type { Location } from '#/lib/types'
+import { listLocations } from '#/lib/business/server'
+import type { Location } from '#/types'
 
-export type { Location } from '#/lib/types'
+export type { Location } from '#/types'
 
 let locationsRequest: ReturnType<typeof listLocations> | null = null
 

@@ -1,20 +1,20 @@
 import { useEffect, useState } from 'react'
 
 import { getCurrentUser } from '#/lib/server/current-user'
-import type { CurrentUser } from '#/lib/types'
+import type { User } from '#/types'
 
-export type { CurrentUser } from '#/lib/types'
+export type { User } from '#/types'
 
 let userInfoRequest: ReturnType<typeof getCurrentUser> | null = null
 
 /** Who is signed in. Browser only. Gate UI with `user.role.title`. */
 export function useCurrentUser(): {
-  user: CurrentUser | null
+  user: User | null
   error: string | null
   loading: boolean
   retry: () => void
 } {
-  const [user, setUser] = useState<CurrentUser | null>(null)
+  const [user, setUser] = useState<User | null>(null)
   const [error, setError] = useState<string | null>(null)
   const [loading, setLoading] = useState(true)
   const [attempt, setAttempt] = useState(0)

@@ -7,9 +7,9 @@ import {
   listFiles,
   uploadFile,
 } from '#/lib/server/files'
-import type { FileMeta, FileWithData } from '#/lib/types'
+import type { FileMeta, FileWithData } from '#/types'
 
-export type { FileMeta, FileWithData } from '#/lib/types'
+export type { FileMeta, FileWithData } from '#/types'
 export { FILE_MAX_BYTES }
 
 function messageOf(caught: unknown, fallback: string): string {

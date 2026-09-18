@@ -1,6 +1,6 @@
 import { getRequest } from '@tanstack/react-start/server'
 
-import { type Provider } from '#/lib/enums'
+import { type Provider } from '#/enums'
 import { studioAppId } from '#/lib/utils'
 
 type RequestInput = {

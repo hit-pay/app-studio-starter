@@ -22,7 +22,7 @@ function CurrentUserAction() {
   const label = loading ? '…' : `Signed in as ${name}`
 
   return (
-    <Link to="/current-user" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
+    <Link to="/user" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
       {label}
     </Link>
   )

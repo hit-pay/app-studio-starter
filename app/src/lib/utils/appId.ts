@@ -1,10 +1,3 @@
-import { clsx, type ClassValue } from 'clsx'
-import { twMerge } from 'tailwind-merge'
-
-export function cn(...inputs: ClassValue[]) {
-  return twMerge(clsx(inputs))
-}
-
 /** First path segment of the iframe URL, or `APP_STUDIO_APP_ID`. */
 export function studioAppId(): string {
   if (typeof window !== 'undefined') {

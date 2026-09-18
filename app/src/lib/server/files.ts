@@ -2,10 +2,10 @@ import { randomUUID } from 'node:crypto'
 
 import { createServerFn } from '@tanstack/react-start'
 
-import { ROLES } from '#/lib/enums'
+import { ROLES } from '#/enums'
 import { requireRoles } from '#/lib/server/current-user'
 import { db } from '#/lib/server/db'
-import type { FileMeta } from '#/lib/types'
+import type { FileMeta } from '#/types'
 
 export const FILE_MAX_BYTES = 10 * 1024 * 1024
 

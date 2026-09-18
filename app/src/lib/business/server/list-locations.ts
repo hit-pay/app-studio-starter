@@ -1,7 +1,7 @@
 import { createServerFn } from '@tanstack/react-start'
 
 import { request } from '#/lib/server/request'
-import type { Location } from '#/lib/types'
+import type { Location } from '#/types'
 
 export const listLocations = createServerFn({ method: 'GET' }).handler(async () => {
   const body = await request.get<Location[] | { data?: Location[]; locations?: Location[] }>({

@@ -2,17 +2,17 @@ import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
 
 import { request } from '#/lib/server/request'
-import type { CurrentUser, CurrentUserRole } from '#/lib/types'
+import type { User, UserRole } from '#/types'
 
-const currentUserByRequest = new WeakMap<Request, Promise<CurrentUser>>()
+const currentUserByRequest = new WeakMap<Request, Promise<User>>()
 
 /** Trusted identity from GET /api/apps/{app}/current-user. */
-export const getCurrentUser = createServerFn({ method: 'GET' }).handler(async (): Promise<CurrentUser> => {
+export const getCurrentUser = createServerFn({ method: 'GET' }).handler(async (): Promise<User> => {
   const incoming = getRequest()
   const cached = currentUserByRequest.get(incoming)
   if (cached) return cached
 
-  const pending = (async (): Promise<CurrentUser> => {
+  const pending = (async (): Promise<User> => {
     const parsed = await request.get<Record<string, unknown>>({ endpoint: '/current-user' })
     if (!parsed || typeof parsed !== 'object' || Array.isArray(parsed)) {
       throw new Error('The current-user response is malformed.')
@@ -30,9 +30,9 @@ export const getCurrentUser = createServerFn({ method: 'GET' }).handler(async ()
         role !== null
         && typeof role === 'object'
         && !Array.isArray(role)
-        && typeof (role as CurrentUserRole).id === 'string'
-        && typeof (role as CurrentUserRole).title === 'string'
-          ? { id: (role as CurrentUserRole).id, title: (role as CurrentUserRole).title }
+        && typeof (role as UserRole).id === 'string'
+        && typeof (role as UserRole).title === 'string'
+          ? { id: (role as UserRole).id, title: (role as UserRole).title }
           : null,
     }
   })()
@@ -47,7 +47,7 @@ export const getCurrentUser = createServerFn({ method: 'GET' }).handler(async ()
   }
 })
 
-export async function requireRoles(allowedTitles: readonly string[]): Promise<CurrentUser> {
+export async function requireRoles(allowedTitles: readonly string[]): Promise<User> {
   const user = await getCurrentUser()
   const title = user.role?.title
   if (!title || !allowedTitles.includes(title)) {

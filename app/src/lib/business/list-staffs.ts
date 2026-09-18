@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { listStaffs } from '#/lib/server/business'
-import type { Staff } from '#/lib/types'
+import { listStaffs } from '#/lib/business/server'
+import type { Staff } from '#/types'
 
-export type { Staff } from '#/lib/types'
+export type { Staff } from '#/types'
 
 let staffsRequest: ReturnType<typeof listStaffs> | null = null
 

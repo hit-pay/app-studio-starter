@@ -4,11 +4,11 @@ import { useCurrentUser } from '#/lib/current-user'
 import { PageLayout } from '@/components/layout/page-layout'
 import { Spinner } from '@ui/spinner'
 
-export const Route = createFileRoute('/current-user')({
-  component: CurrentUserPage,
+export const Route = createFileRoute('/user')({
+  component: UserPage,
 })
 
-function CurrentUserPage() {
+function UserPage() {
   const navigate = useNavigate()
   const { user, error, loading } = useCurrentUser()
 
