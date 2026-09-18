@@ -1,6 +1,6 @@
 import { getRequest } from '@tanstack/react-start/server'
 
-import { appUrl } from './url'
+import { endpointUrl } from './url'
 
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
 
@@ -41,22 +41,22 @@ async function mintToken(): Promise<string> {
     .some((item) => item.startsWith(`${USER_TOKEN_COOKIE}=`) && item.length > USER_TOKEN_COOKIE.length + 1)
 
   if (!hasUserToken) {
-    throw new Error('App Studio user token cookie is missing.')
+    throw new Error('Studio user token cookie is missing.')
   }
 
-  const response = await fetch(appUrl('/token'), {
+  const response = await fetch(endpointUrl({ endpoint: '/token' }), {
     headers: { cookie },
     signal: AbortSignal.timeout(15_000),
   })
 
   if (!response.ok) {
-    throw new Error(`Unable to fetch App Studio app token (HTTP ${response.status}).`)
+    throw new Error(`Unable to fetch Studio app token (HTTP ${response.status}).`)
   }
 
   const body = await response.json() as { token?: string }
 
   if (!body.token) {
-    throw new Error('App Studio token response is missing a token.')
+    throw new Error('Studio token response is missing a token.')
   }
 
   return body.token

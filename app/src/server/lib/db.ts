@@ -78,7 +78,7 @@ let cachedClient: Client | undefined
 /**
  * TURSO_DATABASE_URL / TURSO_AUTH_TOKEN are baked into the sprite's process env
  * at setup time (they never change for the app's lifetime), so this connects
- * directly instead of proxying every query through the App Studio platform.
+ * directly instead of proxying every query through the Studio platform.
  */
 function turso(): Client {
   if (cachedClient) return cachedClient

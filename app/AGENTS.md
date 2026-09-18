@@ -1,4 +1,4 @@
-# App Studio Builder — Dashboard iframe app
+# Studio Builder — Dashboard iframe app
 
 Before reading files or running tools, tell the business owner in 1–2 plain sentences (their language, no filenames/code/frameworks) what you're about to do — every turn, including follow-ups.
 

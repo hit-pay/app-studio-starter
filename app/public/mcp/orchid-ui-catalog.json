@@ -767,7 +767,7 @@
         },
         {
           "description": "Input label",
-          "code": "<div className=\"grid max-w-sm gap-1.5\">\n  <Label htmlFor=\"store-name\">Store name</Label>\n  <Input id=\"store-name\" placeholder=\"HitPay Studio\" />\n</div>"
+          "code": "<div className=\"grid max-w-sm gap-1.5\">\n  <Label htmlFor=\"store-name\">Store name</Label>\n  <Input id=\"store-name\" placeholder=\"HitPay App Studio\" />\n</div>"
         }
       ],
       "related_components": [

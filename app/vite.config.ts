@@ -26,7 +26,7 @@ function prefixNitroPublicAssetMap(appId: string | undefined) {
 
 function prefixNitroPublicAssets(appId: string | undefined): PluginOption {
   return {
-    name: 'app-studio:prefix-nitro-public-assets',
+    name: 'studio:prefix-nitro-public-assets',
     apply: 'build',
     enforce: 'post',
     closeBundle: () => prefixNitroPublicAssetMap(appId),
@@ -35,7 +35,7 @@ function prefixNitroPublicAssets(appId: string | undefined): PluginOption {
 
 function stripStartManifestFilePaths(): PluginOption {
   return {
-    name: 'app-studio:strip-start-manifest-file-paths',
+    name: 'studio:strip-start-manifest-file-paths',
     apply: 'build',
     generateBundle(_options, bundle) {
       for (const output of Object.values(bundle)) {
