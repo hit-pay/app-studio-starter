@@ -9,6 +9,7 @@
     "mcp": "bun public/mcp/stdio.ts",
     "dev": "bun --bun vite dev",
     "generate-routes": "bun --bun tsr generate",
+    "migrate": "bun run scripts/migrate.ts",
     "build": "bun --bun vite build",
     "start": "bun start.mjs"
   },

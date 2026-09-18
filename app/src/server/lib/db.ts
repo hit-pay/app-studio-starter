@@ -1,31 +1,29 @@
-import { appApiUrl, getAppToken } from '#/server/lib/app-token'
+import { createClient, type Client, type Row } from '@libsql/client'
 import { isTransactionControl, splitSqlStatements } from '#/server/lib/sql-statements'
 
 type Statement = { sql: string; args?: unknown[] }
-type Result = { columns: string[]; rows: unknown[][] }
+/** `rows[i]` supports both array index and column-name access (libsql `Row`). */
+type Result = { columns: string[]; rows: Row[] }
 
-async function proxy(operation: 'query' | 'batch' | 'migrations', body: unknown): Promise<any> {
-  const token = await getAppToken()
+let cachedClient: Client | undefined
 
-  const response = await fetch(
-    appApiUrl(`/integrations/turso/${operation}`),
-    {
-      method: 'POST',
-      headers: {
-        accept: 'application/json',
-        'content-type': 'application/json',
-        authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify(body),
-    },
-  )
-  if (!response.ok) {
-    const detail = (await response.text()).trim().slice(0, 400)
-    throw new Error(
-      `Turso proxy returned HTTP ${response.status}${detail ? `: ${detail}` : '.'}`,
-    )
+/**
+ * TURSO_DATABASE_URL / TURSO_AUTH_TOKEN are baked into the sprite's process env
+ * at setup time (they never change for the app's lifetime), so this connects
+ * directly instead of proxying every query through the App Studio platform.
+ */
+function turso(): Client {
+  if (cachedClient) return cachedClient
+
+  const url = process.env.TURSO_DATABASE_URL?.trim()
+  const authToken = process.env.TURSO_AUTH_TOKEN?.trim()
+
+  if (!url || !authToken) {
+    throw new Error('TURSO_DATABASE_URL / TURSO_AUTH_TOKEN are not configured.')
   }
-  return response.json()
+
+  cachedClient = createClient({ url, authToken })
+  return cachedClient
 }
 
 type Db = {
@@ -35,19 +33,20 @@ type Db = {
 }
 
 const rawDb: Db = {
-  execute(statement) {
-    const value = typeof statement === 'string' ? { sql: statement, args: [] } : statement
-    return proxy('query', value).then((body) => body.results?.[0] ?? { columns: [], rows: [] })
+  async execute(statement) {
+    const { sql, args = [] } = typeof statement === 'string' ? { sql: statement, args: [] } : statement
+    const result = await turso().execute({ sql, args: args as any })
+    return { columns: result.columns, rows: result.rows }
   },
   batch(statements) {
-    return proxy('batch', { operations: statements })
+    return turso().batch(statements.map(({ sql, args = [] }) => ({ sql, args: args as any })), 'write')
   },
   executeMultiple(sql) {
     const statements = (Array.isArray(sql) ? sql : splitSqlStatements(sql))
       .map((item) => item.trim())
       .filter((item) => item && !isTransactionControl(item))
     if (statements.length === 0) return Promise.resolve(undefined)
-    return proxy('migrations', { name: 'runtime', statements })
+    return turso().migrate(statements.map((item) => ({ sql: item, args: [] })))
   },
 }
 

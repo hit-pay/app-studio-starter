@@ -35,7 +35,9 @@ routes. Then run `bun run generate-routes`.
   - `db.ts`, `migrate.ts`, `file-store.ts` — Database (blobs in `file-store`)
 - `migrations/` — SQLite files. Add a new numbered file for schema changes;
   never rewrite an already-applied file. `db.execute` / `db.batch` run
-  `ensureMigrations()` first. Use `IF NOT EXISTS`.
+  `ensureMigrations()` first. Use `IF NOT EXISTS`. Run `bun run migrate` to
+  apply pending files standalone (against the real Turso database) so a
+  broken migration fails loudly before build, not on the first request.
 
 `src/routeTree.gen.ts` is generated: after route changes run
 `bun run generate-routes`. Keep tokens and secrets on the server.
@@ -61,10 +63,13 @@ those JSON files). App server port 3000,
 
 ## API / Resource and Database
 
-API / Resource fields and Database tool names come from **app-studio** MCP.
-App-owned SQL lives in `migrations/`. Use MCP when you need live API /
-Resource lists or Database runtime tools (query, batch, apply migrations).
-Start with `tools/list`.
+API / Resource fields come from **app-studio** MCP. Use it when you need live
+API / Resource lists. Start with `tools/list`.
+
+Database has no MCP tool and no proxy: `db.execute` / `db.batch`
+(`#/server/lib/db`) connect directly to this app's Turso database (env is
+already configured on the sprite). App-owned SQL lives in `migrations/` —
+`db.execute` / `db.batch` apply pending files first via `ensureMigrations()`.
 
 ## Auth / current user
 
@@ -75,6 +80,8 @@ Roles: `#/lib/roles`.
 
 ## Output
 
-Build or fix the request. End every implement session with
-`bun run build` (fix failures if it breaks), then a short summary of what
-shipped, what is left, and any blockers. Questions: answer only, no file edits.
+Build or fix the request. End every implement session with `bun run migrate`
+(fix failures if it breaks — a schema change must apply before anything else
+runs) then `bun run build` (fix failures if it breaks), then a short summary
+of what shipped, what is left, and any blockers. Questions: answer only, no
+file edits.
