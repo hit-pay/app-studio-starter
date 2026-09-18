@@ -2,11 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useRouterState } from "@tanstack/react-router";
 import { MoonRegular, SunRegular } from "@mingcute/react/core-regular";
 
-import { DOC_GUIDES } from "./doc-components";
-
 const THEME_KEY = "orchid-theme";
-
-const DOC_PATHS = new Set<string>(DOC_GUIDES.map((item) => item.to));
 
 function readTheme(): "light" | "dark" {
   if (typeof document === "undefined") return "light";
@@ -25,7 +21,6 @@ function navClass(active: boolean) {
 function DocHeader() {
   const pathname = useRouterState({ select: (s) => s.location.pathname });
   const [theme, setTheme] = useState<"light" | "dark">(readTheme);
-  const docsActive = DOC_PATHS.has(pathname);
   const blocksActive =
     pathname === "/components" || pathname.startsWith("/components/");
   const baseActive = pathname === "/ui" || pathname.startsWith("/ui/");
@@ -42,13 +37,6 @@ function DocHeader() {
           Orchid UI
         </Link>
         <nav aria-label="Site" className="flex items-center gap-1">
-          <Link
-            to="/installation"
-            aria-current={docsActive ? "page" : undefined}
-            className={navClass(docsActive)}
-          >
-            Docs
-          </Link>
           <Link
             to="/ui"
             aria-current={baseActive ? "page" : undefined}

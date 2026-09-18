@@ -1,19 +1,7 @@
-import { createFileRoute } from "@tanstack/react-router";
-
-import { DocExamplePage } from "@/docs/doc-example-page";
-import { DocMdx } from "@/docs/doc-mdx";
-import ComponentsJsonDocs from "../../docs/guides/components-json.mdx";
+import { createFileRoute, redirect } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/components-json")({
-  component: ComponentsJsonPage,
+  beforeLoad: () => {
+    throw redirect({ to: "/", replace: true });
+  },
 });
-
-function ComponentsJsonPage() {
-  return (
-    <DocExamplePage to="/components-json">
-      <DocMdx>
-        <ComponentsJsonDocs />
-      </DocMdx>
-    </DocExamplePage>
-  );
-}

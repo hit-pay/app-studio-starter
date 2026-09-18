@@ -180,40 +180,10 @@ export const DOC_BLOCK_GROUPS = [
   blockGroup("Overlays", ["/components/command", "/components/confirmation-modal"]),
 ].filter((group) => group.items.length > 0);
 
-export const DOC_GUIDES = [
-  {
-    to: "/installation" as const,
-    name: "Installation",
-    description:
-      "What Orchid is, how to initialize a project, and how to add components with the shadcn CLI.",
-  },
-  {
-    to: "/components-json" as const,
-    name: "components.json",
-    description:
-      "Configure aliases, Tailwind CSS, and the Orchid registry namespace.",
-  },
-  {
-    to: "/theming" as const,
-    name: "Theming",
-    description:
-      "Install Orchid tokens and customize light and dark themes with Tailwind CSS v4.",
-  },
-  {
-    to: "/mcp" as const,
-    name: "MCP",
-    description:
-      "Connect an AI coding tool to the Orchid MCP server to look up components before writing code.",
-  },
-] as const;
-
-export const DOC_GUIDE_ITEMS = DOC_GUIDES;
-
 export const DOC_CRUMBS: Record<string, string> = {
   "/": "Home",
   "/components": "Components & Blocks",
   "/ui": "Base Components",
-  ...Object.fromEntries(DOC_GUIDE_ITEMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_COMPONENTS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_FORMS.map((item) => [item.to, item.name])),
   ...Object.fromEntries(DOC_BLOCKS.map((item) => [item.to, item.name])),

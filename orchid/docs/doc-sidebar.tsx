@@ -4,11 +4,7 @@ import {
   Sidebar,
   type SidebarGroupConfig,
 } from "@/components/navigation/sidebar";
-import {
-  DOC_BASE_GROUPS,
-  DOC_BLOCK_GROUPS,
-  DOC_GUIDES,
-} from "./doc-components";
+import { DOC_BASE_GROUPS, DOC_BLOCK_GROUPS } from "./doc-components";
 
 function asGroups(
   groups: readonly {
@@ -35,19 +31,14 @@ function DocSidebar() {
     return null;
   }
 
-  const showGuides = DOC_GUIDES.some((item) => item.to === pathname);
   const showBlocks = pathname.startsWith("/components/");
   const showBase = pathname.startsWith("/ui/");
 
-  if (!showGuides && !showBlocks && !showBase) {
+  if (!showBlocks && !showBase) {
     return null;
   }
 
-  const groups = showGuides
-    ? asGroups([{ label: "Guides", items: DOC_GUIDES }])
-    : showBlocks
-      ? asGroups(DOC_BLOCK_GROUPS)
-      : asGroups(DOC_BASE_GROUPS);
+  const groups = showBlocks ? asGroups(DOC_BLOCK_GROUPS) : asGroups(DOC_BASE_GROUPS);
 
   return (
     <aside className="hidden h-full w-56 shrink-0 flex-col border-r border-solid border-oc-border bg-oc-background md:flex">

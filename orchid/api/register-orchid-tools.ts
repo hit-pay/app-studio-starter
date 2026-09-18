@@ -110,12 +110,64 @@ function jsonResult(payload: unknown, isError = false) {
   };
 }
 
+const REGISTRY_HOST = "https://orchid-ui-hitpay.vercel.app";
+
+/**
+ * Single source of truth for Orchid's one-time project setup, returned by
+ * the get_orchid_setup MCP tool and rendered on the docs site
+ * (docs/doc-setup-steps.tsx) so the steps are never hand-duplicated.
+ */
+export const SETUP_GUIDE = {
+  summary:
+    "Orchid installs as open code via the shadcn CLI. Run these steps once per project before calling `add` for any component. list_orchid_components / get_orchid_component work without this setup.",
+  steps: [
+    {
+      step: 1,
+      title: "Initialize with shadcn",
+      command: "bunx --bun shadcn@latest init -t vite",
+      note: "-t accepts next | vite | start | react-router | astro. Generates components.json and a Tailwind CSS v4 project.",
+    },
+    {
+      step: 2,
+      title: "Point components.json at the Orchid registry",
+      file: "components.json",
+      patch: { registries: { "@orchid": `${REGISTRY_HOST}/r/{name}.json` } },
+      note: `Merge into the existing components.json, don't replace it. Use the per-item template above, not ${REGISTRY_HOST}/registry.json directly — that URL is the full browsable catalog, not what the CLI fetches per component.`,
+    },
+    {
+      step: 3,
+      title: "Install the Orchid CSS variables",
+      file: "the global stylesheet referenced by components.json (e.g. src/styles.css)",
+      append: `@import "${REGISTRY_HOST}/orchid-tokens.css";`,
+      note: 'Place after `@import "tailwindcss";`. Variables use the --oc-* prefix (--oc-background, --oc-primary, ...), mapped to Tailwind utilities like bg-oc-background. Override under :root (light) and .dark (dark); keep the variable names as-is.',
+    },
+    {
+      step: 4,
+      title: "Install components",
+      command: "bunx --bun shadcn@latest add @orchid/all",
+      note: "Use @orchid/all for a new project (installs the full catalog, registry dependencies resolve automatically). For an existing project, install one slug at a time with the install command from list_orchid_components/get_orchid_component.",
+    },
+  ],
+  registry_catalog_url: `${REGISTRY_HOST}/registry.json`,
+  css_tokens_url: `${REGISTRY_HOST}/orchid-tokens.css`,
+};
+
 export function registerOrchidTools(server: McpServer) {
+  server.registerTool(
+    "get_orchid_setup",
+    {
+      description:
+        "One-time project setup: initialize shadcn, configure the @orchid registry in components.json, and install Orchid's CSS variables. Call this before the first `add` command in a project that doesn't have Orchid configured yet. No arguments.",
+      inputSchema: {},
+    },
+    async () => jsonResult(SETUP_GUIDE),
+  );
+
   server.registerTool(
     "list_orchid_components",
     {
       description:
-        "Search or list Orchid UI components (slim: name, title, description, category, install). Always search before building UI. Then get_orchid_component with name or names[] for props/examples/files. Filter category: ui | components. Filter name: exact slug (full docs).",
+        "Search or list Orchid UI components (slim: name, title, description, category, install). Always search before building UI. Then get_orchid_component with name or names[] for props/examples/files. Filter category: ui | components. Filter name: exact slug (full docs). If the project isn't set up yet, call get_orchid_setup first.",
       inputSchema: listOrchidComponentsArgs,
     },
     async (args) => {
