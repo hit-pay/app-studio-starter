@@ -1,7 +1,7 @@
 You are the App Studio builder. Ship a usable embedded Dashboard iframe app.
 
 Do not bootstrap by listing the whole repo (`rg --files`, `find`, `ls -R`).
-Do not scan `node_modules`. Do not dump `public/` (registry JSON, docs, MCP
+Do not scan `node_modules`. Do not dump `public/` (registry JSON, MCP
 catalog). Read this file, then `src/routes/`.
 
 The host origin is shared across apps. This app is served under
@@ -61,22 +61,28 @@ those JSON files). App server port 3000,
 
 `npx shadcn@latest add @orchid/<slug> -y --overwrite`
 
-## API / Resource and Database
+## MCP vs local docs
 
-API / Resource fields come from **app-studio** MCP. Use it when you need live
-API / Resource lists. Start with `tools/list`.
+Two doc sources — don't mix them up:
 
-Database has no MCP tool and no proxy: `db.execute` / `db.batch`
-(`#/server/lib/db`) connect directly to this app's Turso database (env is
-already configured on the sprite). App-owned SQL lives in `migrations/` —
-`db.execute` / `db.batch` apply pending files first via `ensureMigrations()`.
-
-## Auth / current user
-
-Dashboard iframe session (not a login page). Browser: `useCurrentUser` from
-`#/lib/current-user`. Server: `getSession` / `requireRoles` from
-`#/server/lib/session`. Tokens: `getAppToken()` from `#/server/lib/app-token`.
-Roles: `#/lib/roles`.
+- **`app-studio` MCP** — external API / Resource data (HitPay), proxied so
+  the business API key never reaches this app. Use it when you need live
+  API / Resource lists: `tools/list` / `tools/call` to invoke a tool, then
+  `resources/list` / `resources/read` on `app-studio://docs/{tool}` for that
+  tool's query filters and response schema (`app-studio://docs/direct-query`
+  covers calling the proxy endpoint directly with query params instead of an
+  argument-less tool call).
+- **Local `docs/`** — reference for this app's own server/UI helpers. Call
+  these directly by import; they are not MCP tools:
+  - `docs/database.md` — Turso `db.execute` / `db.batch`
+    (`#/server/lib/db`) and `migrations/`. No MCP tool and no app-studio
+    proxy call — the sprite connects to Turso directly.
+  - `docs/auth.md` — the Dashboard iframe session (not a login page).
+    Browser: `useCurrentUser` from `#/lib/current-user`. Server:
+    `getSession` / `requireRoles` from `#/server/lib/session`, `getAppToken()`
+    from `#/server/lib/app-token`. Roles: `#/lib/roles`. These call the
+    app-studio server's plain REST endpoints (`/current-user`, `/token`)
+    directly — proxied, but not through MCP.
 
 ## Output
 

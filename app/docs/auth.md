@@ -1,4 +1,4 @@
-# App Studio Current User
+# App Studio Auth / Current User
 
 Endpoint:
 
