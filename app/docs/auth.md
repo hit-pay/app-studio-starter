@@ -32,7 +32,8 @@ Field meanings:
 - `role.id`: role ID.
 - `role.title`: role title used by the starter's role checks.
 
-This endpoint returns user profile only. Proxy Bearer tokens come from
-`getAppToken()` in `#/server/lib/app-api`. Keep tokens on the server.
+This endpoint returns user profile only. Outbound calls use `request`
+(`#/server/lib/request`) with the full cookie plus an app token. Keep tokens
+on the server.
 
 Success is `200` JSON. Missing or expired session is an auth error.

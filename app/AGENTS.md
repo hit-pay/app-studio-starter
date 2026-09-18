@@ -22,7 +22,7 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
   - `utils.ts` — `cn`
 - **`src/server/lib/`** — Node-only. Import from each folder's `index.ts` (or `db.ts`), not UI components.
   - `current-user/` — `getCurrentUser`, `requireRoles`
-  - `app-api/` — `getAppToken`, `appJson`, `appApiUrl`, `proxyUrl`
+  - `request/` — `request.get` / `.post` / `.patch` / `.put` / `.delete` (`endpoint`, optional `provider: 'hitpay'`). Always cookie + app token.
   - `db.ts` — `db`, `ensureMigrations`
   - `files/` — `insertFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
 - **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an already-applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
@@ -46,7 +46,7 @@ npx shadcn@latest add @orchid/<slug> -y --overwrite
 ## MCP vs local docs — don't mix these up
 
 - **`app-studio` MCP** — the business's live data (HitPay: customers, payments, products, orders, invoices, etc.), proxied so the API key never reaches this app. Use `tools/list`/`tools/call` to invoke, then `resources/list`/`resources/read` on `app-studio://docs/{tool}` for filters/schema (`app-studio://docs/direct-query` covers calling the proxy directly).
-- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getCurrentUser` (`#/server/lib/current-user`), `requireRoles` (`#/server/lib/current-user`), `getAppToken` (`#/server/lib/app-api`). Roles: `#/lib/enums`. These hit the app-studio server's plain REST endpoints (`/current-user`, `/token`) directly, proxied but not via MCP.
+- **Local `docs/`** — this app's own server/UI helpers. Browser: `useCurrentUser` (`#/lib/current-user`). Server: `getCurrentUser` (`#/server/lib/current-user`), `requireRoles` (`#/server/lib/current-user`), `request` (`#/server/lib/request`). Roles: `#/lib/enums`. These hit the host REST endpoints (`/current-user`, `/token`, integrations) directly, proxied but not via MCP.
 
 ## Output
 

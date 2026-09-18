@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 
-import { appJson, getAppToken } from '#/server/lib/app-api'
+import { request } from '#/server/lib/request'
 
 export type Staff = {
   id: string
@@ -12,10 +12,9 @@ export type Staff = {
 }
 
 export const listStaffs = createServerFn({ method: 'GET' }).handler(async () => {
-  const { members } = await appJson<{ members: Staff[] }>(
-    '/staff-app-members',
-    await getAppToken(),
-  )
+  const { members } = await request.get<{ members: Staff[] }>({
+    endpoint: '/staff-app-members',
+  })
   return members
 })
 

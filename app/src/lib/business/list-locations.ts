@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { createServerFn } from '@tanstack/react-start'
 
-import { appJson, getAppToken } from '#/server/lib/app-api'
+import { request } from '#/server/lib/request'
 
 export type Location = {
   id: string
@@ -19,10 +19,10 @@ function asLocations(body: unknown): Location[] {
 }
 
 export const listLocations = createServerFn({ method: 'GET' }).handler(async () => {
-  const body = await appJson<unknown>(
-    '/integrations/hitpay/locations',
-    await getAppToken(),
-  )
+  const body = await request.get<unknown>({
+    endpoint: '/locations',
+    provider: 'hitpay',
+  })
   return asLocations(body)
 })
 
