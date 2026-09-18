@@ -1,6 +1,6 @@
 import { createMcpHandler } from "mcp-handler";
 
-import { registerOrchidTools } from "./register-orchid-tools.ts";
+import { registerOrchidTools } from "./register-orchid-tools.js";
 
 const handler = createMcpHandler((server) => {
   registerOrchidTools(server);
