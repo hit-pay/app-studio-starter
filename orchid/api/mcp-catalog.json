@@ -19,14 +19,14 @@
       ],
       "category": "ui",
       "props": {
-        "variant": [
-          "default",
-          "outline",
-          "secondary",
-          "ghost",
-          "destructive",
-          "link"
-        ],
+        "variant": {
+          "default": "primary CTA",
+          "outline": "bordered secondary",
+          "secondary": "less emphasis than default",
+          "ghost": "toolbar / row actions",
+          "destructive": "delete / irreversible",
+          "link": "inline text link"
+        },
         "size": [
           "xs",
           "sm",
@@ -46,7 +46,7 @@
           "circle"
         ],
         "disabled": "boolean",
-        "nativeButton": "boolean — false when render is not a native <button> (e.g. <a>)"
+        "nativeButton": "boolean — false when render is not <button>"
       },
       "examples": [
         {
@@ -1426,11 +1426,35 @@
       ],
       "category": "components",
       "props": {
-        "layout": [
-          "default",
-          "stack",
-          "media"
-        ]
+        "items": "DataListItem[] (required)",
+        "layout": {
+          "default": "horizontal row card",
+          "stack": "vertical; use with copyRows",
+          "media": "left thumbnail (auto if media set)"
+        },
+        "empty": "ReactNode when items is []",
+        "className": "string",
+        "items[].key": "string (required)",
+        "items[].title": "ReactNode (required)",
+        "items[].description": "ReactNode",
+        "items[].badges": "ReactNode",
+        "items[].meta": "ReactNode",
+        "items[].details": "{ key, text, icon? }[]",
+        "items[].tokens": "ReactNode[]",
+        "items[].tokensLabel": "ReactNode",
+        "items[].copyRows": "{ key?, label, value }[] — copyable rows",
+        "items[].media": "{ src, alt? } | ReactNode",
+        "items[].logo": "ReactNode",
+        "items[].layout": "default | stack | media",
+        "items[].selected": "boolean",
+        "items[].onClick": "() => void",
+        "items[].actions": "{ onClick?, trailing?, menu?, hover? }",
+        "items[].actions.menu": "{ key?, label, destructive?, onClick? }[]",
+        "items[].actions.hover": "{ key, label, icon?, destructive?, onClick? }[]",
+        "items[].actions.trailing": "ReactNode",
+        "items[].menu": "alias of actions.menu",
+        "items[].hoverActions": "alias of actions.hover",
+        "items[].trailing": "alias of actions.trailing"
       },
       "examples": [
         {
@@ -1488,16 +1512,52 @@
       ],
       "category": "components",
       "props": {
-        "mode": [
-          "client",
-          "server"
-        ],
-        "selection": "boolean",
-        "editColumns": "boolean",
-        "rowActions": [
-          "edit",
-          "delete"
-        ]
+        "table": "SchemaTableApi from useDataTable (required)",
+        "cells": "custom cell render by column key",
+        "toolbarExtra": "ReactNode",
+        "onRowClick": "(row) => void",
+        "onRowAction": "(action: 'edit' | 'delete', row) => void",
+        "onSelectionAction": "(action, selectedIds) => void",
+        "onEmptyAction": "(action) => void",
+        "className": "string",
+        "useDataTable.schema": "SchemaTableSchema (required)",
+        "useDataTable.data": "rows with id: string",
+        "useDataTable.total": "number — server filtered total",
+        "useDataTable.onQueryChange": "(query, change) => void — refetch in server mode",
+        "schema.mode": {
+          "server": "default — page in data + total; refetch on query change",
+          "client": "filter/sort/paginate in the browser"
+        },
+        "schema.selection": "boolean",
+        "schema.search": "{ placeholder?, debounceMs? } | false",
+        "schema.tabs": "{ key, title, value? }[]",
+        "schema.tabKey": "string — default status",
+        "schema.filters": "{ key, title, options }[]",
+        "schema.sort": "{ fields, defaultKey?, defaultDir? } | false",
+        "schema.pagination": "{ pageSize?, pageSizes? } | false",
+        "schema.editColumns": "boolean — default off",
+        "schema.rowActions": {
+          "edit": "edit in ⋮ menu",
+          "delete": "delete in ⋮ menu"
+        },
+        "schema.selectionActions": "bulk actions when rows are selected",
+        "schema.emptyState": "{ title?, description?, media?, actions? }",
+        "schema.columns": "SchemaTableColumn[] (required)",
+        "columns[].key": "string (required)",
+        "columns[].title": "string (required)",
+        "columns[].type": {
+          "text": "default",
+          "amount": "SGD",
+          "date": "formatted date",
+          "status": "Badge",
+          "image": "thumbnail URL",
+          "empty": "spacer"
+        },
+        "columns[].sortable": "boolean",
+        "columns[].hidden": "boolean",
+        "columns[].locked": "boolean",
+        "columns[].icon": "boolean",
+        "columns[].search": "boolean — default true"
       },
       "examples": [
         {
@@ -1506,7 +1566,7 @@
         },
         {
           "description": "Invoices with row actions",
-          "code": "function InvoiceTableExample() {\n  const table = useDataTable({\n    schema: {\n      key: \"invoices\",\n      search: { placeholder: \"Search invoices\" },\n      rowActions: [\"edit\", \"delete\"],\n      pagination: { pageSize: 5 },\n      columns: [\n        { key: \"name\", title: \"Customer\", type: \"text\", locked: true },\n        { key: \"amount\", title: \"Amount\", type: \"amount\", search: false },\n        { key: \"status\", title: \"Status\", type: \"status\", search: false },\n      ],\n    },\n    data: [\n      { id: \"inv-2048\", name: \"Priya Nair\", amount: 128, status: \"Paid\" },\n      { id: \"inv-2049\", name: \"Alex Turner\", amount: 48, status: \"Pending\" },\n    ],\n  });\n\n  return (\n    <DataTable\n      table={table}\n      onRowAction={() => undefined}\n      onRowClick={() => undefined}\n    />\n  );\n}\n\nrender(<InvoiceTableExample />);"
+          "code": "function InvoiceTableExample() {\n  const table = useDataTable({\n    schema: {\n      key: \"invoices\",\n      mode: \"client\",\n      search: { placeholder: \"Search invoices\" },\n      rowActions: [\"edit\", \"delete\"],\n      pagination: { pageSize: 5 },\n      columns: [\n        { key: \"name\", title: \"Customer\", type: \"text\", locked: true },\n        { key: \"amount\", title: \"Amount\", type: \"amount\", search: false },\n        { key: \"status\", title: \"Status\", type: \"status\", search: false },\n      ],\n    },\n    data: [\n      { id: \"inv-2048\", name: \"Priya Nair\", amount: 128, status: \"Paid\" },\n      { id: \"inv-2049\", name: \"Alex Turner\", amount: 48, status: \"Pending\" },\n    ],\n  });\n\n  return (\n    <DataTable\n      table={table}\n      onRowAction={() => undefined}\n      onRowClick={() => undefined}\n    />\n  );\n}\n\nrender(<InvoiceTableExample />);"
         }
       ],
       "related_components": [
@@ -1592,11 +1652,22 @@
       ],
       "category": "components",
       "props": {
-        "media": [
-          "icon",
-          "search",
-          "upgrade"
-        ]
+        "title": "string (required)",
+        "description": "string",
+        "media": {
+          "icon": "no records yet",
+          "search": "no query matches",
+          "upgrade": "plan / limit"
+        },
+        "icon": "ReactNode — custom glyph",
+        "actions": "EmptyAction[]",
+        "onAction": "(action) => void",
+        "className": "string",
+        "actions[].key": "string (required)",
+        "actions[].label": "string (required)",
+        "actions[].variant": "Button variant",
+        "actions[].disabled": "boolean",
+        "actions[].icon": "ReactNode"
       },
       "examples": [
         {

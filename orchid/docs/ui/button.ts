@@ -9,12 +9,19 @@ const buttonDocs = {
   ...buttonRegistry,
   category: "ui",
   props: {
-    variant: ["default", "outline", "secondary", "ghost", "destructive", "link"],
+    variant: {
+      default: "primary CTA",
+      outline: "bordered secondary",
+      secondary: "less emphasis than default",
+      ghost: "toolbar / row actions",
+      destructive: "delete / irreversible",
+      link: "inline text link",
+    },
     size: ["xs", "sm", "default", "lg", "icon-xs", "icon-sm", "icon", "icon-lg"],
     iconOnly: [true, false],
     shape: ["default", "circle"],
     disabled: "boolean",
-    nativeButton: "boolean — false when render is not a native <button> (e.g. <a>)",
+    nativeButton: "boolean — false when render is not <button>",
   },
   examples: [
     {

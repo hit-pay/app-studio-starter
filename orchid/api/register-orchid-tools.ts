@@ -8,7 +8,7 @@ const listOrchidComponentsArgs = {
     .string()
     .optional()
     .describe(
-      "Case-insensitive search across name, title, description, category, related components, and example descriptions. Use this to explore; then get_orchid_component for full docs.",
+      "Case-insensitive search. Spaces match hyphenated slugs (file upload → file-upload). Multiple words match a phrase (AND) or a list of names (OR on name/title). Searches name, title, description, category, related components, and example descriptions.",
     ),
   category: z
     .string()
@@ -35,23 +35,38 @@ const getOrchidComponentArgs = {
 
 type CatalogEntry = (typeof mcpCatalog.components)[number];
 
+function normalizeSearchText(value: string) {
+  return value.toLowerCase().replace(/[-_]+/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function matchesSearch(component: CatalogEntry, query: string) {
-  const q = query.toLowerCase().trim();
-  if (!q) return true;
+  const tokens = normalizeSearchText(query).split(" ").filter(Boolean);
+  if (tokens.length === 0) return true;
 
-  const haystack = [
-    component.name,
-    component.title,
-    component.description,
-    component.category,
-    ...(component.related_components ?? []),
-    ...(component.examples ?? []).map((example) => example.description),
-  ]
-    .filter(Boolean)
-    .join(" ")
-    .toLowerCase();
+  const haystack = normalizeSearchText(
+    [
+      component.name,
+      component.title,
+      component.description,
+      component.category,
+      ...(component.related_components ?? []),
+      ...(component.examples ?? []).map((example) => example.description),
+    ]
+      .filter(Boolean)
+      .join(" "),
+  );
 
-  return haystack.includes(q);
+  const nameHaystack = normalizeSearchText(
+    [component.name, component.title].filter(Boolean).join(" "),
+  );
+
+  if (haystack.includes(tokens.join(" "))) return true;
+  if (tokens.every((token) => haystack.includes(token))) return true;
+  if (tokens.length > 1 && tokens.some((token) => nameHaystack.includes(token))) {
+    return true;
+  }
+
+  return false;
 }
 
 function slimComponent(component: CatalogEntry) {

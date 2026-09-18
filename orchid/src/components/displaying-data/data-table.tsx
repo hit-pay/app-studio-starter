@@ -83,6 +83,7 @@ import {
   orderedVisibleColumns,
   paginationItems,
   queryTable,
+  schemaTableMode,
   syncColumnOrder,
   type SchemaTableActionIcon,
   type SchemaTableActionItem,
@@ -744,7 +745,7 @@ function useSchemaTable({
 
     const change = { key: "search", value: search } as const;
     const debounceMs =
-      schema.mode === "server"
+      schemaTableMode(schema) === "server"
         ? Math.max(
             0,
             schema.search === false ? 0 : (schema.search?.debounceMs ?? 300),

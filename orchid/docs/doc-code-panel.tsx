@@ -93,6 +93,16 @@ function DocRegistryDescription({ description }: { description?: string | null }
   )
 }
 
+function formatPropValue(value: unknown) {
+  if (Array.isArray(value)) return value.join(" | ")
+  if (value && typeof value === "object") {
+    return Object.entries(value as Record<string, unknown>)
+      .map(([key, description]) => `${key} — ${String(description)}`)
+      .join(" | ")
+  }
+  return String(value)
+}
+
 function DocPropsTable({ props }: { props: Record<string, unknown> }) {
   return (
     <div className="overflow-hidden rounded-xl border border-solid border-oc-border">
@@ -108,7 +118,7 @@ function DocPropsTable({ props }: { props: Record<string, unknown> }) {
             <tr key={name} className="border-t border-solid border-oc-border">
               <td className="px-3 py-2 font-mono text-oc-foreground">{name}</td>
               <td className="px-3 py-2 font-mono text-oc-muted-foreground">
-                {Array.isArray(value) ? value.join(" | ") : String(value)}
+                {formatPropValue(value)}
               </td>
             </tr>
           ))}

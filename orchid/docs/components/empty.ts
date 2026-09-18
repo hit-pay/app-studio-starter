@@ -9,7 +9,22 @@ const emptyDocs = {
   ...emptyRegistry,
   category: "components",
   props: {
-    media: ["icon", "search", "upgrade"],
+    title: "string (required)",
+    description: "string",
+    media: {
+      icon: "no records yet",
+      search: "no query matches",
+      upgrade: "plan / limit",
+    },
+    icon: "ReactNode — custom glyph",
+    actions: "EmptyAction[]",
+    onAction: "(action) => void",
+    className: "string",
+    "actions[].key": "string (required)",
+    "actions[].label": "string (required)",
+    "actions[].variant": "Button variant",
+    "actions[].disabled": "boolean",
+    "actions[].icon": "ReactNode",
   },
   examples: [
     {

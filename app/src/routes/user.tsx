@@ -1,6 +1,7 @@
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
 
 import { useCurrentUser } from '#/lib/current-user'
+import { DetailCard } from '@/components/displaying-data/detail-card'
 import { PageLayout } from '@/components/layout/page-layout'
 import { Spinner } from '@ui/spinner'
 
@@ -22,20 +23,32 @@ function UserPage() {
       ) : error ? (
         <p className="text-sm text-oc-destructive">{error}</p>
       ) : user ? (
-        <dl className="space-y-4 text-sm">
-          <div>
-            <dt className="text-oc-muted-foreground">Name</dt>
-            <dd className="font-medium">{user.name || '—'}</dd>
-          </div>
-          <div>
-            <dt className="text-oc-muted-foreground">Email</dt>
-            <dd className="font-medium">{user.email}</dd>
-          </div>
-          <div>
-            <dt className="text-oc-muted-foreground">Role</dt>
-            <dd className="font-medium">{user.role?.title || '—'}</dd>
-          </div>
-        </dl>
+        <DetailCard
+          title="Profile"
+          columns={2}
+          style="border"
+          items={[
+            {
+              key: 'name',
+              label: 'Name',
+              value: user.name || '—',
+              alignment: 'vertical',
+            },
+            {
+              key: 'email',
+              label: 'Email',
+              value: user.email,
+              copyValue: user.email,
+              alignment: 'vertical',
+            },
+            {
+              key: 'role',
+              label: 'Role',
+              value: user.role?.title || '—',
+              alignment: 'vertical',
+            },
+          ]}
+        />
       ) : null}
     </PageLayout>
   )

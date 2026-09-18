@@ -88,6 +88,7 @@ export type SchemaTableEmptyState = {
 
 export type SchemaTableSchema = {
   key?: string;
+  /** Default `server`: pass the current page in `data` + `total`, refetch in `onQueryChange`. Use `client` for in-memory arrays. */
   mode?: "client" | "server";
   selection?: boolean;
   search?: { placeholder?: string; debounceMs?: number } | false;
@@ -267,6 +268,10 @@ export function syncColumnOrder(schema: SchemaTableSchema, order: string[]) {
   return next;
 }
 
+export function schemaTableMode(schema: SchemaTableSchema) {
+  return schema.mode ?? "server";
+}
+
 export function queryTable({
   schema,
   data,
@@ -279,8 +284,9 @@ export function queryTable({
   total?: number;
 }) {
   const keys = searchKeys(schema);
+  const isServer = schemaTableMode(schema) === "server";
   const filtered =
-    schema.mode === "server"
+    isServer
       ? data
       : data
           .filter((row) => matchesSearch(row, query.search, keys))
@@ -288,14 +294,14 @@ export function queryTable({
           .filter((row) => matchesFilters(row, query.filters));
 
   const sorted =
-    schema.mode === "server" || !query.sortKey
+    isServer || !query.sortKey
       ? filtered
       : [...filtered].sort((left, right) =>
           compareRows(left, right, query.sortKey!, query.sortDir),
         );
 
   const filteredCount =
-    schema.mode === "server" ? (total ?? data.length) : sorted.length;
+    isServer ? (total ?? data.length) : sorted.length;
   const pageSize =
     query.pageSize === Number.POSITIVE_INFINITY
       ? sorted.length || 1
@@ -304,7 +310,7 @@ export function queryTable({
   const page = Math.min(query.page, pageCount);
   const start = (page - 1) * pageSize;
   const rows =
-    schema.mode === "server" ? data : sorted.slice(start, start + pageSize);
+    isServer ? data : sorted.slice(start, start + pageSize);
 
   return { rows, filteredCount, pageCount, page, pageSize };
 }
