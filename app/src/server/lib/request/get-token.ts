@@ -17,12 +17,12 @@ export function requestCookie(): string {
  * Short-lived app-level credential from the host `/token` endpoint.
  * Forwards the full incoming cookie (not a single name).
  */
-export async function getAppToken(): Promise<string> {
+export async function getToken(): Promise<string> {
   const incoming = getRequest()
   const cached = tokenByRequest.get(incoming)
   if (cached) return cached
 
-  const pending = mintAppToken()
+  const pending = mintToken()
   tokenByRequest.set(incoming, pending)
 
   try {
@@ -33,7 +33,7 @@ export async function getAppToken(): Promise<string> {
   }
 }
 
-async function mintAppToken(): Promise<string> {
+async function mintToken(): Promise<string> {
   const cookie = requestCookie()
   const hasUserToken = cookie
     .split(';')

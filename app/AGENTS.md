@@ -17,7 +17,7 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
 - **`src/lib/`** — UI-imported helpers (`createServerFn` + browser hooks). New `createServerFn`s go here. CRUD persist flows through these + `requireRoles` + `db.execute` (`#/server/lib/db`).
   - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
   - `business/` — `list-staffs.ts` (`useListStaffs`), `list-locations.ts` (`useListLocations`) (import from `#/lib/business`)
-  - `enums/` — `ROLES.ts` (import from `#/lib/enums`)
+  - `enums/` — `ROLES.ts`, `PROVIDER.ts` (import from `#/lib/enums`)
   - `current-user.ts` — `useCurrentUser` (wraps `getCurrentUser`)
   - `utils.ts` — `cn`
 - **`src/server/lib/`** — Node-only. Import from each folder's `index.ts` (or `db.ts`), not UI components.

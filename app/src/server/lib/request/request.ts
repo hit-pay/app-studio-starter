@@ -1,11 +1,11 @@
-import { getAppToken, requestCookie } from './get-app-token'
-import { endpointUrl, type RequestProvider } from './url'
+import { type Provider } from '#/lib/enums'
 
-export type { RequestProvider }
+import { getToken, requestCookie } from './get-token'
+import { endpointUrl } from './url'
 
 type RequestInput = {
   endpoint: string
-  provider?: RequestProvider
+  provider?: Provider
 }
 
 type RequestInputWithBody = RequestInput & {
@@ -17,7 +17,7 @@ async function send<T>(
   input: RequestInputWithBody,
 ): Promise<T> {
   const cookie = requestCookie()
-  const token = await getAppToken()
+  const token = await getToken()
   const headers = new Headers({
     accept: 'application/json',
     authorization: `Bearer ${token}`,
