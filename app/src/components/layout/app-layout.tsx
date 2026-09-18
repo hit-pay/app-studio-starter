@@ -1,12 +1,61 @@
 'use client'
 
-import { useState, type ComponentProps, type ReactNode } from 'react'
+import {
+  lazy,
+  Suspense,
+  useState,
+  useSyncExternalStore,
+  type ComponentProps,
+  type ReactNode,
+} from 'react'
 import { Link, useRouterState } from '@tanstack/react-router'
 import { MenuRegular } from '@mingcute/react/core-regular'
 
 import { cn } from '@/lib/utils'
 import { Button } from '@ui/button'
-import { Drawer, DrawerContent, DrawerHeader, DrawerTitle } from '@ui/drawer'
+
+const MD_QUERY = '(max-width: 767px)'
+
+function subscribeIsMobile(onStoreChange: () => void) {
+  const media = window.matchMedia(MD_QUERY)
+  media.addEventListener('change', onStoreChange)
+  return () => media.removeEventListener('change', onStoreChange)
+}
+
+function useIsMobile() {
+  return useSyncExternalStore(
+    subscribeIsMobile,
+    () => window.matchMedia(MD_QUERY).matches,
+    () => false,
+  )
+}
+
+const MobileNavDrawer = lazy(async () => {
+  const { Drawer, DrawerContent, DrawerHeader, DrawerTitle } = await import('@ui/drawer')
+
+  return {
+    default: function MobileNavDrawer({
+      open,
+      onOpenChange,
+      children,
+    }: {
+      open: boolean
+      onOpenChange: (open: boolean) => void
+      children: ReactNode
+    }) {
+      return (
+        <Drawer open={open} onOpenChange={onOpenChange} swipeDirection="left">
+          <DrawerContent className="w-72 data-[swipe-direction=left]:w-72 sm:w-72">
+            <DrawerHeader className="sr-only">
+              <DrawerTitle>Navigation</DrawerTitle>
+            </DrawerHeader>
+            {children}
+          </DrawerContent>
+        </Drawer>
+      )
+    },
+  }
+})
 
 type AppLayoutNavigationItem = {
   id: string
@@ -56,6 +105,7 @@ function AppLayout({
   const resolvedActive = activeIdFromPath(pathname, navigationItems)
 
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const isMobile = useIsMobile()
   const hasNavigation = Boolean(navigationItems?.length)
   const showTabs = variant === 'tabs' && hasNavigation
   const showSidebar = variant === 'sidebar' && hasNavigation
@@ -146,14 +196,13 @@ function AppLayout({
       {showSidebar ? (
         <div data-slot="app-layout-body" className="flex min-h-0 min-w-0 flex-1">
           <AppSidebar className="hidden md:flex">{sidebarNav}</AppSidebar>
-          <Drawer open={sidebarOpen} onOpenChange={setSidebarOpen} swipeDirection="left">
-            <DrawerContent className="w-72 data-[swipe-direction=left]:w-72 sm:w-72">
-              <DrawerHeader className="sr-only">
-                <DrawerTitle>Navigation</DrawerTitle>
-              </DrawerHeader>
-              {sidebarNav}
-            </DrawerContent>
-          </Drawer>
+          {isMobile ? (
+            <Suspense fallback={null}>
+              <MobileNavDrawer open={sidebarOpen} onOpenChange={setSidebarOpen}>
+                {sidebarNav}
+              </MobileNavDrawer>
+            </Suspense>
+          ) : null}
           {page}
         </div>
       ) : (
