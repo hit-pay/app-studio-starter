@@ -5,21 +5,10 @@ import { createServerFn } from '@tanstack/react-start'
 import { ROLES } from '#/lib/enums'
 import { requireRoles } from '#/lib/server/current-user'
 import { db } from '#/lib/server/db'
+import type { FileMeta } from '#/lib/types'
 
 export const FILE_MAX_BYTES = 10 * 1024 * 1024
 
-export type FileMeta = {
-  id: string
-  entityType: string | null
-  entityId: string | null
-  name: string
-  mimeType: string
-  size: number
-  storageProvider: string
-  storageKey: string
-  createdAt: string
-  updatedAt: string
-}
 
 const FILE_META_COLUMNS =
   'id, entity_type, entity_id, name, mime_type, size, storage_provider, storage_key, created_at, updated_at'

@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { listStaffs } from '#/lib/server/business'
+import type { Staff } from '#/lib/types'
 
-export type Staff = Awaited<ReturnType<typeof listStaffs>>[number]
+export type { Staff } from '#/lib/types'
 
 let staffsRequest: ReturnType<typeof listStaffs> | null = null
 

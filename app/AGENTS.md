@@ -18,13 +18,14 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
   - `files.ts` — `useFiles` (`#/lib/files`)
   - `business/` — `useListStaffs`, `useListLocations` (import from `#/lib/business`)
   - `enums/` — `ROLES.ts`, `PROVIDER.ts` (import from `#/lib/enums`)
+  - `types/` — shared TS types (`#/lib/types`)
   - `current-user.ts` — `useCurrentUser`
   - `utils.ts` — `cn`
 - **`src/lib/server/`** — Node-only helpers and all `createServerFn`s. Import from these files, not UI components.
   - `current-user.ts` — `getCurrentUser`, `requireRoles`
   - `request.ts` — `request.get` / `.post` / `.patch` / `.put` / `.delete` (`endpoint`, optional `provider: 'hitpay'`). Always cookie + app token.
   - `db.ts` — `db`, `ensureMigrations`
-  - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`, `FileMeta`
+  - `files.ts` — `uploadFile`, `getFile`, `listFiles`, `deleteFile`
   - `business/` — `listLocations`, `listStaffs`
 - **`migrations/`** — SQLite files. New numbered file per schema change; never rewrite an already-applied one. Use `IF NOT EXISTS`. `db.execute`/`db.batch` auto-run `ensureMigrations()`. Run `bun run migrate` standalone against the real DB so failures surface before build.
 

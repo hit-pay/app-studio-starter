@@ -6,13 +6,11 @@ import {
   getFile,
   listFiles,
   uploadFile,
-  type FileMeta,
 } from '#/lib/server/files'
+import type { FileMeta, FileWithData } from '#/lib/types'
 
-export type { FileMeta }
+export type { FileMeta, FileWithData } from '#/lib/types'
 export { FILE_MAX_BYTES }
-
-export type FileWithData = FileMeta & { dataUrl: string }
 
 function messageOf(caught: unknown, fallback: string): string {
   return caught instanceof Error ? caught.message : fallback

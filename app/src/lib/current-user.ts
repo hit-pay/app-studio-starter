@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react'
 
-import { getCurrentUser, type CurrentUser, type CurrentUserRole } from '#/lib/server/current-user'
+import { getCurrentUser } from '#/lib/server/current-user'
+import type { CurrentUser } from '#/lib/types'
 
-export type { CurrentUser }
-export type Role = CurrentUserRole
+export type { CurrentUser } from '#/lib/types'
 
 let userInfoRequest: ReturnType<typeof getCurrentUser> | null = null
 

@@ -2,18 +2,7 @@ import { createServerFn } from '@tanstack/react-start'
 import { getRequest } from '@tanstack/react-start/server'
 
 import { request } from '#/lib/server/request'
-
-export type CurrentUserRole = {
-  id: string
-  title: string
-}
-
-export type CurrentUser = {
-  id: string
-  email: string
-  name: string | null
-  role: CurrentUserRole | null
-}
+import type { CurrentUser, CurrentUserRole } from '#/lib/types'
 
 const currentUserByRequest = new WeakMap<Request, Promise<CurrentUser>>()
 

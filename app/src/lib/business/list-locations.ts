@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react'
 
 import { listLocations } from '#/lib/server/business'
+import type { Location } from '#/lib/types'
 
-export type Location = Awaited<ReturnType<typeof listLocations>>[number]
+export type { Location } from '#/lib/types'
 
 let locationsRequest: ReturnType<typeof listLocations> | null = null
 
