@@ -10,7 +10,7 @@ Cover the screens the request needs: persist, session/roles, and loading/empty/e
 
 ## Layout
 
-- **`src/routes/`** — pages. `index.tsx` = home. `user.tsx` = `/user` (signed-in profile). Add sibling files (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
+- **`src/routes/`** — pages. `index.tsx` = home. Add sibling files (`$id.tsx`, `new.tsx`, `settings.tsx`, …).
 - **`src/components/`** — UI. `ui/` plus Orchid blocks (`layout/`, `overlays/`, `actions/`, `form/`, `displaying-data/`). Don't dump these to learn APIs; use orchid-ui MCP. Edit only when asked. Install extra slugs via `shadcn add`.
 - **`src/types/`** — shared data shapes (`#/types`): `User`, `UserRole`, `FileMeta`, `FileWithData`, `Location`, `Staff`, plus re-exports of `Provider` / `RoleTitle`.
 - **`src/enums/`** — value lists (`#/enums`): `ROLES`, `PROVIDER`.
@@ -37,7 +37,7 @@ Explore via orchid-ui MCP before writing screens: `list_orchid_components` (sear
 
 On disk today (among others): `app-layout`, `page-layout`, `form-layout`, `confirmation-modal`, `copy-button`, `button`, `dialog`, `drawer`, `input`, `file-upload`, `skeleton`, `spinner`, `toast`, `tooltip`.
 
-`__root.tsx` already mounts `AppLayout`, `Toaster`, `ConfirmationModalProvider`. Signed-in chip links to `/user`.
+`__root.tsx` already mounts `AppLayout`, `Toaster`, `ConfirmationModalProvider`. Signed-in chip opens a profile dropdown.
 
 Missing slug? Install from local registry at `public/r` (don't open those JSON files directly). App server port 3000, path `/${APP_STUDIO_APP_ID}/r/{name}.json`:
 

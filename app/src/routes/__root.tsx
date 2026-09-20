@@ -4,6 +4,13 @@ import { useCurrentUser } from '#/lib/current-user'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
 import { buttonVariants } from '@ui/button'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@ui/dropdown-menu'
 import { Toaster } from '@ui/toast'
 
 import '../styles.css'
@@ -16,15 +23,48 @@ function NotFound() {
   )
 }
 
+function ProfileField({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="flex flex-col gap-0.5 px-2 py-1.5">
+      <span className="text-[10px] leading-4.5 font-medium tracking-[0.3px] text-oc-muted-foreground uppercase">
+        {label}
+      </span>
+      <span className="min-w-0 break-all text-sm leading-normal text-oc-foreground">{value}</span>
+    </div>
+  )
+}
+
 function CurrentUserAction() {
-  const { user, loading } = useCurrentUser()
+  const { user, error, loading } = useCurrentUser()
   const name = user?.name?.trim() || user?.email || '…'
   const label = loading ? '…' : `Signed in as ${name}`
 
   return (
-    <Link to="/user" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
-      {label}
-    </Link>
+    <DropdownMenu>
+      <DropdownMenuTrigger
+        nativeButton
+        render={
+          <button type="button" className={buttonVariants({ variant: 'outline', size: 'sm' })}>
+            {label}
+          </button>
+        }
+      />
+      <DropdownMenuContent align="end" className="w-auto min-w-56 max-w-80">
+        {error ? (
+          <p className="px-2 py-1.5 text-sm text-oc-destructive">{error}</p>
+        ) : user ? (
+          <>
+            <DropdownMenuLabel>Profile</DropdownMenuLabel>
+            <DropdownMenuSeparator />
+            <ProfileField label="Name" value={user.name || '—'} />
+            <ProfileField label="Email" value={user.email} />
+            <ProfileField label="Role" value={user.role?.title || '—'} />
+          </>
+        ) : (
+          <p className="px-2 py-1.5 text-sm text-oc-muted-foreground">…</p>
+        )}
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }
 
@@ -36,7 +76,7 @@ function AppShell() {
           className="h-full min-h-0"
           appName={
             <Link to="/" className="min-w-0 truncate outline-none hover:opacity-80">
-              App
+              App Name
             </Link>
           }
           appBarActions={<CurrentUserAction />}
