@@ -53,6 +53,8 @@ async function getToken(): Promise<string> {
     const appSecret = process.env.APP_STUDIO_APP_SECRET?.trim()
     if (appSecret) {
       headers['x-app-studio-app-secret'] = appSecret
+    }else{
+      throw new Error('Studio app secret is missing.')
     }
 
     const response = await fetch(endpointUrl({ endpoint: '/token' }), {
