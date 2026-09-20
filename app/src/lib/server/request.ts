@@ -13,7 +13,10 @@ type RequestInputWithBody = RequestInput & {
 }
 
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
-const tokenByRequest = new WeakMap<Request, Promise<string>>()
+const TOKEN_REFRESH_SKEW_MS = 30_000
+
+let cachedAppToken: { token: string; expiresAt: number } | null = null
+let appTokenInflight: Promise<string> | null = null
 
 function endpointUrl(input: RequestInput): URL {
   const origin = process.env.APP_STUDIO_PROXY_URL?.trim()
@@ -33,53 +36,70 @@ function requestCookie(): string {
   return cookie
 }
 
+async function fetchAppToken(): Promise<string> {
+  const cookie = requestCookie()
+  const hasUserToken = cookie
+    .split(';')
+    .map((item) => item.trim())
+    .some((item) => item.startsWith(`${USER_TOKEN_COOKIE}=`) && item.length > USER_TOKEN_COOKIE.length + 1)
+
+  if (!hasUserToken) {
+    throw new Error('Studio user token cookie is missing.')
+  }
+
+  const appSecret = process.env.APP_STUDIO_APP_SECRET?.trim()
+  if (!appSecret) {
+    throw new Error('Studio app secret is missing.')
+  }
+
+  const headers: Record<string, string> = {
+    cookie,
+    authorization: `Bearer ${appSecret}`,
+  }
+
+  const response = await fetch(endpointUrl({ endpoint: '/token' }), {
+    headers,
+    signal: AbortSignal.timeout(15_000),
+  })
+
+  if (!response.ok) {
+    throw new Error(`Unable to fetch Studio app token (HTTP ${response.status}).`)
+  }
+
+  const body = await response.json() as { token?: string; expiresIn?: number }
+  if (!body.token) {
+    throw new Error('Studio token response is missing a token.')
+  }
+
+  const expiresIn = typeof body.expiresIn === 'number' && body.expiresIn > 0 ? body.expiresIn : 0
+  cachedAppToken = {
+    token: body.token,
+    expiresAt: Date.now() + expiresIn * 1000,
+  }
+
+  return body.token
+}
+
 async function getToken(): Promise<string> {
-  const incoming = getRequest()
-  const cached = tokenByRequest.get(incoming)
-  if (cached) return cached
+  if (
+    cachedAppToken !== null
+    && Date.now() < cachedAppToken.expiresAt - TOKEN_REFRESH_SKEW_MS
+  ) {
+    return cachedAppToken.token
+  }
 
-  const pending = (async () => {
-    const cookie = requestCookie()
-    const hasUserToken = cookie
-      .split(';')
-      .map((item) => item.trim())
-      .some((item) => item.startsWith(`${USER_TOKEN_COOKIE}=`) && item.length > USER_TOKEN_COOKIE.length + 1)
+  if (appTokenInflight) {
+    return appTokenInflight
+  }
 
-    if (!hasUserToken) {
-      throw new Error('Studio user token cookie is missing.')
-    }
-
-    const headers: Record<string, string> = { cookie }
-    const appSecret = process.env.APP_STUDIO_APP_SECRET?.trim()
-    if (appSecret) {
-      headers['x-app-studio-app-secret'] = appSecret
-    }else{
-      throw new Error('Studio app secret is missing.')
-    }
-
-    const response = await fetch(endpointUrl({ endpoint: '/token' }), {
-      headers,
-      signal: AbortSignal.timeout(15_000),
-    })
-
-    if (!response.ok) {
-      throw new Error(`Unable to fetch Studio app token (HTTP ${response.status}).`)
-    }
-
-    const body = await response.json() as { token?: string }
-    if (!body.token) {
-      throw new Error('Studio token response is missing a token.')
-    }
-
-    return body.token
-  })()
-
-  tokenByRequest.set(incoming, pending)
+  appTokenInflight = fetchAppToken().finally(() => {
+    appTokenInflight = null
+  })
 
   try {
-    return await pending
+    return await appTokenInflight
   } catch (error) {
-    tokenByRequest.delete(incoming)
+    cachedAppToken = null
     throw error
   }
 }
