@@ -49,8 +49,14 @@ async function getToken(): Promise<string> {
       throw new Error('Studio user token cookie is missing.')
     }
 
+    const headers: Record<string, string> = { cookie }
+    const appSecret = process.env.APP_STUDIO_APP_SECRET?.trim()
+    if (appSecret) {
+      headers['x-app-studio-app-secret'] = appSecret
+    }
+
     const response = await fetch(endpointUrl({ endpoint: '/token' }), {
-      headers: { cookie },
+      headers,
       signal: AbortSignal.timeout(15_000),
     })
 
