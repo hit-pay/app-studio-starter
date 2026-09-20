@@ -7,6 +7,7 @@ import { buttonVariants } from '@ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
+  DropdownMenuGroup,
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -53,13 +54,13 @@ function CurrentUserAction() {
         {error ? (
           <p className="px-2 py-1.5 text-sm text-oc-destructive">{error}</p>
         ) : user ? (
-          <>
+          <DropdownMenuGroup>
             <DropdownMenuLabel>Profile</DropdownMenuLabel>
             <DropdownMenuSeparator />
             <ProfileField label="Name" value={user.name || '—'} />
             <ProfileField label="Email" value={user.email} />
             <ProfileField label="Role" value={user.role?.title || '—'} />
-          </>
+          </DropdownMenuGroup>
         ) : (
           <p className="px-2 py-1.5 text-sm text-oc-muted-foreground">…</p>
         )}
