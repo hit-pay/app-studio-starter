@@ -10,9 +10,10 @@ Inspect only the files needed for the request. Do not perform a repository-wide 
 
 For UI:
 
-* Reuse existing components.
-* Use Orchid UI MCP only when you need to discover an unfamiliar component or API.
-* Do not query MCP for components whose usage is already clear from the existing code.
+* Reuse Orchid components. Do not invent a widget the catalog already has.
+* Learn props and usage from orchid-ui MCP only: `list_orchid_components` (always pass `search`), then `get_orchid_component` with `name` or `names[]`.
+* Implement from the returned `props` and `examples`. Do not open `src/components/`, registry JSON, or `public/` to learn an API.
+* Only read the route or feature file you are changing — not component source.
 
 For data:
 
@@ -65,5 +66,7 @@ Do not:
 * scan `node_modules`
 * access or inspect `public/`
 * dump `public/`
+* read `src/components/` to discover props, variants, or examples
+* call `list_orchid_components` without `search`
 
 For questions only: answer without editing files.

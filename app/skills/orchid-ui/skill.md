@@ -1,26 +1,19 @@
 ---
 name: orchid-ui
-description: Reuse Orchid UI components and query orchid-ui MCP only for unfamiliar APIs. Use when building or changing UI, installing components, or looking up props/examples.
+description: Reuse Orchid UI via orchid-ui MCP for props and examples. Use when building or changing UI, installing a missing slug, or looking up how to implement a component.
 ---
 
 # Orchid UI
 
-Reuse existing components. Do not invent a new widget when an Orchid component already covers the need.
+Reuse catalog components. Do not invent a widget Orchid already covers.
 
-## When to use MCP
+MCP is the only way to learn props and usage. Do not open `src/components/`, registry JSON, or `public/` for that.
 
-Use orchid-ui MCP only when the component or API is unfamiliar.
+## Workflow
 
-1. `list_orchid_components` — search the catalog (more slugs are installable than what is on disk).
-2. `get_orchid_component` with `name` or `names[]` — props and examples.
-
-Do not query MCP for components whose usage is already clear from existing code.
-
-Do not inspect registry/MCP catalog files, dump `public/`, or scan Orchid source to learn the catalog.
-
-If MCP is still not enough, open the matching file under `src/components/`.
-
-## Install
+1. `list_orchid_components` with `search` (never list the full catalog).
+2. `get_orchid_component` with `name` or `names[]`.
+3. Implement from `props` and `examples[{description,code}]`. Copy the example pattern; do not read the component source.
 
 Missing slug, app server on port 3000:
 
