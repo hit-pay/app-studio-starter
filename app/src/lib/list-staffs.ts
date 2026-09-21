@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { listStaffs } from '#/lib/business/server'
+import { listStaffs } from '#/lib/server/list-staffs'
 import type { Staff } from '#/types'
 
 export type { Staff } from '#/types'

@@ -1,11 +1,9 @@
 import { getRequest } from '@tanstack/react-start/server'
 
-import { type Provider } from '#/enums'
 import { studioAppId } from '#/lib/utils'
 
 type RequestInput = {
   endpoint: string
-  provider?: Provider
 }
 
 type RequestInputWithBody = RequestInput & {
@@ -26,8 +24,7 @@ function endpointUrl(input: RequestInput): URL {
 
   const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
   const endpoint = input.endpoint.startsWith('/') ? input.endpoint : `/${input.endpoint}`
-  const suffix = input.provider ? `/integrations/${input.provider}${endpoint}` : endpoint
-  return new URL(`/api/apps/${encodeURIComponent(appId)}${suffix}`, `${origin}/`)
+  return new URL(`/api/apps/${encodeURIComponent(appId)}${endpoint}`, `${origin}/`)
 }
 
 function requestCookie(): string {

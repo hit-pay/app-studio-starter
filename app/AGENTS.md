@@ -1,4 +1,4 @@
-**# Studio Builder**
+# Studio Builder
 
 Build the requested app feature using the existing project patterns.
 
@@ -16,14 +16,16 @@ For UI:
 
 For data:
 
-* Use existing server helpers and Turso patterns.
-* Keep secrets and server-only code under `src/lib/server`.
+* Persist app data with existing Turso helpers under `src/lib/server`.
+* Keep secrets and server-only code under `src/lib/server`. UI must not import `#/lib/server`.
+* Host APIs go through `request` in `#/lib/server/request`. Browser code uses `#/lib/*` hooks only.
+* Staff: `useListStaffs` from `#/lib/list-staffs`; `listStaffs` from `#/lib/server/list-staffs`.
 * New database schema requires a new numbered migration.
 * Never modify an already-applied migration.
 
 For auth:
 
-* Use the existing current-user and role helpers.
+* Use the existing current-user and role helpers (`#/lib/current-user`, `#/lib/server/current-user`).
 * Enforce authorization on the server, not only in the UI.
 
 For routing:
@@ -63,6 +65,5 @@ Do not:
 * scan `node_modules`
 * access or inspect `public/`
 * dump `public/`
-* inspect registry/MCP catalog files directly
 
 For questions only: answer without editing files.
