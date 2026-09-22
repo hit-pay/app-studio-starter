@@ -3,7 +3,7 @@ import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/r
 import { useCurrentUser } from '#/lib/current-user'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
-import { Button, buttonVariants } from '@ui/button'
+import { buttonVariants } from '@ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -38,7 +38,7 @@ function ProfileField({ label, value }: { label: string; value: string }) {
 function CurrentUserAction() {
   const { user, error, loading } = useCurrentUser()
   const name = user?.name?.trim() || user?.email || '…'
-  const label = loading ? '…' : `Signed in as ${name}`
+  const label = loading ? '…' : `${name}`
 
   return (
     <DropdownMenu>
@@ -83,9 +83,6 @@ function AppShell() {
           appBarActions={
             <>
               <CurrentUserAction />
-              <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
-                Reload
-              </Button>
             </>
           }
         >
