@@ -10,6 +10,7 @@ Inspect only the minimum application files needed for the request. Do not perfor
 
 ### UI
 
+* See `skills/orchid-ui/skill.md` for the Orchid UI workflow.
 * Reuse Orchid components. Do not invent a widget that the Orchid catalog already provides.
 * Orchid UI MCP is the authoritative source for Orchid component APIs.
 * Before using an Orchid component:
@@ -27,7 +28,9 @@ Application-specific components may be inspected only when they are directly rel
 
 ### Data
 
-* Persist app data with existing Turso helpers under `src/lib/server`.
+* See `skills/database/skill.md` for the data persistence workflow.
+* Persist app data with existing Database helpers under `src/lib/server`.
+* Do not use Local storeage for app data.
 * Keep secrets and server-only code under `src/lib/server`.
 * UI must not import `#/lib/server`.
 * Host APIs go through `request` in `#/lib/server/request`.
@@ -38,11 +41,13 @@ Application-specific components may be inspected only when they are directly rel
 
 ### Auth
 
+* See `skills/authentication/skill.md` for the auth workflow.
 * Use the existing current-user and role helpers (`#/lib/current-user`, `#/lib/server/current-user`).
 * Enforce authorization on the server, not only in the UI.
 
 ### Routing
 
+* See `skills/routing/skill.md` for the routing workflow.
 * Add routes only when they make the UX clearer.
 * Run `bun run generate-routes` after route changes.
 
@@ -81,6 +86,7 @@ Use this workflow:
 * inspect Orchid registry JSON to discover component APIs
 * call `list_orchid_components` without a non-empty `search`
 * inspect `public/` to discover Orchid component APIs
+* read or inspect any file under `src/components` — Orchid component APIs come only from Orchid MCP
 
 For `public/`, access existing assets only when the requested feature explicitly requires them.
 
