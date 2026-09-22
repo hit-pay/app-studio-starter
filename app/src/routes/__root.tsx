@@ -3,7 +3,7 @@ import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/r
 import { useCurrentUser } from '#/lib/current-user'
 import { AppLayout } from '@/components/layout/app-layout'
 import { ConfirmationModalProvider } from '@/components/overlays/confirmation-modal'
-import { buttonVariants } from '@ui/button'
+import { Button, buttonVariants } from '@ui/button'
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -80,7 +80,14 @@ function AppShell() {
               App Name
             </Link>
           }
-          appBarActions={<CurrentUserAction />}
+          appBarActions={
+            <>
+              <CurrentUserAction />
+              <Button variant="outline" size="sm" onClick={() => window.location.reload()}>
+                Reload
+              </Button>
+            </>
+          }
         >
           <Outlet />
         </AppLayout>
