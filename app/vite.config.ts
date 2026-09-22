@@ -91,11 +91,19 @@ export default defineConfig(({ mode }): UserConfig => {
         config: {
           preset: 'bun',
           baseURL: base,
+          rollupConfig: {
+            checks: {
+              preferBuiltinFeature: false,
+            },
+          } as Record<string, unknown>,
           hooks: {
             compiled() {
               prefixNitroPublicAssetMap(
                 loadEnv(mode, process.cwd(), '').APP_STUDIO_APP_ID?.trim(),
               )
+            },
+            'rollup:before'(_nitro, config) {
+              delete (config.output as { generatedCode?: unknown }).generatedCode
             },
           },
         },
