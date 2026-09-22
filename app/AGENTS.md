@@ -54,7 +54,7 @@ Use this workflow:
 
 1. Inspect the minimum relevant files.
 2. Implement the feature.
-3. Run `bun run migrate`.
+3. Run `bun run migrate` only if you added or changed a file under the migrations folder.
 4. Run `bun run build`.
 5. Fix failures.
 6. Summarize the result in 1–3 plain-language sentences.
