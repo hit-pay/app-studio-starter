@@ -1,3 +1,4 @@
+
 # Studio Builder
 
 Build the requested app feature using the existing project patterns.
@@ -8,47 +9,68 @@ Tell the business owner in 1–2 plain sentences what you are about to do.
 
 Inspect only the minimum application files needed for the request. Do not perform a repository-wide scan.
 
-### UI
+## UI
 
 * See `skills/orchid-ui/skill.md` for the Orchid UI workflow.
+
 * Reuse Orchid components. Do not invent a widget that the Orchid catalog already provides.
+
 * Orchid UI MCP is the authoritative source for Orchid component APIs.
+
 * Before using an Orchid component:
 
   1. Call `list_orchid_components` with a non-empty `search`.
   2. Call `get_orchid_component` with `name` or `names[]`.
   3. Use the returned `props` and `examples` to implement the component.
+
 * Never inspect Orchid component source to learn its props, variants, or usage.
+
 * Do not search the repository for an Orchid component implementation before querying Orchid MCP.
+
 * Do not inspect Orchid registry JSON or `public/` to learn component APIs.
+
 * Only inspect local application code when needed to understand the feature being changed.
+
 * If local source conflicts with Orchid MCP documentation, use the Orchid MCP API and examples.
 
-Application-specific components may be inspected only when they are directly relevant to the requested feature.
+* Application-specific components may be inspected only when they are directly relevant to the requested feature.
 
 ### Data
 
 * See `skills/database/skill.md` for the data persistence workflow.
+
 * Persist app data with existing Database helpers under `src/lib/server`.
-* Do not use Local storeage for app data.
+
+* Do not use Local storage for app data.
+
 * Keep secrets and server-only code under `src/lib/server`.
+
 * UI must not import `#/lib/server`.
+
 * Host APIs go through `request` in `#/lib/server/request`.
+
 * Browser code uses `#/lib/*` hooks only.
+
 * Staff: `useListStaffs` from `#/lib/list-staffs`; `listStaffs` from `#/lib/server/list-staffs`.
+
 * New database schema requires a new numbered migration.
+
 * Never modify an already-applied migration.
 
 ### Auth
 
 * See `skills/authentication/skill.md` for the auth workflow.
+
 * Use the existing current-user and role helpers (`#/lib/current-user`, `#/lib/server/current-user`).
+
 * Enforce authorization on the server, not only in the UI.
 
 ### Routing
 
 * See `skills/routing/skill.md` for the routing workflow.
+
 * Add routes only when they make the UX clearer.
+
 * Run `bun run generate-routes` after route changes.
 
 ## Required states
@@ -74,8 +96,14 @@ Use this workflow:
 3. Implement the feature.
 4. Run `bun run migrate`.
 5. Run `bun run build`.
-6. Fix failures.
-7. Summarize the result in 1–3 plain-language sentences.
+6. If `bun run build` fails:
+
+   * Inspect the build error.
+   * Fix the underlying issue.
+   * Run `bun run build` again.
+   * Repeat until the build succeeds.
+7. Only after a successful `bun run build`, consider the implementation verified.
+8. Summarize the result in 1–3 plain-language sentences.
 
 ## Do not
 
