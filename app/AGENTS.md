@@ -107,12 +107,7 @@ Use this workflow:
 
 ## Do not
 
-* run `rg --files` across the whole repository
-* run `find` across the repository
 * scan `node_modules`
-* inspect Orchid component source to discover props, variants, or examples
-* inspect Orchid registry JSON to discover component APIs
-* call `list_orchid_components` without a non-empty `search`
 * inspect `public/` to discover Orchid component APIs
 * read or inspect any file under `src/components` — Orchid component APIs come only from Orchid MCP
 
