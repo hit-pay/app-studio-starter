@@ -55,6 +55,8 @@ Inspect only the minimum application files needed for the request. Do not perfor
 
 * New database schema requires a new numbered migration.
 
+* For anything that should happen automatically on a HitPay event (new order, payment, …), see `skills/webhooks/skill.md`.
+
 * Never modify an already-applied migration.
 
 ### Auth
