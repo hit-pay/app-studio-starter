@@ -112,6 +112,7 @@ Use this workflow:
 * scan `node_modules`
 * inspect `public/` to discover Orchid component APIs
 * read or inspect any file under `src/components` — Orchid component APIs come only from Orchid MCP
+* print `APP_STUDIO_USER_TOKEN` or write it to any file
 
 For `public/`, access existing assets only when the requested feature explicitly requires them.
 
