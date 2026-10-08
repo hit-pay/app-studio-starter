@@ -27,8 +27,23 @@ function endpointUrl(input: RequestInput): URL {
   return new URL(`/api/apps/${encodeURIComponent(appId)}${endpoint}`, `${origin}/`)
 }
 
+function incomingCookie(): string | null {
+  try {
+    return getRequest().headers.get('cookie')
+  } catch {
+    return null
+  }
+}
+
+// A script run by the agent during generation has no incoming request; the run
+// passes the gateway user token of the person who started it instead.
+function runCookie(): string | null {
+  const token = process.env.APP_STUDIO_USER_TOKEN?.trim()
+  return token ? `${USER_TOKEN_COOKIE}=${token}` : null
+}
+
 function requestCookie(): string {
-  const cookie = getRequest().headers.get('cookie')
+  const cookie = incomingCookie() ?? runCookie()
   if (!cookie) throw new Error('Sign in to use this app.')
   return cookie
 }
