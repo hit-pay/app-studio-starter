@@ -78,6 +78,11 @@ export default defineConfig(({ mode }): UserConfig => {
     },
     build: {
       chunkSizeWarningLimit: 2000,
+      rollupOptions: {
+        // These are server-only dependencies imported by server functions.
+        // Keep them external so the client build does not warn about Node built-ins.
+        external: ['node:crypto', 'node:fs/promises', 'node:path'],
+      },
     },
     plugins: [
       tailwindcss(),
