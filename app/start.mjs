@@ -5,8 +5,7 @@ process.env.HOST ??= '0.0.0.0'
 process.env.NITRO_HOST ??= process.env.HOST
 
 const appRoot = dirname(fileURLToPath(import.meta.url))
-const appId = process.env.APP_STUDIO_APP_ID?.trim() ?? ''
-const registryPrefixes = appId ? [`/${appId}/r/`, '/r/'] : ['/r/']
+const registryPrefix = '/r/'
 const registryRoots = [
   resolve(appRoot, 'public/r'),
   resolve(appRoot, '.output/public/r'),
@@ -38,12 +37,11 @@ async function serveOrchidRegistry(request) {
   }
 
   const pathname = new URL(request.url).pathname
-  const prefix = registryPrefixes.find((item) => pathname.startsWith(item))
-  if (!prefix) {
+  if (!pathname.startsWith(registryPrefix)) {
     return null
   }
 
-  const name = pathname.slice(prefix.length)
+  const name = pathname.slice(registryPrefix.length)
   if (!name || name.includes('..') || name.includes('/') || !name.endsWith('.json')) {
     return null
   }

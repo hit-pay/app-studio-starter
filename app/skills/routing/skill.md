@@ -11,6 +11,6 @@ Pages live in `src/routes/`. `index.tsx` is home. Add sibling files (`$id.tsx`, 
 
 Inspect only the files needed for the request. Do not list the whole repository, scan `node_modules`, or dump `public/`.
 
-The app is served under `/{APP_STUDIO_APP_ID}/…`. `studioAppId()` from `#/lib/utils` is that path segment.
+The app is served from the root of its own host (`https://{APP_STUDIO_APP_ID}.hit-studio.com/`), so route paths start at `/`. `studioAppId()` from `#/lib/utils` returns the app id.
 
 Implement the states the feature needs: loading, empty, error, validation, mutation/success.
