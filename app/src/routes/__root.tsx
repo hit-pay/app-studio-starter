@@ -1,4 +1,5 @@
 import { HeadContent, Link, Outlet, Scripts, createRootRoute } from '@tanstack/react-router'
+import { WebhookRegular } from '@mingcute/react/core-regular'
 
 import { useCurrentUser } from '#/lib/current-user'
 import { AppLayout } from '@/components/layout/app-layout'
@@ -39,9 +40,21 @@ function CurrentUserAction() {
   const { user, error, loading } = useCurrentUser()
   const name = user?.name?.trim() || user?.email || '…'
   const label = loading ? '…' : `${name}`
+  const canViewWebhookLogs = user?.role?.title === 'Owner' || user?.role?.title === 'Admin'
 
   return (
-    <DropdownMenu>
+    <>
+      {canViewWebhookLogs ? (
+        <Link
+          to="/webhook-logs"
+          aria-label="Webhook logs"
+          title="Webhook logs"
+          className={buttonVariants({ variant: 'ghost', size: 'icon-sm' })}
+        >
+          <WebhookRegular />
+        </Link>
+      ) : null}
+      <DropdownMenu>
       <DropdownMenuTrigger
         nativeButton
         render={
@@ -65,7 +78,8 @@ function CurrentUserAction() {
           <p className="px-2 py-1.5 text-sm text-oc-muted-foreground">…</p>
         )}
       </DropdownMenuContent>
-    </DropdownMenu>
+      </DropdownMenu>
+    </>
   )
 }
 

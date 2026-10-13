@@ -73,6 +73,31 @@ export const listPendingHitpayWebhookEvents = createServerFn({ method: 'GET' })
     return result.rows.map((row) => eventFromRow(row as Record<string, unknown>))
   })
 
+export const listHitpayWebhookEvents = createServerFn({ method: 'GET' })
+  .validator((data: { page?: number; pageSize?: number; eventObject?: string; eventType?: string }) => data)
+  .handler(async ({ data }): Promise<{ events: HitpayWebhookEvent[]; total: number }> => {
+    await requireRoles(['Owner', 'Admin'])
+    const pageSize = Math.min(Math.max(data.pageSize ?? 50, 1), 100)
+    const page = Math.max(data.page ?? 1, 1)
+    const result = await db.execute({
+      sql: `SELECT *, COUNT(*) OVER() AS total_count FROM hitpay_webhook_events
+        WHERE (? IS NULL OR event_object = ?)
+          AND (? IS NULL OR event_type = ?)
+        ORDER BY received_at DESC
+        LIMIT ? OFFSET ?`,
+      args: [
+        data.eventObject ?? null, data.eventObject ?? null,
+        data.eventType ?? null, data.eventType ?? null,
+        pageSize, (page - 1) * pageSize,
+      ],
+    })
+    const rows = result.rows as Array<Record<string, unknown>>
+    return {
+      events: rows.map((row) => eventFromRow(row)),
+      total: Number(rows[0]?.total_count ?? 0),
+    }
+  })
+
 /** Claims the event; returns false when another tab or staff already processed it. */
 export const markHitpayWebhookEventProcessed = createServerFn({ method: 'POST' })
   .validator((data: { id: string }) => data)
