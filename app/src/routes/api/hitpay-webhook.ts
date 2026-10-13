@@ -8,7 +8,7 @@ import {
 
 /**
  * HitPay webhook receiver, reached through the Studio gateway at
- * POST /{appId}/api/hitpay-webhook. Stores the event and answers fast; the app
+ * POST /api/hitpay-webhook. Stores the event and answers fast; the app
  * reads pending events with `listPendingHitpayWebhookEvents`.
  */
 export const Route = createFileRoute('/api/hitpay-webhook')({
