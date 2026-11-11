@@ -11,6 +11,7 @@
     "generate-routes": "bun --bun tsr generate",
     "migrate": "bun run scripts/migrate.ts",
     "build": "bun --bun vite build",
+    "build:edge": "bun run scripts/build-edge.ts",
     "start": "bun start.mjs"
   },
   "dependencies": {
