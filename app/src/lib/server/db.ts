@@ -1,6 +1,3 @@
-import { readdir, readFile } from 'node:fs/promises'
-import { join } from 'node:path'
-
 import { createClient, type Client, type Row } from '@libsql/client'
 
 type Statement = { sql: string; args?: unknown[] }
@@ -119,11 +116,26 @@ const schemaDb: Db = {
   },
 }
 
+/** Migration file name to its SQL. */
+export type Migrations = Record<string, string>
+
+/**
+ * The files in migrations/, bundled at build time. The app cannot read its own files at runtime
+ * on the shared runtime, so the SQL ships inside the server bundle.
+ */
+function bundledMigrations(): Migrations {
+  const modules = import.meta.glob<string>('/migrations/*.sql', { query: '?raw', import: 'default', eager: true })
+
+  return Object.fromEntries(
+    Object.entries(modules).map(([path, sql]) => [path.slice(path.lastIndexOf('/') + 1), sql]),
+  )
+}
+
 let migrationPromise: Promise<void> | undefined
 
 /** Apply pending files in migrations/ once per process. Safe to call on every request. */
-export async function ensureMigrations(): Promise<void> {
-  const pending = (migrationPromise ??= applyPendingMigrations())
+export async function ensureMigrations(migrations: () => Migrations = bundledMigrations): Promise<void> {
+  const pending = (migrationPromise ??= applyPendingMigrations(migrations()))
 
   try {
     await pending
@@ -133,7 +145,7 @@ export async function ensureMigrations(): Promise<void> {
   }
 }
 
-async function applyPendingMigrations(): Promise<void> {
+async function applyPendingMigrations(migrations: Migrations): Promise<void> {
   await schemaDb.execute(`
     CREATE TABLE IF NOT EXISTS _migrations (
       name TEXT PRIMARY KEY,
@@ -141,21 +153,13 @@ async function applyPendingMigrations(): Promise<void> {
     )
   `)
 
-  const migrationsDir = join(process.cwd(), 'migrations')
-  let files: string[]
-  try {
-    files = (await readdir(migrationsDir)).filter((file) => file.endsWith('.sql')).sort()
-  } catch (error) {
-    throw new Error(`Could not read migrations directory at ${migrationsDir}.`, { cause: error })
-  }
-
   const applied = new Set(
     (await schemaDb.execute('SELECT name FROM _migrations')).rows.map((row) => String(row.name)),
   )
 
-  for (const file of files) {
+  for (const file of Object.keys(migrations).sort()) {
     if (applied.has(file)) continue
-    const sql = (await readFile(join(migrationsDir, file), 'utf8')).trim()
+    const sql = migrations[file]!.trim()
     if (sql === '') continue
 
     const statements = splitSqlStatements(sql).filter((item) => !isTransactionControl(item))
