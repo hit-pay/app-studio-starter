@@ -10,6 +10,7 @@
     "dev": "bun --bun vite dev",
     "generate-routes": "bun --bun tsr generate",
     "migrate": "bun run scripts/migrate.ts",
+    "integrations": "bun run scripts/integrations.ts",
     "build": "bun --bun vite build",
     "build:edge": "bun run scripts/build-edge.ts",
     "start": "bun start.mjs"

@@ -68,6 +68,19 @@ Inspect only the minimum application files needed for the request. Do not perfor
 
 * Never modify an already-applied migration.
 
+### Integrations
+
+When the app needs an outside service (Google Sheets, Drive or Calendar, Notion, Twilio, WhatsApp Business, HitPay, …):
+
+1. Run `bun run integrations list` to find its key and status.
+2. Run `bun run integrations request <key> "<one-line reason the owner will read>"`. Write the reason in plain language, e.g. "To save each new order as a row in your sheet."
+3. Act on the printed status:
+   * `granted` and connected: explore the service with the `nango` MCP tools. In app code use `callNangoTool` and `listNangoTools` from `#/lib/server/integrations` (server only). Never send the session token to the browser, and never ask for or hard-code API keys.
+   * `requested`, or not connected: stop building that part and finish the turn. Tell the owner to allow <Title> in the card above, e.g. "To show your calendar here, please allow Google Calendar in the card above." Continue when the next message says it is allowed.
+   * `declined`: do not ask again. Offer another way to do it.
+
+`callNangoTool` returns null until the owner allows an integration. Handle that in the UI by showing "Waiting for access to <Title>" instead of an error.
+
 ### Auth
 
 * See `skills/authentication/skill.md` for the auth workflow.

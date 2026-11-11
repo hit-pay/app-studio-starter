@@ -10,10 +10,19 @@ type RequestInputWithBody = RequestInput & {
   body?: unknown
 }
 
+/** A Nango agent session for the integrations the business owner allowed. */
+export type NangoSession = {
+  mcpUrl: string
+  token: string
+  expiresAt: number
+}
+
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
 const TOKEN_REFRESH_SKEW_MS = 30_000
+// Without a session, ask again soon so a newly allowed integration shows up.
+const MISSING_NANGO_RECHECK_MS = 60_000
 
-let cachedAppToken: { token: string; expiresAt: number } | null = null
+let cachedAppToken: { token: string; expiresAt: number; nango: NangoSession | null } | null = null
 let appTokenInflight: Promise<string> | null = null
 
 function endpointUrl(input: RequestInput): URL {
@@ -78,18 +87,29 @@ async function fetchAppToken(): Promise<string> {
     throw new Error(`Unable to fetch Studio app token (HTTP ${response.status}).`)
   }
 
-  const body = await response.json() as { token?: string; expiresIn?: number }
+  const body = await response.json() as { token?: string; expiresIn?: number; nango?: unknown }
   if (!body.token) {
     throw new Error('Studio token response is missing a token.')
   }
 
   const expiresIn = typeof body.expiresIn === 'number' && body.expiresIn > 0 ? body.expiresIn : 0
+  const nango = parseNangoSession(body.nango)
+  const nangoExpiresAt = nango?.expiresAt ?? Date.now() + MISSING_NANGO_RECHECK_MS + TOKEN_REFRESH_SKEW_MS
   cachedAppToken = {
     token: body.token,
-    expiresAt: Date.now() + expiresIn * 1000,
+    expiresAt: Math.min(Date.now() + expiresIn * 1000, nangoExpiresAt),
+    nango,
   }
 
   return body.token
+}
+
+function parseNangoSession(value: unknown): NangoSession | null {
+  if (value === null || typeof value !== 'object') return null
+  const { mcp_url: mcpUrl, token, expires_at: expiresAt } = value as Record<string, unknown>
+  if (typeof mcpUrl !== 'string' || typeof token !== 'string' || typeof expiresAt !== 'string') return null
+  const expiresAtMs = Date.parse(expiresAt)
+  return Number.isNaN(expiresAtMs) ? null : { mcpUrl, token, expiresAt: expiresAtMs }
 }
 
 async function getToken(): Promise<string> {
@@ -114,6 +134,16 @@ async function getToken(): Promise<string> {
     cachedAppToken = null
     throw error
   }
+}
+
+/**
+ * The Nango session for the integrations this app may use, or null when the
+ * business owner has not allowed any yet. Server only: never send the token to
+ * the browser.
+ */
+export async function getNangoSession(): Promise<NangoSession | null> {
+  await getToken()
+  return cachedAppToken?.nango ?? null
 }
 
 async function send<T>(
