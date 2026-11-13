@@ -18,11 +18,13 @@ export type NangoSession = {
 }
 
 const USER_TOKEN_COOKIE = 'app_studio_user_token'
+// Set by the Studio gateway on every request: a fingerprint of the integrations the owner allowed.
+const GRANTS_HEADER = 'x-app-studio-grants'
 const TOKEN_REFRESH_SKEW_MS = 30_000
 // Without a session, ask again soon so a newly allowed integration shows up.
 const MISSING_NANGO_RECHECK_MS = 60_000
 
-let cachedAppToken: { token: string; expiresAt: number; nango: NangoSession | null } | null = null
+let cachedAppToken: { token: string; expiresAt: number; nango: NangoSession | null; grants: string | null } | null = null
 let appTokenInflight: Promise<string> | null = null
 
 function endpointUrl(input: RequestInput): URL {
@@ -34,6 +36,15 @@ function endpointUrl(input: RequestInput): URL {
   const appId = process.env.APP_STUDIO_APP_ID?.trim() || studioAppId()
   const endpoint = input.endpoint.startsWith('/') ? input.endpoint : `/${input.endpoint}`
   return new URL(`/api/apps/${encodeURIComponent(appId)}${endpoint}`, `${origin}/`)
+}
+
+// The grants the gateway saw for this request, or null outside a request, such as in an agent script.
+function incomingGrants(): string | null {
+  try {
+    return getRequest().headers.get(GRANTS_HEADER)
+  } catch {
+    return null
+  }
 }
 
 function incomingCookie(): string | null {
@@ -87,7 +98,7 @@ async function fetchAppToken(): Promise<string> {
     throw new Error(`Unable to fetch Studio app token (HTTP ${response.status}).`)
   }
 
-  const body = await response.json() as { token?: string; expiresIn?: number; nango?: unknown }
+  const body = await response.json() as { token?: string; expiresIn?: number; nango?: unknown; grants?: unknown }
   if (!body.token) {
     throw new Error('Studio token response is missing a token.')
   }
@@ -99,6 +110,7 @@ async function fetchAppToken(): Promise<string> {
     token: body.token,
     expiresAt: Math.min(Date.now() + expiresIn * 1000, nangoExpiresAt),
     nango,
+    grants: typeof body.grants === 'string' ? body.grants : null,
   }
 
   return body.token
@@ -113,6 +125,13 @@ function parseNangoSession(value: unknown): NangoSession | null {
 }
 
 async function getToken(): Promise<string> {
+  // An integration was allowed, declined or reconnected since: the cached Nango session is
+  // ended or missing it, so ask for a new one now instead of when the token expires.
+  const grants = incomingGrants()
+  if (cachedAppToken !== null && grants !== null && grants !== cachedAppToken.grants) {
+    cachedAppToken = null
+  }
+
   if (
     cachedAppToken !== null
     && Date.now() < cachedAppToken.expiresAt - TOKEN_REFRESH_SKEW_MS
