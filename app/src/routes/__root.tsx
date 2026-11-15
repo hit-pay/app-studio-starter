@@ -40,11 +40,12 @@ function CurrentUserAction() {
   const { user, error, loading } = useCurrentUser()
   const name = user?.name?.trim() || user?.email || '…'
   const label = loading ? '…' : `${name}`
-  const canViewWebhookLogs = user?.role?.title === 'Owner' || user?.role?.title === 'Admin'
+  // webhook coming soon feature 
+  // const canViewWebhookLogs = user?.role?.title === 'Owner' || user?.role?.title === 'Admin'
 
   return (
     <>
-      {canViewWebhookLogs ? (
+      {/* {canViewWebhookLogs ? (
         <Link
           to="/webhook-logs"
           aria-label="Webhook logs"
@@ -54,7 +55,7 @@ function CurrentUserAction() {
           <WebhookRegular />
         </Link>
       ) : null}
-      <DropdownMenu>
+      <DropdownMenu> */}
       <DropdownMenuTrigger
         nativeButton
         render={
