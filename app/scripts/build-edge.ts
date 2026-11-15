@@ -1,4 +1,4 @@
-// Builds the bundle Supabase Edge Runtime runs for a published app: dist-edge.tgz.
+// Builds the bundle the App Studio runtime (Bun + QuickJS) runs for a published app: dist-edge.tgz.
 // The build runs in a copy of the app, so the preview's .output and .nitro stay untouched.
 import { cp, mkdir, mkdtemp, readdir, readFile, rm, symlink } from 'node:fs/promises'
 import { tmpdir } from 'node:os'
@@ -56,7 +56,7 @@ async function run(cmd: string[], cwd: string, env: Record<string, string> = {})
   }
 }
 
-// The runtime only resolves relative imports and node: built-ins inside the bundle.
+// The runtime resolves relative imports and node: built-ins (shimmed) inside the bundle.
 async function assertNoBareImports(dir: string): Promise<void> {
   const bare: string[] = []
 

@@ -23,7 +23,7 @@ function stripStartManifestFilePaths(): PluginOption {
   }
 }
 
-// STUDIO_BUILD_TARGET=edge builds the bundle Supabase Edge Runtime runs for published apps.
+// STUDIO_BUILD_TARGET=edge builds the bundle the App Studio runtime runs for published apps.
 const edge = process.env.STUDIO_BUILD_TARGET === 'edge'
 
 export default defineConfig((): UserConfig => {
