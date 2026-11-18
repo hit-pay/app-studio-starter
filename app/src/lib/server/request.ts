@@ -17,7 +17,8 @@ export type NangoSession = {
   expiresAt: number
 }
 
-const USER_TOKEN_COOKIE = 'app_studio_user_token'
+// `__Host-` makes a browser refuse it with a Domain, so another app on a sibling host cannot shadow it.
+const USER_TOKEN_COOKIE = '__Host-app_studio_user_token'
 // Set by the Studio gateway on every request: a fingerprint of the integrations the owner allowed.
 const GRANTS_HEADER = 'x-app-studio-grants'
 const TOKEN_REFRESH_SKEW_MS = 30_000
