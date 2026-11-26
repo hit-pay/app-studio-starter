@@ -47,7 +47,7 @@ Rules:
 * Return JSON with `c.json(...)`. For a problem the user should see, `throw new HTTPException(400, { message: '…' })` (from `hono/http-exception`); the message reaches the page.
 * What the validator returns is what the route sees and what the typed client expects. Never trust input that did not pass a validator.
 * HitPay data: `await c.var.host.get<{ members: Staff[] }>('/staff-app-members')`.
-* Integrations: `callNangoTool(c.var.host, 'tool-name', { … })` from `../lib/integrations.ts`.
+* Integrations: `nangoAction(c.var.host, 'google-mail__list-messages', { maxResults: 20 })` or `nangoRequest(c.var.host, { integration: 'hitpay', path: '/v1/products' })` from `../lib/integrations.ts`. See the Integrations section of `AGENTS.md`.
 
 ## 2. Page (frontend)
 

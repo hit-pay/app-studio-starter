@@ -44,6 +44,7 @@ The frontend calls the backend only through the typed client in `frontend/src/li
 * Validate every route's input with Hono's `validator` and the helpers in `backend/src/lib/validate.ts`.
 * New tables or columns need a new numbered file in `backend/migrations/`. Never change a migration that already exists.
 * HitPay data (staff, locations, roles) comes through the host client, `c.var.host`, in a backend route. The frontend already has `useCurrentUser`, `useStaff` and `useLocations`.
+* Other HitPay data (products, orders, invoices, customers, charges, …) comes through the HitPay integration. See `skills/hitpay-api/skill.md`.
 * Files: `useFiles` in `frontend/src/lib/files.ts`, backed by `/api/files`. Files are sent as they are, never as base64.
 
 ### Integrations
@@ -53,11 +54,17 @@ When the app needs an outside service (Google Sheets, Drive or Calendar, Notion,
 1. Run `bun run integrations list` to find its key and status.
 2. Run `bun run integrations request <key> "<one-line reason the owner will read>"`. Write the reason in plain language, e.g. "To save each new order as a row in your sheet."
 3. Act on the printed status:
-   * `granted` and connected: explore the service with the `nango` MCP tools. In a backend route use `callNangoTool(c.var.host, …)` and `listNangoTools(c.var.host)` from `backend/src/lib/integrations.ts`. Never send the session token to the browser, and never ask for or hard-code API keys.
+   * `granted` and connected: build it as below.
    * `requested`, or not connected: stop building that part and finish the turn. Tell the owner to allow <Title> in the card above, e.g. "To show your calendar here, please allow Google Calendar in the card above." Continue when the next message says it is allowed.
    * `declined`: do not ask again. Offer another way to do it.
 
-`callNangoTool` returns null until the owner allows an integration. Show "Waiting for access to <Title>" in the page instead of an error.
+A backend route reaches an integration only through `backend/src/lib/integrations.ts`:
+
+* `nangoAction(c.var.host, '<tool>', input)` runs one of the integration's Nango actions, e.g. `google-mail__list-messages`. Find the tool name and its input with the `nango_tool_search` MCP tool, and try it with `nango_execute`, before writing the route. The app cannot search for tools at runtime: write the exact name.
+* `nangoRequest(c.var.host, { integration, method, path, query, body })` calls the integration's own API, for a job no action covers. Try the same call with the `nango_proxy` MCP tool first.
+* HitPay has no Nango actions: always use `nangoRequest` with `integration: 'hitpay'`. See `skills/hitpay-api/skill.md`.
+
+Both return null until the owner allows an integration: show "Waiting for access to <Title>" in the page instead of an error. `nangoRequest` throws `IntegrationError` when the service answers with an error; show its message. Never send the session token to the browser, and never ask for, hard-code or send an API key or Authorization header.
 
 ### Published app runtime
 
@@ -66,7 +73,7 @@ A published app's backend runs in the App Studio runtime, a small sandbox, not i
 * Each request must finish within 30 seconds, using at most 64 MB of memory.
 * Web APIs only: `fetch`, `Request`, `Response`, `URL`, `TextEncoder`/`TextDecoder`, `crypto.randomUUID`, `crypto.getRandomValues`, and `crypto.subtle` for digests and HMAC. No `node:` modules and no Bun APIs; an import of one fails the publish.
 * No timers: `setTimeout` with a delay and `setInterval` never fire, and `AbortSignal.timeout` never aborts. There are no background jobs; do the work inside the request.
-* Network: only the host client, the app's database through `db`, and integrations through `callNangoTool`. Any other `fetch` fails.
+* Network: only the host client, the app's database through `db`, and integrations through `nangoAction` and `nangoRequest`. Any other `fetch` fails, so never call an integration's API with `fetch`.
 * Files are at most 10 MB. Paginate lists instead of returning a whole table.
 
 ## Auth

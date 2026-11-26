@@ -1,7 +1,13 @@
 import type { Host, NangoSession } from './host.ts'
 
-// Outside services the owner allowed (Google Sheets, Calendar, WhatsApp, HitPay, …), reached through Nango's MCP
-// tools. Server only: never send the session token to the browser.
+// Outside services the owner allowed (Google Sheets, Calendar, WhatsApp, HitPay, …), reached through one Nango
+// session for every allowed integration. Server only: never send the session token to the browser.
+//
+// Two ways to call an integration:
+// * nangoAction: run one of its Nango actions, such as `google-mail__list-messages`. Find the name and input with
+//   the `nango_tool_search` MCP tool while building; the app cannot list them at runtime.
+// * nangoRequest: call its own API directly, for an integration with no action for the job. HitPay has no actions,
+//   so HitPay always goes through nangoRequest. Nango adds the credentials; never send a key or Authorization header.
 
 export type IntegrationStatus = 'requested' | 'granted' | 'declined'
 
@@ -29,10 +35,35 @@ export type IntegrationRequestResult = {
   needs_reconnect: boolean
 }
 
-export type NangoToolResult = {
+type ToolResult = {
   content: { type: string; text?: string; [key: string]: unknown }[]
   structuredContent?: unknown
   isError?: boolean
+}
+
+export type NangoRequest = {
+  /** The integration's key, as `bun run integrations list` prints it, e.g. `hitpay`. */
+  integration: string
+  method?: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
+  /** The path on the provider's API, starting with `/`, e.g. `/v1/products`. */
+  path: string
+  /** An array value is sent once per item; name the key `statuses[]` when the API expects that form. */
+  query?: Record<string, string | number | (string | number)[]>
+  /** Sent as JSON. */
+  body?: unknown
+}
+
+export type NangoResponse<T> = { status: number; body: T }
+
+/** The provider answered with an error. `status` is its HTTP status: 401 or 403 usually means a missing scope. */
+export class IntegrationError extends Error {
+  constructor(
+    message: string,
+    readonly status: number,
+    readonly body: unknown,
+  ) {
+    super(message)
+  }
 }
 
 /** Integrations the business can connect and what this app has been allowed. */
@@ -48,35 +79,70 @@ export function requestIntegration(host: Host, key: string, reason?: string): Pr
   return host.post<IntegrationRequestResult>('/integrations/requests', reason ? { key, reason } : { key })
 }
 
-/** Tools the Nango session exposes for the allowed integrations. Null without a session. */
-export async function listNangoTools(host: Host): Promise<{ name: string; description?: string; inputSchema?: unknown }[] | null> {
-  const session = await host.nangoSession()
-  if (!session) return null
-  const result = await mcp<{ tools: { name: string; description?: string; inputSchema?: unknown }[] }>(
-    session,
-    'tools/list',
-    {},
-  )
-  return result.tools
+/**
+ * Runs a Nango action and returns its output, e.g. `nangoAction(host, 'google-mail__list-messages', { maxResults: 20 })`.
+ * Null until the owner allows an integration.
+ */
+export async function nangoAction<T = unknown>(host: Host, tool: string, input: Record<string, unknown> = {}): Promise<T | null> {
+  const result = await callTool(host, 'nango_execute', { tool, input, goal: GOAL, intent: `Run ${tool} for this app's page` })
+  if (!result) return null
+  if (result.structuredContent !== undefined && !isEmptyObject(result.structuredContent)) return result.structuredContent as T
+
+  const text = result.content.map((item) => item.text ?? '').join('')
+  try {
+    return JSON.parse(text) as T
+  } catch {
+    return text as T
+  }
 }
 
 /**
- * Calls one Nango MCP tool, for example to read rows from a Google Sheet.
- * Returns null when the business owner has not allowed any integration yet.
+ * Calls an integration's own API through Nango, which adds the connection's credentials. Throws IntegrationError
+ * when the provider answers 4xx or 5xx. Null until the owner allows an integration.
  */
-export async function callNangoTool(
-  host: Host,
-  name: string,
-  args: Record<string, unknown> = {},
-): Promise<NangoToolResult | null> {
+export async function nangoRequest<T = unknown>(host: Host, request: NangoRequest): Promise<NangoResponse<T> | null> {
+  const method = request.method ?? 'GET'
+  const result = await callTool(host, 'nango_proxy', {
+    integration: request.integration,
+    method,
+    path: request.path,
+    ...(request.query ? { query_params: request.query } : {}),
+    ...(request.body !== undefined ? { body: request.body } : {}),
+    goal: GOAL,
+    intent: `${method} ${request.path}: the integration has no action for this`,
+  })
+  if (!result) return null
+
+  const reply = result.structuredContent as { status?: number; body?: unknown } | undefined
+  const status = reply?.status ?? 0
+  const body = reply?.body as T
+  if (status < 200 || status >= 300) {
+    throw new IntegrationError(`${request.integration} answered HTTP ${status} to ${method} ${request.path}${errorText(body)}`, status, body)
+  }
+  return { status, body }
+}
+
+// Nango asks every call for the user's task. An app serves many viewers, so the task is the app's own.
+const GOAL = 'Serve a page of this App Studio app with data from the business integrations'
+
+async function callTool(host: Host, name: string, args: Record<string, unknown>): Promise<ToolResult | null> {
   const session = await host.nangoSession()
   if (!session) return null
-  const result = await mcp<NangoToolResult>(session, 'tools/call', { name, arguments: args })
+  const result = await mcp<ToolResult>(session, 'tools/call', { name, arguments: args })
   if (result.isError) {
     const text = result.content.map((item) => item.text).filter(Boolean).join(' ')
-    throw new Error(`The ${name} tool failed${text ? `: ${text}` : '.'}`)
+    throw new Error(`The integration call failed${text ? `: ${text}` : '.'}`)
   }
   return result
+}
+
+function errorText(body: unknown): string {
+  if (body && typeof body === 'object' && 'message' in body && typeof body.message === 'string') return `: ${body.message}`
+  return ''
+}
+
+function isEmptyObject(value: unknown): boolean {
+  return typeof value === 'object' && value !== null && !Array.isArray(value) && Object.keys(value).length === 0
 }
 
 const MCP_PROTOCOL_VERSION = '2025-06-18'
