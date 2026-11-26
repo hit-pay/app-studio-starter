@@ -1,4 +1,3 @@
-
 # Studio Builder
 
 Build the requested app feature using the existing project patterns.
@@ -18,53 +17,34 @@ Tell the business owner in 1–2 plain sentences what you are about to change, f
 
 Inspect only the minimum application files needed for the request. Do not perform a repository-wide scan.
 
+## How the app is built
+
+Two folders, and they only meet through the API:
+
+* `frontend/`: the pages the user sees. A React single-page app with TanStack Router (pages) and TanStack Query (data), styled with Orchid UI.
+* `backend/`: the app's API, Hono routes under `/api`. It owns the database, the HitPay data, integrations and every permission check.
+
+The frontend calls the backend only through the typed client in `frontend/src/lib/api.ts` (`call(api.<resource>.$get())`). Never import backend code into the frontend; the only exception is `import type`.
+
 ## UI
 
 * See `skills/orchid-ui/skill.md` for the Orchid UI workflow.
-
 * Reuse Orchid components. Do not invent a widget that the Orchid catalog already provides.
-
-* Orchid UI MCP is the authoritative source for Orchid component APIs.
-
-* Before using an Orchid component:
-
+* Orchid UI MCP is the authoritative source for Orchid component APIs. Before using a component:
   1. Call `list_orchid_components` with a non-empty `search`.
   2. Call `get_orchid_component` with `name` or `names[]`.
-  3. Use the returned `props` and `examples` to implement the component.
+  3. Use the returned `props` and `examples` to implement it.
+* Never inspect Orchid component source, registry JSON or `public/` to learn component APIs.
+* Pages go in `frontend/src/routes`. See `skills/routing/skill.md`.
 
-* Never inspect Orchid component source to learn its props, variants, or usage.
+## API and data
 
-* Do not search the repository for an Orchid component implementation before querying Orchid MCP.
-
-* Do not inspect Orchid registry JSON or `public/` to learn component APIs.
-
-* Only inspect local application code when needed to understand the feature being changed.
-
-* If local source conflicts with Orchid MCP documentation, use the Orchid MCP API and examples.
-
-* Application-specific components may be inspected only when they are directly relevant to the requested feature.
-
-### Data
-
-* See `skills/database/skill.md` for the data persistence workflow.
-
-* Persist app data with existing Database helpers under `src/lib/server`.
-
-* Do not use Local storage for app data.
-
-* Keep secrets and server-only code under `src/lib/server`.
-
-* UI must not import `#/lib/server`.
-
-* Host APIs go through `request` in `#/lib/server/request`.
-
-* Browser code uses `#/lib/*` hooks only.
-
-* Staff: `useListStaffs` from `#/lib/list-staffs`; `listStaffs` from `#/lib/server/list-staffs`.
-
-* New database schema requires a new numbered migration.
-
-* Never modify an already-applied migration.
+* See `skills/api/skill.md` for adding a backend route and calling it from a page, and `skills/database/skill.md` for storing data.
+* Every piece of data the app keeps goes through a backend route and the app's database (`db` in `backend/src/lib/db.ts`). Never use local storage for app data.
+* Validate every route's input with Hono's `validator` and the helpers in `backend/src/lib/validate.ts`.
+* New tables or columns need a new numbered file in `backend/migrations/`. Never change a migration that already exists.
+* HitPay data (staff, locations, roles) comes through the host client, `c.var.host`, in a backend route. The frontend already has `useCurrentUser`, `useStaff` and `useLocations`.
+* Files: `useFiles` in `frontend/src/lib/files.ts`, backed by `/api/files`. Files are sent as they are, never as base64.
 
 ### Integrations
 
@@ -73,37 +53,27 @@ When the app needs an outside service (Google Sheets, Drive or Calendar, Notion,
 1. Run `bun run integrations list` to find its key and status.
 2. Run `bun run integrations request <key> "<one-line reason the owner will read>"`. Write the reason in plain language, e.g. "To save each new order as a row in your sheet."
 3. Act on the printed status:
-   * `granted` and connected: explore the service with the `nango` MCP tools. In app code use `callNangoTool` and `listNangoTools` from `#/lib/server/integrations` (server only). Never send the session token to the browser, and never ask for or hard-code API keys.
+   * `granted` and connected: explore the service with the `nango` MCP tools. In a backend route use `callNangoTool(c.var.host, …)` and `listNangoTools(c.var.host)` from `backend/src/lib/integrations.ts`. Never send the session token to the browser, and never ask for or hard-code API keys.
    * `requested`, or not connected: stop building that part and finish the turn. Tell the owner to allow <Title> in the card above, e.g. "To show your calendar here, please allow Google Calendar in the card above." Continue when the next message says it is allowed.
    * `declined`: do not ask again. Offer another way to do it.
 
-`callNangoTool` returns null until the owner allows an integration. Handle that in the UI by showing "Waiting for access to <Title>" instead of an error.
+`callNangoTool` returns null until the owner allows an integration. Show "Waiting for access to <Title>" in the page instead of an error.
 
 ### Published app runtime
 
-A published app's server code runs in the App Studio runtime, a small sandbox, not in Bun. The preview runs in Bun and does not enforce these limits, so code that works in the preview can fail once the app is published. Write server code (`src/lib/server`, server functions, `src/routes/api`) within them:
+A published app's backend runs in the App Studio runtime, a small sandbox, not in Bun. The preview runs in Bun and does not enforce these limits, so code that works in the preview can fail once the app is published. Write backend code within them:
 
-* Each request must finish within 30 seconds, using at most 64 MB of memory. The app serves one request at a time.
+* Each request must finish within 30 seconds, using at most 64 MB of memory.
+* Web APIs only: `fetch`, `Request`, `Response`, `URL`, `TextEncoder`/`TextDecoder`, `crypto.randomUUID`, `crypto.getRandomValues`, and `crypto.subtle` for digests and HMAC. No `node:` modules and no Bun APIs; an import of one fails the publish.
 * No timers: `setTimeout` with a delay and `setInterval` never fire, and `AbortSignal.timeout` never aborts. There are no background jobs; do the work inside the request.
-* Network: only `request` (the App Studio host), the app's database through `db`, and integrations through `callNangoTool`. Any other `fetch` fails.
-* Node built-ins: only `node:crypto` (`randomUUID`, `randomBytes`, SHA-256 `createHash`/`createHmac`, `timingSafeEqual`), `node:buffer`, `node:async_hooks`, `node:timers` and `node:process`. No `node:fs`, `node:path`, `node:child_process`, `node:net` or `node:http`.
-* Files go through `useFiles`. Paginate lists instead of returning a whole table.
+* Network: only the host client, the app's database through `db`, and integrations through `callNangoTool`. Any other `fetch` fails.
+* Files are at most 10 MB. Paginate lists instead of returning a whole table.
 
-### Auth
+## Auth
 
-* See `skills/authentication/skill.md` for the auth workflow.
-
-* Use the existing current-user and role helpers (`#/lib/current-user`, `#/lib/server/current-user`).
-
-* Enforce authorization on the server, not only in the UI.
-
-### Routing
-
-* See `skills/routing/skill.md` for the routing workflow.
-
-* Add routes only when they make the UX clearer.
-
-* Run `bun run generate-routes` after route changes.
+* See `skills/authentication/skill.md`.
+* Every backend route already knows who is signed in: `c.var.user`, with `role.title`. Protect a route with `requireRoles(...)` from `backend/src/lib/auth.ts`.
+* Enforce permissions in the backend, not only in the UI. Hiding a button is not a permission check.
 
 ## Required states
 
@@ -115,35 +85,25 @@ Implement the states relevant to the feature:
 * validation
 * mutation/success
 
-Persist user-created data when the request requires persistence.
-
 ## Execution
 
 Do not spend extended time planning.
 
-Use this workflow:
-
 1. Inspect the minimum relevant application files.
-2. If UI is required, query Orchid MCP before inspecting any Orchid component implementation.
-3. Implement the feature.
-4. Run `bun run migrate`.
-5. Run `bun run build`.
-6. If `bun run build` fails:
-
-   * Inspect the build error.
-   * Fix the underlying issue.
-   * Run `bun run build` again.
-   * Repeat until the build succeeds.
+2. If UI is required, query Orchid MCP before writing it.
+3. Implement the feature: backend route first, then the page that calls it.
+4. Run `bun run migrate` if you added a migration.
+5. Run `bun run build`. It checks both folders and builds the pages.
+6. If `bun run build` fails, read the error, fix the cause, and run it again until it succeeds.
 7. Only after a successful `bun run build`, consider the implementation verified.
 8. Tell the business owner in 1–3 plain sentences what changed and how to use it. Do not mention the build, files or commands.
 
 ## Do not
 
 * scan `node_modules`
+* read or inspect any file under `frontend/src/components` to learn Orchid APIs; they come only from Orchid MCP
 * inspect `public/` to discover Orchid component APIs
-* read or inspect any file under `src/components` — Orchid component APIs come only from Orchid MCP
+* edit `backend/src/migrations.gen.ts` or `frontend/src/routeTree.gen.ts`; they are generated
 * print `APP_STUDIO_USER_TOKEN` or write it to any file
-
-For `public/`, access existing assets only when the requested feature explicitly requires them.
 
 For questions only: answer without editing files.

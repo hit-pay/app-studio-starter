@@ -2,60 +2,23 @@
   "name": "hitpay-app",
   "private": true,
   "type": "module",
-  "imports": {
-    "#/*": "./src/*"
-  },
+  "workspaces": ["frontend", "backend"],
   "scripts": {
-    "mcp": "bun public/mcp/stdio.ts",
-    "dev": "bun --bun vite dev",
-    "generate-routes": "bun --bun tsr generate",
-    "migrate": "bun run scripts/migrate.ts",
-    "integrations": "bun run scripts/integrations.ts",
-    "typecheck": "tsc --noEmit",
-    "build": "bun --bun vite build",
+    "start": "bun --hot scripts/start.ts",
+    "generate-routes": "bun run --cwd frontend generate-routes",
+    "build": "bun run scripts/migrations.ts && bun run --cwd backend typecheck && bun run --cwd frontend build",
     "build:edge": "bun run scripts/build-edge.ts",
-    "start": "bun start.mjs"
+    "typecheck": "bun run scripts/migrations.ts && bun run --cwd backend typecheck && bun run --cwd frontend typecheck",
+    "migrate": "bun run scripts/migrations.ts && bun run scripts/migrate.ts",
+    "integrations": "bun run scripts/integrations.ts",
+    "mcp": "bun public/mcp/stdio.ts"
   },
   "dependencies": {
-    "@base-ui/react": "^1.7.0",
-    "@lexical/react": "^0.50.0",
-    "@libsql/client": "0.14.0",
-    "@mingcute/react": "^3.0.2",
     "@modelcontextprotocol/server": "^2.0.0",
-    "@tanstack/query-db-collection": "^1.2.10",
-    "@tanstack/react-db": "^0.3.5",
-    "@tanstack/react-form": "^1.33.5",
-    "@tanstack/react-query": "^5.102.7",
-    "@tanstack/react-router": "^1.132.0",
-    "@tanstack/react-start": "^1.132.0",
-    "@tanstack/react-store": "^0.11.1",
-    "@tanstack/store": "^0.11.1",
-    "class-variance-authority": "^0.7.1",
-    "clsx": "^2.1.1",
-    "cmdk": "^1.1.1",
-    "date-fns": "^4.4.0",
-    "lexical": "^0.50.0",
-    "nitro": "3.0.0",
-    "react": "^19.2.0",
-    "react-day-picker": "^10.0.1",
-    "react-dom": "^19.2.0",
-    "react-is": "19.2.8",
-    "shadcn": "^4.21.0",
-    "tailwind-merge": "^3.6.0",
-    "tw-animate-css": "^1.4.0"
+    "zod": "^4.2.0"
   },
   "devDependencies": {
-    "@tailwindcss/vite": "^4.1.13",
-    "@tanstack/router-cli": "^1.132.0",
-    "@types/node": "^22.10.2",
-    "@types/react": "^19.2.0",
-    "@types/react-dom": "^19.2.0",
-    "@vitejs/plugin-react": "^6.0.1",
-    "tailwindcss": "^4.1.13",
-    "typescript": "^6.0.2",
-    "vite": "^8.0.0"
-  },
-  "overrides": {
-    "react-is": "19.2.8"
+    "@types/bun": "^1.3.0",
+    "typescript": "^6.0.2"
   }
 }

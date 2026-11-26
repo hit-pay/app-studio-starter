@@ -1,93 +1,57 @@
-// Builds the bundle the App Studio runtime (Bun + QuickJS) runs for a published app: dist-edge.tgz.
-// The build runs in a copy of the app, so the preview's .output and .nitro stay untouched.
-import { cp, mkdir, mkdtemp, readdir, readFile, rm, symlink } from 'node:fs/promises'
-import { tmpdir } from 'node:os'
-import { dirname, join, resolve } from 'node:path'
-import { spawn } from 'node:child_process'
-import { fileURLToPath } from 'node:url'
+// Builds dist-edge.tgz, what App Studio publishes: `index.ts`, the backend whose default export has `fetch`, and
+// `static/`, the built frontend, which the runtime serves itself. A page request outside /api gets index.html,
+// inlined here because the published backend cannot read files.
+import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
+import { join } from 'node:path'
 
-const root = resolve(dirname(fileURLToPath(import.meta.url)), '..')
+const root = join(import.meta.dir, '..')
 const out = join(root, 'dist-edge')
 const archive = join(root, 'dist-edge.tgz')
-const skip = new Set(['node_modules', '.output', '.nitro', '.tanstack', 'dist-edge', 'dist-edge.tgz', '.git'])
 
-const work = await mkdtemp(join(tmpdir(), 'studio-edge-'))
+await run(['bun', 'run', 'scripts/migrations.ts'])
+await run(['bun', 'run', '--cwd', 'frontend', 'build'])
+
+await rm(out, { recursive: true, force: true })
+await mkdir(out, { recursive: true })
+await cp(join(root, 'frontend/dist'), join(out, 'static'), { recursive: true })
+
+const html = await readFile(join(root, 'frontend/dist/index.html'), 'utf8')
+const entry = join(root, 'backend/.edge-entry.ts')
+await writeFile(
+  entry,
+  `import app from './src/index.ts'
+const html = ${JSON.stringify(html)}
+export default {
+  fetch(request: Request) {
+    const { pathname } = new URL(request.url)
+    if (pathname === '/api' || pathname.startsWith('/api/')) return app.fetch(request)
+    if (request.method !== 'GET' && request.method !== 'HEAD') return new Response('Not found', { status: 404 })
+    return new Response(html, { headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-cache' } })
+  },
+}
+`,
+)
 
 try {
-  for (const entry of await readdir(root)) {
-    if (!skip.has(entry)) {
-      await cp(join(root, entry), join(work, entry), { recursive: true })
-    }
+  const result = await Bun.build({ entrypoints: [entry], target: 'browser', format: 'esm', minify: true })
+  if (!result.success) {
+    for (const log of result.logs) console.error(log)
+    throw new Error('The backend bundle failed.')
   }
-
-  await symlink(join(root, 'node_modules'), join(work, 'node_modules'), 'dir')
-
-  await run(['bun', '--bun', 'vite', 'build'], work, { STUDIO_BUILD_TARGET: 'edge', NODE_ENV: 'production' })
-
-  await rm(out, { recursive: true, force: true })
-  await mkdir(join(out, '.nitro/vite/services'), { recursive: true })
-  await cp(join(work, '.output'), join(out, '.output'), { recursive: true })
-  await cp(join(work, '.nitro/vite/services/ssr'), join(out, '.nitro/vite/services/ssr'), { recursive: true })
-  // The runtime's static-file glob skips dot-directories, so public files get a plain folder.
-  await cp(join(work, '.output/public'), join(out, 'static'), { recursive: true })
-  await cp(join(root, 'edge/index.ts'), join(out, 'index.ts'))
-  await cp(join(root, 'edge/polyfill.ts'), join(out, 'polyfill.ts'))
-
-  await assertNoBareImports(join(out, '.nitro/vite/services/ssr'))
-  await assertNoBareImports(join(out, '.output/server'))
-
-  await rm(archive, { force: true })
-  await run(['tar', '-czf', archive, '-C', out, '.'], root)
-
-  console.log(`Edge bundle: ${archive}`)
+  const code = await result.outputs[0]!.text()
+  // The runtime runs Web APIs only: a bare or node: import would fail there, so it fails the build instead.
+  const imports = [...code.matchAll(/\bimport\s*(?:[^'"]*from\s*)?["']([^"']+)["']|\bimport\(\s*["']([^"']+)["']/g)].map((m) => m[1] ?? m[2])
+  if (imports.length > 0) throw new Error(`The backend imports what the runtime cannot load: ${imports.join(', ')}`)
+  await writeFile(join(out, 'index.ts'), code)
 } finally {
-  await rm(work, { recursive: true, force: true })
+  await rm(entry, { force: true })
 }
 
-async function run(cmd: string[], cwd: string, env: Record<string, string> = {}): Promise<void> {
-  const code = await new Promise<number | null>((done, fail) => {
-    spawn(cmd[0]!, cmd.slice(1), { cwd, env: { ...process.env, ...env }, stdio: 'inherit' })
-      .on('error', fail)
-      .on('exit', done)
-  })
+await rm(archive, { force: true })
+await run(['tar', '-czf', archive, '-C', out, '.'])
+console.log(`Edge bundle: ${archive}`)
 
-  if (code !== 0) {
-    throw new Error(`${cmd.join(' ')} failed with exit code ${code}`)
-  }
-}
-
-// The runtime resolves relative imports and node: built-ins (shimmed) inside the bundle.
-async function assertNoBareImports(dir: string): Promise<void> {
-  const bare: string[] = []
-
-  for (const file of await walk(dir)) {
-    if (!/\.(m?js)$/.test(file)) continue
-
-    const code = await readFile(file, 'utf8')
-
-    const statements = /^\s*(?:import|export)\b[^'"`;]*?\bfrom\s*["']([^"']+)["']|^\s*import\s*["']([^"']+)["']|\bimport\(\s*["']([^"']+)["']\s*\)/gm
-
-    for (const match of code.matchAll(statements)) {
-      const specifier = (match[1] ?? match[2] ?? match[3])!
-
-      if (!specifier.startsWith('.') && !specifier.startsWith('/') && !specifier.startsWith('node:')) {
-        bare.push(`${file.slice(dir.length + 1)}: ${specifier}`)
-      }
-    }
-  }
-
-  if (bare.length > 0) {
-    throw new Error(`Edge bundle has imports the runtime cannot resolve:\n${bare.join('\n')}`)
-  }
-}
-
-async function walk(dir: string): Promise<string[]> {
-  const files: string[] = []
-
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const path = join(dir, entry.name)
-    files.push(...(entry.isDirectory() ? await walk(path) : [path]))
-  }
-
-  return files
+async function run(cmd: string[]): Promise<void> {
+  const code = await Bun.spawn(cmd, { cwd: root, stdout: 'inherit', stderr: 'inherit' }).exited
+  if (code !== 0) throw new Error(`${cmd.join(' ')} failed with exit code ${code}`)
 }

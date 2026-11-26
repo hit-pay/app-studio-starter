@@ -1,16 +1,28 @@
 ---
 name: routing
-description: TanStack file routes under src/routes. Use when adding pages, splitting list/detail/settings, or after changing route files.
+description: Add or change pages and navigation in the frontend with TanStack Router. Use when a feature needs a new page, a page with an id in its address, or links between pages.
 ---
 
 # Routing
 
-Pages live in `src/routes/`. `index.tsx` is home. Add sibling files (`$id.tsx`, `new.tsx`, `settings.tsx`, …) when they make the UX clearer — list vs detail vs settings is cheap.
+Pages are files in `frontend/src/routes` (TanStack Router, file-based):
 
-`src/routeTree.gen.ts` is generated. After route changes, run `bun run generate-routes`.
+* `index.tsx` → `/`
+* `shifts.tsx` → `/shifts`
+* `shifts.$shiftId.tsx` → `/shifts/:shiftId`
 
-Inspect only the files needed for the request. Do not list the whole repository, scan `node_modules`, or dump `public/`.
+```tsx
+import { createFileRoute, Link } from '@tanstack/react-router'
 
-The app is served from the root of its own host (`https://{APP_STUDIO_APP_ID}.hit-studio.com/`), so route paths start at `/`. `studioAppId()` from `#/lib/utils` returns the app id.
+export const Route = createFileRoute('/shifts/$shiftId')({ component: ShiftPage })
 
-Implement the states the feature needs: loading, empty, error, validation, mutation/success.
+function ShiftPage() {
+  const { shiftId } = Route.useParams()
+  return <Link to="/shifts">All shifts</Link>
+}
+```
+
+* Add a page only when it makes the app clearer; a dialog or a tab is often enough.
+* `__root.tsx` already wraps every page in `AppLayout`, `Toaster` and `ConfirmationModalProvider`. Add navigation there.
+* After adding or renaming a page, run `bun run generate-routes` (the build also does it).
+* Load data with TanStack Query in the page (see `skills/api/skill.md`), not in route loaders.

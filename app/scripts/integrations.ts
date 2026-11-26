@@ -1,4 +1,8 @@
-import { listIntegrations, requestIntegration } from '#/lib/server/integrations'
+// The agent's command for outside services: list what can be connected, and ask the owner to allow one.
+import { createRunHost } from '../backend/src/lib/host.ts'
+import { listIntegrations, requestIntegration } from '../backend/src/lib/integrations.ts'
+
+const host = createRunHost()
 
 const USAGE = 'Usage: bun run integrations list | bun run integrations request <key> "<reason>"'
 
@@ -20,7 +24,7 @@ try {
 }
 
 async function list(): Promise<void> {
-  const { integrations, available } = await listIntegrations()
+  const { integrations, available } = await listIntegrations(host)
   const byKey = new Map(integrations.map((item) => [item.key, item]))
 
   for (const { key: itemKey, title } of available) {
@@ -32,12 +36,12 @@ async function list(): Promise<void> {
 }
 
 async function requestAccess(itemKey: string, reason: string): Promise<void> {
-  const { available } = await listIntegrations()
+  const { available } = await listIntegrations(host)
   if (!available.some((item) => item.key === itemKey)) {
     throw new Error(`Unknown integration "${itemKey}". Run "bun run integrations list" for the keys.`)
   }
 
-  const result = await requestIntegration(itemKey, reason || undefined)
+  const result = await requestIntegration(host, itemKey, reason || undefined)
   const ready = result.status === 'granted' && result.connected && !result.needs_reconnect
   console.log(`${result.key}\t${result.title}\t${result.status}\t${ready ? 'connected' : 'not connected'}`)
 
