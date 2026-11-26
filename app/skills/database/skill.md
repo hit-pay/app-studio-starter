@@ -29,7 +29,7 @@ await db.batch([
 
 The published app runs in a sandbox (see "Published app runtime" in `AGENTS.md`):
 
-- Ids: `randomUUID()` works at most 32 times per request. For bulk inserts, let SQLite create the id: `INSERT INTO items (id, name) VALUES (lower(hex(randomblob(16))), ?)`.
+- Ids: `randomUUID()`. For bulk inserts, SQLite can also create the id: `INSERT INTO items (id, name) VALUES (lower(hex(randomblob(16))), ?)`.
 - Lists: page with `LIMIT ? OFFSET ?` and select only the columns the page shows.
 - Files: use `useFiles` from `#/lib/files`. Do not store files or base64 text in other tables.
 
