@@ -64,7 +64,8 @@ export default defineConfig((): UserConfig => {
             },
           } as Record<string, unknown>,
           hooks: {
-            'rollup:before'(_nitro, config) {
+            // Typed here because Nitro's hook types only exist after a build generates them.
+            'rollup:before'(_nitro: unknown, config: { output?: unknown }) {
               delete (config.output as { generatedCode?: unknown }).generatedCode
             },
           },
