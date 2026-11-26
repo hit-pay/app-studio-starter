@@ -10,53 +10,33 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as WebhookLogsRouteImport } from './routes/webhook-logs'
-import { Route as ApiHitpayWebhookRouteImport } from './routes/api/hitpay-webhook'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const WebhookLogsRoute = WebhookLogsRouteImport.update({
-  id: '/webhook-logs',
-  path: '/webhook-logs',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiHitpayWebhookRoute = ApiHitpayWebhookRouteImport.update({
-  id: '/api/hitpay-webhook',
-  path: '/api/hitpay-webhook',
-  getParentRoute: () => rootRouteImport,
-} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/webhook-logs': typeof WebhookLogsRoute
-  '/api/hitpay-webhook': typeof ApiHitpayWebhookRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/webhook-logs': typeof WebhookLogsRoute
-  '/api/hitpay-webhook': typeof ApiHitpayWebhookRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/webhook-logs': typeof WebhookLogsRoute
-  '/api/hitpay-webhook': typeof ApiHitpayWebhookRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/webhook-logs' | '/api/hitpay-webhook'
+  fullPaths: '/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/webhook-logs' | '/api/hitpay-webhook'
-  id: '__root__' | '/' | '/webhook-logs' | '/api/hitpay-webhook'
+  to: '/'
+  id: '__root__' | '/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  WebhookLogsRoute: typeof WebhookLogsRoute
-  ApiHitpayWebhookRoute: typeof ApiHitpayWebhookRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -68,27 +48,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/webhook-logs': {
-      id: '/webhook-logs'
-      path: '/webhook-logs'
-      fullPath: '/webhook-logs'
-      preLoaderRoute: typeof WebhookLogsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/hitpay-webhook': {
-      id: '/api/hitpay-webhook'
-      path: '/api/hitpay-webhook'
-      fullPath: '/api/hitpay-webhook'
-      preLoaderRoute: typeof ApiHitpayWebhookRouteImport
-      parentRoute: typeof rootRouteImport
-    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  WebhookLogsRoute: WebhookLogsRoute,
-  ApiHitpayWebhookRoute: ApiHitpayWebhookRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

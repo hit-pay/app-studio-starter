@@ -8,6 +8,11 @@ on:
 permissions:
   contents: write
 
+# Two pushes in a row must not race on the ZIP commit or the version tag.
+concurrency:
+  group: release-main
+  cancel-in-progress: false
+
 jobs:
   release:
     name: Build and Release Starter
@@ -26,7 +31,16 @@ jobs:
         working-directory: orchid
         run: |
           bun install --frozen-lockfile
+          bun run lint
           bun run test
+
+      - name: Typecheck and build app
+        working-directory: app
+        run: |
+          bun install --frozen-lockfile
+          bun run typecheck
+          bun run build
+          bun run build:edge
 
       - name: Get next version
         id: version
@@ -55,11 +69,8 @@ jobs:
           rm -f releases/app-studio-starter.zip
           mkdir -p releases
 
-          cd app
-
-          zip -r \
-            "../releases/app-studio-starter.zip" \
-            .
+          # Zip only tracked files, so build output and installed packages never ship.
+          git archive --format=zip --output releases/app-studio-starter.zip HEAD:app
 
       - name: Commit ZIP
         run: |

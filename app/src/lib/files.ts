@@ -1,16 +1,9 @@
 import { useCallback, useEffect, useState } from 'react'
 
-import {
-  FILE_MAX_BYTES,
-  deleteFile,
-  getFile,
-  listFiles,
-  uploadFile,
-} from '#/lib/server/files'
+import { deleteFile, getFile, listFiles, uploadFile } from '#/lib/server/files'
 import type { FileMeta, FileWithData } from '#/types'
 
 export type { FileMeta, FileWithData } from '#/types'
-export { FILE_MAX_BYTES }
 
 function messageOf(caught: unknown, fallback: string): string {
   return caught instanceof Error ? caught.message : fallback
@@ -96,7 +89,6 @@ export function useFiles(query: { entityType: string; entityId: string } | null)
         throw new Error('entityType and entityId are required to upload a file.')
       }
       if (file.size === 0) throw new Error('File is empty.')
-      if (file.size > FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
 
       setUploading(true)
       setError(null)
