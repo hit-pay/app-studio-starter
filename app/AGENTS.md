@@ -64,8 +64,6 @@ Inspect only the minimum application files needed for the request. Do not perfor
 
 * New database schema requires a new numbered migration.
 
-* For anything that should happen automatically on a HitPay event (new order, payment, …), see `skills/webhooks/skill.md`.
-
 * Never modify an already-applied migration.
 
 ### Integrations
@@ -80,6 +78,17 @@ When the app needs an outside service (Google Sheets, Drive or Calendar, Notion,
    * `declined`: do not ask again. Offer another way to do it.
 
 `callNangoTool` returns null until the owner allows an integration. Handle that in the UI by showing "Waiting for access to <Title>" instead of an error.
+
+### Published app runtime
+
+A published app's server code runs in the App Studio runtime, a small sandbox, not in Bun. The preview runs in Bun and does not enforce these limits, so code that works in the preview can fail once the app is published. Write server code (`src/lib/server`, server functions, `src/routes/api`) within them:
+
+* Each request must finish within 30 seconds, using at most 64 MB of memory. The app serves one request at a time.
+* No timers: `setTimeout` with a delay and `setInterval` never fire, and `AbortSignal.timeout` never aborts. There are no background jobs; do the work inside the request.
+* Network: only `request` (the App Studio host), the app's database through `db`, and integrations through `callNangoTool`. Any other `fetch` fails.
+* Node built-ins: only `node:crypto` (`randomUUID`, `randomBytes`, SHA-256 `createHash`/`createHmac`, `timingSafeEqual`), `node:buffer`, `node:async_hooks`, `node:timers` and `node:process`. No `node:fs`, `node:path`, `node:child_process`, `node:net` or `node:http`.
+* At most 32 `randomUUID()` calls per request. To insert many rows at once, let the database create the ids (`lower(hex(randomblob(16)))`).
+* Files go through `useFiles`. Paginate lists instead of returning a whole table.
 
 ### Auth
 

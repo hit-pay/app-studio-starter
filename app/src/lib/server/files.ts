@@ -5,10 +5,8 @@ import { createServerFn } from '@tanstack/react-start'
 import { ROLES } from '#/enums'
 import { requireRoles } from '#/lib/server/current-user'
 import { db } from '#/lib/server/db'
+import { inputObject, nullableString, requiredString } from '#/lib/server/validate'
 import type { FileMeta } from '#/types'
-
-export const FILE_MAX_BYTES = 10 * 1024 * 1024
-
 
 const FILE_META_COLUMNS =
   'id, entity_type, entity_id, name, mime_type, size, storage_provider, storage_key, created_at, updated_at'
@@ -39,13 +37,21 @@ export const uploadFile = createServerFn({ method: 'POST' })
     dataBase64: string
     entityType?: string | null
     entityId?: string | null
-  }) => data)
+  }) => {
+    const input = inputObject(data)
+    return {
+      name: requiredString(input.name, 'File name', 255),
+      mimeType: nullableString(input.mimeType, 'File type', 255) ?? '',
+      // No file size limit in the app: the platform's request limit is the only one.
+      dataBase64: requiredString(input.dataBase64, 'File', Number.POSITIVE_INFINITY),
+      entityType: nullableString(input.entityType, 'entityType', 100),
+      entityId: nullableString(input.entityId, 'entityId', 255),
+    }
+  })
   .handler(async ({ data }): Promise<FileMeta> => {
     await requireRoles(ROLES)
-    if (!data.name.trim()) throw new Error('File name is required.')
     const bytes = new Uint8Array(Buffer.from(data.dataBase64, 'base64'))
     if (bytes.byteLength === 0) throw new Error('File is empty.')
-    if (bytes.byteLength > FILE_MAX_BYTES) throw new Error('File is larger than 10 MB.')
 
     const id = randomUUID()
     const now = new Date().toISOString()
@@ -77,7 +83,7 @@ export const uploadFile = createServerFn({ method: 'POST' })
   })
 
 export const getFile = createServerFn({ method: 'GET' })
-  .validator((data: { id: string }) => data)
+  .validator((data: { id: string }) => ({ id: requiredString(inputObject(data).id, 'id', 128) }))
   .handler(async ({ data }): Promise<(FileMeta & { dataBase64: string }) | null> => {
     await requireRoles(ROLES)
     const result = await db.execute({
@@ -101,7 +107,13 @@ export const getFile = createServerFn({ method: 'GET' })
   })
 
 export const listFiles = createServerFn({ method: 'GET' })
-  .validator((data: { entityType: string; entityId: string }) => data)
+  .validator((data: { entityType: string; entityId: string }) => {
+    const input = inputObject(data)
+    return {
+      entityType: requiredString(input.entityType, 'entityType', 100),
+      entityId: requiredString(input.entityId, 'entityId', 255),
+    }
+  })
   .handler(async ({ data }): Promise<FileMeta[]> => {
     await requireRoles(ROLES)
     const result = await db.execute({
@@ -114,7 +126,7 @@ export const listFiles = createServerFn({ method: 'GET' })
   })
 
 export const deleteFile = createServerFn({ method: 'POST' })
-  .validator((data: { id: string }) => data)
+  .validator((data: { id: string }) => ({ id: requiredString(inputObject(data).id, 'id', 128) }))
   .handler(async ({ data }): Promise<void> => {
     await requireRoles(ROLES)
     await deleteStoredFile(data.id)

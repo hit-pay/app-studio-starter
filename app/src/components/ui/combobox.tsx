@@ -70,7 +70,8 @@ function Combobox({
   return (
     <ComboboxSelectionContext.Provider
       value={{
-        items,
+        // A createItems() collection is opaque; only plain arrays can be flattened here.
+        items: Array.isArray(items) ? items : undefined,
         value: selected,
         multiple: Boolean(multiple),
         setValue: (next, event) => {

@@ -307,7 +307,7 @@ export function queryTable({
       ? sorted.length || 1
       : query.pageSize;
   const pageCount = Math.max(1, Math.ceil(filteredCount / pageSize) || 1);
-  const page = Math.min(query.page, pageCount);
+  const page = Math.min(Math.max(1, Math.floor(query.page) || 1), pageCount);
   const start = (page - 1) * pageSize;
   const rows =
     isServer ? data : sorted.slice(start, start + pageSize);
