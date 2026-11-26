@@ -1,6 +1,6 @@
-// Builds dist-edge.tgz, what App Studio publishes: `index.ts`, the backend whose default export has `fetch`, and
-// `static/`, the built frontend, which the runtime serves itself. A page request outside /api gets index.html,
-// inlined here because the published backend cannot read files.
+// Builds dist-edge.tgz, what App Studio publishes: `index.js`, the backend as one self-contained ES module whose
+// default export has `fetch`, and `static/`, the built frontend, which the runtime serves itself. A page request
+// outside /api gets index.html, inlined here because the published backend cannot read files.
 import { cp, mkdir, readFile, rm, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 
@@ -33,7 +33,13 @@ export default {
 )
 
 try {
-  const result = await Bun.build({ entrypoints: [entry], target: 'browser', format: 'esm', minify: true })
+  const result = await Bun.build({
+    entrypoints: [entry],
+    target: 'browser',
+    format: 'esm',
+    minify: true,
+    define: { 'process.env.NODE_ENV': JSON.stringify('production') },
+  })
   if (!result.success) {
     for (const log of result.logs) console.error(log)
     throw new Error('The backend bundle failed.')
@@ -42,7 +48,7 @@ try {
   // The runtime runs Web APIs only: a bare or node: import would fail there, so it fails the build instead.
   const imports = [...code.matchAll(/\bimport\s*(?:[^'"]*from\s*)?["']([^"']+)["']|\bimport\(\s*["']([^"']+)["']/g)].map((m) => m[1] ?? m[2])
   if (imports.length > 0) throw new Error(`The backend imports what the runtime cannot load: ${imports.join(', ')}`)
-  await writeFile(join(out, 'index.ts'), code)
+  await writeFile(join(out, 'index.js'), code)
 } finally {
   await rm(entry, { force: true })
 }
