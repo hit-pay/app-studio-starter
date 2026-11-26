@@ -87,7 +87,6 @@ A published app's server code runs in the App Studio runtime, a small sandbox, n
 * No timers: `setTimeout` with a delay and `setInterval` never fire, and `AbortSignal.timeout` never aborts. There are no background jobs; do the work inside the request.
 * Network: only `request` (the App Studio host), the app's database through `db`, and integrations through `callNangoTool`. Any other `fetch` fails.
 * Node built-ins: only `node:crypto` (`randomUUID`, `randomBytes`, SHA-256 `createHash`/`createHmac`, `timingSafeEqual`), `node:buffer`, `node:async_hooks`, `node:timers` and `node:process`. No `node:fs`, `node:path`, `node:child_process`, `node:net` or `node:http`.
-* At most 32 `randomUUID()` calls per request. To insert many rows at once, let the database create the ids (`lower(hex(randomblob(16)))`).
 * Files go through `useFiles`. Paginate lists instead of returning a whole table.
 
 ### Auth
