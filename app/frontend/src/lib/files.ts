@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
-import { api, call, errorOf } from '@/lib/api'
+import { call, errorOf } from '@/lib/api'
 import type { FileMeta } from '@/lib/types'
 
 export const MAX_FILE_BYTES = 10 * 1024 * 1024
@@ -19,7 +19,7 @@ export function useFiles(owner: Owner | null) {
     queryKey,
     enabled: owner !== null,
     // Only runs once there is an owner (enabled above).
-    queryFn: () => call(api.files.$get({ query: owner! })),
+    queryFn: () => call('GET', '/api/files', { query: owner! }),
   })
 
   const upload = useMutation({
@@ -38,7 +38,7 @@ export function useFiles(owner: Owner | null) {
   })
 
   const remove = useMutation({
-    mutationFn: (id: string) => call(api.files[':id'].$delete({ param: { id } })),
+    mutationFn: (id: string) => call('DELETE', '/api/files/:id', { params: { id } }),
     onSuccess: () => queryClient.invalidateQueries({ queryKey }),
   })
 

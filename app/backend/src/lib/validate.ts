@@ -1,11 +1,21 @@
-import { HTTPException } from 'hono/http-exception'
+import { HttpError } from './app.ts'
 
-// Guards for request input, used inside Hono's `validator`. Input from the browser is untrusted even though the
-// frontend is typed, so every route validates it; what the validator returns is the type the route and the typed
-// client see.
+// Guards for request input. Input from the browser is untrusted even though the frontend is typed, so every route
+// reads its query and body through these: a bad value answers 400 with a message the page can show.
 
 function fail(message: string): never {
-  throw new HTTPException(400, { message })
+  throw new HttpError(400, message)
+}
+
+/** The request's JSON body as an object, or 400. */
+export async function jsonBody(req: Request): Promise<Record<string, unknown>> {
+  let body: unknown
+  try {
+    body = await req.json()
+  } catch {
+    fail('The request body must be JSON.')
+  }
+  return object(body)
 }
 
 export function object(value: unknown): Record<string, unknown> {

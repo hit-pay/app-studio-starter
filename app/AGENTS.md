@@ -22,9 +22,9 @@ Inspect only the minimum application files needed for the request. Do not perfor
 Two folders, and they only meet through the API:
 
 * `frontend/`: the pages the user sees. A React single-page app with TanStack Router (pages) and TanStack Query (data), styled with Orchid UI.
-* `backend/`: the app's API, Hono routes under `/api`. It owns the database, the HitPay data, integrations and every permission check.
+* `backend/`: the app's API, Bun.serve routes under `/api` (no framework). It owns the database, the HitPay data, integrations and every permission check.
 
-The frontend calls the backend only through the typed client in `frontend/src/lib/api.ts` (`call(api.<resource>.$get())`). Never import backend code into the frontend; the only exception is `import type`.
+The frontend calls the backend only through the typed client in `frontend/src/lib/api.ts` (`call('GET', '/api/<resource>')`). Never import backend code into the frontend; the only exception is `import type`.
 
 ## UI
 
@@ -41,9 +41,9 @@ The frontend calls the backend only through the typed client in `frontend/src/li
 
 * See `skills/api/skill.md` for adding a backend route and calling it from a page, and `skills/database/skill.md` for storing data.
 * Every piece of data the app keeps goes through a backend route and the app's database (`db` in `backend/src/lib/db.ts`). Never use local storage for app data.
-* Validate every route's input with Hono's `validator` and the helpers in `backend/src/lib/validate.ts`.
+* Validate every route's input with the helpers in `backend/src/lib/validate.ts` (`jsonBody`, `requiredString`, …).
 * New tables or columns need a new numbered file in `backend/migrations/`. Never change a migration that already exists.
-* HitPay data (staff, locations, roles) comes through the host client, `c.var.host`, in a backend route. The frontend already has `useCurrentUser`, `useStaff` and `useLocations`.
+* HitPay data (staff, locations, roles) comes through the host client, `c.host`, in a backend route. The frontend already has `useCurrentUser`, `useStaff` and `useLocations`.
 * Other HitPay data (products, orders, invoices, customers, charges, …) comes through the HitPay integration. See `skills/hitpay-api/skill.md`.
 * Files: `useFiles` in `frontend/src/lib/files.ts`, backed by `/api/files`. Files are sent as they are, never as base64.
 
@@ -60,26 +60,26 @@ When the app needs an outside service (Google Sheets, Drive or Calendar, Notion,
 
 A backend route reaches an integration only through `backend/src/lib/integrations.ts`:
 
-* `nangoAction(c.var.host, '<tool>', input)` runs one of the integration's Nango actions, e.g. `google-mail__list-messages`. Find the tool name and its input with the `nango_tool_search` MCP tool, and try it with `nango_execute`, before writing the route. The app cannot search for tools at runtime: write the exact name.
-* `nangoRequest(c.var.host, { integration, method, path, query, body })` calls the integration's own API, for a job no action covers. Try the same call with the `nango_proxy` MCP tool first.
+* `nangoAction(c.host, '<tool>', input)` runs one of the integration's Nango actions, e.g. `google-mail__list-messages`. Find the tool name and its input with the `nango_tool_search` MCP tool, and try it with `nango_execute`, before writing the route. The app cannot search for tools at runtime: write the exact name.
+* `nangoRequest(c.host, { integration, method, path, query, body })` calls the integration's own API, for a job no action covers. Try the same call with the `nango_proxy` MCP tool first.
 * HitPay has no Nango actions: always use `nangoRequest` with `integration: 'hitpay'`. See `skills/hitpay-api/skill.md`.
 
 Both return null until the owner allows an integration: show "Waiting for access to <Title>" in the page instead of an error. `nangoRequest` throws `IntegrationError` when the service answers with an error; show its message. Never send the session token to the browser, and never ask for, hard-code or send an API key or Authorization header.
 
 ### Published app runtime
 
-A published app's backend runs in the App Studio runtime, a small sandbox, not in Bun. The preview runs in Bun and does not enforce these limits, so code that works in the preview can fail once the app is published. Write backend code within them:
+A published app runs on Bun, as in the preview, compiled ahead of time and run in a sandbox. Write backend code within its limits:
 
-* Each request must finish within 30 seconds, using at most 64 MB of memory.
-* Web APIs only: `fetch`, `Request`, `Response`, `URL`, `TextEncoder`/`TextDecoder`, `crypto.randomUUID`, `crypto.getRandomValues`, and `crypto.subtle` for digests and HMAC. No `node:` modules and no Bun APIs; an import of one fails the publish.
-* No timers: `setTimeout` with a delay and `setInterval` never fire, and `AbortSignal.timeout` never aborts. There are no background jobs; do the work inside the request.
+* Each request must finish within 30 seconds. The app's memory is limited; a request that runs it out is stopped.
+* Web APIs and Bun's APIs work as in the preview: `fetch`, `Request`, `Response`, streams, `FormData`, `crypto`, timers. The app has no file system beyond its own files and cannot start processes.
 * Network: only the host client, the app's database through `db`, and integrations through `nangoAction` and `nangoRequest`. Any other `fetch` fails, so never call an integration's API with `fetch`.
+* There are no background jobs: an app that has no requests is stopped. Do the work inside the request.
 * Files are at most 10 MB. Paginate lists instead of returning a whole table.
 
 ## Auth
 
 * See `skills/authentication/skill.md`.
-* Every backend route already knows who is signed in: `c.var.user`, with `role.title`. Protect a route with `requireRoles(...)` from `backend/src/lib/auth.ts`.
+* Every backend route made with `route()` knows who is signed in: `c.user`, with `role.title`. Protect a route with `route(handler, { roles: ['Owner', 'Manager'] })`.
 * Enforce permissions in the backend, not only in the UI. Hiding a button is not a permission check.
 
 ## Required states

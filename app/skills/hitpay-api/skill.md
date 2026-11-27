@@ -7,7 +7,7 @@ description: Read or change the business's HitPay data (products, orders, invoic
 
 The HitPay integration is an OAuth connection to the HitPay REST API (`/v1/...`). It has no Nango actions, so every call goes through `nangoRequest` with `integration: 'hitpay'`. Nango adds the OAuth token: never send `X-BUSINESS-API-KEY` or an `Authorization` header, and never ask the owner for an API key.
 
-Staff, roles and locations of this app come from the host instead (`c.var.host.get(...)`, see `skills/api/skill.md`).
+Staff, roles and locations of this app come from the host instead (`c.host.get(...)`, see `skills/api/skill.md`).
 
 ## Before writing the route
 
@@ -19,29 +19,30 @@ Staff, roles and locations of this app come from the host instead (`c.var.host.g
 ## Route
 
 ```ts
-import { HTTPException } from 'hono/http-exception'
-
-import { router } from '../lib/app.ts'
+import { HttpError, json, route } from '../lib/app.ts'
 import { IntegrationError, nangoRequest } from '../lib/integrations.ts'
 
 type Product = { id: string; name: string; price: number; currency: string; status: 'draft' | 'published' }
 type Page<T> = { data: T[]; meta: { current_page: number; last_page: number; total: number } }
 
-export const products = router().get('/', async (c) => {
-  const page = Number(c.req.query('page') ?? '1') || 1
-  try {
-    const response = await nangoRequest<Page<Product>>(c.var.host, {
-      integration: 'hitpay',
-      path: '/v1/products',
-      query: { page, per_page: 25, 'statuses[]': ['published'] },
-    })
-    if (!response) return c.json({ status: 'waiting' as const })
-    return c.json({ status: 'ready' as const, products: response.body.data, meta: response.body.meta })
-  } catch (error) {
-    if (error instanceof IntegrationError) throw new HTTPException(502, { message: error.message })
-    throw error
-  }
-})
+/** /api/products */
+export const products = {
+  GET: route(async (c) => {
+    const page = Number(c.query.get('page') ?? '1') || 1
+    try {
+      const response = await nangoRequest<Page<Product>>(c.host, {
+        integration: 'hitpay',
+        path: '/v1/products',
+        query: { page, per_page: 25, 'statuses[]': ['published'] },
+      })
+      if (!response) return json({ status: 'waiting' as const })
+      return json({ status: 'ready' as const, products: response.body.data, meta: response.body.meta })
+    } catch (error) {
+      if (error instanceof IntegrationError) throw new HttpError(502, error.message)
+      throw error
+    }
+  }),
+}
 ```
 
 Rules:
