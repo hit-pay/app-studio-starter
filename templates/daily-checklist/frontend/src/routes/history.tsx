@@ -1,81 +1,95 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query'
 import { createFileRoute, useNavigate } from '@tanstack/react-router'
+import type { RunSummary } from 'backend'
 import { useState } from 'react'
 
-import { LocationSelect } from '@/components/checklist/location-select'
 import { RunBadge } from '@/components/checklist/run-badge'
-import { EmptyState, ErrorState, LoadingRows } from '@/components/checklist/states'
-import { DataList } from '@/components/displaying-data/data-list'
+import { ErrorBanner, LoadingRows } from '@/components/checklist/states'
+import { DataTable, useDataTable } from '@/components/displaying-data/data-table'
+import { DatePickerRange } from '@/components/form/date-picker'
 import { PageLayout } from '@/components/layout/page-layout'
 import { call } from '@/lib/api'
-import { addDays, formatDate, KIND_LABEL, todayDate } from '@/lib/checklists'
+import { addDays, formatDate, fromDate, KIND_LABEL, toDate, todayDate } from '@/lib/checklists'
 import { useLocations } from '@/lib/locations'
-import { Button } from '@ui/button'
-import { Input } from '@ui/input'
 
 export const Route = createFileRoute('/history')({ component: History })
+
+const PAGE_SIZE = 20
 
 function History() {
   const navigate = useNavigate()
   const locations = useLocations()
-  const [from, setFrom] = useState(() => addDays(todayDate(), -29))
-  const [to, setTo] = useState(todayDate)
+  const [range, setRange] = useState(() => ({ from: addDays(todayDate(), -29), to: todayDate() }))
   const [locationId, setLocationId] = useState<string | null>(null)
   const [page, setPage] = useState(1)
 
   const history = useQuery({
-    queryKey: ['history', from, to, locationId, page],
+    queryKey: ['history', range, locationId, page],
     placeholderData: keepPreviousData,
-    queryFn: () => call('GET', '/api/runs', { query: { from, to, locationId, page } }),
+    queryFn: () => call('GET', '/api/runs', { query: { ...range, locationId, page } }),
   })
   const locationName = (id: string) => locations.data?.find((location) => location.id === id)?.name ?? ''
-  const filter = (apply: () => void) => {
-    apply()
-    setPage(1)
-  }
+
+  const table = useDataTable({
+    schema: {
+      key: 'history',
+      mode: 'server',
+      search: false,
+      filters: [
+        {
+          key: 'location',
+          title: 'Location',
+          options: (locations.data ?? []).map((location) => ({ value: location.id, label: location.name ?? 'Unnamed location' })),
+        },
+      ],
+      pagination: { pageSize: PAGE_SIZE, pageSizes: [PAGE_SIZE] },
+      emptyState: { title: 'Nothing in this range', description: 'Checklists appear here once staff start them.', media: 'search' },
+      columns: [
+        { key: 'date', title: 'Day', locked: true },
+        { key: 'checklist', title: 'Checklist' },
+        { key: 'location', title: 'Location' },
+        { key: 'kind', title: 'Type' },
+        { key: 'run', title: 'Status' },
+      ],
+    },
+    data: (history.data?.runs ?? []).map((run) => ({
+      id: run.id,
+      date: formatDate(run.date),
+      checklist: run.title,
+      location: locationName(run.locationId),
+      kind: KIND_LABEL[run.kind],
+      run,
+    })),
+    total: history.data?.total ?? 0,
+    onQueryChange: (query) => {
+      setPage(query.page)
+      setLocationId(query.filters.location || null)
+    },
+  })
 
   return (
-    <PageLayout
-      title="History"
-      description="Checklists filled in, newest first."
-      actions={
-        <div className="flex flex-wrap items-center gap-2">
-          <LocationSelect locations={locations.data ?? []} value={locationId} allLabel="All locations" onChange={(next) => filter(() => setLocationId(next))} />
-          <Input type="date" aria-label="From" className="w-auto" value={from} max={to} onChange={(event) => event.target.value && filter(() => setFrom(event.target.value))} />
-          <Input type="date" aria-label="To" className="w-auto" value={to} min={from} onChange={(event) => event.target.value && filter(() => setTo(event.target.value))} />
-        </div>
-      }
-    >
+    <PageLayout title="History" description="Checklists filled in, newest first.">
       {history.isPending ? (
         <LoadingRows rows={5} />
       ) : history.error ? (
-        <ErrorState error={history.error} onRetry={() => history.refetch()} />
+        <ErrorBanner error={history.error} onRetry={() => history.refetch()} />
       ) : (
-        <div className="flex flex-col gap-4">
-          <DataList
-            items={history.data.runs.map((run) => ({
-              key: run.id,
-              title: run.title,
-              description: [formatDate(run.date), locationName(run.locationId), KIND_LABEL[run.kind]].filter(Boolean).join(' · '),
-              badges: <RunBadge run={run} itemCount={run.total} />,
-              onClick: () => navigate({ to: '/runs/$runId', params: { runId: run.id } }),
-            }))}
-            empty={<EmptyState title="Nothing in this range">Checklists appear here once staff start them.</EmptyState>}
-          />
-          {history.data.lastPage > 1 ? (
-            <div className="flex items-center gap-3 text-sm">
-              <Button variant="outline" size="sm" disabled={page <= 1} onClick={() => setPage(page - 1)}>
-                Previous
-              </Button>
-              <span className="text-oc-muted-foreground">
-                Page {history.data.page} of {history.data.lastPage} · {history.data.total} checklists
-              </span>
-              <Button variant="outline" size="sm" disabled={page >= history.data.lastPage} onClick={() => setPage(page + 1)}>
-                Next
-              </Button>
-            </div>
-          ) : null}
-        </div>
+        <DataTable
+          table={table}
+          toolbarExtra={
+            <DatePickerRange
+              selected={{ from: fromDate(range.from), to: fromDate(range.to) }}
+              disabled={{ after: new Date() }}
+              onSelect={(picked) => {
+                if (!picked?.from) return
+                setRange({ from: toDate(picked.from), to: toDate(picked.to ?? picked.from) })
+                table.setPage(1)
+              }}
+            />
+          }
+          cells={{ run: (value) => <RunBadge run={value as RunSummary} itemCount={(value as RunSummary).total} /> }}
+          onRowClick={(row) => navigate({ to: '/runs/$runId', params: { runId: row.id } })}
+        />
       )}
     </PageLayout>
   )

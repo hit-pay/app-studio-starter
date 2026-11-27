@@ -1,5 +1,6 @@
-import type { ReactNode } from 'react'
+import { InformationRegular, WarningRegular } from '@mingcute/react/core-regular'
 
+import { Banner, BannerAction, BannerDescription, BannerTitle } from '@ui/banner'
 import { Button } from '@ui/button'
 import { Skeleton } from '@ui/skeleton'
 
@@ -15,36 +16,32 @@ export function LoadingRows({ rows = 3 }: { rows?: number }) {
 }
 
 /** A request that failed, with its message and a way to try again. */
-export function ErrorState({ error, onRetry }: { error: Error; onRetry?: () => void }) {
+export function ErrorBanner({ error, onRetry }: { error: Error; onRetry?: () => void }) {
   return (
-    <div className="flex flex-col items-start gap-3 rounded-xl border border-oc-destructive-border p-4">
-      <p className="text-sm text-oc-destructive">{error.message}</p>
+    <Banner variant="destructive">
+      <WarningRegular />
+      <BannerTitle>Something went wrong</BannerTitle>
+      <BannerDescription>{error.message}</BannerDescription>
       {onRetry ? (
-        <Button variant="outline" size="sm" onClick={onRetry}>
-          Try again
-        </Button>
+        <BannerAction>
+          <Button variant="outline" size="sm" onClick={onRetry}>
+            Try again
+          </Button>
+        </BannerAction>
       ) : null}
-    </div>
-  )
-}
-
-export function EmptyState({ title, children }: { title: string; children?: ReactNode }) {
-  return (
-    <div className="flex flex-col items-start gap-2 rounded-xl border border-dashed border-oc-border p-6">
-      <p className="text-sm font-medium text-oc-foreground">{title}</p>
-      {children ? <div className="text-sm text-oc-muted-foreground">{children}</div> : null}
-    </div>
+    </Banner>
   )
 }
 
 /** Shown in place of a feature whose integration the owner has not allowed yet. */
 export function WaitingForAccess({ integration, purpose }: { integration: string; purpose: string }) {
   return (
-    <div className="flex flex-col gap-1 rounded-xl border border-oc-border bg-oc-muted p-4">
-      <p className="text-sm font-medium text-oc-foreground">Waiting for access to {integration}</p>
-      <p className="text-sm text-oc-muted-foreground">
+    <Banner>
+      <InformationRegular />
+      <BannerTitle>Waiting for access to {integration}</BannerTitle>
+      <BannerDescription>
         {purpose} The business owner can allow {integration} for this app in App Studio.
-      </p>
-    </div>
+      </BannerDescription>
+    </Banner>
   )
 }

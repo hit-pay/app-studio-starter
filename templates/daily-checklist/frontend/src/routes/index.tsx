@@ -1,15 +1,16 @@
 import { useMutation, useQuery } from '@tanstack/react-query'
-import { Link, createFileRoute } from '@tanstack/react-router'
+import { createFileRoute } from '@tanstack/react-router'
 
-import { DataList } from '@/components/displaying-data/data-list'
-import { EmptyState, ErrorState, LoadingRows } from '@/components/checklist/states'
 import { LocationSelect } from '@/components/checklist/location-select'
 import { RunBadge } from '@/components/checklist/run-badge'
+import { ErrorBanner, LoadingRows } from '@/components/checklist/states'
+import { DataList } from '@/components/displaying-data/data-list'
+import { Empty } from '@/components/displaying-data/empty'
 import { PageLayout } from '@/components/layout/page-layout'
 import { call } from '@/lib/api'
-import { formatDate, KIND_LABEL, todayDate, useIsManager } from '@/lib/checklists'
+import { formatDate, itemCount, KIND_LABEL, todayDate, useIsManager } from '@/lib/checklists'
 import { useLocations } from '@/lib/locations'
-import { Button, buttonVariants } from '@ui/button'
+import { Button } from '@ui/button'
 import { toast } from '@ui/toast'
 
 export const Route = createFileRoute('/')({
@@ -55,19 +56,19 @@ function Today() {
       {locations.isPending ? (
         <LoadingRows />
       ) : locations.error ? (
-        <ErrorState error={locations.error} onRetry={() => locations.refetch()} />
+        <ErrorBanner error={locations.error} onRetry={() => locations.refetch()} />
       ) : locations.data.length === 0 ? (
-        <EmptyState title="No locations yet">Add a location in HitPay to use checklists.</EmptyState>
+        <Empty media="icon" title="No locations yet" description="Add a location in HitPay to use checklists." />
       ) : today.isPending ? (
         <LoadingRows />
       ) : today.error ? (
-        <ErrorState error={today.error} onRetry={() => today.refetch()} />
+        <ErrorBanner error={today.error} onRetry={() => today.refetch()} />
       ) : (
         <DataList
           items={today.data.map(({ checklist, run }) => ({
             key: checklist.id,
             title: checklist.title,
-            description: `${KIND_LABEL[checklist.kind]} · ${checklist.itemCount} items`,
+            description: `${KIND_LABEL[checklist.kind]} · ${itemCount(checklist.itemCount)}`,
             badges: <RunBadge run={run} itemCount={checklist.itemCount} />,
             trailing: (
               <Button
@@ -81,15 +82,13 @@ function Today() {
             ),
           }))}
           empty={
-            <EmptyState title="No checklists for this location">
-              {manager ? (
-                <Link to="/checklists/$checklistId" params={{ checklistId: 'new' }} className={buttonVariants({ size: 'sm' })}>
-                  Create a checklist
-                </Link>
-              ) : (
-                'Ask a manager to set up the opening and closing checklists.'
-              )}
-            </EmptyState>
+            <Empty
+              media="icon"
+              title="No checklists for this location"
+              description={manager ? 'Create the opening and closing checklists your staff follow.' : 'Ask a manager to set up the opening and closing checklists.'}
+              actions={manager ? [{ key: 'create', label: 'Create a checklist' }] : undefined}
+              onAction={() => navigate({ to: '/checklists/$checklistId', params: { checklistId: 'new' } })}
+            />
           }
         />
       )}

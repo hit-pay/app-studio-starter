@@ -1,8 +1,24 @@
+import { CameraRegular, CloseRegular } from '@mingcute/react/core-regular'
 import { useRef } from 'react'
 
 import { fileUrl, useFiles } from '@/lib/files'
-import { Button } from '@ui/button'
+import {
+  FileUpload,
+  FileUploadAction,
+  FileUploadActions,
+  FileUploadContent,
+  FileUploadDescription,
+  FileUploadGroup,
+  FileUploadMedia,
+  FileUploadTitle,
+  FileUploadTrigger,
+} from '@ui/file-upload'
+import { Spinner } from '@ui/spinner'
 import { toast } from '@ui/toast'
+
+function size(bytes: number): string {
+  return bytes < 1024 * 1024 ? `${Math.max(1, Math.round(bytes / 1024))} KB` : `${(bytes / 1024 / 1024).toFixed(1)} MB`
+}
 
 /** The photos proving one item was done, and adding one (from the camera on a phone). */
 export function ItemPhotos({ runId, itemId, editable }: { runId: string; itemId: string; editable: boolean }) {
@@ -11,27 +27,50 @@ export function ItemPhotos({ runId, itemId, editable }: { runId: string; itemId:
   const { files, upload, remove } = useFiles({ entityType: 'run-item', entityId: `${runId}:${itemId}` })
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
+    <FileUploadGroup className="max-w-md">
       {files.data?.map((file) => (
-        <div key={file.id} className="group relative">
-          <a href={fileUrl(file.id)} target="_blank" rel="noreferrer">
-            <img src={fileUrl(file.id)} alt={file.name} className="size-16 rounded-lg border border-oc-border object-cover" />
-          </a>
+        <FileUpload key={file.id} state="done" size="sm">
+          <FileUploadMedia variant="image">
+            <img src={fileUrl(file.id)} alt={file.name} className="size-full object-cover" />
+          </FileUploadMedia>
+          <FileUploadContent>
+            <FileUploadTitle>
+              <a href={fileUrl(file.id)} target="_blank" rel="noreferrer" className="hover:underline">
+                {file.name}
+              </a>
+            </FileUploadTitle>
+            <FileUploadDescription>{size(file.size)}</FileUploadDescription>
+          </FileUploadContent>
           {editable ? (
-            <button
-              type="button"
-              aria-label={`Remove ${file.name}`}
-              className="absolute -top-1.5 -right-1.5 hidden size-5 items-center justify-center rounded-full bg-oc-foreground text-xs text-oc-background group-hover:flex"
-              onClick={() => remove.mutate(file.id)}
-            >
-              ×
-            </button>
+            <FileUploadActions>
+              <FileUploadAction aria-label={`Remove ${file.name}`} disabled={remove.isPending} onClick={() => remove.mutate(file.id)}>
+                <CloseRegular />
+              </FileUploadAction>
+            </FileUploadActions>
           ) : null}
-        </div>
+        </FileUpload>
       ))}
-      {files.error ? <span className="text-xs text-oc-destructive">{files.error.message}</span> : null}
-      {editable ? (
-        <>
+      {files.error ? <p className="text-xs text-oc-destructive">{files.error.message}</p> : null}
+      {editable && upload.isPending ? (
+        <FileUpload state="uploading" size="sm">
+          <FileUploadMedia>
+            <Spinner />
+          </FileUploadMedia>
+          <FileUploadContent>
+            <FileUploadTitle>Uploading photo…</FileUploadTitle>
+          </FileUploadContent>
+        </FileUpload>
+      ) : null}
+      {editable && !upload.isPending ? (
+        <FileUpload state="idle" size="sm">
+          <FileUploadMedia>
+            <CameraRegular />
+          </FileUploadMedia>
+          <FileUploadContent>
+            <FileUploadTitle>Add a photo</FileUploadTitle>
+            <FileUploadDescription>Take one or pick an image, up to 10 MB</FileUploadDescription>
+          </FileUploadContent>
+          <FileUploadTrigger aria-label="Add a photo" onClick={() => input.current?.click()} />
           <input
             ref={input}
             type="file"
@@ -47,11 +86,8 @@ export function ItemPhotos({ runId, itemId, editable }: { runId: string; itemId:
               })
             }}
           />
-          <Button variant="outline" size="sm" disabled={upload.isPending} onClick={() => input.current?.click()}>
-            {upload.isPending ? 'Uploading…' : 'Add photo'}
-          </Button>
-        </>
+        </FileUpload>
       ) : null}
-    </div>
+    </FileUploadGroup>
   )
 }

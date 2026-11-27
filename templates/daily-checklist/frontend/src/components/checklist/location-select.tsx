@@ -1,7 +1,9 @@
 import type { Location } from 'backend/types'
 
-import { inputSurface } from '@ui/input'
+import { Select } from '@/components/form/select'
 import { cn } from '@/lib/utils'
+
+const ALL = 'all'
 
 /** Picks one of the business's locations; `allLabel` adds an option for every location (value null). */
 export function LocationSelect({
@@ -17,19 +19,21 @@ export function LocationSelect({
   allLabel?: string
   className?: string
 }) {
+  const options = [
+    ...(allLabel ? [{ value: ALL, label: allLabel }] : []),
+    ...locations.map((location) => ({ value: location.id, label: location.name ?? 'Unnamed location' })),
+  ]
+
   return (
-    <select
-      aria-label="Location"
-      className={cn(inputSurface, 'w-auto min-w-48 pr-8', className)}
-      value={value ?? ''}
-      onChange={(event) => onChange(event.target.value || null)}
-    >
-      {allLabel ? <option value="">{allLabel}</option> : null}
-      {locations.map((location) => (
-        <option key={location.id} value={location.id}>
-          {location.name ?? 'Unnamed location'}
-        </option>
-      ))}
-    </select>
+    <Select
+      className={cn('w-56', className)}
+      options={options}
+      value={value ?? (allLabel ? ALL : null)}
+      placeholder="Choose a location"
+      onValueChange={(next) => {
+        const picked = typeof next === 'string' ? next : null
+        onChange(picked === ALL ? null : picked)
+      }}
+    />
   )
 }

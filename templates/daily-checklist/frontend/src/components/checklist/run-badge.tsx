@@ -5,7 +5,7 @@ import { Badge } from '@ui/badge'
 
 /** Where a checklist stands for the day: not started, how far along, or who completed it. */
 export function RunBadge({ run, itemCount }: { run: RunSummary | null; itemCount: number }) {
-  if (!run) return <Badge variant="secondary">Not started · 0/{itemCount}</Badge>
+  if (!run) return <Badge tone="grey">Not started · 0/{itemCount}</Badge>
   if (run.status === 'completed') {
     return (
       <Badge tone="green">

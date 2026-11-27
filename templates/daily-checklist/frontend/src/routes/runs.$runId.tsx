@@ -6,7 +6,7 @@ import { useState } from 'react'
 import { CashCount } from '@/components/checklist/cash-count'
 import { ItemPhotos } from '@/components/checklist/item-photos'
 import { RunBadge } from '@/components/checklist/run-badge'
-import { ErrorState, LoadingRows } from '@/components/checklist/states'
+import { ErrorBanner, LoadingRows } from '@/components/checklist/states'
 import { DetailCard } from '@/components/displaying-data/detail-card'
 import { PageLayout } from '@/components/layout/page-layout'
 import { useConfirmationModal } from '@/components/overlays/confirmation-modal'
@@ -15,7 +15,9 @@ import { formatDate, formatMoney, formatTime, KIND_LABEL, useIsManager } from '@
 import { useLocations } from '@/lib/locations'
 import { Button } from '@ui/button'
 import { Checkbox } from '@ui/checkbox'
-import { Field, FieldError, FieldLabel } from '@ui/field'
+import { Banner, BannerDescription } from '@ui/banner'
+import { Field, FieldLabel } from '@ui/field'
+import { FormSection } from '@ui/form-section'
 import { Textarea } from '@ui/textarea'
 import { toast } from '@ui/toast'
 
@@ -75,7 +77,7 @@ function RunPage() {
   if (run.error) {
     return (
       <PageLayout title="Checklist" onBack={() => router.history.back()}>
-        <ErrorState error={run.error} onRetry={() => run.refetch()} />
+        <ErrorBanner error={run.error} onRetry={() => run.refetch()} />
       </PageLayout>
     )
   }
@@ -106,49 +108,59 @@ function RunPage() {
         ) : null
       }
     >
-      <div className="flex max-w-2xl flex-col gap-6">
-        <ul className="flex flex-col divide-y divide-oc-border rounded-xl border border-oc-border">
-          {data.items.map((item) => (
-            <li key={item.id} className="flex flex-col gap-2 p-4">
-              <label className="flex items-start gap-3">
-                <Checkbox
-                  className="mt-0.5"
-                  checked={item.done}
-                  disabled={!open || toggle.isPending}
-                  onCheckedChange={(checked) => toggle.mutate({ itemId: item.id, done: checked === true })}
-                />
-                <span className="flex flex-col gap-0.5">
-                  <span className={item.done ? 'text-sm text-oc-muted-foreground line-through' : 'text-sm text-oc-foreground'}>
-                    {item.label}
-                    {item.requiresPhoto ? <span className="ml-1 text-xs text-oc-muted-foreground">(photo required)</span> : null}
-                  </span>
-                  {item.done && item.doneByName ? (
-                    <span className="text-xs text-oc-muted-foreground">
-                      {item.doneByName}
-                      {item.doneAt ? ` · ${formatTime(item.doneAt)}` : ''}
+      <div className="flex max-w-2xl flex-col gap-8">
+        <section className="flex flex-col gap-4">
+          <FormSection title="Items" description={open ? 'Tick each item as it is done.' : undefined} />
+          <ul className="flex flex-col divide-y divide-oc-border rounded-xl border border-oc-border">
+            {data.items.map((item) => (
+              <li key={item.id} className="flex flex-col gap-2 p-4">
+                <label className="flex items-start gap-3">
+                  <Checkbox
+                    className="mt-0.5"
+                    checked={item.done}
+                    disabled={!open || toggle.isPending}
+                    onCheckedChange={(checked) => toggle.mutate({ itemId: item.id, done: checked === true })}
+                  />
+                  <span className="flex flex-col gap-0.5">
+                    <span className={item.done ? 'text-sm text-oc-muted-foreground line-through' : 'text-sm text-oc-foreground'}>
+                      {item.label}
+                      {item.requiresPhoto ? <span className="ml-1 text-xs text-oc-muted-foreground">(photo required)</span> : null}
                     </span>
-                  ) : null}
-                </span>
-              </label>
-              {item.requiresPhoto ? (
-                <div className="pl-7">
-                  <ItemPhotos runId={data.id} itemId={item.id} editable={open} />
-                </div>
-              ) : null}
-            </li>
-          ))}
-        </ul>
+                    {item.done && item.doneByName ? (
+                      <span className="text-xs text-oc-muted-foreground">
+                        {item.doneByName}
+                        {item.doneAt ? ` · ${formatTime(item.doneAt)}` : ''}
+                      </span>
+                    ) : null}
+                  </span>
+                </label>
+                {item.requiresPhoto ? (
+                  <div className="pl-7">
+                    <ItemPhotos runId={data.id} itemId={item.id} editable={open} />
+                  </div>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+        </section>
 
         {open ? (
-          <div className="flex flex-col gap-4">
+          <div className="flex flex-col gap-8">
             {data.cashCount ? (
-              <CashCount locationId={data.locationId} date={data.date} counted={counted} onCountedChange={setCounted} />
+              <section className="flex flex-col gap-4">
+                <FormSection title="Cash count" description="Compared with the day's cash sales in HitPay." />
+                <CashCount locationId={data.locationId} date={data.date} counted={counted} onCountedChange={setCounted} />
+              </section>
             ) : null}
             <Field>
               <FieldLabel htmlFor="note">Note (optional)</FieldLabel>
               <Textarea id="note" maxLength={500} value={note} onChange={(event) => setNote(event.target.value)} />
             </Field>
-            {completeError ? <FieldError>{completeError}</FieldError> : null}
+            {completeError ? (
+              <Banner variant="destructive">
+                <BannerDescription>{completeError}</BannerDescription>
+              </Banner>
+            ) : null}
             <div>
               <Button disabled={complete.isPending} onClick={() => complete.mutate()}>
                 {complete.isPending ? 'Completing…' : `Complete (${data.done}/${data.total})`}
