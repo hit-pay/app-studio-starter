@@ -7,7 +7,7 @@ description: Who is signed in, their role, and how to restrict what each role ca
 
 The App Studio host signs the user in. Every request to the backend already carries them:
 
-* Backend: `c.var.user` is `{ id, email, name, role: { id, title } | null }`.
+* Backend: `c.user` is `{ id, email, name, role: { id, title } | null }`.
 * Frontend: `useCurrentUser()` from `@/lib/current-user` returns the same user (`data`, `isPending`, `error`).
 
 Role titles: `Owner`, `Admin`, `Manager`, `Cashier` (`ROLES` in `@/lib/types`).
@@ -30,4 +30,4 @@ Hide or disable what the user cannot do, using `useCurrentUser().data?.role?.tit
 
 ## Record who did something
 
-Store `c.var.user.id` with the row (e.g. `created_by`). Show names with `useStaff()`, matching on `id`.
+Store `c.user.id` with the row (e.g. `created_by`). Show names with `useStaff()`, matching on `id`.

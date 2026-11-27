@@ -1,4 +1,6 @@
-import { router } from '../lib/app.ts'
+import { json, route } from '../lib/app.ts'
 
 /** The signed-in user, with their role. */
-export const me = router().get('/', (c) => c.json(c.var.user))
+export const me = {
+  GET: route((c) => json(c.user)),
+}

@@ -1,7 +1,4 @@
-import { HTTPException } from 'hono/http-exception'
-import { validator } from 'hono/validator'
-
-import { router } from '../lib/app.ts'
+import { HttpError, json, route, type Json } from '../lib/app.ts'
 import { db } from '../lib/db.ts'
 import type { FileMeta } from '../lib/types.ts'
 import { optionalString, requiredString } from '../lib/validate.ts'
@@ -23,68 +20,69 @@ function toMeta(row: Record<string, unknown>): FileMeta {
   }
 }
 
-const owner = validator('query', (query) => ({
-  entityType: optionalString(query.entityType, 'entityType', 100),
-  entityId: optionalString(query.entityId, 'entityId', 255),
-}))
+function owner(query: URLSearchParams) {
+  return {
+    entityType: optionalString(query.get('entityType'), 'entityType', 100),
+    entityId: optionalString(query.get('entityId'), 'entityId', 255),
+  }
+}
 
-export const files = router()
+/** /api/files: the files attached to one record, and uploading one. */
+export const files = {
   /** The files attached to one record, newest first. Never selects the file data. */
-  .get('/', owner, async (c) => {
-    const { entityType, entityId } = c.req.valid('query')
+  GET: route(async (c) => {
+    const { entityType, entityId } = owner(c.query)
     const result = await db.execute({
       sql: `SELECT ${COLUMNS} FROM files WHERE entity_type IS ? AND entity_id IS ? ORDER BY created_at DESC`,
       args: [entityType, entityId],
     })
-    return c.json(result.rows.map((row) => toMeta(row as Record<string, unknown>)))
-  })
+    return json(result.rows.map((row) => toMeta(row as Record<string, unknown>)))
+  }),
 
   /** Uploads one file: the request body is the file itself, its name in ?name=. */
-  .post(
-    '/',
-    validator('query', (query) => ({
-      entityType: optionalString(query.entityType, 'entityType', 100),
-      entityId: optionalString(query.entityId, 'entityId', 255),
-      name: requiredString(query.name, 'File name', 255),
-    })),
-    async (c) => {
-      const { entityType, entityId, name } = c.req.valid('query')
-      const bytes = new Uint8Array(await c.req.arrayBuffer())
-      if (bytes.byteLength === 0) throw new HTTPException(400, { message: 'The file is empty.' })
-      if (bytes.byteLength > MAX_FILE_BYTES) throw new HTTPException(413, { message: 'Files must be 10 MB or smaller.' })
+  POST: route(async (c) => {
+    const { entityType, entityId } = owner(c.query)
+    const name = requiredString(c.query.get('name'), 'File name', 255)
+    const bytes = new Uint8Array(await c.req.arrayBuffer())
+    if (bytes.byteLength === 0) throw new HttpError(400, 'The file is empty.')
+    if (bytes.byteLength > MAX_FILE_BYTES) throw new HttpError(413, 'Files must be 10 MB or smaller.')
 
-      const meta: FileMeta = {
-        id: crypto.randomUUID(),
-        entityType,
-        entityId,
-        name,
-        mimeType: c.req.header('content-type')?.split(';')[0]?.trim() || 'application/octet-stream',
-        size: bytes.byteLength,
-        createdAt: new Date().toISOString(),
-      }
-      await db.execute({
-        sql: 'INSERT INTO files (id, entity_type, entity_id, name, mime_type, size, data, created_by, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
-        args: [meta.id, meta.entityType, meta.entityId, meta.name, meta.mimeType, meta.size, bytes, c.var.user.id, meta.createdAt],
-      })
-      return c.json(meta, 201)
-    },
-  )
-
-  /** The file's bytes, as a download. */
-  .get('/:id', async (c) => {
-    const result = await db.execute({ sql: 'SELECT name, mime_type, data FROM files WHERE id = ?', args: [c.req.param('id')] })
-    const row = result.rows[0] as Record<string, unknown> | undefined
-    if (!row) throw new HTTPException(404, { message: 'File not found.' })
-
-    const data = row.data as ArrayBuffer
-    return c.body(new Uint8Array(data), 200, {
-      'content-type': String(row.mime_type),
-      'content-disposition': `attachment; filename*=UTF-8''${encodeURIComponent(String(row.name))}`,
-      'cache-control': 'private, no-store',
+    const meta: FileMeta = {
+      id: crypto.randomUUID(),
+      entityType,
+      entityId,
+      name,
+      mimeType: c.req.headers.get('content-type')?.split(';')[0]?.trim() || 'application/octet-stream',
+      size: bytes.byteLength,
+      createdAt: new Date().toISOString(),
+    }
+    await db.execute({
+      sql: 'INSERT INTO files (id, entity_type, entity_id, name, mime_type, size, data, created_by, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
+      args: [meta.id, meta.entityType, meta.entityId, meta.name, meta.mimeType, meta.size, bytes, c.user.id, meta.createdAt],
     })
-  })
+    return json(meta, 201)
+  }),
+}
 
-  .delete('/:id', async (c) => {
-    await db.execute({ sql: 'DELETE FROM files WHERE id = ?', args: [c.req.param('id')] })
-    return c.body(null, 204)
-  })
+/** /api/files/:id: one file's bytes, and removing it. */
+export const file = {
+  /** The file's bytes, as a download. */
+  GET: route<'/api/files/:id', Response>(async (c) => {
+    const result = await db.execute({ sql: 'SELECT name, mime_type, data FROM files WHERE id = ?', args: [c.params.id] })
+    const row = result.rows[0] as Record<string, unknown> | undefined
+    if (!row) throw new HttpError(404, 'File not found.')
+
+    return new Response(new Uint8Array(row.data as ArrayBuffer), {
+      headers: {
+        'content-type': String(row.mime_type),
+        'content-disposition': `attachment; filename*=UTF-8''${encodeURIComponent(String(row.name))}`,
+        'cache-control': 'private, no-store',
+      },
+    })
+  }),
+
+  DELETE: route<'/api/files/:id', Json<null>>(async (c) => {
+    await db.execute({ sql: 'DELETE FROM files WHERE id = ?', args: [c.params.id] })
+    return new Response(null, { status: 204 }) as Json<null>
+  }),
+}
