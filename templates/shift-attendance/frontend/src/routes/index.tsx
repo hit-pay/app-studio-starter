@@ -88,13 +88,15 @@ function Schedule() {
       actions={
         <div className="flex flex-wrap items-center gap-2">
           <LocationSelect locations={locations.data ?? []} value={locationId} allLabel="All locations" onChange={setLocationId} />
-          <Button variant="outline" size="icon-sm" aria-label="Previous week" onClick={() => setStart(addDays(start, -7))}>
-            <LeftRegular />
-          </Button>
-          <DatePicker selected={start} onSelect={(day) => day && setStart(weekStart(day))} />
-          <Button variant="outline" size="icon-sm" aria-label="Next week" onClick={() => setStart(addDays(start, 7))}>
-            <RightRegular />
-          </Button>
+          <div className="flex items-center gap-1">
+            <Button variant="outline" size="icon-sm" aria-label="Previous week" onClick={() => setStart(addDays(start, -7))}>
+              <LeftRegular />
+            </Button>
+            <DatePicker className="w-44" selected={start} onSelect={(day) => day && setStart(weekStart(day))} />
+            <Button variant="outline" size="icon-sm" aria-label="Next week" onClick={() => setStart(addDays(start, 7))}>
+              <RightRegular />
+            </Button>
+          </div>
         </div>
       }
     >

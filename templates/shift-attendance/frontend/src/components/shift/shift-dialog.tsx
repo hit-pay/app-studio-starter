@@ -87,7 +87,7 @@ export function ShiftDialog({
   })
 
   const update = (patch: Partial<ShiftDraft>) => setForm((current) => (current ? { ...current, ...patch } : current))
-  const staffOptions = staff.map((member) => ({ value: member.id, label: member.name ?? 'Unnamed', description: member.role?.title }))
+  const staffOptions = staff.map((member) => ({ value: member.id, label: member.name ?? 'Unnamed' }))
 
   return (
     <FormLayout

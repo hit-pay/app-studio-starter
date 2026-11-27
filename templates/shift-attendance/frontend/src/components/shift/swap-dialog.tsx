@@ -57,7 +57,7 @@ export function SwapDialog({ shift, colleagues, onClose }: { shift: Shift | null
           <FieldLabel>Colleague</FieldLabel>
           <Select
             searchable
-            options={colleagues.map((member) => ({ value: member.id, label: member.name ?? 'Unnamed', description: member.role?.title }))}
+            options={colleagues.map((member) => ({ value: member.id, label: member.name ?? 'Unnamed' }))}
             value={toStaffId}
             placeholder="Who takes the shift"
             onValueChange={(value) => setToStaffId(typeof value === 'string' ? value : null)}
