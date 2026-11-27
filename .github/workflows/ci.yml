@@ -67,7 +67,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        template: [daily-checklist]
+        template: [daily-checklist, shift-attendance]
     defaults:
       run:
         working-directory: templates/${{ matrix.template }}
