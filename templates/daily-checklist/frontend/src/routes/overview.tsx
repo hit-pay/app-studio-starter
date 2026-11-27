@@ -43,7 +43,7 @@ function Overview() {
       key: 'overview',
       mode: 'client',
       search: { placeholder: 'Search locations or checklists' },
-      pagination: { pageSize: 25 },
+      pagination: { pageSize: 20 },
       emptyState: { title: 'No checklists for this day', description: 'Create checklists to see each location here.', media: 'icon' },
       columns: [
         { key: 'location', title: 'Location', locked: true },
