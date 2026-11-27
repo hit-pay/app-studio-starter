@@ -60,3 +60,33 @@ jobs:
       # The bundle the App Studio runtime runs for a published app, built the way a publish builds it.
       - name: Build edge bundle (published app)
         run: bun run build:edge
+
+  # Every template is a whole app like app/, built the same way.
+  templates:
+    name: Template ${{ matrix.template }} typecheck & build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        template: [daily-checklist]
+    defaults:
+      run:
+        working-directory: templates/${{ matrix.template }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+
+      - name: Install
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck
+        run: bun run generate-routes && bun run typecheck
+
+      - name: Build (preview)
+        run: bun run build
+
+      - name: Build edge bundle (published app)
+        run: bun run build:edge
