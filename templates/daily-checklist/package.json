@@ -1,0 +1,24 @@
+{
+  "name": "hitpay-app",
+  "private": true,
+  "type": "module",
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "start": "bun --hot scripts/start.ts",
+    "generate-routes": "bun run --cwd frontend generate-routes",
+    "build": "bun run scripts/migrations.ts && bun run --cwd backend typecheck && bun run --cwd frontend build",
+    "build:edge": "bun run scripts/build-edge.ts",
+    "typecheck": "bun run scripts/migrations.ts && bun run --cwd backend typecheck && bun run --cwd frontend typecheck",
+    "migrate": "bun run scripts/migrations.ts && bun run scripts/migrate.ts",
+    "integrations": "bun run scripts/integrations.ts",
+    "mcp": "bun public/mcp/stdio.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "^2.0.0",
+    "zod": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.0",
+    "typescript": "^6.0.2"
+  }
+}
