@@ -12,6 +12,9 @@ export const MANAGERS: RoleTitle[] = ['Owner', 'Admin', 'Manager']
 /** Clocking in this long after a shift starts counts as late. */
 export const LATE_AFTER_MINUTES = 5
 
+/** A shift's unpaid break comes off worked time only once someone has worked this long. */
+export const BREAK_AFTER_MINUTES = 240
+
 export type Shift = {
   id: string
   locationId: string
