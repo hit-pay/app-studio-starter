@@ -87,6 +87,7 @@ function AppShell() {
       <ConfirmationModalProvider>
         <AppLayout
           className="h-full min-h-0"
+          variant="tabs"
           appName={
             <Link to="/" className="min-w-0 truncate outline-none hover:opacity-80">
               Daily Checklist
