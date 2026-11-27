@@ -2,7 +2,7 @@ import { HttpError, json, route } from '../lib/app.ts'
 import { db } from '../lib/db.ts'
 import { IntegrationError, nangoRequest } from '../lib/integrations.ts'
 import type { Host } from '../lib/host.ts'
-import { integrationReady, LATE_AFTER_MINUTES, MANAGERS, minutesBetween, staffById, staffName, type TimesheetRow } from '../lib/shifts.ts'
+import { BREAK_AFTER_MINUTES, integrationReady, LATE_AFTER_MINUTES, MANAGERS, minutesBetween, staffById, staffName, type TimesheetRow } from '../lib/shifts.ts'
 import { jsonBody, optionalString } from '../lib/validate.ts'
 import { toAttendance } from './attendance.ts'
 import { range, shiftsBetween } from './shifts.ts'
@@ -57,8 +57,10 @@ export async function timesheet(host: Host, from: string, to: string, locationId
   for (const item of attendance) {
     const entry = row(item.staffId, item.staffName)
     const shift = item.shiftId ? shiftById.get(item.shiftId) : undefined
-    // Someone still clocked in counts up to now.
-    entry.workedMinutes += Math.max(0, minutesBetween(item.clockInAt, item.clockOutAt ?? now) - (shift?.breakMinutes ?? 0))
+    // Someone still clocked in counts up to now. A short stint keeps all its minutes: the break is only taken off
+    // once they worked long enough to have had it.
+    const clocked = minutesBetween(item.clockInAt, item.clockOutAt ?? now)
+    entry.workedMinutes += clocked >= BREAK_AFTER_MINUTES ? Math.max(0, clocked - (shift?.breakMinutes ?? 0)) : clocked
     if (shift && Date.parse(item.clockInAt) - Date.parse(shift.startsAt) > LATE_AFTER_MINUTES * 60_000) entry.lateCount++
   }
   for (const entry of rows.values()) {

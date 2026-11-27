@@ -133,7 +133,7 @@ export function ShiftDialog({
           <Field className="max-w-48">
             <FieldLabel htmlFor="shift-break">Break (minutes)</FieldLabel>
             <Input id="shift-break" inputMode="numeric" value={form.breakMinutes} onChange={(event) => update({ breakMinutes: event.target.value })} />
-            <FieldDescription>Not counted as worked time.</FieldDescription>
+            <FieldDescription>Taken off worked time once someone has worked 4 hours.</FieldDescription>
           </Field>
           <Field>
             <FieldLabel htmlFor="shift-note">Note (optional)</FieldLabel>
