@@ -66,7 +66,7 @@ export default defineConfig({
     chunkSizeWarningLimit: 2000,
   },
   server: {
-    // Served at https://starter-orchid.test by Yerd (orchid/.yerd.toml). HMR
+    // Served at https://hitpay-starter-orchid.test by Yerd (orchid/.yerd.toml). HMR
     // connects through the proxy on 443 and falls back to the dev port on
     // 127.0.0.1.
     allowedHosts: ['.test'],

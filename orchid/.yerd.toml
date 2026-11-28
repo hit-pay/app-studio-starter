@@ -1,4 +1,4 @@
-name = "starter-orchid"
+name = "hitpay-starter-orchid"
 secure = true
 
 [proxy_rules]

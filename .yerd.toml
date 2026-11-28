@@ -1,4 +1,4 @@
-name = "starter"
+name = "hitpay-starter"
 secure = true
 
 [proxy_rules]
