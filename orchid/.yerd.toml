@@ -1,0 +1,5 @@
+name = "starter-orchid"
+secure = true
+
+[proxy_rules]
+"/" = "http://127.0.0.1:5177"
