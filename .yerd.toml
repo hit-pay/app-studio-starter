@@ -1,0 +1,5 @@
+name = "hitpay-starter"
+secure = true
+
+[proxy_rules]
+"/" = "http://127.0.0.1:3000"

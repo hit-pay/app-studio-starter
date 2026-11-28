@@ -65,6 +65,13 @@ export default defineConfig({
   build: {
     chunkSizeWarningLimit: 2000,
   },
+  server: {
+    // Served at https://hitpay-starter-orchid.test by Yerd (orchid/.yerd.toml). HMR
+    // connects through the proxy on 443 and falls back to the dev port on
+    // 127.0.0.1.
+    allowedHosts: ['.test'],
+    hmr: { clientPort: 443 },
+  },
   plugins: [
     publicOrchidTokens(),
     mdx({ providerImportSource: '@mdx-js/react' }),
